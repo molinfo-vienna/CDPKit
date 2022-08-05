@@ -26,27 +26,23 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94EnergyCalculator instance.
-    # \param self The \e %MMFF94EnergyCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94EnergyCalculator instance.
-    # \param self The \e %MMFF94EnergyCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: MMFF94EnergyCalculator) -> None: pass
+    def __init__(calculator: MMFF94EnergyCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94EnergyCalculator instance.
-    # \param self The \e %MMFF94EnergyCalculator instance to initialize.
     # \param ia_data 
     #
-    def __init__(self: object, ia_data: MMFF94InteractionData) -> None: pass
+    def __init__(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     #
     # Different Python \e %MMFF94EnergyCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94EnergyCalculator instances \e a and \e b reference different C++ objects. 
@@ -55,100 +51,87 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94EnergyCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94EnergyCalculator instance \a calculator.
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \param calculator The \e %MMFF94EnergyCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94EnergyCalculator, calculator: MMFF94EnergyCalculator) -> MMFF94EnergyCalculator: pass
+    def assign(calculator: MMFF94EnergyCalculator) -> MMFF94EnergyCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \param types 
     #
-    def setEnabledInteractionTypes(self: MMFF94EnergyCalculator, types: int) -> None: pass
+    def setEnabledInteractionTypes(types: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getEnabledInteractionTypes(self: MMFF94EnergyCalculator) -> int: pass
+    def getEnabledInteractionTypes() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \param ia_data 
     #
-    def setup(self: MMFF94EnergyCalculator, ia_data: MMFF94InteractionData) -> None: pass
+    def setup(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getTotalEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getTotalEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getBondStretchingEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getBondStretchingEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getAngleBendingEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getAngleBendingEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getStretchBendEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getStretchBendEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getOutOfPlaneBendingEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getOutOfPlaneBendingEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getTorsionEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getTorsionEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getElectrostaticEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getElectrostaticEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \return 
     #
-    def getVanDerWaalsEnergy(self: MMFF94EnergyCalculator) -> float: pass
+    def getVanDerWaalsEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94EnergyCalculator instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def __call__(self: MMFF94EnergyCalculator, coords: CDPL.Math.Vector3DArray) -> float: pass
+    def __call__(coords: CDPL.Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 

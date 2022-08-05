@@ -26,6 +26,5 @@ class RDFGZReactionInputHandler(ReactionInputHandler):
 
     ##
     # \brief Initializes the \e %RDFGZReactionInputHandler instance.
-    # \param self The \e %RDFGZReactionInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

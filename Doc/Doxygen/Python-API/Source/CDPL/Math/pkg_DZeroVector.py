@@ -26,34 +26,29 @@ class DZeroVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DZeroVector instance.
-    # \param self The \e %DZeroVector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DZeroVector instance.
-    # \param self The \e %DZeroVector instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: DZeroVector) -> None: pass
+    def __init__(v: DZeroVector) -> None: pass
 
     ##
     # \brief Initializes the \e %DZeroVector instance.
-    # \param self The \e %DZeroVector instance to initialize.
     # \param n 
     #
-    def __init__(self: object, n: int) -> None: pass
+    def __init__(n: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param n 
     #
-    def resize(self: DZeroVector, n: int) -> None: pass
+    def resize(n: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DZeroVector instance this method is called upon.
     #
     # Different Python \e %DZeroVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DZeroVector instances \e a and \e b reference different C++ objects. 
@@ -62,183 +57,160 @@ class DZeroVector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DZeroVector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: DZeroVector) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return 
     #
-    def getSize(self: DZeroVector) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: DZeroVector, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return 
     #
-    def toArray(self: DZeroVector) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DZeroVector instance \a v.
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param v The \e %DZeroVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DZeroVector, v: DZeroVector) -> DZeroVector: pass
+    def assign(v: DZeroVector) -> DZeroVector: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param v 
     #
-    def swap(self: DZeroVector, v: DZeroVector) -> None: pass
+    def swap(v: DZeroVector) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param v The \e %DZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DZeroVector, v: DZeroVector) -> bool: pass
+    def __eq__(v: DZeroVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param e The \e %DZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DZeroVector, e: ConstDVectorExpression) -> bool: pass
+    def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param v The \e %DZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DZeroVector, v: DZeroVector) -> bool: pass
+    def __ne__(v: DZeroVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param e The \e %DZeroVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DZeroVector, e: ConstDVectorExpression) -> bool: pass
+    def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: DZeroVector, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: DZeroVector, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return 
     #
-    def __len__(self: DZeroVector) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %DZeroVector instance.
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DZeroVector) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DZeroVector) -> DZeroVector: pass
+    def __pos__() -> DZeroVector: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDVectorExpression: pass
+    def __neg__() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DZeroVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DZeroVector instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DZeroVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DZeroVector instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DZeroVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DZeroVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DZeroVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %DZeroVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DZeroVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DZeroVector instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DZeroVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 

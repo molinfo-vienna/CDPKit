@@ -26,21 +26,18 @@ class CIPPriorityCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CIPPriorityCalculator instance.
-    # \param self The \e %CIPPriorityCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CIPPriorityCalculator instance.
-    # \param self The \e %CIPPriorityCalculator instance to initialize.
     # \param molgraph 
     # \param priorities 
     #
-    def __init__(self: object, molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CIPPriorityCalculator instance this method is called upon.
     #
     # Different Python \e %CIPPriorityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CIPPriorityCalculator instances \e a and \e b reference different C++ objects. 
@@ -49,29 +46,26 @@ class CIPPriorityCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: CIPPriorityCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CIPPriorityCalculator instance this method is called upon.
     # \param func 
     #
-    def setImplicitHydrogenCountFunction(self: CIPPriorityCalculator, func: SizeTypeAtomFunctor) -> None: pass
+    def setImplicitHydrogenCountFunction(func: SizeTypeAtomFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CIPPriorityCalculator instance this method is called upon.
     # \return 
     #
-    def getImplicitHydrogenCountFunction(self: CIPPriorityCalculator) -> SizeTypeAtomFunctor: pass
+    def getImplicitHydrogenCountFunction() -> SizeTypeAtomFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %CIPPriorityCalculator instance this method is called upon.
     # \param molgraph 
     # \param priorities 
     #
-    def calculate(self: CIPPriorityCalculator, molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, priorities: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief 

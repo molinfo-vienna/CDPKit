@@ -26,13 +26,11 @@ class GraphicsPrimitive2D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GraphicsPrimitive2D instance.
-    # \param self The \e %GraphicsPrimitive2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
     #
     # Different Python \e %GraphicsPrimitive2D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GraphicsPrimitive2D instances \e a and \e b reference different C++ objects. 
@@ -41,29 +39,26 @@ class GraphicsPrimitive2D(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GraphicsPrimitive2D) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
     # \param renderer 
     #
-    def render(self: GraphicsPrimitive2D, renderer: Renderer2D) -> None: pass
+    def render(renderer: Renderer2D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
     # \param bounds 
     # \param font_metrics 
     #
-    def getBounds(self: GraphicsPrimitive2D, bounds: Rectangle2D, font_metrics: FontMetrics = 0) -> None: pass
+    def getBounds(bounds: Rectangle2D, font_metrics: FontMetrics = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
     # \return 
     #
-    def clone(self: GraphicsPrimitive2D) -> GraphicsPrimitive2D: pass
+    def clone() -> GraphicsPrimitive2D: pass
 
     ##
     # \brief 

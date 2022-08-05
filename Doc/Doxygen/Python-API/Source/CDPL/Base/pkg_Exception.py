@@ -26,21 +26,18 @@ class Exception(builtins.Exception):
 
     ##
     # \brief Initializes the \e %Exception instance.
-    # \param self The \e %Exception instance to initialize.
     # \param msg 
     #
-    def __init__(self: Exception, msg: str = '') -> None: pass
+    def __init__(msg: str = '') -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Exception instance this method is called upon.
     # \return 
     #
-    def what(self: Exception) -> str: pass
+    def what() -> str: pass
 
     ##
     # \brief Returns a string representation of the \e %Exception instance.
-    # \param self The \e %Exception instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: Exception) -> str: pass
+    def __str__() -> str: pass

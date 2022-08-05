@@ -26,49 +26,43 @@ class HierarchyViewModel(HierarchyViewNode):
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewModel instance this method is called upon.
     # \return 
     #
-    def getNumChains(self: HierarchyViewModel) -> int: pass
+    def getNumChains() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewModel instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getChain(self: HierarchyViewModel, idx: int) -> HierarchyViewChain: pass
+    def getChain(idx: int) -> HierarchyViewChain: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewModel instance this method is called upon.
     # \param id 
     # \return 
     #
-    def hasChainWithID(self: HierarchyViewModel, id: str) -> bool: pass
+    def hasChainWithID(id: str) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewModel instance this method is called upon.
     # \param id 
     # \return 
     #
-    def getChainByID(self: HierarchyViewModel, id: str) -> HierarchyViewChain: pass
+    def getChainByID(id: str) -> HierarchyViewChain: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewModel instance this method is called upon.
     # \return 
     #
-    def __len__(self: HierarchyViewModel) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewModel instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: HierarchyViewModel, idx: int) -> HierarchyViewChain: pass
+    def __getitem__(idx: int) -> HierarchyViewChain: pass
 
     ##
     # \brief 

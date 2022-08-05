@@ -26,85 +26,73 @@ class ULVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param self The \e %ULVector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param self The \e %ULVector instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: ULVector) -> None: pass
+    def __init__(v: ULVector) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param self The \e %ULVector instance to initialize.
     # \param n 
     #
-    def __init__(self: object, n: int) -> None: pass
+    def __init__(n: int) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param self The \e %ULVector instance to initialize.
     # \param n 
     # \param v 
     #
-    def __init__(self: object, n: int, v: int) -> None: pass
+    def __init__(n: int, v: int) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param arg1 The \e %ULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param arg1 The \e %ULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param arg1 The \e %ULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param arg1 The \e %ULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %ULVector instance.
-    # \param arg1 The \e %ULVector instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param n 
     # \param v 
     #
-    def resize(self: ULVector, n: int, v: int = 0) -> None: pass
+    def resize(n: int, v: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param v 
     #
-    def clear(self: ULVector, v: int = 0) -> None: pass
+    def clear(v: int = 0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ULVector instance this method is called upon.
     #
     # Different Python \e %ULVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ULVector instances \e a and \e b reference different C++ objects. 
@@ -113,295 +101,258 @@ class ULVector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ULVector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVector instance \a e.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param e The \e %ULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULVector, e: ConstFVectorExpression) -> ULVector: pass
+    def assign(e: ConstFVectorExpression) -> ULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVector instance \a e.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param e The \e %ULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULVector, e: ConstDVectorExpression) -> ULVector: pass
+    def assign(e: ConstDVectorExpression) -> ULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVector instance \a e.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param e The \e %ULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULVector, e: ConstLVectorExpression) -> ULVector: pass
+    def assign(e: ConstLVectorExpression) -> ULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVector instance \a e.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param e The \e %ULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULVector, e: ConstULVectorExpression) -> ULVector: pass
+    def assign(e: ConstULVectorExpression) -> ULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVector instance \a v.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param v The \e %ULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULVector, v: ULVector) -> ULVector: pass
+    def assign(v: ULVector) -> ULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULVector instance \a a.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param a The \e %ULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULVector, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ULVector) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \return 
     #
-    def getSize(self: ULVector) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: ULVector, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \return 
     #
-    def toArray(self: ULVector) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param v 
     #
-    def swap(self: ULVector, v: ULVector) -> None: pass
+    def swap(v: ULVector) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: ULVector, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param v The \e %ULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULVector, v: ULVector) -> bool: pass
+    def __eq__(v: ULVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param e The \e %ULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULVector, e: ConstULVectorExpression) -> bool: pass
+    def __eq__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param v The \e %ULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULVector, v: ULVector) -> bool: pass
+    def __ne__(v: ULVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ULVector instance this method is called upon.
     # \param e The \e %ULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULVector, e: ConstULVectorExpression) -> bool: pass
+    def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: ULVector, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: ULVector, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \return 
     #
-    def __len__(self: ULVector) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %ULVector instance.
-    # \param self The \e %ULVector instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ULVector) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ULVector) -> ULVector: pass
+    def __pos__() -> ULVector: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstULVectorExpression: pass
+    def __neg__() -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ULVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ULVector instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __add__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ULVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ULVector instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __sub__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ULVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ULVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __mul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ULVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ULVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
+    def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ULVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ULVector instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __truediv__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __rmul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: ULVector, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %ULVector instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %ULVector instance \a self.
     #
-    def __iadd__(self: ULVector, v: ULVector) -> ULVector: pass
+    def __iadd__(v: ULVector) -> ULVector: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %ULVector instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %ULVector instance \a self.
     #
-    def __iadd__(self: ULVector, e: ConstULVectorExpression) -> ULVector: pass
+    def __iadd__(e: ConstULVectorExpression) -> ULVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %ULVector instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %ULVector instance \a self.
     #
-    def __isub__(self: ULVector, v: ULVector) -> ULVector: pass
+    def __isub__(v: ULVector) -> ULVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %ULVector instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %ULVector instance \a self.
     #
-    def __isub__(self: ULVector, e: ConstULVectorExpression) -> ULVector: pass
+    def __isub__(e: ConstULVectorExpression) -> ULVector: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %ULVector instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %ULVector instance \a self.
     #
-    def __imul__(self: ULVector, t: int) -> ULVector: pass
+    def __imul__(t: int) -> ULVector: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %ULVector instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %ULVector instance \a self.
     #
-    def __idiv__(self: ULVector, t: int) -> ULVector: pass
+    def __idiv__(t: int) -> ULVector: pass
 
     ##
     # \brief 
-    # \param self The \e %ULVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: ULVector, t: int) -> ULVector: pass
+    def __itruediv__(t: int) -> ULVector: pass
 
     ##
     # \brief 

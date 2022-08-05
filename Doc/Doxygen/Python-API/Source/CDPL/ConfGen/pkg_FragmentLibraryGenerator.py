@@ -26,20 +26,17 @@ class FragmentLibraryGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentLibraryGenerator instance.
-    # \param self The \e %FragmentLibraryGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentLibraryGenerator instance.
-    # \param self The \e %FragmentLibraryGenerator instance to initialize.
     # \param lib 
     #
-    def __init__(self: object, lib: FragmentLibrary) -> None: pass
+    def __init__(lib: FragmentLibrary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     #
     # Different Python \e %FragmentLibraryGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibraryGenerator instances \e a and \e b reference different C++ objects. 
@@ -48,93 +45,81 @@ class FragmentLibraryGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FragmentLibraryGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \param lib 
     #
-    def setFragmentLibrary(self: FragmentLibraryGenerator, lib: FragmentLibrary) -> None: pass
+    def setFragmentLibrary(lib: FragmentLibrary) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getFragmentLibrary(self: FragmentLibraryGenerator) -> FragmentLibrary: pass
+    def getFragmentLibrary() -> FragmentLibrary: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \param func 
     #
-    def setAbortCallback(self: FragmentLibraryGenerator, func: CallbackFunction) -> None: pass
+    def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getAbortCallback(self: FragmentLibraryGenerator) -> CallbackFunction: pass
+    def getAbortCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \param func 
     #
-    def setTimeoutCallback(self: FragmentLibraryGenerator, func: CallbackFunction) -> None: pass
+    def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getTimeoutCallback(self: FragmentLibraryGenerator) -> CallbackFunction: pass
+    def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \param func 
     #
-    def setLogMessageCallback(self: FragmentLibraryGenerator, func: LogMessageCallbackFunction) -> None: pass
+    def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getLogMessageCallback(self: FragmentLibraryGenerator) -> LogMessageCallbackFunction: pass
+    def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \param arg1 
     # \param frag 
     # \return 
     #
-    def process(arg1: FragmentLibraryGenerator, self: MolecularGraph, frag: CDPL.Chem.MolecularGraph) -> int: pass
+    def process(self: MolecularGraph, frag: CDPL.Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getNumGeneratedConformers(self: FragmentLibraryGenerator) -> int: pass
+    def getNumGeneratedConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getLibraryEntryHashCode(self: FragmentLibraryGenerator) -> int: pass
+    def getLibraryEntryHashCode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryGenerator instance this method is called upon.
     # \return 
     #
-    def getSettings(self: FragmentLibraryGenerator) -> FragmentConformerGeneratorSettings: pass
+    def getSettings() -> FragmentConformerGeneratorSettings: pass
 
     ##
     # \brief 

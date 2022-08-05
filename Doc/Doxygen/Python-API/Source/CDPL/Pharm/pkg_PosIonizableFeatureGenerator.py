@@ -26,31 +26,27 @@ class PosIonizableFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %PosIonizableFeatureGenerator instance.
-    # \param self The \e %PosIonizableFeatureGenerator instance to initialize.
     # \param chgd_groups_only 
     #
-    def __init__(self: object, chgd_groups_only: bool) -> None: pass
+    def __init__(chgd_groups_only: bool) -> None: pass
 
     ##
     # \brief Initializes the \e %PosIonizableFeatureGenerator instance.
-    # \param self The \e %PosIonizableFeatureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: PosIonizableFeatureGenerator) -> None: pass
+    def __init__(gen: PosIonizableFeatureGenerator) -> None: pass
 
     ##
     # \brief Initializes the \e %PosIonizableFeatureGenerator instance.
-    # \param self The \e %PosIonizableFeatureGenerator instance to initialize.
     # \param molgraph 
     # \param pharm 
     # \param chgd_groups_only 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, chgd_groups_only: bool) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PosIonizableFeatureGenerator instance \a gen.
-    # \param self The \e %PosIonizableFeatureGenerator instance this method is called upon.
     # \param gen The \e %PosIonizableFeatureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PosIonizableFeatureGenerator, gen: PosIonizableFeatureGenerator) -> PosIonizableFeatureGenerator: pass
+    def assign(gen: PosIonizableFeatureGenerator) -> PosIonizableFeatureGenerator: pass

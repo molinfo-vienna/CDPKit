@@ -26,59 +26,51 @@ class CompoundReactionReader(ReactionReader):
 
     ##
     # \brief Initializes the \e %CompoundReactionReader instance.
-    # \param self The \e %CompoundReactionReader instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CompoundReactionReader instance.
-    # \param self The \e %CompoundReactionReader instance to initialize.
     # \param reader 
     #
-    def __init__(self: object, reader: CompoundReactionReader) -> None: pass
+    def __init__(reader: CompoundReactionReader) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundReactionReader instance \a reader.
-    # \param self The \e %CompoundReactionReader instance this method is called upon.
     # \param reader The \e %CompoundReactionReader instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: CompoundReactionReader, reader: CompoundReactionReader) -> CompoundReactionReader: pass
+    def assign(reader: CompoundReactionReader) -> CompoundReactionReader: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundReactionReader instance this method is called upon.
     # \return 
     #
-    def getNumReaders(self: CompoundReactionReader) -> int: pass
+    def getNumReaders() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundReactionReader instance this method is called upon.
     # \param reader 
     #
-    def addReader(self: CompoundReactionReader, reader: ReactionReader) -> None: pass
+    def addReader(reader: ReactionReader) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundReactionReader instance this method is called upon.
     # \param idx 
     #
-    def removeReader(self: CompoundReactionReader, idx: int) -> None: pass
+    def removeReader(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundReactionReader instance this method is called upon.
     #
-    def clear(self: CompoundReactionReader) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundReactionReader instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getReader(self: CompoundReactionReader, idx: int) -> ReactionReader: pass
+    def getReader(idx: int) -> ReactionReader: pass
 
     ##
     # \brief 

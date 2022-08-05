@@ -26,27 +26,23 @@ class PointArray2D(CDPL.Math.Vector2DArray):
 
     ##
     # \brief Initializes the \e %PointArray2D instance.
-    # \param self The \e %PointArray2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PointArray2D instance.
-    # \param self The \e %PointArray2D instance to initialize.
     # \param array 
     #
-    def __init__(self: object, array: PointArray2D) -> None: pass
+    def __init__(array: PointArray2D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PointArray2D instance this method is called upon.
     # \param vec 
     #
-    def translate(self: PointArray2D, vec: CDPL.Math.Vector2D) -> None: pass
+    def translate(vec: CDPL.Math.Vector2D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PointArray2D instance this method is called upon.
     # \param bbox 
     #
-    def getBounds(self: PointArray2D, bbox: Rectangle2D) -> None: pass
+    def getBounds(bbox: Rectangle2D) -> None: pass

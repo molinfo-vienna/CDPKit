@@ -26,43 +26,37 @@ class UInt64AtomMolecularGraphFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %UInt64AtomMolecularGraphFunctor instance.
-    # \param self The \e %UInt64AtomMolecularGraphFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UInt64AtomMolecularGraphFunctor instance.
-    # \param self The \e %UInt64AtomMolecularGraphFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
+    def __init__(func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %UInt64AtomMolecularGraphFunctor instance.
-    # \param arg1 The \e %UInt64AtomMolecularGraphFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %UInt64AtomMolecularGraphFunctor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: SizeTypeAtomMolecularGraphFunctor, arg1: Atom, arg2: MolecularGraph) -> int: pass
+    def __call__(arg1: Atom, arg2: MolecularGraph) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %UInt64AtomMolecularGraphFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: SizeTypeAtomMolecularGraphFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %UInt64AtomMolecularGraphFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: SizeTypeAtomMolecularGraphFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

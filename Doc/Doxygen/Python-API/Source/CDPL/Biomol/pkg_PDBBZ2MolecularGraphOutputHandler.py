@@ -26,6 +26,5 @@ class PDBBZ2MolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PDBBZ2MolecularGraphOutputHandler instance.
-    # \param self The \e %PDBBZ2MolecularGraphOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

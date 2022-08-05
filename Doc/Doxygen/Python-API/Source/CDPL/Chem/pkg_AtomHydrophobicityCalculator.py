@@ -26,28 +26,24 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
-    # \param self The \e %AtomHydrophobicityCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
-    # \param self The \e %AtomHydrophobicityCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: AtomHydrophobicityCalculator) -> None: pass
+    def __init__(calculator: AtomHydrophobicityCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomHydrophobicityCalculator instance.
-    # \param self The \e %AtomHydrophobicityCalculator instance to initialize.
     # \param molgraph 
     # \param hyd_table 
     #
-    def __init__(self: object, molgraph: MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     #
     # Different Python \e %AtomHydrophobicityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomHydrophobicityCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,37 +52,33 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomHydrophobicityCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomHydrophobicityCalculator instance \a calculator.
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     # \param calculator The \e %AtomHydrophobicityCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomHydrophobicityCalculator, calculator: AtomHydrophobicityCalculator) -> AtomHydrophobicityCalculator: pass
+    def assign(calculator: AtomHydrophobicityCalculator) -> AtomHydrophobicityCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: AtomHydrophobicityCalculator, func: Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     # \return 
     #
-    def getAtom3DCoordinatesFunction(self: AtomHydrophobicityCalculator) -> Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomHydrophobicityCalculator instance this method is called upon.
     # \param molgraph 
     # \param hyd_table 
     #
-    def calculate(self: AtomHydrophobicityCalculator, molgraph: MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, hyd_table: CDPL.Util.DArray) -> None: pass
 
     ##
     # \brief 

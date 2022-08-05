@@ -26,61 +26,53 @@ class ConformerData(CDPL.Math.Vector3DArray):
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    # \param self The \e %ConformerData instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    # \param self The \e %ConformerData instance to initialize.
     # \param data 
     #
-    def __init__(self: object, data: ConformerData) -> None: pass
+    def __init__(data: ConformerData) -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerData instance.
-    # \param self The \e %ConformerData instance to initialize.
     # \param coords 
     # \param energy 
     #
-    def __init__(self: object, coords: CDPL.Math.Vector3DArray, energy: float = 0.0) -> None: pass
+    def __init__(coords: CDPL.Math.Vector3DArray, energy: float = 0.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerData instance this method is called upon.
     # \param data 
     #
-    def swap(self: ConformerData, data: ConformerData) -> None: pass
+    def swap(data: ConformerData) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerData instance \a data.
-    # \param self The \e %ConformerData instance this method is called upon.
     # \param data The \e %ConformerData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ConformerData, data: ConformerData) -> ConformerData: pass
+    def assign(data: ConformerData) -> ConformerData: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerData instance \a coords.
-    # \param self The \e %ConformerData instance this method is called upon.
     # \param coords The \e %ConformerData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ConformerData, coords: CDPL.Math.Vector3DArray) -> ConformerData: pass
+    def assign(coords: CDPL.Math.Vector3DArray) -> ConformerData: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerData instance this method is called upon.
     # \return 
     #
-    def getEnergy(self: ConformerData) -> float: pass
+    def getEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerData instance this method is called upon.
     # \param energy 
     #
-    def setEnergy(self: ConformerData, energy: float) -> None: pass
+    def setEnergy(energy: float) -> None: pass
 
     ##
     # \brief 

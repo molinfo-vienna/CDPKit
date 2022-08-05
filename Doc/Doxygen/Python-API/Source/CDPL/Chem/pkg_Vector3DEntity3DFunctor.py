@@ -26,42 +26,36 @@ class Vector3DEntity3DFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector3DEntity3DFunctor instance.
-    # \param self The \e %Vector3DEntity3DFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3DEntity3DFunctor instance.
-    # \param self The \e %Vector3DEntity3DFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: Vector3DEntity3DFunctor) -> None: pass
+    def __init__(func: Vector3DEntity3DFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3DEntity3DFunctor instance.
-    # \param arg1 The \e %Vector3DEntity3DFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3DEntity3DFunctor instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __call__(self: Vector3DEntity3DFunctor, arg1: Entity3D) -> CDPL.Math.Vector3D: pass
+    def __call__(arg1: Entity3D) -> CDPL.Math.Vector3D: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3DEntity3DFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: Vector3DEntity3DFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3DEntity3DFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: Vector3DEntity3DFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

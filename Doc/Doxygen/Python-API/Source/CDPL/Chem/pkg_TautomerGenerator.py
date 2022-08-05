@@ -46,20 +46,17 @@ class TautomerGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TautomerGenerator instance.
-    # \param self The \e %TautomerGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TautomerGenerator instance.
-    # \param self The \e %TautomerGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: TautomerGenerator) -> None: pass
+    def __init__(gen: TautomerGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     #
     # Different Python \e %TautomerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TautomerGenerator instances \e a and \e b reference different C++ objects. 
@@ -68,114 +65,99 @@ class TautomerGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: TautomerGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param rule 
     #
-    def addTautomerizationRule(self: TautomerGenerator, rule: TautomerizationRule) -> None: pass
+    def addTautomerizationRule(rule: TautomerizationRule) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param idx 
     #
-    def removeTautomerizationRule(self: TautomerGenerator, idx: int) -> None: pass
+    def removeTautomerizationRule(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getTautomerizationRule(self: TautomerGenerator, idx: int) -> TautomerizationRule: pass
+    def getTautomerizationRule(idx: int) -> TautomerizationRule: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \return 
     #
-    def getNumTautomerizationRules(self: TautomerGenerator) -> int: pass
+    def getNumTautomerizationRules() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param func 
     #
-    def setCallbackFunction(self: TautomerGenerator, func: BoolMolecularGraphFunctor) -> None: pass
+    def setCallbackFunction(func: BoolMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \return 
     #
-    def getCallbackFunction(self: TautomerGenerator) -> BoolMolecularGraphFunctor: pass
+    def getCallbackFunction() -> BoolMolecularGraphFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param mode 
     #
-    def setMode(self: TautomerGenerator, mode: Mode) -> None: pass
+    def setMode(mode: Mode) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \return 
     #
-    def getMode(self: TautomerGenerator) -> Mode: pass
+    def getMode() -> Mode: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param regard 
     #
-    def regardStereochemistry(self: TautomerGenerator, regard: bool) -> None: pass
+    def regardStereochemistry(regard: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \return 
     #
-    def stereochemistryRegarded(self: TautomerGenerator) -> bool: pass
+    def stereochemistryRegarded() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param regard 
     #
-    def regardIsotopes(self: TautomerGenerator, regard: bool) -> None: pass
+    def regardIsotopes(regard: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \return 
     #
-    def isotopesRegarded(self: TautomerGenerator) -> bool: pass
+    def isotopesRegarded() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param func 
     #
-    def setCustomSetupFunction(self: TautomerGenerator, func: VoidMolecularGraphFunctor) -> None: pass
+    def setCustomSetupFunction(func: VoidMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param molgraph 
     #
-    def generate(self: TautomerGenerator, molgraph: MolecularGraph) -> None: pass
+    def generate(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TautomerGenerator instance \a gen.
-    # \param self The \e %TautomerGenerator instance this method is called upon.
     # \param gen The \e %TautomerGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: TautomerGenerator, gen: TautomerGenerator) -> TautomerGenerator: pass
+    def assign(gen: TautomerGenerator) -> TautomerGenerator: pass
 
     ##
     # \brief 

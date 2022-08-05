@@ -56,15 +56,13 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DVectorBFGSMinimizer instance.
-    # \param self The \e %DVectorBFGSMinimizer instance to initialize.
     # \param func 
     # \param grad_func 
     #
-    def __init__(self: object, func: DoubleDVectorFunctor, grad_func: object) -> None: pass
+    def __init__(func: DoubleDVectorFunctor, grad_func: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     #
     # Different Python \e %DVectorBFGSMinimizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DVectorBFGSMinimizer instances \e a and \e b reference different C++ objects. 
@@ -73,46 +71,40 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DVectorBFGSMinimizer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getGradientNorm(self: DVectorBFGSMinimizer) -> float: pass
+    def getGradientNorm() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getFunctionDelta(self: DVectorBFGSMinimizer) -> float: pass
+    def getFunctionDelta() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getFunctionValue(self: DVectorBFGSMinimizer) -> float: pass
+    def getFunctionValue() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getNumIterations(self: DVectorBFGSMinimizer) -> int: pass
+    def getNumIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getStatus(self: DVectorBFGSMinimizer) -> Status: pass
+    def getStatus() -> Status: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \param x 
     # \param g 
     # \param max_iter 
@@ -121,28 +113,26 @@ class DVectorBFGSMinimizer(Boost.Python.instance):
     # \param do_setup 
     # \return 
     #
-    def minimize(self: DVectorBFGSMinimizer, x: DVector, g: DVector, max_iter: int, g_norm: float, delta_f: float, do_setup: bool = True) -> Status: pass
+    def minimize(x: DVector, g: DVector, max_iter: int, g_norm: float, delta_f: float, do_setup: bool = True) -> Status: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \param x 
     # \param g 
     # \param step_size 
     # \param tol 
     # \return 
     #
-    def setup(self: DVectorBFGSMinimizer, x: DVector, g: DVector, step_size: float = 0.001, tol: float = 0.15) -> float: pass
+    def setup(x: DVector, g: DVector, step_size: float = 0.001, tol: float = 0.15) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorBFGSMinimizer instance this method is called upon.
     # \param f 
     # \param x 
     # \param g 
     # \return 
     #
-    def iterate(self: DVectorBFGSMinimizer, f: float, x: DVector, g: DVector) -> tuple: pass
+    def iterate(f: float, x: DVector, g: DVector) -> tuple: pass
 
     ##
     # \brief 

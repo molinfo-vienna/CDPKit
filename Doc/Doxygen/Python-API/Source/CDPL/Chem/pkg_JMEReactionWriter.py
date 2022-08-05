@@ -26,7 +26,6 @@ class JMEReactionWriter(ReactionWriter):
 
     ##
     # \brief Initializes the \e %JMEReactionWriter instance.
-    # \param self The \e %JMEReactionWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

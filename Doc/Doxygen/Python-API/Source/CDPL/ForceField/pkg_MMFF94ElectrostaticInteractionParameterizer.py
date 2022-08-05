@@ -41,29 +41,25 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteractionParameterizer instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteractionParameterizer instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance to initialize.
     # \param parameterizer 
     #
-    def __init__(self: object, parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> None: pass
+    def __init__(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteractionParameterizer instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance to initialize.
     # \param molgraph 
     # \param ia_data 
     # \param strict 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94ElectrostaticInteractionData, strict: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94ElectrostaticInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     #
     # Different Python \e %MMFF94ElectrostaticInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94ElectrostaticInteractionParameterizer instances \e a and \e b reference different C++ objects. 
@@ -72,59 +68,52 @@ class MMFF94ElectrostaticInteractionParameterizer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94ElectrostaticInteractionParameterizer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setFilterFunction(self: MMFF94ElectrostaticInteractionParameterizer, func: InteractionFilterFunction2) -> None: pass
+    def setFilterFunction(func: InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setAtomChargeFunction(self: MMFF94ElectrostaticInteractionParameterizer, func: MMFF94AtomChargeFunction) -> None: pass
+    def setAtomChargeFunction(func: MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setTopologicalDistanceFunction(self: MMFF94ElectrostaticInteractionParameterizer, func: TopologicalAtomDistanceFunction) -> None: pass
+    def setTopologicalDistanceFunction(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param de_const 
     #
-    def setDielectricConstant(self: MMFF94ElectrostaticInteractionParameterizer, de_const: float) -> None: pass
+    def setDielectricConstant(de_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param dist_expo 
     #
-    def setDistanceExponent(self: MMFF94ElectrostaticInteractionParameterizer, dist_expo: float) -> None: pass
+    def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ElectrostaticInteractionParameterizer instance \a parameterizer.
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param parameterizer The \e %MMFF94ElectrostaticInteractionParameterizer instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94ElectrostaticInteractionParameterizer, parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> MMFF94ElectrostaticInteractionParameterizer: pass
+    def assign(parameterizer: MMFF94ElectrostaticInteractionParameterizer) -> MMFF94ElectrostaticInteractionParameterizer: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionParameterizer instance this method is called upon.
     # \param molgraph 
     # \param ia_data 
     # \param strict 
     #
-    def parameterize(self: MMFF94ElectrostaticInteractionParameterizer, molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94ElectrostaticInteractionData, strict: bool) -> None: pass
+    def parameterize(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94ElectrostaticInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief 

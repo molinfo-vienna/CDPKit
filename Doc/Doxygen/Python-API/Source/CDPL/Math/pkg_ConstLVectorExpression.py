@@ -26,7 +26,6 @@ class ConstLVectorExpression(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     #
     # Different Python \e %ConstLVectorExpression instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstLVectorExpression instances \e a and \e b reference different C++ objects. 
@@ -35,152 +34,133 @@ class ConstLVectorExpression(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConstLVectorExpression) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ConstLVectorExpression) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return 
     #
-    def getSize(self: ConstLVectorExpression) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: ConstLVectorExpression, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return 
     #
-    def toArray(self: ConstLVectorExpression) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstLVectorExpression, e: ConstLVectorExpression) -> bool: pass
+    def __eq__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param e The \e %ConstLVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstLVectorExpression, e: ConstLVectorExpression) -> bool: pass
+    def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: ConstLVectorExpression, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: ConstLVectorExpression, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return 
     #
-    def __len__(self: ConstLVectorExpression) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstLVectorExpression instance.
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ConstLVectorExpression) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __pos__() -> ConstLVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstLVectorExpression: pass
+    def __neg__() -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstLVectorExpression instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLVectorExpression instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __add__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstLVectorExpression instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstLVectorExpression instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __sub__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstLVectorExpression instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __mul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstLVectorExpression instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
+    def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstLVectorExpression instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLVectorExpression instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __truediv__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLVectorExpression instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __rmul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief 

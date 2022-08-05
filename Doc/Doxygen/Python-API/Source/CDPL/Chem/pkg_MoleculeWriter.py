@@ -26,34 +26,29 @@ class MoleculeWriter(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %MoleculeWriter instance.
-    # \param self The \e %MoleculeWriter instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeWriter instance this method is called upon.
     # \param mol 
     # \return 
     #
-    def write(self: MoleculeWriter, mol: Molecule) -> MoleculeWriter: pass
+    def write(mol: Molecule) -> MoleculeWriter: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeWriter instance this method is called upon.
     #
-    def close(self: MoleculeWriter) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeWriter instance this method is called upon.
     # \return 
     #
-    def __bool__(self: MoleculeWriter) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeWriter instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: MoleculeWriter) -> bool: pass
+    def __nonzero__() -> bool: pass

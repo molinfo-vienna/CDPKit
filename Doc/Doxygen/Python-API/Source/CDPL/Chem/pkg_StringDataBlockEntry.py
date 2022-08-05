@@ -26,28 +26,24 @@ class StringDataBlockEntry(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %StringDataBlockEntry instance.
-    # \param self The \e %StringDataBlockEntry instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StringDataBlockEntry instance.
-    # \param self The \e %StringDataBlockEntry instance to initialize.
     # \param entry 
     #
-    def __init__(self: object, entry: StringDataBlockEntry) -> None: pass
+    def __init__(entry: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief Initializes the \e %StringDataBlockEntry instance.
-    # \param self The \e %StringDataBlockEntry instance to initialize.
     # \param header 
     # \param data 
     #
-    def __init__(self: object, header: str, data: str) -> None: pass
+    def __init__(header: str, data: str) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     #
     # Different Python \e %StringDataBlockEntry instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StringDataBlockEntry instances \e a and \e b reference different C++ objects. 
@@ -56,59 +52,52 @@ class StringDataBlockEntry(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: StringDataBlockEntry) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlockEntry instance \a entry.
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \param entry The \e %StringDataBlockEntry instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: StringDataBlockEntry, entry: StringDataBlockEntry) -> StringDataBlockEntry: pass
+    def assign(entry: StringDataBlockEntry) -> StringDataBlockEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \return 
     #
-    def getHeader(self: StringDataBlockEntry) -> str: pass
+    def getHeader() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \param header 
     #
-    def setHeader(self: StringDataBlockEntry, header: str) -> None: pass
+    def setHeader(header: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \return 
     #
-    def getData(self: StringDataBlockEntry) -> str: pass
+    def getData() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \param data 
     #
-    def setData(self: StringDataBlockEntry, data: str) -> None: pass
+    def setData(data: str) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == entry</tt>.
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \param entry The \e %StringDataBlockEntry instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: StringDataBlockEntry, entry: StringDataBlockEntry) -> bool: pass
+    def __eq__(entry: StringDataBlockEntry) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != entry</tt>.
-    # \param self The \e %StringDataBlockEntry instance this method is called upon.
     # \param entry The \e %StringDataBlockEntry instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: StringDataBlockEntry, entry: StringDataBlockEntry) -> bool: pass
+    def __ne__(entry: StringDataBlockEntry) -> bool: pass
 
     ##
     # \brief 

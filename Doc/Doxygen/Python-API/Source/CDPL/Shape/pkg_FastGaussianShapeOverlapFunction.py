@@ -31,74 +31,64 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # \param ref_shape_func 
     # \param ovl_shape_func 
     #
-    def __init__(self: object, ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
+    def __init__(ref_shape_func: GaussianShapeFunction, ovl_shape_func: GaussianShapeFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeOverlapFunction instance.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: FastGaussianShapeOverlapFunction) -> None: pass
+    def __init__(func: FastGaussianShapeOverlapFunction) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FastGaussianShapeOverlapFunction instance \a func.
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FastGaussianShapeOverlapFunction, func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
+    def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \param enable 
     #
-    def proximityOptimization(self: FastGaussianShapeOverlapFunction, enable: bool) -> None: pass
+    def proximityOptimization(enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def proximityOptimization(self: FastGaussianShapeOverlapFunction) -> bool: pass
+    def proximityOptimization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \param factor 
     #
-    def setRadiusScalingFactor(self: FastGaussianShapeOverlapFunction, factor: float) -> None: pass
+    def setRadiusScalingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def getRadiusScalingFactor(self: FastGaussianShapeOverlapFunction) -> float: pass
+    def getRadiusScalingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \param enable 
     #
-    def fastExpFunction(self: FastGaussianShapeOverlapFunction, enable: bool) -> None: pass
+    def fastExpFunction(enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def fastExpFunction(self: FastGaussianShapeOverlapFunction) -> bool: pass
+    def fastExpFunction() -> bool: pass
 
     ##
     # \brief FIXME!

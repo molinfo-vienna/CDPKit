@@ -26,6 +26,5 @@ class INCHIMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %INCHIMoleculeInputHandler instance.
-    # \param self The \e %INCHIMoleculeInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

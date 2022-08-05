@@ -66,84 +66,73 @@ class MatchConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
-    # \param self The \e %MatchConstraint instance to initialize.
     # \param constr 
     #
-    def __init__(self: object, constr: MatchConstraint) -> None: pass
+    def __init__(constr: MatchConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
-    # \param self The \e %MatchConstraint instance to initialize.
     # \param id 
     # \param relation 
     #
-    def __init__(self: object, id: int, relation: Relation) -> None: pass
+    def __init__(id: int, relation: Relation) -> None: pass
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
-    # \param self The \e %MatchConstraint instance to initialize.
     # \param id 
     # \param relation 
     # \param value 
     #
-    def __init__(self: object, id: int, relation: Relation, value: CDPL.Base.Variant) -> None: pass
+    def __init__(id: int, relation: Relation, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraint instance \a constr.
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \param constr The \e %MatchConstraint instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MatchConstraint, constr: MatchConstraint) -> MatchConstraint: pass
+    def assign(constr: MatchConstraint) -> MatchConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \return 
     #
-    def getID(self: MatchConstraint) -> int: pass
+    def getID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \param id 
     #
-    def setID(self: MatchConstraint, id: int) -> None: pass
+    def setID(id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \return 
     #
-    def getRelation(self: MatchConstraint) -> Relation: pass
+    def getRelation() -> Relation: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \param relation 
     #
-    def setRelation(self: MatchConstraint, relation: Relation) -> None: pass
+    def setRelation(relation: Relation) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \return 
     #
-    def getValue(self: MatchConstraint) -> CDPL.Base.Variant: pass
+    def getValue() -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \param value 
     #
-    def setValue(self: MatchConstraint, value: CDPL.Base.Variant) -> None: pass
+    def setValue(value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraint instance this method is called upon.
     # \return 
     #
-    def hasValue(self: MatchConstraint) -> bool: pass
+    def hasValue() -> bool: pass
 
     ##
     # \brief 

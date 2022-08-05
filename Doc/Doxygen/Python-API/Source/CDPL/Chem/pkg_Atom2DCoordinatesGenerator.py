@@ -26,21 +26,18 @@ class Atom2DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Atom2DCoordinatesGenerator instance.
-    # \param self The \e %Atom2DCoordinatesGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Atom2DCoordinatesGenerator instance.
-    # \param self The \e %Atom2DCoordinatesGenerator instance to initialize.
     # \param molgraph 
     # \param coords 
     #
-    def __init__(self: object, molgraph: MolecularGraph, coords: CDPL.Math.Vector2DArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, coords: CDPL.Math.Vector2DArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Atom2DCoordinatesGenerator instance this method is called upon.
     #
     # Different Python \e %Atom2DCoordinatesGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Atom2DCoordinatesGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,15 +46,14 @@ class Atom2DCoordinatesGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Atom2DCoordinatesGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Atom2DCoordinatesGenerator instance this method is called upon.
     # \param molgraph 
     # \param coords 
     #
-    def generate(self: Atom2DCoordinatesGenerator, molgraph: MolecularGraph, coords: CDPL.Math.Vector2DArray) -> None: pass
+    def generate(molgraph: MolecularGraph, coords: CDPL.Math.Vector2DArray) -> None: pass
 
     ##
     # \brief 

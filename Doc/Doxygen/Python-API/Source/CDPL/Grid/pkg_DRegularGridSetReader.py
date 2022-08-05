@@ -26,83 +26,72 @@ class DRegularGridSetReader(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %DRegularGridSetReader instance.
-    # \param self The \e %DRegularGridSetReader instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \param grid_set 
     # \param overwrite 
     # \return 
     #
-    def read(self: DRegularGridSetReader, grid_set: DRegularGridSet, overwrite: bool = True) -> DRegularGridSetReader: pass
+    def read(grid_set: DRegularGridSet, overwrite: bool = True) -> DRegularGridSetReader: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \param idx 
     # \param grid_set 
     # \param overwrite 
     # \return 
     #
-    def read(self: DRegularGridSetReader, idx: int, grid_set: DRegularGridSet, overwrite: bool = True) -> DRegularGridSetReader: pass
+    def read(idx: int, grid_set: DRegularGridSet, overwrite: bool = True) -> DRegularGridSetReader: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \return 
     #
-    def skip(self: DRegularGridSetReader) -> DRegularGridSetReader: pass
+    def skip() -> DRegularGridSetReader: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \return 
     #
-    def hasMoreData(self: DRegularGridSetReader) -> bool: pass
+    def hasMoreData() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \return 
     #
-    def getRecordIndex(self: DRegularGridSetReader) -> int: pass
+    def getRecordIndex() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \param idx 
     #
-    def setRecordIndex(self: DRegularGridSetReader, idx: int) -> None: pass
+    def setRecordIndex(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \return 
     #
-    def getNumRecords(self: DRegularGridSetReader) -> int: pass
+    def getNumRecords() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     #
-    def close(self: DRegularGridSetReader) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: DRegularGridSetReader) -> bool: pass
+    def __nonzero__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetReader instance this method is called upon.
     # \return 
     #
-    def __bool__(self: DRegularGridSetReader) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 

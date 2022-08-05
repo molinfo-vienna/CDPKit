@@ -26,8 +26,7 @@ class FileSMILESReactionReader(ReactionReader):
 
     ##
     # \brief Initializes the \e %FileSMILESReactionReader instance.
-    # \param self The \e %FileSMILESReactionReader instance to initialize.
     # \param file_name 
     # \param mode 
     #
-    def __init__(self: object, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

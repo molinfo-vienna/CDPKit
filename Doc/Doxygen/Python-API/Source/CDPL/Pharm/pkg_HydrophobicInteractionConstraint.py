@@ -36,15 +36,13 @@ class HydrophobicInteractionConstraint(FeatureDistanceConstraint):
 
     ##
     # \brief Initializes the \e %HydrophobicInteractionConstraint instance.
-    # \param self The \e %HydrophobicInteractionConstraint instance to initialize.
     # \param constr 
     #
-    def __init__(self: object, constr: HydrophobicInteractionConstraint) -> None: pass
+    def __init__(constr: HydrophobicInteractionConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %HydrophobicInteractionConstraint instance.
-    # \param self The \e %HydrophobicInteractionConstraint instance to initialize.
     # \param min_dist 
     # \param max_dist 
     #
-    def __init__(self: object, min_dist: float = 2.0, max_dist: float = 6.0) -> None: pass
+    def __init__(min_dist: float = 2.0, max_dist: float = 6.0) -> None: pass

@@ -26,21 +26,18 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ULQuaternionVectorAdapter instance.
-    # \param self The \e %ULQuaternionVectorAdapter instance to initialize.
     # \param a 
     #
-    def __init__(self: object, a: ULQuaternionVectorAdapter) -> None: pass
+    def __init__(a: ULQuaternionVectorAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ULQuaternionVectorAdapter instance.
-    # \param self The \e %ULQuaternionVectorAdapter instance to initialize.
     # \param e 
     #
-    def __init__(self: object, e: ULQuaternionExpression) -> None: pass
+    def __init__(e: ULQuaternionExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     #
     # Different Python \e %ULQuaternionVectorAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ULQuaternionVectorAdapter instances \e a and \e b reference different C++ objects. 
@@ -49,302 +46,264 @@ class ULQuaternionVectorAdapter(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ULQuaternionVectorAdapter) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a e.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ULQuaternionVectorAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULQuaternionVectorAdapter, e: ConstFVectorExpression) -> ULQuaternionVectorAdapter: pass
+    def assign(e: ConstFVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a e.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ULQuaternionVectorAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULQuaternionVectorAdapter, e: ConstDVectorExpression) -> ULQuaternionVectorAdapter: pass
+    def assign(e: ConstDVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a e.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ULQuaternionVectorAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULQuaternionVectorAdapter, e: ConstLVectorExpression) -> ULQuaternionVectorAdapter: pass
+    def assign(e: ConstLVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a e.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ULQuaternionVectorAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULQuaternionVectorAdapter, e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
+    def assign(e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a a.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param a The \e %ULQuaternionVectorAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULQuaternionVectorAdapter, a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    def assign(a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternionVectorAdapter instance \a a.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param a The \e %ULQuaternionVectorAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULQuaternionVectorAdapter, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ULQuaternionVectorAdapter) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def getSize(self: ULQuaternionVectorAdapter) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: ULQuaternionVectorAdapter, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def toArray(self: ULQuaternionVectorAdapter) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param a 
     #
-    def swap(self: ULQuaternionVectorAdapter, a: ULQuaternionVectorAdapter) -> None: pass
+    def swap(a: ULQuaternionVectorAdapter) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: ULQuaternionVectorAdapter, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def getData(self: ULQuaternionVectorAdapter) -> ULQuaternionExpression: pass
+    def getData() -> ULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param a The \e %ULQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULQuaternionVectorAdapter, a: ULQuaternionVectorAdapter) -> bool: pass
+    def __eq__(a: ULQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ULQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULQuaternionVectorAdapter, e: ConstULVectorExpression) -> bool: pass
+    def __eq__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param a The \e %ULQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULQuaternionVectorAdapter, a: ULQuaternionVectorAdapter) -> bool: pass
+    def __ne__(a: ULQuaternionVectorAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param e The \e %ULQuaternionVectorAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULQuaternionVectorAdapter, e: ConstULVectorExpression) -> bool: pass
+    def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: ULQuaternionVectorAdapter, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: ULQuaternionVectorAdapter, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def __len__(self: ULQuaternionVectorAdapter) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %ULQuaternionVectorAdapter instance.
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ULQuaternionVectorAdapter) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    def __pos__() -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstULVectorExpression: pass
+    def __neg__() -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ULQuaternionVectorAdapter instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __add__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ULQuaternionVectorAdapter instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __sub__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ULQuaternionVectorAdapter instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __mul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ULQuaternionVectorAdapter instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
+    def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ULQuaternionVectorAdapter instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __truediv__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __rmul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: ULQuaternionVectorAdapter, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += a</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as in-place addend.
     # \param a Specifies the second addend.
     # \return The updated \e %ULQuaternionVectorAdapter instance \a self.
     #
-    def __iadd__(self: ULQuaternionVectorAdapter, a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    def __iadd__(a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %ULQuaternionVectorAdapter instance \a self.
     #
-    def __iadd__(self: ULQuaternionVectorAdapter, e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
+    def __iadd__(e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as in-place minuend.
     # \param a Specifies the subtrahend.
     # \return The updated \e %ULQuaternionVectorAdapter instance \a self.
     #
-    def __isub__(self: ULQuaternionVectorAdapter, a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
+    def __isub__(a: ULQuaternionVectorAdapter) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %ULQuaternionVectorAdapter instance \a self.
     #
-    def __isub__(self: ULQuaternionVectorAdapter, e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
+    def __isub__(e: ConstULVectorExpression) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %ULQuaternionVectorAdapter instance \a self.
     #
-    def __imul__(self: ULQuaternionVectorAdapter, t: int) -> ULQuaternionVectorAdapter: pass
+    def __imul__(t: int) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %ULQuaternionVectorAdapter instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %ULQuaternionVectorAdapter instance \a self.
     #
-    def __idiv__(self: ULQuaternionVectorAdapter, t: int) -> ULQuaternionVectorAdapter: pass
+    def __idiv__(t: int) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief 
-    # \param self The \e %ULQuaternionVectorAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: ULQuaternionVectorAdapter, t: int) -> ULQuaternionVectorAdapter: pass
+    def __itruediv__(t: int) -> ULQuaternionVectorAdapter: pass
 
     ##
     # \brief 

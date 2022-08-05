@@ -41,456 +41,398 @@ class FRegularSpatialGrid(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FRegularSpatialGrid instance.
-    # \param self The \e %FRegularSpatialGrid instance to initialize.
     # \param grid 
     #
-    def __init__(self: object, grid: FRegularSpatialGrid) -> None: pass
+    def __init__(grid: FRegularSpatialGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularSpatialGrid instance.
-    # \param self The \e %FRegularSpatialGrid instance to initialize.
     # \param data 
     # \param xs 
     # \param ys 
     # \param zs 
     #
-    def __init__(self: object, data: FGrid, xs: float, ys: float, zs: float) -> None: pass
+    def __init__(data: FGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularSpatialGrid instance.
-    # \param self The \e %FRegularSpatialGrid instance to initialize.
     # \param data 
     # \param s 
     #
-    def __init__(self: object, data: FGrid, s: float) -> None: pass
+    def __init__(data: FGrid, s: float) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularSpatialGrid instance.
-    # \param self The \e %FRegularSpatialGrid instance to initialize.
     # \param xs 
     # \param ys 
     # \param zs 
     #
-    def __init__(self: object, xs: float, ys: float, zs: float) -> None: pass
+    def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
     # \brief Initializes the \e %FRegularSpatialGrid instance.
-    # \param self The \e %FRegularSpatialGrid instance to initialize.
     # \param s 
     #
-    def __init__(self: object, s: float) -> None: pass
+    def __init__(s: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param m 
     # \param n 
     # \param o 
     # \param preserve 
     # \param v 
     #
-    def resize(self: FRegularSpatialGrid, m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
+    def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param v 
     #
-    def clear(self: FRegularSpatialGrid, v: float = 0.0) -> None: pass
+    def clear(v: float = 0.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getDataMode(self: FRegularSpatialGrid) -> DataMode: pass
+    def getDataMode() -> DataMode: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param mode 
     #
-    def setDataMode(self: FRegularSpatialGrid, mode: DataMode) -> None: pass
+    def setDataMode(mode: DataMode) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getXExtent(self: FRegularSpatialGrid) -> float: pass
+    def getXExtent() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getYExtent(self: FRegularSpatialGrid) -> float: pass
+    def getYExtent() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getZExtent(self: FRegularSpatialGrid) -> float: pass
+    def getZExtent() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getXStepSize(self: FRegularSpatialGrid) -> float: pass
+    def getXStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getYStepSize(self: FRegularSpatialGrid) -> float: pass
+    def getYStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getZStepSize(self: FRegularSpatialGrid) -> float: pass
+    def getZStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param xs 
     #
-    def setXStepSize(self: FRegularSpatialGrid, xs: float) -> None: pass
+    def setXStepSize(xs: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param ys 
     #
-    def setYStepSize(self: FRegularSpatialGrid, ys: float) -> None: pass
+    def setYStepSize(ys: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param zs 
     #
-    def setZStepSize(self: FRegularSpatialGrid, zs: float) -> None: pass
+    def setZStepSize(zs: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getData(self: FRegularSpatialGrid) -> FGrid: pass
+    def getData() -> FGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param xform 
     #
-    def setCoordinatesTransform(self: FRegularSpatialGrid, xform: Matrix4F) -> None: pass
+    def setCoordinatesTransform(xform: Matrix4F) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getCoordinatesTransform(self: FRegularSpatialGrid) -> Matrix4F: pass
+    def getCoordinatesTransform() -> Matrix4F: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param coords 
     #
-    def getCoordinates(self: FRegularSpatialGrid, i: int, j: int, k: int, coords: object) -> None: pass
+    def getCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param coords 
     #
-    def getCoordinates(self: FRegularSpatialGrid, i: int, coords: object) -> None: pass
+    def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param coords 
     #
-    def getLocalCoordinates(self: FRegularSpatialGrid, i: int, j: int, k: int, coords: object) -> None: pass
+    def getLocalCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param world_coords 
     # \param local_coords 
     #
-    def getLocalCoordinates(self: FRegularSpatialGrid, world_coords: Vector3F, local_coords: object) -> None: pass
+    def getLocalCoordinates(world_coords: Vector3F, local_coords: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: Vector3F) -> bool: pass
+    def containsPoint(pos: Vector3F) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: ConstFVectorExpression) -> bool: pass
+    def containsPoint(pos: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: Vector3D) -> bool: pass
+    def containsPoint(pos: Vector3D) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: ConstDVectorExpression) -> bool: pass
+    def containsPoint(pos: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: Vector3L) -> bool: pass
+    def containsPoint(pos: Vector3L) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: ConstLVectorExpression) -> bool: pass
+    def containsPoint(pos: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: Vector3UL) -> bool: pass
+    def containsPoint(pos: Vector3UL) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsPoint(self: FRegularSpatialGrid, pos: ConstULVectorExpression) -> bool: pass
+    def containsPoint(pos: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: Vector3F) -> bool: pass
+    def containsLocalPoint(pos: Vector3F) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: ConstFVectorExpression) -> bool: pass
+    def containsLocalPoint(pos: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: Vector3D) -> bool: pass
+    def containsLocalPoint(pos: Vector3D) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: ConstDVectorExpression) -> bool: pass
+    def containsLocalPoint(pos: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: Vector3L) -> bool: pass
+    def containsLocalPoint(pos: Vector3L) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: ConstLVectorExpression) -> bool: pass
+    def containsLocalPoint(pos: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: Vector3UL) -> bool: pass
+    def containsLocalPoint(pos: Vector3UL) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def containsLocalPoint(self: FRegularSpatialGrid, pos: ConstULVectorExpression) -> bool: pass
+    def containsLocalPoint(pos: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: Vector3F, indices: object) -> None: pass
+    def getContainingCell(pos: Vector3F, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: ConstFVectorExpression, indices: object) -> None: pass
+    def getContainingCell(pos: ConstFVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: Vector3D, indices: object) -> None: pass
+    def getContainingCell(pos: Vector3D, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: ConstDVectorExpression, indices: object) -> None: pass
+    def getContainingCell(pos: ConstDVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: Vector3L, indices: object) -> None: pass
+    def getContainingCell(pos: Vector3L, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: ConstLVectorExpression, indices: object) -> None: pass
+    def getContainingCell(pos: ConstLVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: Vector3UL, indices: object) -> None: pass
+    def getContainingCell(pos: Vector3UL, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getContainingCell(self: FRegularSpatialGrid, pos: ConstULVectorExpression, indices: object) -> None: pass
+    def getContainingCell(pos: ConstULVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: Vector3F, indices: object) -> None: pass
+    def getLocalContainingCell(pos: Vector3F, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: ConstFVectorExpression, indices: object) -> None: pass
+    def getLocalContainingCell(pos: ConstFVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: Vector3D, indices: object) -> None: pass
+    def getLocalContainingCell(pos: Vector3D, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: ConstDVectorExpression, indices: object) -> None: pass
+    def getLocalContainingCell(pos: ConstDVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: Vector3L, indices: object) -> None: pass
+    def getLocalContainingCell(pos: Vector3L, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: ConstLVectorExpression, indices: object) -> None: pass
+    def getLocalContainingCell(pos: ConstLVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: Vector3UL, indices: object) -> None: pass
+    def getLocalContainingCell(pos: Vector3UL, indices: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param pos 
     # \param indices 
     #
-    def getLocalContainingCell(self: FRegularSpatialGrid, pos: ConstULVectorExpression, indices: object) -> None: pass
+    def getLocalContainingCell(pos: ConstULVectorExpression, indices: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     #
     # Different Python \e %FRegularSpatialGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FRegularSpatialGrid instances \e a and \e b reference different C++ objects. 
@@ -499,338 +441,296 @@ class FRegularSpatialGrid(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FRegularSpatialGrid) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularSpatialGrid instance \a e.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param e The \e %FRegularSpatialGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FRegularSpatialGrid, e: ConstFGridExpression) -> FRegularSpatialGrid: pass
+    def assign(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularSpatialGrid instance \a e.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param e The \e %FRegularSpatialGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FRegularSpatialGrid, e: ConstDGridExpression) -> FRegularSpatialGrid: pass
+    def assign(e: ConstDGridExpression) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularSpatialGrid instance \a e.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param e The \e %FRegularSpatialGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FRegularSpatialGrid, e: object) -> FRegularSpatialGrid: pass
+    def assign(e: object) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularSpatialGrid instance \a g.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param g The \e %FRegularSpatialGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FRegularSpatialGrid, g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
+    def assign(g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getSize1(self: FRegularSpatialGrid) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getSize2(self: FRegularSpatialGrid) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getSize3(self: FRegularSpatialGrid) -> int: pass
+    def getSize3() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: FRegularSpatialGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def getElement(self: FRegularSpatialGrid, i: int, j: int, k: int) -> float: pass
+    def getElement(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: FRegularSpatialGrid, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def toArray(self: FRegularSpatialGrid) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getSize(self: FRegularSpatialGrid) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param g 
     #
-    def swap(self: FRegularSpatialGrid, g: FRegularSpatialGrid) -> None: pass
+    def swap(g: FRegularSpatialGrid) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param v 
     #
-    def setElement(self: FRegularSpatialGrid, i: int, j: int, k: int, v: float) -> None: pass
+    def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: FRegularSpatialGrid, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def __call__(self: FRegularSpatialGrid, i: int, j: int, k: int) -> float: pass
+    def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: FRegularSpatialGrid, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param ijk 
     # \return 
     #
-    def __getitem__(self: FRegularSpatialGrid, ijk: tuple) -> float: pass
+    def __getitem__(ijk: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: FRegularSpatialGrid, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: FRegularSpatialGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param g The \e %FRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FRegularSpatialGrid, g: FRegularSpatialGrid) -> bool: pass
+    def __eq__(g: FRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param e The \e %FRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FRegularSpatialGrid, e: ConstFGridExpression) -> bool: pass
+    def __eq__(e: ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param g The \e %FRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FRegularSpatialGrid, g: FRegularSpatialGrid) -> bool: pass
+    def __ne__(g: FRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param e The \e %FRegularSpatialGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FRegularSpatialGrid, e: ConstFGridExpression) -> bool: pass
+    def __ne__(e: ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %FRegularSpatialGrid instance.
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: FRegularSpatialGrid) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def __pos__(self: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
+    def __pos__() -> FRegularSpatialGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFGridExpression: pass
+    def __neg__() -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FRegularSpatialGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %FRegularSpatialGrid instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFGridExpression) -> ConstFGridExpression: pass
+    def __add__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FRegularSpatialGrid instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFGridExpression) -> ConstFGridExpression: pass
+    def __sub__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %FRegularSpatialGrid instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFGridExpression: pass
+    def __mul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %FRegularSpatialGrid instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFGridExpression: pass
+    def __div__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFGridExpression: pass
+    def __truediv__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFGridExpression: pass
+    def __rmul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param ijk 
     # \param v 
     #
-    def __setitem__(self: FRegularSpatialGrid, ijk: tuple, v: float) -> None: pass
+    def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: FRegularSpatialGrid, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as in-place addend.
     # \param g Specifies the second addend.
     # \return The updated \e %FRegularSpatialGrid instance \a self.
     #
-    def __iadd__(self: FRegularSpatialGrid, g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
+    def __iadd__(g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %FRegularSpatialGrid instance \a self.
     #
-    def __iadd__(self: FRegularSpatialGrid, e: ConstFGridExpression) -> FRegularSpatialGrid: pass
+    def __iadd__(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as in-place minuend.
     # \param g Specifies the subtrahend.
     # \return The updated \e %FRegularSpatialGrid instance \a self.
     #
-    def __isub__(self: FRegularSpatialGrid, g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
+    def __isub__(g: FRegularSpatialGrid) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %FRegularSpatialGrid instance \a self.
     #
-    def __isub__(self: FRegularSpatialGrid, e: ConstFGridExpression) -> FRegularSpatialGrid: pass
+    def __isub__(e: ConstFGridExpression) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %FRegularSpatialGrid instance \a self.
     #
-    def __imul__(self: FRegularSpatialGrid, t: float) -> FRegularSpatialGrid: pass
+    def __imul__(t: float) -> FRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %FRegularSpatialGrid instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %FRegularSpatialGrid instance \a self.
     #
-    def __idiv__(self: FRegularSpatialGrid, t: float) -> FRegularSpatialGrid: pass
+    def __idiv__(t: float) -> FRegularSpatialGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FRegularSpatialGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: FRegularSpatialGrid, t: float) -> FRegularSpatialGrid: pass
+    def __itruediv__(t: float) -> FRegularSpatialGrid: pass
 
     ##
     # \brief 

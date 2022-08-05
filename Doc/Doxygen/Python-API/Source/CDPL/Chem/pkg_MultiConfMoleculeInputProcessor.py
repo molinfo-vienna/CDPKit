@@ -26,13 +26,11 @@ class MultiConfMoleculeInputProcessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MultiConfMoleculeInputProcessor instance.
-    # \param self The \e %MultiConfMoleculeInputProcessor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MultiConfMoleculeInputProcessor instance this method is called upon.
     #
     # Different Python \e %MultiConfMoleculeInputProcessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MultiConfMoleculeInputProcessor instances \e a and \e b reference different C++ objects. 
@@ -41,36 +39,33 @@ class MultiConfMoleculeInputProcessor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MultiConfMoleculeInputProcessor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MultiConfMoleculeInputProcessor instance this method is called upon.
     # \param arg1 
     # \param tgt_molgraph 
     # \return 
     #
-    def init(arg1: MultiConfMoleculeInputProcessor, tgt_molgraph: MolecularGraph) -> bool: pass
+    def init(tgt_molgraph: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MultiConfMoleculeInputProcessor instance this method is called upon.
-    # \param arg1 
-    # \param tgt_molgraph 
-    # \param conf_molgraph 
-    # \return 
-    #
-    def isConformation(arg1: MultiConfMoleculeInputProcessor, tgt_molgraph: MolecularGraph, conf_molgraph: MolecularGraph) -> bool: pass
-
-    ##
-    # \brief 
-    # \param self The \e %MultiConfMoleculeInputProcessor instance this method is called upon.
     # \param arg1 
     # \param tgt_molgraph 
     # \param conf_molgraph 
     # \return 
     #
-    def addConformation(arg1: MultiConfMoleculeInputProcessor, tgt_molgraph: MolecularGraph, conf_molgraph: MolecularGraph) -> bool: pass
+    def isConformation(tgt_molgraph: MolecularGraph, conf_molgraph: MolecularGraph) -> bool: pass
+
+    ##
+    # \brief 
+    # \param arg1 
+    # \param tgt_molgraph 
+    # \param conf_molgraph 
+    # \return 
+    #
+    def addConformation(tgt_molgraph: MolecularGraph, conf_molgraph: MolecularGraph) -> bool: pass
 
     ##
     # \brief 

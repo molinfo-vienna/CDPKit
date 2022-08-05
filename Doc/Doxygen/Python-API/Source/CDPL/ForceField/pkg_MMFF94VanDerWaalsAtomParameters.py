@@ -26,18 +26,16 @@ class MMFF94VanDerWaalsAtomParameters(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsAtomParameters instance.
-    # \param self The \e %MMFF94VanDerWaalsAtomParameters instance to initialize.
     # \param params 
     #
-    def __init__(self: object, params: MMFF94VanDerWaalsAtomParameters) -> None: pass
+    def __init__(params: MMFF94VanDerWaalsAtomParameters) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsAtomParameters instance.
-    # \param self The \e %MMFF94VanDerWaalsAtomParameters instance to initialize.
     # \param atom_pol 
     # \param eff_el_num 
     # \param fact_a 
     # \param fact_g 
     # \param don_acc_type 
     #
-    def __init__(self: object, atom_pol: float, eff_el_num: float, fact_a: float, fact_g: float, don_acc_type: HDonorAcceptorType) -> None: pass
+    def __init__(atom_pol: float, eff_el_num: float, fact_a: float, fact_g: float, don_acc_type: HDonorAcceptorType) -> None: pass

@@ -31,43 +31,37 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
 
         ##
         # \brief 
-        # \param self The \e %AtomMapping instance this method is called upon.
         # \return 
         #
-        def __len__(self: AtomMapping) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %AtomMapping instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: AtomMapping, idx: int) -> CDPL.Chem.Atom: pass
+        def __getitem__(idx: int) -> CDPL.Chem.Atom: pass
 
     ##
     # \brief Initializes the \e %CanonicalFragment instance.
-    # \param self The \e %CanonicalFragment instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CanonicalFragment instance.
-    # \param self The \e %CanonicalFragment instance to initialize.
     # \param molgraph 
     # \param parent 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Initializes the \e %CanonicalFragment instance.
-    # \param self The \e %CanonicalFragment instance to initialize.
     # \param frag 
     #
-    def __init__(self: object, frag: CanonicalFragment) -> None: pass
+    def __init__(frag: CanonicalFragment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     #
     # Different Python \e %CanonicalFragment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CanonicalFragment instances \e a and \e b reference different C++ objects. 
@@ -76,44 +70,39 @@ class CanonicalFragment(CDPL.Chem.MolecularGraph):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: CanonicalFragment) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CanonicalFragment instance \a frag.
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     # \param frag The \e %CanonicalFragment instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: CanonicalFragment, frag: CanonicalFragment) -> CanonicalFragment: pass
+    def assign(frag: CanonicalFragment) -> CanonicalFragment: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     # \param molgraph 
     # \param parent 
     # \param modify 
     #
-    def create(self: CanonicalFragment, molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph, modify: bool = True) -> None: pass
+    def create(molgraph: CDPL.Chem.MolecularGraph, parent: CDPL.Chem.MolecularGraph, modify: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     # \return 
     #
-    def getHashCode(self: CanonicalFragment) -> int: pass
+    def getHashCode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     #
-    def clear(self: CanonicalFragment) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalFragment instance this method is called upon.
     # \return 
     #
-    def getAtomMapping(self: CanonicalFragment) -> CDPL.Chem.AtomMapping: pass
+    def getAtomMapping() -> CDPL.Chem.AtomMapping: pass
 
     ##
     # \brief 

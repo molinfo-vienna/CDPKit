@@ -31,29 +31,25 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         #
-        def __init__(self: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         #
-        def __init__(self: object, entry: Entry) -> None: pass
+        def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param atom_type 
         # \param part_bond_chg_inc 
         # \param form_chg_adj_factor 
         #
-        def __init__(self: object, atom_type: int, part_bond_chg_inc: float, form_chg_adj_factor: float) -> None: pass
+        def __init__(atom_type: int, part_bond_chg_inc: float, form_chg_adj_factor: float) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         #
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -62,50 +58,44 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Entry) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: Entry, entry: Entry) -> Entry: pass
+        def assign(entry: Entry) -> Entry: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAtomType(self: Entry) -> int: pass
+        def getAtomType() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getPartialChargeIncrement(self: Entry) -> float: pass
+        def getPartialChargeIncrement() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getFormalChargeAdjustmentFactor(self: Entry) -> float: pass
+        def getFormalChargeAdjustmentFactor() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def __nonzero__(self: Entry) -> bool: pass
+        def __nonzero__() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def __bool__(self: Entry) -> bool: pass
+        def __bool__() -> bool: pass
 
         ##
         # \brief 
@@ -129,20 +119,17 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94PartialBondChargeIncrementTable instance.
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94PartialBondChargeIncrementTable instance.
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance to initialize.
     # \param table 
     #
-    def __init__(self: object, table: MMFF94PartialBondChargeIncrementTable) -> None: pass
+    def __init__(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     #
     # Different Python \e %MMFF94PartialBondChargeIncrementTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94PartialBondChargeIncrementTable instances \e a and \e b reference different C++ objects. 
@@ -151,73 +138,64 @@ class MMFF94PartialBondChargeIncrementTable(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94PartialBondChargeIncrementTable) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \param atom_type 
     # \param part_bond_chg_inc 
     # \param form_chg_adj_factor 
     #
-    def addEntry(self: MMFF94PartialBondChargeIncrementTable, atom_type: int, part_bond_chg_inc: float, form_chg_adj_factor: float) -> None: pass
+    def addEntry(atom_type: int, part_bond_chg_inc: float, form_chg_adj_factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \param atom_type 
     # \return 
     #
-    def removeEntry(self: MMFF94PartialBondChargeIncrementTable, atom_type: int) -> bool: pass
+    def removeEntry(atom_type: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \param atom_type 
     # \return 
     #
-    def getEntry(self: MMFF94PartialBondChargeIncrementTable, atom_type: int) -> Entry: pass
+    def getEntry(atom_type: int) -> Entry: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     #
-    def clear(self: MMFF94PartialBondChargeIncrementTable) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: MMFF94PartialBondChargeIncrementTable) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \return 
     #
-    def getEntries(self: MMFF94PartialBondChargeIncrementTable) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \param is 
     #
-    def load(self: MMFF94PartialBondChargeIncrementTable, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     #
-    def loadDefaults(self: MMFF94PartialBondChargeIncrementTable) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94PartialBondChargeIncrementTable instance \a table.
-    # \param self The \e %MMFF94PartialBondChargeIncrementTable instance this method is called upon.
     # \param table The \e %MMFF94PartialBondChargeIncrementTable instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94PartialBondChargeIncrementTable, table: MMFF94PartialBondChargeIncrementTable) -> MMFF94PartialBondChargeIncrementTable: pass
+    def assign(table: MMFF94PartialBondChargeIncrementTable) -> MMFF94PartialBondChargeIncrementTable: pass
 
     ##
     # \brief 

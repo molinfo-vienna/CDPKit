@@ -26,59 +26,51 @@ class CompoundDRegularGridReader(DRegularGridReader):
 
     ##
     # \brief Initializes the \e %CompoundDRegularGridReader instance.
-    # \param self The \e %CompoundDRegularGridReader instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CompoundDRegularGridReader instance.
-    # \param self The \e %CompoundDRegularGridReader instance to initialize.
     # \param reader 
     #
-    def __init__(self: object, reader: CompoundDRegularGridReader) -> None: pass
+    def __init__(reader: CompoundDRegularGridReader) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundDRegularGridReader instance \a reader.
-    # \param self The \e %CompoundDRegularGridReader instance this method is called upon.
     # \param reader The \e %CompoundDRegularGridReader instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: CompoundDRegularGridReader, reader: CompoundDRegularGridReader) -> CompoundDRegularGridReader: pass
+    def assign(reader: CompoundDRegularGridReader) -> CompoundDRegularGridReader: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundDRegularGridReader instance this method is called upon.
     # \return 
     #
-    def getNumReaders(self: CompoundDRegularGridReader) -> int: pass
+    def getNumReaders() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundDRegularGridReader instance this method is called upon.
     # \param reader 
     #
-    def addReader(self: CompoundDRegularGridReader, reader: DRegularGridReader) -> None: pass
+    def addReader(reader: DRegularGridReader) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundDRegularGridReader instance this method is called upon.
     # \param idx 
     #
-    def removeReader(self: CompoundDRegularGridReader, idx: int) -> None: pass
+    def removeReader(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundDRegularGridReader instance this method is called upon.
     #
-    def clear(self: CompoundDRegularGridReader) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CompoundDRegularGridReader instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getReader(self: CompoundDRegularGridReader, idx: int) -> DRegularGridReader: pass
+    def getReader(idx: int) -> DRegularGridReader: pass
 
     ##
     # \brief 

@@ -26,13 +26,11 @@ class Lower(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Lower instance.
-    # \param self The \e %Lower instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Lower instance.
-    # \param self The \e %Lower instance to initialize.
     # \param t 
     #
-    def __init__(self: object, t: Lower) -> None: pass
+    def __init__(t: Lower) -> None: pass

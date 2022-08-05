@@ -26,69 +26,59 @@ class Vector3UL(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param self The \e %Vector3UL instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param self The \e %Vector3UL instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: Vector3UL) -> None: pass
+    def __init__(v: Vector3UL) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param self The \e %Vector3UL instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: int) -> None: pass
+    def __init__(v: int) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param arg1 The \e %Vector3UL instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param arg1 The \e %Vector3UL instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param arg1 The \e %Vector3UL instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param arg1 The \e %Vector3UL instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3UL instance.
-    # \param arg1 The \e %Vector3UL instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param v 
     #
-    def clear(self: Vector3UL, v: int = 0) -> None: pass
+    def clear(v: int = 0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector3UL instance this method is called upon.
     #
     # Different Python \e %Vector3UL instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector3UL instances \e a and \e b reference different C++ objects. 
@@ -97,295 +87,258 @@ class Vector3UL(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Vector3UL) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3UL instance \a e.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param e The \e %Vector3UL instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3UL, e: ConstFVectorExpression) -> Vector3UL: pass
+    def assign(e: ConstFVectorExpression) -> Vector3UL: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3UL instance \a e.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param e The \e %Vector3UL instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3UL, e: ConstDVectorExpression) -> Vector3UL: pass
+    def assign(e: ConstDVectorExpression) -> Vector3UL: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3UL instance \a e.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param e The \e %Vector3UL instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3UL, e: ConstLVectorExpression) -> Vector3UL: pass
+    def assign(e: ConstLVectorExpression) -> Vector3UL: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3UL instance \a e.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param e The \e %Vector3UL instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3UL, e: ConstULVectorExpression) -> Vector3UL: pass
+    def assign(e: ConstULVectorExpression) -> Vector3UL: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3UL instance \a v.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param v The \e %Vector3UL instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3UL, v: Vector3UL) -> Vector3UL: pass
+    def assign(v: Vector3UL) -> Vector3UL: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3UL instance \a a.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param a The \e %Vector3UL instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3UL, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: Vector3UL) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return 
     #
-    def getSize(self: Vector3UL) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: Vector3UL, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return 
     #
-    def toArray(self: Vector3UL) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param v 
     #
-    def swap(self: Vector3UL, v: Vector3UL) -> None: pass
+    def swap(v: Vector3UL) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: Vector3UL, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param v The \e %Vector3UL instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector3UL, v: Vector3UL) -> bool: pass
+    def __eq__(v: Vector3UL) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param e The \e %Vector3UL instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector3UL, e: ConstULVectorExpression) -> bool: pass
+    def __eq__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param v The \e %Vector3UL instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector3UL, v: Vector3UL) -> bool: pass
+    def __ne__(v: Vector3UL) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param e The \e %Vector3UL instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector3UL, e: ConstULVectorExpression) -> bool: pass
+    def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: Vector3UL, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: Vector3UL, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return 
     #
-    def __len__(self: Vector3UL) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %Vector3UL instance.
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: Vector3UL) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return 
     #
-    def __pos__(self: Vector3UL) -> Vector3UL: pass
+    def __pos__() -> Vector3UL: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstULVectorExpression: pass
+    def __neg__() -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %Vector3UL instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %Vector3UL instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __add__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %Vector3UL instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %Vector3UL instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __sub__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %Vector3UL instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %Vector3UL instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __mul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %Vector3UL instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %Vector3UL instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
+    def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %Vector3UL instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %Vector3UL instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __truediv__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __rmul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: Vector3UL, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %Vector3UL instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %Vector3UL instance \a self.
     #
-    def __iadd__(self: Vector3UL, v: Vector3UL) -> Vector3UL: pass
+    def __iadd__(v: Vector3UL) -> Vector3UL: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %Vector3UL instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %Vector3UL instance \a self.
     #
-    def __iadd__(self: Vector3UL, e: ConstULVectorExpression) -> Vector3UL: pass
+    def __iadd__(e: ConstULVectorExpression) -> Vector3UL: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %Vector3UL instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %Vector3UL instance \a self.
     #
-    def __isub__(self: Vector3UL, v: Vector3UL) -> Vector3UL: pass
+    def __isub__(v: Vector3UL) -> Vector3UL: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %Vector3UL instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %Vector3UL instance \a self.
     #
-    def __isub__(self: Vector3UL, e: ConstULVectorExpression) -> Vector3UL: pass
+    def __isub__(e: ConstULVectorExpression) -> Vector3UL: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %Vector3UL instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %Vector3UL instance \a self.
     #
-    def __imul__(self: Vector3UL, t: int) -> Vector3UL: pass
+    def __imul__(t: int) -> Vector3UL: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %Vector3UL instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %Vector3UL instance \a self.
     #
-    def __idiv__(self: Vector3UL, t: int) -> Vector3UL: pass
+    def __idiv__(t: int) -> Vector3UL: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3UL instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: Vector3UL, t: int) -> Vector3UL: pass
+    def __itruediv__(t: int) -> Vector3UL: pass
 
     ##
     # \brief 

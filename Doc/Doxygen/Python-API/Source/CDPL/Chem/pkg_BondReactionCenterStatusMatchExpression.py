@@ -26,22 +26,19 @@ class BondReactionCenterStatusMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondReactionCenterStatusMatchExpression instance.
-    # \param self The \e %BondReactionCenterStatusMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: BondReactionCenterStatusMatchExpression) -> None: pass
+    def __init__(expr: BondReactionCenterStatusMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %BondReactionCenterStatusMatchExpression instance.
-    # \param self The \e %BondReactionCenterStatusMatchExpression instance to initialize.
     # \param status 
     #
-    def __init__(self: object, status: int) -> None: pass
+    def __init__(status: int) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondReactionCenterStatusMatchExpression instance \a expr.
-    # \param self The \e %BondReactionCenterStatusMatchExpression instance this method is called upon.
     # \param expr The \e %BondReactionCenterStatusMatchExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BondReactionCenterStatusMatchExpression, expr: BondReactionCenterStatusMatchExpression) -> BondReactionCenterStatusMatchExpression: pass
+    def assign(expr: BondReactionCenterStatusMatchExpression) -> BondReactionCenterStatusMatchExpression: pass

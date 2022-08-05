@@ -26,29 +26,25 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance to initialize.
     # \param parameterizer 
     #
-    def __init__(self: object, parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass
+    def __init__(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteractionParameterizer instance.
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance to initialize.
     # \param molgraph 
     # \param ia_data 
     # \param strict 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94VanDerWaalsInteractionData, strict: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94VanDerWaalsInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     #
     # Different Python \e %MMFF94VanDerWaalsInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94VanDerWaalsInteractionParameterizer instances \e a and \e b reference different C++ objects. 
@@ -57,52 +53,46 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94VanDerWaalsInteractionParameterizer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setFilterFunction(self: MMFF94VanDerWaalsInteractionParameterizer, func: InteractionFilterFunction2) -> None: pass
+    def setFilterFunction(func: InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setAtomTypeFunction(self: MMFF94VanDerWaalsInteractionParameterizer, func: MMFF94NumericAtomTypeFunction) -> None: pass
+    def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setTopologicalDistanceFunction(self: MMFF94VanDerWaalsInteractionParameterizer, func: TopologicalAtomDistanceFunction) -> None: pass
+    def setTopologicalDistanceFunction(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setVanDerWaalsParameterTable(self: MMFF94VanDerWaalsInteractionParameterizer, table: MMFF94VanDerWaalsParameterTable) -> None: pass
+    def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     # \param parameterizer The \e %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94VanDerWaalsInteractionParameterizer, parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
+    def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteractionParameterizer instance this method is called upon.
     # \param molgraph 
     # \param ia_data 
     # \param strict 
     #
-    def parameterize(self: MMFF94VanDerWaalsInteractionParameterizer, molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94VanDerWaalsInteractionData, strict: bool) -> None: pass
+    def parameterize(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94VanDerWaalsInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief 

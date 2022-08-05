@@ -26,165 +26,143 @@ class ControlParameterContainer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ControlParameterContainer instance.
-    # \param self The \e %ControlParameterContainer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setParameter(self: ControlParameterContainer, key: LookupKey, value: Variant) -> None: pass
+    def setParameter(key: LookupKey, value: Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeParameter(self: ControlParameterContainer, key: LookupKey) -> bool: pass
+    def removeParameter(key: LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \param local 
     # \return 
     #
-    def getParameter(self: ControlParameterContainer, key: LookupKey, throw_: bool = False, local: bool = False) -> Variant: pass
+    def getParameter(key: LookupKey, throw_: bool = False, local: bool = False) -> Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \param def_value 
     # \param local 
     # \return 
     #
-    def getParameterOrDefault(self: ControlParameterContainer, key: LookupKey, def_value: Variant, local: bool = False) -> Variant: pass
+    def getParameterOrDefault(key: LookupKey, def_value: Variant, local: bool = False) -> Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \param local 
     # \return 
     #
-    def isParameterSet(self: ControlParameterContainer, key: LookupKey, local: bool = False) -> bool: pass
+    def isParameterSet(key: LookupKey, local: bool = False) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     #
-    def clearParameters(self: ControlParameterContainer) -> None: pass
+    def clearParameters() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param cntnr 
     #
-    def addParameters(self: ControlParameterContainer, cntnr: ControlParameterContainer) -> None: pass
+    def addParameters(cntnr: ControlParameterContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param cntnr 
     #
-    def copyParameters(self: ControlParameterContainer, cntnr: ControlParameterContainer) -> None: pass
+    def copyParameters(cntnr: ControlParameterContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \return 
     #
-    def getNumParameters(self: ControlParameterContainer) -> int: pass
+    def getNumParameters() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param func 
     # \return 
     #
-    def registerParameterChangedCallback(self: ControlParameterContainer, func: VoidLookupKeyVariantFunctor) -> int: pass
+    def registerParameterChangedCallback(func: VoidLookupKeyVariantFunctor) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param id 
     #
-    def unregisterParameterChangedCallback(self: ControlParameterContainer, id: int) -> None: pass
+    def unregisterParameterChangedCallback(id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param func 
     # \return 
     #
-    def registerParameterRemovedCallback(self: ControlParameterContainer, func: VoidLookupKeyFunctor) -> int: pass
+    def registerParameterRemovedCallback(func: VoidLookupKeyFunctor) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param id 
     #
-    def unregisterParameterRemovedCallback(self: ControlParameterContainer, id: int) -> None: pass
+    def unregisterParameterRemovedCallback(id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param func 
     # \return 
     #
-    def registerParentChangedCallback(self: ControlParameterContainer, func: VoidFunctor) -> int: pass
+    def registerParentChangedCallback(func: VoidFunctor) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param id 
     #
-    def unregisterParentChangedCallback(self: ControlParameterContainer, id: int) -> None: pass
+    def unregisterParentChangedCallback(id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \return 
     #
-    def getParent(self: ControlParameterContainer) -> ControlParameterContainer: pass
+    def getParent() -> ControlParameterContainer: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param cntnr 
     #
-    def setParent(self: ControlParameterContainer, cntnr: ControlParameterContainer) -> None: pass
+    def setParent(cntnr: ControlParameterContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \return 
     #
-    def getParameterKeys(self: ControlParameterContainer) -> list: pass
+    def getParameterKeys() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \return 
     #
-    def getParameterValues(self: ControlParameterContainer) -> list: pass
+    def getParameterValues() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \return 
     #
-    def getParameters(self: ControlParameterContainer) -> list: pass
+    def getParameters() -> list: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     #
     # Different Python \e %ControlParameterContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ControlParameterContainer instances \e a and \e b reference different C++ objects. 
@@ -193,46 +171,41 @@ class ControlParameterContainer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ControlParameterContainer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: ControlParameterContainer, key: LookupKey) -> Variant: pass
+    def __getitem__(key: LookupKey) -> Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: ControlParameterContainer, key: LookupKey, value: Variant) -> None: pass
+    def __setitem__(key: LookupKey, value: Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __delitem__(arg1: ControlParameterContainer, self: LookupKey) -> bool: pass
+    def __delitem__(self: LookupKey) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>self in arg1</tt>.
-    # \param arg1 The \e %ControlParameterContainer instance this method is called upon.
     # \param self The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(arg1: ControlParameterContainer, self: LookupKey, key: bool) -> bool: pass
+    def __contains__(self: LookupKey, key: bool) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ControlParameterContainer instance this method is called upon.
     # \return 
     #
-    def __len__(self: ControlParameterContainer) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

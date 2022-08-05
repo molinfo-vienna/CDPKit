@@ -26,78 +26,68 @@ class DGrid(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param self The \e %DGrid instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param self The \e %DGrid instance to initialize.
     # \param g 
     #
-    def __init__(self: object, g: DGrid) -> None: pass
+    def __init__(g: DGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param self The \e %DGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
     #
-    def __init__(self: object, m: int, n: int, o: int) -> None: pass
+    def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param self The \e %DGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
     # \param v 
     #
-    def __init__(self: object, m: int, n: int, o: int, v: float) -> None: pass
+    def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param arg1 The \e %DGrid instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFGridExpression) -> None: pass
+    def __init__(e: ConstFGridExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param arg1 The \e %DGrid instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDGridExpression) -> None: pass
+    def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %DGrid instance.
-    # \param arg1 The \e %DGrid instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: object) -> None: pass
+    def __init__(e: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param m 
     # \param n 
     # \param o 
     # \param preserve 
     # \param v 
     #
-    def resize(self: DGrid, m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
+    def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param v 
     #
-    def clear(self: DGrid, v: float = 0.0) -> None: pass
+    def clear(v: float = 0.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DGrid instance this method is called upon.
     #
     # Different Python \e %DGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DGrid instances \e a and \e b reference different C++ objects. 
@@ -106,338 +96,296 @@ class DGrid(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DGrid) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a e.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param e The \e %DGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGrid, e: ConstFGridExpression) -> DGrid: pass
+    def assign(e: ConstFGridExpression) -> DGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a e.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param e The \e %DGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGrid, e: ConstDGridExpression) -> DGrid: pass
+    def assign(e: ConstDGridExpression) -> DGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a e.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param e The \e %DGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGrid, e: object) -> DGrid: pass
+    def assign(e: object) -> DGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a g.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param g The \e %DGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGrid, g: DGrid) -> DGrid: pass
+    def assign(g: DGrid) -> DGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def getSize1(self: DGrid) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def getSize2(self: DGrid) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def getSize3(self: DGrid) -> int: pass
+    def getSize3() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: DGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def getElement(self: DGrid, i: int, j: int, k: int) -> float: pass
+    def getElement(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: DGrid, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def toArray(self: DGrid) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def getSize(self: DGrid) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param g 
     #
-    def swap(self: DGrid, g: DGrid) -> None: pass
+    def swap(g: DGrid) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param v 
     #
-    def setElement(self: DGrid, i: int, j: int, k: int, v: float) -> None: pass
+    def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: DGrid, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def __call__(self: DGrid, i: int, j: int, k: int) -> float: pass
+    def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: DGrid, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param ijk 
     # \return 
     #
-    def __getitem__(self: DGrid, ijk: tuple) -> float: pass
+    def __getitem__(ijk: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: DGrid, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: DGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param g The \e %DGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DGrid, g: DGrid) -> bool: pass
+    def __eq__(g: DGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param e The \e %DGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DGrid, e: ConstDGridExpression) -> bool: pass
+    def __eq__(e: ConstDGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param g The \e %DGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DGrid, g: DGrid) -> bool: pass
+    def __ne__(g: DGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DGrid instance this method is called upon.
     # \param e The \e %DGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DGrid, e: ConstDGridExpression) -> bool: pass
+    def __ne__(e: ConstDGridExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %DGrid instance.
-    # \param self The \e %DGrid instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DGrid) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DGrid) -> DGrid: pass
+    def __pos__() -> DGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDGridExpression: pass
+    def __neg__() -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DGrid instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDGridExpression) -> ConstDGridExpression: pass
+    def __add__(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DGrid instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDGridExpression) -> ConstDGridExpression: pass
+    def __sub__(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DGrid instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDGridExpression: pass
+    def __mul__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DGrid instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDGridExpression: pass
+    def __div__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDGridExpression: pass
+    def __truediv__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDGridExpression: pass
+    def __rmul__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param ijk 
     # \param v 
     #
-    def __setitem__(self: DGrid, ijk: tuple, v: float) -> None: pass
+    def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: DGrid, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param self The \e %DGrid instance acting as in-place addend.
     # \param g Specifies the second addend.
     # \return The updated \e %DGrid instance \a self.
     #
-    def __iadd__(self: DGrid, g: DGrid) -> DGrid: pass
+    def __iadd__(g: DGrid) -> DGrid: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DGrid instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DGrid instance \a self.
     #
-    def __iadd__(self: DGrid, e: ConstDGridExpression) -> DGrid: pass
+    def __iadd__(e: ConstDGridExpression) -> DGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param self The \e %DGrid instance acting as in-place minuend.
     # \param g Specifies the subtrahend.
     # \return The updated \e %DGrid instance \a self.
     #
-    def __isub__(self: DGrid, g: DGrid) -> DGrid: pass
+    def __isub__(g: DGrid) -> DGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DGrid instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DGrid instance \a self.
     #
-    def __isub__(self: DGrid, e: ConstDGridExpression) -> DGrid: pass
+    def __isub__(e: ConstDGridExpression) -> DGrid: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DGrid instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DGrid instance \a self.
     #
-    def __imul__(self: DGrid, t: float) -> DGrid: pass
+    def __imul__(t: float) -> DGrid: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DGrid instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DGrid instance \a self.
     #
-    def __idiv__(self: DGrid, t: float) -> DGrid: pass
+    def __idiv__(t: float) -> DGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %DGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: DGrid, t: float) -> DGrid: pass
+    def __itruediv__(t: float) -> DGrid: pass
 
     ##
     # \brief 

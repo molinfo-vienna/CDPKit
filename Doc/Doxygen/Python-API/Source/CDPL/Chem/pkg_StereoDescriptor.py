@@ -31,112 +31,98 @@ class StereoDescriptor(Boost.Python.instance):
 
         ##
         # \brief 
-        # \param self The \e %ReferenceAtomArray instance this method is called upon.
         # \return 
         #
-        def __len__(self: ReferenceAtomArray) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %ReferenceAtomArray instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: ReferenceAtomArray, atom: Atom) -> bool: pass
+        def __contains__(atom: Atom) -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %ReferenceAtomArray instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: ReferenceAtomArray, idx: int) -> Atom: pass
+        def __getitem__(idx: int) -> Atom: pass
 
     ##
     # \brief Initializes the \e %StereoDescriptor instance.
-    # \param self The \e %StereoDescriptor instance to initialize.
     # \param config 
     #
-    def __init__(self: object, config: int) -> None: pass
+    def __init__(config: int) -> None: pass
 
     ##
     # \brief Initializes the \e %StereoDescriptor instance.
-    # \param self The \e %StereoDescriptor instance to initialize.
     # \param descr 
     #
-    def __init__(self: object, descr: StereoDescriptor) -> None: pass
+    def __init__(descr: StereoDescriptor) -> None: pass
 
     ##
     # \brief Initializes the \e %StereoDescriptor instance.
-    # \param self The \e %StereoDescriptor instance to initialize.
     # \param config 
     # \param atom1 
     # \param atom2 
     # \param atom3 
     #
-    def __init__(self: object, config: int, atom1: Atom, atom2: Atom, atom3: Atom) -> None: pass
+    def __init__(config: int, atom1: Atom, atom2: Atom, atom3: Atom) -> None: pass
 
     ##
     # \brief Initializes the \e %StereoDescriptor instance.
-    # \param self The \e %StereoDescriptor instance to initialize.
     # \param config 
     # \param atom1 
     # \param atom2 
     # \param atom3 
     # \param atom4 
     #
-    def __init__(self: object, config: int, atom1: Atom, atom2: Atom, atom3: Atom, atom4: Atom) -> None: pass
+    def __init__(config: int, atom1: Atom, atom2: Atom, atom3: Atom, atom4: Atom) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \return 
     #
-    def getConfiguration(self: StereoDescriptor) -> int: pass
+    def getConfiguration() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \param config 
     #
-    def setConfiguration(self: StereoDescriptor, config: int) -> None: pass
+    def setConfiguration(config: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \return 
     #
-    def getNumReferenceAtoms(self: StereoDescriptor) -> int: pass
+    def getNumReferenceAtoms() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \return 
     #
-    def getReferenceAtoms(self: StereoDescriptor) -> ReferenceAtomArray: pass
+    def getReferenceAtoms() -> ReferenceAtomArray: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StereoDescriptor instance \a descr.
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \param descr The \e %StereoDescriptor instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: StereoDescriptor, descr: StereoDescriptor) -> StereoDescriptor: pass
+    def assign(descr: StereoDescriptor) -> StereoDescriptor: pass
 
     ##
     # \brief 
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \param atom1 
     # \param atom2 
     # \param atom3 
     # \param atom4 
     # \return 
     #
-    def getPermutationParity(self: StereoDescriptor, atom1: Atom, atom2: Atom, atom3: Atom, atom4: Atom) -> int: pass
+    def getPermutationParity(atom1: Atom, atom2: Atom, atom3: Atom, atom4: Atom) -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     #
     # Different Python \e %StereoDescriptor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StereoDescriptor instances \e a and \e b reference different C++ objects. 
@@ -145,22 +131,20 @@ class StereoDescriptor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: StereoDescriptor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def isValid(self: StereoDescriptor, atom: Atom) -> bool: pass
+    def isValid(atom: Atom) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %StereoDescriptor instance.
-    # \param self The \e %StereoDescriptor instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: StereoDescriptor) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 

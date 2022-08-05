@@ -26,8 +26,7 @@ class FileCDFBZ2DRegularGridReader(DRegularGridReader):
 
     ##
     # \brief Initializes the \e %FileCDFBZ2DRegularGridReader instance.
-    # \param self The \e %FileCDFBZ2DRegularGridReader instance to initialize.
     # \param file_name 
     # \param mode 
     #
-    def __init__(self: object, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

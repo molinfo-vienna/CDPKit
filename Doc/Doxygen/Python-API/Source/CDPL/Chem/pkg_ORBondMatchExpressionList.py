@@ -26,21 +26,18 @@ class ORBondMatchExpressionList(BondMatchExpressionList):
 
     ##
     # \brief Initializes the \e %ORBondMatchExpressionList instance.
-    # \param self The \e %ORBondMatchExpressionList instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ORBondMatchExpressionList instance.
-    # \param self The \e %ORBondMatchExpressionList instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: ORBondMatchExpressionList) -> None: pass
+    def __init__(expr: ORBondMatchExpressionList) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ORBondMatchExpressionList instance \a expr.
-    # \param self The \e %ORBondMatchExpressionList instance this method is called upon.
     # \param expr The \e %ORBondMatchExpressionList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ORBondMatchExpressionList, expr: ORBondMatchExpressionList) -> ORBondMatchExpressionList: pass
+    def assign(expr: ORBondMatchExpressionList) -> ORBondMatchExpressionList: pass

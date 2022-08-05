@@ -116,30 +116,26 @@ class Color(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Color instance.
-    # \param self The \e %Color instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Color instance.
-    # \param self The \e %Color instance to initialize.
     # \param color 
     #
-    def __init__(self: object, color: Color) -> None: pass
+    def __init__(color: Color) -> None: pass
 
     ##
     # \brief Initializes the \e %Color instance.
-    # \param self The \e %Color instance to initialize.
     # \param red 
     # \param green 
     # \param blue 
     # \param alpha 
     #
-    def __init__(self: object, red: float, green: float, blue: float, alpha: float = 1.0) -> None: pass
+    def __init__(red: float, green: float, blue: float, alpha: float = 1.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Color instance this method is called upon.
     #
     # Different Python \e %Color instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Color instances \e a and \e b reference different C++ objects. 
@@ -148,104 +144,91 @@ class Color(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Color) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Color instance \a color.
-    # \param self The \e %Color instance this method is called upon.
     # \param color The \e %Color instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Color, color: Color) -> Color: pass
+    def assign(color: Color) -> Color: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \return 
     #
-    def getAlpha(self: Color) -> float: pass
+    def getAlpha() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \param alpha 
     #
-    def setAlpha(self: Color, alpha: float) -> None: pass
+    def setAlpha(alpha: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \return 
     #
-    def getBlue(self: Color) -> float: pass
+    def getBlue() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \param blue 
     #
-    def setBlue(self: Color, blue: float) -> None: pass
+    def setBlue(blue: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \return 
     #
-    def getGreen(self: Color) -> float: pass
+    def getGreen() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \param green 
     #
-    def setGreen(self: Color, green: float) -> None: pass
+    def setGreen(green: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \return 
     #
-    def getRed(self: Color) -> float: pass
+    def getRed() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \param red 
     #
-    def setRed(self: Color, red: float) -> None: pass
+    def setRed(red: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Color instance this method is called upon.
     # \param red 
     # \param green 
     # \param blue 
     # \param alpha 
     #
-    def setRGBA(self: Color, red: float, green: float, blue: float, alpha: float = 1.0) -> None: pass
+    def setRGBA(red: float, green: float, blue: float, alpha: float = 1.0) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == color</tt>.
-    # \param self The \e %Color instance this method is called upon.
     # \param color The \e %Color instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Color, color: Color) -> bool: pass
+    def __eq__(color: Color) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != color</tt>.
-    # \param self The \e %Color instance this method is called upon.
     # \param color The \e %Color instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Color, color: Color) -> bool: pass
+    def __ne__(color: Color) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %Color instance.
-    # \param self The \e %Color instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: Color) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 

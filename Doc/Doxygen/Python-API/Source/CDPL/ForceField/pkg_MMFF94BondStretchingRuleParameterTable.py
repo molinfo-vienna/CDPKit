@@ -31,30 +31,26 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         #
-        def __init__(self: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         #
-        def __init__(self: object, entry: Entry) -> None: pass
+        def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param atomic_no1 
         # \param atomic_no2 
         # \param force_const 
         # \param ref_length 
         #
-        def __init__(self: object, atomic_no1: int, atomic_no2: int, force_const: float, ref_length: float) -> None: pass
+        def __init__(atomic_no1: int, atomic_no2: int, force_const: float, ref_length: float) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         #
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -63,57 +59,50 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Entry) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: Entry, entry: Entry) -> Entry: pass
+        def assign(entry: Entry) -> Entry: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAtomicNumber1(self: Entry) -> int: pass
+        def getAtomicNumber1() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAtomicNumber2(self: Entry) -> int: pass
+        def getAtomicNumber2() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getForceConstant(self: Entry) -> float: pass
+        def getForceConstant() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getReferenceLength(self: Entry) -> float: pass
+        def getReferenceLength() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def __nonzero__(self: Entry) -> bool: pass
+        def __nonzero__() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def __bool__(self: Entry) -> bool: pass
+        def __bool__() -> bool: pass
 
         ##
         # \brief 
@@ -142,20 +131,17 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94BondStretchingRuleParameterTable instance.
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondStretchingRuleParameterTable instance.
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance to initialize.
     # \param table 
     #
-    def __init__(self: object, table: MMFF94BondStretchingRuleParameterTable) -> None: pass
+    def __init__(table: MMFF94BondStretchingRuleParameterTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     #
     # Different Python \e %MMFF94BondStretchingRuleParameterTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94BondStretchingRuleParameterTable instances \e a and \e b reference different C++ objects. 
@@ -164,76 +150,67 @@ class MMFF94BondStretchingRuleParameterTable(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94BondStretchingRuleParameterTable) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \param atomic_no1 
     # \param atomic_no2 
     # \param force_const 
     # \param ref_length 
     #
-    def addEntry(self: MMFF94BondStretchingRuleParameterTable, atomic_no1: int, atomic_no2: int, force_const: float, ref_length: float) -> None: pass
+    def addEntry(atomic_no1: int, atomic_no2: int, force_const: float, ref_length: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \param atomic_no1 
     # \param atomic_no2 
     # \return 
     #
-    def removeEntry(self: MMFF94BondStretchingRuleParameterTable, atomic_no1: int, atomic_no2: int) -> bool: pass
+    def removeEntry(atomic_no1: int, atomic_no2: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \param atomic_no1 
     # \param atomic_no2 
     # \return 
     #
-    def getEntry(self: MMFF94BondStretchingRuleParameterTable, atomic_no1: int, atomic_no2: int) -> Entry: pass
+    def getEntry(atomic_no1: int, atomic_no2: int) -> Entry: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     #
-    def clear(self: MMFF94BondStretchingRuleParameterTable) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: MMFF94BondStretchingRuleParameterTable) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \return 
     #
-    def getEntries(self: MMFF94BondStretchingRuleParameterTable) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \param is 
     #
-    def load(self: MMFF94BondStretchingRuleParameterTable, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     #
-    def loadDefaults(self: MMFF94BondStretchingRuleParameterTable) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondStretchingRuleParameterTable instance \a table.
-    # \param self The \e %MMFF94BondStretchingRuleParameterTable instance this method is called upon.
     # \param table The \e %MMFF94BondStretchingRuleParameterTable instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94BondStretchingRuleParameterTable, table: MMFF94BondStretchingRuleParameterTable) -> MMFF94BondStretchingRuleParameterTable: pass
+    def assign(table: MMFF94BondStretchingRuleParameterTable) -> MMFF94BondStretchingRuleParameterTable: pass
 
     ##
     # \brief 

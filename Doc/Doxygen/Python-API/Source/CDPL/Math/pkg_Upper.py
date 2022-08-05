@@ -26,13 +26,11 @@ class Upper(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Upper instance.
-    # \param self The \e %Upper instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Upper instance.
-    # \param self The \e %Upper instance to initialize.
     # \param t 
     #
-    def __init__(self: object, t: Upper) -> None: pass
+    def __init__(t: Upper) -> None: pass

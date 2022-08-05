@@ -26,23 +26,20 @@ class InteractionConstraintConnector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionConstraintConnector instance.
-    # \param self The \e %InteractionConstraintConnector instance to initialize.
     # \param con 
     #
-    def __init__(self: object, con: InteractionConstraintConnector) -> None: pass
+    def __init__(con: InteractionConstraintConnector) -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionConstraintConnector instance.
-    # \param self The \e %InteractionConstraintConnector instance to initialize.
     # \param and_expr 
     # \param func2 
     # \param func1 
     #
-    def __init__(self: object, and_expr: bool, func2: BoolFeature2Functor, func1: BoolFeature2Functor) -> None: pass
+    def __init__(and_expr: bool, func2: BoolFeature2Functor, func1: BoolFeature2Functor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %InteractionConstraintConnector instance this method is called upon.
     #
     # Different Python \e %InteractionConstraintConnector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionConstraintConnector instances \e a and \e b reference different C++ objects. 
@@ -51,24 +48,22 @@ class InteractionConstraintConnector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: InteractionConstraintConnector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionConstraintConnector instance \a con.
-    # \param self The \e %InteractionConstraintConnector instance this method is called upon.
     # \param con The \e %InteractionConstraintConnector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: InteractionConstraintConnector, con: InteractionConstraintConnector) -> InteractionConstraintConnector: pass
+    def assign(con: InteractionConstraintConnector) -> InteractionConstraintConnector: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionConstraintConnector instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: InteractionConstraintConnector, ftr1: Feature, ftr2: Feature) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 

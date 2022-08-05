@@ -26,20 +26,17 @@ class MMFF94ElectrostaticInteractionData(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteractionData instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteractionData instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance to initialize.
     # \param ia_data 
     #
-    def __init__(self: object, ia_data: MMFF94ElectrostaticInteractionData) -> None: pass
+    def __init__(ia_data: MMFF94ElectrostaticInteractionData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     #
     # Different Python \e %MMFF94ElectrostaticInteractionData instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94ElectrostaticInteractionData instances \e a and \e b reference different C++ objects. 
@@ -48,185 +45,161 @@ class MMFF94ElectrostaticInteractionData(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94ElectrostaticInteractionData) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \return 
     #
-    def getSize(self: MMFF94ElectrostaticInteractionData) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: MMFF94ElectrostaticInteractionData) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: MMFF94ElectrostaticInteractionData, num_elem: int, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def resize(num_elem: int, value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: MMFF94ElectrostaticInteractionData, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: MMFF94ElectrostaticInteractionData) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     #
-    def clear(self: MMFF94ElectrostaticInteractionData) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ElectrostaticInteractionData instance \a array.
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param array The \e %MMFF94ElectrostaticInteractionData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94ElectrostaticInteractionData, array: MMFF94ElectrostaticInteractionData) -> MMFF94ElectrostaticInteractionData: pass
+    def assign(array: MMFF94ElectrostaticInteractionData) -> MMFF94ElectrostaticInteractionData: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ElectrostaticInteractionData instance \a num_elem.
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param num_elem The \e %MMFF94ElectrostaticInteractionData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94ElectrostaticInteractionData, num_elem: int, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def assign(num_elem: int, value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param value 
     #
-    def addElement(self: MMFF94ElectrostaticInteractionData, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def addElement(value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param values 
     #
-    def addElements(self: MMFF94ElectrostaticInteractionData, values: MMFF94ElectrostaticInteractionData) -> None: pass
+    def addElements(values: MMFF94ElectrostaticInteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: MMFF94ElectrostaticInteractionData, idx: int, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def insertElement(idx: int, value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: MMFF94ElectrostaticInteractionData, idx: int, num_elem: int, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: MMFF94ElectrostaticInteractionData, index: int, values: MMFF94ElectrostaticInteractionData) -> None: pass
+    def insertElements(index: int, values: MMFF94ElectrostaticInteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     #
-    def popLastElement(self: MMFF94ElectrostaticInteractionData) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: MMFF94ElectrostaticInteractionData, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: MMFF94ElectrostaticInteractionData, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: MMFF94ElectrostaticInteractionData) -> MMFF94ElectrostaticInteraction: pass
+    def getFirstElement() -> MMFF94ElectrostaticInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: MMFF94ElectrostaticInteractionData) -> MMFF94ElectrostaticInteraction: pass
+    def getLastElement() -> MMFF94ElectrostaticInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: MMFF94ElectrostaticInteractionData, idx: int) -> MMFF94ElectrostaticInteraction: pass
+    def getElement(idx: int) -> MMFF94ElectrostaticInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: MMFF94ElectrostaticInteractionData, idx: int, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def setElement(idx: int, value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: MMFF94ElectrostaticInteractionData, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: MMFF94ElectrostaticInteractionData, idx: int) -> MMFF94ElectrostaticInteraction: pass
+    def __getitem__(idx: int) -> MMFF94ElectrostaticInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \return 
     #
-    def __len__(self: MMFF94ElectrostaticInteractionData) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteractionData instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: MMFF94ElectrostaticInteractionData, index: int, value: MMFF94ElectrostaticInteraction) -> None: pass
+    def __setitem__(index: int, value: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief 

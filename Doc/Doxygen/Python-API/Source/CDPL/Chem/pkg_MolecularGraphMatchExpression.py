@@ -26,13 +26,11 @@ class MolecularGraphMatchExpression(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MolecularGraphMatchExpression instance.
-    # \param self The \e %MolecularGraphMatchExpression instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MolecularGraphMatchExpression instance this method is called upon.
     #
     # Different Python \e %MolecularGraphMatchExpression instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MolecularGraphMatchExpression instances \e a and \e b reference different C++ objects. 
@@ -41,35 +39,32 @@ class MolecularGraphMatchExpression(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MolecularGraphMatchExpression) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphMatchExpression instance this method is called upon.
     # \param query_molgraph 
     # \param target_molgraph 
     # \param aux_data 
     # \return 
     #
-    def matches(self: MolecularGraphMatchExpression, query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Variant) -> bool: pass
+    def matches(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Variant) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphMatchExpression instance this method is called upon.
     # \param query_molgraph 
     # \param target_molgraph 
     # \param mapping 
     # \param aux_data 
     # \return 
     #
-    def mappingMatches(self: MolecularGraphMatchExpression, query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Variant) -> bool: pass
+    def mappingMatches(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Variant) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphMatchExpression instance this method is called upon.
     # \return 
     #
-    def requiresAtomBondMapping(self: MolecularGraphMatchExpression) -> bool: pass
+    def requiresAtomBondMapping() -> bool: pass
 
     ##
     # \brief 

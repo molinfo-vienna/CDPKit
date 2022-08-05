@@ -26,33 +26,29 @@ class HierarchyViewChain(HierarchyViewNode):
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewChain instance this method is called upon.
     # \return 
     #
-    def getNumFragments(self: HierarchyViewChain) -> int: pass
+    def getNumFragments() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewChain instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getFragment(self: HierarchyViewChain, idx: int) -> HierarchyViewFragment: pass
+    def getFragment(idx: int) -> HierarchyViewFragment: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewChain instance this method is called upon.
     # \return 
     #
-    def __len__(self: HierarchyViewChain) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewChain instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: HierarchyViewChain, idx: int) -> HierarchyViewFragment: pass
+    def __getitem__(idx: int) -> HierarchyViewFragment: pass
 
     ##
     # \brief 

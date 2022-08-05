@@ -26,23 +26,20 @@ class DefaultInteractionScoreGridSetCalculator(InteractionScoreGridSetCalculator
 
     ##
     # \brief Initializes the \e %DefaultInteractionScoreGridSetCalculator instance.
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultInteractionScoreGridSetCalculator instance.
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance to initialize.
     # \param step_size 
     # \param x_size 
     # \param y_size 
     # \param z_size 
     #
-    def __init__(self: object, step_size: float, x_size: int, y_size: int, z_size: int) -> None: pass
+    def __init__(step_size: float, x_size: int, y_size: int, z_size: int) -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultInteractionScoreGridSetCalculator instance.
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance to initialize.
     # \param x_step_size 
     # \param y_step_size 
     # \param z_step_size 
@@ -50,128 +47,111 @@ class DefaultInteractionScoreGridSetCalculator(InteractionScoreGridSetCalculator
     # \param y_size 
     # \param z_size 
     #
-    def __init__(self: object, x_step_size: float, y_step_size: float, z_step_size: float, x_size: int, y_size: int, z_size: int) -> None: pass
+    def __init__(x_step_size: float, y_step_size: float, z_step_size: float, x_size: int, y_size: int, z_size: int) -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultInteractionScoreGridSetCalculator instance.
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: DefaultInteractionScoreGridSetCalculator) -> None: pass
+    def __init__(calculator: DefaultInteractionScoreGridSetCalculator) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DefaultInteractionScoreGridSetCalculator instance \a calculator.
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param calculator The \e %DefaultInteractionScoreGridSetCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DefaultInteractionScoreGridSetCalculator, calculator: DefaultInteractionScoreGridSetCalculator) -> DefaultInteractionScoreGridSetCalculator: pass
+    def assign(calculator: DefaultInteractionScoreGridSetCalculator) -> DefaultInteractionScoreGridSetCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getXStepSize(self: DefaultInteractionScoreGridSetCalculator) -> float: pass
+    def getXStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param size 
     #
-    def setXStepSize(self: DefaultInteractionScoreGridSetCalculator, size: float) -> None: pass
+    def setXStepSize(size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getYStepSize(self: DefaultInteractionScoreGridSetCalculator) -> float: pass
+    def getYStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param size 
     #
-    def setYStepSize(self: DefaultInteractionScoreGridSetCalculator, size: float) -> None: pass
+    def setYStepSize(size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getZStepSize(self: DefaultInteractionScoreGridSetCalculator) -> float: pass
+    def getZStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param size 
     #
-    def setZStepSize(self: DefaultInteractionScoreGridSetCalculator, size: float) -> None: pass
+    def setZStepSize(size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getGridXSize(self: DefaultInteractionScoreGridSetCalculator) -> int: pass
+    def getGridXSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param size 
     #
-    def setGridXSize(self: DefaultInteractionScoreGridSetCalculator, size: int) -> None: pass
+    def setGridXSize(size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getGridYSize(self: DefaultInteractionScoreGridSetCalculator) -> int: pass
+    def getGridYSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param size 
     #
-    def setGridYSize(self: DefaultInteractionScoreGridSetCalculator, size: int) -> None: pass
+    def setGridYSize(size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getGridZSize(self: DefaultInteractionScoreGridSetCalculator) -> int: pass
+    def getGridZSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param size 
     #
-    def setGridZSize(self: DefaultInteractionScoreGridSetCalculator, size: int) -> None: pass
+    def setGridZSize(size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getCoordinatesTransform(self: DefaultInteractionScoreGridSetCalculator) -> CDPL.Math.Matrix4D: pass
+    def getCoordinatesTransform() -> CDPL.Math.Matrix4D: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param xform 
     #
-    def setCoordinatesTransform(self: DefaultInteractionScoreGridSetCalculator, xform: CDPL.Math.Matrix4D) -> None: pass
+    def setCoordinatesTransform(xform: CDPL.Math.Matrix4D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DefaultInteractionScoreGridSetCalculator instance this method is called upon.
     # \param features 
     # \param grid_set 
     #
-    def calculate(self: DefaultInteractionScoreGridSetCalculator, features: FeatureContainer, grid_set: CDPL.Grid.DRegularGridSet) -> None: pass
+    def calculate(features: FeatureContainer, grid_set: CDPL.Grid.DRegularGridSet) -> None: pass
 
     ##
     # \brief 

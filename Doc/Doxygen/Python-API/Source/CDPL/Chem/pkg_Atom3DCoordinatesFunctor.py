@@ -26,14 +26,12 @@ class Atom3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Atom3DCoordinatesFunctor instance.
-    # \param self The \e %Atom3DCoordinatesFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: Atom3DCoordinatesFunctor) -> None: pass
+    def __init__(func: Atom3DCoordinatesFunctor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Atom3DCoordinatesFunctor instance this method is called upon.
     #
     # Different Python \e %Atom3DCoordinatesFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Atom3DCoordinatesFunctor instances \e a and \e b reference different C++ objects. 
@@ -42,23 +40,21 @@ class Atom3DCoordinatesFunctor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Atom3DCoordinatesFunctor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Atom3DCoordinatesFunctor instance \a func.
-    # \param self The \e %Atom3DCoordinatesFunctor instance this method is called upon.
     # \param func The \e %Atom3DCoordinatesFunctor instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Atom3DCoordinatesFunctor, func: Atom3DCoordinatesFunctor) -> Atom3DCoordinatesFunctor: pass
+    def assign(func: Atom3DCoordinatesFunctor) -> Atom3DCoordinatesFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %Atom3DCoordinatesFunctor instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def __call__(self: Atom3DCoordinatesFunctor, atom: Atom) -> CDPL.Math.Vector3D: pass
+    def __call__(atom: Atom) -> CDPL.Math.Vector3D: pass
 
     ##
     # \brief 

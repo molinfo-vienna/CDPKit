@@ -26,22 +26,19 @@ class FeatureDistanceConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureDistanceConstraint instance.
-    # \param self The \e %FeatureDistanceConstraint instance to initialize.
     # \param constr 
     #
-    def __init__(self: object, constr: FeatureDistanceConstraint) -> None: pass
+    def __init__(constr: FeatureDistanceConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureDistanceConstraint instance.
-    # \param self The \e %FeatureDistanceConstraint instance to initialize.
     # \param min_dist 
     # \param max_dist 
     #
-    def __init__(self: object, min_dist: float, max_dist: float) -> None: pass
+    def __init__(min_dist: float, max_dist: float) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureDistanceConstraint instance this method is called upon.
     #
     # Different Python \e %FeatureDistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureDistanceConstraint instances \e a and \e b reference different C++ objects. 
@@ -50,38 +47,34 @@ class FeatureDistanceConstraint(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FeatureDistanceConstraint) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceConstraint instance this method is called upon.
     # \return 
     #
-    def getMinDistance(self: FeatureDistanceConstraint) -> float: pass
+    def getMinDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceConstraint instance this method is called upon.
     # \return 
     #
-    def getMaxDistance(self: FeatureDistanceConstraint) -> float: pass
+    def getMaxDistance() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceConstraint instance \a constr.
-    # \param self The \e %FeatureDistanceConstraint instance this method is called upon.
     # \param constr The \e %FeatureDistanceConstraint instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FeatureDistanceConstraint, constr: FeatureDistanceConstraint) -> FeatureDistanceConstraint: pass
+    def assign(constr: FeatureDistanceConstraint) -> FeatureDistanceConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceConstraint instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: FeatureDistanceConstraint, ftr1: Feature, ftr2: Feature) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 

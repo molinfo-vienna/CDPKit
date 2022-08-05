@@ -26,6 +26,5 @@ class PDFMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PDFMolecularGraphOutputHandler instance.
-    # \param self The \e %PDFMolecularGraphOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

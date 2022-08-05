@@ -26,135 +26,117 @@ class FileIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %FileIOStream instance.
-    # \param self The \e %FileIOStream instance to initialize.
     # \param file_name 
     # \param mode 
     #
-    def __init__(self: object, file_name: str, mode: str = 'r') -> None: pass
+    def __init__(file_name: str, mode: str = 'r') -> None: pass
 
     ##
     # \brief Initializes the \e %FileIOStream instance.
-    # \param self The \e %FileIOStream instance to initialize.
     # \param file_name 
     # \param mode 
     #
-    def __init__(self: object, file_name: str, mode: OpenMode = CDPL.Base.OpenMode.IN) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode.IN) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readline(self: FileIOStream, size: int = -1) -> str: pass
+    def readline(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readlines(self: FileIOStream, size: int = -1) -> list: pass
+    def readlines(size: int = -1) -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \return 
     #
-    def xreadlines(self: FileIOStream) -> FileIOStream: pass
+    def xreadlines() -> FileIOStream: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def read(self: FileIOStream, size: int = -1) -> str: pass
+    def read(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \return 
     #
-    def tell(self: FileIOStream) -> int: pass
+    def tell() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \return 
     #
-    def tellr(self: FileIOStream) -> int: pass
+    def tellr() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seek(self: FileIOStream, offs: int, whence: int = 0) -> None: pass
+    def seek(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekr(self: FileIOStream, offs: int, whence: int = 0) -> None: pass
+    def seekr(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \return 
     #
-    def next(self: FileIOStream) -> str: pass
+    def next() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     #
-    def flush(self: FileIOStream) -> None: pass
+    def flush() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param string 
     #
-    def write(self: FileIOStream, string: object) -> None: pass
+    def write(string: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param iterable 
     #
-    def writelines(self: FileIOStream, iterable: object) -> None: pass
+    def writelines(iterable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \return 
     #
-    def tellw(self: FileIOStream) -> int: pass
+    def tellw() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekw(self: FileIOStream, offs: int, whence: int = 0) -> None: pass
+    def seekw(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     #
-    def close(self: FileIOStream) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FileIOStream instance this method is called upon.
     # \return 
     #
-    def __iter__(self: FileIOStream) -> FileIOStream: pass
+    def __iter__() -> FileIOStream: pass
 
     ##
     # \brief FIXME!

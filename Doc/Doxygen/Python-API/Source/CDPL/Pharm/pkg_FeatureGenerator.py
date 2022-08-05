@@ -26,13 +26,11 @@ class FeatureGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureGenerator instance.
-    # \param self The \e %FeatureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureGenerator instance this method is called upon.
     #
     # Different Python \e %FeatureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureGenerator instances \e a and \e b reference different C++ objects. 
@@ -41,36 +39,32 @@ class FeatureGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FeatureGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureGenerator instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: FeatureGenerator, func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getAtom3DCoordinatesFunction(self: FeatureGenerator) -> CDPL.Chem.Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureGenerator instance this method is called upon.
     # \param molgraph 
     # \param pharm 
     #
-    def generate(self: FeatureGenerator, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureGenerator instance this method is called upon.
     # \return 
     #
-    def clone(self: FeatureGenerator) -> FeatureGenerator: pass
+    def clone() -> FeatureGenerator: pass
 
     ##
     # \brief 

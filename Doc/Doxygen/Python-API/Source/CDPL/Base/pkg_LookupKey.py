@@ -31,10 +31,9 @@ class LookupKey(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LookupKey instance.
-    # \param self The \e %LookupKey instance to initialize.
     # \param key 
     #
-    def __init__(self: object, key: LookupKey) -> None: pass
+    def __init__(key: LookupKey) -> None: pass
 
     ##
     # \brief 
@@ -46,36 +45,31 @@ class LookupKey(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param self The \e %LookupKey instance this method is called upon.
     # \return 
     #
-    def getID(self: LookupKey) -> int: pass
+    def getID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LookupKey instance \a key.
-    # \param self The \e %LookupKey instance this method is called upon.
     # \param key The \e %LookupKey instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LookupKey, key: LookupKey) -> LookupKey: pass
+    def assign(key: LookupKey) -> LookupKey: pass
 
     ##
     # \brief 
-    # \param self The \e %LookupKey instance this method is called upon.
     # \return 
     #
-    def getName(self: LookupKey) -> str: pass
+    def getName() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %LookupKey instance this method is called upon.
     # \param name 
     #
-    def setName(self: LookupKey, name: str) -> None: pass
+    def setName(name: str) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LookupKey instance this method is called upon.
     #
     # Different Python \e %LookupKey instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LookupKey instances \e a and \e b reference different C++ objects. 
@@ -84,38 +78,34 @@ class LookupKey(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: LookupKey) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < key</tt>.
-    # \param self The \e %LookupKey instance this method is called upon.
     # \param key The \e %LookupKey instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __lt__(self: LookupKey, key: LookupKey) -> bool: pass
+    def __lt__(key: LookupKey) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == key</tt>.
-    # \param self The \e %LookupKey instance this method is called upon.
     # \param key The \e %LookupKey instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: LookupKey, key: LookupKey) -> bool: pass
+    def __eq__(key: LookupKey) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != key</tt>.
-    # \param self The \e %LookupKey instance this method is called upon.
     # \param key The \e %LookupKey instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: LookupKey, key: LookupKey) -> bool: pass
+    def __ne__(key: LookupKey) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %LookupKey instance.
-    # \param self The \e %LookupKey instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: LookupKey) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 

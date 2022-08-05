@@ -26,64 +26,55 @@ class GZipOStream(CDPL.Base.OStream):
 
     ##
     # \brief Initializes the \e %GZipOStream instance.
-    # \param self The \e %GZipOStream instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GZipOStream instance.
-    # \param self The \e %GZipOStream instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     #
-    def flush(self: GZipOStream) -> None: pass
+    def flush() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     # \param string 
     #
-    def write(self: GZipOStream, string: object) -> None: pass
+    def write(string: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     # \param iterable 
     #
-    def writelines(self: GZipOStream, iterable: object) -> None: pass
+    def writelines(iterable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     # \return 
     #
-    def tellw(self: GZipOStream) -> int: pass
+    def tellw() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekw(self: GZipOStream, offs: int, whence: int = 0) -> None: pass
+    def seekw(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     #
-    def close(self: GZipOStream) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipOStream instance this method is called upon.
     # \param os 
     #
-    def open(self: GZipOStream, os: CDPL.Base.OStream) -> None: pass
+    def open(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief FIXME!

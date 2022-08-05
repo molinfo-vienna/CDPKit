@@ -26,21 +26,18 @@ class MorganNumberingGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MorganNumberingGenerator instance.
-    # \param self The \e %MorganNumberingGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MorganNumberingGenerator instance.
-    # \param self The \e %MorganNumberingGenerator instance to initialize.
     # \param molgraph 
     # \param numbering 
     #
-    def __init__(self: object, molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MorganNumberingGenerator instance this method is called upon.
     #
     # Different Python \e %MorganNumberingGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MorganNumberingGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,15 +46,14 @@ class MorganNumberingGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MorganNumberingGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MorganNumberingGenerator instance this method is called upon.
     # \param molgraph 
     # \param numbering 
     #
-    def generate(self: MorganNumberingGenerator, molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
+    def generate(molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief 

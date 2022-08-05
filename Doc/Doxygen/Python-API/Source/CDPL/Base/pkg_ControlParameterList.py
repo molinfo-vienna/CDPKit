@@ -26,21 +26,18 @@ class ControlParameterList(ControlParameterContainer):
 
     ##
     # \brief Initializes the \e %ControlParameterList instance.
-    # \param self The \e %ControlParameterList instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ControlParameterList instance.
-    # \param self The \e %ControlParameterList instance to initialize.
     # \param cntnr 
     #
-    def __init__(self: object, cntnr: ControlParameterContainer) -> None: pass
+    def __init__(cntnr: ControlParameterContainer) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ControlParameterList instance \a cntnr.
-    # \param self The \e %ControlParameterList instance this method is called upon.
     # \param cntnr The \e %ControlParameterList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ControlParameterList, cntnr: ControlParameterContainer) -> ControlParameterList: pass
+    def assign(cntnr: ControlParameterContainer) -> ControlParameterList: pass

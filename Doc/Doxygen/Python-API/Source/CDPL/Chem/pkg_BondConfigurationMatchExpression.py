@@ -26,17 +26,15 @@ class BondConfigurationMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondConfigurationMatchExpression instance.
-    # \param self The \e %BondConfigurationMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: BondConfigurationMatchExpression) -> None: pass
+    def __init__(expr: BondConfigurationMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %BondConfigurationMatchExpression instance.
-    # \param self The \e %BondConfigurationMatchExpression instance to initialize.
     # \param query_stereo_descr 
     # \param query_bond 
     # \param not_match 
     # \param allow_part_maps 
     #
-    def __init__(self: object, query_stereo_descr: StereoDescriptor, query_bond: Bond, not_match: bool, allow_part_maps: bool) -> None: pass
+    def __init__(query_stereo_descr: StereoDescriptor, query_bond: Bond, not_match: bool, allow_part_maps: bool) -> None: pass

@@ -26,7 +26,6 @@ class SVGReactionWriter(CDPL.Chem.ReactionWriter):
 
     ##
     # \brief Initializes the \e %SVGReactionWriter instance.
-    # \param self The \e %SVGReactionWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

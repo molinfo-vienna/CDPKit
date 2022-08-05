@@ -26,7 +26,6 @@ class RDFReactionWriter(ReactionWriter):
 
     ##
     # \brief Initializes the \e %RDFReactionWriter instance.
-    # \param self The \e %RDFReactionWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

@@ -26,28 +26,24 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
-    # \param self The \e %FeatureRDFCodeCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
-    # \param self The \e %FeatureRDFCodeCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: FeatureRDFCodeCalculator) -> None: pass
+    def __init__(calculator: FeatureRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
-    # \param self The \e %FeatureRDFCodeCalculator instance to initialize.
     # \param cntnr 
     # \param rdf_code 
     #
-    def __init__(self: object, cntnr: FeatureContainer, rdf_code: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: FeatureContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     #
     # Different Python \e %FeatureRDFCodeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureRDFCodeCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,121 +52,105 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FeatureRDFCodeCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureRDFCodeCalculator instance \a calculator.
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param calculator The \e %FeatureRDFCodeCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FeatureRDFCodeCalculator, calculator: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
+    def assign(calculator: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param func 
     #
-    def setEntityPairWeightFunction(self: FeatureRDFCodeCalculator, func: DoubleFeature2Functor) -> None: pass
+    def setEntityPairWeightFunction(func: DoubleFeature2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param func 
     #
-    def setEntity3DCoordinatesFunction(self: FeatureRDFCodeCalculator, func: Feature3DCoordinatesFunction) -> None: pass
+    def setEntity3DCoordinatesFunction(func: Feature3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param num_steps 
     #
-    def setNumSteps(self: FeatureRDFCodeCalculator, num_steps: int) -> None: pass
+    def setNumSteps(num_steps: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getNumSteps(self: FeatureRDFCodeCalculator) -> int: pass
+    def getNumSteps() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param radius_inc 
     #
-    def setRadiusIncrement(self: FeatureRDFCodeCalculator, radius_inc: float) -> None: pass
+    def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getRadiusIncrement(self: FeatureRDFCodeCalculator) -> float: pass
+    def getRadiusIncrement() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param start_radius 
     #
-    def setStartRadius(self: FeatureRDFCodeCalculator, start_radius: float) -> None: pass
+    def setStartRadius(start_radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getStartRadius(self: FeatureRDFCodeCalculator) -> float: pass
+    def getStartRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param factor 
     #
-    def setSmoothingFactor(self: FeatureRDFCodeCalculator, factor: float) -> None: pass
+    def setSmoothingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getSmoothingFactor(self: FeatureRDFCodeCalculator) -> float: pass
+    def getSmoothingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param factor 
     #
-    def setScalingFactor(self: FeatureRDFCodeCalculator, factor: float) -> None: pass
+    def setScalingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getScalingFactor(self: FeatureRDFCodeCalculator) -> float: pass
+    def getScalingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param enable 
     #
-    def enableDistanceToIntervalCenterRounding(self: FeatureRDFCodeCalculator, enable: bool) -> None: pass
+    def enableDistanceToIntervalCenterRounding(enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def distanceToIntervalsCenterRoundingEnabled(self: FeatureRDFCodeCalculator) -> bool: pass
+    def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureRDFCodeCalculator instance this method is called upon.
     # \param cntnr 
     # \param rdf_code 
     #
-    def calculate(self: FeatureRDFCodeCalculator, cntnr: FeatureContainer, rdf_code: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: FeatureContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief 

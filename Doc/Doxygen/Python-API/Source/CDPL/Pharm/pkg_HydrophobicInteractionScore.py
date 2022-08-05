@@ -36,15 +36,13 @@ class HydrophobicInteractionScore(FeatureDistanceScore):
 
     ##
     # \brief Initializes the \e %HydrophobicInteractionScore instance.
-    # \param self The \e %HydrophobicInteractionScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: HydrophobicInteractionScore) -> None: pass
+    def __init__(score: HydrophobicInteractionScore) -> None: pass
 
     ##
     # \brief Initializes the \e %HydrophobicInteractionScore instance.
-    # \param self The \e %HydrophobicInteractionScore instance to initialize.
     # \param min_dist 
     # \param max_dist 
     #
-    def __init__(self: object, min_dist: float = 2.0, max_dist: float = 6.0) -> None: pass
+    def __init__(min_dist: float = 2.0, max_dist: float = 6.0) -> None: pass

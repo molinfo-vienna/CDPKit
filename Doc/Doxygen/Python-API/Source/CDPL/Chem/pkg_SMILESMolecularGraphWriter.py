@@ -26,7 +26,6 @@ class SMILESMolecularGraphWriter(MolecularGraphWriter):
 
     ##
     # \brief Initializes the \e %SMILESMolecularGraphWriter instance.
-    # \param self The \e %SMILESMolecularGraphWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

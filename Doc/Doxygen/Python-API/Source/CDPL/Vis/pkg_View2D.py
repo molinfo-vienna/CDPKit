@@ -26,27 +26,23 @@ class View2D(CDPL.Base.ControlParameterContainer):
 
     ##
     # \brief Initializes the \e %View2D instance.
-    # \param self The \e %View2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %View2D instance this method is called upon.
     # \param renderer 
     #
-    def render(self: View2D, renderer: Renderer2D) -> None: pass
+    def render(renderer: Renderer2D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %View2D instance this method is called upon.
     # \param font_metrics 
     #
-    def setFontMetrics(self: View2D, font_metrics: FontMetrics) -> None: pass
+    def setFontMetrics(font_metrics: FontMetrics) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %View2D instance this method is called upon.
     # \param bounds 
     #
-    def getModelBounds(self: View2D, bounds: Rectangle2D) -> None: pass
+    def getModelBounds(bounds: Rectangle2D) -> None: pass

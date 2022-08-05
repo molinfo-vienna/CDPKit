@@ -26,28 +26,24 @@ class MMFF94AromaticSSSRSubset(CDPL.Chem.FragmentList):
 
     ##
     # \brief Initializes the \e %MMFF94AromaticSSSRSubset instance.
-    # \param self The \e %MMFF94AromaticSSSRSubset instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94AromaticSSSRSubset instance.
-    # \param self The \e %MMFF94AromaticSSSRSubset instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticSSSRSubset instance this method is called upon.
     # \param molgraph 
     #
-    def extract(self: MMFF94AromaticSSSRSubset, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def extract(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticSSSRSubset instance this method is called upon.
     # \param molgraph 
     # \param sssr 
     #
-    def extract(self: MMFF94AromaticSSSRSubset, molgraph: CDPL.Chem.MolecularGraph, sssr: CDPL.Chem.FragmentList) -> None: pass
+    def extract(molgraph: CDPL.Chem.MolecularGraph, sssr: CDPL.Chem.FragmentList) -> None: pass

@@ -36,22 +36,19 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
-    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: GeneralizedBellAtomDensity) -> None: pass
+    def __init__(func: GeneralizedBellAtomDensity) -> None: pass
 
     ##
     # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
-    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
     # \param probe_radius 
     # \param rad_scaling_factor 
     #
-    def __init__(self: object, probe_radius: float = 0.0, rad_scaling_factor: float = 1.0) -> None: pass
+    def __init__(probe_radius: float = 0.0, rad_scaling_factor: float = 1.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     #
     # Different Python \e %GeneralizedBellAtomDensity instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GeneralizedBellAtomDensity instances \e a and \e b reference different C++ objects. 
@@ -60,39 +57,35 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GeneralizedBellAtomDensity) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     # \return 
     #
-    def getProbeRadius(self: GeneralizedBellAtomDensity) -> float: pass
+    def getProbeRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     # \return 
     #
-    def getRadiusScalingFactor(self: GeneralizedBellAtomDensity) -> float: pass
+    def getRadiusScalingFactor() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GeneralizedBellAtomDensity instance \a func.
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     # \param func The \e %GeneralizedBellAtomDensity instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: GeneralizedBellAtomDensity, func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
+    def assign(func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
 
     ##
     # \brief 
-    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
     # \param pos 
     # \param atom_pos 
     # \param atom 
     # \return 
     #
-    def __call__(self: GeneralizedBellAtomDensity, pos: CDPL.Math.Vector3D, atom_pos: CDPL.Math.Vector3D, atom: Atom) -> float: pass
+    def __call__(pos: CDPL.Math.Vector3D, atom_pos: CDPL.Math.Vector3D, atom: Atom) -> float: pass
 
     ##
     # \brief 

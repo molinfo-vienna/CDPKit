@@ -26,69 +26,59 @@ class Vector3F(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param self The \e %Vector3F instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param self The \e %Vector3F instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: Vector3F) -> None: pass
+    def __init__(v: Vector3F) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param self The \e %Vector3F instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: float) -> None: pass
+    def __init__(v: float) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param arg1 The \e %Vector3F instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param arg1 The \e %Vector3F instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param arg1 The \e %Vector3F instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param arg1 The \e %Vector3F instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector3F instance.
-    # \param arg1 The \e %Vector3F instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param v 
     #
-    def clear(self: Vector3F, v: float = 0.0) -> None: pass
+    def clear(v: float = 0.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector3F instance this method is called upon.
     #
     # Different Python \e %Vector3F instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector3F instances \e a and \e b reference different C++ objects. 
@@ -97,295 +87,258 @@ class Vector3F(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Vector3F) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3F instance \a e.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param e The \e %Vector3F instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3F, e: ConstFVectorExpression) -> Vector3F: pass
+    def assign(e: ConstFVectorExpression) -> Vector3F: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3F instance \a e.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param e The \e %Vector3F instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3F, e: ConstDVectorExpression) -> Vector3F: pass
+    def assign(e: ConstDVectorExpression) -> Vector3F: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3F instance \a e.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param e The \e %Vector3F instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3F, e: ConstLVectorExpression) -> Vector3F: pass
+    def assign(e: ConstLVectorExpression) -> Vector3F: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3F instance \a e.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param e The \e %Vector3F instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3F, e: ConstULVectorExpression) -> Vector3F: pass
+    def assign(e: ConstULVectorExpression) -> Vector3F: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3F instance \a v.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param v The \e %Vector3F instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3F, v: Vector3F) -> Vector3F: pass
+    def assign(v: Vector3F) -> Vector3F: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3F instance \a a.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param a The \e %Vector3F instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector3F, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: Vector3F) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return 
     #
-    def getSize(self: Vector3F) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: Vector3F, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return 
     #
-    def toArray(self: Vector3F) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param v 
     #
-    def swap(self: Vector3F, v: Vector3F) -> None: pass
+    def swap(v: Vector3F) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: Vector3F, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param v The \e %Vector3F instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector3F, v: Vector3F) -> bool: pass
+    def __eq__(v: Vector3F) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param e The \e %Vector3F instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector3F, e: ConstFVectorExpression) -> bool: pass
+    def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param v The \e %Vector3F instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector3F, v: Vector3F) -> bool: pass
+    def __ne__(v: Vector3F) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param e The \e %Vector3F instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector3F, e: ConstFVectorExpression) -> bool: pass
+    def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: Vector3F, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: Vector3F, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return 
     #
-    def __len__(self: Vector3F) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %Vector3F instance.
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: Vector3F) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return 
     #
-    def __pos__(self: Vector3F) -> Vector3F: pass
+    def __pos__() -> Vector3F: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFVectorExpression: pass
+    def __neg__() -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %Vector3F instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %Vector3F instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %Vector3F instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %Vector3F instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __sub__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %Vector3F instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %Vector3F instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %Vector3F instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %Vector3F instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
+    def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %Vector3F instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %Vector3F instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __truediv__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __rmul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: Vector3F, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %Vector3F instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %Vector3F instance \a self.
     #
-    def __iadd__(self: Vector3F, v: Vector3F) -> Vector3F: pass
+    def __iadd__(v: Vector3F) -> Vector3F: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %Vector3F instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %Vector3F instance \a self.
     #
-    def __iadd__(self: Vector3F, e: ConstFVectorExpression) -> Vector3F: pass
+    def __iadd__(e: ConstFVectorExpression) -> Vector3F: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %Vector3F instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %Vector3F instance \a self.
     #
-    def __isub__(self: Vector3F, v: Vector3F) -> Vector3F: pass
+    def __isub__(v: Vector3F) -> Vector3F: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %Vector3F instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %Vector3F instance \a self.
     #
-    def __isub__(self: Vector3F, e: ConstFVectorExpression) -> Vector3F: pass
+    def __isub__(e: ConstFVectorExpression) -> Vector3F: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %Vector3F instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %Vector3F instance \a self.
     #
-    def __imul__(self: Vector3F, t: float) -> Vector3F: pass
+    def __imul__(t: float) -> Vector3F: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %Vector3F instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %Vector3F instance \a self.
     #
-    def __idiv__(self: Vector3F, t: float) -> Vector3F: pass
+    def __idiv__(t: float) -> Vector3F: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector3F instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: Vector3F, t: float) -> Vector3F: pass
+    def __itruediv__(t: float) -> Vector3F: pass
 
     ##
     # \brief 

@@ -26,8 +26,7 @@ class FileSDFBZ2MoleculeReader(MoleculeReader):
 
     ##
     # \brief Initializes the \e %FileSDFBZ2MoleculeReader instance.
-    # \param self The \e %FileSDFBZ2MoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
     #
-    def __init__(self: object, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

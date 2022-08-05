@@ -31,25 +31,22 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraintList instance this method is called upon.
         # \return 
         #
-        def __len__(self: DistanceConstraintList) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraintList instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: DistanceConstraintList, idx: int) -> DistanceConstraint: pass
+        def __getitem__(idx: int) -> DistanceConstraint: pass
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraintList instance this method is called upon.
         # \param idx 
         #
-        def __delitem__(self: DistanceConstraintList, idx: int) -> None: pass
+        def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
@@ -58,24 +55,21 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DistanceConstraint instance.
-        # \param self The \e %DistanceConstraint instance to initialize.
         # \param pt1_idx 
         # \param pt2_idx 
         # \param lb 
         # \param ub 
         #
-        def __init__(self: object, pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
+        def __init__(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
         ##
         # \brief Initializes the \e %DistanceConstraint instance.
-        # \param self The \e %DistanceConstraint instance to initialize.
         # \param constr 
         #
-        def __init__(self: object, constr: DistanceConstraint) -> None: pass
+        def __init__(constr: DistanceConstraint) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         #
         # Different Python \e %DistanceConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DistanceConstraint instances \e a and \e b reference different C++ objects. 
@@ -84,43 +78,38 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: DistanceConstraint) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %DistanceConstraint instance \a constr.
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # \param constr The \e %DistanceConstraint instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: DistanceConstraint, constr: DistanceConstraint) -> DistanceConstraint: pass
+        def assign(constr: DistanceConstraint) -> DistanceConstraint: pass
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # \return 
         #
-        def getPoint1Index(self: DistanceConstraint) -> int: pass
+        def getPoint1Index() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # \return 
         #
-        def getPoint2Index(self: DistanceConstraint) -> int: pass
+        def getPoint2Index() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # \return 
         #
-        def getLowerBound(self: DistanceConstraint) -> float: pass
+        def getLowerBound() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %DistanceConstraint instance this method is called upon.
         # \return 
         #
-        def getUpperBound(self: DistanceConstraint) -> float: pass
+        def getUpperBound() -> float: pass
 
         ##
         # \brief 
@@ -174,20 +163,17 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DG2DCoordinatesGenerator instance.
-    # \param self The \e %DG2DCoordinatesGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DG2DCoordinatesGenerator instance.
-    # \param self The \e %DG2DCoordinatesGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: DG2DCoordinatesGenerator) -> None: pass
+    def __init__(gen: DG2DCoordinatesGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     #
     # Different Python \e %DG2DCoordinatesGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DG2DCoordinatesGenerator instances \e a and \e b reference different C++ objects. 
@@ -196,132 +182,115 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DG2DCoordinatesGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DG2DCoordinatesGenerator instance \a gen.
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param gen The \e %DG2DCoordinatesGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DG2DCoordinatesGenerator, gen: DG2DCoordinatesGenerator) -> DG2DCoordinatesGenerator: pass
+    def assign(gen: DG2DCoordinatesGenerator) -> DG2DCoordinatesGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     #
-    def clearDistanceConstraints(self: DG2DCoordinatesGenerator) -> None: pass
+    def clearDistanceConstraints() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \return 
     #
-    def getNumDistanceConstraints(self: DG2DCoordinatesGenerator) -> int: pass
+    def getNumDistanceConstraints() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getDistanceConstraint(self: DG2DCoordinatesGenerator, idx: int) -> DistanceConstraint: pass
+    def getDistanceConstraint(idx: int) -> DistanceConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param pt1_idx 
     # \param pt2_idx 
     # \param lb 
     # \param ub 
     #
-    def addDistanceConstraint(self: DG2DCoordinatesGenerator, pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
+    def addDistanceConstraint(pt1_idx: int, pt2_idx: int, lb: float, ub: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param idx 
     #
-    def removeDistanceConstraint(self: DG2DCoordinatesGenerator, idx: int) -> None: pass
+    def removeDistanceConstraint(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param num_cycles 
     #
-    def setNumCycles(self: DG2DCoordinatesGenerator, num_cycles: int) -> None: pass
+    def setNumCycles(num_cycles: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \return 
     #
-    def getNumCycles(self: DG2DCoordinatesGenerator) -> int: pass
+    def getNumCycles() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param fact 
     #
-    def setCycleStepCountFactor(self: DG2DCoordinatesGenerator, fact: int) -> None: pass
+    def setCycleStepCountFactor(fact: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \return 
     #
-    def getCycleStepCountFactor(self: DG2DCoordinatesGenerator) -> int: pass
+    def getCycleStepCountFactor() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param rate 
     #
-    def setStartLearningRate(self: DG2DCoordinatesGenerator, rate: float) -> None: pass
+    def setStartLearningRate(rate: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \return 
     #
-    def getStartLearningRate(self: DG2DCoordinatesGenerator) -> float: pass
+    def getStartLearningRate() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param decr 
     #
-    def setLearningRateDecrement(self: DG2DCoordinatesGenerator, decr: float) -> None: pass
+    def setLearningRateDecrement(decr: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \return 
     #
-    def getLearningRateDecrement(self: DG2DCoordinatesGenerator) -> float: pass
+    def getLearningRateDecrement() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param seed 
     #
-    def setRandomSeed(self: DG2DCoordinatesGenerator, seed: int) -> None: pass
+    def setRandomSeed(seed: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param num_points 
     # \param coords 
     #
-    def generate(self: DG2DCoordinatesGenerator, num_points: int, coords: CDPL.Math.Vector2DArray) -> None: pass
+    def generate(num_points: int, coords: CDPL.Math.Vector2DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DG2DCoordinatesGenerator instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def getDistanceError(self: DG2DCoordinatesGenerator, coords: CDPL.Math.Vector2DArray) -> float: pass
+    def getDistanceError(coords: CDPL.Math.Vector2DArray) -> float: pass
 
     ##
     # \brief 

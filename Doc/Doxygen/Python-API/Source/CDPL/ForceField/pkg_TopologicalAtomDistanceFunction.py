@@ -26,44 +26,38 @@ class TopologicalAtomDistanceFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TopologicalAtomDistanceFunction instance.
-    # \param self The \e %TopologicalAtomDistanceFunction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TopologicalAtomDistanceFunction instance.
-    # \param self The \e %TopologicalAtomDistanceFunction instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: TopologicalAtomDistanceFunction) -> None: pass
+    def __init__(func: TopologicalAtomDistanceFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %TopologicalAtomDistanceFunction instance.
-    # \param arg1 The \e %TopologicalAtomDistanceFunction instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TopologicalAtomDistanceFunction instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \param arg3 
     # \return 
     #
-    def __call__(self: TopologicalAtomDistanceFunction, arg1: CDPL.Chem.Atom, arg2: CDPL.Chem.Atom, arg3: CDPL.Chem.MolecularGraph) -> int: pass
+    def __call__(arg1: CDPL.Chem.Atom, arg2: CDPL.Chem.Atom, arg3: CDPL.Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TopologicalAtomDistanceFunction instance this method is called upon.
     # \return 
     #
-    def __bool__(self: TopologicalAtomDistanceFunction) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TopologicalAtomDistanceFunction instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: TopologicalAtomDistanceFunction) -> bool: pass
+    def __nonzero__() -> bool: pass

@@ -26,21 +26,18 @@ class SpatialFeatureMapping(FeatureMapping):
 
     ##
     # \brief Initializes the \e %SpatialFeatureMapping instance.
-    # \param self The \e %SpatialFeatureMapping instance to initialize.
     # \param mapping 
     #
-    def __init__(self: object, mapping: SpatialFeatureMapping) -> None: pass
+    def __init__(mapping: SpatialFeatureMapping) -> None: pass
 
     ##
     # \brief Initializes the \e %SpatialFeatureMapping instance.
-    # \param self The \e %SpatialFeatureMapping instance to initialize.
     # \param query_mode 
     #
-    def __init__(self: object, query_mode: bool = False) -> None: pass
+    def __init__(query_mode: bool = False) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     #
     # Different Python \e %SpatialFeatureMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialFeatureMapping instances \e a and \e b reference different C++ objects. 
@@ -49,84 +46,74 @@ class SpatialFeatureMapping(FeatureMapping):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SpatialFeatureMapping) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialFeatureMapping instance \a mapping.
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param mapping The \e %SpatialFeatureMapping instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SpatialFeatureMapping, mapping: SpatialFeatureMapping) -> SpatialFeatureMapping: pass
+    def assign(mapping: SpatialFeatureMapping) -> SpatialFeatureMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param ref_ftrs 
     # \param aligned_ftrs 
     # \param xform 
     #
-    def perceive(self: SpatialFeatureMapping, ref_ftrs: FeatureContainer, aligned_ftrs: FeatureContainer, xform: CDPL.Math.Matrix4D) -> None: pass
+    def perceive(ref_ftrs: FeatureContainer, aligned_ftrs: FeatureContainer, xform: CDPL.Math.Matrix4D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param func 
     #
-    def setTypeMatchFunction(self: SpatialFeatureMapping, func: BoolFeature2Functor) -> None: pass
+    def setTypeMatchFunction(func: BoolFeature2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \return 
     #
-    def getTypeMatchFunction(self: SpatialFeatureMapping) -> BoolFeature2Functor: pass
+    def getTypeMatchFunction() -> BoolFeature2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param func 
     #
-    def setPositionMatchFunction(self: SpatialFeatureMapping, func: DoubleFeature2Matrix4DFunctor) -> None: pass
+    def setPositionMatchFunction(func: DoubleFeature2Matrix4DFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \return 
     #
-    def getPositionMatchFunction(self: SpatialFeatureMapping) -> DoubleFeature2Matrix4DFunctor: pass
+    def getPositionMatchFunction() -> DoubleFeature2Matrix4DFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param func 
     #
-    def setGeometryMatchFunction(self: SpatialFeatureMapping, func: DoubleFeature2Matrix4DFunctor) -> None: pass
+    def setGeometryMatchFunction(func: DoubleFeature2Matrix4DFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \return 
     #
-    def getGeometryMatchFunction(self: SpatialFeatureMapping) -> DoubleFeature2Matrix4DFunctor: pass
+    def getGeometryMatchFunction() -> DoubleFeature2Matrix4DFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param ref_ftr 
     # \param aligned_ftr 
     # \return 
     #
-    def getPositionMatchScore(self: SpatialFeatureMapping, ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
+    def getPositionMatchScore(ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureMapping instance this method is called upon.
     # \param ref_ftr 
     # \param aligned_ftr 
     # \return 
     #
-    def getGeometryMatchScore(self: SpatialFeatureMapping, ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
+    def getGeometryMatchScore(ref_ftr: Feature, aligned_ftr: Feature) -> float: pass
 
     ##
     # \brief 

@@ -26,82 +26,70 @@ class SparseDVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param self The \e %SparseDVector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param self The \e %SparseDVector instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: SparseDVector) -> None: pass
+    def __init__(v: SparseDVector) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param self The \e %SparseDVector instance to initialize.
     # \param n 
     #
-    def __init__(self: object, n: int) -> None: pass
+    def __init__(n: int) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param arg1 The \e %SparseDVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param arg1 The \e %SparseDVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param arg1 The \e %SparseDVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param arg1 The \e %SparseDVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseDVector instance.
-    # \param arg1 The \e %SparseDVector instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param n 
     #
-    def resize(self: SparseDVector, n: int) -> None: pass
+    def resize(n: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     #
-    def clear(self: SparseDVector) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def getNumElements(self: SparseDVector) -> int: pass
+    def getNumElements() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SparseDVector instance this method is called upon.
     #
     # Different Python \e %SparseDVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SparseDVector instances \e a and \e b reference different C++ objects. 
@@ -110,295 +98,258 @@ class SparseDVector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SparseDVector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseDVector instance \a e.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param e The \e %SparseDVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseDVector, e: ConstFVectorExpression) -> SparseDVector: pass
+    def assign(e: ConstFVectorExpression) -> SparseDVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseDVector instance \a e.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param e The \e %SparseDVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseDVector, e: ConstDVectorExpression) -> SparseDVector: pass
+    def assign(e: ConstDVectorExpression) -> SparseDVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseDVector instance \a e.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param e The \e %SparseDVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseDVector, e: ConstLVectorExpression) -> SparseDVector: pass
+    def assign(e: ConstLVectorExpression) -> SparseDVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseDVector instance \a e.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param e The \e %SparseDVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseDVector, e: ConstULVectorExpression) -> SparseDVector: pass
+    def assign(e: ConstULVectorExpression) -> SparseDVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseDVector instance \a v.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param v The \e %SparseDVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseDVector, v: SparseDVector) -> SparseDVector: pass
+    def assign(v: SparseDVector) -> SparseDVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseDVector instance \a a.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param a The \e %SparseDVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseDVector, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: SparseDVector) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def getSize(self: SparseDVector) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: SparseDVector, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def toArray(self: SparseDVector) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param v 
     #
-    def swap(self: SparseDVector, v: SparseDVector) -> None: pass
+    def swap(v: SparseDVector) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: SparseDVector, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param v The \e %SparseDVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SparseDVector, v: SparseDVector) -> bool: pass
+    def __eq__(v: SparseDVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param e The \e %SparseDVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SparseDVector, e: ConstDVectorExpression) -> bool: pass
+    def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param v The \e %SparseDVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SparseDVector, v: SparseDVector) -> bool: pass
+    def __ne__(v: SparseDVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param e The \e %SparseDVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SparseDVector, e: ConstDVectorExpression) -> bool: pass
+    def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: SparseDVector, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: SparseDVector, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def __len__(self: SparseDVector) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %SparseDVector instance.
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: SparseDVector) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def __pos__(self: SparseDVector) -> SparseDVector: pass
+    def __pos__() -> SparseDVector: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDVectorExpression: pass
+    def __neg__() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %SparseDVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %SparseDVector instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %SparseDVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %SparseDVector instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %SparseDVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %SparseDVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %SparseDVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %SparseDVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %SparseDVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %SparseDVector instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: SparseDVector, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %SparseDVector instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %SparseDVector instance \a self.
     #
-    def __iadd__(self: SparseDVector, v: SparseDVector) -> SparseDVector: pass
+    def __iadd__(v: SparseDVector) -> SparseDVector: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %SparseDVector instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %SparseDVector instance \a self.
     #
-    def __iadd__(self: SparseDVector, e: ConstDVectorExpression) -> SparseDVector: pass
+    def __iadd__(e: ConstDVectorExpression) -> SparseDVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %SparseDVector instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %SparseDVector instance \a self.
     #
-    def __isub__(self: SparseDVector, v: SparseDVector) -> SparseDVector: pass
+    def __isub__(v: SparseDVector) -> SparseDVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %SparseDVector instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %SparseDVector instance \a self.
     #
-    def __isub__(self: SparseDVector, e: ConstDVectorExpression) -> SparseDVector: pass
+    def __isub__(e: ConstDVectorExpression) -> SparseDVector: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %SparseDVector instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %SparseDVector instance \a self.
     #
-    def __imul__(self: SparseDVector, t: float) -> SparseDVector: pass
+    def __imul__(t: float) -> SparseDVector: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %SparseDVector instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %SparseDVector instance \a self.
     #
-    def __idiv__(self: SparseDVector, t: float) -> SparseDVector: pass
+    def __idiv__(t: float) -> SparseDVector: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseDVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: SparseDVector, t: float) -> SparseDVector: pass
+    def __itruediv__(t: float) -> SparseDVector: pass
 
     ##
     # \brief 

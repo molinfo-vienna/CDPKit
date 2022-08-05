@@ -26,101 +26,87 @@ class TorsionRuleMatcher(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionRuleMatcher instance.
-    # \param self The \e %TorsionRuleMatcher instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionRuleMatcher instance.
-    # \param self The \e %TorsionRuleMatcher instance to initialize.
     # \param lib 
     #
-    def __init__(self: object, lib: TorsionLibrary) -> None: pass
+    def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param unique 
     #
-    def findUniqueMappingsOnly(self: TorsionRuleMatcher, unique: bool) -> None: pass
+    def findUniqueMappingsOnly(unique: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \return 
     #
-    def findUniqueMappingsOnly(self: TorsionRuleMatcher) -> bool: pass
+    def findUniqueMappingsOnly() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param all 
     #
-    def findAllRuleMappings(self: TorsionRuleMatcher, all: bool) -> None: pass
+    def findAllRuleMappings(all: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \return 
     #
-    def findAllRuleMappings(self: TorsionRuleMatcher) -> bool: pass
+    def findAllRuleMappings() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param stop 
     #
-    def stopAtFirstMatchingRule(self: TorsionRuleMatcher, stop: bool) -> None: pass
+    def stopAtFirstMatchingRule(stop: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \return 
     #
-    def stopAtFirstMatchingRule(self: TorsionRuleMatcher) -> bool: pass
+    def stopAtFirstMatchingRule() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param lib 
     #
-    def setTorsionLibrary(self: TorsionRuleMatcher, lib: TorsionLibrary) -> None: pass
+    def setTorsionLibrary(lib: TorsionLibrary) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \return 
     #
-    def getTorsionLibrary(self: TorsionRuleMatcher) -> TorsionLibrary: pass
+    def getTorsionLibrary() -> TorsionLibrary: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \return 
     #
-    def getNumMatches(self: TorsionRuleMatcher) -> int: pass
+    def getNumMatches() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getMatch(self: TorsionRuleMatcher, idx: int) -> TorsionRuleMatch: pass
+    def getMatch(idx: int) -> TorsionRuleMatch: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param bond 
     # \param molgraph 
     # \param append 
     # \return 
     #
-    def findMatches(self: TorsionRuleMatcher, bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, append: bool = False) -> bool: pass
+    def findMatches(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph, append: bool = False) -> bool: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     #
     # Different Python \e %TorsionRuleMatcher instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRuleMatcher instances \e a and \e b reference different C++ objects. 
@@ -129,22 +115,20 @@ class TorsionRuleMatcher(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: TorsionRuleMatcher) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: TorsionRuleMatcher, idx: int) -> TorsionRuleMatch: pass
+    def __getitem__(idx: int) -> TorsionRuleMatch: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatcher instance this method is called upon.
     # \return 
     #
-    def __len__(self: TorsionRuleMatcher) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

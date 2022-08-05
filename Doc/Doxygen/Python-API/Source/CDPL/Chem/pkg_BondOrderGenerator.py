@@ -26,22 +26,19 @@ class BondOrderGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BondOrderGenerator instance.
-    # \param self The \e %BondOrderGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BondOrderGenerator instance.
-    # \param self The \e %BondOrderGenerator instance to initialize.
     # \param molgraph 
     # \param orders 
     # \param undef_only 
     #
-    def __init__(self: object, molgraph: MolecularGraph, orders: CDPL.Util.STArray, undef_only: bool = True) -> None: pass
+    def __init__(molgraph: MolecularGraph, orders: CDPL.Util.STArray, undef_only: bool = True) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondOrderGenerator instance this method is called upon.
     #
     # Different Python \e %BondOrderGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondOrderGenerator instances \e a and \e b reference different C++ objects. 
@@ -50,15 +47,14 @@ class BondOrderGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BondOrderGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondOrderGenerator instance this method is called upon.
     # \param molgraph 
     # \param orders 
     #
-    def generate(self: BondOrderGenerator, molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
+    def generate(molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief 

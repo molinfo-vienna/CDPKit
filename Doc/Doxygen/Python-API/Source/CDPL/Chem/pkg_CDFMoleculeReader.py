@@ -26,7 +26,6 @@ class CDFMoleculeReader(MoleculeReader):
 
     ##
     # \brief Initializes the \e %CDFMoleculeReader instance.
-    # \param self The \e %CDFMoleculeReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

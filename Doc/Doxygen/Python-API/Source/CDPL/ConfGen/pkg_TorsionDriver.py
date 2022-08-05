@@ -26,13 +26,11 @@ class TorsionDriver(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionDriver instance.
-    # \param self The \e %TorsionDriver instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionDriver instance this method is called upon.
     #
     # Different Python \e %TorsionDriver instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionDriver instances \e a and \e b reference different C++ objects. 
@@ -41,152 +39,132 @@ class TorsionDriver(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: TorsionDriver) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \return 
     #
-    def getSettings(self: TorsionDriver) -> TorsionDriverSettings: pass
+    def getSettings() -> TorsionDriverSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     #
-    def clearTorsionLibraries(self: TorsionDriver) -> None: pass
+    def clearTorsionLibraries() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param lib 
     #
-    def addTorsionLibrary(self: TorsionDriver, lib: TorsionLibrary) -> None: pass
+    def addTorsionLibrary(lib: TorsionLibrary) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def setup(self: TorsionDriver, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+    def setup(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param molgraph 
     # \param bond_mask 
     # \return 
     #
-    def setup(self: TorsionDriver, molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet) -> int: pass
+    def setup(molgraph: CDPL.Chem.MolecularGraph, bond_mask: CDPL.Util.BitSet) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     #
-    def clearInputCoordinates(self: TorsionDriver) -> None: pass
+    def clearInputCoordinates() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param frag_idx 
     #
-    def clearInputCoordinates(self: TorsionDriver, frag_idx: int) -> None: pass
+    def clearInputCoordinates(frag_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param coords 
     #
-    def addInputCoordinates(self: TorsionDriver, coords: CDPL.Math.Vector3DArray) -> None: pass
+    def addInputCoordinates(coords: CDPL.Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param coords 
     # \param frag_idx 
     #
-    def addInputCoordinates(self: TorsionDriver, coords: CDPL.Math.Vector3DArray, frag_idx: int) -> None: pass
+    def addInputCoordinates(coords: CDPL.Math.Vector3DArray, frag_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param conf_data 
     # \param frag_idx 
     #
-    def addInputCoordinates(self: TorsionDriver, conf_data: ConformerData, frag_idx: int) -> None: pass
+    def addInputCoordinates(conf_data: ConformerData, frag_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param func 
     #
-    def setAbortCallback(self: TorsionDriver, func: CallbackFunction) -> None: pass
+    def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \return 
     #
-    def getAbortCallback(self: TorsionDriver) -> CallbackFunction: pass
+    def getAbortCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param func 
     #
-    def setTimeoutCallback(self: TorsionDriver, func: CallbackFunction) -> None: pass
+    def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \return 
     #
-    def getTimeoutCallback(self: TorsionDriver) -> CallbackFunction: pass
+    def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param func 
     #
-    def setLogMessageCallback(self: TorsionDriver, func: LogMessageCallbackFunction) -> None: pass
+    def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \return 
     #
-    def getLogMessageCallback(self: TorsionDriver) -> LogMessageCallbackFunction: pass
+    def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \return 
     #
-    def generateConformers(self: TorsionDriver) -> int: pass
+    def generateConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \return 
     #
-    def getNumConformers(self: TorsionDriver) -> int: pass
+    def getNumConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param conf_idx 
     # \return 
     #
-    def getConformer(self: TorsionDriver, conf_idx: int) -> ConformerData: pass
+    def getConformer(conf_idx: int) -> ConformerData: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriver instance this method is called upon.
     # \param conf_idx 
     # \return 
     #
-    def __getitem__(self: TorsionDriver, conf_idx: int) -> ConformerData: pass
+    def __getitem__(conf_idx: int) -> ConformerData: pass
 
     ##
     # \brief 

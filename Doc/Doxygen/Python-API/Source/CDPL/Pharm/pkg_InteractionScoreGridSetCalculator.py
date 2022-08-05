@@ -26,7 +26,6 @@ class InteractionScoreGridSetCalculator(Boost.Python.instance):
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     #
     # Different Python \e %InteractionScoreGridSetCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionScoreGridSetCalculator instances \e a and \e b reference different C++ objects. 
@@ -35,96 +34,85 @@ class InteractionScoreGridSetCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: InteractionScoreGridSetCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionScoreGridSetCalculator instance \a calculator.
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param calculator The \e %InteractionScoreGridSetCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: InteractionScoreGridSetCalculator, calculator: InteractionScoreGridSetCalculator) -> InteractionScoreGridSetCalculator: pass
+    def assign(calculator: InteractionScoreGridSetCalculator) -> InteractionScoreGridSetCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param ftr_type 
     # \param tgt_ftr_type 
     # \param func 
     #
-    def setScoringFunction(self: InteractionScoreGridSetCalculator, ftr_type: int, tgt_ftr_type: int, func: DoubleVector3DFeatureFunctor) -> None: pass
+    def setScoringFunction(ftr_type: int, tgt_ftr_type: int, func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param ftr_type 
     # \param tgt_ftr_type 
     #
-    def removeScoringFunction(self: InteractionScoreGridSetCalculator, ftr_type: int, tgt_ftr_type: int) -> None: pass
+    def removeScoringFunction(ftr_type: int, tgt_ftr_type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param ftr_type 
     # \param tgt_ftr_type 
     # \return 
     #
-    def getScoringFunction(self: InteractionScoreGridSetCalculator, ftr_type: int, tgt_ftr_type: int) -> DoubleVector3DFeatureFunctor: pass
+    def getScoringFunction(ftr_type: int, tgt_ftr_type: int) -> DoubleVector3DFeatureFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param ftr_type 
     # \param tgt_ftr_type 
     # \param enable 
     #
-    def enableInteraction(self: InteractionScoreGridSetCalculator, ftr_type: int, tgt_ftr_type: int, enable: bool) -> None: pass
+    def enableInteraction(ftr_type: int, tgt_ftr_type: int, enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param ftr_type 
     # \param tgt_ftr_type 
     # \return 
     #
-    def isInteractionEnabled(self: InteractionScoreGridSetCalculator, ftr_type: int, tgt_ftr_type: int) -> bool: pass
+    def isInteractionEnabled(ftr_type: int, tgt_ftr_type: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def clearEnabledInteractions(arg1: InteractionScoreGridSetCalculator, arg2: int, self: int) -> bool: pass
+    def clearEnabledInteractions(arg2: int, self: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param func 
     #
-    def setScoreCombinationFunction(self: InteractionScoreGridSetCalculator, func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
+    def setScoreCombinationFunction(func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def getScoreCombinationFunction(self: InteractionScoreGridSetCalculator) -> CDPL.Math.DoubleDVectorFunctor: pass
+    def getScoreCombinationFunction() -> CDPL.Math.DoubleDVectorFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \param normalize 
     #
-    def normalizeScores(self: InteractionScoreGridSetCalculator, normalize: bool) -> None: pass
+    def normalizeScores(normalize: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreGridSetCalculator instance this method is called upon.
     # \return 
     #
-    def scoresNormalized(self: InteractionScoreGridSetCalculator) -> bool: pass
+    def scoresNormalized() -> bool: pass
 
     ##
     # \brief 

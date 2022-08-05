@@ -26,23 +26,20 @@ class BondDirectionMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondDirectionMatchExpression instance.
-    # \param self The \e %BondDirectionMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: BondDirectionMatchExpression) -> None: pass
+    def __init__(expr: BondDirectionMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %BondDirectionMatchExpression instance.
-    # \param self The \e %BondDirectionMatchExpression instance to initialize.
     # \param dir_flags 
     # \param not_match 
     #
-    def __init__(self: object, dir_flags: int, not_match: bool) -> None: pass
+    def __init__(dir_flags: int, not_match: bool) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondDirectionMatchExpression instance \a expr.
-    # \param self The \e %BondDirectionMatchExpression instance this method is called upon.
     # \param expr The \e %BondDirectionMatchExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BondDirectionMatchExpression, expr: BondDirectionMatchExpression) -> BondDirectionMatchExpression: pass
+    def assign(expr: BondDirectionMatchExpression) -> BondDirectionMatchExpression: pass

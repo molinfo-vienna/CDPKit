@@ -26,21 +26,18 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomConformer3DCoordinatesFunctor instance.
-    # \param self The \e %AtomConformer3DCoordinatesFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: AtomConformer3DCoordinatesFunctor) -> None: pass
+    def __init__(func: AtomConformer3DCoordinatesFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomConformer3DCoordinatesFunctor instance.
-    # \param self The \e %AtomConformer3DCoordinatesFunctor instance to initialize.
     # \param conf_idx 
     #
-    def __init__(self: object, conf_idx: int) -> None: pass
+    def __init__(conf_idx: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomConformer3DCoordinatesFunctor instance this method is called upon.
     #
     # Different Python \e %AtomConformer3DCoordinatesFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomConformer3DCoordinatesFunctor instances \e a and \e b reference different C++ objects. 
@@ -49,23 +46,21 @@ class AtomConformer3DCoordinatesFunctor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomConformer3DCoordinatesFunctor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomConformer3DCoordinatesFunctor instance \a func.
-    # \param self The \e %AtomConformer3DCoordinatesFunctor instance this method is called upon.
     # \param func The \e %AtomConformer3DCoordinatesFunctor instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomConformer3DCoordinatesFunctor, func: AtomConformer3DCoordinatesFunctor) -> AtomConformer3DCoordinatesFunctor: pass
+    def assign(func: AtomConformer3DCoordinatesFunctor) -> AtomConformer3DCoordinatesFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomConformer3DCoordinatesFunctor instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def __call__(self: AtomConformer3DCoordinatesFunctor, atom: Atom) -> CDPL.Math.Vector3D: pass
+    def __call__(atom: Atom) -> CDPL.Math.Vector3D: pass
 
     ##
     # \brief 

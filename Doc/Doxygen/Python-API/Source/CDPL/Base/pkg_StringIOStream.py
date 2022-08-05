@@ -26,157 +26,136 @@ class StringIOStream(IOStream):
 
     ##
     # \brief Initializes the \e %StringIOStream instance.
-    # \param self The \e %StringIOStream instance to initialize.
     # \param string 
     # \param mode 
     #
-    def __init__(self: object, string: str = '', mode: str = 'r+') -> None: pass
+    def __init__(string: str = '', mode: str = 'r+') -> None: pass
 
     ##
     # \brief Initializes the \e %StringIOStream instance.
-    # \param self The \e %StringIOStream instance to initialize.
     # \param string 
     # \param mode 
     #
-    def __init__(self: object, string: str = '', mode: OpenMode = CDPL.Base.OpenMode(24)) -> None: pass
+    def __init__(string: str = '', mode: OpenMode = CDPL.Base.OpenMode(24)) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readline(self: StringIOStream, size: int = -1) -> str: pass
+    def readline(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readlines(self: StringIOStream, size: int = -1) -> list: pass
+    def readlines(size: int = -1) -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def xreadlines(self: StringIOStream) -> StringIOStream: pass
+    def xreadlines() -> StringIOStream: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def read(self: StringIOStream, size: int = -1) -> str: pass
+    def read(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def tell(self: StringIOStream) -> int: pass
+    def tell() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def tellr(self: StringIOStream) -> int: pass
+    def tellr() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seek(self: StringIOStream, offs: int, whence: int = 0) -> None: pass
+    def seek(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekr(self: StringIOStream, offs: int, whence: int = 0) -> None: pass
+    def seekr(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def next(self: StringIOStream) -> str: pass
+    def next() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     #
-    def flush(self: StringIOStream) -> None: pass
+    def flush() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param string 
     #
-    def write(self: StringIOStream, string: object) -> None: pass
+    def write(string: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param iterable 
     #
-    def writelines(self: StringIOStream, iterable: object) -> None: pass
+    def writelines(iterable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def tellw(self: StringIOStream) -> int: pass
+    def tellw() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekw(self: StringIOStream, offs: int, whence: int = 0) -> None: pass
+    def seekw(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def isatty(self: StringIOStream) -> bool: pass
+    def isatty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param length 
     #
-    def truncate(self: StringIOStream, length: int = -1) -> None: pass
+    def truncate(length: int = -1) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def getvalue(self: StringIOStream) -> str: pass
+    def getvalue() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \param value 
     #
-    def setvalue(self: StringIOStream, value: str) -> None: pass
+    def setvalue(value: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringIOStream instance this method is called upon.
     # \return 
     #
-    def __iter__(self: StringIOStream) -> StringIOStream: pass
+    def __iter__() -> StringIOStream: pass
 
     ##
     # \brief FIXME!

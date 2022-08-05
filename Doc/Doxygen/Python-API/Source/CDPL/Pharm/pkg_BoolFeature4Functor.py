@@ -26,45 +26,39 @@ class BoolFeature4Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolFeature4Functor instance.
-    # \param self The \e %BoolFeature4Functor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolFeature4Functor instance.
-    # \param self The \e %BoolFeature4Functor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: BoolFeature4Functor) -> None: pass
+    def __init__(func: BoolFeature4Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolFeature4Functor instance.
-    # \param arg1 The \e %BoolFeature4Functor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolFeature4Functor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \param arg3 
     # \param arg4 
     # \return 
     #
-    def __call__(self: BoolFeature4Functor, arg1: Feature, arg2: Feature, arg3: Feature, arg4: Feature) -> bool: pass
+    def __call__(arg1: Feature, arg2: Feature, arg3: Feature, arg4: Feature) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolFeature4Functor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BoolFeature4Functor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolFeature4Functor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BoolFeature4Functor) -> bool: pass
+    def __nonzero__() -> bool: pass

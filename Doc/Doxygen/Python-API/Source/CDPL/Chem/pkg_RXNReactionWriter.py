@@ -26,7 +26,6 @@ class RXNReactionWriter(ReactionWriter):
 
     ##
     # \brief Initializes the \e %RXNReactionWriter instance.
-    # \param self The \e %RXNReactionWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

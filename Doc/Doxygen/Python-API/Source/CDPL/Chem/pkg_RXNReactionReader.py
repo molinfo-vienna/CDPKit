@@ -26,7 +26,6 @@ class RXNReactionReader(ReactionReader):
 
     ##
     # \brief Initializes the \e %RXNReactionReader instance.
-    # \param self The \e %RXNReactionReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

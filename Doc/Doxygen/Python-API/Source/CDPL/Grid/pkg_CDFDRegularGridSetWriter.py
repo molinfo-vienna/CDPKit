@@ -26,7 +26,6 @@ class CDFDRegularGridSetWriter(DRegularGridSetWriter):
 
     ##
     # \brief Initializes the \e %CDFDRegularGridSetWriter instance.
-    # \param self The \e %CDFDRegularGridSetWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

@@ -26,36 +26,31 @@ class ConstFVectorSlice(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstFVectorSlice instance.
-    # \param self The \e %ConstFVectorSlice instance to initialize.
     # \param s 
     #
-    def __init__(self: object, s: ConstFVectorSlice) -> None: pass
+    def __init__(s: ConstFVectorSlice) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstFVectorSlice instance.
-    # \param self The \e %ConstFVectorSlice instance to initialize.
     # \param e 
     # \param s 
     #
-    def __init__(self: object, e: ConstFVectorExpression, s: ast.Slice) -> None: pass
+    def __init__(e: ConstFVectorExpression, s: ast.Slice) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def getStart(self: ConstFVectorSlice) -> int: pass
+    def getStart() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def getStride(self: ConstFVectorSlice) -> int: pass
+    def getStride() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     #
     # Different Python \e %ConstFVectorSlice instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstFVectorSlice instances \e a and \e b reference different C++ objects. 
@@ -64,175 +59,153 @@ class ConstFVectorSlice(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConstFVectorSlice) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ConstFVectorSlice) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def getSize(self: ConstFVectorSlice) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: ConstFVectorSlice, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def toArray(self: ConstFVectorSlice) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def getData(self: ConstFVectorSlice) -> ConstFVectorExpression: pass
+    def getData() -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == s</tt>.
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param s The \e %ConstFVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstFVectorSlice, s: ConstFVectorSlice) -> bool: pass
+    def __eq__(s: ConstFVectorSlice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param e The \e %ConstFVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstFVectorSlice, e: ConstFVectorExpression) -> bool: pass
+    def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param s The \e %ConstFVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstFVectorSlice, s: ConstFVectorSlice) -> bool: pass
+    def __ne__(s: ConstFVectorSlice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param e The \e %ConstFVectorSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstFVectorSlice, e: ConstFVectorExpression) -> bool: pass
+    def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: ConstFVectorSlice, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: ConstFVectorSlice, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def __len__(self: ConstFVectorSlice) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstFVectorSlice instance.
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ConstFVectorSlice) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ConstFVectorSlice) -> ConstFVectorSlice: pass
+    def __pos__() -> ConstFVectorSlice: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFVectorExpression: pass
+    def __neg__() -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstFVectorSlice instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstFVectorSlice instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstFVectorSlice instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstFVectorSlice instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __sub__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstFVectorSlice instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstFVectorSlice instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstFVectorSlice instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstFVectorSlice instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
+    def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstFVectorSlice instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstFVectorSlice instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __truediv__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstFVectorSlice instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __rmul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 

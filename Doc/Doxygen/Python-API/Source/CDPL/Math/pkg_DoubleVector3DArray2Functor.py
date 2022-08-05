@@ -26,43 +26,37 @@ class DoubleVector3DArray2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleVector3DArray2Functor instance.
-    # \param self The \e %DoubleVector3DArray2Functor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector3DArray2Functor instance.
-    # \param self The \e %DoubleVector3DArray2Functor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: DoubleVector3DArray2Functor) -> None: pass
+    def __init__(func: DoubleVector3DArray2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleVector3DArray2Functor instance.
-    # \param arg1 The \e %DoubleVector3DArray2Functor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleVector3DArray2Functor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: DoubleVector3DArray2Functor, arg1: Vector3DArray, arg2: Vector3DArray) -> float: pass
+    def __call__(arg1: Vector3DArray, arg2: Vector3DArray) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleVector3DArray2Functor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: DoubleVector3DArray2Functor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleVector3DArray2Functor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: DoubleVector3DArray2Functor) -> bool: pass
+    def __nonzero__() -> bool: pass

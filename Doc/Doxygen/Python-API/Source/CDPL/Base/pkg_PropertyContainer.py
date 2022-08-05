@@ -26,50 +26,43 @@ class PropertyContainer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PropertyContainer instance.
-    # \param self The \e %PropertyContainer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \return 
     #
-    def getNumProperties(self: PropertyContainer) -> int: pass
+    def getNumProperties() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \param def_value 
     # \return 
     #
-    def getPropertyOrDefault(self: PropertyContainer, key: LookupKey, def_value: Variant) -> Variant: pass
+    def getPropertyOrDefault(key: LookupKey, def_value: Variant) -> Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \return 
     #
-    def getPropertyKeys(self: PropertyContainer) -> list: pass
+    def getPropertyKeys() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \return 
     #
-    def getPropertyValues(self: PropertyContainer) -> list: pass
+    def getPropertyValues() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \return 
     #
-    def getProperties(self: PropertyContainer) -> list: pass
+    def getProperties() -> list: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PropertyContainer instance this method is called upon.
     #
     # Different Python \e %PropertyContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PropertyContainer instances \e a and \e b reference different C++ objects. 
@@ -78,106 +71,93 @@ class PropertyContainer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: PropertyContainer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setProperty(self: PropertyContainer, key: LookupKey, value: Variant) -> None: pass
+    def setProperty(key: LookupKey, value: Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeProperty(self: PropertyContainer, key: LookupKey) -> bool: pass
+    def removeProperty(key: LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \return 
     #
-    def getProperty(self: PropertyContainer, key: LookupKey, throw_: bool = False) -> Variant: pass
+    def getProperty(key: LookupKey, throw_: bool = False) -> Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \return 
     #
-    def isPropertySet(self: PropertyContainer, key: LookupKey) -> bool: pass
+    def isPropertySet(key: LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     #
-    def clearProperties(self: PropertyContainer) -> None: pass
+    def clearProperties() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param cntnr 
     #
-    def addProperties(self: PropertyContainer, cntnr: PropertyContainer) -> None: pass
+    def addProperties(cntnr: PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param cntnr 
     #
-    def copyProperties(self: PropertyContainer, cntnr: PropertyContainer) -> None: pass
+    def copyProperties(cntnr: PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param cntnr 
     #
-    def swap(self: PropertyContainer, cntnr: PropertyContainer) -> None: pass
+    def swap(cntnr: PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: LookupKey) -> Variant: pass
+    def __getitem__(key: LookupKey) -> Variant: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: PropertyContainer, key: LookupKey) -> bool: pass
+    def __contains__(key: LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: PropertyContainer, key: LookupKey, value: Variant) -> None: pass
+    def __setitem__(key: LookupKey, value: Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: PropertyContainer, key: LookupKey) -> bool: pass
+    def __delitem__(key: LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyContainer instance this method is called upon.
     # \return 
     #
-    def __len__(self: PropertyContainer) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

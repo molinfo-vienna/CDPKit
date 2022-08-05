@@ -26,21 +26,18 @@ class KekuleStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %KekuleStructureGenerator instance.
-    # \param self The \e %KekuleStructureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %KekuleStructureGenerator instance.
-    # \param self The \e %KekuleStructureGenerator instance to initialize.
     # \param molgraph 
     # \param orders 
     #
-    def __init__(self: object, molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %KekuleStructureGenerator instance this method is called upon.
     #
     # Different Python \e %KekuleStructureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %KekuleStructureGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,15 +46,14 @@ class KekuleStructureGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: KekuleStructureGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %KekuleStructureGenerator instance this method is called upon.
     # \param molgraph 
     # \param orders 
     #
-    def generate(self: KekuleStructureGenerator, molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
+    def generate(molgraph: MolecularGraph, orders: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief 

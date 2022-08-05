@@ -26,117 +26,101 @@ class BasicPharmacophore(Pharmacophore):
 
     ##
     # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param self The \e %BasicPharmacophore instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param self The \e %BasicPharmacophore instance to initialize.
     # \param pharm 
     #
-    def __init__(self: object, pharm: BasicPharmacophore) -> None: pass
+    def __init__(pharm: BasicPharmacophore) -> None: pass
 
     ##
     # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param self The \e %BasicPharmacophore instance to initialize.
     # \param pharm 
     #
-    def __init__(self: object, pharm: Pharmacophore) -> None: pass
+    def __init__(pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief Initializes the \e %BasicPharmacophore instance.
-    # \param self The \e %BasicPharmacophore instance to initialize.
     # \param cntnr 
     #
-    def __init__(self: object, cntnr: FeatureContainer) -> None: pass
+    def __init__(cntnr: FeatureContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param pharm 
     #
-    def copy(self: BasicPharmacophore, pharm: BasicPharmacophore) -> None: pass
+    def copy(pharm: BasicPharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param pharm 
     #
-    def copy(self: BasicPharmacophore, pharm: Pharmacophore) -> None: pass
+    def copy(pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def copy(self: BasicPharmacophore, cntnr: FeatureContainer) -> None: pass
+    def copy(cntnr: FeatureContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param pharm 
     #
-    def append(self: BasicPharmacophore, pharm: BasicPharmacophore) -> None: pass
+    def append(pharm: BasicPharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param pharm 
     #
-    def append(self: BasicPharmacophore, pharm: Pharmacophore) -> None: pass
+    def append(pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def append(self: BasicPharmacophore, cntnr: FeatureContainer) -> None: pass
+    def append(cntnr: FeatureContainer) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a pharm.
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param pharm The \e %BasicPharmacophore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicPharmacophore, pharm: BasicPharmacophore) -> BasicPharmacophore: pass
+    def assign(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a pharm.
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param pharm The \e %BasicPharmacophore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicPharmacophore, pharm: Pharmacophore) -> BasicPharmacophore: pass
+    def assign(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a cntnr.
-    # \param self The \e %BasicPharmacophore instance this method is called upon.
     # \param cntnr The \e %BasicPharmacophore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicPharmacophore, cntnr: FeatureContainer) -> BasicPharmacophore: pass
+    def assign(cntnr: FeatureContainer) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
-    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
     #
-    def __iadd__(self: BasicPharmacophore, pharm: BasicPharmacophore) -> BasicPharmacophore: pass
+    def __iadd__(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
-    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
     #
-    def __iadd__(self: BasicPharmacophore, pharm: Pharmacophore) -> BasicPharmacophore: pass
+    def __iadd__(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
-    # \param self The \e %BasicPharmacophore instance acting as in-place addend.
     # \param cntnr Specifies the second addend.
     # \return The updated \e %BasicPharmacophore instance \a self.
     #
-    def __iadd__(self: BasicPharmacophore, cntnr: FeatureContainer) -> BasicPharmacophore: pass
+    def __iadd__(cntnr: FeatureContainer) -> BasicPharmacophore: pass

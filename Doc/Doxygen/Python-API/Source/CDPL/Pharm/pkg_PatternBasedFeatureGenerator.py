@@ -51,67 +51,58 @@ class PatternBasedFeatureGenerator(FeatureGenerator):
 
     ##
     # \brief Initializes the \e %PatternBasedFeatureGenerator instance.
-    # \param self The \e %PatternBasedFeatureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PatternBasedFeatureGenerator instance.
-    # \param self The \e %PatternBasedFeatureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: PatternBasedFeatureGenerator) -> None: pass
+    def __init__(gen: PatternBasedFeatureGenerator) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     # \param pattern 
     # \param type 
     # \param tol 
     # \param geom 
     # \param length 
     #
-    def addIncludePattern(self: PatternBasedFeatureGenerator, pattern: CDPL.Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
+    def addIncludePattern(pattern: CDPL.Chem.MolecularGraph, type: int, tol: float, geom: int, length: float = 1.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     # \param pattern 
     #
-    def addExcludePattern(self: PatternBasedFeatureGenerator, pattern: CDPL.Chem.MolecularGraph) -> None: pass
+    def addExcludePattern(pattern: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     #
-    def clearIncludePatterns(self: PatternBasedFeatureGenerator) -> None: pass
+    def clearIncludePatterns() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     #
-    def clearExcludePatterns(self: PatternBasedFeatureGenerator) -> None: pass
+    def clearExcludePatterns() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternBasedFeatureGenerator instance \a gen.
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     # \param gen The \e %PatternBasedFeatureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PatternBasedFeatureGenerator, gen: PatternBasedFeatureGenerator) -> PatternBasedFeatureGenerator: pass
+    def assign(gen: PatternBasedFeatureGenerator) -> PatternBasedFeatureGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     # \param molgraph 
     # \param pharm 
     #
-    def generate(self: PatternBasedFeatureGenerator, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedFeatureGenerator instance this method is called upon.
     # \param molgraph 
     # \param pharm 
     #
-    def __call__(self: PatternBasedFeatureGenerator, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __call__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass

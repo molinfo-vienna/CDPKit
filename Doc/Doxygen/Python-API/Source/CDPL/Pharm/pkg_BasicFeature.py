@@ -26,16 +26,14 @@ class BasicFeature(Feature):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicFeature instance \a ftr.
-    # \param self The \e %BasicFeature instance this method is called upon.
     # \param ftr The \e %BasicFeature instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Feature, ftr: Feature) -> Feature: pass
+    def assign(ftr: Feature) -> Feature: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicFeature instance \a ftr.
-    # \param self The \e %BasicFeature instance this method is called upon.
     # \param ftr The \e %BasicFeature instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicFeature, ftr: BasicFeature) -> BasicFeature: pass
+    def assign(ftr: BasicFeature) -> BasicFeature: pass

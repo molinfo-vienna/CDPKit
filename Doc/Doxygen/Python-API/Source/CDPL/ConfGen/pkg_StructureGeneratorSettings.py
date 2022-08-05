@@ -31,20 +31,17 @@ class StructureGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %StructureGeneratorSettings instance.
-    # \param self The \e %StructureGeneratorSettings instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StructureGeneratorSettings instance.
-    # \param self The \e %StructureGeneratorSettings instance to initialize.
     # \param settings 
     #
-    def __init__(self: object, settings: StructureGeneratorSettings) -> None: pass
+    def __init__(settings: StructureGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     #
     # Different Python \e %StructureGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StructureGeneratorSettings instances \e a and \e b reference different C++ objects. 
@@ -53,218 +50,188 @@ class StructureGeneratorSettings(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: StructureGeneratorSettings) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StructureGeneratorSettings instance \a settings.
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param settings The \e %StructureGeneratorSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: StructureGeneratorSettings, settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
+    def assign(settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param mode 
     #
-    def setGenerationMode(self: StructureGeneratorSettings, mode: int) -> None: pass
+    def setGenerationMode(mode: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getGenerationMode(self: StructureGeneratorSettings) -> int: pass
+    def getGenerationMode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param generate 
     #
-    def generateCoordinatesFromScratch(self: StructureGeneratorSettings, generate: bool) -> None: pass
+    def generateCoordinatesFromScratch(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def generateCoordinatesFromScratch(self: StructureGeneratorSettings) -> bool: pass
+    def generateCoordinatesFromScratch() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param sample 
     #
-    def sampleAngleToleranceRanges(self: StructureGeneratorSettings, sample: bool) -> None: pass
+    def sampleAngleToleranceRanges(sample: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def sampleAngleToleranceRanges(self: StructureGeneratorSettings) -> bool: pass
+    def sampleAngleToleranceRanges() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param mil_secs 
     #
-    def setTimeout(self: StructureGeneratorSettings, mil_secs: int) -> None: pass
+    def setTimeout(mil_secs: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getTimeout(self: StructureGeneratorSettings) -> int: pass
+    def getTimeout() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param type 
     #
-    def setFragmentModeForceFieldType(self: StructureGeneratorSettings, type: int) -> None: pass
+    def setFragmentModeForceFieldType(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getFragmentModeForceFieldType(self: StructureGeneratorSettings) -> int: pass
+    def getFragmentModeForceFieldType() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param type 
     #
-    def setDGModeForceFieldType(self: StructureGeneratorSettings, type: int) -> None: pass
+    def setDGModeForceFieldType(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDGModeForceFieldType(self: StructureGeneratorSettings) -> int: pass
+    def getDGModeForceFieldType() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param strict 
     #
-    def strictForceFieldParameterization(self: StructureGeneratorSettings, strict: bool) -> None: pass
+    def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def strictForceFieldParameterization(self: StructureGeneratorSettings) -> bool: pass
+    def strictForceFieldParameterization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param de_const 
     #
-    def setDielectricConstant(self: StructureGeneratorSettings, de_const: float) -> None: pass
+    def setDielectricConstant(de_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDielectricConstant(self: StructureGeneratorSettings) -> float: pass
+    def getDielectricConstant() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param dist_expo 
     #
-    def setDistanceExponent(self: StructureGeneratorSettings, dist_expo: float) -> None: pass
+    def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDistanceExponent(self: StructureGeneratorSettings) -> float: pass
+    def getDistanceExponent() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumRefinementIterations(self: StructureGeneratorSettings, max_num: int) -> None: pass
+    def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumRefinementIterations(self: StructureGeneratorSettings) -> int: pass
+    def getMaxNumRefinementIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param tol 
     #
-    def setRefinementTolerance(self: StructureGeneratorSettings, tol: float) -> None: pass
+    def setRefinementTolerance(tol: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getRefinementTolerance(self: StructureGeneratorSettings) -> float: pass
+    def getRefinementTolerance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param max_size 
     #
-    def setMacrocycleRotorBondCountThreshold(self: StructureGeneratorSettings, max_size: int) -> None: pass
+    def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMacrocycleRotorBondCountThreshold(self: StructureGeneratorSettings) -> int: pass
+    def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumSampledConformers(self: StructureGeneratorSettings, max_num: int) -> None: pass
+    def setMaxNumSampledConformers(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumSampledConformers(self: StructureGeneratorSettings) -> int: pass
+    def getMaxNumSampledConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \param size 
     #
-    def setConvergenceCheckCycleSize(self: StructureGeneratorSettings, size: int) -> None: pass
+    def setConvergenceCheckCycleSize(size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getConvergenceCheckCycleSize(self: StructureGeneratorSettings) -> int: pass
+    def getConvergenceCheckCycleSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getFragmentBuildSettings(self: StructureGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
+    def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 
     ##
     # \brief 

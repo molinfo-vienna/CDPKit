@@ -26,35 +26,30 @@ class DRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DRealQuaternion instance.
-    # \param self The \e %DRealQuaternion instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DRealQuaternion instance.
-    # \param self The \e %DRealQuaternion instance to initialize.
     # \param q 
     #
-    def __init__(self: object, q: DRealQuaternion) -> None: pass
+    def __init__(q: DRealQuaternion) -> None: pass
 
     ##
     # \brief Initializes the \e %DRealQuaternion instance.
-    # \param self The \e %DRealQuaternion instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: float) -> None: pass
+    def __init__(r: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param r 
     # \return 
     #
-    def set(self: DRealQuaternion, r: float = 0.0) -> DRealQuaternion: pass
+    def set(r: float = 0.0) -> DRealQuaternion: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     #
     # Different Python \e %DRealQuaternion instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DRealQuaternion instances \e a and \e b reference different C++ objects. 
@@ -63,294 +58,257 @@ class DRealQuaternion(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DRealQuaternion) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC1(self: DRealQuaternion) -> float: pass
+    def getC1() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC2(self: DRealQuaternion) -> float: pass
+    def getC2() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC3(self: DRealQuaternion) -> float: pass
+    def getC3() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC4(self: DRealQuaternion) -> float: pass
+    def getC4() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def toArray(self: DRealQuaternion) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DRealQuaternion instance \a q.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q The \e %DRealQuaternion instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DRealQuaternion, q: DRealQuaternion) -> DRealQuaternion: pass
+    def assign(q: DRealQuaternion) -> DRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q 
     #
-    def swap(self: DRealQuaternion, q: DRealQuaternion) -> None: pass
+    def swap(q: DRealQuaternion) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place addend.
     # \param t Specifies the second addend.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __iadd__(self: DRealQuaternion, t: float) -> DRealQuaternion: pass
+    def __iadd__(t: float) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place addend.
     # \param q Specifies the second addend.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __iadd__(self: DRealQuaternion, q: object) -> DRealQuaternion: pass
+    def __iadd__(q: object) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place minuend.
     # \param t Specifies the subtrahend.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __isub__(self: DRealQuaternion, t: float) -> DRealQuaternion: pass
+    def __isub__(t: float) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place minuend.
     # \param q Specifies the subtrahend.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __isub__(self: DRealQuaternion, q: object) -> DRealQuaternion: pass
+    def __isub__(q: object) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __imul__(self: DRealQuaternion, t: float) -> DRealQuaternion: pass
+    def __imul__(t: float) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place multiplicand.
     # \param q Specifies the multiplier.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __imul__(self: DRealQuaternion, q: object) -> DRealQuaternion: pass
+    def __imul__(q: object) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __idiv__(self: DRealQuaternion, t: float) -> DRealQuaternion: pass
+    def __idiv__(t: float) -> DRealQuaternion: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
-    # \param self The \e %DRealQuaternion instance acting as in-place dividend.
     # \param q Specifies the divisor.
     # \return The updated \e %DRealQuaternion instance \a self.
     #
-    def __idiv__(self: DRealQuaternion, q: object) -> DRealQuaternion: pass
+    def __idiv__(q: object) -> DRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: DRealQuaternion, t: float) -> DRealQuaternion: pass
+    def __itruediv__(t: float) -> DRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q 
     # \return 
     #
-    def __itruediv__(self: DRealQuaternion, q: object) -> DRealQuaternion: pass
+    def __itruediv__(q: object) -> DRealQuaternion: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q The \e %DRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DRealQuaternion, q: DRealQuaternion) -> bool: pass
+    def __eq__(q: DRealQuaternion) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q The \e %DRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DRealQuaternion, q: ConstDQuaternionExpression) -> bool: pass
+    def __eq__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q The \e %DRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DRealQuaternion, q: DRealQuaternion) -> bool: pass
+    def __ne__(q: DRealQuaternion) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param q The \e %DRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DRealQuaternion, q: ConstDQuaternionExpression) -> bool: pass
+    def __ne__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %DRealQuaternion instance.
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DRealQuaternion) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DRealQuaternion) -> DRealQuaternion: pass
+    def __pos__() -> DRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDQuaternionExpression: pass
+    def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
-    # \param self The \e %DRealQuaternion instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %DRealQuaternion instance holding the result of the addition.
     #
-    def __add__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __add__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DRealQuaternion instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DRealQuaternion instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __radd__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __radd__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %DRealQuaternion instance holding the result of the subtraction.
     #
-    def __sub__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __sub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DRealQuaternion instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DRealQuaternion instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rsub__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __rsub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DRealQuaternion instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __mul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DRealQuaternion instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %DRealQuaternion instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __mul__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __rmul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DRealQuaternion instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DRealQuaternion instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __div__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
-    # \param self The \e %DRealQuaternion instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %DRealQuaternion instance holding the result of the division.
     #
-    def __div__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __div__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rdiv__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 

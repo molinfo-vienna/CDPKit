@@ -26,20 +26,17 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningProcessor instance.
-    # \param self The \e %ScreeningProcessor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ScreeningProcessor instance.
-    # \param self The \e %ScreeningProcessor instance to initialize.
     # \param query 
     #
-    def __init__(self: object, query: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(query: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     #
     # Different Python \e %ScreeningProcessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningProcessor instances \e a and \e b reference different C++ objects. 
@@ -48,64 +45,56 @@ class ScreeningProcessor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ScreeningProcessor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param func 
     #
-    def setHitCallback(self: ScreeningProcessor, func: VoidMolecularGraph2AlignmentResultFunctor) -> None: pass
+    def setHitCallback(func: VoidMolecularGraph2AlignmentResultFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getHitCallback(self: ScreeningProcessor) -> VoidMolecularGraph2AlignmentResultFunctor: pass
+    def getHitCallback() -> VoidMolecularGraph2AlignmentResultFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getSettings(self: ScreeningProcessor) -> ScreeningSettings: pass
+    def getSettings() -> ScreeningSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     #
-    def clearQuerySet(self: ScreeningProcessor) -> None: pass
+    def clearQuerySet() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param molgraph 
     #
-    def addQuery(self: ScreeningProcessor, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def addQuery(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getQuerySetSize(self: ScreeningProcessor) -> int: pass
+    def getQuerySetSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getQuery(self: ScreeningProcessor, idx: int) -> CDPL.Chem.MolecularGraph: pass
+    def getQuery(idx: int) -> CDPL.Chem.MolecularGraph: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def process(self: ScreeningProcessor, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+    def process(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
 
     ##
     # \brief 

@@ -26,10 +26,9 @@ class HierarchyViewNode(CDPL.Chem.Fragment):
 
     ##
     # \brief 
-    # \param self The \e %HierarchyViewNode instance this method is called upon.
     # \return 
     #
-    def getResidues(self: HierarchyViewNode) -> ResidueList: pass
+    def getResidues() -> ResidueList: pass
 
     ##
     # \brief 

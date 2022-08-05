@@ -36,21 +36,18 @@ class PEOEChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PEOEChargeCalculator instance.
-    # \param self The \e %PEOEChargeCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PEOEChargeCalculator instance.
-    # \param self The \e %PEOEChargeCalculator instance to initialize.
     # \param molgraph 
     # \param charges 
     #
-    def __init__(self: object, molgraph: MolecularGraph, charges: CDPL.Util.DArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, charges: CDPL.Util.DArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     #
     # Different Python \e %PEOEChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PEOEChargeCalculator instances \e a and \e b reference different C++ objects. 
@@ -59,50 +56,44 @@ class PEOEChargeCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: PEOEChargeCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     # \param num_iter 
     #
-    def setNumIterations(self: PEOEChargeCalculator, num_iter: int) -> None: pass
+    def setNumIterations(num_iter: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     # \param factor 
     #
-    def setDampingFactor(self: PEOEChargeCalculator, factor: float) -> None: pass
+    def setDampingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     # \return 
     #
-    def getNumIterations(self: PEOEChargeCalculator) -> int: pass
+    def getNumIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     # \return 
     #
-    def getDampingFactor(self: PEOEChargeCalculator) -> float: pass
+    def getDampingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     # \param molgraph 
     # \param charges 
     #
-    def calculate(self: PEOEChargeCalculator, molgraph: MolecularGraph, charges: CDPL.Util.DArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, charges: CDPL.Util.DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PEOEChargeCalculator instance this method is called upon.
     # \param elnegs 
     #
-    def getElectronegativities(self: PEOEChargeCalculator, elnegs: CDPL.Util.DArray) -> None: pass
+    def getElectronegativities(elnegs: CDPL.Util.DArray) -> None: pass
 
     ##
     # \brief 

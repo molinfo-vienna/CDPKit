@@ -26,14 +26,12 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteraction instance.
-    # \param self The \e %MMFF94ElectrostaticInteraction instance to initialize.
     # \param iactn 
     #
-    def __init__(self: object, iactn: MMFF94ElectrostaticInteraction) -> None: pass
+    def __init__(iactn: MMFF94ElectrostaticInteraction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ElectrostaticInteraction instance.
-    # \param self The \e %MMFF94ElectrostaticInteraction instance to initialize.
     # \param atom1_idx 
     # \param atom2_idx 
     # \param atom1_chg 
@@ -42,68 +40,59 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     # \param de_const 
     # \param dist_expo 
     #
-    def __init__(self: object, atom1_idx: int, atom2_idx: int, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> None: pass
+    def __init__(atom1_idx: int, atom2_idx: int, atom1_chg: float, atom2_chg: float, scale_fact: float, de_const: float, dist_expo: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom1Index(self: MMFF94ElectrostaticInteraction) -> int: pass
+    def getAtom1Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom2Index(self: MMFF94ElectrostaticInteraction) -> int: pass
+    def getAtom2Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom1Charge(self: MMFF94ElectrostaticInteraction) -> float: pass
+    def getAtom1Charge() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom2Charge(self: MMFF94ElectrostaticInteraction) -> float: pass
+    def getAtom2Charge() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getScalingFactor(self: MMFF94ElectrostaticInteraction) -> float: pass
+    def getScalingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getDielectricConstant(self: MMFF94ElectrostaticInteraction) -> float: pass
+    def getDielectricConstant() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \return 
     #
-    def getDistanceExponent(self: MMFF94ElectrostaticInteraction) -> float: pass
+    def getDistanceExponent() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ElectrostaticInteraction instance \a iactn.
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     # \param iactn The \e %MMFF94ElectrostaticInteraction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94ElectrostaticInteraction, iactn: MMFF94ElectrostaticInteraction) -> MMFF94ElectrostaticInteraction: pass
+    def assign(iactn: MMFF94ElectrostaticInteraction) -> MMFF94ElectrostaticInteraction: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94ElectrostaticInteraction instance this method is called upon.
     #
     # Different Python \e %MMFF94ElectrostaticInteraction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94ElectrostaticInteraction instances \e a and \e b reference different C++ objects. 
@@ -112,7 +101,7 @@ class MMFF94ElectrostaticInteraction(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94ElectrostaticInteraction) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 

@@ -26,38 +26,33 @@ class FZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FZeroGrid instance.
-    # \param self The \e %FZeroGrid instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FZeroGrid instance.
-    # \param self The \e %FZeroGrid instance to initialize.
     # \param g 
     #
-    def __init__(self: object, g: FZeroGrid) -> None: pass
+    def __init__(g: FZeroGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %FZeroGrid instance.
-    # \param self The \e %FZeroGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
     #
-    def __init__(self: object, m: int, n: int, o: int) -> None: pass
+    def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param m 
     # \param n 
     # \param o 
     #
-    def resize(self: FZeroGrid, m: int, n: int, o: int) -> None: pass
+    def resize(m: int, n: int, o: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     #
     # Different Python \e %FZeroGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FZeroGrid instances \e a and \e b reference different C++ objects. 
@@ -66,224 +61,196 @@ class FZeroGrid(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FZeroGrid) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def getSize1(self: FZeroGrid) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def getSize2(self: FZeroGrid) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def getSize3(self: FZeroGrid) -> int: pass
+    def getSize3() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: FZeroGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def getElement(self: FZeroGrid, i: int, j: int, k: int) -> float: pass
+    def getElement(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: FZeroGrid, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def toArray(self: FZeroGrid) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def getSize(self: FZeroGrid) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FZeroGrid instance \a g.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param g The \e %FZeroGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FZeroGrid, g: FZeroGrid) -> FZeroGrid: pass
+    def assign(g: FZeroGrid) -> FZeroGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param g 
     #
-    def swap(self: FZeroGrid, g: FZeroGrid) -> None: pass
+    def swap(g: FZeroGrid) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def __call__(self: FZeroGrid, i: int, j: int, k: int) -> float: pass
+    def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: FZeroGrid, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param ijk 
     # \return 
     #
-    def __getitem__(self: FZeroGrid, ijk: tuple) -> float: pass
+    def __getitem__(ijk: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: FZeroGrid, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: FZeroGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param g The \e %FZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FZeroGrid, g: FZeroGrid) -> bool: pass
+    def __eq__(g: FZeroGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param e The \e %FZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FZeroGrid, e: ConstFGridExpression) -> bool: pass
+    def __eq__(e: ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param g The \e %FZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FZeroGrid, g: FZeroGrid) -> bool: pass
+    def __ne__(g: FZeroGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param e The \e %FZeroGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FZeroGrid, e: ConstFGridExpression) -> bool: pass
+    def __ne__(e: ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %FZeroGrid instance.
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: FZeroGrid) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def __pos__(self: FZeroGrid) -> FZeroGrid: pass
+    def __pos__() -> FZeroGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFGridExpression: pass
+    def __neg__() -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FZeroGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %FZeroGrid instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFGridExpression) -> ConstFGridExpression: pass
+    def __add__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FZeroGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FZeroGrid instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFGridExpression) -> ConstFGridExpression: pass
+    def __sub__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FZeroGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %FZeroGrid instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFGridExpression: pass
+    def __mul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FZeroGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %FZeroGrid instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFGridExpression: pass
+    def __div__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFGridExpression: pass
+    def __truediv__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FZeroGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFGridExpression: pass
+    def __rmul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 

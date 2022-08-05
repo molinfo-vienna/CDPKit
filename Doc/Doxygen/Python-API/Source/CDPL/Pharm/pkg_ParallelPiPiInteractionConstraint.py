@@ -46,24 +46,21 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionConstraint instance.
-    # \param self The \e %ParallelPiPiInteractionConstraint instance to initialize.
     # \param constr 
     #
-    def __init__(self: object, constr: ParallelPiPiInteractionConstraint) -> None: pass
+    def __init__(constr: ParallelPiPiInteractionConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionConstraint instance.
-    # \param self The \e %ParallelPiPiInteractionConstraint instance to initialize.
     # \param min_v_dist 
     # \param max_v_dist 
     # \param max_h_dist 
     # \param ang_tol 
     #
-    def __init__(self: object, min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, ang_tol: float = 20.0) -> None: pass
+    def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, ang_tol: float = 20.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     #
     # Different Python \e %ParallelPiPiInteractionConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ParallelPiPiInteractionConstraint instances \e a and \e b reference different C++ objects. 
@@ -72,52 +69,46 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ParallelPiPiInteractionConstraint) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMinVDistance(self: ParallelPiPiInteractionConstraint) -> float: pass
+    def getMinVDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMaxVDistance(self: ParallelPiPiInteractionConstraint) -> float: pass
+    def getMaxVDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMaxHDistance(self: ParallelPiPiInteractionConstraint) -> float: pass
+    def getMaxHDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getAngleTolerance(self: ParallelPiPiInteractionConstraint) -> float: pass
+    def getAngleTolerance() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionConstraint instance \a constr.
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     # \param constr The \e %ParallelPiPiInteractionConstraint instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ParallelPiPiInteractionConstraint, constr: ParallelPiPiInteractionConstraint) -> ParallelPiPiInteractionConstraint: pass
+    def assign(constr: ParallelPiPiInteractionConstraint) -> ParallelPiPiInteractionConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %ParallelPiPiInteractionConstraint instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: ParallelPiPiInteractionConstraint, ftr1: Feature, ftr2: Feature) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 

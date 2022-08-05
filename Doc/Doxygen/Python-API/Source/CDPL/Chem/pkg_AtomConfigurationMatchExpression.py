@@ -26,17 +26,15 @@ class AtomConfigurationMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomConfigurationMatchExpression instance.
-    # \param self The \e %AtomConfigurationMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: AtomConfigurationMatchExpression) -> None: pass
+    def __init__(expr: AtomConfigurationMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomConfigurationMatchExpression instance.
-    # \param self The \e %AtomConfigurationMatchExpression instance to initialize.
     # \param query_stereo_descr 
     # \param query_atom 
     # \param not_match 
     # \param allow_part_maps 
     #
-    def __init__(self: object, query_stereo_descr: StereoDescriptor, query_atom: Atom, not_match: bool, allow_part_maps: bool) -> None: pass
+    def __init__(query_stereo_descr: StereoDescriptor, query_atom: Atom, not_match: bool, allow_part_maps: bool) -> None: pass

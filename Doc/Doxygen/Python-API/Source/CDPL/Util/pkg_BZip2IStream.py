@@ -26,104 +26,90 @@ class BZip2IStream(CDPL.Base.IStream):
 
     ##
     # \brief Initializes the \e %BZip2IStream instance.
-    # \param self The \e %BZip2IStream instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BZip2IStream instance.
-    # \param self The \e %BZip2IStream instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readline(self: BZip2IStream, size: int = -1) -> str: pass
+    def readline(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readlines(self: BZip2IStream, size: int = -1) -> list: pass
+    def readlines(size: int = -1) -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \return 
     #
-    def xreadlines(self: BZip2IStream) -> BZip2IStream: pass
+    def xreadlines() -> BZip2IStream: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def read(self: BZip2IStream, size: int = -1) -> str: pass
+    def read(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \return 
     #
-    def tell(self: BZip2IStream) -> int: pass
+    def tell() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \return 
     #
-    def tellr(self: BZip2IStream) -> int: pass
+    def tellr() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seek(self: BZip2IStream, offs: int, whence: int = 0) -> None: pass
+    def seek(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekr(self: BZip2IStream, offs: int, whence: int = 0) -> None: pass
+    def seekr(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \return 
     #
-    def next(self: BZip2IStream) -> str: pass
+    def next() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     #
-    def close(self: BZip2IStream) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \param is 
     #
-    def open(self: BZip2IStream, is: CDPL.Base.IStream) -> None: pass
+    def open(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2IStream instance this method is called upon.
     # \return 
     #
-    def __iter__(self: BZip2IStream) -> BZip2IStream: pass
+    def __iter__() -> BZip2IStream: pass
 
     ##
     # \brief FIXME!

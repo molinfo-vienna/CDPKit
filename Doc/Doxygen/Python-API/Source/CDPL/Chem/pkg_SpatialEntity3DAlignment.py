@@ -26,20 +26,17 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SpatialEntity3DAlignment instance.
-    # \param self The \e %SpatialEntity3DAlignment instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SpatialEntity3DAlignment instance.
-    # \param self The \e %SpatialEntity3DAlignment instance to initialize.
     # \param alignment 
     #
-    def __init__(self: object, alignment: SpatialEntity3DAlignment) -> None: pass
+    def __init__(alignment: SpatialEntity3DAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     #
     # Different Python \e %SpatialEntity3DAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialEntity3DAlignment instances \e a and \e b reference different C++ objects. 
@@ -48,167 +45,145 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SpatialEntity3DAlignment) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntityMatchFunction(self: SpatialEntity3DAlignment, func: BoolEntity3D2Functor) -> None: pass
+    def setEntityMatchFunction(func: BoolEntity3D2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getEntityMatchFunction(self: SpatialEntity3DAlignment) -> BoolEntity3D2Functor: pass
+    def getEntityMatchFunction() -> BoolEntity3D2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntityPairMatchFunction(self: SpatialEntity3DAlignment, func: BoolEntity3D4Functor) -> None: pass
+    def setEntityPairMatchFunction(func: BoolEntity3D4Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getEntityPairMatchFunction(self: SpatialEntity3DAlignment) -> BoolEntity3D4Functor: pass
+    def getEntityPairMatchFunction() -> BoolEntity3D4Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param func 
     #
-    def setTopAlignmentConstraintFunction(self: SpatialEntity3DAlignment, func: BoolSTPairArrayFunctor) -> None: pass
+    def setTopAlignmentConstraintFunction(func: BoolSTPairArrayFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getTopAlignmentConstraintFunction(self: SpatialEntity3DAlignment) -> BoolSTPairArrayFunctor: pass
+    def getTopAlignmentConstraintFunction() -> BoolSTPairArrayFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntity3DCoordinatesFunction(self: SpatialEntity3DAlignment, func: Vector3DEntity3DFunctor) -> None: pass
+    def setEntity3DCoordinatesFunction(func: Vector3DEntity3DFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getEntity3DCoordinatesFunction(self: SpatialEntity3DAlignment) -> Vector3DEntity3DFunctor: pass
+    def getEntity3DCoordinatesFunction() -> Vector3DEntity3DFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntityWeightFunction(self: SpatialEntity3DAlignment, func: DoubleEntity3DFunctor) -> None: pass
+    def setEntityWeightFunction(func: DoubleEntity3DFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getEntityWeightFunction(self: SpatialEntity3DAlignment) -> DoubleEntity3DFunctor: pass
+    def getEntityWeightFunction() -> DoubleEntity3DFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param entity 
     # \param first_set 
     #
-    def addEntity(self: SpatialEntity3DAlignment, entity: Entity3D, first_set: bool) -> None: pass
+    def addEntity(entity: Entity3D, first_set: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param first_set 
     #
-    def clearEntities(self: SpatialEntity3DAlignment, first_set: bool) -> None: pass
+    def clearEntities(first_set: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param first_set 
     # \return 
     #
-    def getNumEntities(self: SpatialEntity3DAlignment, first_set: bool) -> int: pass
+    def getNumEntities(first_set: bool) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param first_set 
     # \return 
     #
-    def getEntities(self: SpatialEntity3DAlignment, first_set: bool) -> object: pass
+    def getEntities(first_set: bool) -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param idx 
     # \param first_set 
     # \return 
     #
-    def getEntity(self: SpatialEntity3DAlignment, idx: int, first_set: bool) -> Entity3D: pass
+    def getEntity(idx: int, first_set: bool) -> Entity3D: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param min_size 
     #
-    def setMinTopologicalMappingSize(self: SpatialEntity3DAlignment, min_size: int) -> None: pass
+    def setMinTopologicalMappingSize(min_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getMinTopologicalMappingSize(self: SpatialEntity3DAlignment) -> int: pass
+    def getMinTopologicalMappingSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param reset 
     #
-    def reset(reset: SpatialEntity3DAlignment) -> None: pass
+    def reset() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def nextAlignment(self: SpatialEntity3DAlignment) -> bool: pass
+    def nextAlignment() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getTransform(self: SpatialEntity3DAlignment) -> CDPL.Math.Matrix4D: pass
+    def getTransform() -> CDPL.Math.Matrix4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialEntity3DAlignment instance \a alignment.
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \param alignment The \e %SpatialEntity3DAlignment instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SpatialEntity3DAlignment, alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass
+    def assign(alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialEntity3DAlignment instance this method is called upon.
     # \return 
     #
-    def getTopologicalMapping(self: SpatialEntity3DAlignment) -> CDPL.Util.STPairArray: pass
+    def getTopologicalMapping() -> CDPL.Util.STPairArray: pass
 
     ##
     # \brief 

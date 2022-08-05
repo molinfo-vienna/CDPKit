@@ -26,22 +26,19 @@ class ReactionAtomMappingMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Initializes the \e %ReactionAtomMappingMatchExpression instance.
-    # \param self The \e %ReactionAtomMappingMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: ReactionAtomMappingMatchExpression) -> None: pass
+    def __init__(expr: ReactionAtomMappingMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionAtomMappingMatchExpression instance.
-    # \param self The \e %ReactionAtomMappingMatchExpression instance to initialize.
     # \param atom_mapping 
     #
-    def __init__(self: object, atom_mapping: AtomMapping) -> None: pass
+    def __init__(atom_mapping: AtomMapping) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionAtomMappingMatchExpression instance \a expr.
-    # \param self The \e %ReactionAtomMappingMatchExpression instance this method is called upon.
     # \param expr The \e %ReactionAtomMappingMatchExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ReactionAtomMappingMatchExpression, expr: ReactionAtomMappingMatchExpression) -> ReactionAtomMappingMatchExpression: pass
+    def assign(expr: ReactionAtomMappingMatchExpression) -> ReactionAtomMappingMatchExpression: pass

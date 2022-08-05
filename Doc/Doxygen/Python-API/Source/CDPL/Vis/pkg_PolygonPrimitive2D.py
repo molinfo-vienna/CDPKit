@@ -26,52 +26,45 @@ class PolygonPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %PolygonPrimitive2D instance.
-    # \param self The \e %PolygonPrimitive2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PolygonPrimitive2D instance.
-    # \param self The \e %PolygonPrimitive2D instance to initialize.
     # \param prim 
     #
-    def __init__(self: object, prim: PolygonPrimitive2D) -> None: pass
+    def __init__(prim: PolygonPrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PolygonPrimitive2D instance \a prim.
-    # \param self The \e %PolygonPrimitive2D instance this method is called upon.
     # \param prim The \e %PolygonPrimitive2D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PolygonPrimitive2D, prim: PolygonPrimitive2D) -> PolygonPrimitive2D: pass
+    def assign(prim: PolygonPrimitive2D) -> PolygonPrimitive2D: pass
 
     ##
     # \brief 
-    # \param self The \e %PolygonPrimitive2D instance this method is called upon.
     # \param pen 
     #
-    def setPen(self: PolygonPrimitive2D, pen: Pen) -> None: pass
+    def setPen(pen: Pen) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PolygonPrimitive2D instance this method is called upon.
     # \return 
     #
-    def getPen(self: PolygonPrimitive2D) -> Pen: pass
+    def getPen() -> Pen: pass
 
     ##
     # \brief 
-    # \param self The \e %PolygonPrimitive2D instance this method is called upon.
     # \param brush 
     #
-    def setBrush(self: PolygonPrimitive2D, brush: Brush) -> None: pass
+    def setBrush(brush: Brush) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PolygonPrimitive2D instance this method is called upon.
     # \return 
     #
-    def getBrush(self: PolygonPrimitive2D) -> Brush: pass
+    def getBrush() -> Brush: pass
 
     ##
     # \brief 

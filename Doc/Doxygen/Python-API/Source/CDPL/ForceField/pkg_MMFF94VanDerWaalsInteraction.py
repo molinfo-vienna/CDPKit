@@ -46,14 +46,12 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteraction instance.
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance to initialize.
     # \param iactn 
     #
-    def __init__(self: object, iactn: MMFF94VanDerWaalsInteraction) -> None: pass
+    def __init__(iactn: MMFF94VanDerWaalsInteraction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94VanDerWaalsInteraction instance.
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance to initialize.
     # \param atom1_idx 
     # \param atom2_idx 
     # \param atom_params1 
@@ -64,54 +62,47 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
     # \param fact_darad 
     # \param fact_daeps 
     #
-    def __init__(self: object, atom1_idx: int, atom2_idx: int, atom_params1: MMFF94VanDerWaalsAtomParameters, atom_params2: MMFF94VanDerWaalsAtomParameters, expo: float, fact_b: float, beta: float, fact_darad: float, fact_daeps: float) -> None: pass
+    def __init__(atom1_idx: int, atom2_idx: int, atom_params1: MMFF94VanDerWaalsAtomParameters, atom_params2: MMFF94VanDerWaalsAtomParameters, expo: float, fact_b: float, beta: float, fact_darad: float, fact_daeps: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom1Index(self: MMFF94VanDerWaalsInteraction) -> int: pass
+    def getAtom1Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom2Index(self: MMFF94VanDerWaalsInteraction) -> int: pass
+    def getAtom2Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     # \return 
     #
-    def getEIJ(self: MMFF94VanDerWaalsInteraction) -> float: pass
+    def getEIJ() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     # \return 
     #
-    def getRIJ(self: MMFF94VanDerWaalsInteraction) -> float: pass
+    def getRIJ() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     # \return 
     #
-    def getRIJPow7(self: MMFF94VanDerWaalsInteraction) -> float: pass
+    def getRIJPow7() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteraction instance \a iactn.
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     # \param iactn The \e %MMFF94VanDerWaalsInteraction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94VanDerWaalsInteraction, iactn: MMFF94VanDerWaalsInteraction) -> MMFF94VanDerWaalsInteraction: pass
+    def assign(iactn: MMFF94VanDerWaalsInteraction) -> MMFF94VanDerWaalsInteraction: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94VanDerWaalsInteraction instance this method is called upon.
     #
     # Different Python \e %MMFF94VanDerWaalsInteraction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94VanDerWaalsInteraction instances \e a and \e b reference different C++ objects. 
@@ -120,7 +111,7 @@ class MMFF94VanDerWaalsInteraction(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94VanDerWaalsInteraction) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 

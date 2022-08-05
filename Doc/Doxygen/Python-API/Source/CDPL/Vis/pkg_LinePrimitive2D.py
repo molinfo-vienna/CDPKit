@@ -26,53 +26,46 @@ class LinePrimitive2D(Line2D, GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param self The \e %LinePrimitive2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param self The \e %LinePrimitive2D instance to initialize.
     # \param prim 
     #
-    def __init__(self: object, prim: LinePrimitive2D) -> None: pass
+    def __init__(prim: LinePrimitive2D) -> None: pass
 
     ##
     # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param self The \e %LinePrimitive2D instance to initialize.
     # \param line 
     #
-    def __init__(self: object, line: Line2D) -> None: pass
+    def __init__(line: Line2D) -> None: pass
 
     ##
     # \brief Initializes the \e %LinePrimitive2D instance.
-    # \param self The \e %LinePrimitive2D instance to initialize.
     # \param beg 
     # \param end 
     #
-    def __init__(self: object, beg: CDPL.Math.Vector2D, end: CDPL.Math.Vector2D) -> None: pass
+    def __init__(beg: CDPL.Math.Vector2D, end: CDPL.Math.Vector2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LinePrimitive2D instance \a prim.
-    # \param self The \e %LinePrimitive2D instance this method is called upon.
     # \param prim The \e %LinePrimitive2D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LinePrimitive2D, prim: LinePrimitive2D) -> LinePrimitive2D: pass
+    def assign(prim: LinePrimitive2D) -> LinePrimitive2D: pass
 
     ##
     # \brief 
-    # \param self The \e %LinePrimitive2D instance this method is called upon.
     # \param pen 
     #
-    def setPen(self: LinePrimitive2D, pen: Pen) -> None: pass
+    def setPen(pen: Pen) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LinePrimitive2D instance this method is called upon.
     # \return 
     #
-    def getPen(self: LinePrimitive2D) -> Pen: pass
+    def getPen() -> Pen: pass
 
     ##
     # \brief 

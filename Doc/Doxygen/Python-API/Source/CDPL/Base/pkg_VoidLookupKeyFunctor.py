@@ -26,41 +26,35 @@ class VoidLookupKeyFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %VoidLookupKeyFunctor instance.
-    # \param self The \e %VoidLookupKeyFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %VoidLookupKeyFunctor instance.
-    # \param self The \e %VoidLookupKeyFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: VoidLookupKeyFunctor) -> None: pass
+    def __init__(func: VoidLookupKeyFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %VoidLookupKeyFunctor instance.
-    # \param arg1 The \e %VoidLookupKeyFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %VoidLookupKeyFunctor instance this method is called upon.
     # \param arg1 
     #
-    def __call__(self: VoidLookupKeyFunctor, arg1: LookupKey) -> None: pass
+    def __call__(arg1: LookupKey) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %VoidLookupKeyFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: VoidLookupKeyFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %VoidLookupKeyFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: VoidLookupKeyFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

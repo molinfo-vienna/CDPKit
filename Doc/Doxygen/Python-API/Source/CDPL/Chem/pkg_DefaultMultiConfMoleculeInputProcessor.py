@@ -36,9 +36,8 @@ class DefaultMultiConfMoleculeInputProcessor(MultiConfMoleculeInputProcessor):
 
     ##
     # \brief Initializes the \e %DefaultMultiConfMoleculeInputProcessor instance.
-    # \param self The \e %DefaultMultiConfMoleculeInputProcessor instance to initialize.
     # \param comp_names 
     # \param atom_flags 
     # \param bond_flags 
     #
-    def __init__(self: object, comp_names: bool = False, atom_flags: int = 14, bond_flags: int = 2) -> None: pass
+    def __init__(comp_names: bool = False, atom_flags: int = 14, bond_flags: int = 2) -> None: pass

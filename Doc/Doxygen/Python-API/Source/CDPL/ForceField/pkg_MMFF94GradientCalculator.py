@@ -26,28 +26,24 @@ class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param self The \e %MMFF94GradientCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param self The \e %MMFF94GradientCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: MMFF94GradientCalculator) -> None: pass
+    def __init__(calculator: MMFF94GradientCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param self The \e %MMFF94GradientCalculator instance to initialize.
     # \param ia_data 
     # \param num_atoms 
     #
-    def __init__(self: object, ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
+    def __init__(ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     #
     # Different Python \e %MMFF94GradientCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94GradientCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,130 +52,113 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94GradientCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94GradientCalculator instance \a calculator.
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param calculator The \e %MMFF94GradientCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94GradientCalculator, calculator: MMFF94GradientCalculator) -> MMFF94GradientCalculator: pass
+    def assign(calculator: MMFF94GradientCalculator) -> MMFF94GradientCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param types 
     #
-    def setEnabledInteractionTypes(self: MMFF94GradientCalculator, types: int) -> None: pass
+    def setEnabledInteractionTypes(types: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getEnabledInteractionTypes(self: MMFF94GradientCalculator) -> int: pass
+    def getEnabledInteractionTypes() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param ia_data 
     # \param num_atoms 
     #
-    def setup(self: MMFF94GradientCalculator, ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
+    def setup(ia_data: MMFF94InteractionData, num_atoms: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getTotalEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getTotalEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getBondStretchingEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getBondStretchingEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getAngleBendingEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getAngleBendingEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getStretchBendEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getStretchBendEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getOutOfPlaneBendingEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getOutOfPlaneBendingEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getTorsionEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getTorsionEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getElectrostaticEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getElectrostaticEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getVanDerWaalsEnergy(self: MMFF94GradientCalculator) -> float: pass
+    def getVanDerWaalsEnergy() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param mask 
     #
-    def setFixedAtomMask(self: MMFF94GradientCalculator, mask: CDPL.Util.BitSet) -> None: pass
+    def setFixedAtomMask(mask: CDPL.Util.BitSet) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     #
-    def resetFixedAtomMask(self: MMFF94GradientCalculator) -> None: pass
+    def resetFixedAtomMask() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \return 
     #
-    def getFixedAtomMask(self: MMFF94GradientCalculator) -> CDPL.Util.BitSet: pass
+    def getFixedAtomMask() -> CDPL.Util.BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def __call__(self: MMFF94GradientCalculator, coords: CDPL.Math.Vector3DArray) -> float: pass
+    def __call__(coords: CDPL.Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94GradientCalculator instance this method is called upon.
     # \param coords 
     # \param grad 
     # \return 
     #
-    def __call__(self: MMFF94GradientCalculator, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+    def __call__(coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 

@@ -26,20 +26,17 @@ class InteractionAnalyzer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionAnalyzer instance.
-    # \param self The \e %InteractionAnalyzer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionAnalyzer instance.
-    # \param self The \e %InteractionAnalyzer instance to initialize.
     # \param analyzer 
     #
-    def __init__(self: object, analyzer: InteractionAnalyzer) -> None: pass
+    def __init__(analyzer: InteractionAnalyzer) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %InteractionAnalyzer instance this method is called upon.
     #
     # Different Python \e %InteractionAnalyzer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionAnalyzer instances \e a and \e b reference different C++ objects. 
@@ -48,51 +45,46 @@ class InteractionAnalyzer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: InteractionAnalyzer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionAnalyzer instance this method is called upon.
     # \param type1 
     # \param type2 
     # \param func 
     #
-    def setConstraintFunction(self: InteractionAnalyzer, type1: int, type2: int, func: BoolFeature2Functor) -> None: pass
+    def setConstraintFunction(type1: int, type2: int, func: BoolFeature2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionAnalyzer instance this method is called upon.
     # \param type1 
     # \param type2 
     #
-    def removeConstraintFunction(self: InteractionAnalyzer, type1: int, type2: int) -> None: pass
+    def removeConstraintFunction(type1: int, type2: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionAnalyzer instance this method is called upon.
     # \param type1 
     # \param type2 
     # \return 
     #
-    def getConstraintFunction(self: InteractionAnalyzer, type1: int, type2: int) -> BoolFeature2Functor: pass
+    def getConstraintFunction(type1: int, type2: int) -> BoolFeature2Functor: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionAnalyzer instance \a analyzer.
-    # \param self The \e %InteractionAnalyzer instance this method is called upon.
     # \param analyzer The \e %InteractionAnalyzer instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: InteractionAnalyzer, analyzer: InteractionAnalyzer) -> InteractionAnalyzer: pass
+    def assign(analyzer: InteractionAnalyzer) -> InteractionAnalyzer: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionAnalyzer instance this method is called upon.
     # \param cntnr1 
     # \param cntnr2 
     # \param iactions 
     # \param append 
     #
-    def analyze(self: InteractionAnalyzer, cntnr1: FeatureContainer, cntnr2: FeatureContainer, iactions: FeatureMapping, append: bool = False) -> None: pass
+    def analyze(cntnr1: FeatureContainer, cntnr2: FeatureContainer, iactions: FeatureMapping, append: bool = False) -> None: pass
 
     ##
     # \brief 

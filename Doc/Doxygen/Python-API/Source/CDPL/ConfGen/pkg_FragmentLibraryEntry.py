@@ -26,20 +26,17 @@ class FragmentLibraryEntry(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentLibraryEntry instance.
-    # \param self The \e %FragmentLibraryEntry instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentLibraryEntry instance.
-    # \param self The \e %FragmentLibraryEntry instance to initialize.
     # \param entry 
     #
-    def __init__(self: object, entry: FragmentLibraryEntry) -> None: pass
+    def __init__(entry: FragmentLibraryEntry) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     #
     # Different Python \e %FragmentLibraryEntry instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibraryEntry instances \e a and \e b reference different C++ objects. 
@@ -48,86 +45,75 @@ class FragmentLibraryEntry(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FragmentLibraryEntry) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibraryEntry instance \a entry.
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param entry The \e %FragmentLibraryEntry instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FragmentLibraryEntry, entry: FragmentLibraryEntry) -> FragmentLibraryEntry: pass
+    def assign(entry: FragmentLibraryEntry) -> FragmentLibraryEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param hash_code 
     #
-    def setHashCode(self: FragmentLibraryEntry, hash_code: int) -> None: pass
+    def setHashCode(hash_code: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \return 
     #
-    def getHashCode(self: FragmentLibraryEntry) -> int: pass
+    def getHashCode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param smiles 
     #
-    def setSMILES(self: FragmentLibraryEntry, smiles: str) -> None: pass
+    def setSMILES(smiles: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \return 
     #
-    def getSMILES(self: FragmentLibraryEntry) -> str: pass
+    def getSMILES() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \return 
     #
-    def getNumAtoms(self: FragmentLibraryEntry) -> int: pass
+    def getNumAtoms() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \return 
     #
-    def getNumConformers(self: FragmentLibraryEntry) -> int: pass
+    def getNumConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     #
-    def clearConformers(self: FragmentLibraryEntry) -> None: pass
+    def clearConformers() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param conf_data 
     #
-    def addConformer(self: FragmentLibraryEntry, conf_data: ConformerData) -> None: pass
+    def addConformer(conf_data: ConformerData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getConformer(self: FragmentLibraryEntry, idx: int) -> ConformerData: pass
+    def getConformer(idx: int) -> ConformerData: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibraryEntry instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: FragmentLibraryEntry, idx: int) -> ConformerData: pass
+    def __getitem__(idx: int) -> ConformerData: pass
 
     ##
     # \brief 

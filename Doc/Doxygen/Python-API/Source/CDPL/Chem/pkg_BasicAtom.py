@@ -26,16 +26,14 @@ class BasicAtom(Atom):
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicAtom instance \a atom.
-    # \param self The \e %BasicAtom instance this method is called upon.
     # \param atom The \e %BasicAtom instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Atom, atom: Atom) -> Atom: pass
+    def assign(atom: Atom) -> Atom: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicAtom instance \a atom.
-    # \param self The \e %BasicAtom instance this method is called upon.
     # \param atom The \e %BasicAtom instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicAtom, atom: BasicAtom) -> BasicAtom: pass
+    def assign(atom: BasicAtom) -> BasicAtom: pass

@@ -26,82 +26,70 @@ class SparseULVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param self The \e %SparseULVector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param self The \e %SparseULVector instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: SparseULVector) -> None: pass
+    def __init__(v: SparseULVector) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param self The \e %SparseULVector instance to initialize.
     # \param n 
     #
-    def __init__(self: object, n: int) -> None: pass
+    def __init__(n: int) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param arg1 The \e %SparseULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param arg1 The \e %SparseULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param arg1 The \e %SparseULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param arg1 The \e %SparseULVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseULVector instance.
-    # \param arg1 The \e %SparseULVector instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param n 
     #
-    def resize(self: SparseULVector, n: int) -> None: pass
+    def resize(n: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     #
-    def clear(self: SparseULVector) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def getNumElements(self: SparseULVector) -> int: pass
+    def getNumElements() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SparseULVector instance this method is called upon.
     #
     # Different Python \e %SparseULVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SparseULVector instances \e a and \e b reference different C++ objects. 
@@ -110,295 +98,258 @@ class SparseULVector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SparseULVector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseULVector instance \a e.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param e The \e %SparseULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseULVector, e: ConstFVectorExpression) -> SparseULVector: pass
+    def assign(e: ConstFVectorExpression) -> SparseULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseULVector instance \a e.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param e The \e %SparseULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseULVector, e: ConstDVectorExpression) -> SparseULVector: pass
+    def assign(e: ConstDVectorExpression) -> SparseULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseULVector instance \a e.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param e The \e %SparseULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseULVector, e: ConstLVectorExpression) -> SparseULVector: pass
+    def assign(e: ConstLVectorExpression) -> SparseULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseULVector instance \a e.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param e The \e %SparseULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseULVector, e: ConstULVectorExpression) -> SparseULVector: pass
+    def assign(e: ConstULVectorExpression) -> SparseULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseULVector instance \a v.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param v The \e %SparseULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseULVector, v: SparseULVector) -> SparseULVector: pass
+    def assign(v: SparseULVector) -> SparseULVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseULVector instance \a a.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param a The \e %SparseULVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseULVector, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: SparseULVector) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def getSize(self: SparseULVector) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: SparseULVector, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def toArray(self: SparseULVector) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param v 
     #
-    def swap(self: SparseULVector, v: SparseULVector) -> None: pass
+    def swap(v: SparseULVector) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: SparseULVector, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param v The \e %SparseULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SparseULVector, v: SparseULVector) -> bool: pass
+    def __eq__(v: SparseULVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param e The \e %SparseULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SparseULVector, e: ConstULVectorExpression) -> bool: pass
+    def __eq__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param v The \e %SparseULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SparseULVector, v: SparseULVector) -> bool: pass
+    def __ne__(v: SparseULVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param e The \e %SparseULVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SparseULVector, e: ConstULVectorExpression) -> bool: pass
+    def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: SparseULVector, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: SparseULVector, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def __len__(self: SparseULVector) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %SparseULVector instance.
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: SparseULVector) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def __pos__(self: SparseULVector) -> SparseULVector: pass
+    def __pos__() -> SparseULVector: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstULVectorExpression: pass
+    def __neg__() -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %SparseULVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %SparseULVector instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __add__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %SparseULVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %SparseULVector instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __sub__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %SparseULVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %SparseULVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __mul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %SparseULVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %SparseULVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
+    def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %SparseULVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %SparseULVector instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __truediv__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __rmul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: SparseULVector, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %SparseULVector instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %SparseULVector instance \a self.
     #
-    def __iadd__(self: SparseULVector, v: SparseULVector) -> SparseULVector: pass
+    def __iadd__(v: SparseULVector) -> SparseULVector: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %SparseULVector instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %SparseULVector instance \a self.
     #
-    def __iadd__(self: SparseULVector, e: ConstULVectorExpression) -> SparseULVector: pass
+    def __iadd__(e: ConstULVectorExpression) -> SparseULVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %SparseULVector instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %SparseULVector instance \a self.
     #
-    def __isub__(self: SparseULVector, v: SparseULVector) -> SparseULVector: pass
+    def __isub__(v: SparseULVector) -> SparseULVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %SparseULVector instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %SparseULVector instance \a self.
     #
-    def __isub__(self: SparseULVector, e: ConstULVectorExpression) -> SparseULVector: pass
+    def __isub__(e: ConstULVectorExpression) -> SparseULVector: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %SparseULVector instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %SparseULVector instance \a self.
     #
-    def __imul__(self: SparseULVector, t: int) -> SparseULVector: pass
+    def __imul__(t: int) -> SparseULVector: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %SparseULVector instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %SparseULVector instance \a self.
     #
-    def __idiv__(self: SparseULVector, t: int) -> SparseULVector: pass
+    def __idiv__(t: int) -> SparseULVector: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseULVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: SparseULVector, t: int) -> SparseULVector: pass
+    def __itruediv__(t: int) -> SparseULVector: pass
 
     ##
     # \brief 

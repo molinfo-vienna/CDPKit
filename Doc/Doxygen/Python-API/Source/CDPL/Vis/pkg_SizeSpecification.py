@@ -26,24 +26,21 @@ class SizeSpecification(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SizeSpecification instance.
-    # \param self The \e %SizeSpecification instance to initialize.
     # \param spec 
     #
-    def __init__(self: object, spec: SizeSpecification) -> None: pass
+    def __init__(spec: SizeSpecification) -> None: pass
 
     ##
     # \brief Initializes the \e %SizeSpecification instance.
-    # \param self The \e %SizeSpecification instance to initialize.
     # \param value 
     # \param relative 
     # \param input_scaling 
     # \param output_scaling 
     #
-    def __init__(self: object, value: float = 0.0, relative: bool = False, input_scaling: bool = False, output_scaling: bool = False) -> None: pass
+    def __init__(value: float = 0.0, relative: bool = False, input_scaling: bool = False, output_scaling: bool = False) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SizeSpecification instance this method is called upon.
     #
     # Different Python \e %SizeSpecification instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SizeSpecification instances \e a and \e b reference different C++ objects. 
@@ -52,94 +49,82 @@ class SizeSpecification(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SizeSpecification) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SizeSpecification instance \a spec.
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param spec The \e %SizeSpecification instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SizeSpecification, spec: SizeSpecification) -> SizeSpecification: pass
+    def assign(spec: SizeSpecification) -> SizeSpecification: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \return 
     #
-    def followsInputScaling(self: SizeSpecification) -> bool: pass
+    def followsInputScaling() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param follow 
     #
-    def followInputScaling(self: SizeSpecification, follow: bool) -> None: pass
+    def followInputScaling(follow: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \return 
     #
-    def followsOutputScaling(self: SizeSpecification) -> bool: pass
+    def followsOutputScaling() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param follow 
     #
-    def followOutputScaling(self: SizeSpecification, follow: bool) -> None: pass
+    def followOutputScaling(follow: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \return 
     #
-    def isRelative(self: SizeSpecification) -> bool: pass
+    def isRelative() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param relative 
     #
-    def setRelative(self: SizeSpecification, relative: bool) -> None: pass
+    def setRelative(relative: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \return 
     #
-    def getValue(self: SizeSpecification) -> float: pass
+    def getValue() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param value 
     #
-    def setValue(self: SizeSpecification, value: float) -> None: pass
+    def setValue(value: float) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == spec</tt>.
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param spec The \e %SizeSpecification instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SizeSpecification, spec: SizeSpecification) -> bool: pass
+    def __eq__(spec: SizeSpecification) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != spec</tt>.
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \param spec The \e %SizeSpecification instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SizeSpecification, spec: SizeSpecification) -> bool: pass
+    def __ne__(spec: SizeSpecification) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %SizeSpecification instance.
-    # \param self The \e %SizeSpecification instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: SizeSpecification) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 

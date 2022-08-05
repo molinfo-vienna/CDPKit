@@ -26,6 +26,5 @@ class SVGReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %SVGReactionOutputHandler instance.
-    # \param self The \e %SVGReactionOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

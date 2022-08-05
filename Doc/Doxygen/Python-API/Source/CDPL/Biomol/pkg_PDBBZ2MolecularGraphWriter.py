@@ -26,7 +26,6 @@ class PDBBZ2MolecularGraphWriter(CDPL.Chem.MolecularGraphWriter):
 
     ##
     # \brief Initializes the \e %PDBBZ2MolecularGraphWriter instance.
-    # \param self The \e %PDBBZ2MolecularGraphWriter instance to initialize.
     # \param ios 
     #
-    def __init__(self: object, ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: CDPL.Base.IOStream) -> None: pass

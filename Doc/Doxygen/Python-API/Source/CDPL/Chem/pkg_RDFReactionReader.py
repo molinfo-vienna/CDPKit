@@ -26,7 +26,6 @@ class RDFReactionReader(ReactionReader):
 
     ##
     # \brief Initializes the \e %RDFReactionReader instance.
-    # \param self The \e %RDFReactionReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

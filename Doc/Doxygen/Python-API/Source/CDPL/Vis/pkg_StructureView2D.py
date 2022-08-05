@@ -26,73 +26,64 @@ class StructureView2D(View2D):
 
     ##
     # \brief Initializes the \e %StructureView2D instance.
-    # \param self The \e %StructureView2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StructureView2D instance.
-    # \param self The \e %StructureView2D instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     # \param molgraph 
     #
-    def setStructure(self: StructureView2D, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setStructure(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     # \return 
     #
-    def getStructure(self: StructureView2D) -> CDPL.Chem.MolecularGraph: pass
+    def getStructure() -> CDPL.Chem.MolecularGraph: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     # \return 
     #
-    def getFontMetrics(self: StructureView2D) -> FontMetrics: pass
+    def getFontMetrics() -> FontMetrics: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     # \param anchor_pos 
     # \param prim 
     # \param alignment 
     # \param front 
     #
-    def addGraphicsPrimitive(self: StructureView2D, anchor_pos: CDPL.Math.Vector2D, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
+    def addGraphicsPrimitive(anchor_pos: CDPL.Math.Vector2D, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     # \param anchor_atom 
     # \param prim 
     # \param alignment 
     # \param front 
     #
-    def addGraphicsPrimitive(self: StructureView2D, anchor_atom: CDPL.Chem.Atom, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
+    def addGraphicsPrimitive(anchor_atom: CDPL.Chem.Atom, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     # \param anchor_atoms 
     # \param prim 
     # \param alignment 
     # \param front 
     #
-    def addGraphicsPrimitive(self: StructureView2D, anchor_atoms: CDPL.Chem.Fragment, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
+    def addGraphicsPrimitive(anchor_atoms: CDPL.Chem.Fragment, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StructureView2D instance this method is called upon.
     #
-    def clearGraphicsPrimitives(self: StructureView2D) -> None: pass
+    def clearGraphicsPrimitives() -> None: pass
 
     ##
     # \brief 

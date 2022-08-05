@@ -26,24 +26,21 @@ class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScreeningScore instance.
-    # \param self The \e %PharmacophoreFitScreeningScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: PharmacophoreFitScreeningScore) -> None: pass
+    def __init__(score: PharmacophoreFitScreeningScore) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScreeningScore instance.
-    # \param self The \e %PharmacophoreFitScreeningScore instance to initialize.
     # \param match_cnt_factor 
     # \param pos_match_factor 
     # \param geom_match_factor 
     #
-    def __init__(self: object, match_cnt_factor: float = 0.8, pos_match_factor: float = 0.1, geom_match_factor: float = 0.1) -> None: pass
+    def __init__(match_cnt_factor: float = 0.8, pos_match_factor: float = 0.1, geom_match_factor: float = 0.1) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreFitScreeningScore instance this method is called upon.
     # \param hit 
     # \return 
     #
-    def __call__(self: PharmacophoreFitScreeningScore, hit: SearchHit) -> float: pass
+    def __call__(hit: SearchHit) -> float: pass

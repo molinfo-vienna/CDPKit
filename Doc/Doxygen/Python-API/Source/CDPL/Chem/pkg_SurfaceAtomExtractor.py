@@ -46,29 +46,25 @@ class SurfaceAtomExtractor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SurfaceAtomExtractor instance.
-    # \param self The \e %SurfaceAtomExtractor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SurfaceAtomExtractor instance.
-    # \param self The \e %SurfaceAtomExtractor instance to initialize.
     # \param extractor 
     #
-    def __init__(self: object, extractor: SurfaceAtomExtractor) -> None: pass
+    def __init__(extractor: SurfaceAtomExtractor) -> None: pass
 
     ##
     # \brief Initializes the \e %SurfaceAtomExtractor instance.
-    # \param self The \e %SurfaceAtomExtractor instance to initialize.
     # \param cntnr 
     # \param parent_molgraph 
     # \param frag 
     #
-    def __init__(self: object, cntnr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
+    def __init__(cntnr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     #
     # Different Python \e %SurfaceAtomExtractor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SurfaceAtomExtractor instances \e a and \e b reference different C++ objects. 
@@ -77,108 +73,94 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SurfaceAtomExtractor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: SurfaceAtomExtractor, func: Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \return 
     #
-    def getAtom3DCoordinatesFunction(self: SurfaceAtomExtractor) -> Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param radius 
     #
-    def setProbeRadius(self: SurfaceAtomExtractor, radius: float) -> None: pass
+    def setProbeRadius(radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param size 
     #
-    def setGridStepSize(self: SurfaceAtomExtractor, size: float) -> None: pass
+    def setGridStepSize(size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param size 
     #
-    def setGridOversize(self: SurfaceAtomExtractor, size: float) -> None: pass
+    def setGridOversize(size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param min_acc 
     #
-    def setMinSurfaceAccessibility(self: SurfaceAtomExtractor, min_acc: float) -> None: pass
+    def setMinSurfaceAccessibility(min_acc: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param num_points 
     #
-    def setNumTestPoints(self: SurfaceAtomExtractor, num_points: int) -> None: pass
+    def setNumTestPoints(num_points: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \return 
     #
-    def getProbeRadius(self: SurfaceAtomExtractor) -> float: pass
+    def getProbeRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \return 
     #
-    def getGridStepSize(self: SurfaceAtomExtractor) -> float: pass
+    def getGridStepSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \return 
     #
-    def getGridOversize(self: SurfaceAtomExtractor) -> float: pass
+    def getGridOversize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \return 
     #
-    def getMinSurfaceAccessibility(self: SurfaceAtomExtractor) -> float: pass
+    def getMinSurfaceAccessibility() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \return 
     #
-    def getNumTestPoints(self: SurfaceAtomExtractor) -> int: pass
+    def getNumTestPoints() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param cntr 
     # \param parent_molgraph 
     # \param frag 
     #
-    def extract(self: SurfaceAtomExtractor, cntr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
+    def extract(cntr: AtomContainer, parent_molgraph: MolecularGraph, frag: Fragment) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SurfaceAtomExtractor instance \a extractor.
-    # \param self The \e %SurfaceAtomExtractor instance this method is called upon.
     # \param extractor The \e %SurfaceAtomExtractor instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SurfaceAtomExtractor, extractor: SurfaceAtomExtractor) -> SurfaceAtomExtractor: pass
+    def assign(extractor: SurfaceAtomExtractor) -> SurfaceAtomExtractor: pass
 
     ##
     # \brief 

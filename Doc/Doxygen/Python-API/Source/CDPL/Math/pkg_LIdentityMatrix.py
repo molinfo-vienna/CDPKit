@@ -26,36 +26,31 @@ class LIdentityMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LIdentityMatrix instance.
-    # \param self The \e %LIdentityMatrix instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LIdentityMatrix instance.
-    # \param self The \e %LIdentityMatrix instance to initialize.
     # \param m 
     #
-    def __init__(self: object, m: LIdentityMatrix) -> None: pass
+    def __init__(m: LIdentityMatrix) -> None: pass
 
     ##
     # \brief Initializes the \e %LIdentityMatrix instance.
-    # \param self The \e %LIdentityMatrix instance to initialize.
     # \param m 
     # \param n 
     #
-    def __init__(self: object, m: int, n: int) -> None: pass
+    def __init__(m: int, n: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param m 
     # \param n 
     #
-    def resize(self: LIdentityMatrix, m: int, n: int) -> None: pass
+    def resize(m: int, n: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     #
     # Different Python \e %LIdentityMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LIdentityMatrix instances \e a and \e b reference different C++ objects. 
@@ -64,200 +59,175 @@ class LIdentityMatrix(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: LIdentityMatrix) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def getSize1(self: LIdentityMatrix) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def getSize2(self: LIdentityMatrix) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: LIdentityMatrix) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def getElement(self: LIdentityMatrix, i: int, j: int) -> int: pass
+    def getElement(i: int, j: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def toArray(self: LIdentityMatrix) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LIdentityMatrix instance \a m.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param m The \e %LIdentityMatrix instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LIdentityMatrix, m: LIdentityMatrix) -> LIdentityMatrix: pass
+    def assign(m: LIdentityMatrix) -> LIdentityMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param m 
     #
-    def swap(self: LIdentityMatrix, m: LIdentityMatrix) -> None: pass
+    def swap(m: LIdentityMatrix) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def __call__(self: LIdentityMatrix, i: int, j: int) -> int: pass
+    def __call__(i: int, j: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param ij 
     # \return 
     #
-    def __getitem__(self: LIdentityMatrix, ij: tuple) -> int: pass
+    def __getitem__(ij: tuple) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def __len__(self: LIdentityMatrix) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param m The \e %LIdentityMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: LIdentityMatrix, m: LIdentityMatrix) -> bool: pass
+    def __eq__(m: LIdentityMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param e The \e %LIdentityMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: LIdentityMatrix, e: ConstLMatrixExpression) -> bool: pass
+    def __eq__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param m The \e %LIdentityMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: LIdentityMatrix, m: LIdentityMatrix) -> bool: pass
+    def __ne__(m: LIdentityMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param e The \e %LIdentityMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: LIdentityMatrix, e: ConstLMatrixExpression) -> bool: pass
+    def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %LIdentityMatrix instance.
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: LIdentityMatrix) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def __pos__(self: LIdentityMatrix) -> LIdentityMatrix: pass
+    def __pos__() -> LIdentityMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstLMatrixExpression: pass
+    def __neg__() -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %LIdentityMatrix instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %LIdentityMatrix instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+    def __add__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %LIdentityMatrix instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %LIdentityMatrix instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+    def __sub__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %LIdentityMatrix instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %LIdentityMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __mul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %LIdentityMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %LIdentityMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+    def __mul__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %LIdentityMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %LIdentityMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %LIdentityMatrix instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %LIdentityMatrix instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __div__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __truediv__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %LIdentityMatrix instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __rmul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief 

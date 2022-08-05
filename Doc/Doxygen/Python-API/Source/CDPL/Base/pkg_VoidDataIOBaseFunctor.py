@@ -26,42 +26,36 @@ class VoidDataIOBaseFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %VoidDataIOBaseFunctor instance.
-    # \param self The \e %VoidDataIOBaseFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %VoidDataIOBaseFunctor instance.
-    # \param self The \e %VoidDataIOBaseFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: VoidDataIOBaseFunctor) -> None: pass
+    def __init__(func: VoidDataIOBaseFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %VoidDataIOBaseFunctor instance.
-    # \param arg1 The \e %VoidDataIOBaseFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %VoidDataIOBaseFunctor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def __call__(self: VoidDataIOBaseFunctor, arg1: DataIOBase, arg2: float) -> None: pass
+    def __call__(arg1: DataIOBase, arg2: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %VoidDataIOBaseFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: VoidDataIOBaseFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %VoidDataIOBaseFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: VoidDataIOBaseFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

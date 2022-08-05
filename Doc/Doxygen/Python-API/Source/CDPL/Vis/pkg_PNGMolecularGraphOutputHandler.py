@@ -26,6 +26,5 @@ class PNGMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %PNGMolecularGraphOutputHandler instance.
-    # \param self The \e %PNGMolecularGraphOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

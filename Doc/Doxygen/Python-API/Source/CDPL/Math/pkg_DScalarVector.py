@@ -26,35 +26,30 @@ class DScalarVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DScalarVector instance.
-    # \param self The \e %DScalarVector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DScalarVector instance.
-    # \param self The \e %DScalarVector instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: DScalarVector) -> None: pass
+    def __init__(v: DScalarVector) -> None: pass
 
     ##
     # \brief Initializes the \e %DScalarVector instance.
-    # \param self The \e %DScalarVector instance to initialize.
     # \param n 
     # \param v 
     #
-    def __init__(self: object, n: int, v: float = 0.0) -> None: pass
+    def __init__(n: int, v: float = 0.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param n 
     #
-    def resize(self: DScalarVector, n: int) -> None: pass
+    def resize(n: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DScalarVector instance this method is called upon.
     #
     # Different Python \e %DScalarVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DScalarVector instances \e a and \e b reference different C++ objects. 
@@ -63,183 +58,160 @@ class DScalarVector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DScalarVector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: DScalarVector) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return 
     #
-    def getSize(self: DScalarVector) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: DScalarVector, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return 
     #
-    def toArray(self: DScalarVector) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DScalarVector instance \a v.
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param v The \e %DScalarVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DScalarVector, v: DScalarVector) -> DScalarVector: pass
+    def assign(v: DScalarVector) -> DScalarVector: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param v 
     #
-    def swap(self: DScalarVector, v: DScalarVector) -> None: pass
+    def swap(v: DScalarVector) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param v The \e %DScalarVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DScalarVector, v: DScalarVector) -> bool: pass
+    def __eq__(v: DScalarVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param e The \e %DScalarVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DScalarVector, e: ConstDVectorExpression) -> bool: pass
+    def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param v The \e %DScalarVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DScalarVector, v: DScalarVector) -> bool: pass
+    def __ne__(v: DScalarVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param e The \e %DScalarVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DScalarVector, e: ConstDVectorExpression) -> bool: pass
+    def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: DScalarVector, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: DScalarVector, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return 
     #
-    def __len__(self: DScalarVector) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %DScalarVector instance.
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DScalarVector) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DScalarVector) -> DScalarVector: pass
+    def __pos__() -> DScalarVector: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDVectorExpression: pass
+    def __neg__() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DScalarVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DScalarVector instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DScalarVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DScalarVector instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DScalarVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DScalarVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DScalarVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %DScalarVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DScalarVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DScalarVector instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DScalarVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 

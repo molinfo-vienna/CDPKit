@@ -31,20 +31,17 @@ class TorsionDriverSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TorsionDriverSettings instance.
-    # \param self The \e %TorsionDriverSettings instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionDriverSettings instance.
-    # \param self The \e %TorsionDriverSettings instance to initialize.
     # \param settings 
     #
-    def __init__(self: object, settings: TorsionDriverSettings) -> None: pass
+    def __init__(settings: TorsionDriverSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     #
     # Different Python \e %TorsionDriverSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionDriverSettings instances \e a and \e b reference different C++ objects. 
@@ -53,141 +50,122 @@ class TorsionDriverSettings(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: TorsionDriverSettings) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionDriverSettings instance \a settings.
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param settings The \e %TorsionDriverSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: TorsionDriverSettings, settings: TorsionDriverSettings) -> TorsionDriverSettings: pass
+    def assign(settings: TorsionDriverSettings) -> TorsionDriverSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param sample 
     #
-    def sampleHeteroAtomHydrogens(self: TorsionDriverSettings, sample: bool) -> None: pass
+    def sampleHeteroAtomHydrogens(sample: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def sampleHeteroAtomHydrogens(self: TorsionDriverSettings) -> bool: pass
+    def sampleHeteroAtomHydrogens() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param sample 
     #
-    def sampleAngleToleranceRanges(self: TorsionDriverSettings, sample: bool) -> None: pass
+    def sampleAngleToleranceRanges(sample: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def sampleAngleToleranceRanges(self: TorsionDriverSettings) -> bool: pass
+    def sampleAngleToleranceRanges() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param order 
     #
-    def orderByEnergy(self: TorsionDriverSettings, order: bool) -> None: pass
+    def orderByEnergy(order: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def orderByEnergy(self: TorsionDriverSettings) -> bool: pass
+    def orderByEnergy() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param win_size 
     #
-    def setEnergyWindow(self: TorsionDriverSettings, win_size: float) -> None: pass
+    def setEnergyWindow(win_size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def getEnergyWindow(self: TorsionDriverSettings) -> float: pass
+    def getEnergyWindow() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param max_size 
     #
-    def setMaxPoolSize(self: TorsionDriverSettings, max_size: int) -> None: pass
+    def setMaxPoolSize(max_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def getMaxPoolSize(self: TorsionDriverSettings) -> int: pass
+    def getMaxPoolSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param type 
     #
-    def setForceFieldType(self: TorsionDriverSettings, type: int) -> None: pass
+    def setForceFieldType(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def getForceFieldType(self: TorsionDriverSettings) -> int: pass
+    def getForceFieldType() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param strict 
     #
-    def strictForceFieldParameterization(self: TorsionDriverSettings, strict: bool) -> None: pass
+    def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def strictForceFieldParameterization(self: TorsionDriverSettings) -> bool: pass
+    def strictForceFieldParameterization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param de_const 
     #
-    def setDielectricConstant(self: TorsionDriverSettings, de_const: float) -> None: pass
+    def setDielectricConstant(de_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def getDielectricConstant(self: TorsionDriverSettings) -> float: pass
+    def getDielectricConstant() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \param dist_expo 
     #
-    def setDistanceExponent(self: TorsionDriverSettings, dist_expo: float) -> None: pass
+    def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionDriverSettings instance this method is called upon.
     # \return 
     #
-    def getDistanceExponent(self: TorsionDriverSettings) -> float: pass
+    def getDistanceExponent() -> float: pass
 
     ##
     # \brief 

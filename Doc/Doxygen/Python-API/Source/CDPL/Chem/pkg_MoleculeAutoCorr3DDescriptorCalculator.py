@@ -26,28 +26,24 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr3DDescriptorCalculator instance.
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr3DDescriptorCalculator instance.
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: MoleculeAutoCorr3DDescriptorCalculator) -> None: pass
+    def __init__(calculator: MoleculeAutoCorr3DDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr3DDescriptorCalculator instance.
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance to initialize.
     # \param cntnr 
     # \param descr 
     #
-    def __init__(self: object, cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     #
     # Different Python \e %MoleculeAutoCorr3DDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeAutoCorr3DDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,79 +52,69 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MoleculeAutoCorr3DDescriptorCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr3DDescriptorCalculator instance \a calculator.
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param calculator The \e %MoleculeAutoCorr3DDescriptorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MoleculeAutoCorr3DDescriptorCalculator, calculator: MoleculeAutoCorr3DDescriptorCalculator) -> MoleculeAutoCorr3DDescriptorCalculator: pass
+    def assign(calculator: MoleculeAutoCorr3DDescriptorCalculator) -> MoleculeAutoCorr3DDescriptorCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: MoleculeAutoCorr3DDescriptorCalculator, func: Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtomPairWeightFunction(self: MoleculeAutoCorr3DDescriptorCalculator, func: DoubleAtom2UIntFunctor) -> None: pass
+    def setAtomPairWeightFunction(func: DoubleAtom2UIntFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param num_steps 
     #
-    def setNumSteps(self: MoleculeAutoCorr3DDescriptorCalculator, num_steps: int) -> None: pass
+    def setNumSteps(num_steps: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getNumSteps(self: MoleculeAutoCorr3DDescriptorCalculator) -> int: pass
+    def getNumSteps() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param radius_inc 
     #
-    def setRadiusIncrement(self: MoleculeAutoCorr3DDescriptorCalculator, radius_inc: float) -> None: pass
+    def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getRadiusIncrement(self: MoleculeAutoCorr3DDescriptorCalculator) -> float: pass
+    def getRadiusIncrement() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param start_radius 
     #
-    def setStartRadius(self: MoleculeAutoCorr3DDescriptorCalculator, start_radius: float) -> None: pass
+    def setStartRadius(start_radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getStartRadius(self: MoleculeAutoCorr3DDescriptorCalculator) -> float: pass
+    def getStartRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeAutoCorr3DDescriptorCalculator instance this method is called upon.
     # \param cntnr 
     # \param descr 
     #
-    def calculate(self: MoleculeAutoCorr3DDescriptorCalculator, cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief 

@@ -26,6 +26,5 @@ class CDFDRegularGridOutputHandler(DRegularGridOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFDRegularGridOutputHandler instance.
-    # \param self The \e %CDFDRegularGridOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

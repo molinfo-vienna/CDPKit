@@ -36,21 +36,18 @@ class CanonicalNumberingGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CanonicalNumberingGenerator instance.
-    # \param self The \e %CanonicalNumberingGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CanonicalNumberingGenerator instance.
-    # \param self The \e %CanonicalNumberingGenerator instance to initialize.
     # \param molgraph 
     # \param numbering 
     #
-    def __init__(self: object, molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     #
     # Different Python \e %CanonicalNumberingGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CanonicalNumberingGenerator instances \e a and \e b reference different C++ objects. 
@@ -59,57 +56,50 @@ class CanonicalNumberingGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: CanonicalNumberingGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \param flags 
     #
-    def setAtomPropertyFlags(self: CanonicalNumberingGenerator, flags: int) -> None: pass
+    def setAtomPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \return 
     #
-    def getAtomPropertyFlags(self: CanonicalNumberingGenerator) -> int: pass
+    def getAtomPropertyFlags() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \param flags 
     #
-    def setBondPropertyFlags(self: CanonicalNumberingGenerator, flags: int) -> None: pass
+    def setBondPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \return 
     #
-    def getBondPropertyFlags(self: CanonicalNumberingGenerator) -> int: pass
+    def getBondPropertyFlags() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \param func 
     #
-    def setHydrogenCountFunction(self: CanonicalNumberingGenerator, func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
+    def setHydrogenCountFunction(func: SizeTypeAtomMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \return 
     #
-    def getHydrogenCountFunction(self: CanonicalNumberingGenerator) -> SizeTypeAtomMolecularGraphFunctor: pass
+    def getHydrogenCountFunction() -> SizeTypeAtomMolecularGraphFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %CanonicalNumberingGenerator instance this method is called upon.
     # \param molgraph 
     # \param numbering 
     #
-    def generate(self: CanonicalNumberingGenerator, molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
+    def generate(molgraph: MolecularGraph, numbering: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief 

@@ -51,21 +51,18 @@ class MatchConstraintList(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MatchConstraintList instance.
-    # \param self The \e %MatchConstraintList instance to initialize.
     # \param list 
     #
-    def __init__(self: object, list: MatchConstraintList) -> None: pass
+    def __init__(list: MatchConstraintList) -> None: pass
 
     ##
     # \brief Initializes the \e %MatchConstraintList instance.
-    # \param self The \e %MatchConstraintList instance to initialize.
     # \param type 
     #
-    def __init__(self: object, type: Type = CDPL.Chem.Type.AND_LIST) -> None: pass
+    def __init__(type: Type = CDPL.Chem.Type.AND_LIST) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     #
     # Different Python \e %MatchConstraintList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MatchConstraintList instances \e a and \e b reference different C++ objects. 
@@ -74,223 +71,194 @@ class MatchConstraintList(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MatchConstraintList) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def getSize(self: MatchConstraintList) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: MatchConstraintList) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: MatchConstraintList, num_elem: int, value: MatchConstraint) -> None: pass
+    def resize(num_elem: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: MatchConstraintList, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: MatchConstraintList) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     #
-    def clear(self: MatchConstraintList) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraintList instance \a array.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param array The \e %MatchConstraintList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MatchConstraintList, array: MatchConstraintList) -> MatchConstraintList: pass
+    def assign(array: MatchConstraintList) -> MatchConstraintList: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraintList instance \a num_elem.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param num_elem The \e %MatchConstraintList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MatchConstraintList, num_elem: int, value: MatchConstraint) -> None: pass
+    def assign(num_elem: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param value 
     #
-    def addElement(self: MatchConstraintList, value: MatchConstraint) -> None: pass
+    def addElement(value: MatchConstraint) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param id 
     # \param relation 
     #
-    def addElement(self: MatchConstraintList, id: int, relation: Relation) -> None: pass
+    def addElement(id: int, relation: Relation) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param id 
     # \param relation 
     # \param value 
     #
-    def addElement(self: MatchConstraintList, id: int, relation: Relation, value: CDPL.Base.Variant) -> None: pass
+    def addElement(id: int, relation: Relation, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param values 
     #
-    def addElements(self: MatchConstraintList, values: MatchConstraintList) -> None: pass
+    def addElements(values: MatchConstraintList) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: MatchConstraintList, idx: int, value: MatchConstraint) -> None: pass
+    def insertElement(idx: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: MatchConstraintList, idx: int, num_elem: int, value: MatchConstraint) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: MatchConstraintList, index: int, values: MatchConstraintList) -> None: pass
+    def insertElements(index: int, values: MatchConstraintList) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     #
-    def popLastElement(self: MatchConstraintList) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: MatchConstraintList, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: MatchConstraintList, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: MatchConstraintList) -> MatchConstraint: pass
+    def getFirstElement() -> MatchConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: MatchConstraintList) -> MatchConstraint: pass
+    def getLastElement() -> MatchConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: MatchConstraintList, idx: int) -> MatchConstraint: pass
+    def getElement(idx: int) -> MatchConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: MatchConstraintList, idx: int, value: MatchConstraint) -> None: pass
+    def setElement(idx: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def getType(self: MatchConstraintList) -> Type: pass
+    def getType() -> Type: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param type 
     #
-    def setType(self: MatchConstraintList, type: Type) -> None: pass
+    def setType(type: Type) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: MatchConstraintList, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: MatchConstraintList, idx: int) -> MatchConstraint: pass
+    def __getitem__(idx: int) -> MatchConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return 
     #
-    def __len__(self: MatchConstraintList) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: MatchConstraintList, index: int, value: MatchConstraint) -> None: pass
+    def __setitem__(index: int, value: MatchConstraint) -> None: pass
 
     ##
     # \brief Returns a string representation of the \e %MatchConstraintList instance.
-    # \param self The \e %MatchConstraintList instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: MatchConstraintList) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 

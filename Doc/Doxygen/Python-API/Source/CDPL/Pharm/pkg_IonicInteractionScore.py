@@ -36,15 +36,13 @@ class IonicInteractionScore(FeatureDistanceScore):
 
     ##
     # \brief Initializes the \e %IonicInteractionScore instance.
-    # \param self The \e %IonicInteractionScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: IonicInteractionScore) -> None: pass
+    def __init__(score: IonicInteractionScore) -> None: pass
 
     ##
     # \brief Initializes the \e %IonicInteractionScore instance.
-    # \param self The \e %IonicInteractionScore instance to initialize.
     # \param min_dist 
     # \param max_dist 
     #
-    def __init__(self: object, min_dist: float = 1.5, max_dist: float = 5.5) -> None: pass
+    def __init__(min_dist: float = 1.5, max_dist: float = 5.5) -> None: pass

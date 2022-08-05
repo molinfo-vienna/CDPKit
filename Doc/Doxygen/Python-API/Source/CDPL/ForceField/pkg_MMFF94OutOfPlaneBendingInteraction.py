@@ -26,96 +26,83 @@ class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteraction instance.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance to initialize.
     # \param iactn 
     #
-    def __init__(self: object, iactn: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def __init__(iactn: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteraction instance.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance to initialize.
     # \param term_atom1_idx 
     # \param ctr_atom_idx 
     # \param term_atom2_idx 
     # \param oop_atom_idx 
     # \param force_const 
     #
-    def __init__(self: object, term_atom1_idx: int, ctr_atom_idx: int, term_atom2_idx: int, oop_atom_idx: int, force_const: float) -> None: pass
+    def __init__(term_atom1_idx: int, ctr_atom_idx: int, term_atom2_idx: int, oop_atom_idx: int, force_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getTerminalAtom1Index(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getTerminalAtom1Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getTerminalAtom2Index(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getTerminalAtom2Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getCenterAtomIndex(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getCenterAtomIndex() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getOutOfPlaneAtomIndex(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getOutOfPlaneAtomIndex() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom1Index(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getAtom1Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom2Index(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getAtom2Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom3Index(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getAtom3Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getAtom4Index(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getAtom4Index() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \return 
     #
-    def getForceConstant(self: MMFF94OutOfPlaneBendingInteraction) -> float: pass
+    def getForceConstant() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94OutOfPlaneBendingInteraction instance \a iactn.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     # \param iactn The \e %MMFF94OutOfPlaneBendingInteraction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94OutOfPlaneBendingInteraction, iactn: MMFF94OutOfPlaneBendingInteraction) -> MMFF94OutOfPlaneBendingInteraction: pass
+    def assign(iactn: MMFF94OutOfPlaneBendingInteraction) -> MMFF94OutOfPlaneBendingInteraction: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteraction instance this method is called upon.
     #
     # Different Python \e %MMFF94OutOfPlaneBendingInteraction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94OutOfPlaneBendingInteraction instances \e a and \e b reference different C++ objects. 
@@ -124,7 +111,7 @@ class MMFF94OutOfPlaneBendingInteraction(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94OutOfPlaneBendingInteraction) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 

@@ -26,44 +26,38 @@ class TorsionLibrary(TorsionCategory):
 
     ##
     # \brief Initializes the \e %TorsionLibrary instance.
-    # \param self The \e %TorsionLibrary instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionLibrary instance.
-    # \param self The \e %TorsionLibrary instance to initialize.
     # \param lib 
     #
-    def __init__(self: object, lib: TorsionLibrary) -> None: pass
+    def __init__(lib: TorsionLibrary) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionLibrary instance this method is called upon.
     # \param is 
     #
-    def load(self: TorsionLibrary, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionLibrary instance this method is called upon.
     #
-    def loadDefaults(self: TorsionLibrary) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionLibrary instance this method is called upon.
     # \param os 
     #
-    def save(self: TorsionLibrary, os: CDPL.Base.OStream) -> None: pass
+    def save(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionLibrary instance \a lib.
-    # \param self The \e %TorsionLibrary instance this method is called upon.
     # \param lib The \e %TorsionLibrary instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: TorsionLibrary, lib: TorsionLibrary) -> TorsionLibrary: pass
+    def assign(lib: TorsionLibrary) -> TorsionLibrary: pass
 
     ##
     # \brief 

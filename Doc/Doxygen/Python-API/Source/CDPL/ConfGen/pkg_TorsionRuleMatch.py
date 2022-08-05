@@ -31,37 +31,32 @@ class TorsionRuleMatch(Boost.Python.instance):
 
         ##
         # \brief 
-        # \param self The \e %AtomArray instance this method is called upon.
         # \return 
         #
-        def __len__(self: AtomArray) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %AtomArray instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: AtomArray, atom: CDPL.Chem.Atom) -> bool: pass
+        def __contains__(atom: CDPL.Chem.Atom) -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %AtomArray instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: AtomArray, idx: int) -> CDPL.Chem.Atom: pass
+        def __getitem__(idx: int) -> CDPL.Chem.Atom: pass
 
     ##
     # \brief Initializes the \e %TorsionRuleMatch instance.
-    # \param self The \e %TorsionRuleMatch instance to initialize.
     # \param match 
     #
-    def __init__(self: object, match: TorsionRuleMatch) -> None: pass
+    def __init__(match: TorsionRuleMatch) -> None: pass
 
     ##
     # \brief Initializes the \e %TorsionRuleMatch instance.
-    # \param self The \e %TorsionRuleMatch instance to initialize.
     # \param rule 
     # \param bond 
     # \param atom1 
@@ -69,11 +64,10 @@ class TorsionRuleMatch(Boost.Python.instance):
     # \param atom3 
     # \param atom4 
     #
-    def __init__(self: object, rule: TorsionRule, bond: CDPL.Chem.Bond, atom1: CDPL.Chem.Atom, atom2: CDPL.Chem.Atom, atom3: CDPL.Chem.Atom, atom4: CDPL.Chem.Atom) -> None: pass
+    def __init__(rule: TorsionRule, bond: CDPL.Chem.Bond, atom1: CDPL.Chem.Atom, atom2: CDPL.Chem.Atom, atom3: CDPL.Chem.Atom, atom4: CDPL.Chem.Atom) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TorsionRuleMatch instance this method is called upon.
     #
     # Different Python \e %TorsionRuleMatch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TorsionRuleMatch instances \e a and \e b reference different C++ objects. 
@@ -82,36 +76,32 @@ class TorsionRuleMatch(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: TorsionRuleMatch) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatch instance this method is called upon.
     # \return 
     #
-    def getAtoms(self: TorsionRuleMatch) -> AtomArray: pass
+    def getAtoms() -> AtomArray: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatch instance this method is called upon.
     # \return 
     #
-    def getBond(self: TorsionRuleMatch) -> CDPL.Chem.Bond: pass
+    def getBond() -> CDPL.Chem.Bond: pass
 
     ##
     # \brief 
-    # \param self The \e %TorsionRuleMatch instance this method is called upon.
     # \return 
     #
-    def getRule(self: TorsionRuleMatch) -> TorsionRule: pass
+    def getRule() -> TorsionRule: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRuleMatch instance \a match.
-    # \param self The \e %TorsionRuleMatch instance this method is called upon.
     # \param match The \e %TorsionRuleMatch instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: TorsionRuleMatch, match: TorsionRuleMatch) -> TorsionRuleMatch: pass
+    def assign(match: TorsionRuleMatch) -> TorsionRuleMatch: pass
 
     ##
     # \brief 

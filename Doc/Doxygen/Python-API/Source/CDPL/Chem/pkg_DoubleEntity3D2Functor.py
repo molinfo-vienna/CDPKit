@@ -26,43 +26,37 @@ class DoubleEntity3D2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleEntity3D2Functor instance.
-    # \param self The \e %DoubleEntity3D2Functor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleEntity3D2Functor instance.
-    # \param self The \e %DoubleEntity3D2Functor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: DoubleEntity3D2Functor) -> None: pass
+    def __init__(func: DoubleEntity3D2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleEntity3D2Functor instance.
-    # \param arg1 The \e %DoubleEntity3D2Functor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleEntity3D2Functor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: DoubleEntity3D2Functor, arg1: Entity3D, arg2: Entity3D) -> float: pass
+    def __call__(arg1: Entity3D, arg2: Entity3D) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleEntity3D2Functor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: DoubleEntity3D2Functor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleEntity3D2Functor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: DoubleEntity3D2Functor) -> bool: pass
+    def __nonzero__() -> bool: pass

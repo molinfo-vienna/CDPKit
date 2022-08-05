@@ -26,6 +26,5 @@ class PNGReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %PNGReactionOutputHandler instance.
-    # \param self The \e %PNGReactionOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

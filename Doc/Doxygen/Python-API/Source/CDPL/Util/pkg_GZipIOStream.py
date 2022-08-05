@@ -26,139 +26,120 @@ class GZipIOStream(CDPL.Base.IOStream):
 
     ##
     # \brief Initializes the \e %GZipIOStream instance.
-    # \param self The \e %GZipIOStream instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GZipIOStream instance.
-    # \param self The \e %GZipIOStream instance to initialize.
     # \param ios 
     #
-    def __init__(self: object, ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: CDPL.Base.IOStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readline(self: GZipIOStream, size: int = -1) -> str: pass
+    def readline(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def readlines(self: GZipIOStream, size: int = -1) -> list: pass
+    def readlines(size: int = -1) -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \return 
     #
-    def xreadlines(self: GZipIOStream) -> GZipIOStream: pass
+    def xreadlines() -> GZipIOStream: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param size 
     # \return 
     #
-    def read(self: GZipIOStream, size: int = -1) -> str: pass
+    def read(size: int = -1) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \return 
     #
-    def tell(self: GZipIOStream) -> int: pass
+    def tell() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \return 
     #
-    def tellr(self: GZipIOStream) -> int: pass
+    def tellr() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seek(self: GZipIOStream, offs: int, whence: int = 0) -> None: pass
+    def seek(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekr(self: GZipIOStream, offs: int, whence: int = 0) -> None: pass
+    def seekr(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \return 
     #
-    def next(self: GZipIOStream) -> str: pass
+    def next() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     #
-    def flush(self: GZipIOStream) -> None: pass
+    def flush() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param string 
     #
-    def write(self: GZipIOStream, string: object) -> None: pass
+    def write(string: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param iterable 
     #
-    def writelines(self: GZipIOStream, iterable: object) -> None: pass
+    def writelines(iterable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \return 
     #
-    def tellw(self: GZipIOStream) -> int: pass
+    def tellw() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekw(self: GZipIOStream, offs: int, whence: int = 0) -> None: pass
+    def seekw(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     #
-    def close(self: GZipIOStream) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \param ios 
     #
-    def open(self: GZipIOStream, ios: CDPL.Base.IOStream) -> None: pass
+    def open(ios: CDPL.Base.IOStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GZipIOStream instance this method is called upon.
     # \return 
     #
-    def __iter__(self: GZipIOStream) -> GZipIOStream: pass
+    def __iter__() -> GZipIOStream: pass
 
     ##
     # \brief FIXME!

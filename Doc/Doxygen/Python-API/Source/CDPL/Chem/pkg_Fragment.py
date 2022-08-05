@@ -31,33 +31,29 @@ class Fragment(MolecularGraph):
 
         ##
         # \brief 
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \return 
         #
-        def __len__(self: AtomSequence) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: AtomSequence, idx: int) -> Atom: pass
+        def __getitem__(idx: int) -> Atom: pass
 
         ##
         # \brief 
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param idx 
         #
-        def __delitem__(self: AtomSequence, idx: int) -> None: pass
+        def __delitem__(idx: int) -> None: pass
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: AtomSequence, atom: Atom) -> bool: pass
+        def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief 
@@ -66,219 +62,190 @@ class Fragment(MolecularGraph):
 
         ##
         # \brief 
-        # \param self The \e %BondSequence instance this method is called upon.
         # \return 
         #
-        def __len__(self: BondSequence) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: BondSequence, idx: int) -> Bond: pass
+        def __getitem__(idx: int) -> Bond: pass
 
         ##
         # \brief 
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param idx 
         #
-        def __delitem__(self: BondSequence, idx: int) -> None: pass
+        def __delitem__(idx: int) -> None: pass
 
         ##
         # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param bond The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: BondSequence, bond: Bond) -> bool: pass
+        def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Initializes the \e %Fragment instance.
-    # \param self The \e %Fragment instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Fragment instance.
-    # \param self The \e %Fragment instance to initialize.
     # \param frag 
     #
-    def __init__(self: object, frag: Fragment) -> None: pass
+    def __init__(frag: Fragment) -> None: pass
 
     ##
     # \brief Initializes the \e %Fragment instance.
-    # \param self The \e %Fragment instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Fragment instance \a frag.
-    # \param self The \e %Fragment instance this method is called upon.
     # \param frag The \e %Fragment instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Fragment, frag: Fragment) -> Fragment: pass
+    def assign(frag: Fragment) -> Fragment: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Fragment instance \a molgraph.
-    # \param self The \e %Fragment instance this method is called upon.
     # \param molgraph The \e %Fragment instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Fragment, molgraph: MolecularGraph) -> Fragment: pass
+    def assign(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def addAtom(self: Fragment, atom: Atom) -> bool: pass
+    def addAtom(atom: Atom) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param idx 
     #
-    def removeAtom(self: Fragment, idx: int) -> None: pass
+    def removeAtom(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def removeAtom(self: Fragment, atom: Atom) -> bool: pass
+    def removeAtom(atom: Atom) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param bond 
     # \return 
     #
-    def addBond(self: Fragment, bond: Bond) -> bool: pass
+    def addBond(bond: Bond) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param idx 
     #
-    def removeBond(self: Fragment, idx: int) -> None: pass
+    def removeBond(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param bond 
     # \return 
     #
-    def removeBond(self: Fragment, bond: Bond) -> bool: pass
+    def removeBond(bond: Bond) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     #
-    def clear(self: Fragment) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param frag 
     #
-    def swap(self: Fragment, frag: Fragment) -> None: pass
+    def swap(frag: Fragment) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \return 
     #
-    def getAtoms(self: Fragment) -> AtomSequence: pass
+    def getAtoms() -> AtomSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \return 
     #
-    def getBonds(self: Fragment) -> BondSequence: pass
+    def getBonds() -> BondSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param num_atoms 
     #
-    def reserveMemoryForAtoms(self: Fragment, num_atoms: int) -> None: pass
+    def reserveMemoryForAtoms(num_atoms: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param num_bonds 
     #
-    def reserveMemoryForBonds(self: Fragment, num_bonds: int) -> None: pass
+    def reserveMemoryForBonds(num_bonds: int) -> None: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param self The \e %Fragment instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: AtomContainer, atom: Atom) -> bool: pass
+    def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param self The \e %Fragment instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: BondContainer, bond: Bond) -> bool: pass
+    def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Fragment instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: Fragment, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: Fragment, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: Fragment, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Fragment instance this method is called upon.
     # \return 
     #
-    def __len__(self: Fragment) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param self The \e %Fragment instance acting as in-place addend.
     # \param molgraph Specifies the second addend.
     # \return The updated \e %Fragment instance \a self.
     #
-    def __iadd__(self: Fragment, molgraph: MolecularGraph) -> Fragment: pass
+    def __iadd__(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
     # \brief 

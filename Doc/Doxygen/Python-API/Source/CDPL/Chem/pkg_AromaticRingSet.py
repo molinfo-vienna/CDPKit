@@ -26,20 +26,17 @@ class AromaticRingSet(FragmentList):
 
     ##
     # \brief Initializes the \e %AromaticRingSet instance.
-    # \param self The \e %AromaticRingSet instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AromaticRingSet instance.
-    # \param self The \e %AromaticRingSet instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticRingSet instance this method is called upon.
     # \param molgraph 
     #
-    def perceive(self: AromaticRingSet, molgraph: MolecularGraph) -> None: pass
+    def perceive(molgraph: MolecularGraph) -> None: pass

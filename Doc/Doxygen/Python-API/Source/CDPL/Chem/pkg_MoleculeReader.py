@@ -26,83 +26,72 @@ class MoleculeReader(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %MoleculeReader instance.
-    # \param self The \e %MoleculeReader instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \param mol 
     # \param overwrite 
     # \return 
     #
-    def read(self: MoleculeReader, mol: Molecule, overwrite: bool = True) -> MoleculeReader: pass
+    def read(mol: Molecule, overwrite: bool = True) -> MoleculeReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \param idx 
     # \param mol 
     # \param overwrite 
     # \return 
     #
-    def read(self: MoleculeReader, idx: int, mol: Molecule, overwrite: bool = True) -> MoleculeReader: pass
+    def read(idx: int, mol: Molecule, overwrite: bool = True) -> MoleculeReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \return 
     #
-    def skip(self: MoleculeReader) -> MoleculeReader: pass
+    def skip() -> MoleculeReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \return 
     #
-    def hasMoreData(self: MoleculeReader) -> bool: pass
+    def hasMoreData() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \return 
     #
-    def getRecordIndex(self: MoleculeReader) -> int: pass
+    def getRecordIndex() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \param idx 
     #
-    def setRecordIndex(self: MoleculeReader, idx: int) -> None: pass
+    def setRecordIndex(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \return 
     #
-    def getNumRecords(self: MoleculeReader) -> int: pass
+    def getNumRecords() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     #
-    def close(self: MoleculeReader) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: MoleculeReader) -> bool: pass
+    def __nonzero__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeReader instance this method is called upon.
     # \return 
     #
-    def __bool__(self: MoleculeReader) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 

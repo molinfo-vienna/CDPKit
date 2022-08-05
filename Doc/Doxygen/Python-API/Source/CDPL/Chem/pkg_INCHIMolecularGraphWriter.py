@@ -26,31 +26,27 @@ class INCHIMolecularGraphWriter(MolecularGraphWriter):
 
     ##
     # \brief Initializes the \e %INCHIMolecularGraphWriter instance.
-    # \param self The \e %INCHIMolecularGraphWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %INCHIMolecularGraphWriter instance this method is called upon.
     # \return 
     #
-    def getReturnCode(self: INCHIMolecularGraphWriter) -> int: pass
+    def getReturnCode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %INCHIMolecularGraphWriter instance this method is called upon.
     # \return 
     #
-    def getMessage(self: INCHIMolecularGraphWriter) -> str: pass
+    def getMessage() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %INCHIMolecularGraphWriter instance this method is called upon.
     # \return 
     #
-    def getLogOutput(self: INCHIMolecularGraphWriter) -> str: pass
+    def getLogOutput() -> str: pass
 
     ##
     # \brief 

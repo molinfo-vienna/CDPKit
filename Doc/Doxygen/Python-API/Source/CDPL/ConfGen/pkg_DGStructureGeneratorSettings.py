@@ -31,60 +31,52 @@ class DGStructureGeneratorSettings(DGConstraintGeneratorSettings):
 
     ##
     # \brief Initializes the \e %DGStructureGeneratorSettings instance.
-    # \param self The \e %DGStructureGeneratorSettings instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGStructureGeneratorSettings instance.
-    # \param self The \e %DGStructureGeneratorSettings instance to initialize.
     # \param settings 
     #
-    def __init__(self: object, settings: DGStructureGeneratorSettings) -> None: pass
+    def __init__(settings: DGStructureGeneratorSettings) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGeneratorSettings instance \a settings.
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \param settings The \e %DGStructureGeneratorSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGStructureGeneratorSettings, settings: DGStructureGeneratorSettings) -> DGStructureGeneratorSettings: pass
+    def assign(settings: DGStructureGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGeneratorSettings instance \a settings.
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \param settings The \e %DGStructureGeneratorSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGStructureGeneratorSettings, settings: DGConstraintGeneratorSettings) -> DGStructureGeneratorSettings: pass
+    def assign(settings: DGConstraintGeneratorSettings) -> DGStructureGeneratorSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \param size 
     #
-    def setBoxSize(self: DGStructureGeneratorSettings, size: float) -> None: pass
+    def setBoxSize(size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getBoxSize(self: DGStructureGeneratorSettings) -> float: pass
+    def getBoxSize() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \param enable 
     #
-    def enablePlanarityConstraints(self: DGStructureGeneratorSettings, enable: bool) -> None: pass
+    def enablePlanarityConstraints(enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def enablePlanarityConstraints(self: DGStructureGeneratorSettings) -> bool: pass
+    def enablePlanarityConstraints() -> bool: pass
 
     ##
     # \brief 

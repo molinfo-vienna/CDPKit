@@ -26,21 +26,18 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94InteractionParameterizer instance.
-    # \param self The \e %MMFF94InteractionParameterizer instance to initialize.
     # \param param_set 
     #
-    def __init__(self: object, param_set: int = 1) -> None: pass
+    def __init__(param_set: int = 1) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94InteractionParameterizer instance.
-    # \param self The \e %MMFF94InteractionParameterizer instance to initialize.
     # \param parameterizer 
     #
-    def __init__(self: object, parameterizer: MMFF94InteractionParameterizer) -> None: pass
+    def __init__(parameterizer: MMFF94InteractionParameterizer) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     #
     # Different Python \e %MMFF94InteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94InteractionParameterizer instances \e a and \e b reference different C++ objects. 
@@ -49,220 +46,190 @@ class MMFF94InteractionParameterizer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94InteractionParameterizer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setBondStretchingFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction2) -> None: pass
+    def setBondStretchingFilterFunction(func: InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setAngleBendingFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction3) -> None: pass
+    def setAngleBendingFilterFunction(func: InteractionFilterFunction3) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setStretchBendFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction3) -> None: pass
+    def setStretchBendFilterFunction(func: InteractionFilterFunction3) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setOutOfPlaneBendingFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction4) -> None: pass
+    def setOutOfPlaneBendingFilterFunction(func: InteractionFilterFunction4) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setTorsionFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction4) -> None: pass
+    def setTorsionFilterFunction(func: InteractionFilterFunction4) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setElectrostaticFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction2) -> None: pass
+    def setElectrostaticFilterFunction(func: InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setVanDerWaalsFilterFunction(self: MMFF94InteractionParameterizer, func: InteractionFilterFunction2) -> None: pass
+    def setVanDerWaalsFilterFunction(func: InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     #
-    def clearFilterFunctions(self: MMFF94InteractionParameterizer) -> None: pass
+    def clearFilterFunctions() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setSymbolicAtomTypePatternTable(self: MMFF94InteractionParameterizer, table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
+    def setSymbolicAtomTypePatternTable(table: MMFF94SymbolicAtomTypePatternTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param map 
     #
-    def setHeavyToHydrogenAtomTypeMap(self: MMFF94InteractionParameterizer, map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
+    def setHeavyToHydrogenAtomTypeMap(map: MMFF94HeavyToHydrogenAtomTypeMap) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param map 
     #
-    def setSymbolicToNumericAtomTypeMap(self: MMFF94InteractionParameterizer, map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
+    def setSymbolicToNumericAtomTypeMap(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setAromaticAtomTypeDefinitionTable(self: MMFF94InteractionParameterizer, table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
+    def setAromaticAtomTypeDefinitionTable(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setAtomTypePropertyTable(self: MMFF94InteractionParameterizer, table: MMFF94AtomTypePropertyTable) -> None: pass
+    def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setFormalAtomChargeDefinitionTable(self: MMFF94InteractionParameterizer, table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
+    def setFormalAtomChargeDefinitionTable(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setBondChargeIncrementTable(self: MMFF94InteractionParameterizer, table: MMFF94BondChargeIncrementTable) -> None: pass
+    def setBondChargeIncrementTable(table: MMFF94BondChargeIncrementTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setPartialBondChargeIncrementTable(self: MMFF94InteractionParameterizer, table: MMFF94PartialBondChargeIncrementTable) -> None: pass
+    def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param map 
     #
-    def setPrimaryToParameterAtomTypeMap(self: MMFF94InteractionParameterizer, map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
+    def setPrimaryToParameterAtomTypeMap(map: MMFF94PrimaryToParameterAtomTypeMap) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setAngleBendingParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94AngleBendingParameterTable) -> None: pass
+    def setAngleBendingParameterTable(table: MMFF94AngleBendingParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setBondStretchingParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94BondStretchingParameterTable) -> None: pass
+    def setBondStretchingParameterTable(table: MMFF94BondStretchingParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setBondStretchingRuleParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94BondStretchingRuleParameterTable) -> None: pass
+    def setBondStretchingRuleParameterTable(table: MMFF94BondStretchingRuleParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setStretchBendParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94StretchBendParameterTable) -> None: pass
+    def setStretchBendParameterTable(table: MMFF94StretchBendParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setDefaultStretchBendParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94DefaultStretchBendParameterTable) -> None: pass
+    def setDefaultStretchBendParameterTable(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setOutOfPlaneBendingParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94OutOfPlaneBendingParameterTable) -> None: pass
+    def setOutOfPlaneBendingParameterTable(table: MMFF94OutOfPlaneBendingParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setTorsionParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94TorsionParameterTable) -> None: pass
+    def setTorsionParameterTable(table: MMFF94TorsionParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setVanDerWaalsParameterTable(self: MMFF94InteractionParameterizer, table: MMFF94VanDerWaalsParameterTable) -> None: pass
+    def setVanDerWaalsParameterTable(table: MMFF94VanDerWaalsParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param de_const 
     #
-    def setDielectricConstant(self: MMFF94InteractionParameterizer, de_const: float) -> None: pass
+    def setDielectricConstant(de_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param dist_expo 
     #
-    def setDistanceExponent(self: MMFF94InteractionParameterizer, dist_expo: float) -> None: pass
+    def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param param_set 
     #
-    def setParameterSet(self: MMFF94InteractionParameterizer, param_set: int) -> None: pass
+    def setParameterSet(param_set: int) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94InteractionParameterizer instance \a parameterizer.
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param parameterizer The \e %MMFF94InteractionParameterizer instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94InteractionParameterizer, parameterizer: MMFF94InteractionParameterizer) -> MMFF94InteractionParameterizer: pass
+    def assign(parameterizer: MMFF94InteractionParameterizer) -> MMFF94InteractionParameterizer: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionParameterizer instance this method is called upon.
     # \param molgraph 
     # \param ia_data 
     # \param ia_types 
     # \param strict 
     #
-    def parameterize(self: MMFF94InteractionParameterizer, molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94InteractionData, ia_types: int = 127, strict: bool = True) -> None: pass
+    def parameterize(molgraph: CDPL.Chem.MolecularGraph, ia_data: MMFF94InteractionData, ia_types: int = 127, strict: bool = True) -> None: pass
 
     ##
     # \brief 

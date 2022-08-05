@@ -31,20 +31,17 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         #
-        def __init__(self: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         #
-        def __init__(self: object, entry: Entry) -> None: pass
+        def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param tor_type_idx 
         # \param term_atom1_type 
         # \param ctr_atom1_type 
@@ -54,11 +51,10 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
         # \param tor_param2 
         # \param tor_param3 
         #
-        def __init__(self: object, tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int, tor_param1: float, tor_param2: float, tor_param3: float) -> None: pass
+        def __init__(tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int, tor_param1: float, tor_param2: float, tor_param3: float) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         #
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -67,85 +63,74 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Entry) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: Entry, entry: Entry) -> Entry: pass
+        def assign(entry: Entry) -> Entry: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getTorsionTypeIndex(self: Entry) -> int: pass
+        def getTorsionTypeIndex() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getTerminalAtom1Type(self: Entry) -> int: pass
+        def getTerminalAtom1Type() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getCenterAtom1Type(self: Entry) -> int: pass
+        def getCenterAtom1Type() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getCenterAtom2Type(self: Entry) -> int: pass
+        def getCenterAtom2Type() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getTerminalAtom2Type(self: Entry) -> int: pass
+        def getTerminalAtom2Type() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getTorsionParameter1(self: Entry) -> float: pass
+        def getTorsionParameter1() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getTorsionParameter2(self: Entry) -> float: pass
+        def getTorsionParameter2() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getTorsionParameter3(self: Entry) -> float: pass
+        def getTorsionParameter3() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def __nonzero__(self: Entry) -> bool: pass
+        def __nonzero__() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def __bool__(self: Entry) -> bool: pass
+        def __bool__() -> bool: pass
 
         ##
         # \brief 
@@ -194,20 +179,17 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94TorsionParameterTable instance.
-    # \param self The \e %MMFF94TorsionParameterTable instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94TorsionParameterTable instance.
-    # \param self The \e %MMFF94TorsionParameterTable instance to initialize.
     # \param table 
     #
-    def __init__(self: object, table: MMFF94TorsionParameterTable) -> None: pass
+    def __init__(table: MMFF94TorsionParameterTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     #
     # Different Python \e %MMFF94TorsionParameterTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94TorsionParameterTable instances \e a and \e b reference different C++ objects. 
@@ -216,11 +198,10 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94TorsionParameterTable) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \param tor_type_idx 
     # \param term_atom1_type 
     # \param ctr_atom1_type 
@@ -230,11 +211,10 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     # \param tor_param2 
     # \param tor_param3 
     #
-    def addEntry(self: MMFF94TorsionParameterTable, tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int, tor_param1: float, tor_param2: float, tor_param3: float) -> None: pass
+    def addEntry(tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int, tor_param1: float, tor_param2: float, tor_param3: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \param tor_type_idx 
     # \param term_atom1_type 
     # \param ctr_atom1_type 
@@ -242,11 +222,10 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     # \param term_atom2_type 
     # \return 
     #
-    def removeEntry(self: MMFF94TorsionParameterTable, tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int) -> bool: pass
+    def removeEntry(tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \param tor_type_idx 
     # \param term_atom1_type 
     # \param ctr_atom1_type 
@@ -254,49 +233,43 @@ class MMFF94TorsionParameterTable(Boost.Python.instance):
     # \param term_atom2_type 
     # \return 
     #
-    def getEntry(self: MMFF94TorsionParameterTable, tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int) -> Entry: pass
+    def getEntry(tor_type_idx: int, term_atom1_type: int, ctr_atom1_type: int, ctr_atom2_type: int, term_atom2_type: int) -> Entry: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     #
-    def clear(self: MMFF94TorsionParameterTable) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: MMFF94TorsionParameterTable) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \return 
     #
-    def getEntries(self: MMFF94TorsionParameterTable) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \param is 
     #
-    def load(self: MMFF94TorsionParameterTable, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \param param_set 
     #
-    def loadDefaults(self: MMFF94TorsionParameterTable, param_set: int) -> None: pass
+    def loadDefaults(param_set: int) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94TorsionParameterTable instance \a table.
-    # \param self The \e %MMFF94TorsionParameterTable instance this method is called upon.
     # \param table The \e %MMFF94TorsionParameterTable instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94TorsionParameterTable, table: MMFF94TorsionParameterTable) -> MMFF94TorsionParameterTable: pass
+    def assign(table: MMFF94TorsionParameterTable) -> MMFF94TorsionParameterTable: pass
 
     ##
     # \brief 

@@ -26,31 +26,27 @@ class INCHIMoleculeReader(MoleculeReader):
 
     ##
     # \brief Initializes the \e %INCHIMoleculeReader instance.
-    # \param self The \e %INCHIMoleculeReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %INCHIMoleculeReader instance this method is called upon.
     # \return 
     #
-    def getReturnCode(self: INCHIMoleculeReader) -> int: pass
+    def getReturnCode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %INCHIMoleculeReader instance this method is called upon.
     # \return 
     #
-    def getMessage(self: INCHIMoleculeReader) -> str: pass
+    def getMessage() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %INCHIMoleculeReader instance this method is called upon.
     # \return 
     #
-    def getLogOutput(self: INCHIMoleculeReader) -> str: pass
+    def getLogOutput() -> str: pass
 
     ##
     # \brief 

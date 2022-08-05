@@ -26,21 +26,18 @@ class AlignedTotalOverlapTverskyScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AlignedTotalOverlapTverskyScore instance.
-    # \param self The \e %AlignedTotalOverlapTverskyScore instance to initialize.
     # \param beta 
     #
-    def __init__(self: object, beta: float = 0.95) -> None: pass
+    def __init__(beta: float = 0.95) -> None: pass
 
     ##
     # \brief Initializes the \e %AlignedTotalOverlapTverskyScore instance.
-    # \param self The \e %AlignedTotalOverlapTverskyScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: AlignedTotalOverlapTverskyScore) -> None: pass
+    def __init__(score: AlignedTotalOverlapTverskyScore) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AlignedTotalOverlapTverskyScore instance this method is called upon.
     #
     # Different Python \e %AlignedTotalOverlapTverskyScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AlignedTotalOverlapTverskyScore instances \e a and \e b reference different C++ objects. 
@@ -49,23 +46,21 @@ class AlignedTotalOverlapTverskyScore(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AlignedTotalOverlapTverskyScore) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AlignedTotalOverlapTverskyScore instance \a score.
-    # \param self The \e %AlignedTotalOverlapTverskyScore instance this method is called upon.
     # \param score The \e %AlignedTotalOverlapTverskyScore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AlignedTotalOverlapTverskyScore, score: AlignedTotalOverlapTverskyScore) -> AlignedTotalOverlapTverskyScore: pass
+    def assign(score: AlignedTotalOverlapTverskyScore) -> AlignedTotalOverlapTverskyScore: pass
 
     ##
     # \brief 
-    # \param self The \e %AlignedTotalOverlapTverskyScore instance this method is called upon.
     # \param res 
     # \return 
     #
-    def __call__(self: AlignedTotalOverlapTverskyScore, res: AlignmentResult) -> float: pass
+    def __call__(res: AlignmentResult) -> float: pass
 
     ##
     # \brief 

@@ -41,23 +41,20 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScore instance.
-    # \param self The \e %PharmacophoreFitScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: PharmacophoreFitScore) -> None: pass
+    def __init__(score: PharmacophoreFitScore) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScore instance.
-    # \param self The \e %PharmacophoreFitScore instance to initialize.
     # \param match_cnt_factor 
     # \param pos_match_factor 
     # \param geom_match_factor 
     #
-    def __init__(self: object, match_cnt_factor: float = 0.8, pos_match_factor: float = 0.1, geom_match_factor: float = 0.1) -> None: pass
+    def __init__(match_cnt_factor: float = 0.8, pos_match_factor: float = 0.1, geom_match_factor: float = 0.1) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PharmacophoreFitScore instance this method is called upon.
     #
     # Different Python \e %PharmacophoreFitScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PharmacophoreFitScore instances \e a and \e b reference different C++ objects. 
@@ -66,34 +63,31 @@ class PharmacophoreFitScore(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: PharmacophoreFitScore) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreFitScore instance \a score.
-    # \param self The \e %PharmacophoreFitScore instance this method is called upon.
     # \param score The \e %PharmacophoreFitScore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PharmacophoreFitScore, score: PharmacophoreFitScore) -> PharmacophoreFitScore: pass
+    def assign(score: PharmacophoreFitScore) -> PharmacophoreFitScore: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreFitScore instance this method is called upon.
     # \param ref_ftrs 
     # \param algnd_ftrs 
     # \param xform 
     # \return 
     #
-    def __call__(self: PharmacophoreFitScore, ref_ftrs: FeatureContainer, algnd_ftrs: FeatureContainer, xform: CDPL.Math.Matrix4D) -> float: pass
+    def __call__(ref_ftrs: FeatureContainer, algnd_ftrs: FeatureContainer, xform: CDPL.Math.Matrix4D) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreFitScore instance this method is called upon.
     # \param ref_ftrs 
     # \param mapping 
     # \return 
     #
-    def __call__(self: PharmacophoreFitScore, ref_ftrs: FeatureContainer, mapping: SpatialFeatureMapping) -> float: pass
+    def __call__(ref_ftrs: FeatureContainer, mapping: SpatialFeatureMapping) -> float: pass
 
     ##
     # \brief 

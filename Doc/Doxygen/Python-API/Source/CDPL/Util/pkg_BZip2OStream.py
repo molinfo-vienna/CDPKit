@@ -26,64 +26,55 @@ class BZip2OStream(CDPL.Base.OStream):
 
     ##
     # \brief Initializes the \e %BZip2OStream instance.
-    # \param self The \e %BZip2OStream instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BZip2OStream instance.
-    # \param self The \e %BZip2OStream instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     #
-    def flush(self: BZip2OStream) -> None: pass
+    def flush() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     # \param string 
     #
-    def write(self: BZip2OStream, string: object) -> None: pass
+    def write(string: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     # \param iterable 
     #
-    def writelines(self: BZip2OStream, iterable: object) -> None: pass
+    def writelines(iterable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     # \return 
     #
-    def tellw(self: BZip2OStream) -> int: pass
+    def tellw() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     # \param offs 
     # \param whence 
     #
-    def seekw(self: BZip2OStream, offs: int, whence: int = 0) -> None: pass
+    def seekw(offs: int, whence: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     #
-    def close(self: BZip2OStream) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BZip2OStream instance this method is called upon.
     # \param os 
     #
-    def open(self: BZip2OStream, os: CDPL.Base.OStream) -> None: pass
+    def open(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief FIXME!

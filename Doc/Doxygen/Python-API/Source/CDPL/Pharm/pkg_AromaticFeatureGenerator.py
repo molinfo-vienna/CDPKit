@@ -41,74 +41,64 @@ class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %AromaticFeatureGenerator instance.
-    # \param self The \e %AromaticFeatureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AromaticFeatureGenerator instance.
-    # \param self The \e %AromaticFeatureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: AromaticFeatureGenerator) -> None: pass
+    def __init__(gen: AromaticFeatureGenerator) -> None: pass
 
     ##
     # \brief Initializes the \e %AromaticFeatureGenerator instance.
-    # \param self The \e %AromaticFeatureGenerator instance to initialize.
     # \param molgraph 
     # \param pharm 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \param type 
     #
-    def setFeatureType(self: AromaticFeatureGenerator, type: int) -> None: pass
+    def setFeatureType(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \param geom 
     #
-    def setFeatureGeometry(self: AromaticFeatureGenerator, geom: int) -> None: pass
+    def setFeatureGeometry(geom: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \param tol 
     #
-    def setFeatureTolerance(self: AromaticFeatureGenerator, tol: float) -> None: pass
+    def setFeatureTolerance(tol: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureType(self: AromaticFeatureGenerator) -> int: pass
+    def getFeatureType() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureGeometry(self: AromaticFeatureGenerator) -> int: pass
+    def getFeatureGeometry() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureTolerance(self: AromaticFeatureGenerator) -> float: pass
+    def getFeatureTolerance() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AromaticFeatureGenerator instance \a gen.
-    # \param self The \e %AromaticFeatureGenerator instance this method is called upon.
     # \param gen The \e %AromaticFeatureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AromaticFeatureGenerator, gen: AromaticFeatureGenerator) -> AromaticFeatureGenerator: pass
+    def assign(gen: AromaticFeatureGenerator) -> AromaticFeatureGenerator: pass
 
     ##
     # \brief 

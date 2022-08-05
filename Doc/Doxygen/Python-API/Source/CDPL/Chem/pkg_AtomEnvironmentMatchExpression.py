@@ -26,8 +26,7 @@ class AtomEnvironmentMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomEnvironmentMatchExpression instance.
-    # \param self The \e %AtomEnvironmentMatchExpression instance to initialize.
     # \param env_pattern 
     # \param not_match 
     #
-    def __init__(self: object, env_pattern: MolecularGraph, not_match: bool) -> None: pass
+    def __init__(env_pattern: MolecularGraph, not_match: bool) -> None: pass

@@ -26,13 +26,11 @@ class ImineEnamineTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %ImineEnamineTautomerization instance.
-    # \param self The \e %ImineEnamineTautomerization instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ImineEnamineTautomerization instance.
-    # \param self The \e %ImineEnamineTautomerization instance to initialize.
     # \param rule 
     #
-    def __init__(self: object, rule: ImineEnamineTautomerization) -> None: pass
+    def __init__(rule: ImineEnamineTautomerization) -> None: pass

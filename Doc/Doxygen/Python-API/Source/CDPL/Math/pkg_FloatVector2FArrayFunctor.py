@@ -26,42 +26,36 @@ class FloatVector2FArrayFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FloatVector2FArrayFunctor instance.
-    # \param self The \e %FloatVector2FArrayFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FloatVector2FArrayFunctor instance.
-    # \param self The \e %FloatVector2FArrayFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: FloatVector2FArrayFunctor) -> None: pass
+    def __init__(func: FloatVector2FArrayFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FloatVector2FArrayFunctor instance.
-    # \param arg1 The \e %FloatVector2FArrayFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FloatVector2FArrayFunctor instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __call__(self: FloatVector2FArrayFunctor, arg1: Vector2FArray) -> float: pass
+    def __call__(arg1: Vector2FArray) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FloatVector2FArrayFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: FloatVector2FArrayFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FloatVector2FArrayFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: FloatVector2FArrayFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

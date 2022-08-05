@@ -26,29 +26,25 @@ class LVectorRange(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LVectorRange instance.
-    # \param self The \e %LVectorRange instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: LVectorRange) -> None: pass
+    def __init__(r: LVectorRange) -> None: pass
 
     ##
     # \brief Initializes the \e %LVectorRange instance.
-    # \param self The \e %LVectorRange instance to initialize.
     # \param e 
     # \param r 
     #
-    def __init__(self: object, e: LVectorExpression, r: Range) -> None: pass
+    def __init__(e: LVectorExpression, r: Range) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def getStart(self: LVectorRange) -> int: pass
+    def getStart() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LVectorRange instance this method is called upon.
     #
     # Different Python \e %LVectorRange instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LVectorRange instances \e a and \e b reference different C++ objects. 
@@ -57,302 +53,264 @@ class LVectorRange(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: LVectorRange) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorRange instance \a e.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param e The \e %LVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorRange, e: ConstFVectorExpression) -> LVectorRange: pass
+    def assign(e: ConstFVectorExpression) -> LVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorRange instance \a e.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param e The \e %LVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorRange, e: ConstDVectorExpression) -> LVectorRange: pass
+    def assign(e: ConstDVectorExpression) -> LVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorRange instance \a e.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param e The \e %LVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorRange, e: ConstLVectorExpression) -> LVectorRange: pass
+    def assign(e: ConstLVectorExpression) -> LVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorRange instance \a e.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param e The \e %LVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorRange, e: ConstULVectorExpression) -> LVectorRange: pass
+    def assign(e: ConstULVectorExpression) -> LVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorRange instance \a r.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param r The \e %LVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorRange, r: LVectorRange) -> LVectorRange: pass
+    def assign(r: LVectorRange) -> LVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorRange instance \a a.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param a The \e %LVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorRange, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: LVectorRange) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def getSize(self: LVectorRange) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: LVectorRange, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def toArray(self: LVectorRange) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param r 
     #
-    def swap(self: LVectorRange, r: LVectorRange) -> None: pass
+    def swap(r: LVectorRange) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: LVectorRange, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def getData(self: LVectorRange) -> LVectorExpression: pass
+    def getData() -> LVectorExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param r The \e %LVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: LVectorRange, r: LVectorRange) -> bool: pass
+    def __eq__(r: LVectorRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param e The \e %LVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: LVectorRange, e: ConstLVectorExpression) -> bool: pass
+    def __eq__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param r The \e %LVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: LVectorRange, r: LVectorRange) -> bool: pass
+    def __ne__(r: LVectorRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param e The \e %LVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: LVectorRange, e: ConstLVectorExpression) -> bool: pass
+    def __ne__(e: ConstLVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: LVectorRange, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: LVectorRange, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def __len__(self: LVectorRange) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %LVectorRange instance.
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: LVectorRange) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def __pos__(self: LVectorRange) -> LVectorRange: pass
+    def __pos__() -> LVectorRange: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstLVectorExpression: pass
+    def __neg__() -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %LVectorRange instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %LVectorRange instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __add__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %LVectorRange instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %LVectorRange instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __sub__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %LVectorRange instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %LVectorRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __mul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %LVectorRange instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %LVectorRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
+    def __mul__(e: ConstLMatrixExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %LVectorRange instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %LVectorRange instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __div__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __truediv__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstLVectorExpression: pass
+    def __rmul__(t: int) -> ConstLVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: LVectorRange, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param self The \e %LVectorRange instance acting as in-place addend.
     # \param r Specifies the second addend.
     # \return The updated \e %LVectorRange instance \a self.
     #
-    def __iadd__(self: LVectorRange, r: LVectorRange) -> LVectorRange: pass
+    def __iadd__(r: LVectorRange) -> LVectorRange: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %LVectorRange instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %LVectorRange instance \a self.
     #
-    def __iadd__(self: LVectorRange, e: ConstLVectorExpression) -> LVectorRange: pass
+    def __iadd__(e: ConstLVectorExpression) -> LVectorRange: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param self The \e %LVectorRange instance acting as in-place minuend.
     # \param r Specifies the subtrahend.
     # \return The updated \e %LVectorRange instance \a self.
     #
-    def __isub__(self: LVectorRange, r: LVectorRange) -> LVectorRange: pass
+    def __isub__(r: LVectorRange) -> LVectorRange: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %LVectorRange instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %LVectorRange instance \a self.
     #
-    def __isub__(self: LVectorRange, e: ConstLVectorExpression) -> LVectorRange: pass
+    def __isub__(e: ConstLVectorExpression) -> LVectorRange: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %LVectorRange instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %LVectorRange instance \a self.
     #
-    def __imul__(self: LVectorRange, t: int) -> LVectorRange: pass
+    def __imul__(t: int) -> LVectorRange: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %LVectorRange instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %LVectorRange instance \a self.
     #
-    def __idiv__(self: LVectorRange, t: int) -> LVectorRange: pass
+    def __idiv__(t: int) -> LVectorRange: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: LVectorRange, t: int) -> LVectorRange: pass
+    def __itruediv__(t: int) -> LVectorRange: pass
 
     ##
     # \brief 

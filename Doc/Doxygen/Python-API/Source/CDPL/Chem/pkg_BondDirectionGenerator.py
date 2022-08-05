@@ -26,21 +26,18 @@ class BondDirectionGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BondDirectionGenerator instance.
-    # \param self The \e %BondDirectionGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BondDirectionGenerator instance.
-    # \param self The \e %BondDirectionGenerator instance to initialize.
     # \param molgraph 
     # \param dirs 
     #
-    def __init__(self: object, molgraph: MolecularGraph, dirs: CDPL.Util.UIArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, dirs: CDPL.Util.UIArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondDirectionGenerator instance this method is called upon.
     #
     # Different Python \e %BondDirectionGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondDirectionGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,43 +46,38 @@ class BondDirectionGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BondDirectionGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondDirectionGenerator instance this method is called upon.
     # \param include 
     #
-    def includeRingBonds(self: BondDirectionGenerator, include: bool) -> None: pass
+    def includeRingBonds(include: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondDirectionGenerator instance this method is called upon.
     # \return 
     #
-    def ringBondsIncluded(self: BondDirectionGenerator) -> bool: pass
+    def ringBondsIncluded() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BondDirectionGenerator instance this method is called upon.
     # \param min_size 
     #
-    def setRingSizeLimit(self: BondDirectionGenerator, min_size: int) -> None: pass
+    def setRingSizeLimit(min_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondDirectionGenerator instance this method is called upon.
     # \return 
     #
-    def getRingSizeLimit(self: BondDirectionGenerator) -> int: pass
+    def getRingSizeLimit() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondDirectionGenerator instance this method is called upon.
     # \param molgraph 
     # \param dirs 
     #
-    def generate(self: BondDirectionGenerator, molgraph: MolecularGraph, dirs: CDPL.Util.UIArray) -> None: pass
+    def generate(molgraph: MolecularGraph, dirs: CDPL.Util.UIArray) -> None: pass
 
     ##
     # \brief 

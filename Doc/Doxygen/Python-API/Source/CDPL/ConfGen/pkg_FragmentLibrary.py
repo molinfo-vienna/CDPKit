@@ -26,20 +26,17 @@ class FragmentLibrary(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentLibrary instance.
-    # \param self The \e %FragmentLibrary instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentLibrary instance.
-    # \param self The \e %FragmentLibrary instance to initialize.
     # \param lib 
     #
-    def __init__(self: object, lib: FragmentLibrary) -> None: pass
+    def __init__(lib: FragmentLibrary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     #
     # Different Python \e %FragmentLibrary instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLibrary instances \e a and \e b reference different C++ objects. 
@@ -48,94 +45,82 @@ class FragmentLibrary(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FragmentLibrary) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param lib 
     #
-    def addEntries(self: FragmentLibrary, lib: FragmentLibrary) -> None: pass
+    def addEntries(lib: FragmentLibrary) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param entry 
     # \return 
     #
-    def addEntry(self: FragmentLibrary, entry: FragmentLibraryEntry) -> bool: pass
+    def addEntry(entry: FragmentLibraryEntry) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param hash_code 
     # \return 
     #
-    def removeEntry(self: FragmentLibrary, hash_code: int) -> bool: pass
+    def removeEntry(hash_code: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param hash_code 
     # \return 
     #
-    def getEntry(self: FragmentLibrary, hash_code: int) -> FragmentLibraryEntry: pass
+    def getEntry(hash_code: int) -> FragmentLibraryEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param hash_code 
     # \return 
     #
-    def containsEntry(self: FragmentLibrary, hash_code: int) -> bool: pass
+    def containsEntry(hash_code: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     #
-    def clear(self: FragmentLibrary) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: FragmentLibrary) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \return 
     #
-    def getEntries(self: FragmentLibrary) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param is 
     #
-    def load(self: FragmentLibrary, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     #
-    def loadDefaults(self: FragmentLibrary) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param os 
     #
-    def save(self: FragmentLibrary, os: CDPL.Base.OStream) -> None: pass
+    def save(os: CDPL.Base.OStream) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibrary instance \a lib.
-    # \param self The \e %FragmentLibrary instance this method is called upon.
     # \param lib The \e %FragmentLibrary instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FragmentLibrary, lib: FragmentLibrary) -> FragmentLibrary: pass
+    def assign(lib: FragmentLibrary) -> FragmentLibrary: pass
 
     ##
     # \brief 

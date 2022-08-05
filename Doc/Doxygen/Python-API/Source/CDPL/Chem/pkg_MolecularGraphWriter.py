@@ -26,34 +26,29 @@ class MolecularGraphWriter(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %MolecularGraphWriter instance.
-    # \param self The \e %MolecularGraphWriter instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphWriter instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def write(self: MolecularGraphWriter, molgraph: MolecularGraph) -> MolecularGraphWriter: pass
+    def write(molgraph: MolecularGraph) -> MolecularGraphWriter: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphWriter instance this method is called upon.
     #
-    def close(self: MolecularGraphWriter) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphWriter instance this method is called upon.
     # \return 
     #
-    def __bool__(self: MolecularGraphWriter) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphWriter instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: MolecularGraphWriter) -> bool: pass
+    def __nonzero__() -> bool: pass

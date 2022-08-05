@@ -26,7 +26,6 @@ class SMARTSReactionWriter(ReactionWriter):
 
     ##
     # \brief Initializes the \e %SMARTSReactionWriter instance.
-    # \param self The \e %SMARTSReactionWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

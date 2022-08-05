@@ -26,21 +26,18 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstDVectorQuaternionAdapter instance.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance to initialize.
     # \param a 
     #
-    def __init__(self: object, a: ConstDVectorQuaternionAdapter) -> None: pass
+    def __init__(a: ConstDVectorQuaternionAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstDVectorQuaternionAdapter instance.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance to initialize.
     # \param e 
     #
-    def __init__(self: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     #
     # Different Python \e %ConstDVectorQuaternionAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstDVectorQuaternionAdapter instances \e a and \e b reference different C++ objects. 
@@ -49,206 +46,180 @@ class ConstDVectorQuaternionAdapter(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConstDVectorQuaternionAdapter) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def getC1(self: ConstDVectorQuaternionAdapter) -> float: pass
+    def getC1() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def getC2(self: ConstDVectorQuaternionAdapter) -> float: pass
+    def getC2() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def getC3(self: ConstDVectorQuaternionAdapter) -> float: pass
+    def getC3() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def getC4(self: ConstDVectorQuaternionAdapter) -> float: pass
+    def getC4() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def toArray(self: ConstDVectorQuaternionAdapter) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def getData(self: ConstDVectorQuaternionAdapter) -> ConstDVectorExpression: pass
+    def getData() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == a</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %ConstDVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstDVectorQuaternionAdapter, a: ConstDVectorQuaternionAdapter) -> bool: pass
+    def __eq__(a: ConstDVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstDVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstDVectorQuaternionAdapter, q: ConstDQuaternionExpression) -> bool: pass
+    def __eq__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != a</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param a The \e %ConstDVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstDVectorQuaternionAdapter, a: ConstDVectorQuaternionAdapter) -> bool: pass
+    def __ne__(a: ConstDVectorQuaternionAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param q The \e %ConstDVectorQuaternionAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstDVectorQuaternionAdapter, q: ConstDQuaternionExpression) -> bool: pass
+    def __ne__(q: ConstDQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstDVectorQuaternionAdapter instance.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ConstDVectorQuaternionAdapter) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ConstDVectorQuaternionAdapter) -> ConstDVectorQuaternionAdapter: pass
+    def __pos__() -> ConstDVectorQuaternionAdapter: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDQuaternionExpression: pass
+    def __neg__() -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the addition.
     #
-    def __add__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __add__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __add__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __radd__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __radd__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the subtraction.
     #
-    def __sub__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __sub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __sub__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rsub__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __rsub__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __mul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __mul__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __rmul__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __div__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
-    # \param self The \e %ConstDVectorQuaternionAdapter instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %ConstDVectorQuaternionAdapter instance holding the result of the division.
     #
-    def __div__(self: object, e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
+    def __div__(e: ConstDQuaternionExpression) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __truediv__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDVectorQuaternionAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rdiv__(self: object, t: float) -> ConstDQuaternionExpression: pass
+    def __rdiv__(t: float) -> ConstDQuaternionExpression: pass
 
     ##
     # \brief 

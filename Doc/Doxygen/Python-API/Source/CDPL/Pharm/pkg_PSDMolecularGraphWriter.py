@@ -26,14 +26,12 @@ class PSDMolecularGraphWriter(CDPL.Chem.MolecularGraphWriter):
 
     ##
     # \brief Initializes the \e %PSDMolecularGraphWriter instance.
-    # \param self The \e %PSDMolecularGraphWriter instance to initialize.
     # \param ios 
     #
-    def __init__(self: object, ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: CDPL.Base.IOStream) -> None: pass
 
     ##
     # \brief Initializes the \e %PSDMolecularGraphWriter instance.
-    # \param self The \e %PSDMolecularGraphWriter instance to initialize.
     # \param file_name 
     #
-    def __init__(self: object, file_name: str) -> None: pass
+    def __init__(file_name: str) -> None: pass

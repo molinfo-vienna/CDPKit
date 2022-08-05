@@ -26,83 +26,72 @@ class MolecularGraphReader(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %MolecularGraphReader instance.
-    # \param self The \e %MolecularGraphReader instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \param molgraph 
     # \param overwrite 
     # \return 
     #
-    def read(self: MolecularGraphReader, molgraph: MolecularGraph, overwrite: bool = True) -> MolecularGraphReader: pass
+    def read(molgraph: MolecularGraph, overwrite: bool = True) -> MolecularGraphReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \param idx 
     # \param molgraph 
     # \param overwrite 
     # \return 
     #
-    def read(self: MolecularGraphReader, idx: int, molgraph: MolecularGraph, overwrite: bool = True) -> MolecularGraphReader: pass
+    def read(idx: int, molgraph: MolecularGraph, overwrite: bool = True) -> MolecularGraphReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \return 
     #
-    def skip(self: MolecularGraphReader) -> MolecularGraphReader: pass
+    def skip() -> MolecularGraphReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \return 
     #
-    def hasMoreData(self: MolecularGraphReader) -> bool: pass
+    def hasMoreData() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \return 
     #
-    def getRecordIndex(self: MolecularGraphReader) -> int: pass
+    def getRecordIndex() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \param idx 
     #
-    def setRecordIndex(self: MolecularGraphReader, idx: int) -> None: pass
+    def setRecordIndex(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \return 
     #
-    def getNumRecords(self: MolecularGraphReader) -> int: pass
+    def getNumRecords() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     #
-    def close(self: MolecularGraphReader) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: MolecularGraphReader) -> bool: pass
+    def __nonzero__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphReader instance this method is called upon.
     # \return 
     #
-    def __bool__(self: MolecularGraphReader) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 

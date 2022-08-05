@@ -31,27 +31,23 @@ class LogSCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
-    # \param self The \e %LogSCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
-    # \param self The \e %LogSCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: LogSCalculator) -> None: pass
+    def __init__(calculator: LogSCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
-    # \param self The \e %LogSCalculator instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %LogSCalculator instance this method is called upon.
     #
     # Different Python \e %LogSCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %LogSCalculator instances \e a and \e b reference different C++ objects. 
@@ -60,37 +56,33 @@ class LogSCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: LogSCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LogSCalculator instance \a calculator.
-    # \param self The \e %LogSCalculator instance this method is called upon.
     # \param calculator The \e %LogSCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LogSCalculator, calculator: LogSCalculator) -> LogSCalculator: pass
+    def assign(calculator: LogSCalculator) -> LogSCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %LogSCalculator instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def calculate(self: LogSCalculator, molgraph: MolecularGraph) -> float: pass
+    def calculate(molgraph: MolecularGraph) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %LogSCalculator instance this method is called upon.
     # \return 
     #
-    def getResult(self: LogSCalculator) -> float: pass
+    def getResult() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %LogSCalculator instance this method is called upon.
     # \return 
     #
-    def getFeatureVector(self: LogSCalculator) -> CDPL.Math.DVector: pass
+    def getFeatureVector() -> CDPL.Math.DVector: pass
 
     ##
     # \brief 

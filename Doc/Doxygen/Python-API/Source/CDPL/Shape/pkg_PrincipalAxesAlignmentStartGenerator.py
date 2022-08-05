@@ -41,171 +41,147 @@ class PrincipalAxesAlignmentStartGenerator(GaussianShapeAlignmentStartGenerator)
 
     ##
     # \brief Initializes the \e %PrincipalAxesAlignmentStartGenerator instance.
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PrincipalAxesAlignmentStartGenerator instance.
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: PrincipalAxesAlignmentStartGenerator) -> None: pass
+    def __init__(gen: PrincipalAxesAlignmentStartGenerator) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param thresh 
     #
-    def setSymmetryThreshold(self: PrincipalAxesAlignmentStartGenerator, thresh: float) -> None: pass
+    def setSymmetryThreshold(thresh: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def getSymmetryThreshold(self: PrincipalAxesAlignmentStartGenerator) -> float: pass
+    def getSymmetryThreshold() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genShapeCenterStarts(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genShapeCenterStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genShapeCenterStarts(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genShapeCenterStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genColorCenterStarts(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genColorCenterStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genColorCenterStarts(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genColorCenterStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genNonColorCenterStarts(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genNonColorCenterStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genNonColorCenterStarts(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genNonColorCenterStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genRandomStarts(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genRandomStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genRandomStarts(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genRandomStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genForAlignedShapeCenters(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genForAlignedShapeCenters(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genForAlignedShapeCenters(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genForAlignedShapeCenters() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genForReferenceShapeCenters(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genForReferenceShapeCenters(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genForReferenceShapeCenters(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genForReferenceShapeCenters() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param generate 
     #
-    def genForLargerShapeCenters(self: PrincipalAxesAlignmentStartGenerator, generate: bool) -> None: pass
+    def genForLargerShapeCenters(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def genForLargerShapeCenters(self: PrincipalAxesAlignmentStartGenerator) -> bool: pass
+    def genForLargerShapeCenters() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param max_trans 
     #
-    def setMaxRandomTranslation(self: PrincipalAxesAlignmentStartGenerator, max_trans: float) -> None: pass
+    def setMaxRandomTranslation(max_trans: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def getMaxRandomTranslation(self: PrincipalAxesAlignmentStartGenerator) -> float: pass
+    def getMaxRandomTranslation() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param num_starts 
     #
-    def setNumRandomStarts(self: PrincipalAxesAlignmentStartGenerator, num_starts: int) -> None: pass
+    def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def getNumRandomStarts(self: PrincipalAxesAlignmentStartGenerator) -> int: pass
+    def getNumRandomStarts() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param seed 
     #
-    def setRandomSeed(self: PrincipalAxesAlignmentStartGenerator, seed: int) -> None: pass
+    def setRandomSeed(seed: int) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PrincipalAxesAlignmentStartGenerator instance \a gen.
-    # \param self The \e %PrincipalAxesAlignmentStartGenerator instance this method is called upon.
     # \param gen The \e %PrincipalAxesAlignmentStartGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PrincipalAxesAlignmentStartGenerator, gen: PrincipalAxesAlignmentStartGenerator) -> PrincipalAxesAlignmentStartGenerator: pass
+    def assign(gen: PrincipalAxesAlignmentStartGenerator) -> PrincipalAxesAlignmentStartGenerator: pass
 
     ##
     # \brief 

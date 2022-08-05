@@ -26,28 +26,24 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeRDFDescriptorCalculator instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeRDFDescriptorCalculator instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: MoleculeRDFDescriptorCalculator) -> None: pass
+    def __init__(calculator: MoleculeRDFDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeRDFDescriptorCalculator instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance to initialize.
     # \param cntnr 
     # \param descr 
     #
-    def __init__(self: object, cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     #
     # Different Python \e %MoleculeRDFDescriptorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeRDFDescriptorCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,121 +52,105 @@ class MoleculeRDFDescriptorCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MoleculeRDFDescriptorCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeRDFDescriptorCalculator instance \a calculator.
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param calculator The \e %MoleculeRDFDescriptorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MoleculeRDFDescriptorCalculator, calculator: MoleculeRDFDescriptorCalculator) -> MoleculeRDFDescriptorCalculator: pass
+    def assign(calculator: MoleculeRDFDescriptorCalculator) -> MoleculeRDFDescriptorCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: MoleculeRDFDescriptorCalculator, func: Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtomPairWeightFunction(self: MoleculeRDFDescriptorCalculator, func: DoubleAtom2UIntFunctor) -> None: pass
+    def setAtomPairWeightFunction(func: DoubleAtom2UIntFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param num_steps 
     #
-    def setNumSteps(self: MoleculeRDFDescriptorCalculator, num_steps: int) -> None: pass
+    def setNumSteps(num_steps: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getNumSteps(self: MoleculeRDFDescriptorCalculator) -> int: pass
+    def getNumSteps() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param radius_inc 
     #
-    def setRadiusIncrement(self: MoleculeRDFDescriptorCalculator, radius_inc: float) -> None: pass
+    def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getRadiusIncrement(self: MoleculeRDFDescriptorCalculator) -> float: pass
+    def getRadiusIncrement() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param start_radius 
     #
-    def setStartRadius(self: MoleculeRDFDescriptorCalculator, start_radius: float) -> None: pass
+    def setStartRadius(start_radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getStartRadius(self: MoleculeRDFDescriptorCalculator) -> float: pass
+    def getStartRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param factor 
     #
-    def setSmoothingFactor(self: MoleculeRDFDescriptorCalculator, factor: float) -> None: pass
+    def setSmoothingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getSmoothingFactor(self: MoleculeRDFDescriptorCalculator) -> float: pass
+    def getSmoothingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param factor 
     #
-    def setScalingFactor(self: MoleculeRDFDescriptorCalculator, factor: float) -> None: pass
+    def setScalingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def getScalingFactor(self: MoleculeRDFDescriptorCalculator) -> float: pass
+    def getScalingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param enable 
     #
-    def enableDistanceToIntervalCenterRounding(self: MoleculeRDFDescriptorCalculator, enable: bool) -> None: pass
+    def enableDistanceToIntervalCenterRounding(enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \return 
     #
-    def distanceToIntervalsCenterRoundingEnabled(self: MoleculeRDFDescriptorCalculator) -> bool: pass
+    def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeRDFDescriptorCalculator instance this method is called upon.
     # \param cntnr 
     # \param descr 
     #
-    def calculate(self: MoleculeRDFDescriptorCalculator, cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: AtomContainer, descr: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief 

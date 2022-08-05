@@ -31,23 +31,20 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Result instance.
-        # \param self The \e %Result instance to initialize.
         # \param transform 
         # \param overlap 
         # \param col_overlap 
         #
-        def __init__(self: object, transform: CDPL.Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
+        def __init__(transform: CDPL.Math.Matrix4D, overlap: float, col_overlap: float) -> None: pass
 
         ##
         # \brief Initializes the \e %Result instance.
-        # \param self The \e %Result instance to initialize.
         # \param res 
         #
-        def __init__(self: object, res: Result) -> None: pass
+        def __init__(res: Result) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Result instance this method is called upon.
         #
         # Different Python \e %Result instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Result instances \e a and \e b reference different C++ objects. 
@@ -56,36 +53,32 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Result) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Result instance \a res.
-        # \param self The \e %Result instance this method is called upon.
         # \param res The \e %Result instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: Result, res: Result) -> Result: pass
+        def assign(res: Result) -> Result: pass
 
         ##
         # \brief 
-        # \param self The \e %Result instance this method is called upon.
         # \return 
         #
-        def getTransform(self: Result) -> CDPL.Math.Matrix4D: pass
+        def getTransform() -> CDPL.Math.Matrix4D: pass
 
         ##
         # \brief 
-        # \param self The \e %Result instance this method is called upon.
         # \return 
         #
-        def getOverlap(self: Result) -> float: pass
+        def getOverlap() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Result instance this method is called upon.
         # \return 
         #
-        def getColorOverlap(self: Result) -> float: pass
+        def getColorOverlap() -> float: pass
 
         ##
         # \brief 
@@ -119,21 +112,18 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeFunctionAlignment instance.
-    # \param self The \e %GaussianShapeFunctionAlignment instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunctionAlignment instance.
-    # \param self The \e %GaussianShapeFunctionAlignment instance to initialize.
     # \param ref_func 
     # \param sym_class 
     #
-    def __init__(self: object, ref_func: GaussianShapeFunction, sym_class: int) -> None: pass
+    def __init__(ref_func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     #
     # Different Python \e %GaussianShapeFunctionAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeFunctionAlignment instances \e a and \e b reference different C++ objects. 
@@ -142,249 +132,216 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GaussianShapeFunctionAlignment) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     #
-    def setOverlapFunction(self: GaussianShapeFunctionAlignment, func: GaussianShapeOverlapFunction) -> None: pass
+    def setOverlapFunction(func: GaussianShapeOverlapFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getOverlapFunction(self: GaussianShapeFunctionAlignment) -> GaussianShapeOverlapFunction: pass
+    def getOverlapFunction() -> GaussianShapeOverlapFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getDefaultOverlapFunction(self: GaussianShapeFunctionAlignment) -> FastGaussianShapeOverlapFunction: pass
+    def getDefaultOverlapFunction() -> FastGaussianShapeOverlapFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     # \param sym_class 
     #
-    def setReference(self: GaussianShapeFunctionAlignment, func: GaussianShapeFunction, sym_class: int) -> None: pass
+    def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getReference(self: GaussianShapeFunctionAlignment) -> GaussianShapeFunction: pass
+    def getReference() -> GaussianShapeFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param gen 
     #
-    def setStartGenerator(self: GaussianShapeFunctionAlignment, gen: GaussianShapeAlignmentStartGenerator) -> None: pass
+    def setStartGenerator(gen: GaussianShapeAlignmentStartGenerator) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getStartGenerator(self: GaussianShapeFunctionAlignment) -> GaussianShapeAlignmentStartGenerator: pass
+    def getStartGenerator() -> GaussianShapeAlignmentStartGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getDefaultStartGenerator(self: GaussianShapeFunctionAlignment) -> PrincipalAxesAlignmentStartGenerator: pass
+    def getDefaultStartGenerator() -> PrincipalAxesAlignmentStartGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     #
-    def setColorMatchFunction(self: GaussianShapeFunctionAlignment, func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
+    def setColorMatchFunction(func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getColorMatchFunction(self: GaussianShapeFunctionAlignment) -> CDPL.Pharm.BoolSizeType2Functor: pass
+    def getColorMatchFunction() -> CDPL.Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     #
-    def setColorFilterFunction(self: GaussianShapeFunctionAlignment, func: BoolSizeTypeFunctor) -> None: pass
+    def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getColorFilterFunction(self: GaussianShapeFunctionAlignment) -> BoolSizeTypeFunctor: pass
+    def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param perf_align 
     #
-    def performAlignment(self: GaussianShapeFunctionAlignment, perf_align: bool) -> None: pass
+    def performAlignment(perf_align: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def performAlignment(self: GaussianShapeFunctionAlignment) -> bool: pass
+    def performAlignment() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param max_iter 
     #
-    def setMaxNumOptimizationIterations(self: GaussianShapeFunctionAlignment, max_iter: int) -> None: pass
+    def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getMaxNumOptimizationIterations(self: GaussianShapeFunctionAlignment) -> int: pass
+    def getMaxNumOptimizationIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param grad_norm 
     #
-    def setOptimizationStopGradient(self: GaussianShapeFunctionAlignment, grad_norm: float) -> None: pass
+    def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getOptimizationStopGradient(self: GaussianShapeFunctionAlignment) -> float: pass
+    def getOptimizationStopGradient() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param optimize 
     #
-    def optimizeOverlap(self: GaussianShapeFunctionAlignment, optimize: bool) -> None: pass
+    def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def optimizeOverlap(self: GaussianShapeFunctionAlignment) -> bool: pass
+    def optimizeOverlap() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param greedy 
     #
-    def greedyOptimization(self: GaussianShapeFunctionAlignment, greedy: bool) -> None: pass
+    def greedyOptimization(greedy: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def greedyOptimization(self: GaussianShapeFunctionAlignment) -> bool: pass
+    def greedyOptimization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     # \param xform 
     # \return 
     #
-    def setupReference(self: GaussianShapeFunctionAlignment, func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupReference(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     # \param xform 
     # \return 
     #
-    def setupAligned(self: GaussianShapeFunctionAlignment, func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupAligned(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param calc 
     # \return 
     #
-    def calcSelfOverlap(self: GaussianShapeFunctionAlignment, calc: GaussianShapeFunction) -> float: pass
+    def calcSelfOverlap(calc: GaussianShapeFunction) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param calc 
     # \return 
     #
-    def calcColorSelfOverlap(self: GaussianShapeFunctionAlignment, calc: GaussianShapeFunction) -> float: pass
+    def calcColorSelfOverlap(calc: GaussianShapeFunction) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param calc 
     #
-    def calcColorOverlaps(self: GaussianShapeFunctionAlignment, calc: bool) -> None: pass
+    def calcColorOverlaps(calc: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def calcColorOverlaps(self: GaussianShapeFunctionAlignment) -> bool: pass
+    def calcColorOverlaps() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param func 
     # \param sym_class 
     # \return 
     #
-    def align(self: GaussianShapeFunctionAlignment, func: GaussianShapeFunction, sym_class: int) -> bool: pass
+    def align(func: GaussianShapeFunction, sym_class: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def getNumResults(self: GaussianShapeFunctionAlignment) -> int: pass
+    def getNumResults() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getResult(self: GaussianShapeFunctionAlignment, idx: int) -> Result: pass
+    def getResult(idx: int) -> Result: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \return 
     #
-    def __len__(self: GaussianShapeFunctionAlignment) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunctionAlignment instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: GaussianShapeFunctionAlignment, idx: int) -> Result: pass
+    def __getitem__(idx: int) -> Result: pass
 
     ##
     # \brief 

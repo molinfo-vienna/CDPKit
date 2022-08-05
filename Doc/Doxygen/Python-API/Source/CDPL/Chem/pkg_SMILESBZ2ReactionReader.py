@@ -26,7 +26,6 @@ class SMILESBZ2ReactionReader(ReactionReader):
 
     ##
     # \brief Initializes the \e %SMILESBZ2ReactionReader instance.
-    # \param self The \e %SMILESBZ2ReactionReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

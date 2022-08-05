@@ -26,13 +26,11 @@ class ReactionMatchExpression(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ReactionMatchExpression instance.
-    # \param self The \e %ReactionMatchExpression instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ReactionMatchExpression instance this method is called upon.
     #
     # Different Python \e %ReactionMatchExpression instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ReactionMatchExpression instances \e a and \e b reference different C++ objects. 
@@ -41,35 +39,32 @@ class ReactionMatchExpression(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ReactionMatchExpression) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionMatchExpression instance this method is called upon.
     # \param query_rxn 
     # \param target_rxn 
     # \param aux_data 
     # \return 
     #
-    def matches(self: ReactionMatchExpression, query_rxn: Reaction, target_rxn: Reaction, aux_data: CDPL.Base.Variant) -> bool: pass
+    def matches(query_rxn: Reaction, target_rxn: Reaction, aux_data: CDPL.Base.Variant) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionMatchExpression instance this method is called upon.
     # \param query_rxn 
     # \param target_rxn 
     # \param mapping 
     # \param aux_data 
     # \return 
     #
-    def mappingMatches(self: ReactionMatchExpression, query_rxn: Reaction, target_rxn: Reaction, mapping: AtomBondMapping, aux_data: CDPL.Base.Variant) -> bool: pass
+    def mappingMatches(query_rxn: Reaction, target_rxn: Reaction, mapping: AtomBondMapping, aux_data: CDPL.Base.Variant) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionMatchExpression instance this method is called upon.
     # \return 
     #
-    def requiresAtomBondMapping(self: ReactionMatchExpression) -> bool: pass
+    def requiresAtomBondMapping() -> bool: pass
 
     ##
     # \brief 

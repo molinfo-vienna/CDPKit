@@ -26,67 +26,58 @@ class BasicReaction(Reaction):
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
-    # \param self The \e %BasicReaction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
-    # \param self The \e %BasicReaction instance to initialize.
     # \param mol 
     #
-    def __init__(self: object, mol: BasicReaction) -> None: pass
+    def __init__(mol: BasicReaction) -> None: pass
 
     ##
     # \brief Initializes the \e %BasicReaction instance.
-    # \param self The \e %BasicReaction instance to initialize.
     # \param mol 
     #
-    def __init__(self: object, mol: Reaction) -> None: pass
+    def __init__(mol: Reaction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicReaction instance this method is called upon.
     # \param role 
     # \return 
     #
-    def addComponent(self: BasicReaction, role: int) -> BasicMolecule: pass
+    def addComponent(role: int) -> BasicMolecule: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicReaction instance this method is called upon.
     # \param role 
     # \param mol 
     # \return 
     #
-    def addComponent(self: BasicReaction, role: int, mol: Molecule) -> BasicMolecule: pass
+    def addComponent(role: int, mol: Molecule) -> BasicMolecule: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicReaction instance this method is called upon.
     # \param rxn 
     #
-    def copy(self: BasicReaction, rxn: BasicReaction) -> None: pass
+    def copy(rxn: BasicReaction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BasicReaction instance this method is called upon.
     # \param rxn 
     #
-    def copy(self: BasicReaction, rxn: Reaction) -> None: pass
+    def copy(rxn: Reaction) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicReaction instance \a rxn.
-    # \param self The \e %BasicReaction instance this method is called upon.
     # \param rxn The \e %BasicReaction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicReaction, rxn: BasicReaction) -> BasicReaction: pass
+    def assign(rxn: BasicReaction) -> BasicReaction: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicReaction instance \a rxn.
-    # \param self The \e %BasicReaction instance this method is called upon.
     # \param rxn The \e %BasicReaction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BasicReaction, rxn: Reaction) -> BasicReaction: pass
+    def assign(rxn: Reaction) -> BasicReaction: pass

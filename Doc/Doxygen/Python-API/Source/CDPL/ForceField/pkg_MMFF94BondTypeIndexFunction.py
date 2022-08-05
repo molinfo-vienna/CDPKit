@@ -26,42 +26,36 @@ class MMFF94BondTypeIndexFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
-    # \param self The \e %MMFF94BondTypeIndexFunction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
-    # \param self The \e %MMFF94BondTypeIndexFunction instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: MMFF94BondTypeIndexFunction) -> None: pass
+    def __init__(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94BondTypeIndexFunction instance.
-    # \param arg1 The \e %MMFF94BondTypeIndexFunction instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondTypeIndexFunction instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __call__(self: MMFF94BondTypeIndexFunction, arg1: CDPL.Chem.Bond) -> int: pass
+    def __call__(arg1: CDPL.Chem.Bond) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondTypeIndexFunction instance this method is called upon.
     # \return 
     #
-    def __bool__(self: MMFF94BondTypeIndexFunction) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94BondTypeIndexFunction instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: MMFF94BondTypeIndexFunction) -> bool: pass
+    def __nonzero__() -> bool: pass

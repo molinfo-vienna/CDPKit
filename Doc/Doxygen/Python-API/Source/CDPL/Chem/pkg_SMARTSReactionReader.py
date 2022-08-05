@@ -26,7 +26,6 @@ class SMARTSReactionReader(ReactionReader):
 
     ##
     # \brief Initializes the \e %SMARTSReactionReader instance.
-    # \param self The \e %SMARTSReactionReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

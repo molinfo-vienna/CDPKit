@@ -26,13 +26,11 @@ class SulfenicAcidTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %SulfenicAcidTautomerization instance.
-    # \param self The \e %SulfenicAcidTautomerization instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SulfenicAcidTautomerization instance.
-    # \param self The \e %SulfenicAcidTautomerization instance to initialize.
     # \param rule 
     #
-    def __init__(self: object, rule: SulfenicAcidTautomerization) -> None: pass
+    def __init__(rule: SulfenicAcidTautomerization) -> None: pass

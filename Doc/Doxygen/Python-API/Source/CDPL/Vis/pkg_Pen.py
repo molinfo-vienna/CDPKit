@@ -101,38 +101,33 @@ class Pen(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Pen instance.
-    # \param self The \e %Pen instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Pen instance.
-    # \param self The \e %Pen instance to initialize.
     # \param pen 
     #
-    def __init__(self: object, pen: Pen) -> None: pass
+    def __init__(pen: Pen) -> None: pass
 
     ##
     # \brief Initializes the \e %Pen instance.
-    # \param self The \e %Pen instance to initialize.
     # \param line_style 
     #
-    def __init__(self: object, line_style: LineStyle) -> None: pass
+    def __init__(line_style: LineStyle) -> None: pass
 
     ##
     # \brief Initializes the \e %Pen instance.
-    # \param self The \e %Pen instance to initialize.
     # \param color 
     # \param width 
     # \param line_style 
     # \param cap_style 
     # \param join_style 
     #
-    def __init__(self: object, color: Color, width: float = 1.0, line_style: LineStyle = CDPL.Vis.LineStyle.SOLID_LINE, cap_style: CapStyle = CDPL.Vis.CapStyle.ROUND_CAP, join_style: JoinStyle = CDPL.Vis.JoinStyle.ROUND_JOIN) -> None: pass
+    def __init__(color: Color, width: float = 1.0, line_style: LineStyle = CDPL.Vis.LineStyle.SOLID_LINE, cap_style: CapStyle = CDPL.Vis.CapStyle.ROUND_CAP, join_style: JoinStyle = CDPL.Vis.JoinStyle.ROUND_JOIN) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Pen instance this method is called upon.
     #
     # Different Python \e %Pen instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Pen instances \e a and \e b reference different C++ objects. 
@@ -141,101 +136,88 @@ class Pen(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Pen) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Pen instance \a pen.
-    # \param self The \e %Pen instance this method is called upon.
     # \param pen The \e %Pen instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Pen, pen: Pen) -> Pen: pass
+    def assign(pen: Pen) -> Pen: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \return 
     #
-    def getCapStyle(self: Pen) -> CapStyle: pass
+    def getCapStyle() -> CapStyle: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \param cap_style 
     #
-    def setCapStyle(self: Pen, cap_style: CapStyle) -> None: pass
+    def setCapStyle(cap_style: CapStyle) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \return 
     #
-    def getColor(self: Pen) -> Color: pass
+    def getColor() -> Color: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \param color 
     #
-    def setColor(self: Pen, color: Color) -> None: pass
+    def setColor(color: Color) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \return 
     #
-    def getJoinStyle(self: Pen) -> JoinStyle: pass
+    def getJoinStyle() -> JoinStyle: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \param join_style 
     #
-    def setJoinStyle(self: Pen, join_style: JoinStyle) -> None: pass
+    def setJoinStyle(join_style: JoinStyle) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \return 
     #
-    def getLineStyle(self: Pen) -> LineStyle: pass
+    def getLineStyle() -> LineStyle: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \param line_style 
     #
-    def setLineStyle(self: Pen, line_style: LineStyle) -> None: pass
+    def setLineStyle(line_style: LineStyle) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \return 
     #
-    def getWidth(self: Pen) -> float: pass
+    def getWidth() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Pen instance this method is called upon.
     # \param width 
     #
-    def setWidth(self: Pen, width: float) -> None: pass
+    def setWidth(width: float) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == pen</tt>.
-    # \param self The \e %Pen instance this method is called upon.
     # \param pen The \e %Pen instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Pen, pen: Pen) -> bool: pass
+    def __eq__(pen: Pen) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != pen</tt>.
-    # \param self The \e %Pen instance this method is called upon.
     # \param pen The \e %Pen instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Pen, pen: Pen) -> bool: pass
+    def __ne__(pen: Pen) -> bool: pass
 
     ##
     # \brief 

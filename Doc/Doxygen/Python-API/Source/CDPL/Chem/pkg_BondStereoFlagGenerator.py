@@ -26,21 +26,18 @@ class BondStereoFlagGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BondStereoFlagGenerator instance.
-    # \param self The \e %BondStereoFlagGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BondStereoFlagGenerator instance.
-    # \param self The \e %BondStereoFlagGenerator instance to initialize.
     # \param molgraph 
     # \param flags 
     #
-    def __init__(self: object, molgraph: MolecularGraph, flags: CDPL.Util.UIArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, flags: CDPL.Util.UIArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondStereoFlagGenerator instance this method is called upon.
     #
     # Different Python \e %BondStereoFlagGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondStereoFlagGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,29 +46,26 @@ class BondStereoFlagGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BondStereoFlagGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondStereoFlagGenerator instance this method is called upon.
     # \param func 
     #
-    def setAtom2DCoordinatesFunction(self: BondStereoFlagGenerator, func: Vector2DAtomFunctor) -> None: pass
+    def setAtom2DCoordinatesFunction(func: Vector2DAtomFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondStereoFlagGenerator instance this method is called upon.
     # \return 
     #
-    def getAtom2DCoordinatesFunction(self: BondStereoFlagGenerator) -> Vector2DAtomFunctor: pass
+    def getAtom2DCoordinatesFunction() -> Vector2DAtomFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %BondStereoFlagGenerator instance this method is called upon.
     # \param molgraph 
     # \param flags 
     #
-    def generate(self: BondStereoFlagGenerator, molgraph: MolecularGraph, flags: CDPL.Util.UIArray) -> None: pass
+    def generate(molgraph: MolecularGraph, flags: CDPL.Util.UIArray) -> None: pass
 
     ##
     # \brief 

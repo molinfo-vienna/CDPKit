@@ -26,30 +26,26 @@ class PharmacophoreAlignment(SpatialFeatureAlignment):
 
     ##
     # \brief Initializes the \e %PharmacophoreAlignment instance.
-    # \param self The \e %PharmacophoreAlignment instance to initialize.
     # \param query_mode 
     #
-    def __init__(self: object, query_mode: bool) -> None: pass
+    def __init__(query_mode: bool) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreAlignment instance.
-    # \param self The \e %PharmacophoreAlignment instance to initialize.
     # \param alignment 
     #
-    def __init__(self: object, alignment: PharmacophoreAlignment) -> None: pass
+    def __init__(alignment: PharmacophoreAlignment) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreAlignment instance this method is called upon.
     # \param cntnr 
     # \param first_set 
     #
-    def addFeatures(self: PharmacophoreAlignment, cntnr: FeatureContainer, first_set: bool) -> None: pass
+    def addFeatures(cntnr: FeatureContainer, first_set: bool) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreAlignment instance \a alignment.
-    # \param self The \e %PharmacophoreAlignment instance this method is called upon.
     # \param alignment The \e %PharmacophoreAlignment instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PharmacophoreAlignment, alignment: PharmacophoreAlignment) -> PharmacophoreAlignment: pass
+    def assign(alignment: PharmacophoreAlignment) -> PharmacophoreAlignment: pass

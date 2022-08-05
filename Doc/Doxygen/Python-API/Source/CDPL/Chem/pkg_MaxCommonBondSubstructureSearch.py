@@ -26,20 +26,17 @@ class MaxCommonBondSubstructureSearch(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MaxCommonBondSubstructureSearch instance.
-    # \param self The \e %MaxCommonBondSubstructureSearch instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MaxCommonBondSubstructureSearch instance.
-    # \param self The \e %MaxCommonBondSubstructureSearch instance to initialize.
     # \param query 
     #
-    def __init__(self: object, query: MolecularGraph) -> None: pass
+    def __init__(query: MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     #
     # Different Python \e %MaxCommonBondSubstructureSearch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MaxCommonBondSubstructureSearch instances \e a and \e b reference different C++ objects. 
@@ -48,118 +45,103 @@ class MaxCommonBondSubstructureSearch(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MaxCommonBondSubstructureSearch) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def mappingExists(self: MaxCommonBondSubstructureSearch, target: MolecularGraph) -> bool: pass
+    def mappingExists(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def findMappings(self: MaxCommonBondSubstructureSearch, target: MolecularGraph) -> bool: pass
+    def findMappings(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getNumMappings(self: MaxCommonBondSubstructureSearch) -> int: pass
+    def getNumMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getMapping(self: MaxCommonBondSubstructureSearch, idx: int) -> AtomBondMapping: pass
+    def getMapping(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param unique 
     #
-    def uniqueMappingsOnly(self: MaxCommonBondSubstructureSearch, unique: bool) -> None: pass
+    def uniqueMappingsOnly(unique: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def uniqueMappingsOnly(self: MaxCommonBondSubstructureSearch) -> bool: pass
+    def uniqueMappingsOnly() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getMaxNumMappings(self: MaxCommonBondSubstructureSearch) -> int: pass
+    def getMaxNumMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param max_num_mappings 
     #
-    def setMaxNumMappings(self: MaxCommonBondSubstructureSearch, max_num_mappings: int) -> None: pass
+    def setMaxNumMappings(max_num_mappings: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getMinSubstructureSize(self: MaxCommonBondSubstructureSearch) -> int: pass
+    def getMinSubstructureSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param min_size 
     #
-    def setMinSubstructureSize(self: MaxCommonBondSubstructureSearch, min_size: int) -> None: pass
+    def setMinSubstructureSize(min_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param query 
     #
-    def setQuery(self: MaxCommonBondSubstructureSearch, query: MolecularGraph) -> None: pass
+    def setQuery(query: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: MaxCommonBondSubstructureSearch, idx: int) -> AtomBondMapping: pass
+    def __getitem__(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def __len__(self: MaxCommonBondSubstructureSearch) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __nonzero__(arg1: MaxCommonBondSubstructureSearch, self: MolecularGraph) -> bool: pass
+    def __nonzero__(self: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MaxCommonBondSubstructureSearch instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __bool__(arg1: MaxCommonBondSubstructureSearch, self: MolecularGraph) -> bool: pass
+    def __bool__(self: MolecularGraph) -> bool: pass
 
     ##
     # \brief 

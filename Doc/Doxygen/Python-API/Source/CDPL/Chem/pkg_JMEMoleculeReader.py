@@ -26,7 +26,6 @@ class JMEMoleculeReader(MoleculeReader):
 
     ##
     # \brief Initializes the \e %JMEMoleculeReader instance.
-    # \param self The \e %JMEMoleculeReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

@@ -31,28 +31,24 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         #
-        def __init__(self: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         #
-        def __init__(self: object, entry: Entry) -> None: pass
+        def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param sym_type 
         # \param num_type 
         #
-        def __init__(self: object, sym_type: str, num_type: int) -> None: pass
+        def __init__(sym_type: str, num_type: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         #
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -61,7 +57,7 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Entry) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief 
@@ -80,20 +76,17 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94SymbolicToNumericAtomTypeMap instance.
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94SymbolicToNumericAtomTypeMap instance.
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance to initialize.
     # \param map 
     #
-    def __init__(self: object, map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
+    def __init__(map: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     #
     # Different Python \e %MMFF94SymbolicToNumericAtomTypeMap instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94SymbolicToNumericAtomTypeMap instances \e a and \e b reference different C++ objects. 
@@ -102,72 +95,63 @@ class MMFF94SymbolicToNumericAtomTypeMap(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94SymbolicToNumericAtomTypeMap) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \param sym_type 
     # \param num_type 
     #
-    def addEntry(self: MMFF94SymbolicToNumericAtomTypeMap, sym_type: str, num_type: int) -> None: pass
+    def addEntry(sym_type: str, num_type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \param sym_type 
     # \return 
     #
-    def removeEntry(self: MMFF94SymbolicToNumericAtomTypeMap, sym_type: str) -> bool: pass
+    def removeEntry(sym_type: str) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \param sym_type 
     # \return 
     #
-    def getEntry(self: MMFF94SymbolicToNumericAtomTypeMap, sym_type: str) -> int: pass
+    def getEntry(sym_type: str) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     #
-    def clear(self: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: MMFF94SymbolicToNumericAtomTypeMap) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \return 
     #
-    def getEntries(self: MMFF94SymbolicToNumericAtomTypeMap) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \param is 
     #
-    def load(self: MMFF94SymbolicToNumericAtomTypeMap, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     #
-    def loadDefaults(self: MMFF94SymbolicToNumericAtomTypeMap) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94SymbolicToNumericAtomTypeMap instance \a map.
-    # \param self The \e %MMFF94SymbolicToNumericAtomTypeMap instance this method is called upon.
     # \param map The \e %MMFF94SymbolicToNumericAtomTypeMap instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94SymbolicToNumericAtomTypeMap, map: MMFF94SymbolicToNumericAtomTypeMap) -> MMFF94SymbolicToNumericAtomTypeMap: pass
+    def assign(map: MMFF94SymbolicToNumericAtomTypeMap) -> MMFF94SymbolicToNumericAtomTypeMap: pass
 
     ##
     # \brief 

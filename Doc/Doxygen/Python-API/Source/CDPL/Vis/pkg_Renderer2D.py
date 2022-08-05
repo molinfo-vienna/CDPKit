@@ -26,13 +26,11 @@ class Renderer2D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Renderer2D instance.
-    # \param self The \e %Renderer2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Renderer2D instance this method is called upon.
     #
     # Different Python \e %Renderer2D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Renderer2D instances \e a and \e b reference different C++ objects. 
@@ -41,122 +39,107 @@ class Renderer2D(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Renderer2D) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     #
-    def saveState(self: Renderer2D) -> None: pass
+    def saveState() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     #
-    def restoreState(self: Renderer2D) -> None: pass
+    def restoreState() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param xform 
     #
-    def setTransform(self: Renderer2D, xform: CDPL.Math.Matrix3D) -> None: pass
+    def setTransform(xform: CDPL.Math.Matrix3D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param xform 
     #
-    def transform(self: Renderer2D, xform: CDPL.Math.Matrix3D) -> None: pass
+    def transform(xform: CDPL.Math.Matrix3D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param pen 
     #
-    def setPen(self: Renderer2D, pen: Pen) -> None: pass
+    def setPen(pen: Pen) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param brush 
     #
-    def setBrush(self: Renderer2D, brush: Brush) -> None: pass
+    def setBrush(brush: Brush) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param font 
     #
-    def setFont(self: Renderer2D, font: Font) -> None: pass
+    def setFont(font: Font) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param x 
     # \param y 
     # \param width 
     # \param height 
     #
-    def drawRectangle(self: Renderer2D, x: float, y: float, width: float, height: float) -> None: pass
+    def drawRectangle(x: float, y: float, width: float, height: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param x 
     # \param y 
     # \param width 
     # \param height 
     #
-    def drawEllipse(self: Renderer2D, x: float, y: float, width: float, height: float) -> None: pass
+    def drawEllipse(x: float, y: float, width: float, height: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param points 
     #
-    def drawPolygon(self: Renderer2D, points: CDPL.Math.Vector2DArray) -> None: pass
+    def drawPolygon(points: CDPL.Math.Vector2DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param x1 
     # \param y1 
     # \param x2 
     # \param y2 
     #
-    def drawLine(self: Renderer2D, x1: float, y1: float, x2: float, y2: float) -> None: pass
+    def drawLine(x1: float, y1: float, x2: float, y2: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param points 
     #
-    def drawPolyline(self: Renderer2D, points: CDPL.Math.Vector2DArray) -> None: pass
+    def drawPolyline(points: CDPL.Math.Vector2DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param points 
     #
-    def drawLineSegments(self: Renderer2D, points: CDPL.Math.Vector2DArray) -> None: pass
+    def drawLineSegments(points: CDPL.Math.Vector2DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param x 
     # \param y 
     #
-    def drawPoint(self: Renderer2D, x: float, y: float) -> None: pass
+    def drawPoint(x: float, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Renderer2D instance this method is called upon.
     # \param x 
     # \param y 
     # \param txt 
     #
-    def drawText(self: Renderer2D, x: float, y: float, txt: str) -> None: pass
+    def drawText(x: float, y: float, txt: str) -> None: pass
 
     ##
     # \brief 

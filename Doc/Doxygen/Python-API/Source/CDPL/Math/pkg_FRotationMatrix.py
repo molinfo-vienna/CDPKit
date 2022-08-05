@@ -26,43 +26,38 @@ class FRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FRotationMatrix instance.
-    # \param self The \e %FRotationMatrix instance to initialize.
     # \param m 
     #
-    def __init__(self: object, m: FRotationMatrix) -> None: pass
+    def __init__(m: FRotationMatrix) -> None: pass
 
     ##
     # \brief Initializes the \e %FRotationMatrix instance.
-    # \param self The \e %FRotationMatrix instance to initialize.
     # \param n 
     # \param w 
     # \param ux 
     # \param uy 
     # \param uz 
     #
-    def __init__(self: object, n: int, w: float, ux: float, uy: float, uz: float) -> None: pass
+    def __init__(n: int, w: float, ux: float, uy: float, uz: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param w 
     # \param ux 
     # \param uy 
     # \param uz 
     #
-    def set(self: FRotationMatrix, w: float, ux: float, uy: float, uz: float) -> None: pass
+    def set(w: float, ux: float, uy: float, uz: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param arg1 
     # \param n 
     #
-    def resize(arg1: FRotationMatrix, n: int) -> None: pass
+    def resize(n: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     #
     # Different Python \e %FRotationMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FRotationMatrix instances \e a and \e b reference different C++ objects. 
@@ -71,200 +66,175 @@ class FRotationMatrix(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FRotationMatrix) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def getSize1(self: FRotationMatrix) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def getSize2(self: FRotationMatrix) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: FRotationMatrix) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def getElement(self: FRotationMatrix, i: int, j: int) -> float: pass
+    def getElement(i: int, j: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def toArray(self: FRotationMatrix) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRotationMatrix instance \a m.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param m The \e %FRotationMatrix instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FRotationMatrix, m: FRotationMatrix) -> FRotationMatrix: pass
+    def assign(m: FRotationMatrix) -> FRotationMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param m 
     #
-    def swap(self: FRotationMatrix, m: FRotationMatrix) -> None: pass
+    def swap(m: FRotationMatrix) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def __call__(self: FRotationMatrix, i: int, j: int) -> float: pass
+    def __call__(i: int, j: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param ij 
     # \return 
     #
-    def __getitem__(self: FRotationMatrix, ij: tuple) -> float: pass
+    def __getitem__(ij: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def __len__(self: FRotationMatrix) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param m The \e %FRotationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FRotationMatrix, m: FRotationMatrix) -> bool: pass
+    def __eq__(m: FRotationMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param e The \e %FRotationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FRotationMatrix, e: ConstFMatrixExpression) -> bool: pass
+    def __eq__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param m The \e %FRotationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FRotationMatrix, m: FRotationMatrix) -> bool: pass
+    def __ne__(m: FRotationMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param e The \e %FRotationMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FRotationMatrix, e: ConstFMatrixExpression) -> bool: pass
+    def __ne__(e: ConstFMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %FRotationMatrix instance.
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: FRotationMatrix) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def __pos__(self: FRotationMatrix) -> FRotationMatrix: pass
+    def __pos__() -> FRotationMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFMatrixExpression: pass
+    def __neg__() -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FRotationMatrix instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %FRotationMatrix instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+    def __add__(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FRotationMatrix instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FRotationMatrix instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+    def __sub__(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FRotationMatrix instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %FRotationMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFMatrixExpression: pass
+    def __mul__(t: float) -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %FRotationMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %FRotationMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
+    def __mul__(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %FRotationMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %FRotationMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __mul__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FRotationMatrix instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %FRotationMatrix instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFMatrixExpression: pass
+    def __div__(t: float) -> ConstFMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFMatrixExpression: pass
+    def __truediv__(t: float) -> ConstFMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRotationMatrix instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFMatrixExpression: pass
+    def __rmul__(t: float) -> ConstFMatrixExpression: pass
 
     ##
     # \brief 

@@ -26,20 +26,17 @@ class STPairArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %STPairArray instance.
-    # \param self The \e %STPairArray instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %STPairArray instance.
-    # \param self The \e %STPairArray instance to initialize.
     # \param array 
     #
-    def __init__(self: object, array: STPairArray) -> None: pass
+    def __init__(array: STPairArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %STPairArray instance this method is called upon.
     #
     # Different Python \e %STPairArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %STPairArray instances \e a and \e b reference different C++ objects. 
@@ -48,233 +45,203 @@ class STPairArray(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: STPairArray) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \return 
     #
-    def getSize(self: STPairArray) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: STPairArray) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: STPairArray, num_elem: int, value: STPair) -> None: pass
+    def resize(num_elem: int, value: STPair) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: STPairArray, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: STPairArray) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     #
-    def clear(self: STPairArray) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %STPairArray instance \a array.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: STPairArray, array: STPairArray) -> STPairArray: pass
+    def assign(array: STPairArray) -> STPairArray: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %STPairArray instance \a num_elem.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param num_elem The \e %STPairArray instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: STPairArray, num_elem: int, value: STPair) -> None: pass
+    def assign(num_elem: int, value: STPair) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param value 
     #
-    def addElement(self: STPairArray, value: STPair) -> None: pass
+    def addElement(value: STPair) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param values 
     #
-    def addElements(self: STPairArray, values: STPairArray) -> None: pass
+    def addElements(values: STPairArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: STPairArray, idx: int, value: STPair) -> None: pass
+    def insertElement(idx: int, value: STPair) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: STPairArray, idx: int, num_elem: int, value: STPair) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: STPair) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: STPairArray, index: int, values: STPairArray) -> None: pass
+    def insertElements(index: int, values: STPairArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     #
-    def popLastElement(self: STPairArray) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: STPairArray, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: STPairArray, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: STPairArray) -> STPair: pass
+    def getFirstElement() -> STPair: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: STPairArray) -> STPair: pass
+    def getLastElement() -> STPair: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: STPairArray, idx: int) -> STPair: pass
+    def getElement(idx: int) -> STPair: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: STPairArray, idx: int, value: STPair) -> None: pass
+    def setElement(idx: int, value: STPair) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: STPairArray, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: STPairArray, idx: int) -> STPair: pass
+    def __getitem__(idx: int) -> STPair: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \return 
     #
-    def __len__(self: STPairArray) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: STPairArray, index: int, value: STPair) -> None: pass
+    def __setitem__(index: int, value: STPair) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == array</tt>.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: STPairArray, array: STPairArray) -> bool: pass
+    def __eq__(array: STPairArray) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != array</tt>.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: STPairArray, array: STPairArray) -> bool: pass
+    def __ne__(array: STPairArray) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= array</tt>.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __le__(self: STPairArray, array: STPairArray) -> bool: pass
+    def __le__(array: STPairArray) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= array</tt>.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ge__(self: STPairArray, array: STPairArray) -> bool: pass
+    def __ge__(array: STPairArray) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < array</tt>.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __lt__(self: STPairArray, array: STPairArray) -> bool: pass
+    def __lt__(array: STPairArray) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > array</tt>.
-    # \param self The \e %STPairArray instance this method is called upon.
     # \param array The \e %STPairArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __gt__(self: STPairArray, array: STPairArray) -> bool: pass
+    def __gt__(array: STPairArray) -> bool: pass
 
     ##
     # \brief 

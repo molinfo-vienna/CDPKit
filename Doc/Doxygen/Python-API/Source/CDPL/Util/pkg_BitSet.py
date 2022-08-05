@@ -31,35 +31,30 @@ class BitSet(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # \param bs 
     #
-    def __init__(self: object, bs: BitSet) -> None: pass
+    def __init__(bs: BitSet) -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # \param num_bits 
     # \param value 
     #
-    def __init__(self: object, num_bits: int, value: int = 0) -> None: pass
+    def __init__(num_bits: int, value: int = 0) -> None: pass
 
     ##
     # \brief Initializes the \e %BitSet instance.
-    # \param self The \e %BitSet instance to initialize.
     # \param bit_str 
     #
-    def __init__(self: object, bit_str: str) -> None: pass
+    def __init__(bit_str: str) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BitSet instance this method is called upon.
     #
     # Different Python \e %BitSet instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BitSet instances \e a and \e b reference different C++ objects. 
@@ -68,372 +63,324 @@ class BitSet(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BitSet) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     #
-    def swap(self: BitSet, bs: BitSet) -> None: pass
+    def swap(bs: BitSet) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BitSet instance \a bs.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BitSet, bs: BitSet) -> BitSet: pass
+    def assign(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param num_bits 
     # \param value 
     #
-    def resize(self: BitSet, num_bits: int, value: bool = False) -> None: pass
+    def resize(num_bits: int, value: bool = False) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     #
-    def clear(self: BitSet) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param value 
     #
-    def append(self: BitSet, value: bool) -> None: pass
+    def append(value: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def flip(self: BitSet) -> BitSet: pass
+    def flip() -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def flip(self: BitSet, idx: int) -> BitSet: pass
+    def flip(idx: int) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def set(self: BitSet) -> BitSet: pass
+    def set() -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \param value 
     # \return 
     #
-    def set(self: BitSet, idx: int, value: bool = True) -> BitSet: pass
+    def set(idx: int, value: bool = True) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def reset(self: BitSet) -> BitSet: pass
+    def reset() -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def reset(self: BitSet, idx: int) -> BitSet: pass
+    def reset(idx: int) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def test(self: BitSet, idx: int) -> bool: pass
+    def test(idx: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def findFirst(self: BitSet) -> int: pass
+    def findFirst() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def findNext(self: BitSet, idx: int) -> int: pass
+    def findNext(idx: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def isSubsetOf(self: BitSet, bs: BitSet) -> bool: pass
+    def isSubsetOf(bs: BitSet) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def isProperSubsetOf(self: BitSet, bs: BitSet) -> bool: pass
+    def isProperSubsetOf(bs: BitSet) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: BitSet) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def getCount(self: BitSet) -> int: pass
+    def getCount() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def getSize(self: BitSet) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def getMaxSize(self: BitSet) -> int: pass
+    def getMaxSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def hasAny(self: BitSet) -> bool: pass
+    def hasAny() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def hasNone(self: BitSet) -> bool: pass
+    def hasNone() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: BitSet, idx: int) -> bool: pass
+    def __getitem__(idx: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def __setitem__(self: BitSet, idx: int, value: bool) -> None: pass
+    def __setitem__(idx: int, value: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def __and__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __and__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def __or__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __or__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def __xor__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __xor__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - bs</tt>.
-    # \param self The \e %BitSet instance acting as minuend.
     # \param bs Specifies the subtrahend.
     # \return A \e %BitSet instance holding the result of the subtraction.
     #
-    def __sub__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __sub__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def __iand__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __iand__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def __ior__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __ior__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs 
     # \return 
     #
-    def __ixor__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __ixor__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= bs</tt>.
-    # \param self The \e %BitSet instance acting as in-place minuend.
     # \param bs Specifies the subtrahend.
     # \return The updated \e %BitSet instance \a self.
     #
-    def __isub__(self: BitSet, bs: BitSet) -> BitSet: pass
+    def __isub__(bs: BitSet) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def __long__(self: BitSet) -> int: pass
+    def __long__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param num_bits 
     # \return 
     #
-    def __ilshift__(self: BitSet, num_bits: int) -> BitSet: pass
+    def __ilshift__(num_bits: int) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param num_bits 
     # \return 
     #
-    def __lshift__(self: BitSet, num_bits: int) -> BitSet: pass
+    def __lshift__(num_bits: int) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param num_bits 
     # \return 
     #
-    def __irshift__(self: BitSet, num_bits: int) -> BitSet: pass
+    def __irshift__(num_bits: int) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \param num_bits 
     # \return 
     #
-    def __rshift__(self: BitSet, num_bits: int) -> BitSet: pass
+    def __rshift__(num_bits: int) -> BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def __invert__(self: BitSet) -> BitSet: pass
+    def __invert__() -> BitSet: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: BitSet, bs: BitSet) -> bool: pass
+    def __eq__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: BitSet, bs: BitSet) -> bool: pass
+    def __ne__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __lt__(self: BitSet, bs: BitSet) -> bool: pass
+    def __lt__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __le__(self: BitSet, bs: BitSet) -> bool: pass
+    def __le__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __gt__(self: BitSet, bs: BitSet) -> bool: pass
+    def __gt__(bs: BitSet) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= bs</tt>.
-    # \param self The \e %BitSet instance this method is called upon.
     # \param bs The \e %BitSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ge__(self: BitSet, bs: BitSet) -> bool: pass
+    def __ge__(bs: BitSet) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def __len__(self: BitSet) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BitSet) -> bool: pass
+    def __nonzero__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BitSet instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BitSet) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %BitSet instance.
-    # \param self The \e %BitSet instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: BitSet) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 

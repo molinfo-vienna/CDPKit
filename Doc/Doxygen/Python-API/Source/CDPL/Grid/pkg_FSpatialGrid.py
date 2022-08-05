@@ -26,167 +26,145 @@ class FSpatialGrid(AttributedGrid):
 
     ##
     # \brief Initializes the \e %FSpatialGrid instance.
-    # \param self The \e %FSpatialGrid instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: FSpatialGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \return 
     #
-    def getNumElements(self: FSpatialGrid) -> int: pass
+    def getNumElements() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: FSpatialGrid, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param i 
     # \param value 
     #
-    def setElement(self: FSpatialGrid, i: int, value: float) -> None: pass
+    def setElement(i: int, value: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param i 
     # \param coords 
     #
-    def getCoordinates(self: FSpatialGrid, i: int, coords: CDPL.Math.Vector3F) -> None: pass
+    def getCoordinates(i: int, coords: CDPL.Math.Vector3F) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setProperty(self: FSpatialGrid, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeProperty(self: FSpatialGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \return 
     #
-    def getProperty(self: FSpatialGrid, key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
+    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def isPropertySet(self: FSpatialGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     #
-    def clearProperties(self: FSpatialGrid) -> None: pass
+    def clearProperties() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param cntnr 
     #
-    def addProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param cntnr 
     #
-    def copyProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param cntnr 
     #
-    def swap(self: FSpatialGrid, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: FSpatialGrid, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: FSpatialGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: FSpatialGrid, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param i 
     # \param value 
     #
-    def __setitem__(self: FSpatialGrid, i: int, value: float) -> None: pass
+    def __setitem__(i: int, value: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: FSpatialGrid, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: FSpatialGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FSpatialGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: FSpatialGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass

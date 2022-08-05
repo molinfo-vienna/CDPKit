@@ -26,43 +26,37 @@ class BoolAlignmentResult2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolAlignmentResult2Functor instance.
-    # \param self The \e %BoolAlignmentResult2Functor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAlignmentResult2Functor instance.
-    # \param self The \e %BoolAlignmentResult2Functor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: BoolAlignmentResult2Functor) -> None: pass
+    def __init__(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolAlignmentResult2Functor instance.
-    # \param arg1 The \e %BoolAlignmentResult2Functor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolAlignmentResult2Functor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: BoolAlignmentResult2Functor, arg1: AlignmentResult, arg2: AlignmentResult) -> bool: pass
+    def __call__(arg1: AlignmentResult, arg2: AlignmentResult) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolAlignmentResult2Functor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BoolAlignmentResult2Functor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolAlignmentResult2Functor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BoolAlignmentResult2Functor) -> bool: pass
+    def __nonzero__() -> bool: pass

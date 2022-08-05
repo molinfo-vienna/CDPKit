@@ -36,23 +36,20 @@ class BuriednessScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BuriednessScore instance.
-    # \param self The \e %BuriednessScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: BuriednessScore) -> None: pass
+    def __init__(score: BuriednessScore) -> None: pass
 
     ##
     # \brief Initializes the \e %BuriednessScore instance.
-    # \param self The \e %BuriednessScore instance to initialize.
     # \param probe_radius 
     # \param min_vdw_surf_dist 
     # \param num_test_rays 
     #
-    def __init__(self: object, probe_radius: float = 8.0, min_vdw_surf_dist: float = 1.0, num_test_rays: float = 200) -> None: pass
+    def __init__(probe_radius: float = 8.0, min_vdw_surf_dist: float = 1.0, num_test_rays: float = 200) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BuriednessScore instance this method is called upon.
     #
     # Different Python \e %BuriednessScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BuriednessScore instances \e a and \e b reference different C++ objects. 
@@ -61,80 +58,70 @@ class BuriednessScore(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BuriednessScore) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \param dist 
     #
-    def setMinVdWSurfaceDistance(self: BuriednessScore, dist: float) -> None: pass
+    def setMinVdWSurfaceDistance(dist: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \return 
     #
-    def getMinVdWSurfaceDistance(self: BuriednessScore) -> float: pass
+    def getMinVdWSurfaceDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \param radius 
     #
-    def setProbeRadius(self: BuriednessScore, radius: float) -> None: pass
+    def setProbeRadius(radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \return 
     #
-    def getProbeRadius(self: BuriednessScore) -> float: pass
+    def getProbeRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \param num_rays 
     #
-    def setNumTestRays(self: BuriednessScore, num_rays: int) -> None: pass
+    def setNumTestRays(num_rays: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \return 
     #
-    def getNumTestRays(self: BuriednessScore) -> int: pass
+    def getNumTestRays() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: BuriednessScore, func: Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \return 
     #
-    def getAtom3DCoordinatesFunction(self: BuriednessScore) -> Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessScore instance \a score.
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \param score The \e %BuriednessScore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BuriednessScore, score: BuriednessScore) -> BuriednessScore: pass
+    def assign(score: BuriednessScore) -> BuriednessScore: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessScore instance this method is called upon.
     # \param pos 
     # \param atoms 
     # \return 
     #
-    def __call__(self: BuriednessScore, pos: CDPL.Math.Vector3D, atoms: AtomContainer) -> float: pass
+    def __call__(pos: CDPL.Math.Vector3D, atoms: AtomContainer) -> float: pass
 
     ##
     # \brief 

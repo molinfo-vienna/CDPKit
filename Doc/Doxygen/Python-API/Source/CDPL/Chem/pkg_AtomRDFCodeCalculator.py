@@ -26,28 +26,24 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: AtomRDFCodeCalculator) -> None: pass
+    def __init__(calculator: AtomRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
-    # \param self The \e %AtomRDFCodeCalculator instance to initialize.
     # \param cntnr 
     # \param rdf_code 
     #
-    def __init__(self: object, cntnr: AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     #
     # Different Python \e %AtomRDFCodeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomRDFCodeCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,121 +52,105 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomRDFCodeCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomRDFCodeCalculator instance \a calculator.
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param calculator The \e %AtomRDFCodeCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomRDFCodeCalculator, calculator: AtomRDFCodeCalculator) -> AtomRDFCodeCalculator: pass
+    def assign(calculator: AtomRDFCodeCalculator) -> AtomRDFCodeCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param func 
     #
-    def setEntityPairWeightFunction(self: AtomRDFCodeCalculator, func: DoubleAtom2Functor) -> None: pass
+    def setEntityPairWeightFunction(func: DoubleAtom2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param func 
     #
-    def setEntity3DCoordinatesFunction(self: AtomRDFCodeCalculator, func: Atom3DCoordinatesFunction) -> None: pass
+    def setEntity3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param num_steps 
     #
-    def setNumSteps(self: AtomRDFCodeCalculator, num_steps: int) -> None: pass
+    def setNumSteps(num_steps: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getNumSteps(self: AtomRDFCodeCalculator) -> int: pass
+    def getNumSteps() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param radius_inc 
     #
-    def setRadiusIncrement(self: AtomRDFCodeCalculator, radius_inc: float) -> None: pass
+    def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getRadiusIncrement(self: AtomRDFCodeCalculator) -> float: pass
+    def getRadiusIncrement() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param start_radius 
     #
-    def setStartRadius(self: AtomRDFCodeCalculator, start_radius: float) -> None: pass
+    def setStartRadius(start_radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getStartRadius(self: AtomRDFCodeCalculator) -> float: pass
+    def getStartRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param factor 
     #
-    def setSmoothingFactor(self: AtomRDFCodeCalculator, factor: float) -> None: pass
+    def setSmoothingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getSmoothingFactor(self: AtomRDFCodeCalculator) -> float: pass
+    def getSmoothingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param factor 
     #
-    def setScalingFactor(self: AtomRDFCodeCalculator, factor: float) -> None: pass
+    def setScalingFactor(factor: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getScalingFactor(self: AtomRDFCodeCalculator) -> float: pass
+    def getScalingFactor() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param enable 
     #
-    def enableDistanceToIntervalCenterRounding(self: AtomRDFCodeCalculator, enable: bool) -> None: pass
+    def enableDistanceToIntervalCenterRounding(enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \return 
     #
-    def distanceToIntervalsCenterRoundingEnabled(self: AtomRDFCodeCalculator) -> bool: pass
+    def distanceToIntervalsCenterRoundingEnabled() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomRDFCodeCalculator instance this method is called upon.
     # \param cntnr 
     # \param rdf_code 
     #
-    def calculate(self: AtomRDFCodeCalculator, cntnr: AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: AtomContainer, rdf_code: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief 

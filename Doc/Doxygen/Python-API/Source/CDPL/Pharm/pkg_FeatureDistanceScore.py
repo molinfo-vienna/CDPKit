@@ -26,22 +26,19 @@ class FeatureDistanceScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureDistanceScore instance.
-    # \param self The \e %FeatureDistanceScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: FeatureDistanceScore) -> None: pass
+    def __init__(score: FeatureDistanceScore) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureDistanceScore instance.
-    # \param self The \e %FeatureDistanceScore instance to initialize.
     # \param min_dist 
     # \param max_dist 
     #
-    def __init__(self: object, min_dist: float, max_dist: float) -> None: pass
+    def __init__(min_dist: float, max_dist: float) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     #
     # Different Python \e %FeatureDistanceScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureDistanceScore instances \e a and \e b reference different C++ objects. 
@@ -50,54 +47,48 @@ class FeatureDistanceScore(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FeatureDistanceScore) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \param func 
     #
-    def setNormalizationFunction(self: FeatureDistanceScore, func: DoubleDoubleFunctor) -> None: pass
+    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \return 
     #
-    def getMinDistance(self: FeatureDistanceScore) -> float: pass
+    def getMinDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \return 
     #
-    def getMaxDistance(self: FeatureDistanceScore) -> float: pass
+    def getMaxDistance() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceScore instance \a func.
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \param func The \e %FeatureDistanceScore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FeatureDistanceScore, func: FeatureDistanceScore) -> FeatureDistanceScore: pass
+    def assign(func: FeatureDistanceScore) -> FeatureDistanceScore: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: FeatureDistanceScore, ftr1: Feature, ftr2: Feature) -> float: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureDistanceScore instance this method is called upon.
     # \param ftr1_pos 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: FeatureDistanceScore, ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
 
     ##
     # \brief 

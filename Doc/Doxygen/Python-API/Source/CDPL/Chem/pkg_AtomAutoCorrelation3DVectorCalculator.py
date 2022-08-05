@@ -26,28 +26,24 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomAutoCorrelation3DVectorCalculator instance.
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomAutoCorrelation3DVectorCalculator instance.
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: AtomAutoCorrelation3DVectorCalculator) -> None: pass
+    def __init__(calculator: AtomAutoCorrelation3DVectorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomAutoCorrelation3DVectorCalculator instance.
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance to initialize.
     # \param cntnr 
     # \param vec 
     #
-    def __init__(self: object, cntnr: AtomContainer, vec: CDPL.Math.DVector) -> None: pass
+    def __init__(cntnr: AtomContainer, vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     #
     # Different Python \e %AtomAutoCorrelation3DVectorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomAutoCorrelation3DVectorCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,79 +52,69 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomAutoCorrelation3DVectorCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomAutoCorrelation3DVectorCalculator instance \a calculator.
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param calculator The \e %AtomAutoCorrelation3DVectorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomAutoCorrelation3DVectorCalculator, calculator: AtomAutoCorrelation3DVectorCalculator) -> AtomAutoCorrelation3DVectorCalculator: pass
+    def assign(calculator: AtomAutoCorrelation3DVectorCalculator) -> AtomAutoCorrelation3DVectorCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param func 
     #
-    def setEntityPairWeightFunction(self: AtomAutoCorrelation3DVectorCalculator, func: DoubleAtom2Functor) -> None: pass
+    def setEntityPairWeightFunction(func: DoubleAtom2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param func 
     #
-    def setEntity3DCoordinatesFunction(self: AtomAutoCorrelation3DVectorCalculator, func: Atom3DCoordinatesFunction) -> None: pass
+    def setEntity3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param num_steps 
     #
-    def setNumSteps(self: AtomAutoCorrelation3DVectorCalculator, num_steps: int) -> None: pass
+    def setNumSteps(num_steps: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \return 
     #
-    def getNumSteps(self: AtomAutoCorrelation3DVectorCalculator) -> int: pass
+    def getNumSteps() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param radius_inc 
     #
-    def setRadiusIncrement(self: AtomAutoCorrelation3DVectorCalculator, radius_inc: float) -> None: pass
+    def setRadiusIncrement(radius_inc: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \return 
     #
-    def getRadiusIncrement(self: AtomAutoCorrelation3DVectorCalculator) -> float: pass
+    def getRadiusIncrement() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param start_radius 
     #
-    def setStartRadius(self: AtomAutoCorrelation3DVectorCalculator, start_radius: float) -> None: pass
+    def setStartRadius(start_radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \return 
     #
-    def getStartRadius(self: AtomAutoCorrelation3DVectorCalculator) -> float: pass
+    def getStartRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomAutoCorrelation3DVectorCalculator instance this method is called upon.
     # \param cntnr 
     # \param vec 
     #
-    def calculate(self: AtomAutoCorrelation3DVectorCalculator, cntnr: AtomContainer, vec: CDPL.Math.DVector) -> None: pass
+    def calculate(cntnr: AtomContainer, vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief 

@@ -106,20 +106,17 @@ class ScreeningSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningSettings instance.
-    # \param self The \e %ScreeningSettings instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ScreeningSettings instance.
-    # \param self The \e %ScreeningSettings instance to initialize.
     # \param settings 
     #
-    def __init__(self: object, settings: ScreeningSettings) -> None: pass
+    def __init__(settings: ScreeningSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     #
     # Different Python \e %ScreeningSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningSettings instances \e a and \e b reference different C++ objects. 
@@ -128,183 +125,158 @@ class ScreeningSettings(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ScreeningSettings) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ScreeningSettings instance \a settings.
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param settings The \e %ScreeningSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ScreeningSettings, settings: ScreeningSettings) -> ScreeningSettings: pass
+    def assign(settings: ScreeningSettings) -> ScreeningSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param func 
     #
-    def setScoringFunction(self: ScreeningSettings, func: DoubleAlignmentResultFunctor) -> None: pass
+    def setScoringFunction(func: DoubleAlignmentResultFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getScoringFunction(self: ScreeningSettings) -> DoubleAlignmentResultFunctor: pass
+    def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param cutoff 
     #
-    def setScoreCutoff(self: ScreeningSettings, cutoff: float) -> None: pass
+    def setScoreCutoff(cutoff: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getScoreCutoff(self: ScreeningSettings) -> float: pass
+    def getScoreCutoff() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param type 
     #
-    def setColorFeatureType(self: ScreeningSettings, type: ColorFeatureType) -> None: pass
+    def setColorFeatureType(type: ColorFeatureType) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getColorFeatureType(self: ScreeningSettings) -> ColorFeatureType: pass
+    def getColorFeatureType() -> ColorFeatureType: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param mode 
     #
-    def setScreeningMode(self: ScreeningSettings, mode: ScreeningMode) -> None: pass
+    def setScreeningMode(mode: ScreeningMode) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getScreeningMode(self: ScreeningSettings) -> ScreeningMode: pass
+    def getScreeningMode() -> ScreeningMode: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param mode 
     #
-    def setAlignmentMode(self: ScreeningSettings, mode: AlignmentMode) -> None: pass
+    def setAlignmentMode(mode: AlignmentMode) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getAlignmentMode(self: ScreeningSettings) -> AlignmentMode: pass
+    def getAlignmentMode() -> AlignmentMode: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param num_starts 
     #
-    def setNumRandomStarts(self: ScreeningSettings, num_starts: int) -> None: pass
+    def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getNumRandomStarts(self: ScreeningSettings) -> int: pass
+    def getNumRandomStarts() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param all_c 
     #
-    def allCarbonMode(self: ScreeningSettings, all_c: bool) -> None: pass
+    def allCarbonMode(all_c: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def allCarbonMode(self: ScreeningSettings) -> bool: pass
+    def allCarbonMode() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param all_c 
     #
-    def singleConformerSearch(self: ScreeningSettings, all_c: bool) -> None: pass
+    def singleConformerSearch(all_c: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def singleConformerSearch(self: ScreeningSettings) -> bool: pass
+    def singleConformerSearch() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param max_iter 
     #
-    def setMaxNumOptimizationIterations(self: ScreeningSettings, max_iter: int) -> None: pass
+    def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumOptimizationIterations(self: ScreeningSettings) -> int: pass
+    def getMaxNumOptimizationIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param grad_norm 
     #
-    def setOptimizationStopGradient(self: ScreeningSettings, grad_norm: float) -> None: pass
+    def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def getOptimizationStopGradient(self: ScreeningSettings) -> float: pass
+    def getOptimizationStopGradient() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param optimize 
     #
-    def optimizeOverlap(self: ScreeningSettings, optimize: bool) -> None: pass
+    def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def optimizeOverlap(self: ScreeningSettings) -> bool: pass
+    def optimizeOverlap() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \param greedy 
     #
-    def greedyOptimization(self: ScreeningSettings, greedy: bool) -> None: pass
+    def greedyOptimization(greedy: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningSettings instance this method is called upon.
     # \return 
     #
-    def greedyOptimization(self: ScreeningSettings) -> bool: pass
+    def greedyOptimization() -> bool: pass
 
     ##
     # \brief 

@@ -26,22 +26,19 @@ class MolecularGraphComponentGroupingMatchExpression(MolecularGraphMatchExpressi
 
     ##
     # \brief Initializes the \e %MolecularGraphComponentGroupingMatchExpression instance.
-    # \param self The \e %MolecularGraphComponentGroupingMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: MolecularGraphComponentGroupingMatchExpression) -> None: pass
+    def __init__(expr: MolecularGraphComponentGroupingMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %MolecularGraphComponentGroupingMatchExpression instance.
-    # \param self The \e %MolecularGraphComponentGroupingMatchExpression instance to initialize.
     # \param comp_grouping 
     #
-    def __init__(self: object, comp_grouping: FragmentList) -> None: pass
+    def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraphComponentGroupingMatchExpression instance \a expr.
-    # \param self The \e %MolecularGraphComponentGroupingMatchExpression instance this method is called upon.
     # \param expr The \e %MolecularGraphComponentGroupingMatchExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MolecularGraphComponentGroupingMatchExpression, expr: MolecularGraphComponentGroupingMatchExpression) -> MolecularGraphComponentGroupingMatchExpression: pass
+    def assign(expr: MolecularGraphComponentGroupingMatchExpression) -> MolecularGraphComponentGroupingMatchExpression: pass

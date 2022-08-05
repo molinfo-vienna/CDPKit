@@ -26,20 +26,17 @@ class FKabschAlgorithm(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FKabschAlgorithm instance.
-    # \param self The \e %FKabschAlgorithm instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FKabschAlgorithm instance.
-    # \param self The \e %FKabschAlgorithm instance to initialize.
     # \param algo 
     #
-    def __init__(self: object, algo: FKabschAlgorithm) -> None: pass
+    def __init__(algo: FKabschAlgorithm) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     #
     # Different Python \e %FKabschAlgorithm instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FKabschAlgorithm instances \e a and \e b reference different C++ objects. 
@@ -48,48 +45,43 @@ class FKabschAlgorithm(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FKabschAlgorithm) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FKabschAlgorithm instance \a algo.
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \param algo The \e %FKabschAlgorithm instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FKabschAlgorithm, algo: FKabschAlgorithm) -> FKabschAlgorithm: pass
+    def assign(algo: FKabschAlgorithm) -> FKabschAlgorithm: pass
 
     ##
     # \brief 
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \return 
     #
-    def getTransform(self: FKabschAlgorithm) -> FMatrix: pass
+    def getTransform() -> FMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \param points 
     # \param ref_points 
     # \param do_center 
     # \param max_svd_iter 
     # \return 
     #
-    def align(self: FKabschAlgorithm, points: ConstFMatrixExpression, ref_points: ConstFMatrixExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
+    def align(points: ConstFMatrixExpression, ref_points: ConstFMatrixExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \param points 
     # \param ref_points 
     # \param do_center 
     # \param max_svd_iter 
     # \return 
     #
-    def align(self: FKabschAlgorithm, points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
+    def align(points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \param points 
     # \param ref_points 
     # \param weights 
@@ -97,11 +89,10 @@ class FKabschAlgorithm(Boost.Python.instance):
     # \param max_svd_iter 
     # \return 
     #
-    def align(self: FKabschAlgorithm, points: ConstFMatrixExpression, ref_points: ConstFMatrixExpression, weights: ConstFVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
+    def align(points: ConstFMatrixExpression, ref_points: ConstFMatrixExpression, weights: ConstFVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FKabschAlgorithm instance this method is called upon.
     # \param points 
     # \param ref_points 
     # \param weights 
@@ -109,7 +100,7 @@ class FKabschAlgorithm(Boost.Python.instance):
     # \param max_svd_iter 
     # \return 
     #
-    def align(self: FKabschAlgorithm, points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
+    def align(points: ConstDMatrixExpression, ref_points: ConstDMatrixExpression, weights: ConstDVectorExpression, do_center: bool = True, max_svd_iter: int = 0) -> bool: pass
 
     ##
     # \brief 

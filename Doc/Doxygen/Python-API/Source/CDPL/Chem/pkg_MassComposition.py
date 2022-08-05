@@ -26,20 +26,17 @@ class MassComposition(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MassComposition instance.
-    # \param self The \e %MassComposition instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MassComposition instance.
-    # \param self The \e %MassComposition instance to initialize.
     # \param mass_comp 
     #
-    def __init__(self: object, mass_comp: MassComposition) -> None: pass
+    def __init__(mass_comp: MassComposition) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MassComposition instance this method is called upon.
     #
     # Different Python \e %MassComposition instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MassComposition instances \e a and \e b reference different C++ objects. 
@@ -48,193 +45,169 @@ class MassComposition(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MassComposition) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \return 
     #
-    def getSize(self: MassComposition) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: MassComposition) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     #
-    def clear(self: MassComposition) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MassComposition instance \a map.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param map The \e %MassComposition instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MassComposition, map: MassComposition) -> MassComposition: pass
+    def assign(map: MassComposition) -> MassComposition: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \return 
     #
-    def getValue(self: MassComposition, key: int) -> float: pass
+    def getValue(key: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \param def_value 
     # \return 
     #
-    def getValue(self: MassComposition, key: int, def_value: float) -> float: pass
+    def getValue(key: int, def_value: float) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeEntry(self: MassComposition, key: int) -> bool: pass
+    def removeEntry(key: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setEntry(self: MassComposition, key: int, value: float) -> None: pass
+    def setEntry(key: int, value: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \return 
     #
-    def getKeys(self: MassComposition) -> object: pass
+    def getKeys() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \return 
     #
-    def getValues(self: MassComposition) -> object: pass
+    def getValues() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \return 
     #
-    def getEntries(self: MassComposition) -> object: pass
+    def getEntries() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \return 
     #
-    def containsEntry(self: MassComposition, key: int) -> bool: pass
+    def containsEntry(key: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \param value 
     # \return 
     #
-    def insertEntry(self: MassComposition, key: int, value: float) -> bool: pass
+    def insertEntry(key: int, value: float) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \return 
     #
-    def __len__(self: MassComposition) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: MassComposition, key: int) -> float: pass
+    def __getitem__(key: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: MassComposition, key: int, value: float) -> None: pass
+    def __setitem__(key: int, value: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: MassComposition, key: int) -> bool: pass
+    def __delitem__(key: int) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: MassComposition, key: int) -> bool: pass
+    def __contains__(key: int) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == mass_comp</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param mass_comp The \e %MassComposition instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: MassComposition, mass_comp: object) -> bool: pass
+    def __eq__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != mass_comp</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param mass_comp The \e %MassComposition instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: MassComposition, mass_comp: object) -> bool: pass
+    def __ne__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= mass_comp</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param mass_comp The \e %MassComposition instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __le__(self: MassComposition, mass_comp: object) -> bool: pass
+    def __le__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= mass_comp</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param mass_comp The \e %MassComposition instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ge__(self: MassComposition, mass_comp: object) -> bool: pass
+    def __ge__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < mass_comp</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param mass_comp The \e %MassComposition instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __lt__(self: MassComposition, mass_comp: object) -> bool: pass
+    def __lt__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > mass_comp</tt>.
-    # \param self The \e %MassComposition instance this method is called upon.
     # \param mass_comp The \e %MassComposition instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __gt__(self: MassComposition, mass_comp: object) -> bool: pass
+    def __gt__(mass_comp: object) -> bool: pass
 
     ##
     # \brief 

@@ -26,425 +26,372 @@ class DRegularGrid(DSpatialGrid, CDPL.Math.DRegularSpatialGrid):
 
     ##
     # \brief Initializes the \e %DRegularGrid instance.
-    # \param self The \e %DRegularGrid instance to initialize.
     # \param grid 
     #
-    def __init__(self: object, grid: DRegularGrid) -> None: pass
+    def __init__(grid: DRegularGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGrid instance.
-    # \param self The \e %DRegularGrid instance to initialize.
     # \param data 
     # \param xs 
     # \param ys 
     # \param zs 
     #
-    def __init__(self: object, data: CDPL.Math.DGrid, xs: float, ys: float, zs: float) -> None: pass
+    def __init__(data: CDPL.Math.DGrid, xs: float, ys: float, zs: float) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGrid instance.
-    # \param self The \e %DRegularGrid instance to initialize.
     # \param data 
     # \param s 
     #
-    def __init__(self: object, data: CDPL.Math.DGrid, s: float) -> None: pass
+    def __init__(data: CDPL.Math.DGrid, s: float) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGrid instance.
-    # \param self The \e %DRegularGrid instance to initialize.
     # \param xs 
     # \param ys 
     # \param zs 
     #
-    def __init__(self: object, xs: float, ys: float, zs: float) -> None: pass
+    def __init__(xs: float, ys: float, zs: float) -> None: pass
 
     ##
     # \brief Initializes the \e %DRegularGrid instance.
-    # \param self The \e %DRegularGrid instance to initialize.
     # \param s 
     #
-    def __init__(self: object, s: float) -> None: pass
+    def __init__(s: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param coords 
     #
-    def getCoordinates(self: DRegularGrid, i: int, j: int, k: int, coords: object) -> None: pass
+    def getCoordinates(i: int, j: int, k: int, coords: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param coords 
     #
-    def getCoordinates(self: DRegularGrid, i: int, coords: object) -> None: pass
+    def getCoordinates(i: int, coords: object) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularGrid instance \a e.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param e The \e %DRegularGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DRegularSpatialGrid, e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
+    def assign(e: CDPL.Math.ConstFGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularGrid instance \a e.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param e The \e %DRegularGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DRegularSpatialGrid, e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
+    def assign(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularGrid instance \a e.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param e The \e %DRegularGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DRegularSpatialGrid, e: object) -> CDPL.Math.DRegularSpatialGrid: pass
+    def assign(e: object) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DRegularGrid instance \a g.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param g The \e %DRegularGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DRegularSpatialGrid, g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
+    def assign(g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def getSize1(self: DRegularGrid) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def getSize2(self: DRegularGrid) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def getSize3(self: DRegularGrid) -> int: pass
+    def getSize3() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: DRegularGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def getElement(self: DRegularSpatialGrid, i: int, j: int, k: int) -> float: pass
+    def getElement(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: DRegularSpatialGrid, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def toArray(self: DRegularSpatialGrid) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def getSize(self: DRegularGrid) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param g 
     #
-    def swap(self: DRegularSpatialGrid, g: CDPL.Math.DRegularSpatialGrid) -> None: pass
+    def swap(g: CDPL.Math.DRegularSpatialGrid) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param v 
     #
-    def setElement(self: DRegularSpatialGrid, i: int, j: int, k: int, v: float) -> None: pass
+    def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: DRegularSpatialGrid, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param ijk 
     # \return 
     #
-    def __getitem__(self: DRegularSpatialGrid, ijk: tuple) -> float: pass
+    def __getitem__(ijk: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: DRegularSpatialGrid, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: DRegularGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: DRegularGrid, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param ijk 
     # \param v 
     #
-    def __setitem__(self: DRegularSpatialGrid, ijk: tuple, v: float) -> None: pass
+    def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: DRegularSpatialGrid, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: DRegularGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: DRegularGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def __call__(self: DRegularSpatialGrid, i: int, j: int, k: int) -> float: pass
+    def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: DRegularSpatialGrid, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param g The \e %DRegularGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DRegularSpatialGrid, g: CDPL.Math.DRegularSpatialGrid) -> bool: pass
+    def __eq__(g: CDPL.Math.DRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param e The \e %DRegularGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DRegularSpatialGrid, e: CDPL.Math.ConstDGridExpression) -> bool: pass
+    def __eq__(e: CDPL.Math.ConstDGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param g The \e %DRegularGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DRegularSpatialGrid, g: CDPL.Math.DRegularSpatialGrid) -> bool: pass
+    def __ne__(g: CDPL.Math.DRegularSpatialGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param e The \e %DRegularGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DRegularSpatialGrid, e: CDPL.Math.ConstDGridExpression) -> bool: pass
+    def __ne__(e: CDPL.Math.ConstDGridExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %DRegularGrid instance.
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DRegularSpatialGrid) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __pos__() -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> CDPL.Math.ConstDGridExpression: pass
+    def __neg__() -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DRegularGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DRegularGrid instance holding the result of the addition.
     #
-    def __add__(self: object, e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.ConstDGridExpression: pass
+    def __add__(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DRegularGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DRegularGrid instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.ConstDGridExpression: pass
+    def __sub__(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DRegularGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DRegularGrid instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> CDPL.Math.ConstDGridExpression: pass
+    def __mul__(t: float) -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DRegularGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DRegularGrid instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> CDPL.Math.ConstDGridExpression: pass
+    def __div__(t: float) -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> CDPL.Math.ConstDGridExpression: pass
+    def __truediv__(t: float) -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> CDPL.Math.ConstDGridExpression: pass
+    def __rmul__(t: float) -> CDPL.Math.ConstDGridExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param self The \e %DRegularGrid instance acting as in-place addend.
     # \param g Specifies the second addend.
     # \return The updated \e %DRegularGrid instance \a self.
     #
-    def __iadd__(self: DRegularSpatialGrid, g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __iadd__(g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DRegularGrid instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DRegularGrid instance \a self.
     #
-    def __iadd__(self: DRegularSpatialGrid, e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __iadd__(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param self The \e %DRegularGrid instance acting as in-place minuend.
     # \param g Specifies the subtrahend.
     # \return The updated \e %DRegularGrid instance \a self.
     #
-    def __isub__(self: DRegularSpatialGrid, g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __isub__(g: CDPL.Math.DRegularSpatialGrid) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DRegularGrid instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DRegularGrid instance \a self.
     #
-    def __isub__(self: DRegularSpatialGrid, e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __isub__(e: CDPL.Math.ConstDGridExpression) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DRegularGrid instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DRegularGrid instance \a self.
     #
-    def __imul__(self: DRegularSpatialGrid, t: float) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __imul__(t: float) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DRegularGrid instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DRegularGrid instance \a self.
     #
-    def __idiv__(self: DRegularSpatialGrid, t: float) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __idiv__(t: float) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: DRegularSpatialGrid, t: float) -> CDPL.Math.DRegularSpatialGrid: pass
+    def __itruediv__(t: float) -> CDPL.Math.DRegularSpatialGrid: pass
 
     ##
     # \brief 

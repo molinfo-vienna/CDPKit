@@ -31,22 +31,19 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentationRuler instance.
-        # \param self The \e %FragmentationRuler instance to initialize.
         # \param rule 
         #
-        def __init__(self: object, rule: FragmentationRuler) -> None: pass
+        def __init__(rule: FragmentationRuler) -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentationRuler instance.
-        # \param self The \e %FragmentationRuler instance to initialize.
         # \param match_ptn 
         # \param id 
         #
-        def __init__(self: object, match_ptn: MolecularGraph, id: int) -> None: pass
+        def __init__(match_ptn: MolecularGraph, id: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         #
         # Different Python \e %FragmentationRuler instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentationRuler instances \e a and \e b reference different C++ objects. 
@@ -55,43 +52,38 @@ class FragmentGenerator(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: FragmentationRuler) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentationRuler instance \a rule.
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # \param rule The \e %FragmentationRuler instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: FragmentationRuler, rule: FragmentationRuler) -> FragmentationRuler: pass
+        def assign(rule: FragmentationRuler) -> FragmentationRuler: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # \return 
         #
-        def getMatchPattern(self: FragmentationRuler) -> MolecularGraph: pass
+        def getMatchPattern() -> MolecularGraph: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # \param ptn 
         #
-        def setMatchPattern(self: FragmentationRuler, ptn: MolecularGraph) -> None: pass
+        def setMatchPattern(ptn: MolecularGraph) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # \return 
         #
-        def getID(self: FragmentationRuler) -> int: pass
+        def getID() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentationRuler instance this method is called upon.
         # \param id 
         #
-        def setID(self: FragmentationRuler, id: int) -> None: pass
+        def setID(id: int) -> None: pass
 
         ##
         # \brief 
@@ -115,22 +107,19 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %ExcludePattern instance.
-        # \param self The \e %ExcludePattern instance to initialize.
         # \param excl_ptn 
         #
-        def __init__(self: object, excl_ptn: ExcludePattern) -> None: pass
+        def __init__(excl_ptn: ExcludePattern) -> None: pass
 
         ##
         # \brief Initializes the \e %ExcludePattern instance.
-        # \param self The \e %ExcludePattern instance to initialize.
         # \param match_ptn 
         # \param rule_id 
         #
-        def __init__(self: object, match_ptn: MolecularGraph, rule_id: int) -> None: pass
+        def __init__(match_ptn: MolecularGraph, rule_id: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %ExcludePattern instance this method is called upon.
         #
         # Different Python \e %ExcludePattern instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ExcludePattern instances \e a and \e b reference different C++ objects. 
@@ -139,57 +128,50 @@ class FragmentGenerator(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: ExcludePattern) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %ExcludePattern instance \a excl_ptn.
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \param excl_ptn The \e %ExcludePattern instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: ExcludePattern, excl_ptn: ExcludePattern) -> ExcludePattern: pass
+        def assign(excl_ptn: ExcludePattern) -> ExcludePattern: pass
 
         ##
         # \brief 
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \return 
         #
-        def getMatchPattern(self: ExcludePattern) -> MolecularGraph: pass
+        def getMatchPattern() -> MolecularGraph: pass
 
         ##
         # \brief 
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \param ptn 
         #
-        def setMatchPattern(self: ExcludePattern, ptn: MolecularGraph) -> None: pass
+        def setMatchPattern(ptn: MolecularGraph) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \return 
         #
-        def getRuleID(self: ExcludePattern) -> int: pass
+        def getRuleID() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \param id 
         #
-        def setRuleID(self: ExcludePattern, id: int) -> None: pass
+        def setRuleID(id: int) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \return 
         #
-        def isGeneric(self: ExcludePattern) -> bool: pass
+        def isGeneric() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %ExcludePattern instance this method is called upon.
         # \param generic 
         #
-        def setGeneric(self: ExcludePattern, generic: bool) -> None: pass
+        def setGeneric(generic: bool) -> None: pass
 
         ##
         # \brief 
@@ -218,14 +200,12 @@ class FragmentGenerator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentLink instance.
-        # \param self The \e %FragmentLink instance to initialize.
         # \param link 
         #
-        def __init__(self: object, link: FragmentLink) -> None: pass
+        def __init__(link: FragmentLink) -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentLink instance.
-        # \param self The \e %FragmentLink instance to initialize.
         # \param frag1_idx 
         # \param frag2_idx 
         # \param bond 
@@ -233,11 +213,10 @@ class FragmentGenerator(Boost.Python.instance):
         # \param atom1_label 
         # \param atom2_label 
         #
-        def __init__(self: object, frag1_idx: int, frag2_idx: int, bond: Bond, rule_id: int, atom1_label: int, atom2_label: int) -> None: pass
+        def __init__(frag1_idx: int, frag2_idx: int, bond: Bond, rule_id: int, atom1_label: int, atom2_label: int) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %FragmentLink instance this method is called upon.
         #
         # Different Python \e %FragmentLink instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentLink instances \e a and \e b reference different C++ objects. 
@@ -246,57 +225,50 @@ class FragmentGenerator(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: FragmentLink) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLink instance \a link.
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \param link The \e %FragmentLink instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: FragmentLink, link: FragmentLink) -> FragmentLink: pass
+        def assign(link: FragmentLink) -> FragmentLink: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \return 
         #
-        def getFragment1Index(self: FragmentLink) -> int: pass
+        def getFragment1Index() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \return 
         #
-        def getFragment2Index(self: FragmentLink) -> int: pass
+        def getFragment2Index() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \return 
         #
-        def getBond(self: FragmentLink) -> Bond: pass
+        def getBond() -> Bond: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \return 
         #
-        def getRuleID(self: FragmentLink) -> int: pass
+        def getRuleID() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \return 
         #
-        def getAtom1Label(self: FragmentLink) -> int: pass
+        def getAtom1Label() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentLink instance this method is called upon.
         # \return 
         #
-        def getAtom2Label(self: FragmentLink) -> int: pass
+        def getAtom2Label() -> int: pass
 
         ##
         # \brief 
@@ -335,20 +307,17 @@ class FragmentGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentGenerator instance.
-    # \param self The \e %FragmentGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentGenerator instance.
-    # \param self The \e %FragmentGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: FragmentGenerator) -> None: pass
+    def __init__(gen: FragmentGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     #
     # Different Python \e %FragmentGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentGenerator instances \e a and \e b reference different C++ objects. 
@@ -357,153 +326,133 @@ class FragmentGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FragmentGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentGenerator instance \a gen.
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param gen The \e %FragmentGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FragmentGenerator, gen: FragmentGenerator) -> FragmentGenerator: pass
+    def assign(gen: FragmentGenerator) -> FragmentGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param match_ptn 
     # \param rule_id 
     #
-    def addFragmentationRule(self: FragmentGenerator, match_ptn: MolecularGraph, rule_id: int) -> None: pass
+    def addFragmentationRule(match_ptn: MolecularGraph, rule_id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param rule 
     #
-    def addFragmentationRule(self: FragmentGenerator, rule: FragmentationRuler) -> None: pass
+    def addFragmentationRule(rule: FragmentationRuler) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param idx 
     #
-    def removeFragmentationRule(self: FragmentGenerator, idx: int) -> None: pass
+    def removeFragmentationRule(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getFragmentationRule(self: FragmentGenerator, idx: int) -> FragmentationRuler: pass
+    def getFragmentationRule(idx: int) -> FragmentationRuler: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     #
-    def clearFragmentationRules(self: FragmentGenerator) -> None: pass
+    def clearFragmentationRules() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \return 
     #
-    def getNumFragmentationRules(self: FragmentGenerator) -> int: pass
+    def getNumFragmentationRules() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param match_ptn 
     # \param rule_id 
     #
-    def addExcludePattern(self: FragmentGenerator, match_ptn: MolecularGraph, rule_id: int) -> None: pass
+    def addExcludePattern(match_ptn: MolecularGraph, rule_id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param excl_ptn 
     #
-    def addExcludePattern(self: FragmentGenerator, excl_ptn: ExcludePattern) -> None: pass
+    def addExcludePattern(excl_ptn: ExcludePattern) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param idx 
     #
-    def removeExcludePattern(self: FragmentGenerator, idx: int) -> None: pass
+    def removeExcludePattern(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getExcludePattern(self: FragmentGenerator, idx: int) -> ExcludePattern: pass
+    def getExcludePattern(idx: int) -> ExcludePattern: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     #
-    def clearExcludePatterns(self: FragmentGenerator) -> None: pass
+    def clearExcludePatterns() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \return 
     #
-    def getNumExcludePatterns(self: FragmentGenerator) -> int: pass
+    def getNumExcludePatterns() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param func 
     #
-    def setFragmentFilterFunction(self: FragmentGenerator, func: BoolConstMolecularGraphFunctor) -> None: pass
+    def setFragmentFilterFunction(func: BoolConstMolecularGraphFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \return 
     #
-    def getFragmentFilterFunction(self: FragmentGenerator) -> BoolConstMolecularGraphFunctor: pass
+    def getFragmentFilterFunction() -> BoolConstMolecularGraphFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param molgraph 
     # \param frag_list 
     # \param append 
     #
-    def generate(self: FragmentGenerator, molgraph: MolecularGraph, frag_list: FragmentList, append: bool = False) -> None: pass
+    def generate(molgraph: MolecularGraph, frag_list: FragmentList, append: bool = False) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getFragmentLink(self: FragmentGenerator, idx: int) -> FragmentLink: pass
+    def getFragmentLink(idx: int) -> FragmentLink: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \return 
     #
-    def getNumFragmentLinks(self: FragmentGenerator) -> int: pass
+    def getNumFragmentLinks() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \return 
     #
-    def includeSplitBonds(self: FragmentGenerator) -> bool: pass
+    def includeSplitBonds() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentGenerator instance this method is called upon.
     # \param include 
     #
-    def includeSplitBonds(self: FragmentGenerator, include: bool) -> None: pass
+    def includeSplitBonds(include: bool) -> None: pass
 
     ##
     # \brief 

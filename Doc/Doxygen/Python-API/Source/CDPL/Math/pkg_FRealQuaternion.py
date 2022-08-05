@@ -26,35 +26,30 @@ class FRealQuaternion(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FRealQuaternion instance.
-    # \param self The \e %FRealQuaternion instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FRealQuaternion instance.
-    # \param self The \e %FRealQuaternion instance to initialize.
     # \param q 
     #
-    def __init__(self: object, q: FRealQuaternion) -> None: pass
+    def __init__(q: FRealQuaternion) -> None: pass
 
     ##
     # \brief Initializes the \e %FRealQuaternion instance.
-    # \param self The \e %FRealQuaternion instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: float) -> None: pass
+    def __init__(r: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param r 
     # \return 
     #
-    def set(self: FRealQuaternion, r: float = 0.0) -> FRealQuaternion: pass
+    def set(r: float = 0.0) -> FRealQuaternion: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     #
     # Different Python \e %FRealQuaternion instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FRealQuaternion instances \e a and \e b reference different C++ objects. 
@@ -63,294 +58,257 @@ class FRealQuaternion(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FRealQuaternion) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC1(self: FRealQuaternion) -> float: pass
+    def getC1() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC2(self: FRealQuaternion) -> float: pass
+    def getC2() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC3(self: FRealQuaternion) -> float: pass
+    def getC3() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def getC4(self: FRealQuaternion) -> float: pass
+    def getC4() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def toArray(self: FRealQuaternion) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRealQuaternion instance \a q.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q The \e %FRealQuaternion instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FRealQuaternion, q: FRealQuaternion) -> FRealQuaternion: pass
+    def assign(q: FRealQuaternion) -> FRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q 
     #
-    def swap(self: FRealQuaternion, q: FRealQuaternion) -> None: pass
+    def swap(q: FRealQuaternion) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place addend.
     # \param t Specifies the second addend.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __iadd__(self: FRealQuaternion, t: float) -> FRealQuaternion: pass
+    def __iadd__(t: float) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += q</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place addend.
     # \param q Specifies the second addend.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __iadd__(self: FRealQuaternion, q: object) -> FRealQuaternion: pass
+    def __iadd__(q: object) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place minuend.
     # \param t Specifies the subtrahend.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __isub__(self: FRealQuaternion, t: float) -> FRealQuaternion: pass
+    def __isub__(t: float) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= q</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place minuend.
     # \param q Specifies the subtrahend.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __isub__(self: FRealQuaternion, q: object) -> FRealQuaternion: pass
+    def __isub__(q: object) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __imul__(self: FRealQuaternion, t: float) -> FRealQuaternion: pass
+    def __imul__(t: float) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= q</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place multiplicand.
     # \param q Specifies the multiplier.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __imul__(self: FRealQuaternion, q: object) -> FRealQuaternion: pass
+    def __imul__(q: object) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __idiv__(self: FRealQuaternion, t: float) -> FRealQuaternion: pass
+    def __idiv__(t: float) -> FRealQuaternion: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= q</tt>.
-    # \param self The \e %FRealQuaternion instance acting as in-place dividend.
     # \param q Specifies the divisor.
     # \return The updated \e %FRealQuaternion instance \a self.
     #
-    def __idiv__(self: FRealQuaternion, q: object) -> FRealQuaternion: pass
+    def __idiv__(q: object) -> FRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: FRealQuaternion, t: float) -> FRealQuaternion: pass
+    def __itruediv__(t: float) -> FRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q 
     # \return 
     #
-    def __itruediv__(self: FRealQuaternion, q: object) -> FRealQuaternion: pass
+    def __itruediv__(q: object) -> FRealQuaternion: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q The \e %FRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FRealQuaternion, q: FRealQuaternion) -> bool: pass
+    def __eq__(q: FRealQuaternion) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q The \e %FRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FRealQuaternion, q: ConstFQuaternionExpression) -> bool: pass
+    def __eq__(q: ConstFQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q The \e %FRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FRealQuaternion, q: FRealQuaternion) -> bool: pass
+    def __ne__(q: FRealQuaternion) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param q The \e %FRealQuaternion instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FRealQuaternion, q: ConstFQuaternionExpression) -> bool: pass
+    def __ne__(q: ConstFQuaternionExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %FRealQuaternion instance.
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: FRealQuaternion) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def __pos__(self: FRealQuaternion) -> FRealQuaternion: pass
+    def __pos__() -> FRealQuaternion: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFQuaternionExpression: pass
+    def __neg__() -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
-    # \param self The \e %FRealQuaternion instance representing the first addend.
     # \param t Specifies the second addend.
     # \return A \e %FRealQuaternion instance holding the result of the addition.
     #
-    def __add__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __add__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FRealQuaternion instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %FRealQuaternion instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+    def __add__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __radd__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __radd__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as minuend.
     # \param t Specifies the subtrahend.
     # \return A \e %FRealQuaternion instance holding the result of the subtraction.
     #
-    def __sub__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __sub__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FRealQuaternion instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FRealQuaternion instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+    def __sub__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rsub__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __rsub__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %FRealQuaternion instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __mul__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %FRealQuaternion instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %FRealQuaternion instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+    def __mul__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __rmul__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FRealQuaternion instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %FRealQuaternion instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __div__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
-    # \param self The \e %FRealQuaternion instance acting as dividend.
     # \param e Specifies the divisor.
     # \return A \e %FRealQuaternion instance holding the result of the division.
     #
-    def __div__(self: object, e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
+    def __div__(e: ConstFQuaternionExpression) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __truediv__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FRealQuaternion instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rdiv__(self: object, t: float) -> ConstFQuaternionExpression: pass
+    def __rdiv__(t: float) -> ConstFQuaternionExpression: pass
 
     ##
     # \brief 

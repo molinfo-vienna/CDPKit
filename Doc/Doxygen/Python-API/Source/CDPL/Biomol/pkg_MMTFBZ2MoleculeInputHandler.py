@@ -26,6 +26,5 @@ class MMTFBZ2MoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %MMTFBZ2MoleculeInputHandler instance.
-    # \param self The \e %MMTFBZ2MoleculeInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

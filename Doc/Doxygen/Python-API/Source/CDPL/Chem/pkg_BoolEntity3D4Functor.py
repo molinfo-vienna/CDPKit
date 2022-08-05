@@ -26,45 +26,39 @@ class BoolEntity3D4Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolEntity3D4Functor instance.
-    # \param self The \e %BoolEntity3D4Functor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolEntity3D4Functor instance.
-    # \param self The \e %BoolEntity3D4Functor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: BoolEntity3D4Functor) -> None: pass
+    def __init__(func: BoolEntity3D4Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolEntity3D4Functor instance.
-    # \param arg1 The \e %BoolEntity3D4Functor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolEntity3D4Functor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \param arg3 
     # \param arg4 
     # \return 
     #
-    def __call__(self: BoolEntity3D4Functor, arg1: Entity3D, arg2: Entity3D, arg3: Entity3D, arg4: Entity3D) -> bool: pass
+    def __call__(arg1: Entity3D, arg2: Entity3D, arg3: Entity3D, arg4: Entity3D) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolEntity3D4Functor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BoolEntity3D4Functor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolEntity3D4Functor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BoolEntity3D4Functor) -> bool: pass
+    def __nonzero__() -> bool: pass

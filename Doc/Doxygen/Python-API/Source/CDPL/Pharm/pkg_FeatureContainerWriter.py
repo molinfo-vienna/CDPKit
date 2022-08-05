@@ -26,34 +26,29 @@ class FeatureContainerWriter(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %FeatureContainerWriter instance.
-    # \param self The \e %FeatureContainerWriter instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureContainerWriter instance this method is called upon.
     # \param cntnr 
     # \return 
     #
-    def write(self: FeatureContainerWriter, cntnr: FeatureContainer) -> FeatureContainerWriter: pass
+    def write(cntnr: FeatureContainer) -> FeatureContainerWriter: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureContainerWriter instance this method is called upon.
     #
-    def close(self: FeatureContainerWriter) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureContainerWriter instance this method is called upon.
     # \return 
     #
-    def __bool__(self: FeatureContainerWriter) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureContainerWriter instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: FeatureContainerWriter) -> bool: pass
+    def __nonzero__() -> bool: pass

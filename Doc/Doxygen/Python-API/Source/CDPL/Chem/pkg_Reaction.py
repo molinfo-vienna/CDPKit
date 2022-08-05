@@ -31,304 +31,264 @@ class Reaction(CDPL.Base.PropertyContainer):
 
         ##
         # \brief Returns the result of the membership test operation <tt>mol in self</tt>.
-        # \param self The \e %ComponentSequence instance this method is called upon.
         # \param mol The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: ComponentSequence, mol: Molecule) -> bool: pass
+        def __contains__(mol: Molecule) -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %ComponentSequence instance this method is called upon.
         # \return 
         #
-        def __len__(self: ComponentSequence) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %ComponentSequence instance this method is called upon.
         # \param idx 
         #
-        def __delitem__(self: ComponentSequence, idx: int) -> None: pass
+        def __delitem__(idx: int) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %ComponentSequence instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: ComponentSequence, idx: int) -> Molecule: pass
+        def __getitem__(idx: int) -> Molecule: pass
 
     ##
     # \brief Initializes the \e %Reaction instance.
-    # \param self The \e %Reaction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     #
-    def clear(self: Reaction) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param role 
     # \return 
     #
-    def addComponent(self: Reaction, role: int) -> Molecule: pass
+    def addComponent(role: int) -> Molecule: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param mol 
     # \return 
     #
-    def containsComponent(self: Reaction, mol: Molecule) -> bool: pass
+    def containsComponent(mol: Molecule) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param mol 
     # \return 
     #
-    def getComponentRole(self: Reaction, mol: Molecule) -> int: pass
+    def getComponentRole(mol: Molecule) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param mol 
     # \return 
     #
-    def getComponentIndex(self: Reaction, mol: Molecule) -> int: pass
+    def getComponentIndex(mol: Molecule) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param role 
     # \return 
     #
-    def getNumComponents(self: Reaction, role: int) -> int: pass
+    def getNumComponents(role: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \return 
     #
-    def getNumComponents(self: Reaction) -> int: pass
+    def getNumComponents() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param idx 
     # \param role 
     # \return 
     #
-    def getComponent(self: Reaction, idx: int, role: int) -> Molecule: pass
+    def getComponent(idx: int, role: int) -> Molecule: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getComponent(self: Reaction, idx: int) -> Molecule: pass
+    def getComponent(idx: int) -> Molecule: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param role 
     #
-    def removeComponents(self: Reaction, role: int) -> None: pass
+    def removeComponents(role: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param idx 
     # \param role 
     #
-    def removeComponent(self: Reaction, idx: int, role: int) -> None: pass
+    def removeComponent(idx: int, role: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param idx 
     #
-    def removeComponent(self: Reaction, idx: int) -> None: pass
+    def removeComponent(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param role1 
     # \param role2 
     #
-    def swapComponentRoles(self: Reaction, role1: int, role2: int) -> None: pass
+    def swapComponentRoles(role1: int, role2: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \return 
     #
-    def clone(self: Reaction) -> Reaction: pass
+    def clone() -> Reaction: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param rxn 
     #
-    def copy(self: Reaction, rxn: Reaction) -> None: pass
+    def copy(rxn: Reaction) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Reaction instance \a rxn.
-    # \param self The \e %Reaction instance this method is called upon.
     # \param rxn The \e %Reaction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Reaction, rxn: Reaction) -> Reaction: pass
+    def assign(rxn: Reaction) -> Reaction: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \return 
     #
-    def getReactants(self: Reaction) -> ComponentSequence: pass
+    def getReactants() -> ComponentSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \return 
     #
-    def getAgents(self: Reaction) -> ComponentSequence: pass
+    def getAgents() -> ComponentSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \return 
     #
-    def getProducts(self: Reaction) -> ComponentSequence: pass
+    def getProducts() -> ComponentSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setProperty(self: Reaction, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeProperty(self: Reaction, key: CDPL.Base.LookupKey) -> bool: pass
+    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \return 
     #
-    def getProperty(self: Reaction, key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
+    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \return 
     #
-    def isPropertySet(self: Reaction, key: CDPL.Base.LookupKey) -> bool: pass
+    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     #
-    def clearProperties(self: Reaction) -> None: pass
+    def clearProperties() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param cntnr 
     #
-    def addProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param cntnr 
     #
-    def copyProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param cntnr 
     #
-    def swap(self: Reaction, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: Reaction, idx: int) -> Molecule: pass
+    def __getitem__(idx: int) -> Molecule: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: Reaction, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: Reaction, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>mol in self</tt>.
-    # \param self The \e %Reaction instance this method is called upon.
     # \param mol The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: Reaction, mol: Molecule) -> bool: pass
+    def __contains__(mol: Molecule) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: Reaction, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: Reaction, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reaction instance this method is called upon.
     # \return 
     #
-    def __len__(self: Reaction) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

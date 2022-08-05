@@ -26,38 +26,33 @@ class PointListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %PointListPrimitive2D instance.
-    # \param self The \e %PointListPrimitive2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PointListPrimitive2D instance.
-    # \param self The \e %PointListPrimitive2D instance to initialize.
     # \param prim 
     #
-    def __init__(self: object, prim: PointListPrimitive2D) -> None: pass
+    def __init__(prim: PointListPrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PointListPrimitive2D instance \a prim.
-    # \param self The \e %PointListPrimitive2D instance this method is called upon.
     # \param prim The \e %PointListPrimitive2D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PointListPrimitive2D, prim: PointListPrimitive2D) -> PointListPrimitive2D: pass
+    def assign(prim: PointListPrimitive2D) -> PointListPrimitive2D: pass
 
     ##
     # \brief 
-    # \param self The \e %PointListPrimitive2D instance this method is called upon.
     # \param pen 
     #
-    def setPen(self: PointListPrimitive2D, pen: Pen) -> None: pass
+    def setPen(pen: Pen) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PointListPrimitive2D instance this method is called upon.
     # \return 
     #
-    def getPen(self: PointListPrimitive2D) -> Pen: pass
+    def getPen() -> Pen: pass
 
     ##
     # \brief 

@@ -26,21 +26,18 @@ class ConstLMatrixTranspose(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstLMatrixTranspose instance.
-    # \param self The \e %ConstLMatrixTranspose instance to initialize.
     # \param mt 
     #
-    def __init__(self: object, mt: ConstLMatrixTranspose) -> None: pass
+    def __init__(mt: ConstLMatrixTranspose) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstLMatrixTranspose instance.
-    # \param self The \e %ConstLMatrixTranspose instance to initialize.
     # \param e 
     #
-    def __init__(self: object, e: ConstLMatrixExpression) -> None: pass
+    def __init__(e: ConstLMatrixExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     #
     # Different Python \e %ConstLMatrixTranspose instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstLMatrixTranspose instances \e a and \e b reference different C++ objects. 
@@ -49,192 +46,168 @@ class ConstLMatrixTranspose(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConstLMatrixTranspose) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def getSize1(self: ConstLMatrixTranspose) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def getSize2(self: ConstLMatrixTranspose) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ConstLMatrixTranspose) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def getElement(self: ConstLMatrixTranspose, i: int, j: int) -> int: pass
+    def getElement(i: int, j: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def toArray(self: ConstLMatrixTranspose) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def getData(self: ConstLMatrixTranspose) -> ConstLMatrixExpression: pass
+    def getData() -> ConstLMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def __call__(self: ConstLMatrixTranspose, i: int, j: int) -> int: pass
+    def __call__(i: int, j: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param ij 
     # \return 
     #
-    def __getitem__(self: ConstLMatrixTranspose, ij: tuple) -> int: pass
+    def __getitem__(ij: tuple) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def __len__(self: ConstLMatrixTranspose) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == mt</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param mt The \e %ConstLMatrixTranspose instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstLMatrixTranspose, mt: ConstLMatrixTranspose) -> bool: pass
+    def __eq__(mt: ConstLMatrixTranspose) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param e The \e %ConstLMatrixTranspose instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstLMatrixTranspose, e: ConstLMatrixExpression) -> bool: pass
+    def __eq__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != mt</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param mt The \e %ConstLMatrixTranspose instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstLMatrixTranspose, mt: ConstLMatrixTranspose) -> bool: pass
+    def __ne__(mt: ConstLMatrixTranspose) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param e The \e %ConstLMatrixTranspose instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstLMatrixTranspose, e: ConstLMatrixExpression) -> bool: pass
+    def __ne__(e: ConstLMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstLMatrixTranspose instance.
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ConstLMatrixTranspose) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ConstLMatrixTranspose) -> ConstLMatrixTranspose: pass
+    def __pos__() -> ConstLMatrixTranspose: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstLMatrixExpression: pass
+    def __neg__() -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstLMatrixTranspose instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+    def __add__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstLMatrixTranspose instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+    def __sub__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstLMatrixTranspose instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __mul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLMatrixTranspose instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
+    def __mul__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstLMatrixTranspose instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstLVectorExpression) -> ConstLVectorExpression: pass
+    def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstLMatrixTranspose instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstLMatrixTranspose instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __div__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __truediv__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstLMatrixTranspose instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstLMatrixExpression: pass
+    def __rmul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief 

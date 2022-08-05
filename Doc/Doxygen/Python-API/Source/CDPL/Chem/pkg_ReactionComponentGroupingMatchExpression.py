@@ -26,22 +26,19 @@ class ReactionComponentGroupingMatchExpression(ReactionMatchExpression):
 
     ##
     # \brief Initializes the \e %ReactionComponentGroupingMatchExpression instance.
-    # \param self The \e %ReactionComponentGroupingMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: ReactionComponentGroupingMatchExpression) -> None: pass
+    def __init__(expr: ReactionComponentGroupingMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionComponentGroupingMatchExpression instance.
-    # \param self The \e %ReactionComponentGroupingMatchExpression instance to initialize.
     # \param comp_grouping 
     #
-    def __init__(self: object, comp_grouping: FragmentList) -> None: pass
+    def __init__(comp_grouping: FragmentList) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionComponentGroupingMatchExpression instance \a expr.
-    # \param self The \e %ReactionComponentGroupingMatchExpression instance this method is called upon.
     # \param expr The \e %ReactionComponentGroupingMatchExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ReactionComponentGroupingMatchExpression, expr: ReactionComponentGroupingMatchExpression) -> ReactionComponentGroupingMatchExpression: pass
+    def assign(expr: ReactionComponentGroupingMatchExpression) -> ReactionComponentGroupingMatchExpression: pass

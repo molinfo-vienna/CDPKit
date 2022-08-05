@@ -26,27 +26,23 @@ class Vector2LArray(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector2LArray instance.
-    # \param self The \e %Vector2LArray instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector2LArray instance.
-    # \param self The \e %Vector2LArray instance to initialize.
     # \param array 
     #
-    def __init__(self: object, array: Vector2LArray) -> None: pass
+    def __init__(array: Vector2LArray) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector2LArray instance.
-    # \param arg1 The \e %Vector2LArray instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector2LArray instance this method is called upon.
     #
     # Different Python \e %Vector2LArray instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector2LArray instances \e a and \e b reference different C++ objects. 
@@ -55,217 +51,189 @@ class Vector2LArray(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Vector2LArray) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \return 
     #
-    def getSize(self: Vector2LArray) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: Vector2LArray) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: Vector2LArray, num_elem: int, value: Vector2L) -> None: pass
+    def resize(num_elem: int, value: Vector2L) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: Vector2LArray, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: Vector2LArray) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     #
-    def clear(self: Vector2LArray) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2LArray instance \a array.
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param array The \e %Vector2LArray instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector2LArray, array: Vector2LArray) -> Vector2LArray: pass
+    def assign(array: Vector2LArray) -> Vector2LArray: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2LArray instance \a num_elem.
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param num_elem The \e %Vector2LArray instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector2LArray, num_elem: int, value: Vector2L) -> None: pass
+    def assign(num_elem: int, value: Vector2L) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2LArray instance \a a.
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param a The \e %Vector2LArray instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector2LArray, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param value 
     #
-    def addElement(self: Vector2LArray, value: Vector2L) -> None: pass
+    def addElement(value: Vector2L) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param values 
     #
-    def addElements(self: Vector2LArray, values: Vector2LArray) -> None: pass
+    def addElements(values: Vector2LArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: Vector2LArray, idx: int, value: Vector2L) -> None: pass
+    def insertElement(idx: int, value: Vector2L) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: Vector2LArray, idx: int, num_elem: int, value: Vector2L) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: Vector2L) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: Vector2LArray, index: int, values: Vector2LArray) -> None: pass
+    def insertElements(index: int, values: Vector2LArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     #
-    def popLastElement(self: Vector2LArray) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: Vector2LArray, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: Vector2LArray, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: Vector2LArray) -> Vector2L: pass
+    def getFirstElement() -> Vector2L: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: Vector2LArray) -> Vector2L: pass
+    def getLastElement() -> Vector2L: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: Vector2LArray, idx: int) -> Vector2L: pass
+    def getElement(idx: int) -> Vector2L: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: Vector2LArray, idx: int, value: Vector2L) -> None: pass
+    def setElement(idx: int, value: Vector2L) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param as_vec 
     # \return 
     #
-    def toArray(self: Vector2LArray, as_vec: bool) -> object: pass
+    def toArray(as_vec: bool) -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: Vector2LArray, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: Vector2LArray, idx: int) -> Vector2L: pass
+    def __getitem__(idx: int) -> Vector2L: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \return 
     #
-    def __len__(self: Vector2LArray) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: Vector2LArray, index: int, value: Vector2L) -> None: pass
+    def __setitem__(index: int, value: Vector2L) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == array</tt>.
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param array The \e %Vector2LArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector2LArray, array: object) -> bool: pass
+    def __eq__(array: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != array</tt>.
-    # \param self The \e %Vector2LArray instance this method is called upon.
     # \param array The \e %Vector2LArray instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector2LArray, array: object) -> bool: pass
+    def __ne__(array: object) -> bool: pass
 
     ##
     # \brief 

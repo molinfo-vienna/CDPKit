@@ -26,13 +26,11 @@ class TautomerizationRule(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TautomerizationRule instance.
-    # \param self The \e %TautomerizationRule instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %TautomerizationRule instance this method is called upon.
     #
     # Different Python \e %TautomerizationRule instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %TautomerizationRule instances \e a and \e b reference different C++ objects. 
@@ -41,37 +39,33 @@ class TautomerizationRule(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: TautomerizationRule) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerizationRule instance this method is called upon.
     # \return 
     #
-    def getID(self: TautomerizationRule) -> int: pass
+    def getID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerizationRule instance this method is called upon.
     # \param parent_molgraph 
     # \return 
     #
-    def setup(self: TautomerizationRule, parent_molgraph: MolecularGraph) -> bool: pass
+    def setup(parent_molgraph: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerizationRule instance this method is called upon.
     # \param tautomer 
     # \return 
     #
-    def generate(self: TautomerizationRule, tautomer: Molecule) -> bool: pass
+    def generate(tautomer: Molecule) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %TautomerizationRule instance this method is called upon.
     # \return 
     #
-    def clone(self: TautomerizationRule) -> TautomerizationRule: pass
+    def clone() -> TautomerizationRule: pass
 
     ##
     # \brief 

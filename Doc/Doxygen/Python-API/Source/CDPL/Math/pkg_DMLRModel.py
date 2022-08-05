@@ -26,20 +26,17 @@ class DMLRModel(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DMLRModel instance.
-    # \param self The \e %DMLRModel instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DMLRModel instance.
-    # \param self The \e %DMLRModel instance to initialize.
     # \param model 
     #
-    def __init__(self: object, model: DMLRModel) -> None: pass
+    def __init__(model: DMLRModel) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DMLRModel instance this method is called upon.
     #
     # Different Python \e %DMLRModel instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DMLRModel instances \e a and \e b reference different C++ objects. 
@@ -48,222 +45,194 @@ class DMLRModel(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DMLRModel) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMLRModel instance \a model.
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param model The \e %DMLRModel instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMLRModel, model: DMLRModel) -> DMLRModel: pass
+    def assign(model: DMLRModel) -> DMLRModel: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param num_points 
     # \param num_vars 
     #
-    def resizeDataSet(self: DMLRModel, num_points: int, num_vars: int) -> None: pass
+    def resizeDataSet(num_points: int, num_vars: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     #
-    def clearDataSet(self: DMLRModel) -> None: pass
+    def clearDataSet() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param i 
     # \param x_vars 
     # \param y 
     #
-    def setXYData(self: DMLRModel, i: int, x_vars: ConstFVectorExpression, y: float) -> None: pass
+    def setXYData(i: int, x_vars: ConstFVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param i 
     # \param x_vars 
     # \param y 
     #
-    def setXYData(self: DMLRModel, i: int, x_vars: ConstDVectorExpression, y: float) -> None: pass
+    def setXYData(i: int, x_vars: ConstDVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param i 
     # \param x_vars 
     # \param y 
     #
-    def setXYData(self: DMLRModel, i: int, x_vars: ConstLVectorExpression, y: float) -> None: pass
+    def setXYData(i: int, x_vars: ConstLVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param i 
     # \param x_vars 
     # \param y 
     #
-    def setXYData(self: DMLRModel, i: int, x_vars: ConstULVectorExpression, y: float) -> None: pass
+    def setXYData(i: int, x_vars: ConstULVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \param y 
     #
-    def addXYData(self: DMLRModel, x_vars: ConstFVectorExpression, y: float) -> None: pass
+    def addXYData(x_vars: ConstFVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \param y 
     #
-    def addXYData(self: DMLRModel, x_vars: ConstDVectorExpression, y: float) -> None: pass
+    def addXYData(x_vars: ConstDVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \param y 
     #
-    def addXYData(self: DMLRModel, x_vars: ConstLVectorExpression, y: float) -> None: pass
+    def addXYData(x_vars: ConstLVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \param y 
     #
-    def addXYData(self: DMLRModel, x_vars: ConstULVectorExpression, y: float) -> None: pass
+    def addXYData(x_vars: ConstULVectorExpression, y: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getXMatrix(self: DMLRModel) -> DMatrix: pass
+    def getXMatrix() -> DMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getYValues(self: DMLRModel) -> DVector: pass
+    def getYValues() -> DVector: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     #
-    def buildModel(self: DMLRModel) -> None: pass
+    def buildModel() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     #
-    def calcStatistics(self: DMLRModel) -> None: pass
+    def calcStatistics() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def calcYValue(self: DMLRModel, x_vars: ConstFVectorExpression) -> float: pass
+    def calcYValue(x_vars: ConstFVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def calcYValue(self: DMLRModel, x_vars: ConstDVectorExpression) -> float: pass
+    def calcYValue(x_vars: ConstDVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def calcYValue(self: DMLRModel, x_vars: ConstLVectorExpression) -> float: pass
+    def calcYValue(x_vars: ConstLVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def calcYValue(self: DMLRModel, x_vars: ConstULVectorExpression) -> float: pass
+    def calcYValue(x_vars: ConstULVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getCoefficients(self: DMLRModel) -> DVector: pass
+    def getCoefficients() -> DVector: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getChiSquare(self: DMLRModel) -> float: pass
+    def getChiSquare() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getGoodnessOfFit(self: DMLRModel) -> float: pass
+    def getGoodnessOfFit() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getCorrelationCoefficient(self: DMLRModel) -> float: pass
+    def getCorrelationCoefficient() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \return 
     #
-    def getStandardDeviation(self: DMLRModel) -> float: pass
+    def getStandardDeviation() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def __call__(self: DMLRModel, x_vars: ConstFVectorExpression) -> float: pass
+    def __call__(x_vars: ConstFVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def __call__(self: DMLRModel, x_vars: ConstDVectorExpression) -> float: pass
+    def __call__(x_vars: ConstDVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def __call__(self: DMLRModel, x_vars: ConstLVectorExpression) -> float: pass
+    def __call__(x_vars: ConstLVectorExpression) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMLRModel instance this method is called upon.
     # \param x_vars 
     # \return 
     #
-    def __call__(self: DMLRModel, x_vars: ConstULVectorExpression) -> float: pass
+    def __call__(x_vars: ConstULVectorExpression) -> float: pass
 
     ##
     # \brief 

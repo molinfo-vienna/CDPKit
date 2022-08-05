@@ -61,20 +61,17 @@ class ConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConformerGeneratorSettings instance.
-    # \param self The \e %ConformerGeneratorSettings instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConformerGeneratorSettings instance.
-    # \param self The \e %ConformerGeneratorSettings instance to initialize.
     # \param settings 
     #
-    def __init__(self: object, settings: ConformerGeneratorSettings) -> None: pass
+    def __init__(settings: ConformerGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     #
     # Different Python \e %ConformerGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConformerGeneratorSettings instances \e a and \e b reference different C++ objects. 
@@ -83,330 +80,284 @@ class ConformerGeneratorSettings(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConformerGeneratorSettings) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ConformerGeneratorSettings instance \a settings.
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param settings The \e %ConformerGeneratorSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ConformerGeneratorSettings, settings: ConformerGeneratorSettings) -> ConformerGeneratorSettings: pass
+    def assign(settings: ConformerGeneratorSettings) -> ConformerGeneratorSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param mode 
     #
-    def setSamplingMode(self: ConformerGeneratorSettings, mode: int) -> None: pass
+    def setSamplingMode(mode: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getSamplingMode(self: ConformerGeneratorSettings) -> int: pass
+    def getSamplingMode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param sample 
     #
-    def sampleHeteroAtomHydrogens(self: ConformerGeneratorSettings, sample: bool) -> None: pass
+    def sampleHeteroAtomHydrogens(sample: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def sampleHeteroAtomHydrogens(self: ConformerGeneratorSettings) -> bool: pass
+    def sampleHeteroAtomHydrogens() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param sample 
     #
-    def sampleAngleToleranceRanges(self: ConformerGeneratorSettings, sample: bool) -> None: pass
+    def sampleAngleToleranceRanges(sample: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def sampleAngleToleranceRanges(self: ConformerGeneratorSettings) -> bool: pass
+    def sampleAngleToleranceRanges() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param enumerate 
     #
-    def enumerateRings(self: ConformerGeneratorSettings, enumerate: bool) -> None: pass
+    def enumerateRings(enumerate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def enumerateRings(self: ConformerGeneratorSettings) -> bool: pass
+    def enumerateRings() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param mode 
     #
-    def setNitrogenEnumerationMode(self: ConformerGeneratorSettings, mode: int) -> None: pass
+    def setNitrogenEnumerationMode(mode: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getNitrogenEnumerationMode(self: ConformerGeneratorSettings) -> int: pass
+    def getNitrogenEnumerationMode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param generate 
     #
-    def generateCoordinatesFromScratch(self: ConformerGeneratorSettings, generate: bool) -> None: pass
+    def generateCoordinatesFromScratch(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def generateCoordinatesFromScratch(self: ConformerGeneratorSettings) -> bool: pass
+    def generateCoordinatesFromScratch() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param include 
     #
-    def includeInputCoordinates(self: ConformerGeneratorSettings, include: bool) -> None: pass
+    def includeInputCoordinates(include: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def includeInputCoordinates(self: ConformerGeneratorSettings) -> bool: pass
+    def includeInputCoordinates() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param win_size 
     #
-    def setEnergyWindow(self: ConformerGeneratorSettings, win_size: float) -> None: pass
+    def setEnergyWindow(win_size: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getEnergyWindow(self: ConformerGeneratorSettings) -> float: pass
+    def getEnergyWindow() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param max_size 
     #
-    def setMaxPoolSize(self: ConformerGeneratorSettings, max_size: int) -> None: pass
+    def setMaxPoolSize(max_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxPoolSize(self: ConformerGeneratorSettings) -> int: pass
+    def getMaxPoolSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param mil_secs 
     #
-    def setTimeout(self: ConformerGeneratorSettings, mil_secs: int) -> None: pass
+    def setTimeout(mil_secs: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getTimeout(self: ConformerGeneratorSettings) -> int: pass
+    def getTimeout() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param type 
     #
-    def setForceFieldTypeSystematic(self: ConformerGeneratorSettings, type: int) -> None: pass
+    def setForceFieldTypeSystematic(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getForceFieldTypeSystematic(self: ConformerGeneratorSettings) -> int: pass
+    def getForceFieldTypeSystematic() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param type 
     #
-    def setForceFieldTypeStochastic(self: ConformerGeneratorSettings, type: int) -> None: pass
+    def setForceFieldTypeStochastic(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getForceFieldTypeStochastic(self: ConformerGeneratorSettings) -> int: pass
+    def getForceFieldTypeStochastic() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param strict 
     #
-    def strictForceFieldParameterization(self: ConformerGeneratorSettings, strict: bool) -> None: pass
+    def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def strictForceFieldParameterization(self: ConformerGeneratorSettings) -> bool: pass
+    def strictForceFieldParameterization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param de_const 
     #
-    def setDielectricConstant(self: ConformerGeneratorSettings, de_const: float) -> None: pass
+    def setDielectricConstant(de_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDielectricConstant(self: ConformerGeneratorSettings) -> float: pass
+    def getDielectricConstant() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param dist_expo 
     #
-    def setDistanceExponent(self: ConformerGeneratorSettings, dist_expo: float) -> None: pass
+    def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDistanceExponent(self: ConformerGeneratorSettings) -> float: pass
+    def getDistanceExponent() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumOutputConformers(self: ConformerGeneratorSettings, max_num: int) -> None: pass
+    def setMaxNumOutputConformers(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumOutputConformers(self: ConformerGeneratorSettings) -> int: pass
+    def getMaxNumOutputConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param min_rmsd 
     #
-    def setMinRMSD(self: ConformerGeneratorSettings, min_rmsd: float) -> None: pass
+    def setMinRMSD(min_rmsd: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMinRMSD(self: ConformerGeneratorSettings) -> float: pass
+    def getMinRMSD() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumRefinementIterations(self: ConformerGeneratorSettings, max_num: int) -> None: pass
+    def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumRefinementIterations(self: ConformerGeneratorSettings) -> int: pass
+    def getMaxNumRefinementIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param tol 
     #
-    def setRefinementStopGradient(self: ConformerGeneratorSettings, tol: float) -> None: pass
+    def setRefinementStopGradient(tol: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getRefinementTolerance(self: ConformerGeneratorSettings) -> float: pass
+    def getRefinementTolerance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumSampledConformers(self: ConformerGeneratorSettings, max_num: int) -> None: pass
+    def setMaxNumSampledConformers(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumSampledConformers(self: ConformerGeneratorSettings) -> int: pass
+    def getMaxNumSampledConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param size 
     #
-    def setConvergenceCheckCycleSize(self: ConformerGeneratorSettings, size: int) -> None: pass
+    def setConvergenceCheckCycleSize(size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getConvergenceCheckCycleSize(self: ConformerGeneratorSettings) -> int: pass
+    def getConvergenceCheckCycleSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \param max_size 
     #
-    def setMacrocycleRotorBondCountThreshold(self: ConformerGeneratorSettings, max_size: int) -> None: pass
+    def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMacrocycleRotorBondCountThreshold(self: ConformerGeneratorSettings) -> int: pass
+    def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getFragmentBuildSettings(self: ConformerGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
+    def getFragmentBuildSettings() -> FragmentConformerGeneratorSettings: pass
 
     ##
     # \brief 

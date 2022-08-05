@@ -26,34 +26,29 @@ class DRegularGridSetWriter(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %DRegularGridSetWriter instance.
-    # \param self The \e %DRegularGridSetWriter instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetWriter instance this method is called upon.
     # \param grid_set 
     # \return 
     #
-    def write(self: DRegularGridSetWriter, grid_set: DRegularGridSet) -> DRegularGridSetWriter: pass
+    def write(grid_set: DRegularGridSet) -> DRegularGridSetWriter: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetWriter instance this method is called upon.
     #
-    def close(self: DRegularGridSetWriter) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetWriter instance this method is called upon.
     # \return 
     #
-    def __bool__(self: DRegularGridSetWriter) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetWriter instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: DRegularGridSetWriter) -> bool: pass
+    def __nonzero__() -> bool: pass

@@ -44,6 +44,7 @@ import CDPL.ConfGen
 import CDPL.Biomol
 
 
+HIDE_SELF_ARG = True
 DOC_FILE_EXT = '.py'
 FILE_HEADER = \
 """#
@@ -329,7 +330,7 @@ def getBases(class_obj):
 
     return bases
 
-def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, func_data):
+def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, func_data, is_static):
     mn_to_doc_tmplts = { '__str__': __str__DOC_TEMPLATE, '__ne__': __ne__DOC_TEMPLATE, \
                          '__eq__': __eq__DOC_TEMPLATE, '__init__': __init__DOC_TEMPLATE, \
                          '__lt__': __lt__DOC_TEMPLATE, '__le__': __le__DOC_TEMPLATE, \
@@ -346,12 +347,17 @@ def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, fun
 
     tmplt = mn_to_doc_tmplts[method_name]
     proc_args = []
-    
+   
     for line in tmplt.splitlines(True):
+        if not is_static and HIDE_SELF_ARG and line.lstrip().startswith('# \\param @A0@'):
+            continue
+ 
         line = line.replace('@CN@', class_obj.__name__).replace('@MN@', method_name)
-
+       
         if '@ARGS@' in line:
             for i in range(0, len(func_data['arg_names'])):
+                if not is_static and HIDE_SELF_ARG and i == 0:
+                    continue
                 if func_data['arg_names'][i] in proc_args:
                     continue
 
@@ -384,12 +390,20 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident):
         for func_data in overloads:
             out_file.write('\n')
 
-            if not printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, func_data):
+            if HIDE_SELF_ARG and not is_static:
+                idx = func_data['arg_list'].find(',')
+
+                if idx == -1:
+                    func_data['arg_list'] = ''
+                else:
+                    func_data['arg_list'] = func_data['arg_list'][idx + 2:]
+                    
+            if not printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, func_data, is_static):
                 out_file.write(ident + '##\n')
                 #out_file.write(ident + '# \\brief ' + method_name + '.\n')
                 out_file.write(ident + '# \\brief \n')
 
-                if not is_static:
+                if not is_static and not HIDE_SELF_ARG:
                     out_file.write(ident + '# \\param self The \\e %' + class_obj.__name__ + ' instance this method is called upon.\n')
 
                 for arg_name in func_data['arg_names']:
@@ -418,7 +432,7 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident):
         #out_file.write(ident + '# \\brief ' + method_name + '. FIXME!\n')
         out_file.write(ident + '# \\brief FIXME!\n')
 
-        if not is_static:
+        if not is_static and not HIDE_SELF_ARG:
             out_file.write(ident + '# \\param self The \\e %' + class_obj.__name__ + ' instance this method is called upon.\n')
 
         out_file.write(ident + '#\n')

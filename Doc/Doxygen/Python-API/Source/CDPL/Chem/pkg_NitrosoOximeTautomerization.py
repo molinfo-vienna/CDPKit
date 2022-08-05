@@ -26,13 +26,11 @@ class NitrosoOximeTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %NitrosoOximeTautomerization instance.
-    # \param self The \e %NitrosoOximeTautomerization instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %NitrosoOximeTautomerization instance.
-    # \param self The \e %NitrosoOximeTautomerization instance to initialize.
     # \param rule 
     #
-    def __init__(self: object, rule: NitrosoOximeTautomerization) -> None: pass
+    def __init__(rule: NitrosoOximeTautomerization) -> None: pass

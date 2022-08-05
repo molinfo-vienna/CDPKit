@@ -26,6 +26,5 @@ class SVGMolecularGraphOutputHandler(CDPL.Chem.MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %SVGMolecularGraphOutputHandler instance.
-    # \param self The \e %SVGMolecularGraphOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

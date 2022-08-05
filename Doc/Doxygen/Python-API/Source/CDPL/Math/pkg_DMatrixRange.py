@@ -26,37 +26,32 @@ class DMatrixRange(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DMatrixRange instance.
-    # \param self The \e %DMatrixRange instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: DMatrixRange) -> None: pass
+    def __init__(r: DMatrixRange) -> None: pass
 
     ##
     # \brief Initializes the \e %DMatrixRange instance.
-    # \param self The \e %DMatrixRange instance to initialize.
     # \param e 
     # \param r1 
     # \param r2 
     #
-    def __init__(self: object, e: DMatrixExpression, r1: Range, r2: Range) -> None: pass
+    def __init__(e: DMatrixExpression, r1: Range, r2: Range) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def getStart1(self: DMatrixRange) -> int: pass
+    def getStart1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def getStart2(self: DMatrixRange) -> int: pass
+    def getStart2() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     #
     # Different Python \e %DMatrixRange instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DMatrixRange instances \e a and \e b reference different C++ objects. 
@@ -65,320 +60,280 @@ class DMatrixRange(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DMatrixRange) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrixRange instance \a e.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param e The \e %DMatrixRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMatrixRange, e: ConstFMatrixExpression) -> DMatrixRange: pass
+    def assign(e: ConstFMatrixExpression) -> DMatrixRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrixRange instance \a e.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param e The \e %DMatrixRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMatrixRange, e: ConstDMatrixExpression) -> DMatrixRange: pass
+    def assign(e: ConstDMatrixExpression) -> DMatrixRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrixRange instance \a e.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param e The \e %DMatrixRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMatrixRange, e: ConstLMatrixExpression) -> DMatrixRange: pass
+    def assign(e: ConstLMatrixExpression) -> DMatrixRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrixRange instance \a e.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param e The \e %DMatrixRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMatrixRange, e: ConstULMatrixExpression) -> DMatrixRange: pass
+    def assign(e: ConstULMatrixExpression) -> DMatrixRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrixRange instance \a r.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param r The \e %DMatrixRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMatrixRange, r: DMatrixRange) -> DMatrixRange: pass
+    def assign(r: DMatrixRange) -> DMatrixRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DMatrixRange instance \a a.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param a The \e %DMatrixRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DMatrixRange, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def getSize1(self: DMatrixRange) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def getSize2(self: DMatrixRange) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: DMatrixRange) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def getElement(self: DMatrixRange, i: int, j: int) -> float: pass
+    def getElement(i: int, j: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def toArray(self: DMatrixRange) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param r 
     #
-    def swap(self: DMatrixRange, r: DMatrixRange) -> None: pass
+    def swap(r: DMatrixRange) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param i 
     # \param j 
     # \param v 
     #
-    def setElement(self: DMatrixRange, i: int, j: int, v: float) -> None: pass
+    def setElement(i: int, j: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def getData(self: DMatrixRange) -> DMatrixExpression: pass
+    def getData() -> DMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def __call__(self: DMatrixRange, i: int, j: int) -> float: pass
+    def __call__(i: int, j: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param ij 
     # \return 
     #
-    def __getitem__(self: DMatrixRange, ij: tuple) -> float: pass
+    def __getitem__(ij: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def __len__(self: DMatrixRange) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param r The \e %DMatrixRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DMatrixRange, r: DMatrixRange) -> bool: pass
+    def __eq__(r: DMatrixRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param e The \e %DMatrixRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DMatrixRange, e: ConstDMatrixExpression) -> bool: pass
+    def __eq__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param r The \e %DMatrixRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DMatrixRange, r: DMatrixRange) -> bool: pass
+    def __ne__(r: DMatrixRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param e The \e %DMatrixRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DMatrixRange, e: ConstDMatrixExpression) -> bool: pass
+    def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %DMatrixRange instance.
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DMatrixRange) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DMatrixRange) -> DMatrixRange: pass
+    def __pos__() -> DMatrixRange: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDMatrixExpression: pass
+    def __neg__() -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DMatrixRange instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DMatrixRange instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+    def __add__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DMatrixRange instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DMatrixRange instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+    def __sub__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DMatrixRange instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DMatrixRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __mul__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DMatrixRange instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %DMatrixRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DMatrixRange instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %DMatrixRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DMatrixRange instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DMatrixRange instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __div__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __truediv__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __rmul__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param ij 
     # \param v 
     #
-    def __setitem__(self: DMatrixRange, ij: tuple, v: float) -> None: pass
+    def __setitem__(ij: tuple, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param self The \e %DMatrixRange instance acting as in-place addend.
     # \param r Specifies the second addend.
     # \return The updated \e %DMatrixRange instance \a self.
     #
-    def __iadd__(self: DMatrixRange, r: DMatrixRange) -> DMatrixRange: pass
+    def __iadd__(r: DMatrixRange) -> DMatrixRange: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DMatrixRange instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DMatrixRange instance \a self.
     #
-    def __iadd__(self: DMatrixRange, e: ConstDMatrixExpression) -> DMatrixRange: pass
+    def __iadd__(e: ConstDMatrixExpression) -> DMatrixRange: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param self The \e %DMatrixRange instance acting as in-place minuend.
     # \param r Specifies the subtrahend.
     # \return The updated \e %DMatrixRange instance \a self.
     #
-    def __isub__(self: DMatrixRange, r: DMatrixRange) -> DMatrixRange: pass
+    def __isub__(r: DMatrixRange) -> DMatrixRange: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DMatrixRange instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DMatrixRange instance \a self.
     #
-    def __isub__(self: DMatrixRange, e: ConstDMatrixExpression) -> DMatrixRange: pass
+    def __isub__(e: ConstDMatrixExpression) -> DMatrixRange: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DMatrixRange instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DMatrixRange instance \a self.
     #
-    def __imul__(self: DMatrixRange, t: float) -> DMatrixRange: pass
+    def __imul__(t: float) -> DMatrixRange: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DMatrixRange instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DMatrixRange instance \a self.
     #
-    def __idiv__(self: DMatrixRange, t: float) -> DMatrixRange: pass
+    def __idiv__(t: float) -> DMatrixRange: pass
 
     ##
     # \brief 
-    # \param self The \e %DMatrixRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: DMatrixRange, t: float) -> DMatrixRange: pass
+    def __itruediv__(t: float) -> DMatrixRange: pass
 
     ##
     # \brief 

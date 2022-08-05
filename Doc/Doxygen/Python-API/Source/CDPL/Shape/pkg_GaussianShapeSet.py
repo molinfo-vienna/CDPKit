@@ -26,20 +26,17 @@ class GaussianShapeSet(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeSet instance.
-    # \param self The \e %GaussianShapeSet instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeSet instance.
-    # \param self The \e %GaussianShapeSet instance to initialize.
     # \param list 
     #
-    def __init__(self: object, list: GaussianShapeSet) -> None: pass
+    def __init__(list: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     #
     # Different Python \e %GaussianShapeSet instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeSet instances \e a and \e b reference different C++ objects. 
@@ -48,201 +45,175 @@ class GaussianShapeSet(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GaussianShapeSet) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \return 
     #
-    def getSize(self: GaussianShapeSet) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: GaussianShapeSet) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: GaussianShapeSet, num_elem: int, value: GaussianShape) -> None: pass
+    def resize(num_elem: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: GaussianShapeSet, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: GaussianShapeSet) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     #
-    def clear(self: GaussianShapeSet) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeSet instance \a array.
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param array The \e %GaussianShapeSet instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: GaussianShapeSet, array: GaussianShapeSet) -> GaussianShapeSet: pass
+    def assign(array: GaussianShapeSet) -> GaussianShapeSet: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeSet instance \a num_elem.
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param num_elem The \e %GaussianShapeSet instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: GaussianShapeSet, num_elem: int, value: GaussianShape) -> None: pass
+    def assign(num_elem: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param value 
     #
-    def addElement(self: GaussianShapeSet, value: GaussianShape) -> None: pass
+    def addElement(value: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param values 
     #
-    def addElements(self: GaussianShapeSet, values: GaussianShapeSet) -> None: pass
+    def addElements(values: GaussianShapeSet) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: GaussianShapeSet, idx: int, value: GaussianShape) -> None: pass
+    def insertElement(idx: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: GaussianShapeSet, idx: int, num_elem: int, value: GaussianShape) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: GaussianShapeSet, index: int, values: GaussianShapeSet) -> None: pass
+    def insertElements(index: int, values: GaussianShapeSet) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     #
-    def popLastElement(self: GaussianShapeSet) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: GaussianShapeSet, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: GaussianShapeSet, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: GaussianShapeSet) -> GaussianShape: pass
+    def getFirstElement() -> GaussianShape: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: GaussianShapeSet) -> GaussianShape: pass
+    def getLastElement() -> GaussianShape: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: GaussianShapeSet, idx: int) -> GaussianShape: pass
+    def getElement(idx: int) -> GaussianShape: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: GaussianShapeSet, idx: int, value: GaussianShape) -> None: pass
+    def setElement(idx: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: GaussianShapeSet, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: GaussianShapeSet, idx: int) -> GaussianShape: pass
+    def __getitem__(idx: int) -> GaussianShape: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \return 
     #
-    def __len__(self: GaussianShapeSet) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: GaussianShapeSet, index: int, value: GaussianShape) -> None: pass
+    def __setitem__(index: int, value: GaussianShape) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == list</tt>.
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param list The \e %GaussianShapeSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: GaussianShapeSet, list: object) -> bool: pass
+    def __eq__(list: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != list</tt>.
-    # \param self The \e %GaussianShapeSet instance this method is called upon.
     # \param list The \e %GaussianShapeSet instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: GaussianShapeSet, list: object) -> bool: pass
+    def __ne__(list: object) -> bool: pass
 
     ##
     # \brief 

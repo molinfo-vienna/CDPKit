@@ -251,20 +251,17 @@ class PDBData(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PDBData instance.
-    # \param self The \e %PDBData instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PDBData instance.
-    # \param self The \e %PDBData instance to initialize.
     # \param other 
     #
-    def __init__(self: object, other: PDBData) -> None: pass
+    def __init__(other: PDBData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PDBData instance this method is called upon.
     #
     # Different Python \e %PDBData instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PDBData instances \e a and \e b reference different C++ objects. 
@@ -273,127 +270,111 @@ class PDBData(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: PDBData) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \return 
     #
-    def getNumRecords(self: PDBData) -> int: pass
+    def getNumRecords() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: PDBData) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     #
-    def clear(self: PDBData) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PDBData instance \a data.
-    # \param self The \e %PDBData instance this method is called upon.
     # \param data The \e %PDBData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PDBData, data: PDBData) -> PDBData: pass
+    def assign(data: PDBData) -> PDBData: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \return 
     #
-    def containsRecord(self: PDBData, type: RecordType) -> bool: pass
+    def containsRecord(type: RecordType) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \return 
     #
-    def getData(self: PDBData, type: RecordType) -> str: pass
+    def getData(type: RecordType) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \return 
     #
-    def removeRecord(self: PDBData, type: RecordType) -> bool: pass
+    def removeRecord(type: RecordType) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \param data 
     #
-    def setRecord(self: PDBData, type: RecordType, data: str) -> None: pass
+    def setRecord(type: RecordType, data: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \return 
     #
-    def getRecordTypes(self: PDBData) -> object: pass
+    def getRecordTypes() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \return 
     #
-    def getRecordData(self: PDBData) -> object: pass
+    def getRecordData() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \return 
     #
-    def getRecords(self: PDBData) -> object: pass
+    def getRecords() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \return 
     #
-    def __len__(self: PDBData) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \return 
     #
-    def __getitem__(self: PDBData, type: RecordType) -> str: pass
+    def __getitem__(type: RecordType) -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \param data 
     #
-    def __setitem__(self: PDBData, type: RecordType, data: str) -> None: pass
+    def __setitem__(type: RecordType, data: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type 
     # \return 
     #
-    def __delitem__(self: PDBData, type: RecordType) -> bool: pass
+    def __delitem__(type: RecordType) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>type in self</tt>.
-    # \param self The \e %PDBData instance this method is called upon.
     # \param type The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: PDBData, type: RecordType) -> bool: pass
+    def __contains__(type: RecordType) -> bool: pass
 
     ##
     # \brief 

@@ -46,23 +46,20 @@ class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
 
     ##
     # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
-    # \param self The \e %DefaultPharmacophoreGenerator instance to initialize.
     # \param config 
     #
-    def __init__(self: object, config: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
+    def __init__(config: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
-    # \param self The \e %DefaultPharmacophoreGenerator instance to initialize.
     # \param molgraph 
     # \param pharm 
     # \param config 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, config: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, config: Configuration = CDPL.Pharm.Configuration.DEFAULT_CONFIG) -> None: pass
 
     ##
     # \brief Initializes the \e %DefaultPharmacophoreGenerator instance.
-    # \param self The \e %DefaultPharmacophoreGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: DefaultPharmacophoreGenerator) -> None: pass
+    def __init__(gen: DefaultPharmacophoreGenerator) -> None: pass

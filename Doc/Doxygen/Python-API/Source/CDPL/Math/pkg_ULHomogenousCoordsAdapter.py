@@ -26,21 +26,18 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ULHomogenousCoordsAdapter instance.
-    # \param self The \e %ULHomogenousCoordsAdapter instance to initialize.
     # \param a 
     #
-    def __init__(self: object, a: ULHomogenousCoordsAdapter) -> None: pass
+    def __init__(a: ULHomogenousCoordsAdapter) -> None: pass
 
     ##
     # \brief Initializes the \e %ULHomogenousCoordsAdapter instance.
-    # \param self The \e %ULHomogenousCoordsAdapter instance to initialize.
     # \param e 
     #
-    def __init__(self: object, e: ULVectorExpression) -> None: pass
+    def __init__(e: ULVectorExpression) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     #
     # Different Python \e %ULHomogenousCoordsAdapter instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ULHomogenousCoordsAdapter instances \e a and \e b reference different C++ objects. 
@@ -49,302 +46,264 @@ class ULHomogenousCoordsAdapter(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ULHomogenousCoordsAdapter) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULHomogenousCoordsAdapter instance \a e.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ULHomogenousCoordsAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULHomogenousCoordsAdapter, e: ConstFVectorExpression) -> ULHomogenousCoordsAdapter: pass
+    def assign(e: ConstFVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULHomogenousCoordsAdapter instance \a e.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ULHomogenousCoordsAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULHomogenousCoordsAdapter, e: ConstDVectorExpression) -> ULHomogenousCoordsAdapter: pass
+    def assign(e: ConstDVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULHomogenousCoordsAdapter instance \a e.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ULHomogenousCoordsAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULHomogenousCoordsAdapter, e: ConstLVectorExpression) -> ULHomogenousCoordsAdapter: pass
+    def assign(e: ConstLVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULHomogenousCoordsAdapter instance \a e.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ULHomogenousCoordsAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULHomogenousCoordsAdapter, e: ConstULVectorExpression) -> ULHomogenousCoordsAdapter: pass
+    def assign(e: ConstULVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULHomogenousCoordsAdapter instance \a r.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param r The \e %ULHomogenousCoordsAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULHomogenousCoordsAdapter, r: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
+    def assign(r: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULHomogenousCoordsAdapter instance \a a.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param a The \e %ULHomogenousCoordsAdapter instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULHomogenousCoordsAdapter, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ULHomogenousCoordsAdapter) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def getSize(self: ULHomogenousCoordsAdapter) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: ULHomogenousCoordsAdapter, i: int) -> int: pass
+    def getElement(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def toArray(self: ULHomogenousCoordsAdapter) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param r 
     #
-    def swap(self: ULHomogenousCoordsAdapter, r: ULHomogenousCoordsAdapter) -> None: pass
+    def swap(r: ULHomogenousCoordsAdapter) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: ULHomogenousCoordsAdapter, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def getData(self: ULHomogenousCoordsAdapter) -> ULVectorExpression: pass
+    def getData() -> ULVectorExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param r The \e %ULHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULHomogenousCoordsAdapter, r: ULHomogenousCoordsAdapter) -> bool: pass
+    def __eq__(r: ULHomogenousCoordsAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ULHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULHomogenousCoordsAdapter, e: ConstULVectorExpression) -> bool: pass
+    def __eq__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param r The \e %ULHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULHomogenousCoordsAdapter, r: ULHomogenousCoordsAdapter) -> bool: pass
+    def __ne__(r: ULHomogenousCoordsAdapter) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param e The \e %ULHomogenousCoordsAdapter instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULHomogenousCoordsAdapter, e: ConstULVectorExpression) -> bool: pass
+    def __ne__(e: ConstULVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: ULHomogenousCoordsAdapter, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: ULHomogenousCoordsAdapter, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def __len__(self: ULHomogenousCoordsAdapter) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %ULHomogenousCoordsAdapter instance.
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ULHomogenousCoordsAdapter) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
+    def __pos__() -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstULVectorExpression: pass
+    def __neg__() -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ULHomogenousCoordsAdapter instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __add__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ULHomogenousCoordsAdapter instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __sub__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ULHomogenousCoordsAdapter instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __mul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ULHomogenousCoordsAdapter instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
+    def __mul__(e: ConstULMatrixExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ULHomogenousCoordsAdapter instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __div__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __truediv__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstULVectorExpression: pass
+    def __rmul__(t: int) -> ConstULVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: ULHomogenousCoordsAdapter, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += a</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as in-place addend.
     # \param a Specifies the second addend.
     # \return The updated \e %ULHomogenousCoordsAdapter instance \a self.
     #
-    def __iadd__(self: ULHomogenousCoordsAdapter, a: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
+    def __iadd__(a: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %ULHomogenousCoordsAdapter instance \a self.
     #
-    def __iadd__(self: ULHomogenousCoordsAdapter, e: ConstULVectorExpression) -> ULHomogenousCoordsAdapter: pass
+    def __iadd__(e: ConstULVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= a</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as in-place minuend.
     # \param a Specifies the subtrahend.
     # \return The updated \e %ULHomogenousCoordsAdapter instance \a self.
     #
-    def __isub__(self: ULHomogenousCoordsAdapter, a: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
+    def __isub__(a: ULHomogenousCoordsAdapter) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %ULHomogenousCoordsAdapter instance \a self.
     #
-    def __isub__(self: ULHomogenousCoordsAdapter, e: ConstULVectorExpression) -> ULHomogenousCoordsAdapter: pass
+    def __isub__(e: ConstULVectorExpression) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %ULHomogenousCoordsAdapter instance \a self.
     #
-    def __imul__(self: ULHomogenousCoordsAdapter, t: int) -> ULHomogenousCoordsAdapter: pass
+    def __imul__(t: int) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %ULHomogenousCoordsAdapter instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %ULHomogenousCoordsAdapter instance \a self.
     #
-    def __idiv__(self: ULHomogenousCoordsAdapter, t: int) -> ULHomogenousCoordsAdapter: pass
+    def __idiv__(t: int) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief 
-    # \param self The \e %ULHomogenousCoordsAdapter instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: ULHomogenousCoordsAdapter, t: int) -> ULHomogenousCoordsAdapter: pass
+    def __itruediv__(t: int) -> ULHomogenousCoordsAdapter: pass
 
     ##
     # \brief 

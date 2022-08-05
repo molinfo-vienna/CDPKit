@@ -46,25 +46,22 @@ class HBondingInteractionScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %HBondingInteractionScore instance.
-    # \param self The \e %HBondingInteractionScore instance to initialize.
     # \param score 
     #
-    def __init__(self: object, score: HBondingInteractionScore) -> None: pass
+    def __init__(score: HBondingInteractionScore) -> None: pass
 
     ##
     # \brief Initializes the \e %HBondingInteractionScore instance.
-    # \param self The \e %HBondingInteractionScore instance to initialize.
     # \param don_acc 
     # \param min_len 
     # \param max_len 
     # \param min_ahd_ang 
     # \param max_acc_ang 
     #
-    def __init__(self: object, don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
+    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     #
     # Different Python \e %HBondingInteractionScore instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HBondingInteractionScore instances \e a and \e b reference different C++ objects. 
@@ -73,59 +70,52 @@ class HBondingInteractionScore(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: HBondingInteractionScore) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \param func 
     #
-    def setNormalizationFunction(self: HBondingInteractionScore, func: DoubleDoubleFunctor) -> None: pass
+    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \return 
     #
-    def getMinLength(self: HBondingInteractionScore) -> float: pass
+    def getMinLength() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \return 
     #
-    def getMaxLength(self: HBondingInteractionScore) -> float: pass
+    def getMaxLength() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \return 
     #
-    def getMinAHDAngle(self: HBondingInteractionScore) -> float: pass
+    def getMinAHDAngle() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \return 
     #
-    def getMaxAcceptorAngle(self: HBondingInteractionScore) -> float: pass
+    def getMaxAcceptorAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondingInteractionScore instance \a constr.
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \param constr The \e %HBondingInteractionScore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: HBondingInteractionScore, constr: HBondingInteractionScore) -> HBondingInteractionScore: pass
+    def assign(constr: HBondingInteractionScore) -> HBondingInteractionScore: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionScore instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: HBondingInteractionScore, ftr1: Feature, ftr2: Feature) -> float: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> float: pass
 
     ##
     # \brief 

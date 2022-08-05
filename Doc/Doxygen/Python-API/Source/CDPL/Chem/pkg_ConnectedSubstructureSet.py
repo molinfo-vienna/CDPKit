@@ -26,37 +26,32 @@ class ConnectedSubstructureSet(FragmentList):
 
     ##
     # \brief Initializes the \e %ConnectedSubstructureSet instance.
-    # \param self The \e %ConnectedSubstructureSet instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ConnectedSubstructureSet instance.
-    # \param self The \e %ConnectedSubstructureSet instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConnectedSubstructureSet instance this method is called upon.
     # \param molgraph 
     #
-    def reset(self: ConnectedSubstructureSet, molgraph: MolecularGraph) -> None: pass
+    def reset(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConnectedSubstructureSet instance this method is called upon.
     # \return 
     #
-    def getSubstructureSize(self: ConnectedSubstructureSet) -> int: pass
+    def getSubstructureSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConnectedSubstructureSet instance this method is called upon.
     # \param size 
     #
-    def findSubstructures(self: ConnectedSubstructureSet, size: int) -> None: pass
+    def findSubstructures(size: int) -> None: pass
 
     ##
     # \brief 

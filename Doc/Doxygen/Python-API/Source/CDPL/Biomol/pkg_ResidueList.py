@@ -26,22 +26,19 @@ class ResidueList(CDPL.Chem.FragmentList):
 
     ##
     # \brief Initializes the \e %ResidueList instance.
-    # \param self The \e %ResidueList instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ResidueList instance.
-    # \param self The \e %ResidueList instance to initialize.
     # \param molgraph 
     # \param flags 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ResidueList instance this method is called upon.
     # \param molgraph 
     # \param flags 
     #
-    def extract(self: ResidueList, molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> None: pass
+    def extract(molgraph: CDPL.Chem.MolecularGraph, flags: int = 2147483648) -> None: pass

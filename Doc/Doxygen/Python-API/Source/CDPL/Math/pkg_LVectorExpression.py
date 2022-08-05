@@ -26,127 +26,111 @@ class LVectorExpression(ConstLVectorExpression):
 
     ##
     # \brief 
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param e 
     #
-    def swap(self: LVectorExpression, e: LVectorExpression) -> None: pass
+    def swap(e: LVectorExpression) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a e.
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param e The \e %LVectorExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorExpression, e: LVectorExpression) -> LVectorExpression: pass
+    def assign(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a e.
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param e The \e %LVectorExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorExpression, e: ConstFVectorExpression) -> LVectorExpression: pass
+    def assign(e: ConstFVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a e.
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param e The \e %LVectorExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorExpression, e: ConstDVectorExpression) -> LVectorExpression: pass
+    def assign(e: ConstDVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a e.
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param e The \e %LVectorExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorExpression, e: ConstLVectorExpression) -> LVectorExpression: pass
+    def assign(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a e.
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param e The \e %LVectorExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorExpression, e: ConstULVectorExpression) -> LVectorExpression: pass
+    def assign(e: ConstULVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LVectorExpression instance \a a.
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param a The \e %LVectorExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: LVectorExpression, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: LVectorExpression, i: int, v: int) -> None: pass
+    def setElement(i: int, v: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: LVectorExpression, i: int, v: int) -> None: pass
+    def __setitem__(i: int, v: int) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %LVectorExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %LVectorExpression instance \a self.
     #
-    def __iadd__(self: LVectorExpression, e: LVectorExpression) -> LVectorExpression: pass
+    def __iadd__(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %LVectorExpression instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %LVectorExpression instance \a self.
     #
-    def __iadd__(self: LVectorExpression, e: ConstLVectorExpression) -> LVectorExpression: pass
+    def __iadd__(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %LVectorExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %LVectorExpression instance \a self.
     #
-    def __isub__(self: LVectorExpression, e: LVectorExpression) -> LVectorExpression: pass
+    def __isub__(e: LVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %LVectorExpression instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %LVectorExpression instance \a self.
     #
-    def __isub__(self: LVectorExpression, e: ConstLVectorExpression) -> LVectorExpression: pass
+    def __isub__(e: ConstLVectorExpression) -> LVectorExpression: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %LVectorExpression instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %LVectorExpression instance \a self.
     #
-    def __imul__(self: LVectorExpression, t: int) -> LVectorExpression: pass
+    def __imul__(t: int) -> LVectorExpression: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %LVectorExpression instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %LVectorExpression instance \a self.
     #
-    def __idiv__(self: LVectorExpression, t: int) -> LVectorExpression: pass
+    def __idiv__(t: int) -> LVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %LVectorExpression instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: LVectorExpression, t: int) -> LVectorExpression: pass
+    def __itruediv__(t: int) -> LVectorExpression: pass

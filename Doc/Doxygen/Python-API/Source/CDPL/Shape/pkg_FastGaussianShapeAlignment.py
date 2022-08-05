@@ -56,27 +56,23 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # \param ref_shape 
     #
-    def __init__(self: object, ref_shape: GaussianShape) -> None: pass
+    def __init__(ref_shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %FastGaussianShapeAlignment instance.
-    # \param self The \e %FastGaussianShapeAlignment instance to initialize.
     # \param ref_shapes 
     #
-    def __init__(self: object, ref_shapes: GaussianShapeSet) -> None: pass
+    def __init__(ref_shapes: GaussianShapeSet) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     #
     # Different Python \e %FastGaussianShapeAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FastGaussianShapeAlignment instances \e a and \e b reference different C++ objects. 
@@ -85,341 +81,294 @@ class FastGaussianShapeAlignment(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FastGaussianShapeAlignment) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param func 
     #
-    def setResultCompareFunction(self: FastGaussianShapeAlignment, func: BoolAlignmentResult2Functor) -> None: pass
+    def setResultCompareFunction(func: BoolAlignmentResult2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getResultCompareFunction(self: FastGaussianShapeAlignment) -> BoolAlignmentResult2Functor: pass
+    def getResultCompareFunction() -> BoolAlignmentResult2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param func 
     #
-    def setScoringFunction(self: FastGaussianShapeAlignment, func: DoubleAlignmentResultFunctor) -> None: pass
+    def setScoringFunction(func: DoubleAlignmentResultFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getScoringFunction(self: FastGaussianShapeAlignment) -> DoubleAlignmentResultFunctor: pass
+    def getScoringFunction() -> DoubleAlignmentResultFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param mode 
     #
-    def setResultSelectionMode(self: FastGaussianShapeAlignment, mode: int) -> None: pass
+    def setResultSelectionMode(mode: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getResultSelectionMode(self: FastGaussianShapeAlignment) -> int: pass
+    def getResultSelectionMode() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param max_iter 
     #
-    def setMaxNumOptimizationIterations(self: FastGaussianShapeAlignment, max_iter: int) -> None: pass
+    def setMaxNumOptimizationIterations(max_iter: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getMaxNumOptimizationIterations(self: FastGaussianShapeAlignment) -> int: pass
+    def getMaxNumOptimizationIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param grad_norm 
     #
-    def setOptimizationStopGradient(self: FastGaussianShapeAlignment, grad_norm: float) -> None: pass
+    def setOptimizationStopGradient(grad_norm: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getOptimizationStopGradient(self: FastGaussianShapeAlignment) -> float: pass
+    def getOptimizationStopGradient() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param perf_align 
     #
-    def performAlignment(self: FastGaussianShapeAlignment, perf_align: bool) -> None: pass
+    def performAlignment(perf_align: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def performAlignment(self: FastGaussianShapeAlignment) -> bool: pass
+    def performAlignment() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param optimize 
     #
-    def optimizeOverlap(self: FastGaussianShapeAlignment, optimize: bool) -> None: pass
+    def optimizeOverlap(optimize: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def optimizeOverlap(self: FastGaussianShapeAlignment) -> bool: pass
+    def optimizeOverlap() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param greedy 
     #
-    def greedyOptimization(self: FastGaussianShapeAlignment, greedy: bool) -> None: pass
+    def greedyOptimization(greedy: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def greedyOptimization(self: FastGaussianShapeAlignment) -> bool: pass
+    def greedyOptimization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param thresh 
     #
-    def setSymmetryThreshold(self: FastGaussianShapeAlignment, thresh: float) -> None: pass
+    def setSymmetryThreshold(thresh: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getSymmetryThreshold(self: FastGaussianShapeAlignment) -> float: pass
+    def getSymmetryThreshold() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genShapeCenterStarts(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genShapeCenterStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genShapeCenterStarts(self: FastGaussianShapeAlignment) -> bool: pass
+    def genShapeCenterStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genColorCenterStarts(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genColorCenterStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genColorCenterStarts(self: FastGaussianShapeAlignment) -> bool: pass
+    def genColorCenterStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genNonColorCenterStarts(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genNonColorCenterStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genNonColorCenterStarts(self: FastGaussianShapeAlignment) -> bool: pass
+    def genNonColorCenterStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genRandomStarts(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genRandomStarts(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genRandomStarts(self: FastGaussianShapeAlignment) -> bool: pass
+    def genRandomStarts() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genForAlignedShapeCenters(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genForAlignedShapeCenters(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genForAlignedShapeCenters(self: FastGaussianShapeAlignment) -> bool: pass
+    def genForAlignedShapeCenters() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genForReferenceShapeCenters(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genForReferenceShapeCenters(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genForReferenceShapeCenters(self: FastGaussianShapeAlignment) -> bool: pass
+    def genForReferenceShapeCenters() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param generate 
     #
-    def genForLargerShapeCenters(self: FastGaussianShapeAlignment, generate: bool) -> None: pass
+    def genForLargerShapeCenters(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def genForLargerShapeCenters(self: FastGaussianShapeAlignment) -> bool: pass
+    def genForLargerShapeCenters() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param max_trans 
     #
-    def setMaxRandomTranslation(self: FastGaussianShapeAlignment, max_trans: float) -> None: pass
+    def setMaxRandomTranslation(max_trans: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getMaxRandomTranslation(self: FastGaussianShapeAlignment) -> float: pass
+    def getMaxRandomTranslation() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param num_starts 
     #
-    def setNumRandomStarts(self: FastGaussianShapeAlignment, num_starts: int) -> None: pass
+    def setNumRandomStarts(num_starts: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getNumRandomStarts(self: FastGaussianShapeAlignment) -> int: pass
+    def getNumRandomStarts() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param seed 
     #
-    def setRandomSeed(self: FastGaussianShapeAlignment, seed: int) -> None: pass
+    def setRandomSeed(seed: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     #
-    def clearReferenceShapes(self: FastGaussianShapeAlignment) -> None: pass
+    def clearReferenceShapes() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param shape 
     # \param new_set 
     #
-    def addReferenceShape(self: FastGaussianShapeAlignment, shape: GaussianShape, new_set: bool = True) -> None: pass
+    def addReferenceShape(shape: GaussianShape, new_set: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param shapes 
     # \param new_set 
     #
-    def addReferenceShapes(self: FastGaussianShapeAlignment, shapes: GaussianShapeSet, new_set: bool = True) -> None: pass
+    def addReferenceShapes(shapes: GaussianShapeSet, new_set: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getNumReferenceShapes(self: FastGaussianShapeAlignment) -> int: pass
+    def getNumReferenceShapes() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param shape 
     # \return 
     #
-    def align(self: FastGaussianShapeAlignment, shape: GaussianShape) -> bool: pass
+    def align(shape: GaussianShape) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param shapes 
     # \return 
     #
-    def align(self: FastGaussianShapeAlignment, shapes: GaussianShapeSet) -> bool: pass
+    def align(shapes: GaussianShapeSet) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def getNumResults(self: FastGaussianShapeAlignment) -> int: pass
+    def getNumResults() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getResult(self: FastGaussianShapeAlignment, idx: int) -> AlignmentResult: pass
+    def getResult(idx: int) -> AlignmentResult: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \return 
     #
-    def __len__(self: FastGaussianShapeAlignment) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FastGaussianShapeAlignment instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: FastGaussianShapeAlignment, idx: int) -> AlignmentResult: pass
+    def __getitem__(idx: int) -> AlignmentResult: pass
 
     ##
     # \brief 

@@ -26,7 +26,6 @@ class CDFBZ2FeatureContainerWriter(FeatureContainerWriter):
 
     ##
     # \brief Initializes the \e %CDFBZ2FeatureContainerWriter instance.
-    # \param self The \e %CDFBZ2FeatureContainerWriter instance to initialize.
     # \param ios 
     #
-    def __init__(self: object, ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: CDPL.Base.IOStream) -> None: pass

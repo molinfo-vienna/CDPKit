@@ -26,13 +26,11 @@ class PSDScreeningDBAccessor(ScreeningDBAccessor):
 
     ##
     # \brief Initializes the \e %PSDScreeningDBAccessor instance.
-    # \param self The \e %PSDScreeningDBAccessor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PSDScreeningDBAccessor instance.
-    # \param self The \e %PSDScreeningDBAccessor instance to initialize.
     # \param name 
     #
-    def __init__(self: object, name: str) -> None: pass
+    def __init__(name: str) -> None: pass

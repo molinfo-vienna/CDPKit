@@ -26,7 +26,6 @@ class MMTFMoleculeReader(CDPL.Chem.MoleculeReader):
 
     ##
     # \brief Initializes the \e %MMTFMoleculeReader instance.
-    # \param self The \e %MMTFMoleculeReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass

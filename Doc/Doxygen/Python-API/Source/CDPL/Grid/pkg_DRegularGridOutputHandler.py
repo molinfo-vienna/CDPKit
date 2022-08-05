@@ -26,13 +26,11 @@ class DRegularGridOutputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DRegularGridOutputHandler instance.
-    # \param self The \e %DRegularGridOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DRegularGridOutputHandler instance this method is called upon.
     #
     # Different Python \e %DRegularGridOutputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DRegularGridOutputHandler instances \e a and \e b reference different C++ objects. 
@@ -41,31 +39,28 @@ class DRegularGridOutputHandler(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DRegularGridOutputHandler) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridOutputHandler instance this method is called upon.
     # \return 
     #
-    def getDataFormat(self: DRegularGridOutputHandler) -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridOutputHandler instance this method is called upon.
     # \param is 
     # \return 
     #
-    def createWriter(self: DRegularGridOutputHandler, is: CDPL.Base.IStream) -> DRegularGridWriter: pass
+    def createWriter(is: CDPL.Base.IStream) -> DRegularGridWriter: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridOutputHandler instance this method is called upon.
     # \param file_name 
     # \param mode 
     # \return 
     #
-    def createWriter(self: DRegularGridOutputHandler, file_name: str, mode: OpenMode = CDPL.Base.OpenMode60) -> DRegularGridWriter: pass
+    def createWriter(file_name: str, mode: OpenMode = CDPL.Base.OpenMode(60)) -> DRegularGridWriter: pass
 
     ##
     # \brief 

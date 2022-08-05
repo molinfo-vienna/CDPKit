@@ -26,103 +26,89 @@ class EllipsePrimitive2D(GraphicsPrimitive2D):
 
     ##
     # \brief Initializes the \e %EllipsePrimitive2D instance.
-    # \param self The \e %EllipsePrimitive2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %EllipsePrimitive2D instance.
-    # \param self The \e %EllipsePrimitive2D instance to initialize.
     # \param pos 
     # \param width 
     # \param height 
     #
-    def __init__(self: object, pos: CDPL.Math.Vector2D, width: float, height: float) -> None: pass
+    def __init__(pos: CDPL.Math.Vector2D, width: float, height: float) -> None: pass
 
     ##
     # \brief Initializes the \e %EllipsePrimitive2D instance.
-    # \param self The \e %EllipsePrimitive2D instance to initialize.
     # \param prim 
     #
-    def __init__(self: object, prim: EllipsePrimitive2D) -> None: pass
+    def __init__(prim: EllipsePrimitive2D) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %EllipsePrimitive2D instance \a prim.
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param prim The \e %EllipsePrimitive2D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: EllipsePrimitive2D, prim: EllipsePrimitive2D) -> EllipsePrimitive2D: pass
+    def assign(prim: EllipsePrimitive2D) -> EllipsePrimitive2D: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param width 
     #
-    def setWidth(self: EllipsePrimitive2D, width: float) -> None: pass
+    def setWidth(width: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \return 
     #
-    def getWidth(self: EllipsePrimitive2D) -> float: pass
+    def getWidth() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param height 
     #
-    def setHeight(self: EllipsePrimitive2D, height: float) -> None: pass
+    def setHeight(height: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \return 
     #
-    def getHeight(self: EllipsePrimitive2D) -> float: pass
+    def getHeight() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param pos 
     #
-    def setPosition(self: EllipsePrimitive2D, pos: CDPL.Math.Vector2D) -> None: pass
+    def setPosition(pos: CDPL.Math.Vector2D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \return 
     #
-    def getPosition(self: EllipsePrimitive2D) -> CDPL.Math.Vector2D: pass
+    def getPosition() -> CDPL.Math.Vector2D: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param pen 
     #
-    def setPen(self: EllipsePrimitive2D, pen: Pen) -> None: pass
+    def setPen(pen: Pen) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \return 
     #
-    def getPen(self: EllipsePrimitive2D) -> Pen: pass
+    def getPen() -> Pen: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \param brush 
     #
-    def setBrush(self: EllipsePrimitive2D, brush: Brush) -> None: pass
+    def setBrush(brush: Brush) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %EllipsePrimitive2D instance this method is called upon.
     # \return 
     #
-    def getBrush(self: EllipsePrimitive2D) -> Brush: pass
+    def getBrush() -> Brush: pass
 
     ##
     # \brief 

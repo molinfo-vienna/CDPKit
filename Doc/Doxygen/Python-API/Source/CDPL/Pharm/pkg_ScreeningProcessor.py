@@ -51,7 +51,6 @@ class ScreeningProcessor(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %SearchHit instance.
-        # \param self The \e %SearchHit instance to initialize.
         # \param hit_prov 
         # \param qry_pharm 
         # \param hit_pharm 
@@ -61,18 +60,16 @@ class ScreeningProcessor(Boost.Python.instance):
         # \param mol_idx 
         # \param conf_idx 
         #
-        def __init__(self: object, hit_prov: ScreeningProcessor, qry_pharm: FeatureContainer, hit_pharm: FeatureContainer, mol: CDPL.Chem.Molecule, xform: CDPL.Math.Matrix4D, pharm_idx: int, mol_idx: int, conf_idx: int) -> None: pass
+        def __init__(hit_prov: ScreeningProcessor, qry_pharm: FeatureContainer, hit_pharm: FeatureContainer, mol: CDPL.Chem.Molecule, xform: CDPL.Math.Matrix4D, pharm_idx: int, mol_idx: int, conf_idx: int) -> None: pass
 
         ##
         # \brief Initializes the \e %SearchHit instance.
-        # \param self The \e %SearchHit instance to initialize.
         # \param hit 
         #
-        def __init__(self: object, hit: SearchHit) -> None: pass
+        def __init__(hit: SearchHit) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %SearchHit instance this method is called upon.
         #
         # Different Python \e %SearchHit instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SearchHit instances \e a and \e b reference different C++ objects. 
@@ -81,71 +78,62 @@ class ScreeningProcessor(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: SearchHit) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %SearchHit instance \a hit.
-        # \param self The \e %SearchHit instance this method is called upon.
         # \param hit The \e %SearchHit instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: SearchHit, hit: SearchHit) -> SearchHit: pass
+        def assign(hit: SearchHit) -> SearchHit: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitProvider(self: SearchHit) -> ScreeningProcessor: pass
+        def getHitProvider() -> ScreeningProcessor: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getQueryPharmacophore(self: SearchHit) -> FeatureContainer: pass
+        def getQueryPharmacophore() -> FeatureContainer: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitPharmacophore(self: SearchHit) -> FeatureContainer: pass
+        def getHitPharmacophore() -> FeatureContainer: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitMolecule(self: SearchHit) -> CDPL.Chem.Molecule: pass
+        def getHitMolecule() -> CDPL.Chem.Molecule: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitAlignmentTransform(self: SearchHit) -> CDPL.Math.Matrix4D: pass
+        def getHitAlignmentTransform() -> CDPL.Math.Matrix4D: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitPharmacophoreIndex(self: SearchHit) -> int: pass
+        def getHitPharmacophoreIndex() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitMoleculeIndex(self: SearchHit) -> int: pass
+        def getHitMoleculeIndex() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %SearchHit instance this method is called upon.
         # \return 
         #
-        def getHitConformationIndex(self: SearchHit) -> int: pass
+        def getHitConformationIndex() -> int: pass
 
         ##
         # \brief 
@@ -194,14 +182,12 @@ class ScreeningProcessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningProcessor instance.
-    # \param self The \e %ScreeningProcessor instance to initialize.
     # \param db_acc 
     #
-    def __init__(self: object, db_acc: ScreeningDBAccessor) -> None: pass
+    def __init__(db_acc: ScreeningDBAccessor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     #
     # Different Python \e %ScreeningProcessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningProcessor instances \e a and \e b reference different C++ objects. 
@@ -210,129 +196,112 @@ class ScreeningProcessor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ScreeningProcessor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param db_acc 
     #
-    def setDBAccessor(self: ScreeningProcessor, db_acc: ScreeningDBAccessor) -> None: pass
+    def setDBAccessor(db_acc: ScreeningDBAccessor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getDBAccessor(self: ScreeningProcessor) -> ScreeningDBAccessor: pass
+    def getDBAccessor() -> ScreeningDBAccessor: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param mode 
     #
-    def setHitReportMode(self: ScreeningProcessor, mode: HitReportMode) -> None: pass
+    def setHitReportMode(mode: HitReportMode) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getHitReportMode(self: ScreeningProcessor) -> HitReportMode: pass
+    def getHitReportMode() -> HitReportMode: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumOmittedFeatures(self: ScreeningProcessor, max_num: int) -> None: pass
+    def setMaxNumOmittedFeatures(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getMaxNumOmittedFeatures(self: ScreeningProcessor) -> int: pass
+    def getMaxNumOmittedFeatures() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param check 
     #
-    def checkXVolumeClashes(self: ScreeningProcessor, check: bool) -> None: pass
+    def checkXVolumeClashes(check: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def xVolumeClashesChecked(self: ScreeningProcessor) -> bool: pass
+    def xVolumeClashesChecked() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param seek_best 
     #
-    def seekBestAlignments(self: ScreeningProcessor, seek_best: bool) -> None: pass
+    def seekBestAlignments(seek_best: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def bestAlignmentsSeeked(self: ScreeningProcessor) -> bool: pass
+    def bestAlignmentsSeeked() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param func 
     #
-    def setHitCallback(self: ScreeningProcessor, func: BoolSearchHitDoubleFunctor) -> None: pass
+    def setHitCallback(func: BoolSearchHitDoubleFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getHitCallback(self: ScreeningProcessor) -> BoolSearchHitDoubleFunctor: pass
+    def getHitCallback() -> BoolSearchHitDoubleFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param func 
     #
-    def setProgressCallback(self: ScreeningProcessor, func: BoolSizeType2Functor) -> None: pass
+    def setProgressCallback(func: BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getProgressCallback(self: ScreeningProcessor) -> BoolSizeType2Functor: pass
+    def getProgressCallback() -> BoolSizeType2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param func 
     #
-    def setScoringFunction(self: ScreeningProcessor, func: DoubleSearchHitFunctor) -> None: pass
+    def setScoringFunction(func: DoubleSearchHitFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \return 
     #
-    def getScoringFunction(self: ScreeningProcessor) -> DoubleSearchHitFunctor: pass
+    def getScoringFunction() -> DoubleSearchHitFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningProcessor instance this method is called upon.
     # \param query 
     # \param mol_start_idx 
     # \param mol_end_idx 
     # \return 
     #
-    def searchDB(self: ScreeningProcessor, query: FeatureContainer, mol_start_idx: int = 0, mol_end_idx: int = 0) -> int: pass
+    def searchDB(query: FeatureContainer, mol_start_idx: int = 0, mol_end_idx: int = 0) -> int: pass
 
     ##
     # \brief 

@@ -26,7 +26,6 @@ class SMILESReactionWriter(ReactionWriter):
 
     ##
     # \brief Initializes the \e %SMILESReactionWriter instance.
-    # \param self The \e %SMILESReactionWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

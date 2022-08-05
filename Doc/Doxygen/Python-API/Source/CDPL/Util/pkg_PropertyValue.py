@@ -26,15 +26,13 @@ class PropertyValue(builtins.object):
 
     ##
     # \brief Initializes the \e %PropertyValue instance.
-    # \param self The \e %PropertyValue instance to initialize.
     # \param key 
     #
-    def __init__(self: PropertyValue, key: PropertyKey) -> None: pass
+    def __init__(key: PropertyKey) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PropertyValue instance this method is called upon.
     # \param cntnr 
     # \return 
     #
-    def __call__(self: PropertyValue, cntnr: CDPL.Base.PropertyContainer) -> object: pass
+    def __call__(cntnr: CDPL.Base.PropertyContainer) -> object: pass

@@ -26,13 +26,11 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeAlignmentStartGenerator instance.
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     #
     # Different Python \e %GaussianShapeAlignmentStartGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeAlignmentStartGenerator instances \e a and \e b reference different C++ objects. 
@@ -41,79 +39,70 @@ class GaussianShapeAlignmentStartGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GaussianShapeAlignmentStartGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \param func 
     # \param xform 
     # \return 
     #
-    def setupReference(self: GaussianShapeAlignmentStartGenerator, func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupReference(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \param func 
     # \param xform 
     # \return 
     #
-    def setupAligned(self: GaussianShapeAlignmentStartGenerator, func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
+    def setupAligned(func: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \param func 
     # \param sym_class 
     #
-    def setReference(self: GaussianShapeAlignmentStartGenerator, func: GaussianShapeFunction, sym_class: int) -> None: pass
+    def setReference(func: GaussianShapeFunction, sym_class: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \param func 
     # \param sym_class 
     # \return 
     #
-    def generate(self: GaussianShapeAlignmentStartGenerator, func: GaussianShapeFunction, sym_class: int) -> bool: pass
+    def generate(func: GaussianShapeFunction, sym_class: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def getNumStartTransforms(self: GaussianShapeAlignmentStartGenerator) -> int: pass
+    def getNumStartTransforms() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def getNumStartSubTransforms(self: GaussianShapeAlignmentStartGenerator) -> int: pass
+    def getNumStartSubTransforms() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getStartTransform(self: GaussianShapeAlignmentStartGenerator, idx: int) -> CDPL.Math.Vector7D: pass
+    def getStartTransform(idx: int) -> CDPL.Math.Vector7D: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \return 
     #
-    def __len__(self: GaussianShapeAlignmentStartGenerator) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeAlignmentStartGenerator instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: GaussianShapeAlignmentStartGenerator, idx: int) -> CDPL.Math.Vector7D: pass
+    def __getitem__(idx: int) -> CDPL.Math.Vector7D: pass
 
     ##
     # \brief 

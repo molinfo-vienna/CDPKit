@@ -26,20 +26,17 @@ class AromaticSSSRSubset(FragmentList):
 
     ##
     # \brief Initializes the \e %AromaticSSSRSubset instance.
-    # \param self The \e %AromaticSSSRSubset instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AromaticSSSRSubset instance.
-    # \param self The \e %AromaticSSSRSubset instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AromaticSSSRSubset instance this method is called upon.
     # \param molgraph 
     #
-    def extract(self: AromaticSSSRSubset, molgraph: MolecularGraph) -> None: pass
+    def extract(molgraph: MolecularGraph) -> None: pass

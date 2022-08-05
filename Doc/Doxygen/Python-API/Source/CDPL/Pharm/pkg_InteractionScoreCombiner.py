@@ -26,23 +26,20 @@ class InteractionScoreCombiner(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionScoreCombiner instance.
-    # \param self The \e %InteractionScoreCombiner instance to initialize.
     # \param comb 
     #
-    def __init__(self: object, comb: InteractionScoreCombiner) -> None: pass
+    def __init__(comb: InteractionScoreCombiner) -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionScoreCombiner instance.
-    # \param self The \e %InteractionScoreCombiner instance to initialize.
     # \param func1 
     # \param func2 
     # \param comb_func 
     #
-    def __init__(self: object, func1: DoubleVector3DFeatureFunctor, func2: DoubleVector3DFeatureFunctor, comb_func: DoubleDouble2Functor) -> None: pass
+    def __init__(func1: DoubleVector3DFeatureFunctor, func2: DoubleVector3DFeatureFunctor, comb_func: DoubleDouble2Functor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %InteractionScoreCombiner instance this method is called upon.
     #
     # Different Python \e %InteractionScoreCombiner instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionScoreCombiner instances \e a and \e b reference different C++ objects. 
@@ -51,24 +48,22 @@ class InteractionScoreCombiner(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: InteractionScoreCombiner) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionScoreCombiner instance \a con.
-    # \param self The \e %InteractionScoreCombiner instance this method is called upon.
     # \param con The \e %InteractionScoreCombiner instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: InteractionScoreCombiner, con: InteractionScoreCombiner) -> InteractionScoreCombiner: pass
+    def assign(con: InteractionScoreCombiner) -> InteractionScoreCombiner: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionScoreCombiner instance this method is called upon.
     # \param ftr1_pos 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: InteractionScoreCombiner, ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> bool: pass
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 

@@ -31,20 +31,17 @@ class AtomDictionary(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         #
-        def __init__(self: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         #
-        def __init__(self: object, entry: Entry) -> None: pass
+        def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param arg1 The \e %Entry instance to initialize.
         # \param atom_type 
         # \param iso 
         # \param sym 
@@ -60,11 +57,10 @@ class AtomDictionary(Boost.Python.instance):
         # \param ar_eneg 
         # \param iso_masses 
         #
-        def __init__(arg1: object, atom_type: int, iso: int, sym: str, name: str, most_abdt_iso: int, avg_weight: float, iupac_grp: int, metal: bool, non_metal: bool, val_states: object, vdw_rad: float, cov_radii: object, ar_eneg: float, iso_masses: object) -> None: pass
+        def __init__(atom_type: int, iso: int, sym: str, name: str, most_abdt_iso: int, avg_weight: float, iupac_grp: int, metal: bool, non_metal: bool, val_states: object, vdw_rad: float, cov_radii: object, ar_eneg: float, iso_masses: object) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         #
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -73,114 +69,99 @@ class AtomDictionary(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Entry) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: Entry, entry: Entry) -> Entry: pass
+        def assign(entry: Entry) -> Entry: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getType(self: Entry) -> int: pass
+        def getType() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getIsotope(self: Entry) -> int: pass
+        def getIsotope() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getName(self: Entry) -> str: pass
+        def getName() -> str: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getSymbol(self: Entry) -> str: pass
+        def getSymbol() -> str: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getMostAbundantIsotope(self: Entry) -> int: pass
+        def getMostAbundantIsotope() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAverageWeight(self: Entry) -> float: pass
+        def getAverageWeight() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getIUPACGroup(self: Entry) -> int: pass
+        def getIUPACGroup() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def isMetal(self: Entry) -> bool: pass
+        def isMetal() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def isNonMetal(self: Entry) -> bool: pass
+        def isNonMetal() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getValenceStates(self: Entry) -> CDPL.Util.STArray: pass
+        def getValenceStates() -> CDPL.Util.STArray: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getVdWRadius(self: Entry) -> float: pass
+        def getVdWRadius() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \param order 
         # \return 
         #
-        def getCovalentRadius(self: Entry, order: int) -> float: pass
+        def getCovalentRadius(order: int) -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAllredRochowElectronegativity(self: Entry) -> float: pass
+        def getAllredRochowElectronegativity() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getIsotopeMasses(self: Entry) -> dict: pass
+        def getIsotopeMasses() -> dict: pass
 
         ##
         # \brief 
@@ -254,20 +235,17 @@ class AtomDictionary(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomDictionary instance.
-    # \param self The \e %AtomDictionary instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomDictionary instance.
-    # \param self The \e %AtomDictionary instance to initialize.
     # \param dict 
     #
-    def __init__(self: object, dict: AtomDictionary) -> None: pass
+    def __init__(dict: AtomDictionary) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomDictionary instance this method is called upon.
     #
     # Different Python \e %AtomDictionary instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomDictionary instances \e a and \e b reference different C++ objects. 
@@ -276,74 +254,65 @@ class AtomDictionary(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomDictionary) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \param entry 
     #
-    def addEntry(self: AtomDictionary, entry: Entry) -> None: pass
+    def addEntry(entry: Entry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \param type 
     # \param isotope 
     # \return 
     #
-    def containsEntry(self: AtomDictionary, type: int, isotope: int) -> bool: pass
+    def containsEntry(type: int, isotope: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \param type 
     # \param isotope 
     #
-    def removeEntry(self: AtomDictionary, type: int, isotope: int) -> None: pass
+    def removeEntry(type: int, isotope: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \param type 
     # \param isotope 
     # \return 
     #
-    def getEntry(self: AtomDictionary, type: int, isotope: int) -> Entry: pass
+    def getEntry(type: int, isotope: int) -> Entry: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     #
-    def clear(self: AtomDictionary) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: AtomDictionary) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \return 
     #
-    def getEntries(self: AtomDictionary) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomDictionary instance this method is called upon.
     #
-    def loadDefaults(self: AtomDictionary) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomDictionary instance \a dict.
-    # \param self The \e %AtomDictionary instance this method is called upon.
     # \param dict The \e %AtomDictionary instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomDictionary, dict: AtomDictionary) -> AtomDictionary: pass
+    def assign(dict: AtomDictionary) -> AtomDictionary: pass
 
     ##
     # \brief 

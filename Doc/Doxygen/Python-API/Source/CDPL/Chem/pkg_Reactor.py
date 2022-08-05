@@ -26,20 +26,17 @@ class Reactor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Reactor instance.
-    # \param self The \e %Reactor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Reactor instance.
-    # \param self The \e %Reactor instance to initialize.
     # \param rxn_pattern 
     #
-    def __init__(self: object, rxn_pattern: Reaction) -> None: pass
+    def __init__(rxn_pattern: Reaction) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Reactor instance this method is called upon.
     #
     # Different Python \e %Reactor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Reactor instances \e a and \e b reference different C++ objects. 
@@ -48,44 +45,39 @@ class Reactor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Reactor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Reactor instance this method is called upon.
     # \param rxn_pattern 
     #
-    def setReactionPattern(self: Reactor, rxn_pattern: Reaction) -> None: pass
+    def setReactionPattern(rxn_pattern: Reaction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Reactor instance this method is called upon.
     # \param rxn_target 
     # \return 
     #
-    def findReactionSites(self: Reactor, rxn_target: Reaction) -> bool: pass
+    def findReactionSites(rxn_target: Reaction) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Reactor instance this method is called upon.
     # \return 
     #
-    def getNumReactionSites(self: Reactor) -> int: pass
+    def getNumReactionSites() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Reactor instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getReactionSite(self: Reactor, idx: int) -> AtomBondMapping: pass
+    def getReactionSite(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %Reactor instance this method is called upon.
     # \param rxn_site 
     #
-    def performReaction(self: Reactor, rxn_site: AtomBondMapping) -> None: pass
+    def performReaction(rxn_site: AtomBondMapping) -> None: pass
 
     ##
     # \brief 

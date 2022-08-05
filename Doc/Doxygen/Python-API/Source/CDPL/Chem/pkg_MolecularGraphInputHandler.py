@@ -26,13 +26,11 @@ class MolecularGraphInputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MolecularGraphInputHandler instance.
-    # \param self The \e %MolecularGraphInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MolecularGraphInputHandler instance this method is called upon.
     #
     # Different Python \e %MolecularGraphInputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MolecularGraphInputHandler instances \e a and \e b reference different C++ objects. 
@@ -41,31 +39,28 @@ class MolecularGraphInputHandler(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MolecularGraphInputHandler) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphInputHandler instance this method is called upon.
     # \return 
     #
-    def getDataFormat(self: MolecularGraphInputHandler) -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphInputHandler instance this method is called upon.
     # \param is 
     # \return 
     #
-    def createReader(self: MolecularGraphInputHandler, is: CDPL.Base.IStream) -> MolecularGraphReader: pass
+    def createReader(is: CDPL.Base.IStream) -> MolecularGraphReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MolecularGraphInputHandler instance this method is called upon.
     # \param file_name 
     # \param mode 
     # \return 
     #
-    def createReader(self: MolecularGraphInputHandler, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MolecularGraphReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MolecularGraphReader: pass
 
     ##
     # \brief 

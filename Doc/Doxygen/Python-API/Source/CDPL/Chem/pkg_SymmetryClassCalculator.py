@@ -36,21 +36,18 @@ class SymmetryClassCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SymmetryClassCalculator instance.
-    # \param self The \e %SymmetryClassCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SymmetryClassCalculator instance.
-    # \param self The \e %SymmetryClassCalculator instance to initialize.
     # \param molgraph 
     # \param class_ids 
     #
-    def __init__(self: object, molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
+    def __init__(molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     #
     # Different Python \e %SymmetryClassCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SymmetryClassCalculator instances \e a and \e b reference different C++ objects. 
@@ -59,57 +56,50 @@ class SymmetryClassCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SymmetryClassCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \param flags 
     #
-    def setAtomPropertyFlags(self: SymmetryClassCalculator, flags: int) -> None: pass
+    def setAtomPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \param flags 
     #
-    def setBondPropertyFlags(self: SymmetryClassCalculator, flags: int) -> None: pass
+    def setBondPropertyFlags(flags: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \param include 
     #
-    def includeImplicitHydrogens(self: SymmetryClassCalculator, include: bool) -> None: pass
+    def includeImplicitHydrogens(include: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \return 
     #
-    def getAtomPropertyFlags(self: SymmetryClassCalculator) -> int: pass
+    def getAtomPropertyFlags() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \return 
     #
-    def getBondPropertyFlags(self: SymmetryClassCalculator) -> int: pass
+    def getBondPropertyFlags() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \return 
     #
-    def implicitHydrogensIncluded(self: SymmetryClassCalculator) -> bool: pass
+    def implicitHydrogensIncluded() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SymmetryClassCalculator instance this method is called upon.
     # \param molgraph 
     # \param class_ids 
     #
-    def calculate(self: SymmetryClassCalculator, molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
+    def calculate(molgraph: MolecularGraph, class_ids: CDPL.Util.STArray) -> None: pass
 
     ##
     # \brief 

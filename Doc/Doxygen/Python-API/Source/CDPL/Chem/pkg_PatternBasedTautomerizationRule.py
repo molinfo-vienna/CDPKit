@@ -31,28 +31,24 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
 
         ##
         # \brief Initializes the \e %BondOrderChange instance.
-        # \param self The \e %BondOrderChange instance to initialize.
         #
-        def __init__(self: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %BondOrderChange instance.
-        # \param self The \e %BondOrderChange instance to initialize.
         # \param bond_chg 
         #
-        def __init__(self: object, bond_chg: BondOrderChange) -> None: pass
+        def __init__(bond_chg: BondOrderChange) -> None: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %BondOrderChange instance \a bond_chg.
-        # \param self The \e %BondOrderChange instance this method is called upon.
         # \param bond_chg The \e %BondOrderChange instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: BondOrderChange, bond_chg: BondOrderChange) -> BondOrderChange: pass
+        def assign(bond_chg: BondOrderChange) -> BondOrderChange: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %BondOrderChange instance this method is called upon.
         #
         # Different Python \e %BondOrderChange instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondOrderChange instances \e a and \e b reference different C++ objects. 
@@ -61,7 +57,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: BondOrderChange) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief 
@@ -85,21 +81,18 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
 
     ##
     # \brief Initializes the \e %PatternBasedTautomerizationRule instance.
-    # \param self The \e %PatternBasedTautomerizationRule instance to initialize.
     # \param id 
     #
-    def __init__(self: object, id: int) -> None: pass
+    def __init__(id: int) -> None: pass
 
     ##
     # \brief Initializes the \e %PatternBasedTautomerizationRule instance.
-    # \param self The \e %PatternBasedTautomerizationRule instance to initialize.
     # \param rule 
     #
-    def __init__(self: object, rule: PatternBasedTautomerizationRule) -> None: pass
+    def __init__(rule: PatternBasedTautomerizationRule) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
     #
     # Different Python \e %PatternBasedTautomerizationRule instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PatternBasedTautomerizationRule instances \e a and \e b reference different C++ objects. 
@@ -108,43 +101,38 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: PatternBasedTautomerizationRule) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
     # \param pattern 
     # \param bond_chgs 
     #
-    def addTransformationPattern(self: PatternBasedTautomerizationRule, pattern: MolecularGraph, bond_chgs: object) -> None: pass
+    def addTransformationPattern(pattern: MolecularGraph, bond_chgs: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
     # \param pattern 
     #
-    def addExcludePattern(self: PatternBasedTautomerizationRule, pattern: MolecularGraph) -> None: pass
+    def addExcludePattern(pattern: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
     # \param rule 
     #
-    def addExcludePatterns(self: PatternBasedTautomerizationRule, rule: PatternBasedTautomerizationRule) -> None: pass
+    def addExcludePatterns(rule: PatternBasedTautomerizationRule) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
     #
-    def clearExcludePatterns(self: PatternBasedTautomerizationRule) -> None: pass
+    def clearExcludePatterns() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternBasedTautomerizationRule instance \a rule.
-    # \param self The \e %PatternBasedTautomerizationRule instance this method is called upon.
     # \param rule The \e %PatternBasedTautomerizationRule instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PatternBasedTautomerizationRule, rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass
+    def assign(rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass
 
     ##
     # \brief 

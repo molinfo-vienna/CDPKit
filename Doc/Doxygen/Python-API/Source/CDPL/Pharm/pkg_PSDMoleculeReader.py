@@ -26,14 +26,12 @@ class PSDMoleculeReader(CDPL.Chem.MoleculeReader):
 
     ##
     # \brief Initializes the \e %PSDMoleculeReader instance.
-    # \param self The \e %PSDMoleculeReader instance to initialize.
     # \param is 
     #
-    def __init__(self: object, is: CDPL.Base.IStream) -> None: pass
+    def __init__(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief Initializes the \e %PSDMoleculeReader instance.
-    # \param self The \e %PSDMoleculeReader instance to initialize.
     # \param file_name 
     #
-    def __init__(self: object, file_name: str) -> None: pass
+    def __init__(file_name: str) -> None: pass

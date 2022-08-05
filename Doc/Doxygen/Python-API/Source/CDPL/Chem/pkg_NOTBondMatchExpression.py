@@ -26,22 +26,19 @@ class NOTBondMatchExpression(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %NOTBondMatchExpression instance.
-    # \param arg1 The \e %NOTBondMatchExpression instance to initialize.
     # \param expression 
     #
-    def __init__(arg1: object, expression: NOTBondMatchExpression) -> None: pass
+    def __init__(expression: NOTBondMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %NOTBondMatchExpression instance.
-    # \param arg1 The \e %NOTBondMatchExpression instance to initialize.
     # \param expression 
     #
-    def __init__(arg1: object, expression: BondMatchExpression) -> None: pass
+    def __init__(expression: BondMatchExpression) -> None: pass
 
     ##
     # \brief Replaces the current state of \a arg1 with a copy of the state of the \e %NOTBondMatchExpression instance \a expression.
-    # \param arg1 The \e %NOTBondMatchExpression instance this method is called upon.
     # \param expression The \e %NOTBondMatchExpression instance to copy.
     # \return The assignment target \a arg1.
     #
-    def assign(arg1: NOTBondMatchExpression, expression: NOTBondMatchExpression) -> NOTBondMatchExpression: pass
+    def assign(expression: NOTBondMatchExpression) -> NOTBondMatchExpression: pass

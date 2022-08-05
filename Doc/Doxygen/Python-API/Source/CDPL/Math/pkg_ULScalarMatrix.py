@@ -26,37 +26,32 @@ class ULScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ULScalarMatrix instance.
-    # \param self The \e %ULScalarMatrix instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ULScalarMatrix instance.
-    # \param self The \e %ULScalarMatrix instance to initialize.
     # \param m 
     #
-    def __init__(self: object, m: ULScalarMatrix) -> None: pass
+    def __init__(m: ULScalarMatrix) -> None: pass
 
     ##
     # \brief Initializes the \e %ULScalarMatrix instance.
-    # \param self The \e %ULScalarMatrix instance to initialize.
     # \param m 
     # \param n 
     # \param v 
     #
-    def __init__(self: object, m: int, n: int, v: int = 0) -> None: pass
+    def __init__(m: int, n: int, v: int = 0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m 
     # \param n 
     #
-    def resize(self: ULScalarMatrix, m: int, n: int) -> None: pass
+    def resize(m: int, n: int) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     #
     # Different Python \e %ULScalarMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ULScalarMatrix instances \e a and \e b reference different C++ objects. 
@@ -65,200 +60,175 @@ class ULScalarMatrix(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ULScalarMatrix) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def getSize1(self: ULScalarMatrix) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def getSize2(self: ULScalarMatrix) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ULScalarMatrix) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def getElement(self: ULScalarMatrix, i: int, j: int) -> int: pass
+    def getElement(i: int, j: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def toArray(self: ULScalarMatrix) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULScalarMatrix instance \a m.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m The \e %ULScalarMatrix instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ULScalarMatrix, m: ULScalarMatrix) -> ULScalarMatrix: pass
+    def assign(m: ULScalarMatrix) -> ULScalarMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m 
     #
-    def swap(self: ULScalarMatrix, m: ULScalarMatrix) -> None: pass
+    def swap(m: ULScalarMatrix) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def __call__(self: ULScalarMatrix, i: int, j: int) -> int: pass
+    def __call__(i: int, j: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param ij 
     # \return 
     #
-    def __getitem__(self: ULScalarMatrix, ij: tuple) -> int: pass
+    def __getitem__(ij: tuple) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def __len__(self: ULScalarMatrix) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == m</tt>.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m The \e %ULScalarMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULScalarMatrix, m: ULScalarMatrix) -> bool: pass
+    def __eq__(m: ULScalarMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param e The \e %ULScalarMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ULScalarMatrix, e: ConstULMatrixExpression) -> bool: pass
+    def __eq__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != m</tt>.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param m The \e %ULScalarMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULScalarMatrix, m: ULScalarMatrix) -> bool: pass
+    def __ne__(m: ULScalarMatrix) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param e The \e %ULScalarMatrix instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ULScalarMatrix, e: ConstULMatrixExpression) -> bool: pass
+    def __ne__(e: ConstULMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ULScalarMatrix instance.
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ULScalarMatrix) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ULScalarMatrix) -> ULScalarMatrix: pass
+    def __pos__() -> ULScalarMatrix: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstULMatrixExpression: pass
+    def __neg__() -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ULScalarMatrix instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ULScalarMatrix instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+    def __add__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ULScalarMatrix instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ULScalarMatrix instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+    def __sub__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ULScalarMatrix instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ULScalarMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: int) -> ConstULMatrixExpression: pass
+    def __mul__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ULScalarMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ULScalarMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
+    def __mul__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ULScalarMatrix instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ULScalarMatrix instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstULVectorExpression) -> ConstULVectorExpression: pass
+    def __mul__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ULScalarMatrix instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ULScalarMatrix instance holding the result of the division.
     #
-    def __div__(self: object, t: int) -> ConstULMatrixExpression: pass
+    def __div__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: int) -> ConstULMatrixExpression: pass
+    def __truediv__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ULScalarMatrix instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: int) -> ConstULMatrixExpression: pass
+    def __rmul__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief 

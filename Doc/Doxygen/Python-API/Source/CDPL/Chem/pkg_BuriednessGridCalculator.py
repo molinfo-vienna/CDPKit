@@ -26,20 +26,17 @@ class BuriednessGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BuriednessGridCalculator instance.
-    # \param self The \e %BuriednessGridCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BuriednessGridCalculator instance.
-    # \param self The \e %BuriednessGridCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: BuriednessGridCalculator) -> None: pass
+    def __init__(calculator: BuriednessGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     #
     # Different Python \e %BuriednessGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BuriednessGridCalculator instances \e a and \e b reference different C++ objects. 
@@ -48,79 +45,69 @@ class BuriednessGridCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BuriednessGridCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessGridCalculator instance \a calculator.
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \param calculator The \e %BuriednessGridCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BuriednessGridCalculator, calculator: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
+    def assign(calculator: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \param dist 
     #
-    def setMinVdWSurfaceDistance(self: BuriednessGridCalculator, dist: float) -> None: pass
+    def setMinVdWSurfaceDistance(dist: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \return 
     #
-    def getMinVdWSurfaceDistance(self: BuriednessGridCalculator) -> float: pass
+    def getMinVdWSurfaceDistance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \param radius 
     #
-    def setProbeRadius(self: BuriednessGridCalculator, radius: float) -> None: pass
+    def setProbeRadius(radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \return 
     #
-    def getProbeRadius(self: BuriednessGridCalculator) -> float: pass
+    def getProbeRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \param num_rays 
     #
-    def setNumTestRays(self: BuriednessGridCalculator, num_rays: int) -> None: pass
+    def setNumTestRays(num_rays: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \return 
     #
-    def getNumTestRays(self: BuriednessGridCalculator) -> int: pass
+    def getNumTestRays() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: BuriednessGridCalculator, func: Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \return 
     #
-    def getAtom3DCoordinatesFunction(self: BuriednessGridCalculator) -> Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> Atom3DCoordinatesFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %BuriednessGridCalculator instance this method is called upon.
     # \param atoms 
     # \param grid 
     #
-    def calculate(self: BuriednessGridCalculator, atoms: AtomContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
+    def calculate(atoms: AtomContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
 
     ##
     # \brief 

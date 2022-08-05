@@ -26,28 +26,24 @@ class Entity3DContainer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Entity3DContainer instance.
-    # \param self The \e %Entity3DContainer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Entity3DContainer instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getEntity(self: Entity3DContainer, idx: int) -> Entity3D: pass
+    def getEntity(idx: int) -> Entity3D: pass
 
     ##
     # \brief 
-    # \param self The \e %Entity3DContainer instance this method is called upon.
     # \return 
     #
-    def getNumEntities(self: Entity3DContainer) -> int: pass
+    def getNumEntities() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Entity3DContainer instance this method is called upon.
     #
     # Different Python \e %Entity3DContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entity3DContainer instances \e a and \e b reference different C++ objects. 
@@ -56,22 +52,20 @@ class Entity3DContainer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Entity3DContainer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Entity3DContainer instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: Entity3DContainer, idx: int) -> Entity3D: pass
+    def __getitem__(idx: int) -> Entity3D: pass
 
     ##
     # \brief 
-    # \param self The \e %Entity3DContainer instance this method is called upon.
     # \return 
     #
-    def __len__(self: Entity3DContainer) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

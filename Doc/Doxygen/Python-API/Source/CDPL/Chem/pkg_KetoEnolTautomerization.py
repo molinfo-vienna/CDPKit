@@ -26,13 +26,11 @@ class KetoEnolTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %KetoEnolTautomerization instance.
-    # \param self The \e %KetoEnolTautomerization instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %KetoEnolTautomerization instance.
-    # \param self The \e %KetoEnolTautomerization instance to initialize.
     # \param rule 
     #
-    def __init__(self: object, rule: KetoEnolTautomerization) -> None: pass
+    def __init__(rule: KetoEnolTautomerization) -> None: pass

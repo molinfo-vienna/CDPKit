@@ -26,28 +26,24 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: AutoCorrelation2DVectorCalculator) -> None: pass
+    def __init__(calculator: AutoCorrelation2DVectorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance to initialize.
     # \param molgraph 
     # \param corr_vec 
     #
-    def __init__(self: object, molgraph: MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
+    def __init__(molgraph: MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
     #
     # Different Python \e %AutoCorrelation2DVectorCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AutoCorrelation2DVectorCalculator instances \e a and \e b reference different C++ objects. 
@@ -56,44 +52,39 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AutoCorrelation2DVectorCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AutoCorrelation2DVectorCalculator instance \a calculator.
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
     # \param calculator The \e %AutoCorrelation2DVectorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AutoCorrelation2DVectorCalculator, calculator: AutoCorrelation2DVectorCalculator) -> AutoCorrelation2DVectorCalculator: pass
+    def assign(calculator: AutoCorrelation2DVectorCalculator) -> AutoCorrelation2DVectorCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
     # \param max_dist 
     #
-    def setMaxDistance(self: AutoCorrelation2DVectorCalculator, max_dist: int) -> None: pass
+    def setMaxDistance(max_dist: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
     # \return 
     #
-    def getMaxDistance(self: AutoCorrelation2DVectorCalculator) -> int: pass
+    def getMaxDistance() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtomPairWeightFunction(self: AutoCorrelation2DVectorCalculator, func: DoubleAtom2Functor) -> None: pass
+    def setAtomPairWeightFunction(func: DoubleAtom2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AutoCorrelation2DVectorCalculator instance this method is called upon.
     # \param molgraph 
     # \param corr_vec 
     #
-    def calculate(self: AutoCorrelation2DVectorCalculator, molgraph: MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
+    def calculate(molgraph: MolecularGraph, corr_vec: CDPL.Math.DVector) -> None: pass
 
     ##
     # \brief 

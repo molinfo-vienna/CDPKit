@@ -26,29 +26,25 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param self The \e %MMFF94ChargeCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param self The \e %MMFF94ChargeCalculator instance to initialize.
     # \param calculator 
     #
-    def __init__(self: object, calculator: MMFF94ChargeCalculator) -> None: pass
+    def __init__(calculator: MMFF94ChargeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param self The \e %MMFF94ChargeCalculator instance to initialize.
     # \param molgraph 
     # \param charges 
     # \param strict 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray, strict: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     #
     # Different Python \e %MMFF94ChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94ChargeCalculator instances \e a and \e b reference different C++ objects. 
@@ -57,95 +53,83 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94ChargeCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param func 
     #
-    def setAromaticRingSetFunction(self: MMFF94ChargeCalculator, func: MMFF94RingSetFunction) -> None: pass
+    def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param func 
     #
-    def setNumericAtomTypeFunction(self: MMFF94ChargeCalculator, func: MMFF94NumericAtomTypeFunction) -> None: pass
+    def setNumericAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param func 
     #
-    def setSymbolicAtomTypeFunction(self: MMFF94ChargeCalculator, func: MMFF94SymbolicAtomTypeFunction) -> None: pass
+    def setSymbolicAtomTypeFunction(func: MMFF94SymbolicAtomTypeFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param func 
     #
-    def setBondTypeIndexFunction(self: MMFF94ChargeCalculator, func: MMFF94BondTypeIndexFunction) -> None: pass
+    def setBondTypeIndexFunction(func: MMFF94BondTypeIndexFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param table 
     #
-    def setAtomTypePropertyTable(self: MMFF94ChargeCalculator, table: MMFF94AtomTypePropertyTable) -> None: pass
+    def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param table 
     #
-    def setFormalChargeDefinitionTable(self: MMFF94ChargeCalculator, table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
+    def setFormalChargeDefinitionTable(table: MMFF94FormalAtomChargeDefinitionTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param table 
     #
-    def setBondChargeIncrementTable(self: MMFF94ChargeCalculator, table: MMFF94BondChargeIncrementTable) -> None: pass
+    def setBondChargeIncrementTable(table: MMFF94BondChargeIncrementTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param table 
     #
-    def setPartialBondChargeIncrementTable(self: MMFF94ChargeCalculator, table: MMFF94PartialBondChargeIncrementTable) -> None: pass
+    def setPartialBondChargeIncrementTable(table: MMFF94PartialBondChargeIncrementTable) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94ChargeCalculator instance \a parameterizer.
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param parameterizer The \e %MMFF94ChargeCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94ChargeCalculator, parameterizer: MMFF94ChargeCalculator) -> MMFF94ChargeCalculator: pass
+    def assign(parameterizer: MMFF94ChargeCalculator) -> MMFF94ChargeCalculator: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param molgraph 
     # \param charges 
     # \param strict 
     #
-    def calculate(self: MMFF94ChargeCalculator, molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray, strict: bool) -> None: pass
+    def calculate(molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray, strict: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \return 
     #
-    def getFormalCharges(self: MMFF94ChargeCalculator) -> CDPL.Util.DArray: pass
+    def getFormalCharges() -> CDPL.Util.DArray: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94ChargeCalculator instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def formalCharges(arg1: MMFF94ChargeCalculator) -> CDPL.Util.DArray: pass
+    def formalCharges() -> CDPL.Util.DArray: pass
 
     ##
     # \brief 

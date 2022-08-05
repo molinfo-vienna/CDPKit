@@ -26,20 +26,17 @@ class SpatialFeatureAlignment(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SpatialFeatureAlignment instance.
-    # \param self The \e %SpatialFeatureAlignment instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SpatialFeatureAlignment instance.
-    # \param self The \e %SpatialFeatureAlignment instance to initialize.
     # \param alignment 
     #
-    def __init__(self: object, alignment: SpatialFeatureAlignment) -> None: pass
+    def __init__(alignment: SpatialFeatureAlignment) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     #
     # Different Python \e %SpatialFeatureAlignment instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SpatialFeatureAlignment instances \e a and \e b reference different C++ objects. 
@@ -48,167 +45,145 @@ class SpatialFeatureAlignment(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SpatialFeatureAlignment) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntityMatchFunction(self: SpatialFeatureAlignment, func: BoolFeature2Functor) -> None: pass
+    def setEntityMatchFunction(func: BoolFeature2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getEntityMatchFunction(self: SpatialFeatureAlignment) -> BoolFeature2Functor: pass
+    def getEntityMatchFunction() -> BoolFeature2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntityPairMatchFunction(self: SpatialFeatureAlignment, func: BoolFeature4Functor) -> None: pass
+    def setEntityPairMatchFunction(func: BoolFeature4Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getEntityPairMatchFunction(self: SpatialFeatureAlignment) -> BoolFeature4Functor: pass
+    def getEntityPairMatchFunction() -> BoolFeature4Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param func 
     #
-    def setTopAlignmentConstraintFunction(self: SpatialFeatureAlignment, func: CDPL.Chem.BoolSTPairArrayFunctor) -> None: pass
+    def setTopAlignmentConstraintFunction(func: CDPL.Chem.BoolSTPairArrayFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getTopAlignmentConstraintFunction(self: SpatialFeatureAlignment) -> CDPL.Chem.BoolSTPairArrayFunctor: pass
+    def getTopAlignmentConstraintFunction() -> CDPL.Chem.BoolSTPairArrayFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntity3DCoordinatesFunction(self: SpatialFeatureAlignment, func: Feature3DCoordinatesFunction) -> None: pass
+    def setEntity3DCoordinatesFunction(func: Feature3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getEntity3DCoordinatesFunction(self: SpatialFeatureAlignment) -> Feature3DCoordinatesFunction: pass
+    def getEntity3DCoordinatesFunction() -> Feature3DCoordinatesFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param func 
     #
-    def setEntityWeightFunction(self: SpatialFeatureAlignment, func: DoubleFeatureFunctor) -> None: pass
+    def setEntityWeightFunction(func: DoubleFeatureFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getEntityWeightFunction(self: SpatialFeatureAlignment) -> DoubleFeatureFunctor: pass
+    def getEntityWeightFunction() -> DoubleFeatureFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param entity 
     # \param first_set 
     #
-    def addEntity(self: SpatialFeatureAlignment, entity: Feature, first_set: bool) -> None: pass
+    def addEntity(entity: Feature, first_set: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param first_set 
     #
-    def clearEntities(self: SpatialFeatureAlignment, first_set: bool) -> None: pass
+    def clearEntities(first_set: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param first_set 
     # \return 
     #
-    def getNumEntities(self: SpatialFeatureAlignment, first_set: bool) -> int: pass
+    def getNumEntities(first_set: bool) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param first_set 
     # \return 
     #
-    def getEntities(self: SpatialFeatureAlignment, first_set: bool) -> object: pass
+    def getEntities(first_set: bool) -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param idx 
     # \param first_set 
     # \return 
     #
-    def getEntity(self: SpatialFeatureAlignment, idx: int, first_set: bool) -> Feature: pass
+    def getEntity(idx: int, first_set: bool) -> Feature: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param min_size 
     #
-    def setMinTopologicalMappingSize(self: SpatialFeatureAlignment, min_size: int) -> None: pass
+    def setMinTopologicalMappingSize(min_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getMinTopologicalMappingSize(self: SpatialFeatureAlignment) -> int: pass
+    def getMinTopologicalMappingSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param reset 
     #
-    def reset(reset: SpatialFeatureAlignment) -> None: pass
+    def reset() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def nextAlignment(self: SpatialFeatureAlignment) -> bool: pass
+    def nextAlignment() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getTransform(self: SpatialFeatureAlignment) -> CDPL.Math.Matrix4D: pass
+    def getTransform() -> CDPL.Math.Matrix4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialFeatureAlignment instance \a alignment.
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \param alignment The \e %SpatialFeatureAlignment instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SpatialFeatureAlignment, alignment: SpatialFeatureAlignment) -> SpatialFeatureAlignment: pass
+    def assign(alignment: SpatialFeatureAlignment) -> SpatialFeatureAlignment: pass
 
     ##
     # \brief 
-    # \param self The \e %SpatialFeatureAlignment instance this method is called upon.
     # \return 
     #
-    def getTopologicalMapping(self: SpatialFeatureAlignment) -> CDPL.Util.STPairArray: pass
+    def getTopologicalMapping() -> CDPL.Util.STPairArray: pass
 
     ##
     # \brief 

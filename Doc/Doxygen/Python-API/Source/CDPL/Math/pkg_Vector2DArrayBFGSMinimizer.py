@@ -56,15 +56,13 @@ class Vector2DArrayBFGSMinimizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector2DArrayBFGSMinimizer instance.
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance to initialize.
     # \param func 
     # \param grad_func 
     #
-    def __init__(self: object, func: DoubleVector2DArrayFunctor, grad_func: object) -> None: pass
+    def __init__(func: DoubleVector2DArrayFunctor, grad_func: object) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     #
     # Different Python \e %Vector2DArrayBFGSMinimizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector2DArrayBFGSMinimizer instances \e a and \e b reference different C++ objects. 
@@ -73,46 +71,40 @@ class Vector2DArrayBFGSMinimizer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Vector2DArrayBFGSMinimizer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getGradientNorm(self: Vector2DArrayBFGSMinimizer) -> float: pass
+    def getGradientNorm() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getFunctionDelta(self: Vector2DArrayBFGSMinimizer) -> float: pass
+    def getFunctionDelta() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getFunctionValue(self: Vector2DArrayBFGSMinimizer) -> float: pass
+    def getFunctionValue() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getNumIterations(self: Vector2DArrayBFGSMinimizer) -> int: pass
+    def getNumIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \return 
     #
-    def getStatus(self: Vector2DArrayBFGSMinimizer) -> Status: pass
+    def getStatus() -> Status: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \param x 
     # \param g 
     # \param max_iter 
@@ -121,28 +113,26 @@ class Vector2DArrayBFGSMinimizer(Boost.Python.instance):
     # \param do_setup 
     # \return 
     #
-    def minimize(self: Vector2DArrayBFGSMinimizer, x: Vector2DArray, g: Vector2DArray, max_iter: int, g_norm: float, delta_f: float, do_setup: bool = True) -> Status: pass
+    def minimize(x: Vector2DArray, g: Vector2DArray, max_iter: int, g_norm: float, delta_f: float, do_setup: bool = True) -> Status: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \param x 
     # \param g 
     # \param step_size 
     # \param tol 
     # \return 
     #
-    def setup(self: Vector2DArrayBFGSMinimizer, x: Vector2DArray, g: Vector2DArray, step_size: float = 0.001, tol: float = 0.15) -> float: pass
+    def setup(x: Vector2DArray, g: Vector2DArray, step_size: float = 0.001, tol: float = 0.15) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector2DArrayBFGSMinimizer instance this method is called upon.
     # \param f 
     # \param x 
     # \param g 
     # \return 
     #
-    def iterate(self: Vector2DArrayBFGSMinimizer, f: float, x: Vector2DArray, g: Vector2DArray) -> tuple: pass
+    def iterate(f: float, x: Vector2DArray, g: Vector2DArray) -> tuple: pass
 
     ##
     # \brief 

@@ -26,6 +26,5 @@ class PSDMoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %PSDMoleculeInputHandler instance.
-    # \param self The \e %PSDMoleculeInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

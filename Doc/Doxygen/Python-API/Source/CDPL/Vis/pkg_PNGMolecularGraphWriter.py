@@ -26,7 +26,6 @@ class PNGMolecularGraphWriter(CDPL.Chem.MolecularGraphWriter):
 
     ##
     # \brief Initializes the \e %PNGMolecularGraphWriter instance.
-    # \param self The \e %PNGMolecularGraphWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

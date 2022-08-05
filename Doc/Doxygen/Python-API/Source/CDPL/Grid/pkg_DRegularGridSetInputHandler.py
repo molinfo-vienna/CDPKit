@@ -26,13 +26,11 @@ class DRegularGridSetInputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DRegularGridSetInputHandler instance.
-    # \param self The \e %DRegularGridSetInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DRegularGridSetInputHandler instance this method is called upon.
     #
     # Different Python \e %DRegularGridSetInputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DRegularGridSetInputHandler instances \e a and \e b reference different C++ objects. 
@@ -41,31 +39,28 @@ class DRegularGridSetInputHandler(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DRegularGridSetInputHandler) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetInputHandler instance this method is called upon.
     # \return 
     #
-    def getDataFormat(self: DRegularGridSetInputHandler) -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetInputHandler instance this method is called upon.
     # \param is 
     # \return 
     #
-    def createReader(self: DRegularGridSetInputHandler, is: CDPL.Base.IStream) -> DRegularGridSetReader: pass
+    def createReader(is: CDPL.Base.IStream) -> DRegularGridSetReader: pass
 
     ##
     # \brief 
-    # \param self The \e %DRegularGridSetInputHandler instance this method is called upon.
     # \param file_name 
     # \param mode 
     # \return 
     #
-    def createReader(self: DRegularGridSetInputHandler, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> DRegularGridSetReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> DRegularGridSetReader: pass
 
     ##
     # \brief 

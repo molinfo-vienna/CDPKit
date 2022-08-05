@@ -26,21 +26,18 @@ class BurdenMatrixGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BurdenMatrixGenerator instance.
-    # \param self The \e %BurdenMatrixGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BurdenMatrixGenerator instance.
-    # \param self The \e %BurdenMatrixGenerator instance to initialize.
     # \param molgraph 
     # \param mtx 
     #
-    def __init__(self: object, molgraph: MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
+    def __init__(molgraph: MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BurdenMatrixGenerator instance this method is called upon.
     #
     # Different Python \e %BurdenMatrixGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BurdenMatrixGenerator instances \e a and \e b reference different C++ objects. 
@@ -49,22 +46,20 @@ class BurdenMatrixGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BurdenMatrixGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BurdenMatrixGenerator instance this method is called upon.
     # \param func 
     #
-    def setAtomWeightFunction(self: BurdenMatrixGenerator, func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def setAtomWeightFunction(func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BurdenMatrixGenerator instance this method is called upon.
     # \param molgraph 
     # \param mtx 
     #
-    def generate(self: BurdenMatrixGenerator, molgraph: MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
+    def generate(molgraph: MolecularGraph, mtx: CDPL.Math.DMatrix) -> None: pass
 
     ##
     # \brief 

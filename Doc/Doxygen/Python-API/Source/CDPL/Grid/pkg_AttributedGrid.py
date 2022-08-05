@@ -26,122 +26,106 @@ class AttributedGrid(CDPL.Base.PropertyContainer):
 
     ##
     # \brief Initializes the \e %AttributedGrid instance.
-    # \param self The \e %AttributedGrid instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: AttributedGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \return 
     #
-    def getNumElements(self: AttributedGrid) -> int: pass
+    def getNumElements() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setProperty(self: AttributedGrid, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeProperty(self: AttributedGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \return 
     #
-    def getProperty(self: AttributedGrid, key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
+    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def isPropertySet(self: AttributedGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     #
-    def clearProperties(self: AttributedGrid) -> None: pass
+    def clearProperties() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param cntnr 
     #
-    def addProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param cntnr 
     #
-    def copyProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param cntnr 
     #
-    def swap(self: AttributedGrid, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: AttributedGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: AttributedGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: AttributedGrid, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AttributedGrid instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: AttributedGrid, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 

@@ -26,82 +26,70 @@ class SparseFVector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param self The \e %SparseFVector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param self The \e %SparseFVector instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: SparseFVector) -> None: pass
+    def __init__(v: SparseFVector) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param self The \e %SparseFVector instance to initialize.
     # \param n 
     #
-    def __init__(self: object, n: int) -> None: pass
+    def __init__(n: int) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param arg1 The \e %SparseFVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param arg1 The \e %SparseFVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param arg1 The \e %SparseFVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param arg1 The \e %SparseFVector instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %SparseFVector instance.
-    # \param arg1 The \e %SparseFVector instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param n 
     #
-    def resize(self: SparseFVector, n: int) -> None: pass
+    def resize(n: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     #
-    def clear(self: SparseFVector) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def getNumElements(self: SparseFVector) -> int: pass
+    def getNumElements() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SparseFVector instance this method is called upon.
     #
     # Different Python \e %SparseFVector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SparseFVector instances \e a and \e b reference different C++ objects. 
@@ -110,295 +98,258 @@ class SparseFVector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SparseFVector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseFVector instance \a e.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param e The \e %SparseFVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseFVector, e: ConstFVectorExpression) -> SparseFVector: pass
+    def assign(e: ConstFVectorExpression) -> SparseFVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseFVector instance \a e.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param e The \e %SparseFVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseFVector, e: ConstDVectorExpression) -> SparseFVector: pass
+    def assign(e: ConstDVectorExpression) -> SparseFVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseFVector instance \a e.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param e The \e %SparseFVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseFVector, e: ConstLVectorExpression) -> SparseFVector: pass
+    def assign(e: ConstLVectorExpression) -> SparseFVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseFVector instance \a e.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param e The \e %SparseFVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseFVector, e: ConstULVectorExpression) -> SparseFVector: pass
+    def assign(e: ConstULVectorExpression) -> SparseFVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseFVector instance \a v.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param v The \e %SparseFVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseFVector, v: SparseFVector) -> SparseFVector: pass
+    def assign(v: SparseFVector) -> SparseFVector: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SparseFVector instance \a a.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param a The \e %SparseFVector instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: SparseFVector, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: SparseFVector) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def getSize(self: SparseFVector) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: SparseFVector, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def toArray(self: SparseFVector) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param v 
     #
-    def swap(self: SparseFVector, v: SparseFVector) -> None: pass
+    def swap(v: SparseFVector) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: SparseFVector, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param v The \e %SparseFVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SparseFVector, v: SparseFVector) -> bool: pass
+    def __eq__(v: SparseFVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param e The \e %SparseFVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: SparseFVector, e: ConstFVectorExpression) -> bool: pass
+    def __eq__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param v The \e %SparseFVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SparseFVector, v: SparseFVector) -> bool: pass
+    def __ne__(v: SparseFVector) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param e The \e %SparseFVector instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: SparseFVector, e: ConstFVectorExpression) -> bool: pass
+    def __ne__(e: ConstFVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: SparseFVector, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: SparseFVector, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def __len__(self: SparseFVector) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %SparseFVector instance.
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: SparseFVector) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def __pos__(self: SparseFVector) -> SparseFVector: pass
+    def __pos__() -> SparseFVector: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFVectorExpression: pass
+    def __neg__() -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %SparseFVector instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %SparseFVector instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %SparseFVector instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %SparseFVector instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFVectorExpression) -> ConstFVectorExpression: pass
+    def __sub__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %SparseFVector instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %SparseFVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %SparseFVector instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %SparseFVector instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
+    def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %SparseFVector instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %SparseFVector instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __div__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __truediv__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFVectorExpression: pass
+    def __rmul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: SparseFVector, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %SparseFVector instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %SparseFVector instance \a self.
     #
-    def __iadd__(self: SparseFVector, v: SparseFVector) -> SparseFVector: pass
+    def __iadd__(v: SparseFVector) -> SparseFVector: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %SparseFVector instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %SparseFVector instance \a self.
     #
-    def __iadd__(self: SparseFVector, e: ConstFVectorExpression) -> SparseFVector: pass
+    def __iadd__(e: ConstFVectorExpression) -> SparseFVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %SparseFVector instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %SparseFVector instance \a self.
     #
-    def __isub__(self: SparseFVector, v: SparseFVector) -> SparseFVector: pass
+    def __isub__(v: SparseFVector) -> SparseFVector: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %SparseFVector instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %SparseFVector instance \a self.
     #
-    def __isub__(self: SparseFVector, e: ConstFVectorExpression) -> SparseFVector: pass
+    def __isub__(e: ConstFVectorExpression) -> SparseFVector: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %SparseFVector instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %SparseFVector instance \a self.
     #
-    def __imul__(self: SparseFVector, t: float) -> SparseFVector: pass
+    def __imul__(t: float) -> SparseFVector: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %SparseFVector instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %SparseFVector instance \a self.
     #
-    def __idiv__(self: SparseFVector, t: float) -> SparseFVector: pass
+    def __idiv__(t: float) -> SparseFVector: pass
 
     ##
     # \brief 
-    # \param self The \e %SparseFVector instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: SparseFVector, t: float) -> SparseFVector: pass
+    def __itruediv__(t: float) -> SparseFVector: pass
 
     ##
     # \brief 

@@ -26,79 +26,68 @@ class Range(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Range instance.
-    # \param self The \e %Range instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Range instance.
-    # \param self The \e %Range instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: Range) -> None: pass
+    def __init__(r: Range) -> None: pass
 
     ##
     # \brief Initializes the \e %Range instance.
-    # \param self The \e %Range instance to initialize.
     # \param start 
     # \param stop 
     #
-    def __init__(self: object, start: int, stop: int) -> None: pass
+    def __init__(start: int, stop: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \return 
     #
-    def getStart(self: Range) -> int: pass
+    def getStart() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \return 
     #
-    def getStop(self: Range) -> int: pass
+    def getStop() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \return 
     #
-    def getSize(self: Range) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: Range) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getIndex(self: Range, i: int) -> int: pass
+    def getIndex(i: int) -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Range instance \a r.
-    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Range, r: Range) -> Range: pass
+    def assign(r: Range) -> Range: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \param r 
     #
-    def swap(self: Range, r: Range) -> None: pass
+    def swap(r: Range) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Range instance this method is called upon.
     #
     # Different Python \e %Range instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Range instances \e a and \e b reference different C++ objects. 
@@ -107,39 +96,35 @@ class Range(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Range) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Range, r: Range) -> bool: pass
+    def __eq__(r: Range) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %Range instance this method is called upon.
     # \param r The \e %Range instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Range, r: Range) -> bool: pass
+    def __ne__(r: Range) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: Range, i: int) -> int: pass
+    def __call__(i: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Range instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: Range, i: int) -> int: pass
+    def __getitem__(i: int) -> int: pass
 
     ##
     # \brief 

@@ -31,33 +31,29 @@ class Molecule(MolecularGraph):
 
         ##
         # \brief 
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \return 
         #
-        def __len__(self: AtomSequence) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: AtomSequence, idx: int) -> Atom: pass
+        def __getitem__(idx: int) -> Atom: pass
 
         ##
         # \brief 
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param idx 
         #
-        def __delitem__(self: AtomSequence, idx: int) -> None: pass
+        def __delitem__(idx: int) -> None: pass
 
         ##
         # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-        # \param self The \e %AtomSequence instance this method is called upon.
         # \param atom The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: AtomSequence, atom: Atom) -> bool: pass
+        def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief 
@@ -66,401 +62,348 @@ class Molecule(MolecularGraph):
 
         ##
         # \brief 
-        # \param self The \e %BondSequence instance this method is called upon.
         # \return 
         #
-        def __len__(self: BondSequence) -> int: pass
+        def __len__() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param idx 
         # \return 
         #
-        def __getitem__(self: BondSequence, idx: int) -> Bond: pass
+        def __getitem__(idx: int) -> Bond: pass
 
         ##
         # \brief 
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param idx 
         #
-        def __delitem__(self: BondSequence, idx: int) -> None: pass
+        def __delitem__(idx: int) -> None: pass
 
         ##
         # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-        # \param self The \e %BondSequence instance this method is called upon.
         # \param bond The value to test for membership.
         # \return The result of the membership test operation.
         #
-        def __contains__(self: BondSequence, bond: Bond) -> bool: pass
+        def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Initializes the \e %Molecule instance.
-    # \param self The \e %Molecule instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param num_atoms 
     #
-    def reserveMemoryForAtoms(self: Molecule, num_atoms: int) -> None: pass
+    def reserveMemoryForAtoms(num_atoms: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param num_bonds 
     #
-    def reserveMemoryForBonds(self: Molecule, num_bonds: int) -> None: pass
+    def reserveMemoryForBonds(num_bonds: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     #
-    def clear(self: Molecule) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def addAtom(self: Molecule) -> Atom: pass
+    def addAtom() -> Atom: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param atom1_idx 
     # \param atom2_idx 
     # \return 
     #
-    def addBond(self: Molecule, atom1_idx: int, atom2_idx: int) -> Bond: pass
+    def addBond(atom1_idx: int, atom2_idx: int) -> Bond: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param idx 
     #
-    def removeAtom(self: Molecule, idx: int) -> None: pass
+    def removeAtom(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param idx 
     #
-    def removeBond(self: Molecule, idx: int) -> None: pass
+    def removeBond(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param mol 
     #
-    def copy(self: Molecule, mol: Molecule) -> None: pass
+    def copy(mol: Molecule) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param molgraph 
     #
-    def copy(self: Molecule, molgraph: MolecularGraph) -> None: pass
+    def copy(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param mol 
     #
-    def append(self: Molecule, mol: Molecule) -> None: pass
+    def append(mol: Molecule) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param molgraph 
     #
-    def append(self: Molecule, molgraph: MolecularGraph) -> None: pass
+    def append(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Molecule instance \a mol.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param mol The \e %Molecule instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Molecule, mol: Molecule) -> Molecule: pass
+    def assign(mol: Molecule) -> Molecule: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Molecule instance \a molgraph.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param molgraph The \e %Molecule instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Molecule, molgraph: MolecularGraph) -> Molecule: pass
+    def assign(molgraph: MolecularGraph) -> Molecule: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def getAtoms(self: Molecule) -> AtomSequence: pass
+    def getAtoms() -> AtomSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def getBonds(self: Molecule) -> BondSequence: pass
+    def getBonds() -> BondSequence: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getAtom(self: Molecule, idx: int) -> Atom: pass
+    def getAtom(idx: int) -> Atom: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def containsAtom(self: AtomContainer, atom: Atom) -> bool: pass
+    def containsAtom(atom: Atom) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def containsAtom(arg1: Molecule, arg2: Atom) -> None: pass
+    def containsAtom(arg2: Atom) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param atom 
     # \return 
     #
-    def getAtomIndex(self: AtomContainer, atom: Atom) -> int: pass
+    def getAtomIndex(atom: Atom) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def getAtomIndex(arg1: Molecule, arg2: Atom) -> None: pass
+    def getAtomIndex(arg2: Atom) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def getNumAtoms(self: Molecule) -> int: pass
+    def getNumAtoms() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param func 
     #
-    def orderAtoms(self: Molecule, func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
+    def orderAtoms(func: CDPL.ForceField.InteractionFilterFunction2) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getEntity(self: Molecule, idx: int) -> Entity3D: pass
+    def getEntity(idx: int) -> Entity3D: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def getNumEntities(self: Molecule) -> int: pass
+    def getNumEntities() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getBond(self: Molecule, idx: int) -> Bond: pass
+    def getBond(idx: int) -> Bond: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param bond 
     # \return 
     #
-    def containsBond(self: BondContainer, bond: Bond) -> bool: pass
+    def containsBond(bond: Bond) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def containsBond(arg1: Molecule, arg2: Bond) -> None: pass
+    def containsBond(arg2: Bond) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param func 
     #
-    def orderBonds(self: Molecule, func: BoolBond2Functor) -> None: pass
+    def orderBonds(func: BoolBond2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param bond 
     # \return 
     #
-    def getBondIndex(self: BondContainer, bond: Bond) -> int: pass
+    def getBondIndex(bond: Bond) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def getBondIndex(arg1: Molecule, arg2: Bond) -> None: pass
+    def getBondIndex(arg2: Bond) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def getNumBonds(self: Molecule) -> int: pass
+    def getNumBonds() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setProperty(self: Molecule, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeProperty(self: Molecule, key: CDPL.Base.LookupKey) -> bool: pass
+    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \return 
     #
-    def getProperty(self: Molecule, key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
+    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \return 
     #
-    def isPropertySet(self: Molecule, key: CDPL.Base.LookupKey) -> bool: pass
+    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     #
-    def clearProperties(self: Molecule) -> None: pass
+    def clearProperties() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param cntnr 
     #
-    def addProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param cntnr 
     #
-    def copyProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param cntnr 
     #
-    def swap(self: Molecule, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += mol</tt>.
-    # \param self The \e %Molecule instance acting as in-place addend.
     # \param mol Specifies the second addend.
     # \return The updated \e %Molecule instance \a self.
     #
-    def __iadd__(self: Molecule, mol: Molecule) -> Molecule: pass
+    def __iadd__(mol: Molecule) -> Molecule: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += molgraph</tt>.
-    # \param self The \e %Molecule instance acting as in-place addend.
     # \param molgraph Specifies the second addend.
     # \return The updated \e %Molecule instance \a self.
     #
-    def __iadd__(self: Molecule, molgraph: MolecularGraph) -> Molecule: pass
+    def __iadd__(molgraph: MolecularGraph) -> Molecule: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: AtomContainer, atom: Atom) -> bool: pass
+    def __contains__(atom: Atom) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: BondContainer, bond: Bond) -> bool: pass
+    def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: Molecule, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: Molecule, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: Molecule, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Molecule instance this method is called upon.
     # \return 
     #
-    def __len__(self: Molecule) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

@@ -26,23 +26,20 @@ class AtomTypeMatchExpression(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomTypeMatchExpression instance.
-    # \param self The \e %AtomTypeMatchExpression instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: AtomTypeMatchExpression) -> None: pass
+    def __init__(expr: AtomTypeMatchExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomTypeMatchExpression instance.
-    # \param self The \e %AtomTypeMatchExpression instance to initialize.
     # \param atom_type 
     # \param not_match 
     #
-    def __init__(self: object, atom_type: int, not_match: bool) -> None: pass
+    def __init__(atom_type: int, not_match: bool) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomTypeMatchExpression instance \a expr.
-    # \param self The \e %AtomTypeMatchExpression instance this method is called upon.
     # \param expr The \e %AtomTypeMatchExpression instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomTypeMatchExpression, expr: AtomTypeMatchExpression) -> AtomTypeMatchExpression: pass
+    def assign(expr: AtomTypeMatchExpression) -> AtomTypeMatchExpression: pass

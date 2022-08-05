@@ -26,7 +26,6 @@ class PMLFeatureContainerWriter(FeatureContainerWriter):
 
     ##
     # \brief Initializes the \e %PMLFeatureContainerWriter instance.
-    # \param self The \e %PMLFeatureContainerWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

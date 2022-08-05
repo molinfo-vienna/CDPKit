@@ -26,20 +26,17 @@ class AtomMapping(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AtomMapping instance.
-    # \param self The \e %AtomMapping instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomMapping instance.
-    # \param self The \e %AtomMapping instance to initialize.
     # \param mapping 
     #
-    def __init__(self: object, mapping: AtomMapping) -> None: pass
+    def __init__(mapping: AtomMapping) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomMapping instance this method is called upon.
     #
     # Different Python \e %AtomMapping instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomMapping instances \e a and \e b reference different C++ objects. 
@@ -48,160 +45,140 @@ class AtomMapping(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomMapping) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \return 
     #
-    def getSize(self: AtomMapping) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: AtomMapping) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     #
-    def clear(self: AtomMapping) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomMapping instance \a map.
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param map The \e %AtomMapping instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomMapping, map: AtomMapping) -> AtomMapping: pass
+    def assign(map: AtomMapping) -> AtomMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def getValue(self: AtomMapping, key: Atom) -> Atom: pass
+    def getValue(key: Atom) -> Atom: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \param def_value 
     # \return 
     #
-    def getValue(self: AtomMapping, key: Atom, def_value: Atom) -> Atom: pass
+    def getValue(key: Atom, def_value: Atom) -> Atom: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeEntry(self: AtomMapping, key: Atom) -> bool: pass
+    def removeEntry(key: Atom) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setEntry(self: AtomMapping, key: Atom, value: Atom) -> None: pass
+    def setEntry(key: Atom, value: Atom) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \return 
     #
-    def getKeys(self: AtomMapping) -> object: pass
+    def getKeys() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \return 
     #
-    def getValues(self: AtomMapping) -> object: pass
+    def getValues() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def getValues(self: AtomMapping, key: Atom) -> object: pass
+    def getValues(key: Atom) -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \return 
     #
-    def getEntries(self: AtomMapping) -> object: pass
+    def getEntries() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def getNumEntries(self: AtomMapping, key: Atom) -> int: pass
+    def getNumEntries(key: Atom) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeEntries(self: AtomMapping, key: Atom) -> int: pass
+    def removeEntries(key: Atom) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def insertEntry(self: AtomMapping, key: Atom, value: Atom) -> None: pass
+    def insertEntry(key: Atom, value: Atom) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \return 
     #
-    def __len__(self: AtomMapping) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: AtomMapping, key: Atom) -> Atom: pass
+    def __getitem__(key: Atom) -> Atom: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: AtomMapping, key: Atom, value: Atom) -> None: pass
+    def __setitem__(key: Atom, value: Atom) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: AtomMapping, key: Atom) -> bool: pass
+    def __delitem__(key: Atom) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %AtomMapping instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: AtomMapping, key: Atom) -> int: pass
+    def __contains__(key: Atom) -> int: pass
 
     ##
     # \brief 

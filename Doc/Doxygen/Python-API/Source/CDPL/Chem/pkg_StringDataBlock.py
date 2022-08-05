@@ -26,20 +26,17 @@ class StringDataBlock(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %StringDataBlock instance.
-    # \param self The \e %StringDataBlock instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %StringDataBlock instance.
-    # \param self The \e %StringDataBlock instance to initialize.
     # \param data_block 
     #
-    def __init__(self: object, data_block: StringDataBlock) -> None: pass
+    def __init__(data_block: StringDataBlock) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %StringDataBlock instance this method is called upon.
     #
     # Different Python \e %StringDataBlock instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %StringDataBlock instances \e a and \e b reference different C++ objects. 
@@ -48,209 +45,182 @@ class StringDataBlock(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: StringDataBlock) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \return 
     #
-    def getSize(self: StringDataBlock) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: StringDataBlock) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: StringDataBlock, num_elem: int, value: StringDataBlockEntry) -> None: pass
+    def resize(num_elem: int, value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: StringDataBlock, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: StringDataBlock) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     #
-    def clear(self: StringDataBlock) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlock instance \a array.
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param array The \e %StringDataBlock instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: StringDataBlock, array: StringDataBlock) -> StringDataBlock: pass
+    def assign(array: StringDataBlock) -> StringDataBlock: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlock instance \a num_elem.
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param num_elem The \e %StringDataBlock instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: StringDataBlock, num_elem: int, value: StringDataBlockEntry) -> None: pass
+    def assign(num_elem: int, value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param value 
     #
-    def addElement(self: StringDataBlock, value: StringDataBlockEntry) -> None: pass
+    def addElement(value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param values 
     #
-    def addElements(self: StringDataBlock, values: StringDataBlock) -> None: pass
+    def addElements(values: StringDataBlock) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: StringDataBlock, idx: int, value: StringDataBlockEntry) -> None: pass
+    def insertElement(idx: int, value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: StringDataBlock, idx: int, num_elem: int, value: StringDataBlockEntry) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: StringDataBlock, index: int, values: StringDataBlock) -> None: pass
+    def insertElements(index: int, values: StringDataBlock) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     #
-    def popLastElement(self: StringDataBlock) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: StringDataBlock, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: StringDataBlock, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: StringDataBlock) -> StringDataBlockEntry: pass
+    def getFirstElement() -> StringDataBlockEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: StringDataBlock) -> StringDataBlockEntry: pass
+    def getLastElement() -> StringDataBlockEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: StringDataBlock, idx: int) -> StringDataBlockEntry: pass
+    def getElement(idx: int) -> StringDataBlockEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: StringDataBlock, idx: int, value: StringDataBlockEntry) -> None: pass
+    def setElement(idx: int, value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param header 
     # \param data 
     #
-    def addEntry(self: StringDataBlock, header: str, data: str) -> None: pass
+    def addEntry(header: str, data: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: StringDataBlock, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: StringDataBlock, idx: int) -> StringDataBlockEntry: pass
+    def __getitem__(idx: int) -> StringDataBlockEntry: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \return 
     #
-    def __len__(self: StringDataBlock) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: StringDataBlock, index: int, value: StringDataBlockEntry) -> None: pass
+    def __setitem__(index: int, value: StringDataBlockEntry) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == data_block</tt>.
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param data_block The \e %StringDataBlock instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: StringDataBlock, data_block: object) -> bool: pass
+    def __eq__(data_block: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != data_block</tt>.
-    # \param self The \e %StringDataBlock instance this method is called upon.
     # \param data_block The \e %StringDataBlock instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: StringDataBlock, data_block: object) -> bool: pass
+    def __ne__(data_block: object) -> bool: pass
 
     ##
     # \brief 

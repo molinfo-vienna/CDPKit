@@ -26,20 +26,17 @@ class AtomMatchExpressionList(AtomMatchExpression):
 
     ##
     # \brief Initializes the \e %AtomMatchExpressionList instance.
-    # \param self The \e %AtomMatchExpressionList instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %AtomMatchExpressionList instance.
-    # \param self The \e %AtomMatchExpressionList instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: AtomMatchExpressionList) -> None: pass
+    def __init__(expr: AtomMatchExpressionList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     #
     # Different Python \e %AtomMatchExpressionList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %AtomMatchExpressionList instances \e a and \e b reference different C++ objects. 
@@ -48,201 +45,175 @@ class AtomMatchExpressionList(AtomMatchExpression):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: AtomMatchExpressionList) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getSize(self: AtomMatchExpressionList) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: AtomMatchExpressionList) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: AtomMatchExpressionList, num_elem: int, value: AtomMatchExpression) -> None: pass
+    def resize(num_elem: int, value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: AtomMatchExpressionList, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: AtomMatchExpressionList) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     #
-    def clear(self: AtomMatchExpressionList) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomMatchExpressionList instance \a array.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param array The \e %AtomMatchExpressionList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomMatchExpressionList, array: AtomMatchExpressionList) -> AtomMatchExpressionList: pass
+    def assign(array: AtomMatchExpressionList) -> AtomMatchExpressionList: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomMatchExpressionList instance \a num_elem.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param num_elem The \e %AtomMatchExpressionList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: AtomMatchExpressionList, num_elem: int, value: AtomMatchExpression) -> None: pass
+    def assign(num_elem: int, value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param value 
     #
-    def addElement(self: AtomMatchExpressionList, value: AtomMatchExpression) -> None: pass
+    def addElement(value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param values 
     #
-    def addElements(self: AtomMatchExpressionList, values: AtomMatchExpressionList) -> None: pass
+    def addElements(values: AtomMatchExpressionList) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: AtomMatchExpressionList, idx: int, value: AtomMatchExpression) -> None: pass
+    def insertElement(idx: int, value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: AtomMatchExpressionList, idx: int, num_elem: int, value: AtomMatchExpression) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: AtomMatchExpressionList, index: int, values: AtomMatchExpressionList) -> None: pass
+    def insertElements(index: int, values: AtomMatchExpressionList) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     #
-    def popLastElement(self: AtomMatchExpressionList) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: AtomMatchExpressionList, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: AtomMatchExpressionList, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: AtomMatchExpressionList) -> AtomMatchExpression: pass
+    def getFirstElement() -> AtomMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: AtomMatchExpressionList) -> AtomMatchExpression: pass
+    def getLastElement() -> AtomMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: AtomMatchExpressionList, idx: int) -> AtomMatchExpression: pass
+    def getElement(idx: int) -> AtomMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: AtomMatchExpressionList, idx: int, value: AtomMatchExpression) -> None: pass
+    def setElement(idx: int, value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: AtomMatchExpressionList, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: AtomMatchExpressionList, idx: int) -> AtomMatchExpression: pass
+    def __getitem__(idx: int) -> AtomMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def __len__(self: AtomMatchExpressionList) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: AtomMatchExpressionList, index: int, value: AtomMatchExpression) -> None: pass
+    def __setitem__(index: int, value: AtomMatchExpression) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param expr The \e %AtomMatchExpressionList instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: AtomMatchExpressionList, expr: object) -> bool: pass
+    def __eq__(expr: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != expr</tt>.
-    # \param self The \e %AtomMatchExpressionList instance this method is called upon.
     # \param expr The \e %AtomMatchExpressionList instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: AtomMatchExpressionList, expr: object) -> bool: pass
+    def __ne__(expr: object) -> bool: pass
 
     ##
     # \brief 

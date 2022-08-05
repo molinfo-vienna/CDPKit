@@ -26,51 +26,44 @@ class BondContainer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BondContainer instance.
-    # \param self The \e %BondContainer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getBond(self: BondContainer, idx: int) -> Bond: pass
+    def getBond(idx: int) -> Bond: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param bond 
     # \return 
     #
-    def containsBond(self: BondContainer, bond: Bond) -> bool: pass
+    def containsBond(bond: Bond) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param func 
     #
-    def orderBonds(self: BondContainer, func: BoolBond2Functor) -> None: pass
+    def orderBonds(func: BoolBond2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param bond 
     # \return 
     #
-    def getBondIndex(self: BondContainer, bond: Bond) -> int: pass
+    def getBondIndex(bond: Bond) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \return 
     #
-    def getNumBonds(self: BondContainer) -> int: pass
+    def getNumBonds() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondContainer instance this method is called upon.
     #
     # Different Python \e %BondContainer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondContainer instances \e a and \e b reference different C++ objects. 
@@ -79,30 +72,27 @@ class BondContainer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BondContainer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>bond in self</tt>.
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param bond The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: BondContainer, bond: Bond) -> bool: pass
+    def __contains__(bond: Bond) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: BondContainer, idx: int) -> Bond: pass
+    def __getitem__(idx: int) -> Bond: pass
 
     ##
     # \brief 
-    # \param self The \e %BondContainer instance this method is called upon.
     # \return 
     #
-    def __len__(self: BondContainer) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 

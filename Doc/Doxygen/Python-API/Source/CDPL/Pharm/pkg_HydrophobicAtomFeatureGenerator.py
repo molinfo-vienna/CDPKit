@@ -46,88 +46,76 @@ class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %HydrophobicAtomFeatureGenerator instance.
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %HydrophobicAtomFeatureGenerator instance.
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance to initialize.
     # \param molgraph 
     # \param pharm 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief Initializes the \e %HydrophobicAtomFeatureGenerator instance.
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: HydrophobicAtomFeatureGenerator) -> None: pass
+    def __init__(gen: HydrophobicAtomFeatureGenerator) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HydrophobicAtomFeatureGenerator instance \a gen.
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \param gen The \e %HydrophobicAtomFeatureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: HydrophobicAtomFeatureGenerator, gen: HydrophobicAtomFeatureGenerator) -> HydrophobicAtomFeatureGenerator: pass
+    def assign(gen: HydrophobicAtomFeatureGenerator) -> HydrophobicAtomFeatureGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \param type 
     #
-    def setFeatureType(self: HydrophobicAtomFeatureGenerator, type: int) -> None: pass
+    def setFeatureType(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \param geom 
     #
-    def setFeatureGeometry(self: HydrophobicAtomFeatureGenerator, geom: int) -> None: pass
+    def setFeatureGeometry(geom: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \param tol 
     #
-    def setFeatureTolerance(self: HydrophobicAtomFeatureGenerator, tol: float) -> None: pass
+    def setFeatureTolerance(tol: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \param thresh 
     #
-    def setHydrophobicityThreshold(self: HydrophobicAtomFeatureGenerator, thresh: float) -> None: pass
+    def setHydrophobicityThreshold(thresh: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureType(self: HydrophobicAtomFeatureGenerator) -> int: pass
+    def getFeatureType() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureGeometry(self: HydrophobicAtomFeatureGenerator) -> int: pass
+    def getFeatureGeometry() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureTolerance(self: HydrophobicAtomFeatureGenerator) -> float: pass
+    def getFeatureTolerance() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HydrophobicAtomFeatureGenerator instance this method is called upon.
     # \return 
     #
-    def getHydrophobicityThreshold(self: HydrophobicAtomFeatureGenerator) -> float: pass
+    def getHydrophobicityThreshold() -> float: pass
 
     ##
     # \brief 

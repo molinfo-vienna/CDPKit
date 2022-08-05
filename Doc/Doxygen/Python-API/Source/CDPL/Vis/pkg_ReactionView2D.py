@@ -26,37 +26,32 @@ class ReactionView2D(View2D):
 
     ##
     # \brief Initializes the \e %ReactionView2D instance.
-    # \param self The \e %ReactionView2D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ReactionView2D instance.
-    # \param self The \e %ReactionView2D instance to initialize.
     # \param rxn 
     #
-    def __init__(self: object, rxn: CDPL.Chem.Reaction) -> None: pass
+    def __init__(rxn: CDPL.Chem.Reaction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionView2D instance this method is called upon.
     # \param rxn 
     #
-    def setReaction(self: ReactionView2D, rxn: CDPL.Chem.Reaction) -> None: pass
+    def setReaction(rxn: CDPL.Chem.Reaction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionView2D instance this method is called upon.
     # \return 
     #
-    def getReaction(self: ReactionView2D) -> CDPL.Chem.Reaction: pass
+    def getReaction() -> CDPL.Chem.Reaction: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionView2D instance this method is called upon.
     # \return 
     #
-    def getFontMetrics(self: ReactionView2D) -> FontMetrics: pass
+    def getFontMetrics() -> FontMetrics: pass
 
     ##
     # \brief 

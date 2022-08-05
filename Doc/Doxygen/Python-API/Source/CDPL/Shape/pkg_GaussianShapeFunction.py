@@ -36,27 +36,23 @@ class GaussianShapeFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    # \param self The \e %GaussianShapeFunction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    # \param self The \e %GaussianShapeFunction instance to initialize.
     # \param shape 
     #
-    def __init__(self: object, shape: GaussianShape) -> None: pass
+    def __init__(shape: GaussianShape) -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeFunction instance.
-    # \param self The \e %GaussianShapeFunction instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: GaussianShapeFunction) -> None: pass
+    def __init__(func: GaussianShapeFunction) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     #
     # Different Python \e %GaussianShapeFunction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeFunction instances \e a and \e b reference different C++ objects. 
@@ -65,123 +61,107 @@ class GaussianShapeFunction(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GaussianShapeFunction) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeFunction instance \a func.
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param func The \e %GaussianShapeFunction instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: GaussianShapeFunction, func: GaussianShapeFunction) -> GaussianShapeFunction: pass
+    def assign(func: GaussianShapeFunction) -> GaussianShapeFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param shape 
     #
-    def setShape(self: GaussianShapeFunction, shape: GaussianShape) -> None: pass
+    def setShape(shape: GaussianShape) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \return 
     #
-    def getShape(self: GaussianShapeFunction) -> GaussianShape: pass
+    def getShape() -> GaussianShape: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param max_order 
     #
-    def setMaxOrder(self: GaussianShapeFunction, max_order: int) -> None: pass
+    def setMaxOrder(max_order: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \return 
     #
-    def getMaxOrder(self: GaussianShapeFunction) -> int: pass
+    def getMaxOrder() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param cutoff 
     #
-    def setDistanceCutoff(self: GaussianShapeFunction, cutoff: float) -> None: pass
+    def setDistanceCutoff(cutoff: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \return 
     #
-    def getDistanceCutoff(self: GaussianShapeFunction) -> float: pass
+    def getDistanceCutoff() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     #
-    def reset(self: GaussianShapeFunction) -> None: pass
+    def reset() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param xform 
     #
-    def transform(self: GaussianShapeFunction, xform: CDPL.Math.Matrix4D) -> None: pass
+    def transform(xform: CDPL.Math.Matrix4D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param coords 
     #
-    def getElementPositions(self: GaussianShapeFunction, coords: CDPL.Math.Vector3DArray) -> None: pass
+    def getElementPositions(coords: CDPL.Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElementPosition(self: GaussianShapeFunction, idx: int) -> CDPL.Math.Vector3D: pass
+    def getElementPosition(idx: int) -> CDPL.Math.Vector3D: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param pos 
     # \return 
     #
-    def calcDensity(self: GaussianShapeFunction, pos: CDPL.Math.Vector3D) -> float: pass
+    def calcDensity(pos: CDPL.Math.Vector3D) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \return 
     #
-    def calcSurfaceArea(self: GaussianShapeFunction) -> float: pass
+    def calcSurfaceArea() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param elem_idx 
     # \return 
     #
-    def calcSurfaceArea(self: GaussianShapeFunction, elem_idx: int) -> float: pass
+    def calcSurfaceArea(elem_idx: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param ctr 
     #
-    def calcCentroid(self: GaussianShapeFunction, ctr: CDPL.Math.Vector3D) -> None: pass
+    def calcCentroid(ctr: CDPL.Math.Vector3D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeFunction instance this method is called upon.
     # \param ctr 
     # \param quad_tensor 
     #
-    def calcQuadrupoleTensor(self: GaussianShapeFunction, ctr: CDPL.Math.Vector3D, quad_tensor: CDPL.Math.Matrix3D) -> None: pass
+    def calcQuadrupoleTensor(ctr: CDPL.Math.Vector3D, quad_tensor: CDPL.Math.Matrix3D) -> None: pass
 
     ##
     # \brief 

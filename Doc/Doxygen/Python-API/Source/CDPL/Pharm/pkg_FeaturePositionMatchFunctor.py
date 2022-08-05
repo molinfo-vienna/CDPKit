@@ -26,21 +26,18 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeaturePositionMatchFunctor instance.
-    # \param self The \e %FeaturePositionMatchFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: FeaturePositionMatchFunctor) -> None: pass
+    def __init__(func: FeaturePositionMatchFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %FeaturePositionMatchFunctor instance.
-    # \param self The \e %FeaturePositionMatchFunctor instance to initialize.
     # \param query_mode 
     #
-    def __init__(self: object, query_mode: bool) -> None: pass
+    def __init__(query_mode: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeaturePositionMatchFunctor instance this method is called upon.
     #
     # Different Python \e %FeaturePositionMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeaturePositionMatchFunctor instances \e a and \e b reference different C++ objects. 
@@ -49,34 +46,31 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FeaturePositionMatchFunctor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePositionMatchFunctor instance \a func.
-    # \param self The \e %FeaturePositionMatchFunctor instance this method is called upon.
     # \param func The \e %FeaturePositionMatchFunctor instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FeaturePositionMatchFunctor, func: FeaturePositionMatchFunctor) -> FeaturePositionMatchFunctor: pass
+    def assign(func: FeaturePositionMatchFunctor) -> FeaturePositionMatchFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %FeaturePositionMatchFunctor instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: FeaturePositionMatchFunctor, ftr1: Feature, ftr2: Feature) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FeaturePositionMatchFunctor instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \param xform 
     # \return 
     #
-    def __call__(self: FeaturePositionMatchFunctor, ftr1: Feature, ftr2: Feature, xform: CDPL.Math.Matrix4D) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature, xform: CDPL.Math.Matrix4D) -> bool: pass
 
     ##
     # \brief 

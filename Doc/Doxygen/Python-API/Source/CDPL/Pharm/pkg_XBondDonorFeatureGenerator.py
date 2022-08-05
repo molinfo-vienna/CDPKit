@@ -26,29 +26,25 @@ class XBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %XBondDonorFeatureGenerator instance.
-    # \param self The \e %XBondDonorFeatureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %XBondDonorFeatureGenerator instance.
-    # \param self The \e %XBondDonorFeatureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: XBondDonorFeatureGenerator) -> None: pass
+    def __init__(gen: XBondDonorFeatureGenerator) -> None: pass
 
     ##
     # \brief Initializes the \e %XBondDonorFeatureGenerator instance.
-    # \param self The \e %XBondDonorFeatureGenerator instance to initialize.
     # \param molgraph 
     # \param pharm 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondDonorFeatureGenerator instance \a gen.
-    # \param self The \e %XBondDonorFeatureGenerator instance this method is called upon.
     # \param gen The \e %XBondDonorFeatureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: XBondDonorFeatureGenerator, gen: XBondDonorFeatureGenerator) -> XBondDonorFeatureGenerator: pass
+    def assign(gen: XBondDonorFeatureGenerator) -> XBondDonorFeatureGenerator: pass

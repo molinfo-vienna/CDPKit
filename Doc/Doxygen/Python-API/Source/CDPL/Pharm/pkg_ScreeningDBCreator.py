@@ -46,13 +46,11 @@ class ScreeningDBCreator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningDBCreator instance.
-    # \param self The \e %ScreeningDBCreator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     #
     # Different Python \e %ScreeningDBCreator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningDBCreator instances \e a and \e b reference different C++ objects. 
@@ -61,88 +59,77 @@ class ScreeningDBCreator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ScreeningDBCreator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \param name 
     # \param mode 
     # \param allow_dup_entries 
     #
-    def open(self: ScreeningDBCreator, name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass
+    def open(name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     #
-    def close(self: ScreeningDBCreator) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def getMode(self: ScreeningDBCreator) -> Mode: pass
+    def getMode() -> Mode: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def allowDuplicateEntries(self: ScreeningDBCreator) -> bool: pass
+    def allowDuplicateEntries() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def process(self: ScreeningDBCreator, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+    def process(molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \param db_acc 
     # \param func 
     # \return 
     #
-    def merge(self: ScreeningDBCreator, db_acc: ScreeningDBAccessor, func: BoolDoubleFunctor) -> bool: pass
+    def merge(db_acc: ScreeningDBAccessor, func: BoolDoubleFunctor) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def getNumProcessed(self: ScreeningDBCreator) -> int: pass
+    def getNumProcessed() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def getNumRejected(self: ScreeningDBCreator) -> int: pass
+    def getNumRejected() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def getNumDeleted(self: ScreeningDBCreator) -> int: pass
+    def getNumDeleted() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def getNumInserted(self: ScreeningDBCreator) -> int: pass
+    def getNumInserted() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBCreator instance this method is called upon.
     # \return 
     #
-    def getDatabaseName(self: ScreeningDBCreator) -> str: pass
+    def getDatabaseName() -> str: pass
 
     ##
     # \brief 

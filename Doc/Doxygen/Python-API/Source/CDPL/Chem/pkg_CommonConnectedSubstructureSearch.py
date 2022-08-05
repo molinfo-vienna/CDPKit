@@ -26,20 +26,17 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CommonConnectedSubstructureSearch instance.
-    # \param self The \e %CommonConnectedSubstructureSearch instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CommonConnectedSubstructureSearch instance.
-    # \param self The \e %CommonConnectedSubstructureSearch instance to initialize.
     # \param query 
     #
-    def __init__(self: object, query: MolecularGraph) -> None: pass
+    def __init__(query: MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     #
     # Different Python \e %CommonConnectedSubstructureSearch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %CommonConnectedSubstructureSearch instances \e a and \e b reference different C++ objects. 
@@ -48,126 +45,110 @@ class CommonConnectedSubstructureSearch(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: CommonConnectedSubstructureSearch) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def mappingExists(self: CommonConnectedSubstructureSearch, target: MolecularGraph) -> bool: pass
+    def mappingExists(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def findAllMappings(self: CommonConnectedSubstructureSearch, target: MolecularGraph) -> bool: pass
+    def findAllMappings(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def findMaxMappings(self: CommonConnectedSubstructureSearch, target: MolecularGraph) -> bool: pass
+    def findMaxMappings(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getNumMappings(self: CommonConnectedSubstructureSearch) -> int: pass
+    def getNumMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getMapping(self: CommonConnectedSubstructureSearch, idx: int) -> AtomBondMapping: pass
+    def getMapping(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param unique 
     #
-    def uniqueMappingsOnly(self: CommonConnectedSubstructureSearch, unique: bool) -> None: pass
+    def uniqueMappingsOnly(unique: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def uniqueMappingsOnly(self: CommonConnectedSubstructureSearch) -> bool: pass
+    def uniqueMappingsOnly() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getMaxNumMappings(self: CommonConnectedSubstructureSearch) -> int: pass
+    def getMaxNumMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param max_num_mappings 
     #
-    def setMaxNumMappings(self: CommonConnectedSubstructureSearch, max_num_mappings: int) -> None: pass
+    def setMaxNumMappings(max_num_mappings: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getMinSubstructureSize(self: CommonConnectedSubstructureSearch) -> int: pass
+    def getMinSubstructureSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param min_size 
     #
-    def setMinSubstructureSize(self: CommonConnectedSubstructureSearch, min_size: int) -> None: pass
+    def setMinSubstructureSize(min_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param query 
     #
-    def setQuery(self: CommonConnectedSubstructureSearch, query: MolecularGraph) -> None: pass
+    def setQuery(query: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: CommonConnectedSubstructureSearch, idx: int) -> AtomBondMapping: pass
+    def __getitem__(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \return 
     #
-    def __len__(self: CommonConnectedSubstructureSearch) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __nonzero__(arg1: CommonConnectedSubstructureSearch, self: MolecularGraph) -> bool: pass
+    def __nonzero__(self: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CommonConnectedSubstructureSearch instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __bool__(arg1: CommonConnectedSubstructureSearch, self: MolecularGraph) -> bool: pass
+    def __bool__(self: MolecularGraph) -> bool: pass
 
     ##
     # \brief 

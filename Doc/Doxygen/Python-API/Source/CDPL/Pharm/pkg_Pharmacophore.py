@@ -26,277 +26,240 @@ class Pharmacophore(FeatureContainer):
 
     ##
     # \brief Initializes the \e %Pharmacophore instance.
-    # \param self The \e %Pharmacophore instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     #
-    def clear(self: Pharmacophore) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \return 
     #
-    def addFeature(self: Pharmacophore) -> Feature: pass
+    def addFeature() -> Feature: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param idx 
     #
-    def removeFeature(self: Pharmacophore, idx: int) -> None: pass
+    def removeFeature(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param pharm 
     #
-    def copy(self: Pharmacophore, pharm: Pharmacophore) -> None: pass
+    def copy(pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def copy(self: Pharmacophore, cntnr: FeatureContainer) -> None: pass
+    def copy(cntnr: FeatureContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param pharm 
     #
-    def append(self: Pharmacophore, pharm: Pharmacophore) -> None: pass
+    def append(pharm: Pharmacophore) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def append(self: Pharmacophore, cntnr: FeatureContainer) -> None: pass
+    def append(cntnr: FeatureContainer) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a pharm.
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param pharm The \e %Pharmacophore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Pharmacophore, pharm: Pharmacophore) -> Pharmacophore: pass
+    def assign(pharm: Pharmacophore) -> Pharmacophore: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a cntnr.
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param cntnr The \e %Pharmacophore instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Pharmacophore, cntnr: FeatureContainer) -> Pharmacophore: pass
+    def assign(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \return 
     #
-    def clone(self: Pharmacophore) -> Pharmacophore: pass
+    def clone() -> Pharmacophore: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getFeature(self: Pharmacophore, idx: int) -> Feature: pass
+    def getFeature(idx: int) -> Feature: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param ftr 
     # \return 
     #
-    def containsFeature(self: FeatureContainer, ftr: Feature) -> bool: pass
+    def containsFeature(ftr: Feature) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def containsFeature(arg1: Pharmacophore, arg2: Feature) -> None: pass
+    def containsFeature(arg2: Feature) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param ftr 
     # \return 
     #
-    def getFeatureIndex(self: FeatureContainer, ftr: Feature) -> int: pass
+    def getFeatureIndex(ftr: Feature) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param arg1 
     # \param arg2 
     #
-    def getFeatureIndex(arg1: Pharmacophore, arg2: Feature) -> None: pass
+    def getFeatureIndex(arg2: Feature) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \return 
     #
-    def getNumFeatures(self: Pharmacophore) -> int: pass
+    def getNumFeatures() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getEntity(self: Pharmacophore, idx: int) -> CDPL.Chem.Entity3D: pass
+    def getEntity(idx: int) -> CDPL.Chem.Entity3D: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \return 
     #
-    def getNumEntities(self: Pharmacophore) -> int: pass
+    def getNumEntities() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def setProperty(self: Pharmacophore, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \return 
     #
-    def removeProperty(self: Pharmacophore, key: CDPL.Base.LookupKey) -> bool: pass
+    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \param throw_ 
     # \return 
     #
-    def getProperty(self: Pharmacophore, key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
+    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \return 
     #
-    def isPropertySet(self: Pharmacophore, key: CDPL.Base.LookupKey) -> bool: pass
+    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     #
-    def clearProperties(self: Pharmacophore) -> None: pass
+    def clearProperties() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def addProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def copyProperties(self: PropertyContainer, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param cntnr 
     #
-    def swap(self: Pharmacophore, cntnr: CDPL.Base.PropertyContainer) -> None: pass
+    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
-    # \param self The \e %Pharmacophore instance acting as in-place addend.
     # \param pharm Specifies the second addend.
     # \return The updated \e %Pharmacophore instance \a self.
     #
-    def __iadd__(self: Pharmacophore, pharm: Pharmacophore) -> Pharmacophore: pass
+    def __iadd__(pharm: Pharmacophore) -> Pharmacophore: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += cntnr</tt>.
-    # \param self The \e %Pharmacophore instance acting as in-place addend.
     # \param cntnr Specifies the second addend.
     # \return The updated \e %Pharmacophore instance \a self.
     #
-    def __iadd__(self: Pharmacophore, cntnr: FeatureContainer) -> Pharmacophore: pass
+    def __iadd__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: Pharmacophore, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __delitem__(self: Pharmacophore, key: CDPL.Base.LookupKey) -> bool: pass
+    def __delitem__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>ftr in self</tt>.
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param ftr The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: FeatureContainer, ftr: Feature) -> bool: pass
+    def __contains__(ftr: Feature) -> bool: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key The value to test for membership.
     # \return The result of the membership test operation.
     #
-    def __contains__(self: Pharmacophore, key: CDPL.Base.LookupKey) -> bool: pass
+    def __contains__(key: CDPL.Base.LookupKey) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: Pharmacophore, idx: int) -> Feature: pass
+    def __getitem__(idx: int) -> Feature: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \return 
     #
-    def __getitem__(self: PropertyContainer, key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \return 
     #
-    def __len__(self: Pharmacophore) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Pharmacophore instance this method is called upon.
     # \param key 
     # \param value 
     #
-    def __setitem__(self: Pharmacophore, key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass

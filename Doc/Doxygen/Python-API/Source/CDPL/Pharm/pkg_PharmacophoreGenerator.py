@@ -26,20 +26,17 @@ class PharmacophoreGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreGenerator instance.
-    # \param self The \e %PharmacophoreGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreGenerator instance.
-    # \param self The \e %PharmacophoreGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: PharmacophoreGenerator) -> None: pass
+    def __init__(gen: PharmacophoreGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     #
     # Different Python \e %PharmacophoreGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PharmacophoreGenerator instances \e a and \e b reference different C++ objects. 
@@ -48,92 +45,81 @@ class PharmacophoreGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: PharmacophoreGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param molgraph 
     # \param pharm 
     # \param append 
     #
-    def generate(self: PharmacophoreGenerator, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, append: bool = False) -> None: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, append: bool = False) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \return 
     #
-    def clone(self: PharmacophoreGenerator) -> PharmacophoreGenerator: pass
+    def clone() -> PharmacophoreGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param func 
     #
-    def setAtom3DCoordinatesFunction(self: PharmacophoreGenerator, func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \return 
     #
-    def getAtom3DCoordinatesFunction(self: PharmacophoreGenerator) -> CDPL.Chem.Atom3DCoordinatesFunction: pass
+    def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param type 
     # \param ftr_gen 
     #
-    def setFeatureGenerator(self: PharmacophoreGenerator, type: int, ftr_gen: FeatureGenerator) -> None: pass
+    def setFeatureGenerator(type: int, ftr_gen: FeatureGenerator) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param type 
     #
-    def removeFeatureGenerator(self: PharmacophoreGenerator, type: int) -> None: pass
+    def removeFeatureGenerator(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param type 
     # \return 
     #
-    def getFeatureGenerator(self: PharmacophoreGenerator, type: int) -> FeatureGenerator: pass
+    def getFeatureGenerator(type: int) -> FeatureGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param type 
     # \param enable 
     #
-    def enableFeature(self: PharmacophoreGenerator, type: int, enable: bool) -> None: pass
+    def enableFeature(type: int, enable: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param ft_type 
     # \return 
     #
-    def isFeatureEnabled(self: PharmacophoreGenerator, ft_type: int) -> bool: pass
+    def isFeatureEnabled(ft_type: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def clearEnabledFeatures(arg1: PharmacophoreGenerator, self: int) -> bool: pass
+    def clearEnabledFeatures(self: int) -> bool: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PharmacophoreGenerator instance \a gen.
-    # \param self The \e %PharmacophoreGenerator instance this method is called upon.
     # \param gen The \e %PharmacophoreGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: PharmacophoreGenerator, gen: PharmacophoreGenerator) -> PharmacophoreGenerator: pass
+    def assign(gen: PharmacophoreGenerator) -> PharmacophoreGenerator: pass
 
     ##
     # \brief 

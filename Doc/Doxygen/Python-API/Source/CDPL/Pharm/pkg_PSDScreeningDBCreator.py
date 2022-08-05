@@ -26,15 +26,13 @@ class PSDScreeningDBCreator(ScreeningDBCreator):
 
     ##
     # \brief Initializes the \e %PSDScreeningDBCreator instance.
-    # \param self The \e %PSDScreeningDBCreator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %PSDScreeningDBCreator instance.
-    # \param self The \e %PSDScreeningDBCreator instance to initialize.
     # \param name 
     # \param mode 
     # \param allow_dup_entries 
     #
-    def __init__(self: object, name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass
+    def __init__(name: str, mode: Mode = CDPL.Pharm.Mode.CREATE, allow_dup_entries: bool = True) -> None: pass

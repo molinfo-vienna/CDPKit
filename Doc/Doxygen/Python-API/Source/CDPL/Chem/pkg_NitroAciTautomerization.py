@@ -26,13 +26,11 @@ class NitroAciTautomerization(PatternBasedTautomerizationRule):
 
     ##
     # \brief Initializes the \e %NitroAciTautomerization instance.
-    # \param self The \e %NitroAciTautomerization instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %NitroAciTautomerization instance.
-    # \param self The \e %NitroAciTautomerization instance to initialize.
     # \param rule 
     #
-    def __init__(self: object, rule: NitroAciTautomerization) -> None: pass
+    def __init__(rule: NitroAciTautomerization) -> None: pass

@@ -31,13 +31,11 @@ class RMSDConformerSelector(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %RMSDConformerSelector instance.
-    # \param self The \e %RMSDConformerSelector instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     #
     # Different Python \e %RMSDConformerSelector instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %RMSDConformerSelector instances \e a and \e b reference different C++ objects. 
@@ -46,82 +44,72 @@ class RMSDConformerSelector(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: RMSDConformerSelector) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \param min_rmsd 
     #
-    def setMinRMSD(self: RMSDConformerSelector, min_rmsd: float) -> None: pass
+    def setMinRMSD(min_rmsd: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \return 
     #
-    def getMinRMSD(self: RMSDConformerSelector) -> float: pass
+    def getMinRMSD() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \param func 
     #
-    def setAbortCallback(self: RMSDConformerSelector, func: CallbackFunction) -> None: pass
+    def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \return 
     #
-    def getAbortCallback(self: RMSDConformerSelector) -> CallbackFunction: pass
+    def getAbortCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \return 
     #
-    def getNumSymmetryMappings(self: RMSDConformerSelector) -> int: pass
+    def getNumSymmetryMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumSymmetryMappings(self: RMSDConformerSelector, max_num: int) -> None: pass
+    def setMaxNumSymmetryMappings(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \return 
     #
-    def getMaxNumSymmetryMappings(self: RMSDConformerSelector) -> int: pass
+    def getMaxNumSymmetryMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \param molgraph 
     # \param atom_mask 
     # \param stable_config_atom_mask 
     # \param coords 
     #
-    def setup(self: RMSDConformerSelector, molgraph: CDPL.Chem.MolecularGraph, atom_mask: CDPL.Util.BitSet, stable_config_atom_mask: CDPL.Util.BitSet, coords: CDPL.Math.Vector3DArray) -> None: pass
+    def setup(molgraph: CDPL.Chem.MolecularGraph, atom_mask: CDPL.Util.BitSet, stable_config_atom_mask: CDPL.Util.BitSet, coords: CDPL.Math.Vector3DArray) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \param molgraph 
     # \param atom_mask 
     #
-    def setup(self: RMSDConformerSelector, molgraph: CDPL.Chem.MolecularGraph, atom_mask: CDPL.Util.BitSet) -> None: pass
+    def setup(molgraph: CDPL.Chem.MolecularGraph, atom_mask: CDPL.Util.BitSet) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %RMSDConformerSelector instance this method is called upon.
     # \param conf_coords 
     # \return 
     #
-    def selected(self: RMSDConformerSelector, conf_coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def selected(conf_coords: CDPL.Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 

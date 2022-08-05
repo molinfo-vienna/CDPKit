@@ -26,6 +26,5 @@ class CFLMoleculeInputHandler(CDPL.Chem.MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %CFLMoleculeInputHandler instance.
-    # \param self The \e %CFLMoleculeInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

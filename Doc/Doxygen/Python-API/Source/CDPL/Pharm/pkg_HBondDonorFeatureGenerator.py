@@ -26,31 +26,27 @@ class HBondDonorFeatureGenerator(PatternBasedFeatureGenerator):
 
     ##
     # \brief Initializes the \e %HBondDonorFeatureGenerator instance.
-    # \param self The \e %HBondDonorFeatureGenerator instance to initialize.
     # \param static_h_bonds 
     #
-    def __init__(self: object, static_h_bonds: bool) -> None: pass
+    def __init__(static_h_bonds: bool) -> None: pass
 
     ##
     # \brief Initializes the \e %HBondDonorFeatureGenerator instance.
-    # \param self The \e %HBondDonorFeatureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: HBondDonorFeatureGenerator) -> None: pass
+    def __init__(gen: HBondDonorFeatureGenerator) -> None: pass
 
     ##
     # \brief Initializes the \e %HBondDonorFeatureGenerator instance.
-    # \param self The \e %HBondDonorFeatureGenerator instance to initialize.
     # \param molgraph 
     # \param pharm 
     # \param static_h_bonds 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, static_h_bonds: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, pharm: Pharmacophore, static_h_bonds: bool) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondDonorFeatureGenerator instance \a gen.
-    # \param self The \e %HBondDonorFeatureGenerator instance this method is called upon.
     # \param gen The \e %HBondDonorFeatureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: HBondDonorFeatureGenerator, gen: HBondDonorFeatureGenerator) -> HBondDonorFeatureGenerator: pass
+    def assign(gen: HBondDonorFeatureGenerator) -> HBondDonorFeatureGenerator: pass

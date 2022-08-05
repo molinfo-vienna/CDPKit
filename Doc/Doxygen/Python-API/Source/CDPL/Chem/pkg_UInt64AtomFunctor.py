@@ -26,42 +26,36 @@ class UInt64AtomFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %UInt64AtomFunctor instance.
-    # \param self The \e %UInt64AtomFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %UInt64AtomFunctor instance.
-    # \param self The \e %UInt64AtomFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: SizeTypeAtomFunctor) -> None: pass
+    def __init__(func: SizeTypeAtomFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %UInt64AtomFunctor instance.
-    # \param arg1 The \e %UInt64AtomFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %UInt64AtomFunctor instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __call__(self: SizeTypeAtomFunctor, arg1: Atom) -> int: pass
+    def __call__(arg1: Atom) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %UInt64AtomFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: SizeTypeAtomFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %UInt64AtomFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: SizeTypeAtomFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

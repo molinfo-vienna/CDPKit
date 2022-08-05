@@ -26,6 +26,5 @@ class CDFBZ2MolecularGraphOutputHandler(MolecularGraphOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFBZ2MolecularGraphOutputHandler instance.
-    # \param self The \e %CDFBZ2MolecularGraphOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

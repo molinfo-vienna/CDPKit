@@ -31,14 +31,12 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param entry 
         #
-        def __init__(self: object, entry: Entry) -> None: pass
+        def __init__(entry: Entry) -> None: pass
 
         ##
         # \brief Initializes the \e %Entry instance.
-        # \param self The \e %Entry instance to initialize.
         # \param old_type 
         # \param aro_type 
         # \param atomic_no 
@@ -47,11 +45,10 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         # \param im_cation 
         # \param n5_anion 
         #
-        def __init__(self: object, old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
+        def __init__(old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %Entry instance this method is called upon.
         #
         # Different Python \e %Entry instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Entry instances \e a and \e b reference different C++ objects. 
@@ -60,64 +57,56 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: Entry) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
-        # \param self The \e %Entry instance this method is called upon.
         # \param entry The \e %Entry instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: Entry, entry: Entry) -> Entry: pass
+        def assign(entry: Entry) -> Entry: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getOldAtomType(self: Entry) -> str: pass
+        def getOldAtomType() -> str: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAromAtomType(self: Entry) -> str: pass
+        def getAromAtomType() -> str: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getAtomicNumber(self: Entry) -> int: pass
+        def getAtomicNumber() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getRingSize(self: Entry) -> int: pass
+        def getRingSize() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def getHeteroAtomDistance(self: Entry) -> int: pass
+        def getHeteroAtomDistance() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def isImidazoliumCation(self: Entry) -> bool: pass
+        def isImidazoliumCation() -> bool: pass
 
         ##
         # \brief 
-        # \param self The \e %Entry instance this method is called upon.
         # \return 
         #
-        def isN5RingAnion(self: Entry) -> bool: pass
+        def isN5RingAnion() -> bool: pass
 
         ##
         # \brief 
@@ -161,20 +150,17 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94AromaticAtomTypeDefinitionTable instance.
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94AromaticAtomTypeDefinitionTable instance.
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance to initialize.
     # \param table 
     #
-    def __init__(self: object, table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
+    def __init__(table: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     #
     # Different Python \e %MMFF94AromaticAtomTypeDefinitionTable instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94AromaticAtomTypeDefinitionTable instances \e a and \e b reference different C++ objects. 
@@ -183,11 +169,10 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94AromaticAtomTypeDefinitionTable) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \param old_type 
     # \param aro_type 
     # \param atomic_no 
@@ -196,63 +181,55 @@ class MMFF94AromaticAtomTypeDefinitionTable(Boost.Python.instance):
     # \param im_cation 
     # \param n5_anion 
     #
-    def addEntry(self: MMFF94AromaticAtomTypeDefinitionTable, old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
+    def addEntry(old_type: str, aro_type: str, atomic_no: int, ring_size: int, het_atom_dist: int, im_cation: bool, n5_anion: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \param idx 
     #
-    def removeEntry(self: MMFF94AromaticAtomTypeDefinitionTable, idx: int) -> None: pass
+    def removeEntry(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getEntry(self: MMFF94AromaticAtomTypeDefinitionTable, idx: int) -> Entry: pass
+    def getEntry(idx: int) -> Entry: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     #
-    def clear(self: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \return 
     #
-    def getNumEntries(self: MMFF94AromaticAtomTypeDefinitionTable) -> int: pass
+    def getNumEntries() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \return 
     #
-    def getEntries(self: MMFF94AromaticAtomTypeDefinitionTable) -> list: pass
+    def getEntries() -> list: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \param is 
     #
-    def load(self: MMFF94AromaticAtomTypeDefinitionTable, is: CDPL.Base.IStream) -> None: pass
+    def load(is: CDPL.Base.IStream) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     #
-    def loadDefaults(self: MMFF94AromaticAtomTypeDefinitionTable) -> None: pass
+    def loadDefaults() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AromaticAtomTypeDefinitionTable instance \a table.
-    # \param self The \e %MMFF94AromaticAtomTypeDefinitionTable instance this method is called upon.
     # \param table The \e %MMFF94AromaticAtomTypeDefinitionTable instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94AromaticAtomTypeDefinitionTable, table: MMFF94AromaticAtomTypeDefinitionTable) -> MMFF94AromaticAtomTypeDefinitionTable: pass
+    def assign(table: MMFF94AromaticAtomTypeDefinitionTable) -> MMFF94AromaticAtomTypeDefinitionTable: pass
 
     ##
     # \brief 

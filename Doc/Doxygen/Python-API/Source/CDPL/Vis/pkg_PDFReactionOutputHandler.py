@@ -26,6 +26,5 @@ class PDFReactionOutputHandler(CDPL.Chem.ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %PDFReactionOutputHandler instance.
-    # \param self The \e %PDFReactionOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

@@ -26,41 +26,35 @@ class CallbackFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %CallbackFunction instance.
-    # \param self The \e %CallbackFunction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %CallbackFunction instance.
-    # \param self The \e %CallbackFunction instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: CallbackFunction) -> None: pass
+    def __init__(func: CallbackFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %CallbackFunction instance.
-    # \param arg1 The \e %CallbackFunction instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %CallbackFunction instance this method is called upon.
     # \return 
     #
-    def __call__(self: CallbackFunction) -> bool: pass
+    def __call__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CallbackFunction instance this method is called upon.
     # \return 
     #
-    def __bool__(self: CallbackFunction) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %CallbackFunction instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: CallbackFunction) -> bool: pass
+    def __nonzero__() -> bool: pass

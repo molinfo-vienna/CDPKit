@@ -26,29 +26,25 @@ class DVectorRange(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DVectorRange instance.
-    # \param self The \e %DVectorRange instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: DVectorRange) -> None: pass
+    def __init__(r: DVectorRange) -> None: pass
 
     ##
     # \brief Initializes the \e %DVectorRange instance.
-    # \param self The \e %DVectorRange instance to initialize.
     # \param e 
     # \param r 
     #
-    def __init__(self: object, e: DVectorExpression, r: Range) -> None: pass
+    def __init__(e: DVectorExpression, r: Range) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def getStart(self: DVectorRange) -> int: pass
+    def getStart() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DVectorRange instance this method is called upon.
     #
     # Different Python \e %DVectorRange instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DVectorRange instances \e a and \e b reference different C++ objects. 
@@ -57,302 +53,264 @@ class DVectorRange(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DVectorRange) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %DVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DVectorRange, e: ConstFVectorExpression) -> DVectorRange: pass
+    def assign(e: ConstFVectorExpression) -> DVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %DVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DVectorRange, e: ConstDVectorExpression) -> DVectorRange: pass
+    def assign(e: ConstDVectorExpression) -> DVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %DVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DVectorRange, e: ConstLVectorExpression) -> DVectorRange: pass
+    def assign(e: ConstLVectorExpression) -> DVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a e.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %DVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DVectorRange, e: ConstULVectorExpression) -> DVectorRange: pass
+    def assign(e: ConstULVectorExpression) -> DVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a r.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r The \e %DVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DVectorRange, r: DVectorRange) -> DVectorRange: pass
+    def assign(r: DVectorRange) -> DVectorRange: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorRange instance \a a.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param a The \e %DVectorRange instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DVectorRange, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: DVectorRange) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def getSize(self: DVectorRange) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: DVectorRange, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def toArray(self: DVectorRange) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r 
     #
-    def swap(self: DVectorRange, r: DVectorRange) -> None: pass
+    def swap(r: DVectorRange) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: DVectorRange, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def getData(self: DVectorRange) -> DVectorExpression: pass
+    def getData() -> DVectorExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r The \e %DVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DVectorRange, r: DVectorRange) -> bool: pass
+    def __eq__(r: DVectorRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %DVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: DVectorRange, e: ConstDVectorExpression) -> bool: pass
+    def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param r The \e %DVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DVectorRange, r: DVectorRange) -> bool: pass
+    def __ne__(r: DVectorRange) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param e The \e %DVectorRange instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: DVectorRange, e: ConstDVectorExpression) -> bool: pass
+    def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: DVectorRange, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: DVectorRange, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def __len__(self: DVectorRange) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %DVectorRange instance.
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: DVectorRange) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def __pos__(self: DVectorRange) -> DVectorRange: pass
+    def __pos__() -> DVectorRange: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDVectorExpression: pass
+    def __neg__() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %DVectorRange instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %DVectorRange instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %DVectorRange instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %DVectorRange instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %DVectorRange instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %DVectorRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %DVectorRange instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %DVectorRange instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %DVectorRange instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %DVectorRange instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: DVectorRange, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += r</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place addend.
     # \param r Specifies the second addend.
     # \return The updated \e %DVectorRange instance \a self.
     #
-    def __iadd__(self: DVectorRange, r: DVectorRange) -> DVectorRange: pass
+    def __iadd__(r: DVectorRange) -> DVectorRange: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %DVectorRange instance \a self.
     #
-    def __iadd__(self: DVectorRange, e: ConstDVectorExpression) -> DVectorRange: pass
+    def __iadd__(e: ConstDVectorExpression) -> DVectorRange: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= r</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place minuend.
     # \param r Specifies the subtrahend.
     # \return The updated \e %DVectorRange instance \a self.
     #
-    def __isub__(self: DVectorRange, r: DVectorRange) -> DVectorRange: pass
+    def __isub__(r: DVectorRange) -> DVectorRange: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %DVectorRange instance \a self.
     #
-    def __isub__(self: DVectorRange, e: ConstDVectorExpression) -> DVectorRange: pass
+    def __isub__(e: ConstDVectorExpression) -> DVectorRange: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %DVectorRange instance \a self.
     #
-    def __imul__(self: DVectorRange, t: float) -> DVectorRange: pass
+    def __imul__(t: float) -> DVectorRange: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %DVectorRange instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %DVectorRange instance \a self.
     #
-    def __idiv__(self: DVectorRange, t: float) -> DVectorRange: pass
+    def __idiv__(t: float) -> DVectorRange: pass
 
     ##
     # \brief 
-    # \param self The \e %DVectorRange instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: DVectorRange, t: float) -> DVectorRange: pass
+    def __itruediv__(t: float) -> DVectorRange: pass
 
     ##
     # \brief 

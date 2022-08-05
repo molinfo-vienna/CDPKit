@@ -26,43 +26,37 @@ class BoolMolecularGraphAtomBondMappingFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolMolecularGraphAtomBondMappingFunctor instance.
-    # \param self The \e %BoolMolecularGraphAtomBondMappingFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolMolecularGraphAtomBondMappingFunctor instance.
-    # \param self The \e %BoolMolecularGraphAtomBondMappingFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: BoolMolecularGraphAtomBondMappingFunctor) -> None: pass
+    def __init__(func: BoolMolecularGraphAtomBondMappingFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolMolecularGraphAtomBondMappingFunctor instance.
-    # \param arg1 The \e %BoolMolecularGraphAtomBondMappingFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolMolecularGraphAtomBondMappingFunctor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: BoolMolecularGraphAtomBondMappingFunctor, arg1: MolecularGraph, arg2: AtomBondMapping) -> bool: pass
+    def __call__(arg1: MolecularGraph, arg2: AtomBondMapping) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolMolecularGraphAtomBondMappingFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BoolMolecularGraphAtomBondMappingFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolMolecularGraphAtomBondMappingFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BoolMolecularGraphAtomBondMappingFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

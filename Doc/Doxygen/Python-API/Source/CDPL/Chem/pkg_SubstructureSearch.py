@@ -26,20 +26,17 @@ class SubstructureSearch(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SubstructureSearch instance.
-    # \param self The \e %SubstructureSearch instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %SubstructureSearch instance.
-    # \param self The \e %SubstructureSearch instance to initialize.
     # \param query 
     #
-    def __init__(self: object, query: MolecularGraph) -> None: pass
+    def __init__(query: MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     #
     # Different Python \e %SubstructureSearch instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %SubstructureSearch instances \e a and \e b reference different C++ objects. 
@@ -48,159 +45,138 @@ class SubstructureSearch(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: SubstructureSearch) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param func 
     #
-    def setAtomMatchExpressionFunction(self: SubstructureSearch, func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
+    def setAtomMatchExpressionFunction(func: AtomMatchExpressionPtrAtomFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param func 
     #
-    def setBondMatchExpressionFunction(self: SubstructureSearch, func: BondMatchExpressionPtrBondFunctor) -> None: pass
+    def setBondMatchExpressionFunction(func: BondMatchExpressionPtrBondFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param func 
     #
-    def setMolecularGraphMatchExpressionFunction(self: SubstructureSearch, func: MolGraphMatchExpressionPtrMolGraphFunctor) -> None: pass
+    def setMolecularGraphMatchExpressionFunction(func: MolGraphMatchExpressionPtrMolGraphFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def mappingExists(self: SubstructureSearch, target: MolecularGraph) -> bool: pass
+    def mappingExists(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param target 
     # \return 
     #
-    def findMappings(self: SubstructureSearch, target: MolecularGraph) -> bool: pass
+    def findMappings(target: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     #
-    def stopSearch(self: SubstructureSearch) -> None: pass
+    def stopSearch() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getNumMappings(self: SubstructureSearch) -> int: pass
+    def getNumMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getMapping(self: SubstructureSearch, idx: int) -> AtomBondMapping: pass
+    def getMapping(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param unique 
     #
-    def uniqueMappingsOnly(self: SubstructureSearch, unique: bool) -> None: pass
+    def uniqueMappingsOnly(unique: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \return 
     #
-    def uniqueMappingsOnly(self: SubstructureSearch) -> bool: pass
+    def uniqueMappingsOnly() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \return 
     #
-    def getMaxNumMappings(self: SubstructureSearch) -> int: pass
+    def getMaxNumMappings() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param max_num_mappings 
     #
-    def setMaxNumMappings(self: SubstructureSearch, max_num_mappings: int) -> None: pass
+    def setMaxNumMappings(max_num_mappings: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     #
-    def clearAtomMappingConstraints(self: SubstructureSearch) -> None: pass
+    def clearAtomMappingConstraints() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param query_atom_idx 
     # \param target_atom_idx 
     #
-    def addAtomMappingConstraint(self: SubstructureSearch, query_atom_idx: int, target_atom_idx: int) -> None: pass
+    def addAtomMappingConstraint(query_atom_idx: int, target_atom_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     #
-    def clearBondMappingConstraints(self: SubstructureSearch) -> None: pass
+    def clearBondMappingConstraints() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param query_bond_idx 
     # \param target_bond_idx 
     #
-    def addBondMappingConstraint(self: SubstructureSearch, query_bond_idx: int, target_bond_idx: int) -> None: pass
+    def addBondMappingConstraint(query_bond_idx: int, target_bond_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param query 
     #
-    def setQuery(self: SubstructureSearch, query: MolecularGraph) -> None: pass
+    def setQuery(query: MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: SubstructureSearch, idx: int) -> AtomBondMapping: pass
+    def __getitem__(idx: int) -> AtomBondMapping: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \return 
     #
-    def __len__(self: SubstructureSearch) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __nonzero__(arg1: SubstructureSearch, self: MolecularGraph) -> bool: pass
+    def __nonzero__(self: MolecularGraph) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %SubstructureSearch instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __bool__(arg1: SubstructureSearch, self: MolecularGraph) -> bool: pass
+    def __bool__(self: MolecularGraph) -> bool: pass
 
     ##
     # \brief 

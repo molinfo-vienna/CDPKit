@@ -26,44 +26,38 @@ class InteractionFilterFunction3(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction3 instance.
-    # \param self The \e %InteractionFilterFunction3 instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction3 instance.
-    # \param self The \e %InteractionFilterFunction3 instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: InteractionFilterFunction3) -> None: pass
+    def __init__(func: InteractionFilterFunction3) -> None: pass
 
     ##
     # \brief Initializes the \e %InteractionFilterFunction3 instance.
-    # \param arg1 The \e %InteractionFilterFunction3 instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionFilterFunction3 instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \param arg3 
     # \return 
     #
-    def __call__(self: InteractionFilterFunction3, arg1: CDPL.Chem.Atom, arg2: CDPL.Chem.Atom, arg3: CDPL.Chem.Atom) -> bool: pass
+    def __call__(arg1: CDPL.Chem.Atom, arg2: CDPL.Chem.Atom, arg3: CDPL.Chem.Atom) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionFilterFunction3 instance this method is called upon.
     # \return 
     #
-    def __bool__(self: InteractionFilterFunction3) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %InteractionFilterFunction3 instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: InteractionFilterFunction3) -> bool: pass
+    def __nonzero__() -> bool: pass

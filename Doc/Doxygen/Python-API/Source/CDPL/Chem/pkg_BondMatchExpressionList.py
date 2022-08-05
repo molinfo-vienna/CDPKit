@@ -26,20 +26,17 @@ class BondMatchExpressionList(BondMatchExpression):
 
     ##
     # \brief Initializes the \e %BondMatchExpressionList instance.
-    # \param self The \e %BondMatchExpressionList instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BondMatchExpressionList instance.
-    # \param self The \e %BondMatchExpressionList instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: BondMatchExpressionList) -> None: pass
+    def __init__(expr: BondMatchExpressionList) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     #
     # Different Python \e %BondMatchExpressionList instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %BondMatchExpressionList instances \e a and \e b reference different C++ objects. 
@@ -48,201 +45,175 @@ class BondMatchExpressionList(BondMatchExpression):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: BondMatchExpressionList) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getSize(self: BondMatchExpressionList) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: BondMatchExpressionList) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: BondMatchExpressionList, num_elem: int, value: BondMatchExpression) -> None: pass
+    def resize(num_elem: int, value: BondMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: BondMatchExpressionList, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: BondMatchExpressionList) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     #
-    def clear(self: BondMatchExpressionList) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMatchExpressionList instance \a array.
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param array The \e %BondMatchExpressionList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BondMatchExpressionList, array: BondMatchExpressionList) -> BondMatchExpressionList: pass
+    def assign(array: BondMatchExpressionList) -> BondMatchExpressionList: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMatchExpressionList instance \a num_elem.
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param num_elem The \e %BondMatchExpressionList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: BondMatchExpressionList, num_elem: int, value: BondMatchExpression) -> None: pass
+    def assign(num_elem: int, value: BondMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param value 
     #
-    def addElement(self: BondMatchExpressionList, value: BondMatchExpression) -> None: pass
+    def addElement(value: BondMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param values 
     #
-    def addElements(self: BondMatchExpressionList, values: BondMatchExpressionList) -> None: pass
+    def addElements(values: BondMatchExpressionList) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: BondMatchExpressionList, idx: int, value: BondMatchExpression) -> None: pass
+    def insertElement(idx: int, value: BondMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: BondMatchExpressionList, idx: int, num_elem: int, value: BondMatchExpression) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: BondMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: BondMatchExpressionList, index: int, values: BondMatchExpressionList) -> None: pass
+    def insertElements(index: int, values: BondMatchExpressionList) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     #
-    def popLastElement(self: BondMatchExpressionList) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: BondMatchExpressionList, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: BondMatchExpressionList, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: BondMatchExpressionList) -> BondMatchExpression: pass
+    def getFirstElement() -> BondMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: BondMatchExpressionList) -> BondMatchExpression: pass
+    def getLastElement() -> BondMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: BondMatchExpressionList, idx: int) -> BondMatchExpression: pass
+    def getElement(idx: int) -> BondMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: BondMatchExpressionList, idx: int, value: BondMatchExpression) -> None: pass
+    def setElement(idx: int, value: BondMatchExpression) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: BondMatchExpressionList, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: BondMatchExpressionList, idx: int) -> BondMatchExpression: pass
+    def __getitem__(idx: int) -> BondMatchExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \return 
     #
-    def __len__(self: BondMatchExpressionList) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: BondMatchExpressionList, index: int, value: BondMatchExpression) -> None: pass
+    def __setitem__(index: int, value: BondMatchExpression) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param expr The \e %BondMatchExpressionList instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: BondMatchExpressionList, expr: object) -> bool: pass
+    def __eq__(expr: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != expr</tt>.
-    # \param self The \e %BondMatchExpressionList instance this method is called upon.
     # \param expr The \e %BondMatchExpressionList instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: BondMatchExpressionList, expr: object) -> bool: pass
+    def __ne__(expr: object) -> bool: pass
 
     ##
     # \brief 

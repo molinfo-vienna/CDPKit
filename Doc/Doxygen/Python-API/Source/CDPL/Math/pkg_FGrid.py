@@ -26,78 +26,68 @@ class FGrid(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param self The \e %FGrid instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param self The \e %FGrid instance to initialize.
     # \param g 
     #
-    def __init__(self: object, g: FGrid) -> None: pass
+    def __init__(g: FGrid) -> None: pass
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param self The \e %FGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
     #
-    def __init__(self: object, m: int, n: int, o: int) -> None: pass
+    def __init__(m: int, n: int, o: int) -> None: pass
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param self The \e %FGrid instance to initialize.
     # \param m 
     # \param n 
     # \param o 
     # \param v 
     #
-    def __init__(self: object, m: int, n: int, o: int, v: float) -> None: pass
+    def __init__(m: int, n: int, o: int, v: float) -> None: pass
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param arg1 The \e %FGrid instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFGridExpression) -> None: pass
+    def __init__(e: ConstFGridExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param arg1 The \e %FGrid instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDGridExpression) -> None: pass
+    def __init__(e: ConstDGridExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %FGrid instance.
-    # \param arg1 The \e %FGrid instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: object) -> None: pass
+    def __init__(e: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param m 
     # \param n 
     # \param o 
     # \param preserve 
     # \param v 
     #
-    def resize(self: FGrid, m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
+    def resize(m: int, n: int, o: int, preserve: bool = True, v: float = 0.0) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param v 
     #
-    def clear(self: FGrid, v: float = 0.0) -> None: pass
+    def clear(v: float = 0.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FGrid instance this method is called upon.
     #
     # Different Python \e %FGrid instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FGrid instances \e a and \e b reference different C++ objects. 
@@ -106,338 +96,296 @@ class FGrid(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FGrid) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FGrid instance \a e.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param e The \e %FGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FGrid, e: ConstFGridExpression) -> FGrid: pass
+    def assign(e: ConstFGridExpression) -> FGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FGrid instance \a e.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param e The \e %FGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FGrid, e: ConstDGridExpression) -> FGrid: pass
+    def assign(e: ConstDGridExpression) -> FGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FGrid instance \a e.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param e The \e %FGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FGrid, e: object) -> FGrid: pass
+    def assign(e: object) -> FGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FGrid instance \a g.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param g The \e %FGrid instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FGrid, g: FGrid) -> FGrid: pass
+    def assign(g: FGrid) -> FGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def getSize1(self: FGrid) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def getSize2(self: FGrid) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def getSize3(self: FGrid) -> int: pass
+    def getSize3() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: FGrid) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def getElement(self: FGrid, i: int, j: int, k: int) -> float: pass
+    def getElement(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: FGrid, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def toArray(self: FGrid) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def getSize(self: FGrid) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param g 
     #
-    def swap(self: FGrid, g: FGrid) -> None: pass
+    def swap(g: FGrid) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \param v 
     #
-    def setElement(self: FGrid, i: int, j: int, k: int, v: float) -> None: pass
+    def setElement(i: int, j: int, k: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: FGrid, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \param j 
     # \param k 
     # \return 
     #
-    def __call__(self: FGrid, i: int, j: int, k: int) -> float: pass
+    def __call__(i: int, j: int, k: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: FGrid, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param ijk 
     # \return 
     #
-    def __getitem__(self: FGrid, ijk: tuple) -> float: pass
+    def __getitem__(ijk: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: FGrid, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def __len__(self: FGrid) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == g</tt>.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param g The \e %FGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FGrid, g: FGrid) -> bool: pass
+    def __eq__(g: FGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param e The \e %FGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: FGrid, e: ConstFGridExpression) -> bool: pass
+    def __eq__(e: ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != g</tt>.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param g The \e %FGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FGrid, g: FGrid) -> bool: pass
+    def __ne__(g: FGrid) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %FGrid instance this method is called upon.
     # \param e The \e %FGrid instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: FGrid, e: ConstFGridExpression) -> bool: pass
+    def __ne__(e: ConstFGridExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %FGrid instance.
-    # \param self The \e %FGrid instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: FGrid) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def __pos__(self: FGrid) -> FGrid: pass
+    def __pos__() -> FGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstFGridExpression: pass
+    def __neg__() -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %FGrid instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %FGrid instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstFGridExpression) -> ConstFGridExpression: pass
+    def __add__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %FGrid instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %FGrid instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstFGridExpression) -> ConstFGridExpression: pass
+    def __sub__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %FGrid instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %FGrid instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstFGridExpression: pass
+    def __mul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %FGrid instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %FGrid instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstFGridExpression: pass
+    def __div__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstFGridExpression: pass
+    def __truediv__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstFGridExpression: pass
+    def __rmul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param ijk 
     # \param v 
     #
-    def __setitem__(self: FGrid, ijk: tuple, v: float) -> None: pass
+    def __setitem__(ijk: tuple, v: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: FGrid, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += g</tt>.
-    # \param self The \e %FGrid instance acting as in-place addend.
     # \param g Specifies the second addend.
     # \return The updated \e %FGrid instance \a self.
     #
-    def __iadd__(self: FGrid, g: FGrid) -> FGrid: pass
+    def __iadd__(g: FGrid) -> FGrid: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %FGrid instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %FGrid instance \a self.
     #
-    def __iadd__(self: FGrid, e: ConstFGridExpression) -> FGrid: pass
+    def __iadd__(e: ConstFGridExpression) -> FGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= g</tt>.
-    # \param self The \e %FGrid instance acting as in-place minuend.
     # \param g Specifies the subtrahend.
     # \return The updated \e %FGrid instance \a self.
     #
-    def __isub__(self: FGrid, g: FGrid) -> FGrid: pass
+    def __isub__(g: FGrid) -> FGrid: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %FGrid instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %FGrid instance \a self.
     #
-    def __isub__(self: FGrid, e: ConstFGridExpression) -> FGrid: pass
+    def __isub__(e: ConstFGridExpression) -> FGrid: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %FGrid instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %FGrid instance \a self.
     #
-    def __imul__(self: FGrid, t: float) -> FGrid: pass
+    def __imul__(t: float) -> FGrid: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %FGrid instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %FGrid instance \a self.
     #
-    def __idiv__(self: FGrid, t: float) -> FGrid: pass
+    def __idiv__(t: float) -> FGrid: pass
 
     ##
     # \brief 
-    # \param self The \e %FGrid instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: FGrid, t: float) -> FGrid: pass
+    def __itruediv__(t: float) -> FGrid: pass
 
     ##
     # \brief 

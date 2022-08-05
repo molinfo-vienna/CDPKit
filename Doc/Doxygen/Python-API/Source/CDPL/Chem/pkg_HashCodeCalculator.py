@@ -31,19 +31,17 @@ class HashCodeCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DefAtomHashSeedFunctor instance.
-        # \param self The \e %DefAtomHashSeedFunctor instance to initialize.
         # \param calculator 
         # \param flags 
         #
-        def __init__(self: object, calculator: HashCodeCalculator, flags: int = 159) -> None: pass
+        def __init__(calculator: HashCodeCalculator, flags: int = 159) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %DefAtomHashSeedFunctor instance this method is called upon.
         # \param atom 
         # \return 
         #
-        def __call__(self: DefAtomHashSeedFunctor, atom: Atom) -> int: pass
+        def __call__(atom: Atom) -> int: pass
 
     ##
     # \brief 
@@ -52,19 +50,17 @@ class HashCodeCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DefBondHashSeedFunctor instance.
-        # \param self The \e %DefBondHashSeedFunctor instance to initialize.
         # \param calculator 
         # \param flags 
         #
-        def __init__(self: object, calculator: HashCodeCalculator, flags: int = 15) -> None: pass
+        def __init__(calculator: HashCodeCalculator, flags: int = 15) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %DefBondHashSeedFunctor instance this method is called upon.
         # \param bond 
         # \return 
         #
-        def __call__(self: DefBondHashSeedFunctor, bond: Bond) -> int: pass
+        def __call__(bond: Bond) -> int: pass
 
     ##
     # \brief 
@@ -78,20 +74,17 @@ class HashCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %HashCodeCalculator instance.
-    # \param self The \e %HashCodeCalculator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %HashCodeCalculator instance.
-    # \param self The \e %HashCodeCalculator instance to initialize.
     # \param molgraph 
     #
-    def __init__(self: object, molgraph: MolecularGraph) -> None: pass
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     #
     # Different Python \e %HashCodeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HashCodeCalculator instances \e a and \e b reference different C++ objects. 
@@ -100,58 +93,51 @@ class HashCodeCalculator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: HashCodeCalculator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \param func 
     #
-    def setAtomHashSeedFunction(self: HashCodeCalculator, func: SizeTypeAtomFunctor) -> None: pass
+    def setAtomHashSeedFunction(func: SizeTypeAtomFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \param func 
     #
-    def setBondHashSeedFunction(self: HashCodeCalculator, func: UInt64BondFunctor) -> None: pass
+    def setBondHashSeedFunction(func: UInt64BondFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \param include 
     #
-    def includeGlobalStereoFeatures(self: HashCodeCalculator, include: bool) -> None: pass
+    def includeGlobalStereoFeatures(include: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \return 
     #
-    def globalStereoFeaturesIncluded(self: HashCodeCalculator) -> bool: pass
+    def globalStereoFeaturesIncluded() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def calculate(self: HashCodeCalculator, molgraph: MolecularGraph) -> int: pass
+    def calculate(molgraph: MolecularGraph) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \return 
     #
-    def getResult(self: HashCodeCalculator) -> int: pass
+    def getResult() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HashCodeCalculator instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def __call__(self: HashCodeCalculator, molgraph: MolecularGraph) -> int: pass
+    def __call__(molgraph: MolecularGraph) -> int: pass
 
     ##
     # \brief 

@@ -26,34 +26,29 @@ class ReactionWriter(CDPL.Base.DataIOBase):
 
     ##
     # \brief Initializes the \e %ReactionWriter instance.
-    # \param self The \e %ReactionWriter instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionWriter instance this method is called upon.
     # \param rxn 
     # \return 
     #
-    def write(self: ReactionWriter, rxn: Reaction) -> ReactionWriter: pass
+    def write(rxn: Reaction) -> ReactionWriter: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionWriter instance this method is called upon.
     #
-    def close(self: ReactionWriter) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionWriter instance this method is called upon.
     # \return 
     #
-    def __bool__(self: ReactionWriter) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ReactionWriter instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: ReactionWriter) -> bool: pass
+    def __nonzero__() -> bool: pass

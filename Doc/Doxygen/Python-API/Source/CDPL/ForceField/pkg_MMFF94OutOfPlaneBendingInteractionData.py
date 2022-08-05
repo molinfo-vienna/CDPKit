@@ -26,20 +26,17 @@ class MMFF94OutOfPlaneBendingInteractionData(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteractionData instance.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94OutOfPlaneBendingInteractionData instance.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance to initialize.
     # \param ia_data 
     #
-    def __init__(self: object, ia_data: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
+    def __init__(ia_data: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     #
     # Different Python \e %MMFF94OutOfPlaneBendingInteractionData instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94OutOfPlaneBendingInteractionData instances \e a and \e b reference different C++ objects. 
@@ -48,185 +45,161 @@ class MMFF94OutOfPlaneBendingInteractionData(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94OutOfPlaneBendingInteractionData) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \return 
     #
-    def getSize(self: MMFF94OutOfPlaneBendingInteractionData) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: MMFF94OutOfPlaneBendingInteractionData) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param num_elem 
     # \param value 
     #
-    def resize(self: MMFF94OutOfPlaneBendingInteractionData, num_elem: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def resize(num_elem: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param num_elem 
     #
-    def reserve(self: MMFF94OutOfPlaneBendingInteractionData, num_elem: int) -> None: pass
+    def reserve(num_elem: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \return 
     #
-    def getCapacity(self: MMFF94OutOfPlaneBendingInteractionData) -> int: pass
+    def getCapacity() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     #
-    def clear(self: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94OutOfPlaneBendingInteractionData instance \a array.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param array The \e %MMFF94OutOfPlaneBendingInteractionData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94OutOfPlaneBendingInteractionData, array: MMFF94OutOfPlaneBendingInteractionData) -> MMFF94OutOfPlaneBendingInteractionData: pass
+    def assign(array: MMFF94OutOfPlaneBendingInteractionData) -> MMFF94OutOfPlaneBendingInteractionData: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94OutOfPlaneBendingInteractionData instance \a num_elem.
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param num_elem The \e %MMFF94OutOfPlaneBendingInteractionData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94OutOfPlaneBendingInteractionData, num_elem: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def assign(num_elem: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param value 
     #
-    def addElement(self: MMFF94OutOfPlaneBendingInteractionData, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def addElement(value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param values 
     #
-    def addElements(self: MMFF94OutOfPlaneBendingInteractionData, values: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
+    def addElements(values: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def insertElement(self: MMFF94OutOfPlaneBendingInteractionData, idx: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def insertElement(idx: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     # \param num_elem 
     # \param value 
     #
-    def insertElements(self: MMFF94OutOfPlaneBendingInteractionData, idx: int, num_elem: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def insertElements(idx: int, num_elem: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param index 
     # \param values 
     #
-    def insertElements(self: MMFF94OutOfPlaneBendingInteractionData, index: int, values: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
+    def insertElements(index: int, values: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     #
-    def popLastElement(self: MMFF94OutOfPlaneBendingInteractionData) -> None: pass
+    def popLastElement() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     #
-    def removeElement(self: MMFF94OutOfPlaneBendingInteractionData, idx: int) -> None: pass
+    def removeElement(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param begin_idx 
     # \param end_idx 
     #
-    def removeElements(self: MMFF94OutOfPlaneBendingInteractionData, begin_idx: int, end_idx: int) -> None: pass
+    def removeElements(begin_idx: int, end_idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \return 
     #
-    def getFirstElement(self: MMFF94OutOfPlaneBendingInteractionData) -> MMFF94OutOfPlaneBendingInteraction: pass
+    def getFirstElement() -> MMFF94OutOfPlaneBendingInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \return 
     #
-    def getLastElement(self: MMFF94OutOfPlaneBendingInteractionData) -> MMFF94OutOfPlaneBendingInteraction: pass
+    def getLastElement() -> MMFF94OutOfPlaneBendingInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def getElement(self: MMFF94OutOfPlaneBendingInteractionData, idx: int) -> MMFF94OutOfPlaneBendingInteraction: pass
+    def getElement(idx: int) -> MMFF94OutOfPlaneBendingInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     # \param value 
     #
-    def setElement(self: MMFF94OutOfPlaneBendingInteractionData, idx: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def setElement(idx: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     #
-    def __delitem__(self: MMFF94OutOfPlaneBendingInteractionData, idx: int) -> None: pass
+    def __delitem__(idx: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param idx 
     # \return 
     #
-    def __getitem__(self: MMFF94OutOfPlaneBendingInteractionData, idx: int) -> MMFF94OutOfPlaneBendingInteraction: pass
+    def __getitem__(idx: int) -> MMFF94OutOfPlaneBendingInteraction: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \return 
     #
-    def __len__(self: MMFF94OutOfPlaneBendingInteractionData) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94OutOfPlaneBendingInteractionData instance this method is called upon.
     # \param index 
     # \param value 
     #
-    def __setitem__(self: MMFF94OutOfPlaneBendingInteractionData, index: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
+    def __setitem__(index: int, value: MMFF94OutOfPlaneBendingInteraction) -> None: pass
 
     ##
     # \brief 

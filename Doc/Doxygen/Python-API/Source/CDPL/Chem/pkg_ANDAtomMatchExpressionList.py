@@ -26,21 +26,18 @@ class ANDAtomMatchExpressionList(AtomMatchExpressionList):
 
     ##
     # \brief Initializes the \e %ANDAtomMatchExpressionList instance.
-    # \param self The \e %ANDAtomMatchExpressionList instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %ANDAtomMatchExpressionList instance.
-    # \param self The \e %ANDAtomMatchExpressionList instance to initialize.
     # \param expr 
     #
-    def __init__(self: object, expr: ANDAtomMatchExpressionList) -> None: pass
+    def __init__(expr: ANDAtomMatchExpressionList) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ANDAtomMatchExpressionList instance \a expr.
-    # \param self The \e %ANDAtomMatchExpressionList instance this method is called upon.
     # \param expr The \e %ANDAtomMatchExpressionList instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: ANDAtomMatchExpressionList, expr: ANDAtomMatchExpressionList) -> ANDAtomMatchExpressionList: pass
+    def assign(expr: ANDAtomMatchExpressionList) -> ANDAtomMatchExpressionList: pass

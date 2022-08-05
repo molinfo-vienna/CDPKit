@@ -26,13 +26,11 @@ class ScreeningDBAccessor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ScreeningDBAccessor instance.
-    # \param self The \e %ScreeningDBAccessor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     #
     # Different Python \e %ScreeningDBAccessor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ScreeningDBAccessor instances \e a and \e b reference different C++ objects. 
@@ -41,110 +39,97 @@ class ScreeningDBAccessor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ScreeningDBAccessor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param name 
     #
-    def open(self: ScreeningDBAccessor, name: str) -> None: pass
+    def open(name: str) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     #
-    def close(self: ScreeningDBAccessor) -> None: pass
+    def close() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \return 
     #
-    def getDatabaseName(self: ScreeningDBAccessor) -> str: pass
+    def getDatabaseName() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \return 
     #
-    def getNumMolecules(self: ScreeningDBAccessor) -> int: pass
+    def getNumMolecules() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \return 
     #
-    def getNumPharmacophores(self: ScreeningDBAccessor) -> int: pass
+    def getNumPharmacophores() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param mol_idx 
     # \return 
     #
-    def getNumPharmacophores(self: ScreeningDBAccessor, mol_idx: int) -> int: pass
+    def getNumPharmacophores(mol_idx: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param mol_idx 
     # \param mol 
     # \param overwrite 
     #
-    def getMolecule(self: ScreeningDBAccessor, mol_idx: int, mol: CDPL.Chem.Molecule, overwrite: bool = True) -> None: pass
+    def getMolecule(mol_idx: int, mol: CDPL.Chem.Molecule, overwrite: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param pharm_idx 
     # \param pharm 
     # \param overwrite 
     #
-    def getPharmacophore(self: ScreeningDBAccessor, pharm_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
+    def getPharmacophore(pharm_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param mol_idx 
     # \param mol_conf_idx 
     # \param pharm 
     # \param overwrite 
     #
-    def getPharmacophore(self: ScreeningDBAccessor, mol_idx: int, mol_conf_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
+    def getPharmacophore(mol_idx: int, mol_conf_idx: int, pharm: Pharmacophore, overwrite: bool = True) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param pharm_idx 
     # \return 
     #
-    def getMoleculeIndex(self: ScreeningDBAccessor, pharm_idx: int) -> int: pass
+    def getMoleculeIndex(pharm_idx: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param pharm_idx 
     # \return 
     #
-    def getConformationIndex(self: ScreeningDBAccessor, pharm_idx: int) -> int: pass
+    def getConformationIndex(pharm_idx: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param pharm_idx 
     # \return 
     #
-    def getFeatureCounts(self: ScreeningDBAccessor, pharm_idx: int) -> FeatureTypeHistogram: pass
+    def getFeatureCounts(pharm_idx: int) -> FeatureTypeHistogram: pass
 
     ##
     # \brief 
-    # \param self The \e %ScreeningDBAccessor instance this method is called upon.
     # \param mol_idx 
     # \param mol_conf_idx 
     # \return 
     #
-    def getFeatureCounts(self: ScreeningDBAccessor, mol_idx: int, mol_conf_idx: int) -> FeatureTypeHistogram: pass
+    def getFeatureCounts(mol_idx: int, mol_conf_idx: int) -> FeatureTypeHistogram: pass
 
     ##
     # \brief 

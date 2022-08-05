@@ -26,8 +26,7 @@ class FileSMARTSMoleculeReader(MoleculeReader):
 
     ##
     # \brief Initializes the \e %FileSMARTSMoleculeReader instance.
-    # \param self The \e %FileSMARTSMoleculeReader instance to initialize.
     # \param file_name 
     # \param mode 
     #
-    def __init__(self: object, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass
+    def __init__(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> None: pass

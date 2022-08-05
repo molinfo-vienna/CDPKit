@@ -26,42 +26,36 @@ class DoubleAtomFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DoubleAtomFunctor instance.
-    # \param self The \e %DoubleAtomFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleAtomFunctor instance.
-    # \param self The \e %DoubleAtomFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
+    def __init__(func: CDPL.ForceField.MMFF94AtomChargeFunction) -> None: pass
 
     ##
     # \brief Initializes the \e %DoubleAtomFunctor instance.
-    # \param arg1 The \e %DoubleAtomFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleAtomFunctor instance this method is called upon.
     # \param arg1 
     # \return 
     #
-    def __call__(self: MMFF94AtomChargeFunction, arg1: Atom) -> float: pass
+    def __call__(arg1: Atom) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleAtomFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: MMFF94AtomChargeFunction) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DoubleAtomFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: MMFF94AtomChargeFunction) -> bool: pass
+    def __nonzero__() -> bool: pass

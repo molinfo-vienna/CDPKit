@@ -26,14 +26,12 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureTypeMatchFunctor instance.
-    # \param self The \e %FeatureTypeMatchFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: FeatureTypeMatchFunctor) -> None: pass
+    def __init__(func: FeatureTypeMatchFunctor) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FeatureTypeMatchFunctor instance this method is called upon.
     #
     # Different Python \e %FeatureTypeMatchFunctor instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureTypeMatchFunctor instances \e a and \e b reference different C++ objects. 
@@ -42,24 +40,22 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FeatureTypeMatchFunctor) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureTypeMatchFunctor instance \a func.
-    # \param self The \e %FeatureTypeMatchFunctor instance this method is called upon.
     # \param func The \e %FeatureTypeMatchFunctor instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FeatureTypeMatchFunctor, func: FeatureTypeMatchFunctor) -> FeatureTypeMatchFunctor: pass
+    def assign(func: FeatureTypeMatchFunctor) -> FeatureTypeMatchFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %FeatureTypeMatchFunctor instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: FeatureTypeMatchFunctor, ftr1: Feature, ftr2: Feature) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 

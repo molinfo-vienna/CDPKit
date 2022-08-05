@@ -26,90 +26,77 @@ class MMFF94InteractionData(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94InteractionData instance.
-    # \param self The \e %MMFF94InteractionData instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94InteractionData instance.
-    # \param self The \e %MMFF94InteractionData instance to initialize.
     # \param ia_data 
     #
-    def __init__(self: object, ia_data: MMFF94InteractionData) -> None: pass
+    def __init__(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     #
-    def clear(self: MMFF94InteractionData) -> None: pass
+    def clear() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getBondStretchingInteractions(self: MMFF94InteractionData) -> MMFF94BondStretchingInteractionData: pass
+    def getBondStretchingInteractions() -> MMFF94BondStretchingInteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getAngleBendingInteractions(self: MMFF94InteractionData) -> MMFF94AngleBendingInteractionData: pass
+    def getAngleBendingInteractions() -> MMFF94AngleBendingInteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getStretchBendInteractions(self: MMFF94InteractionData) -> MMFF94StretchBendInteractionData: pass
+    def getStretchBendInteractions() -> MMFF94StretchBendInteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getOutOfPlaneBendingInteractions(self: MMFF94InteractionData) -> MMFF94OutOfPlaneBendingInteractionData: pass
+    def getOutOfPlaneBendingInteractions() -> MMFF94OutOfPlaneBendingInteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getTorsionInteractions(self: MMFF94InteractionData) -> MMFF94TorsionInteractionData: pass
+    def getTorsionInteractions() -> MMFF94TorsionInteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getElectrostaticInteractions(self: MMFF94InteractionData) -> MMFF94ElectrostaticInteractionData: pass
+    def getElectrostaticInteractions() -> MMFF94ElectrostaticInteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \return 
     #
-    def getVanDerWaalsInteractions(self: MMFF94InteractionData) -> MMFF94VanDerWaalsInteractionData: pass
+    def getVanDerWaalsInteractions() -> MMFF94VanDerWaalsInteractionData: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94InteractionData instance \a ia_data.
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \param ia_data The \e %MMFF94InteractionData instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94InteractionData, ia_data: MMFF94InteractionData) -> MMFF94InteractionData: pass
+    def assign(ia_data: MMFF94InteractionData) -> MMFF94InteractionData: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     # \param ia_data 
     #
-    def swap(self: MMFF94InteractionData, ia_data: MMFF94InteractionData) -> None: pass
+    def swap(ia_data: MMFF94InteractionData) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94InteractionData instance this method is called upon.
     #
     # Different Python \e %MMFF94InteractionData instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94InteractionData instances \e a and \e b reference different C++ objects. 
@@ -118,7 +105,7 @@ class MMFF94InteractionData(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94InteractionData) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 

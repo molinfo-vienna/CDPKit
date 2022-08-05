@@ -26,31 +26,27 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance to initialize.
     # \param parameterizer 
     #
-    def __init__(self: object, parameterizer: MMFF94StretchBendInteractionParameterizer) -> None: pass
+    def __init__(parameterizer: MMFF94StretchBendInteractionParameterizer) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94StretchBendInteractionParameterizer instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance to initialize.
     # \param molgraph 
     # \param bs_ia_data 
     # \param ab_ia_data 
     # \param ia_data 
     # \param strict 
     #
-    def __init__(self: object, molgraph: CDPL.Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     #
     # Different Python \e %MMFF94StretchBendInteractionParameterizer instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94StretchBendInteractionParameterizer instances \e a and \e b reference different C++ objects. 
@@ -59,61 +55,54 @@ class MMFF94StretchBendInteractionParameterizer(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MMFF94StretchBendInteractionParameterizer) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setFilterFunction(self: MMFF94StretchBendInteractionParameterizer, func: InteractionFilterFunction3) -> None: pass
+    def setFilterFunction(func: InteractionFilterFunction3) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param func 
     #
-    def setAtomTypeFunction(self: MMFF94StretchBendInteractionParameterizer, func: MMFF94NumericAtomTypeFunction) -> None: pass
+    def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setStretchBendParameterTable(self: MMFF94StretchBendInteractionParameterizer, table: MMFF94StretchBendParameterTable) -> None: pass
+    def setStretchBendParameterTable(table: MMFF94StretchBendParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setDefaultStretchBendParameterTable(self: MMFF94StretchBendInteractionParameterizer, table: MMFF94DefaultStretchBendParameterTable) -> None: pass
+    def setDefaultStretchBendParameterTable(table: MMFF94DefaultStretchBendParameterTable) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param table 
     #
-    def setAtomTypePropertyTable(self: MMFF94StretchBendInteractionParameterizer, table: MMFF94AtomTypePropertyTable) -> None: pass
+    def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94StretchBendInteractionParameterizer instance \a parameterizer.
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param parameterizer The \e %MMFF94StretchBendInteractionParameterizer instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: MMFF94StretchBendInteractionParameterizer, parameterizer: MMFF94StretchBendInteractionParameterizer) -> MMFF94StretchBendInteractionParameterizer: pass
+    def assign(parameterizer: MMFF94StretchBendInteractionParameterizer) -> MMFF94StretchBendInteractionParameterizer: pass
 
     ##
     # \brief 
-    # \param self The \e %MMFF94StretchBendInteractionParameterizer instance this method is called upon.
     # \param molgraph 
     # \param bs_ia_data 
     # \param ab_ia_data 
     # \param ia_data 
     # \param strict 
     #
-    def parameterize(self: MMFF94StretchBendInteractionParameterizer, molgraph: CDPL.Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
+    def parameterize(molgraph: CDPL.Chem.MolecularGraph, bs_ia_data: MMFF94BondStretchingInteractionData, ab_ia_data: MMFF94AngleBendingInteractionData, ia_data: MMFF94StretchBendInteractionData, strict: bool) -> None: pass
 
     ##
     # \brief 

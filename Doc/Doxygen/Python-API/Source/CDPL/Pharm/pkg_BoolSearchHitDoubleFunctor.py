@@ -26,43 +26,37 @@ class BoolSearchHitDoubleFunctor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
-    # \param self The \e %BoolSearchHitDoubleFunctor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
-    # \param self The \e %BoolSearchHitDoubleFunctor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: BoolSearchHitDoubleFunctor) -> None: pass
+    def __init__(func: BoolSearchHitDoubleFunctor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolSearchHitDoubleFunctor instance.
-    # \param arg1 The \e %BoolSearchHitDoubleFunctor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolSearchHitDoubleFunctor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: BoolSearchHitDoubleFunctor, arg1: SearchHit, arg2: float) -> bool: pass
+    def __call__(arg1: SearchHit, arg2: float) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolSearchHitDoubleFunctor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BoolSearchHitDoubleFunctor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolSearchHitDoubleFunctor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BoolSearchHitDoubleFunctor) -> bool: pass
+    def __nonzero__() -> bool: pass

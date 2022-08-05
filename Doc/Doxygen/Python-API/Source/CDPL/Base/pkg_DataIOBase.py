@@ -26,34 +26,29 @@ class DataIOBase(ControlParameterContainer):
 
     ##
     # \brief Initializes the \e %DataIOBase instance.
-    # \param self The \e %DataIOBase instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DataIOBase instance this method is called upon.
     # \param func 
     # \return 
     #
-    def registerIOCallback(self: DataIOBase, func: VoidDataIOBaseFunctor) -> int: pass
+    def registerIOCallback(func: VoidDataIOBaseFunctor) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DataIOBase instance this method is called upon.
     # \param id 
     #
-    def unregisterIOCallback(self: DataIOBase, id: int) -> None: pass
+    def unregisterIOCallback(id: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DataIOBase instance this method is called upon.
     # \param progress 
     #
-    def invokeIOCallbacks(self: DataIOBase, progress: float) -> None: pass
+    def invokeIOCallbacks(progress: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DataIOBase instance this method is called upon.
     #
-    def clearIOCallbacks(self: DataIOBase) -> None: pass
+    def clearIOCallbacks() -> None: pass

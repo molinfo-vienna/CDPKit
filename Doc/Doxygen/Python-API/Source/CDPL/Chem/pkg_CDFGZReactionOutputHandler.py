@@ -26,6 +26,5 @@ class CDFGZReactionOutputHandler(ReactionOutputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZReactionOutputHandler instance.
-    # \param self The \e %CDFGZReactionOutputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

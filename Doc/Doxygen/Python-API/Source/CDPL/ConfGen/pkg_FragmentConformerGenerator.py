@@ -26,13 +26,11 @@ class FragmentConformerGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentConformerGenerator instance.
-    # \param self The \e %FragmentConformerGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     #
     # Different Python \e %FragmentConformerGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentConformerGenerator instances \e a and \e b reference different C++ objects. 
@@ -41,103 +39,90 @@ class FragmentConformerGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FragmentConformerGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param func 
     #
-    def setAbortCallback(self: FragmentConformerGenerator, func: CallbackFunction) -> None: pass
+    def setAbortCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \return 
     #
-    def getAbortCallback(self: FragmentConformerGenerator) -> CallbackFunction: pass
+    def getAbortCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param func 
     #
-    def setTimeoutCallback(self: FragmentConformerGenerator, func: CallbackFunction) -> None: pass
+    def setTimeoutCallback(func: CallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \return 
     #
-    def getTimeoutCallback(self: FragmentConformerGenerator) -> CallbackFunction: pass
+    def getTimeoutCallback() -> CallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param func 
     #
-    def setLogMessageCallback(self: FragmentConformerGenerator, func: LogMessageCallbackFunction) -> None: pass
+    def setLogMessageCallback(func: LogMessageCallbackFunction) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \return 
     #
-    def getLogMessageCallback(self: FragmentConformerGenerator) -> LogMessageCallbackFunction: pass
+    def getLogMessageCallback() -> LogMessageCallbackFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def generate(self: FragmentConformerGenerator, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param molgraph 
     # \param frag_type 
     # \return 
     #
-    def generate(self: FragmentConformerGenerator, molgraph: CDPL.Chem.MolecularGraph, frag_type: int) -> int: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph, frag_type: int) -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param molgraph 
     #
-    def setConformers(self: FragmentConformerGenerator, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setConformers(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \return 
     #
-    def getNumConformers(self: FragmentConformerGenerator) -> int: pass
+    def getNumConformers() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param conf_idx 
     # \return 
     #
-    def getConformer(self: FragmentConformerGenerator, conf_idx: int) -> ConformerData: pass
+    def getConformer(conf_idx: int) -> ConformerData: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \return 
     #
-    def getSettings(self: FragmentConformerGenerator) -> FragmentConformerGeneratorSettings: pass
+    def getSettings() -> FragmentConformerGeneratorSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGenerator instance this method is called upon.
     # \param conf_idx 
     # \return 
     #
-    def __getitem__(self: FragmentConformerGenerator, conf_idx: int) -> ConformerData: pass
+    def __getitem__(conf_idx: int) -> ConformerData: pass
 
     ##
     # \brief 

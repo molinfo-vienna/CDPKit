@@ -26,13 +26,11 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeOverlapFunction instance.
-    # \param self The \e %GaussianShapeOverlapFunction instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     #
     # Different Python \e %GaussianShapeOverlapFunction instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeOverlapFunction instances \e a and \e b reference different C++ objects. 
@@ -41,106 +39,93 @@ class GaussianShapeOverlapFunction(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GaussianShapeOverlapFunction) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param func 
     # \param is_ref 
     #
-    def setShapeFunction(self: GaussianShapeOverlapFunction, func: GaussianShapeFunction, is_ref: bool) -> None: pass
+    def setShapeFunction(func: GaussianShapeFunction, is_ref: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param ref 
     # \return 
     #
-    def getShapeFunction(self: GaussianShapeOverlapFunction, ref: bool) -> GaussianShapeFunction: pass
+    def getShapeFunction(ref: bool) -> GaussianShapeFunction: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param func 
     #
-    def setColorMatchFunction(self: GaussianShapeOverlapFunction, func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
+    def setColorMatchFunction(func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def getColorMatchFunction(self: GaussianShapeOverlapFunction) -> CDPL.Pharm.BoolSizeType2Functor: pass
+    def getColorMatchFunction() -> CDPL.Pharm.BoolSizeType2Functor: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param func 
     #
-    def setColorFilterFunction(self: GaussianShapeOverlapFunction, func: BoolSizeTypeFunctor) -> None: pass
+    def setColorFilterFunction(func: BoolSizeTypeFunctor) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def getColorFilterFunction(self: GaussianShapeOverlapFunction) -> BoolSizeTypeFunctor: pass
+    def getColorFilterFunction() -> BoolSizeTypeFunctor: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param ref 
     # \return 
     #
-    def calcSelfOverlap(self: GaussianShapeOverlapFunction, ref: bool) -> float: pass
+    def calcSelfOverlap(ref: bool) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param ref 
     # \return 
     #
-    def calcColorSelfOverlap(self: GaussianShapeOverlapFunction, ref: bool) -> float: pass
+    def calcColorSelfOverlap(ref: bool) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def calcOverlap(self: GaussianShapeOverlapFunction) -> float: pass
+    def calcOverlap() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def calcOverlap(self: GaussianShapeOverlapFunction, coords: CDPL.Math.Vector3DArray) -> float: pass
+    def calcOverlap(coords: CDPL.Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \return 
     #
-    def calcColorOverlap(self: GaussianShapeOverlapFunction) -> float: pass
+    def calcColorOverlap() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def calcColorOverlap(self: GaussianShapeOverlapFunction, coords: CDPL.Math.Vector3DArray) -> float: pass
+    def calcColorOverlap(coords: CDPL.Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeOverlapFunction instance this method is called upon.
     # \param coords 
     # \param grad 
     # \return 
     #
-    def calcOverlapGradient(self: GaussianShapeOverlapFunction, coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
+    def calcOverlapGradient(coords: CDPL.Math.Vector3DArray, grad: CDPL.Math.Vector3DArray) -> float: pass
 
     ##
     # \brief 

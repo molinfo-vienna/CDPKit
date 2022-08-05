@@ -26,43 +26,37 @@ class BoolSizeType2Functor(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BoolSizeType2Functor instance.
-    # \param self The \e %BoolSizeType2Functor instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %BoolSizeType2Functor instance.
-    # \param self The \e %BoolSizeType2Functor instance to initialize.
     # \param func 
     #
-    def __init__(self: object, func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
+    def __init__(func: CDPL.Pharm.BoolSizeType2Functor) -> None: pass
 
     ##
     # \brief Initializes the \e %BoolSizeType2Functor instance.
-    # \param arg1 The \e %BoolSizeType2Functor instance to initialize.
     # \param callable 
     #
-    def __init__(arg1: object, callable: object) -> None: pass
+    def __init__(callable: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolSizeType2Functor instance this method is called upon.
     # \param arg1 
     # \param arg2 
     # \return 
     #
-    def __call__(self: BoolSizeType2Functor, arg1: int, arg2: int) -> bool: pass
+    def __call__(arg1: int, arg2: int) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolSizeType2Functor instance this method is called upon.
     # \return 
     #
-    def __bool__(self: BoolSizeType2Functor) -> bool: pass
+    def __bool__() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %BoolSizeType2Functor instance this method is called upon.
     # \return 
     #
-    def __nonzero__(self: BoolSizeType2Functor) -> bool: pass
+    def __nonzero__() -> bool: pass

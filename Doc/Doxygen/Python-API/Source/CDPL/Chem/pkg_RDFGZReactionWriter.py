@@ -26,7 +26,6 @@ class RDFGZReactionWriter(ReactionWriter):
 
     ##
     # \brief Initializes the \e %RDFGZReactionWriter instance.
-    # \param self The \e %RDFGZReactionWriter instance to initialize.
     # \param ios 
     #
-    def __init__(self: object, ios: CDPL.Base.IOStream) -> None: pass
+    def __init__(ios: CDPL.Base.IOStream) -> None: pass

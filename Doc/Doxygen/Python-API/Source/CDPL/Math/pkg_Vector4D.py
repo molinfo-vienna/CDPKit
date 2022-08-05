@@ -26,69 +26,59 @@ class Vector4D(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param self The \e %Vector4D instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param self The \e %Vector4D instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: Vector4D) -> None: pass
+    def __init__(v: Vector4D) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param self The \e %Vector4D instance to initialize.
     # \param v 
     #
-    def __init__(self: object, v: float) -> None: pass
+    def __init__(v: float) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param arg1 The \e %Vector4D instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstFVectorExpression) -> None: pass
+    def __init__(e: ConstFVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param arg1 The \e %Vector4D instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstDVectorExpression) -> None: pass
+    def __init__(e: ConstDVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param arg1 The \e %Vector4D instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstLVectorExpression) -> None: pass
+    def __init__(e: ConstLVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param arg1 The \e %Vector4D instance to initialize.
     # \param e 
     #
-    def __init__(arg1: object, e: ConstULVectorExpression) -> None: pass
+    def __init__(e: ConstULVectorExpression) -> None: pass
 
     ##
     # \brief Initializes the \e %Vector4D instance.
-    # \param arg1 The \e %Vector4D instance to initialize.
     # \param a 
     #
-    def __init__(arg1: object, a: object) -> None: pass
+    def __init__(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param v 
     #
-    def clear(self: Vector4D, v: float = 0.0) -> None: pass
+    def clear(v: float = 0.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %Vector4D instance this method is called upon.
     #
     # Different Python \e %Vector4D instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %Vector4D instances \e a and \e b reference different C++ objects. 
@@ -97,295 +87,258 @@ class Vector4D(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: Vector4D) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector4D instance \a e.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param e The \e %Vector4D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector4D, e: ConstFVectorExpression) -> Vector4D: pass
+    def assign(e: ConstFVectorExpression) -> Vector4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector4D instance \a e.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param e The \e %Vector4D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector4D, e: ConstDVectorExpression) -> Vector4D: pass
+    def assign(e: ConstDVectorExpression) -> Vector4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector4D instance \a e.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param e The \e %Vector4D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector4D, e: ConstLVectorExpression) -> Vector4D: pass
+    def assign(e: ConstLVectorExpression) -> Vector4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector4D instance \a e.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param e The \e %Vector4D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector4D, e: ConstULVectorExpression) -> Vector4D: pass
+    def assign(e: ConstULVectorExpression) -> Vector4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector4D instance \a v.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param v The \e %Vector4D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector4D, v: Vector4D) -> Vector4D: pass
+    def assign(v: Vector4D) -> Vector4D: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector4D instance \a a.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param a The \e %Vector4D instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: Vector4D, a: object) -> None: pass
+    def assign(a: object) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: Vector4D) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return 
     #
-    def getSize(self: Vector4D) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: Vector4D, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return 
     #
-    def toArray(self: Vector4D) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param v 
     #
-    def swap(self: Vector4D, v: Vector4D) -> None: pass
+    def swap(v: Vector4D) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def setElement(self: Vector4D, i: int, v: float) -> None: pass
+    def setElement(i: int, v: float) -> None: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == v</tt>.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param v The \e %Vector4D instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector4D, v: Vector4D) -> bool: pass
+    def __eq__(v: Vector4D) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param e The \e %Vector4D instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: Vector4D, e: ConstDVectorExpression) -> bool: pass
+    def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != v</tt>.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param v The \e %Vector4D instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector4D, v: Vector4D) -> bool: pass
+    def __ne__(v: Vector4D) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param e The \e %Vector4D instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: Vector4D, e: ConstDVectorExpression) -> bool: pass
+    def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: Vector4D, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: Vector4D, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return 
     #
-    def __len__(self: Vector4D) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %Vector4D instance.
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: Vector4D) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return 
     #
-    def __pos__(self: Vector4D) -> Vector4D: pass
+    def __pos__() -> Vector4D: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDVectorExpression: pass
+    def __neg__() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %Vector4D instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %Vector4D instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %Vector4D instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %Vector4D instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %Vector4D instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %Vector4D instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %Vector4D instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %Vector4D instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %Vector4D instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %Vector4D instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param i 
     # \param v 
     #
-    def __setitem__(self: Vector4D, i: int, v: float) -> None: pass
+    def __setitem__(i: int, v: float) -> None: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += v</tt>.
-    # \param self The \e %Vector4D instance acting as in-place addend.
     # \param v Specifies the second addend.
     # \return The updated \e %Vector4D instance \a self.
     #
-    def __iadd__(self: Vector4D, v: Vector4D) -> Vector4D: pass
+    def __iadd__(v: Vector4D) -> Vector4D: pass
 
     ##
     # \brief Performs the in-place addition operation <tt>self += e</tt>.
-    # \param self The \e %Vector4D instance acting as in-place addend.
     # \param e Specifies the second addend.
     # \return The updated \e %Vector4D instance \a self.
     #
-    def __iadd__(self: Vector4D, e: ConstDVectorExpression) -> Vector4D: pass
+    def __iadd__(e: ConstDVectorExpression) -> Vector4D: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= v</tt>.
-    # \param self The \e %Vector4D instance acting as in-place minuend.
     # \param v Specifies the subtrahend.
     # \return The updated \e %Vector4D instance \a self.
     #
-    def __isub__(self: Vector4D, v: Vector4D) -> Vector4D: pass
+    def __isub__(v: Vector4D) -> Vector4D: pass
 
     ##
     # \brief Performs the in-place subtraction operation <tt>self -= e</tt>.
-    # \param self The \e %Vector4D instance acting as in-place minuend.
     # \param e Specifies the subtrahend.
     # \return The updated \e %Vector4D instance \a self.
     #
-    def __isub__(self: Vector4D, e: ConstDVectorExpression) -> Vector4D: pass
+    def __isub__(e: ConstDVectorExpression) -> Vector4D: pass
 
     ##
     # \brief Performs the in-place multiplication operation <tt>self *= t</tt>.
-    # \param self The \e %Vector4D instance acting as in-place multiplicand.
     # \param t Specifies the multiplier.
     # \return The updated \e %Vector4D instance \a self.
     #
-    def __imul__(self: Vector4D, t: float) -> Vector4D: pass
+    def __imul__(t: float) -> Vector4D: pass
 
     ##
     # \brief Performs the in-place division operation <tt>self /= t</tt>.
-    # \param self The \e %Vector4D instance acting as in-place dividend.
     # \param t Specifies the divisor.
     # \return The updated \e %Vector4D instance \a self.
     #
-    def __idiv__(self: Vector4D, t: float) -> Vector4D: pass
+    def __idiv__(t: float) -> Vector4D: pass
 
     ##
     # \brief 
-    # \param self The \e %Vector4D instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __itruediv__(self: Vector4D, t: float) -> Vector4D: pass
+    def __itruediv__(t: float) -> Vector4D: pass
 
     ##
     # \brief 

@@ -26,20 +26,17 @@ class GaussianShapeGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GaussianShapeGenerator instance.
-    # \param self The \e %GaussianShapeGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GaussianShapeGenerator instance.
-    # \param self The \e %GaussianShapeGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: GaussianShapeGenerator) -> None: pass
+    def __init__(gen: GaussianShapeGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     #
     # Different Python \e %GaussianShapeGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GaussianShapeGenerator instances \e a and \e b reference different C++ objects. 
@@ -48,163 +45,141 @@ class GaussianShapeGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: GaussianShapeGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeGenerator instance \a gen.
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param gen The \e %GaussianShapeGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: GaussianShapeGenerator, gen: GaussianShapeGenerator) -> GaussianShapeGenerator: pass
+    def assign(gen: GaussianShapeGenerator) -> GaussianShapeGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param gen 
     #
-    def setPharmacophoreGenerator(self: GaussianShapeGenerator, gen: CDPL.Pharm.PharmacophoreGenerator) -> None: pass
+    def setPharmacophoreGenerator(gen: CDPL.Pharm.PharmacophoreGenerator) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getPharmacophoreGenerator(self: GaussianShapeGenerator) -> CDPL.Pharm.PharmacophoreGenerator: pass
+    def getPharmacophoreGenerator() -> CDPL.Pharm.PharmacophoreGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getDefaultPharmacophoreGenerator(self: GaussianShapeGenerator) -> CDPL.Pharm.DefaultPharmacophoreGenerator: pass
+    def getDefaultPharmacophoreGenerator() -> CDPL.Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param radius 
     #
-    def setAtomRadius(self: GaussianShapeGenerator, radius: float) -> None: pass
+    def setAtomRadius(radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getAtomRadius(self: GaussianShapeGenerator) -> float: pass
+    def getAtomRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param hardness 
     #
-    def setAtomHardness(self: GaussianShapeGenerator, hardness: float) -> None: pass
+    def setAtomHardness(hardness: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getAtomHardness(self: GaussianShapeGenerator) -> float: pass
+    def getAtomHardness() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param radius 
     #
-    def setFeatureRadius(self: GaussianShapeGenerator, radius: float) -> None: pass
+    def setFeatureRadius(radius: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureRadius(self: GaussianShapeGenerator) -> float: pass
+    def getFeatureRadius() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param hardness 
     #
-    def setFeatureHardness(self: GaussianShapeGenerator, hardness: float) -> None: pass
+    def setFeatureHardness(hardness: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getFeatureHardness(self: GaussianShapeGenerator) -> float: pass
+    def getFeatureHardness() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param generate 
     #
-    def generatePharmacophoreShape(self: GaussianShapeGenerator, generate: bool) -> None: pass
+    def generatePharmacophoreShape(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def generatePharmacophoreShape(self: GaussianShapeGenerator) -> bool: pass
+    def generatePharmacophoreShape() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param generate 
     #
-    def generateMoleculeShape(self: GaussianShapeGenerator, generate: bool) -> None: pass
+    def generateMoleculeShape(generate: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def generateMoleculeShape(self: GaussianShapeGenerator) -> bool: pass
+    def generateMoleculeShape() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param multi_conf 
     #
-    def multiConformerMode(self: GaussianShapeGenerator, multi_conf: bool) -> None: pass
+    def multiConformerMode(multi_conf: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def multiConformerMode(self: GaussianShapeGenerator) -> bool: pass
+    def multiConformerMode() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param include 
     #
-    def includeHydrogens(self: GaussianShapeGenerator, include: bool) -> None: pass
+    def includeHydrogens(include: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def includeHydrogens(self: GaussianShapeGenerator) -> bool: pass
+    def includeHydrogens() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \param molgraph 
     # \return 
     #
-    def generate(self: GaussianShapeGenerator, molgraph: CDPL.Chem.MolecularGraph) -> GaussianShapeSet: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph) -> GaussianShapeSet: pass
 
     ##
     # \brief 
-    # \param self The \e %GaussianShapeGenerator instance this method is called upon.
     # \return 
     #
-    def getShapes(self: GaussianShapeGenerator) -> GaussianShapeSet: pass
+    def getShapes() -> GaussianShapeSet: pass
 
     ##
     # \brief 

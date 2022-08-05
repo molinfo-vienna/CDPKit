@@ -26,13 +26,11 @@ class MoleculeInputHandler(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeInputHandler instance.
-    # \param self The \e %MoleculeInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %MoleculeInputHandler instance this method is called upon.
     #
     # Different Python \e %MoleculeInputHandler instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MoleculeInputHandler instances \e a and \e b reference different C++ objects. 
@@ -41,31 +39,28 @@ class MoleculeInputHandler(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: MoleculeInputHandler) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeInputHandler instance this method is called upon.
     # \return 
     #
-    def getDataFormat(self: MoleculeInputHandler) -> CDPL.Base.DataFormat: pass
+    def getDataFormat() -> CDPL.Base.DataFormat: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeInputHandler instance this method is called upon.
     # \param is 
     # \return 
     #
-    def createReader(self: MoleculeInputHandler, is: CDPL.Base.IStream) -> MoleculeReader: pass
+    def createReader(is: CDPL.Base.IStream) -> MoleculeReader: pass
 
     ##
     # \brief 
-    # \param self The \e %MoleculeInputHandler instance this method is called upon.
     # \param file_name 
     # \param mode 
     # \return 
     #
-    def createReader(self: MoleculeInputHandler, file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MoleculeReader: pass
+    def createReader(file_name: str, mode: OpenMode = CDPL.Base.OpenMode12) -> MoleculeReader: pass
 
     ##
     # \brief 

@@ -31,20 +31,17 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentSettings instance.
-        # \param arg1 The \e %FragmentSettings instance to initialize.
         #
-        def __init__(arg1: object) -> None: pass
+        def __init__() -> None: pass
 
         ##
         # \brief Initializes the \e %FragmentSettings instance.
-        # \param self The \e %FragmentSettings instance to initialize.
         # \param settings 
         #
-        def __init__(self: object, settings: FragmentSettings) -> None: pass
+        def __init__(settings: FragmentSettings) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-        # \param self The \e %FragmentSettings instance this method is called upon.
         #
         # Different Python \e %FragmentSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
         # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentSettings instances \e a and \e b reference different C++ objects. 
@@ -53,99 +50,86 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         #
         # \return The numeric ID of the internally referenced C++ class instance.
         #
-        def getObjectID(self: FragmentSettings) -> int: pass
+        def getObjectID() -> int: pass
 
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentSettings instance \a settings.
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param settings The \e %FragmentSettings instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(self: FragmentSettings, settings: FragmentSettings) -> FragmentSettings: pass
+        def assign(settings: FragmentSettings) -> FragmentSettings: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param max_num 
         #
-        def setMaxNumSampledConformers(self: FragmentSettings, max_num: int) -> None: pass
+        def setMaxNumSampledConformers(max_num: int) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \return 
         #
-        def getMaxNumSampledConformers(self: FragmentSettings) -> int: pass
+        def getMaxNumSampledConformers() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param min_num 
         #
-        def setMinNumSampledConformers(self: FragmentSettings, min_num: int) -> None: pass
+        def setMinNumSampledConformers(min_num: int) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \return 
         #
-        def getMinNumSampledConformers(self: FragmentSettings) -> int: pass
+        def getMinNumSampledConformers() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param mil_secs 
         #
-        def setTimeout(self: FragmentSettings, mil_secs: int) -> None: pass
+        def setTimeout(mil_secs: int) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \return 
         #
-        def getTimeout(self: FragmentSettings) -> int: pass
+        def getTimeout() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param win_size 
         #
-        def setEnergyWindow(self: FragmentSettings, win_size: float) -> None: pass
+        def setEnergyWindow(win_size: float) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \return 
         #
-        def getEnergyWindow(self: FragmentSettings) -> float: pass
+        def getEnergyWindow() -> float: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param max_num 
         #
-        def setMaxNumOutputConformers(self: FragmentSettings, max_num: int) -> None: pass
+        def setMaxNumOutputConformers(max_num: int) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \return 
         #
-        def getMaxNumOutputConformers(self: FragmentSettings) -> int: pass
+        def getMaxNumOutputConformers() -> int: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \param min_rmsd 
         #
-        def setMinRMSD(self: FragmentSettings, min_rmsd: float) -> None: pass
+        def setMinRMSD(min_rmsd: float) -> None: pass
 
         ##
         # \brief 
-        # \param self The \e %FragmentSettings instance this method is called upon.
         # \return 
         #
-        def getMinRMSD(self: FragmentSettings) -> float: pass
+        def getMinRMSD() -> float: pass
 
         ##
         # \brief 
@@ -199,20 +183,17 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FragmentConformerGeneratorSettings instance.
-    # \param self The \e %FragmentConformerGeneratorSettings instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %FragmentConformerGeneratorSettings instance.
-    # \param self The \e %FragmentConformerGeneratorSettings instance to initialize.
     # \param settings 
     #
-    def __init__(self: object, settings: FragmentConformerGeneratorSettings) -> None: pass
+    def __init__(settings: FragmentConformerGeneratorSettings) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     #
     # Different Python \e %FragmentConformerGeneratorSettings instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FragmentConformerGeneratorSettings instances \e a and \e b reference different C++ objects. 
@@ -221,162 +202,140 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: FragmentConformerGeneratorSettings) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentConformerGeneratorSettings instance \a settings.
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param settings The \e %FragmentConformerGeneratorSettings instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: FragmentConformerGeneratorSettings, settings: FragmentConformerGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
+    def assign(settings: FragmentConformerGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param preserve 
     #
-    def preserveInputBondingGeometries(self: FragmentConformerGeneratorSettings, preserve: bool) -> None: pass
+    def preserveInputBondingGeometries(preserve: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def preserveInputBondingGeometries(self: FragmentConformerGeneratorSettings) -> bool: pass
+    def preserveInputBondingGeometries() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param type 
     #
-    def setForceFieldType(self: FragmentConformerGeneratorSettings, type: int) -> None: pass
+    def setForceFieldType(type: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getForceFieldType(self: FragmentConformerGeneratorSettings) -> int: pass
+    def getForceFieldType() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param strict 
     #
-    def strictForceFieldParameterization(self: FragmentConformerGeneratorSettings, strict: bool) -> None: pass
+    def strictForceFieldParameterization(strict: bool) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def strictForceFieldParameterization(self: FragmentConformerGeneratorSettings) -> bool: pass
+    def strictForceFieldParameterization() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param de_const 
     #
-    def setDielectricConstant(self: FragmentConformerGeneratorSettings, de_const: float) -> None: pass
+    def setDielectricConstant(de_const: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDielectricConstant(self: FragmentConformerGeneratorSettings) -> float: pass
+    def getDielectricConstant() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param dist_expo 
     #
-    def setDistanceExponent(self: FragmentConformerGeneratorSettings, dist_expo: float) -> None: pass
+    def setDistanceExponent(dist_expo: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getDistanceExponent(self: FragmentConformerGeneratorSettings) -> float: pass
+    def getDistanceExponent() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param max_num 
     #
-    def setMaxNumRefinementIterations(self: FragmentConformerGeneratorSettings, max_num: int) -> None: pass
+    def setMaxNumRefinementIterations(max_num: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMaxNumRefinementIterations(self: FragmentConformerGeneratorSettings) -> int: pass
+    def getMaxNumRefinementIterations() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param grad_norm 
     #
-    def setRefinementStopGradient(self: FragmentConformerGeneratorSettings, grad_norm: float) -> None: pass
+    def setRefinementStopGradient(grad_norm: float) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getRefinementStopGradient(self: FragmentConformerGeneratorSettings) -> float: pass
+    def getRefinementStopGradient() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param max_size 
     #
-    def setMacrocycleRotorBondCountThreshold(self: FragmentConformerGeneratorSettings, max_size: int) -> None: pass
+    def setMacrocycleRotorBondCountThreshold(max_size: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMacrocycleRotorBondCountThreshold(self: FragmentConformerGeneratorSettings) -> int: pass
+    def getMacrocycleRotorBondCountThreshold() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getChainSettings(self: FragmentConformerGeneratorSettings) -> FragmentSettings: pass
+    def getChainSettings() -> FragmentSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getMacrocycleSettings(self: FragmentConformerGeneratorSettings) -> FragmentSettings: pass
+    def getMacrocycleSettings() -> FragmentSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getSmallRingSystemSettings(self: FragmentConformerGeneratorSettings) -> FragmentSettings: pass
+    def getSmallRingSystemSettings() -> FragmentSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \param min_rmsd 
     #
-    def setSmallRingSystemSamplingFactor(self: FragmentConformerGeneratorSettings, min_rmsd: int) -> None: pass
+    def setSmallRingSystemSamplingFactor(min_rmsd: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %FragmentConformerGeneratorSettings instance this method is called upon.
     # \return 
     #
-    def getSmallRingSystemSamplingFactor(self: FragmentConformerGeneratorSettings) -> int: pass
+    def getSmallRingSystemSamplingFactor() -> int: pass
 
     ##
     # \brief 

@@ -46,25 +46,22 @@ class HBondingInteractionConstraint(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %HBondingInteractionConstraint instance.
-    # \param self The \e %HBondingInteractionConstraint instance to initialize.
     # \param constr 
     #
-    def __init__(self: object, constr: HBondingInteractionConstraint) -> None: pass
+    def __init__(constr: HBondingInteractionConstraint) -> None: pass
 
     ##
     # \brief Initializes the \e %HBondingInteractionConstraint instance.
-    # \param self The \e %HBondingInteractionConstraint instance to initialize.
     # \param don_acc 
     # \param min_len 
     # \param max_len 
     # \param min_ahd_ang 
     # \param max_acc_ang 
     #
-    def __init__(self: object, don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
+    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     #
     # Different Python \e %HBondingInteractionConstraint instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HBondingInteractionConstraint instances \e a and \e b reference different C++ objects. 
@@ -73,52 +70,46 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: HBondingInteractionConstraint) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMinLength(self: HBondingInteractionConstraint) -> float: pass
+    def getMinLength() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMaxLength(self: HBondingInteractionConstraint) -> float: pass
+    def getMaxLength() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMinAHDAngle(self: HBondingInteractionConstraint) -> float: pass
+    def getMinAHDAngle() -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     # \return 
     #
-    def getMaxAcceptorAngle(self: HBondingInteractionConstraint) -> float: pass
+    def getMaxAcceptorAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondingInteractionConstraint instance \a constr.
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     # \param constr The \e %HBondingInteractionConstraint instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: HBondingInteractionConstraint, constr: HBondingInteractionConstraint) -> HBondingInteractionConstraint: pass
+    def assign(constr: HBondingInteractionConstraint) -> HBondingInteractionConstraint: pass
 
     ##
     # \brief 
-    # \param self The \e %HBondingInteractionConstraint instance this method is called upon.
     # \param ftr1 
     # \param ftr2 
     # \return 
     #
-    def __call__(self: HBondingInteractionConstraint, ftr1: Feature, ftr2: Feature) -> bool: pass
+    def __call__(ftr1: Feature, ftr2: Feature) -> bool: pass
 
     ##
     # \brief 

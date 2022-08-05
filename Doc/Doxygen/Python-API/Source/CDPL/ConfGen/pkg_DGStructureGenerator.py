@@ -26,20 +26,17 @@ class DGStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %DGStructureGenerator instance.
-    # \param self The \e %DGStructureGenerator instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %DGStructureGenerator instance.
-    # \param self The \e %DGStructureGenerator instance to initialize.
     # \param gen 
     #
-    def __init__(self: object, gen: DGStructureGenerator) -> None: pass
+    def __init__(gen: DGStructureGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     #
     # Different Python \e %DGStructureGenerator instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %DGStructureGenerator instances \e a and \e b reference different C++ objects. 
@@ -48,89 +45,78 @@ class DGStructureGenerator(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: DGStructureGenerator) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGStructureGenerator instance \a gen.
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param gen The \e %DGStructureGenerator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(self: DGStructureGenerator, gen: DGStructureGenerator) -> DGStructureGenerator: pass
+    def assign(gen: DGStructureGenerator) -> DGStructureGenerator: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \return 
     #
-    def getExcludedHydrogenMask(self: DGStructureGenerator) -> CDPL.Util.BitSet: pass
+    def getExcludedHydrogenMask() -> CDPL.Util.BitSet: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param molgraph 
     #
-    def setup(self: DGStructureGenerator, molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def setup(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param molgraph 
     # \param ia_data 
     #
-    def setup(self: DGStructureGenerator, molgraph: CDPL.Chem.MolecularGraph, ia_data: CDPL.ForceField.MMFF94InteractionData) -> None: pass
+    def setup(molgraph: CDPL.Chem.MolecularGraph, ia_data: CDPL.ForceField.MMFF94InteractionData) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def generate(self: DGStructureGenerator, coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def generate(coords: CDPL.Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \return 
     #
-    def getNumAtomStereoCenters(self: DGStructureGenerator) -> int: pass
+    def getNumAtomStereoCenters() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \return 
     #
-    def getNumBondStereoCenters(self: DGStructureGenerator) -> int: pass
+    def getNumBondStereoCenters() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def checkAtomConfigurations(self: DGStructureGenerator, coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def checkAtomConfigurations(coords: CDPL.Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \param coords 
     # \return 
     #
-    def checkBondConfigurations(self: DGStructureGenerator, coords: CDPL.Math.Vector3DArray) -> bool: pass
+    def checkBondConfigurations(coords: CDPL.Math.Vector3DArray) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \return 
     #
-    def getSettings(self: DGStructureGenerator) -> DGStructureGeneratorSettings: pass
+    def getSettings() -> DGStructureGeneratorSettings: pass
 
     ##
     # \brief 
-    # \param self The \e %DGStructureGenerator instance this method is called upon.
     # \return 
     #
-    def getConstraintGenerator(self: DGStructureGenerator) -> DGConstraintGenerator: pass
+    def getConstraintGenerator() -> DGConstraintGenerator: pass
 
     ##
     # \brief 

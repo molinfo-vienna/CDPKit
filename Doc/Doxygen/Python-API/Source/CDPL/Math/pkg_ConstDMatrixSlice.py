@@ -26,51 +26,44 @@ class ConstDMatrixSlice(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstDMatrixSlice instance.
-    # \param self The \e %ConstDMatrixSlice instance to initialize.
     # \param s 
     #
-    def __init__(self: object, s: ConstDMatrixSlice) -> None: pass
+    def __init__(s: ConstDMatrixSlice) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstDMatrixSlice instance.
-    # \param self The \e %ConstDMatrixSlice instance to initialize.
     # \param e 
     # \param s1 
     # \param s2 
     #
-    def __init__(self: object, e: ConstDMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> None: pass
+    def __init__(e: ConstDMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getStart1(self: ConstDMatrixSlice) -> int: pass
+    def getStart1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getStart2(self: ConstDMatrixSlice) -> int: pass
+    def getStart2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getStride1(self: ConstDMatrixSlice) -> int: pass
+    def getStride1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getStride2(self: ConstDMatrixSlice) -> int: pass
+    def getStride2() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     #
     # Different Python \e %ConstDMatrixSlice instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstDMatrixSlice instances \e a and \e b reference different C++ objects. 
@@ -79,192 +72,168 @@ class ConstDMatrixSlice(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConstDMatrixSlice) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getSize1(self: ConstDMatrixSlice) -> int: pass
+    def getSize1() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getSize2(self: ConstDMatrixSlice) -> int: pass
+    def getSize2() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ConstDMatrixSlice) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def getElement(self: ConstDMatrixSlice, i: int, j: int) -> float: pass
+    def getElement(i: int, j: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def toArray(self: ConstDMatrixSlice) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def getData(self: ConstDMatrixSlice) -> ConstDMatrixExpression: pass
+    def getData() -> ConstDMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param i 
     # \param j 
     # \return 
     #
-    def __call__(self: ConstDMatrixSlice, i: int, j: int) -> float: pass
+    def __call__(i: int, j: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param ij 
     # \return 
     #
-    def __getitem__(self: ConstDMatrixSlice, ij: tuple) -> float: pass
+    def __getitem__(ij: tuple) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def __len__(self: ConstDMatrixSlice) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == s</tt>.
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param s The \e %ConstDMatrixSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstDMatrixSlice, s: ConstDMatrixSlice) -> bool: pass
+    def __eq__(s: ConstDMatrixSlice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param e The \e %ConstDMatrixSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstDMatrixSlice, e: ConstDMatrixExpression) -> bool: pass
+    def __eq__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != s</tt>.
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param s The \e %ConstDMatrixSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstDMatrixSlice, s: ConstDMatrixSlice) -> bool: pass
+    def __ne__(s: ConstDMatrixSlice) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param e The \e %ConstDMatrixSlice instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstDMatrixSlice, e: ConstDMatrixExpression) -> bool: pass
+    def __ne__(e: ConstDMatrixExpression) -> bool: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstDMatrixSlice instance.
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ConstDMatrixSlice) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ConstDMatrixSlice) -> ConstDMatrixSlice: pass
+    def __pos__() -> ConstDMatrixSlice: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDMatrixExpression: pass
+    def __neg__() -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstDMatrixSlice instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDMatrixSlice instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+    def __add__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstDMatrixSlice instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstDMatrixSlice instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+    def __sub__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstDMatrixSlice instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDMatrixSlice instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __mul__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstDMatrixSlice instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDMatrixSlice instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstDMatrixSlice instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDMatrixSlice instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstDMatrixSlice instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDMatrixSlice instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __div__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __truediv__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixSlice instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDMatrixExpression: pass
+    def __rmul__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief 

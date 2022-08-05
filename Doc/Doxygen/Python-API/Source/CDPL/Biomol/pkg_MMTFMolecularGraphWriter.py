@@ -26,7 +26,6 @@ class MMTFMolecularGraphWriter(CDPL.Chem.MolecularGraphWriter):
 
     ##
     # \brief Initializes the \e %MMTFMolecularGraphWriter instance.
-    # \param self The \e %MMTFMolecularGraphWriter instance to initialize.
     # \param os 
     #
-    def __init__(self: object, os: CDPL.Base.OStream) -> None: pass
+    def __init__(os: CDPL.Base.OStream) -> None: pass

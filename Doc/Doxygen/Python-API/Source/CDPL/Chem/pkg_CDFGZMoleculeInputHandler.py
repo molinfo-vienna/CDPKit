@@ -26,6 +26,5 @@ class CDFGZMoleculeInputHandler(MoleculeInputHandler):
 
     ##
     # \brief Initializes the \e %CDFGZMoleculeInputHandler instance.
-    # \param self The \e %CDFGZMoleculeInputHandler instance to initialize.
     #
-    def __init__(self: object) -> None: pass
+    def __init__() -> None: pass

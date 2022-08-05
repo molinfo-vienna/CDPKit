@@ -26,29 +26,25 @@ class ConstDMatrixRow(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %ConstDMatrixRow instance.
-    # \param self The \e %ConstDMatrixRow instance to initialize.
     # \param r 
     #
-    def __init__(self: object, r: ConstDMatrixRow) -> None: pass
+    def __init__(r: ConstDMatrixRow) -> None: pass
 
     ##
     # \brief Initializes the \e %ConstDMatrixRow instance.
-    # \param self The \e %ConstDMatrixRow instance to initialize.
     # \param e 
     # \param i 
     #
-    def __init__(self: object, e: ConstDMatrixExpression, i: int) -> None: pass
+    def __init__(e: ConstDMatrixExpression, i: int) -> None: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def getIndex(self: ConstDMatrixRow) -> int: pass
+    def getIndex() -> int: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     #
     # Different Python \e %ConstDMatrixRow instances may reference the same underlying C++ class instance. The commonly used Python expression
     # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ConstDMatrixRow instances \e a and \e b reference different C++ objects. 
@@ -57,175 +53,153 @@ class ConstDMatrixRow(Boost.Python.instance):
     #
     # \return The numeric ID of the internally referenced C++ class instance.
     #
-    def getObjectID(self: ConstDMatrixRow) -> int: pass
+    def getObjectID() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def isEmpty(self: ConstDMatrixRow) -> bool: pass
+    def isEmpty() -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def getSize(self: ConstDMatrixRow) -> int: pass
+    def getSize() -> int: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param i 
     # \return 
     #
-    def getElement(self: ConstDMatrixRow, i: int) -> float: pass
+    def getElement(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def toArray(self: ConstDMatrixRow) -> object: pass
+    def toArray() -> object: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def getData(self: ConstDMatrixRow) -> ConstDMatrixExpression: pass
+    def getData() -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == r</tt>.
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param r The \e %ConstDMatrixRow instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstDMatrixRow, r: ConstDMatrixRow) -> bool: pass
+    def __eq__(r: ConstDMatrixRow) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param e The \e %ConstDMatrixRow instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __eq__(self: ConstDMatrixRow, e: ConstDVectorExpression) -> bool: pass
+    def __eq__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != r</tt>.
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param r The \e %ConstDMatrixRow instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstDMatrixRow, r: ConstDMatrixRow) -> bool: pass
+    def __ne__(r: ConstDMatrixRow) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param e The \e %ConstDMatrixRow instance to be compared with.
     # \return The result of the comparison operation.
     #
-    def __ne__(self: ConstDMatrixRow, e: ConstDVectorExpression) -> bool: pass
+    def __ne__(e: ConstDVectorExpression) -> bool: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __call__(self: ConstDMatrixRow, i: int) -> float: pass
+    def __call__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param i 
     # \return 
     #
-    def __getitem__(self: ConstDMatrixRow, i: int) -> float: pass
+    def __getitem__(i: int) -> float: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def __len__(self: ConstDMatrixRow) -> int: pass
+    def __len__() -> int: pass
 
     ##
     # \brief Returns a string representation of the \e %ConstDMatrixRow instance.
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return The generated string representation.
     #
-    def __str__(self: ConstDMatrixRow) -> str: pass
+    def __str__() -> str: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def __pos__(self: ConstDMatrixRow) -> ConstDMatrixRow: pass
+    def __pos__() -> ConstDMatrixRow: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \return 
     #
-    def __neg__(self: object) -> ConstDVectorExpression: pass
+    def __neg__() -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
-    # \param self The \e %ConstDMatrixRow instance representing the first addend.
     # \param e Specifies the second addend.
     # \return A \e %ConstDMatrixRow instance holding the result of the addition.
     #
-    def __add__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __add__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the subtraction operation <tt>self - e</tt>.
-    # \param self The \e %ConstDMatrixRow instance acting as minuend.
     # \param e Specifies the subtrahend.
     # \return A \e %ConstDMatrixRow instance holding the result of the subtraction.
     #
-    def __sub__(self: object, e: ConstDVectorExpression) -> ConstDVectorExpression: pass
+    def __sub__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
-    # \param self The \e %ConstDMatrixRow instance acting as multiplicand.
     # \param t Specifies the multiplier.
     # \return A \e %ConstDMatrixRow instance holding the result of the multiplication.
     #
-    def __mul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __mul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
-    # \param self The \e %ConstDMatrixRow instance acting as multiplicand.
     # \param e Specifies the multiplier.
     # \return A \e %ConstDMatrixRow instance holding the result of the multiplication.
     #
-    def __mul__(self: object, e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
+    def __mul__(e: ConstDMatrixExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
-    # \param self The \e %ConstDMatrixRow instance acting as dividend.
     # \param t Specifies the divisor.
     # \return A \e %ConstDMatrixRow instance holding the result of the division.
     #
-    def __div__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __div__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __truediv__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __truediv__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
-    # \param self The \e %ConstDMatrixRow instance this method is called upon.
     # \param t 
     # \return 
     #
-    def __rmul__(self: object, t: float) -> ConstDVectorExpression: pass
+    def __rmul__(t: float) -> ConstDVectorExpression: pass
 
     ##
     # \brief 
