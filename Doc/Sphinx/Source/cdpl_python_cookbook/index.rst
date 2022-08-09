@@ -1,5 +1,5 @@
-CDPL Cookbook
-=============
+CDPL Python Cookbook
+====================
 
 .. toctree::
    :maxdepth: 2

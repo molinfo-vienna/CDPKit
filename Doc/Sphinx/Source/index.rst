@@ -7,7 +7,7 @@ Welcome to the Chemical Data Processing Toolkit (CDPKit) Documentation
    introduction/index
    getting_started/index
    cdpl_prog_guide/index
-   cdpl_cookbook/index
+   cdpl_python_cookbook/index
    bibliography
 
 Chemical Data Processing Library (CDPL) API documentation
