@@ -121,17 +121,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportLogSCalculator();
 	exportMolecularComplexityCalculator();
 	exportPEOEChargeCalculator();
-	exportAutoCorrelation2DVectorCalculator();
-	exportAtomRDFCodeCalculator();
-	exportMoleculeRDFDescriptorCalculator();
-	exportAtomAutoCorrelation3DVectorCalculator();
-	exportMoleculeAutoCorr3DDescriptorCalculator();
-	exportMoleculeAutoCorr2DDescriptorCalculator();
-	exportBurdenMatrixGenerator();
-	exportBCUTDescriptorCalculator();
 	exportSurfaceAtomExtractor();
-	exportPathFingerprintGenerator();
-	exportCircularFingerprintGenerator();
+
 	exportPatternAtomTyper();
 	exportSubstructureHistogramGenerator();
 	exportGeneralizedBellAtomDensity();
@@ -288,7 +279,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportMoleculeFunctions();
 	exportFragmentFunctions();
 	exportReactionFunctions();
-	exportSimilarityFunctions();
 
 	exportBoostFunctionWrappers();
 

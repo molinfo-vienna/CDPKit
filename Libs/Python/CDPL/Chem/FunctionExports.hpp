@@ -43,7 +43,6 @@ namespace CDPLPythonChem
 	void exportMoleculeFunctions();
 	void exportFragmentFunctions();
 	void exportReactionFunctions();
-	void exportSimilarityFunctions();
 }
 
 #endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP

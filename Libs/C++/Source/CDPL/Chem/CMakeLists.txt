@@ -158,17 +158,7 @@ SET(cdpl-chem_LIB_SRCS
     LogSCalculator.cpp
     MolecularComplexityCalculator.cpp
     PEOEChargeCalculator.cpp
-    AutoCorrelation2DVectorCalculator.cpp
-    AtomAutoCorrelation3DVectorCalculator.cpp
-    AtomRDFCodeCalculator.cpp
-    MoleculeRDFDescriptorCalculator.cpp
-    MoleculeAutoCorr3DDescriptorCalculator.cpp
-    MoleculeAutoCorr2DDescriptorCalculator.cpp
-    BurdenMatrixGenerator.cpp
-    BCUTDescriptorCalculator.cpp
     SurfaceAtomExtractor.cpp
-    PathFingerprintGenerator.cpp
-    CircularFingerprintGenerator.cpp
     PatternAtomTyper.cpp
     SubstructureHistogramGenerator.cpp
     GeneralizedBellAtomDensity.cpp
@@ -327,8 +317,6 @@ SET(cdpl-chem_LIB_SRCS
     AtomArray3DCoordinatesFunctor.cpp
 
     ControlParameterFunctions.cpp
-
-    SimilarityFunctions.cpp
     UtilityFunctions.cpp
 
     MatchConstraintList.cpp

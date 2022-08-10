@@ -45,10 +45,6 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportFeatureMapping();
 	exportFeatureTypeHistogram();
-	exportFeatureRDFCodeCalculator();
-	exportPharmacophoreRDFDescriptorCalculator();
-	exportFeatureAutoCorrelation3DVectorCalculator();
-    exportPharmacophoreAutoCorr3DDescriptorCalculator();
 
 	exportPharmacophoreReader();
 	exportFeatureContainerWriter();

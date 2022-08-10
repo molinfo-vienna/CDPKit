@@ -118,17 +118,7 @@ namespace CDPLPythonChem
 	void exportLogSCalculator();
 	void exportMolecularComplexityCalculator();
 	void exportPEOEChargeCalculator();
-	void exportAutoCorrelation2DVectorCalculator();
-	void exportAtomRDFCodeCalculator();
-	void exportMoleculeRDFDescriptorCalculator();
-	void exportAtomAutoCorrelation3DVectorCalculator();
-	void exportMoleculeAutoCorr3DDescriptorCalculator();
-	void exportMoleculeAutoCorr2DDescriptorCalculator();
-	void exportBurdenMatrixGenerator();
-	void exportBCUTDescriptorCalculator();
 	void exportSurfaceAtomExtractor();
-	void exportPathFingerprintGenerator();
-	void exportCircularFingerprintGenerator();
 	void exportPatternAtomTyper();
 	void exportSubstructureHistogramGenerator();
 	void exportGeneralizedBellAtomDensity();

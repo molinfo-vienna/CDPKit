@@ -120,11 +120,6 @@
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
 
-#include "CDPL/Pharm/FeatureRDFCodeCalculator.hpp"
-#include "CDPL/Pharm/FeatureAutoCorrelation3DVectorCalculator.hpp"
-#include "CDPL/Pharm/PharmacophoreRDFDescriptorCalculator.hpp"
-#include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
-
 #include "CDPL/Pharm/MoleculeFunctions.hpp"  
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"

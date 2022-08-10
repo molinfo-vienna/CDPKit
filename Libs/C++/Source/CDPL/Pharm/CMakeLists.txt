@@ -88,11 +88,7 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureGeometryMatchFunctor.cpp
     SpatialFeatureMapping.cpp
     PharmacophoreAlignment.cpp
-    FeatureRDFCodeCalculator.cpp
-    FeatureAutoCorrelation3DVectorCalculator.cpp
-    PharmacophoreRDFDescriptorCalculator.cpp
-    PharmacophoreAutoCorr3DDescriptorCalculator.cpp
-
+ 
     PharmacophoreFitScore.cpp
 
     ScreeningProcessor.cpp

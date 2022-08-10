@@ -26,8 +26,33 @@
 
 #include <boost/python.hpp>
 
+#include "ClassExports.hpp"
+#include "FunctionExports.hpp"
+#include "ConverterRegistration.hpp"
+
 
 BOOST_PYTHON_MODULE(_descr)
 {
+	using namespace CDPLPythonDescr;
 
+	exportAutoCorrelation2DVectorCalculator();
+	exportAtomRDFCodeCalculator();
+	exportMoleculeRDFDescriptorCalculator();
+	exportAtomAutoCorrelation3DVectorCalculator();
+	exportMoleculeAutoCorr3DDescriptorCalculator();
+	exportMoleculeAutoCorr2DDescriptorCalculator();
+	exportBurdenMatrixGenerator();
+	exportBCUTDescriptorCalculator();
+
+	exportFeatureRDFCodeCalculator();
+	exportPharmacophoreRDFDescriptorCalculator();
+	exportFeatureAutoCorrelation3DVectorCalculator();
+    exportPharmacophoreAutoCorr3DDescriptorCalculator();
+
+	exportPathFingerprintGenerator();
+	exportCircularFingerprintGenerator();
+
+	exportSimilarityFunctions();
+
+	registerFromPythonConverters();
 }

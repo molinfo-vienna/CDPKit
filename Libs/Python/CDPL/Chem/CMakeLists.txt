@@ -114,17 +114,7 @@ SET(chem_MOD_SRCS
     LogSCalculatorExport.cpp 
     MolecularComplexityCalculatorExport.cpp 
     PEOEChargeCalculatorExport.cpp 
-    AutoCorrelation2DVectorCalculatorExport.cpp 
-    AtomRDFCodeCalculatorExport.cpp 
-    MoleculeRDFDescriptorCalculatorExport.cpp 
-    AtomAutoCorrelation3DVectorCalculatorExport.cpp 
-    MoleculeAutoCorr3DDescriptorCalculatorExport.cpp 
-    MoleculeAutoCorr2DDescriptorCalculatorExport.cpp 
-    BurdenMatrixGeneratorExport.cpp 
-    BCUTDescriptorCalculatorExport.cpp 
     SurfaceAtomExtractorExport.cpp 
-    PathFingerprintGeneratorExport.cpp 
-    CircularFingerprintGeneratorExport.cpp 
     PatternAtomTyperExport.cpp 
     SubstructureHistogramGeneratorExport.cpp 
     GeneralizedBellAtomDensityExport.cpp
@@ -277,7 +267,6 @@ SET(chem_MOD_SRCS
     MoleculeFunctionExport.cpp 
     FragmentFunctionExport.cpp 
     ReactionFunctionExport.cpp 
-    SimilarityFunctionExport.cpp 
 
     BoostFunctionWrapperExport.cpp
     Atom3DCoordinatesFunctorExport.cpp

@@ -33,6 +33,25 @@ ENDFOREACH(PYTHON_FILE)
 
 SET(descr_MOD_SRCS
     Module.cpp
+
+    AutoCorrelation2DVectorCalculatorExport.cpp 
+    AtomRDFCodeCalculatorExport.cpp 
+    MoleculeRDFDescriptorCalculatorExport.cpp 
+    AtomAutoCorrelation3DVectorCalculatorExport.cpp 
+    MoleculeAutoCorr3DDescriptorCalculatorExport.cpp 
+    MoleculeAutoCorr2DDescriptorCalculatorExport.cpp 
+    BurdenMatrixGeneratorExport.cpp 
+    BCUTDescriptorCalculatorExport.cpp 
+    PathFingerprintGeneratorExport.cpp 
+    CircularFingerprintGeneratorExport.cpp
+    FeatureRDFCodeCalculatorExport.cpp 
+    PharmacophoreRDFDescriptorCalculatorExport.cpp
+    FeatureAutoCorrelation3DVectorCalculatorExport.cpp 
+    PharmacophoreAutoCorr3DDescriptorCalculatorExport.cpp
+
+    SimilarityFunctionExport.cpp 
+
+    FromPythonConverterRegistration.cpp
    )
 
 ADD_LIBRARY(_descr MODULE ${descr_MOD_SRCS})

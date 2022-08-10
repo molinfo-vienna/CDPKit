@@ -42,10 +42,6 @@ namespace CDPLPythonPharm
 
 	void exportFeatureMapping();
 	void exportFeatureTypeHistogram();
-	void exportFeatureRDFCodeCalculator();
-	void exportPharmacophoreRDFDescriptorCalculator();
-	void exportFeatureAutoCorrelation3DVectorCalculator();
-    void exportPharmacophoreAutoCorr3DDescriptorCalculator();
 
 	void exportBoostFunctionWrappers();
 

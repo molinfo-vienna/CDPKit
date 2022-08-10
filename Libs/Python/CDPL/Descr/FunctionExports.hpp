@@ -31,6 +31,7 @@
 namespace CDPLPythonDescr
 {
 
+	void exportSimilarityFunctions();
 }
 
 #endif // CDPL_PYTHON_DESCR_FUNCTIONEXPORTS_HPP

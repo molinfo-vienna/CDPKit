@@ -31,4 +31,27 @@
 #ifndef CDPL_DESCR_HPP
 #define CDPL_DESCR_HPP
 
+#include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
+#include "CDPL/Descr/AutoCorrelation3DVectorCalculator.hpp"
+#include "CDPL/Descr/AtomAutoCorrelation3DVectorCalculator.hpp"
+#include "CDPL/Descr/MoleculeAutoCorr2DDescriptorCalculator.hpp"
+#include "CDPL/Descr/MoleculeAutoCorr3DDescriptorCalculator.hpp"
+
+#include "CDPL/Descr/CircularFingerprintGenerator.hpp"
+#include "CDPL/Descr/PathFingerprintGenerator.hpp"
+
+#include "CDPL/Descr/BurdenMatrixGenerator.hpp"
+#include "CDPL/Descr/BCUTDescriptorCalculator.hpp"
+
+#include "CDPL/Descr/RDFCodeCalculator.hpp"
+#include "CDPL/Descr/AtomRDFCodeCalculator.hpp"
+#include "CDPL/Descr/MoleculeRDFDescriptorCalculator.hpp"
+
+#include "CDPL/Pharm/FeatureRDFCodeCalculator.hpp"
+#include "CDPL/Pharm/FeatureAutoCorrelation3DVectorCalculator.hpp"
+#include "CDPL/Pharm/PharmacophoreRDFDescriptorCalculator.hpp"
+#include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
+
+#include "CDPL/Descr/SimilarityFunctions.hpp"
+
 #endif // CDPL_DESCR_HPP

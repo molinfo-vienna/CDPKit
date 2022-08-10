@@ -23,27 +23,48 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-descr_LIB_SRCS
-    Dummy.cpp
-   )
+    BCUTDescriptorCalculator.cpp
+    BurdenMatrixGenerator.cpp
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_ATOMIC_LIBRARY})
+    CircularFingerprintGenerator.cpp 
+    PathFingerprintGenerator.cpp 
+
+    AtomRDFCodeCalculator.cpp
+    MoleculeRDFDescriptorCalculator.cpp
+
+    AutoCorrelation2DVectorCalculator.cpp
+    AtomAutoCorrelation3DVectorCalculator.cpp
+    MoleculeAutoCorr2DDescriptorCalculator.cpp
+    MoleculeAutoCorr3DDescriptorCalculator.cpp
+
+    FeatureRDFCodeCalculator.cpp
+    FeatureAutoCorrelation3DVectorCalculator.cpp
+    PharmacophoreRDFDescriptorCalculator.cpp
+    PharmacophoreAutoCorr3DDescriptorCalculator.cpp
+
+    SimilarityFunctions.cpp
+   )
 
 ADD_LIBRARY(cdpl-descr-static STATIC ${cdpl-descr_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-descr-static PROPERTIES 
                       OUTPUT_NAME cdpl-descr
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS CDPL_DESCR_STATIC_LINK
+                      COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK;CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_UTIL_STATIC_LINK"
                      )
+
+TARGET_LINK_LIBRARIES(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
 
 INSTALL(TARGETS cdpl-descr-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
 ADD_LIBRARY(cdpl-descr-shared SHARED ${cdpl-descr_LIB_SRCS})
+
+TARGET_LINK_LIBRARIES(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-descr-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

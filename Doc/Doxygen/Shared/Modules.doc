@@ -61,22 +61,7 @@
 \defgroup CDPL_CHEM_SURFACE_ATOM_PERCEPTION Surface-accessible Atom Perception
 \ingroup CDPL_CHEM
 
-\defgroup CDPL_CHEM_2D_AUTOCORRELATION 2D Autocorrelation
-\ingroup CDPL_CHEM
-
-\defgroup CDPL_CHEM_3D_AUTOCORRELATION 3D Autocorrelation
-\ingroup CDPL_CHEM
-
-\defgroup CDPL_CHEM_RDF_CODES Radial Distribution Function (RDF) Codes
-\ingroup CDPL_CHEM
-
-\defgroup CDPL_CHEM_DESCRIPTORS Descriptors
-\ingroup CDPL_CHEM
-
 \defgroup CDPL_CHEM_PEOE_CHARGES Gasteiger-Marsili Charges (PEOE)
-\ingroup CDPL_CHEM
-
-\defgroup CDPL_CHEM_FINGERPRINTS Fingerprints
 \ingroup CDPL_CHEM
 
 \defgroup CDPL_CHEM_2D_STRUCTURE_LAYOUT 2D Structure Layout
@@ -391,9 +376,6 @@
 \defgroup CDPL_PHARM_RDF_CODES Radial Distribution Function (RDF) Codes
 \ingroup CDPL_PHARM
 
-\defgroup CDPL_PHARM_DESCRIPTORS Descriptors
-\ingroup CDPL_PHARM
-
 \defgroup CDPL_PHARM_PROPERTIES Property Keys
 \ingroup CDPL_PHARM
 
@@ -588,6 +570,35 @@
 
 \defgroup CDPL_SHAPE_HELPERS Implementation Helper Classes
 \ingroup CDPL_SHAPE
+
+
+\defgroup CDPL_MOLPROP Molecular Property Calculation
+
+
+\defgroup CDPL_DESCR Structure Descriptor Calculation
+
+\defgroup CDPL_DESCR_FINGERPRINTS Structure Fingerprints
+\ingroup CDPL_DESCR
+
+\defgroup CDPL_DESCR_SIMILARITY_FUNCTIONS Similarity Functions
+\ingroup CDPL_DESCR_FINGERPRINTS
+
+\defgroup CDPL_DESCR_2D 2D Descriptors
+
+\defgroup CDPL_DESCR_2D_AUTOCORRELATION 2D Autocorrelation
+\ingroup CDPL_DESCR_2D
+
+\defgroup CDPL_DESCR_BCUT BCUT
+\ingroup CDPL_DESCR_2D
+
+\defgroup CDPL_DESCR_3D 3D Descriptors
+
+\defgroup CDPL_DESCR_3D_AUTOCORRELATION 3D Autocorrelation
+\ingroup CDPL_DESCR_3D
+
+\defgroup CDPL_DESCR_RDF_CODES Radial Distribution Function (RDF) Codes
+\ingroup CDPL_DESCR_3D
+
 
 
 \defgroup CDPL_GRID Grid Data Handling
