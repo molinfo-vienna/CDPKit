@@ -48,19 +48,6 @@
 using namespace CDPL; 
 
 
-void Chem::foldBitSet(Util::BitSet& bs, std::size_t num_times)
-{
-	Util::BitSet tmp;
-
-	for (std::size_t i = 0, new_num_bits = bs.size() >> 1; i < num_times; i++, new_num_bits >>= 1) {
-		tmp = bs;
-		tmp >>= new_num_bits;
-		
-		bs |= tmp;
-		bs.resize(new_num_bits);
-	}
-}
-
 Chem::Molecule::SharedPointer Chem::parseSMARTS(const std::string& smarts, bool init_qry)
 {
 	Molecule::SharedPointer mol_ptr(new BasicMolecule());

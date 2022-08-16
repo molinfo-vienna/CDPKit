@@ -48,4 +48,4 @@
  */
 
 #endif // CDPL_MOLPROP_APIPREFIX_HPP
-x
+

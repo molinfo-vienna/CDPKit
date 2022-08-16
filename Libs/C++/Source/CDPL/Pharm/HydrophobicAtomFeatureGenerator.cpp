@@ -31,10 +31,11 @@
 #include "CDPL/Pharm/HydrophobicAtomFeatureGenerator.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
-#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -183,8 +184,8 @@ void Pharm::HydrophobicAtomFeatureGenerator::getAtomHydrophobicities()
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		const Atom& atom = molGraph->getAtom(i);
 
-		if (hasHydrophobicity(atom)) {
-			atomHydTable[i] = getHydrophobicity(atom);
+		if (MolProp::hasHydrophobicity(atom)) {
+			atomHydTable[i] = MolProp::getHydrophobicity(atom);
 			continue;
 		}
 

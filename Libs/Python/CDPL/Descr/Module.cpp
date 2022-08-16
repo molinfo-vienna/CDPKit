@@ -43,7 +43,8 @@ BOOST_PYTHON_MODULE(_descr)
 	exportMoleculeAutoCorr2DDescriptorCalculator();
 	exportBurdenMatrixGenerator();
 	exportBCUTDescriptorCalculator();
-
+	exportMolecularComplexityCalculator();
+	
 	exportFeatureRDFCodeCalculator();
 	exportPharmacophoreRDFDescriptorCalculator();
 	exportFeatureAutoCorrelation3DVectorCalculator();
@@ -52,6 +53,7 @@ BOOST_PYTHON_MODULE(_descr)
 	exportPathFingerprintGenerator();
 	exportCircularFingerprintGenerator();
 
+	exportMolecularGraphFunctions();
 	exportSimilarityFunctions();
 
 	registerFromPythonConverters();

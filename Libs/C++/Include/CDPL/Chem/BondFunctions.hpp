@@ -197,9 +197,6 @@ namespace CDPL
 		CDPL_CHEM_API void buildMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& str);
 
 
-		CDPL_CHEM_API double calcPolarizability(const Bond& bond, const MolecularGraph& molgraph, double damping = 0.75);
-
-
 		CDPL_CHEM_API bool isHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API bool isHeteroAtomHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);

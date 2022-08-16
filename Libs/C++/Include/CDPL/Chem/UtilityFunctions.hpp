@@ -52,18 +52,6 @@ namespace CDPL
 		 * @{
 		 */
 
-		/**
-		 * \brief Folds the bitset \a bs the specified number of times.
-		 *
-		 * Folding a bitset means that the lower and upper half of the bitset are combined
-		 * by a logical OR operation to produce a new bitset which is half of the original
-		 * size. This process is repeated the specified number of times. See also [\ref DTPFP].
-		 *
-		 * \param bs The bitset to fold.
-		 * \param num_times The number of times the bitset has to be folded.
-		 */
-		CDPL_CHEM_API void foldBitSet(Util::BitSet& bs, std::size_t num_times);
-
 		CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
 
 		CDPL_CHEM_API bool parseSMARTS(const std::string& smarts, Molecule& mol, bool init_qry = true);

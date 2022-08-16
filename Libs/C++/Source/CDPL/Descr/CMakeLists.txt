@@ -28,6 +28,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 SET(cdpl-descr_LIB_SRCS
     BCUTDescriptorCalculator.cpp
     BurdenMatrixGenerator.cpp
+    MolecularComplexityCalculator.cpp
 
     CircularFingerprintGenerator.cpp 
     PathFingerprintGenerator.cpp 
@@ -45,6 +46,15 @@ SET(cdpl-descr_LIB_SRCS
     PharmacophoreRDFDescriptorCalculator.cpp
     PharmacophoreAutoCorr3DDescriptorCalculator.cpp
 
+    MolecularGraphComplexityFunction.cpp
+    MolecularGraphKierShapeFunctions.cpp
+    MolecularGraphRandicIndexFunction.cpp
+    MolecularGraphRingComplexityFunction.cpp
+    MolecularGraphTotalWalkCountFunction.cpp
+    MolecularGraphWienerIndexFunction.cpp
+    MolecularGraphZagrebIndexFunctions.cpp
+    MolecularGraphTopologicalDiameterAndRadiusFunctions.cpp
+    
     SimilarityFunctions.cpp
    )
 

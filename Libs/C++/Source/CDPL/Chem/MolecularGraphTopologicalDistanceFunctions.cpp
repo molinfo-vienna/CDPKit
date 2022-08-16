@@ -185,54 +185,6 @@ namespace
 }
 
 
-std::size_t Chem::calcTopologicalRadius(const MolecularGraph& molgraph)
-{
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
-	std::size_t radius = molgraph.getNumBonds() + 1;
-
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-
-	for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != atoms_end; ) {
-		const Atom& atom1 = *it1;
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-
-		std::size_t max_atom_dist = 0;
-
-		for (MolecularGraph::ConstAtomIterator it2 = ++it1; it2 != atoms_end; ++it2) {
-			const Atom& atom2 = *it2;
-			std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
-			max_atom_dist = std::max(std::size_t(dist_mtx(atom1_idx, atom2_idx)), max_atom_dist);
-		}
-
-		radius = std::min(max_atom_dist, radius);
-	}
-
-	return (radius == std::numeric_limits<std::size_t>::max() ? 0 : radius);
-}
-
-std::size_t Chem::calcTopologicalDiameter(const MolecularGraph& molgraph)
-{
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
-	std::size_t diameter = 0;
-
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-
-	for (MolecularGraph::ConstAtomIterator it1 = molgraph.getAtomsBegin(); it1 != atoms_end; ) {
-		const Atom& atom1 = *it1;
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-
-		for (MolecularGraph::ConstAtomIterator it2 = ++it1; it2 != atoms_end; ++it2) {
-			const Atom& atom2 = *it2;
-			std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
-			diameter = std::max(std::size_t(dist_mtx(atom1_idx, atom2_idx)), diameter);
-		}
-	}
-
-	return diameter;
-}
-
 Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {

@@ -36,7 +36,7 @@
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/AtomHydrophobicityCalculator.hpp"
+#include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -171,13 +171,13 @@ namespace CDPL
 
 			Chem::Fragment::SharedPointer makeFragment(const Chem::Atom&) const;
 
-			const Chem::MolecularGraph*        molGraph;
-			unsigned int                       featureType;
-			double                             featureTol;
-			unsigned int                       featureGeom;
-			double                             hydThreshold;  
-			Util::DArray                       atomHydTable;
-			Chem::AtomHydrophobicityCalculator atomHydCalculator;
+			const Chem::MolecularGraph*           molGraph;
+			unsigned int                          featureType;
+			double                                featureTol;
+			unsigned int                          featureGeom;
+			double                                hydThreshold;  
+			Util::DArray                          atomHydTable;
+			MolProp::AtomHydrophobicityCalculator atomHydCalculator;
 		};
 
 		/**

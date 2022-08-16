@@ -51,8 +51,6 @@ namespace CDPLPythonChem
 	void exportAtomBondMapping();
 	void exportFragmentList();
 	void exportStringDataBlock();
-	void exportMassComposition();
-	void exportElementHistogram();
 	void exportStereoDescriptor();
 	void exportMultiConfMoleculeInputProcessor();
 	void exportDefaultMultiConfMoleculeInputProcessor();
@@ -111,19 +109,13 @@ namespace CDPLPythonChem
 	void exportBondOrderGenerator();
 	void exportKekuleStructureGenerator();
 	void exportBondDirectionGenerator();
-	void exportXLogPCalculator();
-	void exportTPSACalculator();
 	void exportHashCodeCalculator();
 	void exportSymmetryClassCalculator();
-	void exportLogSCalculator();
-	void exportMolecularComplexityCalculator();
-	void exportPEOEChargeCalculator();
 	void exportSurfaceAtomExtractor();
 	void exportPatternAtomTyper();
 	void exportSubstructureHistogramGenerator();
 	void exportGeneralizedBellAtomDensity();
 	void exportAtomDensityGridCalculator();
-	void exportAtomHydrophobicityCalculator();
 	void exportBuriednessScore();
 	void exportBuriednessGridCalculator();
 	void exportTautomerScore();

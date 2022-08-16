@@ -35,7 +35,8 @@ namespace CDPL
 
 	namespace MolProp
 	{
-
+		
+		void initAtomProperties();
 	}
 }
 
@@ -46,7 +47,7 @@ namespace
 	{
 
 		CDPLMolPropInit() {
-
+			initAtomProperties();
 		}
 
 	} cdplMolPropInit;

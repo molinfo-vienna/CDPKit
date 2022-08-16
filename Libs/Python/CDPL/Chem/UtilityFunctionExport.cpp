@@ -48,7 +48,6 @@ void CDPLPythonChem::exportUtilityFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("foldBitSet", &Chem::foldBitSet, (python::arg("bs"), python::arg("num_times")));
 	python::def("parseSMARTS", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&, bool)>(&Chem::parseSMARTS), 
 				(python::arg("smarts"), python::arg("init_qry") = true));
 	python::def("parseSMARTS", static_cast<bool (*)(const std::string&, Chem::Molecule&, bool)>(&Chem::parseSMARTS), 

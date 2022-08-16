@@ -56,8 +56,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomBondMapping();
 	exportFragmentList();
 	exportStringDataBlock();
-	exportMassComposition();
-	exportElementHistogram();
 	exportStereoDescriptor();
 	exportMultiConfMoleculeInputProcessor();
 	exportDefaultMultiConfMoleculeInputProcessor();
@@ -114,20 +112,14 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBondDirectionGenerator();
 	exportBondOrderGenerator();
 	exportKekuleStructureGenerator();
-	exportXLogPCalculator();
-	exportTPSACalculator();
 	exportHashCodeCalculator();
 	exportSymmetryClassCalculator();
-	exportLogSCalculator();
-	exportMolecularComplexityCalculator();
-	exportPEOEChargeCalculator();
 	exportSurfaceAtomExtractor();
 
 	exportPatternAtomTyper();
 	exportSubstructureHistogramGenerator();
 	exportGeneralizedBellAtomDensity();
 	exportAtomDensityGridCalculator();
-	exportAtomHydrophobicityCalculator();
 	exportBuriednessScore();
 	exportBuriednessGridCalculator();
 	exportTautomerScore();

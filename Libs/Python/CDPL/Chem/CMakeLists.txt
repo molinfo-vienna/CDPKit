@@ -53,8 +53,6 @@ SET(chem_MOD_SRCS
     AtomBondMappingExport.cpp 
     FragmentListExport.cpp 
     StringDataBlockExport.cpp
-    ElementHistogramExport.cpp
-    MassCompositionExport.cpp
     StereoDescriptorExport.cpp
     MultiConfMoleculeInputProcessorExport.cpp
     DefaultMultiConfMoleculeInputProcessorExport.cpp
@@ -107,19 +105,13 @@ SET(chem_MOD_SRCS
     BondDirectionGeneratorExport.cpp 
     BondOrderGeneratorExport.cpp 
     KekuleStructureGeneratorExport.cpp 
-    XLogPCalculatorExport.cpp 
-    TPSACalculatorExport.cpp 
     HashCodeCalculatorExport.cpp 
     SymmetryClassCalculatorExport.cpp 
-    LogSCalculatorExport.cpp 
-    MolecularComplexityCalculatorExport.cpp 
-    PEOEChargeCalculatorExport.cpp 
     SurfaceAtomExtractorExport.cpp 
     PatternAtomTyperExport.cpp 
     SubstructureHistogramGeneratorExport.cpp 
     GeneralizedBellAtomDensityExport.cpp
     AtomDensityGridCalculatorExport.cpp
-    AtomHydrophobicityCalculatorExport.cpp
     BuriednessScoreExport.cpp
     BuriednessGridCalculatorExport.cpp
     TautomerScoreExport.cpp

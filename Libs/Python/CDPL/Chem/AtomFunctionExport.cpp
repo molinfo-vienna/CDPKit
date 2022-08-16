@@ -110,13 +110,11 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, CanonicalNumber)
 	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, CIPPriority)
 	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, SymmetryClass)
-	MAKE_ATOM_FUNC_WRAPPERS(double, Hydrophobicity)
 	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, CIPConfiguration)
 	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, MDLParity)
 	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, AtomMappingID)
 	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, ComponentGroupID)
 	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, ReactionCenterStatus)
-	MAKE_ATOM_FUNC_WRAPPERS(double, PEOECharge)
 	MAKE_ATOM_FUNC_WRAPPERS(bool, StereoCenterFlag)
 	MAKE_ATOM_FUNC_WRAPPERS(bool, MDLStereoCareFlag)
 	MAKE_ATOM_FUNC_WRAPPERS(MatchExpressionPtrRef, MatchExpression)
@@ -180,7 +178,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(CDPL::Chem::StereoDescriptor, calcStereoDescriptorFromMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, calcMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(double, getHybridPolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, buildMatchExpression, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfSmallestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
@@ -198,7 +195,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
-	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getTopologicalDistance, CDPL::Chem::Atom&, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
@@ -359,8 +355,6 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("calcStereoDescriptorFromMDLParity", &calcStereoDescriptorFromMDLParityWrapper2,
 				(python::arg("atom"), python::arg("molgraph")), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("calcMDLParity", &calcMDLParityWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getHybridPolarizability", &getHybridPolarizabilityWrapper2, 
-				(python::arg("atom"), python::arg("molgraph")));
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper2, (python::arg("atom"), python::arg("molgraph")),
 				python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("getSizeOfSmallestContainingFragment", &getSizeOfSmallestContainingFragmentWrapper2,
@@ -395,8 +389,6 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("getContainingFragments", &getContainingFragmentsWrapper3,
 				(python::arg("atom"), python::arg("frag_list"), python::arg("cont_frag_list")),
 				python::with_custodian_and_ward<3, 2>());
-	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
 
 	python::def("isStereoCenter", &isStereoCenterWrapper4, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("check_cip_sym") = true, 
@@ -470,9 +462,7 @@ void CDPLPythonChem::exportAtomFunctions()
 	EXPORT_ATOM_FUNCS(AtomMappingID, id)
 	EXPORT_ATOM_FUNCS(ComponentGroupID, id)
 	EXPORT_ATOM_FUNCS(ReactionCenterStatus, status)
-	EXPORT_ATOM_FUNCS(PEOECharge, charge)
 	EXPORT_ATOM_FUNCS(StereoCenterFlag, is_center)
-	EXPORT_ATOM_FUNCS(Hydrophobicity, hyd)
 	EXPORT_ATOM_FUNCS(MDLStereoCareFlag, flag)
     EXPORT_ATOM_FUNCS_COPY_REF_CW(MatchExpression, expr)
 	EXPORT_ATOM_FUNCS_COPY_REF(MatchExpressionString, expr_str)

@@ -353,15 +353,6 @@ namespace CDPL
 		CDPL_CHEM_API bool hasSymmetryClass(const Atom& atom);
 
 
-		CDPL_CHEM_API double getHydrophobicity(const Atom& atom);
-
-		CDPL_CHEM_API void setHydrophobicity(Atom& atom, double hyd);
-
-		CDPL_CHEM_API void clearHydrophobicity(Atom& atom);	
-
-		CDPL_CHEM_API bool hasHydrophobicity(const Atom& atom);
-
-
 		CDPL_CHEM_API unsigned int getCIPConfiguration(const Atom& atom);
 
 		CDPL_CHEM_API void setCIPConfiguration(Atom& atom, unsigned int config);
@@ -488,20 +479,6 @@ namespace CDPL
 		CDPL_CHEM_API void clearMDLStereoCareFlag(Atom& atom);
 	
 		CDPL_CHEM_API bool hasMDLStereoCareFlag(const Atom& atom);
-
-
-		CDPL_CHEM_API double getPEOECharge(const Atom& atom);
-
-		CDPL_CHEM_API void setPEOECharge(Atom& atom, double charge);
-
-		CDPL_CHEM_API void clearPEOECharge(Atom& atom);
-	
-		CDPL_CHEM_API bool hasPEOECharge(const Atom& atom);
-	
-
-		CDPL_CHEM_API double getHybridPolarizability(const Atom& atom, const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcEffectivePolarizability(const Atom& atom, const MolecularGraph& molgraph, double damping = 0.75);
 
 
 		CDPL_CHEM_API unsigned int getReactionCenterStatus(const Atom& atom);

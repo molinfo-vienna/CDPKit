@@ -31,6 +31,8 @@
 #ifndef CDPL_DESCR_HPP
 #define CDPL_DESCR_HPP
 
+#include "CDPL/Descr/MolecularGraphFunctions.hpp"
+
 #include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Descr/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Descr/AtomAutoCorrelation3DVectorCalculator.hpp"
@@ -42,6 +44,7 @@
 
 #include "CDPL/Descr/BurdenMatrixGenerator.hpp"
 #include "CDPL/Descr/BCUTDescriptorCalculator.hpp"
+#include "CDPL/Descr/MolecularComplexityCalculator.hpp"
 
 #include "CDPL/Descr/RDFCodeCalculator.hpp"
 #include "CDPL/Descr/AtomRDFCodeCalculator.hpp"

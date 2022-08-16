@@ -33,8 +33,6 @@
 #include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
-#include "CDPL/Chem/MassComposition.hpp"
-#include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
@@ -129,9 +127,6 @@ void CDPLPythonChem::registerFromPythonConverters()
 	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MatchExpression<Chem::Reaction>::SharedPointer&>();
 	
 	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::StringDataBlock::SharedPointer&>();
-
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MassComposition::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::ElementHistogram::SharedPointer&>();
 
 	CDPLPythonBase::GenericFromPythonConverter<const Chem::Atom3DCoordinatesFunctor&,
 											   Chem::Atom3DCoordinatesFunction>();

@@ -111,7 +111,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(bool, isHeteroAtomHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
-	MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
 	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomPriorityFunction&);
@@ -165,8 +164,6 @@ void CDPLPythonChem::exportBondFunctions()
 	python::def("getContainingFragments", &getContainingFragmentsWrapper3,
 				(python::arg("bond"), python::arg("frag_list"), python::arg("cont_frag_list")),
 				python::with_custodian_and_ward<3, 2>());
-	python::def("calcPolarizability", &calcPolarizabilityWrapper3, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("damping") = 0.75));
 	python::def("isInRingOfSize", &isInRingOfSizeWrapper3,
 				(python::arg("bond"), python::arg("molgraph"), python::arg("size")));
 	python::def("isInFragmentOfSize", &isInFragmentOfSizeWrapper3, 

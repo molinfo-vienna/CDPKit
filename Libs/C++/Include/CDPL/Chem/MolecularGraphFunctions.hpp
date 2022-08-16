@@ -41,8 +41,6 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
-#include "CDPL/Chem/MassComposition.hpp"
-#include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/ControlParameterDefault.hpp"
@@ -388,30 +386,7 @@ namespace CDPL
 
 		CDPL_CHEM_API Math::DMatrix::SharedPointer calcGeometricalDistanceMatrix(MolecularGraph& molgraph, bool overwrite);
 
-
-		CDPL_CHEM_API std::size_t calcTopologicalRadius(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t calcTopologicalDiameter(const MolecularGraph& molgraph);
-
-
-		CDPL_CHEM_API double calcRingComplexity(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcKierShape1(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcKierShape2(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcKierShape3(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t calcWienerIndex(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcRandicIndex(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t calcZagrebIndex1(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t calcZagrebIndex2(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t calcTotalWalkCount(const MolecularGraph& molgraph);
-
+		
 		CDPL_CHEM_API std::size_t calcCyclomaticNumber(const MolecularGraph& molgraph);
 
 
@@ -443,17 +418,6 @@ namespace CDPL
 		CDPL_CHEM_API std::size_t getChainBondCount(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API std::size_t getRotatableBondCount(const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
-
-	
-		CDPL_CHEM_API double calcMass(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void calcMassComposition(const MolecularGraph& molgraph, MassComposition& comp);
-	
-		CDPL_CHEM_API void buildMassCompositionString(const MolecularGraph& molgraph, std::string& comp);
-
-		CDPL_CHEM_API void buildMolecularFormula(const MolecularGraph& molgraph, std::string& formula);
-
-		CDPL_CHEM_API void buildElementHistogram(const MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
 	
 		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);
@@ -490,22 +454,6 @@ namespace CDPL
 
 		CDPL_CHEM_API void canonicalize(MolecularGraph& molgraph, bool atoms = true, bool atom_nbrs = true, 
 										bool bonds = true, bool bond_atoms = false);
-
-
-		CDPL_CHEM_API double calcXLogP(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcLogS(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcTPSA(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t calcRuleOfFiveScore(const MolecularGraph& molgraph);
-		
-		CDPL_CHEM_API double calcMeanPolarizability(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API double calcMolecularComplexity(const MolecularGraph& molgraph);
-		
-		CDPL_CHEM_API void calcPEOECharges(MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 6, 
-										   double damping = 0.5);
 
 
 		CDPL_CHEM_API void generate2DCoordinates(MolecularGraph& molgraph, bool overwrite);
@@ -586,8 +534,6 @@ namespace CDPL
 		CDPL_CHEM_API void setAtomSymbolsFromTypes(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite);
-
-		CDPL_CHEM_API void calcAtomHydrophobicities(MolecularGraph& molgraph, bool overwrite);
 		
 
 		CDPL_CHEM_API bool containsMolecularGraph(const MolecularGraph& molgraph, const MolecularGraph& sub_molgraph, 

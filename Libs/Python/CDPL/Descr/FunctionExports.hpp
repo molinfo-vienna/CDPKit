@@ -30,7 +30,7 @@
 
 namespace CDPLPythonDescr
 {
-
+	void exportMolecularGraphFunctions();
 	void exportSimilarityFunctions();
 }
 

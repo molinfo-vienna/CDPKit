@@ -26,24 +26,49 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-molprop_LIB_SRCS
-    Dummy.cpp
+    AtomProperty.cpp
+
+    AtomPropertyFunctions.cpp
+    AtomContainerElementalCompositionFunctions.cpp
+    AtomContainerMassCompositionFunctions.cpp
+    MolecularGraphMassCompositionFunctions.cpp
+    MolecularGraphElementalCompositionFunctions.cpp
+    MolecularGraphMeanPolarizabilityFunction.cpp
+    MolecularGraphAtomHydrophobicityFunction.cpp
+    MolecularGraphPEOEChargesFunction.cpp
+    MolecularGraphRO5ScoreFunction.cpp
+    MolecularGraphTPSAFunction.cpp
+    MolecularGraphLogSFunction.cpp
+    MolecularGraphXLogPFunction.cpp
+    AtomPolarizabilityFunctions.cpp
+    BondPolarizabilityFunction.cpp
+    
+    AtomHydrophobicityCalculator.cpp
+    LogSCalculator.cpp
+    PEOEChargeCalculator.cpp
+    TPSACalculator.cpp
+    XLogPCalculator.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_ATOMIC_LIBRARY})
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 ADD_LIBRARY(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-molprop-static PROPERTIES 
                       OUTPUT_NAME cdpl-molprop
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS CDPL_MOLPROP_STATIC_LINK
+                      COMPILE_DEFINITIONS "CDPL_MOLPROP_STATIC_LINKK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_UTIL_STATIC_LINK"
                      )
 
 INSTALL(TARGETS cdpl-molprop-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
+TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
+
 ADD_LIBRARY(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS})
+
+TARGET_LINK_LIBRARIES(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-molprop-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

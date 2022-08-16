@@ -31,4 +31,18 @@
 #ifndef CDPL_MOLPROP_HPP
 #define CDPL_MOLPROP_HPP
 
+#include "CDPL/MolProp/AtomProperty.hpp"
+#include "CDPL/MolProp/MassComposition.hpp"
+#include "CDPL/MolProp/ElementHistogram.hpp"
+#include "CDPL/MolProp/AtomContainerFunctions.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/MolProp/BondFunctions.hpp"
+
+#include "CDPL/MolProp/TPSACalculator.hpp"
+#include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
+#include "CDPL/MolProp/LogSCalculator.hpp"
+#include "CDPL/MolProp/XLogPCalculator.hpp"
+#include "CDPL/MolProp/PEOEChargeCalculator.hpp"
+
 #endif // CDPL_MOLPROP_HPP

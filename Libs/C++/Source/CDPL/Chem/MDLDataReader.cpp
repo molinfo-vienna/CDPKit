@@ -37,7 +37,10 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/lexical_cast.hpp>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
+# define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#endif
+
 #include <boost/bind.hpp>
 
 #include <boost/tokenizer.hpp>

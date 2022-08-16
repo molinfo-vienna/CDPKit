@@ -35,8 +35,6 @@
 #include <string>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/MassComposition.hpp"
-#include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/AtomPredicate.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -73,16 +71,6 @@ namespace CDPL
 
 
 		CDPL_CHEM_API long calcFormalCharge(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API double calcExplicitMass(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API void calcExplicitMassComposition(const AtomContainer& cntnr, MassComposition& mass_comp);
-
-		CDPL_CHEM_API void buildExplicitMassCompositionString(const AtomContainer& cntnr, std::string& comp_str);
-
-		CDPL_CHEM_API void buildExplicitMolecularFormula(const AtomContainer& cntnr, std::string& formula);
-
-		CDPL_CHEM_API void buildExplicitElementHistogram(const AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
 
 
 		CDPL_CHEM_API bool hasCoordinates(const AtomContainer& cntnr, std::size_t dim);

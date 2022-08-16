@@ -89,24 +89,6 @@ namespace
 
 		return boost::python::str(inchi_key.c_str());
 	} 
-
-	boost::python::object buildMassCompositionStringWrapper(CDPL::Chem::MolecularGraph& molgraph)
-	{
-		std::string str;
-
-		buildMassCompositionString(molgraph, str);
-
-		return boost::python::str(str.c_str());
-	}
-
-	boost::python::object buildMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph)
-	{
-		std::string str;
-
-		buildMolecularFormula(molgraph, str);
-
-		return boost::python::str(str.c_str());
-	}
 }
 
 
@@ -127,9 +109,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcGeometricalDistanceMatrix", &Chem::calcGeometricalDistanceMatrix, 
 				(python::arg("molgraph"), python::arg("overwrite")));
- 	python::def("calcPEOECharges", &Chem::calcPEOECharges, 
-				(python::arg("molgraph"), python::arg("overwrite"), 
-				 python::arg("num_iter") = 6, python::arg("damping") = 0.5));
 	python::def("generate2DCoordinates", &Chem::generate2DCoordinates, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("generateHydrogen3DCoordinates", &Chem::generateHydrogen3DCoordinates, 
@@ -187,8 +166,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("setAtomSymbolsFromTypes", &Chem::setAtomSymbolsFromTypes,
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("perceiveSybylAtomTypes", &Chem::perceiveSybylAtomTypes, 
-				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calcAtomHydrophobicities", &Chem::calcAtomHydrophobicities, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("containsMolecularGraph", &Chem::containsMolecularGraph, 
 				(python::arg("molgraph"), python::arg("sub_molgraph"), python::arg("atoms") = true, python::arg("bonds") = true));
@@ -279,17 +256,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("extractTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
 
- 	python::def("calcTopologicalRadius", &Chem::calcTopologicalRadius, python::arg("molgraph"));
-	python::def("calcTopologicalDiameter", &Chem::calcTopologicalDiameter, python::arg("molgraph"));
-	python::def("calcRingComplexity", &Chem::calcRingComplexity, python::arg("molgraph"));
-	python::def("calcKierShape1", &Chem::calcKierShape1, python::arg("molgraph"));
-	python::def("calcKierShape2", &Chem::calcKierShape2, python::arg("molgraph"));
-	python::def("calcKierShape3", &Chem::calcKierShape3, python::arg("molgraph"));
-	python::def("calcWienerIndex", &Chem::calcWienerIndex, python::arg("molgraph"));
-	python::def("calcRandicIndex", &Chem::calcRandicIndex, python::arg("molgraph"));
-	python::def("calcZagrebIndex1", &Chem::calcZagrebIndex1, python::arg("molgraph"));
-	python::def("calcZagrebIndex2", &Chem::calcZagrebIndex2, python::arg("molgraph"));
-	python::def("calcTotalWalkCount", &Chem::calcTotalWalkCount, python::arg("molgraph"));
 	python::def("calcCyclomaticNumber", &Chem::calcCyclomaticNumber, python::arg("molgraph"));
 	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&Chem::getAtomCount),
 				python::arg("molgraph"));
@@ -311,17 +277,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("getHydrogenBondCount", &Chem::getHydrogenBondCount, python::arg("molgraph"));
 	python::def("getChainBondCount", &Chem::getChainBondCount, python::arg("molgraph"));
 	python::def("getComponentCount", &Chem::getComponentCount, python::arg("molgraph"));
-	python::def("calcMass", &Chem::calcMass, python::arg("molgraph"));
-	python::def("calcMassComposition", &Chem::calcMassComposition, 
-				(python::arg("molgraph"), python::arg("comp")));
-	python::def("buildElementHistogram", &Chem::buildElementHistogram, 
-				(python::arg("molgraph"), python::arg("hist")));
-	python::def("calcXLogP", &Chem::calcXLogP, python::arg("molgraph"));
-	python::def("calcLogS", &Chem::calcLogS, python::arg("molgraph"));
-	python::def("calcTPSA", &Chem::calcTPSA, python::arg("molgraph"));
-	python::def("calcRuleOfFiveScore", &Chem::calcRuleOfFiveScore, python::arg("molgraph"));
-	python::def("calcMeanPolarizability", &Chem::calcMeanPolarizability, python::arg("molgraph"));
-	python::def("calcMolecularComplexity", &Chem::calcMolecularComplexity, python::arg("molgraph"));
 	python::def("getRotatableBondCount", &Chem::getRotatableBondCount, 
 				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 
@@ -337,8 +292,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
 				 python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, 
 				 python::arg("global_stereo") = true, python::arg("ord_h_deplete") = true));
-	python::def("buildMassCompositionString", &buildMassCompositionStringWrapper, python::arg("molgraph"));
-	python::def("buildMolecularFormula", &buildMolecularFormulaWrapper, python::arg("molgraph"));
 
 	python::def("hasMatchConstraints", &Chem::hasMatchConstraints, python::arg("molgraph"));
 	python::def("setMatchConstraints", &Chem::setMatchConstraints, 

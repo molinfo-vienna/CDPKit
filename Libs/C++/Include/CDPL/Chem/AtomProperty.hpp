@@ -81,8 +81,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
 			extern CDPL_CHEM_API const Base::LookupKey SYMMETRY_CLASS;
 
-			extern CDPL_CHEM_API const Base::LookupKey HYDROPHOBICITY;
-
 			extern CDPL_CHEM_API const Base::LookupKey STEREO_DESCRIPTOR;
 			extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 			extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;
@@ -97,8 +95,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_SUBTYPE;
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_SUBSTRUCTURE_CHAIN;
 
-			extern CDPL_CHEM_API const Base::LookupKey PEOE_CHARGE;
-	
 			extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
 			extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING_ID;
 			

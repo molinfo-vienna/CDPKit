@@ -151,19 +151,13 @@ SET(cdpl-chem_LIB_SRCS
     BondDirectionGenerator.cpp
     BondOrderGenerator.cpp
     KekuleStructureGenerator.cpp
-    XLogPCalculator.cpp
-    TPSACalculator.cpp
     HashCodeCalculator.cpp
     SymmetryClassCalculator.cpp
-    LogSCalculator.cpp
-    MolecularComplexityCalculator.cpp
-    PEOEChargeCalculator.cpp
     SurfaceAtomExtractor.cpp
     PatternAtomTyper.cpp
     SubstructureHistogramGenerator.cpp
     GeneralizedBellAtomDensity.cpp
     AtomDensityGridCalculator.cpp
-    AtomHydrophobicityCalculator.cpp
     BuriednessScore.cpp
     BuriednessGridCalculator.cpp
 
@@ -177,8 +171,6 @@ SET(cdpl-chem_LIB_SRCS
 
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp
-    AtomContainerElementalCompositionFunctions.cpp
-    AtomContainerMassCompositionFunctions.cpp
     AtomContainerCoordinatesFunctions.cpp
     AtomContainerMaxAtomMappingIDFunction.cpp
     AtomContainerMaxComponentGroupIDFunction.cpp
@@ -207,7 +199,6 @@ SET(cdpl-chem_LIB_SRCS
     AtomCIPConfigurationFunction.cpp
     AtomMDLParityFunction.cpp
     AtomStereoCenterFlagFunction.cpp
-    AtomPolarizabilityFunctions.cpp
     AtomMatchExpressionStringFunction.cpp
     AtomMatchExpressionFunction.cpp
     AtomSybylTypeFunctions.cpp
@@ -219,7 +210,6 @@ SET(cdpl-chem_LIB_SRCS
     BondFragmentMembershipFunctions.cpp
     BondStereoCenterFlagFunction.cpp
     BondClassificationFunctions.cpp
-    BondPolarizabilityFunction.cpp
     BondStereoDescriptorFunction.cpp
     BondCIPConfigurationFunction.cpp
     BondMatchExpressionStringFunction.cpp
@@ -239,19 +229,11 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphBondMatrixFunction.cpp
     MolecularGraphBondElectronMatrixFunction.cpp
     MolecularGraphBondAtomTypeMatrixFunction.cpp
-    MolecularGraphKierShapeFunctions.cpp
-    MolecularGraphZagrebIndexFunctions.cpp
-    MolecularGraphRingComplexityFunction.cpp
-    MolecularGraphTotalWalkCountFunction.cpp
-    MolecularGraphRandicIndexFunction.cpp
-    MolecularGraphWienerIndexFunction.cpp
     MolecularGraphCyclomaticNumberFunction.cpp
     MolecularGraphComponentGroupsFunctions.cpp
     MolecularGraphExtractReactionCenterFunction.cpp
     MolecularGraphAtomCountFunctions.cpp
     MolecularGraphBondCountFunctions.cpp
-    MolecularGraphMassCompositionFunctions.cpp
-    MolecularGraphElementalCompositionFunctions.cpp	
     MolecularGraphAromaticRingSetFunctions.cpp
     MolecularGraphAromaticSubstructureFunctions.cpp
     MolecularGraphKekulizeBondsFunction.cpp
@@ -261,13 +243,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphSMILESFunction.cpp
     MolecularGraphINCHIFunctions.cpp
     MolecularGraphHashCodeFunction.cpp
-    MolecularGraphXLogPFunction.cpp
-    MolecularGraphLogSFunction.cpp
-    MolecularGraphTPSAFunction.cpp
-    MolecularGraphRO5ScoreFunction.cpp
-    MolecularGraphMeanPolarizabilityFunction.cpp
-    MolecularGraphComplexityFunction.cpp
-    MolecularGraphPEOEChargesFunction.cpp
     MolecularGraphSubstructSearchInitializationFunctions.cpp
     MolecularGraphBond2DStereoFlagsFunction.cpp 
     MolecularGraphBondDirectionsFunction.cpp 
@@ -287,7 +262,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraph2DCoordinatesFunction.cpp
     MolecularGraph3DCoordinatesFunctions.cpp
     MolecularGraphSybylAtomTypesFunction.cpp
-    MolecularGraphAtomHydrophobicityFunction.cpp 
     MolecularGraphCanonicalizationFunctions.cpp 
     MolecularGraphFragmentMembershipFunctions.cpp 
     MolecularGraphCopyStereoDescriptorsFunctions.cpp  
