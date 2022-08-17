@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of gzip-compressed molecule data in <em>Daylight SMILES</em> [\ref SMILES] format.
 		 */
 		typedef Util::DefaultDataInputHandler<SMILESGZMoleculeReader, DataFormat::SMILES_GZ> SMILESGZMoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

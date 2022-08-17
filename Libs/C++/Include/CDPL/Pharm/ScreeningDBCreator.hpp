@@ -55,11 +55,6 @@ namespace CDPL
 		class ScreeningDBAccessor;
 
 		/**
-		 * \addtogroup CDPL_PHARM_SCREENING
-		 * @{
-		 */
-
-		/**
 		 * \brief A class for the creation of optimized pharmacophore screening databases.
 		 */
 		class CDPL_PHARM_API ScreeningDBCreator
@@ -110,10 +105,6 @@ namespace CDPL
 				return *this;
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

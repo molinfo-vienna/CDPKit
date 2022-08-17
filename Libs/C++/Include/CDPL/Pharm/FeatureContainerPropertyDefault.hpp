@@ -43,11 +43,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_CONTAINER_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Pharm::FeatureContainer properties.
 		 */
 		namespace FeatureContainerPropertyDefault
@@ -55,10 +50,6 @@ namespace CDPL
 
 			extern CDPL_PHARM_API const std::string NAME;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

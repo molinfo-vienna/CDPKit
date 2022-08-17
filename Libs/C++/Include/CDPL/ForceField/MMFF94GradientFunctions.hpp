@@ -49,11 +49,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_GRADIENT_FUNCTIONS
-		 * @{
-		 */
-
 		template <typename ValueType, typename Iter, typename CoordsArray, typename GradVector>
 		ValueType calcMMFF94BondStretchingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad);
 

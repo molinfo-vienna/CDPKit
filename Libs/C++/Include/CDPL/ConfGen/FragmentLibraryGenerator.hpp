@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
-		/**
 		 * \brief FragmentLibraryGenerator.
 		 */
 		class CDPL_CONFGEN_API FragmentLibraryGenerator
@@ -106,10 +101,6 @@ namespace CDPL
 			Chem::SMILESMolecularGraphWriter smilesGen;
 			std::size_t                      numGenConfs;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

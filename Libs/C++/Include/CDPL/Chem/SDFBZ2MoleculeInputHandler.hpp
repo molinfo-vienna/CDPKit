@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_SDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of bzip2-compressed molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 		 */
 		typedef Util::DefaultDataInputHandler<SDFBZ2MoleculeReader, DataFormat::SDF_BZ2> SDFBZ2MoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

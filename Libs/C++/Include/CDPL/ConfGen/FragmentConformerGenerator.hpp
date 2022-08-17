@@ -56,11 +56,6 @@ namespace CDPL
 
 		class FragmentConformerGeneratorImpl;
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API FragmentConformerGenerator
 		{
 
@@ -117,10 +112,6 @@ namespace CDPL
 
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

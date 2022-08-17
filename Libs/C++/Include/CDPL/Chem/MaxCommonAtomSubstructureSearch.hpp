@@ -55,11 +55,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_MAX_COMMON_SUBSTRUCTURE_SEARCH
-		 * @{
-		 */
-
-		/**
 		 * \brief MaxCommonAtomSubstructureSearch.
 		 * \see [\ref MCASA]
 		 */
@@ -420,10 +415,6 @@ namespace CDPL
 			std::size_t                   minSubstructureSize;
 			std::size_t                   currNodeIdx;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

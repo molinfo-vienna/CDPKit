@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief IonicInteractionConstraint.
 		 */
 		class CDPL_PHARM_API IonicInteractionConstraint : public FeatureDistanceConstraint
@@ -65,10 +60,6 @@ namespace CDPL
 			IonicInteractionConstraint(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
 				FeatureDistanceConstraint(min_dist, max_dist) {}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

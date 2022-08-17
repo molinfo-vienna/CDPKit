@@ -46,11 +46,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_GRAPHICS_PRIMITIVES
-		 * @{
-		 */
-	
-		/**
 		 * \brief A graphics primitive representing a list of disjoint line segments.
 		 */
 		class CDPL_VIS_API LineSegmentListPrimitive2D : public PointArray2D, public GraphicsPrimitive2D
@@ -88,10 +83,6 @@ namespace CDPL
 		private:
 			Pen   pen;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -51,11 +51,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_PROCESSING
-		 * @{
-		 */
-
-		/**
 		 * \brief A datastructure allowing a hierarchical view on biological macromolecules.
 		 */
 		class CDPL_BIOMOL_API HierarchyView
@@ -116,10 +111,6 @@ namespace CDPL
 			mutable bool                initModels;
 			mutable boost::mutex        initMutex;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

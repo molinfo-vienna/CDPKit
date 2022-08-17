@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the forcefield that shall be used 
 		 *        for 3D coordinates refinement and energy calculations.
 		 */
@@ -61,10 +56,6 @@ namespace CDPL
 			const unsigned int MMFF94S_RTOR_XOOP          = 8;
 			const unsigned int MMFF94S_RTOR_XOOP_NO_ESTAT = 9;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

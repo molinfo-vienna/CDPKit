@@ -47,11 +47,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief A common interface for data-structures that support a random access to stored Chem::Bond instances.
 		 *
 		 * Implementations have to guarantee that a given Chem::Bond object is stored only once and its index is unique amongst
@@ -196,10 +191,6 @@ namespace CDPL
 				BondContainer* container;
 			};
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief InteractionConstraintConnector.
 		 */
 		class CDPL_PHARM_API InteractionConstraintConnector : public std::binary_function<Feature, Feature, bool>
@@ -79,10 +74,6 @@ namespace CDPL
 			ConstraintFunction function1;
 			ConstraintFunction function2;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

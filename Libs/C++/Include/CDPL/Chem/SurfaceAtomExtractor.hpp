@@ -48,11 +48,6 @@ namespace CDPL
     namespace Chem
     {
 
-		/**
-		 * \addtogroup CDPL_CHEM_SURFACE_ATOM_PERCEPTION
-		 * @{
-		 */
-
 		class MolecularGraph;
 		class AtomContainer;
 		class Fragment;
@@ -209,10 +204,6 @@ namespace CDPL
 			std::size_t                     gridZSize;
 			GridAtomLookupTable             gridAtomLookup;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

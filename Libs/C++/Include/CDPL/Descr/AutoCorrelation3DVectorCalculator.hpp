@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_3D_AUTOCORRELATION
-		 * @{
-		 */
-
-		/**
 		 * \brief AutoCorrelation3DVectorCalculator.
 		 */
 		template <typename T>
@@ -172,10 +167,6 @@ namespace CDPL
 			Math::DMatrix               weightMatrix;
 			Math::Vector3DArray         entityPositions;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

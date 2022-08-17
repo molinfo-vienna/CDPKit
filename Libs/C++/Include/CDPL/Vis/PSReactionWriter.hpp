@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_PS_OUTPUT
-		 * @{
-		 */
-
-		/**
 		 * \brief Creates 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS] format. 
 		 *
 		 * \c %PSReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
@@ -85,10 +80,6 @@ namespace CDPL
 			std::ostream& output;
 			bool          state;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

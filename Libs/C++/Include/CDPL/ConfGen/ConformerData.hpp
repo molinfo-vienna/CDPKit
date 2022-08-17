@@ -43,11 +43,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API ConformerData : public Math::Vector3DArray
 		{
 
@@ -79,10 +74,6 @@ namespace CDPL
 
 			double energy;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_PML_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of pharmacophore data in the native I/O format of <em>LigandScout</em>.
 		 */
 		typedef Util::DefaultDataInputHandler<PMLPharmacophoreReader, DataFormat::PML> PMLPharmacophoreInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

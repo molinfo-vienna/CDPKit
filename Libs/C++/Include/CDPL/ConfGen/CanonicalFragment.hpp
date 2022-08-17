@@ -51,11 +51,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
-		/**
 		 * \brief CanonicalFragment.
 		 */
 		class CDPL_CONFGEN_API CanonicalFragment : public Chem::MolecularGraph
@@ -170,10 +165,6 @@ namespace CDPL
 			HashInputData                     hashInputData;
 			AtomMapping                       atomMapping;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

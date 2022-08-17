@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the perception of molecular graph components.
 		 */
 		class CDPL_CHEM_API ComponentSet : public FragmentList
@@ -84,10 +79,6 @@ namespace CDPL
 			const MolecularGraph*    molGraph;
 			Util::BitSet             visAtomMask;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

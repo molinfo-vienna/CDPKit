@@ -54,11 +54,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
 		 */
 		typedef boost::function1<unsigned int, const Chem::Atom&> MMFF94NumericAtomTypeFunction;
@@ -82,10 +77,6 @@ namespace CDPL
 		 * \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
 		 */
 		typedef boost::function1<const Chem::FragmentList::SharedPointer&, const Chem::MolecularGraph&> MMFF94RingSetFunction;
-
-		/**
-		 * @}
-		 */
     }
 }
 

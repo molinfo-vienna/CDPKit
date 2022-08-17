@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags for the specification of basic Chem::Atom properties.
 		 */
 		namespace AtomPropertyFlag
@@ -129,10 +124,6 @@ namespace CDPL
 			 */
 			const unsigned int HYBRIDIZATION_STATE  = 0x2000;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

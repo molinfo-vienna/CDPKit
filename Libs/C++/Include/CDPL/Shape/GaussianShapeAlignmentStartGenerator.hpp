@@ -47,11 +47,6 @@ namespace CDPL
 		class GaussianShape;
 		class GaussianShapeFunction;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_ALIGNMENT
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API GaussianShapeAlignmentStartGenerator
 		{
 			
@@ -72,10 +67,6 @@ namespace CDPL
 
 			virtual const QuaternionTransformation& getStartTransform(std::size_t idx) const = 0;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

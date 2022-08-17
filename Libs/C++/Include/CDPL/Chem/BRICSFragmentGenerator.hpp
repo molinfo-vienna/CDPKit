@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_FRAGMENT_GENERATION
-	 * @{
-	 */
-
-	/**
 	 * \brief BRICSFragmentGenerator.
 	 * \see [\ref BRICS]
 	 */
@@ -63,10 +58,6 @@ namespace CDPL
 	     */
 	    BRICSFragmentGenerator();
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

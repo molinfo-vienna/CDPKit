@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-	
-		/**
 		 * \brief A data structure that caches instances of type \c T up to a user specified amount. 
 		 *
 		 * Instances of type \c T that are allocated via this pool (see get()) are preferentially taken from an
@@ -217,10 +212,6 @@ namespace CDPL
 			ObjectFunction      initFunc;
 			ObjectFunction      cleanFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

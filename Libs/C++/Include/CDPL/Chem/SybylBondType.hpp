@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of the <em>Tripos Sybyl</em> bond type.
 		 */
 		namespace SybylBondType 
@@ -89,10 +84,6 @@ namespace CDPL
 			 */
 			const unsigned int NOT_CONNECTED    = 7;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

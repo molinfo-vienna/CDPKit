@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION
-	 * @{
-	 */
-
-	/**
 	 * \brief DefaultTautomerGenerator.
 	 */
 	class CDPL_CHEM_API DefaultTautomerGenerator : public TautomerGenerator 
@@ -58,10 +53,6 @@ namespace CDPL
 	     */
 	    DefaultTautomerGenerator();
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

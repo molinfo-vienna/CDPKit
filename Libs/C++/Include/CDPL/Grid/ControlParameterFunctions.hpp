@@ -46,11 +46,6 @@ namespace CDPL
 	namespace Grid 
 	{
 	
-		/**
-		 * \addtogroup CDPL_GRID_CONTROL_PARAMETER_FUNCTIONS
-		 * @{
-		 */
-		
 		CDPL_GRID_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_GRID_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
@@ -67,10 +62,6 @@ namespace CDPL
 		CDPL_GRID_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 	
 		CDPL_GRID_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

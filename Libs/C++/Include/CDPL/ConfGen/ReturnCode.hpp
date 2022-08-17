@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CONFGEN_CONSTANTS
-	 * @{
-	 */
-
-	/**
 	 * \brief Provides constants that are used to describe the result of operations related to conformer generation.
 	 */
 	namespace ReturnCode
@@ -75,10 +70,6 @@ namespace CDPL
 
 		const int TOO_MUCH_SYMMETRY               = 12;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

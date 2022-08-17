@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-		
-		/**
 		 * \brief A data type for the storage of Chem::Fragment objects.
 		 */
 		class CDPL_CHEM_API FragmentList : public Util::IndirectArray<Fragment>
@@ -63,10 +58,6 @@ namespace CDPL
 				return "FragmentList";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

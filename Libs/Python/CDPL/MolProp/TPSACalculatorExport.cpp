@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/TPSACalculator.hpp"
+#include "CDPL/MolProp/TPSACalculator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -35,19 +35,19 @@
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportTPSACalculator()
+void CDPLPythonMolProp::exportTPSACalculator()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::TPSACalculator, boost::noncopyable>("TPSACalculator", python::no_init)
+	python::class_<MolProp::TPSACalculator, boost::noncopyable>("TPSACalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::TPSACalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const MolProp::TPSACalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TPSACalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::TPSACalculator::operator=), 
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::TPSACalculator>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::TPSACalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
-		.def("calculate", &Chem::TPSACalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &Chem::TPSACalculator::getResult, python::arg("self"))
-		.add_property("result", &Chem::TPSACalculator::getResult);
+		.def("calculate", &MolProp::TPSACalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+		.def("getResult", &MolProp::TPSACalculator::getResult, python::arg("self"))
+		.add_property("result", &MolProp::TPSACalculator::getResult);
 }

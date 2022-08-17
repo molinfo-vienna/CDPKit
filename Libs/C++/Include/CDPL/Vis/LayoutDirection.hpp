@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the main direction of object layouts.
 		 */
 		namespace LayoutDirection
@@ -59,10 +54,6 @@ namespace CDPL
 			 */
 			const unsigned int VERTICAL   = 1;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

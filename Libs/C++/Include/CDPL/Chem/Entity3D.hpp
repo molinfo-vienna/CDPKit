@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_STRUCTURE_INTERFACES
-	 * @{
-	 */
-
-	/**
 	 * \brief Entity3D.
 	 */
 	class CDPL_CHEM_API Entity3D : public Base::PropertyContainer
@@ -76,10 +71,6 @@ namespace CDPL
 	     */
 	    Entity3D& operator=(const Entity3D& cntnr);
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief DefaultInteractionAnalyzer.
 		 */
 		class CDPL_PHARM_API DefaultInteractionAnalyzer : public InteractionAnalyzer
@@ -63,10 +58,6 @@ namespace CDPL
 		  private:
 			void init();
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

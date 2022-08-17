@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_PDB_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of bzip2-compressed molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
 		 *        [\ref PDB] format.
 		 */
 		typedef Util::DefaultDataInputHandler<PDBBZ2MoleculeReader, DataFormat::PDB_BZ2> PDBBZ2MoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

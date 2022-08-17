@@ -44,11 +44,6 @@ namespace CDPL
     namespace Chem
     {
 
-	/**
-	 * \addtogroup CDPL_CHEM_AROMATICITY
-	 * @{
-	 */
-
 	class MolecularGraph;
 
 	/**
@@ -92,10 +87,6 @@ namespace CDPL
 	    Util::BitSet          aromBondMask;
 	    const MolecularGraph* molGraph;
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

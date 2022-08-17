@@ -46,16 +46,7 @@ namespace CDPL
 	namespace ConfGen 
 	{
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_MOLECULE_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
-		
-		/**
-		 * @}
-		 */
 	}
 }
 

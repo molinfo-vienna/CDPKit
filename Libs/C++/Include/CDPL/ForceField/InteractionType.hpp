@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags for the specification of a set of force field interaction types.
 		 */
 		namespace InteractionType
@@ -59,10 +54,6 @@ namespace CDPL
 			const unsigned int ELECTROSTATIC          = 0x40;
 			const unsigned int ALL                    = 0x7f;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

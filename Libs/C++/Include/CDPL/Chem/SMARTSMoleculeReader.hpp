@@ -47,11 +47,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMARTS_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 		 *
 		 * \c %SMARTSMoleculeReader supports the following control-parameter:
@@ -98,10 +93,6 @@ namespace CDPL
 
 			SMARTSDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

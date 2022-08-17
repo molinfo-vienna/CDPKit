@@ -52,11 +52,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PSD_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the PSD-format of the <em>CDPL</em>.
 		 */
 		class CDPL_PHARM_API PSDMoleculeReader : public Base::DataReader<Chem::Molecule>
@@ -101,10 +96,6 @@ namespace CDPL
 			std::size_t            numRecords;
 			bool                   state;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

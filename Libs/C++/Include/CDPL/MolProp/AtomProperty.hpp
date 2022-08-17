@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in MolProp::Atom properties.
 		 */
 		namespace AtomProperty
@@ -61,10 +56,6 @@ namespace CDPL
 
 			extern CDPL_MOLPROP_API const Base::LookupKey PEOE_CHARGE;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

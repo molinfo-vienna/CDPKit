@@ -50,11 +50,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_TRANSFORMATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief Reactor.
 		 */
 		class CDPL_CHEM_API Reactor
@@ -242,10 +237,6 @@ namespace CDPL
 			BondMap                    tgtBondMapping;
 			Util::BitSet               mappedAtomMask;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

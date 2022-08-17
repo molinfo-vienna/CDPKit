@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the <em>R/S</em> configuration of atoms.
 		 */
 		namespace AtomConfiguration
@@ -75,10 +70,6 @@ namespace CDPL
 			 */
 			const unsigned int EITHER = 0x8;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

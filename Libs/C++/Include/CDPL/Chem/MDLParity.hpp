@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the MDL stereo parity of atoms.
 		 */
 		namespace MDLParity
@@ -74,10 +69,6 @@ namespace CDPL
 			 */
 			const unsigned int EITHER = 0x8;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

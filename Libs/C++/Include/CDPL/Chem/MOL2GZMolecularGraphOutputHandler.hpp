@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOL2_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Sybyl MOL2</em> format.
 		 */
 		typedef Util::DefaultDataOutputHandler<MOL2GZMolecularGraphWriter, DataFormat::MOL2_GZ> MOL2GZMolecularGraphOutputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

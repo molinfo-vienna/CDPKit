@@ -45,11 +45,6 @@ namespace CDPL
 		class FeatureContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_ALIGNMENT
-		 * @{
-		 */
-
-		/**
 		 * \brief PharmacophoreAlignment.
 		 */
 		class CDPL_PHARM_API PharmacophoreAlignment : public Chem::SpatialEntityAlignment<Feature>
@@ -72,10 +67,6 @@ namespace CDPL
 			 */
 			void addFeatures(const FeatureContainer& cntnr, bool first_set);
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

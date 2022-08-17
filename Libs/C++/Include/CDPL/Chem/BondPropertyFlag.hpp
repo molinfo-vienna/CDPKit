@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags for the specification of basic Chem::Bond properties.
 		 */
 		namespace BondPropertyFlag
@@ -84,10 +79,6 @@ namespace CDPL
 			 */
 			const unsigned int CONFIGURATION     = 0x10;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

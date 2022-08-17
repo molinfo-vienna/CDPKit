@@ -44,11 +44,6 @@ namespace CDPL
 		class Entity3D;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data type for the storage and lookup of arbitrary entity to entity mappings.
 		 *
 		 * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D objects.
@@ -70,10 +65,6 @@ namespace CDPL
 				return "Entity3DMapping";
 			}
 		};
-		
-		/**
-		 * @}
-		 */
     }
 }
 

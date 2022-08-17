@@ -43,11 +43,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Chem::Atom properties.
 		 */
 		namespace AtomPropertyDefault
@@ -60,10 +55,6 @@ namespace CDPL
 			extern CDPL_BIOMOL_API const bool RESIDUE_LINKING_ATOM_FLAG;
 			extern CDPL_BIOMOL_API const char RESIDUE_INSERTION_CODE;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

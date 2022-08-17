@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants used to specify the employed structure generation method.
 		 */
 		namespace StructureGenerationMode
@@ -53,10 +48,6 @@ namespace CDPL
 			const unsigned int FRAGMENT          = 1;
 			const unsigned int DISTANCE_GEOMETRY = 2;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

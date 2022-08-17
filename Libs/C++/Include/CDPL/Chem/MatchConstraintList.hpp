@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MATCH_CONSTRAINTS
-		 * @{
-		 */
-
-		/**
 		 * \brief MatchConstraint.
 		 */
 		class CDPL_CHEM_API MatchConstraint
@@ -264,10 +259,6 @@ namespace CDPL
 
 			Type type;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

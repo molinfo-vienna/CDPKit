@@ -46,11 +46,6 @@ namespace CDPL
 		class MOL2DataReader;
 		class Molecule;
 
-		/**
-		 * \addtogroup CDPL_CHEM_MOL2_IO
-		 * @{
-		 */
-
 		class CDPL_CHEM_API MOL2MoleculeReader : public Util::StreamDataReader<Molecule, MOL2MoleculeReader>
 		{
 
@@ -82,10 +77,6 @@ namespace CDPL
 
 			MOL2DataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

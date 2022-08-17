@@ -48,11 +48,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_RDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 		 *
 		 * \c %RDFReactionWriter supports the following control-parameters:
@@ -161,10 +156,6 @@ namespace CDPL
 			bool             state;
 			MDLDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

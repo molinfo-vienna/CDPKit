@@ -42,11 +42,6 @@ namespace CDPL
 		
 		class AlignmentResult;
 
-		/**
-		 * \addtogroup CDPL_SHAPE_SCORING_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_SHAPE_API double calcTotalOverlapTanimotoScore(const AlignmentResult& res);
 
 		CDPL_SHAPE_API double calcShapeTanimotoScore(const AlignmentResult& res);
@@ -81,10 +76,6 @@ namespace CDPL
 		CDPL_SHAPE_API double calcAlignedColorTverskyScore(const AlignmentResult& res, double beta = 0.95);
 
 		CDPL_SHAPE_API double calcAlignedTverskyComboScore(const AlignmentResult& res, double beta = 0.95);
-
-		/**
-		 * @}
-		 */
     }
 }
 

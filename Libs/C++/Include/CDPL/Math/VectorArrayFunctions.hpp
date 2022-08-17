@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MATH_FUNCTIONS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N \f$-dimensional square matrix \a xform.
 		 * \param va The vectors to transform.
 		 * \param xform The transformation matrix.
@@ -209,10 +204,6 @@ namespace CDPL
 
 			return std::sqrt(sd / num_elem); 
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

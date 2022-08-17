@@ -46,11 +46,6 @@ namespace CDPL
 		class Molecule;
 	
 		/**
-		 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION_RULES
-		 * @{
-		 */
-
-		/**
 		 * \brief TautomerizationRule.
 		 */
 		class CDPL_CHEM_API TautomerizationRule 
@@ -74,10 +69,6 @@ namespace CDPL
 
 			virtual SharedPointer clone() const = 0;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

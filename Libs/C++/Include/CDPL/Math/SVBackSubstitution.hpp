@@ -42,11 +42,6 @@ namespace CDPL
 	{	
 
 		/**
-		 * \addtogroup CDPL_MATH_SV_DECOMPOSITION
-		 * @{
-		 */
-
-		/**
 		 * \brief Solves \f$ A \cdot X = B \f$ for a vector \f$ X \f$ where \f$ A \f$
 		 *        is given by its <em>Singular Value Decomposition</em> [\ref WSVD].
 		 *
@@ -71,10 +66,6 @@ namespace CDPL
 		 */
 		template <typename M1, typename V1, typename M2, typename V2, typename V3>
 		void svBackSubstitution(const M1& u, const V1& w, const M2& v, const V2& b, V3& x);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -44,11 +44,6 @@ namespace CDPL
 		class Pharmacophore;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief Feature.
 		 */
 		class CDPL_PHARM_API Feature : public Chem::Entity3D
@@ -86,10 +81,6 @@ namespace CDPL
 			 */
 			virtual ~Feature() {}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

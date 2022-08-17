@@ -46,11 +46,6 @@ namespace CDPL
 
 		class AlignmentResult;
 
-		/**
-		 * \addtogroup CDPL_SHAPE_SCREENING
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API ScreeningSettings
 		{
 
@@ -150,10 +145,6 @@ namespace CDPL
 			double            optStopGrad;
 			double            scoreCutoff;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

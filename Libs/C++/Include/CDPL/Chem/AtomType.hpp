@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of the chemical element or generic type of an atom.
 		 *
 		 * For constants with a name equal to the symbol of a chemical element, the value of the constant
@@ -673,10 +668,6 @@ namespace CDPL
 			 */
 			const unsigned int MAX_TYPE      = HET;
 		}
-
-		/**
-		 * @}
-		 */
  	}
 }
 

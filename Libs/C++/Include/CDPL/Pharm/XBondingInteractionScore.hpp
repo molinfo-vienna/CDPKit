@@ -46,11 +46,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief XBondingInteractionScore.
 		 */
 		class CDPL_PHARM_API XBondingInteractionScore
@@ -98,10 +93,6 @@ namespace CDPL
 			double                accAngleTol;
 			NormalizationFunction normFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

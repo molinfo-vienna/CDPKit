@@ -45,11 +45,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_VIS_MOLECULAR_GRAPH_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Chem::MolecularGraph properties.
 		 */
 		namespace MolecularGraphPropertyDefault
@@ -76,10 +71,6 @@ namespace CDPL
 			extern CDPL_VIS_API const SizeSpecification BOND_LABEL_SIZE;
 			extern CDPL_VIS_API const SizeSpecification BOND_LABEL_MARGIN;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief Molecule.
 		 */
 		class CDPL_CHEM_API Molecule : public MolecularGraph
@@ -329,10 +324,6 @@ namespace CDPL
 			 */
 			Molecule& operator+=(const MolecularGraph& molgraph);
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

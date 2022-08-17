@@ -46,11 +46,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief Atom.
 		 */
 		class CDPL_CHEM_API Atom : public AtomContainer, public BondContainer, public Entity3D
@@ -230,10 +225,6 @@ namespace CDPL
 			 */
 			virtual ~Atom() {}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

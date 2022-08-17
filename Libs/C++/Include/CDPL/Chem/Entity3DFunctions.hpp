@@ -43,11 +43,6 @@ namespace CDPL
 
 		class Entity3D;
 	
-		/**
-		 * \addtogroup CDPL_CHEM_ENTITY3D_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API const Math::Vector3D& get3DCoordinates(const Entity3D& entity);
 
 		CDPL_CHEM_API void set3DCoordinates(Entity3D& entity, const Math::Vector3D& coords);
@@ -55,10 +50,6 @@ namespace CDPL
 		CDPL_CHEM_API void clear3DCoordinates(Entity3D& entity);
 	
 		CDPL_CHEM_API bool has3DCoordinates(const Entity3D& entity);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

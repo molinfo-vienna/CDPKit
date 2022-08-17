@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_PROCESSING
-		 * @{
-		 */
-
-		/**
 		 * \brief HierarchyViewNode.
 		 */
 		class CDPL_BIOMOL_API HierarchyViewNode : public Chem::Fragment
@@ -69,10 +64,6 @@ namespace CDPL
 			mutable bool         initResidues;
 			mutable boost::mutex initMutex;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

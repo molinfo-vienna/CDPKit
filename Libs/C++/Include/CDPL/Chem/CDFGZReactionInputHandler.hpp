@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataInputHandler<CDFGZReactionReader, DataFormat::CDF_GZ> CDFGZReactionInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

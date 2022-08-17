@@ -53,11 +53,6 @@ namespace CDPL
 		class MMTFDataReader;
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_MMTF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
 		 *        [\ref MMTF].
 		 */
@@ -92,10 +87,6 @@ namespace CDPL
 
 			MMTFDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

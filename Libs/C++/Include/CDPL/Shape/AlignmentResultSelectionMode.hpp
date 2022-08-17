@@ -38,11 +38,6 @@ namespace CDPL
     namespace Shape
     {
 
-	/**
-	 * \addtogroup CDPL_SHAPE_CONSTANTS
-	 * @{
-	 */
-	
 	namespace AlignmentResultSelectionMode
 	{
 			
@@ -52,10 +47,6 @@ namespace CDPL
 	    const unsigned int BEST_PER_REFERENCE_SET     = 3;
 	    const unsigned int BEST_OVERALL               = 4;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

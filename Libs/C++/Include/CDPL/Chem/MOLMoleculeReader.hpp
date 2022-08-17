@@ -47,11 +47,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOL_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
 		 *
 		 * \c %MOLMoleculeReader supports the following control-parameters:
@@ -129,10 +124,6 @@ namespace CDPL
 
 			MDLDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

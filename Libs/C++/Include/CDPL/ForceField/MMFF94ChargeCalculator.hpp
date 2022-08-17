@@ -58,11 +58,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_CHARGE_CALCULATION
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94ChargeCalculator
 		{
 
@@ -160,10 +155,6 @@ namespace CDPL
 			AtomIndexList                                        atomList;
 			const Chem::MolecularGraph*                          molGraph;
 		};
-    
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_MOLECULAR_GRAPH_PROPERTIES
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides keys for built-in Chem::MolecularGraph properties.
 		 */
 		namespace MolecularGraphProperty
@@ -314,10 +309,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const Base::LookupKey BOND_LABEL_MARGIN;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

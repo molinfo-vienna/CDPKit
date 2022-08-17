@@ -54,11 +54,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_AROMATICITY
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the extraction of all rings in the SSSR of a molecular graph that 
 		 *        are aromatic according to MMFF94 conventions.
 		 */
@@ -112,10 +107,6 @@ namespace CDPL
 			RingList                    candidateRings;
 			Util::BitSet                aromBondMask;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

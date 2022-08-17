@@ -47,11 +47,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_RXN_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 		 *
 		 * \c %RXNReactionReader supports the following control-parameters:
@@ -118,10 +113,6 @@ namespace CDPL
 
 			MDLDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

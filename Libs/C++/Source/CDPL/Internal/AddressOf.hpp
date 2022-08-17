@@ -36,11 +36,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_INTERNAL_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief An unary functor for the conversion of object references to
 		 *        corresponding object addresses.
 		 * \tparam ArgType The type of the referenced objects.
@@ -59,10 +54,6 @@ namespace CDPL
 			 */
 			ResType* operator()(ArgType& ref) const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

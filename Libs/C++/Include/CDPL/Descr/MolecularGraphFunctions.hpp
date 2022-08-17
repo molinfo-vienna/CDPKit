@@ -48,11 +48,6 @@ namespace CDPL
 	namespace Descr 
 	{
 
-		/**
-		 * \addtogroup CDPL_DESCR_MOLECULAR_GRAPH_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_DESCR_API std::size_t calcTopologicalRadius(const Chem::MolecularGraph& molgraph);
 
 		CDPL_DESCR_API std::size_t calcTopologicalDiameter(const Chem::MolecularGraph& molgraph);
@@ -76,10 +71,6 @@ namespace CDPL
 		CDPL_DESCR_API std::size_t calcZagrebIndex2(const Chem::MolecularGraph& molgraph);
 
 		CDPL_DESCR_API std::size_t calcTotalWalkCount(const Chem::MolecularGraph& molgraph);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

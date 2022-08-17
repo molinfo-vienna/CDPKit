@@ -58,11 +58,6 @@ namespace CDPL
 		class ScreeningProcessorImpl;
 
 		/**
-		 * \addtogroup CDPL_PHARM_SCREENING
-		 * @{
-		 */
-
-		/**
 		 * \brief ScreeningProcessor.
 		 */
 		class CDPL_PHARM_API ScreeningProcessor
@@ -174,10 +169,6 @@ namespace CDPL
 
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

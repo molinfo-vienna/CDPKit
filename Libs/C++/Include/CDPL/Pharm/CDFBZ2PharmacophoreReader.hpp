@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		/**
-		 * \addtogroup CDPL_PHARM_CDF_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataReader<CDFPharmacophoreReader, Util::BZip2IStream> CDFBZ2PharmacophoreReader;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

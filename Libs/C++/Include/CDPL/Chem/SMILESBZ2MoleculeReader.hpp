@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Chem
 	{
 	
-		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataReader<SMILESMoleculeReader, Util::BZip2IStream> SMILESBZ2MoleculeReader;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

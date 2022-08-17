@@ -50,11 +50,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief ReactionComponentGroupingMatchExpression.
 		 * \see [\ref SMARTS]
 		 */
@@ -115,10 +110,6 @@ namespace CDPL
 			mutable ComponentList       compList;
 			mutable boost::mutex        mutex;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

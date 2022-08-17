@@ -43,11 +43,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_DATA
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteraction
 		{
 
@@ -133,10 +128,6 @@ namespace CDPL
 			double      rIJ;
 			double      rIJPow7;
 		};			
-    
-		/**
-		 * @}
-		 */
     }
 }
 

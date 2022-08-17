@@ -51,11 +51,6 @@ namespace CDPL
 	namespace MolProp 
 	{
 
-		/**
-		 * \addtogroup CDPL_MOLPROP_MOLECULAR_GRAPH_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_MOLPROP_API double calcMass(const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API void calcMassComposition(const Chem::MolecularGraph& molgraph, MassComposition& comp);
@@ -81,10 +76,6 @@ namespace CDPL
 										   double damping = 0.5);
 
 		CDPL_MOLPROP_API void calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

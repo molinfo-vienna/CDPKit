@@ -42,11 +42,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_DATA
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteraction
 		{
 
@@ -99,10 +94,6 @@ namespace CDPL
 			std::size_t oopAtomIdx;
 			double      forceConst;
 		};			
-    
-		/**
-		 * @}
-		 */
     }
 }
 

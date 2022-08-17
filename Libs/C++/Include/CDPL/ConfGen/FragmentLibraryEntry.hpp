@@ -49,11 +49,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief FragmentLibraryEntry.
 		 */
 		class CDPL_CONFGEN_API FragmentLibraryEntry
@@ -108,10 +103,6 @@ namespace CDPL
 			std::string        smiles;
 			ConformerDataArray conformers;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

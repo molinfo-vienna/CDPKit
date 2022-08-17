@@ -56,11 +56,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_ALIGNMENT
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API GaussianShapeAlignment
 		{
 
@@ -252,10 +247,6 @@ namespace CDPL
 			std::size_t                    currSetIndex;
 			std::size_t                    currShapeIndex;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -54,11 +54,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-	
-		/**
 		 * \brief ObjectStack.
 		 */
 		template <typename T>
@@ -200,10 +195,6 @@ namespace CDPL
 			ObjectFunction      initFunc;
 			ObjectFunction      cleanFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

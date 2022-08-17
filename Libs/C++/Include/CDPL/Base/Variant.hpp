@@ -55,11 +55,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_VARIABLE_DATA_STORAGE
-		 * @{
-		 */
-
-		/**
 		 * \brief A safe, type checked container for arbitrary data of variable type.
 		 *
 		 * \c %Variant implements a safe, type checked container for data of variable type. Instances of \c %Variant
@@ -606,10 +601,6 @@ namespace CDPL
 
 			/** \endcond */
 		};
-	
-		/**
-		 * @}
-		 */
 
 		template <>
 		struct Variant::DataGetter<Variant>

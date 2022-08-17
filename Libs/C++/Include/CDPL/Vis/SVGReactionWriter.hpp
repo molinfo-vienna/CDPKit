@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_SVG_OUTPUT
-		 * @{
-		 */
-
-		/**
 		 * \brief Creates 2D depictions of chemical reactions in the <em>Scalable Vector Graphics (SVG)</em> [\ref WSVG] format. 
 		 *
 		 * \c %SVGReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
@@ -84,10 +79,6 @@ namespace CDPL
 			std::ostream& output;
 			bool          state;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

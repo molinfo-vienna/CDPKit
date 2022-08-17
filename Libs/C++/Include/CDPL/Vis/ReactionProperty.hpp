@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_REACTION_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Reaction properties.
 		 */
 		namespace ReactionProperty
@@ -265,10 +260,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const Base::LookupKey SHOW_PLUS_SIGNS;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

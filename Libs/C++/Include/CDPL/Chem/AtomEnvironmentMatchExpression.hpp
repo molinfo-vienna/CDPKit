@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_ATOM_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomEnvironmentMatchExpression.
 		 */
 		class CDPL_CHEM_API AtomEnvironmentMatchExpression : public MatchExpression<Atom, MolecularGraph>
@@ -96,10 +91,6 @@ namespace CDPL
 			mutable boost::mutex          mutex;
 			bool                          notMatch;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -57,11 +57,6 @@ namespace CDPL
 		class GaussianShape;
 		class GaussianShapeFunction;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTIONS
-		 * @{
-		 */
-	
 		CDPL_SHAPE_API void generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape,
 												  bool append = false, double radius = -1.0, bool inc_h = false, double p = 2.7);
 

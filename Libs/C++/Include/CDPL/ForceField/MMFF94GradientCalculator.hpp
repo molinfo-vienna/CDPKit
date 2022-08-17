@@ -47,11 +47,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_GRADIENT_CALCULATION
-		 * @{
-		 */
-
 		template <typename ValueType>
 		class MMFF94GradientCalculator
 		{
@@ -109,10 +104,6 @@ namespace CDPL
 			unsigned int                 interactionTypes;
 			Util::BitSet                 fixedAtomMask;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

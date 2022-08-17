@@ -50,11 +50,6 @@ namespace CDPL
 		class FeatureContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_ALIGNMENT
-		 * @{
-		 */
-
-		/**
 		 * \brief SpatialFeatureMapping.
 		 */
 		class CDPL_PHARM_API SpatialFeatureMapping : public FeatureMapping
@@ -135,10 +130,6 @@ namespace CDPL
 			FeaturePairToScoreMap posMatchScores;
 			FeaturePairToScoreMap geomMatchScores;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOL2_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of molecule data in the <em>Sybyl MOL2</em> format.
 		 */
 		typedef Util::DefaultDataInputHandler<MOL2MoleculeReader, DataFormat::MOL2> MOL2MoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

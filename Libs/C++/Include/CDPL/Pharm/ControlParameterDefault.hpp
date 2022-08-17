@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in control-parameters.
 		 */
 		namespace ControlParameterDefault
@@ -63,10 +58,6 @@ namespace CDPL
 
 			extern CDPL_PHARM_API const bool PSD_ALLOW_DUPLICATES;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

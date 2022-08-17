@@ -46,11 +46,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief OrthogonalPiPiInteractionScore.
 		 */
 		class CDPL_PHARM_API OrthogonalPiPiInteractionScore
@@ -97,10 +92,6 @@ namespace CDPL
 			double                angleTol;
 			NormalizationFunction normFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

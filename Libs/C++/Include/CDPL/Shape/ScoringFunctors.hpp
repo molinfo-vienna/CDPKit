@@ -41,11 +41,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_SCORING_FUNCTORS
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API TotalOverlapTanimotoScore
 		{
 
@@ -265,10 +260,6 @@ namespace CDPL
 		  private:
 			double beta;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

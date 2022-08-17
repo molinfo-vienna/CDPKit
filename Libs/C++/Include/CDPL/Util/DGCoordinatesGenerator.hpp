@@ -48,11 +48,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_ALGORITHMS
-		 * @{
-		 */
-
-		/**
 		 * \brief Base for classes dedicated to the generation of coordinates that fulfill user-provided point distance
 		 *        (and volume) constraints [\ref ASPE].
 		 */
@@ -300,10 +295,6 @@ namespace CDPL
 		};
 
 		typedef DGCoordinatesGenerator<3, double> DG3DCoordinatesGenerator;
-
-		/**
-		 * @}
-		 */
     }
 }
 

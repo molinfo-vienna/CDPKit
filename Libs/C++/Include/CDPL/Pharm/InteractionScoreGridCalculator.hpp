@@ -59,11 +59,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_INTERACTION_SCORE_GRID_CALCULATION
-		 * @{
-		 */
-
-		/**
 		 * \brief InteractionScoreGridCalculator.
 		 */
 		class CDPL_PHARM_API InteractionScoreGridCalculator
@@ -140,10 +135,6 @@ namespace CDPL
 			FeatureIndexList         featureIndices;
 			bool                     normScores;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

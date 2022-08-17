@@ -45,11 +45,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief XBondingInteractionConstraint.
 		 */
 		class CDPL_PHARM_API XBondingInteractionConstraint : public std::binary_function<Feature, Feature, bool>
@@ -91,10 +86,6 @@ namespace CDPL
 			double minAXBAngle;
 			double accAngleTol;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

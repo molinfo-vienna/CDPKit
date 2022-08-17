@@ -46,11 +46,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief MolecularGraph.
 		 */
 		class CDPL_CHEM_API MolecularGraph : public AtomContainer, public BondContainer, public Base::PropertyContainer
@@ -82,10 +77,6 @@ namespace CDPL
 			 */
 			MolecularGraph& operator=(const MolecularGraph& molgraph);
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

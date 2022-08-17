@@ -43,18 +43,9 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined callback functions.
 		 */
 		typedef boost::function1<void, const std::string&> LogMessageCallbackFunction;
-
-		/**
-		 * @}
-		 */
     }
 }
 

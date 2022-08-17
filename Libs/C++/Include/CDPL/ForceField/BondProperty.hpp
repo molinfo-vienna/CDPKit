@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_BOND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Bond properties.
 		 */
 		namespace BondProperty
@@ -59,10 +54,6 @@ namespace CDPL
 
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE_INDEX;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief A STL compatible random access iterator for container elements accessible by index.
 		 *
 		 * The rationale for \c %IndexedElementIterator is to allow STL-style iteration over
@@ -176,10 +171,6 @@ namespace CDPL
 			AccessFunc accessFunc;
 			IndexType  index;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_FORMATS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
 		 */
 		namespace DataFormat
@@ -62,10 +57,6 @@ namespace CDPL
 			 */
 			extern CDPL_CONFGEN_API const Base::DataFormat CFL;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

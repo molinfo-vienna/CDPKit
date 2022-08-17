@@ -41,11 +41,6 @@ namespace CDPL
 	{
 		
 		/**
-		 * \addtogroup CDPL_VIS_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief Specifies the value and type of a size attribute and defines how the value may change during processing steps.
 		 */
 		class CDPL_VIS_API SizeSpecification
@@ -153,10 +148,6 @@ namespace CDPL
 			bool    inputScaling;
 			bool    outputScaling;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_DATA_FORMATS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides preinitialized Base::DataFormat objects for all supported image output formats.
 		 */
 		namespace DataFormat
@@ -77,10 +72,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const Base::DataFormat SVG;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

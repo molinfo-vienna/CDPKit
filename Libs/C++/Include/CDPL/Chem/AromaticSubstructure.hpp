@@ -49,11 +49,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_AROMATICITY
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the perception of aromatic atoms and bonds in a molecular graph.
 		 */
 		class CDPL_CHEM_API AromaticSubstructure : public Fragment
@@ -136,10 +131,6 @@ namespace CDPL
 			BondMaskSet                uniqueRingSet;
 			bool                       finished;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

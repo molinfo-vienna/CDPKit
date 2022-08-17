@@ -56,11 +56,6 @@ namespace CDPL
 	
 		class Reaction;
 
-		/**
-		 * \addtogroup CDPL_CHEM_REACTION_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API const std::string& getName(const Reaction& rxn);
 
 		CDPL_CHEM_API void setName(Reaction& rxn, const std::string& name);
@@ -234,10 +229,6 @@ namespace CDPL
 		CDPL_CHEM_API void initSubstructureSearchQuery(Reaction& rxn, bool overwrite);
 
 		CDPL_CHEM_API void initSubstructureSearchTarget(Reaction& rxn, bool overwrite);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

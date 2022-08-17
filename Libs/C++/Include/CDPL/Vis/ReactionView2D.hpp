@@ -67,11 +67,6 @@ namespace CDPL
 		class FontMetrics;
 	
 		/**
-		 * \addtogroup CDPL_VIS_REACTION_VISUALIZATION
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the 2D visualization of chemical reactions.
 		 *
 		 * \c %ReactionView2D visualizes chemical reactions in the form of schematic reaction equations in which
@@ -759,10 +754,6 @@ namespace CDPL
 			PolygonPrimitiveCache          polygonCache;
 			LineSegListPrimitiveCache      lineSegListCache;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

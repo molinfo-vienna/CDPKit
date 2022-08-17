@@ -47,11 +47,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BondDirectionMatchExpression.
 		 */
 		class CDPL_CHEM_API BondDirectionMatchExpression : public MatchExpression<Bond, MolecularGraph>
@@ -102,10 +97,6 @@ namespace CDPL
 			unsigned int dirFlags;
 			bool         notMatch;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

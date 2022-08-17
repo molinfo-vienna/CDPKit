@@ -57,11 +57,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_ALIGNMENT
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API FastGaussianShapeAlignment
 		{
 
@@ -291,10 +286,6 @@ namespace CDPL
 			QuaternionTransformation       normXformQuat;
 			std::size_t                    currRefShapeIdx;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

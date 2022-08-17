@@ -45,11 +45,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief ParallelPiPiInteractionConstraint.
 		 */
 		class CDPL_PHARM_API ParallelPiPiInteractionConstraint : public std::binary_function<Feature, Feature, bool>
@@ -88,10 +83,6 @@ namespace CDPL
 			double maxHDist;
 			double angleTol;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

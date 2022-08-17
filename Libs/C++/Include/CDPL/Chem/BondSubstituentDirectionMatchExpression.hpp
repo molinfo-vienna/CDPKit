@@ -47,11 +47,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BondSubstituentDirectionMatchExpression.
 		 *
 		 * <em>Daylight SMARTS</em> [\ref SMARTS] substructure search patterns specify cis/trans geometry constraints for a double bond by 
@@ -101,10 +96,6 @@ namespace CDPL
 			 */
 			bool requiresAtomBondMapping() const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -45,11 +45,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief FeatureTypeMatchFunctor.
 		 */
 		class CDPL_PHARM_API FeatureTypeMatchFunctor : public std::binary_function<Feature, Feature, bool>
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -52,11 +52,6 @@ namespace CDPL
     namespace Biomol 
     {
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_UTILITY_FUNCTIONS
-		 * @{
-		 */
-		
 		template <typename Iter>
 		Iter findResidueAtom(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
 							 char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO)
@@ -84,10 +79,6 @@ namespace CDPL
 
 			return end;
 		}
-	
-		/**
-		 * @}
-		 */
 	}
 }
 

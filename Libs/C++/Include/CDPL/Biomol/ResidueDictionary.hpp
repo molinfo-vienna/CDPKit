@@ -49,11 +49,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_RESIDUE_DICTIONARY
-		 * @{
-		 */
-
-		/**
 		 * \brief A global dictionary for the lookup of meta-data associated with the residues
 		 *        in biological macromolecules.
 		 */ 
@@ -147,10 +142,6 @@ namespace CDPL
 			static SharedPointer defaultDict;
 			EntryLookupTable     entries;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

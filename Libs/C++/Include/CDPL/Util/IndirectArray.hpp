@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_CONTAINERS
-		 * @{
-		 */
-
-		/**
 		 * \brief A dynamic array class for the storage of object pointers with an indirected query interface.
 		 *
 		 * \c %IndirectArray stores pointers to objects instead of object copies and provides an indirected query
@@ -347,10 +342,6 @@ namespace CDPL
 
 			DerefFunc dereferencer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

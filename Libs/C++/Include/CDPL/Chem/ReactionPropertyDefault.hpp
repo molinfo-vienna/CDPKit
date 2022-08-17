@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Chem::Reaction properties.
 		 */
 		namespace ReactionPropertyDefault
@@ -61,10 +56,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const std::string MDL_PROGRAM_NAME;
 			extern CDPL_CHEM_API const std::string MDL_USER_INITIALS;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

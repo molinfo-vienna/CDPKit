@@ -51,11 +51,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief FileDataReader.
 		 */
 		template <typename ReaderImpl, typename DataType = typename ReaderImpl::DataType>
@@ -88,10 +83,6 @@ namespace CDPL
 			std::string   fileName;
 			ReaderImpl    reader;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

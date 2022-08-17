@@ -56,11 +56,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_2D
-		 * @{
-		 */
-
-		/**
 		 * \brief MolecularComplexityCalculator.
 		 * \see [\ref MCPLX]
 		 */
@@ -163,10 +158,6 @@ namespace CDPL
 			double                      structComplexity;
 			double                      complexity;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

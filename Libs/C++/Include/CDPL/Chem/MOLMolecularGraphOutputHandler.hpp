@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOL_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of molecular graph data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
 		 */
 		typedef Util::DefaultDataOutputHandler<MOLMolecularGraphWriter, DataFormat::MOL> MOLMolecularGraphOutputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

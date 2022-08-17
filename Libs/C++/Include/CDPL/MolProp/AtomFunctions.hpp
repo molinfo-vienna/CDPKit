@@ -47,11 +47,6 @@ namespace CDPL
 	namespace MolProp
 	{
 		
-		/**
-		 * \addtogroup CDPL_MOLPROP_ATOM_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_MOLPROP_API double getHydrophobicity(const Chem::Atom& atom);
 
 		CDPL_MOLPROP_API void setHydrophobicity(Chem::Atom& atom, double hyd);
@@ -73,10 +68,6 @@ namespace CDPL
 		CDPL_MOLPROP_API double getHybridPolarizability(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API double calcEffectivePolarizability(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, double damping = 0.75);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

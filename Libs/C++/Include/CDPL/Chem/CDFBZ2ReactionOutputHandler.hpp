@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of gzip-compressed reaction data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataOutputHandler<CDFBZ2ReactionWriter, DataFormat::CDF_BZ2> CDFBZ2ReactionOutputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

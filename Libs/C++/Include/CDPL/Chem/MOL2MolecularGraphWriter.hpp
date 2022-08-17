@@ -47,11 +47,6 @@ namespace CDPL
 		class MOL2DataWriter;
 		class MolecularGraph;
 
-		/**
-		 * \addtogroup CDPL_CHEM_MOL2_IO
-		 * @{
-		 */
-
 		class CDPL_CHEM_API MOL2MolecularGraphWriter : public Base::DataWriter<MolecularGraph>
 		{
 
@@ -89,10 +84,6 @@ namespace CDPL
 			bool              state;
 			MOL2DataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

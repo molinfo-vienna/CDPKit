@@ -49,11 +49,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_PROCESSING
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the extraction of residues in biological macromolecules.
 		 */
 		class CDPL_BIOMOL_API ResidueList : public Chem::FragmentList
@@ -109,10 +104,6 @@ namespace CDPL
 
 			ResidueIDToFragmentMap resIDsToFragments;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

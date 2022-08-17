@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Atom properties.
 		 */
 		namespace AtomProperty
@@ -104,10 +99,6 @@ namespace CDPL
 		
 			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUP_ID;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

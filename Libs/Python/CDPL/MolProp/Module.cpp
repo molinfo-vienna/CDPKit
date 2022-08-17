@@ -26,8 +26,28 @@
 
 #include <boost/python.hpp>
 
+#include "ClassExports.hpp"
+#include "FunctionExports.hpp"
+#include "NamespaceExports.hpp"
+
 
 BOOST_PYTHON_MODULE(_molprop)
 {
+	using namespace CDPLPythonMolProp;
 
+	exportAtomProperties();
+
+	exportElementHistogram();
+	exportMassComposition();
+
+	exportAtomHydrophobicityCalculator();
+	exportLogSCalculator();
+	exportXLogPCalculator();
+	exportTPSACalculator();
+	exportPEOEChargeCalculator();
+
+	exportAtomContainerFunctions();
+	exportAtomFunctions();
+	exportBondFunctions();
+	exportMolecularGraphFunctions();
 }

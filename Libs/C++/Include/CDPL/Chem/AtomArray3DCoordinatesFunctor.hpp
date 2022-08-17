@@ -48,11 +48,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomArray3DCoordinatesFunctor.
 		 */
 		class CDPL_CHEM_API AtomArray3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
@@ -73,10 +68,6 @@ namespace CDPL
 			const Math::Vector3DArray* coordinates;
 			const MolecularGraph*      molGraph;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

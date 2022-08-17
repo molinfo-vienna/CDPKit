@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief InteractionPharmacophoreGenerator.
 		 */
 		class CDPL_PHARM_API InteractionPharmacophoreGenerator
@@ -109,10 +104,6 @@ namespace CDPL
 			double                        coreEnvRadius;
 			bool                          addXVolumes;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

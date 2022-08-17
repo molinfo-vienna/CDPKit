@@ -48,11 +48,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PSD_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of molecule data in the PSD-format of the <em>CDPL</em>.
 		 */
 		class CDPL_PHARM_API PSDMoleculeInputHandler : public Base::DataInputHandler<Chem::Molecule>
@@ -65,10 +60,6 @@ namespace CDPL
 
 			ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

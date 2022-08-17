@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Chem
 	{
 	
-		/**
-		 * \addtogroup CDPL_CHEM_SDF_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataReader<SDFMoleculeReader, Util::GZipIStream> SDFGZMoleculeReader;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

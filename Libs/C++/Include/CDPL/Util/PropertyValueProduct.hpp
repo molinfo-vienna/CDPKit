@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief A binary functor that calculates the product of two property values retrieved 
 		 *        from a pair of Base::PropertyContainer instances passed as argument.
 		 * \tparam ResType The result type.
@@ -79,10 +74,6 @@ namespace CDPL
 		private:
 			Base::LookupKey propKey;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

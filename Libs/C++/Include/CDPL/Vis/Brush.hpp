@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief Specifies the fill pattern and fill color of shapes.
 		 *
 		 * A brush has a style and a color attribute. The style defines the look of the fill pattern and the
@@ -202,10 +197,6 @@ namespace CDPL
 			Style style;
 			Color color;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

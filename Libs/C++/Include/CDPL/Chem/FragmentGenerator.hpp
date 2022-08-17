@@ -51,11 +51,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_FRAGMENT_GENERATION
-		 * @{
-		 */
-
-		/**
 		 * \brief FragmentGenerator.
 		 */
 		class CDPL_CHEM_API FragmentGenerator 
@@ -260,10 +255,6 @@ namespace CDPL
 			Util::BitSet           visAtomMask;
 			SplitBondDataArray     splitBondData;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -48,11 +48,6 @@ namespace CDPL
 	namespace ForceField 
 	{
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_ATOM_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_FORCEFIELD_API const std::string& getMMFF94SymbolicType(const Chem::Atom& atom);
 
 		CDPL_FORCEFIELD_API void setMMFF94SymbolicType(Chem::Atom& atom, const std::string& type);
@@ -78,10 +73,6 @@ namespace CDPL
 		CDPL_FORCEFIELD_API void clearMMFF94Charge(Chem::Atom& atom);
 
 		CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

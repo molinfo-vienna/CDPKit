@@ -53,11 +53,6 @@ namespace CDPL
 
 		class TorsionRule;
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API TorsionRuleMatch
 		{
 
@@ -77,10 +72,6 @@ namespace CDPL
 			const Chem::Bond*  bond;
 			const Chem::Atom*  atoms[4];
 		};
-    
-		/**
-		 * @}
-		 */
     }
 }
 

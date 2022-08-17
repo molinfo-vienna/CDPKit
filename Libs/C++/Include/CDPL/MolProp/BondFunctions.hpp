@@ -47,16 +47,7 @@ namespace CDPL
 	namespace MolProp 
 	{
 	
-		/**
-		 * \addtogroup CDPL_MOLPROP_BOND_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_MOLPROP_API double calcPolarizability(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, double damping = 0.75);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

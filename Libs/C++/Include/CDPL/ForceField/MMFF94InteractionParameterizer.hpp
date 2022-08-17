@@ -87,11 +87,6 @@ namespace CDPL
 
 		class MMFF94InteractionData;
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94InteractionParameterizer
 		{
 
@@ -207,10 +202,6 @@ namespace CDPL
 			Util::DArray                                    atomCharges;
 			const Chem::MolecularGraph*                     molGraph;
 		};			
-    
-		/**
-		 * @}
-		 */
     }
 }
 

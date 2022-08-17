@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::MolecularGraph properties.
 		 */
 		namespace MolecularGraphProperty
@@ -59,10 +54,6 @@ namespace CDPL
 
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_AROMATIC_RINGS;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

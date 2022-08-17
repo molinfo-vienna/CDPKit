@@ -54,11 +54,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_2D_AUTOCORRELATION
-		 * @{
-		 */
-
-		/**
 		 * \brief AutoCorrelation2DVectorCalculator.
 		 * \see [\ref AUCOR, \ref HBMD]
 		 */
@@ -130,10 +125,6 @@ namespace CDPL
 			AtomPairWeightFunction weightFunc;
 			std::size_t            maxDist;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

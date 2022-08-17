@@ -47,11 +47,6 @@ namespace CDPL
     namespace Shape
     {
 
-		/**
-		 * \addtogroup CDPL_SHAPE_ALIGNMENT
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API PrincipalAxesAlignmentStartGenerator : public GaussianShapeAlignmentStartGenerator
 		{
 			
@@ -144,10 +139,6 @@ namespace CDPL
 			std::size_t                  numSubTransforms;
 			RandomEngine                 randomEngine;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

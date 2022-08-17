@@ -55,11 +55,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_ALIGNMENT
-		 * @{
-		 */
-
-		/**
 		 * \brief SpatialEntityAlignment.
 		 */
 		template <typename T>
@@ -312,10 +307,6 @@ namespace CDPL
 			TopMappingHashSet                      seenTopMappings;
 			TopMappingCache                        topMappingCache;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

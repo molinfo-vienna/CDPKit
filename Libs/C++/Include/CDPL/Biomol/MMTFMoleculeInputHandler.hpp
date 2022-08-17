@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_MMTF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)y</em>
 		 *        [\ref MMTF].
 		 */
 		typedef Util::DefaultDataInputHandler<MMTFMoleculeReader, DataFormat::MMTF> MMTFMoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

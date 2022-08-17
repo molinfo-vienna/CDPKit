@@ -41,11 +41,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to describe the status of an \e %InChI [\ref INCHI] output or input operation.
 		 *
 		 * The defined constants correspond to the return values of the <em>%InChI C-API</em> functions (see [\ref INCHI])
@@ -96,10 +91,6 @@ namespace CDPL
 			 */
 			extern CDPL_CHEM_API const int BUSY;
   		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

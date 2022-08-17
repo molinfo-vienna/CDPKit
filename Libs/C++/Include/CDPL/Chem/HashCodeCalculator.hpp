@@ -53,11 +53,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_HASH_CODES
-		 * @{
-		 */
-
-		/**
 		 * \brief HashCodeCalculator.
 		 * \see [\ref MHASH]
 		 */
@@ -294,10 +289,6 @@ namespace CDPL
 			bool                     incGlobalStereoFeatures;
 			Base::uint8              shaHashCode[20];
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -45,11 +45,6 @@ namespace CDPL
 		class BasicAtom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BasicBond.
 		 */
 		class CDPL_CHEM_API BasicBond : public Bond
@@ -114,10 +109,6 @@ namespace CDPL
 			std::size_t    index;
 			BasicAtom*     atoms[2];
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief AttributedGrid.
 		 */
 		class AttributedGrid : public Base::PropertyContainer
@@ -68,10 +63,6 @@ namespace CDPL
 				return *this;
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -81,11 +81,6 @@ namespace CDPL
 		class StructureView2DParameters;
 
 		/**
-		 * \addtogroup CDPL_VIS_STRUCTURE_VISUALIZATION
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the 2D visualization of chemical structures.
 		 *
 		 * \c %StructureView2D visualizes chemical structures in the form of 2D structure diagrams (also known
@@ -758,10 +753,6 @@ namespace CDPL
 			PointListPrimitiveCache            pointListCache;
 			TextLabelPrimitiveCache            textLabelCache;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief DefaultDataInputHandler.
 		 */
 		template <typename ReaderImpl, const Base::DataFormat& Format, typename DataType = typename ReaderImpl::DataType>
@@ -68,10 +63,6 @@ namespace CDPL
 				return typename ReaderType::SharedPointer(new Util::FileDataReader<ReaderImpl>(file_name, mode));
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

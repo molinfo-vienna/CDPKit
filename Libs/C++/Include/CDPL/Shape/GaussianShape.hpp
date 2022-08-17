@@ -48,11 +48,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
-		 * @{
-		 */
-		
-		/**
 		 * \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
 		 */
 		class CDPL_SHAPE_API GaussianShape : public Base::PropertyContainer
@@ -139,10 +134,6 @@ namespace CDPL
 		  private:
 			ElementList elements;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

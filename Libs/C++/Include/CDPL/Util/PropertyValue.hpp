@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief An unary functor that retrieves the value of a given property from the
 		 *        Base::PropertyContainer instance provided as argument.
 		 * \tparam T The type of the property value.
@@ -77,10 +72,6 @@ namespace CDPL
 		private:
 			Base::LookupKey propKey;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

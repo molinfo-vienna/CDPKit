@@ -48,11 +48,6 @@ namespace CDPL
 		class CDFRegularGridDataWriter;
 
 		/**
-		 * \addtogroup CDPL_GRID_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for spatial regular grid data in the native I/O format of the <em>CDPL</em>.
 		 */
 		class CDPL_GRID_API CDFDRegularGridWriter : public Base::DataWriter<DRegularGrid>
@@ -92,10 +87,6 @@ namespace CDPL
 			bool             state;
 			CDFDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

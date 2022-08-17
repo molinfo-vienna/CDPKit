@@ -60,11 +60,6 @@ namespace CDPL
 
 		class TorsionDriverImpl;
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API TorsionDriver
 		{
 
@@ -136,10 +131,6 @@ namespace CDPL
 
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

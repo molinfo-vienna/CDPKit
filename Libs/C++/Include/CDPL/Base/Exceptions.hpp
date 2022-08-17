@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_EXCEPTIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief The root of the \e %CDPL exception hierarchy.
 		 */
 		class CDPL_BASE_API Exception : public std::exception
@@ -268,10 +263,6 @@ namespace CDPL
 			 */
 			virtual ~IOError() throw();
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

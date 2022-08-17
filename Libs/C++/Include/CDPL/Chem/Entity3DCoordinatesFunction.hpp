@@ -45,18 +45,9 @@ namespace CDPL
 		class Entity;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined entity3D coordinates function.
 		 */
 		typedef boost::function1<const Math::Vector3D&, const Chem::Entity&> Entity3DCoordinatesFunction;
-
-		/**
-		 * @}
-		 */
     }
 }
 

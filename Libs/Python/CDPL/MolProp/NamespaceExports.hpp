@@ -24,55 +24,14 @@
  */
 
 
-#ifndef CDPL_PYTHON_CHEM_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
 
 
-namespace CDPLPythonChem
+namespace CDPLPythonMolProp
 {
 
-	void exportAtomPropertyFlags();
-	void exportBondPropertyFlags();
-	void exportReactionRoles();
-	void exportAtomTypes();
-	void exportAtomConfigurations();
-	void exportBondConfigurations();
-	void exportBondStereoFlags();
-	void exportHybridizationStates();
-	void exportReactionCenterStates();
-	void exportBondDirections();
-	void exportRadicalTypes();
-	void exportINCHIReturnCodes();
-	void exportAtomMatchConstraints();
-	void exportBondMatchConstraints();
-	void exportMolecularGraphMatchConstraints();
-	void exportReactionMatchConstraints();
-	void exportMDLDataFormatVersions();
-	void exportMDLParities();
-	void exportSybylAtomTypes();
-	void exportSybylBondTypes();
-	void exportMOL2MoleculeTypes();
-	void exportMOL2ChargeTypes();
-	void exportTautomerizationTypes();
-	void exportRECAPRuleIDs();
-	void exportRECAPAtomLabels();
-	void exportBRICSRuleIDs();
-	void exportBRICSAtomLabels();
-
-	void exportEntity3DProperties();
 	void exportAtomProperties();
-	void exportBondProperties();
-	void exportMolecularGraphProperties();
-	void exportReactionProperties();
-	void exportAtomPropertyDefaults();
-	void exportBondPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
-	void exportReactionPropertyDefaults();
-
-	void exportControlParameters();
-	void exportControlParameterDefaults();
-
-	void exportDataFormats();
 }
 
-#endif // CDPL_PYTHON_CHEM_NAMESPACEEXPORTS_HPP
+#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP

@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides numerical identifiers for built-in Chem::Bond matching constraints and flags for the
 		 *        specification of bond orders.
 		 */
@@ -126,10 +121,6 @@ namespace CDPL
 			 */
 			const unsigned int REACTION_CENTER_STATUS = 7;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

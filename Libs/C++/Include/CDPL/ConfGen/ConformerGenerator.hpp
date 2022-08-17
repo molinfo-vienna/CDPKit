@@ -58,11 +58,6 @@ namespace CDPL
 
 		class ConformerGeneratorImpl;
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_GENERATORS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API ConformerGenerator
 		{
 
@@ -125,10 +120,6 @@ namespace CDPL
 
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

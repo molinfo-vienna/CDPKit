@@ -57,11 +57,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_GRID_CALCULATION
-		 * @{
-		 */
-
-		/**
 		 * \brief BuriednessGridCalculator.
 		 */
 		class CDPL_CHEM_API BuriednessGridCalculator
@@ -109,10 +104,6 @@ namespace CDPL
 			AtomIndexList        atomIndices;
 			Fragment             atomSubset;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -54,11 +54,6 @@ namespace CDPL
     {
 	
 		/**
-		 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION_RULES
-		 * @{
-		 */
-
-		/**
 		 * \brief PatternBasedTautomerizationRule.
 		 */
 		class CDPL_CHEM_API PatternBasedTautomerizationRule : public TautomerizationRule
@@ -133,10 +128,6 @@ namespace CDPL
 			BitSetList                  excludeMatches;
 			BitSetCache                 bitSetCache;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

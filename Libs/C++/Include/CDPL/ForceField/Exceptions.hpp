@@ -41,11 +41,6 @@ namespace CDPL
     namespace ForceField
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_EXCEPTIONS
-	 * @{
-	 */
-
 	class CDPL_FORCEFIELD_API Error : public Base::Exception
 	{
 
@@ -63,10 +58,6 @@ namespace CDPL
 
 	    virtual ~ParameterizationFailed() throw();
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

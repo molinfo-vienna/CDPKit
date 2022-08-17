@@ -50,11 +50,6 @@ namespace CDPL
 	
 		class StereoDescriptor;
 
-		/**
-		 * \addtogroup CDPL_CHEM_BOND_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API std::size_t getOrder(const Bond& bond);
 
 		CDPL_CHEM_API void setOrder(Bond& bond, std::size_t order);
@@ -217,10 +212,6 @@ namespace CDPL
 		CDPL_CHEM_API bool hasSybylType(const Bond& bond);
 
 		CDPL_CHEM_API unsigned int perceiveSybylType(const Bond& bond, const MolecularGraph& molgraph);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

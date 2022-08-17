@@ -66,11 +66,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API DGConstraintGenerator
 		{
 
@@ -189,10 +184,6 @@ namespace CDPL
 			AtomIndexList                 atomIndexList2;
 			DGConstraintGeneratorSettings settings;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

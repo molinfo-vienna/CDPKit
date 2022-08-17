@@ -47,11 +47,6 @@ namespace CDPL
 	namespace Pharm 
 	{
 	
-		/**
-		 * \addtogroup CDPL_PHARM_CONTROL_PARAMETER_FUNCTIONS
-		 * @{
-		 */
-		
 		CDPL_PHARM_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_PHARM_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
@@ -86,10 +81,6 @@ namespace CDPL
 		CDPL_PHARM_API bool hasPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
 	
 		CDPL_PHARM_API void clearPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

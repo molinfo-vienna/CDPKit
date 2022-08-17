@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_BCUT
-		 * @{
-		 */
-
-		/**
 		 * \brief BCUTDescriptorCalculator.
 		 * \see [\ref BCUT]
 		 */
@@ -114,10 +109,6 @@ namespace CDPL
 			Math::DMatrix          tmpBurdenMatrix;
 			Math::DMatrix          eigenVectors;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

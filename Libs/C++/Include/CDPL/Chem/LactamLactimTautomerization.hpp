@@ -42,11 +42,6 @@ namespace CDPL
     {
 	
 		/**
-		 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION_RULES
-		 * @{
-		 */
-
-		/**
 		 * \brief LactamLactimTautomerizationRule.
 		 */
 		class CDPL_CHEM_API LactamLactimTautomerization : public PatternBasedTautomerizationRule
@@ -55,10 +50,6 @@ namespace CDPL
 		  public:
 			LactamLactimTautomerization();
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

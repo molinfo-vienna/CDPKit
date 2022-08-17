@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief DefaultDataOutputHandler.
 		 */
 		template <typename WriterImpl, const Base::DataFormat& FORMAT, typename DataType = typename WriterImpl::DataType>
@@ -68,10 +63,6 @@ namespace CDPL
 				return typename WriterType::SharedPointer(new Util::FileDataWriter<WriterImpl>(file_name, mode));
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

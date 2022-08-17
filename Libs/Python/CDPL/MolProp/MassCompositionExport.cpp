@@ -26,28 +26,28 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/MassComposition.hpp"
+#include "CDPL/MolProp/MassComposition.hpp"
 
 #include "Util/MapVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportMassComposition()
+void CDPLPythonMolProp::exportMassComposition()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::MassComposition, Chem::MassComposition::SharedPointer>("MassComposition", python::no_init)
+	python::class_<MolProp::MassComposition, MolProp::MassComposition::SharedPointer>("MassComposition", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MassComposition&>((python::arg("self"), python::arg("mass_comp"))))
-		.def(CDPLPythonUtil::MapVisitor<Chem::MassComposition, 
+		.def(python::init<const MolProp::MassComposition&>((python::arg("self"), python::arg("mass_comp"))))
+		.def(CDPLPythonUtil::MapVisitor<MolProp::MassComposition, 
 			 python::return_value_policy<python::copy_non_const_reference>, 
 			 python::default_call_policies, python::default_call_policies, python::default_call_policies, false>())
-		.def("__eq__", &Chem::MassComposition::operator==, (python::arg("self"), python::arg("mass_comp")))
-		.def("__ne__", &Chem::MassComposition::operator!=, (python::arg("self"), python::arg("mass_comp")))
-		.def("__le__", &Chem::MassComposition::operator<=, (python::arg("self"), python::arg("mass_comp")))
-		.def("__ge__", &Chem::MassComposition::operator>=, (python::arg("self"), python::arg("mass_comp")))
-		.def("__lt__", &Chem::MassComposition::operator<, (python::arg("self"), python::arg("mass_comp")))
-		.def("__gt__", &Chem::MassComposition::operator>, (python::arg("self"), python::arg("mass_comp")));
+		.def("__eq__", &MolProp::MassComposition::operator==, (python::arg("self"), python::arg("mass_comp")))
+		.def("__ne__", &MolProp::MassComposition::operator!=, (python::arg("self"), python::arg("mass_comp")))
+		.def("__le__", &MolProp::MassComposition::operator<=, (python::arg("self"), python::arg("mass_comp")))
+		.def("__ge__", &MolProp::MassComposition::operator>=, (python::arg("self"), python::arg("mass_comp")))
+		.def("__lt__", &MolProp::MassComposition::operator<, (python::arg("self"), python::arg("mass_comp")))
+		.def("__gt__", &MolProp::MassComposition::operator>, (python::arg("self"), python::arg("mass_comp")));
 }

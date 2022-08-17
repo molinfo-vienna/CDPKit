@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Chem
 	{
 
-		/**
-		 * \addtogroup CDPL_CHEM_RDF_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataReader<RDFReactionReader, Util::BZip2IStream> RDFBZ2ReactionReader;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

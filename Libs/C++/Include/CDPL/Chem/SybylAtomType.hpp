@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of the <em>Tripos Sybyl</em> atom type.
 		 */
 		namespace SybylAtomType 
@@ -324,10 +319,6 @@ namespace CDPL
 			 */
 			const unsigned int MAX_TYPE         = Sn;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

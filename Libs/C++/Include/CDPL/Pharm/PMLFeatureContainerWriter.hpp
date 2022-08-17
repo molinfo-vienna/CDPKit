@@ -48,11 +48,6 @@ namespace CDPL
 		class FeatureContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PML_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for feature container data in the native I/O format of <em>LigandScout</em>.
 		 */
 		class CDPL_PHARM_API PMLFeatureContainerWriter : public Base::DataWriter<FeatureContainer>
@@ -95,10 +90,6 @@ namespace CDPL
 			bool             state;
 			PMLDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

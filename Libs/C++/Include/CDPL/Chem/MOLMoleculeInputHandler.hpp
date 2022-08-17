@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOL_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of molecule data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
 		 */
 		typedef Util::DefaultDataInputHandler<MOLMoleculeReader, DataFormat::MOL> MOLMoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

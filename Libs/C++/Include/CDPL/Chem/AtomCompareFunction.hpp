@@ -43,18 +43,9 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined atom compare function.
 		 */
 		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> AtomCompareFunction;
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULE_FUNCTIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief Removes all explicit hydrogen atoms from the molecule \a mol.
 		 * \param mol The molecule for which to remove all explicit hydrogen atoms.
 		 * \return \c false if \a mol was not altered, \c true otherwise.
@@ -81,10 +76,6 @@ namespace CDPL
 		CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 
 		CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

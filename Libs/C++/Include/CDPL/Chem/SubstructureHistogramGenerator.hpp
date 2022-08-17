@@ -52,11 +52,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_SUBSTRUCTURE_HISTOGRAM
-		 * @{
-		 */
-
-		/**
 		 * \brief SubstructureHistogramGenerator.
 		 */
 		class CDPL_CHEM_API SubstructureHistogramGenerator
@@ -165,10 +160,6 @@ namespace CDPL
 			AtomBondMask              testingAtomBondMask;   
 			Util::BitSet              tmpMask;   
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

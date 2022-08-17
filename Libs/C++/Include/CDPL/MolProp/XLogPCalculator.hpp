@@ -55,11 +55,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_LOGP
-		 * @{
-		 */
-
-		/**
 		 * \brief XLogPCalculator.
 		 * \see [\ref XLOGP]
 		 */
@@ -125,10 +120,6 @@ namespace CDPL
 			Chem::PatternAtomTyper               atomTyper;
 			Chem::SubstructureHistogramGenerator corrSubstructHistoGen;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

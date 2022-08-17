@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_PNG_OUTPUT
-		 * @{
-		 */
-	
-		/**
 		 * \brief Creates 2D structure diagrams of molecular graphs in the <em>Portable Network Graphics (PNG)</em> [\ref WPNG] format. 
 		 *
 		 * \c %PNGMolecularGraphWriter uses Vis::StructureView2D for the creation of 2D structure diagrams. All control-parameters and
@@ -85,10 +80,6 @@ namespace CDPL
 			std::ostream& output;
 			bool          state;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

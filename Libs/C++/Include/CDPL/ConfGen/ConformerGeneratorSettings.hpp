@@ -43,11 +43,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API ConformerGeneratorSettings
 		{
 
@@ -181,10 +176,6 @@ namespace CDPL
 			std::size_t                        mcRotorBondCountThresh;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};
-		
-		/**
-		 * @}
-		 */
 	};
 }
 

@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
 		 */
 		namespace FeatureGeometry 
@@ -57,10 +52,6 @@ namespace CDPL
 
 			const unsigned int PLANE    = 3;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

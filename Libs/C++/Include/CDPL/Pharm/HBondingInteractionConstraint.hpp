@@ -45,11 +45,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief HBondingInteractionConstraint.
 		 */
 		class CDPL_PHARM_API HBondingInteractionConstraint : public std::binary_function<Feature, Feature, bool>
@@ -91,10 +86,6 @@ namespace CDPL
 			double minAHDAngle;
 			double maxAccAngle;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

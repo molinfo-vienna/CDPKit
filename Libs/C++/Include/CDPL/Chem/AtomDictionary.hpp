@@ -52,11 +52,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A global dictionary for the lookup of meta-data associated with the atom
 		 *        types defined in namespace Chem::AtomType
 		 */ 
@@ -329,10 +324,6 @@ namespace CDPL
 			SymbolToTypeLookupTable  strictSymToTypeTable;
 			SymbolToTypeLookupTable  nonstrictSymToTypeTable;
 		};
-
-		/**
-		 * @}
-		 */
 	};
 }
 

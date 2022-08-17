@@ -45,11 +45,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief PharmacophoreGenerator.
 		 */
 		class CDPL_PHARM_API PharmacophoreGenerator 
@@ -143,10 +138,6 @@ namespace CDPL
 			EnabledFeatureSet               enabledFeatures;
 			Chem::Atom3DCoordinatesFunction coordsFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

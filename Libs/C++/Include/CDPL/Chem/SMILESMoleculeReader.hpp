@@ -47,11 +47,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 		 *
 		 * \c %SMILESMoleculeReader supports the following control-parameters:
@@ -103,10 +98,6 @@ namespace CDPL
 
 			SMILESDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

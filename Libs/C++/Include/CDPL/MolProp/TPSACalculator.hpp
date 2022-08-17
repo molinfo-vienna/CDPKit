@@ -51,11 +51,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_TPSA
-		 * @{
-		 */
-
-		/**
 		 * \brief TPSACalculator.
 		 * \see [\ref TPSA]
 		 */
@@ -97,10 +92,6 @@ namespace CDPL
 			Chem::PatternAtomTyper atomTyper;
 			double                 area;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

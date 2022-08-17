@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/AtomHydrophobicityCalculator.hpp"
+#include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/CopyAssOp.hpp"
@@ -35,26 +35,25 @@
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportAtomHydrophobicityCalculator()
+void CDPLPythonMolProp::exportAtomHydrophobicityCalculator()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::AtomHydrophobicityCalculator, boost::noncopyable>("AtomHydrophobicityCalculator", python::no_init)
+    python::class_<MolProp::AtomHydrophobicityCalculator, boost::noncopyable>("AtomHydrophobicityCalculator", python::no_init)
 	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::AtomHydrophobicityCalculator&>((python::arg("self"), python::arg("calculator"))))
+	.def(python::init<const MolProp::AtomHydrophobicityCalculator&>((python::arg("self"), python::arg("calculator"))))
 	.def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
 		 (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomHydrophobicityCalculator>())	
-	.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomHydrophobicityCalculator::operator=), 
+	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::AtomHydrophobicityCalculator>())	
+	.def("assign", CDPLPythonBase::copyAssOp(&MolProp::AtomHydrophobicityCalculator::operator=), 
 	     (python::arg("self"), python::arg("calculator")), python::return_self<>())
-	.def("setAtom3DCoordinatesFunction", &Chem::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction,
+	.def("setAtom3DCoordinatesFunction", &MolProp::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction,
 	     (python::arg("self"), python::arg("func")))
-	.def("getAtom3DCoordinatesFunction", &Chem::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction,
+	.def("getAtom3DCoordinatesFunction", &MolProp::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction,
 	     python::arg("self"), python::return_internal_reference<>())
-	.def("calculate", &Chem::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")))
+	.def("calculate", &MolProp::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")))
 	.add_property("atomCoordinatesFunction", 
-		      python::make_function(&Chem::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
-		      &Chem::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction);
-
+		      python::make_function(&MolProp::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
+		      &MolProp::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction);
 }

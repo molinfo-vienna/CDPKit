@@ -53,11 +53,6 @@ namespace CDPL
 		class PDBDataReader;
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_PDB_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
 		 *        [\ref PDB] format.
 		 */
@@ -92,10 +87,6 @@ namespace CDPL
 
 			PDBDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

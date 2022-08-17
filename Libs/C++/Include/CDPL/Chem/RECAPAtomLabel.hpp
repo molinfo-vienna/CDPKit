@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
-
-	/**
 	 * \brief Provides constants for the labeling of atoms in bonds matched by a RECAP fragmentation rule.
 	 * \see [\ref RECAP]
 	 */
@@ -72,10 +67,6 @@ namespace CDPL
 	    const unsigned int SULFONAMIDE_N            = 19;
 	    const unsigned int SULFONAMIDE_S            = 20;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

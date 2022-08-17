@@ -52,11 +52,6 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_CIP_PRIORITIES
-		 * @{
-		 */
-
-		/**
 		 * \brief CIPPriorityCalculator.
 		 * \see [\ref TCIP]
 		 */
@@ -156,10 +151,6 @@ namespace CDPL
 			NodeList                      atomNodes;
 			ImplicitHydrogenCountFunction implHCountFunc;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

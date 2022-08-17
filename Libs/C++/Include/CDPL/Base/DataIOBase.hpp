@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides infrastructure for the registration of I/O callback functions.
 		 *
 		 * The purpose of \c %DataIOBase is to provide methods for the registration of I/O callback functions
@@ -135,10 +130,6 @@ namespace CDPL
 
 			CallbackList callbacks;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

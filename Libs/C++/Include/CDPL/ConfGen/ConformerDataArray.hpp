@@ -43,18 +43,9 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data type for the storage of dyn. allocated ConfGen::ConformerData objects.
 		 */
 		typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
-	
-		/**
-		 * @}
-		 */
     }
 }
 

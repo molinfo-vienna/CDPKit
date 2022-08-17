@@ -45,11 +45,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Chem::MolecularGraph properties.
 		 */
 		namespace MolecularGraphPropertyDefault
@@ -70,10 +65,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
 			extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

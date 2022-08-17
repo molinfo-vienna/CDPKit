@@ -46,11 +46,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief HBondingInteractionScore.
 		 */
 		class CDPL_PHARM_API HBondingInteractionScore
@@ -98,10 +93,6 @@ namespace CDPL
 			double                maxAccAngle;
 			NormalizationFunction normFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

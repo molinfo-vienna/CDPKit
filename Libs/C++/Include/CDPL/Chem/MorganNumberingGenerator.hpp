@@ -53,11 +53,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_CANONICAL_NUMBERING
-		 * @{
-		 */
-
-		/**
 		 * \brief MorganNumberingGenerator.
 		 * \see [\ref MOCAN]
 		 */
@@ -157,10 +152,6 @@ namespace CDPL
 			Math::ULMatrix bondMatrix;
 			NumberingState numbering;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

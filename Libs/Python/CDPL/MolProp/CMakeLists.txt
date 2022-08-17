@@ -33,6 +33,22 @@ ENDFOREACH(PYTHON_FILE)
 
 SET(molprop_MOD_SRCS
     Module.cpp
+
+    AtomPropertyExport.cpp 
+
+    MolecularGraphFunctionExport.cpp
+    AtomContainerFunctionExport.cpp  
+    AtomFunctionExport.cpp
+    BondFunctionExport.cpp 
+
+    ElementHistogramExport.cpp 
+    MassCompositionExport.cpp 
+
+    AtomHydrophobicityCalculatorExport.cpp
+    XLogPCalculatorExport.cpp
+    LogSCalculatorExport.cpp 
+    PEOEChargeCalculatorExport.cpp
+    TPSACalculatorExport.cpp
    )
 
 ADD_LIBRARY(_molprop MODULE ${molprop_MOD_SRCS})

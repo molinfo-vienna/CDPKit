@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_MMTF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of gzip-compressed molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em>
 		 *        [\ref MMTF].
 		 */
 		typedef Util::DefaultDataOutputHandler<MMTFGZMolecularGraphWriter, DataFormat::MMTF_GZ> MMTFGZMolecularGraphOutputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

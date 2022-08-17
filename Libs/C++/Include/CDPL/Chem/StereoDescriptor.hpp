@@ -46,11 +46,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data structure for the storage and retrieval of stereochemical information about atoms and bonds.
 		 *
 		 * The stereochemistry of atoms and bonds is definded by an ordered list of reference atoms 
@@ -229,10 +224,6 @@ namespace CDPL
 			std::size_t  numRefAtoms;
 			unsigned int config;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides meta-information about a particular data storage format.
 		 */
 		class CDPL_BASE_API DataFormat 
@@ -262,10 +257,6 @@ namespace CDPL
 			FileExtensionList fileExtensions;
 			bool              multiRecordFormat;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

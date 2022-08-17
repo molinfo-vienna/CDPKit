@@ -53,11 +53,6 @@ namespace CDPL
 		class ExactGaussianShapeOverlapFunction;
 		class FastGaussianShapeOverlapFunction;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTORS
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API GaussianShapeFunction
 		{
 			
@@ -121,10 +116,6 @@ namespace CDPL
 			double               volume;
 			ProductListPtr       prodList;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

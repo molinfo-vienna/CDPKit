@@ -39,11 +39,6 @@ namespace CDPL
 	{
 	
 		/**
-		 * \addtogroup CDPL_VIS_CONSTANTS
-		 * @{
-		 */
-	
-		/**
 		 * \brief Provides constants for the specification of reaction arrow styles in 2D depictions of
 		 *        chemical reactions.
 		 */
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			const unsigned int REACTION_HOLLOW = 2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

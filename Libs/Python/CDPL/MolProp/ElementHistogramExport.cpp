@@ -26,28 +26,28 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/ElementHistogram.hpp"
+#include "CDPL/MolProp/ElementHistogram.hpp"
 
 #include "Util/MapVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportElementHistogram()
+void CDPLPythonMolProp::exportElementHistogram()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::ElementHistogram, Chem::ElementHistogram::SharedPointer>("ElementHistogram", python::no_init)
+	python::class_<MolProp::ElementHistogram, MolProp::ElementHistogram::SharedPointer>("ElementHistogram", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::ElementHistogram&>((python::arg("self"), python::arg("hist"))))
-		.def(CDPLPythonUtil::MapVisitor<Chem::ElementHistogram, 
+		.def(python::init<const MolProp::ElementHistogram&>((python::arg("self"), python::arg("hist"))))
+		.def(CDPLPythonUtil::MapVisitor<MolProp::ElementHistogram, 
 			 python::return_value_policy<python::copy_non_const_reference>, 
 			 python::default_call_policies, python::default_call_policies, python::default_call_policies, false>())
-		.def("__eq__", &Chem::ElementHistogram::operator==, (python::arg("self"), python::arg("hist")))
-		.def("__ne__", &Chem::ElementHistogram::operator!=, (python::arg("self"), python::arg("hist")))
-		.def("__le__", &Chem::ElementHistogram::operator<=, (python::arg("self"), python::arg("hist")))
-		.def("__ge__", &Chem::ElementHistogram::operator>=, (python::arg("self"), python::arg("hist")))
-		.def("__lt__", &Chem::ElementHistogram::operator<, (python::arg("self"), python::arg("hist")))
-		.def("__gt__", &Chem::ElementHistogram::operator>, (python::arg("self"), python::arg("hist")));
+		.def("__eq__", &MolProp::ElementHistogram::operator==, (python::arg("self"), python::arg("hist")))
+		.def("__ne__", &MolProp::ElementHistogram::operator!=, (python::arg("self"), python::arg("hist")))
+		.def("__le__", &MolProp::ElementHistogram::operator<=, (python::arg("self"), python::arg("hist")))
+		.def("__ge__", &MolProp::ElementHistogram::operator>=, (python::arg("self"), python::arg("hist")))
+		.def("__lt__", &MolProp::ElementHistogram::operator<, (python::arg("self"), python::arg("hist")))
+		.def("__gt__", &MolProp::ElementHistogram::operator>, (python::arg("self"), python::arg("hist")));
 }

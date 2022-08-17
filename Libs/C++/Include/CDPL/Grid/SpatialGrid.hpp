@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief SpatialGrid.
 		 */
 		template <typename T, typename CVT = T> 
@@ -74,10 +69,6 @@ namespace CDPL
 
 		typedef SpatialGrid<float> FSpatialGrid;
 		typedef SpatialGrid<double> DSpatialGrid;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

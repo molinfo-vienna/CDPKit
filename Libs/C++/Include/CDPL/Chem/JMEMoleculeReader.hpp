@@ -47,11 +47,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_JME_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
 		 *
 		 * \c %JMEMoleculeReader implements the reading of Chem::Molecule objects from a \c std::istream instance that
@@ -414,10 +409,6 @@ namespace CDPL
 
 			JMEDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

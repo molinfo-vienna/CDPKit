@@ -72,11 +72,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_CONTAINERS
-		 * @{
-		 */
-
-		/**
 		 * \brief A dynamic array class providing amortized constant time
 		 *        access to arbitrary elements.
 		 *
@@ -652,10 +647,6 @@ namespace CDPL
 		 * \brief An array of <tt>Util::BitSet</tt> objects.
 		 */
 		typedef Array<BitSet> BitSetArray;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

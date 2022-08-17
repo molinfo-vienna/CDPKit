@@ -41,11 +41,6 @@ namespace CDPL
 	namespace Vis
 	{
 
-		/**
-		 * \addtogroup CDPL_VIS_RENDERING_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class Rectangle2D;
 
 		/**
@@ -66,10 +61,6 @@ namespace CDPL
 		private:
 			const char* getClassName() const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

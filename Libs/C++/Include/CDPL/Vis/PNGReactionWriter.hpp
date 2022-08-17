@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_PNG_OUTPUT
-		 * @{
-		 */
-
-		/**
 		 * \brief Creates 2D depictions of chemical reactions in the <em>Portable Network Graphics (PNG)</em> [\ref WPNG] format. 
 		 *
 		 * \c %PNGReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
@@ -85,10 +80,6 @@ namespace CDPL
 			std::ostream& output;
 			bool          state;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

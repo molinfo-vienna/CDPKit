@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_VIS_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Vis::Atom properties.
 		 */
 		namespace AtomPropertyDefault
@@ -62,10 +57,6 @@ namespace CDPL
 			extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
 			extern CDPL_VIS_API const SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

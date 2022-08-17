@@ -48,11 +48,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 		 *
 		 * \c %SMILESReactionWriter supports the following control-parameters:
@@ -170,10 +165,6 @@ namespace CDPL
 			bool                state;
 			SMILESDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_RDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of bzip2-compressed reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 		 */
 		typedef Util::DefaultDataInputHandler<RDFBZ2ReactionReader, DataFormat::RDF_BZ2> RDFBZ2ReactionInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

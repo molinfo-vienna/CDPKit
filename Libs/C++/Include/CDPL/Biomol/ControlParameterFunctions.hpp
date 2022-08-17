@@ -47,11 +47,6 @@ namespace CDPL
 	namespace Biomol 
 	{
 	
-		/**
-		 * \addtogroup CDPL_BIOMOL_CONTROL_PARAMETER_FUNCTIONS
-		 * @{
-		 */
-		
 		CDPL_BIOMOL_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_BIOMOL_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
@@ -248,10 +243,6 @@ namespace CDPL
 		CDPL_BIOMOL_API bool hasCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_BIOMOL_API void clearCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of stereo bonds in 2D depictions of chemical structures.
 		 */
 		namespace BondStereoFlag
@@ -114,10 +109,6 @@ namespace CDPL
 			 */
 			const unsigned int REVERSE_EITHER = 6;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

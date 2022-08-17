@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief An unary functor for the dereferenciation of pointers
 		 *        \e without \e null pointer checking.
 		 * \tparam ArgType The pointer type.
@@ -91,10 +86,6 @@ namespace CDPL
 			 */
 			ResType operator()(const ArgType& ptr) const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

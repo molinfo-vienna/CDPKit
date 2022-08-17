@@ -45,11 +45,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_IO_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief MultiConfMoleculeInputProcessor.
 		 */
 		class CDPL_CHEM_API MultiConfMoleculeInputProcessor
@@ -93,10 +88,6 @@ namespace CDPL
 			 */
 			virtual bool addConformation(MolecularGraph& tgt_molgraph, MolecularGraph& conf_molgraph) const = 0;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

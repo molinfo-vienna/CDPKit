@@ -47,11 +47,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BondReactionCenterStatusMatchExpression.
 		 */
 		class CDPL_CHEM_API BondReactionCenterStatusMatchExpression : public MatchExpression<Bond, MolecularGraph>
@@ -124,10 +119,6 @@ namespace CDPL
 		private:
 			unsigned int rxnCtrStatus;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

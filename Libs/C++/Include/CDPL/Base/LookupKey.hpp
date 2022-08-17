@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief An unique lookup key for control-parameter and property values.
 		 *
 		 * \c %LookupKey has a private default constructor and a public copy constructor. The creation of
@@ -139,10 +134,6 @@ namespace CDPL
 
 			std::size_t numericID;
 		};
-	
-		/**
-		 * @}
-		 */
 	}
 }
 

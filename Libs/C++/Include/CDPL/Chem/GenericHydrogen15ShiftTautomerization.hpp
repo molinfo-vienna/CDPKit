@@ -42,11 +42,6 @@ namespace CDPL
     {
 	
 		/**
-		 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION_RULES
-		 * @{
-		 */
-
-		/**
 		 * \brief GenericHydrogen15ShiftTautomerizationRule.
 		 */
 		class CDPL_CHEM_API GenericHydrogen15ShiftTautomerization : public PatternBasedTautomerizationRule
@@ -55,10 +50,6 @@ namespace CDPL
 		  public:
 			GenericHydrogen15ShiftTautomerization();
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

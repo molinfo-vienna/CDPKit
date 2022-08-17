@@ -55,11 +55,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_STEREO_FLAGS
-		 * @{
-		 */
-
-		/**
 		 * \brief BondStereoFlagGenerator.
 		 */
 		class CDPL_CHEM_API BondStereoFlagGenerator 
@@ -181,10 +176,6 @@ namespace CDPL
 			std::size_t                numMismatchingCtrs;
 			std::size_t                minNumMismatchingCtrs;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

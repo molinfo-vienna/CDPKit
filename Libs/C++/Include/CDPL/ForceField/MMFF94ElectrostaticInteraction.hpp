@@ -42,11 +42,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_DATA
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteraction
 		{
 
@@ -93,10 +88,6 @@ namespace CDPL
 			double      deConst;
 			double      distExpo;
 		};			
-    
-		/**
-		 * @}
-		 */
     }
 }
 

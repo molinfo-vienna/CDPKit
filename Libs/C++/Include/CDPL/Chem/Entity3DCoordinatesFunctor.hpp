@@ -46,11 +46,6 @@ namespace CDPL
 		class Entity3D;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief Entity3DCoordinatesFunctor.
 		 */
 		class CDPL_CHEM_API Entity3DCoordinatesFunctor : public std::unary_function<Entity3D, const Math::Vector3D&>
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			const Math::Vector3D& operator()(const Entity3D& entity) const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

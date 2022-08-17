@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MATH_MISCELLANEOUS
-		 * @{
-		 */
-		
-		/**
 		 * \brief An array for storing generic vector objects.
 		 */
 		template <typename V>
@@ -108,10 +103,6 @@ namespace CDPL
 		 * \brief An array of Math::Vector3UL objects.
 		 */
 		typedef VectorArray<Vector3UL> Vector3ULArray;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

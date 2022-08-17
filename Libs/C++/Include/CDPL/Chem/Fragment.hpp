@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief Fragment.
 		 */
 		class CDPL_CHEM_API Fragment : public MolecularGraph
@@ -365,10 +360,6 @@ namespace CDPL
 			AtomIndexMap atomIndices;
 			BondIndexMap bondIndices;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

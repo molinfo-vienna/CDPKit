@@ -52,11 +52,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API RMSDConformerSelector
 		{
 
@@ -128,10 +123,6 @@ namespace CDPL
 		    std::size_t                   maxNumSymMappings;
 		  	CallbackFunction              abortCallback;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

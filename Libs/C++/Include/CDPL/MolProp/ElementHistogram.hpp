@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data type for the storage of element histograms of chemical compounds.
 		 *
 		 * \c %ElementHistogram is an unique associative map where the keys specify the atom type

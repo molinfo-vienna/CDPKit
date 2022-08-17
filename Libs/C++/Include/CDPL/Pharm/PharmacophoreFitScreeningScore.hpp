@@ -43,11 +43,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief PharmacophoreFitScreeningScore.
 		 */
         class CDPL_PHARM_API PharmacophoreFitScreeningScore : public PharmacophoreFitScore
@@ -60,10 +55,6 @@ namespace CDPL
 
 			double operator()(const ScreeningProcessor::SearchHit& hit);
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

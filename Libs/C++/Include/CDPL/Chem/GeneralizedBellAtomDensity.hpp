@@ -44,11 +44,6 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief GeneralizedBellAtomDensity.
 		 */
 		class CDPL_CHEM_API GeneralizedBellAtomDensity
@@ -71,10 +66,6 @@ namespace CDPL
 			double probeRadius;
 			double radiusScalingFactor;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

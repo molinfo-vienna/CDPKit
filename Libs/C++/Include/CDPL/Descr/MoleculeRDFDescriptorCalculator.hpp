@@ -52,11 +52,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_RDF_CODES
-		 * @{
-		 */
-
-		/**
 		 * \brief MoleculeRDFDescriptorCalculator.
 		 * \see [\ref CITB, \ref HBMD]
 		 */
@@ -180,10 +175,6 @@ namespace CDPL
 			RDFCodeCalculator      rdfCalculator;
 			AtomPairWeightFunction weightFunc;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of spatial regular grid data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataInputHandler<CDFDRegularGridReader, DataFormat::CDF> CDFDRegularGridInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

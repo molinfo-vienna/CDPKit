@@ -50,11 +50,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_3D_AUTOCORRELATION
-		 * @{
-		 */
-
-		/**
 		 * \brief FeatureAutoCorrelation3DVectorCalculator.
 		 * \see [\ref CITB, \ref HBMD]
 		 */
@@ -71,10 +66,6 @@ namespace CDPL
 
 			void calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& vec);
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

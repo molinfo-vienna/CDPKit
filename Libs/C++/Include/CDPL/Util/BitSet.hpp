@@ -41,11 +41,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_CONTAINERS
-		 * @{
-		 */
-
-		/**
 		 * \brief A dynamic bitset class.
 		 *
 		 * For further information see [\ref BDBS].
@@ -74,10 +69,6 @@ namespace CDPL
 				bs.resize(new_num_bits);
 			}
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -52,11 +52,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_3D_AUTOCORRELATION
-		 * @{
-		 */
-
-		/**
 		 * \brief MoleculeAutoCorr3DDescriptorCalculator.
 		 */
 		class CDPL_DESCR_API MoleculeAutoCorr3DDescriptorCalculator
@@ -138,10 +133,6 @@ namespace CDPL
 			AutoCorr3DVectorCalculator autoCorrCalculator;
 			AtomPairWeightFunction     weightFunc;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

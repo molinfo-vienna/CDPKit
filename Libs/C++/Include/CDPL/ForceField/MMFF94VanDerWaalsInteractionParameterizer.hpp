@@ -53,11 +53,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
 		{
 
@@ -86,10 +81,6 @@ namespace CDPL
 			TopologicalAtomDistanceFunction                distFunc;
 			MMFF94VanDerWaalsParameterTable::SharedPointer paramTable;
 		};			
-    
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief A helper class that implements Base::DataReader for \c std::istream based data readers.
 		 *
 		 * \c %StreamDataReader implements common operations for readers which retrieve the input data
@@ -119,10 +114,6 @@ namespace CDPL
 			bool                   streamScanned;
 			RecordStreamPosTable   recordPositions;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

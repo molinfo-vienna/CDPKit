@@ -54,11 +54,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_LOGS
-		 * @{
-		 */
-
-		/**
 		 * \brief LogSCalculator.
 		 * \see [\ref LOGS]
 		 */
@@ -121,10 +116,6 @@ namespace CDPL
 			Math::DVector          featureVector;
 			double                 logS;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

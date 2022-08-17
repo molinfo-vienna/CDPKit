@@ -61,11 +61,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_FINGERPRINTS
-		 * @{
-		 */
-
-		/**
 		 * \brief CircularFingerprintGenerator.
 		 * \see [\ref STECFP]
 		 */
@@ -334,10 +329,6 @@ namespace CDPL
 			UInt64PairArray              nbrFeatureData;
 			Util::BitSet                 bondSet;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

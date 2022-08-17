@@ -44,11 +44,6 @@ namespace CDPL
 	
 		class Entity3DContainer;
 
-		/**
-		 * \addtogroup CDPL_CHEM_ENTITY3D_CONTAINER_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API void calcGeometricalDistanceMatrix(const Entity3DContainer& cntnr, Math::DMatrix& mtx);
 
 		CDPL_CHEM_API double calcGeometricalRadius(const Entity3DContainer& cntnr);
@@ -69,10 +64,6 @@ namespace CDPL
 		CDPL_CHEM_API bool insideBoundingBox(const Entity3DContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max);	
 
 		CDPL_CHEM_API bool intersectsBoundingBox(const Entity3DContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max);	
-
-		/**
-		 * @}
-		 */
 	}
 }
 

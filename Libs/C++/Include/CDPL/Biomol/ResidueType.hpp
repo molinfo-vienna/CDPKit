@@ -38,11 +38,6 @@ namespace CDPL
     namespace Biomol 
     {
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_CONSTANTS
-		 * @{
-		 */
-	
 		namespace ResidueType 
 		{
 
@@ -62,10 +57,6 @@ namespace CDPL
 			const unsigned int SACCHARIDE_LINKING       = 13;
 			const unsigned int SACCHARIDE               = 14;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

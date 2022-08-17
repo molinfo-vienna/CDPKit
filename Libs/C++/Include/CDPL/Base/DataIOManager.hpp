@@ -80,11 +80,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A singleton class that serves as a global registry for Base::DataInputHandler and Base::DataOutputHandler
 		 *        implementation instances.
 		 *
@@ -352,10 +347,6 @@ namespace CDPL
 			InputHandlerList  inputHandlers;
 			OutputHandlerList outputHandlers;
 		};
-
-		/**
-		 * @}
-		 */
 
 		// \cond UNHIDE_DETAILS
 

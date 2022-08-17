@@ -47,11 +47,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_PARAMETER_TABLES
-	 * @{
-	 */
-
 	class CDPL_FORCEFIELD_API MMFF94HeavyToHydrogenAtomTypeMap
 	{
 
@@ -98,10 +93,6 @@ namespace CDPL
 	    static SharedPointer defaultMap;
 	    DataStorage          entries;
 	};
-    
-	/**
-	 * @}
-	 */
     }
 }
 

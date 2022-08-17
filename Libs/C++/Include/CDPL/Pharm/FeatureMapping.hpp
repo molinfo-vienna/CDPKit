@@ -44,11 +44,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data type for the storage and lookup of arbitrary feature to feature mappings.
 		 *
 		 * Features mappings are stored as pairs of pointers to the mapped \c const Pharm::Feature objects.
@@ -68,10 +63,6 @@ namespace CDPL
 				return "FeatureMapping";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

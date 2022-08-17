@@ -48,11 +48,6 @@ namespace CDPL
 
 		class GaussianShapeFunction;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTORS
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API GaussianShapeOverlapFunction
 		{
 			
@@ -99,10 +94,6 @@ namespace CDPL
 				return *this;
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

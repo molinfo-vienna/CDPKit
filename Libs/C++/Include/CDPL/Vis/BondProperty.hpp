@@ -47,11 +47,6 @@ namespace CDPL
 	{
 	
 		/**
-		 * \addtogroup CDPL_VIS_BOND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Bond properties.
 		 */
 		namespace BondProperty
@@ -210,10 +205,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const Base::LookupKey LABEL_MARGIN;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

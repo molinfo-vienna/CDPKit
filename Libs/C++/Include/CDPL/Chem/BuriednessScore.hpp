@@ -49,11 +49,6 @@ namespace CDPL
 		class AtomContainer;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief BuriednessScore.
 		 */
 		class CDPL_CHEM_API BuriednessScore
@@ -101,10 +96,6 @@ namespace CDPL
 			PointList                 probeSurfPoints;
 			Util::BitSet              hitRaysMask;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

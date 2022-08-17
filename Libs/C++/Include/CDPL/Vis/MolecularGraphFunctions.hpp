@@ -51,11 +51,6 @@ namespace CDPL
 		class Font;
 		class SizeSpecification;
 
-		/**
-		 * \addtogroup CDPL_VIS_MOLECULAR_GRAPH_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_VIS_API const ColorTable::SharedPointer& getAtomColorTable(const Chem::MolecularGraph& molgraph);
 
 		CDPL_VIS_API void setAtomColorTable(Chem::MolecularGraph& molgraph, const ColorTable::SharedPointer& colors);
@@ -234,10 +229,6 @@ namespace CDPL
 		CDPL_VIS_API bool hasBondLabelMargin(const Chem::MolecularGraph& molgraph);
 
 		CDPL_VIS_API void clearBondLabelMargin(Chem::MolecularGraph& molgraph);
-		
-		/**
-		 * @}
-		 */
 	}
 }
 

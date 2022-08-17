@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_INCHI_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em>
 		 *        [\ref INCHI] format.
 		 */
 		typedef Util::DefaultDataOutputHandler<INCHIMolecularGraphWriter, DataFormat::INCHI> INCHIMolecularGraphOutputHandler;
-	
-		/**
-		 * @}
-		 */
 	}
 }
 

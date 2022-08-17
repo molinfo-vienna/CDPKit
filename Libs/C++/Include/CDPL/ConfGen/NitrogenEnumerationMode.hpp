@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the mode of invertible nitrogen enumeration.
 		 */
 		namespace NitrogenEnumerationMode
@@ -55,10 +50,6 @@ namespace CDPL
 
 			const int UNSPECIFIED_STEREO = 2;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

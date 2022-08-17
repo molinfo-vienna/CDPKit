@@ -42,11 +42,6 @@ namespace CDPL
     namespace Util
     {
 
-	/**
-	 * \addtogroup CDPL_UTIL_FUNCTIONS
-	 * @{
-	 */
-
 	class CDPL_UTIL_API FileRemover
 	{
 
@@ -68,10 +63,6 @@ namespace CDPL
 
 	    std::string path;
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

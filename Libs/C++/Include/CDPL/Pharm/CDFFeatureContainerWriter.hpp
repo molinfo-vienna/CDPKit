@@ -48,11 +48,6 @@ namespace CDPL
 		class FeatureContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for feature container data in the native I/O format of the <em>CDPL</em>.
 		 */
 		class CDPL_PHARM_API CDFFeatureContainerWriter : public Base::DataWriter<FeatureContainer>
@@ -92,10 +87,6 @@ namespace CDPL
 			bool             state;
 			CDFDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

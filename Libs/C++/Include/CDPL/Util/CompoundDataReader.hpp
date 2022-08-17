@@ -51,11 +51,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief CompoundDataReader.
 		 */
 		template <typename DataType>
@@ -111,10 +106,6 @@ namespace CDPL
 			std::size_t        recordIdx;
 			std::size_t        numRecords;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

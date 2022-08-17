@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the connection table and \e Rxn-File version for the
 		 *        I/O of molecular graphs and reactions in \e MDL format [\ref CTFILE].
 		 */
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			const unsigned int V3000    = 3000;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

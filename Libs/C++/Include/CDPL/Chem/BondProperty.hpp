@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Bond properties.
 		 */
 		namespace BondProperty
@@ -76,10 +71,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

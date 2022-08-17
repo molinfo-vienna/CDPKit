@@ -42,11 +42,6 @@ namespace CDPL
 	namespace Vis
 	{
 
-		/**
-		 * \addtogroup CDPL_VIS_RENDERING_INTERFACES
-		 * @{
-		 */
-
 		class Font;
 		class Rectangle2D;
 
@@ -181,10 +176,6 @@ namespace CDPL
 			 */
 			virtual void getBounds(char ch, Rectangle2D& bounds) const = 0; 
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

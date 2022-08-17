@@ -48,11 +48,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for molecular graph data in the <em>MDL Mol-File</em> [\ref CTFILE] format.
 		 *
 		 * \c %SDFMolecularGraphWriter supports the following control-parameters:
@@ -161,10 +156,6 @@ namespace CDPL
 			bool             state;
 			MDLDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

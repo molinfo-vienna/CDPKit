@@ -44,11 +44,6 @@ namespace CDPL
 
 		class Feature;
 	
-		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_PHARM_API unsigned int getType(const Feature& feature);
 
 		CDPL_PHARM_API void setType(Feature& feature, unsigned int type);
@@ -137,10 +132,6 @@ namespace CDPL
 		CDPL_PHARM_API void clearHydrophobicity(Feature& feature);
 
 		CDPL_PHARM_API bool hasHydrophobicity(const Feature& feature);
-
-		/**
-		 * @}
-		 */
     }
 }
 

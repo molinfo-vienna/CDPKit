@@ -50,11 +50,6 @@ namespace CDPL
 	{
 		
 		/**
-		 * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief A class providing methods for the storage and lookup of control-parameter values.
 		 *
 		 * The purpose of \c %ControlParameterContainer is to provide a common facility for the storage and lookup of
@@ -428,10 +423,6 @@ namespace CDPL
 			ParamRemovedCallbackContainer    paramRemovedCallbacks;
 			ParentChangedCallbackContainer   parentChangedCallbacks;
 		};
-	
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in control-parameters.
 		 */
 		namespace ControlParameter
@@ -69,10 +64,6 @@ namespace CDPL
 			 */
 			extern CDPL_CONFGEN_API const Base::LookupKey STRICT_ERROR_CHECKING;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief MolecularGraphComponentGroupingMatchExpression.
 		 * \see [\ref SMARTS]
 		 */
@@ -113,10 +108,6 @@ namespace CDPL
 			mutable ComponentList       compList;
 			mutable boost::mutex        mutex;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

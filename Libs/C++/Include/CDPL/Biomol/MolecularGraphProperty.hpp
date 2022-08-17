@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_MOLECULAR_GRAPH_PROPERTIES 
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Biomol::MolecularGraph properties.
 		 */
 		namespace MolecularGraphProperty
@@ -65,10 +60,6 @@ namespace CDPL
 			extern CDPL_BIOMOL_API const Base::LookupKey MODEL_NUMBER;
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_DATA;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

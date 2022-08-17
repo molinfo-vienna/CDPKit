@@ -48,11 +48,6 @@ namespace CDPL
 	namespace Util
 	{
 
-		/**
-		 * \addtogroup CDPL_UTIL_CONTAINERS
-		 * @{
-		 */
-
 		template <typename ValueType, bool Allow = true> 
 		struct MapDefaultValue
 		{
@@ -653,10 +648,6 @@ namespace CDPL
 
 			StorageType data;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

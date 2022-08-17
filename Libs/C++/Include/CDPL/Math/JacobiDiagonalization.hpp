@@ -48,11 +48,6 @@ namespace CDPL
 	{	
 
 		/**
-		 * \addtogroup CDPL_MATH_EIGENVALUES
-		 * @{
-		 */
-
-		/**
 		 * \brief Computes all eigenvalues and eigenvectors of a real symmetric matrix \a an using Jacobi's
 		 *        algorithm [\ref WJACO ].
 		 *
@@ -72,10 +67,6 @@ namespace CDPL
 		 */
 		template <typename M1, typename V, typename M2>
 		bool jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>& d, MatrixExpression<M2>& v, std::size_t max_iter = 50);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

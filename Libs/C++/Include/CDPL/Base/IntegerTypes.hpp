@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_INTEGER_TYPES
-		 * @{
-		 */
-
-		/**
 		 * \brief A 8-bit wide signed integer.
 		 */
 		typedef boost::int8_t int8;			 
@@ -100,10 +95,6 @@ namespace CDPL
 		typedef boost::uint64_t uint64;		   
 
 #endif // SIZEOF_LONG_INT == 8		
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -49,11 +49,6 @@ namespace CDPL
     namespace Util
     {
 
-		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
 		enum CompressionAlgo
 		{
 
@@ -181,10 +176,6 @@ namespace CDPL
 		typedef CompressionOStream<BZIP2>   BZip2OStream;
 		typedef CompressedIOStream<GZIP>    GZipIOStream;
 		typedef CompressedIOStream<BZIP2>   BZip2IOStream;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

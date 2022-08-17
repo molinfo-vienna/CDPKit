@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_DATA_FORMATS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
 		 */
 		namespace DataFormat
@@ -82,10 +77,6 @@ namespace CDPL
 			 */
 			extern CDPL_PHARM_API const Base::DataFormat PSD;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

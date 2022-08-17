@@ -46,11 +46,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief TautomerScore.
 		 */
 		class CDPL_CHEM_API TautomerScore
@@ -75,10 +70,6 @@ namespace CDPL
 
 			bool hasExocyclicOH(const Atom& atom, const MolecularGraph& molgraph) const;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

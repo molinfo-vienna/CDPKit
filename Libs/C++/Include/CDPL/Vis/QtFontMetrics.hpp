@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_BACKENDS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the FontMetrics interface for the \e Qt rendering backend.
 		 *
 		 * \c %QtFontMetrics is implemented by wrapping a corresponding \c QFontMetrics instance created for the
@@ -95,10 +90,6 @@ namespace CDPL
 			QPaintDevice*                qPaintDevice;
 			std::auto_ptr<QFontMetricsF> qFontMetrics;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

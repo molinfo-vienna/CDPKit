@@ -46,11 +46,6 @@ namespace CDPL
 		class Rectangle2D;
 
 		/**
-		 * \addtogroup CDPL_VIS_PRESENTATION
-		 * @{
-		 */
-
-		/**
 		 * \brief The abstract base of classes implementing the 2D visualization of data objects.
 		 *
 		 * Subclasses of \c %View2D implement the generation of two-dimensional visual representations of data objects
@@ -89,10 +84,6 @@ namespace CDPL
 			 */
 			virtual void getModelBounds(Rectangle2D& bounds) = 0;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

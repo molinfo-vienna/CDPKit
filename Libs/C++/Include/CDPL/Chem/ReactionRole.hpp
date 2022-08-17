@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the role of molecules (components) in
 		 *        a chemical reaction.
 		 */
@@ -80,10 +75,6 @@ namespace CDPL
 			 */
 			const unsigned int ALL      = REACTANT | AGENT | PRODUCT;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

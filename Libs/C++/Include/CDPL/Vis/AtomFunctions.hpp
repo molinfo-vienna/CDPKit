@@ -50,11 +50,6 @@ namespace CDPL
 		class Font;
 		class SizeSpecification;
 
-		/**
-		 * \addtogroup CDPL_VIS_ATOM_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_VIS_API const Color& getColor(const Chem::Atom& atom);
 
 		CDPL_VIS_API void setColor(Chem::Atom& atom, const Color& color);
@@ -116,10 +111,6 @@ namespace CDPL
 		CDPL_VIS_API bool hasRadicalElectronDotSize(const Chem::Atom& atom);
 
 		CDPL_VIS_API void clearRadicalElectronDotSize(Chem::Atom& atom);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

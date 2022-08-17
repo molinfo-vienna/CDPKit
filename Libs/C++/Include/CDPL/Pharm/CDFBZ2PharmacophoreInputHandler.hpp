@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of bzip2-compressed pharmacophore data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataInputHandler<CDFBZ2PharmacophoreReader, DataFormat::CDF_BZ2> CDFBZ2PharmacophoreInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

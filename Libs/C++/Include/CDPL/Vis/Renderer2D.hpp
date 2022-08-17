@@ -44,11 +44,6 @@ namespace CDPL
 	namespace Vis
 	{
 
-		/**
-		 * \addtogroup CDPL_VIS_RENDERING_INTERFACES
-		 * @{
-		 */
-
 		class Pen;
 		class Brush;
 		class Font;
@@ -244,10 +239,6 @@ namespace CDPL
 			 */
 			virtual void drawText(double x, double y, const std::string& txt) = 0;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

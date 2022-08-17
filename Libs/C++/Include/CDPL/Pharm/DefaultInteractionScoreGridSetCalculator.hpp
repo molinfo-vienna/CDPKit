@@ -46,11 +46,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_INTERACTION_SCORE_GRID_CALCULATION
-		 * @{
-		 */
-
-		/**
 		 * \brief DefaultInteractionScoreGridSetCalculator.
 		 */
 		class CDPL_PHARM_API DefaultInteractionScoreGridSetCalculator : public InteractionScoreGridSetCalculator
@@ -111,10 +106,6 @@ namespace CDPL
             Math::Matrix4D         coordsTransform;
 			Grid::DRegularGridSet* gridSet;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

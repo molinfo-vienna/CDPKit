@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in control-parameters.
 		 */
 		namespace ControlParameter
@@ -483,10 +478,6 @@ namespace CDPL
 
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_SUBSTRUCTURES;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

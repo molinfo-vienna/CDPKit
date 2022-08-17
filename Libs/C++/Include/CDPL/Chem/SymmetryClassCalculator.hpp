@@ -51,11 +51,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SYMMETRY_CLASSES
-		 * @{
-		 */
-
-		/**
 		 * \brief SymmetryClassCalculator.
 		 * \see [\ref TOPSY]
 		 */
@@ -235,10 +230,6 @@ namespace CDPL
 			NodeList       atomNodes;
 			NodeList       sortedAtomNodes;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

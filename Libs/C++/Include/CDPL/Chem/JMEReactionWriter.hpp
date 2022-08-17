@@ -48,11 +48,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_JME_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for reaction data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
 		 *
 		 * \c %JMEReactionWriter implements the output of Chem::Reaction objects in the native I/O format used by the
@@ -493,10 +488,6 @@ namespace CDPL
 			bool             state;
 			JMEDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

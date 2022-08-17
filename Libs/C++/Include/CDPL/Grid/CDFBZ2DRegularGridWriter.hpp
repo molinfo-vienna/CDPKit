@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Grid
 	{
 
-		/**
-		 * \addtogroup CDPL_GRID_CDF_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataWriter<CDFDRegularGridWriter, Util::BZip2OStream> CDFBZ2DRegularGridWriter;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

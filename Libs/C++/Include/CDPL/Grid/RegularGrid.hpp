@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_GRID_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief RegularGrid.
 		 */
 		template <typename T, typename CVT = T> 
@@ -95,10 +90,6 @@ namespace CDPL
 
 		typedef RegularGrid<float> FRegularGrid;
 		typedef RegularGrid<double> DRegularGrid;
-
-		/**
-		 * @}
-		 */
     }
 }
 

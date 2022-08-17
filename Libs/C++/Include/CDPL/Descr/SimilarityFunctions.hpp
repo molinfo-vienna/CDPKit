@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_SIMILARITY_FUNCTIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief Calculates the <em>Tanimoto Similarity Measure</em> [\ref CITB] for the given bitsets \a bs1 and \a bs2.
 		 *
 		 * The <em>Tanimoto Similarity Measure</em> \f$ S_{ab} \f$ is calculated by:
@@ -222,10 +217,6 @@ namespace CDPL
 		 * \return The calculated distance.
 		 */
 		CDPL_DESCR_API double calcEuclideanDistance(const Util::BitSet& bs1, const Util::BitSet& bs2);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

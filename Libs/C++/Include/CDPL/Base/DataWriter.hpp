@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief An interface for writing data objects of a given type to an arbitrary data sink.
 		 *
 		 * \c %DataWriter is the common interface of classes which write objects of a given type 
@@ -142,10 +137,6 @@ namespace CDPL
 		 */
 		template <typename T>
 		DataWriter<T>& operator<<(DataWriter<T>& writer, const T& obj);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

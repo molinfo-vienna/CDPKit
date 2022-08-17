@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief HBondDonorFeatureGenerator.
 		 */
 		class CDPL_PHARM_API HBondDonorFeatureGenerator : public PatternBasedFeatureGenerator
@@ -73,10 +68,6 @@ namespace CDPL
 		  private:
 			void init(bool static_h_bonds);
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

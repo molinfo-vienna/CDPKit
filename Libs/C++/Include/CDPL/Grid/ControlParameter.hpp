@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in control-parameters.
 		 */
 		namespace ControlParameter
@@ -71,10 +66,6 @@ namespace CDPL
 
 			extern CDPL_GRID_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

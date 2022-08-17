@@ -46,11 +46,6 @@ namespace CDPL
     namespace Pharm 
     {
 	
-		/**
-		 * \addtogroup CDPL_PHARM_ATTRIBUTED_GRID_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_PHARM_API unsigned int getFeatureType(const Grid::AttributedGrid& grid);
 
 		CDPL_PHARM_API void setFeatureType(Grid::AttributedGrid& grid, unsigned int type);
@@ -67,10 +62,6 @@ namespace CDPL
 		CDPL_PHARM_API void clearTargetFeatureType(Grid::AttributedGrid& grid);
 
 		CDPL_PHARM_API bool hasTargetFeatureType(const Grid::AttributedGrid& grid);
-
-		/**
-		 * @}
-		 */
     }
 }
 

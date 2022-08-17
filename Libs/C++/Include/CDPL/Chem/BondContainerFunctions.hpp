@@ -44,11 +44,6 @@ namespace CDPL
 	
 		class BondContainer;
 
-		/**
-		 * \addtogroup CDPL_CHEM_BOND_CONTAINER_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API std::size_t getExplicitBondCount(const BondContainer& cntnr);
 
 		CDPL_CHEM_API std::size_t getExplicitBondCount(const BondContainer& cntnr, std::size_t order);
@@ -62,10 +57,6 @@ namespace CDPL
 		CDPL_CHEM_API std::size_t getAromaticBondCount(const BondContainer& cntnr);
 
 		CDPL_CHEM_API std::size_t getHeavyBondCount(const BondContainer& cntnr);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

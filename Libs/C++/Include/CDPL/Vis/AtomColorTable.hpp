@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides preinitialized color tables for the visualization of atomic properties.
 		 */
 		namespace AtomColorTable
@@ -62,10 +57,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const ColorTable ELEMENT_COLORS_2D;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

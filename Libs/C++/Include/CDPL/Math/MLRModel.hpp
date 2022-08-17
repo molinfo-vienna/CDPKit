@@ -49,11 +49,6 @@ namespace CDPL
 	{	
 
 		/**
-		 * \addtogroup CDPL_MATH_LINEAR_REGRESSION
-		 * @{
-		 */
-
-		/**
 		 * \brief Performs <em>Multiple Linear Regression</em> [\ref WLIREG] on a set of data points
 		 *        \f$ (y_i, \vec{X}_i) \f$.
 		 *
@@ -303,10 +298,6 @@ namespace CDPL
 		    ValueType   r;
 		    ValueType   stdDeviation;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

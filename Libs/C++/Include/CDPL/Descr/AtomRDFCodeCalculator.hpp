@@ -50,11 +50,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_RDF_CODES
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomRDFCodeCalculator.
 		 * \see [\ref CITB, \ref HBMD]
 		 */
@@ -71,10 +66,6 @@ namespace CDPL
 
 			void calculate(const Chem::AtomContainer& cntnr, Math::DVector& rdf_code);
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

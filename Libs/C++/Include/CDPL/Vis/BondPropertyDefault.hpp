@@ -43,11 +43,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_VIS_BOND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Vis::Bond properties.
 		 */
 		namespace BondPropertyDefault
@@ -66,10 +61,6 @@ namespace CDPL
 			extern CDPL_VIS_API const SizeSpecification LABEL_SIZE;
 			extern CDPL_VIS_API const SizeSpecification LABEL_MARGIN;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

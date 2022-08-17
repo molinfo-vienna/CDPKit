@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief HydrophobicInteractionConstraint.
 		 */
 		class CDPL_PHARM_API HydrophobicInteractionConstraint : public FeatureDistanceConstraint
@@ -65,10 +60,6 @@ namespace CDPL
 			HydrophobicInteractionConstraint(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
 				FeatureDistanceConstraint(min_dist, max_dist) {}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

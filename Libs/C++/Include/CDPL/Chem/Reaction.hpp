@@ -45,11 +45,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief Reaction.
 		 */
 		class CDPL_CHEM_API Reaction : public Base::PropertyContainer
@@ -351,10 +346,6 @@ namespace CDPL
 				unsigned int compRole;
 			};
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

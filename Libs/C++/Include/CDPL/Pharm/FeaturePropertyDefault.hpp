@@ -41,11 +41,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Pharm::Feature properties.
 		 */
 		namespace FeaturePropertyDefault
@@ -62,10 +57,6 @@ namespace CDPL
 			extern CDPL_PHARM_API const unsigned int TYPE;
 			extern CDPL_PHARM_API const unsigned int GEOMETRY;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

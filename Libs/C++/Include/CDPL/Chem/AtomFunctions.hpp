@@ -56,11 +56,6 @@ namespace CDPL
 
 		class StereoDescriptor;
 	
-		/**
-		 * \addtogroup CDPL_CHEM_ATOM_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API const std::string& getName(const Atom& atom);
 
 		CDPL_CHEM_API void setName(Atom& atom, const std::string& name);
@@ -618,10 +613,6 @@ namespace CDPL
 
 			return count;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -53,11 +53,6 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_INCHI_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em>
 		 *        [\ref INCHI] format.
 		 *
@@ -227,10 +222,6 @@ namespace CDPL
 			std::string  message;
 			std::string  logOutput;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

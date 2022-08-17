@@ -38,11 +38,6 @@ namespace CDPL
     namespace Shape
     {
 
-	/**
-	 * \addtogroup CDPL_SHAPE_CONSTANTS
-	 * @{
-	 */
-	
 	namespace SymmetryClass
 	{
 			
@@ -57,10 +52,6 @@ namespace CDPL
 
 	    const unsigned int SPHERICAL   = 4;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

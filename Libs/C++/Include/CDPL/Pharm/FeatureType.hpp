@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
 		 */
 		namespace FeatureType 
@@ -71,10 +66,6 @@ namespace CDPL
 
 			const unsigned int MAX_TYPE              = EXCLUSION_VOLUME;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

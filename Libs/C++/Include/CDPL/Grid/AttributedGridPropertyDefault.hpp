@@ -43,11 +43,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_GRID_ATTRIBUTED_GRID_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Grid::AttributedGrid properties.
 		 */
 		namespace AttributedGridPropertyDefault
@@ -55,10 +50,6 @@ namespace CDPL
 
 			extern CDPL_GRID_API const std::string NAME;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

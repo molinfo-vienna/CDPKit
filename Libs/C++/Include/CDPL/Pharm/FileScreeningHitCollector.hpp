@@ -50,11 +50,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief FileScreeningHitCollector.
 		 */
         class CDPL_PHARM_API FileScreeningHitCollector
@@ -101,10 +96,6 @@ namespace CDPL
 			Math::Vector3DArray   alignedCoords;
 			Chem::BasicMolecule   molecule;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

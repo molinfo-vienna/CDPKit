@@ -47,11 +47,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief ReactionAtomMappingMatchExpression.
 		 */
 		class CDPL_CHEM_API ReactionAtomMappingMatchExpression : public MatchExpression<Reaction>
@@ -106,10 +101,6 @@ namespace CDPL
 		private:
 			AtomMapping::SharedPointer atomMapping;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Biomol
 	{
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_MMTF_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataWriter<MMTFMolecularGraphWriter, Util::BZip2OStream> MMTFBZ2MolecularGraphWriter;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

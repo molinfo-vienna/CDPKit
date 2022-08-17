@@ -49,11 +49,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief FeatureContainer.
 		 */
 		class CDPL_PHARM_API FeatureContainer : public Chem::Entity3DContainer, public Base::PropertyContainer
@@ -194,10 +189,6 @@ namespace CDPL
 				boost::reference_wrapper<FeatureContainer> container;
 			};
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

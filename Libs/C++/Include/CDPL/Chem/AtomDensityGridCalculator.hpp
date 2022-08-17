@@ -59,11 +59,6 @@ namespace CDPL
 		class AtomContainer;
 
 		/**
-		 * \addtogroup CDPL_CHEM_GRID_CALCULATION
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomDensityGridCalculator.
 		 */
 		class CDPL_CHEM_API AtomDensityGridCalculator
@@ -123,10 +118,6 @@ namespace CDPL
 			Math::Vector3DArray        atomCoords;
 			AtomIndexList              atomIndices;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

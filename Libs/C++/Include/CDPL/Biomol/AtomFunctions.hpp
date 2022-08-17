@@ -53,11 +53,6 @@ namespace CDPL
 	namespace Biomol 
 	{
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_ATOM_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_BIOMOL_API const std::string& getResidueAtomName(const Chem::Atom& atom);
 
 		CDPL_BIOMOL_API void setResidueAtomName(Chem::Atom& atom, const std::string& name);

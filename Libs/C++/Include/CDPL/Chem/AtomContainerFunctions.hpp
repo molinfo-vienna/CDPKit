@@ -52,11 +52,6 @@ namespace CDPL
 		class Fragment;
 		class Molecule;
 
-		/**
-		 * \addtogroup CDPL_CHEM_ATOM_CONTAINER_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API std::size_t getExplicitAtomCount(const AtomContainer& cntnr);
 
 		CDPL_CHEM_API std::size_t getExplicitAtomCount(const AtomContainer& cntnr, unsigned int type);
@@ -131,10 +126,6 @@ namespace CDPL
 		CDPL_CHEM_API bool insideBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);	
 
 		CDPL_CHEM_API bool intersectsBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);	
-
-		/**
-		 * @}
-		 */
 	}
 }
 

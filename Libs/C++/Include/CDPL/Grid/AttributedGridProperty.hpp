@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_GRID_ATTRIBUTED_GRID_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Grid::AttributedGrid properties.
 		 */
 		namespace AttributedGridProperty
@@ -59,10 +54,6 @@ namespace CDPL
 
 			extern CDPL_GRID_API const Base::LookupKey NAME; 
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

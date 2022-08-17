@@ -50,11 +50,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_ORDERS
-		 * @{
-		 */
-
-		/**
 		 * \brief KekuleStructureGenerator.
 		 */
 		class CDPL_CHEM_API KekuleStructureGenerator 
@@ -98,10 +93,6 @@ namespace CDPL
 			Util::BitSet           defOrderMask;
 			BondList               conctdUndefBonds;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -49,11 +49,6 @@ namespace CDPL
 		class AtomBondMapping;
 
 		/**
-		 * \addtogroup CDPL_CHEM_MATCH_EXPRESSION_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic boolean expression interface for the implementation of query/target object equivalence tests
 		 *        in molecular graph matching algorithms.
 		 *
@@ -198,10 +193,6 @@ namespace CDPL
 			 */
 			virtual bool requiresAtomBondMapping() const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

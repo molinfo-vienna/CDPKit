@@ -39,11 +39,6 @@ namespace CDPL
 	{
 		
 		/**
-		 * \addtogroup CDPL_VIS_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the layout of a set of graphical objects.
 		 */
 		namespace LayoutStyle
@@ -64,10 +59,6 @@ namespace CDPL
 			 */
 			const unsigned int PACKED  = 2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,20 +47,11 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
-		 * @{
-		 */
-		
 		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction2;
 
 		typedef boost::function3<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction3;
 
 		typedef boost::function4<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction4;
-
-		/**
-		 * @}
-		 */
     }
 }
 

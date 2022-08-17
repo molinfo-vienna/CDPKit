@@ -47,11 +47,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_RDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 		 *
 		 * \c %RDFReactionReader supports the following control-parameters:
@@ -118,10 +113,6 @@ namespace CDPL
 
 			MDLDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

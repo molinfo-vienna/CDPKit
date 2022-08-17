@@ -45,11 +45,6 @@ namespace CDPL
 
 		class MMFF94InteractionData;
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_UTILITY_FUNCTIONS
-		 * @{ 
-		 */
-
 		CDPL_FORCEFIELD_API void filterInteractions(const MMFF94InteractionData& ia_data, MMFF94InteractionData& filtered_ia_data, const Util::BitSet& inc_atom_mask);
 
 		/**

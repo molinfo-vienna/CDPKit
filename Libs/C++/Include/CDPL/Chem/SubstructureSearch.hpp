@@ -59,11 +59,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SUBGRAPH_ISOMORPHISM
-		 * @{
-		 */
-
-		/**
 		 * \brief SubstructureSearch.
 		 * \see [\ref VFLIB2]
 		 */
@@ -387,10 +382,6 @@ namespace CDPL
 			std::size_t                           numMappedAtoms;
 			std::size_t                           maxNumMappings;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

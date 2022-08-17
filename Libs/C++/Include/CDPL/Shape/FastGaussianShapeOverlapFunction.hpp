@@ -45,11 +45,6 @@ namespace CDPL
 
 		class GaussianProductList;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTORS
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API FastGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
 		{
 			
@@ -151,10 +146,6 @@ namespace CDPL
 			bool                         fastExpFunc;
 			double                       radScalingFact;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

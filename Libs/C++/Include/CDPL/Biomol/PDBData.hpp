@@ -46,11 +46,6 @@ namespace CDPL
 	namespace Biomol
 	{
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_DATA_STRUCTURES
-		 * @{
-		 */
-
 	    /**
 		 * \brief A datastructure for the storage of imported PDB data records (see [\ref CTFILE]).
 		 */
@@ -158,10 +153,6 @@ namespace CDPL
 		private:
 			TypeToDataMap data;
 	    };
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Biomol::Atom properties.
 		 */
 		namespace AtomProperty
@@ -73,10 +68,6 @@ namespace CDPL
 			extern CDPL_BIOMOL_API const Base::LookupKey OCCUPANCY;
 			extern CDPL_BIOMOL_API const Base::LookupKey B_FACTOR;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

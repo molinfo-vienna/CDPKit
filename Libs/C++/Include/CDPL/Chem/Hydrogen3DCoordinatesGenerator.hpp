@@ -53,11 +53,6 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_3D_COORDINATES_GENERATION
-		 * @{
-		 */
-
-		/**
 		 * \brief Hydrogen3DCoordinatesGenerator.
 		 */
 		class CDPL_CHEM_API Hydrogen3DCoordinatesGenerator 
@@ -183,10 +178,6 @@ namespace CDPL
 			Math::KabschAlgorithm<double>  kabschAlgo;
 			Util::BitSet                   usedPosMask;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

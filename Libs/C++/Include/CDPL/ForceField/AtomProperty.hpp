@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Atom properties.
 		 */
 		namespace AtomProperty
@@ -61,10 +56,6 @@ namespace CDPL
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_NUMERIC_TYPE;
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

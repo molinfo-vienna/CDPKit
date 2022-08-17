@@ -48,11 +48,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API DGStructureGenerator
 		{
 
@@ -90,10 +85,6 @@ namespace CDPL
 			RandNumEngine                  randomEngine;
 			DGStructureGeneratorSettings   settings;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

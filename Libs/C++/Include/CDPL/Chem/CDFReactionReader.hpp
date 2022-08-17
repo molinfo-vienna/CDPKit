@@ -47,11 +47,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for reaction data in the native I/O format of the <em>CDPL</em>.
 		 */
 		class CDPL_CHEM_API CDFReactionReader : public Util::StreamDataReader<Reaction, CDFReactionReader>
@@ -85,10 +80,6 @@ namespace CDPL
 
 			CDFDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

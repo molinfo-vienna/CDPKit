@@ -45,11 +45,6 @@ namespace CDPL
 	namespace ConfGen 
 	{
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API TorsionLibrary : public TorsionCategory
 		{
 			
@@ -69,10 +64,6 @@ namespace CDPL
 		  private:
 			static SharedPointer defaultLib;
 		};
-    
-		/**
-		 * @}
-		 */
 	}
 }
 

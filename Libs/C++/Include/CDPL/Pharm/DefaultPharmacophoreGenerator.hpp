@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief DefaultPharmacophoreGenerator.
 		 */
 		class CDPL_PHARM_API DefaultPharmacophoreGenerator : public PharmacophoreGenerator
@@ -97,10 +92,6 @@ namespace CDPL
 		  private:
 			void init(Configuration config);
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

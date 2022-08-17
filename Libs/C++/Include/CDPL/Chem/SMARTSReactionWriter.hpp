@@ -48,11 +48,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMARTS_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 		 *
 		 * \c %SMARTSReactionWriter supports the following control-parameters:
@@ -110,10 +105,6 @@ namespace CDPL
 			bool                state;
 			SMARTSDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

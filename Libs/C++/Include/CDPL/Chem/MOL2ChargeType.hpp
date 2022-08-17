@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
-
-	/**
 	 * \brief Provides constants for the specification of the atom charge type in <em>Tripos MOL2</em> files.
 	 */
 	namespace MOL2ChargeType 
@@ -63,10 +58,6 @@ namespace CDPL
 	    const unsigned int MMFF94      = 11;
 	    const unsigned int USER        = 12;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

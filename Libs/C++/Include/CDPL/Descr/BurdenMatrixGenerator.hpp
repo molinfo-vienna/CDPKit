@@ -51,11 +51,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_BCUT
-		 * @{
-		 */
-
-		/**
 		 * \brief BurdenMatrixGenerator.
 		 * \see [\ref BURMA]
 		 */
@@ -108,10 +103,6 @@ namespace CDPL
 
 			AtomWeightFunction atomWeightFunc;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

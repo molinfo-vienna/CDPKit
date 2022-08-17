@@ -46,11 +46,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief CationPiInteractionScore.
 		 */
 		class CDPL_PHARM_API CationPiInteractionScore
@@ -93,10 +88,6 @@ namespace CDPL
 			double                maxAngle;
 			NormalizationFunction normFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

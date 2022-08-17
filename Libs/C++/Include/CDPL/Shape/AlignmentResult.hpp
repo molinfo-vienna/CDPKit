@@ -43,11 +43,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_ALIGNMENT
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API AlignmentResult
 		{
 
@@ -111,10 +106,6 @@ namespace CDPL
 			double         overlap;
 			double         colOverlap;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

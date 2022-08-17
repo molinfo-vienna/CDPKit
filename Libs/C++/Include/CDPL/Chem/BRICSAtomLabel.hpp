@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
-
-	/**
 	 * \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
 	 * \see [\ref BRICS]
 	 */
@@ -68,10 +63,6 @@ namespace CDPL
 		const unsigned int L15  = 15;
 		const unsigned int L16  = 16;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

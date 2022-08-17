@@ -46,11 +46,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief FeatureGeometryMatchFunctor.
 		 */
 		class CDPL_PHARM_API FeatureGeometryMatchFunctor
@@ -130,10 +125,6 @@ namespace CDPL
 			double maxXBDInteractionDirDeviation;
 		    double maxAROrientationDeviation;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

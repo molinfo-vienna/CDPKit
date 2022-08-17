@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_INTERFACES
-		 * @{
-		 */
-
-		/**
 		 * \brief Pharmacophore.
 		 */
 		class CDPL_PHARM_API Pharmacophore : public FeatureContainer
@@ -222,10 +217,6 @@ namespace CDPL
 			 */
 			Pharmacophore& operator+=(const FeatureContainer& cntnr);
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_ATTRIBUTED_GRID_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Pharm::AttributedGrid properties.
 		 */
 		namespace AttributedGridProperty
@@ -60,10 +55,6 @@ namespace CDPL
 			extern CDPL_PHARM_API const Base::LookupKey FEATURE_TYPE; 
 			extern CDPL_PHARM_API const Base::LookupKey TARGET_FEATURE_TYPE; 
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

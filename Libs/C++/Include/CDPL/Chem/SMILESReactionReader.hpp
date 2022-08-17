@@ -47,11 +47,6 @@ namespace CDPL
 		class Reaction;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for reaction data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 		 *
 		 * \c %SMILESReactionReader supports the following control-parameters:
@@ -103,10 +98,6 @@ namespace CDPL
 
 			SMILESDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -49,11 +49,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_RDF_CODES
-		 * @{
-		 */
-
-		/**
 		 * \brief RDFCodeCalculator.
 		 * \see [\ref CITB, \ref HBMD]
 		 */
@@ -220,10 +215,6 @@ namespace CDPL
 			Math::DMatrix               weightMatrix;
 			Math::DMatrix               distMatrix;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

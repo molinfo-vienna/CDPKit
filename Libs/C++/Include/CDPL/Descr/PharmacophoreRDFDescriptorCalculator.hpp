@@ -52,11 +52,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_DESCRIPTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief PharmacophoreRDFDescriptorCalculator.
 		 * \see [\ref CITB, \ref HBMD]
 		 */
@@ -180,10 +175,6 @@ namespace CDPL
 			RDFCodeCalc               rdfCalculator;
 			FeaturePairWeightFunction weightFunc;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

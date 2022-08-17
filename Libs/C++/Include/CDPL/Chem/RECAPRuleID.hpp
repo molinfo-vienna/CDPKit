@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the identification of RECAP fragmentation rules.
 		 * \see [\ref RECAP]
 		 */
@@ -63,10 +58,6 @@ namespace CDPL
 			const unsigned int AROMATIC_C_AROMATIC_C  = 10;
 			const unsigned int SULFONAMIDE            = 11;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

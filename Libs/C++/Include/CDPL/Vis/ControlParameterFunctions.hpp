@@ -52,11 +52,6 @@ namespace CDPL
 		class Font;
 		class Color;
 
-		/**
-		 * \addtogroup CDPL_VIS_CONTROL_PARAMETER_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_VIS_API const Rectangle2D& getViewportParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_VIS_API void setViewportParameter(Base::ControlParameterContainer& cntnr, const Rectangle2D& viewport);
@@ -577,10 +572,6 @@ namespace CDPL
 		CDPL_VIS_API bool hasShowStereoBondsParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_VIS_API void clearShowStereoBondsParameter(Base::ControlParameterContainer& cntnr);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

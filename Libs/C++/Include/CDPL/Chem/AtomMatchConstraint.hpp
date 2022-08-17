@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides numerical identifiers for built-in Chem::Atom matching constraints.
 		 */
 		namespace AtomMatchConstraint
@@ -155,10 +150,6 @@ namespace CDPL
 			 */
 			const unsigned int HYBRIDIZATION_STATE = 20;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -49,11 +49,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief HydrophobicAtomFeatureGenerator.
 		 * \see [\ref CATA] 
 		 */
@@ -179,10 +174,6 @@ namespace CDPL
 			Util::DArray                          atomHydTable;
 			MolProp::AtomHydrophobicityCalculator atomHydCalculator;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

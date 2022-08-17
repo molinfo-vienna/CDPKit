@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_DATA_FORMATS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides preinitialized Base::DataFormat objects for all supported biopolymer data formats.
 		 */
 		namespace DataFormat
@@ -93,10 +88,6 @@ namespace CDPL
 			 */
 			extern CDPL_BIOMOL_API const Base::DataFormat MMTF_BZ2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

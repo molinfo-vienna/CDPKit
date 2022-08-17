@@ -57,11 +57,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_PEOE_CHARGES
-		 * @{
-		 */
-
-		/**
 		 * \brief PEOEChargeCalculator.
 		 * \see [\ref PEOE]
 		 */
@@ -178,10 +173,6 @@ namespace CDPL
 			PEOEAtomStateList  atomStates;
 			PEOEAtomStateList  implHStates;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

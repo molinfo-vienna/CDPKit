@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_MOLPROP_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data type for the storage of mass percent compositions of chemical compounds.
 		 *
 		 * \c %MassComposition is an unique associative map where the keys specify the atom type
@@ -65,10 +60,6 @@ namespace CDPL
 				return "MassComposition";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A reader for molecule data in the native I/O format of the <em>CDPL</em>.
 		 */
 		class CDPL_CHEM_API CDFMoleculeReader : public Util::StreamDataReader<Molecule, CDFMoleculeReader>
@@ -85,10 +80,6 @@ namespace CDPL
 
 			CDFDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

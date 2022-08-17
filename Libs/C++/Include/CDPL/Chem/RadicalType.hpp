@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the degeneracy of the electronic state of radical atoms.
 		 */
 		namespace RadicalType
@@ -77,10 +72,6 @@ namespace CDPL
 			 */
 			const unsigned int TRIPLET       = 3;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

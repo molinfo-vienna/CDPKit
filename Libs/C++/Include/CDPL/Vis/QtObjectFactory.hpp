@@ -52,11 +52,6 @@ namespace CDPL
 		class Brush;
 
 		/**
-		 * \addtogroup CDPL_VIS_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides methods for the creation of \c QFont, \c QColor, \c QPen and \c QBrush objects
 		 *        from Font, Color, Pen and Brush instances.
 		 *
@@ -98,10 +93,6 @@ namespace CDPL
 		private:
 			QtObjectFactory() {}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

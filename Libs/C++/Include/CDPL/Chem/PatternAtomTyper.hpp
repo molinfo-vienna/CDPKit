@@ -49,11 +49,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_ATOM_CLASSIFICATION
-		 * @{
-		 */
-
-		/**
 		 * \brief PatternAtomTyper.
 		 */
 		class CDPL_CHEM_API PatternAtomTyper
@@ -153,10 +148,6 @@ namespace CDPL
 			SubstructureSearch    substructSearch;
 			Util::BitSet          labeledAtomMask;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -48,11 +48,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_JME_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for molecular graph data in the native I/O format of the <em>JME Molecular Editor</em> [\ref JME] java applet.
 		 *
 		 * \c %JMEMolecularGraphWriter implements the output of Chem::MolecularGraph objects in the native I/O format used by the
@@ -484,10 +479,6 @@ namespace CDPL
 			bool             state;
 			JMEDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

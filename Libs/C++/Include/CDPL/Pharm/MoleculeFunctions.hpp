@@ -46,16 +46,7 @@ namespace CDPL
     namespace Pharm 
     {
 	
-		/**
-		 * \addtogroup CDPL_PHARM_MOLECULE_FUNCTIONS
-		 * @{
-		 */
-	
 		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
-	
-		/**
-		 * @}
-		 */
     }
 }
 

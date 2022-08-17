@@ -51,11 +51,6 @@ namespace CDPL
 	namespace Chem 
 	{
 	
-		/**
-		 * \addtogroup CDPL_CHEM_CONTROL_PARAMETER_FUNCTIONS
-		 * @{
-		 */
-		
 		CDPL_CHEM_API bool getOrdinaryHydrogenDepleteParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_CHEM_API void setOrdinaryHydrogenDepleteParameter(Base::ControlParameterContainer& cntnr, bool deplete);
@@ -459,10 +454,6 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMOL2OutputSubstructuresParameter(const Base::ControlParameterContainer& cntnr);
 	
 		CDPL_CHEM_API void clearMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -52,11 +52,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_DESCR_2D_AUTOCORRELATION
-		 * @{
-		 */
-
-		/**
 		 * \brief MoleculeAutoCorr2DDescriptorCalculator.
 		 */
 		class CDPL_DESCR_API MoleculeAutoCorr2DDescriptorCalculator
@@ -109,10 +104,6 @@ namespace CDPL
 			AtomPairWeightFunction            weightFunc;
 			Mode                              mode;
 		}; 
-
-		/**
-		 * @}
-		 */
     }
 }
 

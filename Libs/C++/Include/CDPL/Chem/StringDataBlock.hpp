@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief Represents a data item in the structure or reaction data block of a
 		 *        <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
 		 */
@@ -134,10 +129,6 @@ namespace CDPL
 				return "StringDataBlock";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

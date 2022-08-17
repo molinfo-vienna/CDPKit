@@ -43,11 +43,6 @@ namespace CDPL
     namespace ForceField
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_HELPER_CLASSES
-		 * @{
-		 */
-
 		template <typename GV>
 		struct GradientVectorTraits
 		{
@@ -93,10 +88,6 @@ namespace CDPL
 					it->clear(ValueType());
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

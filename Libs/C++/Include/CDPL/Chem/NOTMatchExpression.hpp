@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MATCH_EXPRESSION_BUILDING_BLOCKS
-		 * @{
-		 */
-
-		/**
 		 * \brief NOTMatchExpression.
 		 * \tparam ObjType1 The type of the primary query/target objects for which the expression gets evaluated.
 		 * \tparam ObjType2 The type of secondary query/target objects which provide auxiliary information for
@@ -164,10 +159,6 @@ namespace CDPL
 		private:
 			typename MatchExpression<ObjType, void>::SharedPointer expression;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

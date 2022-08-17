@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_FORMATS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides preinitialized Base::DataFormat objects for all supported chemical data formats.
 		 */
 		namespace DataFormat
@@ -159,10 +154,6 @@ namespace CDPL
 			 */
 			extern CDPL_CHEM_API const Base::DataFormat MOL2_BZ2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

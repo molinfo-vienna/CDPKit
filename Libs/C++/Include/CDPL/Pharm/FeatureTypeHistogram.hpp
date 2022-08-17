@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data type for the storage of feature type histograms of pharmacophores.
 		 *
 		 * \c %FeatureTypeHistogram is an unique associative map where the keys specify the feature type
@@ -64,10 +59,6 @@ namespace CDPL
 				return "FeatureTypeHistogram";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

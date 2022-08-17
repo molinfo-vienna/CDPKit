@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MATCH_EXPRESSION_BUILDING_BLOCKS
-		 * @{
-		 */
-
-		/**
 		 * \brief PropertyMatchExpression.
 		 * \tparam ValueType The type of the checked property values.
 		 * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the target property
@@ -184,10 +179,6 @@ namespace CDPL
 			PropertyFunction  propertyFunc;
 			bool              fixed;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

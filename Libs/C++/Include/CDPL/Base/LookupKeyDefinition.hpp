@@ -34,11 +34,6 @@
 #include "CDPL/Base/LookupKey.hpp"
 
 /**
- * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
- * @{
- */
-
-/**
  * \brief Defines a constant CDPL::Base::LookupKey variable with the specified name.
  *
  * The variable is initialized with a new unique CDPL::Base::LookupKey instance
@@ -48,9 +43,5 @@
  */
 #define CDPL_DEFINE_LOOKUP_KEY(name) \
 const CDPL::Base::LookupKey name = CDPL::Base::LookupKey::create(#name);
-
-/**
- * @}
- */
 
 #endif // CDPL_BASE_LOOKUPKEYDEFINITION_HPP

@@ -57,11 +57,6 @@ namespace CDPL
 		class Fragment;
 
 		/**
-		 * \addtogroup CDPL_CHEM_2D_STRUCTURE_LAYOUT
-		 * @{
-		 */
-
-		/**
 		 * \brief Atom2DCoordinatesGenerator.
 		 */
 		class CDPL_CHEM_API Atom2DCoordinatesGenerator 
@@ -536,10 +531,6 @@ namespace CDPL
 			std::size_t           maxNumLayoutCollisions;
 			std::size_t           backtrackingCount;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

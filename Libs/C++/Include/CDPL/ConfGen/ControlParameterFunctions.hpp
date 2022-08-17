@@ -46,11 +46,6 @@ namespace CDPL
 	namespace ConfGen 
 	{
 	
-		/**
-		 * \addtogroup CDPL_CONFGEN_CONTROL_PARAMETER_FUNCTIONS
-		 * @{
-		 */
-		
 		CDPL_CONFGEN_API bool getStrictErrorCheckingParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_CONFGEN_API void setStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr, bool strict);
@@ -59,10 +54,6 @@ namespace CDPL
 
 		CDPL_CONFGEN_API void clearStrictErrorCheckingParameter(Base::ControlParameterContainer& cntnr);
 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

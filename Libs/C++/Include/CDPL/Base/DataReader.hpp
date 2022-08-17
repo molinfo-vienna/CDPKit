@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief An interface for reading data objects of a given type from an arbitrary data source.
 		 *
 		 * \c %DataReader is the common interface of classes which read objects of a given type 
@@ -213,10 +208,6 @@ namespace CDPL
 		 */
 		template <typename T>
 		DataReader<T>& operator>>(DataReader<T>& reader, T& obj);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

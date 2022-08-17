@@ -42,11 +42,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_GEOMETRIC_PRIMITIVES
-		 * @{
-		 */
-
-		/**
 		 * \brief Specifies an axis aligned rectangular area in 2D space.
 		 *
 		 * The rectangle is defined by a minimum point \f$ (x_{min}, y_{min}) \f$ and a maximum point
@@ -314,10 +309,6 @@ namespace CDPL
 			Math::Vector2D min;
 			Math::Vector2D max;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

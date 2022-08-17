@@ -46,11 +46,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_GRAPHICS_PRIMITIVES
-		 * @{
-		 */
-
-		/**
 		 * \brief A graphics primitive representing a single line.
 		 */
 		class CDPL_VIS_API LinePrimitive2D : public Line2D, public GraphicsPrimitive2D
@@ -101,10 +96,6 @@ namespace CDPL
 		private:
 			Pen   pen;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

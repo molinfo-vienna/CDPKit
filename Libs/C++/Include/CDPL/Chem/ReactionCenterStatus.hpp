@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags that are used to describe state changes of atoms and bonds in a
 		 *        reaction center.
 		 * \note The flags ReactionCenterStatus::IS_CENTER, ReactionCenterStatus::BOND_MADE, ReactionCenterStatus::BOND_BROKEN,
@@ -104,10 +99,6 @@ namespace CDPL
 			 */
 			const unsigned int EXACT_CHANGE      = 0x80;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

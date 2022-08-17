@@ -45,11 +45,6 @@ namespace CDPL
 
 		class GaussianProductList;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTORS
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API ExactGaussianShapeOverlapFunction : public GaussianShapeOverlapFunction
 		{
 			
@@ -109,10 +104,6 @@ namespace CDPL
 			ColorMatchFunction           colorMatchFunc;
 			ColorFilterFunction          colorFilterFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

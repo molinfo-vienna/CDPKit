@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CFL_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of molecule data from conformer generator fragment libraries.
 		 */
 		typedef Util::DefaultDataInputHandler<CFLMoleculeReader, DataFormat::CFL> CFLMoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

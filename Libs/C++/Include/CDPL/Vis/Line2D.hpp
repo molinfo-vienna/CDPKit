@@ -41,11 +41,6 @@ namespace CDPL
 	namespace Vis
 	{
 
-		/**
-		 * \addtogroup CDPL_VIS_GEOMETRIC_PRIMITIVES
-		 * @{
-		 */
-
 		class Rectangle2D;
 
 		/**
@@ -349,10 +344,6 @@ namespace CDPL
 			Math::Vector2D begin;
 			Math::Vector2D end;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

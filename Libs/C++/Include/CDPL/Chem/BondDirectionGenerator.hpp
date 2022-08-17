@@ -51,11 +51,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_DIRECTIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BondDirectionGenerator.
 		 * \see [\ref SMILES]
 		 */
@@ -198,10 +193,6 @@ namespace CDPL
 			std::size_t            numDirBonds;
 			std::size_t            minNumDirBonds;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

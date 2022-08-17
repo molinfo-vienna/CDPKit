@@ -46,11 +46,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief OrthogonalPiPiInteractionConstraint.
 		 */
 		class CDPL_PHARM_API OrthogonalPiPiInteractionConstraint : public std::binary_function<Feature, Feature, bool>
@@ -91,10 +86,6 @@ namespace CDPL
 			double maxHDist;
 			double angleTol;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

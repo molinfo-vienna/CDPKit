@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_BACKENDS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the FontMetrics interface for the \e Cairo rendering backend.
 		 *
 		 * For more information about the <em>Cairo 2D Graphics Library</em> see [\ref CAIRO].
@@ -97,10 +92,6 @@ namespace CDPL
 			CairoPointer<cairo_t>       cairoContext;
 			std::auto_ptr<CairoExtents> cairoExtents;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

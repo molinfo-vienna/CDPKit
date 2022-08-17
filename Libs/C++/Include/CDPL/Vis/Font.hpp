@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief Specifies a font for drawing text.
 		 *
 		 * On creation of a \c %Font object one can specify various attributes the font should have. The attributes set in
@@ -202,10 +197,6 @@ namespace CDPL
 			bool        strikedOut;
 			bool        fixedPitch;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

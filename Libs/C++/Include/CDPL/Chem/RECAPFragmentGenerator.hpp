@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_FRAGMENT_GENERATION
-	 * @{
-	 */
-
-	/**
 	 * \brief RECAPFragmentGenerator.
 	 * \see [\ref RECAP]
 	 */
@@ -63,10 +58,6 @@ namespace CDPL
 	     */
 	    RECAPFragmentGenerator();
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

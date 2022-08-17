@@ -41,11 +41,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_ATTRIBUTED_GRID_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Pharm::AttributedGrid properties.
 		 */
 		namespace AttributedGridPropertyDefault
@@ -54,10 +49,6 @@ namespace CDPL
 			extern CDPL_PHARM_API const unsigned int FEATURE_TYPE;
 			extern CDPL_PHARM_API const unsigned int TARGET_FEATURE_TYPE;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -42,11 +42,6 @@ namespace CDPL
     {
 	
 		/**
-		 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION_RULES
-		 * @{
-		 */
-
-		/**
 		 * \brief ImineEnamineTautomerizationRule.
 		 */
 		class CDPL_CHEM_API ImineEnamineTautomerization : public PatternBasedTautomerizationRule
@@ -55,10 +50,6 @@ namespace CDPL
 		  public:
 			ImineEnamineTautomerization();
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_JME_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of reaction data in the native I/O format of the <em>JME Molecular Editor</em>
 		 *        [\ref JME] java applet.
 		 */
 		typedef Util::DefaultDataOutputHandler<JMEReactionWriter, DataFormat::JME> JMEReactionOutputHandler;	
-
-		/**
-		 * @}
-		 */
 	}
 }
 

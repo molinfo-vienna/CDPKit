@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the perception of ring atoms and bonds in a molecular graph.
 		 */
 		class CDPL_CHEM_API CyclicSubstructure : public Fragment
@@ -101,10 +96,6 @@ namespace CDPL
 			BondStack             bondStack;
 			const MolecularGraph* molGraph;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

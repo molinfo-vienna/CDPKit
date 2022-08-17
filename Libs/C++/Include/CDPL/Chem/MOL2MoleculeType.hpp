@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
-
-	/**
 	 * \brief Provides constants for the specification of the molecule type in <em>Tripos MOL2</em> files.
 	 */
 	namespace MOL2MoleculeType 
@@ -56,10 +51,6 @@ namespace CDPL
 	    const unsigned int NUCLEIC_ACID = 4;
 	    const unsigned int SACCHARIDE   = 5;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

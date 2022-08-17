@@ -50,11 +50,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_3D_AUTOCORRELATION
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomAutoCorrelation3DVectorCalculator.
 		 */
 		class CDPL_DESCR_API AtomAutoCorrelation3DVectorCalculator : public AutoCorrelation3DVectorCalculator<Chem::Atom>
@@ -70,10 +65,6 @@ namespace CDPL
 
 			void calculate(const Chem::AtomContainer& cntnr, Math::DVector& vec);
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

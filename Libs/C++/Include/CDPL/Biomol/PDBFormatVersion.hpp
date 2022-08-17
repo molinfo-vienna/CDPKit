@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of the <em>Brookhaven Protein Data Bank (PDB)</em>
 		 *        [\ref PDB] format version.
 		 */
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			const unsigned int V3    = 3;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

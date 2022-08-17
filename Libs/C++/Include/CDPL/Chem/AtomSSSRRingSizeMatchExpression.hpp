@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_ATOM_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomSSSRRingSizeMatchExpression.
 		 * \tparam MatchFunc The type of a binary functor class that implements the logic of testing the size of rings containing
 		 *                   the target atom against the query ring size. The overloaded function call operator is
@@ -96,10 +91,6 @@ namespace CDPL
 			std::size_t ringSize;
 			MatchFunc   matchFunc;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

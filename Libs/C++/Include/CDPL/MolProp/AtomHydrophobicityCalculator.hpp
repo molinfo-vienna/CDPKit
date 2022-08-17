@@ -46,11 +46,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_MOLPROP_ATOM_HYDROPHOBICITY
-	 * @{
-	 */
-
-	/**
 	 * \brief AtomHydrophobicityCalculator.
 	 * \see [\ref CATA] 
 	 */
@@ -123,10 +118,6 @@ namespace CDPL
 	    DoubleArray                     nbrAtomVdWRadii;
 	    CoordsArray                     nbrAtomPositions;
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

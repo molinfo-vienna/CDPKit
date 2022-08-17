@@ -58,11 +58,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_SUBSTRUCTURE_SEARCH
-		 * @{
-		 */
-
-		/**
 		 * \brief ReactionSubstructureSearch.
 		 */
 		class CDPL_CHEM_API ReactionSubstructureSearch
@@ -350,10 +345,6 @@ namespace CDPL
 			std::size_t                    numTargetBonds;
 			std::size_t                    maxNumMappings;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

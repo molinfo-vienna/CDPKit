@@ -58,11 +58,6 @@ namespace CDPL
 
 		class FragmentAssemblerImpl;
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API FragmentAssembler
 		{
 
@@ -117,10 +112,6 @@ namespace CDPL
 
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -50,11 +50,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
-		 * @{
-		 */
-
-		/**
 		 * \brief ConnectedSubstructureSet.
 		 */
 		class CDPL_CHEM_API ConnectedSubstructureSet : public FragmentList
@@ -170,10 +165,6 @@ namespace CDPL
 			std::size_t              currSubstructSize;
 			const MolecularGraph*    molGraph;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

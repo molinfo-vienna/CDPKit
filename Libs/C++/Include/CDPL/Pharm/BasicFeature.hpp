@@ -44,11 +44,6 @@ namespace CDPL
 		class BasicPharmacophore;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BasicFeature.
 		 */
 		class CDPL_PHARM_API BasicFeature : public Feature
@@ -84,10 +79,6 @@ namespace CDPL
 			BasicPharmacophore* pharm;
 			std::size_t         index;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

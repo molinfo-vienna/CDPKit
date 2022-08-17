@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_GRAPHICS_PRIMITIVES
-		 * @{
-		 */
-	
-		/**
 		 * \brief A graphics primitive representing a text label.
 		 */
 		class CDPL_VIS_API TextLabelPrimitive2D : public GraphicsPrimitive2D
@@ -136,10 +131,6 @@ namespace CDPL
 			Math::Vector2D position;
 			std::string    text;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

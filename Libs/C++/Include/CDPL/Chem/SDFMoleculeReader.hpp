@@ -47,11 +47,6 @@ namespace CDPL
 		class Molecule;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A Reader for molecule data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 		 *
 		 * \c %SDFMoleculeReader supports the following control-parameters:
@@ -129,10 +124,6 @@ namespace CDPL
 
 			MDLDataReaderPtr reader;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

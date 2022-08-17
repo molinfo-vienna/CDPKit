@@ -45,11 +45,6 @@ namespace CDPL
 	{	
 
 		/**
-		 * \addtogroup CDPL_MATH_FUNCTIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief Computes the factorial \f$ n! \f$ of the non-negative integer \a n.
 		 * \param n The non-negative integer for which to compute the factorial.
 		 * \return The computed factorial of \a n.
@@ -102,10 +97,6 @@ namespace CDPL
 		 */
 		template <typename T>
 		T generalizedBell(const T& x, const T& a, const T& b, const T& c);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

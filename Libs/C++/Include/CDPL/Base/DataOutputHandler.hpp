@@ -47,11 +47,6 @@ namespace CDPL
 		class DataFormat;
 
 		/**
-		 * \addtogroup CDPL_BASE_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A factory interface providing methods for the creation of Base::DataWriter instances handling a particular
 		 *        object type and storage format.
 		 * \tparam T The type of objects handled by the created Base::DataWriter instances.
@@ -93,10 +88,6 @@ namespace CDPL
 																	std::ios_base::openmode mode = 
 																	std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

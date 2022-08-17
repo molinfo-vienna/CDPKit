@@ -61,11 +61,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94AtomTyper
 		{
 
@@ -125,10 +120,6 @@ namespace CDPL
 			RingList                                             aromRings;
 			Chem::PatternAtomTyper                               atomTyper;
 		};
-    
-		/**
-		 * @}
-		 */
     }
 }
 

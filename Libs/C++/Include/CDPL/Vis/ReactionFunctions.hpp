@@ -49,11 +49,6 @@ namespace CDPL
 		class Color;
 		class SizeSpecification;
 
-		/**
-		 * \addtogroup CDPL_VIS_REACTION_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_VIS_API unsigned int getArrowStyle(const Chem::Reaction& rxn);
 
 		CDPL_VIS_API void setArrowStyle(Chem::Reaction& rxn, unsigned int style);
@@ -232,10 +227,6 @@ namespace CDPL
 		CDPL_VIS_API bool hasShowPlusSigns(const Chem::Reaction& rxn);
 
 		CDPL_VIS_API void clearShowPlusSigns(Chem::Reaction& rxn);
-		
-		/**
-		 * @}
-		 */
 	}
 }
 

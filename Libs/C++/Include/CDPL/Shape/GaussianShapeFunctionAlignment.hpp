@@ -51,11 +51,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_ALIGNMENT
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API GaussianShapeFunctionAlignment
 		{
 
@@ -211,10 +206,6 @@ namespace CDPL
 			BFGSMinimizer                         minimizer;
 			ResultList                            results;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

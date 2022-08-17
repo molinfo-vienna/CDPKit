@@ -45,11 +45,6 @@ namespace CDPL
 
 		class GaussianShapeFunction;
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTIONS
-		 * @{
-		 */
-	
 		CDPL_SHAPE_API void calcQuadrupoleTensorEigenDecomposition(const Math::Matrix3D& quad_tensor, Math::Matrix3D& eigen_vecs,
 																   Math::Vector3D& eigen_vals);
 
@@ -64,10 +59,6 @@ namespace CDPL
 		CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
 
 		CDPL_SHAPE_API void quaternionToMatrix(const QuaternionTransformation& quat, Math::Matrix4D& mtx);
-
-		/**
-		 * @}
-		 */
     }
 }
 

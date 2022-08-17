@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags that are used to specify the 2D alignment of graphical objects within a bounded rectangular
 		 *        area.
 		 *
@@ -103,10 +98,6 @@ namespace CDPL
 			 */
 			const unsigned int CENTER           = H_CENTER | V_CENTER;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

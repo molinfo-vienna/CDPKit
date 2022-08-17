@@ -44,11 +44,6 @@ namespace CDPL
 
 		class AttributedGrid;
 	
-		/**
-		 * \addtogroup CDPL_GRID_ATTRIBUTED_GRID_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_GRID_API const std::string& getName(const AttributedGrid& grid);
 
 		CDPL_GRID_API void setName(AttributedGrid& grid, const std::string& name);
@@ -56,10 +51,6 @@ namespace CDPL
 		CDPL_GRID_API void clearName(AttributedGrid& grid);
 
 		CDPL_GRID_API bool hasName(const AttributedGrid& grid);
-
-		/**
-		 * @}
-		 */
     }
 }
 

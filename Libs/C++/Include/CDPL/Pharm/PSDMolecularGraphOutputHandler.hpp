@@ -48,11 +48,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_PHARM_PSD_IO
-	 * @{
-	 */
-
-	/**
 	 * \brief A handler for the output of molecular graph dara in the PSD-format of the <em>CDPL</em>.
 	 */
 	class CDPL_PHARM_API PSDMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
@@ -65,10 +60,6 @@ namespace CDPL
 
 	    WriterType::SharedPointer createWriter(const std::string& file_name, std::ios_base::openmode mode) const;
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

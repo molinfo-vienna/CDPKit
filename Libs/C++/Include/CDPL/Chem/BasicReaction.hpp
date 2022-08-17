@@ -49,11 +49,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_REACTION_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BasicReaction.
 		 */
 		class CDPL_CHEM_API BasicReaction : public Reaction
@@ -234,10 +229,6 @@ namespace CDPL
 			std::size_t    agentsStartIdx;
 			std::size_t    productsStartIdx;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

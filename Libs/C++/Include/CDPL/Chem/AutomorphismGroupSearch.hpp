@@ -48,11 +48,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_GRAPH_AUTOMORPHISM_SEARCH
-		 * @{
-		 */
-
-		/**
 		 * \brief AutomorphismGroupSearch.
 		 */
 		class CDPL_CHEM_API AutomorphismGroupSearch
@@ -288,10 +283,6 @@ namespace CDPL
 			const Atom*                  lastQueryAtom;
 			const Bond*                  lastQueryBond;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

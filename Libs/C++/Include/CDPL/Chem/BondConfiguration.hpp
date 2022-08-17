@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the <em>E/Z</em> configuration of double bonds.
 		 */
 		namespace BondConfiguration
@@ -85,10 +80,6 @@ namespace CDPL
 			 */
 			const unsigned int EITHER = 0x8;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

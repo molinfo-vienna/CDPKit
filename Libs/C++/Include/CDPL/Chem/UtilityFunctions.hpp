@@ -47,11 +47,6 @@ namespace CDPL
 	namespace Chem 
 	{
 
-		/**
-		 * \addtogroup CDPL_CHEM_UTILITY_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
 
 		CDPL_CHEM_API bool parseSMARTS(const std::string& smarts, Molecule& mol, bool init_qry = true);
@@ -71,10 +66,6 @@ namespace CDPL
 		CDPL_CHEM_API bool containsFragmentWithBond(const FragmentList& frag_list, const Bond& bond);
 
 		CDPL_CHEM_API bool containsFragmentWithMinSize(const FragmentList& frag_list, std::size_t min_size);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

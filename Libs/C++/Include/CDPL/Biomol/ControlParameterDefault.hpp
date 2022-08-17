@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in control-parameters.
 		 */
 		namespace ControlParameterDefault
@@ -104,10 +99,6 @@ namespace CDPL
 
 			extern CDPL_BIOMOL_API const bool COMBINE_INTERFERING_RESIDUE_COORDINATES;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

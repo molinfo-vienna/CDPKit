@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in control-parameters.
 		 */
 		namespace ControlParameterDefault
@@ -259,10 +254,6 @@ namespace CDPL
 
 			extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

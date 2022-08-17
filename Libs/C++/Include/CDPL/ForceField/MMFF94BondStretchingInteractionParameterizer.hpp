@@ -55,11 +55,6 @@ namespace CDPL
 	namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94BondStretchingInteractionParameterizer
 		{
 
@@ -110,10 +105,6 @@ namespace CDPL
 			 MMFF94BondStretchingRuleParameterTable::SharedPointer ruleParamTable;
 			 MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
 		};			
-    
-		/**
-		 * @}
-		 */
     }
 }
 

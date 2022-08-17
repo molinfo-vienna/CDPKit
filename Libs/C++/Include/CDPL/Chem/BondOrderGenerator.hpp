@@ -57,11 +57,6 @@ namespace CDPL
 		class AtomBondMapping;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_ORDERS
-		 * @{
-		 */
-
-		/**
 		 * \brief BondOrderGenerator.
 		 */
 		class CDPL_CHEM_API BondOrderGenerator 
@@ -192,10 +187,6 @@ namespace CDPL
 			Util::BitSet           bondMappingMask2;
 			Util::BitSet           planarPiBondMask;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

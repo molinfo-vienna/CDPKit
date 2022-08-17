@@ -47,11 +47,6 @@ namespace CDPL
 		class Rectangle2D;
 
 		/**
-		 * \addtogroup CDPL_VIS_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in control-parameters.
 		 */
 		namespace ControlParameterDefault
@@ -347,10 +342,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const bool                      SHOW_STEREO_BONDS;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

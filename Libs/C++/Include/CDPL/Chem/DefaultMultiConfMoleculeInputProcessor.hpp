@@ -44,11 +44,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_IO_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief MultiConfMoleculeInputProcessor.
 		 */
 		class CDPL_CHEM_API DefaultMultiConfMoleculeInputProcessor : public MultiConfMoleculeInputProcessor
@@ -77,10 +72,6 @@ namespace CDPL
 			unsigned int atomFlags;
 			unsigned int bondFlags;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

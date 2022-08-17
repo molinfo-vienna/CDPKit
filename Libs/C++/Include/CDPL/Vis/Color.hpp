@@ -41,11 +41,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief Specifies a color in terms of its red, green and blue components and an alpha-channel
 		 *        for transparency.
 		 *
@@ -268,10 +263,6 @@ namespace CDPL
 			double blue;
 			double alpha;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

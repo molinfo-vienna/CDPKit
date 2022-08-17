@@ -48,11 +48,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A writer for molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 		 *
 		 * \c %SMILESMolecularGraphWriter supports the following control-parameters:
@@ -170,10 +165,6 @@ namespace CDPL
 			bool                state;
 			SMILESDataWriterPtr writer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

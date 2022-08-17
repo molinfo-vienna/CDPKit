@@ -41,11 +41,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in control-parameters.
 		 */
 		namespace ControlParameterDefault
@@ -56,10 +51,6 @@ namespace CDPL
 			 */
 			extern CDPL_CONFGEN_API const bool STRICT_ERROR_CHECKING;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

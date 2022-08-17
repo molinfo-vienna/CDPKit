@@ -49,11 +49,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_ALIGNMENT
-		 * @{
-		 */
-
-		/**
 		 * \brief TopologicalEntityAlignment.
 		 */
 		template <typename T>
@@ -189,10 +184,6 @@ namespace CDPL
 			EntitySet                   secondEntities;
 			bool                        changes;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

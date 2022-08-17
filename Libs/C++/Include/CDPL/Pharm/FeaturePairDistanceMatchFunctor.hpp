@@ -43,11 +43,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief FeaturePairDistanceMatchFunctor.
 		 */
 		class CDPL_PHARM_API FeaturePairDistanceMatchFunctor
@@ -80,10 +75,6 @@ namespace CDPL
 		  private:
 			bool qryMode;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

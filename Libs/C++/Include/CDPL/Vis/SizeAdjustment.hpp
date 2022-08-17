@@ -39,11 +39,6 @@ namespace CDPL
 	{
 		
 		/**
-		 * \addtogroup CDPL_VIS_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to specify the size adjustment policy for graphical objects within
 		 *        a bounded rectangular area.
 		 */
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			const unsigned int IF_REQUIRED = 2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

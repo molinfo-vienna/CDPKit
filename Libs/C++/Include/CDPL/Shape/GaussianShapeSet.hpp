@@ -44,11 +44,6 @@ namespace CDPL
     namespace Shape
     {
 
-		/**
-		 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
-		 * @{
-		 */
-		
 		class CDPL_SHAPE_API GaussianShapeSet : public Util::IndirectArray<GaussianShape>
 		{
 
@@ -60,10 +55,6 @@ namespace CDPL
 				return "GaussianShapeSet";
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

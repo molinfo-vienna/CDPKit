@@ -44,11 +44,6 @@ namespace CDPL
 	{
 		
 		/**
-		 * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data structure for the storage and lookup of control-parameter values.
 		 * \see Base::ControlParameterContainer for a description of the available methods.
 		 */
@@ -81,10 +76,6 @@ namespace CDPL
 			 */
 			ControlParameterList& operator=(const ControlParameterContainer& cntnr);
 		};
-	
-		/**
-		 * @}
-		 */
 	}
 }
 

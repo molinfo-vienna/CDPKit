@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::MolecularGraph properties.
 		 */
 		namespace MolecularGraphProperty
@@ -96,10 +91,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

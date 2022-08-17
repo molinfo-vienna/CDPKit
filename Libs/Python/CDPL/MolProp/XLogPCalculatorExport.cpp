@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/XLogPCalculator.hpp"
+#include "CDPL/MolProp/XLogPCalculator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -35,22 +35,22 @@
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportXLogPCalculator()
+void CDPLPythonMolProp::exportXLogPCalculator()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::XLogPCalculator, boost::noncopyable>("XLogPCalculator", python::no_init)
+	python::class_<MolProp::XLogPCalculator, boost::noncopyable>("XLogPCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::XLogPCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const MolProp::XLogPCalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::XLogPCalculator>())	
-		.def("assign", CDPLPythonBase::copyAssOp(&Chem::XLogPCalculator::operator=), 
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::XLogPCalculator>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::XLogPCalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
-		.def("calculate", &Chem::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
-		.def("getResult", &Chem::XLogPCalculator::getResult, python::arg("self"))
-		.def("getFeatureVector", &Chem::XLogPCalculator::getFeatureVector, python::arg("self"),
+		.def("calculate", &MolProp::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
+		.def("getResult", &MolProp::XLogPCalculator::getResult, python::arg("self"))
+		.def("getFeatureVector", &MolProp::XLogPCalculator::getFeatureVector, python::arg("self"),
 			 python::return_internal_reference<>())
-		.add_property("result", &Chem::XLogPCalculator::getResult)
-		.def_readonly("FEATURE_VECTOR_SIZE", &Chem::XLogPCalculator::FEATURE_VECTOR_SIZE);
+		.add_property("result", &MolProp::XLogPCalculator::getResult)
+		.def_readonly("FEATURE_VECTOR_SIZE", &MolProp::XLogPCalculator::FEATURE_VECTOR_SIZE);
 }

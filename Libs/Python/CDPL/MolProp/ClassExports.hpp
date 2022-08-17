@@ -31,7 +31,14 @@
 namespace CDPLPythonMolProp
 {
 
+	void exportElementHistogram();
+	void exportMassComposition();
 
+	void exportAtomHydrophobicityCalculator();
+	void exportLogSCalculator();
+	void exportXLogPCalculator();
+	void exportTPSACalculator();
+	void exportPEOEChargeCalculator();
 }
 
 #endif // CDPL_PYTHON_MOLPROP_CLASSEXPORTS_HPP

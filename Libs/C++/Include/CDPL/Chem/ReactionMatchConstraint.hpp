@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides numerical identifiers for built-in Chem::Reaction matching constraints.
 		 */
 		namespace ReactionMatchConstraint
@@ -73,10 +68,6 @@ namespace CDPL
 			 */
 			const unsigned int COMPONENT_GROUPING = 2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

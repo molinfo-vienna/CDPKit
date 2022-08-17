@@ -44,11 +44,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_VIS_REACTION_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Vis::Reaction properties.
 		 */
 		namespace ReactionPropertyDefault
@@ -75,10 +70,6 @@ namespace CDPL
 			extern CDPL_VIS_API const SizeSpecification PLUS_SIGN_LINE_WIDTH;
 			extern CDPL_VIS_API const bool SHOW_PLUS_SIGNS;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

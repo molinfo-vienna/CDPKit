@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Chem
 	{
 
-		/**
-		 * \addtogroup CDPL_CHEM_MOL2_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataWriter<MOL2MolecularGraphWriter, Util::BZip2OStream> MOL2BZ2MolecularGraphWriter;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

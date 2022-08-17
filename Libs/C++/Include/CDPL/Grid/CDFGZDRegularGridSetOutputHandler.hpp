@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of gzip-compressed spatial regular grid set data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataOutputHandler<CDFGZDRegularGridSetWriter, DataFormat::CDF_GZ> CDFGZDRegularGridSetOutputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

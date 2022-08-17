@@ -43,18 +43,9 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined bond predicate.
 		 */
 		typedef boost::function1<bool, const Chem::Bond&> BondPredicate;
-
-		/**
-		 * @}
-		 */
     }
 }
 

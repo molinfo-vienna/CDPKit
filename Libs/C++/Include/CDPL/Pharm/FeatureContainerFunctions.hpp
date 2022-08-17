@@ -55,11 +55,6 @@ namespace CDPL
 		class FeatureContainer;
 		class FeatureTypeHistogram;
 	
-		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_CONTAINER_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_PHARM_API const std::string& getName(const FeatureContainer& cntnr);
 
 		CDPL_PHARM_API void setName(FeatureContainer& cntnr, const std::string& name);
@@ -82,10 +77,6 @@ namespace CDPL
 													  const Math::Matrix4D& xform, double vdw_factor = 1.0);
 
 		CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms, bool append = false);
-
-		/**
-		 * @}
-		 */
     }
 }
 

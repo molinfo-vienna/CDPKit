@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags for the specification of the MMFF94 parameter set to use.
 		 */
 		namespace MMFF94ParameterSet
@@ -55,10 +50,6 @@ namespace CDPL
 			const unsigned int STATIC_RTOR      = 3;
 			const unsigned int STATIC_RTOR_XOOP = 4;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

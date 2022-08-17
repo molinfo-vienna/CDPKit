@@ -50,11 +50,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief CompressedDataReader.
 		 */
 		template <typename ReaderImpl, typename DecompStream, typename DataType = typename ReaderImpl::DataType>
@@ -85,10 +80,6 @@ namespace CDPL
 			DecompStream  stream;
 			ReaderImpl    reader;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		/**
-		 * \addtogroup CDPL_PHARM_CDF_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::BZip2OStream> CDFBZ2FeatureContainerWriter;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

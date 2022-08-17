@@ -51,11 +51,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MATCH_EXPRESSION_BUILDING_BLOCKS
-		 * @{
-		 */
-
-		/**
 		 * \brief A container for the storage and evaluation of logical match expression lists.
 		 *
 		 * \c %MatchExpressionList allows for a concatenation of multiple Chem::MatchExpression instances that
@@ -91,10 +86,6 @@ namespace CDPL
 				return "MatchExpressionList";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

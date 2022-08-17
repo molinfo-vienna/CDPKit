@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of atom hybridization states.
 		 */	
 		namespace HybridizationState
@@ -104,10 +99,6 @@ namespace CDPL
 			 */
 			const unsigned int SP3D3   = 9;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

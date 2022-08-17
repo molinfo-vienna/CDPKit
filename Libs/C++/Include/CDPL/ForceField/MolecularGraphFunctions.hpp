@@ -41,11 +41,6 @@ namespace CDPL
 	namespace ForceField 
 	{
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_FORCEFIELD_API const Chem::FragmentList::SharedPointer& getMMFF94AromaticRings(const Chem::MolecularGraph& molgraph);
 
 		CDPL_FORCEFIELD_API void setMMFF94AromaticRings(Chem::MolecularGraph& molgraph, const Chem::FragmentList::SharedPointer& rings);
@@ -64,10 +59,6 @@ namespace CDPL
 		CDPL_FORCEFIELD_API void assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
 
 		CDPL_FORCEFIELD_API void calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool strict, bool overwrite);
-		
-		/**
-		 * @}
-		 */
 	}
 }
 

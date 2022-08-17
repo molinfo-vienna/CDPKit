@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief IonicInteractionScore.
 		 */
 		class CDPL_PHARM_API IonicInteractionScore : public FeatureDistanceScore
@@ -65,10 +60,6 @@ namespace CDPL
 			IonicInteractionScore(double min_dist = DEF_MIN_DISTANCE, double max_dist = DEF_MAX_DISTANCE): 
 				FeatureDistanceScore(min_dist, max_dist) {}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

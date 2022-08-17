@@ -54,11 +54,6 @@ namespace CDPL
 	namespace Biomol 
 	{
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_MOLECULAR_GRAPH_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_BIOMOL_API const std::string& getResidueCode(const Chem::MolecularGraph& molgraph);
 
 		CDPL_BIOMOL_API void setResidueCode(Chem::MolecularGraph& molgraph, const std::string& code);
@@ -134,10 +129,6 @@ namespace CDPL
 
 		CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
 												char ins_code = 0, std::size_t model_no = 0);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

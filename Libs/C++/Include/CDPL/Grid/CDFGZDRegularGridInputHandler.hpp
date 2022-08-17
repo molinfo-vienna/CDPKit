@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of gzip-compressed spatial regular grid data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataInputHandler<CDFGZDRegularGridReader, DataFormat::CDF_GZ> CDFGZDRegularGridInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

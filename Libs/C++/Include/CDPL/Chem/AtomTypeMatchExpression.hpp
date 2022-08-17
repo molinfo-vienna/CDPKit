@@ -47,11 +47,6 @@ namespace CDPL
 		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_CHEM_ATOM_MATCH_EXPRESSIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomTypeMatchExpression.
 		 */
 		class CDPL_CHEM_API AtomTypeMatchExpression : public MatchExpression<Atom, MolecularGraph>
@@ -142,10 +137,6 @@ namespace CDPL
 			unsigned int atomType;
 			bool         notMatch;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

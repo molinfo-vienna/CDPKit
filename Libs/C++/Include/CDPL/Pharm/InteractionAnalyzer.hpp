@@ -50,11 +50,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief InteractionAnalyzer.
 		 */
 		class CDPL_PHARM_API InteractionAnalyzer 
@@ -128,10 +123,6 @@ namespace CDPL
 		
 			ConstraintFunctionMap constraintFuncMap;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

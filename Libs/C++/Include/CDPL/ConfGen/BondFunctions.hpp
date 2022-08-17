@@ -47,18 +47,9 @@ namespace CDPL
 	namespace ConfGen 
 	{
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_BOND_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
 
 		CDPL_CONFGEN_API bool isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

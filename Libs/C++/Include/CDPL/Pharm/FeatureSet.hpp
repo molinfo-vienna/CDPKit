@@ -48,11 +48,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_PHARM_PHARMACOPHORE_IMPLEMENTATIONS
-	 * @{
-	 */
-
-	/**
 	 * \brief FeatureSet.
 	 */
 	class CDPL_PHARM_API FeatureSet : public FeatureContainer
@@ -226,10 +221,6 @@ namespace CDPL
 	    FeatureList     features;
 	    FeatureIndexMap featureIndices;
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

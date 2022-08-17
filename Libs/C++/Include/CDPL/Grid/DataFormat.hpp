@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_DATA_FORMATS
-		 * @{
-		 */
-		
-		/**
 		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
 		 */
 		namespace DataFormat
@@ -72,10 +67,6 @@ namespace CDPL
 			 */
 			extern CDPL_GRID_API const Base::DataFormat CDF_BZ2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

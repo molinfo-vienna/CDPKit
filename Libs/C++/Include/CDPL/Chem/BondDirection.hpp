@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants for the specification of directional bonds in <em>Daylight SMILES</em> and
 		 *        \e SMARTS strings.
 		 *
@@ -85,10 +80,6 @@ namespace CDPL
 			 */
 			const unsigned int UNSPECIFIED = 0x4; 
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

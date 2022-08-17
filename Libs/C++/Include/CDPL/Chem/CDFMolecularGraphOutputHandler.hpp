@@ -43,18 +43,9 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CDF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of molecular graph data in the native I/O format of the <em>CDPL</em>.
 		 */
 		typedef Util::DefaultDataOutputHandler<CDFMolecularGraphWriter, DataFormat::CDF> CDFMolecularGraphOutputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

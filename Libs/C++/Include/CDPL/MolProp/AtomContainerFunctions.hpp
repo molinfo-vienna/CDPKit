@@ -50,11 +50,6 @@ namespace CDPL
 	namespace MolProp
 	{
 		
-		/**
-		 * \addtogroup CDPL_MOLPROP_ATOM_CONTAINER_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_MOLPROP_API double calcExplicitMass(const Chem::AtomContainer& cntnr);
 
 		CDPL_MOLPROP_API void calcExplicitMassComposition(const Chem::AtomContainer& cntnr, MassComposition& mass_comp);
@@ -64,10 +59,6 @@ namespace CDPL
 		CDPL_MOLPROP_API void buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula);
 
 		CDPL_MOLPROP_API void buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

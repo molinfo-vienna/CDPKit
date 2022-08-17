@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_PDF_OUTPUT
-		 * @{
-		 */
-
-		/**
 		 * \brief Creates 2D depictions of chemical reactions in the <em>Portable Document Format (PDF)</em> [\ref WPDF]. 
 		 *
 		 * \c %PDFReactionWriter uses Vis::ReactionView2D for the visualization of chemical reactions. All control-parameters and
@@ -85,10 +80,6 @@ namespace CDPL
 			std::ostream& output;
 			bool          state;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -42,11 +42,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API TorsionDriverSettings
 		{
 
@@ -102,10 +97,6 @@ namespace CDPL
 			double       dielectricConst;
 			double       distExponent;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

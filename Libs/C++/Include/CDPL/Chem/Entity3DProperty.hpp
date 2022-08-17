@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_ENTITY3D_PROPERTIES
-	 * @{
-	 */
-
-	/**
 	 * \brief Provides keys for built-in Chem::Entity3D properties.
 	 */
 	namespace Entity3DProperty
@@ -59,10 +54,6 @@ namespace CDPL
 
 	    extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D;
 	}
-
-	/**
-	 * @}
-	 */
     }
 }
 

@@ -54,11 +54,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_TAUTOMER_GENERATION
-		 * @{
-		 */
-
-		/**
 		 * \brief TautomerGenerator.
 		 */
 		class CDPL_CHEM_API TautomerGenerator 
@@ -163,10 +158,6 @@ namespace CDPL
 			BondDescrArray        tautomerBonds;
 			SizeTArray            shaInput;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

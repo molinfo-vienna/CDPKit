@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants that are used to describe the nature of fragments used 
 		 *        to build-up molecule 3D models.
 		 */
@@ -54,10 +49,6 @@ namespace CDPL
 			const unsigned int FLEXIBLE_RING_SYSTEM  = 1;
 			const unsigned int RIGID_RING_SYSTEM     = 2;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

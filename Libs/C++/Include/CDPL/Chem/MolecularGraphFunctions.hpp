@@ -57,11 +57,6 @@ namespace CDPL
 	namespace Chem 
 	{
 
-		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_CHEM_API const std::string& getName(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API void setName(MolecularGraph& molgraph, const std::string& name);
@@ -556,10 +551,6 @@ namespace CDPL
 
 		CDPL_CHEM_API void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frag_list, 
 											  const Util::BitSet& split_bond_mask, bool append = false);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

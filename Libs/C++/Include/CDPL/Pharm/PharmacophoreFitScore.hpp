@@ -47,11 +47,6 @@ namespace CDPL
 		class FeatureContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief PharmacophoreFitScore.
 		 */
 		class CDPL_PHARM_API PharmacophoreFitScore
@@ -92,10 +87,6 @@ namespace CDPL
 			double                ftrGeomMatchFactor;
 			FeatureList           groupedRefFtrs;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

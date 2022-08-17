@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief A class providing methods for the storage and lookup of object properties.
 		 *
 		 * The purpose of \c %PropertyContainer is to provide a common facility for the storage and lookup of
@@ -238,10 +233,6 @@ namespace CDPL
 		private:	
 			PropertyMap properties;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

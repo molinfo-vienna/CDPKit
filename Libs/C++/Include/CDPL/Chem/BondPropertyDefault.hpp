@@ -45,11 +45,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_BOND_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Chem::Bond properties.
 		 */
 		namespace BondPropertyDefault
@@ -63,10 +58,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const unsigned int SYBYL_TYPE;
 			extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -44,16 +44,7 @@ namespace CDPL
 		class FeatureSet;
 		class FeatureMapping;
 	
-		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_SET_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
-	
-		/**
-		 * @}
-		 */
     }
 }
 

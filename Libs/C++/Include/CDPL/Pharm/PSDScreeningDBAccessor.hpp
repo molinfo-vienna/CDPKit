@@ -46,11 +46,6 @@ namespace CDPL
 	    class PSDScreeningDBAccessorImpl;
 
 		/**
-		 * \addtogroup CDPL_PHARM_SCREENING
-		 * @{
-		 */
-
-		/**
 		 * \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
 		 */
 		class CDPL_PHARM_API PSDScreeningDBAccessor : public ScreeningDBAccessor
@@ -108,10 +103,6 @@ namespace CDPL
 		
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

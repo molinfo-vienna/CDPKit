@@ -48,11 +48,6 @@ namespace CDPL
     {
 	
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BasicPharmacophore.
 		 */
 		class CDPL_PHARM_API BasicPharmacophore : public Pharmacophore
@@ -221,10 +216,6 @@ namespace CDPL
 			FeatureCache featureCache;
 			FeatureList  features;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

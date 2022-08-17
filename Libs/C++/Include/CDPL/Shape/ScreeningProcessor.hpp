@@ -59,11 +59,6 @@ namespace CDPL
 		
 		class AlignmentResult;
 
-		/**
-		 * \addtogroup CDPL_SHAPE_SCREENING
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API ScreeningProcessor
 		{
 
@@ -121,10 +116,6 @@ namespace CDPL
 			MolecularGraphList                   queryList;
 			HitCallbackFunction                  hitCallback;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

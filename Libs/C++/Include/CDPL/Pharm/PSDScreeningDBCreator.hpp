@@ -46,11 +46,6 @@ namespace CDPL
 		class PSDScreeningDBCreatorImpl;
 
 		/**
-		 * \addtogroup CDPL_PHARM_SCREENING
-		 * @{
-		 */
-
-		/**
 		 * \brief A class for the creation of optimized pharmacophore screening databases.
 		 */
         class CDPL_PHARM_API PSDScreeningDBCreator : public ScreeningDBCreator
@@ -107,10 +102,6 @@ namespace CDPL
 		
 			ImplementationPointer impl;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

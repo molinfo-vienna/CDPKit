@@ -45,11 +45,6 @@ namespace CDPL
 	namespace Vis
 	{
 		
-		/**
-		 * \addtogroup CDPL_VIS_MISCELLANEOUS
-		 * @{
-		 */
-
 		template <typename T> struct CairoPointerTraits;
 
 		/**
@@ -229,10 +224,6 @@ namespace CDPL
 		private:
 			T* pointer;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in control-parameters.
 		 */
 		namespace ControlParameter
@@ -75,10 +70,6 @@ namespace CDPL
 
 			extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

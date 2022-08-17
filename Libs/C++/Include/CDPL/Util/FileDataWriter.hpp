@@ -51,11 +51,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief FileDataWriter.
 		 */
 		template <typename WriterImpl, typename DataType = typename WriterImpl::DataType>
@@ -79,10 +74,6 @@ namespace CDPL
 			std::string   fileName;
 			WriterImpl    writer;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

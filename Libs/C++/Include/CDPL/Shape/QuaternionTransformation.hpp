@@ -40,16 +40,7 @@ namespace CDPL
     namespace Shape
     {
 
-		/**
-		 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
-		 * @{
-		 */
-		
 		typedef Math::CVector<double, 7> QuaternionTransformation;
-	
-		/**
-		 * @}
-		 */
     }
 }
 

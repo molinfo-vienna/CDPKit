@@ -39,11 +39,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides constants serving as identifiers for built-in Chem::TautomerizationRule implementations.
 		 */
 		namespace TautomerizationType
@@ -62,10 +57,6 @@ namespace CDPL
 			const unsigned int GENERIC_H_15_SHIFT     = 10;
 
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

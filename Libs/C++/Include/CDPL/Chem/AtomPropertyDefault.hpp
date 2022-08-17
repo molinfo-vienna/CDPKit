@@ -46,11 +46,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in Chem::Atom properties.
 		 */
 		namespace AtomPropertyDefault
@@ -73,10 +68,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const std::string MOL2_NAME;
 			extern CDPL_CHEM_API const bool MDL_DB_STEREO_CARE_FLAG;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -46,11 +46,6 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief Atom3DCoordinatesFunctor.
 		 */
 		class CDPL_CHEM_API Atom3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
@@ -65,10 +60,6 @@ namespace CDPL
 			 */
 			const Math::Vector3D& operator()(const Atom& atom) const;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

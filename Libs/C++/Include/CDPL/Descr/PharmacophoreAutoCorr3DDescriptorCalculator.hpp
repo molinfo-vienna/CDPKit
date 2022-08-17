@@ -52,11 +52,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_RDF_CODES
-		 * @{
-		 */
-
-		/**
 		 * \brief PharmacophoreAutoCorr3DDescriptorCalculator.
 		 */
 		class CDPL_DESCR_API PharmacophoreAutoCorr3DDescriptorCalculator
@@ -138,10 +133,6 @@ namespace CDPL
 			AutoCorr3DVectorCalculator autoCorrCalculator;
 			FeaturePairWeightFunction  weightFunc;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

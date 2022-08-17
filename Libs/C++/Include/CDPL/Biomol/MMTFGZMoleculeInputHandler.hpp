@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_MMTF_IO
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the input of gzip-compressed molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
 		 *        [\ref MMTF] format.
 		 */
 		typedef Util::DefaultDataInputHandler<MMTFGZMoleculeReader, DataFormat::MMTF_GZ> MMTFGZMoleculeInputHandler;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in control-parameters.
 		 */
 		namespace ControlParameter
@@ -123,10 +118,6 @@ namespace CDPL
 
 			extern CDPL_BIOMOL_API const Base::LookupKey COMBINE_INTERFERING_RESIDUE_COORDINATES;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

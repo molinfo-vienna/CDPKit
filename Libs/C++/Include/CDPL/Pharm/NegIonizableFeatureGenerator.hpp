@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief NegIonizableFeatureGenerator.
 		 */
 		class CDPL_PHARM_API NegIonizableFeatureGenerator : public PatternBasedFeatureGenerator
@@ -71,10 +66,6 @@ namespace CDPL
 		  private:
 			void init(bool chgd_groups_only);
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

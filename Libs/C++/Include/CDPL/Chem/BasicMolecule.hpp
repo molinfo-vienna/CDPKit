@@ -50,11 +50,6 @@ namespace CDPL
 	{
 	
 		/**
-		 * \addtogroup CDPL_CHEM_STRUCTURE_IMPLEMENTATIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief BasicMolecule.
 		 */
 		class CDPL_CHEM_API BasicMolecule : public Molecule
@@ -294,10 +289,6 @@ namespace CDPL
 			AtomList  atoms;
 			BondList  bonds;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -48,11 +48,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief InteractionScoreCombiner.
 		 */
 		class CDPL_PHARM_API InteractionScoreCombiner : public std::binary_function<Math::Vector3D, Feature, double>
@@ -83,10 +78,6 @@ namespace CDPL
 			ScoringFunction     scoringFunc2;
 			CombinationFunction combFunc;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

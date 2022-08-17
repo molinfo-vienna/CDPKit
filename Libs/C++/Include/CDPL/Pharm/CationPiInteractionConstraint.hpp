@@ -45,11 +45,6 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief CationPiInteractionConstraint.
 		 */
 		class CDPL_PHARM_API CationPiInteractionConstraint : public std::binary_function<Feature, Feature, bool>
@@ -86,10 +81,6 @@ namespace CDPL
 			double maxDist;
 			double maxAngle;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

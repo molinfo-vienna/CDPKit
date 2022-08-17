@@ -43,19 +43,10 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_PDF_OUTPUT
-		 * @{
-		 */
-
-		/**
 		 * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable
 		 *        Document Format (PDF)</em> [\ref WPDF].
 		 */
 		typedef Util::DefaultDataOutputHandler<PDFReactionWriter, DataFormat::PDF> PDFReactionOutputHandler;	
-	
-		/**
-		 * @}
-		 */
 	}
 }
 

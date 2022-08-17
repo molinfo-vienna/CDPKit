@@ -45,11 +45,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API TorsionRule
 		{
 
@@ -132,10 +127,6 @@ namespace CDPL
 			Chem::MolecularGraph::SharedPointer matchPattern;
 			AngleEntryList                      angles;
 		};
-    
-		/**
-		 * @}
-		 */
     }
 }
 

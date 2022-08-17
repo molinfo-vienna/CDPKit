@@ -61,11 +61,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_DESCR_FINGERPRINTS
-		 * @{
-		 */
-
-		/**
 		 * \brief PathFingerprintGenerator.
 		 * \see [\ref DTPFP]
 		 */
@@ -289,10 +284,6 @@ namespace CDPL
 			UInt64Array                  revPathDescriptor;
 			boost::rand48                randGenerator;
 		}; 
-
-		/**
-		 * @}
-		 */
 	}
 }
 

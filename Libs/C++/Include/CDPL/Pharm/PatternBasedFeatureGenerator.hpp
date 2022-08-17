@@ -55,11 +55,6 @@ namespace CDPL
 		class Pharmacophore;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief PatternBasedFeatureGenerator.
 		 */
 		class CDPL_PHARM_API PatternBasedFeatureGenerator : public FeatureGenerator
@@ -210,10 +205,6 @@ namespace CDPL
 			Math::Vector3D              svdW;
 			BitSetCache                 bitSetCache;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

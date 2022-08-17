@@ -47,11 +47,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_ENERGY_FUNCTIONS
-		 * @{
-		 */
-
 		template <typename ValueType, typename Iter, typename CoordsArray>
 		ValueType calcMMFF94BondStretchingEnergy(Iter beg, const Iter& end, const CoordsArray& coords);
 
@@ -498,10 +493,6 @@ namespace CDPL
 		template <typename ValueType>
 		ValueType calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ, 
 											  const ValueType& r_IJ, const ValueType& r_IJ_7);
-
-		/**
-		 * @}
-		 */
     }
 }
 

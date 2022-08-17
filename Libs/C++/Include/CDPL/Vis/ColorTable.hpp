@@ -43,11 +43,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief A container for the storage and lookup of Vis::Color objects that are associated with a
 		 *        numeric identifier.
 		 */
@@ -67,10 +62,6 @@ namespace CDPL
 				return "ColorTable";
 			}
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

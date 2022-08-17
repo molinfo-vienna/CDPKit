@@ -46,16 +46,7 @@ namespace CDPL
 	namespace Biomol 
 	{
 
-		/**
-		 * \addtogroup CDPL_BIOMOL_MOLECULE_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_BIOMOL_API bool combineInterferingResidueCoordinates(Chem::Molecule& mol, double max_ctr_dist = 1.0);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_CONTAINER_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Pharm::FeatureContainer properties.
 		 */
 		namespace FeatureContainerProperty
@@ -59,10 +54,6 @@ namespace CDPL
 
 			extern CDPL_PHARM_API const Base::LookupKey NAME; 
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

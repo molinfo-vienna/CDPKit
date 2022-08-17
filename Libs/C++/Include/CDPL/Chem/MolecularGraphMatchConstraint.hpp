@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides numerical identifiers for built-in Chem::MolecularGraph matching constraints.
 		 */
 		namespace MolecularGraphMatchConstraint
@@ -66,10 +61,6 @@ namespace CDPL
 			 */
 			const unsigned int COMPONENT_GROUPING = 1;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

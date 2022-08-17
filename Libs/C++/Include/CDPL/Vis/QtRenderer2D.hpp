@@ -48,11 +48,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_BACKENDS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the Renderer2D interface on top of the <em>Qt Toolkit</em>.
 		 *
 		 * \c %QtRenderer2D is implemented by forwarding the drawing operations to a provided \c QPainter
@@ -103,10 +98,6 @@ namespace CDPL
 			QPainter&                qPainter;
 			std::auto_ptr<QPolygonF> qPolygon;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

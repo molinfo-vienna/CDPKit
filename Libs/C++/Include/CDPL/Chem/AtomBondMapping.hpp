@@ -45,11 +45,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A data structure for the common storage of related atom to atom and bond to bond mappings.
 		 *
 		 * \c %AtomBondMapping is used to represent arbitrary mappings between the atoms and bonds of
@@ -124,10 +119,6 @@ namespace CDPL
 			AtomMapping atomMapping;
 			BondMapping bondMapping;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -49,11 +49,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_BOND_TYPE_PERCEPTION
-		 * @{
-		 */
-
 		class CDPL_FORCEFIELD_API MMFF94BondTyper
 		{
 
@@ -91,10 +86,6 @@ namespace CDPL
 			MMFF94RingSetFunction                      aromRingSetFunc;
 			MMFF94NumericAtomTypeFunction              atomTypeFunc;
 		};
-    
-		/**
-		 * @}
-		 */
     }
 }
 

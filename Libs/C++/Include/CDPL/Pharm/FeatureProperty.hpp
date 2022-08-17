@@ -47,11 +47,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_FEATURE_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Pharm::Feature properties.
 		 */
 		namespace FeatureProperty
@@ -72,10 +67,6 @@ namespace CDPL
 
 			extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
 		}
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -39,11 +39,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_CONSTANTS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides flags for the specification of basic Chem::Atom properties.
 		 */
 		namespace AtomPropertyFlag
@@ -69,10 +64,6 @@ namespace CDPL
 
 			const unsigned int MODEL_NUMBER      = 0x4000;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

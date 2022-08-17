@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Biomol
 	{
 	
-		/**
-		 * \addtogroup CDPL_BIOMOL_PDB_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataReader<PDBMoleculeReader, Util::BZip2IStream> PDBBZ2MoleculeReader;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -55,11 +55,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the exhaustive perception of rings in a molecular graph.
 		 * \see [\ref HANSER] 
 		 */
@@ -170,10 +165,6 @@ namespace CDPL
 			NodeArray                nodes;
 			NodeQueue                nodeQueue;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

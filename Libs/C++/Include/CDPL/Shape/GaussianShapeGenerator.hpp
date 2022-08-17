@@ -54,11 +54,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		/**
-		 * \addtogroup CDPL_SHAPE_GENERATION
-		 * @{
-		 */
-
 		class CDPL_SHAPE_API GaussianShapeGenerator
 		{
 			
@@ -138,10 +133,6 @@ namespace CDPL
 			Pharm::BasicPharmacophore            pharm;
 			AtomList                             shapeAtoms;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

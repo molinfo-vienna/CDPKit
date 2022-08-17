@@ -46,11 +46,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief AromaticFeatureGenerator.
 		 */
 		class CDPL_PHARM_API AromaticFeatureGenerator : public PatternBasedFeatureGenerator
@@ -150,10 +145,6 @@ namespace CDPL
 			double                   featureTol;
 			AtomList                 featureAtoms;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

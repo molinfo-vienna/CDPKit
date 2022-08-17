@@ -50,11 +50,6 @@ namespace CDPL
 		class Font;
 		class SizeSpecification;
 
-		/**
-		 * \addtogroup CDPL_VIS_BOND_FUNCTIONS
-		 * @{
-		 */
-
 		CDPL_VIS_API const Color& getColor(const Chem::Bond& bond);
 
 		CDPL_VIS_API void setColor(Chem::Bond& bond, const Color& color);
@@ -161,10 +156,6 @@ namespace CDPL
 		CDPL_VIS_API bool hasLabelMargin(const Chem::Bond& bond);
 
 		CDPL_VIS_API void clearLabelMargin(Chem::Bond& bond);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

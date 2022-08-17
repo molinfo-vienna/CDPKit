@@ -43,18 +43,9 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined atom predicate.
 		 */
 		typedef boost::function1<bool, const Chem::Atom&> AtomPredicate;
-
-		/**
-		 * @}
-		 */
     }
 }
 

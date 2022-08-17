@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
-		 * @{
-		 */
-
-		/**
 		 * \brief XBondAcceptorFeatureGenerator.
 		 */
 		class CDPL_PHARM_API XBondAcceptorFeatureGenerator : public PatternBasedFeatureGenerator
@@ -69,10 +64,6 @@ namespace CDPL
 		  private:
 			void init();
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

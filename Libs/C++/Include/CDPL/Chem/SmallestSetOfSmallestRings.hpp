@@ -55,11 +55,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the perception of the <em>Smallest Set of Smallest Rings (SSSR)</em> of a molecular graphs.
 		 * \see [\ref BALD] 
 		 */
@@ -216,10 +211,6 @@ namespace CDPL
 			MessageList              sssr;
 			std::size_t              sssrSize;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

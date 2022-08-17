@@ -51,11 +51,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_BACKENDS
-		 * @{
-		 */
-
-		/**
 		 * \brief Implements the Renderer2D interface on top of the <em>Cairo 2D Graphics Library</em>.
 		 *
 		 * For more information about the <em>Cairo 2D Graphics Library</em> see [\ref CAIRO].
@@ -108,10 +103,6 @@ namespace CDPL
 			BrushStack            brushStack;
 			FontStack             fontStack;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

@@ -51,11 +51,6 @@ namespace CDPL
 		class FeatureMapping;
 		class FeatureContainer;
 	
-		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS
-		 * @{
-		 */
-	
 		CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append = false);
 			
 		CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
@@ -71,10 +66,6 @@ namespace CDPL
 		CDPL_PHARM_API bool resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
 															  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact = 1.0);
 
-	
-		/**
-		 * @}
-		 */
     }
 }
 

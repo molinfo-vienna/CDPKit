@@ -41,11 +41,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_GRID_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides default values for built-in control-parameters.
 		 */
 		namespace ControlParameterDefault
@@ -58,10 +53,6 @@ namespace CDPL
 
 			extern CDPL_GRID_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

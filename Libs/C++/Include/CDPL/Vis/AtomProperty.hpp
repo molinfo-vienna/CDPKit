@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_ATOM_PROPERTIES
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in Chem::Atom properties.
 		 */
 		namespace AtomProperty
@@ -142,10 +137,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const Base::LookupKey RADICAL_ELECTRON_DOT_SIZE;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

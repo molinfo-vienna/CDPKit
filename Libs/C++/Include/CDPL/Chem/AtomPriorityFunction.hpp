@@ -45,18 +45,9 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief A generic wrapper class used to store a user-defined atom priority function.
 		 */
 		typedef boost::function1<std::size_t, const Chem::Atom&> AtomPriorityFunction;
-
-		/**
-		 * @}
-		 */
     }
 }
 

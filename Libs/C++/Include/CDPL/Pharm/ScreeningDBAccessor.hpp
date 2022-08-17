@@ -55,11 +55,6 @@ namespace CDPL
 		class FeatureTypeHistogram;
 
 		/**
-		 * \addtogroup CDPL_PHARM_SCREENING
-		 * @{
-		 */
-
-		/**
 		 * \brief A class for accessing the data stored in pharmacophore screening databases.
 		 */
 		class CDPL_PHARM_API ScreeningDBAccessor
@@ -104,10 +99,6 @@ namespace CDPL
 				return *this;
 			}
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

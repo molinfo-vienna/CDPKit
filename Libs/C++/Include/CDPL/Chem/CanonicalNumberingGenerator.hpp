@@ -64,11 +64,6 @@ namespace CDPL
 		class Bond;
 
 		/**
-		 * \addtogroup CDPL_CHEM_CANONICAL_NUMBERING
-		 * @{
-		 */
-
-		/**
 		 * \brief CanonicalNumberingGenerator.
 		 * \see [\ref MCKAY]
 		 */
@@ -348,10 +343,6 @@ namespace CDPL
 			CanonComponentList     canonComponentList;
 			Util::BitSet           visitedEdgeMask;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

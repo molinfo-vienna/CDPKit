@@ -43,11 +43,6 @@ namespace CDPL
     namespace ForceField 
     {
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_ENERGY_CALCULATION
-		 * @{
-		 */
-
 		template <typename ValueType>
 		class MMFF94EnergyCalculator
 		{
@@ -94,10 +89,6 @@ namespace CDPL
 			ValueType                    vanDerWaalsEnergy;
 			unsigned int                 interactionTypes;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

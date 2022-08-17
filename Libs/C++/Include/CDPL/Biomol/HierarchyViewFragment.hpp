@@ -44,11 +44,6 @@ namespace CDPL
 	class HierarchyViewChain;
 
 	/**
-	 * \addtogroup CDPL_BIOMOL_PROCESSING
-	 * @{
-	 */
-
-	/**
 	 * \brief HierarchyViewFragment.
 	 */
 	class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
@@ -59,10 +54,6 @@ namespace CDPL
 	  private:
 	    HierarchyViewFragment() {}
 	};
-
-	/**
-	 * @}
-	 */
     }
 }
 

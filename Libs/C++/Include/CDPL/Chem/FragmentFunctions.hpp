@@ -44,11 +44,6 @@ namespace CDPL
 		class Fragment;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FRAGMENT_FUNCTIONS
-		 * @{
-		 */
-
-		/**
 		 * \brief Removes all explicit hydrogen atoms from the fragment \a frag.
 		 * \param frag The fragment for which to remove all explicit hydrogen atoms.
 		 * \return \c false if \a frag was not altered, \c true otherwise.
@@ -67,10 +62,6 @@ namespace CDPL
 		CDPL_CHEM_API void removeAtomsIf(Fragment& frag, const AtomPredicate& pred);
 
 		CDPL_CHEM_API void removeAtomsIfNot(Fragment& frag, const AtomPredicate& pred);
-
-		/**
-		 * @}
-		 */
 	}
 }
 

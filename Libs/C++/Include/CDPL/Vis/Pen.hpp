@@ -42,11 +42,6 @@ namespace CDPL
 	{
 	
 		/**
-		 * \addtogroup CDPL_VIS_RENDERING_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief Specifies how to draw lines and outlines of shapes.
 		 *
 		 * A pen has a line style, width, color, cap style and join style attribute. The line style specifies how a line
@@ -255,10 +250,6 @@ namespace CDPL
 			JoinStyle joinStyle;
 			double    width;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 

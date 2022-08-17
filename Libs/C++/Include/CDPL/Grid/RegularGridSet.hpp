@@ -42,11 +42,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_GRID_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
 		 * \brief RegularGridSet.
 		 */
 		template <typename T, typename CVT = T>
@@ -64,10 +59,6 @@ namespace CDPL
 
 		typedef RegularGridSet<double> DRegularGridSet;
 		typedef RegularGridSet<float> FRegularGridSet;
-
-		/**
-		 * @}
-		 */
     }
 }
 

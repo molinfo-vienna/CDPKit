@@ -42,11 +42,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-		 * @{
-		 */
-
 		class CDPL_CONFGEN_API FragmentConformerGeneratorSettings
 		{
 
@@ -160,10 +155,6 @@ namespace CDPL
 			FragmentSettings     mcSettings;
 			FragmentSettings     srSettings;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

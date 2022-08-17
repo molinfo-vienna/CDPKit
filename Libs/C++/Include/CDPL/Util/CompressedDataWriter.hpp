@@ -50,11 +50,6 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_UTIL_MISCELLANEOUS
-		 * @{
-		 */
-
-		/**
 		 * \brief CompressedDataWriter.
 		 */
 		template <typename WriterImpl, typename CompStream, typename DataType = typename WriterImpl::DataType>
@@ -76,10 +71,6 @@ namespace CDPL
 			CompStream  stream;
 			WriterImpl  writer;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 

@@ -47,11 +47,6 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_VIS_CONTROL_PARAMETERS
-		 * @{
-		 */
-
-		/**
 		 * \brief Provides keys for built-in control-parameters.
 		 */
 		namespace ControlParameter
@@ -852,10 +847,6 @@ namespace CDPL
 			 */
 			extern CDPL_VIS_API const Base::LookupKey SHOW_STEREO_BONDS;
 		}
-
-		/**
-		 * @}
-		 */
 	}
 }
 

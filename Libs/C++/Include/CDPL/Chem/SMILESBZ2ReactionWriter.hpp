@@ -41,16 +41,7 @@ namespace CDPL
 	namespace Chem
 	{
 	
-		/**
-		 * \addtogroup CDPL_CHEM_SMILES_IO
-		 * @{
-		 */
-
 		typedef Util::CompressedDataWriter<SMILESReactionWriter, Util::BZip2OStream> SMILESBZ2ReactionWriter;
-
-		/**
-		 * @}
-		 */
 	}
 }
 

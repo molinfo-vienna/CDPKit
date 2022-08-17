@@ -47,11 +47,6 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_FUNCTORS
-		 * @{
-		 */
-
-		/**
 		 * \brief AtomConformer3DCoordinatesFunctor.
 		 */
 		class CDPL_CHEM_API AtomConformer3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
@@ -71,10 +66,6 @@ namespace CDPL
 		  private:
 			std::size_t confIndex;
 		};
-
-		/**
-		 * @}
-		 */
     }
 }
 
