@@ -32,6 +32,7 @@
 
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 

@@ -52,25 +52,9 @@ namespace CDPL
 		class Fragment;
 		class Molecule;
 
-		CDPL_CHEM_API std::size_t getExplicitAtomCount(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API std::size_t getExplicitAtomCount(const AtomContainer& cntnr, unsigned int type);
-
-		CDPL_CHEM_API std::size_t getExplicitChainAtomCount(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API std::size_t getRingAtomCount(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API std::size_t getAromaticAtomCount(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API std::size_t getHeavyAtomCount(const AtomContainer& cntnr);
-
-
-		CDPL_CHEM_API long calcFormalCharge(const AtomContainer& cntnr);
-
-
 		CDPL_CHEM_API bool hasCoordinates(const AtomContainer& cntnr, std::size_t dim);
 
-
+		
 		CDPL_CHEM_API void get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append = false);
 
 		CDPL_CHEM_API void set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coords);

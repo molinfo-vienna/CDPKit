@@ -34,13 +34,13 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/BondStereoFlagGenerator.hpp"
+#include "CDPL/Chem/BondStereoFlagCalculator.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
+void Chem::calculateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,
@@ -48,7 +48,7 @@ void Chem::generateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 		return;
 
 	Util::UIArray flags;
-	BondStereoFlagGenerator generator(molgraph, flags);
+	BondStereoFlagCalculator calculator(molgraph, flags);
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	for (std::size_t i = 0; i < num_bonds; i++) 

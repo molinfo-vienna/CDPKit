@@ -73,6 +73,7 @@
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
+#include "CDPL/Internal/AtomContainerFunctions.hpp"
 
 #include "MDLDataReader.hpp"
 #include "MDLFormatData.hpp"
@@ -3965,10 +3966,10 @@ void Chem::MDLDataReader::addAtomQueryHCountConstraints() const
 
 		if (h_count == 0)
 			constr_list_ptr->addElement(AtomMatchConstraint::H_COUNT, MatchConstraint::EQUAL,
-										getExplicitAtomCount(atom, AtomType::H));
+										Internal::getExplicitAtomCount(atom, AtomType::H));
 		else
 			constr_list_ptr->addElement(AtomMatchConstraint::H_COUNT, MatchConstraint::GREATER_OR_EQUAL,
-										getExplicitAtomCount(atom, AtomType::H) + h_count);
+										Internal::getExplicitAtomCount(atom, AtomType::H) + h_count);
 
 		setMatchConstraints(atom, constr_list_ptr);
 	}

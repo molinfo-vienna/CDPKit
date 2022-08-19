@@ -90,6 +90,16 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("comp")));
 	python::def("buildElementHistogram", &MolProp::buildElementHistogram, 
 				(python::arg("molgraph"), python::arg("hist")));
+	
+	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&MolProp::getBondCount),
+				python::arg("molgraph"));
+	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, std::size_t, bool)>(&MolProp::getBondCount),
+				(python::arg("molgraph"), python::arg("order"), python::arg("inc_aro") = true));
+	python::def("getHydrogenBondCount", &MolProp::getHydrogenBondCount, python::arg("molgraph"));
+	python::def("getChainBondCount", &MolProp::getChainBondCount, python::arg("molgraph"));
+	python::def("getRotatableBondCount", &MolProp::getRotatableBondCount, 
+				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
+
 	python::def("calcXLogP", &MolProp::calcXLogP, python::arg("molgraph"));
 	python::def("calcLogS", &MolProp::calcLogS, python::arg("molgraph"));
 	python::def("calcTPSA", &MolProp::calcTPSA, python::arg("molgraph"));

@@ -61,7 +61,18 @@ namespace CDPL
 
 		CDPL_MOLPROP_API void buildElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
-	
+
+		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph, std::size_t order, bool inc_aro = true);
+
+		CDPL_MOLPROP_API std::size_t getHydrogenBondCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getChainBondCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
+		
+		
 		CDPL_MOLPROP_API double calcXLogP(const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API double calcLogS(const Chem::MolecularGraph& molgraph);

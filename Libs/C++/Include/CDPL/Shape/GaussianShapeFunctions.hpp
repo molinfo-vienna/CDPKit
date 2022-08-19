@@ -70,9 +70,6 @@ namespace CDPL
 		
 		CDPL_SHAPE_API unsigned int centerAndAlignPrincipalAxes(GaussianShape& shape, const GaussianShapeFunction& func, Math::Matrix4D& back_xform,
 																double mom_eq_thresh = 0.15);
-		/**
-		 * @}
-		 */
     }
 }
 

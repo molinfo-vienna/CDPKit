@@ -481,9 +481,6 @@ namespace CDPL
 													const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
 													GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, 
 													GradVec& term_atom2_deriv, GradVec& oop_atom_deriv);
-		/**
-		 * @}
-		 */
     }
 }
 

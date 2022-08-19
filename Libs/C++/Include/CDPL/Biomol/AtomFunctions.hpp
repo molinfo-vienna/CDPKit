@@ -188,9 +188,6 @@ namespace CDPL
 
 		CDPL_BIOMOL_API void extractResidueSubstructure(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& res_substruct, 
 														bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT, bool append = false);
-		/**
-		 * @}
-		 */
 	}
 }
 

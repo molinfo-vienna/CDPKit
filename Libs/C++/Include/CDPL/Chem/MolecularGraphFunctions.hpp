@@ -145,7 +145,7 @@ namespace CDPL
 
 		CDPL_CHEM_API FragmentList::SharedPointer perceiveComponents(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API std::size_t getComponentCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getComponentCount(const MolecularGraph& molgraph);//move
 
 
 		CDPL_CHEM_API const FragmentList::SharedPointer& getComponentGroups(const MolecularGraph& molgraph);
@@ -345,8 +345,6 @@ namespace CDPL
 
 		CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
 
-		CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
-
 		CDPL_CHEM_API void buildBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
 
 	
@@ -382,39 +380,29 @@ namespace CDPL
 		CDPL_CHEM_API Math::DMatrix::SharedPointer calcGeometricalDistanceMatrix(MolecularGraph& molgraph, bool overwrite);
 
 		
-		CDPL_CHEM_API std::size_t calcCyclomaticNumber(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t calcCyclomaticNumber(const MolecularGraph& molgraph);//move
 
 
-		CDPL_CHEM_API std::size_t getAtomCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getAtomCount(const MolecularGraph& molgraph);//move
 
-		CDPL_CHEM_API std::size_t getAtomCount(const MolecularGraph& molgraph, unsigned int type);
+		CDPL_CHEM_API std::size_t getAtomCount(const MolecularGraph& molgraph, unsigned int type);//move
 
-		CDPL_CHEM_API std::size_t getImplicitHydrogenCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getImplicitHydrogenCount(const MolecularGraph& molgraph);//move
 
-		CDPL_CHEM_API std::size_t getOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
+		CDPL_CHEM_API std::size_t getOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);//move
 
-		CDPL_CHEM_API std::size_t getExplicitOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
+		CDPL_CHEM_API std::size_t getExplicitOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);//move
 
-		CDPL_CHEM_API std::size_t getChainAtomCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getChainAtomCount(const MolecularGraph& molgraph);//move
 
-		CDPL_CHEM_API std::size_t getHydrogenAcceptorAtomCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getHydrogenAcceptorAtomCount(const MolecularGraph& molgraph);//move
 
-		CDPL_CHEM_API std::size_t getHydrogenDonorAtomCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getHydrogenDonorAtomCount(const MolecularGraph& molgraph);//move
 
 
 		CDPL_CHEM_API std::size_t getCompleteBondCount(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API std::size_t getBondCount(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t getBondCount(const MolecularGraph& molgraph, std::size_t order);
-
-		CDPL_CHEM_API std::size_t getHydrogenBondCount(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t getChainBondCount(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API std::size_t getRotatableBondCount(const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
-
-	
+		
 		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API FragmentList::SharedPointer extractAromaticSSSRSubset(const MolecularGraph& molgraph);
@@ -451,16 +439,16 @@ namespace CDPL
 										bool bonds = true, bool bond_atoms = false);
 
 
-		CDPL_CHEM_API void generate2DCoordinates(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void calculate2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
 
-		CDPL_CHEM_API void generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
+		CDPL_CHEM_API void calculateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
 
 
-		CDPL_CHEM_API void generateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void calculateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API void generateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 
-												  std::size_t min_ring_size = 8);
+		CDPL_CHEM_API void calculateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 
+												   std::size_t min_ring_size = 8);
 
 		
 		CDPL_CHEM_API void calcCIPPriorities(MolecularGraph& molgraph, bool overwrite);
@@ -469,11 +457,11 @@ namespace CDPL
 												   unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
 												   unsigned int bond_flags = BondPropertyFlag::DEFAULT, bool inc_impl_h = true);
 
-		CDPL_CHEM_API void generateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
-													  unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
-													  unsigned int bond_flags = BondPropertyFlag::DEFAULT);
+		CDPL_CHEM_API void calculateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
+													   unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
+													   unsigned int bond_flags = BondPropertyFlag::DEFAULT);
 
-		CDPL_CHEM_API void generateMorganNumbering(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void calculateMorganNumbering(MolecularGraph& molgraph, bool overwrite);
 
 
 		CDPL_CHEM_API void calcImplicitHydrogenCounts(MolecularGraph& molgraph, bool overwrite);

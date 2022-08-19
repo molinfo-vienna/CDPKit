@@ -36,6 +36,7 @@ SET(cdpl-internal_LIB_SRCS
     StringDataIOUtilities.cpp
     ByteBuffer.cpp
     SHA1.cpp
+    AtomContainerFunctions.cpp
    )
 
 ADD_LIBRARY(cdpl-internal-static STATIC ${cdpl-internal_LIB_SRCS})

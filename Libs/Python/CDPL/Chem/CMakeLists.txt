@@ -96,20 +96,20 @@ SET(chem_MOD_SRCS
     ConnectedSubstructureSetExport.cpp 
     ComponentSetExport.cpp 
    
-    Atom2DCoordinatesGeneratorExport.cpp 
-    Hydrogen3DCoordinatesGeneratorExport.cpp 
-    MorganNumberingGeneratorExport.cpp 
-    CanonicalNumberingGeneratorExport.cpp 
+    Atom2DCoordinatesCalculatorExport.cpp 
+    Hydrogen3DCoordinatesCalculatorExport.cpp 
+    MorganNumberingCalculatorExport.cpp 
+    CanonicalNumberingCalculatorExport.cpp 
     CIPPriorityCalculatorExport.cpp 
-    BondStereoFlagGeneratorExport.cpp 
-    BondDirectionGeneratorExport.cpp 
-    BondOrderGeneratorExport.cpp 
-    KekuleStructureGeneratorExport.cpp 
+    BondStereoFlagCalculatorExport.cpp 
+    BondDirectionCalculatorExport.cpp 
+    BondOrderCalculatorExport.cpp 
+    KekuleStructureCalculatorExport.cpp 
     HashCodeCalculatorExport.cpp 
     SymmetryClassCalculatorExport.cpp 
     SurfaceAtomExtractorExport.cpp 
     PatternAtomTyperExport.cpp 
-    SubstructureHistogramGeneratorExport.cpp 
+    SubstructureHistogramCalculatorExport.cpp 
     GeneralizedBellAtomDensityExport.cpp
     AtomDensityGridCalculatorExport.cpp
     BuriednessScoreExport.cpp
@@ -250,7 +250,6 @@ SET(chem_MOD_SRCS
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 
     AtomContainerFunctionExport.cpp 
-    BondContainerFunctionExport.cpp 
     Entity3DContainerFunctionExport.cpp 
     Entity3DFunctionExport.cpp 
     AtomFunctionExport.cpp 

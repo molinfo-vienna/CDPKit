@@ -117,8 +117,8 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 
 	fragConfDataCache.setCleanupFunction(boost::bind(&FragmentConfData::clear, _1));
 
-	hCoordsGen.undefinedOnly(true);
-	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&ConformerGeneratorImpl::has3DCoordinates, this, _1));
+	hCoordsCalc.undefinedOnly(true);
+	hCoordsCalc.setAtom3DCoordinatesCheckFunction(boost::bind(&ConformerGeneratorImpl::has3DCoordinates, this, _1));
 
 	DGStructureGeneratorSettings& dg_settings = dgStructureGen.getSettings();
 
@@ -497,7 +497,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 
 	dgStructureGen.getSettings().setBoxSize(coreAtomMask.size() * 0.5);
 
-	hCoordsGen.setup(*molGraph);
+	hCoordsCalc.setup(*molGraph);
 
 	mmff94GradientCalc.setup(mmff94Data, num_atoms);
 	mmff94GradientCalc.resetFixedAtomMask();
@@ -671,7 +671,7 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph,
 
 bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(ConformerData& conf_data)
 {
-	hCoordsGen.generate(conf_data, false);
+	hCoordsCalc.calculate(conf_data, false);
 
 	Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
 	std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
@@ -735,7 +735,7 @@ ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputC
 	if (!coords_compl) {
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
 		energyGradient.resize(num_atoms);
-		hCoordsGen.setup(*molGraph);
+		hCoordsCalc.setup(*molGraph);
 
 		if (logCallback)
 			logCallback("Using provided input coordinates, generating missing hydrogen coordinates\n");

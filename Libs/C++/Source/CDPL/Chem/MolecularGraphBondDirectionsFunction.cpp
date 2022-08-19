@@ -34,25 +34,25 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/BondDirectionGenerator.hpp"
+#include "CDPL/Chem/BondDirectionCalculator.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds, std::size_t min_ring_size)
+void Chem::calculateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds, std::size_t min_ring_size)
 {
 	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,
 											   boost::bind(&hasDirection, _1))) == molgraph.getBondsEnd())
 		return;
 
-	BondDirectionGenerator generator;
+	BondDirectionCalculator calculator;
 	Util::UIArray dirs;
 
-	generator.includeRingBonds(ring_bonds);
-	generator.setRingSizeLimit(min_ring_size);
-	generator.generate(molgraph, dirs);
+	calculator.includeRingBonds(ring_bonds);
+	calculator.setRingSizeLimit(min_ring_size);
+	calculator.calculate(molgraph, dirs);
 
 	std::size_t num_bonds = molgraph.getNumBonds();
 

@@ -441,9 +441,6 @@ namespace CDPL
 		ValueType calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
 												GradVec& atom2_grad, const ValueType& e_IJ, const ValueType& r_IJ, 
 												const ValueType& r_IJ_7);
-		/**
-		 * @}
-		 */
     }
 }
 

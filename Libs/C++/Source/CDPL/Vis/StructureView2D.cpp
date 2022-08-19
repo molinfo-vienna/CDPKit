@@ -58,8 +58,8 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
-#include "CDPL/Chem/Atom2DCoordinatesGenerator.hpp"
-#include "CDPL/Chem/BondStereoFlagGenerator.hpp"
+#include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"
+#include "CDPL/Chem/BondStereoFlagCalculator.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
 
@@ -2479,13 +2479,13 @@ void Vis::StructureView2D::initInputAtomPosTable()
 		if (structureChanged || parameters->explicitHVisibilityChanged() || parameters->propertyVisibilityChanged() ||
 			calcInputAtomCoords.isEmpty() || calcBondStereoFlags.isEmpty()) {
 
-			Chem::Atom2DCoordinatesGenerator(*structure, calcInputAtomCoords);
+			Chem::Atom2DCoordinatesCalculator(*structure, calcInputAtomCoords);
 
-			Chem::BondStereoFlagGenerator sto_flag_gen;
+			Chem::BondStereoFlagCalculator sto_flag_calc;
 
-			sto_flag_gen.setAtom2DCoordinatesFunction(boost::bind(static_cast<const Math::Vector2D& (Math::Vector2DArray::*)(std::size_t) const>(&Math::Vector2DArray::getElement), 
+			sto_flag_calc.setAtom2DCoordinatesFunction(boost::bind(static_cast<const Math::Vector2D& (Math::Vector2DArray::*)(std::size_t) const>(&Math::Vector2DArray::getElement), 
 																  boost::ref(calcInputAtomCoords), boost::bind(&Chem::MolecularGraph::getAtomIndex, structure, _1)));
-			sto_flag_gen.generate(*structure, calcBondStereoFlags);
+			sto_flag_calc.calculate(*structure, calcBondStereoFlags);
 		}
 
 		inputAtomCoords = calcInputAtomCoords;

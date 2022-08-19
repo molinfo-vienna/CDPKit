@@ -28,6 +28,7 @@
 
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -102,7 +103,7 @@ std::size_t Chem::getBondCount(const Atom& atom, const MolecularGraph& molgraph,
 {
     std::size_t count = getExplicitBondCount(atom, molgraph, order, type, strict);
  
-    if (order == 1 && type == AtomType::H)
+    if (order == 1 && (strict ? type == AtomType::H : atomTypesMatch(type, AtomType::H)))
 		count += getImplicitHydrogenCount(atom);
 
     return count;

@@ -109,13 +109,13 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcGeometricalDistanceMatrix", &Chem::calcGeometricalDistanceMatrix, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("generate2DCoordinates", &Chem::generate2DCoordinates, 
+	python::def("calculate2DCoordinates", &Chem::calculate2DCoordinates, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("generateHydrogen3DCoordinates", &Chem::generateHydrogen3DCoordinates, 
+	python::def("calculateHydrogen3DCoordinates", &Chem::calculateHydrogen3DCoordinates, 
 				(python::arg("molgraph"), python::arg("undef_only") = true));
-	python::def("generateBond2DStereoFlags", &Chem::generateBond2DStereoFlags, 
+	python::def("calculateBond2DStereoFlags", &Chem::calculateBond2DStereoFlags, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("generateBondDirections", &Chem::generateBondDirections,
+	python::def("calculateBondDirections", &Chem::calculateBondDirections,
 				(python::arg("molgraph"), python::arg("overwrite"), 
 				 python::arg("ring_bonds") = true, python::arg("min_ring_size") = 8));
 	python::def("calcCIPPriorities", &Chem::calcCIPPriorities,
@@ -123,10 +123,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("perceiveSymmetryClasses", &Chem::perceiveSymmetryClasses, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT, 
 				 python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, python::arg("inc_impl_h") = true));
-	python::def("generateCanonicalNumbering", &Chem::generateCanonicalNumbering, 
+	python::def("calculateCanonicalNumbering", &Chem::calculateCanonicalNumbering, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
 				 python::arg("bond_flags") =  Chem::BondPropertyFlag::DEFAULT));
-	python::def("generateMorganNumbering", &Chem::generateMorganNumbering, 
+	python::def("calculateMorganNumbering", &Chem::calculateMorganNumbering, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcImplicitHydrogenCounts", &Chem::calcImplicitHydrogenCounts, 
 				(python::arg("molgraph"), python::arg("overwrite")));
@@ -270,16 +270,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("getHydrogenAcceptorAtomCount", &Chem::getHydrogenAcceptorAtomCount, python::arg("molgraph"));
 	python::def("getHydrogenDonorAtomCount", &Chem::getHydrogenDonorAtomCount, python::arg("molgraph"));
 	python::def("getCompleteBondCount", &Chem::getCompleteBondCount, python::arg("molgraph"));
-	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&Chem::getBondCount),
-				python::arg("molgraph"));
-	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, std::size_t)>(&Chem::getBondCount),
-				(python::arg("molgraph"), python::arg("order")));
-	python::def("getHydrogenBondCount", &Chem::getHydrogenBondCount, python::arg("molgraph"));
-	python::def("getChainBondCount", &Chem::getChainBondCount, python::arg("molgraph"));
 	python::def("getComponentCount", &Chem::getComponentCount, python::arg("molgraph"));
-	python::def("getRotatableBondCount", &Chem::getRotatableBondCount, 
-				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
-
+	
 	python::def("generateINCHI", &generateINCHIWrapper, 
 				(python::arg("molgraph"), python::arg("options") = Chem::ControlParameterDefault::INCHI_OUTPUT_OPTIONS,
 				 python::arg("dim") = 0));

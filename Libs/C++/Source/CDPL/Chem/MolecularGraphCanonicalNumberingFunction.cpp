@@ -34,13 +34,13 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
+#include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
+void Chem::calculateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
 									  unsigned int atom_flags, unsigned int bond_flags)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
@@ -49,17 +49,17 @@ void Chem::generateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
 		return;
 
 	Util::STArray numbering;
-	CanonicalNumberingGenerator generator;
+	CanonicalNumberingCalculator calculator;
 
 	if (atom_flags == AtomPropertyFlag::DEFAULT)
-		atom_flags = CanonicalNumberingGenerator::DEF_ATOM_PROPERTY_FLAGS;
+		atom_flags = CanonicalNumberingCalculator::DEF_ATOM_PROPERTY_FLAGS;
 
 	if (bond_flags == BondPropertyFlag::DEFAULT)
-		bond_flags = CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS;
+		bond_flags = CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLAGS;
 
-	generator.setAtomPropertyFlags(atom_flags);
-	generator.setBondPropertyFlags(bond_flags);
-	generator.generate(molgraph, numbering);
+	calculator.setAtomPropertyFlags(atom_flags);
+	calculator.setBondPropertyFlags(bond_flags);
+	calculator.calculate(molgraph, numbering);
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 

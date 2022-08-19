@@ -36,7 +36,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+//#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -45,6 +45,7 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
+#include "CDPL/MolProp/AtomContainerFunctions.hpp"
 #include "CDPL/Internal/SHA1.hpp"
 
 
@@ -93,7 +94,7 @@ namespace
 
 ConfGen::CanonicalFragment::CanonicalFragment(): hashCode(0)
 {
-	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
+	canonNumCalc.setHydrogenCountFunction(boost::bind(&MolProp::getExplicitAtomCount, _1, Chem::AtomType::H, true));
 }
 	  
 ConfGen::CanonicalFragment::CanonicalFragment(const CanonicalFragment& frag):  
@@ -102,12 +103,12 @@ ConfGen::CanonicalFragment::CanonicalFragment(const CanonicalFragment& frag):
 	for (AtomMapping::const_iterator it = frag.atomMapping.begin(), end = frag.atomMapping.end(); it != end; ++it) 
 		atomMapping.push_back(&molecule.getAtom(frag.molecule.getAtomIndex(**it)));
 
-	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
+	canonNumCalc.setHydrogenCountFunction(boost::bind(&MolProp::getExplicitAtomCount, _1, Chem::AtomType::H, true));
 }
 
 ConfGen::CanonicalFragment::CanonicalFragment(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
 {
-	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
+	canonNumCalc.setHydrogenCountFunction(boost::bind(&MolProp::getExplicitAtomCount, _1, Chem::AtomType::H, true));
 
     create(molgraph, parent);
 }
@@ -552,18 +553,18 @@ void ConfGen::CanonicalFragment::canonicalize(bool stereo)
 	using namespace Chem;
 
 	if (stereo) {
-		canonNumGen.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE |
-										 AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::CONFIGURATION |
-										 AtomPropertyFlag::H_COUNT);
-		canonNumGen.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | 
-										 BondPropertyFlag::CONFIGURATION);
+		canonNumCalc.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE |
+										  AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::CONFIGURATION |
+										  AtomPropertyFlag::H_COUNT);
+		canonNumCalc.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | 
+										  BondPropertyFlag::CONFIGURATION);
 	} else {
-		canonNumGen.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE |
-										 AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::H_COUNT);
-		canonNumGen.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY);
+		canonNumCalc.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE |
+										  AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::H_COUNT);
+		canonNumCalc.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY);
 	}
 
-	canonNumGen.generate(molecule, canonNumbers);
+	canonNumCalc.calculate(molecule, canonNumbers);
 
 	molecule.orderAtoms(boost::bind(&CanonicalFragment::compareCanonNumber, this, _1, _2));
 
@@ -589,7 +590,7 @@ void ConfGen::CanonicalFragment::calcHashCode(bool stereo)
 		hashInputData.push_back(getType(atom));
 		hashInputData.push_back(getFormalCharge(atom) + 1000000);
 		hashInputData.push_back(getAromaticityFlag(atom));
-		hashInputData.push_back(getExplicitAtomCount(atom, AtomType::H));
+		hashInputData.push_back(MolProp::getExplicitAtomCount(atom, AtomType::H));
 
 		if (stereo && hasStereoDescriptor(atom)) {
 			const StereoDescriptor& descr = getStereoDescriptor(atom);

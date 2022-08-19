@@ -54,8 +54,8 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/Chem/BondDirectionGenerator.hpp"
-#include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
+#include "CDPL/Chem/BondDirectionCalculator.hpp"
+#include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
@@ -282,11 +282,11 @@ void Chem::SMILESDataWriter::writeCanonSMILES(std::ostream& os, const Reaction& 
 void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const MolecularGraph& molgraph)
 {
 	if (ctrlParameters.writeBondStereo) {
-		if (!bondDirGenerator.get())
-			bondDirGenerator.reset(new BondDirectionGenerator());
+		if (!bondDirCalculator.get())
+			bondDirCalculator.reset(new BondDirectionCalculator());
 
-		bondDirGenerator->includeRingBonds(ctrlParameters.writeRingBondStereo);
-		bondDirGenerator->setRingSizeLimit(ctrlParameters.minStereoBondRingSize);
+		bondDirCalculator->includeRingBonds(ctrlParameters.writeRingBondStereo);
+		bondDirCalculator->setRingSizeLimit(ctrlParameters.minStereoBondRingSize);
 	}
 
 	bool first_comp = true;
@@ -308,7 +308,7 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 		
 		if (ctrlParameters.writeBondStereo) {
 			perceiveSSSR(*output_molgraph, false);
-			bondDirGenerator->generate(*output_molgraph, bondDirections);
+			bondDirCalculator->calculate(*output_molgraph, bondDirections);
 		}
 
 		if (!first_comp)
@@ -339,11 +339,11 @@ void Chem::SMILESDataWriter::writeCanonSMILES(std::ostream& os, const MolecularG
 void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& molgraph)
 {
 	if (ctrlParameters.writeBondStereo) {
-		if (!bondDirGenerator.get())
-			bondDirGenerator.reset(new BondDirectionGenerator());
+		if (!bondDirCalculator.get())
+			bondDirCalculator.reset(new BondDirectionCalculator());
 
-		bondDirGenerator->includeRingBonds(ctrlParameters.writeRingBondStereo);
-		bondDirGenerator->setRingSizeLimit(ctrlParameters.minStereoBondRingSize);
+		bondDirCalculator->includeRingBonds(ctrlParameters.writeRingBondStereo);
+		bondDirCalculator->setRingSizeLimit(ctrlParameters.minStereoBondRingSize);
 	}
 
 	unsigned int atom_prop_flags = AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT;
@@ -363,11 +363,11 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 	if (ctrlParameters.writeBondStereo)
 		bond_prop_flags |= BondPropertyFlag::CONFIGURATION;
 
-	if (!canonNumberingGenerator.get())
-		canonNumberingGenerator.reset(new CanonicalNumberingGenerator());
+	if (!canonNumberingCalculator.get())
+		canonNumberingCalculator.reset(new CanonicalNumberingCalculator());
 
-	canonNumberingGenerator->setAtomPropertyFlags(atom_prop_flags);
-	canonNumberingGenerator->setBondPropertyFlags(bond_prop_flags);
+	canonNumberingCalculator->setAtomPropertyFlags(atom_prop_flags);
+	canonNumberingCalculator->setBondPropertyFlags(bond_prop_flags);
 
 	std::ostringstream oss;
 	FragmentList& components = *getComponents(molgraph);
@@ -388,7 +388,7 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 		
 		if (ctrlParameters.writeBondStereo) {
 			perceiveSSSR(*canonMolGraph, true);
-			bondDirGenerator->generate(*canonMolGraph, bondDirections);
+			bondDirCalculator->calculate(*canonMolGraph, bondDirections);
 		}
 
 		freeNodes();
@@ -543,7 +543,7 @@ void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)
 	else
 		canonMolGraph->clear();
 
-	canonNumberingGenerator->generate(molgraph, canonNumbering);
+	canonNumberingCalculator->calculate(molgraph, canonNumbering);
 
 	canonAtomList.clear();
 

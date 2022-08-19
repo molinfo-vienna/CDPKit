@@ -361,20 +361,20 @@ void MolProp::XLogPCalculator::init(const Chem::MolecularGraph& molgraph)
 	featureVector.clear();
 	featureVector[LOGP_OFFSET_INDEX] = 1;
 
-	if (corrSubstructHistoGen.getNumPatterns() == 0) {
+	if (corrSubstructHistoCalc.getNumPatterns() == 0) {
 		boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-		corrSubstructHistoGen.addPattern(internalHBondQuery1, INTERNAL_H_BOND_INDEX);
-		corrSubstructHistoGen.addPattern(internalHBondQuery2, INTERNAL_H_BOND_INDEX);
-		corrSubstructHistoGen.addPattern(internalHBondQuery3, INTERNAL_H_BOND_INDEX);
-		corrSubstructHistoGen.addPattern(halogen13PairQuery, HALOGEN_13_PAIR_INDEX);
-		corrSubstructHistoGen.addPattern(aromaticN14PairQuery, AROMATIC_N_14_PAIR_INDEX);
-		corrSubstructHistoGen.addPattern(orthoSP3OPairQuery, ORTHO_SP3_O_PAIR_INDEX);
-		corrSubstructHistoGen.addPattern(paraDonorPairQuery, PARA_DONOR_PAIR_INDEX);
-		corrSubstructHistoGen.addPattern(sp2O15PairQuery, SP2_O_15_PAIR_INDEX);
-		corrSubstructHistoGen.addPattern(alphaAminoAcidQuery, ALPHA_AMINO_ACID_INDEX, 0, false);
-		corrSubstructHistoGen.addPattern(salicylicAcid, SALICYLIC_ACID_INDEX, 0, false);
-		corrSubstructHistoGen.addPattern(pAminoSulfonicAcidQuery, P_AMINO_SULFONIC_ACID_INDEX, 0, false);
+		corrSubstructHistoCalc.addPattern(internalHBondQuery1, INTERNAL_H_BOND_INDEX);
+		corrSubstructHistoCalc.addPattern(internalHBondQuery2, INTERNAL_H_BOND_INDEX);
+		corrSubstructHistoCalc.addPattern(internalHBondQuery3, INTERNAL_H_BOND_INDEX);
+		corrSubstructHistoCalc.addPattern(halogen13PairQuery, HALOGEN_13_PAIR_INDEX);
+		corrSubstructHistoCalc.addPattern(aromaticN14PairQuery, AROMATIC_N_14_PAIR_INDEX);
+		corrSubstructHistoCalc.addPattern(orthoSP3OPairQuery, ORTHO_SP3_O_PAIR_INDEX);
+		corrSubstructHistoCalc.addPattern(paraDonorPairQuery, PARA_DONOR_PAIR_INDEX);
+		corrSubstructHistoCalc.addPattern(sp2O15PairQuery, SP2_O_15_PAIR_INDEX);
+		corrSubstructHistoCalc.addPattern(alphaAminoAcidQuery, ALPHA_AMINO_ACID_INDEX, 0, false);
+		corrSubstructHistoCalc.addPattern(salicylicAcid, SALICYLIC_ACID_INDEX, 0, false);
+		corrSubstructHistoCalc.addPattern(pAminoSulfonicAcidQuery, P_AMINO_SULFONIC_ACID_INDEX, 0, false);
 
 		for (PatternTable::const_iterator p_it = atomTypePatterns.begin(), p_end = atomTypePatterns.end(); p_it != p_end; ++p_it)
 			atomTyper.addPattern(*p_it);
@@ -432,7 +432,7 @@ void MolProp::XLogPCalculator::countHydrophicCarbons(const Chem::MolecularGraph&
 
 void MolProp::XLogPCalculator::calcLogP(const Chem::MolecularGraph& molgraph)
 {
-	corrSubstructHistoGen.generate(molgraph, featureVector);
+	corrSubstructHistoCalc.calculate(molgraph, featureVector);
 	atomTyper.execute(molgraph);
 
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)

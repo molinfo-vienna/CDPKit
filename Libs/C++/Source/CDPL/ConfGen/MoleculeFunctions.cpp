@@ -145,7 +145,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 	perceiveComponents(mol, added_hs);
 
 	if (canon) {
-		generateCanonicalNumbering(mol, false);
+		calculateCanonicalNumbering(mol, false);
 		canonicalize(mol, true, true, true, true);
 		perceiveSSSR(mol, true);
 		perceiveComponents(mol, true);

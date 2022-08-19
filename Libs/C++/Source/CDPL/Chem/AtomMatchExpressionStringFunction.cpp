@@ -34,7 +34,6 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Molecule.hpp"

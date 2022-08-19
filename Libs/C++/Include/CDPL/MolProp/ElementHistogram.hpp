@@ -59,9 +59,6 @@ namespace CDPL
 				return "ElementHistogram";
 			}
 		};
-		/**
-		 * @}
-		 */
 	}
 }
 

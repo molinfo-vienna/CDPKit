@@ -37,7 +37,7 @@
 #include <cstddef>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
-#include "CDPL/Chem/SubstructureHistogramGenerator.hpp"
+#include "CDPL/Chem/SubstructureHistogramCalculator.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -115,10 +115,10 @@ namespace CDPL
 	
 			void calcLogP(const Chem::MolecularGraph& molgraph);
 		
-			Math::DVector                        featureVector;
-			double                               logP;
-			Chem::PatternAtomTyper               atomTyper;
-			Chem::SubstructureHistogramGenerator corrSubstructHistoGen;
+			Math::DVector                         featureVector;
+			double                                logP;
+			Chem::PatternAtomTyper                atomTyper;
+			Chem::SubstructureHistogramCalculator corrSubstructHistoCalc;
 		};
 	}
 }

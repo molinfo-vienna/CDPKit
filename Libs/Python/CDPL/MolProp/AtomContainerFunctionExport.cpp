@@ -36,11 +36,17 @@
 namespace
 {
 
-
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitChainAtomCount, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getRingAtomCount, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticAtomCount, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyAtomCount, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(long, getNetFormalCharge, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(double, calcExplicitMass, CDPL::Chem::AtomContainer&)
 
 	MAKE_FUNCTION_WRAPPER2(void, calcExplicitMassComposition, CDPL::Chem::AtomContainer&, CDPL::MolProp::MassComposition&)
 
+	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&, unsigned int, bool)
 	MAKE_FUNCTION_WRAPPER3(void, buildExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::MolProp::ElementHistogram&, bool);
 
 	std::string buildExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
@@ -66,9 +72,18 @@ void CDPLPythonMolProp::exportAtomContainerFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
+	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper1, python::arg("cntnr"));
+	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper3, (python::arg("cntnr"), python::arg("type"), python::arg("strict") = true));
+	python::def("getExplicitChainAtomCount", &getExplicitChainAtomCountWrapper1, python::arg("cntnr"));
+	python::def("getRingAtomCount", &getRingAtomCountWrapper1, python::arg("cntnr"));
+	python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper1, python::arg("cntnr"));
+	python::def("getHeavyAtomCount", &getHeavyAtomCountWrapper1, python::arg("cntnr"));
+	python::def("getNetFormalCharge", &getNetFormalChargeWrapper1, python::arg("cntnr"));
 	python::def("calcExplicitMass", &calcExplicitMassWrapper1, python::arg("cntnr"));
+
 	python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2, (python::arg("cntnr"), python::arg("mass_comp")));
 	python::def("buildExplicitMassCompositionString", &buildExplicitMassCompositionStringWrapper, python::arg("cntnr"));
+
 	python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
 	python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
 }

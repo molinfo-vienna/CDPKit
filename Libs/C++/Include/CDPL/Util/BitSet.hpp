@@ -57,7 +57,7 @@ namespace CDPL
 		 * \param bs The bitset to fold.
 		 * \param num_times The number of times the bitset has to be folded.
 		 */
-		inline void foldBitSet(BitSet& bs, std::size_t num_times)
+		inline void fold(BitSet& bs, std::size_t num_times)
 		{
 			BitSet tmp;
 

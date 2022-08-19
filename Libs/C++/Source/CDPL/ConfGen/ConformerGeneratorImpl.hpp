@@ -43,7 +43,7 @@
 #include "CDPL/ConfGen/RMSDConformerSelector.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
-#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Hydrogen3DCoordinatesCalculator.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
@@ -203,42 +203,42 @@ namespace CDPL
 			typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
 			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 
-			ConformerDataCache                   confDataCache;
-			FragmentConfDataCache                fragConfDataCache;
-			ConfCombinationDataCache             confCombDataCache;
-			ConformerGeneratorSettings           settings;
-			const Chem::MolecularGraph*          molGraph;
-			ConformerDataArray                   workingConfs;
-			ConformerDataArray                   tmpWorkingConfs;
-			ConformerDataArray                   outputConfs;
-			CallbackFunction                     abortCallback;
-			CallbackFunction                     timeoutCallback;
-			LogMessageCallbackFunction           logCallback;
-			boost::timer::cpu_timer              timer;
-			RMSDConformerSelector                confSelector;
-			TorsionDriverImpl                    torDriver;
-			FragmentAssemblerImpl                fragAssembler;
-			DGStructureGenerator                 dgStructureGen;
-			MMFF94Parameterizer                  mmff94Parameterizer;
-			MMFF94InteractionData                mmff94Data;
-			ForceFieldInteractionMask            mmff94InteractionMask;
-			MMFF94GradientCalculator             mmff94GradientCalc;
-			BFGSMinimizer                        energyMinimizer;
-			Chem::Hydrogen3DCoordinatesGenerator hCoordsGen;
-			BondList                             torDriveBonds;
-			BondList                             fragSplitBonds;
-			Chem::FragmentList                   fragments;
-			Util::BitSet                         tmpBitSet;
-			Util::BitSet                         coreAtomMask;
-			Util::BitSet                         invertibleNMask;
-			Util::BitSet                         fixedAtomConfigMask;
-			FragmentConfDataList                 compConfData;
-			FragmentConfDataList                 torFragConfData;
-			ConfCombinationDataList              torFragConfCombData;
-			UIntArray                            currConfComb;
-			UIntArray                            parentAtomInds; 
-			Math::Vector3DArray::StorageType     energyGradient;
-			bool                                 inStochasticMode;
+			ConformerDataCache                    confDataCache;
+			FragmentConfDataCache                 fragConfDataCache;
+			ConfCombinationDataCache              confCombDataCache;
+			ConformerGeneratorSettings            settings;
+			const Chem::MolecularGraph*           molGraph;
+			ConformerDataArray                    workingConfs;
+			ConformerDataArray                    tmpWorkingConfs;
+			ConformerDataArray                    outputConfs;
+			CallbackFunction                      abortCallback;
+			CallbackFunction                      timeoutCallback;
+			LogMessageCallbackFunction            logCallback;
+			boost::timer::cpu_timer               timer;
+			RMSDConformerSelector                 confSelector;
+			TorsionDriverImpl                     torDriver;
+			FragmentAssemblerImpl                 fragAssembler;
+			DGStructureGenerator                  dgStructureGen;
+			MMFF94Parameterizer                   mmff94Parameterizer;
+			MMFF94InteractionData                 mmff94Data;
+			ForceFieldInteractionMask             mmff94InteractionMask;
+			MMFF94GradientCalculator              mmff94GradientCalc;
+			BFGSMinimizer                         energyMinimizer;
+			Chem::Hydrogen3DCoordinatesCalculator hCoordsCalc;
+			BondList                              torDriveBonds;
+			BondList                              fragSplitBonds;
+			Chem::FragmentList                    fragments;
+			Util::BitSet                          tmpBitSet;
+			Util::BitSet                          coreAtomMask;
+			Util::BitSet                          invertibleNMask;
+			Util::BitSet                          fixedAtomConfigMask;
+			FragmentConfDataList                  compConfData;
+			FragmentConfDataList                  torFragConfData;
+			ConfCombinationDataList               torFragConfCombData;
+			UIntArray                             currConfComb;
+			UIntArray                             parentAtomInds; 
+			Math::Vector3DArray::StorageType      energyGradient;
+			bool                                  inStochasticMode;
 		};
     }
 }

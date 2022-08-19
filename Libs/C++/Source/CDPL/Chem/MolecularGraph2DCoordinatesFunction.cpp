@@ -28,19 +28,19 @@
 
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
-#include "CDPL/Chem/Atom2DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generate2DCoordinates(MolecularGraph& molgraph, bool overwrite)
+void Chem::calculate2DCoordinates(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && hasCoordinates(molgraph, 2))
 		return;
 
 	Math::Vector2DArray coords;
-	Atom2DCoordinatesGenerator generator(molgraph, coords);
+	Atom2DCoordinatesCalculator calculator(molgraph, coords);
 
 	set2DCoordinates(molgraph, coords);
 }

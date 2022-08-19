@@ -51,7 +51,7 @@ void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
     setAromaticityFlags(mol, false);
 
 	if (makeHydrogenComplete(mol)) {
-		generateHydrogen3DCoordinates(mol);
+		calculateHydrogen3DCoordinates(mol);
 
 		try {
 			Biomol::setHydrogenResidueSequenceInfo(mol, false);

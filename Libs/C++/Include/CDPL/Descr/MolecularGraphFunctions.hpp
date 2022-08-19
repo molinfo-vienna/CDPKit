@@ -25,7 +25,7 @@
 
 /**
  * \file
- * \brief Declaration of functions that operate on Descr::MolecularGraph instances.
+ * \brief Declaration of functions that operate on Chem::MolecularGraph instances.
  */
 
 #ifndef CDPL_DESCR_MOLECULARGRAPHFUNCTIONS_HPP

@@ -34,13 +34,13 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/MorganNumberingGenerator.hpp"
+#include "CDPL/Chem/MorganNumberingCalculator.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generateMorganNumbering(MolecularGraph& molgraph, bool overwrite)
+void Chem::calculateMorganNumbering(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,
@@ -48,7 +48,7 @@ void Chem::generateMorganNumbering(MolecularGraph& molgraph, bool overwrite)
 		return;
 
 	Util::STArray numbering;
-	MorganNumberingGenerator generator(molgraph, numbering);
+	MorganNumberingCalculator calculator(molgraph, numbering);
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) 

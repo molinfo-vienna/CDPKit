@@ -66,7 +66,7 @@ SET_TARGET_PROPERTIES(cdpl-descr-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK;CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_UTIL_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
+TARGET_LINK_LIBRARIES(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static)
 
 INSTALL(TARGETS cdpl-descr-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -74,7 +74,7 @@ INSTALL(TARGETS cdpl-descr-static
 
 ADD_LIBRARY(cdpl-descr-shared SHARED ${cdpl-descr_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+TARGET_LINK_LIBRARIES(cdpl-descr-shared cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-descr-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

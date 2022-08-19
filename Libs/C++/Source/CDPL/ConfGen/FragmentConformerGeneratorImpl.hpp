@@ -44,7 +44,7 @@
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
-#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Hydrogen3DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
@@ -162,7 +162,7 @@ namespace CDPL
 			MMFF94GradientCalculator               mmff94GradientCalc;
 			BFGSMinimizer                          energyMinimizer;
 			DGStructureGenerator                   dgStructureGen;
-			Chem::Hydrogen3DCoordinatesGenerator   hCoordsGen;
+			Chem::Hydrogen3DCoordinatesCalculator  hCoordsCalc;
 			Chem::AutomorphismGroupSearch          symMappingSearch;
 			AlignmentCalculator                    alignmentCalc;
 			Math::Vector3DArray::StorageType       energyGradient;

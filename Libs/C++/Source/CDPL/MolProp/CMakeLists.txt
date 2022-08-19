@@ -23,14 +23,21 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-molprop_LIB_SRCS
     AtomProperty.cpp
 
     AtomPropertyFunctions.cpp
+    
     AtomContainerElementalCompositionFunctions.cpp
     AtomContainerMassCompositionFunctions.cpp
+    AtomContainerAtomCountFunctions.cpp
+    AtomContainerNetFormalChargeFunction.cpp
+
+    BondContainerBondCountFunctions.cpp
+
+    MolecularGraphBondCountFunctions.cpp
     MolecularGraphMassCompositionFunctions.cpp
     MolecularGraphElementalCompositionFunctions.cpp
     MolecularGraphMeanPolarizabilityFunction.cpp
@@ -40,6 +47,7 @@ SET(cdpl-molprop_LIB_SRCS
     MolecularGraphTPSAFunction.cpp
     MolecularGraphLogSFunction.cpp
     MolecularGraphXLogPFunction.cpp
+
     AtomPolarizabilityFunctions.cpp
     BondPolarizabilityFunction.cpp
     
@@ -64,11 +72,11 @@ INSTALL(TARGETS cdpl-molprop-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
+TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
 
 ADD_LIBRARY(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared)
+TARGET_LINK_LIBRARIES(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-molprop-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

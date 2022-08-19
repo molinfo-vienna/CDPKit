@@ -39,17 +39,10 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&, unsigned int)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getExplicitChainAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getRingAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyAtomCount, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getNumConformations, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxAtomMappingID, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxComponentGroupID, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(long, calcFormalCharge, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getNumConformations, CDPL::Chem::AtomContainer&)
-
+	
 	MAKE_FUNCTION_WRAPPER2(bool, hasCoordinates, CDPL::Chem::AtomContainer&, std::size_t);
 
 	MAKE_FUNCTION_WRAPPER3(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&, bool);
@@ -74,15 +67,8 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper2, (python::arg("cntnr"), python::arg("type")));
-	python::def("getExplicitChainAtomCount", &getExplicitChainAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getRingAtomCount", &getRingAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper1, python::arg("cntnr"));
-	python::def("getHeavyAtomCount", &getHeavyAtomCountWrapper1, python::arg("cntnr"));
 	python::def("getMaxComponentGroupID", &getMaxComponentGroupIDWrapper1, python::arg("cntnr"));
 	python::def("getMaxAtomMappingID", &getMaxAtomMappingIDWrapper1, python::arg("cntnr"));
-	python::def("calcFormalCharge", &calcFormalChargeWrapper1, python::arg("cntnr"));
 	python::def("hasCoordinates", &hasCoordinatesWrapper2, (python::arg("cntnr"), python::arg("dim")));
 	python::def("get2DCoordinates", &get2DCoordinatesWrapper3, (python::arg("cntnr"), python::arg("coords"), python::arg("append") = false));
 	python::def("set2DCoordinates", &Chem::set2DCoordinates, (python::arg("cntnr"), python::arg("coords")));

@@ -36,7 +36,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
-#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Hydrogen3DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -54,14 +54,14 @@ namespace
 }
 
 
-void Chem::generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
+void Chem::calculateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
 {
   	Math::Vector3DArray coords;
-	Hydrogen3DCoordinatesGenerator generator;
+	Hydrogen3DCoordinatesCalculator calculator;
 
-	generator.undefinedOnly(undef_only);
-	generator.setup(molgraph);
-	generator.generate(coords, true);
+	calculator.undefinedOnly(undef_only);
+	calculator.setup(molgraph);
+	calculator.calculate(coords, true);
 
 	set3DCoordinates(molgraph, coords);
 
@@ -92,12 +92,12 @@ void Chem::generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_on
 	if (num_confs == 0 || num_confs == std::numeric_limits<std::size_t>::max())
 		return;
 
-	generator.setAtom3DCoordinatesCheckFunction(&hasConformers);
-	generator.setup(molgraph);
+	calculator.setAtom3DCoordinatesCheckFunction(&hasConformers);
+	calculator.setup(molgraph);
 
 	for (i = 0; i < num_confs; i++) {
-		generator.setAtom3DCoordinatesFunction(AtomConformer3DCoordinatesFunctor(i));
-		generator.generate(coords, true);
+		calculator.setAtom3DCoordinatesFunction(AtomConformer3DCoordinatesFunctor(i));
+		calculator.calculate(coords, true);
 
 		for (std::vector<std::size_t>::const_iterator it = undef_atoms.begin(), end = undef_atoms.end(); it != end; ++it) {
 			std::size_t atom_idx = *it;

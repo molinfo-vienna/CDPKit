@@ -47,6 +47,7 @@ BOOST_PYTHON_MODULE(_molprop)
 	exportPEOEChargeCalculator();
 
 	exportAtomContainerFunctions();
+	exportBondContainerFunctions();
 	exportAtomFunctions();
 	exportBondFunctions();
 	exportMolecularGraphFunctions();

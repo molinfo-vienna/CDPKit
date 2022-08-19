@@ -25,7 +25,7 @@
 
 /**
  * \file
- * \brief Declaration of functions that operate on MolProp::Bond instances.
+ * \brief Declaration of functions that operate on Chem::Bond instances.
  */
 
 #ifndef CDPL_MOLPROP_BONDFUNCTIONS_HPP

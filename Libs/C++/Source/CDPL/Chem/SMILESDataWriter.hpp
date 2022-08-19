@@ -57,8 +57,8 @@ namespace CDPL
 		class Fragment;
 		class Atom;
 		class Bond;
-		class CanonicalNumberingGenerator;
-		class BondDirectionGenerator;
+		class CanonicalNumberingCalculator;
+		class BondDirectionCalculator;
 
 		class SMILESDataWriter
 		{
@@ -238,8 +238,8 @@ namespace CDPL
 				std::size_t                lexicalOrder;
 			};
 
-			typedef std::auto_ptr<BondDirectionGenerator> BondDirGeneratorPtr;
-			typedef std::auto_ptr<CanonicalNumberingGenerator> CanonNumberingGeneratorPtr;
+			typedef std::auto_ptr<BondDirectionCalculator> BondDirCalculatorPtr;
+			typedef std::auto_ptr<CanonicalNumberingCalculator> CanonNumberingCalculatorPtr;
 			typedef std::auto_ptr<Fragment> FragmentPtr;
 			typedef std::vector<const Atom*> AtomList;
 			typedef std::vector<DFSTreeNode*> NodeList;
@@ -256,8 +256,8 @@ namespace CDPL
 			AtomList                    canonAtomList;
 			FragmentPtr                 hDepleteMolGraph;
 			FragmentPtr                 canonMolGraph;
-			BondDirGeneratorPtr         bondDirGenerator;
-			CanonNumberingGeneratorPtr  canonNumberingGenerator;
+			BondDirCalculatorPtr        bondDirCalculator;
+			CanonNumberingCalculatorPtr canonNumberingCalculator;
 			CanonSMILESList             canonSMILESStrings;
 			Util::STArray               canonNumbering;
 			Util::UIArray               bondDirections;

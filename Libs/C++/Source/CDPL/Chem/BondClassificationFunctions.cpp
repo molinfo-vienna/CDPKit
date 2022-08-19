@@ -28,7 +28,6 @@
 
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondContainerFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomType.hpp"

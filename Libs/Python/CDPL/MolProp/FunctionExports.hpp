@@ -32,6 +32,7 @@ namespace CDPLPythonMolProp
 {
 
 	void exportAtomContainerFunctions();
+	void exportBondContainerFunctions();
 	void exportAtomFunctions();
 	void exportBondFunctions();
 	void exportMolecularGraphFunctions();

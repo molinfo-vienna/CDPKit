@@ -25,7 +25,7 @@
 
 /**
  * \file
- * \brief Declaration of functions that operate on MolProp::AtomContainer instances.
+ * \brief Declaration of functions that operate on Chem::AtomContainer instances.
  */
 
 #ifndef CDPL_MOLPROP_ATOMCONTAINERFUNCTIONS_HPP
@@ -59,6 +59,22 @@ namespace CDPL
 		CDPL_MOLPROP_API void buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, std::string& formula);
 
 		CDPL_MOLPROP_API void buildExplicitElementHistogram(const Chem::AtomContainer& cntnr, ElementHistogram& hist, bool append = false);
+
+
+		CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr);
+
+		CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
+
+		CDPL_MOLPROP_API std::size_t getExplicitChainAtomCount(const Chem::AtomContainer& cntnr);
+
+		CDPL_MOLPROP_API std::size_t getRingAtomCount(const Chem::AtomContainer& cntnr);
+
+		CDPL_MOLPROP_API std::size_t getAromaticAtomCount(const Chem::AtomContainer& cntnr);
+
+		CDPL_MOLPROP_API std::size_t getHeavyAtomCount(const Chem::AtomContainer& cntnr);
+
+
+		CDPL_MOLPROP_API long getNetFormalCharge(const Chem::AtomContainer& cntnr);
 	}
 }
 

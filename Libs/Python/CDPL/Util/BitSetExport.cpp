@@ -289,5 +289,5 @@ void CDPLPythonUtil::exportBitSet()
 		.def("__str__", &toString, python::arg("self"))
 		.add_static_property("npos", &getNPos);
 
-	python::def("foldBitSet", &Util::foldBitSet, (python::arg("bs"), python::arg("num_times")));
+	python::def("fold", &Util::fold, (python::arg("bs"), python::arg("num_times")));
 }

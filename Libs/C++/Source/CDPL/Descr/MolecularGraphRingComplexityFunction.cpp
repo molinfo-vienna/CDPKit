@@ -32,7 +32,7 @@
 
 #include "CDPL/Descr/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/MolProp/AtomContainerFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -48,8 +48,7 @@ double Descr::calcRingComplexity(const Chem::MolecularGraph& molgraph)
 												 boost::bind(std::plus<std::size_t>(), _1, 
 															 boost::bind(&Fragment::getNumBonds, _2)));
 
-	std::size_t num_ring_atoms = getRingAtomCount(molgraph);
-
+	std::size_t num_ring_atoms = MolProp::getRingAtomCount(molgraph);
 	double complexity = (num_ring_atoms == 0 ? 0.0 : double(sum_ring_sizes) / num_ring_atoms);
 
 	return complexity;

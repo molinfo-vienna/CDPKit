@@ -103,21 +103,21 @@ BOOST_PYTHON_MODULE(_chem)
 	exportConnectedSubstructureSet();
 	exportComponentSet();
 
-	exportMorganNumberingGenerator();
-	exportCanonicalNumberingGenerator();
+	exportMorganNumberingCalculator();
+	exportCanonicalNumberingCalculator();
 	exportCIPPriorityCalculator();
-	exportAtom2DCoordinatesGenerator();
-	exportHydrogen3DCoordinatesGenerator();
-	exportBondStereoFlagGenerator();
-	exportBondDirectionGenerator();
-	exportBondOrderGenerator();
-	exportKekuleStructureGenerator();
+	exportAtom2DCoordinatesCalculator();
+	exportHydrogen3DCoordinatesCalculator();
+	exportBondStereoFlagCalculator();
+	exportBondDirectionCalculator();
+	exportBondOrderCalculator();
+	exportKekuleStructureCalculator();
 	exportHashCodeCalculator();
 	exportSymmetryClassCalculator();
 	exportSurfaceAtomExtractor();
 
 	exportPatternAtomTyper();
-	exportSubstructureHistogramGenerator();
+	exportSubstructureHistogramCalculator();
 	exportGeneralizedBellAtomDensity();
 	exportAtomDensityGridCalculator();
 	exportBuriednessScore();
@@ -262,7 +262,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportControlParameterFunctions();
 	exportUtilityFunctions();
 	exportAtomContainerFunctions();
-	exportBondContainerFunctions();
 	exportEntity3DContainerFunctions();
 	exportEntity3DFunctions();
 	exportAtomFunctions();

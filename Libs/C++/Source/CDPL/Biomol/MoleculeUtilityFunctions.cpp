@@ -43,6 +43,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/MolProp/AtomContainerFunctions.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
 
@@ -257,7 +258,7 @@ namespace
 	if (getType(atom) != AtomType::O) 
 	    return false;
 
-	return (getHeavyAtomCount(atom) == 0);
+	return (MolProp::getHeavyAtomCount(atom) == 0);
     }
 }
 

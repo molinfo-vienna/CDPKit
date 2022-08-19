@@ -37,7 +37,8 @@ SET(molprop_MOD_SRCS
     AtomPropertyExport.cpp 
 
     MolecularGraphFunctionExport.cpp
-    AtomContainerFunctionExport.cpp  
+    AtomContainerFunctionExport.cpp
+    BondContainerFunctionExport.cpp  
     AtomFunctionExport.cpp
     BondFunctionExport.cpp 
 

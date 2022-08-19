@@ -41,6 +41,8 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Chem/SybylAtomType.hpp"
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
 #include "CDPL/Chem/SMILESMoleculeReader.hpp"
 
@@ -454,4 +456,161 @@ bool Chem::containsFragmentWithMinSize(const FragmentList& frag_list, std::size_
 
 	return (std::find_if(frag_list.getElementsBegin(), end, 
 						 boost::bind(std::greater_equal<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), min_size)) != end);
+}
+
+unsigned int Chem::sybylToAtomType(unsigned int sybyl_type)
+{
+	switch (sybyl_type) {
+
+		case SybylAtomType::C_3:
+	    case SybylAtomType::C_2:
+	    case SybylAtomType::C_1:
+	    case SybylAtomType::C_ar:
+	    case SybylAtomType::C_cat:
+	    case SybylAtomType::Du_C:
+			return AtomType::C;
+			
+	    case SybylAtomType::N_3:
+	    case SybylAtomType::N_2:
+	    case SybylAtomType::N_1:
+	    case SybylAtomType::N_ar:
+	    case SybylAtomType::N_am:
+	    case SybylAtomType::N_pl3:
+	    case SybylAtomType::N_4:
+			return AtomType::N;
+
+	    case SybylAtomType::O_3:
+	    case SybylAtomType::O_2:
+	    case SybylAtomType::O_co2:
+	    case SybylAtomType::O_spc:
+	    case SybylAtomType::O_t3p:
+			return AtomType::O;
+
+	    case SybylAtomType::S_3:
+	    case SybylAtomType::S_2:
+	    case SybylAtomType::S_O:
+	    case SybylAtomType::S_O2:
+			return AtomType::S;
+
+	    case SybylAtomType::P_3:
+			return AtomType::P;
+
+	    case SybylAtomType::H:
+	    case SybylAtomType::H_spc:
+	    case SybylAtomType::H_t3p:
+			return AtomType::H;
+
+	    case SybylAtomType::Any:
+			return AtomType::AH;
+
+	    case SybylAtomType::Hal:
+			return AtomType::X;
+
+	    case SybylAtomType::Hev:
+			return AtomType::A;
+
+	    case SybylAtomType::Het:
+			return AtomType::HET;
+
+	    case SybylAtomType::Li:
+			return AtomType::Li;
+
+	    case SybylAtomType::Na:
+			return AtomType::Na;
+
+	    case SybylAtomType::Mg:
+			return AtomType::Mg;
+
+	    case SybylAtomType::Al:
+			return AtomType::Al;
+
+	    case SybylAtomType::Si:
+			return AtomType::Si;
+
+	    case SybylAtomType::K:
+			return AtomType::K;
+
+	    case SybylAtomType::Ca:
+			return AtomType::Ca;
+
+	    case SybylAtomType::Cr_th:
+	    case SybylAtomType::Cr_oh:
+			return AtomType::Cr;
+
+	    case SybylAtomType::Mn:
+			return AtomType::Mn;
+
+	    case SybylAtomType::Fe:
+			return AtomType::Fe;
+
+	    case SybylAtomType::Co_oh:
+			return AtomType::Co;
+
+	    case SybylAtomType::Cu:
+			return AtomType::Cu;
+
+	    case SybylAtomType::F:
+			return AtomType::F;
+
+	    case SybylAtomType::Cl:
+			return AtomType::Cl;
+
+	    case SybylAtomType::Br:
+			return AtomType::Br;
+
+	    case SybylAtomType::I:
+			return AtomType::I;
+
+	    case SybylAtomType::Zn:
+			return AtomType::Zn;
+
+	    case SybylAtomType::Se:
+			return AtomType::Se;
+
+	    case SybylAtomType::Mo:
+			return AtomType::Mo;
+
+	    case SybylAtomType::Sn:
+			return AtomType::Sn;
+
+		default:
+			return AtomType::UNKNOWN;
+	}
+}
+
+bool Chem::atomTypesMatch(unsigned int qry_type, unsigned int tgt_type)
+{
+    switch (qry_type) {
+
+		case AtomType::ANY:
+		case AtomType::AH:
+			return true;
+
+		case AtomType::A:
+			return (tgt_type != AtomType::H);
+			
+		case AtomType::Q:
+			return (tgt_type != AtomType::H && tgt_type != AtomType::C);
+
+		case AtomType::QH:
+			return (tgt_type != AtomType::C);
+
+		case AtomType::M:
+			return AtomDictionary::isMetal(tgt_type);
+
+		case AtomType::MH:
+			return (tgt_type == AtomType::H || AtomDictionary::isMetal(tgt_type));
+
+		case AtomType::X:
+			return AtomDictionary::isHalogen(tgt_type);
+
+		case AtomType::XH:
+			return (tgt_type == AtomType::H || AtomDictionary::isHalogen(tgt_type));
+
+		case AtomType::HET:
+			return (tgt_type == AtomType::N || tgt_type == AtomType::O || tgt_type == AtomType::S || tgt_type == AtomType::P);
+
+		default:
+			return (qry_type == tgt_type);
+    }
 }

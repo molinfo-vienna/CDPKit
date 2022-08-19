@@ -142,20 +142,20 @@ SET(cdpl-chem_LIB_SRCS
     ConnectedSubstructureSet.cpp
     ComponentSet.cpp
 
-    MorganNumberingGenerator.cpp
+    MorganNumberingCalculator.cpp
     CIPPriorityCalculator.cpp
-    CanonicalNumberingGenerator.cpp
-    Atom2DCoordinatesGenerator.cpp
-    Hydrogen3DCoordinatesGenerator.cpp
-    BondStereoFlagGenerator.cpp
-    BondDirectionGenerator.cpp
-    BondOrderGenerator.cpp
-    KekuleStructureGenerator.cpp
+    CanonicalNumberingCalculator.cpp
+    Atom2DCoordinatesCalculator.cpp
+    Hydrogen3DCoordinatesCalculator.cpp
+    BondStereoFlagCalculator.cpp
+    BondDirectionCalculator.cpp
+    BondOrderCalculator.cpp
+    KekuleStructureCalculator.cpp
     HashCodeCalculator.cpp
     SymmetryClassCalculator.cpp
     SurfaceAtomExtractor.cpp
     PatternAtomTyper.cpp
-    SubstructureHistogramGenerator.cpp
+    SubstructureHistogramCalculator.cpp
     GeneralizedBellAtomDensity.cpp
     AtomDensityGridCalculator.cpp
     BuriednessScore.cpp
@@ -169,8 +169,6 @@ SET(cdpl-chem_LIB_SRCS
     Entity3DContainerCentroidFunction.cpp
     Entity3DContainerBoundingBoxFunctions.cpp
 
-    AtomContainerAtomCountFunctions.cpp
-    AtomContainerFormalChargeFunction.cpp
     AtomContainerCoordinatesFunctions.cpp
     AtomContainerMaxAtomMappingIDFunction.cpp
     AtomContainerMaxComponentGroupIDFunction.cpp
@@ -178,8 +176,6 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerAtomTypeMaskFunction.cpp
     AtomContainerCopyAtomsFunctions.cpp
     AtomContainerBoundingBoxFunctions.cpp
-
-    BondContainerBondCountFunctions.cpp
  
     AtomPropertyFunctions.cpp
     AtomTypeFunctions.cpp
@@ -233,7 +229,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphComponentGroupsFunctions.cpp
     MolecularGraphExtractReactionCenterFunction.cpp
     MolecularGraphAtomCountFunctions.cpp
-    MolecularGraphBondCountFunctions.cpp
+    MolecularGraphCompleteBondCountFunction.cpp
     MolecularGraphAromaticRingSetFunctions.cpp
     MolecularGraphAromaticSubstructureFunctions.cpp
     MolecularGraphKekulizeBondsFunction.cpp

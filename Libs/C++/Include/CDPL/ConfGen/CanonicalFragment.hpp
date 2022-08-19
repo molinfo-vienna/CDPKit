@@ -38,7 +38,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
+#include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -157,13 +157,13 @@ namespace CDPL
 			typedef std::vector<Base::uint32> HashInputData;
 			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 
-			Chem::BasicMolecule               molecule;
-			Base::uint64                      hashCode;
-			Chem::CanonicalNumberingGenerator canonNumGen;
-			SmallestSetOfSmallestRingsPtr     sssr;
-			Util::STArray                     canonNumbers;
-			HashInputData                     hashInputData;
-			AtomMapping                       atomMapping;
+			Chem::BasicMolecule                molecule;
+			Base::uint64                       hashCode;
+			Chem::CanonicalNumberingCalculator canonNumCalc;
+			SmallestSetOfSmallestRingsPtr      sssr;
+			Util::STArray                      canonNumbers;
+			HashInputData                      hashInputData;
+			AtomMapping                        atomMapping;
 		};
     }
 }

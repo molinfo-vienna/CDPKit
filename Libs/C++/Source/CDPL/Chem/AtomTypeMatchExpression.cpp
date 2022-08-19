@@ -28,6 +28,7 @@
 
 #include "CDPL/Chem/AtomTypeMatchExpression.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
 
 using namespace CDPL;

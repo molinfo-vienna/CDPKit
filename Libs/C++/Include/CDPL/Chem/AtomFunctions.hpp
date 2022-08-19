@@ -55,6 +55,7 @@ namespace CDPL
 	{
 
 		class StereoDescriptor;
+		
 	
 		CDPL_CHEM_API const std::string& getName(const Atom& atom);
 
@@ -86,7 +87,7 @@ namespace CDPL
 
 		CDPL_CHEM_API unsigned int getTypeForSymbol(const Atom& atom);
 		
-		CDPL_CHEM_API unsigned int getGenericType(const Atom& atom);
+		CDPL_CHEM_API unsigned int getGenericType(const Atom& atom);//move
 
 
 		CDPL_CHEM_API long getFormalCharge(const Atom& atom);
@@ -129,35 +130,35 @@ namespace CDPL
 		CDPL_CHEM_API unsigned int perceiveHybridizationState(const Atom& atom, const MolecularGraph& molgraph);
 
 
-		CDPL_CHEM_API double getAtomicWeight(const Atom& atom);
+		CDPL_CHEM_API double getAtomicWeight(const Atom& atom);//move
 
-		CDPL_CHEM_API std::size_t getIUPACGroup(const Atom& atom);
+		CDPL_CHEM_API std::size_t getIUPACGroup(const Atom& atom);//move
 
-		CDPL_CHEM_API double getVdWRadius(const Atom& atom);
+		CDPL_CHEM_API double getVdWRadius(const Atom& atom);//move Internal
 
-		CDPL_CHEM_API double getCovalentRadius(const Atom& atom, std::size_t order);
+		CDPL_CHEM_API double getCovalentRadius(const Atom& atom, std::size_t order);//move
 
-		CDPL_CHEM_API double getAllredRochowElectronegativity(const Atom& atom);
+		CDPL_CHEM_API double getAllredRochowElectronegativity(const Atom& atom);//move
 
-		CDPL_CHEM_API const std::string& getElementName(const Atom& atom);
+		CDPL_CHEM_API const std::string& getElementName(const Atom& atom);//move
 
-		CDPL_CHEM_API std::size_t getElementValenceElectronCount(const Atom& atom);
+		CDPL_CHEM_API std::size_t getElementValenceElectronCount(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isChemicalElement(const Atom& atom);
+		CDPL_CHEM_API bool isChemicalElement(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isMainGroupElement(const Atom& atom);
+		CDPL_CHEM_API bool isMainGroupElement(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isMetal(const Atom& atom);
+		CDPL_CHEM_API bool isMetal(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isTransitionMetal(const Atom& atom);
+		CDPL_CHEM_API bool isTransitionMetal(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isNonMetal(const Atom& atom);
+		CDPL_CHEM_API bool isNonMetal(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isSemiMetal(const Atom& atom);
+		CDPL_CHEM_API bool isSemiMetal(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isHalogen(const Atom& atom);
+		CDPL_CHEM_API bool isHalogen(const Atom& atom);//move
 
-		CDPL_CHEM_API bool isNobleGas(const Atom& atom);
+		CDPL_CHEM_API bool isNobleGas(const Atom& atom);//move
 
 
 		CDPL_CHEM_API bool getRingFlag(const Atom& atom);
@@ -197,35 +198,36 @@ namespace CDPL
 
 
 		CDPL_CHEM_API bool isOrdinaryHydrogen(const Atom& atom, const MolecularGraph& molgraph, 
-											  unsigned int flags = AtomPropertyFlag::DEFAULT);
+											  unsigned int flags = AtomPropertyFlag::DEFAULT);// move Internal
+		
 
-		CDPL_CHEM_API bool isHeavy(const Atom& atom);
+		CDPL_CHEM_API bool isHeavy(const Atom& atom);// move Internal
 
-		CDPL_CHEM_API bool isUnsaturated(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool isUnsaturated(const Atom& atom, const MolecularGraph& molgraph);// move Internal
 
-		CDPL_CHEM_API bool isHydrogenAcceptor(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool isHydrogenAcceptor(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API bool isHydrogenDonor(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool isHydrogenDonor(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API bool isCarbonylLikeAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+		CDPL_CHEM_API bool isCarbonylLikeAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);// move
 
-		CDPL_CHEM_API bool isAmideCenterAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+		CDPL_CHEM_API bool isAmideCenterAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);// move
 
-		CDPL_CHEM_API bool isAmideNitrogen(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+		CDPL_CHEM_API bool isAmideNitrogen(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);// move
 
-		CDPL_CHEM_API bool isInvertibleNitrogen(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool isInvertibleNitrogen(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API bool isPlanarNitrogen(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool isPlanarNitrogen(const Atom& atom, const MolecularGraph& molgraph);// move
 
 
-		CDPL_CHEM_API std::size_t calcExplicitValence(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t calcExplicitValence(const Atom& atom, const MolecularGraph& molgraph);// move
 	
-		CDPL_CHEM_API std::size_t calcValence(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t calcValence(const Atom& atom, const MolecularGraph& molgraph);// move
 
 	
-		CDPL_CHEM_API std::size_t calcFreeValenceElectronCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t calcFreeValenceElectronCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t calcValenceElectronCount(const Atom& atom);
+		CDPL_CHEM_API std::size_t calcValenceElectronCount(const Atom& atom);// move
 
 
 		CDPL_CHEM_API std::size_t getUnpairedElectronCount(const Atom& atom);
@@ -248,47 +250,47 @@ namespace CDPL
 		CDPL_CHEM_API std::size_t calcImplicitHydrogenCount(const Atom& atom, const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API std::size_t getOrdinaryHydrogenCount(const Atom& atom, const MolecularGraph& molgraph, 
-														   unsigned int flags = AtomPropertyFlag::DEFAULT);
+														   unsigned int flags = AtomPropertyFlag::DEFAULT);// move Internal
 
 
-		CDPL_CHEM_API std::size_t getExplicitAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict = true);
+		CDPL_CHEM_API std::size_t getExplicitAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict = true);//move
 
-		CDPL_CHEM_API std::size_t getAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict = true);
+		CDPL_CHEM_API std::size_t getAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict = true);//move
 
-		CDPL_CHEM_API std::size_t getExplicitChainAtomCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getExplicitChainAtomCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getChainAtomCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getChainAtomCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getRingAtomCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getRingAtomCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getAromaticAtomCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getAromaticAtomCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getHeavyAtomCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getHeavyAtomCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
 
-		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph);//move
 
-		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order);
+		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order);//move
 
-		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
+		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);//move
 
-		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph);//move
 
-		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order);
+		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order);//move
 
-		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
+		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);//move Internal
 
-		CDPL_CHEM_API std::size_t getExplicitChainBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getExplicitChainBondCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getChainBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getChainBondCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getRingBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getRingBondCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getAromaticBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getAromaticBondCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getHeavyBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getHeavyBondCount(const Atom& atom, const MolecularGraph& molgraph);// move
 
-		CDPL_CHEM_API std::size_t getRotatableBondCount(const Atom& atom, const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
+		CDPL_CHEM_API std::size_t getRotatableBondCount(const Atom& atom, const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);// move
 
 
 		CDPL_CHEM_API const Math::Vector2D& get2DCoordinates(const Atom& atom);
@@ -398,8 +400,6 @@ namespace CDPL
 		CDPL_CHEM_API bool hasSybylType(const Atom& atom);
 
 		CDPL_CHEM_API unsigned int perceiveSybylType(const Atom& atom, const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
 	
 
 		CDPL_CHEM_API const std::string& getMOL2Name(const Atom& atom);
@@ -538,8 +538,6 @@ namespace CDPL
 											  Util::BitSet& atom_mask, bool reset = true);
 
 		CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool atomTypesMatch(unsigned int qry_type, unsigned int tgt_type);
 
 
 		template <typename AtomType, typename OutputIterator>

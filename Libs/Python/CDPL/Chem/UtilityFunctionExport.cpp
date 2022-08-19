@@ -62,4 +62,6 @@ void CDPLPythonChem::exportUtilityFunctions()
 	python::def("isNotAromatic", &Chem::isNotAromatic, (python::arg("ring"), python::arg("molgraph")));
 	python::def("containsFragmentWithBond", &containsFragmentWithBond, (python::arg("frag_list"), python::arg("bond")));
 	python::def("containsFragmentWithMinSize", &Chem::containsFragmentWithMinSize, (python::arg("frag_list"), python::arg("min_size")));
+	python::def("atomTypesMatch", &Chem::atomTypesMatch, (python::arg("qry_type"), python::arg("tgt_type")));
+	python::def("sybylToAtomType", &Chem::sybylToAtomType, python::arg("sybyl_type"));
 }

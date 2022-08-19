@@ -87,8 +87,8 @@ ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl():
     dg_settings.regardBondConfiguration(true);
 	dg_settings.enablePlanarityConstraints(true);
 
-	hCoordsGen.undefinedOnly(true);
-	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGeneratorImpl::has3DCoordinates, this, _1));
+	hCoordsCalc.undefinedOnly(true);
+	hCoordsCalc.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGeneratorImpl::has3DCoordinates, this, _1));
 
 	symMappingSearch.includeIdentityMapping(false);
 	symMappingSearch.setMaxNumMappings(MAX_NUM_SYM_MAPPINGS);
@@ -266,7 +266,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 	} 
 
 	if (!coords_compl) {
-		hCoordsGen.setup(*molGraph);
+		hCoordsCalc.setup(*molGraph);
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
 
 		if (logCallback)
@@ -327,7 +327,7 @@ void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration(boo
 	coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
 	coreAtomMask.flip();
 
-	hCoordsGen.setup(*molGraph);
+	hCoordsCalc.setup(*molGraph);
 
 	mmff94GradientCalc.resetFixedAtomMask();
 }
@@ -601,7 +601,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(
 	double stop_grad = settings.getRefinementStopGradient();
 	Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
 
-	hCoordsGen.generate(conf_data, false);
+	hCoordsCalc.calculate(conf_data, false);
 	energyMinimizer.setup(conf_coords_data, energyGradient);
 
 	double energy = 0.0;		

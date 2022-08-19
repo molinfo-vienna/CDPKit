@@ -365,7 +365,6 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("frag_list")));
 	python::def("perceiveSybylType", &perceiveSybylTypeWrapper2,
 				(python::arg("atom"), python::arg("molgraph")));
-	python::def("sybylToAtomType", &Chem::sybylToAtomType, python::arg("sybyl_type"));
 	python::def("getTopologicalDistance", &getTopologicalDistanceWrapper3, 
 				(python::arg("atom1"), python::arg("atom2"), python::arg("molgraph")));
 
@@ -438,7 +437,6 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("atom"));
 
-	python::def("atomTypesMatch", &Chem::atomTypesMatch, (python::arg("qry_type"), python::arg("tgt_type")));
 
 	EXPORT_ATOM_FUNCS_COPY_REF(Name, name)
 	EXPORT_ATOM_FUNCS_COPY_REF(Symbol, symbol)

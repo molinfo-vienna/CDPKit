@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/KekuleStructureGenerator.hpp"
+#include "CDPL/Chem/KekuleStructureCalculator.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 
@@ -37,7 +37,7 @@ using namespace CDPL;
 void Chem::kekulizeBonds(MolecularGraph& molgraph)
 {
 	Util::STArray orders;
-	KekuleStructureGenerator kekulizer(molgraph, orders);
+	KekuleStructureCalculator kekulizer(molgraph, orders);
 
 	std::size_t num_bonds = molgraph.getNumBonds();
 
