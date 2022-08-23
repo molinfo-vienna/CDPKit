@@ -53,6 +53,7 @@
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "JMEDataWriter.hpp"
 #include "JMEFormatData.hpp"
@@ -792,7 +793,7 @@ bool Chem::JMEDataWriter::writeQueryFlags(std::ostream& os, const MolecularGraph
 				std::size_t heavy_bnd_count;
 
 				if (!constraint.hasValue()) 
-					heavy_bnd_count = getHeavyBondCount(atom, molgraph);
+					heavy_bnd_count = Internal::getHeavyBondCount(atom, molgraph);
 				else
 					heavy_bnd_count = constraint.getValue<std::size_t>();
 
@@ -809,7 +810,7 @@ bool Chem::JMEDataWriter::writeQueryFlags(std::ostream& os, const MolecularGraph
 				std::size_t h_count;
 
 				if (!constraint.hasValue()) 
-					h_count = getAtomCount(atom, molgraph, AtomType::H);
+					h_count = Internal::getAtomCount(atom, molgraph, AtomType::H);
 				else
 					h_count = constraint.getValue<std::size_t>();
 

@@ -62,7 +62,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveSSSR(MolecularGraph& molgraph, b
 	return sssr_ptr;
 }
 
-Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph)
+Chem::FragmentList::SharedPointer Chem::extractSSSRSubset(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph)
 {
 	FragmentList::SharedPointer tgt_sssr(new FragmentList());
 	const FragmentList::SharedPointer& src_sssr = getSSSR(src_molgraph);
@@ -72,7 +72,7 @@ Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_mo
 	return tgt_sssr;
 }
 
-Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
+Chem::FragmentList::SharedPointer Chem::extractSSSRSubset(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
 {
 	if (!overwrite) {
 		Base::Variant tgt_sssr = tgt_molgraph.getProperty(MolecularGraphProperty::SSSR, false);
@@ -81,7 +81,7 @@ Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_mo
 			return tgt_sssr.getData<FragmentList::SharedPointer>();
 	}
 
-	FragmentList::SharedPointer tgt_sssr = extractSSSR(src_molgraph, tgt_molgraph);
+	FragmentList::SharedPointer tgt_sssr = extractSSSRSubset(src_molgraph, tgt_molgraph);
 
 	setSSSR(tgt_molgraph, tgt_sssr);
 

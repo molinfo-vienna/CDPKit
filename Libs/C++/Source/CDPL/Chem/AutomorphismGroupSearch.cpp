@@ -37,6 +37,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfigurationMatchExpression.hpp"
 #include "CDPL/Chem/BondConfigurationMatchExpression.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -200,7 +201,7 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 			isotope = getIsotope(query_atom);
  
 		if (parent->atomPropFlags & AtomPropertyFlag::H_COUNT)
-			hCount = getBondCount(query_atom, query_molgraph, 1, AtomType::H);
+			hCount = Internal::getBondCount(query_atom, query_molgraph, 1, AtomType::H);
 
 		if (parent->atomPropFlags & AtomPropertyFlag::FORMAL_CHARGE)
 			charge = getFormalCharge(query_atom);
@@ -209,7 +210,7 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 			aromatic = getAromaticityFlag(query_atom);
 
 		if (parent->atomPropFlags & AtomPropertyFlag::EXPLICIT_BOND_COUNT)
-			expBondCount = getExplicitBondCount(query_atom, query_molgraph);
+			expBondCount = Internal::getExplicitBondCount(query_atom, query_molgraph);
 
 		parent->lastQueryAtom = &query_atom;
 	}
@@ -229,10 +230,10 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 	if ((parent->atomPropFlags & AtomPropertyFlag::AROMATICITY) && (aromatic != getAromaticityFlag(target_atom)))
 		return false;
 
-	if ((parent->atomPropFlags & AtomPropertyFlag::EXPLICIT_BOND_COUNT) && (expBondCount != getExplicitBondCount(target_atom, target_molgraph)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::EXPLICIT_BOND_COUNT) && (expBondCount != Internal::getExplicitBondCount(target_atom, target_molgraph)))
 		return false;
 
-	if ((parent->atomPropFlags & AtomPropertyFlag::H_COUNT) && (hCount != getBondCount(target_atom, target_molgraph, 1, AtomType::H)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::H_COUNT) && (hCount != Internal::getBondCount(target_atom, target_molgraph, 1, AtomType::H)))
 		return false;
 
     return true;

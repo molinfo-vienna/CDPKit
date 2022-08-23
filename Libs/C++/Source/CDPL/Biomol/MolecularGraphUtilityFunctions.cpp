@@ -40,6 +40,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 
 
@@ -200,7 +201,7 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
 	if (getType(atom) != AtomType::H) 
 	    continue;
 	
-	if (atom.getNumAtoms() != 1 && getHeavyAtomCount(atom, molgraph) != 1) 
+	if (atom.getNumAtoms() != 1 && MolProp::getHeavyAtomCount(atom, molgraph) != 1) 
 	    continue;
 
 	const Atom& prnt_atom = atom.getAtom(0);

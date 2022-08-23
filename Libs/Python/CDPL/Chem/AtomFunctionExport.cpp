@@ -130,51 +130,14 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::Atom&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::Atom&)
-	MAKE_FUNCTION_WRAPPER1(double, getAtomicWeight, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getIUPACGroup, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(double, getVdWRadius, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(double, getAllredRochowElectronegativity, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(const std::string&, getElementName, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getElementValenceElectronCount, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isChemicalElement, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isMainGroupElement, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isMetal, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isTransitionMetal, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isNonMetal, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isSemiMetal, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isHalogen, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isNobleGas, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(bool, isHeavy, CDPL::Chem::Atom&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcValenceElectronCount, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(const std::string&, getSymbolForType, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(unsigned int, getTypeForSymbol, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(unsigned int, getGenericType, CDPL::Chem::Atom&);
 
 	MAKE_FUNCTION_WRAPPER2(const CDPL::Math::Vector3D&, getConformer3DCoordinates, CDPL::Chem::Atom&, std::size_t);
-	MAKE_FUNCTION_WRAPPER2(double, getCovalentRadius, CDPL::Chem::Atom&, std::size_t);
-	MAKE_FUNCTION_WRAPPER2(bool, isInRing, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, calcExplicitValence, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, calcValence, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, calcFreeValenceElectronCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isUnsaturated, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenAcceptor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenDonor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(long, calcFormalCharge, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveHybridizationState, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, calcImplicitHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getChainAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getRingAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getAromaticAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getHeavyAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitChainAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitChainBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getChainBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getRingBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getAromaticBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getHeavyBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(CDPL::Chem::StereoDescriptor, calcStereoDescriptorFromMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, calcMDLParity, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
@@ -183,32 +146,17 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isPlanarNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isInvertibleNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(unsigned int, calcCIPConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomPriorityFunction&);
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
-	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
-	MAKE_FUNCTION_WRAPPER3(bool, isOrdinaryHydrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getTopologicalDistance, CDPL::Chem::Atom&, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
-	MAKE_FUNCTION_WRAPPER4(bool, isCarbonylLikeAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
-	MAKE_FUNCTION_WRAPPER4(bool, isAmideCenterAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
-	MAKE_FUNCTION_WRAPPER4(bool, isAmideNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
-	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
-	MAKE_FUNCTION_WRAPPER4(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(unsigned int, calcAtomConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
-	MAKE_FUNCTION_WRAPPER4(std::size_t, getRotatableBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(void, markReachableAtoms, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Util::BitSet&, bool);
 
-	MAKE_FUNCTION_WRAPPER5(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
-	MAKE_FUNCTION_WRAPPER5(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
 	{
@@ -291,23 +239,6 @@ void CDPLPythonChem::exportAtomFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("getAtomicWeight", &getAtomicWeightWrapper1, python::arg("atom"));
-	python::def("getIUPACGroup", &getIUPACGroupWrapper1, python::arg("atom"));
-	python::def("getVdWRadius", &getVdWRadiusWrapper1, python::arg("atom"));
-	python::def("getAllredRochowElectronegativity", &getAllredRochowElectronegativityWrapper1, python::arg("atom"));
-	python::def("getElementName", &getElementNameWrapper1, python::arg("atom"),
-				python::return_value_policy<python::copy_const_reference>());
-	python::def("getElementValenceElectronCount", &getElementValenceElectronCountWrapper1, python::arg("atom"));
-	python::def("isChemicalElement", &isChemicalElementWrapper1, python::arg("atom"));
-	python::def("isMainGroupElement", &isMainGroupElementWrapper1, python::arg("atom"));
-	python::def("isMetal", &isMetalWrapper1, python::arg("atom"));
-	python::def("isTransitionMetal", &isTransitionMetalWrapper1, python::arg("atom"));
-	python::def("isNonMetal", &isNonMetalWrapper1, python::arg("atom"));
-	python::def("isSemiMetal", &isSemiMetalWrapper1, python::arg("atom"));
-	python::def("isHalogen", &isHalogenWrapper1, python::arg("atom"));
-	python::def("isNobleGas", &isNobleGasWrapper1, python::arg("atom"));
-	python::def("isHeavy", &isHeavyWrapper1, python::arg("atom"));
-	python::def("calcValenceElectronCount", &calcValenceElectronCountWrapper1, python::arg("atom"));
 	python::def("getSymbolForType", &getSymbolForTypeWrapper1, python::arg("atom"), 
 				python::return_value_policy<python::copy_const_reference>());
 	python::def("getTypeForSymbol", &getTypeForSymbolWrapper1, python::arg("atom"));
@@ -315,42 +246,11 @@ void CDPLPythonChem::exportAtomFunctions()
 
 	python::def("getConformer3DCoordinates", &getConformer3DCoordinatesWrapper2, (python::arg("atom"), python::arg("conf_idx")),
 				python::return_internal_reference<>());
-	python::def("getCovalentRadius", &getCovalentRadiusWrapper2, (python::arg("atom"), python::arg("order") = 1));
-	python::def("isInRing", &isInRingWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 
-				(python::arg("atom"), python::arg("molgraph")));
-	python::def("calcExplicitValence", &calcExplicitValenceWrapper2,
-				(python::arg("atom"), python::arg("molgraph")));
-	python::def("calcValence", &calcValenceWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("calcFreeValenceElectronCount", &calcFreeValenceElectronCountWrapper2,
-				(python::arg("atom"), python::arg("molgraph")));
-	python::def("isPlanarNitrogen", &isPlanarNitrogenWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("isInvertibleNitrogen", &isInvertibleNitrogenWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("isUnsaturated", &isUnsaturatedWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("isHydrogenAcceptor", &isHydrogenAcceptorWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("isHydrogenDonor", &isHydrogenDonorWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("calcFormalCharge", &calcFormalChargeWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("perceiveHybridizationState", &perceiveHybridizationStateWrapper2,
 				(python::arg("atom"), python::arg("molgraph")));
 	python::def("calcImplicitHydrogenCount", &calcImplicitHydrogenCountWrapper2,
 				(python::arg("atom"), python::arg("molgraph")));
-	python::def("getChainAtomCount", &getChainAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getRingAtomCount", &getRingAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getHeavyAtomCount", &getHeavyAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getExplicitBondCount", &getExplicitBondCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getExplicitChainAtomCount", &getExplicitChainAtomCountWrapper2, 
-				(python::arg("atom"), python::arg("molgraph")));
-	python::def("getBondCount", &getBondCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getExplicitChainBondCount", &getExplicitChainBondCountWrapper2,
-				(python::arg("atom"), python::arg("molgraph")));
-	python::def("getChainBondCount", &getChainBondCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getRingBondCount", &getRingBondCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getAromaticBondCount", &getAromaticBondCountWrapper2, 
-				(python::arg("atom"), python::arg("molgraph")));
-	python::def("getHeavyBondCount", &getHeavyBondCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("getRotatableBondCount", &getRotatableBondCountWrapper4, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 	python::def("calcCIPConfiguration", &calcCIPConfigurationWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("calcStereoDescriptorFromMDLParity", &calcStereoDescriptorFromMDLParityWrapper2,
 				(python::arg("atom"), python::arg("molgraph")), python::with_custodian_and_ward_postcall<0, 1>());
@@ -367,22 +267,11 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph")));
 	python::def("getTopologicalDistance", &getTopologicalDistanceWrapper3, 
 				(python::arg("atom1"), python::arg("atom2"), python::arg("molgraph")));
-
 	python::def("calcCIPConfiguration", &calcCIPConfigurationWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("cip_pri_func")));
-	python::def("getExplicitBondCount", &getExplicitBondCountWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("order")));
-	python::def("isInRingOfSize", &isInRingOfSizeWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("size")));
-	python::def("getBondCount", &getBondCountWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("order")));
 	python::def("calcStereoDescriptor", &calcStereoDescriptorWrapper3,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("dim") = 1),
 				python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("isOrdinaryHydrogen", &isOrdinaryHydrogenWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
-	python::def("getOrdinaryHydrogenCount", &getOrdinaryHydrogenCountWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 	python::def("isInFragmentOfSize", &isInFragmentOfSizeWrapper3, 
 				(python::arg("atom"), python::arg("frag_list"), python::arg("size")));
 	python::def("getContainingFragments", &getContainingFragmentsWrapper3,
@@ -392,26 +281,11 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("isStereoCenter", &isStereoCenterWrapper4, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("check_cip_sym") = true, 
 				 python::arg("check_acyclic_subst_sym_only") = false));
-	python::def("isCarbonylLikeAtom", &isCarbonylLikeAtomWrapper4, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
-	python::def("isAmideCenterAtom", &isAmideCenterAtomWrapper4, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
-	python::def("isAmideNitrogen", &isAmideNitrogenWrapper4, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
-	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper4,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
-	python::def("getAtomCount", &getAtomCountWrapper4,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
 	python::def("calcAtomConfiguration", &calcAtomConfigurationWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
 	python::def("markReachableAtoms", &markReachableAtomsWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("atom_mask"), python::arg("reset") = true));
-
-	python::def("getExplicitBondCount", &getExplicitBondCountWrapper5,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
-	python::def("getBondCount", &getBondCountWrapper5,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
-
+	
 	python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
 				(python::arg("atom"), python::arg("molgraph")));
 
@@ -436,7 +310,6 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("setMatchConstraints", &Chem::setMatchConstraints, 
 				(python::arg("atom"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("atom"));
-
 
 	EXPORT_ATOM_FUNCS_COPY_REF(Name, name)
 	EXPORT_ATOM_FUNCS_COPY_REF(Symbol, symbol)

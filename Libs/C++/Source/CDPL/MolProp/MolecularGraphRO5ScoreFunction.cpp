@@ -33,7 +33,7 @@
 using namespace CDPL; 
 
 
-std::size_t MolProp::calcRuleOfFiveScore(const Chem::MolecularGraph& molgraph)
+std::size_t MolProp::getRuleOfFiveScore(const Chem::MolecularGraph& molgraph)
 {
 	std::size_t score = 0;
 

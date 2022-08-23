@@ -43,6 +43,7 @@
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -563,10 +564,10 @@ void Chem::BondStereoFlagCalculator::StereoAtomInfo::findBestBondOrder(const Uti
 		if (ring_bnd_mask.test(bond_idx))
 			ordered_ligs[i].second |= 8;
 
-		if (getType(*nbr_atom) == AtomType::H || isUnsaturated(*nbr_atom, *molGraph))
+		if (getType(*nbr_atom) == AtomType::H || Internal::isUnsaturated(*nbr_atom, *molGraph))
 			ordered_ligs[i].second |= 4;
 
-		if (getHeavyBondCount(*nbr_atom, *molGraph) > 1)
+		if (Internal::getHeavyBondCount(*nbr_atom, *molGraph) > 1)
 			ordered_ligs[i].second |= 2;
 	}
 

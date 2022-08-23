@@ -26,7 +26,6 @@
 
 #include "StaticInit.hpp"
 
-
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
@@ -51,4 +50,30 @@ void Chem::set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray&
 
 	for (std::size_t i = 0; i < num_ents; i++) 
 		set3DCoordinates(cntnr.getEntity(i), coords[i]);
+}
+
+void Chem::transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D& mtx)
+{
+	Math::Vector4D tmp1;
+	Math::Vector4D tmp2;
+	Math::Vector3D tmp3;
+
+	tmp1[3] = 1.0;
+
+	for (Entity3DContainer::EntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it) {
+		Entity3D& ent = *it;
+		const Math::Vector3D& coords = get3DCoordinates(ent);
+
+		tmp1[0] = coords[0];
+		tmp1[1] = coords[1];
+		tmp1[2] = coords[2];
+
+		prod(mtx, tmp1, tmp2);
+
+		tmp3[0] = tmp2[0];
+		tmp3[1] = tmp2[1];
+		tmp3[2] = tmp2[2];
+
+		set3DCoordinates(ent, tmp3);
+	}
 }

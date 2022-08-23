@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 
 
@@ -56,7 +56,7 @@ double Chem::GeneralizedBellAtomDensity::operator()(const Math::Vector3D& pos, c
 	tmp.minusAssign(pos);
 
 	double dist = length(tmp);
-	double vdw_radius = getVdWRadius(atom);
+	double vdw_radius = Internal::getVdWRadius(atom);
 
 	return Math::generalizedBell(dist, (vdw_radius + probeRadius) * radiusScalingFactor, 10.0, 0.0);
 }

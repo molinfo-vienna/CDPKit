@@ -44,20 +44,18 @@ namespace CDPL
 	
 		class Entity3DContainer;
 
+		
 		CDPL_CHEM_API void calcGeometricalDistanceMatrix(const Entity3DContainer& cntnr, Math::DMatrix& mtx);
-
-		CDPL_CHEM_API double calcGeometricalRadius(const Entity3DContainer& cntnr);
-
-		CDPL_CHEM_API double calcGeometricalDiameter(const Entity3DContainer& cntnr);
 
 	
 		CDPL_CHEM_API void get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords, bool append = false);
 
 		CDPL_CHEM_API void set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray& coords);	
 
+		CDPL_CHEM_API void transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D& mtx);
+
 		
 		CDPL_CHEM_API bool calcCentroid(const Entity3DContainer& cntnr, Math::Vector3D& ctr);	
-
 
 		CDPL_CHEM_API void calcBoundingBox(const Entity3DContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, bool reset = true);	
 

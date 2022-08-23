@@ -31,6 +31,7 @@
 #include <iomanip>
 
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"

@@ -43,6 +43,8 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
+#include "CDPL/Internal/BondFunctions.hpp"
 #include "CDPL/Internal/SHA1.hpp"
 
 
@@ -524,9 +526,9 @@ Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule& 
 
 		if (mode == GEOMETRICALLY_UNIQUE) {
 			if (regIsotopes) {
-				if (isOrdinaryHydrogen(bond.getBegin(), tautomer) || isOrdinaryHydrogen(bond.getEnd(), tautomer)) 
+				if (Internal::isOrdinaryHydrogen(bond.getBegin(), tautomer) || Internal::isOrdinaryHydrogen(bond.getEnd(), tautomer)) 
 					continue;
-			} else if (isHydrogenBond(bond)) 
+			} else if (Internal::isHydrogenBond(bond)) 
 				continue;
 		}
 

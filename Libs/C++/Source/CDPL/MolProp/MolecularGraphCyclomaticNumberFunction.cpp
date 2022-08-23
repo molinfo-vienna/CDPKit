@@ -27,12 +27,13 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t Chem::calcCyclomaticNumber(const MolecularGraph& molgraph)
+std::size_t MolProp::calcCyclomaticNumber(const Chem::MolecularGraph& molgraph)
 {
 	return (getCompleteBondCount(molgraph) + getComponentCount(molgraph) - molgraph.getNumAtoms());
 }

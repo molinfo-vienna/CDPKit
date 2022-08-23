@@ -41,6 +41,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/RangeHashCode.hpp"
 
@@ -93,16 +94,16 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::oper
     }
  
 	std::size_t exp_h_count = ((flags & AtomPropertyFlag::VALENCE) || (flags & AtomPropertyFlag::HEAVY_BOND_COUNT) || (flags & AtomPropertyFlag::H_COUNT) ?
-							   getExplicitAtomCount(atom, molgraph, AtomType::H, true) : std::size_t(0));
+							   MolProp::getExplicitAtomCount(atom, molgraph, AtomType::H, true) : std::size_t(0));
 
 	if (flags & AtomPropertyFlag::VALENCE) {
 		id <<= 8;
-		id += calcExplicitValence(atom, molgraph) - exp_h_count;
+		id += MolProp::calcExplicitValence(atom, molgraph) - exp_h_count;
     }
 
 	if (flags & AtomPropertyFlag::HEAVY_BOND_COUNT) {
 		id <<= 8;
-		id += getExplicitBondCount(atom, molgraph) - exp_h_count;
+		id += MolProp::getExplicitBondCount(atom, molgraph) - exp_h_count;
     }
 
 	if (flags & AtomPropertyFlag::H_COUNT) {

@@ -33,6 +33,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/SybylAtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -43,6 +44,8 @@ namespace
 
 	bool isGuanidineCarbon(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		if (getBondCount(atom, molgraph) != 3)
 			return false;
 
@@ -54,6 +57,8 @@ namespace
 
 	bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		if (getBondCount(atom, molgraph) != 3)
 			return false;
 
@@ -85,6 +90,8 @@ namespace
 
 	bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		if (getBondCount(atom, molgraph) != 3)
 			return false;
 
@@ -99,6 +106,8 @@ namespace
 
 	bool isCarboxylateOxygen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		std::size_t bond_cnt = getBondCount(atom, molgraph);
 
 		if (bond_cnt < 1 || bond_cnt > 2)
@@ -132,6 +141,8 @@ namespace
 
 	bool isPhosphateOxygen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		std::size_t bond_cnt = getBondCount(atom, molgraph);
 
 		if (bond_cnt < 1 || bond_cnt > 2)
@@ -161,6 +172,8 @@ namespace
 
 	bool isSulfoxideSulfur(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		if (getBondCount(atom, molgraph) != 3)
 			return false;
 
@@ -175,6 +188,8 @@ namespace
 
 	bool isSulfoneSulfur(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
+		using namespace Internal;
+
 		if (getBondCount(atom, molgraph) != 4)
 			return false;
 
@@ -191,6 +206,8 @@ namespace
 
 unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& molgraph)
 {
+	using namespace Internal;
+
 	switch (getType(atom)) {
 
 		case AtomType::C:

@@ -40,6 +40,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -127,7 +128,7 @@ void Chem::MorganNumberingCalculator::NumberingState::perceiveSymClasses()
 	for (MolecularGraph::ConstAtomIterator it = atoms_beg; it != atoms_end; ++it) {
 		const Atom& atom = *it;
  
-		ec_values.push_back(getExplicitBondCount(atom, *molGraph));
+		ec_values.push_back(Internal::getExplicitBondCount(atom, *molGraph));
 
 		atomSymbols->push_back(getSymbol(atom));
 		atomCharges->push_back(getFormalCharge(atom));

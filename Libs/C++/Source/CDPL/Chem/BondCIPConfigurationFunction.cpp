@@ -36,6 +36,7 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -57,7 +58,7 @@ unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& 
     const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
     for (std::size_t i = 0; i < 2; i++) {
-		std::size_t num_bonds = getExplicitBondCount(*bond_atoms[i], molgraph);
+		std::size_t num_bonds = Internal::getExplicitBondCount(*bond_atoms[i], molgraph);
 
 		if (num_bonds < 2 || num_bonds > 3)
 			return BondConfiguration::NONE;
@@ -68,7 +69,7 @@ unsigned int Chem::calcCIPConfiguration(const Bond& bond, const MolecularGraph& 
 		if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
 			return BondConfiguration::NONE;
 
-		if (getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+		if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 			return BondConfiguration::NONE;
     }
   

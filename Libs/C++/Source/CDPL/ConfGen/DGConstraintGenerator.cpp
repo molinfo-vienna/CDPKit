@@ -47,6 +47,8 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
@@ -938,15 +940,13 @@ double ConfGen::DGConstraintGenerator::calcTrans14AtomDistance(double bond1_len,
 
 bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Atom& atom) const
 {
-	using namespace Chem;
-
-	if (getHybridizationState(atom) == HybridizationState::SP2)
+	if (getHybridizationState(atom) == Chem::HybridizationState::SP2)
 		return true;
 
 	if (getAromaticityFlag(atom))
 		return true;
 
-	return isPlanarNitrogen(atom, *molGraph);
+	return MolProp::isPlanarNitrogen(atom, *molGraph);
 }
 
 bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
@@ -968,7 +968,7 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
 		return ((getHybridizationState(atom1) == HybridizationState::SP2 || getAromaticityFlag(atom1)) &&
 				(getHybridizationState(atom2) == HybridizationState::SP2 || getAromaticityFlag(atom2)));
 
-	return isAmideBond(bond, *molGraph, true, false);
+	return MolProp::isAmideBond(bond, *molGraph, true, false);
 }
 
 std::size_t ConfGen::DGConstraintGenerator::getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list, const Chem::Atom* x_atom) const

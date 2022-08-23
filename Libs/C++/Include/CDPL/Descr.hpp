@@ -31,7 +31,10 @@
 #ifndef CDPL_DESCR_HPP
 #define CDPL_DESCR_HPP
 
+#include "CDPL/Descr/Entity3DContainerFunctions.hpp"
+#include "CDPL/Descr/AtomContainerFunctions.hpp"
 #include "CDPL/Descr/MolecularGraphFunctions.hpp"
+#include "CDPL/Descr/SimilarityFunctions.hpp"
 
 #include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Descr/AutoCorrelation3DVectorCalculator.hpp"
@@ -54,7 +57,5 @@
 #include "CDPL/Pharm/FeatureAutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Pharm/PharmacophoreRDFDescriptorCalculator.hpp"
 #include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
-
-#include "CDPL/Descr/SimilarityFunctions.hpp"
 
 #endif // CDPL_DESCR_HPP

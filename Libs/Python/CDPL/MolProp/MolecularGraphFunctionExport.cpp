@@ -90,7 +90,23 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("comp")));
 	python::def("buildElementHistogram", &MolProp::buildElementHistogram, 
 				(python::arg("molgraph"), python::arg("hist")));
+
+	python::def("calcCyclomaticNumber", &MolProp::calcCyclomaticNumber, python::arg("molgraph"));
+	python::def("getComponentCount", &MolProp::getComponentCount, python::arg("molgraph"));
 	
+	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&MolProp::getAtomCount),
+				python::arg("molgraph"));
+	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, unsigned int)>(&MolProp::getAtomCount),
+				(python::arg("molgraph"), python::arg("type")));
+	python::def("getImplicitHydrogenCount", &MolProp::getImplicitHydrogenCount, python::arg("molgraph"));
+	python::def("getOrdinaryHydrogenCount", &MolProp::getOrdinaryHydrogenCount, 
+				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
+	python::def("getExplicitOrdinaryHydrogenCount", &MolProp::getExplicitOrdinaryHydrogenCount, 
+				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
+	python::def("getChainAtomCount", &MolProp::getChainAtomCount, python::arg("molgraph"));
+	python::def("getHydrogenAcceptorAtomCount", &MolProp::getHydrogenAcceptorAtomCount, python::arg("molgraph"));
+	python::def("getHydrogenDonorAtomCount", &MolProp::getHydrogenDonorAtomCount, python::arg("molgraph"));
+
 	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&MolProp::getBondCount),
 				python::arg("molgraph"));
 	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, std::size_t, bool)>(&MolProp::getBondCount),
@@ -100,10 +116,12 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 	python::def("getRotatableBondCount", &MolProp::getRotatableBondCount, 
 				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 
+	python::def("getRuleOfFiveScore", &MolProp::getRuleOfFiveScore, python::arg("molgraph"));
+
 	python::def("calcXLogP", &MolProp::calcXLogP, python::arg("molgraph"));
 	python::def("calcLogS", &MolProp::calcLogS, python::arg("molgraph"));
 	python::def("calcTPSA", &MolProp::calcTPSA, python::arg("molgraph"));
-	python::def("calcRuleOfFiveScore", &MolProp::calcRuleOfFiveScore, python::arg("molgraph"));
+
 	python::def("calcMeanPolarizability", &MolProp::calcMeanPolarizability, python::arg("molgraph"));
 	python::def("buildMassCompositionString", &buildMassCompositionStringWrapper, python::arg("molgraph"));
 	python::def("buildMolecularFormula", &buildMolecularFormulaWrapper, python::arg("molgraph"));

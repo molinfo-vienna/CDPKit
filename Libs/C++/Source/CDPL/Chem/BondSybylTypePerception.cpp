@@ -31,6 +31,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/SybylBondType.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -42,7 +43,8 @@ namespace
     bool isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
     {
 		using namespace Chem;
-
+		using namespace Internal;
+		
 		const Atom* c_atom = 0;
 		const Atom* n_atom = 0;
 

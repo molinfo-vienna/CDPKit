@@ -34,7 +34,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 namespace
@@ -179,14 +179,14 @@ void Chem::ConnectedSubstructureSet::SubstructDescriptor::init(const MolecularGr
 
 	startAtom = &bond.getBegin();
 
-	if (getExplicitBondCount(*startAtom, *molgraph) > 1) {
+	if (Internal::getExplicitBondCount(*startAtom, *molgraph) > 1) {
 		unsatAtoms.push_back(startAtom);
 		atomBondCounts.push_back(1);
 	}
 
 	const Atom* atom2 = &bond.getEnd();
 
-	if (getExplicitBondCount(*atom2, *molgraph) > 1) {
+	if (Internal::getExplicitBondCount(*atom2, *molgraph) > 1) {
 		unsatAtoms.push_back(atom2);
 		atomBondCounts.push_back(1);
 	}
@@ -215,7 +215,7 @@ bool Chem::ConnectedSubstructureSet::SubstructDescriptor::grow(const Util::BitSe
 
 			const Atom& nbr_atom = atom->getAtom(nbrBListIdx);
 
-			if (getExplicitBondCount(nbr_atom, *molGraph) > 1) {
+			if (Internal::getExplicitBondCount(nbr_atom, *molGraph) > 1) {
 				unsatAtoms.push_back(&nbr_atom);
 				atomBondCounts.push_back(1);
 
@@ -224,7 +224,7 @@ bool Chem::ConnectedSubstructureSet::SubstructDescriptor::grow(const Util::BitSe
 			} else
 				addedAtom = false;
 
-			if (++atomBondCounts[unsatAListIdx] == getExplicitBondCount(*atom, *molGraph))
+			if (++atomBondCounts[unsatAListIdx] == Internal::getExplicitBondCount(*atom, *molGraph))
 				nbrBListIdx = num_bonds;
 			else 
 				nbrBListIdx++;
@@ -304,7 +304,7 @@ void Chem::ConnectedSubstructureSet::SubstructDescriptor::copy(const SubstructDe
 	bondMask = descr.bondMask;
 	startAtom = descr.startAtom;
 
-	if (descr.atomBondCounts[descr.unsatAListIdx] < getExplicitBondCount(*descr.unsatAtoms[descr.unsatAListIdx], *molGraph)) {
+	if (descr.atomBondCounts[descr.unsatAListIdx] < Internal::getExplicitBondCount(*descr.unsatAtoms[descr.unsatAListIdx], *molGraph)) {
 		unsatAtoms = descr.unsatAtoms;
 		atomBondCounts = descr.atomBondCounts;
 

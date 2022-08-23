@@ -31,7 +31,7 @@
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/ConfGen/StructureGenerationMode.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 
 #include "ConformerGeneratorImpl.hpp"
 

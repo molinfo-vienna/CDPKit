@@ -59,6 +59,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "SMILESDataWriter.hpp"
 #include "SMILESData.hpp"
@@ -440,12 +441,12 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
 		if (getType(atom) == AtomType::H)
 			continue;
 
-		std::size_t exp_bond_count = getExplicitBondCount(atom, *hDepleteMolGraph);
+		std::size_t exp_bond_count = Internal::getExplicitBondCount(atom, *hDepleteMolGraph);
 
 		if (ctrlParameters.writeBondStereo) {
 			if (exp_bond_count == 2 &&
-				calcExplicitValence(atom, *hDepleteMolGraph) == 3 &&
-				getExplicitBondCount(atom, *hDepleteMolGraph, 1, AtomType::H) == 1 &&
+				Internal::calcExplicitValence(atom, *hDepleteMolGraph) == 3 &&
+				Internal::getExplicitBondCount(atom, *hDepleteMolGraph, 1, AtomType::H) == 1 &&
 				calcImplicitHydrogenCount(atom, *hDepleteMolGraph) == 0) {
 
 				bool has_db_geom = false;
@@ -516,10 +517,10 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
 			if (getFormalCharge(nbr_atom) != 0)
 				continue;
 	
-			if (getExplicitBondCount(nbr_atom, *hDepleteMolGraph) != 1)
+			if (Internal::getExplicitBondCount(nbr_atom, *hDepleteMolGraph) != 1)
 				continue;
 
-			if (calcExplicitValence(nbr_atom, *hDepleteMolGraph) != 1)
+			if (Internal::calcExplicitValence(nbr_atom, *hDepleteMolGraph) != 1)
 				continue;
 
 			if (calcImplicitHydrogenCount(nbr_atom, *hDepleteMolGraph) != 0)
@@ -729,7 +730,7 @@ Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createRootNode(cons
 		for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
 			root_atom = &*it;
 
-			std::size_t bond_count = getExplicitBondCount(*root_atom, molgraph);
+			std::size_t bond_count = Internal::getExplicitBondCount(*root_atom, molgraph);
 
 			if (bond_count < 3 || bond_count > 4)
 				break;
@@ -942,7 +943,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
 	bool in_brackets;
 
 	if (!(in_brackets = (writer.ctrlParameters.noOrganicSubset || charge != 0 || isotope > 0 || stereo_rot != 0 || aam_id > 0))) {
-		std::size_t valence = calcExplicitValence(*atom, *molGraph) + impl_h_count;
+		std::size_t valence = Internal::calcExplicitValence(*atom, *molGraph) + impl_h_count;
 
 		switch (atom_type) {
 

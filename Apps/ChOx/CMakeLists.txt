@@ -162,7 +162,7 @@ IF(APPLE)
           COMPONENT Applications
          )
 
-  TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-molprop-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ELSE(APPLE)
   IF(WIN32)
     IF(MINGW) # resource compilation for mingw
@@ -207,7 +207,7 @@ ELSE(APPLE)
     )
   INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
   
-  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 
 INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

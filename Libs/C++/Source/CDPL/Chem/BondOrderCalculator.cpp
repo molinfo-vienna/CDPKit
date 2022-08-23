@@ -54,6 +54,7 @@
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -141,7 +142,7 @@ public:
 			if (qry_atom_type != getType(tgt_atom))
 				return false;
 
-			if (getHeavyBondCount(qry_atom, qry_molgraph) == 1 && getHeavyBondCount(tgt_atom, tgt_molgraph) != 1)
+			if (Internal::getHeavyBondCount(qry_atom, qry_molgraph) == 1 && Internal::getHeavyBondCount(tgt_atom, tgt_molgraph) != 1)
 				return false;
 		}   
 
@@ -356,7 +357,7 @@ void Chem::BondOrderCalculator::calcFreeAtomValences(Util::STArray& orders)
 
 		const Util::STArray* valence_states;
 
-		if (AtomDictionary::getIUPACGroup(atom_type) == 16 && atom_type > AtomType::O && getExplicitBondCount(atom, *molGraph) >= 4)
+		if (AtomDictionary::getIUPACGroup(atom_type) == 16 && atom_type > AtomType::O && Internal::getExplicitBondCount(atom, *molGraph) >= 4)
 		 	valence_states = &chalcogenideValStatesBCGE4;			
 		else
 			valence_states = &AtomDictionary::getValenceStates(atom_type);		
@@ -428,8 +429,8 @@ void Chem::BondOrderCalculator::assignTetrahedralAtomBondOrders(Util::STArray& o
 		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 	
-		if ((atomGeometries[atom1_idx] == TETRAHEDRAL && getType(atom1) < AtomType::Ne && getExplicitBondCount(atom1, *molGraph) > 2) ||
-			(atomGeometries[atom2_idx] == TETRAHEDRAL && getType(atom2) < AtomType::Ne && getExplicitBondCount(atom2, *molGraph) > 2)) {
+		if ((atomGeometries[atom1_idx] == TETRAHEDRAL && getType(atom1) < AtomType::Ne && Internal::getExplicitBondCount(atom1, *molGraph) > 2) ||
+			(atomGeometries[atom2_idx] == TETRAHEDRAL && getType(atom2) < AtomType::Ne && Internal::getExplicitBondCount(atom2, *molGraph) > 2)) {
 
 			defOrderMask.set(bond_idx);
 			orders[bond_idx] = 1; // REMOVE ME
@@ -813,7 +814,7 @@ void Chem::BondOrderCalculator::assignRemainingBondOrders(Util::STArray& orders)
 			} else if (atom1_geom != TRIG_PLANAR || atom2_geom != TERMINAL)
 				continue;
 
-			if (getExplicitBondCount(*atom1, *molGraph) > 2)
+			if (Internal::getExplicitBondCount(*atom1, *molGraph) > 2)
 				continue;
 
 			double bond_length = length(get3DCoordinates(*atom1) - get3DCoordinates(*atom2));
@@ -1116,7 +1117,7 @@ void Chem::BondOrderCalculator::fixRingAtomGeometries(const Fragment& ring)
 		for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
 			const Atom& atom = *it;
 
-			if (getExplicitBondCount(atom, *molGraph) == 2)
+			if (Internal::getExplicitBondCount(atom, *molGraph) == 2)
 				atomGeometries[molGraph->getAtomIndex(atom)] = TRIG_PLANAR;
 		}
 	} 

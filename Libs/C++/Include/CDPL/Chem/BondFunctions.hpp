@@ -68,13 +68,6 @@ namespace CDPL
 		CDPL_CHEM_API bool hasRingFlag(const Bond& bond);
 
 
-		CDPL_CHEM_API bool isInRing(const Bond& Bond, const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool isInRingOfSize(const Bond& bond, const MolecularGraph& molgraph, std::size_t size);
-
-		CDPL_CHEM_API std::size_t getNumContainingSSSRRings(const Bond& bond, const MolecularGraph& molgraph);
-
-
 		CDPL_CHEM_API bool isInFragmentOfSize(const Bond& bond, const FragmentList& frag_list, std::size_t size);
 
 		CDPL_CHEM_API std::size_t getSizeOfSmallestContainingFragment(const Bond& bond, const FragmentList& frag_list);
@@ -190,17 +183,6 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMatchExpressionString(const Bond& bond);
 
 		CDPL_CHEM_API void buildMatchExpressionString(const Bond& bond, const MolecularGraph& molgraph, std::string& str);
-
-
-		CDPL_CHEM_API bool isHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);// move
-
-		CDPL_CHEM_API bool isHeteroAtomHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);// move
-		
-		CDPL_CHEM_API bool isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);// move
-
-		CDPL_CHEM_API bool isHydrogenBond(const Bond& bond);// move
-
-		CDPL_CHEM_API bool isAmideBond(const Bond& bond, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);// move
 
 
 		CDPL_CHEM_API unsigned int getSybylType(const Bond& bond);

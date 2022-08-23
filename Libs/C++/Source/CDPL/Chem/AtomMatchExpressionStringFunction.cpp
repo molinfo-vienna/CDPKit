@@ -44,6 +44,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -703,12 +704,12 @@ namespace
 
 				case AtomMatchConstraint::RING_BOND_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, RING_BOND_COUNT_SYMBOL, 
-														   boost::bind(&getRingBondCount, _1, boost::ref(molgraph)));
+														   boost::bind(&Internal::getRingBondCount, _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::H_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, TOTAL_H_COUNT_SYMBOL, 
-														   boost::bind(&getAtomCount, _1, boost::ref(molgraph), Chem::AtomType::H, true));
+														   boost::bind(&Internal::getAtomCount, _1, boost::ref(molgraph), Chem::AtomType::H, true));
 					break;
 
 				case AtomMatchConstraint::IMPLICIT_H_COUNT:
@@ -718,32 +719,32 @@ namespace
 
 				case AtomMatchConstraint::EXPLICIT_H_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, EXPLICIT_H_COUNT_SYMBOL, 
-														   boost::bind(&getExplicitAtomCount, _1, boost::ref(molgraph), Chem::AtomType::H, true));
+														   boost::bind(&Internal::getExplicitAtomCount, _1, boost::ref(molgraph), Chem::AtomType::H, true));
 					break;
 
 				case AtomMatchConstraint::BOND_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, TOTAL_BOND_COUNT_SYMBOL, 
-														   boost::bind(static_cast<std::size_t (*)(const Atom&, const MolecularGraph&)>(&getBondCount), _1, boost::ref(molgraph)));
+														   boost::bind(static_cast<std::size_t (*)(const Atom&, const MolecularGraph&)>(&Internal::getBondCount), _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::EXPLICIT_BOND_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, EXPLICIT_BOND_COUNT_SYMBOL, 
-														   boost::bind(static_cast<std::size_t (*)(const Atom&, const MolecularGraph&)>(&getExplicitBondCount), _1, boost::ref(molgraph)));
+														   boost::bind(static_cast<std::size_t (*)(const Atom&, const MolecularGraph&)>(&Internal::getExplicitBondCount), _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::HEAVY_BOND_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, HEAVY_BOND_COUNT_SYMBOL, 
-														   boost::bind(&getHeavyBondCount, _1, boost::ref(molgraph)));
+														   boost::bind(&Internal::getHeavyBondCount, _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::VALENCE:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, TOTAL_VALENCE_SYMBOL, 
-														   boost::bind(&calcValence, _1, boost::ref(molgraph)));
+														   boost::bind(&Internal::calcValence, _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::EXPLICIT_VALENCE:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, EXPLICIT_VALENCE_SYMBOL, 
-														   boost::bind(&calcExplicitValence, _1, boost::ref(molgraph)));
+														   boost::bind(&Internal::calcExplicitValence, _1, boost::ref(molgraph)));
 					break;
 		
 				case AtomMatchConstraint::RING_TOPOLOGY:
@@ -757,12 +758,12 @@ namespace
 
 				case AtomMatchConstraint::UNSATURATION:
 					createBooleanPropertyExpressionString(atom, constraint, expr_str, UNSATURATION_FLAG_SYMBOL, 
-														  boost::bind(&isUnsaturated, _1, boost::ref(molgraph)));
+														  boost::bind(&Internal::isUnsaturated, _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::SSSR_RING_COUNT:
 					createIntegralPropertyExpressionString(atom, constraint, expr_str, SSSR_RING_COUNT_SYMBOL, 
-														   boost::bind(&getNumContainingSSSRRings, _1, boost::ref(molgraph)));
+														   boost::bind(&Internal::getNumContainingSSSRRings, _1, boost::ref(molgraph)));
 					break;
 
 				case AtomMatchConstraint::SSSR_RING_SIZE:

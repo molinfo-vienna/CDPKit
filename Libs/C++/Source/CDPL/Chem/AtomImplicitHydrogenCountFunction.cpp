@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomHydrogenCountFunctions.cpp 
+ * AtomImplicitHydrogenCountFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -31,6 +31,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -43,7 +44,7 @@ std::size_t Chem::calcImplicitHydrogenCount(const Atom& atom, const MolecularGra
     if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
 		return std::size_t(0);
 
-    long explicit_val = calcExplicitValence(atom, molgraph);
+    long explicit_val = Internal::calcExplicitValence(atom, molgraph);
     long iupac_group = AtomDictionary::getIUPACGroup(atom_type);
     long num_val_elecs = iupac_group - 10;
 
@@ -101,18 +102,4 @@ std::size_t Chem::calcImplicitHydrogenCount(const Atom& atom, const MolecularGra
     }
 
     return std::size_t(0); 
-}
-
-std::size_t Chem::getOrdinaryHydrogenCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int flags)
-{
-    std::size_t count = 0;
-
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && isOrdinaryHydrogen(*a_it, molgraph, flags))
-			count++;
-
-    return (count + getImplicitHydrogenCount(atom));
 }

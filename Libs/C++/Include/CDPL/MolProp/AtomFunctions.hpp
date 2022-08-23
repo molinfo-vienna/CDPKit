@@ -31,7 +31,11 @@
 #ifndef CDPL_MOLPROP_ATOMFUNCTIONS_HPP
 #define CDPL_MOLPROP_ATOMFUNCTIONS_HPP
 
+#include <cstddef>
+#include <string>
+
 #include "CDPL/MolProp/APIPrefix.hpp"
+#include "CDPL/Chem/AtomPropertyFlag.hpp"
 
 
 namespace CDPL 
@@ -65,6 +69,119 @@ namespace CDPL
 		CDPL_MOLPROP_API bool hasPEOECharge(const Chem::Atom& atom);
 	
 
+		CDPL_MOLPROP_API bool isInRing(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API bool isInRingOfSize(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t size);
+
+		CDPL_MOLPROP_API std::size_t getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		
+		CDPL_MOLPROP_API double getAtomicWeight(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API std::size_t getIUPACGroup(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API double getVdWRadius(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API double getCovalentRadius(const Chem::Atom& atom, std::size_t order);
+
+		CDPL_MOLPROP_API double getAllredRochowElectronegativity(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API const std::string& getElementName(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API std::size_t getElementValenceElectronCount(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isChemicalElement(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isMainGroupElement(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isMetal(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isTransitionMetal(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isNonMetal(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isSemiMetal(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isHalogen(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isNobleGas(const Chem::Atom& atom);
+
+
+		CDPL_MOLPROP_API bool isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
+												 unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
+		
+		CDPL_MOLPROP_API bool isHeavy(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API bool isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API bool isHydrogenAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API bool isHydrogenDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
+		CDPL_MOLPROP_API bool isAmideCenterAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
+		CDPL_MOLPROP_API bool isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
+		CDPL_MOLPROP_API bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+
+		CDPL_MOLPROP_API std::size_t getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
+															  unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
+
+		CDPL_MOLPROP_API std::size_t getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
+
+		CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict = true);
+
+		CDPL_MOLPROP_API std::size_t getExplicitChainAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getChainAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getRingAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getAromaticAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+
+		CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order);
+
+		CDPL_MOLPROP_API std::size_t getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
+
+		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order);
+
+		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
+
+		CDPL_MOLPROP_API std::size_t getExplicitChainBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getChainBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getRingBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getAromaticBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getRotatableBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
+
+		
+		CDPL_MOLPROP_API std::size_t calcExplicitValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+	
+		CDPL_MOLPROP_API std::size_t calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+	
+		CDPL_MOLPROP_API std::size_t calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t calcValenceElectronCount(const Chem::Atom& atom);
+
+		
 		CDPL_MOLPROP_API double getHybridPolarizability(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API double calcEffectivePolarizability(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, double damping = 0.75);

@@ -40,8 +40,8 @@
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Math/VectorAdapter.hpp"
 
 
@@ -67,7 +67,7 @@ bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const C
 
 	if (vdw_factor > 0.0) 
 		std::transform(atom_cntnr.getAtomsBegin(), atom_cntnr.getAtomsEnd(), std::back_inserter(vdw_radii), 
-					   boost::bind(std::multiplies<double>(), boost::bind(&Chem::getVdWRadius, _1), vdw_factor));
+					   boost::bind(std::multiplies<double>(), boost::bind(&MolProp::getVdWRadius, _1), vdw_factor));
 	else
 		vdw_radii.resize(num_atoms, 0.0);
 

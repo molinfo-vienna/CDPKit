@@ -46,6 +46,10 @@ SET(cdpl-descr_LIB_SRCS
     PharmacophoreRDFDescriptorCalculator.cpp
     PharmacophoreAutoCorr3DDescriptorCalculator.cpp
 
+    Entity3DContainerGeomDiameterAndRadiusFunctions.cpp
+
+    AtomContainerGeomDiameterAndRadiusFunctions.cpp
+    
     MolecularGraphComplexityFunction.cpp
     MolecularGraphKierShapeFunctions.cpp
     MolecularGraphRandicIndexFunction.cpp
@@ -53,7 +57,7 @@ SET(cdpl-descr_LIB_SRCS
     MolecularGraphTotalWalkCountFunction.cpp
     MolecularGraphWienerIndexFunction.cpp
     MolecularGraphZagrebIndexFunctions.cpp
-    MolecularGraphTopologicalDiameterAndRadiusFunctions.cpp
+    MolecularGraphTopDiameterAndRadiusFunctions.cpp
     
     SimilarityFunctions.cpp
    )
@@ -63,7 +67,7 @@ ADD_LIBRARY(cdpl-descr-static STATIC ${cdpl-descr_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-descr-static PROPERTIES 
                       OUTPUT_NAME cdpl-descr
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK;CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_UTIL_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_DESCR_STATIC_LINK;CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_UTIL_STATIC_LINK"
                      )
 
 TARGET_LINK_LIBRARIES(cdpl-descr-static cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-util-static cdpl-base-static)

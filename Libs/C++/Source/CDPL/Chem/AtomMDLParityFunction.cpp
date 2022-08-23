@@ -40,6 +40,7 @@
 #include "CDPL/Chem/MDLParity.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -47,7 +48,7 @@ using namespace CDPL;
 
 unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgraph)
 {
-    std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
+    std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
 		return MDLParity::NONE;
@@ -74,7 +75,7 @@ unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgrap
 		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*b_it))
 			continue;
 
-		if (isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
+		if (Internal::isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
 			if (ordinary_h_nbr) 
 				return MDLParity::NONE;
 

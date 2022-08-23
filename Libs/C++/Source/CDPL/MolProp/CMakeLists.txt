@@ -37,7 +37,10 @@ SET(cdpl-molprop_LIB_SRCS
 
     BondContainerBondCountFunctions.cpp
 
+    MolecularGraphAtomCountFunctions.cpp
     MolecularGraphBondCountFunctions.cpp
+    MolecularGraphComponentCountFunction.cpp
+    MolecularGraphCyclomaticNumberFunction.cpp
     MolecularGraphMassCompositionFunctions.cpp
     MolecularGraphElementalCompositionFunctions.cpp
     MolecularGraphMeanPolarizabilityFunction.cpp
@@ -49,7 +52,17 @@ SET(cdpl-molprop_LIB_SRCS
     MolecularGraphXLogPFunction.cpp
 
     AtomPolarizabilityFunctions.cpp
+    AtomBondCountFunctions.cpp
+    AtomElementPropertyFunctions.cpp
+    AtomRingMembershipFunctions.cpp
+    AtomClassificationFunctions.cpp
+    AtomValenceFunctions.cpp
+    AtomValenceElectronCountFunctions.cpp
+    AtomAtomCountFunctions.cpp
+    
     BondPolarizabilityFunction.cpp
+    BondClassificationFunctions.cpp
+    BondRingMembershipFunctions.cpp
     
     AtomHydrophobicityCalculator.cpp
     LogSCalculator.cpp

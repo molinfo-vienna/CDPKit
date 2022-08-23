@@ -43,6 +43,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
 
@@ -1139,6 +1140,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_only, bool& have_ipt_coords)
 {
 	using namespace Chem;
+	using namespace MolProp;
 
 	have_ipt_coords = false;
 	

@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/MolProp/BondContainerFunctions.hpp"
+#include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/BondContainer.hpp"
 #include "CDPL/Chem/Bond.hpp"

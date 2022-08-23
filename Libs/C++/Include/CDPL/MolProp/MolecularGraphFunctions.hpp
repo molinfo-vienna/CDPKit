@@ -37,6 +37,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp" 
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
+#include "CDPL/Chem/AtomPropertyFlag.hpp"
 
 
 namespace CDPL 
@@ -62,6 +63,26 @@ namespace CDPL
 		CDPL_MOLPROP_API void buildElementHistogram(const Chem::MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
 
+		CDPL_MOLPROP_API std::size_t calcCyclomaticNumber(const Chem::MolecularGraph& molgraph);
+
+
+		CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type);
+
+		CDPL_MOLPROP_API std::size_t getImplicitHydrogenCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
+
+		CDPL_MOLPROP_API std::size_t getExplicitOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags = Chem::AtomPropertyFlag::DEFAULT);
+
+		CDPL_MOLPROP_API std::size_t getChainAtomCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getHydrogenAcceptorAtomCount(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getHydrogenDonorAtomCount(const Chem::MolecularGraph& molgraph);
+
+
 		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph, std::size_t order, bool inc_aro = true);
@@ -72,19 +93,23 @@ namespace CDPL
 
 		CDPL_MOLPROP_API std::size_t getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
 		
+		CDPL_MOLPROP_API std::size_t getComponentCount(const Chem::MolecularGraph& molgraph);
 		
+
 		CDPL_MOLPROP_API double calcXLogP(const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API double calcLogS(const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API double calcTPSA(const Chem::MolecularGraph& molgraph);
 
-		CDPL_MOLPROP_API std::size_t calcRuleOfFiveScore(const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API std::size_t getRuleOfFiveScore(const Chem::MolecularGraph& molgraph);
 		
+
 		CDPL_MOLPROP_API double calcMeanPolarizability(const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API void calcPEOECharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 6, 
-										   double damping = 0.5);
+											  double damping = 0.5);
 
 		CDPL_MOLPROP_API void calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite);
 	}

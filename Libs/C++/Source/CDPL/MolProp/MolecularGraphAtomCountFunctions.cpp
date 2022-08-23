@@ -26,22 +26,26 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t Chem::getAtomCount(const MolecularGraph& molgraph)
+std::size_t MolProp::getAtomCount(const Chem::MolecularGraph& molgraph)
 {
 	return (molgraph.getNumAtoms() + getImplicitHydrogenCount(molgraph));
 }
 
-std::size_t Chem::getAtomCount(const MolecularGraph& molgraph, unsigned int type)
+std::size_t MolProp::getAtomCount(const Chem::MolecularGraph& molgraph, unsigned int type)
 {
+	using namespace Chem;
+	
 	std::size_t count = 0;
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
@@ -58,18 +62,20 @@ std::size_t Chem::getAtomCount(const MolecularGraph& molgraph, unsigned int type
 	return count;
 }
 
-std::size_t Chem::getImplicitHydrogenCount(const MolecularGraph& molgraph)
+std::size_t MolProp::getImplicitHydrogenCount(const Chem::MolecularGraph& molgraph)
 {
 	std::size_t count = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
+	for (Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
 		count += getImplicitHydrogenCount(*it);
 	
 	return count;
 }
 
-std::size_t Chem::getOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsigned int flags)
+std::size_t MolProp::getOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
+	using namespace Chem;
+	
 	std::size_t count = 0;
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
@@ -84,8 +90,10 @@ std::size_t Chem::getOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsig
 	return count;
 }
 
-std::size_t Chem::getChainAtomCount(const MolecularGraph& molgraph)
+std::size_t MolProp::getChainAtomCount(const Chem::MolecularGraph& molgraph)
 {
+	using namespace Chem;
+	
 	std::size_t count = 0;
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
@@ -100,33 +108,33 @@ std::size_t Chem::getChainAtomCount(const MolecularGraph& molgraph)
 	return count;
 }
 
-std::size_t Chem::getExplicitOrdinaryHydrogenCount(const MolecularGraph& molgraph, unsigned int flags)
+std::size_t MolProp::getExplicitOrdinaryHydrogenCount(const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
 	std::size_t count = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
+	for (Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
 		if (isOrdinaryHydrogen(*it, molgraph, flags))
 			count++;
 
 	return count;
 }
 
-std::size_t Chem::getHydrogenAcceptorAtomCount(const MolecularGraph& molgraph)
+std::size_t MolProp::getHydrogenAcceptorAtomCount(const Chem::MolecularGraph& molgraph)
 {
 	std::size_t count = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
+	for (Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
 		if (isHydrogenAcceptor(*it, molgraph))
 			count++;
 
 	return count;
 }
 
-std::size_t Chem::getHydrogenDonorAtomCount(const MolecularGraph& molgraph)
+std::size_t MolProp::getHydrogenDonorAtomCount(const Chem::MolecularGraph& molgraph)
 {
 	std::size_t count = 0;
 
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
+	for (Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
 		if (isHydrogenDonor(*it, molgraph))
 			count++;
 

@@ -40,6 +40,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -139,7 +140,7 @@ std::size_t Chem::TautomerScore::getUnsaturatedNeighborCount(const Atom& atom, c
 		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(nbr_bond))
 			continue;
 	
-		if (isUnsaturated(nbr_atom, molgraph))
+		if (Internal::isUnsaturated(nbr_atom, molgraph))
 			count++;
 	}
 
@@ -194,7 +195,7 @@ bool Chem::TautomerScore::hasExocyclicOH(const Atom& atom, const MolecularGraph&
 		if (getType(nbr_atom) != AtomType::O)
 			continue;
 
-		if (getHeavyAtomCount(nbr_atom, molgraph) != 1)
+		if (Internal::getHeavyAtomCount(nbr_atom, molgraph) != 1)
 			continue;
 
 		return true;

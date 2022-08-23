@@ -127,12 +127,12 @@ ENDIF(CAIRO_FOUND)
 
 ADD_LIBRARY(cdpl-vis-static STATIC ${cdpl-vis_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-base-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-molprop-static cdpl-base-static cdpl-internal-static)
 
 SET_TARGET_PROPERTIES(cdpl-vis-static PROPERTIES 
                       OUTPUT_NAME cdpl-vis
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
 INSTALL(TARGETS cdpl-vis-static
@@ -141,7 +141,7 @@ INSTALL(TARGETS cdpl-vis-static
 
 ADD_LIBRARY(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-vis-shared cdpl-chem-shared cdpl-base-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-vis-shared cdpl-chem-shared cdpl-molprop-shared cdpl-base-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-vis-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

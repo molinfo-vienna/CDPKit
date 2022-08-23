@@ -38,6 +38,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Math/SVDecomposition.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -154,7 +155,7 @@ bool Chem::SurfaceAtomExtractor::init(const AtomContainer& cntnr, const Molecula
 	atomCoords.reserve(num_prnt_atoms);	
 
 	for (MolecularGraph::ConstAtomIterator it = parent_molgraph.getAtomsBegin(), end = parent_molgraph.getAtomsEnd(); it != end; ++it) {
-		atomRadii.push_back(getVdWRadius(*it) + probeRadius);
+		atomRadii.push_back(Internal::getVdWRadius(*it) + probeRadius);
 		atomCoords.push_back(coordsFunc(*it));
 	}
 

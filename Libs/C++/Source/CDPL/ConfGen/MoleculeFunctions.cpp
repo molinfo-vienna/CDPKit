@@ -39,6 +39,7 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 #include "SubstituentBulkinessCalculator.hpp"
 
@@ -85,6 +86,7 @@ namespace
 void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 {
 	using namespace Chem;
+	using namespace MolProp;
 
 	calcImplicitHydrogenCounts(mol, false);
 	perceiveHybridizationStates(mol, false);
@@ -158,7 +160,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 	for (FragmentList::ElementIterator it = comps.getElementsBegin(), end = comps.getElementsEnd(); it != end; ++it) {
 		Fragment& comp = *it;
 
-		extractTopologicalDistanceMatrix(mol, comp, true);
-		extractSSSR(mol, comp, true);
+		extractTopologicalDistanceSubMatrix(mol, comp, true);
+		extractSSSRSubset(mol, comp, true);
 	}
 }

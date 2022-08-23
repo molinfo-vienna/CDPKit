@@ -165,7 +165,6 @@ SET(cdpl-chem_LIB_SRCS
 
     Entity3DContainerCoordinatesFunctions.cpp
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp
-    Entity3DContainerGeometricalDistanceFunctions.cpp
     Entity3DContainerCentroidFunction.cpp
     Entity3DContainerBoundingBoxFunctions.cpp
 
@@ -176,20 +175,14 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerAtomTypeMaskFunction.cpp
     AtomContainerCopyAtomsFunctions.cpp
     AtomContainerBoundingBoxFunctions.cpp
- 
+    AtomContainerCentroidFunction.cpp
+    
     AtomPropertyFunctions.cpp
     AtomTypeFunctions.cpp
     AtomFormalChargeFunction.cpp
     AtomHybridizationPerceptionFunction.cpp
-    AtomElementPropertyFunctions.cpp
-    AtomRingMembershipFunctions.cpp
     AtomFragmentMembershipFunctions.cpp
-    AtomClassificationFunctions.cpp
-    AtomValenceFunctions.cpp
-    AtomValenceElectronCountFunctions.cpp
-    AtomHydrogenCountFunctions.cpp
-    AtomAtomCountFunctions.cpp
-    AtomBondCountFunctions.cpp
+    AtomImplicitHydrogenCountFunction.cpp
     AtomConformerCoordinatesFunction.cpp
     AtomStereoDescriptorFunctions.cpp
     AtomCIPConfigurationFunction.cpp
@@ -202,10 +195,8 @@ SET(cdpl-chem_LIB_SRCS
     AtomMarkReachableAtomsFunction.cpp 
 
     BondPropertyFunctions.cpp
-    BondRingMembershipFunctions.cpp
     BondFragmentMembershipFunctions.cpp
     BondStereoCenterFlagFunction.cpp
-    BondClassificationFunctions.cpp
     BondStereoDescriptorFunction.cpp
     BondCIPConfigurationFunction.cpp
     BondMatchExpressionStringFunction.cpp
@@ -225,10 +216,8 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphBondMatrixFunction.cpp
     MolecularGraphBondElectronMatrixFunction.cpp
     MolecularGraphBondAtomTypeMatrixFunction.cpp
-    MolecularGraphCyclomaticNumberFunction.cpp
     MolecularGraphComponentGroupsFunctions.cpp
     MolecularGraphExtractReactionCenterFunction.cpp
-    MolecularGraphAtomCountFunctions.cpp
     MolecularGraphCompleteBondCountFunction.cpp
     MolecularGraphAromaticRingSetFunctions.cpp
     MolecularGraphAromaticSubstructureFunctions.cpp

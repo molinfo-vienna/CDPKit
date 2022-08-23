@@ -42,6 +42,7 @@
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Internal/Permutation.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -743,7 +744,7 @@ unsigned int Chem::Hydrogen3DCoordinatesCalculator::getHybridizationState(
 				for (std::size_t i = 0; i < num_def_atoms; i++) {
 					const Atom& nbr_atom = molGraph->getAtom(conctdAtoms[i]);
 					
-					if (getAromaticityFlag(nbr_atom) || getExplicitBondCount(nbr_atom, *molGraph, 2) > 0)
+					if (getAromaticityFlag(nbr_atom) || Internal::getExplicitBondCount(nbr_atom, *molGraph, 2) > 0)
 						return HybridizationState::SP2;
 				}
 

@@ -70,7 +70,7 @@ namespace
 				continue;
 			}
 		
-			if (isUnsaturated(atom, molgraph)) {
+			if (MolProp::isUnsaturated(atom, molgraph)) {
 				n++;
 				continue;
 			}

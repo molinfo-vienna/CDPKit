@@ -49,6 +49,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "MOL2DataReader.hpp"
 #include "MOL2FormatData.hpp"
@@ -894,7 +895,8 @@ void Chem::MOL2DataReader::extractStereoAtoms(MolecularGraph& molgraph)
 		} 
 		
 		if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
-			!isInvertibleNitrogen(atom, molgraph) && !isAmideNitrogen(atom, molgraph, false, false) && !isPlanarNitrogen(atom, molgraph)) { 
+			!Internal::isInvertibleNitrogen(atom, molgraph) && !Internal::isAmideNitrogen(atom, molgraph, false, false) &&
+			!Internal::isPlanarNitrogen(atom, molgraph)) { 
 
 			StereoDescriptor descr = calcStereoDescriptor(atom, molgraph, 3);
 

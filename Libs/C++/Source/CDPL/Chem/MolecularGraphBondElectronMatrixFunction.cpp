@@ -28,9 +28,9 @@
 
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -69,7 +69,7 @@ void Chem::buildBondElectronMatrix(const MolecularGraph& molgraph, Math::ULMatri
 	std::size_t i = 0;
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
-		std::size_t free_el_count = calcFreeValenceElectronCount(*it, molgraph);
+		std::size_t free_el_count = Internal::calcFreeValenceElectronCount(*it, molgraph);
 	
 		mtx(i, i) = free_el_count;
 	}

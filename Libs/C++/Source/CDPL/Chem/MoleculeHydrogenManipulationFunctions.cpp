@@ -33,6 +33,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -67,7 +68,7 @@ bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
 	for (std::size_t i = 0; i < num_atoms; ) {
 		const Atom& atom = mol.getAtom(i);
 
-		if (!isOrdinaryHydrogen(atom, mol, flags)) {
+		if (!Internal::isOrdinaryHydrogen(atom, mol, flags)) {
 			i++;
 			continue;
 		}

@@ -36,8 +36,8 @@
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -74,7 +74,7 @@ void Pharm::createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContain
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
 		const Math::Vector3D& atom_pos = coords_func(atom);
-		double xvol_tol = (tol > 0.0 ? tol : getVdWRadius(atom)); 
+		double xvol_tol = (tol > 0.0 ? tol : MolProp::getVdWRadius(atom)); 
 		bool invalid = false;
 
 		for (std::size_t i = 0, num_xvols = xvol_positions.size(); i < num_xvols; i++) {

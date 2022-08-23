@@ -204,10 +204,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("perceiveSSSR",
 				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveSSSR),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-  	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSR),
+  	python::def("extractSSSRSubset", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSRSubset),
 	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph")),
 				python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractSSSR),
+	python::def("extractSSSRSubset", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractSSSRSubset),
 	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")),
 				python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("copySSSR", &Chem::copySSSR,
@@ -230,8 +230,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("calcTopologicalDistanceMatrix", 
 				static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
 				(python::arg("molgraph"), python::arg("overwrite")));
-    python::def("extractTopologicalDistanceMatrix", 
-				static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceMatrix),
+    python::def("extractTopologicalDistanceSubMatrix", 
+				static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceSubMatrix),
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")));
  
 	python::def("extractReactionCenter", &Chem::extractReactionCenter, 
@@ -251,27 +251,13 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("mtx")));
 	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("extractTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
+    python::def("extractTopologicalDistanceSubMatrix", static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::extractTopologicalDistanceSubMatrix), 
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
-	python::def("extractTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
+	python::def("extractTopologicalDistanceSubMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceSubMatrix), 
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
 
-	python::def("calcCyclomaticNumber", &Chem::calcCyclomaticNumber, python::arg("molgraph"));
-	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&Chem::getAtomCount),
-				python::arg("molgraph"));
-	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, unsigned int)>(&Chem::getAtomCount),
-				(python::arg("molgraph"), python::arg("type")));
-	python::def("getImplicitHydrogenCount", &Chem::getImplicitHydrogenCount, python::arg("molgraph"));
-	python::def("getOrdinaryHydrogenCount", &Chem::getOrdinaryHydrogenCount, 
-				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
-	python::def("getExplicitOrdinaryHydrogenCount", &Chem::getExplicitOrdinaryHydrogenCount, 
-				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
-	python::def("getChainAtomCount", &Chem::getChainAtomCount, python::arg("molgraph"));
-	python::def("getHydrogenAcceptorAtomCount", &Chem::getHydrogenAcceptorAtomCount, python::arg("molgraph"));
-	python::def("getHydrogenDonorAtomCount", &Chem::getHydrogenDonorAtomCount, python::arg("molgraph"));
 	python::def("getCompleteBondCount", &Chem::getCompleteBondCount, python::arg("molgraph"));
-	python::def("getComponentCount", &Chem::getComponentCount, python::arg("molgraph"));
-	
+		
 	python::def("generateINCHI", &generateINCHIWrapper, 
 				(python::arg("molgraph"), python::arg("options") = Chem::ControlParameterDefault::INCHI_OUTPUT_OPTIONS,
 				 python::arg("dim") = 0));

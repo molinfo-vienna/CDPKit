@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Entity3DContainerGeometricalDistanceFunctions.cpp 
+ * Entity3DContainerGeomDiameterAndRadiusFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <limits>
 
-#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
+#include "CDPL/Descr/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Chem/Entity3D.hpp"
@@ -38,8 +38,10 @@
 using namespace CDPL; 
 
 
-double Chem::calcGeometricalRadius(const Entity3DContainer& cntnr)
+double Descr::calcGeometricalRadius(const Chem::Entity3DContainer& cntnr)
 {
+	using namespace Chem;
+	
 	if (cntnr.getNumEntities() <= 1)
 		return 0.0;
 
@@ -71,8 +73,10 @@ double Chem::calcGeometricalRadius(const Entity3DContainer& cntnr)
 	return radius;
 }
 
-double Chem::calcGeometricalDiameter(const Entity3DContainer& cntnr)
+double Descr::calcGeometricalDiameter(const Chem::Entity3DContainer& cntnr)
 {
+	using namespace Chem;
+
 	double diameter = 0.0;
 
 	Entity3DContainer::ConstEntityIterator entities_end = cntnr.getEntitiesEnd();

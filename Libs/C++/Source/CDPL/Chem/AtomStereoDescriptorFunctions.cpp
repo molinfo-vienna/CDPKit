@@ -44,6 +44,7 @@
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -74,7 +75,7 @@ namespace
 
 Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const MolecularGraph& molgraph, std::size_t dim)
 {
-    std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
+    std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
 		return StereoDescriptor(AtomConfiguration::NONE);
@@ -276,7 +277,7 @@ unsigned int Chem::calcAtomConfiguration(const Atom& atom, const MolecularGraph&
 
 Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph)
 {
-	std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
+	std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
 	if (num_bonds < 3 || num_bonds > 4)
 		return StereoDescriptor(AtomConfiguration::NONE);
@@ -301,7 +302,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom,
 		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*b_it))
 			continue;
 
-		if (isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
+		if (Internal::isOrdinaryHydrogen(nbr_atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT)) {
 			if (ordinary_h_nbr) 
 				return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
 

@@ -39,6 +39,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -85,8 +86,8 @@ void Descr::MolecularComplexityCalculator::processAtom(const Chem::Atom& atom)
 {
 	using namespace Chem;
 	
-	if (isOrdinaryHydrogen(atom, *molGraph, 
-						   AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT))
+	if (MolProp::isOrdinaryHydrogen(atom, *molGraph, 
+									AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT))
 		return;
 
 	unsigned int atom_type = getType(atom);
@@ -185,8 +186,8 @@ Descr::MolecularComplexityCalculator::SymmetryTerm::SymmetryTerm(const Chem::Mol
 		if (!molgraph.containsAtom(nbr_atom))
 			continue;
 
-		if (isOrdinaryHydrogen(nbr_atom, molgraph, 
-							   AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT))
+		if (MolProp::isOrdinaryHydrogen(nbr_atom, molgraph, 
+										AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT))
 			continue;
 
 		std::size_t order = std::max(getOrder(*b_it), std::size_t(1));

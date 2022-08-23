@@ -36,6 +36,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -74,7 +75,7 @@ bool Chem::makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags)
 	for (std::size_t i = 0; i < num_atoms; ) {
 		const Atom& atom = frag.getAtom(i);
 
-		if (!isOrdinaryHydrogen(atom, frag, flags)) {
+		if (!Internal::isOrdinaryHydrogen(atom, frag, flags)) {
 			i++;
 			continue;
 		}

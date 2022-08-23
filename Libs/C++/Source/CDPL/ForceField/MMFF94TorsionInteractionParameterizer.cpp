@@ -44,6 +44,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -474,8 +475,8 @@ bool ForceField::MMFF94TorsionInteractionParameterizer::getParameters(const Chem
 
 	// Rule h2)
  
-	std::size_t num_ctr_atom1_nbrs = std::max(ctr_atom1_prop_entry.getNumNeighbors(), getBondCount(ctr_atom1, molgraph));
-	std::size_t num_ctr_atom2_nbrs = std::max(ctr_atom2_prop_entry.getNumNeighbors(), getBondCount(ctr_atom2, molgraph));
+	std::size_t num_ctr_atom1_nbrs = std::max(ctr_atom1_prop_entry.getNumNeighbors(), MolProp::getBondCount(ctr_atom1, molgraph));
+	std::size_t num_ctr_atom2_nbrs = std::max(ctr_atom2_prop_entry.getNumNeighbors(), MolProp::getBondCount(ctr_atom2, molgraph));
 
 	if (num_ctr_atom1_nbrs <= 1 || num_ctr_atom2_nbrs <= 1)
 		return false;

@@ -42,6 +42,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -289,7 +290,7 @@ bool ForceField::MMFF94AtomTyper::isImidazoliumCation(const Chem::Fragment& ring
 		if (getType(atom) != AtomType::C)
 			continue;
 
-		if (getExplicitBondCount(atom, *molGraph) != 3)
+		if (MolProp::getExplicitBondCount(atom, *molGraph) != 3)
 			continue;
 
 		bool found_n_db_c1 = false;
@@ -320,7 +321,7 @@ bool ForceField::MMFF94AtomTyper::isImidazoliumCation(const Chem::Fragment& ring
 					break;
 
 				case 2:
-					if (getFormalCharge(nbr_atom) == 1 && getBondCount(nbr_atom, *molGraph, 1, AtomType::O) == 0)
+					if (getFormalCharge(nbr_atom) == 1 && MolProp::getBondCount(nbr_atom, *molGraph, 1, AtomType::O) == 0)
 						found_n_db_c1  = true;
 					
 				default:

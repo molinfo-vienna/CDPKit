@@ -79,7 +79,19 @@ python::def("set"#FUNC_SUFFIX, &MolProp::set##FUNC_SUFFIX, (python::arg("bond"),
 namespace
 {
 
+	MAKE_FUNCTION_WRAPPER1(bool, isHydrogenBond, CDPL::Chem::Bond&)
+
+	MAKE_FUNCTION_WRAPPER2(bool, isInRing, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isHeteroAtomHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+
 	MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
+	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
+
+	MAKE_FUNCTION_WRAPPER4(bool, isAmideBond, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
+
+	MAKE_FUNCTION_WRAPPER5(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
 }
 
 
@@ -88,6 +100,23 @@ void CDPLPythonMolProp::exportBondFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
+	python::def("isHydrogenBond", &isHydrogenBondWrapper1, python::arg("bond"));
+
+	python::def("isInRing", &isInRingWrapper2, (python::arg("bond"), python::arg("molgraph")));
+	python::def("isHydrogenRotor", &isHydrogenRotorWrapper2, (python::arg("bond"), python::arg("molgraph")));
+	python::def("isHeteroAtomHydrogenRotor", &isHeteroAtomHydrogenRotorWrapper2,
+				(python::arg("bond"), python::arg("molgraph")));
+	python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 
+				(python::arg("bond"), python::arg("molgraph")));
+
 	python::def("calcPolarizability", &calcPolarizabilityWrapper3, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("damping") = 0.75));
+	python::def("isInRingOfSize", &isInRingOfSizeWrapper3,
+				(python::arg("bond"), python::arg("molgraph"), python::arg("size")));
+
+	python::def("isAmideBond", &isAmideBondWrapper4, 
+				(python::arg("bond"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
+
+	python::def("isRotatable", &isRotatableWrapper5, 
+				(python::arg("bond"), python::arg("molgraph"), python::arg("h_rotors"), python::arg("ring_bonds"), python::arg("amide_bonds")));
 }

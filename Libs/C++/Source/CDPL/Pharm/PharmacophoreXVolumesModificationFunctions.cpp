@@ -33,8 +33,8 @@
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -65,7 +65,7 @@ bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::
 			tmp.assign(xvol_pos);
 			tmp.minusAssign(atom_pos);
 
-			if ((length(tmp) - xvol_tol - getVdWRadius(atom) * vdw_scaling_fact) < 0.0) {
+			if ((length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact) < 0.0) {
 				clash = true;
 				break;;
 			}
@@ -108,7 +108,7 @@ bool Pharm::resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::
 			tmp.assign(xvol_pos);
 			tmp.minusAssign(atom_pos);
 
-			double inters = (length(tmp) - xvol_tol - getVdWRadius(atom) * vdw_scaling_fact);
+			double inters = (length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact);
 
 			if (inters < 0.0) {
 				modif = true;

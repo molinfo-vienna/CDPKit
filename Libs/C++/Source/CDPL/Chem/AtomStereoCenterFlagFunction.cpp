@@ -33,6 +33,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -46,7 +47,7 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool
     if (getHybridizationState(atom) != HybridizationState::SP3) 
 		return false;
 	
-	std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
+	std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
 		return false;
@@ -54,10 +55,10 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool
 	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
 		return false;
 
-	if (getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+	if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 	    return false;
 
-	if (isPlanarNitrogen(atom, molgraph))
+	if (Internal::isPlanarNitrogen(atom, molgraph))
 		return false;
 
 	if (!check_cip_sym)

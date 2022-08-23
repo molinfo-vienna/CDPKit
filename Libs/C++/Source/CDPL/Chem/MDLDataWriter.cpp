@@ -69,6 +69,7 @@
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "MDLDataWriter.hpp"
 #include "MDLFormatData.hpp"
@@ -94,7 +95,7 @@ namespace
 
 	std::size_t calcHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
-		return (getExplicitAtomCount(atom, molgraph, Chem::AtomType::H) + calcImplicitHydrogenCount(atom, molgraph));
+		return (Internal::getExplicitAtomCount(atom, molgraph, Chem::AtomType::H) + calcImplicitHydrogenCount(atom, molgraph));
 	}
 
 	bool isRingBond(const Chem::Bond& bond, const Chem::MolecularGraph&)
@@ -705,7 +706,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomQueryHCount(std::ostream& os, const 
 	const MatchConstraintList& constr_list = *getMatchConstraints(atom);
 
 	if (constr_list.getSize() != 0) {
-		std::size_t expl_h_count = getExplicitAtomCount(atom, molgraph, AtomType::H);
+		std::size_t expl_h_count = Internal::getExplicitAtomCount(atom, molgraph, AtomType::H);
 
 		if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::H_COUNT, MatchConstraint::EQUAL, 
 								CalcOrSetConstraintValueMatches<std::size_t, Atom>(expl_h_count, atom, molgraph, 
@@ -794,7 +795,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomValence(std::ostream& os, const Mole
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	std::size_t valence = AtomBlock::VALENCE_UNDEF;
-	std::size_t valence_val = calcValence(atom, molgraph);
+	std::size_t valence_val = Internal::calcValence(atom, molgraph);
 
 	if (valence_val == 0)
 		valence = AtomBlock::VALENCE_ZERO;
@@ -2376,7 +2377,7 @@ void Chem::MDLDataWriter::writeCTabV3000AtomValence(std::ostream& os, const Mole
 	using namespace MDL;
 	using namespace MOLFile::CTab::V3000;
 
-	long valence = calcValence(atom, molgraph);
+	long valence = Internal::calcValence(atom, molgraph);
 
 	if (valence == 0)
 		valence = AtomBlock::VALENCE_ZERO;
@@ -2390,7 +2391,7 @@ void Chem::MDLDataWriter::writeCTabV3000AtomQueryHCount(std::ostream& os, const 
 	using namespace MDL;
 	using namespace MOLFile::CTab::V3000;
 
-	std::size_t expl_h_count = getExplicitAtomCount(atom, molgraph, AtomType::H);
+	std::size_t expl_h_count = Internal::getExplicitAtomCount(atom, molgraph, AtomType::H);
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::H_COUNT, MatchConstraint::EQUAL, 
 							CalcOrSetConstraintValueMatches<std::size_t, Atom>(expl_h_count, atom, molgraph, 
@@ -2467,35 +2468,35 @@ void Chem::MDLDataWriter::writeCTabV3000AtomQuerySubstCount(std::ostream& os, co
 	using namespace MOLFile::CTab::V3000;
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(0, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(0, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_E0;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(1, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(1, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_E1;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(2, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(2, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_E2;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(3, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(3, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_E3;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(4, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(4, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_E4;
 		return;
@@ -2503,14 +2504,14 @@ void Chem::MDLDataWriter::writeCTabV3000AtomQuerySubstCount(std::ostream& os, co
 	
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT,
 							MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(5, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(5, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_E5;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::HEAVY_BOND_COUNT, MatchConstraint::GREATER_OR_EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(6, atom, molgraph, &getHeavyBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(6, atom, molgraph, &Internal::getHeavyBondCount))) {
 
 		os << ' ' << AtomBlock::SUBSTITUTION_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::SUBSTITUTION_COUNT_GE6;
 	}
@@ -2523,14 +2524,14 @@ void Chem::MDLDataWriter::writeCTabV3000AtomQueryUnsaturationFlag(std::ostream& 
 	using namespace MOLFile::CTab::V3000;
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::UNSATURATION, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<bool, Atom>(true, atom, molgraph, &isUnsaturated))) {
+							CalcOrSetConstraintValueMatches<bool, Atom>(true, atom, molgraph, &Internal::isUnsaturated))) {
 
 		os << ' ' << AtomBlock::UNSATURATION_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::UNSATURATION_ON;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::UNSATURATION, MatchConstraint::NOT_EQUAL, 
-							CalcOrSetConstraintValueMatches<bool, Atom>(false, atom, molgraph, &isUnsaturated))) {
+							CalcOrSetConstraintValueMatches<bool, Atom>(false, atom, molgraph, &Internal::isUnsaturated))) {
 
 		os << ' ' << AtomBlock::UNSATURATION_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::UNSATURATION_ON;
 	}
@@ -2543,28 +2544,28 @@ void Chem::MDLDataWriter::writeCTabV3000AtomQueryRingBondCount(std::ostream& os,
 	using namespace MOLFile::CTab::V3000;
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::RING_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(0, atom, molgraph, &getRingBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(0, atom, molgraph, &Internal::getRingBondCount))) {
 
 		os << ' ' << AtomBlock::RING_BOND_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::RING_BOND_COUNT_E0;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::RING_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(2, atom, molgraph, &getRingBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(2, atom, molgraph, &Internal::getRingBondCount))) {
 
 		os << ' ' << AtomBlock::RING_BOND_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::RING_BOND_COUNT_E2;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::RING_BOND_COUNT, MatchConstraint::EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(3, atom, molgraph, &getRingBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(3, atom, molgraph, &Internal::getRingBondCount))) {
 
 		os << ' ' << AtomBlock::RING_BOND_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::RING_BOND_COUNT_E3;
 		return;
 	}
 
 	if (findMatchConstraint(constr_list, AtomMatchConstraint::CONSTRAINT_LIST, AtomMatchConstraint::RING_BOND_COUNT, MatchConstraint::GREATER_OR_EQUAL, 
-							CalcOrSetConstraintValueMatches<std::size_t, Atom>(4, atom, molgraph, &getRingBondCount))) {
+							CalcOrSetConstraintValueMatches<std::size_t, Atom>(4, atom, molgraph, &Internal::getRingBondCount))) {
 
 		os << ' ' << AtomBlock::RING_BOND_COUNT_KEYWORD << V3000::KEYWORD_VALUE_SEPARATOR << AtomBlock::RING_BOND_COUNT_GE4;
 	}

@@ -36,6 +36,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 #include "FragmentTreeNode.hpp"
 #include "FragmentTree.hpp"
@@ -631,7 +632,7 @@ void ConfGen::FragmentTreeNode::initFragmentData(const Chem::MolecularGraph& fra
 		atomIndices.push_back(atom_idx);
 		atomMask.set(atom_idx);
 
-		if (getExplicitBondCount(atom, frag) == 1 && getExplicitBondCount(atom, molgraph) > 1) // is connected fragment atom?
+		if (MolProp::getExplicitBondCount(atom, frag) == 1 && MolProp::getExplicitBondCount(atom, molgraph) > 1) // is connected fragment atom?
 			continue;
 
 		coreAtomMask.set(atom_idx);

@@ -35,13 +35,13 @@ namespace CDPL
     namespace Chem 
     {
 	
-	class AtomContainer;
+		class AtomContainer;
     }
     
     namespace Internal
     {
 
-	std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
+		std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
     }
 }
 

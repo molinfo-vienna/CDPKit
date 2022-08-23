@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomValenceFunctions.cpp 
+ * MolecularGraphComponentCountFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,34 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Bond.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t Chem::calcExplicitValence(const Atom& atom, const MolecularGraph& molgraph)
+std::size_t MolProp::getComponentCount(const Chem::MolecularGraph& molgraph)
 {
-	std::size_t exp_val = 0;
-
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it))
-			exp_val += getOrder(*b_it);
-
-	return exp_val;
-}
+	using namespace Chem;
 	
-std::size_t Chem::calcValence(const Atom& atom, const MolecularGraph& molgraph)
-{
-	return (calcExplicitValence(atom, molgraph) + getImplicitHydrogenCount(atom));
+	Util::BitSet vis_atoms(molgraph.getNumAtoms());
+	std::size_t count = 0;
+	std::size_t i = 0;
+
+	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+	
+	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
+		const Atom& atom = *it;
+
+		if (!vis_atoms.test(i)) {
+			count++;
+			vis_atoms.set(i);
+
+			markReachableAtoms(atom, molgraph, vis_atoms, false);
+		}
+	}
+
+	return count;
 }

@@ -35,6 +35,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -118,7 +119,7 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
 	if (atom2_type == AtomType::H)
 		return false;
 
-	if (getExplicitBondCount(atom1, molgraph) <= 1 || getExplicitBondCount(atom2, molgraph) <= 1)
+	if (MolProp::getExplicitBondCount(atom1, molgraph) <= 1 || MolProp::getExplicitBondCount(atom2, molgraph) <= 1)
 		return false;
 	
 	std::size_t order = getOrder(bond);
@@ -148,6 +149,7 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
 bool ConfGen::isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors)
 {
 	using namespace Chem;
+	using namespace MolProp;
 
     if (getOrder(bond) != 1)
 		return false;

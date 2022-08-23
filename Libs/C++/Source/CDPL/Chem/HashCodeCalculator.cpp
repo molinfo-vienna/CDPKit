@@ -44,6 +44,7 @@
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Internal/SHA1.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -154,7 +155,7 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomChargeHash
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomHCountHashSeed(const Atom& atom) const
 {
-	return boost::math::prime(ATOM_H_COUNT_IDX + (getBondCount(atom, *calculator.molGraph, 1, AtomType::H) % ATOM_H_COUNT_RANGE));
+	return boost::math::prime(ATOM_H_COUNT_IDX + (Internal::getBondCount(atom, *calculator.molGraph, 1, AtomType::H) % ATOM_H_COUNT_RANGE));
 }
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHashSeed(const Atom& atom) const

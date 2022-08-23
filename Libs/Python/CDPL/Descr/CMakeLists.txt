@@ -54,6 +54,8 @@ SET(descr_MOD_SRCS
     FeatureAutoCorrelation3DVectorCalculatorExport.cpp 
     PharmacophoreAutoCorr3DDescriptorCalculatorExport.cpp
 
+    Entity3DContainerFunctionExport.cpp
+    AtomContainerFunctionExport.cpp 
     MolecularGraphFunctionExport.cpp 
     SimilarityFunctionExport.cpp 
 

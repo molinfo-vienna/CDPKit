@@ -31,6 +31,7 @@
 #include <iomanip>
 
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"

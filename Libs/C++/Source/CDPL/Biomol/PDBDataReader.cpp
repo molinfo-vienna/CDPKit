@@ -44,6 +44,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/MoleculeFunctions.hpp"
@@ -1020,12 +1021,12 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 			for (AtomList::const_iterator a_it1 = prevResidueLinkAtoms.begin(), a_end1 = prevResidueLinkAtoms.end(); a_it1 != a_end1; ++a_it1) {
 				Atom* atom1 = *a_it1;
 				const Math::Vector3D& atom1_pos = get3DCoordinates(*atom1);
-				double cov_rad1 = getCovalentRadius(*atom1, 1);
+				double cov_rad1 = MolProp::getCovalentRadius(*atom1, 1);
 
 				for (AtomList::const_iterator a_it2 = currResidueLinkAtoms.begin(), a_end2 = currResidueLinkAtoms.end(); a_it2 != a_end2; ++a_it2) {
 					Atom* atom2 = *a_it2;
 					const Math::Vector3D& atom2_pos = get3DCoordinates(*atom2);
-					double cov_rad2 = getCovalentRadius(*atom2, 1);
+					double cov_rad2 = MolProp::getCovalentRadius(*atom2, 1);
 
 					double dist = norm2(atom1_pos - atom2_pos);
 

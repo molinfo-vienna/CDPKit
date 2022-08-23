@@ -46,6 +46,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
@@ -711,7 +712,7 @@ void ConfGen::FragmentConformerGeneratorImpl::getRingAtomIndices()
 	for (std::size_t i = 0; i < numAtoms; i++) {
 		const Atom& atom = molGraph->getAtom(i);
 
-		if (getRingFlag(atom) && getRingBondCount(atom, *molGraph) >= 2)
+		if (getRingFlag(atom) && MolProp::getRingBondCount(atom, *molGraph) >= 2)
 			ringAtomIndices.push_back(i);
 	}
 }
@@ -752,7 +753,7 @@ void ConfGen::FragmentConformerGeneratorImpl::getSymmetryMappings()
 
 			if (&first_atom != &second_atom && 
 				(getAromaticityFlag(first_atom) || 
-				 (getRingFlag(first_atom) && getRingBondCount(first_atom, *molGraph) < getHeavyBondCount(first_atom, *molGraph))))
+				 (getRingFlag(first_atom) && MolProp::getRingBondCount(first_atom, *molGraph) < MolProp::getHeavyBondCount(first_atom, *molGraph))))
 				keep_mapping = true;
 
 			getNeighborHydrogens(first_atom, nbrHydrogens1);

@@ -252,7 +252,7 @@ void Pharm::HydrophobicFeatureGenerator::genGroupFeatures(Pharmacophore& pharm)
 			if (procAtomMask.test(nbr_atom_idx))
 				continue;
 
-			if (getHeavyAtomCount(nbr_atom, *molGraph) == 1)
+			if (MolProp::getHeavyAtomCount(nbr_atom, *molGraph) == 1)
 				featureAtoms.push_back(&nbr_atom);
 		}
 
@@ -397,8 +397,8 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 			set3DCoordinates(feature, coords_func(*featureAtoms[0]));
 
 		} else {
-			bool term_atom1 = (getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
-			bool term_atom2 = (getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
+			bool term_atom1 = (MolProp::getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
+			bool term_atom2 = (MolProp::getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
 
 			if (term_atom1 && !term_atom2) {
 				set3DCoordinates(feature, coords_func(*featureAtoms.front()));
@@ -565,7 +565,7 @@ bool Pharm::HydrophobicFeatureGenerator::hasSubstWithMoreThan2Atoms(const Chem::
 		if (hAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
 			continue;
 
-		std::size_t hvy_cnt = getHeavyAtomCount(nbr_atom, *molGraph);
+		std::size_t hvy_cnt = MolProp::getHeavyAtomCount(nbr_atom, *molGraph);
 
 		if (!first_level) 
 			return (hvy_cnt > 1);

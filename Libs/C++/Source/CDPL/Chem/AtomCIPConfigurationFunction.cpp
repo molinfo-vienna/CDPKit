@@ -40,6 +40,7 @@
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -52,7 +53,7 @@ unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& 
 
 unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func)
 {
-    std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
+    std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
 		return AtomConfiguration::NONE;
@@ -66,7 +67,7 @@ unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& 
 	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
 		return AtomConfiguration::NONE;
 
-	if (getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+	if (Internal::getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 	    return AtomConfiguration::NONE;
 
     const Atom* nbr_atoms[4];

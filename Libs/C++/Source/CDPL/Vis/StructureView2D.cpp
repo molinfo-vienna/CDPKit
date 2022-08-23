@@ -60,6 +60,7 @@
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
 #include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/BondStereoFlagCalculator.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
 
@@ -377,7 +378,7 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
 
 	Rectangle2D total_brect;
 
-	if (getExplicitBondCount(atom, *structure) != 0 && isotope == 0 && charge == 0 && h_count == 0 && 
+	if (MolProp::getExplicitBondCount(atom, *structure) != 0 && isotope == 0 && charge == 0 && h_count == 0 && 
 		rad_elec_count == 0 && qry_info_str.empty() && !parameters->showCarbons() && symbol == "C") {
 
 		if (aam_id > 0) {
@@ -651,7 +652,7 @@ void Vis::StructureView2D::createAtomHCountLabelPrimitives(const Chem::Atom& ato
 	Rectangle2D test_brect = union_brect;
 	test_brect.translate(label_pos);
 	
-	std::size_t num_atom_nbrs = getExplicitBondCount(atom, *structure);
+	std::size_t num_atom_nbrs = MolProp::getExplicitBondCount(atom, *structure);
 
 	double lowest_cong_fact = calcCongestionFactor(test_brect, atom) * (num_atom_nbrs < 2 ? H_COUNT_HOR_ALIGNMENT_PREFERENCE : 1.0);
 
@@ -1288,7 +1289,7 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
 					wedge->addElement(inters_pt);
 					wedge->addElement(wedge_side11.getEnd());
 
-					if (!atom2_visible && getExplicitBondCount(bond.getEnd(), *structure) > 2)
+					if (!atom2_visible && MolProp::getExplicitBondCount(bond.getEnd(), *structure) > 2)
 						wedge->addElement(ctr_line.getEnd());
 
 					wedge->addElement(wedge_side21.getEnd());
@@ -1335,13 +1336,13 @@ void Vis::StructureView2D::createUpSingleBondPrimitives(const Chem::Bond& bond, 
 
 	PolygonPrimitive2D* wedge = allocPolygonPrimitive();
 
-	if (!atom1_visible && getExplicitBondCount(bond.getBegin(), *structure) > 2)
+	if (!atom1_visible && MolProp::getExplicitBondCount(bond.getBegin(), *structure) > 2)
 		wedge->addElement(ctr_line.getBegin());
 
 	wedge->addElement(wedge_side1.getBegin());
 	wedge->addElement(wedge_side1.getEnd());
 
-	if (!atom2_visible && getExplicitBondCount(bond.getEnd(), *structure) > 2)
+	if (!atom2_visible && MolProp::getExplicitBondCount(bond.getEnd(), *structure) > 2)
 		wedge->addElement(ctr_line.getEnd());
 
 	wedge->addElement(wedge_side2.getEnd());
@@ -1355,7 +1356,7 @@ void Vis::StructureView2D::extendUpBondWedgeSides(const Chem::Bond& bond, const 
 {
 	using namespace Chem;
 
-	if (getExplicitBondCount(atom, *structure) == 2) {
+	if (MolProp::getExplicitBondCount(atom, *structure) == 2) {
 		Atom::ConstAtomIterator nbr_atoms_end = atom.getAtomsEnd();
 		Atom::ConstBondIterator b_it = atom.getBondsBegin();
 		const Bond* nbr_bond = 0;
@@ -1778,8 +1779,8 @@ void Vis::StructureView2D::createAsymDoubleBondPrimitives(const Chem::Bond& bond
 	std::size_t atom1_idx = structure->getAtomIndex(bond.getBegin());
 	std::size_t atom2_idx = structure->getAtomIndex(bond.getEnd());
 
-	std::size_t atom1_bnd_cnt = getExplicitBondCount(bond.getBegin(), *structure);
-	std::size_t atom2_bnd_cnt = getExplicitBondCount(bond.getEnd(), *structure);
+	std::size_t atom1_bnd_cnt = MolProp::getExplicitBondCount(bond.getBegin(), *structure);
+	std::size_t atom2_bnd_cnt = MolProp::getExplicitBondCount(bond.getEnd(), *structure);
 
 	bool atom1_visible = !atomLabelBounds[atom1_idx].empty();
 	bool atom2_visible = !atomLabelBounds[atom2_idx].empty();
@@ -1843,8 +1844,8 @@ void Vis::StructureView2D::createTripleBondPrimitives(const Chem::Bond& bond, co
 	std::size_t atom1_idx = structure->getAtomIndex(bond.getBegin());
 	std::size_t atom2_idx = structure->getAtomIndex(bond.getEnd());
 
-	std::size_t atom1_bnd_cnt = getExplicitBondCount(bond.getBegin(), *structure);
-	std::size_t atom2_bnd_cnt = getExplicitBondCount(bond.getEnd(), *structure);
+	std::size_t atom1_bnd_cnt = MolProp::getExplicitBondCount(bond.getBegin(), *structure);
+	std::size_t atom2_bnd_cnt = MolProp::getExplicitBondCount(bond.getEnd(), *structure);
 
 	bool atom1_visible = !atomLabelBounds[atom1_idx].empty();
 	bool atom2_visible = !atomLabelBounds[atom2_idx].empty();
@@ -1972,8 +1973,8 @@ int Vis::StructureView2D::getBondAsymmetryShiftDirection(const Chem::Bond& bond)
 
 	const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
-	std::size_t num_atom1_nbrs = getExplicitBondCount(*bond_atoms[0], *structure);
-	std::size_t num_atom2_nbrs = getExplicitBondCount(*bond_atoms[1], *structure);
+	std::size_t num_atom1_nbrs = MolProp::getExplicitBondCount(*bond_atoms[0], *structure);
+	std::size_t num_atom2_nbrs = MolProp::getExplicitBondCount(*bond_atoms[1], *structure);
 
 	if (num_atom1_nbrs <= 1 && num_atom2_nbrs <= 1)
 		return 0;
@@ -2287,7 +2288,7 @@ std::size_t Vis::StructureView2D::getHydrogenCount(const Chem::Atom& atom) const
 {
 	using namespace Chem;
 
-	if (getExplicitBondCount(atom, *structure) != 0 && !parameters->showHydrogenCounts()) {
+	if (MolProp::getExplicitBondCount(atom, *structure) != 0 && !parameters->showHydrogenCounts()) {
 		if (!parameters->showNonCarbonHydrogenCounts())
 			return 0;
 
@@ -2296,8 +2297,8 @@ std::size_t Vis::StructureView2D::getHydrogenCount(const Chem::Atom& atom) const
 	}
 
 	try {
-		return (getExplicitAtomCount(atom, *origStructure, AtomType::H) - 
-				getExplicitAtomCount(atom, *structure, AtomType::H) + 
+		return (MolProp::getExplicitAtomCount(atom, *origStructure, AtomType::H) - 
+				MolProp::getExplicitAtomCount(atom, *structure, AtomType::H) + 
 				calcImplicitHydrogenCount(atom, *origStructure));
 
 	} catch (const Base::Exception& e) {
@@ -2333,12 +2334,12 @@ void Vis::StructureView2D::prepareStructureData()
 
 		bool check_stereo_flag = false;
 		bool remove_one_h = false;
-		std::size_t exp_bond_count = getExplicitBondCount(atom, *structure);
+		std::size_t exp_bond_count = MolProp::getExplicitBondCount(atom, *structure);
 
 		try {
 			if (exp_bond_count == 2 &&
-				calcExplicitValence(atom, *structure) == 3 &&
-				getExplicitAtomCount(atom, *structure, AtomType::H) == 1 &&
+				MolProp::calcExplicitValence(atom, *structure) == 3 &&
+				MolProp::getExplicitAtomCount(atom, *structure, AtomType::H) == 1 &&
 				calcImplicitHydrogenCount(atom, *structure) == 0) {
 
 				bool has_db_geom = false;
@@ -2446,7 +2447,7 @@ void Vis::StructureView2D::prepareStructureData()
 			if (check_stereo_flag && get2DStereoFlag(bond) != BondStereoFlag::PLAIN)
 				continue;
 
-			if (getExplicitBondCount(nbr_atom, *structure) > 1)
+			if (MolProp::getExplicitBondCount(nbr_atom, *structure) > 1)
 				continue;
 
 			std::size_t nbr_atom_idx = structure->getAtomIndex(nbr_atom);

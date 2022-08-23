@@ -124,10 +124,10 @@ ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-forcefield-static PROPERTIES 
                       OUTPUT_NAME cdpl-forcefield
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_FORCEFIELD_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_FORCEFIELD_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-math-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-internal-static)
 
 INSTALL(TARGETS cdpl-forcefield-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -135,7 +135,7 @@ INSTALL(TARGETS cdpl-forcefield-static
 
 ADD_LIBRARY(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-math-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-forcefield-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

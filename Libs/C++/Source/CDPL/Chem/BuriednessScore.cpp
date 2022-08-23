@@ -31,8 +31,8 @@
 #include "CDPL/Chem/BuriednessScore.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -107,7 +107,7 @@ double Chem::BuriednessScore::operator()(const Math::Vector3D& pos, const AtomCo
     for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
 		const Math::Vector3D& atom_pos = coordsFunc(atom);
-		double vdw_radius = getVdWRadius(atom);
+		double vdw_radius = Internal::getVdWRadius(atom);
 		
 		tmp.assign(atom_pos - pos);
 

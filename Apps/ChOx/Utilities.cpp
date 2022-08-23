@@ -47,6 +47,7 @@
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 
 #include "Utilities.hpp"
@@ -107,6 +108,7 @@ void ChOx::initData(CDPL::Chem::Molecule& mol)
 {
 	using namespace CDPL;
 	using namespace Chem;
+	using namespace MolProp;
 
 	perceiveComponents(mol, false);
 	perceiveComponentGroups(mol, false);

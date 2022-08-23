@@ -40,6 +40,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 namespace
@@ -60,13 +61,13 @@ const unsigned int Chem::CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLAGS;
 Chem::CanonicalNumberingCalculator::CanonicalNumberingCalculator():
 	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
-	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true)) 
+	hCountFunc(boost::bind(&Internal::getBondCount, _1, _2, 1, AtomType::H, true)) 
 {}
 
 Chem::CanonicalNumberingCalculator::CanonicalNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering):
 	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
-	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true))
+	hCountFunc(boost::bind(&Internal::getBondCount, _1, _2, 1, AtomType::H, true))
 {
 	calculate(molgraph, numbering);
 }

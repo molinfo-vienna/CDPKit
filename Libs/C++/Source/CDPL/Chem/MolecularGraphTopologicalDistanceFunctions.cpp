@@ -202,7 +202,7 @@ Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph
 	return mtx_ptr;
 }
 
-Math::ULMatrix::SharedPointer Chem::extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
+Math::ULMatrix::SharedPointer Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
 {
 	if (!overwrite) {
 		Base::Variant mtx_prop = tgt_molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
@@ -224,7 +224,7 @@ void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::U
 	calcTopologicalDistances(molgraph, mtx);
 }
 
-void Chem::extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx)
+void Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx)
 {
 	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
 }
@@ -234,7 +234,7 @@ void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::S
 	calcTopologicalDistances(molgraph, mtx);
 }
 
-void Chem::extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::SparseULMatrix& mtx)
+void Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::SparseULMatrix& mtx)
 {
 	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
 }

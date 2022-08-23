@@ -28,8 +28,8 @@
 
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/MolProp/BondContainerFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/MolProp/BondFunctions.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
 
 

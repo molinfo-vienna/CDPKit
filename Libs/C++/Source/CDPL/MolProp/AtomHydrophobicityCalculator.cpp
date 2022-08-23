@@ -29,10 +29,11 @@
 #include <boost/thread.hpp>
 
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Math/Matrix.hpp"

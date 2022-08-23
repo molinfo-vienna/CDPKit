@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomValenceElectronCountFunctions.cpp 
+ * BondFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,25 +24,20 @@
  */
 
 
-#include "StaticInit.hpp"
-
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+
+#include "BondFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t Chem::calcFreeValenceElectronCount(const Atom& atom, const MolecularGraph& molgraph)
+bool Internal::isHydrogenBond(const Chem::Bond& bond)
 {
-	long free_el_count = calcValenceElectronCount(atom) - calcValence(atom, molgraph);
+	using namespace Chem;
 
-	return std::size_t(free_el_count < 0 ? 0 : free_el_count); 
+	return (getType(bond.getBegin()) == AtomType::H || getType(bond.getEnd()) == AtomType::H);
 }
 
-std::size_t Chem::calcValenceElectronCount(const Atom& atom)
-{
-	long el_count = getElementValenceElectronCount(atom) - getFormalCharge(atom);
-
-	return std::size_t(el_count < 0 ? 0 : el_count); 
-}

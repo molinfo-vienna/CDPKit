@@ -31,6 +31,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
 using namespace CDPL;
@@ -106,7 +107,7 @@ void Descr::BurdenMatrixGenerator::generate(const Chem::MolecularGraph& molgraph
 			}
 		
 		for (std::size_t i = 0; i < 2; i++) {
-			if (getExplicitBondCount(*atoms[i], molgraph) == 1) {
+			if (MolProp::getExplicitBondCount(*atoms[i], molgraph) == 1) {
 				bond_val += 0.01;
 				break;
 			}

@@ -55,6 +55,7 @@
 #include "CDPL/Chem/BondDirection.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "SMARTSDataWriter.hpp"
 #include "SMARTSData.hpp"
@@ -121,7 +122,7 @@ namespace
 
 	std::size_t calcTotalHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) 
 	{
-		return getAtomCount(atom, molgraph, Chem::AtomType::H);
+		return Internal::getAtomCount(atom, molgraph, Chem::AtomType::H);
 	}
 
 	Chem::StereoDescriptor calcStereoDescriptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) 
@@ -1404,7 +1405,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeUnsaturationFlagExpression(const 
 		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
 		return;
 
-	bool unsat = getConstraintValue<bool>(constraint, *atom, *molGraph, &isUnsaturated);
+	bool unsat = getConstraintValue<bool>(constraint, *atom, *molGraph, &Internal::isUnsaturated);
 
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		unsat = !unsat;
@@ -1424,7 +1425,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingMembershipExpression(const Ma
 		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
 		return;
 
-	std::size_t num_sssr_rings = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &getNumContainingSSSRRings);
+	std::size_t num_sssr_rings = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &Internal::getNumContainingSSSRRings);
 
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		expr_str.push_back(NOT_OPERATOR);
@@ -1479,7 +1480,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeValenceExpression(const MatchCons
 		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
 		return;
 
-	std::size_t valence = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &calcValence);
+	std::size_t valence = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &Internal::calcValence);
 
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		expr_str.push_back(NOT_OPERATOR);
@@ -1499,7 +1500,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeExplicitDegreeExpression(const Ma
 		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
 		return;
 
-	std::size_t expl_bond_count = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &getExplicitBondCount);
+	std::size_t expl_bond_count = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &Internal::getExplicitBondCount);
 
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		expr_str.push_back(NOT_OPERATOR);
@@ -1519,7 +1520,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeConnectivityExpression(const Matc
 		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
 		return;
 
-	std::size_t bond_count = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &getBondCount);
+	std::size_t bond_count = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &Internal::getBondCount);
 
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		expr_str.push_back(NOT_OPERATOR);
@@ -1539,7 +1540,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingConnectivityExpression(const 
 		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
 		return;
 
-	std::size_t ring_bond_count = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &getRingBondCount);
+	std::size_t ring_bond_count = getConstraintValue<std::size_t>(constraint, *atom, *molGraph, &Internal::getRingBondCount);
 
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		expr_str.push_back(NOT_OPERATOR);

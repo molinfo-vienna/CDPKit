@@ -26,13 +26,9 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/ComponentSet.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 
 using namespace CDPL; 
@@ -59,27 +55,4 @@ Chem::FragmentList::SharedPointer Chem::perceiveComponents(MolecularGraph& molgr
 	molgraph.setProperty(MolecularGraphProperty::COMPONENTS, comps_ptr);
 
 	return comps_ptr;
-}
-
-std::size_t Chem::getComponentCount(const MolecularGraph& molgraph)
-{
-	Util::BitSet vis_atoms(molgraph.getNumAtoms());
-
-	std::size_t count = 0;
-	std::size_t i = 0;
-
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-	
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it, i++) {
-		const Atom& atom = *it;
-
-		if (!vis_atoms.test(i)) {
-			count++;
-			vis_atoms.set(i);
-
-			markReachableAtoms(atom, molgraph, vis_atoms, false);
-		}
-	}
-
-	return count;
 }

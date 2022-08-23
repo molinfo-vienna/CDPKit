@@ -36,7 +36,6 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-//#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -46,6 +45,7 @@
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Internal/SHA1.hpp"
 
 
@@ -297,6 +297,7 @@ void ConfGen::CanonicalFragment::perceiveSSSR()
 void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify)
 {
     using namespace Chem;
+	using namespace MolProp;
  
 	molecule.reserveMemoryForAtoms(molgraph.getNumAtoms());
 

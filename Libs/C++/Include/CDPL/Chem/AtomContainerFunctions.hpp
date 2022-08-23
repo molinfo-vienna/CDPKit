@@ -32,7 +32,6 @@
 #define CDPL_CHEM_ATOMCONTAINERFUNCTIONS_HPP
 
 #include <cstddef>
-#include <string>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPredicate.hpp"
@@ -52,6 +51,7 @@ namespace CDPL
 		class Fragment;
 		class Molecule;
 
+		
 		CDPL_CHEM_API bool hasCoordinates(const AtomContainer& cntnr, std::size_t dim);
 
 		
@@ -62,13 +62,7 @@ namespace CDPL
 		CDPL_CHEM_API void transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx);
 
 
-		CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, bool append = false);
-
 		CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append = false);
-
-		CDPL_CHEM_API void set3DCoordinates(AtomContainer& cntnr, const Math::Vector3DArray& coords);
-
-		CDPL_CHEM_API void transform3DCoordinates(AtomContainer& cntnr, const Math::Matrix4D& mtx);
 
 
 		CDPL_CHEM_API void clearConformations(AtomContainer& cntnr);
@@ -104,7 +98,9 @@ namespace CDPL
 
 		CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
 
-	
+
+		CDPL_CHEM_API bool calcCentroid(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
+		
 		CDPL_CHEM_API void calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func, bool reset = true);	
 
 		CDPL_CHEM_API bool insideBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& min, const Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func);	

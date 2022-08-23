@@ -30,6 +30,9 @@
 
 namespace CDPLPythonDescr
 {
+	
+	void exportEntity3DContainerFunctions();
+	void exportAtomContainerFunctions();
 	void exportMolecularGraphFunctions();
 	void exportSimilarityFunctions();
 }

@@ -35,6 +35,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -133,7 +134,7 @@ unsigned int Chem::perceiveHybridizationState(const Atom& atom, const MolecularG
 	
     bnd_order_counts[0] += impl_h_count;
 
-    long free_val_el_count = calcValenceElectronCount(atom) - calcExplicitValence(atom, molgraph) - impl_h_count;
+    long free_val_el_count = Internal::calcValenceElectronCount(atom) - Internal::calcExplicitValence(atom, molgraph) - impl_h_count;
 
     Base::uint64 atom_descr = MAKE_ATOM_DESCR(getType(atom),
 											  bnd_order_counts[0], bnd_order_counts[1], bnd_order_counts[2],

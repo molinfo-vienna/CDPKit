@@ -31,6 +31,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -39,10 +40,10 @@ using namespace CDPL;
 long Chem::calcFormalCharge(const Atom& atom, const MolecularGraph& molgraph)
 {
 	unsigned int atom_type = getType(atom);
-	long valence = calcValence(atom, molgraph) + getUnpairedElectronCount(atom);
+	long valence = Internal::calcValence(atom, molgraph) + getUnpairedElectronCount(atom);
 
 	if ((atom_type == AtomType::C || atom_type == AtomType::N) && getImplicitHydrogenCount(atom) == 0) {
-		switch (getExplicitBondCount(atom, molgraph)) {
+		switch (Internal::getExplicitBondCount(atom, molgraph)) {
 
 			case 1:
 				if ((atom_type == AtomType::C && valence == 3) || (atom_type == AtomType::N && valence == 2))

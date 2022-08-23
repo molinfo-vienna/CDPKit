@@ -38,6 +38,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -127,7 +128,7 @@ namespace
 	{
 		using namespace Chem;
 
-		std::size_t exp_val = calcExplicitValence(atom, atom.getMolecule());
+		std::size_t exp_val = Internal::calcExplicitValence(atom, atom.getMolecule());
 		const Util::STArray& val_states = AtomDictionary::getValenceStates(getType(atom));
 		std::size_t max_val = 0;
 

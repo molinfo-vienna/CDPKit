@@ -38,6 +38,7 @@
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
+#include "CDPL/Internal/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -84,7 +85,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
     const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
     for (std::size_t i = 0; i < 2; i++) {
-		std::size_t num_bonds = getExplicitBondCount(*bond_atoms[i], molgraph);
+		std::size_t num_bonds = Internal::getExplicitBondCount(*bond_atoms[i], molgraph);
 
 		if (num_bonds < 2 || num_bonds > 3)
 			return StereoDescriptor(BondConfiguration::NONE);
@@ -95,7 +96,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
 		if ((num_bonds + getImplicitHydrogenCount(*bond_atoms[i])) > 3)
 			return false;
 
-		if (getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
+		if (Internal::getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 			return StereoDescriptor(BondConfiguration::NONE);
     }
 

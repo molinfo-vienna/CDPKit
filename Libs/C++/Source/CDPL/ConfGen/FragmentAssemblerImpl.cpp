@@ -47,6 +47,8 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/Math/Quaternion.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -247,7 +249,7 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 		const Atom& atom1 = bond.getBegin();
 		const Atom& atom2 = bond.getEnd();
 
-		if (!getAromaticityFlag(atom1) && !getAromaticityFlag(atom2) && isHydrogenRotor(bond, molgraph))
+		if (!getAromaticityFlag(atom1) && !getAromaticityFlag(atom2) && MolProp::isHydrogenRotor(bond, molgraph))
 			continue;
 		
 		tmpBitSet.set(i);
@@ -554,6 +556,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 void ConfGen::FragmentAssemblerImpl::fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node)
 {
 	using namespace Chem;
+	using namespace MolProp;
 
 	const Util::BitSet& core_atom_mask = node->getCoreAtomMask();
 

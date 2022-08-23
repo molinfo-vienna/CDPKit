@@ -45,8 +45,8 @@ namespace
 	
 	MAKE_FUNCTION_WRAPPER2(bool, hasCoordinates, CDPL::Chem::AtomContainer&, std::size_t);
 
-	MAKE_FUNCTION_WRAPPER3(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&, bool);
 	MAKE_FUNCTION_WRAPPER3(void, get2DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector2DArray&, bool);
+	MAKE_FUNCTION_WRAPPER3(bool, calcCentroid, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
 
 	MAKE_FUNCTION_WRAPPER4(std::size_t, buildAtomTypeMask, CDPL::Chem::AtomContainer&, CDPL::Util::BitSet&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(void, getConformation, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&, bool);
@@ -69,14 +69,13 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 
 	python::def("getMaxComponentGroupID", &getMaxComponentGroupIDWrapper1, python::arg("cntnr"));
 	python::def("getMaxAtomMappingID", &getMaxAtomMappingIDWrapper1, python::arg("cntnr"));
+
 	python::def("hasCoordinates", &hasCoordinatesWrapper2, (python::arg("cntnr"), python::arg("dim")));
 	python::def("get2DCoordinates", &get2DCoordinatesWrapper3, (python::arg("cntnr"), python::arg("coords"), python::arg("append") = false));
 	python::def("set2DCoordinates", &Chem::set2DCoordinates, (python::arg("cntnr"), python::arg("coords")));
 	python::def("transform2DCoordinates", &Chem::transform2DCoordinates, (python::arg("cntnr"), python::arg("mtx")));
-	python::def("get3DCoordinates", &get3DCoordinatesWrapper3, (python::arg("cntnr"), python::arg("coords"), python::arg("append") = false));
 	python::def("get3DCoordinates", &get3DCoordinatesWrapper4, (python::arg("cntnr"), python::arg("coords"), python::arg("coords_func"), python::arg("append") = false));
-	python::def("set3DCoordinates", &Chem::set3DCoordinates, (python::arg("cntnr"), python::arg("coords")));
-	python::def("transform3DCoordinates", &Chem::transform3DCoordinates, (python::arg("cntnr"), python::arg("mtx")));
+
 	python::def("clearConformations", &Chem::clearConformations, python::arg("cntnr"));
 	python::def("applyConformation", &Chem::applyConformation, (python::arg("cntnr"), python::arg("conf_idx")));
 	python::def("getConformation", &getConformationWrapper4, (python::arg("cntnr"), python::arg("conf_idx"),python::arg("coords"), python::arg("append") = false));
@@ -84,6 +83,7 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("transformConformation", &Chem::transformConformation, (python::arg("cntnr"), python::arg("conf_idx"), python::arg("mtx")));
 	python::def("transformConformations", &Chem::transformConformations, (python::arg("cntnr"), python::arg("mtx")));
 	python::def("getNumConformations", &getNumConformationsWrapper1, python::arg("cntnr"));
+
 	python::def("buildAtomTypeMask",  &buildAtomTypeMaskWrapper4, 
 				(python::arg("cntnr"), python::arg("mask"), python::arg("type"), python::arg("reset") = true));
 	python::def("copyAtomsIf", static_cast<void (*)(CDPL::Chem::AtomContainer&, CDPL::Chem::Molecule&, const CDPL::Chem::AtomPredicate&, bool)>(&copyAtomsIfWrapper4),
@@ -95,6 +95,7 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("copyAtomsIfNot", static_cast<void (*)(CDPL::Chem::AtomContainer&, CDPL::Chem::Fragment&, const CDPL::Chem::AtomPredicate&, bool)>(&copyAtomsIfNotWrapper4),
 				(python::arg("cntnr"), python::arg("frag"), python::arg("pred"), python::arg("append") = false));
 
+	python::def("calcCentroid", &calcCentroidWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("ctr")));
 	python::def("calcBoundingBox", &calcBoundingBoxWrapper5, (python::arg("cntnr"), python::arg("min"), python::arg("max"), 
 															  python::arg("coords_func"), (python::arg("reset") = true)));
 	python::def("insideBoundingBox", &insideBoundingBoxWrapper4, (python::arg("cntnr"), python::arg("min"), python::arg("max"), 
