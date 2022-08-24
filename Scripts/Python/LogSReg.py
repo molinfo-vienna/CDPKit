@@ -30,6 +30,7 @@ import sys
 
 import CDPL.Base as Base
 import CDPL.Chem as Chem
+import CDPL.MolProp as MolProp
 import CDPL.Math as Math
 
 
@@ -45,10 +46,10 @@ def process():
     mlr_model = Math.DMLRModel()
 	sdf_reader = Chem.SDFMoleculeReader(struct_is)
 	mol = Chem.BasicMolecule()
-	logs_calc = Chem.LogSCalculator()
+	logs_calc = MolProp.LogSCalculator()
 
     histo = Math.DVector()
-    histo.resize(Chem.LogSCalculator.FEATURE_VECTOR_SIZE)
+    histo.resize(MolProp.LogSCalculator.FEATURE_VECTOR_SIZE)
 
     Chem.setMultiConfImportParameter(sdf_reader, False)
 

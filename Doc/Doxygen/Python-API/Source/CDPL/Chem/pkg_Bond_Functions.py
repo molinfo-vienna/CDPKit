@@ -23,34 +23,6 @@
 # \brief 
 # \param bond 
 # \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isAmideBond(bond: Bond, molgraph: MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
-
-##
-# \brief 
-# \param bond 
-# \return 
-#
-def isHydrogenBond(bond: Bond) -> bool: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
-# \param h_rotors 
-# \param ring_bonds 
-# \param amide_bonds 
-# \return 
-#
-def isRotatable(bond: Bond, molgraph: MolecularGraph, h_rotors: bool, ring_bonds: bool, amide_bonds: bool) -> bool: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
 # \return 
 #
 def perceiveSybylType(bond: Bond, molgraph: MolecularGraph) -> int: pass
@@ -81,15 +53,6 @@ def getSybylType(bond: Bond) -> int: pass
 # \param type 
 #
 def setSybylType(bond: Bond, type: int) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
-# \param size 
-# \return 
-#
-def isInRingOfSize(bond: Bond, molgraph: MolecularGraph, size: int) -> bool: pass
 
 ##
 # \brief 
@@ -207,14 +170,6 @@ def getAromaticityFlag(bond: Bond) -> bool: pass
 # \param aromatic 
 #
 def setAromaticityFlag(bond: Bond, aromatic: bool) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
-# \return 
-#
-def isInRing(bond: Bond, molgraph: MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -408,22 +363,6 @@ def isStereoCenter(bond: Bond, molgraph: MolecularGraph, check_cip_sym: bool = T
 # \brief 
 # \param bond 
 # \param molgraph 
-# \return 
-#
-def isHeteroAtomHydrogenRotor(bond: Bond, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
-# \return 
-#
-def isHydrogenRotor(bond: Bond, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
 # \param dim 
 # \param min_ring_size 
 # \param check_order 
@@ -457,14 +396,6 @@ def getStereoDescriptor(bond: Bond) -> StereoDescriptor: pass
 # \param descr 
 #
 def setStereoDescriptor(bond: Bond, descr: StereoDescriptor) -> None: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
-# \return 
-#
-def getNumContainingSSSRRings(bond: Bond, molgraph: MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -551,12 +482,3 @@ def getSizeOfLargestContainingFragment(bond: Bond, frag_list: FragmentList) -> i
 # \return 
 #
 def getSizeOfSmallestContainingFragment(bond: Bond, frag_list: FragmentList) -> int: pass
-
-##
-# \brief 
-# \param bond 
-# \param molgraph 
-# \param damping 
-# \return 
-#
-def calcPolarizability(bond: Bond, molgraph: MolecularGraph, damping: float = 0.75) -> float: pass

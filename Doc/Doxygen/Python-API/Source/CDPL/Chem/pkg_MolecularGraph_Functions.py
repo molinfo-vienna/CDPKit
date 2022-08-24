@@ -22,13 +22,6 @@
 ##
 # \brief 
 # \param molgraph 
-# \return 
-#
-def calcKierShape1(molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param molgraph 
 #
 def clearMDLScalingFactor1(molgraph: MolecularGraph) -> None: pass
 
@@ -52,20 +45,6 @@ def getMDLScalingFactor1(molgraph: MolecularGraph) -> int: pass
 # \param factor 
 #
 def setMDLScalingFactor1(molgraph: MolecularGraph, factor: int) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcZagrebIndex1(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcKierShape2(molgraph: MolecularGraph) -> float: pass
 
 ##
 # \brief 
@@ -97,39 +76,11 @@ def setMDLScalingFactor2(molgraph: MolecularGraph, factor: float) -> None: pass
 ##
 # \brief 
 # \param molgraph 
-# \return 
-#
-def calcZagrebIndex2(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcKierShape3(molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcTPSA(molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param molgraph 
 # \param options 
 # \param dim 
 # \return 
 #
 def generateINCHI(molgraph: MolecularGraph, options: str = '/WarnOnEmptyStructure /AuxNone /NEWPSOFF', dim: int = 0) -> object: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcXLogP(molgraph: MolecularGraph) -> float: pass
 
 ##
 # \brief 
@@ -158,23 +109,6 @@ def clearSSSR(molgraph: MolecularGraph) -> None: pass
 # \return 
 #
 def hasSSSR(molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \return 
-#
-def extractSSSR(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph) -> FragmentList: pass
-
-##
-# \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \param overwrite 
-# \return 
-#
-def extractSSSR(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
 # \brief 
@@ -208,20 +142,6 @@ def copySSSR(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph) -> Frag
 # \return 
 #
 def generateSMILES(molgraph: MolecularGraph, canonical: bool = False, ord_h_deplete: bool = True, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> object: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcLogS(molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def buildMolecularFormula(molgraph: MolecularGraph) -> object: pass
 
 ##
 # \brief 
@@ -401,13 +321,6 @@ def setMOL2MoleculeType(molgraph: MolecularGraph, type: int) -> None: pass
 # \param molgraph 
 # \return 
 #
-def calcRuleOfFiveScore(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
 def perceiveCyclicSubstructure(molgraph: MolecularGraph) -> Fragment: pass
 
 ##
@@ -542,21 +455,14 @@ def setMDLChiralFlag(molgraph: MolecularGraph, flag: bool) -> None: pass
 # \param atom_flags 
 # \param bond_flags 
 #
-def generateCanonicalNumbering(molgraph: MolecularGraph, overwrite: bool, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> None: pass
+def calculateCanonicalNumbering(molgraph: MolecularGraph, overwrite: bool, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param overwrite 
 #
-def generateMorganNumbering(molgraph: MolecularGraph, overwrite: bool) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def buildMassCompositionString(molgraph: MolecularGraph) -> object: pass
+def calculateMorganNumbering(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -567,14 +473,6 @@ def buildMassCompositionString(molgraph: MolecularGraph) -> object: pass
 # \return 
 #
 def containsMolecularGraph(molgraph: MolecularGraph, sub_molgraph: MolecularGraph, atoms: bool = True, bonds: bool = True) -> bool: pass
-
-##
-# \brief 
-# \param arg1 
-# \param molgraph 
-# \param hist 
-#
-def buildElementHistogram(arg1: MolecularGraph, molgraph: ElementHistogram, hist: bool) -> None: pass
 
 ##
 # \brief 
@@ -665,13 +563,6 @@ def setConformation(molgraph: MolecularGraph, conf_idx: int, coords: CDPL.Math.V
 ##
 # \brief 
 # \param molgraph 
-# \param comp 
-#
-def calcMassComposition(molgraph: MolecularGraph, comp: MassComposition) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
 #
 def clearMDLTimestamp(molgraph: MolecularGraph) -> None: pass
 
@@ -726,13 +617,6 @@ def setStoichiometricNumber(molgraph: MolecularGraph, num: float) -> None: pass
 ##
 # \brief 
 # \param molgraph 
-# \return 
-#
-def calcCyclomaticNumber(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
 #
 def clearMDLRegistryNumber(molgraph: MolecularGraph) -> None: pass
 
@@ -760,13 +644,6 @@ def setMDLRegistryNumber(molgraph: MolecularGraph, reg_no: int) -> None: pass
 ##
 # \brief 
 # \param molgraph 
-# \return 
-#
-def calcTopologicalDiameter(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
 # \param rxn_center 
 #
 def extractReactionCenter(molgraph: MolecularGraph, rxn_center: Fragment) -> None: pass
@@ -776,15 +653,6 @@ def extractReactionCenter(molgraph: MolecularGraph, rxn_center: Fragment) -> Non
 # \param molgraph 
 #
 def kekulizeBonds(molgraph: MolecularGraph) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-# \param num_iter 
-# \param damping 
-#
-def calcPEOECharges(molgraph: MolecularGraph, overwrite: bool, num_iter: int = 6, damping: float = 0.5) -> None: pass
 
 ##
 # \brief 
@@ -819,13 +687,6 @@ def getConformerEnergies(molgraph: MolecularGraph) -> CDPL.Util.DArray: pass
 # \param energies 
 #
 def setConformerEnergies(molgraph: MolecularGraph, energies: CDPL.Util.DArray) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param overwrite 
-#
-def calcAtomHydrophobicities(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -877,14 +738,14 @@ def perceiveSymmetryClasses(molgraph: MolecularGraph, overwrite: bool, atom_flag
 # \param molgraph 
 # \param overwrite 
 #
-def generate2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def calculate2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param undef_only 
 #
-def generateHydrogen3DCoordinates(molgraph: MolecularGraph, undef_only: bool = True) -> None: pass
+def calculateHydrogen3DCoordinates(molgraph: MolecularGraph, undef_only: bool = True) -> None: pass
 
 ##
 # \brief 
@@ -905,7 +766,7 @@ def setRingFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \param molgraph 
 # \param overwrite 
 #
-def generateBond2DStereoFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def calculateBond2DStereoFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -1032,7 +893,7 @@ def calcAtomCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None
 # \param ring_bonds 
 # \param min_ring_size 
 #
-def generateBondDirections(molgraph: MolecularGraph, overwrite: bool, ring_bonds: bool = True, min_ring_size: int = 8) -> None: pass
+def calculateBondDirections(molgraph: MolecularGraph, overwrite: bool, ring_bonds: bool = True, min_ring_size: int = 8) -> None: pass
 
 ##
 # \brief 
@@ -1134,13 +995,6 @@ def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 # \param atom_idx_offs 
 #
 def copyAtomStereoDescriptors(mol_copy: MolecularGraph, molgraph: MolecularGraph, atom_idx_offs: int = 0) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcMass(molgraph: MolecularGraph) -> float: pass
 
 ##
 # \brief 
@@ -1268,13 +1122,6 @@ def calcImplicitHydrogenCounts(molgraph: MolecularGraph, overwrite: bool) -> Non
 ##
 # \brief 
 # \param molgraph 
-# \return 
-#
-def calcTopologicalRadius(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
 # \param overwrite 
 #
 def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> None: pass
@@ -1285,6 +1132,23 @@ def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> N
 # \return 
 #
 def extractAromaticSSSRSubset(molgraph: MolecularGraph) -> FragmentList: pass
+
+##
+# \brief 
+# \param src_molgraph 
+# \param tgt_molgraph 
+# \return 
+#
+def extractSSSRSubset(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph) -> FragmentList: pass
+
+##
+# \brief 
+# \param src_molgraph 
+# \param tgt_molgraph 
+# \param overwrite 
+# \return 
+#
+def extractSSSRSubset(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> FragmentList: pass
 
 ##
 # \brief 
@@ -1316,127 +1180,9 @@ def setMDLComment(molgraph: MolecularGraph, comment: str) -> None: pass
 ##
 # \brief 
 # \param molgraph 
-# \param inc_h_rotors 
-# \param inc_amide_bonds 
-# \return 
-#
-def getRotatableBondCount(molgraph: MolecularGraph, inc_h_rotors: bool, inc_amide_bonds: bool) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
 # \return 
 #
 def getCompleteBondCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getHydrogenBondCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getChainBondCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getBondCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param order 
-# \return 
-#
-def getBondCount(molgraph: MolecularGraph, order: int) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcTotalWalkCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getChainAtomCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getHydrogenDonorAtomCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getHydrogenAcceptorAtomCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getAtomCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param type 
-# \return 
-#
-def getAtomCount(molgraph: MolecularGraph, type: int) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getImplicitHydrogenCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param flags 
-# \return 
-#
-def getOrdinaryHydrogenCount(molgraph: MolecularGraph, flags: int = 2147483648) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param flags 
-# \return 
-#
-def getExplicitOrdinaryHydrogenCount(molgraph: MolecularGraph, flags: int = 2147483648) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def getComponentCount(molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcRandicIndex(molgraph: MolecularGraph) -> float: pass
 
 ##
 # \brief 
@@ -1467,10 +1213,28 @@ def setConformationIndex(molgraph: MolecularGraph, index: int) -> None: pass
 
 ##
 # \brief 
-# \param molgraph 
+# \param src_molgraph 
+# \param tgt_molgraph 
+# \param overwrite 
 # \return 
 #
-def calcWienerIndex(molgraph: MolecularGraph) -> int: pass
+def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> CDPL.Math.ULMatrix: pass
+
+##
+# \brief 
+# \param src_molgraph 
+# \param tgt_molgraph 
+# \param mtx 
+#
+def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+
+##
+# \brief 
+# \param src_molgraph 
+# \param tgt_molgraph 
+# \param mtx 
+#
+def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1513,31 +1277,6 @@ def clearTopologicalDistanceMatrix(molgraph: MolecularGraph) -> None: pass
 # \return 
 #
 def hasTopologicalDistanceMatrix(molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \param overwrite 
-# \return 
-#
-def extractTopologicalDistanceMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, overwrite: bool) -> CDPL.Math.ULMatrix: pass
-
-##
-# \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \param mtx 
-#
-def extractTopologicalDistanceMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
-
-##
-# \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \param mtx 
-#
-def extractTopologicalDistanceMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1691,24 +1430,3 @@ def getMDLDimensionality(molgraph: MolecularGraph) -> int: pass
 # \param dim 
 #
 def setMDLDimensionality(molgraph: MolecularGraph, dim: int) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcMeanPolarizability(molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcRingComplexity(molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param molgraph 
-# \return 
-#
-def calcMolecularComplexity(molgraph: MolecularGraph) -> float: pass

@@ -26,11 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-#include <functional>
-
-#include <boost/bind.hpp>
-
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/MolProp/PEOEChargeCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
@@ -44,20 +39,35 @@ using namespace CDPL;
 void MolProp::calcPEOECharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter, 
 							  double damping)
 {
-	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasPEOECharge, _1))) == molgraph.getAtomsEnd())
-		return;
+	if (!overwrite) {
+		Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd();
+		
+		for ( ; it != end; ++it) {
+			const Chem::Atom& atom = *it;
+
+			if (!hasPEOECharge(atom) || !hasPEOEElectronegativity(atom))
+				break;
+		}
+		
+		if (it == end)
+			return;
+	}
 
 	Util::DArray charges;
+	Util::DArray el_negs;
 	PEOEChargeCalculator calculator;
 
 	calculator.setNumIterations(num_iter);
 	calculator.setDampingFactor(damping);
 	calculator.calculate(molgraph, charges);
-
+	calculator.getElectronegativities(el_negs);
+	
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		setPEOECharge(molgraph.getAtom(i), charges[i]);
+	for (std::size_t i = 0; i < num_atoms; i++) {
+		Chem::Atom& atom = molgraph.getAtom(i);
+		
+		setPEOECharge(atom, charges[i]);
+		setPEOEElectronegativity(atom, el_negs[i]);
+	}
 }

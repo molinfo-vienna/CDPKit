@@ -27,64 +27,64 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    ORDER = CDPL.Base.LookupKey(id=42, name='ORDER')
+    ORDER = CDPL.Base.LookupKey(id=40, name='ORDER')
 
     ##
     # \brief 
     #
-    SYBYL_TYPE = CDPL.Base.LookupKey(id=43, name='SYBYL_TYPE')
+    SYBYL_TYPE = CDPL.Base.LookupKey(id=41, name='SYBYL_TYPE')
 
     ##
     # \brief 
     #
-    RING_FLAG = CDPL.Base.LookupKey(id=44, name='RING_FLAG')
+    RING_FLAG = CDPL.Base.LookupKey(id=42, name='RING_FLAG')
 
     ##
     # \brief 
     #
-    AROMATICITY_FLAG = CDPL.Base.LookupKey(id=45, name='AROMATICITY_FLAG')
+    AROMATICITY_FLAG = CDPL.Base.LookupKey(id=43, name='AROMATICITY_FLAG')
 
     ##
     # \brief 
     #
-    STEREO_DESCRIPTOR = CDPL.Base.LookupKey(id=46, name='STEREO_DESCRIPTOR')
+    STEREO_DESCRIPTOR = CDPL.Base.LookupKey(id=44, name='STEREO_DESCRIPTOR')
 
     ##
     # \brief 
     #
-    STEREO_CENTER_FLAG = CDPL.Base.LookupKey(id=47, name='STEREO_CENTER_FLAG')
+    STEREO_CENTER_FLAG = CDPL.Base.LookupKey(id=45, name='STEREO_CENTER_FLAG')
 
     ##
     # \brief 
     #
-    CIP_CONFIGURATION = CDPL.Base.LookupKey(id=48, name='CIP_CONFIGURATION')
+    CIP_CONFIGURATION = CDPL.Base.LookupKey(id=46, name='CIP_CONFIGURATION')
 
     ##
     # \brief 
     #
-    DIRECTION = CDPL.Base.LookupKey(id=50, name='DIRECTION')
+    DIRECTION = CDPL.Base.LookupKey(id=48, name='DIRECTION')
 
     ##
     # \brief 
     #
-    STEREO_2D_FLAG = CDPL.Base.LookupKey(id=49, name='STEREO_2D_FLAG')
+    STEREO_2D_FLAG = CDPL.Base.LookupKey(id=47, name='STEREO_2D_FLAG')
 
     ##
     # \brief 
     #
-    REACTION_CENTER_STATUS = CDPL.Base.LookupKey(id=51, name='REACTION_CENTER_STATUS')
+    REACTION_CENTER_STATUS = CDPL.Base.LookupKey(id=49, name='REACTION_CENTER_STATUS')
 
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=52, name='MATCH_CONSTRAINTS')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=50, name='MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=53, name='MATCH_EXPRESSION')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=51, name='MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey(id=54, name='MATCH_EXPRESSION_STRING')
+    MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey(id=52, name='MATCH_EXPRESSION_STRING')

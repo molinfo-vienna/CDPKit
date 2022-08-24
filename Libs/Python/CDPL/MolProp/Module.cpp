@@ -36,6 +36,7 @@ BOOST_PYTHON_MODULE(_molprop)
 	using namespace CDPLPythonMolProp;
 
 	exportAtomProperties();
+	exportCoordinationGeometries();
 
 	exportElementHistogram();
 	exportMassComposition();

@@ -46,5 +46,6 @@ void CDPLPythonMolProp::exportAtomProperties()
 
 	python::class_<AtomProperty, boost::noncopyable>("AtomProperty", python::no_init)
 		.def_readonly("HYDROPHOBICITY", &MolProp::AtomProperty::HYDROPHOBICITY)
-		.def_readonly("PEOE_CHARGE", &MolProp::AtomProperty::PEOE_CHARGE);
+		.def_readonly("PEOE_CHARGE", &MolProp::AtomProperty::PEOE_CHARGE)
+		.def_readonly("PEOE_ELECTRONEGATIVITY", &MolProp::AtomProperty::PEOE_ELECTRONEGATIVITY);
 }

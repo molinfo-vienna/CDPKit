@@ -36,16 +36,11 @@ def getMaxComponentGroupID(cntnr: AtomContainer) -> int: pass
 ##
 # \brief 
 # \param cntnr 
+# \param coords_func 
+# \param ctr 
 # \return 
 #
-def buildExplicitMolecularFormula(cntnr: AtomContainer) -> str: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def calcFormalCharge(cntnr: AtomContainer) -> int: pass
+def calcCentroid(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: CDPL.Math.Vector3D) -> bool: pass
 
 ##
 # \brief 
@@ -68,27 +63,12 @@ def copyAtomsIf(cntnr: AtomContainer, frag: Fragment, pred: AtomPredicate, appen
 ##
 # \brief 
 # \param cntnr 
-# \return 
-#
-def buildExplicitMassCompositionString(cntnr: AtomContainer) -> str: pass
-
-##
-# \brief 
-# \param cntnr 
 # \param mask 
 # \param type 
 # \param reset 
 # \return 
 #
 def buildAtomTypeMask(cntnr: AtomContainer, mask: CDPL.Util.BitSet, type: int, reset: bool = True) -> int: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param hist 
-# \param append 
-#
-def buildExplicitElementHistogram(cntnr: AtomContainer, hist: ElementHistogram, append: bool = False) -> None: pass
 
 ##
 # \brief 
@@ -124,13 +104,6 @@ def applyConformation(cntnr: AtomContainer, conf_idx: int) -> None: pass
 ##
 # \brief 
 # \param cntnr 
-# \param mass_comp 
-#
-def calcExplicitMassComposition(cntnr: AtomContainer, mass_comp: MassComposition) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
 # \param mtx 
 #
 def transform2DCoordinates(cntnr: AtomContainer, mtx: CDPL.Math.Matrix3D) -> None: pass
@@ -153,33 +126,11 @@ def set2DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector2DArray) -> N
 ##
 # \brief 
 # \param cntnr 
-# \param mtx 
-#
-def transform3DCoordinates(cntnr: AtomContainer, mtx: CDPL.Math.Matrix4D) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param coords 
-# \param append 
-#
-def get3DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector3DArray, append: bool = False) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
 # \param coords 
 # \param coords_func 
 # \param append 
 #
 def get3DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector3DArray, coords_func: Atom3DCoordinatesFunction, append: bool = False) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param coords 
-#
-def set3DCoordinates(cntnr: AtomContainer, coords: CDPL.Math.Vector3DArray) -> None: pass
 
 ##
 # \brief 
@@ -208,56 +159,6 @@ def getNumConformations(cntnr: AtomContainer) -> int: pass
 # \param cntnr 
 #
 def clearConformations(cntnr: AtomContainer) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def calcExplicitMass(cntnr: AtomContainer) -> float: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getAromaticAtomCount(cntnr: AtomContainer) -> int: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getRingAtomCount(cntnr: AtomContainer) -> int: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getExplicitChainAtomCount(cntnr: AtomContainer) -> int: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getExplicitAtomCount(cntnr: AtomContainer) -> int: pass
-
-##
-# \brief 
-# \param cntnr 
-# \param type 
-# \return 
-#
-def getExplicitAtomCount(cntnr: AtomContainer, type: int) -> int: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def getHeavyAtomCount(cntnr: AtomContainer) -> int: pass
 
 ##
 # \brief 

@@ -27,74 +27,74 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    NAME = CDPL.Base.LookupKey(id=84, name='NAME')
+    NAME = CDPL.Base.LookupKey(id=82, name='NAME')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=85, name='MATCH_EXPRESSION')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=83, name='MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=86, name='MATCH_CONSTRAINTS')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=84, name='MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=87, name='COMPONENT_GROUPS')
+    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=85, name='COMPONENT_GROUPS')
 
     ##
     # \brief 
     #
-    ATOM_MAPPING = CDPL.Base.LookupKey(id=88, name='ATOM_MAPPING')
+    ATOM_MAPPING = CDPL.Base.LookupKey(id=86, name='ATOM_MAPPING')
 
     ##
     # \brief 
     #
-    REACTION_DATA = CDPL.Base.LookupKey(id=89, name='REACTION_DATA')
+    REACTION_DATA = CDPL.Base.LookupKey(id=87, name='REACTION_DATA')
 
     ##
     # \brief 
     #
-    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=90, name='MDL_USER_INITIALS')
+    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=88, name='MDL_USER_INITIALS')
 
     ##
     # \brief 
     #
-    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=91, name='MDL_PROGRAM_NAME')
+    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=89, name='MDL_PROGRAM_NAME')
 
     ##
     # \brief 
     #
-    MDL_TIMESTAMP = CDPL.Base.LookupKey(id=92, name='MDL_TIMESTAMP')
+    MDL_TIMESTAMP = CDPL.Base.LookupKey(id=90, name='MDL_TIMESTAMP')
 
     ##
     # \brief 
     #
-    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=93, name='MDL_REGISTRY_NUMBER')
+    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=91, name='MDL_REGISTRY_NUMBER')
 
     ##
     # \brief 
     #
-    MDL_COMMENT = CDPL.Base.LookupKey(id=94, name='MDL_COMMENT')
+    MDL_COMMENT = CDPL.Base.LookupKey(id=92, name='MDL_COMMENT')
 
     ##
     # \brief 
     #
-    MDL_MOLECULE_RECORD = CDPL.Base.LookupKey(id=95, name='MDL_MOLECULE_RECORD')
+    MDL_MOLECULE_RECORD = CDPL.Base.LookupKey(id=93, name='MDL_MOLECULE_RECORD')
 
     ##
     # \brief 
     #
-    MDL_INTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=96, name='MDL_INTERNAL_REGISTRY_NUMBER')
+    MDL_INTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=94, name='MDL_INTERNAL_REGISTRY_NUMBER')
 
     ##
     # \brief 
     #
-    MDL_EXTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=97, name='MDL_EXTERNAL_REGISTRY_NUMBER')
+    MDL_EXTERNAL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=95, name='MDL_EXTERNAL_REGISTRY_NUMBER')
 
     ##
     # \brief 
     #
-    MDL_RXN_FILE_VERSION = CDPL.Base.LookupKey(id=98, name='MDL_RXN_FILE_VERSION')
+    MDL_RXN_FILE_VERSION = CDPL.Base.LookupKey(id=96, name='MDL_RXN_FILE_VERSION')

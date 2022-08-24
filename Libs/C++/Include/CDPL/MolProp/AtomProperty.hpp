@@ -55,6 +55,7 @@ namespace CDPL
 			extern CDPL_MOLPROP_API const Base::LookupKey HYDROPHOBICITY;
 
 			extern CDPL_MOLPROP_API const Base::LookupKey PEOE_CHARGE;
+			extern CDPL_MOLPROP_API const Base::LookupKey PEOE_ELECTRONEGATIVITY;
 		}
 	}
 }

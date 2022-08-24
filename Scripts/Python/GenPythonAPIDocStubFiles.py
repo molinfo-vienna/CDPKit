@@ -42,6 +42,8 @@ import CDPL.Grid
 import CDPL.ForceField
 import CDPL.ConfGen
 import CDPL.Biomol
+import CDPL.Descr
+import CDPL.MolProp
 
 
 HIDE_SELF_ARG = True

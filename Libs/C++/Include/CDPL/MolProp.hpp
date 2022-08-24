@@ -36,6 +36,8 @@
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
 
+#include "CDPL/MolProp/CoordinationGeometry.hpp"
+
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"

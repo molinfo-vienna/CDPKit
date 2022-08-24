@@ -30,9 +30,9 @@ def calcCentroid(cntnr: Entity3DContainer, ctr: CDPL.Math.Vector3D) -> bool: pas
 ##
 # \brief 
 # \param cntnr 
-# \return 
+# \param mtx 
 #
-def calcGeometricalDiameter(cntnr: Entity3DContainer) -> float: pass
+def transform3DCoordinates(cntnr: Entity3DContainer, mtx: CDPL.Math.Matrix4D) -> None: pass
 
 ##
 # \brief 
@@ -48,13 +48,6 @@ def get3DCoordinates(cntnr: Entity3DContainer, coords: CDPL.Math.Vector3DArray, 
 # \param coords 
 #
 def set3DCoordinates(cntnr: Entity3DContainer, coords: CDPL.Math.Vector3DArray) -> None: pass
-
-##
-# \brief 
-# \param cntnr 
-# \return 
-#
-def calcGeometricalRadius(cntnr: Entity3DContainer) -> float: pass
 
 ##
 # \brief 

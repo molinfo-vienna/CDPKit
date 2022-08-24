@@ -102,36 +102,12 @@ def setComponentGroupID(atom: Atom, id: int) -> None: pass
 
 ##
 # \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def isUnsaturated(atom: Atom, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
 # \param atom1 
 # \param atom2 
 # \param molgraph 
 # \return 
 #
 def getTopologicalDistance(atom1: Atom, atom2: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def calcValence(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def calcExplicitValence(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -159,33 +135,6 @@ def getMOL2Charge(atom: Atom) -> float: pass
 # \param charge 
 #
 def setMOL2Charge(atom: Atom, charge: float) -> None: pass
-
-##
-# \brief 
-# \param atom 
-#
-def clearPEOECharge(atom: Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasPEOECharge(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def getPEOECharge(atom: Atom) -> float: pass
-
-##
-# \brief 
-# \param atom 
-# \param charge 
-#
-def setPEOECharge(atom: Atom, charge: float) -> None: pass
 
 ##
 # \brief 
@@ -302,13 +251,6 @@ def getName(atom: Atom) -> str: pass
 # \param name 
 #
 def setName(atom: Atom, name: str) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def getElementName(atom: Atom) -> str: pass
 
 ##
 # \brief 
@@ -505,15 +447,6 @@ def setHybridizationState(atom: Atom, state: int) -> None: pass
 ##
 # \brief 
 # \param atom 
-# \param molgraph 
-# \param size 
-# \return 
-#
-def isInRingOfSize(atom: Atom, molgraph: MolecularGraph, size: int) -> bool: pass
-
-##
-# \brief 
-# \param atom 
 # \param frag_list 
 # \param size 
 # \return 
@@ -634,14 +567,6 @@ def setAromaticityFlag(atom: Atom, aromatic: bool) -> None: pass
 # \param molgraph 
 # \return 
 #
-def isInRing(atom: Atom, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
 def buildMatchExpressionString(atom: Atom, molgraph: MolecularGraph) -> str: pass
 
 ##
@@ -670,34 +595,6 @@ def getMatchExpressionString(atom: Atom) -> str: pass
 # \param expr_str 
 #
 def setMatchExpressionString(atom: Atom, expr_str: str) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isSemiMetal(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isNonMetal(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isTransitionMetal(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isMetal(atom: Atom) -> bool: pass
 
 ##
 # \brief 
@@ -732,68 +629,6 @@ def getSymbol(atom: Atom) -> str: pass
 # \param symbol 
 #
 def setSymbol(atom: Atom, symbol: str) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isCarbonylLikeAtom(atom: Atom, molgraph: MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isAmideCenterAtom(atom: Atom, molgraph: MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isHalogen(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param flags 
-# \return 
-#
-def isOrdinaryHydrogen(atom: Atom, molgraph: MolecularGraph, flags: int = 2147483648) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param c_only 
-# \param db_o_only 
-# \return 
-#
-def isAmideNitrogen(atom: Atom, molgraph: MolecularGraph, c_only: bool = False, db_o_only: bool = False) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def isInvertibleNitrogen(atom: Atom, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def isPlanarNitrogen(atom: Atom, molgraph: MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -914,13 +749,6 @@ def calcAtomConfiguration(atom: Atom, molgraph: MolecularGraph, descr: StereoDes
 ##
 # \brief 
 # \param atom 
-# \return 
-#
-def getIUPACGroup(atom: Atom) -> int: pass
-
-##
-# \brief 
-# \param atom 
 #
 def clearCanonicalNumber(atom: Atom) -> None: pass
 
@@ -986,22 +814,6 @@ def isStereoCenter(atom: Atom, molgraph: MolecularGraph, check_cip_sym: bool = T
 # \brief 
 # \param atom 
 # \param molgraph 
-# \return 
-#
-def isHydrogenDonor(atom: Atom, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def isHydrogenAcceptor(atom: Atom, molgraph: MolecularGraph) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
 # \param dim 
 # \return 
 #
@@ -1033,13 +845,6 @@ def getStereoDescriptor(atom: Atom) -> StereoDescriptor: pass
 # \param descr 
 #
 def setStereoDescriptor(atom: Atom, descr: StereoDescriptor) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isNobleGas(atom: Atom) -> bool: pass
 
 ##
 # \brief 
@@ -1096,14 +901,6 @@ def set2DCoordinates(atom: Atom, coords: CDPL.Math.Vector2D) -> None: pass
 # \return 
 #
 def getConformer3DCoordinates(atom: Atom, conf_idx: int) -> CDPL.Math.Vector3D: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getNumContainingSSSRRings(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -1197,21 +994,6 @@ def setMatchConstraints(atom: Atom, constr: MatchConstraintList) -> None: pass
 ##
 # \brief 
 # \param atom 
-# \return 
-#
-def getVdWRadius(atom: Atom) -> float: pass
-
-##
-# \brief 
-# \param atom 
-# \param order 
-# \return 
-#
-def getCovalentRadius(atom: Atom, order: int = 1) -> float: pass
-
-##
-# \brief 
-# \param atom 
 #
 def clearReactionCenterStatus(atom: Atom) -> None: pass
 
@@ -1239,27 +1021,6 @@ def setReactionCenterStatus(atom: Atom, status: int) -> None: pass
 ##
 # \brief 
 # \param atom 
-# \return 
-#
-def getAtomicWeight(atom: Atom) -> float: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isChemicalElement(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isMainGroupElement(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
 # \param frag_list 
 # \return 
 #
@@ -1272,172 +1033,6 @@ def getSizeOfLargestContainingFragment(atom: Atom, frag_list: FragmentList) -> i
 # \return 
 #
 def getSizeOfSmallestContainingFragment(atom: Atom, frag_list: FragmentList) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getAromaticBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param inc_h_rotors 
-# \param inc_amide_bonds 
-# \return 
-#
-def getRotatableBondCount(atom: Atom, molgraph: MolecularGraph, inc_h_rotors: bool, inc_amide_bonds: bool) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getRingBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getChainBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getExplicitChainBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param order 
-# \return 
-#
-def getBondCount(atom: Atom, molgraph: MolecularGraph, order: int) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param order 
-# \param type 
-# \param strict 
-# \return 
-#
-def getBondCount(atom: Atom, molgraph: MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getExplicitBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param order 
-# \return 
-#
-def getExplicitBondCount(atom: Atom, molgraph: MolecularGraph, order: int) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param order 
-# \param type 
-# \param strict 
-# \return 
-#
-def getExplicitBondCount(atom: Atom, molgraph: MolecularGraph, order: int, type: int, strict: bool = True) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getHeavyBondCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getAromaticAtomCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getRingAtomCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getChainAtomCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getExplicitChainAtomCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param type 
-# \param strict 
-# \return 
-#
-def getAtomCount(atom: Atom, molgraph: MolecularGraph, type: int, strict: bool = True) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param type 
-# \param strict 
-# \return 
-#
-def getExplicitAtomCount(atom: Atom, molgraph: MolecularGraph, type: int, strict: bool = True) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getHeavyAtomCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
 
 ##
 # \brief 
@@ -1477,15 +1072,6 @@ def setImplicitHydrogenCount(atom: Atom, count: int) -> None: pass
 ##
 # \brief 
 # \param atom 
-# \param molgraph 
-# \param flags 
-# \return 
-#
-def getOrdinaryHydrogenCount(atom: Atom, molgraph: MolecularGraph, flags: int = 2147483648) -> int: pass
-
-##
-# \brief 
-# \param atom 
 #
 def clearUnpairedElectronCount(atom: Atom) -> None: pass
 
@@ -1513,28 +1099,6 @@ def setUnpairedElectronCount(atom: Atom, count: int) -> None: pass
 ##
 # \brief 
 # \param atom 
-# \return 
-#
-def calcValenceElectronCount(atom: Atom) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def calcFreeValenceElectronCount(atom: Atom, molgraph: MolecularGraph) -> int: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def getElementValenceElectronCount(atom: Atom) -> int: pass
-
-##
-# \brief 
-# \param atom 
 #
 def clear3DCoordinatesArray(atom: Atom) -> None: pass
 
@@ -1558,50 +1122,6 @@ def get3DCoordinatesArray(atom: Atom) -> CDPL.Math.Vector3DArray: pass
 # \param coords_array 
 #
 def set3DCoordinatesArray(atom: Atom, coords_array: CDPL.Math.Vector3DArray) -> None: pass
-
-##
-# \brief 
-# \param atom 
-#
-def clearHydrophobicity(atom: Atom) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def hasHydrophobicity(atom: Atom) -> bool: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def getHydrophobicity(atom: Atom) -> float: pass
-
-##
-# \brief 
-# \param atom 
-# \param hyd 
-#
-def setHydrophobicity(atom: Atom, hyd: float) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \return 
-#
-def getHybridPolarizability(atom: Atom, molgraph: MolecularGraph) -> float: pass
-
-##
-# \brief 
-# \param atom 
-# \param molgraph 
-# \param damping 
-# \return 
-#
-def calcEffectivePolarizability(atom: Atom, molgraph: MolecularGraph, damping: float = 0.75) -> float: pass
 
 ##
 # \brief 
@@ -1672,17 +1192,3 @@ def getCIPPriority(atom: Atom) -> int: pass
 # \param priority 
 #
 def setCIPPriority(atom: Atom, priority: int) -> None: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def getAllredRochowElectronegativity(atom: Atom) -> float: pass
-
-##
-# \brief 
-# \param atom 
-# \return 
-#
-def isHeavy(atom: Atom) -> bool: pass

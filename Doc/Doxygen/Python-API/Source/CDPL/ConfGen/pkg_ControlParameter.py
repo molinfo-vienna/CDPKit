@@ -27,4 +27,4 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=326, name='STRICT_ERROR_CHECKING')
+    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=327, name='STRICT_ERROR_CHECKING')

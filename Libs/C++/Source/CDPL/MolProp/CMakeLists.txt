@@ -59,6 +59,7 @@ SET(cdpl-molprop_LIB_SRCS
     AtomValenceFunctions.cpp
     AtomValenceElectronCountFunctions.cpp
     AtomAtomCountFunctions.cpp
+    AtomVSEPRGeometryFunctions.cpp
     
     BondPolarizabilityFunction.cpp
     BondClassificationFunctions.cpp

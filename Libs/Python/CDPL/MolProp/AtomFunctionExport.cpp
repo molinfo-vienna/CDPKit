@@ -127,13 +127,16 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getHeavyBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(bool, isPlanarNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(bool, isInvertibleNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-
+	MAKE_FUNCTION_WRAPPER2(std::size_t, calcStericNumber, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(unsigned int, getVSEPRCoordinationGeometry, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+	
 	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isOrdinaryHydrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
+	MAKE_FUNCTION_WRAPPER3(unsigned int, getVSEPRCoordinationGeometry, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	
 	MAKE_FUNCTION_WRAPPER4(bool, isCarbonylLikeAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(bool, isAmideCenterAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
@@ -147,6 +150,7 @@ namespace
 
 	MAKE_ATOM_FUNC_WRAPPERS(double, Hydrophobicity)
 	MAKE_ATOM_FUNC_WRAPPERS(double, PEOECharge)
+	MAKE_ATOM_FUNC_WRAPPERS(double, PEOEElectronegativity)
 }
 
 
@@ -204,6 +208,8 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	python::def("getAromaticBondCount", &getAromaticBondCountWrapper2, 
 				(python::arg("atom"), python::arg("molgraph")));
 	python::def("getHeavyBondCount", &getHeavyBondCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
+	python::def("calcStericNumber", &calcStericNumberWrapper2, (python::arg("atom"), python::arg("molgraph")));
+	python::def("getVSEPRCoordinationGeometry", &getVSEPRCoordinationGeometryWrapper2, (python::arg("atom"), python::arg("molgraph")));
 
 	python::def("getExplicitBondCount", &getExplicitBondCountWrapper3,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order")));
@@ -217,7 +223,9 @@ void CDPLPythonMolProp::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
-
+	python::def("getVSEPRCoordinationGeometry", &getVSEPRCoordinationGeometryWrapper3,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("steric_num")));
+	
 	python::def("getRotatableBondCount", &getRotatableBondCountWrapper4, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 	python::def("isCarbonylLikeAtom", &isCarbonylLikeAtomWrapper4, 
@@ -237,5 +245,6 @@ void CDPLPythonMolProp::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
 	
 	EXPORT_ATOM_FUNCS(PEOECharge, charge)
+	EXPORT_ATOM_FUNCS(PEOEElectronegativity, e_neg)
 	EXPORT_ATOM_FUNCS(Hydrophobicity, hyd)
 }

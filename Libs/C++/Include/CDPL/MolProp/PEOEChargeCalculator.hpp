@@ -140,30 +140,30 @@ namespace CDPL
 			class PEOEAtomState
 		    {
 
-			  public:
-				typedef boost::shared_ptr<PEOEAtomState> SharedPointer;
+			public:
+			  typedef boost::shared_ptr<PEOEAtomState> SharedPointer;
 
-				PEOEAtomState();
-				PEOEAtomState(const Chem::Atom&, const Chem::MolecularGraph&);
+			  PEOEAtomState();
+			  PEOEAtomState(const Chem::Atom&, const Chem::MolecularGraph&);
 
-				void linkTo(PEOEAtomState*);
+			  void linkTo(PEOEAtomState*);
 
-				double getCharge() const;
-				double getElectronegativity() const;
+			  double getCharge() const;
+			  double getElectronegativity() const;
 
-				void shiftCharges(double);
-				void updateElectronegativity();
+			  void shiftCharges(double);
+			  void updateElectronegativity();
 
-					private:
-				typedef std::vector<PEOEAtomState*> PEOEAtomStateList;
+			 private:
+			  typedef std::vector<PEOEAtomState*> PEOEAtomStateList;
 
-				PEOEAtomStateList  nbrAtomStates;
-				double             a;
-				double             b;
-				double             c;
-				double             enegativity;
-				double             enegativityP1;
-				double             charge;
+			  PEOEAtomStateList  nbrAtomStates;
+			  double             a;
+			  double             b;
+			  double             c;
+			  double             enegativity;
+			  double             enegativityP1;
+			  double             charge;
 			};
 
 			typedef std::vector<PEOEAtomState::SharedPointer> PEOEAtomStateList;

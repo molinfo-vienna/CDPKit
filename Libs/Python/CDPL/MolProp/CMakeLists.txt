@@ -34,7 +34,8 @@ ENDFOREACH(PYTHON_FILE)
 SET(molprop_MOD_SRCS
     Module.cpp
 
-    AtomPropertyExport.cpp 
+    AtomPropertyExport.cpp
+    CoordinationGeometryExport.cpp 
 
     MolecularGraphFunctionExport.cpp
     AtomContainerFunctionExport.cpp

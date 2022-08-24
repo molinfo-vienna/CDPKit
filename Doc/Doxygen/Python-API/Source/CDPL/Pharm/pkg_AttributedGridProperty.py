@@ -27,9 +27,9 @@ class AttributedGridProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    FEATURE_TYPE = CDPL.Base.LookupKey(id=315, name='FEATURE_TYPE')
+    FEATURE_TYPE = CDPL.Base.LookupKey(id=316, name='FEATURE_TYPE')
 
     ##
     # \brief 
     #
-    TARGET_FEATURE_TYPE = CDPL.Base.LookupKey(id=316, name='TARGET_FEATURE_TYPE')
+    TARGET_FEATURE_TYPE = CDPL.Base.LookupKey(id=317, name='TARGET_FEATURE_TYPE')

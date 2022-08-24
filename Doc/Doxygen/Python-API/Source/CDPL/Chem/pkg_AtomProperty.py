@@ -112,99 +112,89 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    HYDROPHOBICITY = CDPL.Base.LookupKey(id=22, name='HYDROPHOBICITY')
+    STEREO_DESCRIPTOR = CDPL.Base.LookupKey(id=22, name='STEREO_DESCRIPTOR')
 
     ##
     # \brief 
     #
-    STEREO_DESCRIPTOR = CDPL.Base.LookupKey(id=23, name='STEREO_DESCRIPTOR')
+    STEREO_CENTER_FLAG = CDPL.Base.LookupKey(id=23, name='STEREO_CENTER_FLAG')
 
     ##
     # \brief 
     #
-    STEREO_CENTER_FLAG = CDPL.Base.LookupKey(id=24, name='STEREO_CENTER_FLAG')
+    CIP_CONFIGURATION = CDPL.Base.LookupKey(id=24, name='CIP_CONFIGURATION')
 
     ##
     # \brief 
     #
-    CIP_CONFIGURATION = CDPL.Base.LookupKey(id=25, name='CIP_CONFIGURATION')
+    MDL_PARITY = CDPL.Base.LookupKey(id=25, name='MDL_PARITY')
 
     ##
     # \brief 
     #
-    MDL_PARITY = CDPL.Base.LookupKey(id=26, name='MDL_PARITY')
+    MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey(id=26, name='MDL_DB_STEREO_CARE_FLAG')
 
     ##
     # \brief 
     #
-    MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey(id=27, name='MDL_DB_STEREO_CARE_FLAG')
+    SYBYL_TYPE = CDPL.Base.LookupKey(id=27, name='SYBYL_TYPE')
 
     ##
     # \brief 
     #
-    SYBYL_TYPE = CDPL.Base.LookupKey(id=28, name='SYBYL_TYPE')
+    MOL2_NAME = CDPL.Base.LookupKey(id=29, name='MOL2_NAME')
 
     ##
     # \brief 
     #
-    MOL2_NAME = CDPL.Base.LookupKey(id=30, name='MOL2_NAME')
+    MOL2_CHARGE = CDPL.Base.LookupKey(id=28, name='MOL2_CHARGE')
 
     ##
     # \brief 
     #
-    MOL2_CHARGE = CDPL.Base.LookupKey(id=29, name='MOL2_CHARGE')
+    MOL2_SUBSTRUCTURE_ID = CDPL.Base.LookupKey(id=30, name='MOL2_SUBSTRUCTURE_ID')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_ID = CDPL.Base.LookupKey(id=31, name='MOL2_SUBSTRUCTURE_ID')
+    MOL2_SUBSTRUCTURE_NAME = CDPL.Base.LookupKey(id=31, name='MOL2_SUBSTRUCTURE_NAME')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_NAME = CDPL.Base.LookupKey(id=32, name='MOL2_SUBSTRUCTURE_NAME')
+    MOL2_SUBSTRUCTURE_SUBTYPE = CDPL.Base.LookupKey(id=32, name='MOL2_SUBSTRUCTURE_SUBTYPE')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_SUBTYPE = CDPL.Base.LookupKey(id=33, name='MOL2_SUBSTRUCTURE_SUBTYPE')
+    MOL2_SUBSTRUCTURE_CHAIN = CDPL.Base.LookupKey(id=33, name='MOL2_SUBSTRUCTURE_CHAIN')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_CHAIN = CDPL.Base.LookupKey(id=34, name='MOL2_SUBSTRUCTURE_CHAIN')
+    REACTION_CENTER_STATUS = CDPL.Base.LookupKey(id=34, name='REACTION_CENTER_STATUS')
 
     ##
     # \brief 
     #
-    PEOE_CHARGE = CDPL.Base.LookupKey(id=35, name='PEOE_CHARGE')
+    ATOM_MAPPING_ID = CDPL.Base.LookupKey(id=35, name='ATOM_MAPPING_ID')
 
     ##
     # \brief 
     #
-    REACTION_CENTER_STATUS = CDPL.Base.LookupKey(id=36, name='REACTION_CENTER_STATUS')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=36, name='MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    ATOM_MAPPING_ID = CDPL.Base.LookupKey(id=37, name='ATOM_MAPPING_ID')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=37, name='MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=38, name='MATCH_CONSTRAINTS')
+    MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey(id=38, name='MATCH_EXPRESSION_STRING')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=39, name='MATCH_EXPRESSION')
-
-    ##
-    # \brief 
-    #
-    MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey(id=40, name='MATCH_EXPRESSION_STRING')
-
-    ##
-    # \brief 
-    #
-    COMPONENT_GROUP_ID = CDPL.Base.LookupKey(id=41, name='COMPONENT_GROUP_ID')
+    COMPONENT_GROUP_ID = CDPL.Base.LookupKey(id=39, name='COMPONENT_GROUP_ID')

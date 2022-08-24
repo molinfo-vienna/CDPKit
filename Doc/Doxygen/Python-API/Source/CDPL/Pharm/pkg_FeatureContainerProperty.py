@@ -27,4 +27,4 @@ class FeatureContainerProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    NAME = CDPL.Base.LookupKey(id=304, name='NAME')
+    NAME = CDPL.Base.LookupKey(id=305, name='NAME')
