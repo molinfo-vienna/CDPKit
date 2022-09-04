@@ -85,6 +85,7 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction2Export<boost::function2<Base::uint64, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<std::size_t, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("SizeTypeAtomMolecularGraphFunctor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const MolecularGraph&, const AtomBondMapping&> >("BoolMolecularGraphAtomBondMappingFunctor");
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Util::LArray&, const Util::STArray&> >("BoolLArraySTArrayFunctor");
 
 	CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Math::Vector3D&, const Math::Vector3D&, const Atom&>,
 										 const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");

@@ -216,8 +216,7 @@ bool Chem::TautomerGenerator::init(const MolecularGraph& molgraph)
 
 	MoleculePtr mol = copyInputMolGraph(molgraph);
 
-	if (!addNewTautomer(mol))
-		return false;
+	addNewTautomer(mol);
 
 	return callbackFunc(*mol);
 }

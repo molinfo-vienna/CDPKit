@@ -81,7 +81,7 @@ namespace CDPL
 
 				Entry(unsigned int atom_type, std::size_t iso, const std::string& sym,
 					  const std::string& name, std::size_t most_abdt_iso, double avg_weight,
-					  std::size_t iupac_grp, bool metal, bool non_metal, const Util::STArray& val_states,
+					  std::size_t iupac_grp, std::size_t period, bool metal, bool non_metal, const Util::STArray& val_states,
 					  double vdw_rad, const double cov_radii[3], double ar_eneg, const IsotopeMassMap& iso_masses);
 
 				unsigned int getType() const;
@@ -97,6 +97,8 @@ namespace CDPL
 				double getAverageWeight() const;
 
 				std::size_t getIUPACGroup() const;
+
+				std::size_t getPeriod() const;
 
 				bool isMetal() const;
 
@@ -120,6 +122,7 @@ namespace CDPL
 				std::size_t        mostAbundantIso;
 				double             avgWeight;
 				std::size_t        iupacGroup;
+				std::size_t        period;
 				bool               isMet;
 				bool               isNonMet;
 				Util::STArray      valenceStates;
@@ -204,6 +207,14 @@ namespace CDPL
 			 *         does not specify a supported chemical element.
 			 */
 			static std::size_t getIUPACGroup(unsigned int type);
+
+			/**
+			 * \brief Returns the period number of the chemical element specified by \a type.
+			 * \param type The atom type specifying the chemical element.
+			 * \return The period of the element, or \e 0 if \a type
+			 *         does not specify a supported chemical element.
+			 */
+			static std::size_t getPeriod(unsigned int type);
 
 			/**
 			 * \brief Returns the number of valence electrons of the chemical element specified by \a type.

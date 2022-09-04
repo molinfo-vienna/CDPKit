@@ -89,6 +89,8 @@ namespace CDPL
 
 		CDPL_MOLPROP_API std::size_t getIUPACGroup(const Chem::Atom& atom);
 
+		CDPL_MOLPROP_API std::size_t getPeriod(const Chem::Atom& atom);
+
 		CDPL_MOLPROP_API double getVdWRadius(const Chem::Atom& atom);
 
 		CDPL_MOLPROP_API double getCovalentRadius(const Chem::Atom& atom, std::size_t order);

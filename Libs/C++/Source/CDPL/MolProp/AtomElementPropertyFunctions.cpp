@@ -45,6 +45,11 @@ std::size_t MolProp::getIUPACGroup(const Chem::Atom& atom)
     return Chem::AtomDictionary::getIUPACGroup(getType(atom));
 }
 
+std::size_t MolProp::getPeriod(const Chem::Atom& atom)
+{
+    return Chem::AtomDictionary::getPeriod(getType(atom));
+}
+
 double MolProp::getVdWRadius(const Chem::Atom& atom)
 {
     return Internal::getVdWRadius(atom);

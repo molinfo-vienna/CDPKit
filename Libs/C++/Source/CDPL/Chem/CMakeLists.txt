@@ -128,7 +128,8 @@ SET(cdpl-chem_LIB_SRCS
     SulfenicAcidTautomerization.cpp  
     GenericHydrogen13ShiftTautomerization.cpp  
     GenericHydrogen15ShiftTautomerization.cpp  
-
+    ResonanceStructureGenerator.cpp
+    
     FragmentGenerator.cpp
     RECAPFragmentGenerator.cpp
     BRICSFragmentGenerator.cpp

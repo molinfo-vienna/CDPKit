@@ -624,6 +624,11 @@ namespace CDPL
 		typedef Array<std::size_t> STArray;
 
 		/**
+		 * \brief An array of unsigned integers of type <tt>long</tt>.
+		 */
+		typedef Array<long> LArray;
+
+		/**
 		 * \brief A pair of unsigned integers of type <tt>std::size_t</tt>.
 		 */
 		typedef std::pair<std::size_t, std::size_t> STPair;

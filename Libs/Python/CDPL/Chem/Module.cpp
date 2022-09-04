@@ -141,7 +141,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportFragmentGenerator();
 	exportRECAPFragmentGenerator();
 	exportBRICSFragmentGenerator();
-
+	exportResonanceStructureGenerator();
+	
 	exportMoleculeReader();
 	exportMoleculeWriter();
 	exportMolecularGraphReader();

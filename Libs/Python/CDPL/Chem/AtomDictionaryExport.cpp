@@ -40,7 +40,7 @@ namespace
 
 	CDPL::Chem::AtomDictionary::Entry* makeEntry(unsigned int atom_type, std::size_t iso, const std::string& sym,
 												 const std::string& name, std::size_t most_abdt_iso, double avg_weight,
-												 std::size_t iupac_grp, bool metal, bool non_metal, boost::python::object val_states,
+												 std::size_t iupac_grp, std::size_t period, bool metal, bool non_metal, boost::python::object val_states,
 												 double vdw_rad, boost::python::object cov_radii, double ar_eneg, boost::python::object iso_masses)
 	{
 		using namespace boost;
@@ -78,7 +78,7 @@ namespace
 			}
 		}
 
-		return new AtomDictionary::Entry(atom_type, iso, sym, name, most_abdt_iso, avg_weight, iupac_grp, metal, non_metal, val_state_array,
+		return new AtomDictionary::Entry(atom_type, iso, sym, name, most_abdt_iso, avg_weight, iupac_grp, period, metal, non_metal, val_state_array,
 										 vdw_rad, cov_rad_array, ar_eneg, iso_mass_map);
 	}
 
@@ -148,6 +148,8 @@ void CDPLPythonChem::exportAtomDictionary()
 		.staticmethod("getMostAbundantIsotope")
 		.def("getIUPACGroup", &Chem::AtomDictionary::getIUPACGroup, python::arg("type"))
 		.staticmethod("getIUPACGroup")
+		.def("getPeriod", &Chem::AtomDictionary::getPeriod, python::arg("type"))
+		.staticmethod("getPeriod")
 		.def("getNumValenceElectrons", &Chem::AtomDictionary::getNumValenceElectrons, python::arg("type"))
 		.staticmethod("getNumValenceElectrons")
 		.def("getAtomicWeight", &Chem::AtomDictionary::getAtomicWeight, (python::arg("type"), python::arg("isotope") = 0))
@@ -184,7 +186,7 @@ void CDPLPythonChem::exportAtomDictionary()
 		.def("__init__", python::make_constructor(&makeEntry, python::default_call_policies(),
 												  (python::arg("atom_type"), python::arg("iso"), python::arg("sym"),
 												   python::arg("name"), python::arg("most_abdt_iso"), python::arg("avg_weight"),
-												   python::arg("iupac_grp"), python::arg("metal"), python::arg("non_metal"), python::arg("val_states"),
+												   python::arg("iupac_grp"), python::arg("period"), python::arg("metal"), python::arg("non_metal"), python::arg("val_states"),
 												   python::arg("vdw_rad"), python::arg("cov_radii"), python::arg("ar_eneg"), python::arg("iso_masses"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomDictionary::Entry>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomDictionary::Entry::operator=),
@@ -198,6 +200,7 @@ void CDPLPythonChem::exportAtomDictionary()
 		.def("getMostAbundantIsotope", &Chem::AtomDictionary::Entry::getMostAbundantIsotope, python::arg("self"))
 		.def("getAverageWeight", &Chem::AtomDictionary::Entry::getAverageWeight, python::arg("self"))
 		.def("getIUPACGroup", &Chem::AtomDictionary::Entry::getIUPACGroup, python::arg("self"))
+		.def("getPeriod", &Chem::AtomDictionary::Entry::getPeriod, python::arg("self"))
 		.def("isMetal", &Chem::AtomDictionary::Entry::isMetal, python::arg("self"))
 		.def("isNonMetal", &Chem::AtomDictionary::Entry::isNonMetal, python::arg("self"))
 		.def("getValenceStates", &Chem::AtomDictionary::Entry::getValenceStates, python::arg("self"),
@@ -215,6 +218,7 @@ void CDPLPythonChem::exportAtomDictionary()
 		.add_property("mostAbundantIsotope", &Chem::AtomDictionary::Entry::getMostAbundantIsotope)
 		.add_property("averageWeight", &Chem::AtomDictionary::Entry::getAverageWeight)
 		.add_property("IUPACGroup", &Chem::AtomDictionary::Entry::getIUPACGroup)
+		.add_property("period", &Chem::AtomDictionary::Entry::getPeriod)
 		.add_property("metal", &Chem::AtomDictionary::Entry::isMetal)
 		.add_property("nonMetal", &Chem::AtomDictionary::Entry::isNonMetal)
 		.add_property("valenceStates", python::make_function(&Chem::AtomDictionary::Entry::getValenceStates,

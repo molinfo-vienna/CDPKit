@@ -88,6 +88,7 @@ namespace
 	
 	MAKE_FUNCTION_WRAPPER1(double, getAtomicWeight, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getIUPACGroup, CDPL::Chem::Atom&);
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getPeriod, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(double, getVdWRadius, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(double, getAllredRochowElectronegativity, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(const std::string&, getElementName, CDPL::Chem::Atom&);
@@ -161,6 +162,7 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	
 	python::def("getAtomicWeight", &getAtomicWeightWrapper1, python::arg("atom"));
 	python::def("getIUPACGroup", &getIUPACGroupWrapper1, python::arg("atom"));
+	python::def("getPeriod", &getPeriodWrapper1, python::arg("atom"));
 	python::def("getVdWRadius", &getVdWRadiusWrapper1, python::arg("atom"));
 	python::def("getAllredRochowElectronegativity", &getAllredRochowElectronegativityWrapper1, python::arg("atom"));
 	python::def("getElementName", &getElementNameWrapper1, python::arg("atom"),

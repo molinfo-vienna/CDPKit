@@ -61,6 +61,19 @@ void CDPLPythonUtil::exportArrays()
 		.def("__lt__", &Util::UIArray::operator<, (python::arg("self"), python::arg("array")))
 		.def("__gt__", &Util::UIArray::operator>, (python::arg("self"), python::arg("array")));
 
+	python::class_<Util::LArray, Util::LArray::SharedPointer>("LArray", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Util::LArray&>((python::arg("self"), python::arg("array"))))
+		.def(ArrayVisitor<Util::LArray, 
+			 python::return_value_policy<python::return_by_value>, python::default_call_policies,
+			 python::default_call_policies, python::default_call_policies>())
+		.def("__eq__", &Util::LArray::operator==, (python::arg("self"), python::arg("array")))
+		.def("__ne__", &Util::LArray::operator!=, (python::arg("self"), python::arg("array")))
+		.def("__le__", &Util::LArray::operator<=, (python::arg("self"), python::arg("array")))
+		.def("__ge__", &Util::LArray::operator>=, (python::arg("self"), python::arg("array")))
+		.def("__lt__", &Util::LArray::operator<, (python::arg("self"), python::arg("array")))
+		.def("__gt__", &Util::LArray::operator>, (python::arg("self"), python::arg("array")));
+
 	python::class_<Util::STArray, Util::STArray::SharedPointer>("STArray", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Util::STArray&>((python::arg("self"), python::arg("array"))))
