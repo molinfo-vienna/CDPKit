@@ -81,6 +81,42 @@ namespace CDPL
 			void setCallbackFunction(const CallbackFunction& func);
 
 			const CallbackFunction& getCallbackFunction() const;
+
+			void setMaxNonCarbonCharge(long max_charge);
+
+			long getMaxNonCarbonCharge() const;
+
+			void setMaxCarbonCharge(long max_charge);
+
+			long getMaxCarbonCharge() const;
+
+			void setMinNonCarbonCharge(long min_charge);
+
+			long getMinNonCarbonCharge() const;
+
+			void setMinCarbonCharge(long min_charge);
+
+			long getMinCarbonCharge() const;
+
+			void allowRepulsive12Charges(bool allow);
+
+			bool repulsive12ChargesAllowed() const;
+
+			void allowCarbonCarbonBond12Charges(bool allow);
+
+			bool carbonCarbonBond12ChargesAllowed() const;
+
+			void setMaxChargedAtomCount(std::size_t max_count);
+
+			std::size_t getMaxChargedAtomCount() const;
+
+			void setMaxChargedCarbonCount(std::size_t max_count);
+
+			std::size_t getMaxChargedCarbonCount() const;
+
+			void setMaxChargedNonCarbonCount(std::size_t max_count);
+
+			std::size_t getMaxChargedNonCarbonCount() const;
 			
 			/**
 			 * \brief Generates all unique resonanceStructures of the molecular graph \a molgraph.
@@ -119,6 +155,8 @@ namespace CDPL
 				double getElectronegativity() const;
 
 				bool checkValenceState(const ResStructData& res_struct, long val_diff, long charge_diff) const;
+
+				bool isCarbon() const;
 				
 			  private:
 				typedef std::vector<std::size_t> IndexArray;
@@ -161,6 +199,15 @@ namespace CDPL
 			ResStructDataCache    resStructDataCache;
 			const MolecularGraph* molGraph;
 			CallbackFunction      callbackFunc;
+			long                  minNonCCharge;
+			long                  maxNonCCharge;
+			long                  minCCharge;
+			long                  maxCCharge;
+			bool                  rep12Charges;
+			bool                  cc12Charges;
+			std::size_t           maxChgdAtomCount;
+			std::size_t           maxChgdNonCCount;
+			std::size_t           maxChgdCCount;
 			AtomDataArray         atomData;
 			ResBondList           resBonds;
 			HashCodeSet           resStructHashCodes;

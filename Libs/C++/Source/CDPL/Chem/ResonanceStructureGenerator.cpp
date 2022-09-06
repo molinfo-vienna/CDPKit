@@ -26,7 +26,7 @@
  
 #include "StaticInit.hpp"
 
-#include <cstdlib>
+#include <limits>
 
 #include "CDPL/Chem/ResonanceStructureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -50,12 +50,19 @@ using namespace CDPL;
 
 
 Chem::ResonanceStructureGenerator::ResonanceStructureGenerator():
-	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE)
+	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE), minNonCCharge(-1),
+	maxNonCCharge(1), minCCharge(-1), maxCCharge(1), rep12Charges(false),
+	cc12Charges(false), maxChgdAtomCount(std::numeric_limits<std::size_t>::max()),
+	maxChgdNonCCount(std::numeric_limits<std::size_t>::max()),
+	maxChgdCCount(std::numeric_limits<std::size_t>::max())
 {}
 
 Chem::ResonanceStructureGenerator::ResonanceStructureGenerator(const ResonanceStructureGenerator& gen):
 	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE),
-	callbackFunc(gen.callbackFunc)
+	callbackFunc(gen.callbackFunc), minNonCCharge(gen.minNonCCharge),
+	maxNonCCharge(gen.maxNonCCharge), minCCharge(gen.minCCharge), maxCCharge(gen.maxCCharge),
+	rep12Charges(gen.rep12Charges),	cc12Charges(gen.cc12Charges), maxChgdAtomCount(gen.maxChgdAtomCount),
+	maxChgdNonCCount(gen.maxChgdNonCCount),	maxChgdCCount(gen.maxChgdCCount)
 {}
 
 Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(const ResonanceStructureGenerator& gen) 
@@ -64,6 +71,15 @@ Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(
 		return *this;
 
 	callbackFunc = gen.callbackFunc;
+	minNonCCharge = gen.minNonCCharge;
+	maxNonCCharge = gen.maxNonCCharge;
+	minCCharge = gen.minCCharge;
+	maxCCharge = gen.maxCCharge;
+	rep12Charges = gen.rep12Charges;
+	cc12Charges = gen.cc12Charges;
+	maxChgdAtomCount = gen.maxChgdAtomCount;
+	maxChgdNonCCount = gen.maxChgdNonCCount;
+	maxChgdCCount = gen.maxChgdCCount;
 
 	return *this;
 }
@@ -78,6 +94,96 @@ const Chem::ResonanceStructureGenerator::CallbackFunction& Chem::ResonanceStruct
     return callbackFunc;
 }
 
+void Chem::ResonanceStructureGenerator::setMaxNonCarbonCharge(long max_charge)
+{
+	maxNonCCharge = max_charge;
+}
+
+long Chem::ResonanceStructureGenerator::getMaxNonCarbonCharge() const
+{
+	return maxNonCCharge;
+}
+
+void Chem::ResonanceStructureGenerator::setMaxCarbonCharge(long max_charge)
+{
+	maxCCharge = max_charge;
+}
+
+long Chem::ResonanceStructureGenerator::getMaxCarbonCharge() const
+{
+	return maxCCharge;
+}
+
+void Chem::ResonanceStructureGenerator::setMinNonCarbonCharge(long min_charge)
+{
+	minNonCCharge = min_charge;
+}
+
+long Chem::ResonanceStructureGenerator::getMinNonCarbonCharge() const
+{
+	return minNonCCharge;
+}
+
+void Chem::ResonanceStructureGenerator::setMinCarbonCharge(long min_charge)
+{
+	minCCharge = min_charge;
+}
+
+long Chem::ResonanceStructureGenerator::getMinCarbonCharge() const
+{
+	return minCCharge;
+}
+
+void Chem::ResonanceStructureGenerator::allowRepulsive12Charges(bool allow)
+{
+	rep12Charges = allow;
+}
+
+bool Chem::ResonanceStructureGenerator::repulsive12ChargesAllowed() const
+{
+	return rep12Charges;
+}
+
+void Chem::ResonanceStructureGenerator::allowCarbonCarbonBond12Charges(bool allow)
+{
+	cc12Charges = allow;
+}
+
+bool Chem::ResonanceStructureGenerator::carbonCarbonBond12ChargesAllowed() const
+{
+	return cc12Charges;
+}
+
+void Chem::ResonanceStructureGenerator::setMaxChargedAtomCount(std::size_t max_count)
+{
+	maxChgdAtomCount = max_count;
+}
+
+std::size_t Chem::ResonanceStructureGenerator::getMaxChargedAtomCount() const
+{
+	return maxChgdAtomCount;
+}
+
+void Chem::ResonanceStructureGenerator::setMaxChargedCarbonCount(std::size_t max_count)
+{
+	maxChgdCCount = max_count;
+}
+
+std::size_t Chem::ResonanceStructureGenerator::getMaxChargedCarbonCount() const
+{
+	return maxChgdCCount;
+}
+
+void Chem::ResonanceStructureGenerator::setMaxChargedNonCarbonCount(std::size_t max_count)
+{
+	maxChgdNonCCount = max_count;
+}
+
+std::size_t Chem::ResonanceStructureGenerator::getMaxChargedNonCarbonCount() const
+{
+	return maxChgdNonCCount;
+}
+			
 void Chem::ResonanceStructureGenerator::generate(const MolecularGraph& molgraph)
 {
 	if (!callbackFunc)
@@ -267,22 +373,48 @@ bool Chem::ResonanceStructureGenerator::validateOutputResStruct(const ResStructD
 	for (ResBondList::const_iterator it = resBonds.begin(), end = resBonds.end(); it != end; ++it) {
 		const ResBond& res_bond = *it;
 		long atom1_chg = res_struct.atomCharges[res_bond.atom1Index];
-
-		if (std::abs(atom1_chg) > 1)
-			return false;
-		
 		long atom2_chg = res_struct.atomCharges[res_bond.atom2Index];
 
-		if (std::abs(atom2_chg) > 1)
+		if (!rep12Charges && ((atom1_chg < 0 && atom2_chg < 0) || (atom1_chg > 0 && atom2_chg > 0)))
 			return false;
 
-		if (atom1_chg < 0 && atom2_chg < 0)
-			return false;
-
-		if (atom1_chg > 0 && atom2_chg > 0)
+		if (!cc12Charges && atom1_chg != 0 && atom2_chg != 0 &&
+			atomData[res_bond.atom1Index].isCarbon() && atomData[res_bond.atom2Index].isCarbon())
 			return false;
 	}
 
+	std::size_t chgd_atom_count = 0;
+	std::size_t chgd_c_count = 0;
+	std::size_t chgd_non_c_count = 0;
+	
+	for (std::size_t i = 0, num_atoms = atomData.size(); i < num_atoms; i++) {
+		long charge = res_struct.atomCharges[i];
+		bool is_carbon = atomData[i].isCarbon();
+		
+		if (charge != 0) {
+			if (++chgd_atom_count > maxChgdAtomCount)
+				return false;
+			
+			if (is_carbon) {
+				if (++chgd_c_count > maxChgdCCount)
+					return false;
+				
+			} else {
+				if (++chgd_non_c_count > maxChgdNonCCount)
+					return false;
+			}
+		}
+
+		if (is_carbon) {
+			if (charge < minCCharge || charge > maxCCharge)
+				return false;
+			
+		} else {
+			if (charge < minNonCCharge || charge > maxNonCCharge)
+				return false;
+		}
+	}
+	
 	return true;
 }
 
@@ -398,4 +530,9 @@ bool Chem::ResonanceStructureGenerator::AtomData::checkValenceState(const ResStr
 	}
 	
 	return (val <= elec_cnt);
+}
+
+bool Chem::ResonanceStructureGenerator::AtomData::isCarbon() const
+{
+	return (atomType == AtomType::C);
 }
