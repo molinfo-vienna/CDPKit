@@ -39,8 +39,25 @@ void CDPLPythonChem::exportResonanceStructureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::ResonanceStructureGenerator, Chem::ResonanceStructureGenerator::SharedPointer,
-				   boost::noncopyable>("ResonanceStructureGenerator", python::no_init)
+    python::class_<Chem::ResonanceStructureGenerator, Chem::ResonanceStructureGenerator::SharedPointer> cl("ResonanceStructureGenerator", python::no_init);
+
+	python::scope scope = cl;
+
+	python::class_<Chem::ResonanceStructureGenerator::StructureData>("StructureData", python::no_init)
+		.def(python::init<Chem::ResonanceStructureGenerator::StructureData>((python::arg("self"), python::arg("data"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ResonanceStructureGenerator::StructureData>())	
+		.def("assign", &Chem::ResonanceStructureGenerator::operator=, 
+			 (python::arg("self"), python::arg("data")), python::return_self<>())
+		.def("getAtomCharges", &Chem::ResonanceStructureGenerator::StructureData::getAtomCharges, python::arg("self"), 
+			 python::return_internal_reference<>())
+		.def("getBondOrders", &Chem::ResonanceStructureGenerator::StructureData::getBondOrders, python::arg("self"), 
+			 python::return_internal_reference<>())
+		.add_property("atomCharges", python::make_function(&Chem::ResonanceStructureGenerator::StructureData::getAtomCharges,
+														   python::return_internal_reference<>()))
+		.add_property("bondOrders", python::make_function(&Chem::ResonanceStructureGenerator::StructureData::getBondOrders,
+														  python::return_internal_reference<>()));
+
+	cl
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<Chem::ResonanceStructureGenerator>((python::arg("self"), python::arg("gen"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ResonanceStructureGenerator>())	
@@ -48,66 +65,11 @@ void CDPLPythonChem::exportResonanceStructureGenerator()
 			 (python::arg("self"), python::arg("molgraph")))
 		.def("assign", &Chem::ResonanceStructureGenerator::operator=, 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("setCallbackFunction", &Chem::ResonanceStructureGenerator::setCallbackFunction, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getCallbackFunction", &Chem::ResonanceStructureGenerator::getCallbackFunction, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setMaxNonCarbonCharge", &Chem::ResonanceStructureGenerator::setMaxNonCarbonCharge, 
-			 (python::arg("self"), python::arg("max_charge")))
-		.def("getMaxNonCarbonCharge", &Chem::ResonanceStructureGenerator::getMaxNonCarbonCharge, 
-			 python::arg("self"))
-		.def("setMaxCarbonCharge", &Chem::ResonanceStructureGenerator::setMaxCarbonCharge, 
-			 (python::arg("self"), python::arg("max_charge")))
-		.def("getMaxCarbonCharge", &Chem::ResonanceStructureGenerator::getMaxCarbonCharge, 
-			 python::arg("self"))
-		.def("setMinNonCarbonCharge", &Chem::ResonanceStructureGenerator::setMinNonCarbonCharge, 
-			 (python::arg("self"), python::arg("min_charge")))
-		.def("getMinNonCarbonCharge", &Chem::ResonanceStructureGenerator::getMinNonCarbonCharge, 
-			 python::arg("self"))
-		.def("setMinCarbonCharge", &Chem::ResonanceStructureGenerator::setMinCarbonCharge, 
-			 (python::arg("self"), python::arg("min_charge")))
-		.def("getMinCarbonCharge", &Chem::ResonanceStructureGenerator::getMinCarbonCharge, 
-			 python::arg("self"))
-		.def("setMaxChargedAtomCount", &Chem::ResonanceStructureGenerator::setMaxChargedAtomCount, 
-			 (python::arg("self"), python::arg("max_count")))
-		.def("getMaxChargedAtomCount", &Chem::ResonanceStructureGenerator::getMaxChargedAtomCount, 
-			 python::arg("self"))
-		.def("setMaxChargedCarbonCount", &Chem::ResonanceStructureGenerator::setMaxChargedCarbonCount, 
-			 (python::arg("self"), python::arg("max_count")))
-		.def("getMaxChargedCarbonCount", &Chem::ResonanceStructureGenerator::getMaxChargedCarbonCount, 
-			 python::arg("self"))
-		.def("setMaxChargedNonCarbonCount", &Chem::ResonanceStructureGenerator::setMaxChargedNonCarbonCount, 
-			 (python::arg("self"), python::arg("max_count")))
-		.def("getMaxChargedNonCarbonCount", &Chem::ResonanceStructureGenerator::getMaxChargedNonCarbonCount, 
-			 python::arg("self"))
-		.def("allowRepulsive12Charges", &Chem::ResonanceStructureGenerator::allowRepulsive12Charges, 
-			 (python::arg("self"), python::arg("allow")))
-		.def("repulsive12ChargesAllowed", &Chem::ResonanceStructureGenerator::repulsive12ChargesAllowed, 
-			 python::arg("self"))
-		.def("allowCarbonCarbonBond12Charges", &Chem::ResonanceStructureGenerator::allowCarbonCarbonBond12Charges, 
-			 (python::arg("self"), python::arg("allow")))
-		.def("carbonCarbonBond12ChargesAllowed", &Chem::ResonanceStructureGenerator::carbonCarbonBond12ChargesAllowed, 
-			 python::arg("self"))
-		.add_property("callbackFunction",
-					  python::make_function(&Chem::ResonanceStructureGenerator::getCallbackFunction, python::return_internal_reference<>()),
-					  &Chem::ResonanceStructureGenerator::setCallbackFunction)
-		.add_property("maxNonCarbonCharge", &Chem::ResonanceStructureGenerator::getMaxNonCarbonCharge,
-					  &Chem::ResonanceStructureGenerator::setMaxNonCarbonCharge)
-		.add_property("minNonCarbonCharge", &Chem::ResonanceStructureGenerator::getMinNonCarbonCharge,
-					  &Chem::ResonanceStructureGenerator::setMinNonCarbonCharge)
-		.add_property("maxCarbonCharge", &Chem::ResonanceStructureGenerator::getMaxCarbonCharge,
-					  &Chem::ResonanceStructureGenerator::setMaxCarbonCharge)
-		.add_property("minCarbonCharge", &Chem::ResonanceStructureGenerator::getMinCarbonCharge,
-					  &Chem::ResonanceStructureGenerator::setMinCarbonCharge)
-		.add_property("maxChargedAtomCount", &Chem::ResonanceStructureGenerator::getMaxChargedAtomCount,
-					  &Chem::ResonanceStructureGenerator::setMaxChargedAtomCount)
-		.add_property("maxChargedNonCarbonCount", &Chem::ResonanceStructureGenerator::getMaxChargedNonCarbonCount,
-					  &Chem::ResonanceStructureGenerator::setMaxChargedNonCarbonCount)
-		.add_property("maxChargedCarbonCount", &Chem::ResonanceStructureGenerator::getMaxChargedCarbonCount,
-					  &Chem::ResonanceStructureGenerator::setMaxChargedCarbonCount)
-		.add_property("repulsive12Charges", &Chem::ResonanceStructureGenerator::repulsive12ChargesAllowed,
-					  &Chem::ResonanceStructureGenerator::allowRepulsive12Charges)
-		.add_property("carbonCarbonBond12Charges", &Chem::ResonanceStructureGenerator::carbonCarbonBond12ChargesAllowed,
-					  &Chem::ResonanceStructureGenerator::allowCarbonCarbonBond12Charges)
-		;
+		.def("getNumStructures", &Chem::ResonanceStructureGenerator::getNumStructures, python::arg("self"))
+		.def("getStructureData", &Chem::ResonanceStructureGenerator::getStructureData, 
+			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
+		.def("__getitem__", &Chem::ResonanceStructureGenerator::getStructureData, (python::arg("self"), python::arg("idx")), 
+			 python::return_internal_reference<1>())
+		.def("__len__", &Chem::ResonanceStructureGenerator::getNumStructures, python::arg("self"))
+		.add_property("numStructures", &Chem::ResonanceStructureGenerator::getNumStructures);
 }

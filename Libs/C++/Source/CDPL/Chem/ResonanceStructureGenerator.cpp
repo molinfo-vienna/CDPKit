@@ -26,7 +26,9 @@
  
 #include "StaticInit.hpp"
 
-#include <limits>
+#include <iterator>
+
+#include <boost/bind.hpp>
 
 #include "CDPL/Chem/ResonanceStructureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -36,7 +38,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Internal/SHA1.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 namespace
@@ -50,19 +52,11 @@ using namespace CDPL;
 
 
 Chem::ResonanceStructureGenerator::ResonanceStructureGenerator():
-	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE), minNonCCharge(-1),
-	maxNonCCharge(1), minCCharge(-1), maxCCharge(1), rep12Charges(false),
-	cc12Charges(false), maxChgdAtomCount(std::numeric_limits<std::size_t>::max()),
-	maxChgdNonCCount(std::numeric_limits<std::size_t>::max()),
-	maxChgdCCount(std::numeric_limits<std::size_t>::max())
+	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE)
 {}
 
 Chem::ResonanceStructureGenerator::ResonanceStructureGenerator(const ResonanceStructureGenerator& gen):
-	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE),
-	callbackFunc(gen.callbackFunc), minNonCCharge(gen.minNonCCharge),
-	maxNonCCharge(gen.maxNonCCharge), minCCharge(gen.minCCharge), maxCCharge(gen.maxCCharge),
-	rep12Charges(gen.rep12Charges),	cc12Charges(gen.cc12Charges), maxChgdAtomCount(gen.maxChgdAtomCount),
-	maxChgdNonCCount(gen.maxChgdNonCCount),	maxChgdCCount(gen.maxChgdCCount)
+	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE)
 {}
 
 Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(const ResonanceStructureGenerator& gen) 
@@ -70,210 +64,117 @@ Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(
 	if (this == &gen)
 		return *this;
 
-	callbackFunc = gen.callbackFunc;
-	minNonCCharge = gen.minNonCCharge;
-	maxNonCCharge = gen.maxNonCCharge;
-	minCCharge = gen.minCCharge;
-	maxCCharge = gen.maxCCharge;
-	rep12Charges = gen.rep12Charges;
-	cc12Charges = gen.cc12Charges;
-	maxChgdAtomCount = gen.maxChgdAtomCount;
-	maxChgdNonCCount = gen.maxChgdNonCCount;
-	maxChgdCCount = gen.maxChgdCCount;
-
 	return *this;
 }
 
-void Chem::ResonanceStructureGenerator::setCallbackFunction(const CallbackFunction& func)
-{
-    callbackFunc = func;
-}
-
-const Chem::ResonanceStructureGenerator::CallbackFunction& Chem::ResonanceStructureGenerator::getCallbackFunction() const
-{
-    return callbackFunc;
-}
-
-void Chem::ResonanceStructureGenerator::setMaxNonCarbonCharge(long max_charge)
-{
-	maxNonCCharge = max_charge;
-}
-
-long Chem::ResonanceStructureGenerator::getMaxNonCarbonCharge() const
-{
-	return maxNonCCharge;
-}
-
-void Chem::ResonanceStructureGenerator::setMaxCarbonCharge(long max_charge)
-{
-	maxCCharge = max_charge;
-}
-
-long Chem::ResonanceStructureGenerator::getMaxCarbonCharge() const
-{
-	return maxCCharge;
-}
-
-void Chem::ResonanceStructureGenerator::setMinNonCarbonCharge(long min_charge)
-{
-	minNonCCharge = min_charge;
-}
-
-long Chem::ResonanceStructureGenerator::getMinNonCarbonCharge() const
-{
-	return minNonCCharge;
-}
-
-void Chem::ResonanceStructureGenerator::setMinCarbonCharge(long min_charge)
-{
-	minCCharge = min_charge;
-}
-
-long Chem::ResonanceStructureGenerator::getMinCarbonCharge() const
-{
-	return minCCharge;
-}
-
-void Chem::ResonanceStructureGenerator::allowRepulsive12Charges(bool allow)
-{
-	rep12Charges = allow;
-}
-
-bool Chem::ResonanceStructureGenerator::repulsive12ChargesAllowed() const
-{
-	return rep12Charges;
-}
-
-void Chem::ResonanceStructureGenerator::allowCarbonCarbonBond12Charges(bool allow)
-{
-	cc12Charges = allow;
-}
-
-bool Chem::ResonanceStructureGenerator::carbonCarbonBond12ChargesAllowed() const
-{
-	return cc12Charges;
-}
-
-void Chem::ResonanceStructureGenerator::setMaxChargedAtomCount(std::size_t max_count)
-{
-	maxChgdAtomCount = max_count;
-}
-
-std::size_t Chem::ResonanceStructureGenerator::getMaxChargedAtomCount() const
-{
-	return maxChgdAtomCount;
-}
-
-void Chem::ResonanceStructureGenerator::setMaxChargedCarbonCount(std::size_t max_count)
-{
-	maxChgdCCount = max_count;
-}
-
-std::size_t Chem::ResonanceStructureGenerator::getMaxChargedCarbonCount() const
-{
-	return maxChgdCCount;
-}
-
-void Chem::ResonanceStructureGenerator::setMaxChargedNonCarbonCount(std::size_t max_count)
-{
-	maxChgdNonCCount = max_count;
-}
-
-std::size_t Chem::ResonanceStructureGenerator::getMaxChargedNonCarbonCount() const
-{
-	return maxChgdNonCCount;
-}
-			
 void Chem::ResonanceStructureGenerator::generate(const MolecularGraph& molgraph)
 {
-	if (!callbackFunc)
-		return;
+	init(molgraph);
 
-	if (!init(molgraph))
-		return;
+	genStartResStructs();
+	genOutputResStructs();
+}
 
-	while (!nextGeneration.empty()) {
-		currGeneration.swap(nextGeneration);
+std::size_t Chem::ResonanceStructureGenerator::getNumStructures() const
+{
+	return outputResStructs.size();
+}
 
-		while (!currGeneration.empty()) {
-			ResStructDataPtr res_struct_ptr = currGeneration.back(); currGeneration.pop_back();
+const Chem::ResonanceStructureGenerator::StructureData& Chem::ResonanceStructureGenerator::getStructureData(std::size_t idx) const
+{
+	if (idx >= outputResStructs.size())
+		throw Base::IndexError("ResonanceStructureGenerator: structure data index out of bounds");
 
-			if (!shiftCharges(*res_struct_ptr))
-				return;
+	return *outputResStructs[idx];
+}
+
+Chem::ResonanceStructureGenerator::ConstStructureDataIterator Chem::ResonanceStructureGenerator::getStructureDataBegin() const
+{
+	return outputResStructs.begin();
+}
+
+Chem::ResonanceStructureGenerator::ConstStructureDataIterator Chem::ResonanceStructureGenerator::getStructureDataEnd() const
+{
+	return outputResStructs.end();
+}
+
+void Chem::ResonanceStructureGenerator::init(const MolecularGraph& molgraph)
+{
+	molGraph = &molgraph;
+	
+	createInputResStructData();
+	extractResBonds();
+}
+
+void Chem::ResonanceStructureGenerator::createInputResStructData()
+{
+	std::size_t num_atoms = molGraph->getNumAtoms();
+		
+	inputResStruct.atomCharges.resize(num_atoms);
+	atomData.resize(num_atoms);
+	
+	for (std::size_t i = 0; i < num_atoms; i++) 
+		inputResStruct.atomCharges[i] = atomData[i].init(molGraph->getAtom(i), *molGraph, i);
+	
+	inputResStruct.bondOrders.clear();
+
+	std::transform(molGraph->getBondsBegin(), molGraph->getBondsEnd(), std::back_inserter(inputResStruct.bondOrders.getData()),
+				   boost::bind(&getOrder, _1));
+}
+
+void Chem::ResonanceStructureGenerator::extractResBonds()
+{
+	resBonds.clear();
+	tmpBitMask.resize(molGraph->getNumBonds());
+	tmpBitMask.reset();
+
+	for (AtomDataArray::iterator it = atomData.begin(), end = atomData.end(); it != end; ++it) {
+		AtomData& atom_data = *it;
+
+		if (!atom_data.getVisitedFlag() && atom_data.canShiftElectrons())
+			extractResBonds(atom_data);
+	}
+}
+
+void Chem::ResonanceStructureGenerator::extractResBonds(AtomData& atom_data)
+{
+	atom_data.setVisitedFlag();
+
+	for (std::size_t i = 0, num_bonds = atom_data.getNumBonds(); i < num_bonds; i++) {
+		std::size_t nbr_bond_idx = atom_data.getBondIndex(i);
+
+		if (tmpBitMask.test(nbr_bond_idx))
+			continue;
+
+		tmpBitMask.set(nbr_bond_idx);
+
+		std::size_t nbr_atom_idx = atom_data.getAtomIndex(i);
+
+		if (atomData[nbr_atom_idx].canShiftElectrons()) {
+			resBonds.push_back({ atom_data.getIndex(), nbr_atom_idx, nbr_bond_idx});
+			
+			if (!atomData[nbr_atom_idx].getVisitedFlag())
+				extractResBonds(atomData[nbr_atom_idx]);
 		}
 	}
 }
 
-bool Chem::ResonanceStructureGenerator::init(const MolecularGraph& molgraph)
+void Chem::ResonanceStructureGenerator::genStartResStructs()
 {
-	molGraph = &molgraph;
+	startResStructs.clear();
 
-	currGeneration.clear();
-	nextGeneration.clear();
-	resStructHashCodes.clear();
-	
-	return genStartResStruct();
+	// TODO
 }
 
-bool Chem::ResonanceStructureGenerator::genStartResStruct()
+void Chem::ResonanceStructureGenerator::genOutputResStructs()
 {
-	ResStructDataPtr start_res_struct_ptr = resStructDataCache.get();
-	ResStructData& start_res_struct = *start_res_struct_ptr;
-	std::size_t num_atoms = molGraph->getNumAtoms();
-	
-	start_res_struct.atomCharges.resize(num_atoms);
+	outputResStructs.clear();
 
-	atomData.resize(num_atoms);
-	
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		start_res_struct.atomCharges[i] = atomData[i].init(molGraph->getAtom(i), *molGraph, i);
-	
-	start_res_struct.bondOrders.reserve(molGraph->getNumBonds());
-	start_res_struct.bondOrders.clear();
+/*
+	StructureDataPtr new_res_struct_ptr;
 
-	resBonds.clear();
-
-	std::size_t i = 0;
-	
-	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it, i++) {
-		const Bond& bond = *it;
-
-		start_res_struct.bondOrders.addElement(getOrder(bond));
-
-		const Atom& atom1 = bond.getBegin();
-
-		if (!molGraph->containsAtom(atom1))
-			continue;
-
-		const Atom& atom2 = bond.getEnd();
-
-		if (!molGraph->containsAtom(atom2))
-			continue;
-
-		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
-
-		if (!atomData[atom1_idx].canShiftElectrons())
-			continue;
-
-		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
-
-		if (!atomData[atom2_idx].canShiftElectrons())
-			continue;
-
-		resBonds.push_back({ atom1_idx, atom2_idx, i });
-	}
-
-	addNewResStruct(start_res_struct_ptr);
-	
-	return outputResStruct(start_res_struct);
-}
-
-bool Chem::ResonanceStructureGenerator::shiftCharges(const ResStructData& res_struct)
-{
-	ResStructDataPtr new_res_struct_ptr;
-
-	for (ResBondList::const_iterator it = resBonds.begin(), end = resBonds.end(); it != end; ++it) {
-		const ResBond& res_bond = *it;
+	for (BondDataList::const_iterator it = resBonds.begin(), end = resBonds.end(); it != end; ++it) {
+		const BondData& res_bond = *it;
 		const AtomData& atom1_data = atomData[res_bond.atom1Index];
 		const AtomData& atom2_data = atomData[res_bond.atom2Index];
 
@@ -308,138 +209,37 @@ bool Chem::ResonanceStructureGenerator::shiftCharges(const ResStructData& res_st
 	}
 	
 	return true;
+*/
 }
 
-bool Chem::ResonanceStructureGenerator::genNewResStruct(const ResStructData& res_struct, ResStructDataPtr& new_res_struct_ptr, const ResBond& res_bond,
-														long bond_order_diff, long atom1_chg_diff, long atom2_chg_diff)
+void Chem::ResonanceStructureGenerator::modifyResStruct(StructureData& res_struct, const BondData& res_bond,
+														long bond_order_diff, long atom1_chg_diff, long atom2_chg_diff) const
 {
-	allocResStructData(res_struct, new_res_struct_ptr);
-
-	new_res_struct_ptr->bondOrders[res_bond.bondIndex] += bond_order_diff;
-	new_res_struct_ptr->atomCharges[res_bond.atom1Index] += atom1_chg_diff;
-	new_res_struct_ptr->atomCharges[res_bond.atom2Index] += atom2_chg_diff;
-
-	if (addNewResStruct(new_res_struct_ptr)) {
-		if (!outputResStruct(*new_res_struct_ptr))
-			return false;
-					
-		new_res_struct_ptr.reset();
-					
-	} else
-		restoreState(res_struct, *new_res_struct_ptr, res_bond);
-
-	return true;
-}
-
-bool Chem::ResonanceStructureGenerator::addNewResStruct(const ResStructDataPtr& res_struct_ptr)
-{
-	const ResStructData& res_struct = *res_struct_ptr;
-
-	if (!resStructHashCodes.insert(calcResStructHashCode(res_struct)).second)
-		return false;
-	
-	nextGeneration.push_back(res_struct_ptr);
-	
-	return true;
-}
-
-Base::uint64 Chem::ResonanceStructureGenerator::calcResStructHashCode(const ResStructData& res_struct) const
-{
-	Internal::SHA1 sha;
-	Base::uint8 sha_hash[Internal::SHA1::HASH_SIZE];
-
-	sha.input(res_struct.atomCharges.getElementsBegin(), res_struct.atomCharges.getElementsEnd());
-	sha.input(res_struct.bondOrders.getElementsBegin(), res_struct.bondOrders.getElementsEnd());
-	sha.getResult(&sha_hash[0]);
-
-	Base::uint64 hash_code = 0;
-
-	for (std::size_t i = 0; i < Internal::SHA1::HASH_SIZE; i++) 
-		hash_code = hash_code ^ (Base::uint64(sha_hash[i]) << ((i % 8) * 8));
-
-	return hash_code;
-}
-
-bool Chem::ResonanceStructureGenerator::outputResStruct(const ResStructData& res_struct) const
-{
-	if (!validateOutputResStruct(res_struct))
-		return true;
-
-	return callbackFunc(res_struct.atomCharges, res_struct.bondOrders);
-}
-
-bool Chem::ResonanceStructureGenerator::validateOutputResStruct(const ResStructData& res_struct) const
-{
-	for (ResBondList::const_iterator it = resBonds.begin(), end = resBonds.end(); it != end; ++it) {
-		const ResBond& res_bond = *it;
-		long atom1_chg = res_struct.atomCharges[res_bond.atom1Index];
-		long atom2_chg = res_struct.atomCharges[res_bond.atom2Index];
-
-		if (!rep12Charges && ((atom1_chg < 0 && atom2_chg < 0) || (atom1_chg > 0 && atom2_chg > 0)))
-			return false;
-
-		if (!cc12Charges && atom1_chg != 0 && atom2_chg != 0 &&
-			atomData[res_bond.atom1Index].isCarbon() && atomData[res_bond.atom2Index].isCarbon())
-			return false;
-	}
-
-	std::size_t chgd_atom_count = 0;
-	std::size_t chgd_c_count = 0;
-	std::size_t chgd_non_c_count = 0;
-	
-	for (std::size_t i = 0, num_atoms = atomData.size(); i < num_atoms; i++) {
-		long charge = res_struct.atomCharges[i];
-		bool is_carbon = atomData[i].isCarbon();
-		
-		if (charge != 0) {
-			if (++chgd_atom_count > maxChgdAtomCount)
-				return false;
-			
-			if (is_carbon) {
-				if (++chgd_c_count > maxChgdCCount)
-					return false;
-				
-			} else {
-				if (++chgd_non_c_count > maxChgdNonCCount)
-					return false;
-			}
-		}
-
-		if (is_carbon) {
-			if (charge < minCCharge || charge > maxCCharge)
-				return false;
-			
-		} else {
-			if (charge < minNonCCharge || charge > maxNonCCharge)
-				return false;
-		}
-	}
-	
-	return true;
-}
-
-void Chem::ResonanceStructureGenerator::restoreState(const ResStructData& src_res_struct, ResStructData& tgt_res_struct, const ResBond& res_bond) const
-{
-	tgt_res_struct.atomCharges[res_bond.atom1Index] = src_res_struct.atomCharges[res_bond.atom1Index];
-	tgt_res_struct.atomCharges[res_bond.atom2Index] = src_res_struct.atomCharges[res_bond.atom2Index];
-	tgt_res_struct.bondOrders[res_bond.bondIndex] = src_res_struct.bondOrders[res_bond.bondIndex];
-}
-
-void Chem::ResonanceStructureGenerator::allocResStructData(const ResStructData& src_res_struct, ResStructDataPtr& alloc_res_struct_ptr)
-{
-	if (alloc_res_struct_ptr)
-		return;
-
-	alloc_res_struct_ptr = resStructDataCache.get();
-	alloc_res_struct_ptr->atomCharges = src_res_struct.atomCharges;
-	alloc_res_struct_ptr->bondOrders = src_res_struct.bondOrders;
+	res_struct.bondOrders[res_bond.bondIndex] += bond_order_diff;
+	res_struct.atomCharges[res_bond.atom1Index] += atom1_chg_diff;
+	res_struct.atomCharges[res_bond.atom2Index] += atom2_chg_diff;
 }
 
 //---------
 
-long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const MolecularGraph& molgraph, std::size_t atom_idx)
+const Util::LArray& Chem::ResonanceStructureGenerator::StructureData::getAtomCharges() const
+{
+	return atomCharges;
+}
+
+const Util::STArray& Chem::ResonanceStructureGenerator::StructureData::getBondOrders() const
+{
+	return bondOrders;
+}
+
+//---------
+
+long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const MolecularGraph& molgraph, std::size_t idx)
 {
 	canShiftElecs = false;
+	visited = false;
+	index = idx;
+
 	atomType = getType(atom);
 	
 	long form_charge = getFormalCharge(atom);
@@ -451,7 +251,7 @@ long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const M
 	bondIndices.clear();
 
 	std::size_t exp_val = 0;
-	bool unsat = false;
+	bool unsat = getAromaticityFlag(atom);
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 	
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
@@ -466,11 +266,12 @@ long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const M
 			continue;
 
 		bondIndices.push_back(molgraph.getBondIndex(nbr_bond));
+		atomIndices.push_back(molgraph.getAtomIndex(nbr_atom));
 
 		std::size_t order = getOrder(nbr_bond);
 
 		exp_val += order;
-		unsat |= (order > 1) || getAromaticityFlag(nbr_bond);
+		unsat |= (order > 1);
 	}
 
 	if (bondIndices.empty())
@@ -485,7 +286,6 @@ long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const M
 
 	enegativity = AtomDictionary::getAllredRochowElectronegativity(atomType);
 	canShiftElecs = true;
-	atomIndex = atom_idx;
 	
 	return form_charge;
 }
@@ -493,6 +293,11 @@ long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const M
 bool Chem::ResonanceStructureGenerator::AtomData::canShiftElectrons() const
 {
 	return canShiftElecs;
+}
+
+std::size_t Chem::ResonanceStructureGenerator::AtomData::getIndex() const
+{
+	return index;
 }
 
 std::size_t Chem::ResonanceStructureGenerator::AtomData::getNumBonds() const
@@ -505,14 +310,29 @@ std::size_t Chem::ResonanceStructureGenerator::AtomData::getBondIndex(std::size_
 	return bondIndices[list_idx];
 }
 
+std::size_t Chem::ResonanceStructureGenerator::AtomData::getAtomIndex(std::size_t list_idx) const
+{
+	return atomIndices[list_idx];
+}
+
 double Chem::ResonanceStructureGenerator::AtomData::getElectronegativity() const
 {
 	return enegativity;
 }
 
-bool Chem::ResonanceStructureGenerator::AtomData::checkValenceState(const ResStructData& res_struct, long val_diff, long charge_diff) const
+bool Chem::ResonanceStructureGenerator::AtomData::getVisitedFlag() const
 {
-	long elec_cnt = valElecCount - charge_diff - res_struct.atomCharges[atomIndex];
+	return visited;
+}
+
+void Chem::ResonanceStructureGenerator::AtomData::setVisitedFlag()
+{
+	visited = true;
+}
+
+bool Chem::ResonanceStructureGenerator::AtomData::checkValenceState(const StructureData& res_struct, long val_diff, long charge_diff) const
+{
+	long elec_cnt = valElecCount - charge_diff - res_struct.atomCharges[index];
 
 	if (elec_cnt > 8)
 		return false;
@@ -530,9 +350,4 @@ bool Chem::ResonanceStructureGenerator::AtomData::checkValenceState(const ResStr
 	}
 	
 	return (val <= elec_cnt);
-}
-
-bool Chem::ResonanceStructureGenerator::AtomData::isCarbon() const
-{
-	return (atomType == AtomType::C);
 }

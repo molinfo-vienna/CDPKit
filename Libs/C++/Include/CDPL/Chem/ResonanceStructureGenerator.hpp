@@ -34,9 +34,8 @@
 #include <vector>
 #include <cstddef>
 
-#include <boost/function.hpp>
-#include <boost/unordered_set.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -61,11 +60,31 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<ResonanceStructureGenerator> SharedPointer;
+			class StructureData;
 
-			typedef Util::LArray AtomChargeArray;
-			typedef Util::STArray BondOrderArray;
-			typedef boost::function2<bool, const AtomChargeArray&, const BondOrderArray&> CallbackFunction;
+		  private:
+			typedef Util::ObjectPool<StructureData> StructureDataCache;
+			typedef StructureDataCache::SharedObjectPointer StructureDataPtr;
+			typedef std::vector<StructureDataPtr> StructureDataList;
+
+		  public:
+			typedef boost::shared_ptr<ResonanceStructureGenerator> SharedPointer;
+			typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
+
+			class StructureData
+		    {
+
+				friend class ResonanceStructureGenerator;
+
+			  public:
+				const Util::LArray& getAtomCharges() const;
+
+				const Util::STArray& getBondOrders() const;
+
+			  private:
+				Util::LArray  atomCharges;
+				Util::STArray bondOrders;
+			};
 
 			/**
 			 * \brief Constructs the \c %ResonanceStructureGenerator instance.
@@ -77,46 +96,6 @@ namespace CDPL
 			virtual ~ResonanceStructureGenerator() {}
 
 			ResonanceStructureGenerator& operator=(const ResonanceStructureGenerator& gen);
-
-			void setCallbackFunction(const CallbackFunction& func);
-
-			const CallbackFunction& getCallbackFunction() const;
-
-			void setMaxNonCarbonCharge(long max_charge);
-
-			long getMaxNonCarbonCharge() const;
-
-			void setMaxCarbonCharge(long max_charge);
-
-			long getMaxCarbonCharge() const;
-
-			void setMinNonCarbonCharge(long min_charge);
-
-			long getMinNonCarbonCharge() const;
-
-			void setMinCarbonCharge(long min_charge);
-
-			long getMinCarbonCharge() const;
-
-			void allowRepulsive12Charges(bool allow);
-
-			bool repulsive12ChargesAllowed() const;
-
-			void allowCarbonCarbonBond12Charges(bool allow);
-
-			bool carbonCarbonBond12ChargesAllowed() const;
-
-			void setMaxChargedAtomCount(std::size_t max_count);
-
-			std::size_t getMaxChargedAtomCount() const;
-
-			void setMaxChargedCarbonCount(std::size_t max_count);
-
-			std::size_t getMaxChargedCarbonCount() const;
-
-			void setMaxChargedNonCarbonCount(std::size_t max_count);
-
-			std::size_t getMaxChargedNonCarbonCount() const;
 			
 			/**
 			 * \brief Generates all unique resonanceStructures of the molecular graph \a molgraph.
@@ -124,15 +103,16 @@ namespace CDPL
 			 */
 			void generate(const MolecularGraph& molgraph);
 
+			std::size_t getNumStructures() const;
+
+			const StructureData& getStructureData(std::size_t idx) const;
+
+			ConstStructureDataIterator getStructureDataBegin() const;
+
+			ConstStructureDataIterator getStructureDataEnd() const;
+
 		  private:			
-			struct ResStructData
-		    {
-
-				AtomChargeArray atomCharges;
-				BondOrderArray  bondOrders;
-			};
-
-			struct ResBond
+			struct BondData
 		    {
 
 				std::size_t atom1Index;
@@ -144,7 +124,7 @@ namespace CDPL
 		    {
 				
 			  public:
-				long init(const Atom& atom, const MolecularGraph& molgraph, std::size_t atom_idx);
+				long init(const Atom& atom, const MolecularGraph& molgraph, std::size_t idx);
 
 				bool canShiftElectrons() const;
 
@@ -152,67 +132,56 @@ namespace CDPL
 
 				std::size_t getBondIndex(std::size_t list_idx) const;
 
+				std::size_t getAtomIndex(std::size_t list_idx) const;
+
+				std::size_t getIndex() const;
+
 				double getElectronegativity() const;
 
-				bool checkValenceState(const ResStructData& res_struct, long val_diff, long charge_diff) const;
+				bool checkValenceState(const StructureData& res_struct, long val_diff, long charge_diff) const;
 
-				bool isCarbon() const;
-				
+				bool getVisitedFlag() const;
+
+				void setVisitedFlag();
+
 			  private:
 				typedef std::vector<std::size_t> IndexArray;
 
 				bool         canShiftElecs;
-				std::size_t  atomIndex;
+				std::size_t  index;
 				unsigned int atomType;
 				long         valElecCount;
 				std::size_t  unprdElecCount;
 				std::size_t  implHCount;
 				double       enegativity;
 				IndexArray   bondIndices;
+				IndexArray   atomIndices;
+				bool         visited;
 			};
 			
-			typedef Util::ObjectPool<ResStructData> ResStructDataCache;
-			typedef ResStructDataCache::SharedObjectPointer ResStructDataPtr;
-			typedef boost::unordered_set<Base::uint64> HashCodeSet;
-			typedef std::vector<ResStructDataPtr> ResStructList;
 			typedef std::vector<AtomData> AtomDataArray;
-			typedef std::vector<ResBond> ResBondList;
+			typedef std::vector<BondData> BondDataList;
 
-			bool init(const MolecularGraph& molgraph);
-			bool genStartResStruct();
+			void init(const MolecularGraph& molgraph);
 
-			bool shiftCharges(const ResStructData& res_struct);
-			bool genNewResStruct(const ResStructData& res_struct, ResStructDataPtr& new_res_struct_ptr, const ResBond& res_bond,
-								 long bond_order_diff, long atom1_chg_diff, long atom2_chg_diff);
-			
-			bool addNewResStruct(const ResStructDataPtr& res_struct_ptr);
+			void createInputResStructData();
 
-			Base::uint64 calcResStructHashCode(const ResStructData& res_struct) const;
+			void extractResBonds();
+			void extractResBonds(AtomData& atom_data);
 
-			bool outputResStruct(const ResStructData& res_struct) const;
-			bool validateOutputResStruct(const ResStructData& res_struct) const;
+			void genStartResStructs();
+			void genOutputResStructs();
 
-			void restoreState(const ResStructData& src_res_struct, ResStructData& tgt_res_struct, const ResBond& res_bond) const;
+			void modifyResStruct(StructureData& res_struct, const BondData& res_bond,
+								 long bond_order_diff, long atom1_chg_diff, long atom2_chg_diff) const;
 
-			void allocResStructData(const ResStructData& src_res_struct, ResStructDataPtr& alloc_res_struct_ptr);
-
-			ResStructDataCache    resStructDataCache;
+			StructureDataCache    resStructDataCache;
 			const MolecularGraph* molGraph;
-			CallbackFunction      callbackFunc;
-			long                  minNonCCharge;
-			long                  maxNonCCharge;
-			long                  minCCharge;
-			long                  maxCCharge;
-			bool                  rep12Charges;
-			bool                  cc12Charges;
-			std::size_t           maxChgdAtomCount;
-			std::size_t           maxChgdNonCCount;
-			std::size_t           maxChgdCCount;
 			AtomDataArray         atomData;
-			ResBondList           resBonds;
-			HashCodeSet           resStructHashCodes;
-			ResStructList         currGeneration;
-			ResStructList         nextGeneration;
+			BondDataList          resBonds;
+			StructureData         inputResStruct;
+			StructureDataList     startResStructs;
+			StructureDataList     outputResStructs;
 			Util::BitSet          tmpBitMask;
 		};
     }
