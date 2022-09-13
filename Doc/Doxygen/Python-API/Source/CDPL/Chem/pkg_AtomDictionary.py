@@ -49,6 +49,7 @@ class AtomDictionary(Boost.Python.instance):
         # \param most_abdt_iso 
         # \param avg_weight 
         # \param iupac_grp 
+        # \param period 
         # \param metal 
         # \param non_metal 
         # \param val_states 
@@ -57,7 +58,7 @@ class AtomDictionary(Boost.Python.instance):
         # \param ar_eneg 
         # \param iso_masses 
         #
-        def __init__(atom_type: int, iso: int, sym: str, name: str, most_abdt_iso: int, avg_weight: float, iupac_grp: int, metal: bool, non_metal: bool, val_states: object, vdw_rad: float, cov_radii: object, ar_eneg: float, iso_masses: object) -> None: pass
+        def __init__(atom_type: int, iso: int, sym: str, name: str, most_abdt_iso: int, avg_weight: float, iupac_grp: int, period: int, metal: bool, non_metal: bool, val_states: object, vdw_rad: float, cov_radii: object, ar_eneg: float, iso_masses: object) -> None: pass
 
         ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -119,6 +120,12 @@ class AtomDictionary(Boost.Python.instance):
         # \return 
         #
         def getIUPACGroup() -> int: pass
+
+        ##
+        # \brief 
+        # \return 
+        #
+        def getPeriod() -> int: pass
 
         ##
         # \brief 
@@ -202,6 +209,11 @@ class AtomDictionary(Boost.Python.instance):
         # \brief 
         #
         IUPACGroup = property(getIUPACGroup)
+
+        ##
+        # \brief 
+        #
+        period = property(getPeriod)
 
         ##
         # \brief FIXME!
@@ -371,6 +383,14 @@ class AtomDictionary(Boost.Python.instance):
     #
     @staticmethod
     def getIUPACGroup(type: int) -> int: pass
+
+    ##
+    # \brief 
+    # \param type 
+    # \return 
+    #
+    @staticmethod
+    def getPeriod(type: int) -> int: pass
 
     ##
     # \brief 

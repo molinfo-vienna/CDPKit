@@ -55,38 +55,6 @@ class StructureView2D(View2D):
 
     ##
     # \brief 
-    # \param anchor_pos 
-    # \param prim 
-    # \param alignment 
-    # \param front 
-    #
-    def addGraphicsPrimitive(anchor_pos: CDPL.Math.Vector2D, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
-
-    ##
-    # \brief 
-    # \param anchor_atom 
-    # \param prim 
-    # \param alignment 
-    # \param front 
-    #
-    def addGraphicsPrimitive(anchor_atom: CDPL.Chem.Atom, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
-
-    ##
-    # \brief 
-    # \param anchor_atoms 
-    # \param prim 
-    # \param alignment 
-    # \param front 
-    #
-    def addGraphicsPrimitive(anchor_atoms: CDPL.Chem.Fragment, prim: GraphicsPrimitive2D, alignment: int, front: bool) -> None: pass
-
-    ##
-    # \brief 
-    #
-    def clearGraphicsPrimitives() -> None: pass
-
-    ##
-    # \brief 
     #
     structure = property(getStructure, setStructure)
 

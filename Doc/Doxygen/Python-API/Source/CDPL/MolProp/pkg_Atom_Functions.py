@@ -30,6 +30,13 @@ def isUnsaturated(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> b
 ##
 # \brief 
 # \param atom 
+# \return 
+#
+def getPeriod(atom: CDPL.Chem.Atom) -> int: pass
+
+##
+# \brief 
+# \param atom 
 # \param molgraph 
 # \return 
 #
