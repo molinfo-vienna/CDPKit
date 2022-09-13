@@ -36,6 +36,8 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
+#include <boost/unordered_set.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -84,6 +86,7 @@ namespace CDPL
 			  private:
 				Util::LArray  atomCharges;
 				Util::STArray bondOrders;
+				std::size_t   numCharges;
 			};
 
 			/**
@@ -96,6 +99,26 @@ namespace CDPL
 			virtual ~ResonanceStructureGenerator() {}
 
 			ResonanceStructureGenerator& operator=(const ResonanceStructureGenerator& gen);
+
+			Util::BitSet& getOctetRuleCheckAtomTypes();
+
+			const Util::BitSet& getOctetRuleCheckAtomTypes() const;
+			
+			void minimizeOctetRuleViolations(bool minimize);
+
+			bool octetRuleViolationsMinimized() const;
+
+			void minimizeSP1GeometryViolations(bool minimize);
+
+			bool sp1GeometryViolationsMinimized() const;
+
+			void minimizeCarbonBond12Charges(bool minimize);
+
+			bool carbonBond12ChargesMinimized() const;
+
+			void setChargeCountWindow(std::size_t win_size);
+
+			std::size_t getChargeCountWindow() const;
 			
 			/**
 			 * \brief Generates all unique resonanceStructures of the molecular graph \a molgraph.
@@ -119,7 +142,7 @@ namespace CDPL
 				std::size_t atom2Index;
 				std::size_t bondIndex;
 			};
-
+			
 			class AtomData
 		    {
 				
@@ -136,32 +159,69 @@ namespace CDPL
 
 				std::size_t getIndex() const;
 
+				unsigned int getType() const;
+				
 				double getElectronegativity() const;
 
+				bool isSP1Hybridized(const StructureData& res_struct) const;
+				
 				bool checkValenceState(const StructureData& res_struct, long val_diff, long charge_diff) const;
+
+				bool octetRuleFulfilled(const StructureData& res_struct) const;
+				
+				std::size_t countRepChargePairs(const Util::LArray& charges) const;
 
 				bool getVisitedFlag() const;
 
 				void setVisitedFlag();
 
+				bool getInSmallRingFlag() const;
+
+				void setInSmallRingFlag();
+				
 			  private:
 				typedef std::vector<std::size_t> IndexArray;
 
 				bool         canShiftElecs;
 				std::size_t  index;
-				unsigned int atomType;
+				unsigned int type;
 				long         valElecCount;
 				std::size_t  unprdElecCount;
 				std::size_t  implHCount;
 				double       enegativity;
 				IndexArray   bondIndices;
 				IndexArray   atomIndices;
+				bool         inSmallRing;
 				bool         visited;
+			};
+
+			struct StructureDataPtrHashFunc
+		    {
+
+				std::size_t operator()(const StructureDataPtr& rs_ptr) const {
+					std::size_t seed = 0;
+					
+					boost::hash_combine(seed, boost::hash_value(rs_ptr->getBondOrders().getData()));
+					boost::hash_combine(seed, boost::hash_value(rs_ptr->getAtomCharges().getData()));
+
+					return seed;
+				}
+			};
+
+			struct StructureDataPtrCmpFunc
+		    {
+
+				bool operator()(const StructureDataPtr& rs_ptr1, const StructureDataPtr& rs_ptr2) const {
+					return (rs_ptr1->getBondOrders() == rs_ptr2->getBondOrders() &&
+							rs_ptr1->getAtomCharges() == rs_ptr2->getAtomCharges());
+				}
 			};
 			
 			typedef std::vector<AtomData> AtomDataArray;
+			typedef std::vector<const AtomData*> AtomDataPtrArray;
 			typedef std::vector<BondData> BondDataList;
-
+			typedef boost::unordered_set<StructureDataPtr, StructureDataPtrHashFunc, StructureDataPtrCmpFunc> StructureDataSet;
+			
 			void init(const MolecularGraph& molgraph);
 
 			void createInputResStructData();
@@ -170,19 +230,47 @@ namespace CDPL
 			void extractResBonds(AtomData& atom_data);
 
 			void genStartResStructs();
+			void genStartResStructs(std::size_t depth, std::size_t num_rep_chg_pairs);
+
+			std::size_t countRepChargePairs() const;
+			
 			void genOutputResStructs();
+			void genOutputResStructs(StructureData& res_struct, std::size_t depth, std::size_t con_idx,
+									 std::size_t num_charges);
 
-			void modifyResStruct(StructureData& res_struct, const BondData& res_bond,
+			void postprocOutputResStructs();
+
+			void minimzeResStructProperty(std::size_t (ResonanceStructureGenerator::* prop_func)(const StructureData&) const);
+				
+			std::size_t countOctetRuleViolations(const StructureData& res_struct) const;
+			std::size_t countSP1GeometryViolations(const StructureData& res_struct) const;
+			std::size_t count12ChargedCBonds(const StructureData& res_struct) const;
+			
+			void modifyResStruct(StructureData& res_struct, std::size_t bond_idx, std::size_t atom1_idx, std::size_t atom2_idx,
 								 long bond_order_diff, long atom1_chg_diff, long atom2_chg_diff) const;
-
+			
+			StructureDataPtr copyResStructPtr(const StructureDataPtr& res_struct_ptr);
+			StructureDataPtr copyResStruct(const StructureData& res_struct);
+			
 			StructureDataCache    resStructDataCache;
+			bool                  minOctRuleViolations;
+			bool                  minSP1GeomViolations;
+			bool                  minCBond12Charges;
+			std::size_t           chargeCountWin;
+			Util::BitSet          octRuleCheckAtomTypes;
 			const MolecularGraph* molGraph;
 			AtomDataArray         atomData;
+			AtomDataPtrArray      resAtoms;
 			BondDataList          resBonds;
 			StructureData         inputResStruct;
 			StructureDataList     startResStructs;
+			StructureDataSet      workingResStructs;
 			StructureDataList     outputResStructs;
-			Util::BitSet          tmpBitMask;
+			StructureDataList     tmpOutputResStructs;
+			Util::LArray          chargeDiffPtn;
+			Util::BitSet          visBondMask;
+			std::size_t           minNumRepChargePairs;
+			std::size_t           minNumCharges;
 		};
     }
 }

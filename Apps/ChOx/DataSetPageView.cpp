@@ -65,10 +65,9 @@ void DataSetPageView::setNumRows(int num_rows)
 		numRows = std::max(1, num_rows);
 
 		setGridRowCountParameter(settings, numRows);
-
-		emit numRowsChanged(numRows);
-
 		updateDataRecordPainters(pageOffset);
+		
+		emit numRowsChanged(numRows);
 
 		update();
 	}
@@ -80,10 +79,9 @@ void DataSetPageView::setNumColumns(int num_cols)
 		numColumns = std::max(1, num_cols);
 
 		setGridColumnCountParameter(settings, numColumns);
-
-		emit numColumnsChanged(numColumns);
-
 		updateDataRecordPainters(pageOffset);
+		
+		emit numColumnsChanged(numColumns);
 
 		update();
 	}
@@ -91,14 +89,14 @@ void DataSetPageView::setNumColumns(int num_cols)
 
 void DataSetPageView::setPageOffset(int page_offs)
 {
-	if (page_offs != pageOffset) {
+	if (page_offs != pageOffset && page_offs < dataSet.getSize()) {
 		int old_page_offs = pageOffset;
 
-		pageOffset = std::max(0, std::min(dataSet.getSize() - 1, page_offs));
+		pageOffset = std::max(0, page_offs);
+		
+		updateDataRecordPainters(old_page_offs);
 
 		emit pageOffsetChanged(pageOffset);
-
-		updateDataRecordPainters(old_page_offs);
 
 		update();
 	}
@@ -407,7 +405,7 @@ void DataSetPageView::updateDataRecordPainters(int old_page_offs)
 
 	for (int i = pageOffset; i < pageOffset + page_size && i < dataSet.getSize(); i++) {
 		if (old_page_offs >= 0 && i >= old_page_offs && i < old_page_offs + old_page_size) {
-			tmpDataRecordPainters.push_back(dataRecordPainters.at(i - old_page_offs));
+			tmpDataRecordPainters.push_back(dataRecordPainters[i - old_page_offs]);
 			
 		} else {
 			DataRecordPainter::SharedPointer painter_ptr(new DataRecordPainter(fontMetrics, painter, settings, dataSet.getRecord(i)));

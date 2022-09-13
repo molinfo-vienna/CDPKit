@@ -130,6 +130,8 @@ void DataSetView::init()
 
 void DataSetView::adjustScrollBar(int)
 {
+	scrollBar->blockSignals(true);
+	
 	int num_recs = dataSet.getSize();
 	int num_cols = pageView->getNumColumns();
 	int num_recs_per_page = num_cols * pageView->getNumRows();
@@ -145,4 +147,6 @@ void DataSetView::adjustScrollBar(int)
 		scrollBar->hide();
 		scrollBar->setValue(0);
 	}
+
+	scrollBar->blockSignals(false);
 }
