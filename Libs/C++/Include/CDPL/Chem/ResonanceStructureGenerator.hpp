@@ -119,6 +119,10 @@ namespace CDPL
 			void setChargeCountWindow(std::size_t win_size);
 
 			std::size_t getChargeCountWindow() const;
+
+			void setMaxNumGeneratedStructures(std::size_t max_num);
+
+			std::size_t getMaxNumGeneratedStructures() const;
 			
 			/**
 			 * \brief Generates all unique resonanceStructures of the molecular graph \a molgraph.
@@ -258,6 +262,7 @@ namespace CDPL
 			bool                  minCBond12Charges;
 			std::size_t           chargeCountWin;
 			Util::BitSet          octRuleCheckAtomTypes;
+			std::size_t           maxNumGenStructs;
 			const MolecularGraph* molGraph;
 			AtomDataArray         atomData;
 			AtomDataPtrArray      resAtoms;

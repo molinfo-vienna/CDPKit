@@ -35,6 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -61,8 +62,5 @@ void Chem::calculateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
 	calculator.setBondPropertyFlags(bond_flags);
 	calculator.calculate(molgraph, numbering);
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
-
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		setCanonicalNumber(molgraph.getAtom(i), numbering[i]);
+	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), numbering.getElementsBegin(), &setCanonicalNumber);
 }

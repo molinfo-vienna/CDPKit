@@ -35,6 +35,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -63,10 +64,8 @@ void Chem::get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coo
 
 void Chem::set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coords)
 {
-	std::size_t num_atoms = cntnr.getNumAtoms();
-
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		set2DCoordinates(cntnr.getAtom(i), coords[i]);
+	Util::forEachPair(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), coords.getElementsBegin(), coords.getElementsEnd(),
+					  static_cast<void (*)(Atom&, const Math::Vector2D&)>(&set2DCoordinates));
 }
 
 void Chem::transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx)

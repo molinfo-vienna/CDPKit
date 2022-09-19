@@ -35,6 +35,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/BondDirectionCalculator.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -54,9 +55,6 @@ void Chem::calculateBondDirections(MolecularGraph& molgraph, bool overwrite, boo
 	calculator.setRingSizeLimit(min_ring_size);
 	calculator.calculate(molgraph, dirs);
 
-	std::size_t num_bonds = molgraph.getNumBonds();
-
-	for (std::size_t i = 0; i < num_bonds; i++) 
-		setDirection(molgraph.getBond(i), dirs[i]);
+	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), dirs.getElementsBegin(), &setDirection);
 }
 	

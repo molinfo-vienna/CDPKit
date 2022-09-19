@@ -37,6 +37,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -52,6 +53,5 @@ void ForceField::assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, boo
 	 Util::UIArray types;
 	 MMFF94BondTyper typer(molgraph, types, strict);
 
-	 for (std::size_t i = 0, num_bonds = molgraph.getNumBonds(); i < num_bonds; i++) 
-		 setMMFF94TypeIndex(molgraph.getBond(i), types[i]);
+	 Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), types.getElementsBegin(), &setMMFF94TypeIndex);
 }

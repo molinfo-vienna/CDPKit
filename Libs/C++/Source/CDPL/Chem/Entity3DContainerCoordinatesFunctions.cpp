@@ -30,6 +30,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Chem/Entity3D.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -46,10 +47,8 @@ void Chem::get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray&
 
 void Chem::set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray& coords)
 {
-	std::size_t num_ents = cntnr.getNumEntities();
-
-	for (std::size_t i = 0; i < num_ents; i++) 
-		set3DCoordinates(cntnr.getEntity(i), coords[i]);
+	Util::forEachPair(cntnr.getEntitiesBegin(), cntnr.getEntitiesEnd(), coords.getElementsBegin(), coords.getElementsEnd(),
+				  static_cast<void (*)(Entity3D&, const Math::Vector3D&)>(&set3DCoordinates));
 }
 
 void Chem::transform3DCoordinates(Entity3DContainer& cntnr, const Math::Matrix4D& mtx)

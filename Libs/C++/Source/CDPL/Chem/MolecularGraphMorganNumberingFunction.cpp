@@ -35,6 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/MorganNumberingCalculator.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -49,8 +50,6 @@ void Chem::calculateMorganNumbering(MolecularGraph& molgraph, bool overwrite)
 
 	Util::STArray numbering;
 	MorganNumberingCalculator calculator(molgraph, numbering);
-	std::size_t num_atoms = molgraph.getNumAtoms();
 
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		setMorganNumber(molgraph.getAtom(i), numbering[i]);
+	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), numbering.getElementsBegin(), &setMorganNumber);
 }

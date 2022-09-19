@@ -82,6 +82,10 @@ void CDPLPythonChem::exportResonanceStructureGenerator()
 			 python::arg("self"))
 		.def("setChargeCountWindow", &Chem::ResonanceStructureGenerator::setChargeCountWindow,
 			 (python::arg("self"), python::arg("win_size")))
+		.def("getMaxNumGeneratedStructures", &Chem::ResonanceStructureGenerator::getMaxNumGeneratedStructures,
+			 python::arg("self"))
+		.def("setMaxNumGeneratedStructures", &Chem::ResonanceStructureGenerator::setMaxNumGeneratedStructures,
+			 (python::arg("self"), python::arg("max_num")))
 		.def("generate", &Chem::ResonanceStructureGenerator::generate, 
 			 (python::arg("self"), python::arg("molgraph")))
 		.def("getNumStructures", &Chem::ResonanceStructureGenerator::getNumStructures, python::arg("self"))
@@ -101,5 +105,7 @@ void CDPLPythonChem::exportResonanceStructureGenerator()
 																		   &Chem::ResonanceStructureGenerator::getOctetRuleCheckAtomTypes),
 																	   python::return_internal_reference<>()))
 		.add_property("chargeCountWindow", &Chem::ResonanceStructureGenerator::getChargeCountWindow,
-					  &Chem::ResonanceStructureGenerator::setChargeCountWindow);
+					  &Chem::ResonanceStructureGenerator::setChargeCountWindow)
+		.add_property("maxNumGeneratedStructures", &Chem::ResonanceStructureGenerator::getMaxNumGeneratedStructures,
+					  &Chem::ResonanceStructureGenerator::setMaxNumGeneratedStructures);
 }

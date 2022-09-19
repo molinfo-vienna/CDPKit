@@ -35,6 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/SymmetryClassCalculator.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -62,8 +63,5 @@ void Chem::perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
 	calculator.includeImplicitHydrogens(inc_impl_h);
 	calculator.calculate(molgraph, sym_classes);
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
-
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		setSymmetryClass(molgraph.getAtom(i), sym_classes[i]);
+	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), sym_classes.getElementsBegin(), &setSymmetryClass);
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * FunctionExports.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,36 +24,15 @@
  */
 
 
-#include <boost/python.hpp>
-
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "ConverterRegistration.hpp"
+#ifndef CDPL_PYTHON_UTIL_FUNCTIONEXPORTS_HPP
+#define CDPL_PYTHON_UTIL_FUNCTIONEXPORTS_HPP
 
 
-BOOST_PYTHON_MODULE(_util)
+namespace CDPLPythonUtil
 {
-	using namespace CDPLPythonUtil;
 
-	exportBitSet();
-	exportArrays();
-	exportBronKerboschAlgorithm();
-	exportDGCoordinatesGenerator();
-	
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
-	exportCompressionStreams();
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
-#if defined(HAVE_BOOST_FILESYSTEM)
-
-	exportFileFunctions();
-		
-#endif  // defined(HAVE_BOOST_FILESYSTEM)
-
-	exportSequenceFunctions();
-	
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    void exportFileFunctions();
+    void exportSequenceFunctions();
 }
+
+#endif // CDPL_PYTHON_UTIL_FUNCTIONEXPORTS_HPP

@@ -29,6 +29,8 @@
 #include "CDPL/Chem/BondOrderCalculator.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -38,8 +40,6 @@ void Chem::perceiveBondOrders(MolecularGraph& molgraph, bool overwrite)
 {
 	Util::STArray orders;
 	BondOrderCalculator calculator(molgraph, orders, !overwrite);
-	std::size_t num_bonds = molgraph.getNumBonds();
 
-	for (std::size_t i = 0; i < num_bonds; i++) 
-		setOrder(molgraph.getBond(i), orders[i]);
+	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), orders.getElementsBegin(), &setOrder);
 }

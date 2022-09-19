@@ -37,6 +37,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -52,6 +53,5 @@ void ForceField::calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool stri
     Util::DArray charges;
     MMFF94ChargeCalculator charge_calc(molgraph, charges, strict);
 
-    for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) 
-		setMMFF94Charge(molgraph.getAtom(i), charges[i]);
+	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), charges.getElementsBegin(), &setMMFF94Charge);
 }

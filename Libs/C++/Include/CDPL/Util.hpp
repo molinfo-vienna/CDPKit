@@ -51,6 +51,7 @@
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM)
 

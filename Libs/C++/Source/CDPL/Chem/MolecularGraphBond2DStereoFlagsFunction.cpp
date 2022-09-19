@@ -35,6 +35,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/BondStereoFlagCalculator.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -49,8 +50,6 @@ void Chem::calculateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 
 	Util::UIArray flags;
 	BondStereoFlagCalculator calculator(molgraph, flags);
-	std::size_t num_bonds = molgraph.getNumBonds();
 
-	for (std::size_t i = 0; i < num_bonds; i++) 
-		set2DStereoFlag(molgraph.getBond(i), flags[i]);
+	Util::forEachPair(molgraph.getBondsBegin(), molgraph.getBondsEnd(), flags.getElementsBegin(), &set2DStereoFlag);
 }

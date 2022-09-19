@@ -35,6 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/CIPPriorityCalculator.hpp"
+#include "CDPL/Util/SequenceFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -49,8 +50,6 @@ void Chem::calcCIPPriorities(MolecularGraph& molgraph, bool overwrite)
 
 	Util::STArray priorities;
 	CIPPriorityCalculator calculator(molgraph, priorities);
-	std::size_t num_atoms = molgraph.getNumAtoms();
 
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		setCIPPriority(molgraph.getAtom(i), priorities[i]);
+	Util::forEachPair(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), priorities.getElementsBegin(), &setCIPPriority);
 }

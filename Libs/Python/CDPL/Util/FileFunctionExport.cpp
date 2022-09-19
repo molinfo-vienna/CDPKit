@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * FileFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,34 +26,17 @@
 
 #include <boost/python.hpp>
 
-#include "ClassExports.hpp"
+#include "CDPL/Util/FileFunctions.hpp"
+
 #include "FunctionExports.hpp"
-#include "ConverterRegistration.hpp"
 
 
-BOOST_PYTHON_MODULE(_util)
+void CDPLPythonUtil::exportFileFunctions()
 {
-	using namespace CDPLPythonUtil;
+    using namespace boost;
+    using namespace CDPL;
 
-	exportBitSet();
-	exportArrays();
-	exportBronKerboschAlgorithm();
-	exportDGCoordinatesGenerator();
-	
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
-	exportCompressionStreams();
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
-#if defined(HAVE_BOOST_FILESYSTEM)
-
-	exportFileFunctions();
-		
-#endif  // defined(HAVE_BOOST_FILESYSTEM)
-
-	exportSequenceFunctions();
-	
-	registerToPythonConverters();
-	registerFromPythonConverters();
+    python::def("genCheckedTempFilePath", &Util::genCheckedTempFilePath, (python::arg("dir") = "", python::arg("ptn") = "%%%%-%%%%-%%%%-%%%%"));
+    python::def("checkIfSameFile", &Util::checkIfSameFile, (python::arg("path1"), python::arg("path2")));
+    python::def("fileExists", &Util::fileExists, python::arg("path"));
 }

@@ -59,7 +59,7 @@ using namespace CDPL;
 Chem::ResonanceStructureGenerator::ResonanceStructureGenerator():
 	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE), minOctRuleViolations(true),
 	minSP1GeomViolations(true), minCBond12Charges(false), chargeCountWin(0),
-	octRuleCheckAtomTypes(AtomType::MAX_ATOMIC_NO)
+	octRuleCheckAtomTypes(AtomType::MAX_ATOMIC_NO), maxNumGenStructs(0)
 {
 	octRuleCheckAtomTypes.set(AtomType::N);
 	octRuleCheckAtomTypes.set(AtomType::O);
@@ -68,7 +68,8 @@ Chem::ResonanceStructureGenerator::ResonanceStructureGenerator():
 Chem::ResonanceStructureGenerator::ResonanceStructureGenerator(const ResonanceStructureGenerator& gen):
 	resStructDataCache(MAX_RES_STRUCT_DATA_CACHE_SIZE),	minOctRuleViolations(gen.minOctRuleViolations),
 	minSP1GeomViolations(gen.minSP1GeomViolations), minCBond12Charges(gen.minCBond12Charges),
-	chargeCountWin(gen.chargeCountWin), octRuleCheckAtomTypes(gen.octRuleCheckAtomTypes)
+	chargeCountWin(gen.chargeCountWin), octRuleCheckAtomTypes(gen.octRuleCheckAtomTypes),
+	maxNumGenStructs(gen.maxNumGenStructs)
 {
 	std::transform(gen.outputResStructs.begin(), gen.outputResStructs.end(), std::back_inserter(outputResStructs),
 				   boost::bind(&ResonanceStructureGenerator::copyResStructPtr, this, _1));
@@ -84,6 +85,7 @@ Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(
 	minCBond12Charges = gen.minCBond12Charges;
 	octRuleCheckAtomTypes = gen.octRuleCheckAtomTypes;
 	chargeCountWin = gen.chargeCountWin;
+	maxNumGenStructs = gen.maxNumGenStructs;
 	
 	outputResStructs.clear();
 	
@@ -366,6 +368,9 @@ void Chem::ResonanceStructureGenerator::genOutputResStructs()
 void Chem::ResonanceStructureGenerator::genOutputResStructs(StructureData& res_struct, std::size_t depth, std::size_t con_idx,
 															std::size_t num_charges)
 {
+	if (maxNumGenStructs > 0 && workingResStructs.size() >= maxNumGenStructs)
+		return;
+	
 	if (con_idx == 0) {
 		if (num_charges > (minNumCharges + chargeCountWin))
 			return;
