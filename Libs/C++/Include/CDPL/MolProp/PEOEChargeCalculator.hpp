@@ -134,44 +134,44 @@ namespace CDPL
 
 			PEOEChargeCalculator& operator=(const PEOEChargeCalculator&);
 
-			void init(const Chem::MolecularGraph&, Util::DArray&);
-			void calcCharges(Util::DArray&);
+			void init(const Chem::MolecularGraph& molgraph);
+			void calcCharges();
 
-			class PEOEAtomState
+			class AtomState
 		    {
 
 			public:
-			  typedef boost::shared_ptr<PEOEAtomState> SharedPointer;
+			  typedef boost::shared_ptr<AtomState> SharedPointer;
 
-			  PEOEAtomState();
-			  PEOEAtomState(const Chem::Atom&, const Chem::MolecularGraph&);
+			  AtomState();
+			  AtomState(const Chem::Atom&, const Chem::MolecularGraph&);
 
-			  void linkTo(PEOEAtomState*);
+			  void linkTo(AtomState* nbr_state);
 
 			  double getCharge() const;
 			  double getElectronegativity() const;
 
-			  void shiftCharges(double);
+			  void shiftCharges(double att_fact);
 			  void updateElectronegativity();
 
 			 private:
-			  typedef std::vector<PEOEAtomState*> PEOEAtomStateList;
+			  typedef std::vector<AtomState*> AtomStateList;
 
-			  PEOEAtomStateList  nbrAtomStates;
-			  double             a;
-			  double             b;
-			  double             c;
-			  double             enegativity;
-			  double             enegativityP1;
-			  double             charge;
+			  AtomStateList  nbrAtomStates;
+			  double         a;
+			  double         b;
+			  double         c;
+			  double         enegativity;
+			  double         enegativityP1;
+			  double         charge;
 			};
 
-			typedef std::vector<PEOEAtomState::SharedPointer> PEOEAtomStateList;
+			typedef std::vector<AtomState::SharedPointer> AtomStateList;
 		
-			std::size_t        numIterations;
-			double             dampingFactor;
-			PEOEAtomStateList  atomStates;
-			PEOEAtomStateList  implHStates;
+			std::size_t    numIterations;
+			double         dampingFactor;
+			AtomStateList  atomStates;
+			AtomStateList  implHStates;
 		};
 	}
 }

@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <iterator>
 
 #include <boost/bind.hpp>
 
@@ -83,8 +84,14 @@ double MolProp::PEOEChargeCalculator::getDampingFactor() const
 
 void MolProp::PEOEChargeCalculator::calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges)
 {
-	init(molgraph, charges);
-	calcCharges(charges);
+	init(molgraph);
+	calcCharges();
+	
+	charges.clear();
+	charges.reserve(atomStates.size());
+
+	std::transform(atomStates.begin(), atomStates.end(), std::back_inserter(charges.getData()),
+				   boost::bind(&AtomState::getCharge, _1));
 }
 
 void MolProp::PEOEChargeCalculator::getElectronegativities(Util::DArray& elnegs) const
@@ -92,13 +99,11 @@ void MolProp::PEOEChargeCalculator::getElectronegativities(Util::DArray& elnegs)
 	elnegs.clear();
 	elnegs.reserve(atomStates.size());
 	
-	std::for_each(atomStates.begin(), atomStates.end(), 
-				  boost::bind(&Util::DArray::addElement, 
-							  boost::ref(elnegs),
-							  boost::bind(&PEOEAtomState::getElectronegativity, _1)));
+	std::transform(atomStates.begin(), atomStates.end(), std::back_inserter(elnegs.getData()),
+				   boost::bind(&AtomState::getElectronegativity, _1));
 }
 
-void MolProp::PEOEChargeCalculator::init(const Chem::MolecularGraph& molgraph, Util::DArray& charges)
+void MolProp::PEOEChargeCalculator::init(const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -110,24 +115,21 @@ void MolProp::PEOEChargeCalculator::init(const Chem::MolecularGraph& molgraph, U
 	implHStates.clear();
 	implHStates.reserve(num_atoms);
 
-	charges.clear();
-	charges.reserve(num_atoms);
-
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), atoms_end = molgraph.getAtomsEnd(); it != atoms_end; ++it) {
 		const Atom& atom = *it;
 
-		PEOEAtomState::SharedPointer atom_state_ptr(new PEOEAtomState(atom, molgraph));
+		AtomState::SharedPointer atom_state_ptr(new AtomState(atom, molgraph));
 		atomStates.push_back(atom_state_ptr);
 
-		PEOEAtomState* atom_state = atom_state_ptr.get();
+		AtomState* atom_state = atom_state_ptr.get();
 
 		std::size_t impl_h_count = getImplicitHydrogenCount(atom);
 
 		if (impl_h_count > 0) {
-			PEOEAtomState::SharedPointer h_state_ptr(new PEOEAtomState());
+			AtomState::SharedPointer h_state_ptr(new AtomState());
 			implHStates.push_back(h_state_ptr);
 
-			PEOEAtomState* h_state = h_state_ptr.get();
+			AtomState* h_state = h_state_ptr.get();
 
 			for (std::size_t i = 0; i < impl_h_count; i++)
 				atom_state->linkTo(h_state);
@@ -142,21 +144,21 @@ void MolProp::PEOEChargeCalculator::init(const Chem::MolecularGraph& molgraph, U
 		if (!molgraph.containsAtom(bond.getBegin()) || !molgraph.containsAtom(bond.getEnd()))
 			continue;
 
-		PEOEAtomState* atom_state1 = atomStates[molgraph.getAtomIndex(bond.getBegin())].get();
-		PEOEAtomState* atom_state2 = atomStates[molgraph.getAtomIndex(bond.getEnd())].get();
+		AtomState* atom_state1 = atomStates[molgraph.getAtomIndex(bond.getBegin())].get();
+		AtomState* atom_state2 = atomStates[molgraph.getAtomIndex(bond.getEnd())].get();
 
 		atom_state1->linkTo(atom_state2);
 		atom_state2->linkTo(atom_state1);
 	}
 }
 
-void MolProp::PEOEChargeCalculator::calcCharges(Util::DArray& charges)
+void MolProp::PEOEChargeCalculator::calcCharges()
 {
-	PEOEAtomStateList::iterator atom_states_beg = atomStates.begin();
-	PEOEAtomStateList::iterator atom_states_end = atomStates.end();
+	AtomStateList::iterator atom_states_beg = atomStates.begin();
+	AtomStateList::iterator atom_states_end = atomStates.end();
 
-	PEOEAtomStateList::iterator impl_h_states_beg = implHStates.begin();
-	PEOEAtomStateList::iterator impl_h_states_end = implHStates.end();
+	AtomStateList::iterator impl_h_states_beg = implHStates.begin();
+	AtomStateList::iterator impl_h_states_end = implHStates.end();
 
 	double attenuation_fact = 1.0;
 
@@ -164,23 +166,19 @@ void MolProp::PEOEChargeCalculator::calcCharges(Util::DArray& charges)
 		attenuation_fact *= dampingFactor;
 
 		std::for_each(atom_states_beg, atom_states_end,
-					  boost::bind(&PEOEAtomState::shiftCharges, _1, attenuation_fact));
+					  boost::bind(&AtomState::shiftCharges, _1, attenuation_fact));
 		std::for_each(impl_h_states_beg, impl_h_states_end,
-					  boost::bind(&PEOEAtomState::shiftCharges, _1, attenuation_fact));
+					  boost::bind(&AtomState::shiftCharges, _1, attenuation_fact));
 
 		std::for_each(atom_states_beg, atom_states_end,
-					  boost::bind(&PEOEAtomState::updateElectronegativity, _1));
+					  boost::bind(&AtomState::updateElectronegativity, _1));
 		std::for_each(impl_h_states_beg, impl_h_states_end,
-					  boost::bind(&PEOEAtomState::updateElectronegativity, _1));
+					  boost::bind(&AtomState::updateElectronegativity, _1));
 	}
-
-	std::for_each(atom_states_beg, atom_states_end, boost::bind(&Util::DArray::addElement, 
-																boost::ref(charges),
-																boost::bind(&PEOEAtomState::getCharge, _1)));
 }
 
 
-MolProp::PEOEChargeCalculator::PEOEAtomState::PEOEAtomState(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph): 
+MolProp::PEOEChargeCalculator::AtomState::AtomState(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph): 
 	charge(0.0) 
 {
 	using namespace Chem;
@@ -270,6 +268,60 @@ MolProp::PEOEChargeCalculator::PEOEAtomState::PEOEAtomState(const Chem::Atom& at
 			c = 1.38;
 			break;
 
+		case AtomType::Li:
+			a = 3.1;
+			b = 4.44;
+			c = 1.75;
+			break;
+
+		case AtomType::Na:
+			a = 2.8;
+			b = 12.99;
+			c = 10.42;
+			break;
+
+		case AtomType::Mg:
+			a = 3.3;
+			b = 5.58;
+			c = 2.44;
+			break;
+
+		case AtomType::Al:
+			a = 5.38;
+			b = 4.95;
+			c = 0.87;
+			break;
+
+		case AtomType::Be:
+			a = 3.84;
+			b = 6.75;
+			c = 3.17;
+			break;
+
+		case AtomType::B:
+			a = 5.98;
+			b = 6.82;
+			c = 1.60;
+			break;
+
+		case AtomType::Si:
+			a = 7.30;
+			b = 6.57;
+			c = 0.66;
+			break;
+
+		case AtomType::P:
+			a = 8.91;
+			b = 8.24;
+			c = 1.76;
+			break;
+
+		case AtomType::Ti:
+			a = 2.48;
+			b = 5.10;
+			c = 2.16;
+			break;
+
 		case AtomType::C:
 		default:
 			switch (getHybridizationState(atom)) {
@@ -301,33 +353,33 @@ MolProp::PEOEChargeCalculator::PEOEAtomState::PEOEAtomState(const Chem::Atom& at
 	enegativity = a;
 }
 
-MolProp::PEOEChargeCalculator::PEOEAtomState::PEOEAtomState(): // Implicit H
+MolProp::PEOEChargeCalculator::AtomState::AtomState(): // Implicit H
 	a(7.17), b(6.24), c(-0.56), enegativity(7.17), enegativityP1(HYDROGEN_ENEGATIVITY_P1), charge(0.0) 
 {}
 
-void MolProp::PEOEChargeCalculator::PEOEAtomState::linkTo(PEOEAtomState* nbr_state)
+void MolProp::PEOEChargeCalculator::AtomState::linkTo(AtomState* nbr_state)
 {
 	nbrAtomStates.push_back(nbr_state);
 }
 
-double MolProp::PEOEChargeCalculator::PEOEAtomState::getCharge() const
+double MolProp::PEOEChargeCalculator::AtomState::getCharge() const
 {
 	return charge;
 }
 
-double MolProp::PEOEChargeCalculator::PEOEAtomState::getElectronegativity() const
+double MolProp::PEOEChargeCalculator::AtomState::getElectronegativity() const
 {
 	return enegativity;
 }
 
-void MolProp::PEOEChargeCalculator::PEOEAtomState::shiftCharges(double attenuation_fact)
+void MolProp::PEOEChargeCalculator::AtomState::shiftCharges(double att_fact)
 {
 	double q_i = 0.0;
 
-	PEOEAtomStateList::const_iterator nbrs_end = nbrAtomStates.end();
+	AtomStateList::const_iterator nbrs_end = nbrAtomStates.end();
 
-	for (PEOEAtomStateList::const_iterator it = nbrAtomStates.begin(); it != nbrs_end; ++it) {
-		const PEOEAtomState& nbr_desc = **it;
+	for (AtomStateList::const_iterator it = nbrAtomStates.begin(); it != nbrs_end; ++it) {
+		const AtomState& nbr_desc = **it;
 
 		if (enegativity < nbr_desc.enegativity)
 			q_i += (nbr_desc.enegativity - enegativity) / enegativityP1;
@@ -335,10 +387,10 @@ void MolProp::PEOEChargeCalculator::PEOEAtomState::shiftCharges(double attenuati
 			q_i += (nbr_desc.enegativity - enegativity) / nbr_desc.enegativityP1;
 	}
 
-	charge += q_i * attenuation_fact;
+	charge += q_i * att_fact;
 }
 
-void MolProp::PEOEChargeCalculator::PEOEAtomState::updateElectronegativity()
+void MolProp::PEOEChargeCalculator::AtomState::updateElectronegativity()
 {
 	enegativity = a + b * charge + c * charge * charge;
 }
