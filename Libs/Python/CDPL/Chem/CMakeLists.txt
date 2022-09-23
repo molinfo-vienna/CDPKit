@@ -46,12 +46,14 @@ SET(chem_MOD_SRCS
     BasicBondExport.cpp
     BasicMoleculeExport.cpp
     BasicReactionExport.cpp
-    FragmentExport.cpp 
+    FragmentExport.cpp
+    ElectronSystemExport.cpp 
     Entity3DMappingExport.cpp 
     AtomMappingExport.cpp 
     BondMappingExport.cpp 
     AtomBondMappingExport.cpp 
-    FragmentListExport.cpp 
+    FragmentListExport.cpp
+    ElectronSystemListExport.cpp 
     StringDataBlockExport.cpp
     StereoDescriptorExport.cpp
     MultiConfMoleculeInputProcessorExport.cpp

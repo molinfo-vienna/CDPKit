@@ -50,11 +50,13 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBasicMolecule();
 	exportBasicReaction();
 	exportFragment();
+	exportElectronSystem();
 	exportEntity3DMapping();
 	exportAtomMapping();
 	exportBondMapping();
 	exportAtomBondMapping();
 	exportFragmentList();
+	exportElectronSystemList();
 	exportStringDataBlock();
 	exportStereoDescriptor();
 	exportMultiConfMoleculeInputProcessor();

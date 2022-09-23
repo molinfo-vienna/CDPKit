@@ -128,9 +128,13 @@ namespace CDPL
 			 * \return The zero-based index of the specified Chem::Bond instance.
 			 * \throw Base::ItemNotFound if the specified Chem::Bond instance could not be found.
 			 */
-			virtual std::size_t getBondIndex(const Bond& bond) const = 0;
+			 virtual std::size_t getBondIndex(const Bond& bond) const = 0;
 
-			virtual void orderBonds(const BondCompareFunction& func) = 0;
+			/**
+			  * \brief Orders the stored bonds according to criteria implemented by the provided bond comparison function.
+			  * \param func The bond comparison function implementing the applied ordering criteria.
+			  */
+			 virtual void orderBonds(const BondCompareFunction& func) = 0;
 
 		protected:
 			/**

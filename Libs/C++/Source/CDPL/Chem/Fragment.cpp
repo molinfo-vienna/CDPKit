@@ -175,10 +175,9 @@ void Chem::Fragment::removeAtom(std::size_t idx)
 		throw Base::IndexError("Fragment: atom index out of bounds");
 
 	const Atom& atom = *atoms[idx];
-
 	AtomList::iterator it = atoms.begin() + idx;
 
-	atomIndices.erase(*it);
+	atomIndices.erase(&atom);
 	
 	it = atoms.erase(it);
 	
@@ -219,7 +218,6 @@ bool Chem::Fragment::removeAtom(const Atom& atom)
 		return false;
 
 	std::size_t idx = idx_it->second;
-
 	AtomList::iterator it = atoms.begin() + idx;
 
 	atomIndices.erase(idx_it);

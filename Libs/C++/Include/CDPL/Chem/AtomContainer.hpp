@@ -137,6 +137,10 @@ namespace CDPL
 
 			virtual Entity3D& getEntity(std::size_t idx);
 
+			/**
+			 * \brief Orders the stored atoms according to criteria implemented by the provided atom comparison function.
+			 * \param func The atom comparison function implementing the applied ordering criteria.
+			 */
 			virtual void orderAtoms(const AtomCompareFunction& func) = 0;
 
 		protected:

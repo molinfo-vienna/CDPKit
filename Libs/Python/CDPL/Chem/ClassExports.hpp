@@ -45,11 +45,13 @@ namespace CDPLPythonChem
 	void exportBasicMolecule();
 	void exportBasicReaction();
 	void exportFragment();
+	void exportElectronSystem();
 	void exportEntity3DMapping();
 	void exportAtomMapping();
 	void exportBondMapping();
 	void exportAtomBondMapping();
 	void exportFragmentList();
+	void exportElectronSystemList();
 	void exportStringDataBlock();
 	void exportStereoDescriptor();
 	void exportMultiConfMoleculeInputProcessor();

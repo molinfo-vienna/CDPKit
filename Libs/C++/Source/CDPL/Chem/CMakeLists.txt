@@ -40,6 +40,7 @@ SET(cdpl-chem_LIB_SRCS
     BasicAtom.cpp
     BasicBond.cpp
     Fragment.cpp
+    ElectronSystem.cpp
     Entity3DMapping.cpp	
     AtomBondMapping.cpp
 

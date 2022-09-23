@@ -104,7 +104,6 @@ const Util::BitSet& Chem::ResonanceStructureGenerator::getOctetRuleCheckAtomType
 {
 	return octRuleCheckAtomTypes;
 }
-
 			
 void Chem::ResonanceStructureGenerator::minimizeOctetRuleViolations(bool minimize)
 {
@@ -144,6 +143,16 @@ void Chem::ResonanceStructureGenerator::setChargeCountWindow(std::size_t win_siz
 std::size_t Chem::ResonanceStructureGenerator::getChargeCountWindow() const
 {
 	return chargeCountWin;
+}
+
+void Chem::ResonanceStructureGenerator::setMaxNumGeneratedStructures(std::size_t max_num)
+{
+	maxNumGenStructs = max_num;
+}
+
+std::size_t Chem::ResonanceStructureGenerator::getMaxNumGeneratedStructures() const
+{
+	return maxNumGenStructs;
 }
 
 void Chem::ResonanceStructureGenerator::generate(const MolecularGraph& molgraph)

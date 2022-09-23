@@ -76,7 +76,7 @@ void CDPLPythonChem::exportFragment()
 	Chem::Fragment& (Chem::Fragment::*copyFragFunc)(const Chem::Fragment&) = &Chem::Fragment::operator=;
 
 	python::scope scope = python::class_<Chem::Fragment, Chem::Fragment::SharedPointer, 
-		python::bases<Chem::MolecularGraph> >("Fragment", python::no_init)
+										 python::bases<Chem::MolecularGraph> >("Fragment", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Chem::Fragment&>((python::arg("self"), python::arg("frag")))
 			 [python::with_custodian_and_ward<1, 2>()])

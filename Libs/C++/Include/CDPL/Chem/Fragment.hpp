@@ -316,8 +316,16 @@ namespace CDPL
 			 */
 			void swap(Fragment& frag);
 
+			/**
+			 * \brief Orders the stored atoms according to criteria implemented by the provided atom comparison function.
+			 * \param func The atom comparison function implementing the applied ordering criteria.
+			 */
 			void orderAtoms(const AtomCompareFunction& func);
 
+			/**
+			 * \brief Orders the stored bonds according to criteria implemented by the provided bond comparison function.
+			 * \param func The bond comparison function implementing the applied ordering criteria.
+			 */
 			void orderBonds(const BondCompareFunction& func);
 
 			/**

@@ -47,9 +47,11 @@
 #include "CDPL/Chem/BasicAtom.hpp"
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/ElectronSystem.hpp"
 
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/ElectronSystemList.hpp"
 #include "CDPL/Chem/Entity3DMapping.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/BondMapping.hpp"
