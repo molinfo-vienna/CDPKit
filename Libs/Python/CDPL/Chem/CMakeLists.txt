@@ -97,7 +97,8 @@ SET(chem_MOD_SRCS
     CyclicSubstructureExport.cpp 
     ConnectedSubstructureSetExport.cpp 
     ComponentSetExport.cpp 
-   
+    PiElectronSystemListExport.cpp
+    
     Atom2DCoordinatesCalculatorExport.cpp 
     Hydrogen3DCoordinatesCalculatorExport.cpp 
     MorganNumberingCalculatorExport.cpp 

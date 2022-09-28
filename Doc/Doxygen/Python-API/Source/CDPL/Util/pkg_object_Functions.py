@@ -21,25 +21,15 @@
 
 ##
 # \brief 
+# \param seq 
+# \param func 
 #
-class ControlParameter(Boost.Python.instance):
+def forEach(seq: object, func: object) -> None: pass
 
-    ##
-    # \brief 
-    #
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=319, name='STRICT_ERROR_CHECKING')
-
-    ##
-    # \brief 
-    #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=320, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')
-
-    ##
-    # \brief 
-    #
-    PSD_CREATION_MODE = CDPL.Base.LookupKey(id=321, name='PSD_CREATION_MODE')
-
-    ##
-    # \brief 
-    #
-    PSD_ALLOW_DUPLICATES = CDPL.Base.LookupKey(id=322, name='PSD_ALLOW_DUPLICATES')
+##
+# \brief 
+# \param seq1 
+# \param seq2 
+# \param func 
+#
+def forEachPair(seq1: object, seq2: object, func: object) -> None: pass

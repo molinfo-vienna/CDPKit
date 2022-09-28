@@ -104,7 +104,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportCyclicSubstructure();
 	exportConnectedSubstructureSet();
 	exportComponentSet();
-
+	exportPiElectronSystemList();
+	
 	exportMorganNumberingCalculator();
 	exportCanonicalNumberingCalculator();
 	exportCIPPriorityCalculator();

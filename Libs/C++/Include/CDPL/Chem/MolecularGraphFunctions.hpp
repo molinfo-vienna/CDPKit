@@ -38,6 +38,7 @@
 #include "CDPL/Chem/APIPrefix.hpp" 
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/ElectronSystemList.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
@@ -377,10 +378,6 @@ namespace CDPL
 
 		CDPL_CHEM_API Math::DMatrix::SharedPointer calcGeometricalDistanceMatrix(MolecularGraph& molgraph, bool overwrite);
 
-		
-		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API FragmentList::SharedPointer extractAromaticSSSRSubset(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API const Fragment::SharedPointer& getAromaticSubstructure(const MolecularGraph& molgraph);
 
@@ -393,6 +390,20 @@ namespace CDPL
 		CDPL_CHEM_API Fragment::SharedPointer perceiveAromaticSubstructure(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API Fragment::SharedPointer perceiveAromaticSubstructure(MolecularGraph& molgraph, bool overwrite);
+		
+
+		CDPL_CHEM_API const ElectronSystemList::SharedPointer& getPiElectronSystems(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API void setPiElectronSystems(MolecularGraph& molgraph, const ElectronSystemList::SharedPointer& pi_systems);
+
+		CDPL_CHEM_API void clearPiElectronSystems(MolecularGraph& molgraph);
+
+		CDPL_CHEM_API bool hasPiElectronSystems(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API ElectronSystemList::SharedPointer perceivePiElectronSystems(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API ElectronSystemList::SharedPointer perceivePiElectronSystems(MolecularGraph& molgraph, bool overwrite);
+		
 
 		CDPL_CHEM_API bool generateSMILES(const MolecularGraph& molgraph, std::string& smiles, bool canonical = false, 
 										  bool ord_h_deplete = true, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
@@ -483,7 +494,11 @@ namespace CDPL
 		CDPL_CHEM_API void setAtomSymbolsFromTypes(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite);
-		
+
+		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API FragmentList::SharedPointer extractAromaticSSSRSubset(const MolecularGraph& molgraph);
+
 		CDPL_CHEM_API bool containsMolecularGraph(const MolecularGraph& molgraph, const MolecularGraph& sub_molgraph, 
 												  bool atoms = true, bool bonds = true);
 

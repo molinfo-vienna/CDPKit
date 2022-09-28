@@ -233,8 +233,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("extractTopologicalDistanceSubMatrix", 
 				static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceSubMatrix),
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")));
- 
-	python::def("extractReactionCenter", &Chem::extractReactionCenter, 
+ 	python::def("extractReactionCenter", &Chem::extractReactionCenter, 
 				(python::arg("molgraph"), python::arg("rxn_center")),
 				python::with_custodian_and_ward<2, 1>());
     python::def("buildAdjacencyMatrix", &Chem::buildAdjacencyMatrix,
@@ -255,7 +254,12 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
 	python::def("extractTopologicalDistanceSubMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceSubMatrix), 
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
-
+	python::def("perceivePiElectronSystems", static_cast<Chem::ElectronSystemList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceivePiElectronSystems),
+	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+    python::def("perceivePiElectronSystems",
+				static_cast<Chem::ElectronSystemList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceivePiElectronSystems),
+	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+	
 	python::def("getCompleteBondCount", &Chem::getCompleteBondCount, python::arg("molgraph"));
 		
 	python::def("generateINCHI", &generateINCHIWrapper, 
@@ -307,6 +311,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MatchExpression, expr)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(ComponentGroups, comp_groups)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(Components, comps)
+	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(PiElectronSystems, pi_systems)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(Name, name)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLUserInitials, initials)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLProgramName, name)

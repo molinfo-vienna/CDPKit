@@ -57,114 +57,119 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=59, name='MATCH_CONSTRAINTS')
+    PI_ELECTRON_SYSTEMS = CDPL.Base.LookupKey(id=59, name='PI_ELECTRON_SYSTEMS')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=60, name='MATCH_EXPRESSION')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=60, name='MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=61, name='COMPONENT_GROUPS')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=61, name='MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    TOPOLOGICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey(id=62, name='TOPOLOGICAL_DISTANCE_MATRIX')
+    COMPONENT_GROUPS = CDPL.Base.LookupKey(id=62, name='COMPONENT_GROUPS')
 
     ##
     # \brief 
     #
-    GEOMETRICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey(id=63, name='GEOMETRICAL_DISTANCE_MATRIX')
+    TOPOLOGICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey(id=63, name='TOPOLOGICAL_DISTANCE_MATRIX')
 
     ##
     # \brief 
     #
-    STOICHIOMETRIC_NUMBER = CDPL.Base.LookupKey(id=64, name='STOICHIOMETRIC_NUMBER')
+    GEOMETRICAL_DISTANCE_MATRIX = CDPL.Base.LookupKey(id=64, name='GEOMETRICAL_DISTANCE_MATRIX')
 
     ##
     # \brief 
     #
-    CONFORMATION_INDEX = CDPL.Base.LookupKey(id=65, name='CONFORMATION_INDEX')
+    STOICHIOMETRIC_NUMBER = CDPL.Base.LookupKey(id=65, name='STOICHIOMETRIC_NUMBER')
 
     ##
     # \brief 
     #
-    CONFORMER_ENERGIES = CDPL.Base.LookupKey(id=66, name='CONFORMER_ENERGIES')
+    CONFORMATION_INDEX = CDPL.Base.LookupKey(id=66, name='CONFORMATION_INDEX')
 
     ##
     # \brief 
     #
-    STRUCTURE_DATA = CDPL.Base.LookupKey(id=67, name='STRUCTURE_DATA')
+    CONFORMER_ENERGIES = CDPL.Base.LookupKey(id=67, name='CONFORMER_ENERGIES')
 
     ##
     # \brief 
     #
-    HASH_CODE = CDPL.Base.LookupKey(id=68, name='HASH_CODE')
+    STRUCTURE_DATA = CDPL.Base.LookupKey(id=68, name='STRUCTURE_DATA')
 
     ##
     # \brief 
     #
-    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=69, name='MDL_USER_INITIALS')
+    HASH_CODE = CDPL.Base.LookupKey(id=69, name='HASH_CODE')
 
     ##
     # \brief 
     #
-    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=70, name='MDL_PROGRAM_NAME')
+    MDL_USER_INITIALS = CDPL.Base.LookupKey(id=70, name='MDL_USER_INITIALS')
 
     ##
     # \brief 
     #
-    MDL_TIMESTAMP = CDPL.Base.LookupKey(id=71, name='MDL_TIMESTAMP')
+    MDL_PROGRAM_NAME = CDPL.Base.LookupKey(id=71, name='MDL_PROGRAM_NAME')
 
     ##
     # \brief 
     #
-    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=76, name='MDL_REGISTRY_NUMBER')
+    MDL_TIMESTAMP = CDPL.Base.LookupKey(id=72, name='MDL_TIMESTAMP')
 
     ##
     # \brief 
     #
-    MDL_COMMENT = CDPL.Base.LookupKey(id=77, name='MDL_COMMENT')
+    MDL_REGISTRY_NUMBER = CDPL.Base.LookupKey(id=77, name='MDL_REGISTRY_NUMBER')
 
     ##
     # \brief 
     #
-    MDL_CTAB_VERSION = CDPL.Base.LookupKey(id=79, name='MDL_CTAB_VERSION')
+    MDL_COMMENT = CDPL.Base.LookupKey(id=78, name='MDL_COMMENT')
 
     ##
     # \brief 
     #
-    MDL_DIMENSIONALITY = CDPL.Base.LookupKey(id=72, name='MDL_DIMENSIONALITY')
+    MDL_CTAB_VERSION = CDPL.Base.LookupKey(id=80, name='MDL_CTAB_VERSION')
 
     ##
     # \brief 
     #
-    MDL_SCALING_FACTOR1 = CDPL.Base.LookupKey(id=73, name='MDL_SCALING_FACTOR1')
+    MDL_DIMENSIONALITY = CDPL.Base.LookupKey(id=73, name='MDL_DIMENSIONALITY')
 
     ##
     # \brief 
     #
-    MDL_SCALING_FACTOR2 = CDPL.Base.LookupKey(id=74, name='MDL_SCALING_FACTOR2')
+    MDL_SCALING_FACTOR1 = CDPL.Base.LookupKey(id=74, name='MDL_SCALING_FACTOR1')
 
     ##
     # \brief 
     #
-    MDL_ENERGY = CDPL.Base.LookupKey(id=75, name='MDL_ENERGY')
+    MDL_SCALING_FACTOR2 = CDPL.Base.LookupKey(id=75, name='MDL_SCALING_FACTOR2')
 
     ##
     # \brief 
     #
-    MDL_CHIRAL_FLAG = CDPL.Base.LookupKey(id=78, name='MDL_CHIRAL_FLAG')
+    MDL_ENERGY = CDPL.Base.LookupKey(id=76, name='MDL_ENERGY')
 
     ##
     # \brief 
     #
-    MOL2_CHARGE_TYPE = CDPL.Base.LookupKey(id=80, name='MOL2_CHARGE_TYPE')
+    MDL_CHIRAL_FLAG = CDPL.Base.LookupKey(id=79, name='MDL_CHIRAL_FLAG')
 
     ##
     # \brief 
     #
-    MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey(id=81, name='MOL2_MOLECULE_TYPE')
+    MOL2_CHARGE_TYPE = CDPL.Base.LookupKey(id=81, name='MOL2_CHARGE_TYPE')
+
+    ##
+    # \brief 
+    #
+    MOL2_MOLECULE_TYPE = CDPL.Base.LookupKey(id=82, name='MOL2_MOLECULE_TYPE')

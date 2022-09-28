@@ -101,7 +101,8 @@ namespace CDPLPythonChem
 	void exportCyclicSubstructure();
 	void exportConnectedSubstructureSet();
 	void exportComponentSet();
-
+	void exportPiElectronSystemList();
+	
 	void exportMorganNumberingCalculator();
 	void exportCanonicalNumberingCalculator();
 	void exportCIPPriorityCalculator();

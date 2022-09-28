@@ -22,24 +22,21 @@
 ##
 # \brief 
 #
-class ControlParameter(Boost.Python.instance):
+class PiElectronSystemList(ElectronSystemList):
+
+    ##
+    # \brief Initializes the \e %PiElectronSystemList instance.
+    #
+    def __init__() -> None: pass
+
+    ##
+    # \brief Initializes the \e %PiElectronSystemList instance.
+    # \param molgraph 
+    #
+    def __init__(molgraph: MolecularGraph) -> None: pass
 
     ##
     # \brief 
+    # \param molgraph 
     #
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=319, name='STRICT_ERROR_CHECKING')
-
-    ##
-    # \brief 
-    #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=320, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')
-
-    ##
-    # \brief 
-    #
-    PSD_CREATION_MODE = CDPL.Base.LookupKey(id=321, name='PSD_CREATION_MODE')
-
-    ##
-    # \brief 
-    #
-    PSD_ALLOW_DUPLICATES = CDPL.Base.LookupKey(id=322, name='PSD_ALLOW_DUPLICATES')
+    def perceive(molgraph: MolecularGraph) -> None: pass

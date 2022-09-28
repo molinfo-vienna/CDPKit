@@ -80,6 +80,7 @@ MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(RINGS, const Chem::FragmentList::SharedPointer&
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(SSSR, const Chem::FragmentList::SharedPointer&, SSSR)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(CYCLIC_SUBSTRUCTURE, const Chem::Fragment::SharedPointer&, CyclicSubstructure)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(AROMATIC_SUBSTRUCTURE, const Chem::Fragment::SharedPointer&, AromaticSubstructure)
+MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PI_ELECTRON_SYSTEMS, const Chem::ElectronSystemList::SharedPointer&, PiElectronSystems)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(COMPONENT_GROUPS, const Chem::FragmentList::SharedPointer&, ComponentGroups)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(TOPOLOGICAL_DISTANCE_MATRIX, const Math::ULMatrix::SharedPointer&, TopologicalDistanceMatrix)
 MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(GEOMETRICAL_DISTANCE_MATRIX, const Math::DMatrix::SharedPointer&, GeometricalDistanceMatrix)

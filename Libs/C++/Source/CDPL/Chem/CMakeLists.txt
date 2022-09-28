@@ -143,7 +143,8 @@ SET(cdpl-chem_LIB_SRCS
     CyclicSubstructure.cpp
     ConnectedSubstructureSet.cpp
     ComponentSet.cpp
-
+    PiElectronSystemList.cpp
+    
     MorganNumberingCalculator.cpp
     CIPPriorityCalculator.cpp
     CanonicalNumberingCalculator.cpp
@@ -254,7 +255,8 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphCopyStereoDescriptorsFunctions.cpp  
     MolecularGraphSplitIntoFragmentsFunction.cpp  
     MolecularGraphConformerFunctions.cpp
-
+    MolecularGraphPiElectronSystemsFunctions.cpp
+    
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
     ReactionMatchExpressionFunctions.cpp

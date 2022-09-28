@@ -27,34 +27,34 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    COLOR = CDPL.Base.LookupKey(id=145, name='COLOR')
+    COLOR = CDPL.Base.LookupKey(id=146, name='COLOR')
 
     ##
     # \brief 
     #
-    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=151, name='RADICAL_ELECTRON_DOT_SIZE')
+    RADICAL_ELECTRON_DOT_SIZE = CDPL.Base.LookupKey(id=152, name='RADICAL_ELECTRON_DOT_SIZE')
 
     ##
     # \brief 
     #
-    LABEL_FONT = CDPL.Base.LookupKey(id=146, name='LABEL_FONT')
+    LABEL_FONT = CDPL.Base.LookupKey(id=147, name='LABEL_FONT')
 
     ##
     # \brief 
     #
-    LABEL_MARGIN = CDPL.Base.LookupKey(id=150, name='LABEL_MARGIN')
+    LABEL_MARGIN = CDPL.Base.LookupKey(id=151, name='LABEL_MARGIN')
 
     ##
     # \brief 
     #
-    LABEL_SIZE = CDPL.Base.LookupKey(id=147, name='LABEL_SIZE')
+    LABEL_SIZE = CDPL.Base.LookupKey(id=148, name='LABEL_SIZE')
 
     ##
     # \brief 
     #
-    SECONDARY_LABEL_FONT = CDPL.Base.LookupKey(id=148, name='SECONDARY_LABEL_FONT')
+    SECONDARY_LABEL_FONT = CDPL.Base.LookupKey(id=149, name='SECONDARY_LABEL_FONT')
 
     ##
     # \brief 
     #
-    SECONDARY_LABEL_SIZE = CDPL.Base.LookupKey(id=149, name='SECONDARY_LABEL_SIZE')
+    SECONDARY_LABEL_SIZE = CDPL.Base.LookupKey(id=150, name='SECONDARY_LABEL_SIZE')

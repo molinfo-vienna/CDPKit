@@ -252,6 +252,7 @@
 #include "CDPL/Chem/CyclicSubstructure.hpp"
 #include "CDPL/Chem/ConnectedSubstructureSet.hpp"
 #include "CDPL/Chem/ComponentSet.hpp"
+#include "CDPL/Chem/PiElectronSystemList.hpp"
 
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/ReactionSubstructureSearch.hpp"

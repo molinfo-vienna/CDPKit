@@ -59,7 +59,8 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey SSSR;
 			extern CDPL_CHEM_API const Base::LookupKey CYCLIC_SUBSTRUCTURE;
 			extern CDPL_CHEM_API const Base::LookupKey AROMATIC_SUBSTRUCTURE;
-
+			extern CDPL_CHEM_API const Base::LookupKey PI_ELECTRON_SYSTEMS;
+			
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;
 			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;

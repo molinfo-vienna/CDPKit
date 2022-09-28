@@ -167,6 +167,18 @@ class ResonanceStructureGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def getMaxNumGeneratedStructures() -> int: pass
+
+    ##
+    # \brief 
+    # \param max_num 
+    #
+    def setMaxNumGeneratedStructures(max_num: int) -> None: pass
+
+    ##
+    # \brief 
     # \param molgraph 
     #
     def generate(molgraph: MolecularGraph) -> None: pass
@@ -231,3 +243,8 @@ class ResonanceStructureGenerator(Boost.Python.instance):
     # \brief 
     #
     chargeCountWindow = property(getChargeCountWindow, setChargeCountWindow)
+
+    ##
+    # \brief 
+    #
+    maxNumGeneratedStructures = property(getMaxNumGeneratedStructures, setMaxNumGeneratedStructures)

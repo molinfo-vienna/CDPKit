@@ -27,14 +27,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    HYDROPHOBICITY = CDPL.Base.LookupKey(id=142, name='HYDROPHOBICITY')
+    HYDROPHOBICITY = CDPL.Base.LookupKey(id=143, name='HYDROPHOBICITY')
 
     ##
     # \brief 
     #
-    PEOE_CHARGE = CDPL.Base.LookupKey(id=143, name='PEOE_CHARGE')
+    PEOE_CHARGE = CDPL.Base.LookupKey(id=144, name='PEOE_CHARGE')
 
     ##
     # \brief 
     #
-    PEOE_ELECTRONEGATIVITY = CDPL.Base.LookupKey(id=144, name='PEOE_ELECTRONEGATIVITY')
+    PEOE_ELECTRONEGATIVITY = CDPL.Base.LookupKey(id=145, name='PEOE_ELECTRONEGATIVITY')

@@ -868,6 +868,48 @@ def setAtomTypesFromSymbols(molgraph: MolecularGraph, overwrite: bool) -> None: 
 ##
 # \brief 
 # \param molgraph 
+# \return 
+#
+def perceivePiElectronSystems(molgraph: MolecularGraph) -> ElectronSystemList: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param overwrite 
+# \return 
+#
+def perceivePiElectronSystems(molgraph: MolecularGraph, overwrite: bool) -> ElectronSystemList: pass
+
+##
+# \brief 
+# \param molgraph 
+#
+def clearPiElectronSystems(molgraph: MolecularGraph) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def hasPiElectronSystems(molgraph: MolecularGraph) -> bool: pass
+
+##
+# \brief 
+# \param molgraph 
+# \return 
+#
+def getPiElectronSystems(molgraph: MolecularGraph) -> ElectronSystemList: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param pi_systems 
+#
+def setPiElectronSystems(molgraph: MolecularGraph, pi_systems: ElectronSystemList) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
 # \param overwrite 
 #
 def buildMatchExpressions(molgraph: MolecularGraph, overwrite: bool) -> None: pass
