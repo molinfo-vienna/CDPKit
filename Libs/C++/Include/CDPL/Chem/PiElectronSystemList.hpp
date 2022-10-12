@@ -31,6 +31,9 @@
 #ifndef CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP
 #define CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP
 
+#include <list>
+#include <vector>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -75,7 +78,13 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-		
+			typedef std::list<ElectronSystem::SharedPointer> WorkingElecSysList;
+
+			void initStartElecSystems(const MolecularGraph& molgraph);
+
+			void mergeElecSystems(const MolecularGraph& molgraph);
+
+			WorkingElecSysList workingElecSystems;
 		};
 	}
 }

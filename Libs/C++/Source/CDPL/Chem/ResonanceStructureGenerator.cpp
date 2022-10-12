@@ -637,7 +637,6 @@ long Chem::ResonanceStructureGenerator::AtomData::init(const Atom& atom, const M
 
 	if (bondIndices.empty())
 		return form_charge;
-	
 
 	if (form_charge == 0 && !unsat && (valElecCount - unprdElecCount - implHCount - exp_val) < 2)
 		return form_charge;
