@@ -34,6 +34,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 
 
 using namespace CDPL;
@@ -84,6 +85,61 @@ void Chem::PiElectronSystemList::initStartElecSystems(const MolecularGraph& molg
 		}
 
 		long form_chg = getFormalCharge(atom);
+		std::size_t num_sys = 4;
+
+		if (type > AtomType::O) {
+
+			switch (iupac_grp) {
+
+				case 15:
+					if (num_bonds >= 4)
+						num_sys = 5;
+
+					break;
+
+				case 16:
+					if (num_bonds == 3) {
+						if (form_chg == 0)
+							num_sys = 5;
+
+					} else if (num_bonds >= 4)
+						num_sys = 6;
+					
+					break;
+
+				case 17:
+					if (num_bonds == 2)
+						num_sys = 5;
+
+					else if (num_bonds == 3)
+						num_sys = 6;
+
+					else if (num_bonds >= 4)
+						num_sys = 7;
+
+				default:
+					break;
+			}
+		}
+
+		if (num_bonds >= num_sys)
+			continue;
+
+		num_sys -= num_bonds;
+
+		long num_el = AtomDictionary::getNumValenceElectrons(type) - form_chg - num_bonds;
+		std::size_t el_cnts[7] = { 0 };
+
+		for (long i = 0; i < num_el; i++)
+			el_cnts[i % num_sys] += 1;
+
+		for (std::size_t i = 0; i < num_sys; i++) {
+			ElectronSystem::SharedPointer e_sys(new ElectronSystem());
+			
+			e_sys->addAtom(atom, el_cnts[i]);
+
+			workingElecSystems.push_back(e_sys);
+		}
 	}
 }
 
