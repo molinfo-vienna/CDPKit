@@ -32,7 +32,6 @@
 #define CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP
 
 #include <list>
-#include <vector>
 
 #include <boost/shared_ptr.hpp>
 
@@ -83,6 +82,9 @@ namespace CDPL
 			void initStartElecSystems(const MolecularGraph& molgraph);
 
 			void mergeElecSystems(const MolecularGraph& molgraph);
+
+			void mergeElecSystemsPass1(const MolecularGraph& molgraph);
+			void mergeElecSystemsPass2(const MolecularGraph& molgraph);
 
 			WorkingElecSysList workingElecSystems;
 		};

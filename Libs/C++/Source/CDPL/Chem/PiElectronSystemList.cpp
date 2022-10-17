@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <iterator>
+#include <algorithm>
 
 #include "CDPL/Chem/PiElectronSystemList.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -38,6 +38,29 @@
 
 
 using namespace CDPL;
+
+
+namespace
+{
+
+	struct ElecSysCmpFunc
+	{
+
+		bool operator()(const Chem::ElectronSystem::SharedPointer& e_sys1, const Chem::ElectronSystem::SharedPointer& e_sys2) const {
+			switch (e_sys1->getNumElectrons()) {
+
+				case 0:
+					return false;
+					
+				case 1:
+					return (e_sys2->getNumElectrons() != 1);
+					
+				default:
+					return (e_sys2->getNumElectrons() == 0);
+			};
+		}
+	};
+}
 
 
 Chem::PiElectronSystemList::PiElectronSystemList() {}
@@ -54,7 +77,7 @@ void Chem::PiElectronSystemList::perceive(const MolecularGraph& molgraph)
 	initStartElecSystems(molgraph);
 	mergeElecSystems(molgraph);
 
-	insertElements(0, workingElecSystems.begin(), workingElecSystems.end());
+	insertElements(getElementsEnd(), workingElecSystems.begin(), workingElecSystems.end());
 }
 
 void Chem::PiElectronSystemList::initStartElecSystems(const MolecularGraph& molgraph)
@@ -128,21 +151,99 @@ void Chem::PiElectronSystemList::initStartElecSystems(const MolecularGraph& molg
 		num_sys -= num_bonds;
 
 		long num_el = AtomDictionary::getNumValenceElectrons(type) - form_chg - num_bonds;
-		std::size_t el_cnts[7] = { 0 };
+		std::size_t el_cnts[7];
+
+		std::fill(el_cnts, el_cnts + num_sys, 0);
 
 		for (long i = 0; i < num_el; i++)
 			el_cnts[i % num_sys] += 1;
 
+		std::size_t num_lps = 0;
+
+		for ( ; num_lps < num_sys && el_cnts[num_lps] == 2; num_lps++);
+		
 		for (std::size_t i = 0; i < num_sys; i++) {
 			ElectronSystem::SharedPointer e_sys(new ElectronSystem());
 			
 			e_sys->addAtom(atom, el_cnts[i]);
 
-			workingElecSystems.push_back(e_sys);
+			if (num_lps > 1 && i < num_lps - 1) // allow only one lone-pair to be part of a pi-system
+				addElement(e_sys);
+			else
+				workingElecSystems.push_back(e_sys);
 		}
 	}
 }
 
 void Chem::PiElectronSystemList::mergeElecSystems(const MolecularGraph& molgraph)
 {
+	workingElecSystems.sort(ElecSysCmpFunc()); 	// elec. system merge priority: single electron > lone-pair > empty system
+
+	mergeElecSystemsPass1(molgraph);
+	mergeElecSystemsPass2(molgraph);
+}
+
+void Chem::PiElectronSystemList::mergeElecSystemsPass1(const MolecularGraph& molgraph)
+{
+	for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
+		ElectronSystem& e_sys1 = **it1;
+		std::size_t num_el1 = e_sys1.getNumElectrons();
+
+		if (num_el1 == 0) // don't merge two empty systems
+			break;
+		
+		WorkingElecSysList::iterator it2 = it1;
+			
+		for (++it2; it2 != workingElecSystems.end(); ++it2) {
+			const ElectronSystem& e_sys2 = **it2;
+			std::size_t num_el2 = e_sys2.getNumElectrons();
+
+			if (num_el1 == 1 && num_el2 != 1)
+				break;
+				
+			if (num_el1 == 2 && num_el2 != 0)
+				continue;
+				
+			if (e_sys1.connected(e_sys2, molgraph)) { // merge if connected by bond
+				e_sys1.addAtoms(e_sys2);
+				workingElecSystems.erase(it2);
+				break;
+			}
+		}
+	}
+}
+
+void Chem::PiElectronSystemList::mergeElecSystemsPass2(const MolecularGraph& molgraph)
+{
+	for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
+		ElectronSystem& e_sys1 = **it1;
+		std::size_t num_el1 = e_sys1.getNumElectrons();
+
+		if (num_el1 == 0) // don't merge empty systems
+			break;
+
+		std::size_t num_at1 = e_sys1.getNumAtoms();
+
+		for (bool merges = true; merges; ) {
+			merges = false;
+
+			WorkingElecSysList::iterator it2 = it1;
+			
+			for (++it2; it2 != workingElecSystems.end(); ++it2) {
+				const ElectronSystem& e_sys2 = **it2;
+				std::size_t num_el2 = e_sys2.getNumElectrons();
+				std::size_t num_at2 = e_sys2.getNumAtoms();
+		
+				if (num_at1 == 1 && num_el1 == 2 && num_at2 == 1 && num_el2 == 2) // don't merge two lone-pairs
+					continue;
+				
+				if (e_sys1.connected(e_sys2, molgraph)) { // merge if connected by bond
+					e_sys1.addAtoms(e_sys2);
+					workingElecSystems.erase(it2);
+					merges = true;
+					break;
+				}
+			}
+		}
+	}
 }

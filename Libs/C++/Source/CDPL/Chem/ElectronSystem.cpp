@@ -329,19 +329,23 @@ bool Chem::ElectronSystem::contains(const ElectronSystem& elec_sys) const
 
 bool Chem::ElectronSystem::connected(const ElectronSystem& elec_sys, const BondContainer& bonds) const
 {
-	if (overlaps(elec_sys))
-		return false;
+	const ElectronSystem* sys1 = this;
+	const ElectronSystem* sys2 = &elec_sys;
+	
+	if (sys1->atoms.size() > sys2->atoms.size())
+		std::swap(sys1, sys2);
 
-	for (BondContainer::ConstBondIterator it = bonds.getBondsBegin(), end = bonds.getBondsEnd(); it != end; ++it) {
-		const Bond& bond = *it;
-		const Atom& atom1 = bond.getBegin();
-		const Atom& atom2 = bond.getEnd();
+	for (AtomList::const_iterator it = sys1->atoms.begin(), end = sys1->atoms.end(); it != end; ++it)
+		if (sys2->containsAtom(**it))
+			return false;
 
-		if (containsAtom(atom1) && elec_sys.containsAtom(atom2))
-			return true;
+	for (AtomList::const_iterator it = sys1->atoms.begin(), end = sys1->atoms.end(); it != end; ++it) {
+		const Atom& atom = **it;
+		Atom::ConstBondIterator nb_it = atom.getBondsBegin();
 
-		if (containsAtom(atom2) && elec_sys.containsAtom(atom1))
-			return true;
+		for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) 
+			if (sys2->containsAtom(*na_it) && bonds.containsBond(*nb_it))
+				return true;
 	}
 	
 	return false;
