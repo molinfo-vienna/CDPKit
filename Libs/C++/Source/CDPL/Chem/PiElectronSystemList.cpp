@@ -162,12 +162,17 @@ void Chem::PiElectronSystemList::initStartElecSystems(const MolecularGraph& molg
 
 		for ( ; num_lps < num_sys && el_cnts[num_lps] == 2; num_lps++);
 		
+		std::size_t max_lp_cnt = 1;
+
+		//if (num_lps < num_sys && el_cnts[num_lps] > 0)
+		//max_lp_cnt = 0;
+
 		for (std::size_t i = 0; i < num_sys; i++) {
 			ElectronSystem::SharedPointer e_sys(new ElectronSystem());
 			
 			e_sys->addAtom(atom, el_cnts[i]);
 
-			if (num_lps > 1 && i < num_lps - 1) // allow only one lone-pair to be part of a pi-system
+			if (num_lps > 1 && i < num_lps - max_lp_cnt) // allow only one lone-pair to be part of a pi-system
 				addElement(e_sys);
 			else
 				workingElecSystems.push_back(e_sys);
