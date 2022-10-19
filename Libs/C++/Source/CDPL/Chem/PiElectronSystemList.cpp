@@ -162,17 +162,17 @@ void Chem::PiElectronSystemList::initStartElecSystems(const MolecularGraph& molg
 
 		for ( ; num_lps < num_sys && el_cnts[num_lps] == 2; num_lps++);
 		
-		std::size_t max_lp_cnt = 1;
+		std::size_t max_lp_cnt = 1; // allow only at most one lone-pair to be part of a pi-system
 
-		//if (num_lps < num_sys && el_cnts[num_lps] > 0)
-		//max_lp_cnt = 0;
-
+		if (num_lps < num_sys && el_cnts[num_lps] > 0)
+			max_lp_cnt = 0;
+				
 		for (std::size_t i = 0; i < num_sys; i++) {
 			ElectronSystem::SharedPointer e_sys(new ElectronSystem());
 			
 			e_sys->addAtom(atom, el_cnts[i]);
 
-			if (num_lps > 1 && i < num_lps - max_lp_cnt) // allow only one lone-pair to be part of a pi-system
+			if (num_lps >= 1 && i < (num_lps - max_lp_cnt)) 
 				addElement(e_sys);
 			else
 				workingElecSystems.push_back(e_sys);
@@ -194,25 +194,27 @@ void Chem::PiElectronSystemList::mergeElecSystemsPass1(const MolecularGraph& mol
 		ElectronSystem& e_sys1 = **it1;
 		std::size_t num_el1 = e_sys1.getNumElectrons();
 
-		if (num_el1 == 0) // don't merge two empty systems
+		if (num_el1 == 0) // don't merge empty systems
 			break;
-		
-		WorkingElecSysList::iterator it2 = it1;
-			
-		for (++it2; it2 != workingElecSystems.end(); ++it2) {
-			const ElectronSystem& e_sys2 = **it2;
-			std::size_t num_el2 = e_sys2.getNumElectrons();
 
-			if (num_el1 == 1 && num_el2 != 1)
-				break;
+		for (bool merges = true, sys1_is_lp = (e_sys1.getNumAtoms() == 1 && num_el1 == 2); merges; ) {
+			merges = false;
+			WorkingElecSysList::iterator it2 = it1;
+			
+			for (++it2; it2 != workingElecSystems.end(); ++it2) {
+				const ElectronSystem& e_sys2 = **it2;
+		
+				if (sys1_is_lp && e_sys2.getNumAtoms() == 1 && e_sys2.getNumElectrons() == 2) // don't merge two lone-pairs
+					continue;
 				
-			if (num_el1 == 2 && num_el2 != 0)
-				continue;
-				
-			if (e_sys1.connected(e_sys2, molgraph)) { // merge if connected by bond
-				e_sys1.addAtoms(e_sys2);
-				workingElecSystems.erase(it2);
-				break;
+				if (e_sys1.connected(e_sys2, molgraph)) {
+					e_sys1.addAtoms(e_sys2);
+					workingElecSystems.erase(it2);
+
+					merges = true;
+					sys1_is_lp = false;
+					break;
+				}
 			}
 		}
 	}
@@ -227,25 +229,19 @@ void Chem::PiElectronSystemList::mergeElecSystemsPass2(const MolecularGraph& mol
 		if (num_el1 == 0) // don't merge empty systems
 			break;
 
-		std::size_t num_at1 = e_sys1.getNumAtoms();
-
-		for (bool merges = true; merges; ) {
+		for (bool merges = true, sys1_is_rad = (e_sys1.getNumAtoms() == 1 && num_el1 == 1); merges; ) {
 			merges = false;
-
 			WorkingElecSysList::iterator it2 = it1;
-			
+		
 			for (++it2; it2 != workingElecSystems.end(); ++it2) {
 				const ElectronSystem& e_sys2 = **it2;
-				std::size_t num_el2 = e_sys2.getNumElectrons();
-				std::size_t num_at2 = e_sys2.getNumAtoms();
 		
-				if (num_at1 == 1 && num_el1 == 2 && num_at2 == 1 && num_el2 == 2) // don't merge two lone-pairs
-					continue;
-				
-				if (e_sys1.connected(e_sys2, molgraph)) { // merge if connected by bond
-					e_sys1.addAtoms(e_sys2);
+				if ((sys1_is_rad || (e_sys2.getNumAtoms() == 1 && e_sys2.getNumElectrons() == 1)) && e_sys1.overlaps(e_sys2)) {
+					e_sys1.merge(e_sys2);
 					workingElecSystems.erase(it2);
+				
 					merges = true;
+					sys1_is_rad = false;
 					break;
 				}
 			}

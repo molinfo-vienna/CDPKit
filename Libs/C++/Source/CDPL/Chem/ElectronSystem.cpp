@@ -299,7 +299,7 @@ void Chem::ElectronSystem::merge(const ElectronSystem& elec_sys)
 		if (atomIndsAndElecContribs.insert(AtomIdxAndElecContribMap::value_type(atom, UIPair(atoms.size(), elec_contrib))).second)
 			atoms.push_back(const_cast<Atom*>(atom));
 		else
-			atomIndsAndElecContribs[atom].second += numElectrons;
+			atomIndsAndElecContribs[atom].second += elec_contrib;
 	}
 }
 
