@@ -86,6 +86,13 @@ namespace CDPL
 			void mergeElecSystemsPass1(const MolecularGraph& molgraph);
 			void mergeElecSystemsPass2(const MolecularGraph& molgraph);
 
+			bool isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys, 
+									   const MolecularGraph& molgraph) const;
+			bool isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys, 
+												 const MolecularGraph& molgraph) const;
+			bool has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys, 
+										const MolecularGraph& molgraph) const;
+
 			WorkingElecSysList workingElecSystems;
 		};
 	}

@@ -220,31 +220,111 @@ void Chem::PiElectronSystemList::mergeElecSystemsPass1(const MolecularGraph& mol
 	}
 }
 
-void Chem::PiElectronSystemList::mergeElecSystemsPass2(const MolecularGraph& molgraph)
+void Chem::PiElectronSystemList::mergeElecSystemsPass2(const MolecularGraph& molgraph) // merge split pi-systems of cumulenes with even number of bonds (helical orbitals)
 {
 	for (WorkingElecSysList::iterator it1 = workingElecSystems.begin(); it1 != workingElecSystems.end(); ++it1) {
 		ElectronSystem& e_sys1 = **it1;
-		std::size_t num_el1 = e_sys1.getNumElectrons();
 
-		if (num_el1 == 0) // don't merge empty systems
+		if (e_sys1.getNumElectrons() == 0) // don't merge empty systems
 			break;
 
-		for (bool merges = true, sys1_is_rad = (e_sys1.getNumAtoms() == 1 && num_el1 == 1); merges; ) {
-			merges = false;
-			WorkingElecSysList::iterator it2 = it1;
+		bool sys1_maybe_cumulene = ((e_sys1.getNumAtoms() % 2) == 1 && isLinChainPiSysWith1ElecPerAtom(e_sys1, molgraph));
+		WorkingElecSysList::iterator it2 = it1;
+
+		for (++it2; it2 != workingElecSystems.end(); ++it2) {
+			const ElectronSystem& e_sys2 = **it2;
 		
-			for (++it2; it2 != workingElecSystems.end(); ++it2) {
-				const ElectronSystem& e_sys2 = **it2;
-		
-				if ((sys1_is_rad || (e_sys2.getNumAtoms() == 1 && e_sys2.getNumElectrons() == 1)) && e_sys1.overlaps(e_sys2)) {
-					e_sys1.merge(e_sys2);
-					workingElecSystems.erase(it2);
-				
-					merges = true;
-					sys1_is_rad = false;
-					break;
-				}
+			if ((sys1_maybe_cumulene && isCumuleneSubPiSystem(e_sys1, e_sys2, molgraph)) || 
+				((e_sys2.getNumAtoms() % 2) == 1 && isLinChainPiSysWith1ElecPerAtom(e_sys2, molgraph) && isCumuleneSubPiSystem(e_sys2, e_sys1, molgraph))) {
+
+				e_sys1.merge(e_sys2);
+				workingElecSystems.erase(it2);
+				break;
 			}
 		}
 	}
+}
+
+bool Chem::PiElectronSystemList::isCumuleneSubPiSystem(const ElectronSystem& sub_e_sys, const ElectronSystem& parent_e_sys, const MolecularGraph& molgraph) const 
+{
+	if (parent_e_sys.getNumAtoms() <= sub_e_sys.getNumAtoms())
+		return false;
+
+	for (ElectronSystem::ConstAtomIterator a_it = sub_e_sys.getAtomsBegin(), a_end = sub_e_sys.getAtomsEnd(); a_it != a_end; ++a_it) {
+		const Atom& atom = *a_it;
+
+		if (!parent_e_sys.containsAtom(atom) || parent_e_sys.getElectronContrib(atom) != 1 || !has2NeighborsWith1Elec(atom, parent_e_sys, molgraph))
+			return false;
+	}
+
+	return true;
+}
+
+bool Chem::PiElectronSystemList::isLinChainPiSysWith1ElecPerAtom(const ElectronSystem& e_sys, const MolecularGraph& molgraph) const
+{
+	if (e_sys.getNumAtoms() == 1) 
+		return (e_sys.getElectronContrib(e_sys.getAtom(0)) == 1);
+
+	std::size_t num_term_atoms = 0;
+
+	for (ElectronSystem::ConstAtomIterator it = e_sys.getAtomsBegin(), end = e_sys.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (e_sys.getElectronContrib(atom) != 1)
+			return false;
+
+		Atom::ConstBondIterator nb_it = atom.getBondsBegin();
+		std::size_t num_e_sys_nbrs = 0;
+
+		for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
+			if (!molgraph.containsBond(*nb_it))
+				continue;
+
+			if (!molgraph.containsAtom(*na_it))
+				continue;
+
+			if (e_sys.containsAtom(*na_it))
+				if (++num_e_sys_nbrs > 2)
+					return false;
+		}
+
+		switch (num_e_sys_nbrs) {
+
+			case 1:
+				num_term_atoms++;
+
+			case 2:
+				continue;
+
+			default:
+				return false;
+		}
+	}
+
+	return (num_term_atoms == 2);
+}
+
+bool Chem::PiElectronSystemList::has2NeighborsWith1Elec(const Atom& atom, const ElectronSystem& e_sys, const MolecularGraph& molgraph) const
+{
+	Atom::ConstBondIterator nb_it = atom.getBondsBegin();
+	std::size_t num_e_sys_nbrs = 0;
+
+	for (Atom::ConstAtomIterator na_it = atom.getAtomsBegin(), na_end = atom.getAtomsEnd(); na_it != na_end; ++na_it, ++nb_it) {
+		if (!molgraph.containsBond(*nb_it))
+			continue;
+
+		const Atom& nbr_atom = *na_it;
+
+		if (!molgraph.containsAtom(nbr_atom))
+			continue;
+
+		if (e_sys.containsAtom(nbr_atom)) {
+			if (e_sys.getElectronContrib(nbr_atom) != 1)
+				continue;
+
+			num_e_sys_nbrs++;
+		}
+	}
+
+	return (num_e_sys_nbrs >= 2);
 }
