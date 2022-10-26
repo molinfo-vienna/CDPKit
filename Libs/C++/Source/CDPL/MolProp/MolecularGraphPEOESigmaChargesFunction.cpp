@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphPEOEChargesFunction.cpp 
+ * MolecularGraphPEOESigmaChargesFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
-#include "CDPL/MolProp/PEOEChargeCalculator.hpp"
+#include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -36,7 +36,7 @@
 using namespace CDPL; 
 
 
-void MolProp::calcPEOECharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter, 
+void MolProp::calcPEOESigmaCharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter, 
 							  double damping)
 {
 	if (!overwrite) {
@@ -45,7 +45,7 @@ void MolProp::calcPEOECharges(Chem::MolecularGraph& molgraph, bool overwrite, st
 		for ( ; it != end; ++it) {
 			const Chem::Atom& atom = *it;
 
-			if (!hasPEOECharge(atom) || !hasPEOEElectronegativity(atom))
+			if (!hasPEOESigmaCharge(atom) || !hasPEOESigmaElectronegativity(atom))
 				break;
 		}
 		
@@ -53,21 +53,18 @@ void MolProp::calcPEOECharges(Chem::MolecularGraph& molgraph, bool overwrite, st
 			return;
 	}
 
-	Util::DArray charges;
-	Util::DArray el_negs;
-	PEOEChargeCalculator calculator;
+	PEOESigmaChargeCalculator calculator;
 
 	calculator.setNumIterations(num_iter);
 	calculator.setDampingFactor(damping);
-	calculator.calculate(molgraph, charges);
-	calculator.getElectronegativities(el_negs);
+	calculator.calculate(molgraph);
 	
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Chem::Atom& atom = molgraph.getAtom(i);
 		
-		setPEOECharge(atom, charges[i]);
-		setPEOEElectronegativity(atom, el_negs[i]);
+		setPEOESigmaCharge(atom, calculator.getCharge(i));
+		setPEOESigmaElectronegativity(atom, calculator.getElectronegativity(i));
 	}
 }

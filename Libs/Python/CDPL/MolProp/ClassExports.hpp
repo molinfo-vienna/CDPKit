@@ -38,7 +38,8 @@ namespace CDPLPythonMolProp
 	void exportLogSCalculator();
 	void exportXLogPCalculator();
 	void exportTPSACalculator();
-	void exportPEOEChargeCalculator();
+	void exportPEOESigmaChargeCalculator();
+	void exportModifiedHueckelMOCalculator();
 }
 
 #endif // CDPL_PYTHON_MOLPROP_CLASSEXPORTS_HPP

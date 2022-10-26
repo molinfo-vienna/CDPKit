@@ -60,22 +60,22 @@ namespace CDPL
 		CDPL_MOLPROP_API bool hasHydrophobicity(const Chem::Atom& atom);
 
 
-		CDPL_MOLPROP_API double getPEOECharge(const Chem::Atom& atom);
+		CDPL_MOLPROP_API double getPEOESigmaCharge(const Chem::Atom& atom);
 
-		CDPL_MOLPROP_API void setPEOECharge(Chem::Atom& atom, double charge);
+		CDPL_MOLPROP_API void setPEOESigmaCharge(Chem::Atom& atom, double charge);
 
-		CDPL_MOLPROP_API void clearPEOECharge(Chem::Atom& atom);
+		CDPL_MOLPROP_API void clearPEOESigmaCharge(Chem::Atom& atom);
 	
-		CDPL_MOLPROP_API bool hasPEOECharge(const Chem::Atom& atom);
+		CDPL_MOLPROP_API bool hasPEOESigmaCharge(const Chem::Atom& atom);
 	
 
-		CDPL_MOLPROP_API double getPEOEElectronegativity(const Chem::Atom& atom);
+		CDPL_MOLPROP_API double getPEOESigmaElectronegativity(const Chem::Atom& atom);
 
-		CDPL_MOLPROP_API void setPEOEElectronegativity(Chem::Atom& atom, double e_neg);
+		CDPL_MOLPROP_API void setPEOESigmaElectronegativity(Chem::Atom& atom, double e_neg);
 
-		CDPL_MOLPROP_API void clearPEOEElectronegativity(Chem::Atom& atom);
+		CDPL_MOLPROP_API void clearPEOESigmaElectronegativity(Chem::Atom& atom);
 	
-		CDPL_MOLPROP_API bool hasPEOEElectronegativity(const Chem::Atom& atom);
+		CDPL_MOLPROP_API bool hasPEOESigmaElectronegativity(const Chem::Atom& atom);
 
 		
 		CDPL_MOLPROP_API bool isInRing(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PEOEChargeCalculator.hpp 
+ * PEOESigmaChargeCalculator.hpp 
  * 
  * Charge calculation by partial equalization of orbital electronegativities (PEOE)
  * (J. Gasteiger, M. Marsili, Tetrahedron 1980, 36, 3219-3228) 
@@ -28,11 +28,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::PEOEChargeCalculator.
+ * \brief Definition of the class CDPL::MolProp::PEOESigmaChargeCalculator.
  */
 
-#ifndef CDPL_MOLPROP_PEOECHARGECALCULATOR_HPP
-#define CDPL_MOLPROP_PEOECHARGECALCULATOR_HPP
+#ifndef CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP
+#define CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP
 
 #include <cstddef>
 #include <vector>
@@ -40,7 +40,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
-#include "CDPL/Util/Array.hpp"
 
 
 namespace CDPL 
@@ -57,37 +56,34 @@ namespace CDPL
 	{
 
 		/**
-		 * \brief PEOEChargeCalculator.
+		 * \brief PEOESigmaChargeCalculator.
 		 * \see [\ref PEOE]
 		 */
-		class CDPL_MOLPROP_API PEOEChargeCalculator
+		class CDPL_MOLPROP_API PEOESigmaChargeCalculator
 		{
 
 		  public:
-			typedef boost::shared_ptr<PEOEChargeCalculator> SharedPointer;
+			typedef boost::shared_ptr<PEOESigmaChargeCalculator> SharedPointer;
 
 			static const std::size_t DEF_NUM_ITERATIONS = 6;
 			static const double      DEF_DAMPING_FACTOR;
 
 			/**
-			 * \brief Constructs the \c %PEOEChargeCalculator instance.
+			 * \brief Constructs the \c %PEOESigmaChargeCalculator instance.
 			 */
-			PEOEChargeCalculator();
+			PEOESigmaChargeCalculator();
 
 			/**
-			 * \brief Constructs the \c %PEOEChargeCalculator instance and calculates the \e PEOE charges of
-			 *        the atoms in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the \e PEOE charges.
-			 * \param charges An array containing the calculated partial atomic charges. The charges
-			 *         are stored in the same order as the atoms appear in the atom list of the
-			 *         molecular graph (i.e. the partial charge of an atom is accessible via its index).
+			 * \brief Constructs the \c %PEOESigmaChargeCalculator instance and calculates the sigma charges and
+			 *        electronegativities of the atoms in the molecular graph \a molgraph by the \e PEOE method.
+			 * \param molgraph The molecular graph for which to perform the calculations.
 			 */
-			PEOEChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
+			PEOESigmaChargeCalculator(const Chem::MolecularGraph& molgraph);
 
 			/**
 			 * \brief Allows to specify the number of charge shifting iterations that have to be performed.
 			 * \param num_iter The number of iterations to perform.
-			 * \note By default, PEOEChargeCalculator::DEF_NUM_ITERATIONS iterations are performed.
+			 * \note By default, PEOESigmaChargeCalculator::DEF_NUM_ITERATIONS iterations are performed.
 			 */
 			void setNumIterations(std::size_t num_iter);
 
@@ -100,7 +96,7 @@ namespace CDPL
 			/**
 			 * \brief Allows to specify the applied damping factor.
 			 * \param factor The damping factor to apply.
-			 * \note The default damping factor is specified by the constant PEOEChargeCalculator::DEF_DAMPING_FACTOR.
+			 * \note The default damping factor is specified by the constant PEOESigmaChargeCalculator::DEF_DAMPING_FACTOR.
 			 */
 			void setDampingFactor(double factor);
 
@@ -111,28 +107,31 @@ namespace CDPL
 			double getDampingFactor() const;
 
 			/**
-			 * \brief Calculates the \e PEOE charges of the atoms in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to calculate the \e PEOE charges.  
-			 * \param charges An array containing the calculated partial atomic charges. The charges
-			 *         are stored in the same order as the atoms appear in the atom list of the
-			 *         molecular graph (i.e. the partial charge of an atom is accessible via its index).
+			 * \brief Calculates the sigma charges and electronegativities of the atoms in the molecular graph \a molgraph by the \e PEOE method.
+			 * \param molgraph The molecular graph for which to perform the calculations.  
 			 */
-			void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
+			void calculate(const Chem::MolecularGraph& molgraph);
 
 			/**
-			 * \brief Retrieves the residual atom electronegativities resulting from the last \e PEOE charge calculation.
-			 * \param elnegs An array containing the calculated residual electronegativities. If a calculation has not yet
-			 *         been performed, the array will be empty. The electronegativities
-			 *         are stored in the same order as the atoms appear in the atom list of the
-			 *         molecular graph (i.e. the residual electronegativity of an atom is accessible via
-			 *         its index).
+			 * \brief Returns the calculated sigma charge of the atom with index \a idx.
+			 * \param idx The index of the atom for which to return the charge.
+			 * \throw Base::IndexError If \a idx is not in the range <i>[0, NA - 1]</i> where <i>NA</i> is the
+			 *        number of atoms of the molecular graph for which the calculations have been performed.
 			 */
-			void getElectronegativities(Util::DArray& elnegs) const;
+			double getCharge(std::size_t idx) const;
+
+			/**
+			 * \brief Returns the calculated sigma electronegativity of the atom with index \a idx.
+			 * \param idx The index of the atom for which to return the electronegativity.
+			 * \throw Base::IndexError If \a idx is not in the range <i>[0, NA - 1]</i> where <i>NA</i> is the
+			 *        number of atoms of the molecular graph for which the calculations have been performed.
+			 */
+			double getElectronegativity(std::size_t idx) const;
 
 		  private:
-			PEOEChargeCalculator(const PEOEChargeCalculator&);
+			PEOESigmaChargeCalculator(const PEOESigmaChargeCalculator&);
 
-			PEOEChargeCalculator& operator=(const PEOEChargeCalculator&);
+			PEOESigmaChargeCalculator& operator=(const PEOESigmaChargeCalculator&);
 
 			void init(const Chem::MolecularGraph& molgraph);
 			void calcCharges();
@@ -176,4 +175,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_MOLPROP_PEOECHARGECALCULATOR_HPP
+#endif // CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP

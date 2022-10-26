@@ -108,8 +108,8 @@ namespace CDPL
 
 		CDPL_MOLPROP_API double calcMeanPolarizability(const Chem::MolecularGraph& molgraph);
 
-		CDPL_MOLPROP_API void calcPEOECharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 6, 
-											  double damping = 0.5);
+		CDPL_MOLPROP_API void calcPEOESigmaCharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter = 6, 
+												   double damping = 0.5);
 
 		CDPL_MOLPROP_API void calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite);
 	}

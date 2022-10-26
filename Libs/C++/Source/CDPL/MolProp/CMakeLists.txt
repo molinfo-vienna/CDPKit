@@ -45,7 +45,7 @@ SET(cdpl-molprop_LIB_SRCS
     MolecularGraphElementalCompositionFunctions.cpp
     MolecularGraphMeanPolarizabilityFunction.cpp
     MolecularGraphAtomHydrophobicityFunction.cpp
-    MolecularGraphPEOEChargesFunction.cpp
+    MolecularGraphPEOESigmaChargesFunction.cpp
     MolecularGraphRO5ScoreFunction.cpp
     MolecularGraphTPSAFunction.cpp
     MolecularGraphLogSFunction.cpp
@@ -67,7 +67,8 @@ SET(cdpl-molprop_LIB_SRCS
     
     AtomHydrophobicityCalculator.cpp
     LogSCalculator.cpp
-    PEOEChargeCalculator.cpp
+    PEOESigmaChargeCalculator.cpp
+    ModifiedHueckelMOCalculator.cpp
     TPSACalculator.cpp
     XLogPCalculator.cpp
    )

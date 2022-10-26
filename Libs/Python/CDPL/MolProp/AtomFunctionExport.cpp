@@ -150,8 +150,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER5(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
 
 	MAKE_ATOM_FUNC_WRAPPERS(double, Hydrophobicity)
-	MAKE_ATOM_FUNC_WRAPPERS(double, PEOECharge)
-	MAKE_ATOM_FUNC_WRAPPERS(double, PEOEElectronegativity)
+	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaCharge)
+	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaElectronegativity)
 }
 
 
@@ -246,7 +246,7 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	python::def("getBondCount", &getBondCountWrapper5,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
 	
-	EXPORT_ATOM_FUNCS(PEOECharge, charge)
-	EXPORT_ATOM_FUNCS(PEOEElectronegativity, e_neg)
+	EXPORT_ATOM_FUNCS(PEOESigmaCharge, charge)
+	EXPORT_ATOM_FUNCS(PEOESigmaElectronegativity, e_neg)
 	EXPORT_ATOM_FUNCS(Hydrophobicity, hyd)
 }

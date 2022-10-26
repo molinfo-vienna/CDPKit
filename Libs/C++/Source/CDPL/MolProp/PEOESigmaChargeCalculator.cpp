@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PEOEChargeCalculator.cpp 
+ * PEOESigmaChargeCalculator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -27,16 +27,16 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <iterator>
 
 #include <boost/bind.hpp>
 
-#include "CDPL/MolProp/PEOEChargeCalculator.hpp"
+#include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
@@ -49,61 +49,62 @@ namespace
 }
 
 
-const std::size_t MolProp::PEOEChargeCalculator::DEF_NUM_ITERATIONS;
-const double      MolProp::PEOEChargeCalculator::DEF_DAMPING_FACTOR = 0.5;
+const std::size_t MolProp::PEOESigmaChargeCalculator::DEF_NUM_ITERATIONS;
+const double      MolProp::PEOESigmaChargeCalculator::DEF_DAMPING_FACTOR = 0.5;
 
 
-MolProp::PEOEChargeCalculator::PEOEChargeCalculator():
+MolProp::PEOESigmaChargeCalculator::PEOESigmaChargeCalculator():
 	numIterations(DEF_NUM_ITERATIONS), dampingFactor(DEF_DAMPING_FACTOR) {}
 
-MolProp::PEOEChargeCalculator::PEOEChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges):
+MolProp::PEOESigmaChargeCalculator::PEOESigmaChargeCalculator(const Chem::MolecularGraph& molgraph):
 	numIterations(DEF_NUM_ITERATIONS), dampingFactor(DEF_DAMPING_FACTOR)
 {
-	calculate(molgraph, charges);
+	calculate(molgraph);
 }
 
-void MolProp::PEOEChargeCalculator::setNumIterations(std::size_t num_iter)
+void MolProp::PEOESigmaChargeCalculator::setNumIterations(std::size_t num_iter)
 {
 	numIterations = num_iter;
 }
 
-void MolProp::PEOEChargeCalculator::setDampingFactor(double factor)
+void MolProp::PEOESigmaChargeCalculator::setDampingFactor(double factor)
 {
 	dampingFactor = factor;
 }
 
-std::size_t MolProp::PEOEChargeCalculator::getNumIterations() const
+std::size_t MolProp::PEOESigmaChargeCalculator::getNumIterations() const
 {
 	return numIterations;
 }
 
-double MolProp::PEOEChargeCalculator::getDampingFactor() const
+double MolProp::PEOESigmaChargeCalculator::getDampingFactor() const
 {
 	return dampingFactor;
 }
 
-void MolProp::PEOEChargeCalculator::calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges)
+void MolProp::PEOESigmaChargeCalculator::calculate(const Chem::MolecularGraph& molgraph)
 {
 	init(molgraph);
 	calcCharges();
-	
-	charges.clear();
-	charges.reserve(atomStates.size());
-
-	std::transform(atomStates.begin(), atomStates.end(), std::back_inserter(charges.getData()),
-				   boost::bind(&AtomState::getCharge, _1));
 }
 
-void MolProp::PEOEChargeCalculator::getElectronegativities(Util::DArray& elnegs) const
+double MolProp::PEOESigmaChargeCalculator::getCharge(std::size_t idx) const
 {
-	elnegs.clear();
-	elnegs.reserve(atomStates.size());
-	
-	std::transform(atomStates.begin(), atomStates.end(), std::back_inserter(elnegs.getData()),
-				   boost::bind(&AtomState::getElectronegativity, _1));
+	if (idx >= atomStates.size())
+		throw Base::IndexError("PEOESigmaChargeCalculator: atom index out of bounds");
+
+	return atomStates[idx]->getCharge();
 }
 
-void MolProp::PEOEChargeCalculator::init(const Chem::MolecularGraph& molgraph)
+double MolProp::PEOESigmaChargeCalculator::getElectronegativity(std::size_t idx) const
+{
+	if (idx >= atomStates.size())
+		throw Base::IndexError("PEOESigmaChargeCalculator: atom index out of bounds");
+
+	return atomStates[idx]->getElectronegativity();
+}
+
+void MolProp::PEOESigmaChargeCalculator::init(const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -152,7 +153,7 @@ void MolProp::PEOEChargeCalculator::init(const Chem::MolecularGraph& molgraph)
 	}
 }
 
-void MolProp::PEOEChargeCalculator::calcCharges()
+void MolProp::PEOESigmaChargeCalculator::calcCharges()
 {
 	AtomStateList::iterator atom_states_beg = atomStates.begin();
 	AtomStateList::iterator atom_states_end = atomStates.end();
@@ -178,7 +179,7 @@ void MolProp::PEOEChargeCalculator::calcCharges()
 }
 
 
-MolProp::PEOEChargeCalculator::AtomState::AtomState(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph): 
+MolProp::PEOESigmaChargeCalculator::AtomState::AtomState(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph): 
 	charge(0.0) 
 {
 	using namespace Chem;
@@ -353,26 +354,26 @@ MolProp::PEOEChargeCalculator::AtomState::AtomState(const Chem::Atom& atom, cons
 	enegativity = a;
 }
 
-MolProp::PEOEChargeCalculator::AtomState::AtomState(): // Implicit H
+MolProp::PEOESigmaChargeCalculator::AtomState::AtomState(): // Implicit H
 	a(7.17), b(6.24), c(-0.56), enegativity(7.17), enegativityP1(HYDROGEN_ENEGATIVITY_P1), charge(0.0) 
 {}
 
-void MolProp::PEOEChargeCalculator::AtomState::linkTo(AtomState* nbr_state)
+void MolProp::PEOESigmaChargeCalculator::AtomState::linkTo(AtomState* nbr_state)
 {
 	nbrAtomStates.push_back(nbr_state);
 }
 
-double MolProp::PEOEChargeCalculator::AtomState::getCharge() const
+double MolProp::PEOESigmaChargeCalculator::AtomState::getCharge() const
 {
 	return charge;
 }
 
-double MolProp::PEOEChargeCalculator::AtomState::getElectronegativity() const
+double MolProp::PEOESigmaChargeCalculator::AtomState::getElectronegativity() const
 {
 	return enegativity;
 }
 
-void MolProp::PEOEChargeCalculator::AtomState::shiftCharges(double att_fact)
+void MolProp::PEOESigmaChargeCalculator::AtomState::shiftCharges(double att_fact)
 {
 	double q_i = 0.0;
 
@@ -390,7 +391,7 @@ void MolProp::PEOEChargeCalculator::AtomState::shiftCharges(double att_fact)
 	charge += q_i * att_fact;
 }
 
-void MolProp::PEOEChargeCalculator::AtomState::updateElectronegativity()
+void MolProp::PEOESigmaChargeCalculator::AtomState::updateElectronegativity()
 {
 	enegativity = a + b * charge + c * charge * charge;
 }

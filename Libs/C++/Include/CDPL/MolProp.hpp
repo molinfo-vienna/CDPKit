@@ -48,6 +48,7 @@
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/MolProp/LogSCalculator.hpp"
 #include "CDPL/MolProp/XLogPCalculator.hpp"
-#include "CDPL/MolProp/PEOEChargeCalculator.hpp"
+#include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
+#include "CDPL/MolProp/ModifiedHueckelMOCalculator.hpp"
 
 #endif // CDPL_MOLPROP_HPP

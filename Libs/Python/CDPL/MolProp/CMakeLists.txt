@@ -49,7 +49,8 @@ SET(molprop_MOD_SRCS
     AtomHydrophobicityCalculatorExport.cpp
     XLogPCalculatorExport.cpp
     LogSCalculatorExport.cpp 
-    PEOEChargeCalculatorExport.cpp
+    PEOESigmaChargeCalculatorExport.cpp
+    ModifiedHueckelMOCalculatorExport.cpp    
     TPSACalculatorExport.cpp
    )
 
