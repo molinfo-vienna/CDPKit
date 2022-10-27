@@ -86,9 +86,14 @@ namespace CDPL
 			void getAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
 			void calcForPiSystem(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-			void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-			bool diagonalizeHueckelMatrix();
+
 			void getPiSystemBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+			void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+
+			double getAlpha(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
+			double getBeta(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph) const;
+
+			bool diagonalizeHueckelMatrix();
 			
 			typedef Math::Matrix<double> Matrix;
 			typedef Math::Vector<double> Vector;

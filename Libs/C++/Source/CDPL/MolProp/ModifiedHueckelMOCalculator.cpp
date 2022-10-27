@@ -114,26 +114,6 @@ void MolProp::ModifiedHueckelMOCalculator::calcForPiSystem(const Chem::ElectronS
 	// TODO
 }
 
-void MolProp::ModifiedHueckelMOCalculator::initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
-{
-	std::size_t num_atoms = pi_sys.getNumAtoms();
-	
-	hueckelMatrix.resize(num_atoms, num_atoms);
-	hueckelMatrix.clear();
-
-	// TODO
-}
-
-bool MolProp::ModifiedHueckelMOCalculator::diagonalizeHueckelMatrix()
-{
-	std::size_t num_atoms = hueckelMatrix.getSize1();
-	
-	hmEigenVectors.resize(num_atoms, num_atoms);
-	hmEigenValues.resize(num_atoms);
-	
-	return jacobiDiagonalize(hueckelMatrix, hmEigenValues, hmEigenVectors);
-}
-
 void MolProp::ModifiedHueckelMOCalculator::getPiSystemBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
@@ -146,4 +126,47 @@ void MolProp::ModifiedHueckelMOCalculator::getPiSystemBonds(const Chem::Electron
 		if (pi_sys.containsAtom(bond.getBegin()) && pi_sys.containsAtom(bond.getEnd()))
 			piSysBonds.push_back(&bond);
 	}
+}
+
+void MolProp::ModifiedHueckelMOCalculator::initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+{
+	using namespace Chem;
+
+	std::size_t num_atoms = pi_sys.getNumAtoms();
+	
+	hueckelMatrix.resize(num_atoms, num_atoms);
+	hueckelMatrix.clear();
+
+	for (std::size_t i = 0; i < num_atoms; i++)
+		hueckelMatrix(i, i) = getAlpha(pi_sys.getAtom(0), molgraph);
+
+	for (BondList::const_iterator it = piSysBonds.begin(), end = piSysBonds.end(); it != end; ++it) {
+		const Bond* bond = *it;
+		std::size_t atom1_idx = pi_sys.getAtomIndex(bond->getBegin());
+		std::size_t atom2_idx = pi_sys.getAtomIndex(bond->getEnd());
+		double beta = getBeta(*bond, molgraph);
+
+		hueckelMatrix(atom1_idx, atom2_idx) = beta;
+		hueckelMatrix(atom2_idx, atom1_idx) = beta;
+	}
+}
+
+double MolProp::ModifiedHueckelMOCalculator::getAlpha(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const
+{
+	return 0.0; // TODO
+}
+
+double MolProp::ModifiedHueckelMOCalculator::getBeta(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph) const
+{
+	return 1.0; // TODO
+}
+
+bool MolProp::ModifiedHueckelMOCalculator::diagonalizeHueckelMatrix()
+{
+	std::size_t num_atoms = hueckelMatrix.getSize1();
+	
+	hmEigenVectors.resize(num_atoms, num_atoms);
+	hmEigenValues.resize(num_atoms);
+	
+	return jacobiDiagonalize(hueckelMatrix, hmEigenValues, hmEigenVectors, 100);
 }
