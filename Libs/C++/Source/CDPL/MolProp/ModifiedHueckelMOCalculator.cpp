@@ -29,6 +29,7 @@ h * along with this library; see the file COPYING. If not, write to
 #include <algorithm>
 
 #include <boost/bind.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/MolProp/ModifiedHueckelMOCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
@@ -36,9 +37,101 @@ h * along with this library; see the file COPYING. If not, write to
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Math/JacobiDiagonalization.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 
 using namespace CDPL;
+
+
+namespace
+{
+
+	typedef boost::unordered_map<Base::uint64, double> ParameterMap;
+
+	ParameterMap alphaParams;
+	ParameterMap betaParams;
+
+	struct Init
+	{
+
+		Init() {
+
+			alphaParams.insert(ParameterMap::value_type(5000 , -0.45));
+			alphaParams.insert(ParameterMap::value_type(6000 ,  0.00));
+			alphaParams.insert(ParameterMap::value_type(7010 ,  0.33));
+			alphaParams.insert(ParameterMap::value_type(7000 ,  1.21));
+			alphaParams.insert(ParameterMap::value_type(7001 ,  1.21));
+			alphaParams.insert(ParameterMap::value_type(8020 ,  0.15));
+			alphaParams.insert(ParameterMap::value_type(8010 ,  2.10));
+			alphaParams.insert(ParameterMap::value_type(9020 ,  2.12));
+			alphaParams.insert(ParameterMap::value_type(15010,  0.14));
+			alphaParams.insert(ParameterMap::value_type(15020,  3.31));
+			alphaParams.insert(ParameterMap::value_type(15011,  0.03));
+			alphaParams.insert(ParameterMap::value_type(16010,  0.10));
+			alphaParams.insert(ParameterMap::value_type(16020,  4.17));
+			alphaParams.insert(ParameterMap::value_type(16011,  0.06));
+			alphaParams.insert(ParameterMap::value_type(16021,  4.66));
+			alphaParams.insert(ParameterMap::value_type(17020,  1.12));
+			alphaParams.insert(ParameterMap::value_type(35020,  1.10));
+			alphaParams.insert(ParameterMap::value_type(53020,  0.90));
+			alphaParams.insert(ParameterMap::value_type(14000, -0.10));
+
+			betaParams.insert(ParameterMap::value_type(500006000, 0.73));
+			betaParams.insert(ParameterMap::value_type(500007010, 0.66));
+			betaParams.insert(ParameterMap::value_type(500007000, 0.53));
+			betaParams.insert(ParameterMap::value_type(500008020, 0.60));
+			betaParams.insert(ParameterMap::value_type(500008010, 0.35));
+			betaParams.insert(ParameterMap::value_type(500009020, 0.26));
+			betaParams.insert(ParameterMap::value_type(500017020, 0.41));
+			betaParams.insert(ParameterMap::value_type(500035020, 0.50));
+			betaParams.insert(ParameterMap::value_type(500053020, 0.50));
+			betaParams.insert(ParameterMap::value_type(500014000, 0.57));
+			betaParams.insert(ParameterMap::value_type(500015010, 0.53));
+			betaParams.insert(ParameterMap::value_type(500015020, 0.54));
+			betaParams.insert(ParameterMap::value_type(500016010, 0.51));
+			betaParams.insert(ParameterMap::value_type(500016020, 0.44));
+			betaParams.insert(ParameterMap::value_type(600006000, 1.00));
+			betaParams.insert(ParameterMap::value_type(600007010, 1.19));
+			betaParams.insert(ParameterMap::value_type(600007000, 0.68));
+			betaParams.insert(ParameterMap::value_type(600007001, 0.72));
+			betaParams.insert(ParameterMap::value_type(600008020, 1.08));
+			betaParams.insert(ParameterMap::value_type(600008010, 0.65));
+			betaParams.insert(ParameterMap::value_type(600009020, 0.63));
+			betaParams.insert(ParameterMap::value_type(701007010, 0.58));
+			betaParams.insert(ParameterMap::value_type(701007000, 0.80));
+			betaParams.insert(ParameterMap::value_type(700007000, 1.30));
+			betaParams.insert(ParameterMap::value_type(701008010, 0.92));
+			betaParams.insert(ParameterMap::value_type(700008020, 0.55));
+			betaParams.insert(ParameterMap::value_type(700108020, 0.55));
+			betaParams.insert(ParameterMap::value_type(700008010, 0.01));
+			betaParams.insert(ParameterMap::value_type(600015010, 0.41));
+			betaParams.insert(ParameterMap::value_type(600015020, 0.08));
+			betaParams.insert(ParameterMap::value_type(701015010, 0.63));
+			betaParams.insert(ParameterMap::value_type(600015011, 0.18));
+			betaParams.insert(ParameterMap::value_type(700015011, 0.31));
+			betaParams.insert(ParameterMap::value_type(802015011, 0.60));
+			betaParams.insert(ParameterMap::value_type(801015011, 0.25));
+			betaParams.insert(ParameterMap::value_type(600016010, 0.68));
+			betaParams.insert(ParameterMap::value_type(600016020, 0.41));
+			betaParams.insert(ParameterMap::value_type(600016011, 0.24));
+			betaParams.insert(ParameterMap::value_type(600016021, 0.63));
+			betaParams.insert(ParameterMap::value_type(700016020, 0.47));
+			betaParams.insert(ParameterMap::value_type(700016021, 0.47));
+			betaParams.insert(ParameterMap::value_type(802016010, 0.19));
+			betaParams.insert(ParameterMap::value_type(802016011, 0.19));
+			betaParams.insert(ParameterMap::value_type(802016020, 3.28));
+			betaParams.insert(ParameterMap::value_type(801016020, 0.18));
+			betaParams.insert(ParameterMap::value_type(802016021, 3.28));
+			betaParams.insert(ParameterMap::value_type(801016021, 0.18));
+			betaParams.insert(ParameterMap::value_type(600017020, 0.29));
+			betaParams.insert(ParameterMap::value_type(600035020, 0.29));
+			betaParams.insert(ParameterMap::value_type(600053020, 0.20));
+			betaParams.insert(ParameterMap::value_type(902016020, 0.76));
+			betaParams.insert(ParameterMap::value_type(902016021, 0.76));
+		}
+
+	} init;
+}
 
 
 MolProp::ModifiedHueckelMOCalculator::ModifiedHueckelMOCalculator():
