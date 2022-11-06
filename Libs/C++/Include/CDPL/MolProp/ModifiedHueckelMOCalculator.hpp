@@ -43,6 +43,7 @@
 #include "CDPL/Chem/ElectronSystemList.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -81,31 +82,63 @@ namespace CDPL
 			void calculate(const Chem::MolecularGraph& molgraph);
 
 			void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+
+			double getPiElectronDensity(std::size_t atom_idx) const;
+
+			double getPiBondOrder(std::size_t bond_idx) const;
+
+			double getEnergy() const;
 			
 		  private:
 			void getAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
-			void calcForPiSystem(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
-
-			void getPiSystemBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+			void calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+			
+			void getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 			void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
-			double getAlpha(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
-			double getBeta(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph) const;
+			double getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+			double getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+			double getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 
-			bool diagonalizeHueckelMatrix();
+			Base::uint64 getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+			Base::uint64 getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+
+			bool diagHueckelMatrix();
+			void distElectrons(const Chem::ElectronSystem& pi_sys);
+			void updateEnergy();
+			void updateAtomElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+			void updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+
+			double calcElecDensity(std::size_t i, std::size_t j) const;
+			
+			struct MODescr
+		    {
+
+				double energy;
+				double coeffVecIndex;
+				double elecCount;
+			};
 			
 			typedef Math::Matrix<double> Matrix;
 			typedef Math::Vector<double> Vector;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<std::size_t> CountsArray;
+			typedef std::vector<double> DoubleArray;
+			typedef std::vector<MODescr> MODescrArray;
+			typedef std::vector<MODescr*> MODescrPtrArray;
 			
-			Matrix      hueckelMatrix;
-			Matrix      hmEigenVectors;
-			Vector      hmEigenValues;
-			BondList    piSysBonds;
-			CountsArray atomPiSysCounts;
-			bool        locPiBonds;
+			Matrix          hueckelMatrix;
+			Matrix          hmEigenVectors;
+			Vector          hmEigenValues;
+			BondList        piSysBonds;
+			CountsArray     atomPiSysCounts;
+			MODescrArray    moDescriptors;
+			MODescrPtrArray moDescriptorPtrs;
+			bool            locPiBonds;
+			DoubleArray     atomElecDensities;
+			DoubleArray     bondElecDensities;
+			double          energy;
 		};
     }
 }

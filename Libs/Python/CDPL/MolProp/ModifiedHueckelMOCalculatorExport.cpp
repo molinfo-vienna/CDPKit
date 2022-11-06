@@ -54,7 +54,10 @@ void CDPLPythonMolProp::exportModifiedHueckelMOCalculator()
 		.def("calculate", static_cast<void (MolProp::ModifiedHueckelMOCalculator::*)(
 				 const Chem::ElectronSystemList&, const Chem::MolecularGraph&)>(&MolProp::ModifiedHueckelMOCalculator::calculate),
 			 (python::arg("self"), python::arg("pi_sys_list"), python::arg("molgraph")))
+		.def("getPiElectronDensity", &MolProp::ModifiedHueckelMOCalculator::getPiElectronDensity, (python::arg("self"), python::arg("atom_idx")))
+		.def("getPiBondOrder", &MolProp::ModifiedHueckelMOCalculator::getPiBondOrder, (python::arg("self"), python::arg("bond_idx")))
+		.def("getEnergy", &MolProp::ModifiedHueckelMOCalculator::getEnergy, python::arg("self"))
 		.add_property("locPiBonds", static_cast<bool (MolProp::ModifiedHueckelMOCalculator::*)() const>(&MolProp::ModifiedHueckelMOCalculator::localizedPiBonds),
 					  static_cast<void (MolProp::ModifiedHueckelMOCalculator::*)(bool)>(&MolProp::ModifiedHueckelMOCalculator::localizedPiBonds))
-		;
+		.add_property("energy", &MolProp::ModifiedHueckelMOCalculator::getEnergy);
 }
