@@ -29,6 +29,7 @@ from __future__ import print_function
 import sys
 import CDPL.Base as Base
 import CDPL.Chem as Chem
+import CDPL.MolProp as MolProp
 
 
 #REMOVE_FLUORINATED = True
@@ -97,7 +98,7 @@ def processMolecule(mol, stats):
 
         mol = largest_comp
 
-    if Chem.getHeavyAtomCount(mol) < MIN_HEAVY_ATOM_COUNT:
+    if MolProp.getHeavyAtomCount(mol) < MIN_HEAVY_ATOM_COUNT:
         return None
 
     if REMOVE_FLUORINATED and Chem.getAtomCount(mol, Chem.AtomType.F) > FLUOR_ATOM_COUNT:

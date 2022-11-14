@@ -43,6 +43,7 @@
 #include "CDPL/Chem/ElectronSystemList.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
 
@@ -90,10 +91,16 @@ namespace CDPL
 			double getEnergy() const;
 			
 		  private:
-			void getAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+			void initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+			void initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
 			void calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 			
+			void initAtomPiElecCounts(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+
+			std::size_t getNumBonds(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+									const Chem::MolecularGraph& molgraph) const;
+
 			void getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 			void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
@@ -133,6 +140,9 @@ namespace CDPL
 			Vector          hmEigenValues;
 			BondList        piSysBonds;
 			CountsArray     atomPiSysCounts;
+			CountsArray     atomFreeElecCounts;
+			CountsArray     atomPiElecCounts;
+			Util::BitSet    specialAtomFlags;
 			MODescrArray    moDescriptors;
 			MODescrPtrArray moDescriptorPtrs;
 			bool            locPiBonds;
