@@ -136,10 +136,9 @@ namespace
 	} init;
 
 	const double ENERGY_LEVEL_COMP_TOL = 0.01;
-	const double SIGMA_DESCR_ETHANE    = 7.324379833683146;
+	const double SIGMA_CORR_REF        = 7.324379833683146;
 	const double SIGMA_FACTOR          = 0.029;
-	const double HYPERCONJ_FACTOR      = 0.58;
-	const double ETHANE_H_SIGMA_ENEG   = 7.311450948517412;
+	const double HYPER_CONJ_FACTOR     = 0.58;
 }
 
 
@@ -176,7 +175,10 @@ void MolProp::ModifiedHueckelMOCalculator::calculate(const Chem::MolecularGraph&
 
 void MolProp::ModifiedHueckelMOCalculator::calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
 {
-	atomElecDensities.assign(molgraph.getNumAtoms(), 0.0);
+	std::size_t num_atoms = molgraph.getNumAtoms();
+
+	atomElecDensities.assign(num_atoms, 0.0);
+	atomPiCharges.assign(num_atoms, 0.0);
 	bondElecDensities.assign(molgraph.getNumBonds(), 0.0);
 	energy = 0.0;
 	
@@ -193,6 +195,14 @@ double MolProp::ModifiedHueckelMOCalculator::getPiElectronDensity(std::size_t at
 		throw Base::IndexError("ModifiedHueckelMOCalculator: atom index out of bounds");
 	
 	return atomElecDensities[atom_idx];
+}
+
+double MolProp::ModifiedHueckelMOCalculator::getPiCharge(std::size_t atom_idx) const
+{
+	if (atom_idx >= atomElecDensities.size())
+		throw Base::IndexError("ModifiedHueckelMOCalculator: atom index out of bounds");
+	
+	return atomPiCharges[atom_idx];
 }
 
 double MolProp::ModifiedHueckelMOCalculator::getPiBondOrder(std::size_t bond_idx) const
@@ -258,7 +268,7 @@ void MolProp::ModifiedHueckelMOCalculator::calcForPiSys(const Chem::ElectronSyst
 	distElectrons(pi_sys);
 	
 	updateEnergy();
-	updateAtomElecDensities(pi_sys, molgraph);
+	updateAtomElecDensitiesAndCharges(pi_sys, molgraph);
 	updateBondElecDensities(pi_sys, molgraph);
 }
 
@@ -267,10 +277,10 @@ void MolProp::ModifiedHueckelMOCalculator::initAtomPiElecCounts(const Chem::Elec
 	using namespace Chem;
 
 	std::size_t num_atoms = pi_sys.getNumAtoms();
-	
+
 	atomPiElecCounts.assign(num_atoms, 0);
-	specialAtomFlags.resize(num_atoms);
-	specialAtomFlags.reset();
+	specialAtomTypes.resize(num_atoms);
+	specialAtomTypes.reset();
 	
 	for (std::size_t i = 0; i < num_atoms; i++)
 		atomPiElecCounts[i] = pi_sys.getElectronContrib(pi_sys.getAtom(i));
@@ -282,7 +292,7 @@ void MolProp::ModifiedHueckelMOCalculator::initAtomPiElecCounts(const Chem::Elec
 			
 		if( (atom_type == AtomType::S && num_bonds > 2) || (atom_type == AtomType::P && num_bonds > 3)) {
 			atomPiElecCounts[i] = atom_type - 10 - getBondCount(atom, molgraph) - atomFreeElecCounts[molgraph.getAtomIndex(atom)];
-			specialAtomFlags.set(i);
+			specialAtomTypes.set(i);
 
 			Atom::ConstBondIterator b_it = atom.getBondsBegin();
 	
@@ -324,7 +334,7 @@ void MolProp::ModifiedHueckelMOCalculator::initAtomPiElecCounts(const Chem::Elec
 				continue;
 			
 			atomPiElecCounts[i] = 2;
-			specialAtomFlags.set(i);
+			specialAtomTypes.set(i);
 
 			b_it = atom.getBondsBegin();
 	
@@ -419,67 +429,59 @@ double MolProp::ModifiedHueckelMOCalculator::getAlphaCorrection(const Chem::Atom
 {
 	using namespace Chem;
 		
-	std::size_t nbr_count = getImplicitHydrogenCount(atom);
+	std::size_t nbr_count = 0;
+	double sigma_corr = 0.0;
+
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-	double sig_corr = nbr_count * ETHANE_H_SIGMA_ENEG; // a better-than-nothing hack for (partially) H-deplete molecules
 	
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
 		if (!molgraph.containsBond(*b_it))
 			continue;
 
-		sig_corr += getPEOESigmaElectronegativity(*a_it);
+		sigma_corr += getPEOESigmaElectronegativity(*a_it);
 		nbr_count++;
 	}
 
 	if (nbr_count > 1)
-		sig_corr /= nbr_count;
+		sigma_corr /= nbr_count;
 	
-	sig_corr = SIGMA_FACTOR * (sig_corr - SIGMA_DESCR_ETHANE);
+	sigma_corr = SIGMA_FACTOR * (sigma_corr - SIGMA_CORR_REF);
 	
-	/*
+	double hyp_conj_corr = 0.0;
 
-	const Moses::Atom& atom = *patom;
-	double descr = getSigmaDescriptor(atom) - mParams.DSigEthaneC; // zero-value is the methyl group in ethane
-	double retval = (descr * mParams.FSig);
+	if (atomPiElecCounts[pi_sys.getAtomIndex(atom)] == 1) {
+		b_it = atom.getBondsBegin();
+	
+		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+			if (!molgraph.containsBond(*b_it))
+				continue;
 
-	// only systems with full conjugation may have hyperconjugative neighbors
-	// eg. C=C-CH3, C=N-CH3 but not N(CH3)2
-	if( (! d_equal(mParams.FHyp, 0.0)) && (mNElec[atom.index()] == 1) )
-	{
-		// for which atoms? only C or also N?
-		const Group& cneighbors = atom.getGroup(A_G_CNEIGHBORS);
-		double hyp = 0.0;
-		for(ConstAtomIterator neit = cneighbors.beginAtom(); neit != cneighbors.endAtom(); ++neit)
-		{
-			const Moses::Atom& cneighbor = *neit;
-			// only saturated carbon centers may donate
-			if(cneighbor.getProperty(A_NEIGHBOR).to<int>() != 4) continue;
+			const Atom& nbr_atom = *a_it;
 
-			if(cneighbor.getGroup(A_G_HNEIGHBORS).nAtom() > 0)
-			{
-				double qsig = mParams.atomQSIG[cneighbor.index()];
+			if (getType(nbr_atom) != AtomType::C)
+				continue;
 
-				// only partial negatively charged groups can donate
-				if(qsig < 0.0)
-				{
-					hyp += (qsig * mParams.FHyp);
-				}
-			}
+			if (getBondCount(nbr_atom, molgraph) != 4)
+				continue;
+
+			if (getBondCount(nbr_atom, molgraph, 1, AtomType::H) == 0)
+				continue;
+
+			double sig_charge = getPEOESigmaCharge(nbr_atom);
+
+			if(sig_charge < 0.0)
+				hyp_conj_corr += sig_charge;
 		}
-		retval += hyp;
-	}
-	
-
-	int npisys = atom.getProperty(A_NPISYS).to<int>();
-	if(npisys > 1)
-	{
-		retval /= npisys;
 	}
 
-	return retval;
-	*/
-	
-	return 0.0; // TODO
+	hyp_conj_corr *= HYPER_CONJ_FACTOR;
+
+	std::size_t num_pi_sys = atomPiSysCounts[molgraph.getAtomIndex(atom)];
+
+	if (num_pi_sys > 1)
+		return ((sigma_corr + hyp_conj_corr) / num_pi_sys);
+
+	return (sigma_corr + hyp_conj_corr);
 }
 
 double MolProp::ModifiedHueckelMOCalculator::getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
@@ -505,7 +507,7 @@ Base::uint64 MolProp::ModifiedHueckelMOCalculator::getAtomID(const Chem::Atom& a
 	if (atom_type == AtomType::S || atom_type == AtomType::P)
 		num_pi_elec = atomPiElecCounts[atom_idx];
 	
-	return (atom_type * 1000 + num_pi_elec * 10 + specialAtomFlags.test(atom_idx));
+	return (atom_type * 1000 + num_pi_elec * 10 + specialAtomTypes.test(atom_idx));
 }
 
 Base::uint64 MolProp::ModifiedHueckelMOCalculator::getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
@@ -587,10 +589,15 @@ void MolProp::ModifiedHueckelMOCalculator::updateEnergy()
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::updateAtomElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::ModifiedHueckelMOCalculator::updateAtomElecDensitiesAndCharges(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
-	for (std::size_t i = 0, num_atoms = pi_sys.getNumAtoms(); i < num_atoms; i++) 
-		atomElecDensities[molgraph.getAtomIndex(pi_sys.getAtom(i))] += calcElecDensity(i, i);
+	for (std::size_t i = 0, num_atoms = pi_sys.getNumAtoms(); i < num_atoms; i++) { 
+		double el_density = calcElecDensity(i, i);
+		std::size_t atom_idx = molgraph.getAtomIndex(pi_sys.getAtom(i));
+
+		atomElecDensities[atom_idx] += el_density;
+		atomPiCharges[atom_idx] += atomPiElecCounts[i] - el_density; 
+	}
 }
 
 void MolProp::ModifiedHueckelMOCalculator::updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)

@@ -86,6 +86,8 @@ namespace CDPL
 
 			double getPiElectronDensity(std::size_t atom_idx) const;
 
+			double getPiCharge(std::size_t atom_idx) const;
+
 			double getPiBondOrder(std::size_t bond_idx) const;
 
 			double getEnergy() const;
@@ -114,7 +116,7 @@ namespace CDPL
 			bool diagHueckelMatrix();
 			void distElectrons(const Chem::ElectronSystem& pi_sys);
 			void updateEnergy();
-			void updateAtomElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
+			void updateAtomElecDensitiesAndCharges(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 			void updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
 			double calcElecDensity(std::size_t i, std::size_t j) const;
@@ -142,12 +144,13 @@ namespace CDPL
 			CountsArray     atomPiSysCounts;
 			CountsArray     atomFreeElecCounts;
 			CountsArray     atomPiElecCounts;
-			Util::BitSet    specialAtomFlags;
+			Util::BitSet    specialAtomTypes;
 			MODescrArray    moDescriptors;
 			MODescrPtrArray moDescriptorPtrs;
 			bool            locPiBonds;
 			DoubleArray     atomElecDensities;
 			DoubleArray     bondElecDensities;
+			DoubleArray     atomPiCharges;
 			double          energy;
 		};
     }
