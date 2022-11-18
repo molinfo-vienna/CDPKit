@@ -89,11 +89,15 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 	using namespace MolProp;
 
 	calcImplicitHydrogenCounts(mol, false);
+
+	bool added_hs = makeHydrogenComplete(mol, true);
+
+	perceiveComponents(mol, added_hs);
 	perceiveHybridizationStates(mol, false);
 	perceiveSSSR(mol, false);
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
-	calcCIPPriorities(mol, false);
+	calcCIPPriorities(mol, added_hs);
 
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
@@ -142,11 +146,22 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 		}
 	}
 
-	bool added_hs = makeHydrogenComplete(mol, true);
-
-	perceiveComponents(mol, added_hs);
-
 	if (canon) {
+		if (added_hs) {
+			for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+				Atom& atom = *it;
+				const StereoDescriptor& descr = getStereoDescriptor(atom);
+
+				if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
+					continue;
+
+				if (descr.getNumReferenceAtoms() == atom.getNumBonds())
+					continue;
+
+				setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 0));
+			}
+		}
+		
 		calculateCanonicalNumbering(mol, false);
 		canonicalize(mol, true, true, true, true);
 		perceiveSSSR(mol, true);

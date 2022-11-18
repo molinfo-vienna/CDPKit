@@ -663,11 +663,30 @@ void ConfGen::FragmentAssemblerImpl::fixChainAtomConfigurations(bool have_inv_n,
 
 		if (calcAtomConfiguration(atom, parent_molgraph, descr, coords) == config) 
 			continue;
-	
-		invertConfiguration(atom, *ref_atoms[0], *ref_atoms[1], *ref_atoms[2], frag, node, true);
 
-		if (num_ref_atoms > 3)
-			invertConfiguration(atom, *ref_atoms[0], *ref_atoms[1], *ref_atoms[3], frag, node, true);
+		const Atom* nbr_atoms[4];
+		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+		std::size_t num_nbr_atoms = 0;
+		
+		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+			const Atom& nbr_atom = *a_it;
+
+			if (!frag.containsAtom(nbr_atom) || !frag.containsBond(*b_it))
+				continue;
+
+			if (num_nbr_atoms < 4)
+				nbr_atoms[num_nbr_atoms] = &nbr_atom;
+
+			num_nbr_atoms++;
+		}
+
+		if (num_nbr_atoms < 3 || num_nbr_atoms > 4)
+			continue;
+		
+		invertConfiguration(atom, *nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], frag, node, true);
+
+		if (num_nbr_atoms > 3)
+			invertConfiguration(atom, *nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[3], frag, node, true);
 	}
 }
 
