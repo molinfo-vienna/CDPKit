@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ModifiedHueckelMOCalculator.cpp 
+ * MHMOPiChargeCalculator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,7 +32,7 @@ h * along with this library; see the file COPYING. If not, write to
 #include <boost/bind.hpp>
 #include <boost/unordered_map.hpp>
 
-#include "CDPL/MolProp/ModifiedHueckelMOCalculator.hpp"
+#include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -142,38 +142,38 @@ namespace
 }
 
 
-MolProp::ModifiedHueckelMOCalculator::ModifiedHueckelMOCalculator():
+MolProp::MHMOPiChargeCalculator::MHMOPiChargeCalculator():
 	locPiBonds(false)
 {}
 
-MolProp::ModifiedHueckelMOCalculator::ModifiedHueckelMOCalculator(const Chem::MolecularGraph& molgraph):
+MolProp::MHMOPiChargeCalculator::MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph):
 	locPiBonds(false)
 {
 	calculate(molgraph);
 }
 
-MolProp::ModifiedHueckelMOCalculator::ModifiedHueckelMOCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph):
+MolProp::MHMOPiChargeCalculator::MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph):
 	locPiBonds(false)
 {
 	calculate(pi_sys_list, molgraph);
 }
 
-void MolProp::ModifiedHueckelMOCalculator::localizedPiBonds(bool localized)
+void MolProp::MHMOPiChargeCalculator::localizedPiBonds(bool localized)
 {
 	locPiBonds = localized;
 }
 
-bool MolProp::ModifiedHueckelMOCalculator::localizedPiBonds() const
+bool MolProp::MHMOPiChargeCalculator::localizedPiBonds() const
 {
 	return locPiBonds;
 }
 		
-void MolProp::ModifiedHueckelMOCalculator::calculate(const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::calculate(const Chem::MolecularGraph& molgraph)
 {
 	calculate(*getPiElectronSystems(molgraph), molgraph);
 }
 
-void MolProp::ModifiedHueckelMOCalculator::calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -186,39 +186,39 @@ void MolProp::ModifiedHueckelMOCalculator::calculate(const Chem::ElectronSystemL
 	initAtomFreeElecCounts(pi_sys_list, molgraph);
 	
 	std::for_each(pi_sys_list.getElementsBegin(), pi_sys_list.getElementsEnd(),
-				  boost::bind(&ModifiedHueckelMOCalculator::calcForPiSys, this, _1, boost::ref(molgraph)));
+				  boost::bind(&MHMOPiChargeCalculator::calcForPiSys, this, _1, boost::ref(molgraph)));
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getPiElectronDensity(std::size_t atom_idx) const
+double MolProp::MHMOPiChargeCalculator::getElectronDensity(std::size_t atom_idx) const
 {
 	if (atom_idx >= atomElecDensities.size())
-		throw Base::IndexError("ModifiedHueckelMOCalculator: atom index out of bounds");
+		throw Base::IndexError("MHMOPiChargeCalculator: atom index out of bounds");
 	
 	return atomElecDensities[atom_idx];
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getPiCharge(std::size_t atom_idx) const
+double MolProp::MHMOPiChargeCalculator::getCharge(std::size_t atom_idx) const
 {
 	if (atom_idx >= atomElecDensities.size())
-		throw Base::IndexError("ModifiedHueckelMOCalculator: atom index out of bounds");
+		throw Base::IndexError("MHMOPiChargeCalculator: atom index out of bounds");
 	
 	return atomPiCharges[atom_idx];
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getPiBondOrder(std::size_t bond_idx) const
+double MolProp::MHMOPiChargeCalculator::getBondOrder(std::size_t bond_idx) const
 {
 	if (bond_idx >= bondElecDensities.size())
-		throw Base::IndexError("ModifiedHueckelMOCalculator: bond index out of bounds");
+		throw Base::IndexError("MHMOPiChargeCalculator: bond index out of bounds");
 
 	return bondElecDensities[bond_idx];
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getEnergy() const
+double MolProp::MHMOPiChargeCalculator::getEnergy() const
 {
 	return energy;
 }
 
-void MolProp::ModifiedHueckelMOCalculator::initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -239,7 +239,7 @@ void MolProp::ModifiedHueckelMOCalculator::initAtomPiSysCounts(const Chem::Elect
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -253,7 +253,7 @@ void MolProp::ModifiedHueckelMOCalculator::initAtomFreeElecCounts(const Chem::El
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	if (pi_sys.getNumAtoms() < 2)
 		return;
@@ -263,7 +263,7 @@ void MolProp::ModifiedHueckelMOCalculator::calcForPiSys(const Chem::ElectronSyst
 	initHueckelMatrix(pi_sys, molgraph);
 
 	if (!diagHueckelMatrix())
-		throw Base::CalculationFailed("ModifiedHueckelMOCalculator: could not diagonalize Hueckel-matrix");
+		throw Base::CalculationFailed("MHMOPiChargeCalculator: could not diagonalize Hueckel-matrix");
 
 	distElectrons(pi_sys);
 	
@@ -272,7 +272,7 @@ void MolProp::ModifiedHueckelMOCalculator::calcForPiSys(const Chem::ElectronSyst
 	updateBondElecDensities(pi_sys, molgraph);
 }
 
-void MolProp::ModifiedHueckelMOCalculator::initAtomPiElecCounts(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::initAtomPiElecCounts(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
@@ -353,7 +353,7 @@ void MolProp::ModifiedHueckelMOCalculator::initAtomPiElecCounts(const Chem::Elec
 	}
 }
 
-std::size_t MolProp::ModifiedHueckelMOCalculator::getNumBonds(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+std::size_t MolProp::MHMOPiChargeCalculator::getNumBonds(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
 															  const Chem::MolecularGraph& molgraph) const
 {
 	using namespace Chem;
@@ -369,7 +369,7 @@ std::size_t MolProp::ModifiedHueckelMOCalculator::getNumBonds(const Chem::Atom& 
 	return count;
 }
 
-void MolProp::ModifiedHueckelMOCalculator::getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -383,7 +383,7 @@ void MolProp::ModifiedHueckelMOCalculator::getInvolvedBonds(const Chem::Electron
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
@@ -413,7 +413,7 @@ void MolProp::ModifiedHueckelMOCalculator::initHueckelMatrix(const Chem::Electro
 	}
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+double MolProp::MHMOPiChargeCalculator::getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
 													  const Chem::MolecularGraph& molgraph) const
 {
 	ParameterMap::const_iterator it = alphaParams.find(getAtomID(atom, pi_sys, molgraph));
@@ -424,7 +424,7 @@ double MolProp::ModifiedHueckelMOCalculator::getAlpha(const Chem::Atom& atom, co
 	return it->second;
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+double MolProp::MHMOPiChargeCalculator::getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
 																const Chem::MolecularGraph& molgraph) const
 {
 	using namespace Chem;
@@ -484,7 +484,7 @@ double MolProp::ModifiedHueckelMOCalculator::getAlphaCorrection(const Chem::Atom
 	return (sigma_corr + hyp_conj_corr);
 }
 
-double MolProp::ModifiedHueckelMOCalculator::getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
+double MolProp::MHMOPiChargeCalculator::getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
 													 const Chem::MolecularGraph& molgraph) const
 {
 	ParameterMap::const_iterator it = betaParams.find(getBondID(bond, pi_sys, molgraph));
@@ -495,7 +495,7 @@ double MolProp::ModifiedHueckelMOCalculator::getBeta(const Chem::Bond& bond, con
 	return it->second;
 }
 
-Base::uint64 MolProp::ModifiedHueckelMOCalculator::getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+Base::uint64 MolProp::MHMOPiChargeCalculator::getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
 															 const Chem::MolecularGraph& molgraph) const
 {
 	using namespace Chem;
@@ -510,7 +510,7 @@ Base::uint64 MolProp::ModifiedHueckelMOCalculator::getAtomID(const Chem::Atom& a
 	return (atom_type * 1000 + num_pi_elec * 10 + specialAtomTypes.test(atom_idx));
 }
 
-Base::uint64 MolProp::ModifiedHueckelMOCalculator::getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
+Base::uint64 MolProp::MHMOPiChargeCalculator::getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
 															 const Chem::MolecularGraph& molgraph) const
 {
 	Base::uint64 atom1_id = getAtomID(bond.getBegin(), pi_sys, molgraph);
@@ -522,7 +522,7 @@ Base::uint64 MolProp::ModifiedHueckelMOCalculator::getBondID(const Chem::Bond& b
 	return (atom1_id * 100000 + atom2_id);
 }
 
-bool MolProp::ModifiedHueckelMOCalculator::diagHueckelMatrix()
+bool MolProp::MHMOPiChargeCalculator::diagHueckelMatrix()
 {
 	std::size_t num_atoms = hueckelMatrix.getSize1();
 	
@@ -532,7 +532,7 @@ bool MolProp::ModifiedHueckelMOCalculator::diagHueckelMatrix()
 	return jacobiDiagonalize(hueckelMatrix, hmEigenValues, hmEigenVectors, 100);
 }
 
-void MolProp::ModifiedHueckelMOCalculator::distElectrons(const Chem::ElectronSystem& pi_sys)
+void MolProp::MHMOPiChargeCalculator::distElectrons(const Chem::ElectronSystem& pi_sys)
 {
 	std::size_t num_mos = hmEigenValues.getSize();
 	
@@ -577,7 +577,7 @@ void MolProp::ModifiedHueckelMOCalculator::distElectrons(const Chem::ElectronSys
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::updateEnergy()
+void MolProp::MHMOPiChargeCalculator::updateEnergy()
 {
 	for (MODescrPtrArray::const_iterator it = moDescriptorPtrs.begin(), end = moDescriptorPtrs.end(); it != end; ++it) {
 		double num_el = (*it)->elecCount;
@@ -589,7 +589,7 @@ void MolProp::ModifiedHueckelMOCalculator::updateEnergy()
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::updateAtomElecDensitiesAndCharges(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::updateAtomElecDensitiesAndCharges(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	for (std::size_t i = 0, num_atoms = pi_sys.getNumAtoms(); i < num_atoms; i++) { 
 		double el_density = calcElecDensity(i, i);
@@ -600,7 +600,7 @@ void MolProp::ModifiedHueckelMOCalculator::updateAtomElecDensitiesAndCharges(con
 	}
 }
 
-void MolProp::ModifiedHueckelMOCalculator::updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
+void MolProp::MHMOPiChargeCalculator::updateBondElecDensities(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -611,7 +611,7 @@ void MolProp::ModifiedHueckelMOCalculator::updateBondElecDensities(const Chem::E
 	}
 }
 
-double MolProp::ModifiedHueckelMOCalculator::calcElecDensity(std::size_t i, std::size_t j) const
+double MolProp::MHMOPiChargeCalculator::calcElecDensity(std::size_t i, std::size_t j) const
 {
 	double density = 0.0;
 

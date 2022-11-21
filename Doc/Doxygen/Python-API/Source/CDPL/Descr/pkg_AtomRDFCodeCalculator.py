@@ -33,7 +33,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: AtomRDFCodeCalculator) -> None: pass
+    def __init__(calculator: ._descr.AtomRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomRDFCodeCalculator instance.
@@ -59,7 +59,7 @@ class AtomRDFCodeCalculator(Boost.Python.instance):
     # \param calculator The \e %AtomRDFCodeCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: AtomRDFCodeCalculator) -> AtomRDFCodeCalculator: pass
+    def assign(calculator: ._descr.AtomRDFCodeCalculator) -> ._descr.AtomRDFCodeCalculator: pass
 
     ##
     # \brief 

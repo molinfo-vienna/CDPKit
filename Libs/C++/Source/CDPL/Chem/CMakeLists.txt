@@ -179,6 +179,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerCopyAtomsFunctions.cpp
     AtomContainerBoundingBoxFunctions.cpp
     AtomContainerCentroidFunction.cpp
+    AtomContainerCenterOfMassFunction.cpp
     
     AtomPropertyFunctions.cpp
     AtomTypeFunctions.cpp

@@ -35,6 +35,7 @@ SET(molprop_MOD_SRCS
     Module.cpp
 
     AtomPropertyExport.cpp
+    BondPropertyExport.cpp
     CoordinationGeometryExport.cpp 
 
     MolecularGraphFunctionExport.cpp
@@ -50,7 +51,7 @@ SET(molprop_MOD_SRCS
     XLogPCalculatorExport.cpp
     LogSCalculatorExport.cpp 
     PEOESigmaChargeCalculatorExport.cpp
-    ModifiedHueckelMOCalculatorExport.cpp    
+    MHMOPiChargeCalculatorExport.cpp    
     TPSACalculatorExport.cpp
    )
 

@@ -92,6 +92,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER4(bool, isAmideBond, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
 
 	MAKE_FUNCTION_WRAPPER5(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
+
+	MAKE_BOND_FUNC_WRAPPERS(double, MHMOPiOrder)
 }
 
 
@@ -119,4 +121,6 @@ void CDPLPythonMolProp::exportBondFunctions()
 
 	python::def("isRotatable", &isRotatableWrapper5, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("h_rotors"), python::arg("ring_bonds"), python::arg("amide_bonds")));
+
+	EXPORT_BOND_FUNCS(MHMOPiOrder, order)
 }

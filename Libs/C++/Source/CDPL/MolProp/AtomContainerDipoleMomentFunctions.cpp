@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphPEOESigmaChargesFunction.cpp 
+ * AtomContainerDipoleMomentFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,45 +26,42 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
-#include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
+#include "CDPL/MolProp/AtomContainerFunctions.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 
 
 using namespace CDPL; 
 
 
-void MolProp::calcPEOESigmaCharges(Chem::MolecularGraph& molgraph, bool overwrite, std::size_t num_iter, 
-							  double damping)
+bool MolProp::calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment)
 {
-	if (!overwrite) {
-		Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd();
-		
-		for ( ; it != end; ++it) {
-			const Chem::Atom& atom = *it;
-
-			if (!hasPEOESigmaCharge(atom) || !hasPEOESigmaElectronegativity(atom))
-				break;
-		}
-		
-		if (it == end)
-			return;
-	}
-
-	PEOESigmaChargeCalculator calculator;
-
-	calculator.setNumIterations(num_iter);
-	calculator.setDampingFactor(damping);
-	calculator.calculate(molgraph);
+	using namespace Chem;
 	
-	std::size_t num_atoms = molgraph.getNumAtoms();
+	const double UNIT_CONV_FACTOR = 4.8032066;
+	Math::Vector3D mass_ctr;
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		Chem::Atom& atom = molgraph.getAtom(i);
+	if (!calcCenterOfMass(cntnr, coords_func, mass_ctr))
+		return false;
+
+	moment.clear();
+
+	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
 		
-		setPEOESigmaCharge(atom, calculator.getCharge(i));
-		setPEOESigmaElectronegativity(atom, calculator.getElectronegativity(i));
+		moment.plusAssign((coords_func(atom) - mass_ctr) * calcTotalPartialCharge(atom));
 	}
+	
+	moment *= UNIT_CONV_FACTOR;
+	
+	return true;
 }
+
+bool MolProp::calcDipoleMoment(const Chem::AtomContainer& cntnr, Math::Vector3D& moment)
+{
+	return calcDipoleMoment(cntnr, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), moment);
+}
+

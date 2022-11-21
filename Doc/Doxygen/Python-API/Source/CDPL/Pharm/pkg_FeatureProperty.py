@@ -27,49 +27,49 @@ class FeatureProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    TYPE = CDPL.Base.LookupKey(id=307, name='TYPE')
+    TYPE = CDPL.Base.LookupKey(id=309, name='TYPE')
 
     ##
     # \brief 
     #
-    GEOMETRY = CDPL.Base.LookupKey(id=308, name='GEOMETRY')
+    GEOMETRY = CDPL.Base.LookupKey(id=310, name='GEOMETRY')
 
     ##
     # \brief 
     #
-    LENGTH = CDPL.Base.LookupKey(id=309, name='LENGTH')
+    LENGTH = CDPL.Base.LookupKey(id=311, name='LENGTH')
 
     ##
     # \brief 
     #
-    ORIENTATION = CDPL.Base.LookupKey(id=310, name='ORIENTATION')
+    ORIENTATION = CDPL.Base.LookupKey(id=312, name='ORIENTATION')
 
     ##
     # \brief 
     #
-    TOLERANCE = CDPL.Base.LookupKey(id=311, name='TOLERANCE')
+    TOLERANCE = CDPL.Base.LookupKey(id=313, name='TOLERANCE')
 
     ##
     # \brief 
     #
-    WEIGHT = CDPL.Base.LookupKey(id=312, name='WEIGHT')
+    WEIGHT = CDPL.Base.LookupKey(id=314, name='WEIGHT')
 
     ##
     # \brief 
     #
-    SUBSTRUCTURE = CDPL.Base.LookupKey(id=313, name='SUBSTRUCTURE')
+    SUBSTRUCTURE = CDPL.Base.LookupKey(id=315, name='SUBSTRUCTURE')
 
     ##
     # \brief 
     #
-    DISABLED_FLAG = CDPL.Base.LookupKey(id=314, name='DISABLED_FLAG')
+    DISABLED_FLAG = CDPL.Base.LookupKey(id=316, name='DISABLED_FLAG')
 
     ##
     # \brief 
     #
-    OPTIONAL_FLAG = CDPL.Base.LookupKey(id=315, name='OPTIONAL_FLAG')
+    OPTIONAL_FLAG = CDPL.Base.LookupKey(id=317, name='OPTIONAL_FLAG')
 
     ##
     # \brief 
     #
-    HYDROPHOBICITY = CDPL.Base.LookupKey(id=316, name='HYDROPHOBICITY')
+    HYDROPHOBICITY = CDPL.Base.LookupKey(id=318, name='HYDROPHOBICITY')

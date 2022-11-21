@@ -32,9 +32,14 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    PEOE_CHARGE = CDPL.Base.LookupKey(id=144, name='PEOE_CHARGE')
+    PEOE_SIGMA_CHARGE = CDPL.Base.LookupKey(id=144, name='PEOE_SIGMA_CHARGE')
 
     ##
     # \brief 
     #
-    PEOE_ELECTRONEGATIVITY = CDPL.Base.LookupKey(id=145, name='PEOE_ELECTRONEGATIVITY')
+    PEOE_SIGMA_ELECTRONEGATIVITY = CDPL.Base.LookupKey(id=145, name='PEOE_SIGMA_ELECTRONEGATIVITY')
+
+    ##
+    # \brief 
+    #
+    MHMO_PI_CHARGE = CDPL.Base.LookupKey(id=146, name='MHMO_PI_CHARGE')

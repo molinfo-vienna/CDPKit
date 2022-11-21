@@ -77,6 +77,15 @@ namespace CDPL
 	
 		CDPL_MOLPROP_API bool hasPEOESigmaElectronegativity(const Chem::Atom& atom);
 
+
+		CDPL_MOLPROP_API double getMHMOPiCharge(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API void setMHMOPiCharge(Chem::Atom& atom, double charge);
+
+		CDPL_MOLPROP_API void clearMHMOPiCharge(Chem::Atom& atom);
+	
+		CDPL_MOLPROP_API bool hasMHMOPiCharge(const Chem::Atom& atom);
+
 		
 		CDPL_MOLPROP_API bool isInRing(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
@@ -203,6 +212,14 @@ namespace CDPL
 		CDPL_MOLPROP_API double getHybridPolarizability(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API double calcEffectivePolarizability(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, double damping = 0.75);
+
+		CDPL_MOLPROP_API double calcTotalPartialCharge(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API double calcLonePairElectronegativity(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API double calcPiElectronegativity(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+
+		CDPL_MOLPROP_API double calcInductiveEffect(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t num_bonds = 3);
 	}
 }
 

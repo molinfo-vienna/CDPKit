@@ -47,6 +47,7 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER3(void, get2DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector2DArray&, bool);
 	MAKE_FUNCTION_WRAPPER3(bool, calcCentroid, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
+	MAKE_FUNCTION_WRAPPER3(bool, calcCenterOfMass, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
 
 	MAKE_FUNCTION_WRAPPER4(std::size_t, buildAtomTypeMask, CDPL::Chem::AtomContainer&, CDPL::Util::BitSet&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(void, getConformation, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&, bool);
@@ -95,6 +96,7 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("copyAtomsIfNot", static_cast<void (*)(CDPL::Chem::AtomContainer&, CDPL::Chem::Fragment&, const CDPL::Chem::AtomPredicate&, bool)>(&copyAtomsIfNotWrapper4),
 				(python::arg("cntnr"), python::arg("frag"), python::arg("pred"), python::arg("append") = false));
 
+	python::def("calcCenterOfMass", &calcCenterOfMassWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("ctr")));
 	python::def("calcCentroid", &calcCentroidWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("ctr")));
 	python::def("calcBoundingBox", &calcBoundingBoxWrapper5, (python::arg("cntnr"), python::arg("min"), python::arg("max"), 
 															  python::arg("coords_func"), (python::arg("reset") = true)));

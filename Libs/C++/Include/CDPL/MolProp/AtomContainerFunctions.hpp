@@ -36,6 +36,7 @@
 #include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 
 namespace CDPL 
@@ -75,6 +76,11 @@ namespace CDPL
 
 
 		CDPL_MOLPROP_API long getNetFormalCharge(const Chem::AtomContainer& cntnr);
+
+
+		CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, const Chem::Atom3DCoordinatesFunction& coords_func, Math::Vector3D& moment);
+
+		CDPL_MOLPROP_API bool calcDipoleMoment(const Chem::AtomContainer& cntnr, Math::Vector3D& moment);
 	}
 }
 

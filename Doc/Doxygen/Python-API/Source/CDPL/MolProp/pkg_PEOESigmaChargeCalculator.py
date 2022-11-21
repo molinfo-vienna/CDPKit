@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class PEOEChargeCalculator(Boost.Python.instance):
+class PEOESigmaChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief 
@@ -35,22 +35,21 @@ class PEOEChargeCalculator(Boost.Python.instance):
     DEF_DAMPING_FACTOR = 0.5
 
     ##
-    # \brief Initializes the \e %PEOEChargeCalculator instance.
+    # \brief Initializes the \e %PEOESigmaChargeCalculator instance.
     #
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PEOEChargeCalculator instance.
+    # \brief Initializes the \e %PEOESigmaChargeCalculator instance.
     # \param molgraph 
-    # \param charges 
     #
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
-    # Different Python \e %PEOEChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PEOEChargeCalculator instances \e a and \e b reference different C++ objects. 
+    # Different Python \e %PEOESigmaChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PEOESigmaChargeCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     #
@@ -85,15 +84,22 @@ class PEOEChargeCalculator(Boost.Python.instance):
     ##
     # \brief 
     # \param molgraph 
-    # \param charges 
     #
-    def calculate(molgraph: CDPL.Chem.MolecularGraph, charges: CDPL.Util.DArray) -> None: pass
+    def calculate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 
-    # \param elnegs 
+    # \param idx 
+    # \return 
     #
-    def getElectronegativities(elnegs: CDPL.Util.DArray) -> None: pass
+    def getCharge(idx: int) -> float: pass
+
+    ##
+    # \brief 
+    # \param idx 
+    # \return 
+    #
+    def getElectronegativity(idx: int) -> float: pass
 
     ##
     # \brief 

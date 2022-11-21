@@ -21,8 +21,10 @@
 
 ##
 # \brief 
-# \param str dir 
-# \param ptn 
-# \return 
 #
-def genCheckedTempFilePath(str dir: [ = '', ptn: str = '%%%%-%%%%-%%%%-%%%%') -> str: pass
+class BondProperty(Boost.Python.instance):
+
+    ##
+    # \brief 
+    #
+    MHMO_PI_ORDER = CDPL.Base.LookupKey(id=147, name='MHMO_PI_ORDER')

@@ -33,7 +33,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     # \brief Initializes the \e %MoleculeAutoCorr3DDescriptorCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: MoleculeAutoCorr3DDescriptorCalculator) -> None: pass
+    def __init__(calculator: ._descr.MoleculeAutoCorr3DDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr3DDescriptorCalculator instance.
@@ -59,7 +59,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     # \param calculator The \e %MoleculeAutoCorr3DDescriptorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: MoleculeAutoCorr3DDescriptorCalculator) -> MoleculeAutoCorr3DDescriptorCalculator: pass
+    def assign(calculator: ._descr.MoleculeAutoCorr3DDescriptorCalculator) -> ._descr.MoleculeAutoCorr3DDescriptorCalculator: pass
 
     ##
     # \brief 

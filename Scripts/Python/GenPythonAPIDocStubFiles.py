@@ -694,6 +694,7 @@ def getFuncOverloads(func_obj, func_name):
             arg_list = arg_list.replace('(', '')
             arg_list = arg_list.replace(')', ' ')
             arg_list = arg_list.replace(' [', '')
+            arg_list = arg_list.replace('[ ', '')
             arg_list = arg_list.replace(']', '')
             arg_list = arg_list.strip()
 

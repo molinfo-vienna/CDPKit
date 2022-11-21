@@ -99,6 +99,8 @@ namespace CDPL
 		CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append = false);
 
 
+		CDPL_CHEM_API bool calcCenterOfMass(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
+
 		CDPL_CHEM_API bool calcCentroid(const AtomContainer& cntnr, const Atom3DCoordinatesFunction& coords_func, Math::Vector3D& ctr);
 		
 		CDPL_CHEM_API void calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math::Vector3D& max, const Atom3DCoordinatesFunction& coords_func, bool reset = true);	

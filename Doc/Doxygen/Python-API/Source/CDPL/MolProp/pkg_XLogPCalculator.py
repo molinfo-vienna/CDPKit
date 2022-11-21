@@ -38,7 +38,7 @@ class XLogPCalculator(Boost.Python.instance):
     # \brief Initializes the \e %XLogPCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: XLogPCalculator) -> None: pass
+    def __init__(calculator: ._molprop.XLogPCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %XLogPCalculator instance.
@@ -63,7 +63,7 @@ class XLogPCalculator(Boost.Python.instance):
     # \param calculator The \e %XLogPCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: XLogPCalculator) -> XLogPCalculator: pass
+    def assign(calculator: ._molprop.XLogPCalculator) -> ._molprop.XLogPCalculator: pass
 
     ##
     # \brief 

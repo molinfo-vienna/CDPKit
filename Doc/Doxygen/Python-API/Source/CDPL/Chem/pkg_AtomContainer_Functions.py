@@ -163,6 +163,15 @@ def clearConformations(cntnr: AtomContainer) -> None: pass
 ##
 # \brief 
 # \param cntnr 
+# \param coords_func 
+# \param ctr 
+# \return 
+#
+def calcCenterOfMass(cntnr: AtomContainer, coords_func: Atom3DCoordinatesFunction, ctr: CDPL.Math.Vector3D) -> bool: pass
+
+##
+# \brief 
+# \param cntnr 
 # \param mol 
 # \param pred 
 # \param append 

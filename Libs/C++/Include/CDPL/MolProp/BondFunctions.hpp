@@ -48,7 +48,16 @@ namespace CDPL
 	
 	namespace MolProp 
 	{
+
+		CDPL_MOLPROP_API double getMHMOPiOrder(const Chem::Bond& bond);
+
+		CDPL_MOLPROP_API void setMHMOPiOrder(Chem::Bond& bond, double order);
+
+		CDPL_MOLPROP_API void clearMHMOPiOrder(Chem::Bond& bond);
 	
+		CDPL_MOLPROP_API bool hasMHMOPiOrder(const Chem::Bond& atom);
+
+		
 		CDPL_MOLPROP_API double calcPolarizability(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, double damping = 0.75);
 
 

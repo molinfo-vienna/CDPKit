@@ -29,6 +29,14 @@ def checkIfSameFile(path1: str, path2: str) -> bool: pass
 
 ##
 # \brief 
+# \param dir 
+# \param ptn 
+# \return 
+#
+def genCheckedTempFilePath(dir: str = '', ptn: str = '%%%%-%%%%-%%%%-%%%%') -> str: pass
+
+##
+# \brief 
 # \param path 
 # \return 
 #

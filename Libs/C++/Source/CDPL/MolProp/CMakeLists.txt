@@ -27,13 +27,16 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-molprop_LIB_SRCS
     AtomProperty.cpp
+    BondProperty.cpp
 
     AtomPropertyFunctions.cpp
+    BondPropertyFunctions.cpp
     
     AtomContainerElementalCompositionFunctions.cpp
     AtomContainerMassCompositionFunctions.cpp
     AtomContainerAtomCountFunctions.cpp
     AtomContainerNetFormalChargeFunction.cpp
+    AtomContainerDipoleMomentFunctions.cpp
 
     BondContainerBondCountFunctions.cpp
 
@@ -45,7 +48,8 @@ SET(cdpl-molprop_LIB_SRCS
     MolecularGraphElementalCompositionFunctions.cpp
     MolecularGraphMeanPolarizabilityFunction.cpp
     MolecularGraphAtomHydrophobicityFunction.cpp
-    MolecularGraphPEOESigmaChargesFunction.cpp
+    MolecularGraphPEOEPropertiesFunction.cpp
+    MolecularGraphMHMOPropertiesFunction.cpp
     MolecularGraphRO5ScoreFunction.cpp
     MolecularGraphTPSAFunction.cpp
     MolecularGraphLogSFunction.cpp
@@ -60,6 +64,9 @@ SET(cdpl-molprop_LIB_SRCS
     AtomValenceElectronCountFunctions.cpp
     AtomAtomCountFunctions.cpp
     AtomVSEPRGeometryFunctions.cpp
+    AtomTotalPartialChargeFunction.cpp
+    AtomElectronegativityFunctions.cpp
+    AtomInductiveEffectFunction.cpp
     
     BondPolarizabilityFunction.cpp
     BondClassificationFunctions.cpp
@@ -68,7 +75,7 @@ SET(cdpl-molprop_LIB_SRCS
     AtomHydrophobicityCalculator.cpp
     LogSCalculator.cpp
     PEOESigmaChargeCalculator.cpp
-    ModifiedHueckelMOCalculator.cpp
+    MHMOPiChargeCalculator.cpp
     TPSACalculator.cpp
     XLogPCalculator.cpp
    )

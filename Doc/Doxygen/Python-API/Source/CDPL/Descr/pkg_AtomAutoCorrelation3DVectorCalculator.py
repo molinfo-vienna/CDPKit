@@ -33,7 +33,7 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     # \brief Initializes the \e %AtomAutoCorrelation3DVectorCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: AtomAutoCorrelation3DVectorCalculator) -> None: pass
+    def __init__(calculator: ._descr.AtomAutoCorrelation3DVectorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AtomAutoCorrelation3DVectorCalculator instance.
@@ -59,7 +59,7 @@ class AtomAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     # \param calculator The \e %AtomAutoCorrelation3DVectorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: AtomAutoCorrelation3DVectorCalculator) -> AtomAutoCorrelation3DVectorCalculator: pass
+    def assign(calculator: ._descr.AtomAutoCorrelation3DVectorCalculator) -> ._descr.AtomAutoCorrelation3DVectorCalculator: pass
 
     ##
     # \brief 

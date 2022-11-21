@@ -48,7 +48,7 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
+    def __init__(calculator: ._descr.MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
@@ -74,7 +74,7 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     # \param calculator The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: MoleculeAutoCorr2DDescriptorCalculator) -> MoleculeAutoCorr2DDescriptorCalculator: pass
+    def assign(calculator: ._descr.MoleculeAutoCorr2DDescriptorCalculator) -> ._descr.MoleculeAutoCorr2DDescriptorCalculator: pass
 
     ##
     # \brief 

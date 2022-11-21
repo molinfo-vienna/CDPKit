@@ -33,7 +33,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         # \brief Initializes the \e %Pattern instance.
         # \param ptn 
         #
-        def __init__(ptn: Pattern) -> None: pass
+        def __init__(ptn: re.Pattern) -> None: pass
 
         ##
         # \brief Initializes the \e %Pattern instance.
@@ -62,7 +62,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         # \param ptn The \e %Pattern instance to copy.
         # \return The assignment target \a self.
         #
-        def assign(ptn: Pattern) -> Pattern: pass
+        def assign(ptn: re.Pattern) -> re.Pattern: pass
 
         ##
         # \brief 
@@ -161,14 +161,14 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     # \brief 
     # \param ptn 
     #
-    def addPattern(ptn: Pattern) -> None: pass
+    def addPattern(ptn: re.Pattern) -> None: pass
 
     ##
     # \brief 
     # \param idx 
     # \return 
     #
-    def getPattern(idx: int) -> Pattern: pass
+    def getPattern(idx: int) -> re.Pattern: pass
 
     ##
     # \brief 

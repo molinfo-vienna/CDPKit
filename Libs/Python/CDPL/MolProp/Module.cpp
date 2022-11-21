@@ -36,6 +36,7 @@ BOOST_PYTHON_MODULE(_molprop)
 	using namespace CDPLPythonMolProp;
 
 	exportAtomProperties();
+	exportBondProperties();
 	exportCoordinationGeometries();
 
 	exportElementHistogram();
@@ -46,7 +47,7 @@ BOOST_PYTHON_MODULE(_molprop)
 	exportXLogPCalculator();
 	exportTPSACalculator();
 	exportPEOESigmaChargeCalculator();
-	exportModifiedHueckelMOCalculator();
+	exportMHMOPiChargeCalculator();
 
 	exportAtomContainerFunctions();
 	exportBondContainerFunctions();

@@ -32,6 +32,7 @@
 #define CDPL_MOLPROP_HPP
 
 #include "CDPL/MolProp/AtomProperty.hpp"
+#include "CDPL/MolProp/BondProperty.hpp"
 
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
@@ -49,6 +50,6 @@
 #include "CDPL/MolProp/LogSCalculator.hpp"
 #include "CDPL/MolProp/XLogPCalculator.hpp"
 #include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
-#include "CDPL/MolProp/ModifiedHueckelMOCalculator.hpp"
+#include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
 
 #endif // CDPL_MOLPROP_HPP

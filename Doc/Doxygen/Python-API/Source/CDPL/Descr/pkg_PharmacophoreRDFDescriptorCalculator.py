@@ -33,7 +33,7 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     # \brief Initializes the \e %PharmacophoreRDFDescriptorCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: PharmacophoreRDFDescriptorCalculator) -> None: pass
+    def __init__(calculator: ._descr.PharmacophoreRDFDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %PharmacophoreRDFDescriptorCalculator instance.
@@ -59,7 +59,7 @@ class PharmacophoreRDFDescriptorCalculator(Boost.Python.instance):
     # \param calculator The \e %PharmacophoreRDFDescriptorCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: PharmacophoreRDFDescriptorCalculator) -> PharmacophoreRDFDescriptorCalculator: pass
+    def assign(calculator: ._descr.PharmacophoreRDFDescriptorCalculator) -> ._descr.PharmacophoreRDFDescriptorCalculator: pass
 
     ##
     # \brief 

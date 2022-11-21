@@ -35,7 +35,7 @@ class ConstDVectorSlice(Boost.Python.instance):
     # \param e 
     # \param s 
     #
-    def __init__(e: ConstDVectorExpression, s: ast.Slice) -> None: pass
+    def __init__(e: ConstDVectorExpression, s: _ast.Slice) -> None: pass
 
     ##
     # \brief 

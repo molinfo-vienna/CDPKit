@@ -32,6 +32,7 @@ namespace CDPLPythonMolProp
 {
 
 	void exportAtomProperties();
+	void exportBondProperties();
 	void exportCoordinationGeometries();
 }
 

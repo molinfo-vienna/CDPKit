@@ -67,6 +67,33 @@ def isInRing(bond: CDPL.Chem.Bond, molgraph: CDPL.Chem.MolecularGraph) -> bool: 
 ##
 # \brief 
 # \param bond 
+#
+def clearMHMOPiOrder(bond: CDPL.Chem.Bond) -> None: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def hasMHMOPiOrder(bond: CDPL.Chem.Bond) -> bool: pass
+
+##
+# \brief 
+# \param bond 
+# \return 
+#
+def getMHMOPiOrder(bond: CDPL.Chem.Bond) -> float: pass
+
+##
+# \brief 
+# \param bond 
+# \param order 
+#
+def setMHMOPiOrder(bond: CDPL.Chem.Bond, order: float) -> None: pass
+
+##
+# \brief 
+# \param bond 
 # \param molgraph 
 # \return 
 #

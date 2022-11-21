@@ -33,7 +33,7 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: FeatureRDFCodeCalculator) -> None: pass
+    def __init__(calculator: ._descr.FeatureRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
@@ -59,7 +59,7 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     # \param calculator The \e %FeatureRDFCodeCalculator instance to copy.
     # \return The assignment target \a self.
     #
-    def assign(calculator: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
+    def assign(calculator: ._descr.FeatureRDFCodeCalculator) -> ._descr.FeatureRDFCodeCalculator: pass
 
     ##
     # \brief 

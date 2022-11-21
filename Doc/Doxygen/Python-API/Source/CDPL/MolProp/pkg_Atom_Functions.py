@@ -54,28 +54,62 @@ def calcExplicitValence(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph
 # \brief 
 # \param atom 
 #
-def clearPEOECharge(atom: CDPL.Chem.Atom) -> None: pass
+def clearPEOESigmaCharge(atom: CDPL.Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def hasPEOECharge(atom: CDPL.Chem.Atom) -> bool: pass
+def hasPEOESigmaCharge(atom: CDPL.Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getPEOECharge(atom: CDPL.Chem.Atom) -> float: pass
+def getPEOESigmaCharge(atom: CDPL.Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param charge 
 #
-def setPEOECharge(atom: CDPL.Chem.Atom, charge: float) -> None: pass
+def setPEOESigmaCharge(atom: CDPL.Chem.Atom, charge: float) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearMHMOPiCharge(atom: CDPL.Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasMHMOPiCharge(atom: CDPL.Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getMHMOPiCharge(atom: CDPL.Chem.Atom) -> float: pass
+
+##
+# \brief 
+# \param atom 
+# \param charge 
+#
+def setMHMOPiCharge(atom: CDPL.Chem.Atom, charge: float) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def calcTotalPartialCharge(atom: CDPL.Chem.Atom) -> float: pass
 
 ##
 # \brief 
@@ -251,6 +285,15 @@ def getVdWRadius(atom: CDPL.Chem.Atom) -> float: pass
 # \return 
 #
 def getCovalentRadius(atom: CDPL.Chem.Atom, order: int = 1) -> float: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \param num_bonds 
+# \return 
+#
+def calcInductiveEffect(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, num_bonds: int) -> float: pass
 
 ##
 # \brief 
@@ -535,28 +578,44 @@ def calcEffectivePolarizability(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.Molecu
 # \brief 
 # \param atom 
 #
-def clearPEOEElectronegativity(atom: CDPL.Chem.Atom) -> None: pass
+def clearPEOESigmaElectronegativity(atom: CDPL.Chem.Atom) -> None: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def hasPEOEElectronegativity(atom: CDPL.Chem.Atom) -> bool: pass
+def hasPEOESigmaElectronegativity(atom: CDPL.Chem.Atom) -> bool: pass
 
 ##
 # \brief 
 # \param atom 
 # \return 
 #
-def getPEOEElectronegativity(atom: CDPL.Chem.Atom) -> float: pass
+def getPEOESigmaElectronegativity(atom: CDPL.Chem.Atom) -> float: pass
 
 ##
 # \brief 
 # \param atom 
 # \param e_neg 
 #
-def setPEOEElectronegativity(atom: CDPL.Chem.Atom, e_neg: float) -> None: pass
+def setPEOESigmaElectronegativity(atom: CDPL.Chem.Atom, e_neg: float) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \return 
+#
+def calcPiElectronegativity(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> float: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
+# \return 
+#
+def calcLonePairElectronegativity(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> float: pass
 
 ##
 # \brief 

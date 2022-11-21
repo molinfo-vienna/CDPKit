@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ModifiedHueckelMOCalculator.hpp 
+ * MHMOPiChargeCalculator.hpp 
  * 
  * Modified Hueckel Molecular Orbital calculation of various pi electron system properties
  * (according to T. Kleinöder, PhD Thesis, FAU Erlangen-Nuremberg, 2005) 
@@ -28,11 +28,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::MolProp::ModifiedHueckelMOCalculator.
+ * \brief Definition of the class CDPL::MolProp::MHMOPiChargeCalculator.
  */
 
-#ifndef CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP
-#define CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP
+#ifndef CDPL_MOLPROP_MHMOPICHARGECALCULATOR_HPP
+#define CDPL_MOLPROP_MHMOPICHARGECALCULATOR_HPP
 
 #include <vector>
 #include <cstddef>
@@ -61,20 +61,20 @@ namespace CDPL
     {
 
 		/**
-		 * \brief ModifiedHueckelMOCalculator.
+		 * \brief MHMOPiChargeCalculator.
 		 * \see [\ref MHMO]
 		 */
-		class CDPL_MOLPROP_API ModifiedHueckelMOCalculator
+		class CDPL_MOLPROP_API MHMOPiChargeCalculator
 		{
 
 		  public:
-			typedef boost::shared_ptr<ModifiedHueckelMOCalculator> SharedPointer;
+			typedef boost::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
 
-			ModifiedHueckelMOCalculator();
+			MHMOPiChargeCalculator();
 
-			ModifiedHueckelMOCalculator(const Chem::MolecularGraph& molgraph);
+			MHMOPiChargeCalculator(const Chem::MolecularGraph& molgraph);
 
-			ModifiedHueckelMOCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
+			MHMOPiChargeCalculator(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
 			void localizedPiBonds(bool localized);
 
@@ -84,11 +84,11 @@ namespace CDPL
 
 			void calculate(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
-			double getPiElectronDensity(std::size_t atom_idx) const;
+			double getElectronDensity(std::size_t atom_idx) const;
 
-			double getPiCharge(std::size_t atom_idx) const;
+			double getCharge(std::size_t atom_idx) const;
 
-			double getPiBondOrder(std::size_t bond_idx) const;
+			double getBondOrder(std::size_t bond_idx) const;
 
 			double getEnergy() const;
 			
@@ -156,4 +156,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_MOLPROP_PEOESIGMACHARGECALCULATOR_HPP
+#endif // CDPL_MOLPROP_MHMOPICHARGECALCULATOR_HPP

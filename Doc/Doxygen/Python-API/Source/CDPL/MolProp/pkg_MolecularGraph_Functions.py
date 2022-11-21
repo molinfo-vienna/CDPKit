@@ -67,14 +67,14 @@ def buildMassCompositionString(molgraph: CDPL.Chem.MolecularGraph) -> object: pa
 # \param molgraph 
 # \param hist 
 #
-def buildElementHistogram(arg1: CDPL.Chem.MolecularGraph, molgraph: ElementHistogram, hist: bool) -> None: pass
+def buildElementHistogram(arg1: CDPL.Chem.MolecularGraph, molgraph: ._molprop.ElementHistogram, hist: bool) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param comp 
 #
-def calcMassComposition(molgraph: CDPL.Chem.MolecularGraph, comp: MassComposition) -> None: pass
+def calcMassComposition(molgraph: CDPL.Chem.MolecularGraph, comp: ._molprop.MassComposition) -> None: pass
 
 ##
 # \brief 
@@ -89,6 +89,22 @@ def calcCyclomaticNumber(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 # \param overwrite 
 #
 def calcAtomHydrophobicities(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param overwrite 
+# \param num_iter 
+# \param damping 
+#
+def calcPEOEProperties(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool, num_iter: int = 6, damping: float = 0.5) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param overwrite 
+#
+def calcMHMOProperties(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 

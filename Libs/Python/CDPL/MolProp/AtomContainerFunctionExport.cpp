@@ -45,9 +45,11 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(double, calcExplicitMass, CDPL::Chem::AtomContainer&)
 
 	MAKE_FUNCTION_WRAPPER2(void, calcExplicitMassComposition, CDPL::Chem::AtomContainer&, CDPL::MolProp::MassComposition&)
-
+	MAKE_FUNCTION_WRAPPER2(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3D&);
+	
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitAtomCount, CDPL::Chem::AtomContainer&, unsigned int, bool)
 	MAKE_FUNCTION_WRAPPER3(void, buildExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::MolProp::ElementHistogram&, bool);
+	MAKE_FUNCTION_WRAPPER3(bool, calcDipoleMoment, CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&, CDPL::Math::Vector3D&);
 
 	std::string buildExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
 	{
@@ -86,4 +88,7 @@ void CDPLPythonMolProp::exportAtomContainerFunctions()
 
 	python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
 	python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper3, (python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
+
+	python::def("calcDipoleMoment", &calcDipoleMomentWrapper2, (python::arg("cntnr"), python::arg("moment")));
+	python::def("calcDipoleMoment", &calcDipoleMomentWrapper3, (python::arg("cntnr"), python::arg("coords_func"), python::arg("moment")));
 }

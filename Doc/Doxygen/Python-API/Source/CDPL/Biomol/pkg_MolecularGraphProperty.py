@@ -27,29 +27,29 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    RESIDUE_CODE = CDPL.Base.LookupKey(id=278, name='RESIDUE_CODE')
+    RESIDUE_CODE = CDPL.Base.LookupKey(id=280, name='RESIDUE_CODE')
 
     ##
     # \brief 
     #
-    RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey(id=279, name='RESIDUE_SEQUENCE_NUMBER')
+    RESIDUE_SEQUENCE_NUMBER = CDPL.Base.LookupKey(id=281, name='RESIDUE_SEQUENCE_NUMBER')
 
     ##
     # \brief 
     #
-    RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey(id=280, name='RESIDUE_INSERTION_CODE')
+    RESIDUE_INSERTION_CODE = CDPL.Base.LookupKey(id=282, name='RESIDUE_INSERTION_CODE')
 
     ##
     # \brief 
     #
-    CHAIN_ID = CDPL.Base.LookupKey(id=281, name='CHAIN_ID')
+    CHAIN_ID = CDPL.Base.LookupKey(id=283, name='CHAIN_ID')
 
     ##
     # \brief 
     #
-    MODEL_NUMBER = CDPL.Base.LookupKey(id=282, name='MODEL_NUMBER')
+    MODEL_NUMBER = CDPL.Base.LookupKey(id=284, name='MODEL_NUMBER')
 
     ##
     # \brief 
     #
-    PDB_DATA = CDPL.Base.LookupKey(id=283, name='PDB_DATA')
+    PDB_DATA = CDPL.Base.LookupKey(id=285, name='PDB_DATA')
