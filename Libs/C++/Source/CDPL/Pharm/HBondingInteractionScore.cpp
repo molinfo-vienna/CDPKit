@@ -173,7 +173,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 
 			score *= normFunc(opt_ang_dev);
 		}
-
+		
 		return score * getWeight(ftr2);
 	}
 

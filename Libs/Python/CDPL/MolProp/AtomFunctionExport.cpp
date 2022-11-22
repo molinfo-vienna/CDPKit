@@ -235,7 +235,7 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	python::def("getVSEPRCoordinationGeometry", &getVSEPRCoordinationGeometryWrapper3,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("steric_num")));
 	python::def("calcInductiveEffect", &calcInductiveEffectWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("num_bonds")));
+				(python::arg("atom"), python::arg("molgraph"), python::arg("num_bonds") = 10));
 	
 	python::def("getRotatableBondCount", &getRotatableBondCountWrapper4, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));

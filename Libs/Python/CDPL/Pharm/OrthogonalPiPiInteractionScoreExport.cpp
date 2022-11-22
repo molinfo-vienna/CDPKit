@@ -38,10 +38,16 @@
 namespace
 {
 
-    double callOperator(CDPL::Pharm::OrthogonalPiPiInteractionScore& score, 
-						CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+    double callOperator1(CDPL::Pharm::OrthogonalPiPiInteractionScore& score, 
+						 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
 		return score(ftr1, ftr2);
+    }
+
+	double callOperator2(CDPL::Pharm::OrthogonalPiPiInteractionScore& score, 
+						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
+    {
+		return score(ftr1_pos, ftr2);
     }
 }
 
@@ -66,7 +72,8 @@ void CDPLPythonPharm::exportOrthogonalPiPiInteractionScore()
 		.def("getAngleTolerance", &Pharm::OrthogonalPiPiInteractionScore::getAngleTolerance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::OrthogonalPiPiInteractionScore::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinVDistance)
 		.add_property("maxVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance)
 		.add_property("maxHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxHDistance)

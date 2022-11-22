@@ -95,7 +95,7 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 		const Math::Vector3D& orient2 = getOrientation(ftr2);
 
 		double ang_cos = angleCos(orient1, orient2, 1);
-		double ang = std::acos(ang_cos) * 180.0 / M_PI;
+		double ang = std::acos(ang_cos) * 180.0 / M_PI - 90.0;
 
 		ang_score = normFunc(ang / angleTol * 0.5);
 	}
@@ -118,12 +118,12 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& f
 	return calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) * getWeight(ftr2);
 }
 
-double Pharm::OrthogonalPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient1, const Math::Vector3D& ftr1_ftr2_vec) const
+double Pharm::OrthogonalPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient, const Math::Vector3D& ftr1_ftr2_vec) const
 {
-	double v_dist = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
+	double v_dist = calcHPlaneDistance(orient, ftr1_ftr2_vec);
 	double v_dist_score = normFunc((v_dist - (maxVDist + minVDist) * 0.5) / (maxVDist - minVDist));
 
-    double h_dist = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
+    double h_dist = calcVPlaneDistance(orient, ftr1_ftr2_vec);
 	double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
 	
     return (h_dist_score * v_dist_score);

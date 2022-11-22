@@ -36,6 +36,12 @@
 \package CDPL.ConfGen
 \brief Contains classes and functions related to conformer ensemble generation.
 
+\package CDPL.MolProp
+\brief Contains classes and functions related to the calculation/preciction of physicochemical molecular properties.
+
+\package CDPL.Descr
+\brief Contains classes and functions related to the generation and processing of pharmacophore and molecule descriptors.
+
 \package CDPL.Vis.QtBackend
 \brief Contains classes related to the implementation of CDPL.Vis interfaces on top of the <em>Qt Toolkit</em> [\ref QTDOC].
 

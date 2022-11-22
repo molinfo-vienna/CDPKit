@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/FeaturePositionMatchFunctor.hpp"
 #include "CDPL/Pharm/FeatureGeometryMatchFunctor.hpp"
 #include "CDPL/Pharm/HBondingInteractionConstraint.hpp"
+#include "CDPL/Pharm/XBondingInteractionConstraint.hpp"
 #include "CDPL/Pharm/OrthogonalPiPiInteractionConstraint.hpp"
 #include "CDPL/Pharm/CationPiInteractionConstraint.hpp"
 #include "CDPL/Pharm/FeatureTypeMatchFunctor.hpp"
@@ -39,6 +40,7 @@
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 #include "CDPL/Pharm/HBondingInteractionScore.hpp"
+#include "CDPL/Pharm/XBondingInteractionScore.hpp"
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"
 #include "CDPL/Pharm/CationPiInteractionScore.hpp"
 #include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"
@@ -79,6 +81,8 @@ void CDPLPythonPharm::registerFromPythonConverters()
 											   boost::function3<double, const Pharm::Feature&, 
 																const Pharm::Feature&, const Math::Matrix4D&> >();
 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::XBondingInteractionConstraint&, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
 	CDPLPythonBase::GenericFromPythonConverter<const Pharm::HBondingInteractionConstraint&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
 	CDPLPythonBase::GenericFromPythonConverter<const Pharm::OrthogonalPiPiInteractionConstraint&, 
@@ -94,6 +98,10 @@ void CDPLPythonPharm::registerFromPythonConverters()
 	CDPLPythonBase::GenericFromPythonConverter<const Pharm::InteractionConstraintConnector&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::XBondingInteractionScore&, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::XBondingInteractionScore&, 
+											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
 	CDPLPythonBase::GenericFromPythonConverter<const Pharm::HBondingInteractionScore&, 
 											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
 	CDPLPythonBase::GenericFromPythonConverter<const Pharm::HBondingInteractionScore&, 

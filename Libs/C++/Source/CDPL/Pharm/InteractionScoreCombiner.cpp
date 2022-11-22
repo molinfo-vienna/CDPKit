@@ -30,7 +30,6 @@
 
 #include "CDPL/Pharm/InteractionScoreCombiner.hpp"
 
-
 using namespace CDPL; 
 
 
