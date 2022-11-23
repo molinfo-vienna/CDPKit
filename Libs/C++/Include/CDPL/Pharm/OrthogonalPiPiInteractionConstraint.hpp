@@ -52,27 +52,27 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MAX_H_DISTANCE;
-			static const double DEF_MIN_V_DISTANCE;
 			static const double DEF_MAX_V_DISTANCE;
+			static const double DEF_MIN_H_DISTANCE;
+			static const double DEF_MAX_H_DISTANCE;
 			static const double DEF_ANGLE_TOLERANCE;
 	
 			/**
 			 * \brief Constructs a \c %OrthogonalPiPiInteractionConstraint functor with the specified constraints.
-			 * \param min_v_dist The minimum allowed distance of the vertically oriented aromatic ring to the plane of the horizontally oriented ring.
-			 * \param max_v_dist The maximum allowed distance of the vertically oriented aromatic ring to the plane of the horizontally oriented ring.
-			 * \param max_h_dist The maximum allowed distance of the ring-centers projected to the plane of the horizontally oriented aromatic ring.
+			 * \param min_h_dist The minimum allowed aromatic ring center distance in the plane of the vertically oriented ring.
+			 * \param max_h_dist The maximum allowed aromatic ring center distance in the plane of the vertically oriented ring.
+			 * \param max_v_dist The maximum allowed distance distance of the center of the horizontally oriented aromatic ring to the plane of the vertically oriented ring.
 			 * \param ang_tol The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
 			 */
-			OrthogonalPiPiInteractionConstraint(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
-												double max_h_dist = DEF_MAX_H_DISTANCE,double ang_tol = DEF_ANGLE_TOLERANCE):
-				minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), angleTol(ang_tol) {}
+			OrthogonalPiPiInteractionConstraint(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
+												double max_v_dist = DEF_MAX_V_DISTANCE,double ang_tol = DEF_ANGLE_TOLERANCE):
+				minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), angleTol(ang_tol) {}
 
-			double getMinVDistance() const;
-
-			double getMaxVDistance() const;
+			double getMinHDistance() const;
 
 			double getMaxHDistance() const;
+
+			double getMaxVDistance() const;
 
 			double getAngleTolerance() const;
 
@@ -81,9 +81,9 @@ namespace CDPL
 		  private:
 			bool checkDistances(const Math::Vector3D&, const Math::Vector3D&) const;
 
-			double minVDist;
-			double maxVDist;
+			double minHDist;
 			double maxHDist;
+			double maxVDist;
 			double angleTol;
 		};
     }

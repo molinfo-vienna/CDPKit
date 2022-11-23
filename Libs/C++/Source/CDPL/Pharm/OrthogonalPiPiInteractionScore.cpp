@@ -44,30 +44,30 @@
 using namespace CDPL;
 
 
-const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_H_DISTANCE  = 1.4;
-const double Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_V_DISTANCE  = 4.0;
-const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE  = 6.0;
+const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE  = 1.4;
+const double Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_H_DISTANCE  = 4.0;
+const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_H_DISTANCE  = 6.0;
 const double Pharm::OrthogonalPiPiInteractionScore::DEF_ANGLE_TOLERANCE = 35.0;
 
 
-Pharm::OrthogonalPiPiInteractionScore::OrthogonalPiPiInteractionScore(double min_v_dist, double max_v_dist,
-																	  double max_h_dist, double ang_tol):
-	minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), angleTol(ang_tol),
+Pharm::OrthogonalPiPiInteractionScore::OrthogonalPiPiInteractionScore(double min_h_dist, double max_h_dist,
+																	  double max_v_dist, double ang_tol):
+	minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), angleTol(ang_tol),
 	normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
 
-double Pharm::OrthogonalPiPiInteractionScore::getMinVDistance() const
+double Pharm::OrthogonalPiPiInteractionScore::getMinHDistance() const
 {
-    return minVDist;
-}
-
-double Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance() const
-{
-    return maxVDist;
+    return minHDist;
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::getMaxHDistance() const
 {
     return maxHDist;
+}
+
+double Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance() const
+{
+    return maxVDist;
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::getAngleTolerance() const
@@ -82,11 +82,17 @@ void Pharm::OrthogonalPiPiInteractionScore::setNormalizationFunction(const Norma
 
 double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
+    Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
+
 	bool has_orient1 = hasOrientation(ftr1);
 	bool has_orient2 = hasOrientation(ftr2);
 
-    if (!has_orient1 && !has_orient2)
-		return 0.0;
+    if (!has_orient1 && !has_orient2) {
+		double min_dist = minHDist;
+		double max_dist = std::sqrt(maxVDist * maxVDist + maxHDist * maxHDist);
+
+		return normFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
+	}
 
 	double ang_score = 1.0;
 
@@ -100,8 +106,6 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 		ang_score = normFunc(ang / angleTol * 0.5);
 	}
 
-    Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
-
 	double dist_score1 = (has_orient1 ? calcDistanceScore(getOrientation(ftr1), ftr1_ftr2_vec) : 0.0);
 	double dist_score2 = (has_orient2 ? calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) : 0.0);
 
@@ -110,21 +114,25 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 
 double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
 {
-    if (!hasOrientation(ftr2))
-		return 0.0;
-
     Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - ftr1_pos);
+
+    if (!hasOrientation(ftr2)) {
+		double min_dist = minHDist;
+		double max_dist = std::sqrt(maxVDist * maxVDist + maxHDist * maxHDist);
+
+		return normFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
+	}
 
 	return calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) * getWeight(ftr2);
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient, const Math::Vector3D& ftr1_ftr2_vec) const
 {
-	double v_dist = calcHPlaneDistance(orient, ftr1_ftr2_vec);
-	double v_dist_score = normFunc((v_dist - (maxVDist + minVDist) * 0.5) / (maxVDist - minVDist));
+	double h_dist = calcHPlaneDistance(orient, ftr1_ftr2_vec);
+	double h_dist_score = normFunc((h_dist - (maxHDist + minHDist) * 0.5) / (maxHDist - minHDist));
 
-    double h_dist = calcVPlaneDistance(orient, ftr1_ftr2_vec);
-	double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
+    double v_dist = calcVPlaneDistance(orient, ftr1_ftr2_vec);
+	double v_dist_score = normFunc(v_dist / maxVDist * 0.5);
 	
     return (h_dist_score * v_dist_score);
 }

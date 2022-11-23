@@ -60,26 +60,26 @@ void CDPLPythonPharm::exportOrthogonalPiPiInteractionScore()
     python::class_<Pharm::OrthogonalPiPiInteractionScore, boost::noncopyable>("OrthogonalPiPiInteractionScore", python::no_init)
 		.def(python::init<const Pharm::OrthogonalPiPiInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double, double, double>((python::arg("self"),
-														 python::arg("min_v_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_V_DISTANCE, 
-														 python::arg("max_v_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE,
+														 python::arg("min_h_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_H_DISTANCE, 
 														 python::arg("max_h_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_H_DISTANCE,
+														 python::arg("max_v_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE,
 														 python::arg("ang_tol") = Pharm::OrthogonalPiPiInteractionScore::DEF_ANGLE_TOLERANCE)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::OrthogonalPiPiInteractionScore>())
 		.def("setNormalizationFunction", &Pharm::OrthogonalPiPiInteractionScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
-		.def("getMinVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinVDistance, python::arg("self"))
-		.def("getMaxVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance, python::arg("self"))
+		.def("getMinHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinHDistance, python::arg("self"))
 		.def("getMaxHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxHDistance, python::arg("self"))
+		.def("getMaxVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance, python::arg("self"))
 		.def("getAngleTolerance", &Pharm::OrthogonalPiPiInteractionScore::getAngleTolerance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::OrthogonalPiPiInteractionScore::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
 		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
-		.add_property("minVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinVDistance)
-		.add_property("maxVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance)
+		.add_property("minHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinHDistance)
 		.add_property("maxHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxHDistance)
+		.add_property("maxVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance)
 		.add_property("angleTolerance", &Pharm::OrthogonalPiPiInteractionScore::getAngleTolerance)
-		.def_readonly("DEF_MIN_V_DISTANCE", Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_V_DISTANCE)
-		.def_readonly("DEF_MAX_V_DISTANCE", Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE)
+		.def_readonly("DEF_MIN_H_DISTANCE", Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_H_DISTANCE)
 		.def_readonly("DEF_MAX_H_DISTANCE", Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_H_DISTANCE)
+		.def_readonly("DEF_MAX_V_DISTANCE", Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE)
 		.def_readonly("DEF_ANGLE_TOLERANCE", Pharm::OrthogonalPiPiInteractionScore::DEF_ANGLE_TOLERANCE);
 }

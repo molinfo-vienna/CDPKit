@@ -40,25 +40,25 @@
 using namespace CDPL;
 
 
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_H_DISTANCE  = 1.4;
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MIN_V_DISTANCE  = 4.0;
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_V_DISTANCE  = 6.0;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_V_DISTANCE  = 1.4;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MIN_H_DISTANCE  = 4.0;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_H_DISTANCE  = 6.0;
 const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_ANGLE_TOLERANCE = 35.0;
 
 
-double Pharm::OrthogonalPiPiInteractionConstraint::getMinVDistance() const
+double Pharm::OrthogonalPiPiInteractionConstraint::getMinHDistance() const
 {
-    return minVDist;
-}
-
-double Pharm::OrthogonalPiPiInteractionConstraint::getMaxVDistance() const
-{
-    return maxVDist;
+    return minHDist;
 }
 
 double Pharm::OrthogonalPiPiInteractionConstraint::getMaxHDistance() const
 {
     return maxHDist;
+}
+
+double Pharm::OrthogonalPiPiInteractionConstraint::getMaxVDistance() const
+{
+    return maxVDist;
 }
 
 double Pharm::OrthogonalPiPiInteractionConstraint::getAngleTolerance() const
@@ -68,39 +68,57 @@ double Pharm::OrthogonalPiPiInteractionConstraint::getAngleTolerance() const
 
 bool Pharm::OrthogonalPiPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-    if (!hasOrientation(ftr1) || !hasOrientation(ftr2))
-		return false;
-
-    const Math::Vector3D& orient1 = getOrientation(ftr1);
-    const Math::Vector3D& orient2 = getOrientation(ftr2);
-
-    double ang_cos = angleCos(orient1, orient2, 1);
-    double ang = std::acos(ang_cos) * 180.0 / M_PI;
-
-    if (std::abs(ang - 90.0) > angleTol)
-		return false;
-
     Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
+
+	bool has_orient1 = hasOrientation(ftr1);
+	bool has_orient2 = hasOrientation(ftr2);
+
+   if (!has_orient1 && !has_orient2) {
+		double min_dist = minHDist;
+		double max_dist = std::sqrt(maxVDist * maxVDist + maxHDist * maxHDist);
+		double dist = length(ftr1_ftr2_vec);
+
+		if (dist < min_dist)
+			return false;
+  
+		return (dist <= max_dist);
+	}
+
+	if (has_orient1 && has_orient2) {
+		const Math::Vector3D& orient1 = getOrientation(ftr1);
+		const Math::Vector3D& orient2 = getOrientation(ftr2);
+
+		double ang_cos = angleCos(orient1, orient2, 1);
+		double ang = std::acos(ang_cos) * 180.0 / M_PI;
+
+		if (std::abs(ang - 90.0) > angleTol)
+			return false;
+
+		if (checkDistances(orient1, ftr1_ftr2_vec))
+			return true;
+
+		return checkDistances(orient2, ftr1_ftr2_vec);
+	}
     
-	if (checkDistances(orient1, ftr1_ftr2_vec))
+	if (has_orient1 && checkDistances(getOrientation(ftr1), ftr1_ftr2_vec))
 		return true;
 
-	return checkDistances(orient2, ftr1_ftr2_vec);
+	return (has_orient2 && checkDistances(getOrientation(ftr2), ftr1_ftr2_vec));
 }
 
 bool Pharm::OrthogonalPiPiInteractionConstraint::checkDistances(const Math::Vector3D& orient1, const Math::Vector3D& ftr1_ftr2_vec) const
 {
-	double v_dist = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
+	double h_dist = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
 
-    if (v_dist < minVDist)
+    if (h_dist < minHDist)
 		return false;
   
-    if (v_dist > maxVDist)
+    if (h_dist > maxHDist)
 		return false;
 
-    double h_dist = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
+    double v_dist = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
 
-    if (h_dist > maxHDist)
+    if (v_dist > maxVDist)
 		return false;
 
     return true;

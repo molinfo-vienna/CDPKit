@@ -52,28 +52,28 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MAX_H_DISTANCE;
-			static const double DEF_MIN_V_DISTANCE;
 			static const double DEF_MAX_V_DISTANCE;
+			static const double DEF_MIN_H_DISTANCE;
+			static const double DEF_MAX_H_DISTANCE;
 			static const double DEF_ANGLE_TOLERANCE;
 
 			typedef boost::function1<double, double> NormalizationFunction;
 
 			/**
 			 * \brief Constructs a \c %OrthogonalPiPiInteractionScore functor with the specified constraints.
-			 * \param min_v_dist The minimum allowed distance of the vertically oriented aromatic ring to the plane of the horizontally oriented ring.
-			 * \param max_v_dist The maximum allowed distance of the vertically oriented aromatic ring to the plane of the horizontally oriented ring.
-			 * \param max_h_dist The maximum allowed distance of the ring-centers projected to the plane of the horizontally oriented aromatic ring.
+			 * \param min_h_dist The minimum allowed aromatic ring center distance in the plane of the vertically oriented ring.
+			 * \param max_h_dist The maximum allowed aromatic ring center distance in the plane of the vertically oriented ring.
+			 * \param max_v_dist The maximum allowed distance distance of the center of the horizontally oriented aromatic ring to the plane of the vertically oriented ring.
 			 * \param ang_tol The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
 			 */
-			OrthogonalPiPiInteractionScore(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
-										   double max_h_dist = DEF_MAX_H_DISTANCE, double ang_tol = DEF_ANGLE_TOLERANCE);
+			OrthogonalPiPiInteractionScore(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
+										   double max_V_dist = DEF_MAX_V_DISTANCE, double ang_tol = DEF_ANGLE_TOLERANCE);
 
-			double getMinVDistance() const;
-
-			double getMaxVDistance() const;
+			double getMinHDistance() const;
 
 			double getMaxHDistance() const;
+
+			double getMaxVDistance() const;
 
 			double getAngleTolerance() const;
 
@@ -86,9 +86,9 @@ namespace CDPL
 		  private:
 			double calcDistanceScore(const Math::Vector3D&, const Math::Vector3D&) const;
 
-			double                minVDist;
-			double                maxVDist;
+			double                minHDist;
 			double                maxHDist;
+			double                maxVDist;
 			double                angleTol;
 			NormalizationFunction normFunc;
 		};
