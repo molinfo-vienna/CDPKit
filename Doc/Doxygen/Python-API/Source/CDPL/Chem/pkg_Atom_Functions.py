@@ -1038,6 +1038,16 @@ def getSizeOfSmallestContainingFragment(atom: Atom, frag_list: FragmentList) -> 
 # \brief 
 # \param atom 
 # \param molgraph 
+# \param max_dist 
+# \param env 
+# \param append 
+#
+def getEnvironment(atom: Atom, molgraph: MolecularGraph, max_dist: int, env: Fragment, append: bool = False) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \param molgraph 
 # \return 
 #
 def calcImplicitHydrogenCount(atom: Atom, molgraph: MolecularGraph) -> int: pass

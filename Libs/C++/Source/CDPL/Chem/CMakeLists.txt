@@ -197,7 +197,8 @@ SET(cdpl-chem_LIB_SRCS
     AtomSybylTypeFunctions.cpp
     AtomTopologicalDistanceFunction.cpp
     AtomMarkReachableAtomsFunction.cpp 
-
+    AtomEnvironmentFunction.cpp
+    
     BondPropertyFunctions.cpp
     BondFragmentMembershipFunctions.cpp
     BondStereoCenterFlagFunction.cpp

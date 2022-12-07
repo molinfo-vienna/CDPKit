@@ -58,7 +58,7 @@ class HBondingInteractionScore(Boost.Python.instance):
     # \param min_ahd_ang 
     # \param max_acc_ang 
     #
-    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
+    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 2.8, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -116,6 +116,14 @@ class HBondingInteractionScore(Boost.Python.instance):
     # \return 
     #
     def __call__(ftr1: Feature, ftr2: Feature) -> float: pass
+
+    ##
+    # \brief 
+    # \param ftr1_pos 
+    # \param ftr2 
+    # \return 
+    #
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
 
     ##
     # \brief 

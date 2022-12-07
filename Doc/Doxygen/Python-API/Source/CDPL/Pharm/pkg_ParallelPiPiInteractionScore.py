@@ -118,6 +118,14 @@ class ParallelPiPiInteractionScore(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param ftr1_pos 
+    # \param ftr2 
+    # \return 
+    #
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
+
+    ##
+    # \brief 
     #
     objectID = property(getObjectID)
 

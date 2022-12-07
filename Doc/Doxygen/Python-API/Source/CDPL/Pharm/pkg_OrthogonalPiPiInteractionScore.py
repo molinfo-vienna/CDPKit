@@ -27,17 +27,17 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_MIN_V_DISTANCE = 4.0
+    DEF_MIN_H_DISTANCE = 4.0
 
     ##
     # \brief 
     #
-    DEF_MAX_V_DISTANCE = 6.0
+    DEF_MAX_H_DISTANCE = 6.0
 
     ##
     # \brief 
     #
-    DEF_MAX_H_DISTANCE = 1.4
+    DEF_MAX_V_DISTANCE = 1.4
 
     ##
     # \brief 
@@ -52,12 +52,12 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %OrthogonalPiPiInteractionScore instance.
-    # \param min_v_dist 
-    # \param max_v_dist 
+    # \param min_h_dist 
     # \param max_h_dist 
+    # \param max_v_dist 
     # \param ang_tol 
     #
-    def __init__(min_v_dist: float = 4.0, max_v_dist: float = 6.0, max_h_dist: float = 1.4, ang_tol: float = 35.0) -> None: pass
+    def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, ang_tol: float = 35.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -81,19 +81,19 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getMinVDistance() -> float: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getMaxVDistance() -> float: pass
+    def getMinHDistance() -> float: pass
 
     ##
     # \brief 
     # \return 
     #
     def getMaxHDistance() -> float: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getMaxVDistance() -> float: pass
 
     ##
     # \brief 
@@ -118,23 +118,31 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param ftr1_pos 
+    # \param ftr2 
+    # \return 
+    #
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
+
+    ##
+    # \brief 
     #
     objectID = property(getObjectID)
 
     ##
     # \brief 
     #
-    minVDistance = property(getMinVDistance)
-
-    ##
-    # \brief 
-    #
-    maxVDistance = property(getMaxVDistance)
+    minHDistance = property(getMinHDistance)
 
     ##
     # \brief 
     #
     maxHDistance = property(getMaxHDistance)
+
+    ##
+    # \brief 
+    #
+    maxVDistance = property(getMaxVDistance)
 
     ##
     # \brief 

@@ -63,7 +63,7 @@ class InteractionScoreCombiner(Boost.Python.instance):
     # \param ftr2 
     # \return 
     #
-    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> bool: pass
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
 
     ##
     # \brief 

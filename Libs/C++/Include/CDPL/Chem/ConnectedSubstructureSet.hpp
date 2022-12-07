@@ -89,12 +89,12 @@ namespace CDPL
 			 * objects to the list of previously found (if any) substructures. If the specified size is zero, substructures
 			 * of size \e 1 (i.e. the bonds of the molecular graph) will be extracted.
 			 *
-			 * \param size The substructure size in terms of the number of bonds.
+			 * \param size The substructure size in terms of number of bonds.
 			 */
 			void findSubstructures(std::size_t size);
 
 			/**
-			 * \brief Returns the current substructure size in terms of the number bonds.
+			 * \brief Returns the current substructure size in terms of number of bonds.
 			 *
 			 * The current substructure size corresponds to the size that was specified in the the last call to findSubstructures().
 			 * If findSubstructures() has not yet been called, the current substructure size is zero.

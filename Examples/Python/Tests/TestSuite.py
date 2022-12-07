@@ -44,20 +44,36 @@ def checkScriptOutput(script_name, args):
             print('OK', file=sys.stderr)
             return False
 
-        print('\nOutput check FAILED: expected output = \'%s\', received output = \'%s\'' % (exp_output, output), file=sys.stderr)
+        print('\nScript output check FAILED:\nExpected output = \'%s\'\nReceived output = \'%s\'' % (exp_output, output), file=sys.stderr)
         return True
     
     except Exception as e:
-        print('\nScript execution FAILED: ' + str(e), file=sys.stderr)
+        print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
         return True
 
-def dataFile(fname):
+def checkScriptExecution(script_name, args):
+    script_dir = os.environ['PYTHON_EXAMPLES_DIR']
+    script_path = os.path.join(script_dir, script_name + '.py')
+
+    print('Checking execution of script \'%s.py\'...' % (script_name), end=' ', file=sys.stderr)
+
+    try:
+        subprocess.run([ sys.executable, script_path ] + args, capture_output=False, check=True)
+
+        print('OK', file=sys.stderr)
+        return False
+    
+    except Exception as e:
+        print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
+        return True
+
+def testDataFilePath(fname):
     return os.path.join(os.environ['CDPKIT_TEST_DATA_DIR'], fname)
 
 
 if __name__ == '__main__':
     errors = False
     
-    errors |= checkScriptOutput('seq_mol_input', [ dataFile('Citalopram.sdf') ])
+    errors |= checkScriptOutput('seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
 
     sys.exit(errors)

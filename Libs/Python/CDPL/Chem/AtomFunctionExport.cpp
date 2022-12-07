@@ -157,6 +157,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER4(unsigned int, calcAtomConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
 	MAKE_FUNCTION_WRAPPER4(void, markReachableAtoms, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Util::BitSet&, bool);
 
+	MAKE_FUNCTION_WRAPPER5(void, getEnvironment, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, CDPL::Chem::Fragment&, bool);
+
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
 	{
@@ -285,6 +287,9 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
 	python::def("markReachableAtoms", &markReachableAtomsWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("atom_mask"), python::arg("reset") = true));
+
+	python::def("getEnvironment", &getEnvironmentWrapper5,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("max_dist"), python::arg("env"), python::arg("append") = false));
 	
 	python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
 				(python::arg("atom"), python::arg("molgraph")));

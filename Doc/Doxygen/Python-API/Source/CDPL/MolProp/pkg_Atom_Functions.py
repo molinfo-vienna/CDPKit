@@ -293,7 +293,7 @@ def getCovalentRadius(atom: CDPL.Chem.Atom, order: int = 1) -> float: pass
 # \param num_bonds 
 # \return 
 #
-def calcInductiveEffect(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, num_bonds: int) -> float: pass
+def calcInductiveEffect(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, num_bonds: int = 10) -> float: pass
 
 ##
 # \brief 

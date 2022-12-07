@@ -58,7 +58,7 @@ class XBondingInteractionScore(Boost.Python.instance):
     # \param min_axb_ang 
     # \param acc_ang_tol 
     #
-    def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 1.6, min_axb_ang: float = 140.0, acc_ang_tol: float = 45.0) -> None: pass
+    def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 3.75, min_axb_ang: float = 140.0, acc_ang_tol: float = 45.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -116,6 +116,14 @@ class XBondingInteractionScore(Boost.Python.instance):
     # \return 
     #
     def __call__(ftr1: Feature, ftr2: Feature) -> float: pass
+
+    ##
+    # \brief 
+    # \param ftr1_pos 
+    # \param ftr2 
+    # \return 
+    #
+    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
 
     ##
     # \brief 
