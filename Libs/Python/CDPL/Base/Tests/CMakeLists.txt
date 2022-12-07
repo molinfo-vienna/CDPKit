@@ -24,3 +24,4 @@
 ##
 
 ADD_TEST("CDPL.Base" "${RUN_PYTHON_TESTS}" "${CMAKE_CURRENT_SOURCE_DIR}/TestSuite.py")
+

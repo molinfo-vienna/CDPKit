@@ -25,10 +25,11 @@
 
 
 import unittest
+import sys
 
 
 test_suite = unittest.TestSuite()
 
 #test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName(""))
 
-unittest.TextTestRunner(verbosity=2).run(test_suite)
+sys.exit(not unittest.TextTestRunner(verbosity=2).run(test_suite).wasSuccessful())

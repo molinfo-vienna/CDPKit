@@ -25,6 +25,7 @@
 
 
 import unittest
+import sys
 
 
 test_suite = unittest.TestSuite()
@@ -32,4 +33,4 @@ test_suite = unittest.TestSuite()
 test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("LookupKeyTest"))
 test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("DataFormatTest"))
 
-unittest.TextTestRunner(verbosity=2).run(test_suite)
+sys.exit(not unittest.TextTestRunner(verbosity=2).run(test_suite).wasSuccessful())

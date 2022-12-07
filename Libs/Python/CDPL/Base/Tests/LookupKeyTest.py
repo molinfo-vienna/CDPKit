@@ -33,7 +33,7 @@ class TestCase(unittest.TestCase):
 
     def checkProperties(self, key):
         self.assert_(key.name == key.getName())
-        self.assert_(key.__str__() == key.getName())
+        self.assert_(key.__str__() == ('CDPL.Base.LookupKey(id=' + str(key.getID()) + ', name=\'' + key.getName() + '\')'))
         self.assert_(key.numericID == key.getID())
 
     def runTest(self):

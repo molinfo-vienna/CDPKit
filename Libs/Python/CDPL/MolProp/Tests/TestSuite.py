@@ -25,8 +25,9 @@
 
 
 import unittest
+import sys
 
 
 test_suite = unittest.TestSuite()
 
-unittest.TextTestRunner(verbosity=2).run(test_suite)
+sys.exit(not unittest.TextTestRunner(verbosity=2).run(test_suite).wasSuccessful())

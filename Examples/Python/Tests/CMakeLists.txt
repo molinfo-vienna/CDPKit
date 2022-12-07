@@ -22,3 +22,6 @@
 # the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 # Boston, MA 02111-1307, USA.
 ##
+
+ADD_TEST("CDPL.Python.Examples" "${RUN_PYTHON_TESTS}" "${CMAKE_CURRENT_SOURCE_DIR}/TestSuite.py")
+SET_PROPERTY(TEST "CDPL.Python.Examples" PROPERTY ENVIRONMENT "PYTHON_EXAMPLES_DIR=${CDPKIT_EXAMPLES_DIR}/Python")
