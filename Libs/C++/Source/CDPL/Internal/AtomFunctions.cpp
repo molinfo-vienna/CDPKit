@@ -197,9 +197,6 @@ bool Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGra
 	if (getType(atom) != AtomType::N)
 		return false;
 
-	if (getAromaticityFlag(atom))
-		return true;
-
 	std::size_t bond_count = 0;
 	bool unsat_nbrs = false;
 
@@ -213,10 +210,7 @@ bool Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGra
 		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
 			continue;
 
-		if (getOrder(bond) != 1)
-			return true;
-
-		if (getAromaticityFlag(nbr_atom)/* || isUnsaturated(nbr_atom, molgraph)*/) {
+		if (getOrder(bond) != 1 || getAromaticityFlag(nbr_atom)/* || isUnsaturated(nbr_atom, molgraph)*/) {
 			unsat_nbrs = true;
 
 		} else {
@@ -234,10 +228,10 @@ bool Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGra
 		bond_count++;
 	}
 
-	if (getImplicitHydrogenCount(atom) + bond_count > 3)
+	if (getImplicitHydrogenCount(atom) + bond_count != 3)
 		return false;
 
-	return unsat_nbrs;
+	return (unsat_nbrs || getAromaticityFlag(atom));
 }
 
 bool Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
