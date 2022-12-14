@@ -50,7 +50,7 @@ class Vector3FArrayAlignmentCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector3FArrayAlignmentCalculator instance \a algo.
     # \param algo The \e %Vector3FArrayAlignmentCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(algo: Vector3FArrayAlignmentCalculator) -> Vector3FArrayAlignmentCalculator: pass
 

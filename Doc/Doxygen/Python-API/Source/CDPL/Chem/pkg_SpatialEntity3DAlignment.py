@@ -175,7 +175,7 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialEntity3DAlignment instance \a alignment.
     # \param alignment The \e %SpatialEntity3DAlignment instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(alignment: SpatialEntity3DAlignment) -> SpatialEntity3DAlignment: pass
 

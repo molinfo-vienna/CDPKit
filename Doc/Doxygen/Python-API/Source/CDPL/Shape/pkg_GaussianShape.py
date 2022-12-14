@@ -36,15 +36,6 @@ class GaussianShape(CDPL.Base.PropertyContainer):
         def __init__(elem: Element) -> None: pass
 
         ##
-        # \brief Initializes the \e %Element instance.
-        # \param pos 
-        # \param radius 
-        # \param color 
-        # \param hardness 
-        #
-        def __init__(pos: CDPL.Math.Vector3D, radius: float, color: int = 0, hardness: float = 2.7) -> None: pass
-
-        ##
         # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
         #
         # Different Python \e %Element instances may reference the same underlying C++ class instance. The commonly used Python expression
@@ -59,7 +50,7 @@ class GaussianShape(CDPL.Base.PropertyContainer):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Element instance \a elem.
         # \param elem The \e %Element instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(elem: Element) -> Element: pass
 
@@ -150,7 +141,7 @@ class GaussianShape(CDPL.Base.PropertyContainer):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShape instance \a shape.
     # \param shape The \e %GaussianShape instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(shape: GaussianShape) -> GaussianShape: pass
 

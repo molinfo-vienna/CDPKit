@@ -118,7 +118,7 @@ class FZeroGrid(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FZeroGrid instance \a g.
     # \param g The \e %FZeroGrid instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(g: FZeroGrid) -> FZeroGrid: pass
 
@@ -173,7 +173,7 @@ class FZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %FZeroGrid instance to be compared with.
+    # \param e The \e %ConstFGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstFGridExpression) -> bool: pass
@@ -187,7 +187,7 @@ class FZeroGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %FZeroGrid instance to be compared with.
+    # \param e The \e %ConstFGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstFGridExpression) -> bool: pass
@@ -213,7 +213,7 @@ class FZeroGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %FZeroGrid instance holding the result of the addition.
+    # \return A \e %ConstFGridExpression instance holding the result of the addition.
     #
     def __add__(e: ConstFGridExpression) -> ConstFGridExpression: pass
 
@@ -227,14 +227,14 @@ class FZeroGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %FZeroGrid instance holding the result of the multiplication.
+    # \return A \e %ConstFGridExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstFGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %FZeroGrid instance holding the result of the division.
+    # \return A \e %ConstFGridExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstFGridExpression: pass
 

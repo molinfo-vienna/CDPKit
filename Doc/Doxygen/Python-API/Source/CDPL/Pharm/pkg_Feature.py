@@ -44,7 +44,7 @@ class Feature(CDPL.Chem.Entity3D):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Feature instance \a ftr.
     # \param ftr The \e %Feature instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(ftr: Feature) -> Feature: pass
 

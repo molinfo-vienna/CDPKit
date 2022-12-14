@@ -95,7 +95,7 @@ class DGConstraintGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGenerator instance \a gen.
     # \param gen The \e %DGConstraintGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: DGConstraintGenerator) -> DGConstraintGenerator: pass
 
@@ -104,22 +104,6 @@ class DGConstraintGenerator(Boost.Python.instance):
     # \return 
     #
     def getExcludedHydrogenMask() -> CDPL.Util.BitSet: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param atom 
-    # \param descr 
-    #
-    def addAtomStereoCenter(atom: CDPL.Chem.Atom, descr: CDPL.Chem.StereoDescriptor) -> None: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param bond 
-    # \param descr 
-    #
-    def addBondStereoCenter(bond: CDPL.Chem.Bond, descr: CDPL.Chem.StereoDescriptor) -> None: pass
 
     ##
     # \brief 

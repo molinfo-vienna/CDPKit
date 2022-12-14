@@ -58,7 +58,7 @@ class DefaultInteractionScoreGridSetCalculator(InteractionScoreGridSetCalculator
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DefaultInteractionScoreGridSetCalculator instance \a calculator.
     # \param calculator The \e %DefaultInteractionScoreGridSetCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(calculator: DefaultInteractionScoreGridSetCalculator) -> DefaultInteractionScoreGridSetCalculator: pass
 

@@ -55,7 +55,7 @@ class TorsionLibrary(TorsionCategory):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionLibrary instance \a lib.
     # \param lib The \e %TorsionLibrary instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(lib: TorsionLibrary) -> TorsionLibrary: pass
 

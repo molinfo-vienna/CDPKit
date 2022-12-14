@@ -25,20 +25,8 @@
 class NOTReactionMatchExpression(ReactionMatchExpression):
 
     ##
-    # \brief Initializes the \e %NOTReactionMatchExpression instance.
-    # \param expression 
-    #
-    def __init__(expression: NOTReactionMatchExpression) -> None: pass
-
-    ##
-    # \brief Initializes the \e %NOTReactionMatchExpression instance.
-    # \param expression 
-    #
-    def __init__(expression: ReactionMatchExpression) -> None: pass
-
-    ##
     # \brief Replaces the current state of \a arg1 with a copy of the state of the \e %NOTReactionMatchExpression instance \a expression.
     # \param expression The \e %NOTReactionMatchExpression instance to copy.
-    # \return The assignment target \a arg1.
+    # \return \a arg1
     #
     def assign(expression: NOTReactionMatchExpression) -> NOTReactionMatchExpression: pass

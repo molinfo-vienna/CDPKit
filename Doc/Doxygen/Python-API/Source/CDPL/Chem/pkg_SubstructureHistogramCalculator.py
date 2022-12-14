@@ -60,7 +60,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Pattern instance \a ptn.
         # \param ptn The \e %Pattern instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(ptn: re.Pattern) -> re.Pattern: pass
 
@@ -197,7 +197,7 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SubstructureHistogramCalculator instance \a calculator.
     # \param calculator The \e %SubstructureHistogramCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(calculator: SubstructureHistogramCalculator) -> SubstructureHistogramCalculator: pass
 

@@ -161,14 +161,14 @@ class Molecule(MolecularGraph):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Molecule instance \a mol.
     # \param mol The \e %Molecule instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(mol: Molecule) -> Molecule: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Molecule instance \a molgraph.
-    # \param molgraph The \e %Molecule instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraph instance \a molgraph.
+    # \param molgraph The \e %MolecularGraph instance to copy.
+    # \return \a self
     #
     def assign(molgraph: MolecularGraph) -> Molecule: pass
 
@@ -200,24 +200,10 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsAtom(arg2: Atom) -> None: pass
-
-    ##
-    # \brief 
     # \param atom 
     # \return 
     #
     def getAtomIndex(atom: Atom) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getAtomIndex(arg2: Atom) -> None: pass
 
     ##
     # \brief 
@@ -260,13 +246,6 @@ class Molecule(MolecularGraph):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsBond(arg2: Bond) -> None: pass
-
-    ##
-    # \brief 
     # \param func 
     #
     def orderBonds(func: BoolBond2Functor) -> None: pass
@@ -277,13 +256,6 @@ class Molecule(MolecularGraph):
     # \return 
     #
     def getBondIndex(bond: Bond) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getBondIndex(arg2: Bond) -> None: pass
 
     ##
     # \brief 

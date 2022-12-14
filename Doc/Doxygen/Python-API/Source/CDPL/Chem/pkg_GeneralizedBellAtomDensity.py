@@ -74,7 +74,7 @@ class GeneralizedBellAtomDensity(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GeneralizedBellAtomDensity instance \a func.
     # \param func The \e %GeneralizedBellAtomDensity instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
 

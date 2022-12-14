@@ -50,7 +50,7 @@ class TautomerScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TautomerScore instance \a score.
     # \param score The \e %TautomerScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(score: TautomerScore) -> TautomerScore: pass
 

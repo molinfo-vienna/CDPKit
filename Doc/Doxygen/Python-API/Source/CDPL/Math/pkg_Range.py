@@ -76,7 +76,7 @@ class Range(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Range instance \a r.
     # \param r The \e %Range instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(r: Range) -> Range: pass
 

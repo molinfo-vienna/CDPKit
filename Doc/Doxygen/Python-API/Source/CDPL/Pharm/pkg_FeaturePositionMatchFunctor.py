@@ -51,7 +51,7 @@ class FeaturePositionMatchFunctor(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeaturePositionMatchFunctor instance \a func.
     # \param func The \e %FeaturePositionMatchFunctor instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(func: FeaturePositionMatchFunctor) -> FeaturePositionMatchFunctor: pass
 

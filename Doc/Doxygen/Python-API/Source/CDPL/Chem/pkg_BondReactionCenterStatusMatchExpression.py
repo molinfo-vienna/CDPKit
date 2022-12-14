@@ -39,6 +39,6 @@ class BondReactionCenterStatusMatchExpression(BondMatchExpression):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondReactionCenterStatusMatchExpression instance \a expr.
     # \param expr The \e %BondReactionCenterStatusMatchExpression instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(expr: BondReactionCenterStatusMatchExpression) -> BondReactionCenterStatusMatchExpression: pass

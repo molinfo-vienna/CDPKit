@@ -82,7 +82,7 @@ class MMFF94VanDerWaalsInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94VanDerWaalsInteractionParameterizer instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(parameterizer: MMFF94VanDerWaalsInteractionParameterizer) -> MMFF94VanDerWaalsInteractionParameterizer: pass
 

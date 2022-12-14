@@ -50,7 +50,7 @@ class FKabschAlgorithm(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FKabschAlgorithm instance \a algo.
     # \param algo The \e %FKabschAlgorithm instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(algo: FKabschAlgorithm) -> FKabschAlgorithm: pass
 

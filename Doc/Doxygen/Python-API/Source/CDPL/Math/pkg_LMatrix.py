@@ -108,44 +108,44 @@ class LMatrix(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrix instance \a e.
-    # \param e The \e %LMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFMatrixExpression) -> LMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrix instance \a e.
-    # \param e The \e %LMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDMatrixExpression) -> LMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrix instance \a e.
-    # \param e The \e %LMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstLMatrixExpression) -> LMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrix instance \a e.
-    # \param e The \e %LMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstULMatrixExpression) -> LMatrix: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrix instance \a m.
     # \param m The \e %LMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(m: LMatrix) -> LMatrix: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LMatrix instance \a a.
-    # \param a The \e %LMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 
@@ -225,7 +225,7 @@ class LMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %LMatrix instance to be compared with.
+    # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstLMatrixExpression) -> bool: pass
@@ -239,7 +239,7 @@ class LMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %LMatrix instance to be compared with.
+    # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
@@ -265,7 +265,7 @@ class LMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %LMatrix instance holding the result of the addition.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the addition.
     #
     def __add__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -279,28 +279,28 @@ class LMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %LMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %LMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %LMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %LMatrix instance holding the result of the division.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the division.
     #
     def __div__(t: int) -> ConstLMatrixExpression: pass
 

@@ -107,7 +107,7 @@ class StereoDescriptor(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StereoDescriptor instance \a descr.
     # \param descr The \e %StereoDescriptor instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(descr: StereoDescriptor) -> StereoDescriptor: pass
 

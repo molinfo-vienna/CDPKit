@@ -119,7 +119,7 @@ class DScalarGrid(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DScalarGrid instance \a g.
     # \param g The \e %DScalarGrid instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(g: DScalarGrid) -> DScalarGrid: pass
 
@@ -174,7 +174,7 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %DScalarGrid instance to be compared with.
+    # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstDGridExpression) -> bool: pass
@@ -188,7 +188,7 @@ class DScalarGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %DScalarGrid instance to be compared with.
+    # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstDGridExpression) -> bool: pass
@@ -214,7 +214,7 @@ class DScalarGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %DScalarGrid instance holding the result of the addition.
+    # \return A \e %ConstDGridExpression instance holding the result of the addition.
     #
     def __add__(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -228,14 +228,14 @@ class DScalarGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %DScalarGrid instance holding the result of the multiplication.
+    # \return A \e %ConstDGridExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %DScalarGrid instance holding the result of the division.
+    # \return A \e %ConstDGridExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstDGridExpression: pass
 

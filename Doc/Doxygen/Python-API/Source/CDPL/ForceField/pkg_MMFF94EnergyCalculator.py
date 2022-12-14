@@ -56,7 +56,7 @@ class MMFF94EnergyCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94EnergyCalculator instance \a calculator.
     # \param calculator The \e %MMFF94EnergyCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(calculator: MMFF94EnergyCalculator) -> MMFF94EnergyCalculator: pass
 

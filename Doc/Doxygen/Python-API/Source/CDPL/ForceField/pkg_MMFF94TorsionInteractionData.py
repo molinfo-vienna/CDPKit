@@ -86,14 +86,14 @@ class MMFF94TorsionInteractionData(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94TorsionInteractionData instance \a array.
     # \param array The \e %MMFF94TorsionInteractionData instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: MMFF94TorsionInteractionData) -> MMFF94TorsionInteractionData: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94TorsionInteractionData instance \a num_elem.
-    # \param num_elem The \e %MMFF94TorsionInteractionData instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: MMFF94TorsionInteraction) -> None: pass
 

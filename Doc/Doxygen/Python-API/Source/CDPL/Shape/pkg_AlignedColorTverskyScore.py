@@ -51,7 +51,7 @@ class AlignedColorTverskyScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AlignedColorTverskyScore instance \a score.
     # \param score The \e %AlignedColorTverskyScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(score: AlignedColorTverskyScore) -> AlignedColorTverskyScore: pass
 

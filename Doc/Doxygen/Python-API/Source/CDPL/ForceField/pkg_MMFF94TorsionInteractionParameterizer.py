@@ -100,7 +100,7 @@ class MMFF94TorsionInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94TorsionInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94TorsionInteractionParameterizer instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(parameterizer: MMFF94TorsionInteractionParameterizer) -> MMFF94TorsionInteractionParameterizer: pass
 

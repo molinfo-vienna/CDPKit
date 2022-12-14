@@ -104,7 +104,7 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %OrthogonalPiPiInteractionScore instance \a constr.
     # \param constr The \e %OrthogonalPiPiInteractionScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(constr: OrthogonalPiPiInteractionScore) -> OrthogonalPiPiInteractionScore: pass
 

@@ -69,7 +69,7 @@ class BronKerboschAlgorithm(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BronKerboschAlgorithm instance \a bka.
     # \param bka The \e %BronKerboschAlgorithm instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(bka: BronKerboschAlgorithm) -> BronKerboschAlgorithm: pass
 

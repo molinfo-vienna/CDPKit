@@ -92,21 +92,21 @@ class Vector2LArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2LArray instance \a array.
     # \param array The \e %Vector2LArray instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: Vector2LArray) -> Vector2LArray: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2LArray instance \a num_elem.
-    # \param num_elem The \e %Vector2LArray instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: Vector2L) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2LArray instance \a a.
-    # \param a The \e %Vector2LArray instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 
@@ -223,14 +223,14 @@ class Vector2LArray(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == array</tt>.
-    # \param array The \e %Vector2LArray instance to be compared with.
+    # \param array The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(array: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != array</tt>.
-    # \param array The \e %Vector2LArray instance to be compared with.
+    # \param array The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(array: object) -> bool: pass

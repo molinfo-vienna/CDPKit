@@ -87,44 +87,44 @@ class ULQuaternion(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a e.
-    # \param e The \e %ULQuaternion instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
+    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a e.
-    # \param e The \e %ULQuaternion instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
+    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a e.
-    # \param e The \e %ULQuaternion instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
+    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstLQuaternionExpression) -> ULQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a e.
-    # \param e The \e %ULQuaternion instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
+    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstULQuaternionExpression) -> ULQuaternion: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a q.
     # \param q The \e %ULQuaternion instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(q: ULQuaternion) -> ULQuaternion: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULQuaternion instance \a a.
-    # \param a The \e %ULQuaternion instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 
@@ -206,7 +206,7 @@ class ULQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == q</tt>.
-    # \param q The \e %ULQuaternion instance to be compared with.
+    # \param q The \e %ConstULQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(q: ConstULQuaternionExpression) -> bool: pass
@@ -220,7 +220,7 @@ class ULQuaternion(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != q</tt>.
-    # \param q The \e %ULQuaternion instance to be compared with.
+    # \param q The \e %ConstULQuaternionExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(q: ConstULQuaternionExpression) -> bool: pass
@@ -246,14 +246,14 @@ class ULQuaternion(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + t</tt>.
     # \param t Specifies the second addend.
-    # \return A \e %ULQuaternion instance holding the result of the addition.
+    # \return A \e %ConstULQuaternionExpression instance holding the result of the addition.
     #
     def __add__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ULQuaternion instance holding the result of the addition.
+    # \return A \e %ConstULQuaternionExpression instance holding the result of the addition.
     #
     def __add__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -288,14 +288,14 @@ class ULQuaternion(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ULQuaternion instance holding the result of the multiplication.
+    # \return A \e %ConstULQuaternionExpression instance holding the result of the multiplication.
     #
     def __mul__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ULQuaternion instance holding the result of the multiplication.
+    # \return A \e %ConstULQuaternionExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 
@@ -309,14 +309,14 @@ class ULQuaternion(Boost.Python.instance):
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ULQuaternion instance holding the result of the division.
+    # \return A \e %ConstULQuaternionExpression instance holding the result of the division.
     #
     def __div__(t: int) -> ConstULQuaternionExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / e</tt>.
     # \param e Specifies the divisor.
-    # \return A \e %ULQuaternion instance holding the result of the division.
+    # \return A \e %ConstULQuaternionExpression instance holding the result of the division.
     #
     def __div__(e: ConstULQuaternionExpression) -> ConstULQuaternionExpression: pass
 

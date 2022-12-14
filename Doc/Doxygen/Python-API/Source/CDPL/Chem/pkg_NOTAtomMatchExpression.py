@@ -25,20 +25,8 @@
 class NOTAtomMatchExpression(AtomMatchExpression):
 
     ##
-    # \brief Initializes the \e %NOTAtomMatchExpression instance.
-    # \param expression 
-    #
-    def __init__(expression: NOTAtomMatchExpression) -> None: pass
-
-    ##
-    # \brief Initializes the \e %NOTAtomMatchExpression instance.
-    # \param expression 
-    #
-    def __init__(expression: AtomMatchExpression) -> None: pass
-
-    ##
     # \brief Replaces the current state of \a arg1 with a copy of the state of the \e %NOTAtomMatchExpression instance \a expression.
     # \param expression The \e %NOTAtomMatchExpression instance to copy.
-    # \return The assignment target \a arg1.
+    # \return \a arg1
     #
     def assign(expression: NOTAtomMatchExpression) -> NOTAtomMatchExpression: pass

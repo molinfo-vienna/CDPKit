@@ -67,7 +67,7 @@ class ElementHistogram(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ElementHistogram instance \a map.
     # \param map The \e %ElementHistogram instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: ._molprop.ElementHistogram) -> ._molprop.ElementHistogram: pass
 
@@ -169,42 +169,42 @@ class ElementHistogram(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == hist</tt>.
-    # \param hist The \e %ElementHistogram instance to be compared with.
+    # \param hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != hist</tt>.
-    # \param hist The \e %ElementHistogram instance to be compared with.
+    # \param hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= hist</tt>.
-    # \param hist The \e %ElementHistogram instance to be compared with.
+    # \param hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __le__(hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= hist</tt>.
-    # \param hist The \e %ElementHistogram instance to be compared with.
+    # \param hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ge__(hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < hist</tt>.
-    # \param hist The \e %ElementHistogram instance to be compared with.
+    # \param hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __lt__(hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > hist</tt>.
-    # \param hist The \e %ElementHistogram instance to be compared with.
+    # \param hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __gt__(hist: object) -> bool: pass

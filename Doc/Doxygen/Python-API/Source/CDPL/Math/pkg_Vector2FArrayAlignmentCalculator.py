@@ -50,7 +50,7 @@ class Vector2FArrayAlignmentCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Vector2FArrayAlignmentCalculator instance \a algo.
     # \param algo The \e %Vector2FArrayAlignmentCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(algo: Vector2FArrayAlignmentCalculator) -> Vector2FArrayAlignmentCalculator: pass
 

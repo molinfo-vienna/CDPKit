@@ -95,7 +95,7 @@ class MMFF94AtomTyper(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AtomTyper instance \a parameterizer.
     # \param parameterizer The \e %MMFF94AtomTyper instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(parameterizer: MMFF94AtomTyper) -> MMFF94AtomTyper: pass
 

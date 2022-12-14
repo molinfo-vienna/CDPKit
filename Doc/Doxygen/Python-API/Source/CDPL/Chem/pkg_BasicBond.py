@@ -25,15 +25,15 @@
 class BasicBond(Bond):
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicBond instance \a bond.
-    # \param bond The \e %BasicBond instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Bond instance \a bond.
+    # \param bond The \e %Bond instance to copy.
+    # \return \a self
     #
     def assign(bond: Bond) -> Bond: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicBond instance \a bond.
     # \param bond The \e %BasicBond instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(bond: BasicBond) -> BasicBond: pass

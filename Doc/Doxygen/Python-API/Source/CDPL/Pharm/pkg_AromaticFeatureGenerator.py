@@ -96,7 +96,7 @@ class AromaticFeatureGenerator(PatternBasedFeatureGenerator):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AromaticFeatureGenerator instance \a gen.
     # \param gen The \e %AromaticFeatureGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: AromaticFeatureGenerator) -> AromaticFeatureGenerator: pass
 

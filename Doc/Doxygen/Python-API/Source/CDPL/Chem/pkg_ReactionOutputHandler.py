@@ -52,7 +52,7 @@ class ReactionOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IStream) -> ReactionWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> ReactionWriter: pass
 
     ##
     # \brief 

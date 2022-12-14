@@ -31,11 +31,6 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %FragmentSettings instance.
-        #
-        def __init__() -> None: pass
-
-        ##
-        # \brief Initializes the \e %FragmentSettings instance.
         # \param settings 
         #
         def __init__(settings: FragmentSettings) -> None: pass
@@ -55,7 +50,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentSettings instance \a settings.
         # \param settings The \e %FragmentSettings instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(settings: FragmentSettings) -> FragmentSettings: pass
 
@@ -207,7 +202,7 @@ class FragmentConformerGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentConformerGeneratorSettings instance \a settings.
     # \param settings The \e %FragmentConformerGeneratorSettings instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(settings: FragmentConformerGeneratorSettings) -> FragmentConformerGeneratorSettings: pass
 

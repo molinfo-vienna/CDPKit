@@ -52,7 +52,7 @@ class AtomArray3DCoordinatesFunctor(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %AtomArray3DCoordinatesFunctor instance \a func.
     # \param func The \e %AtomArray3DCoordinatesFunctor instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(func: AtomArray3DCoordinatesFunctor) -> AtomArray3DCoordinatesFunctor: pass
 

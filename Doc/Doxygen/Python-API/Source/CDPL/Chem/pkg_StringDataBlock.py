@@ -86,14 +86,14 @@ class StringDataBlock(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlock instance \a array.
     # \param array The \e %StringDataBlock instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: StringDataBlock) -> StringDataBlock: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlock instance \a num_elem.
-    # \param num_elem The \e %StringDataBlock instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: StringDataBlockEntry) -> None: pass
 
@@ -210,14 +210,14 @@ class StringDataBlock(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == data_block</tt>.
-    # \param data_block The \e %StringDataBlock instance to be compared with.
+    # \param data_block The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(data_block: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != data_block</tt>.
-    # \param data_block The \e %StringDataBlock instance to be compared with.
+    # \param data_block The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(data_block: object) -> bool: pass

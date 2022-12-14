@@ -67,7 +67,7 @@ class MassComposition(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MassComposition instance \a map.
     # \param map The \e %MassComposition instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: ._molprop.MassComposition) -> ._molprop.MassComposition: pass
 
@@ -169,42 +169,42 @@ class MassComposition(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == mass_comp</tt>.
-    # \param mass_comp The \e %MassComposition instance to be compared with.
+    # \param mass_comp The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != mass_comp</tt>.
-    # \param mass_comp The \e %MassComposition instance to be compared with.
+    # \param mass_comp The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= mass_comp</tt>.
-    # \param mass_comp The \e %MassComposition instance to be compared with.
+    # \param mass_comp The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __le__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= mass_comp</tt>.
-    # \param mass_comp The \e %MassComposition instance to be compared with.
+    # \param mass_comp The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ge__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < mass_comp</tt>.
-    # \param mass_comp The \e %MassComposition instance to be compared with.
+    # \param mass_comp The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __lt__(mass_comp: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > mass_comp</tt>.
-    # \param mass_comp The \e %MassComposition instance to be compared with.
+    # \param mass_comp The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __gt__(mass_comp: object) -> bool: pass

@@ -86,14 +86,14 @@ class FragmentList(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentList instance \a array.
     # \param array The \e %FragmentList instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: FragmentList) -> FragmentList: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentList instance \a num_elem.
-    # \param num_elem The \e %FragmentList instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: Fragment) -> None: pass
 
@@ -203,14 +203,14 @@ class FragmentList(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == list</tt>.
-    # \param list The \e %FragmentList instance to be compared with.
+    # \param list The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(list: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != list</tt>.
-    # \param list The \e %FragmentList instance to be compared with.
+    # \param list The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(list: object) -> bool: pass

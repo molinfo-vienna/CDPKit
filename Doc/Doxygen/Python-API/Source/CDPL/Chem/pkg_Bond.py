@@ -89,7 +89,7 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Bond instance \a bond.
     # \param bond The \e %Bond instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(bond: Bond) -> Bond: pass
 
@@ -115,24 +115,10 @@ class Bond(AtomContainer, CDPL.Base.PropertyContainer):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsAtom(arg2: Atom) -> None: pass
-
-    ##
-    # \brief 
     # \param atom 
     # \return 
     #
     def getAtomIndex(atom: Atom) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getAtomIndex(arg2: Atom) -> None: pass
 
     ##
     # \brief 

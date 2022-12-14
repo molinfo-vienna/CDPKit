@@ -55,7 +55,7 @@ class DGConstraintGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGConstraintGeneratorSettings instance \a settings.
     # \param settings The \e %DGConstraintGeneratorSettings instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(settings: DGConstraintGeneratorSettings) -> DGConstraintGeneratorSettings: pass
 

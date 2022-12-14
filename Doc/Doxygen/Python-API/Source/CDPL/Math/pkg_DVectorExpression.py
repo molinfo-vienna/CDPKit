@@ -33,42 +33,42 @@ class DVectorExpression(ConstDVectorExpression):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
     # \param e The \e %DVectorExpression instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(e: DVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
-    # \param e The \e %DVectorExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
+    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
-    # \param e The \e %DVectorExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
+    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
-    # \param e The \e %DVectorExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
+    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstLVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a e.
-    # \param e The \e %DVectorExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
+    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstULVectorExpression) -> DVectorExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DVectorExpression instance \a a.
-    # \param a The \e %DVectorExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 

@@ -55,7 +55,7 @@ class StructureGeneratorSettings(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StructureGeneratorSettings instance \a settings.
     # \param settings The \e %StructureGeneratorSettings instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(settings: StructureGeneratorSettings) -> StructureGeneratorSettings: pass
 

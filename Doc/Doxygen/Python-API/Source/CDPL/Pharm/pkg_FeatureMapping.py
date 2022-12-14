@@ -67,7 +67,7 @@ class FeatureMapping(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureMapping instance \a map.
     # \param map The \e %FeatureMapping instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: FeatureMapping) -> FeatureMapping: pass
 

@@ -73,14 +73,14 @@ class Pharmacophore(FeatureContainer):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a pharm.
     # \param pharm The \e %Pharmacophore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(pharm: Pharmacophore) -> Pharmacophore: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a cntnr.
-    # \param cntnr The \e %Pharmacophore instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureContainer instance \a cntnr.
+    # \param cntnr The \e %FeatureContainer instance to copy.
+    # \return \a self
     #
     def assign(cntnr: FeatureContainer) -> Pharmacophore: pass
 
@@ -106,24 +106,10 @@ class Pharmacophore(FeatureContainer):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsFeature(arg2: Feature) -> None: pass
-
-    ##
-    # \brief 
     # \param ftr 
     # \return 
     #
     def getFeatureIndex(ftr: Feature) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getFeatureIndex(arg2: Feature) -> None: pass
 
     ##
     # \brief 

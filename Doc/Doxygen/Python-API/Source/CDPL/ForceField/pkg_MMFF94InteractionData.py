@@ -85,7 +85,7 @@ class MMFF94InteractionData(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94InteractionData instance \a ia_data.
     # \param ia_data The \e %MMFF94InteractionData instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(ia_data: MMFF94InteractionData) -> MMFF94InteractionData: pass
 

@@ -106,14 +106,14 @@ class Fragment(MolecularGraph):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Fragment instance \a frag.
     # \param frag The \e %Fragment instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(frag: Fragment) -> Fragment: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %Fragment instance \a molgraph.
-    # \param molgraph The \e %Fragment instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MolecularGraph instance \a molgraph.
+    # \param molgraph The \e %MolecularGraph instance to copy.
+    # \return \a self
     #
     def assign(molgraph: MolecularGraph) -> Fragment: pass
 

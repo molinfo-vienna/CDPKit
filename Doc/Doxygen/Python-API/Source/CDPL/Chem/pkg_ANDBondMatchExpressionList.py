@@ -38,6 +38,6 @@ class ANDBondMatchExpressionList(BondMatchExpressionList):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ANDBondMatchExpressionList instance \a expr.
     # \param expr The \e %ANDBondMatchExpressionList instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(expr: ANDBondMatchExpressionList) -> ANDBondMatchExpressionList: pass

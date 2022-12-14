@@ -118,7 +118,7 @@ class FragmentLibrary(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FragmentLibrary instance \a lib.
     # \param lib The \e %FragmentLibrary instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(lib: FragmentLibrary) -> FragmentLibrary: pass
 

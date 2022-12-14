@@ -52,7 +52,7 @@ class TotalOverlapTverskyScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TotalOverlapTverskyScore instance \a score.
     # \param score The \e %TotalOverlapTverskyScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(score: TotalOverlapTverskyScore) -> TotalOverlapTverskyScore: pass
 

@@ -59,7 +59,7 @@ class TorsionRule(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %AngleEntry instance \a entry.
         # \param entry The \e %AngleEntry instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(entry: AngleEntry) -> AngleEntry: pass
 
@@ -138,7 +138,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TorsionRule instance \a rule.
     # \param rule The \e %TorsionRule instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(rule: TorsionRule) -> TorsionRule: pass
 
@@ -233,7 +233,7 @@ class TorsionRule(Boost.Python.instance):
     ##
     # \brief Performs the in-place addition operation <tt>self += ang_entry</tt>.
     # \param ang_entry Specifies the second addend.
-    # \return The updated \e %TorsionRule instance \a self.
+    # \return The updated \e %None instance \a self.
     #
     def __iadd__(ang_entry: AngleEntry) -> None: pass
 

@@ -45,7 +45,7 @@ class FeatureTypeMatchFunctor(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureTypeMatchFunctor instance \a func.
     # \param func The \e %FeatureTypeMatchFunctor instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(func: FeatureTypeMatchFunctor) -> FeatureTypeMatchFunctor: pass
 

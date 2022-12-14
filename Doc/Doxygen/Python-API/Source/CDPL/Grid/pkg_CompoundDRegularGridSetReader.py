@@ -38,7 +38,7 @@ class CompoundDRegularGridSetReader(DRegularGridSetReader):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundDRegularGridSetReader instance \a reader.
     # \param reader The \e %CompoundDRegularGridSetReader instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(reader: CompoundDRegularGridSetReader) -> CompoundDRegularGridSetReader: pass
 

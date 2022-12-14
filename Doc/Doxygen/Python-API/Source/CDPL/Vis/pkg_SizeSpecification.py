@@ -54,7 +54,7 @@ class SizeSpecification(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SizeSpecification instance \a spec.
     # \param spec The \e %SizeSpecification instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(spec: SizeSpecification) -> SizeSpecification: pass
 

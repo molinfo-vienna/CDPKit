@@ -67,7 +67,7 @@ class Entity3DMapping(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Entity3DMapping instance \a map.
     # \param map The \e %Entity3DMapping instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: Entity3DMapping) -> Entity3DMapping: pass
 

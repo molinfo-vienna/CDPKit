@@ -155,7 +155,7 @@ class TautomerGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TautomerGenerator instance \a gen.
     # \param gen The \e %TautomerGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: TautomerGenerator) -> TautomerGenerator: pass
 

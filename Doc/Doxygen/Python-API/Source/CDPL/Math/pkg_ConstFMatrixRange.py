@@ -130,7 +130,7 @@ class ConstFMatrixRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ConstFMatrixRange instance to be compared with.
+    # \param e The \e %ConstFMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstFMatrixExpression) -> bool: pass
@@ -144,7 +144,7 @@ class ConstFMatrixRange(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ConstFMatrixRange instance to be compared with.
+    # \param e The \e %ConstFMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstFMatrixExpression) -> bool: pass
@@ -170,7 +170,7 @@ class ConstFMatrixRange(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ConstFMatrixRange instance holding the result of the addition.
+    # \return A \e %ConstFMatrixExpression instance holding the result of the addition.
     #
     def __add__(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
@@ -184,28 +184,28 @@ class ConstFMatrixRange(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ConstFMatrixRange instance holding the result of the multiplication.
+    # \return A \e %ConstFMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstFMatrixRange instance holding the result of the multiplication.
+    # \return A \e %ConstFMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstFMatrixExpression) -> ConstFMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstFMatrixRange instance holding the result of the multiplication.
+    # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ConstFMatrixRange instance holding the result of the division.
+    # \return A \e %ConstFMatrixExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstFMatrixExpression: pass
 

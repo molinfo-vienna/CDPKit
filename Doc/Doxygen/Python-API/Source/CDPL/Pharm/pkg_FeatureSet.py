@@ -44,14 +44,14 @@ class FeatureSet(FeatureContainer):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureSet instance \a ftr_set.
     # \param ftr_set The \e %FeatureSet instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(ftr_set: FeatureSet) -> FeatureSet: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureSet instance \a cntnr.
-    # \param cntnr The \e %FeatureSet instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureContainer instance \a cntnr.
+    # \param cntnr The \e %FeatureContainer instance to copy.
+    # \return \a self
     #
     def assign(cntnr: FeatureContainer) -> FeatureSet: pass
 

@@ -49,44 +49,44 @@ class ULMatrixTranspose(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixTranspose instance \a e.
-    # \param e The \e %ULMatrixTranspose instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFMatrixExpression instance \a e.
+    # \param e The \e %ConstFMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixTranspose instance \a e.
-    # \param e The \e %ULMatrixTranspose instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDMatrixExpression instance \a e.
+    # \param e The \e %ConstDMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixTranspose instance \a e.
-    # \param e The \e %ULMatrixTranspose instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLMatrixExpression instance \a e.
+    # \param e The \e %ConstLMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstLMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixTranspose instance \a e.
-    # \param e The \e %ULMatrixTranspose instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULMatrixExpression instance \a e.
+    # \param e The \e %ConstULMatrixExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstULMatrixExpression) -> ULMatrixTranspose: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixTranspose instance \a mt.
     # \param mt The \e %ULMatrixTranspose instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(mt: ULMatrixTranspose) -> ULMatrixTranspose: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ULMatrixTranspose instance \a a.
-    # \param a The \e %ULMatrixTranspose instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 
@@ -172,7 +172,7 @@ class ULMatrixTranspose(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ULMatrixTranspose instance to be compared with.
+    # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstULMatrixExpression) -> bool: pass
@@ -186,7 +186,7 @@ class ULMatrixTranspose(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ULMatrixTranspose instance to be compared with.
+    # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
@@ -212,7 +212,7 @@ class ULMatrixTranspose(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ULMatrixTranspose instance holding the result of the addition.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the addition.
     #
     def __add__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -226,28 +226,28 @@ class ULMatrixTranspose(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ULMatrixTranspose instance holding the result of the multiplication.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ULMatrixTranspose instance holding the result of the multiplication.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ULMatrixTranspose instance holding the result of the multiplication.
+    # \return A \e %ConstULVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ULMatrixTranspose instance holding the result of the division.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the division.
     #
     def __div__(t: int) -> ConstULMatrixExpression: pass
 

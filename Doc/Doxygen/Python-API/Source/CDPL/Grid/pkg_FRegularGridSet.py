@@ -86,14 +86,14 @@ class FRegularGridSet(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularGridSet instance \a array.
     # \param array The \e %FRegularGridSet instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: FRegularGridSet) -> FRegularGridSet: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FRegularGridSet instance \a num_elem.
-    # \param num_elem The \e %FRegularGridSet instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: FRegularGrid) -> None: pass
 
@@ -203,14 +203,14 @@ class FRegularGridSet(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == set</tt>.
-    # \param set The \e %FRegularGridSet instance to be compared with.
+    # \param set The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(set: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != set</tt>.
-    # \param set The \e %FRegularGridSet instance to be compared with.
+    # \param set The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(set: object) -> bool: pass

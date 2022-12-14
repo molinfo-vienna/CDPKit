@@ -52,7 +52,7 @@ class MoleculeOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IStream) -> MoleculeWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> MoleculeWriter: pass
 
     ##
     # \brief 

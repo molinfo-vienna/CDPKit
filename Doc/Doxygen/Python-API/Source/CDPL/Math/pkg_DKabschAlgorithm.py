@@ -50,7 +50,7 @@ class DKabschAlgorithm(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DKabschAlgorithm instance \a algo.
     # \param algo The \e %DKabschAlgorithm instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(algo: DKabschAlgorithm) -> DKabschAlgorithm: pass
 

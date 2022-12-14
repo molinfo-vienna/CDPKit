@@ -50,7 +50,7 @@ class BuriednessGridCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessGridCalculator instance \a calculator.
     # \param calculator The \e %BuriednessGridCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(calculator: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 

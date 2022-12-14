@@ -53,7 +53,7 @@ class InteractionConstraintConnector(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionConstraintConnector instance \a con.
     # \param con The \e %InteractionConstraintConnector instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(con: InteractionConstraintConnector) -> InteractionConstraintConnector: pass
 

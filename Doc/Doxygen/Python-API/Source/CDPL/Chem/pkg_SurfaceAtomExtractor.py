@@ -158,7 +158,7 @@ class SurfaceAtomExtractor(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SurfaceAtomExtractor instance \a extractor.
     # \param extractor The \e %SurfaceAtomExtractor instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(extractor: SurfaceAtomExtractor) -> SurfaceAtomExtractor: pass
 

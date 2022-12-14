@@ -121,7 +121,7 @@ class TopologicalEntity3DAlignment(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %TopologicalEntity3DAlignment instance \a alignment.
     # \param alignment The \e %TopologicalEntity3DAlignment instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(alignment: TopologicalEntity3DAlignment) -> TopologicalEntity3DAlignment: pass
 

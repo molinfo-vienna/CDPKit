@@ -39,6 +39,6 @@ class ReactionAtomMappingMatchExpression(ReactionMatchExpression):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ReactionAtomMappingMatchExpression instance \a expr.
     # \param expr The \e %ReactionAtomMappingMatchExpression instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(expr: ReactionAtomMappingMatchExpression) -> ReactionAtomMappingMatchExpression: pass

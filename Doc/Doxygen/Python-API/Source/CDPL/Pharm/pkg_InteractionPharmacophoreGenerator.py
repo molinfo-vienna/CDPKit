@@ -52,7 +52,7 @@ class InteractionPharmacophoreGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionPharmacophoreGenerator instance \a gen.
     # \param gen The \e %InteractionPharmacophoreGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: InteractionPharmacophoreGenerator) -> InteractionPharmacophoreGenerator: pass
 

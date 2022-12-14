@@ -86,21 +86,21 @@ class BasicPharmacophore(Pharmacophore):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a pharm.
     # \param pharm The \e %BasicPharmacophore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(pharm: BasicPharmacophore) -> BasicPharmacophore: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a pharm.
-    # \param pharm The \e %BasicPharmacophore instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a pharm.
+    # \param pharm The \e %Pharmacophore instance to copy.
+    # \return \a self
     #
     def assign(pharm: Pharmacophore) -> BasicPharmacophore: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicPharmacophore instance \a cntnr.
-    # \param cntnr The \e %BasicPharmacophore instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureContainer instance \a cntnr.
+    # \param cntnr The \e %FeatureContainer instance to copy.
+    # \return \a self
     #
     def assign(cntnr: FeatureContainer) -> BasicPharmacophore: pass
 

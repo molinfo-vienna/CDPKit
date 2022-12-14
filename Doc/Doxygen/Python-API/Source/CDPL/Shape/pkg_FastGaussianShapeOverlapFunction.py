@@ -50,7 +50,7 @@ class FastGaussianShapeOverlapFunction(GaussianShapeOverlapFunction):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FastGaussianShapeOverlapFunction instance \a func.
     # \param func The \e %FastGaussianShapeOverlapFunction instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(func: FastGaussianShapeOverlapFunction) -> FastGaussianShapeOverlapFunction: pass
 

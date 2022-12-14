@@ -38,6 +38,6 @@ class ORBondMatchExpressionList(BondMatchExpressionList):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ORBondMatchExpressionList instance \a expr.
     # \param expr The \e %ORBondMatchExpressionList instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(expr: ORBondMatchExpressionList) -> ORBondMatchExpressionList: pass

@@ -25,20 +25,8 @@
 class NOTMolecularGraphMatchExpression(MolecularGraphMatchExpression):
 
     ##
-    # \brief Initializes the \e %NOTMolecularGraphMatchExpression instance.
-    # \param expression 
-    #
-    def __init__(expression: NOTMolecularGraphMatchExpression) -> None: pass
-
-    ##
-    # \brief Initializes the \e %NOTMolecularGraphMatchExpression instance.
-    # \param expression 
-    #
-    def __init__(expression: MolecularGraphMatchExpression) -> None: pass
-
-    ##
     # \brief Replaces the current state of \a arg1 with a copy of the state of the \e %NOTMolecularGraphMatchExpression instance \a expression.
     # \param expression The \e %NOTMolecularGraphMatchExpression instance to copy.
-    # \return The assignment target \a arg1.
+    # \return \a arg1
     #
     def assign(expression: NOTMolecularGraphMatchExpression) -> NOTMolecularGraphMatchExpression: pass

@@ -57,7 +57,7 @@ class MoleculeAutoCorr3DDescriptorCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr3DDescriptorCalculator instance \a calculator.
     # \param calculator The \e %MoleculeAutoCorr3DDescriptorCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(calculator: ._descr.MoleculeAutoCorr3DDescriptorCalculator) -> ._descr.MoleculeAutoCorr3DDescriptorCalculator: pass
 

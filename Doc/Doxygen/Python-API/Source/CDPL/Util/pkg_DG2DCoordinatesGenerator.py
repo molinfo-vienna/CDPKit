@@ -83,7 +83,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %DistanceConstraint instance \a constr.
         # \param constr The \e %DistanceConstraint instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(constr: DistanceConstraint) -> DistanceConstraint: pass
 
@@ -187,7 +187,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DG2DCoordinatesGenerator instance \a gen.
     # \param gen The \e %DG2DCoordinatesGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: DG2DCoordinatesGenerator) -> DG2DCoordinatesGenerator: pass
 

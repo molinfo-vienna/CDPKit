@@ -99,30 +99,30 @@ class DGrid(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a e.
-    # \param e The \e %DGrid instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
+    # \param e The \e %ConstFGridExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFGridExpression) -> DGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a e.
-    # \param e The \e %DGrid instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
+    # \param e The \e %ConstDGridExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDGridExpression) -> DGrid: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a e.
-    # \param e The \e %DGrid instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
+    # \param e The \e %object instance to copy.
+    # \return \a self
     #
     def assign(e: object) -> DGrid: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGrid instance \a g.
     # \param g The \e %DGrid instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(g: DGrid) -> DGrid: pass
 
@@ -245,7 +245,7 @@ class DGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %DGrid instance to be compared with.
+    # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstDGridExpression) -> bool: pass
@@ -259,7 +259,7 @@ class DGrid(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %DGrid instance to be compared with.
+    # \param e The \e %ConstDGridExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstDGridExpression) -> bool: pass
@@ -285,7 +285,7 @@ class DGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %DGrid instance holding the result of the addition.
+    # \return A \e %ConstDGridExpression instance holding the result of the addition.
     #
     def __add__(e: ConstDGridExpression) -> ConstDGridExpression: pass
 
@@ -299,14 +299,14 @@ class DGrid(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %DGrid instance holding the result of the multiplication.
+    # \return A \e %ConstDGridExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstDGridExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %DGrid instance holding the result of the division.
+    # \return A \e %ConstDGridExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstDGridExpression: pass
 

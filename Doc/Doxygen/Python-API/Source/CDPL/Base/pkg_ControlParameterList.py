@@ -36,8 +36,8 @@ class ControlParameterList(ControlParameterContainer):
     def __init__(cntnr: ControlParameterContainer) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %ControlParameterList instance \a cntnr.
-    # \param cntnr The \e %ControlParameterList instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ControlParameterContainer instance \a cntnr.
+    # \param cntnr The \e %ControlParameterContainer instance to copy.
+    # \return \a self
     #
     def assign(cntnr: ControlParameterContainer) -> ControlParameterList: pass

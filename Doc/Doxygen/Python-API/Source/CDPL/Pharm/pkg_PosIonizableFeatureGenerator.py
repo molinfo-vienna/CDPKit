@@ -47,6 +47,6 @@ class PosIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PosIonizableFeatureGenerator instance \a gen.
     # \param gen The \e %PosIonizableFeatureGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: PosIonizableFeatureGenerator) -> PosIonizableFeatureGenerator: pass

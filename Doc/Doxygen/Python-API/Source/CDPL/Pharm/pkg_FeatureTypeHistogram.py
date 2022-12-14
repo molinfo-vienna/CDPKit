@@ -67,7 +67,7 @@ class FeatureTypeHistogram(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureTypeHistogram instance \a map.
     # \param map The \e %FeatureTypeHistogram instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: FeatureTypeHistogram) -> FeatureTypeHistogram: pass
 
@@ -169,42 +169,42 @@ class FeatureTypeHistogram(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == ft_hist</tt>.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to be compared with.
+    # \param ft_hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != ft_hist</tt>.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to be compared with.
+    # \param ft_hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self <= ft_hist</tt>.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to be compared with.
+    # \param ft_hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __le__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self >= ft_hist</tt>.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to be compared with.
+    # \param ft_hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ge__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self < ft_hist</tt>.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to be compared with.
+    # \param ft_hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __lt__(ft_hist: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self > ft_hist</tt>.
-    # \param ft_hist The \e %FeatureTypeHistogram instance to be compared with.
+    # \param ft_hist The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __gt__(ft_hist: object) -> bool: pass

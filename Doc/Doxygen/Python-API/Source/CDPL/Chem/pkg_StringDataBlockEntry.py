@@ -57,7 +57,7 @@ class StringDataBlockEntry(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %StringDataBlockEntry instance \a entry.
     # \param entry The \e %StringDataBlockEntry instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(entry: StringDataBlockEntry) -> StringDataBlockEntry: pass
 

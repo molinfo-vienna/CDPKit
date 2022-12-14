@@ -67,7 +67,7 @@ class ColorTable(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ColorTable instance \a map.
     # \param map The \e %ColorTable instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: ColorTable) -> ColorTable: pass
 
@@ -175,14 +175,14 @@ class ColorTable(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == table</tt>.
-    # \param table The \e %ColorTable instance to be compared with.
+    # \param table The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(table: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != table</tt>.
-    # \param table The \e %ColorTable instance to be compared with.
+    # \param table The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(table: object) -> bool: pass

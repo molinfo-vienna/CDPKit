@@ -49,44 +49,44 @@ class FQuaternionVectorAdapter(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionVectorAdapter instance \a e.
-    # \param e The \e %FQuaternionVectorAdapter instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFVectorExpression instance \a e.
+    # \param e The \e %ConstFVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFVectorExpression) -> FQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionVectorAdapter instance \a e.
-    # \param e The \e %FQuaternionVectorAdapter instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDVectorExpression instance \a e.
+    # \param e The \e %ConstDVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDVectorExpression) -> FQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionVectorAdapter instance \a e.
-    # \param e The \e %FQuaternionVectorAdapter instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLVectorExpression instance \a e.
+    # \param e The \e %ConstLVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstLVectorExpression) -> FQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionVectorAdapter instance \a e.
-    # \param e The \e %FQuaternionVectorAdapter instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULVectorExpression instance \a e.
+    # \param e The \e %ConstULVectorExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstULVectorExpression) -> FQuaternionVectorAdapter: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionVectorAdapter instance \a a.
     # \param a The \e %FQuaternionVectorAdapter instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(a: FQuaternionVectorAdapter) -> FQuaternionVectorAdapter: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FQuaternionVectorAdapter instance \a a.
-    # \param a The \e %FQuaternionVectorAdapter instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 
@@ -143,7 +143,7 @@ class FQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %FQuaternionVectorAdapter instance to be compared with.
+    # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstFVectorExpression) -> bool: pass
@@ -157,7 +157,7 @@ class FQuaternionVectorAdapter(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %FQuaternionVectorAdapter instance to be compared with.
+    # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstFVectorExpression) -> bool: pass
@@ -203,7 +203,7 @@ class FQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %FQuaternionVectorAdapter instance holding the result of the addition.
+    # \return A \e %ConstFVectorExpression instance holding the result of the addition.
     #
     def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -217,21 +217,21 @@ class FQuaternionVectorAdapter(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %FQuaternionVectorAdapter instance holding the result of the multiplication.
+    # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %FQuaternionVectorAdapter instance holding the result of the multiplication.
+    # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %FQuaternionVectorAdapter instance holding the result of the division.
+    # \return A \e %ConstFVectorExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstFVectorExpression: pass
 

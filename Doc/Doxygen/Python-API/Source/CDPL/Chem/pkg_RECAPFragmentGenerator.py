@@ -38,6 +38,6 @@ class RECAPFragmentGenerator(FragmentGenerator):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %RECAPFragmentGenerator instance \a gen.
     # \param gen The \e %RECAPFragmentGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: RECAPFragmentGenerator) -> RECAPFragmentGenerator: pass

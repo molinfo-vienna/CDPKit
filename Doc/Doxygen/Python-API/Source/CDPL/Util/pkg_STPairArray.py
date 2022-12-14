@@ -86,14 +86,14 @@ class STPairArray(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %STPairArray instance \a array.
     # \param array The \e %STPairArray instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: STPairArray) -> STPairArray: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %STPairArray instance \a num_elem.
-    # \param num_elem The \e %STPairArray instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: STPair) -> None: pass
 

@@ -31,14 +31,6 @@ class DefaultInteractionAnalyzer(InteractionAnalyzer):
 
     ##
     # \brief Initializes the \e %DefaultInteractionAnalyzer instance.
-    # \param self 
-    # \param pharm 
-    # \param pharm 
-    #
-    def __init__(self: Pharmacophore, pharm: Pharmacophore, pharm: FeatureMapping) -> None: pass
-
-    ##
-    # \brief Initializes the \e %DefaultInteractionAnalyzer instance.
     # \param analyzer 
     #
     def __init__(analyzer: DefaultInteractionAnalyzer) -> None: pass
@@ -46,6 +38,6 @@ class DefaultInteractionAnalyzer(InteractionAnalyzer):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DefaultInteractionAnalyzer instance \a analyzer.
     # \param analyzer The \e %DefaultInteractionAnalyzer instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(analyzer: DefaultInteractionAnalyzer) -> DefaultInteractionAnalyzer: pass

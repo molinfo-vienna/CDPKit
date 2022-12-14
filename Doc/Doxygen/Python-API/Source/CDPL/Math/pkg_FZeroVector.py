@@ -87,7 +87,7 @@ class FZeroVector(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FZeroVector instance \a v.
     # \param v The \e %FZeroVector instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(v: FZeroVector) -> FZeroVector: pass
 
@@ -106,7 +106,7 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %FZeroVector instance to be compared with.
+    # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstFVectorExpression) -> bool: pass
@@ -120,7 +120,7 @@ class FZeroVector(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %FZeroVector instance to be compared with.
+    # \param e The \e %ConstFVectorExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstFVectorExpression) -> bool: pass
@@ -166,7 +166,7 @@ class FZeroVector(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %FZeroVector instance holding the result of the addition.
+    # \return A \e %ConstFVectorExpression instance holding the result of the addition.
     #
     def __add__(e: ConstFVectorExpression) -> ConstFVectorExpression: pass
 
@@ -180,21 +180,21 @@ class FZeroVector(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %FZeroVector instance holding the result of the multiplication.
+    # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %FZeroVector instance holding the result of the multiplication.
+    # \return A \e %ConstFVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstFMatrixExpression) -> ConstFVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %FZeroVector instance holding the result of the division.
+    # \return A \e %ConstFVectorExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstFVectorExpression: pass
 

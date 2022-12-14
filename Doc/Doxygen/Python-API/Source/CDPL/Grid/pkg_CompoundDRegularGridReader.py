@@ -38,7 +38,7 @@ class CompoundDRegularGridReader(DRegularGridReader):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CompoundDRegularGridReader instance \a reader.
     # \param reader The \e %CompoundDRegularGridReader instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(reader: CompoundDRegularGridReader) -> CompoundDRegularGridReader: pass
 

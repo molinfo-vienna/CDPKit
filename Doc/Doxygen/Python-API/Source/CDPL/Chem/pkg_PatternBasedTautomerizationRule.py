@@ -43,7 +43,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %BondOrderChange instance \a bond_chg.
         # \param bond_chg The \e %BondOrderChange instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(bond_chg: BondOrderChange) -> BondOrderChange: pass
 
@@ -130,7 +130,7 @@ class PatternBasedTautomerizationRule(TautomerizationRule):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternBasedTautomerizationRule instance \a rule.
     # \param rule The \e %PatternBasedTautomerizationRule instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(rule: PatternBasedTautomerizationRule) -> PatternBasedTautomerizationRule: pass
 

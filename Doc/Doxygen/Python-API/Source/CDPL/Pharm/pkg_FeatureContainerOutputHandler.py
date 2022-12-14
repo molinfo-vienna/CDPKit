@@ -52,7 +52,7 @@ class FeatureContainerOutputHandler(Boost.Python.instance):
     # \param is 
     # \return 
     #
-    def createWriter(is: CDPL.Base.IStream) -> FeatureContainerWriter: pass
+    def createWriter(is: CDPL.Base.IOStream) -> FeatureContainerWriter: pass
 
     ##
     # \brief 

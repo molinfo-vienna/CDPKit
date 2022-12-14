@@ -65,7 +65,7 @@ class HydrophobicAtomFeatureGenerator(PatternBasedFeatureGenerator):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HydrophobicAtomFeatureGenerator instance \a gen.
     # \param gen The \e %HydrophobicAtomFeatureGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: HydrophobicAtomFeatureGenerator) -> HydrophobicAtomFeatureGenerator: pass
 

@@ -93,7 +93,7 @@ class CationPiInteractionScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CationPiInteractionScore instance \a constr.
     # \param constr The \e %CationPiInteractionScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(constr: CationPiInteractionScore) -> CationPiInteractionScore: pass
 

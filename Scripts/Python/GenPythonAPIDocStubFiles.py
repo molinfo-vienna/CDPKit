@@ -91,7 +91,7 @@ __lt__DOC_TEMPLATE = \
 """##
 # \\brief Returns the result of the comparison operation <tt>@A0@ < @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to be compared with.
+# \\param @A1@ The \\e %@AT1@ instance to be compared with.
 # \\return The result of the comparison operation.
 #
 """
@@ -100,7 +100,7 @@ __le__DOC_TEMPLATE = \
 """##
 # \\brief Returns the result of the comparison operation <tt>@A0@ <= @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to be compared with.
+# \\param @A1@ The \\e %@AT1@ instance to be compared with.
 # \\return The result of the comparison operation.
 #
 """
@@ -109,7 +109,7 @@ __gt__DOC_TEMPLATE = \
 """##
 # \\brief Returns the result of the comparison operation <tt>@A0@ > @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to be compared with.
+# \\param @A1@ The \\e %@AT1@ instance to be compared with.
 # \\return The result of the comparison operation.
 #
 """
@@ -118,7 +118,7 @@ __ge__DOC_TEMPLATE = \
 """##
 # \\brief Returns the result of the comparison operation <tt>@A0@ >= @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to be compared with.
+# \\param @A1@ The \\e %@AT1@ instance to be compared with.
 # \\return The result of the comparison operation.
 #
 """
@@ -127,7 +127,7 @@ __ne__DOC_TEMPLATE = \
 """##
 # \\brief Returns the result of the comparison operation <tt>@A0@ != @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to be compared with.
+# \\param @A1@ The \\e %@AT1@ instance to be compared with.
 # \\return The result of the comparison operation.
 #
 """
@@ -136,7 +136,7 @@ __eq__DOC_TEMPLATE = \
 """##
 # \\brief Returns the result of the comparison operation <tt>@A0@ == @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to be compared with.
+# \\param @A1@ The \\e %@AT1@ instance to be compared with.
 # \\return The result of the comparison operation.
 #
 """
@@ -155,7 +155,7 @@ __iadd__DOC_TEMPLATE = \
 # \\brief Performs the in-place addition operation <tt>@A0@ += @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance acting as in-place addend.
 # \\param @A1@ Specifies the second addend.
-# \\return The updated \\e %@CN@ instance \\a @A0@.
+# \\return The updated \\e %@RT@ instance \\a @A0@.
 #
 """
 
@@ -164,7 +164,7 @@ __isub__DOC_TEMPLATE = \
 # \\brief Performs the in-place subtraction operation <tt>@A0@ -= @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance acting as in-place minuend.
 # \\param @A1@ Specifies the subtrahend.
-# \\return The updated \\e %@CN@ instance \\a @A0@.
+# \\return The updated \\e %@RT@ instance \\a @A0@.
 #
 """
 
@@ -173,7 +173,7 @@ __imul__DOC_TEMPLATE = \
 # \\brief Performs the in-place multiplication operation <tt>@A0@ *= @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance acting as in-place multiplicand.
 # \\param @A1@ Specifies the multiplier.
-# \\return The updated \\e %@CN@ instance \\a @A0@.
+# \\return The updated \\e %@RT@ instance \\a @A0@.
 #
 """
 
@@ -182,7 +182,7 @@ __idiv__DOC_TEMPLATE = \
 # \\brief Performs the in-place division operation <tt>@A0@ /= @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance acting as in-place dividend.
 # \\param @A1@ Specifies the divisor.
-# \\return The updated \\e %@CN@ instance \\a @A0@.
+# \\return The updated \\e %@RT@ instance \\a @A0@.
 #
 """
 
@@ -191,7 +191,7 @@ __add__DOC_TEMPLATE = \
 # \\brief Returns the result of the addition operation <tt>@A0@ + @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance representing the first addend.
 # \\param @A1@ Specifies the second addend.
-# \\return A \\e %@CN@ instance holding the result of the addition.
+# \\return A \\e %@RT@ instance holding the result of the addition.
 #
 """
 
@@ -209,7 +209,7 @@ __mul__DOC_TEMPLATE = \
 # \\brief Returns the result of the multiplication operation <tt>@A0@ * @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance acting as multiplicand.
 # \\param @A1@ Specifies the multiplier.
-# \\return A \\e %@CN@ instance holding the result of the multiplication.
+# \\return A \\e %@RT@ instance holding the result of the multiplication.
 #
 """
 
@@ -218,16 +218,16 @@ __div__DOC_TEMPLATE = \
 # \\brief Returns the result of the division operation <tt>@A0@ / @A1@</tt>.
 # \\param @A0@ The \\e %@CN@ instance acting as dividend.
 # \\param @A1@ Specifies the divisor.
-# \\return A \\e %@CN@ instance holding the result of the division.
+# \\return A \\e %@RT@ instance holding the result of the division.
 #
 """
 
 assign_DOC_TEMPLATE = \
 """##
-# \\brief Replaces the current state of \\a @A0@ with a copy of the state of the \\e %@CN@ instance \\a @A1@.
+# \\brief Replaces the current state of \\a @A0@ with a copy of the state of the \\e %@AT1@ instance \\a @A1@.
 # \\param @A0@ The \\e %@CN@ instance this method is called upon.
-# \\param @A1@ The \\e %@CN@ instance to copy.
-# \\return The assignment target \\a @A0@.
+# \\param @A1@ The \\e %@AT1@ instance to copy.
+# \\return \\a @A0@
 #
 """
 
@@ -354,7 +354,7 @@ def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, fun
         if not is_static and HIDE_SELF_ARG and line.lstrip().startswith('# \\param @A0@'):
             continue
  
-        line = line.replace('@CN@', class_obj.__name__).replace('@MN@', method_name)
+        line = line.replace('@CN@', class_obj.__name__).replace('@MN@', method_name).replace('@RT@', func_data['ret_type'])
        
         if '@ARGS@' in line:
             for i in range(0, len(func_data['arg_names'])):
@@ -374,6 +374,9 @@ def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, fun
                 proc_args.append(func_data['arg_names'][i])
                 
             line = tmp_line
+
+        for i in range(0, len(func_data['arg_types'])):
+            line = line.replace('@AT' + str(i) + '@', func_data['arg_types'][i])
                 
         out_file.write(ident + line)
         
@@ -390,6 +393,9 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident):
 
     if len(overloads) > 0:
         for func_data in overloads:
+            if not is_static and func_data['ret_type'] == 'None' and func_data['arg_names'][0] == 'arg1':
+                continue
+            
             out_file.write('\n')
 
             if HIDE_SELF_ARG and not is_static:

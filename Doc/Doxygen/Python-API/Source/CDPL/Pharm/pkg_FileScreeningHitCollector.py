@@ -51,7 +51,7 @@ class FileScreeningHitCollector(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FileScreeningHitCollector instance \a collector.
     # \param collector The \e %FileScreeningHitCollector instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(collector: FileScreeningHitCollector) -> FileScreeningHitCollector: pass
 

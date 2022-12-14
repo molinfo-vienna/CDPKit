@@ -1041,8 +1041,9 @@ def getSizeOfSmallestContainingFragment(atom: Atom, frag_list: FragmentList) -> 
 # \param max_dist 
 # \param env 
 # \param append 
+# \return 
 #
-def getEnvironment(atom: Atom, molgraph: MolecularGraph, max_dist: int, env: Fragment, append: bool = False) -> None: pass
+def getEnvironment(atom: Atom, molgraph: MolecularGraph, max_dist: int, env: Fragment, append: bool = False) -> int: pass
 
 ##
 # \brief 

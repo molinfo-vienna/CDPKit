@@ -60,7 +60,7 @@ class PatternAtomTyper(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Pattern instance \a ptn.
         # \param ptn The \e %Pattern instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(ptn: re.Pattern) -> re.Pattern: pass
 
@@ -217,7 +217,7 @@ class PatternAtomTyper(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %PatternAtomTyper instance \a typer.
     # \param typer The \e %PatternAtomTyper instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(typer: PatternAtomTyper) -> PatternAtomTyper: pass
 

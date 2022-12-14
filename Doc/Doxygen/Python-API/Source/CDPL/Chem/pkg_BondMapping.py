@@ -67,7 +67,7 @@ class BondMapping(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMapping instance \a map.
     # \param map The \e %BondMapping instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(map: BondMapping) -> BondMapping: pass
 

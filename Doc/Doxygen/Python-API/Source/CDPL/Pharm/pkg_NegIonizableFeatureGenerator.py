@@ -47,6 +47,6 @@ class NegIonizableFeatureGenerator(PatternBasedFeatureGenerator):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %NegIonizableFeatureGenerator instance \a gen.
     # \param gen The \e %NegIonizableFeatureGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: NegIonizableFeatureGenerator) -> NegIonizableFeatureGenerator: pass

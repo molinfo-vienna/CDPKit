@@ -71,13 +71,13 @@ class BasicReaction(Reaction):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicReaction instance \a rxn.
     # \param rxn The \e %BasicReaction instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(rxn: BasicReaction) -> BasicReaction: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BasicReaction instance \a rxn.
-    # \param rxn The \e %BasicReaction instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %Reaction instance \a rxn.
+    # \param rxn The \e %Reaction instance to copy.
+    # \return \a self
     #
     def assign(rxn: Reaction) -> BasicReaction: pass

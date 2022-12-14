@@ -38,7 +38,7 @@ class LineSegmentListPrimitive2D(PointArray2D, GraphicsPrimitive2D):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LineSegmentListPrimitive2D instance \a prim.
     # \param prim The \e %LineSegmentListPrimitive2D instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(prim: LineSegmentListPrimitive2D) -> LineSegmentListPrimitive2D: pass
 

@@ -104,7 +104,7 @@ class ParallelPiPiInteractionScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionScore instance \a constr.
     # \param constr The \e %ParallelPiPiInteractionScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(constr: ParallelPiPiInteractionScore) -> ParallelPiPiInteractionScore: pass
 

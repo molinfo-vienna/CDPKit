@@ -50,13 +50,6 @@ class ULRotationMatrix(Boost.Python.instance):
     def set(w: int, ux: int, uy: int, uz: int) -> None: pass
 
     ##
-    # \brief 
-    # \param arg1 
-    # \param n 
-    #
-    def resize(n: int) -> None: pass
-
-    ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
     # Different Python \e %ULRotationMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
@@ -103,7 +96,7 @@ class ULRotationMatrix(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ULRotationMatrix instance \a m.
     # \param m The \e %ULRotationMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(m: ULRotationMatrix) -> ULRotationMatrix: pass
 
@@ -143,7 +136,7 @@ class ULRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %ULRotationMatrix instance to be compared with.
+    # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstULMatrixExpression) -> bool: pass
@@ -157,7 +150,7 @@ class ULRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %ULRotationMatrix instance to be compared with.
+    # \param e The \e %ConstULMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstULMatrixExpression) -> bool: pass
@@ -183,7 +176,7 @@ class ULRotationMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %ULRotationMatrix instance holding the result of the addition.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the addition.
     #
     def __add__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
@@ -197,28 +190,28 @@ class ULRotationMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %ULRotationMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(t: int) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ULRotationMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstULMatrixExpression) -> ConstULMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ULRotationMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstULVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstULVectorExpression) -> ConstULVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %ULRotationMatrix instance holding the result of the division.
+    # \return A \e %ConstULMatrixExpression instance holding the result of the division.
     #
     def __div__(t: int) -> ConstULMatrixExpression: pass
 

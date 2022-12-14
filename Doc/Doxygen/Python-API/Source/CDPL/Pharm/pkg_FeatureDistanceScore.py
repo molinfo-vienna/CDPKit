@@ -70,7 +70,7 @@ class FeatureDistanceScore(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureDistanceScore instance \a func.
     # \param func The \e %FeatureDistanceScore instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(func: FeatureDistanceScore) -> FeatureDistanceScore: pass
 

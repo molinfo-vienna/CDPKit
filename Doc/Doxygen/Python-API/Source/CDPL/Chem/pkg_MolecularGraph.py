@@ -113,24 +113,10 @@ class MolecularGraph(AtomContainer, BondContainer, CDPL.Base.PropertyContainer):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsAtom(arg2: Atom) -> None: pass
-
-    ##
-    # \brief 
     # \param atom 
     # \return 
     #
     def getAtomIndex(atom: Atom) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getAtomIndex(arg2: Atom) -> None: pass
 
     ##
     # \brief 
@@ -173,13 +159,6 @@ class MolecularGraph(AtomContainer, BondContainer, CDPL.Base.PropertyContainer):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsBond(arg2: Bond) -> None: pass
-
-    ##
-    # \brief 
     # \param func 
     #
     def orderBonds(func: BoolBond2Functor) -> None: pass
@@ -190,13 +169,6 @@ class MolecularGraph(AtomContainer, BondContainer, CDPL.Base.PropertyContainer):
     # \return 
     #
     def getBondIndex(bond: Bond) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getBondIndex(arg2: Bond) -> None: pass
 
     ##
     # \brief 

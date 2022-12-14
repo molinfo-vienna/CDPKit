@@ -179,7 +179,7 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CircularFingerprintGenerator instance \a gen.
     # \param gen The \e %CircularFingerprintGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: ._descr.CircularFingerprintGenerator) -> ._descr.CircularFingerprintGenerator: pass
 

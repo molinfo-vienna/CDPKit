@@ -50,7 +50,7 @@ class GaussianShapeGenerator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %GaussianShapeGenerator instance \a gen.
     # \param gen The \e %GaussianShapeGenerator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(gen: GaussianShapeGenerator) -> GaussianShapeGenerator: pass
 

@@ -83,7 +83,7 @@ class ScreeningProcessor(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %SearchHit instance \a hit.
         # \param hit The \e %SearchHit instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(hit: SearchHit) -> SearchHit: pass
 

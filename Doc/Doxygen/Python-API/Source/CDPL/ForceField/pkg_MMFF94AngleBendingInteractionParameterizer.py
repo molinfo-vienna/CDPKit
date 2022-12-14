@@ -112,7 +112,7 @@ class MMFF94AngleBendingInteractionParameterizer(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AngleBendingInteractionParameterizer instance \a parameterizer.
     # \param parameterizer The \e %MMFF94AngleBendingInteractionParameterizer instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(parameterizer: MMFF94AngleBendingInteractionParameterizer) -> MMFF94AngleBendingInteractionParameterizer: pass
 

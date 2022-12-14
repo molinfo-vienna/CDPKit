@@ -58,7 +58,7 @@ class GaussianShapeFunctionAlignment(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Result instance \a res.
         # \param res The \e %Result instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(res: Result) -> Result: pass
 

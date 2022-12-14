@@ -57,7 +57,7 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94GradientCalculator instance \a calculator.
     # \param calculator The \e %MMFF94GradientCalculator instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(calculator: MMFF94GradientCalculator) -> MMFF94GradientCalculator: pass
 

@@ -33,28 +33,28 @@ class DGridExpression(ConstDGridExpression):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DGridExpression instance \a e.
     # \param e The \e %DGridExpression instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(e: DGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGridExpression instance \a e.
-    # \param e The \e %DGridExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFGridExpression instance \a e.
+    # \param e The \e %ConstFGridExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGridExpression instance \a e.
-    # \param e The \e %DGridExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDGridExpression instance \a e.
+    # \param e The \e %ConstDGridExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDGridExpression) -> DGridExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %DGridExpression instance \a e.
-    # \param e The \e %DGridExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a e.
+    # \param e The \e %object instance to copy.
+    # \return \a self
     #
     def assign(e: object) -> DGridExpression: pass
 

@@ -33,42 +33,42 @@ class LQuaternionExpression(ConstLQuaternionExpression):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a e.
     # \param e The \e %LQuaternionExpression instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(e: LQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a e.
-    # \param e The \e %LQuaternionExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstFQuaternionExpression instance \a e.
+    # \param e The \e %ConstFQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstFQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a e.
-    # \param e The \e %LQuaternionExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstDQuaternionExpression instance \a e.
+    # \param e The \e %ConstDQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstDQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a e.
-    # \param e The \e %LQuaternionExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstLQuaternionExpression instance \a e.
+    # \param e The \e %ConstLQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstLQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a e.
-    # \param e The \e %LQuaternionExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ConstULQuaternionExpression instance \a e.
+    # \param e The \e %ConstULQuaternionExpression instance to copy.
+    # \return \a self
     #
     def assign(e: ConstULQuaternionExpression) -> LQuaternionExpression: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LQuaternionExpression instance \a a.
-    # \param a The \e %LQuaternionExpression instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %object instance \a a.
+    # \param a The \e %object instance to copy.
+    # \return \a self
     #
     def assign(a: object) -> None: pass
 

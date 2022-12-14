@@ -86,14 +86,14 @@ class BondMatchExpressionList(BondMatchExpression):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMatchExpressionList instance \a array.
     # \param array The \e %BondMatchExpressionList instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(array: BondMatchExpressionList) -> BondMatchExpressionList: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BondMatchExpressionList instance \a num_elem.
-    # \param num_elem The \e %BondMatchExpressionList instance to copy.
-    # \return The assignment target \a self.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
+    # \param num_elem The \e %int instance to copy.
+    # \return \a self
     #
     def assign(num_elem: int, value: BondMatchExpression) -> None: pass
 
@@ -203,14 +203,14 @@ class BondMatchExpressionList(BondMatchExpression):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == expr</tt>.
-    # \param expr The \e %BondMatchExpressionList instance to be compared with.
+    # \param expr The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(expr: object) -> bool: pass
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != expr</tt>.
-    # \param expr The \e %BondMatchExpressionList instance to be compared with.
+    # \param expr The \e %object instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(expr: object) -> bool: pass

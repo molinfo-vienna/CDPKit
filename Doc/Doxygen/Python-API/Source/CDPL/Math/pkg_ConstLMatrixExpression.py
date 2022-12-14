@@ -152,7 +152,7 @@ class ConstLMatrixExpression(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
+    # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 

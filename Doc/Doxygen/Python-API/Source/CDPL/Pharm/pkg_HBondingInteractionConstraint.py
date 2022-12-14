@@ -99,7 +99,7 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondingInteractionConstraint instance \a constr.
     # \param constr The \e %HBondingInteractionConstraint instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(constr: HBondingInteractionConstraint) -> HBondingInteractionConstraint: pass
 

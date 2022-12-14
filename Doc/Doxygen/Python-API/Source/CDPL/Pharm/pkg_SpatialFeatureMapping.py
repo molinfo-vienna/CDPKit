@@ -51,7 +51,7 @@ class SpatialFeatureMapping(FeatureMapping):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %SpatialFeatureMapping instance \a mapping.
     # \param mapping The \e %SpatialFeatureMapping instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(mapping: SpatialFeatureMapping) -> SpatialFeatureMapping: pass
 

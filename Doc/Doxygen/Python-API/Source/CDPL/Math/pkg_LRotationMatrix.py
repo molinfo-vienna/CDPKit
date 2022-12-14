@@ -50,13 +50,6 @@ class LRotationMatrix(Boost.Python.instance):
     def set(w: int, ux: int, uy: int, uz: int) -> None: pass
 
     ##
-    # \brief 
-    # \param arg1 
-    # \param n 
-    #
-    def resize(n: int) -> None: pass
-
-    ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
     # Different Python \e %LRotationMatrix instances may reference the same underlying C++ class instance. The commonly used Python expression
@@ -103,7 +96,7 @@ class LRotationMatrix(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %LRotationMatrix instance \a m.
     # \param m The \e %LRotationMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(m: LRotationMatrix) -> LRotationMatrix: pass
 
@@ -143,7 +136,7 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %LRotationMatrix instance to be compared with.
+    # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstLMatrixExpression) -> bool: pass
@@ -157,7 +150,7 @@ class LRotationMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %LRotationMatrix instance to be compared with.
+    # \param e The \e %ConstLMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstLMatrixExpression) -> bool: pass
@@ -183,7 +176,7 @@ class LRotationMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %LRotationMatrix instance holding the result of the addition.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the addition.
     #
     def __add__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
@@ -197,28 +190,28 @@ class LRotationMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %LRotationMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(t: int) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %LRotationMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstLMatrixExpression) -> ConstLMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %LRotationMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstLVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstLVectorExpression) -> ConstLVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %LRotationMatrix instance holding the result of the division.
+    # \return A \e %ConstLMatrixExpression instance holding the result of the division.
     #
     def __div__(t: int) -> ConstLMatrixExpression: pass
 

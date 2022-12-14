@@ -108,7 +108,7 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Atom instance \a atom.
     # \param atom The \e %Atom instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(atom: Atom) -> Atom: pass
 
@@ -140,24 +140,10 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsAtom(arg2: Atom) -> None: pass
-
-    ##
-    # \brief 
     # \param atom 
     # \return 
     #
     def getAtomIndex(atom: Atom) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getAtomIndex(arg2: Atom) -> None: pass
 
     ##
     # \brief 
@@ -200,13 +186,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
 
     ##
     # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def containsBond(arg2: Bond) -> None: pass
-
-    ##
-    # \brief 
     # \param func 
     #
     def orderBonds(func: BoolBond2Functor) -> None: pass
@@ -217,13 +196,6 @@ class Atom(AtomContainer, BondContainer, Entity3D):
     # \return 
     #
     def getBondIndex(bond: Bond) -> int: pass
-
-    ##
-    # \brief 
-    # \param arg1 
-    # \param arg2 
-    #
-    def getBondIndex(arg2: Bond) -> None: pass
 
     ##
     # \brief 

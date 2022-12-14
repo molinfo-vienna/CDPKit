@@ -97,7 +97,7 @@ class DScalarMatrix(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %DScalarMatrix instance \a m.
     # \param m The \e %DScalarMatrix instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(m: DScalarMatrix) -> DScalarMatrix: pass
 
@@ -137,7 +137,7 @@ class DScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self == e</tt>.
-    # \param e The \e %DScalarMatrix instance to be compared with.
+    # \param e The \e %ConstDMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __eq__(e: ConstDMatrixExpression) -> bool: pass
@@ -151,7 +151,7 @@ class DScalarMatrix(Boost.Python.instance):
 
     ##
     # \brief Returns the result of the comparison operation <tt>self != e</tt>.
-    # \param e The \e %DScalarMatrix instance to be compared with.
+    # \param e The \e %ConstDMatrixExpression instance to be compared with.
     # \return The result of the comparison operation.
     #
     def __ne__(e: ConstDMatrixExpression) -> bool: pass
@@ -177,7 +177,7 @@ class DScalarMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the addition operation <tt>self + e</tt>.
     # \param e Specifies the second addend.
-    # \return A \e %DScalarMatrix instance holding the result of the addition.
+    # \return A \e %ConstDMatrixExpression instance holding the result of the addition.
     #
     def __add__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
@@ -191,28 +191,28 @@ class DScalarMatrix(Boost.Python.instance):
     ##
     # \brief Returns the result of the multiplication operation <tt>self * t</tt>.
     # \param t Specifies the multiplier.
-    # \return A \e %DScalarMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstDMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(t: float) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %DScalarMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstDMatrixExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstDMatrixExpression) -> ConstDMatrixExpression: pass
 
     ##
     # \brief Returns the result of the multiplication operation <tt>self * e</tt>.
     # \param e Specifies the multiplier.
-    # \return A \e %DScalarMatrix instance holding the result of the multiplication.
+    # \return A \e %ConstDVectorExpression instance holding the result of the multiplication.
     #
     def __mul__(e: ConstDVectorExpression) -> ConstDVectorExpression: pass
 
     ##
     # \brief Returns the result of the division operation <tt>self / t</tt>.
     # \param t Specifies the divisor.
-    # \return A \e %DScalarMatrix instance holding the result of the division.
+    # \return A \e %ConstDMatrixExpression instance holding the result of the division.
     #
     def __div__(t: float) -> ConstDMatrixExpression: pass
 

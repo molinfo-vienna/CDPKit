@@ -66,7 +66,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
         ##
         # \brief Replaces the current state of \a self with a copy of the state of the \e %Entry instance \a entry.
         # \param entry The \e %Entry instance to copy.
-        # \return The assignment target \a self.
+        # \return \a self
         #
         def assign(entry: Entry) -> Entry: pass
 
@@ -232,7 +232,7 @@ class MMFF94VanDerWaalsParameterTable(Boost.Python.instance):
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94VanDerWaalsParameterTable instance \a table.
     # \param table The \e %MMFF94VanDerWaalsParameterTable instance to copy.
-    # \return The assignment target \a self.
+    # \return \a self
     #
     def assign(table: MMFF94VanDerWaalsParameterTable) -> MMFF94VanDerWaalsParameterTable: pass
 
