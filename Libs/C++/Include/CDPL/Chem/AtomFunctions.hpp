@@ -425,7 +425,7 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API void getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append = false);
+		CDPL_CHEM_API std::size_t getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append = false);
 
 
 		template <typename AtomType, typename OutputIterator>

@@ -35,7 +35,7 @@
 using namespace CDPL; 
 
 
-void Chem::getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append)
+std::size_t Chem::getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std::size_t max_dist, Fragment& env, bool append)
 {
     if (!append)
 	env.clear();
@@ -67,8 +67,10 @@ void Chem::getEnvironment(const Atom& atom, const MolecularGraph& molgraph, std:
 	}
 
 	if (curr_num_atoms == env.getNumAtoms())
-	    return;
+	    return i;
 
 	last_num_atoms = curr_num_atoms;
     }
+
+    return max_dist;
 }

@@ -157,7 +157,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER4(unsigned int, calcAtomConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
 	MAKE_FUNCTION_WRAPPER4(void, markReachableAtoms, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Util::BitSet&, bool);
 
-	MAKE_FUNCTION_WRAPPER5(void, getEnvironment, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, CDPL::Chem::Fragment&, bool);
+	MAKE_FUNCTION_WRAPPER5(std::size_t, getEnvironment, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, CDPL::Chem::Fragment&, bool);
 
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
