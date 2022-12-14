@@ -71,8 +71,8 @@ namespace CDPLPythonBase
 
 			typedef Base::DataOutputHandler<T> HandlerType;
 
-			typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc1)(std::istream&) const;
-			typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc2)(const std::string&, std::ios_base::openmode) const;
+			typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc1)(std::iostream&) const = &HandlerType::createWriter;
+			typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc2)(const std::string&, std::ios_base::openmode) const = &HandlerType::createWriter;
 
             python::class_<DataOutputHandlerWrapper<T>, typename DataOutputHandlerWrapper<T>::SharedPointer, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))

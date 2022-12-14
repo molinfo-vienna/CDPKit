@@ -71,8 +71,8 @@ namespace CDPLPythonBase
 
 			typedef Base::DataInputHandler<T> HandlerType;
 
-			typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc1)(std::istream&) const;
-			typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc2)(const std::string&, std::ios_base::openmode) const;
+			typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc1)(std::istream&) const = &HandlerType::createReader;
+			typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc2)(const std::string&, std::ios_base::openmode) const = &HandlerType::createReader;
 
 			python::class_<DataInputHandlerWrapper<T>, typename DataInputHandlerWrapper<T>::SharedPointer, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
