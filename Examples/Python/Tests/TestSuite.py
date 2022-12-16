@@ -29,6 +29,12 @@ import os
 import subprocess
 
 
+def testDataFilePath(fname):
+    return os.path.join(os.environ['CDPKIT_TEST_DATA_DIR'], fname)
+
+def outputFilePath(fname):
+    return os.path.join(os.environ['CURR_BINARY_DIR'], fname)
+
 def checkScriptOutput(script_name, args):
     script_dir = os.environ['PYTHON_EXAMPLES_DIR']
     script_path = os.path.join(script_dir, script_name + '.py')
@@ -38,6 +44,28 @@ def checkScriptOutput(script_name, args):
     try:
         result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, capture_output=False, check=True)
         output = result.stdout.decode('ascii').replace('\r\n', '\n')
+        exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
+
+        if output == exp_output:
+            print('OK', file=sys.stderr)
+            return False
+
+        print('\nScript output check FAILED:\nExpected output = \'%s\'\nReceived output = \'%s\'' % (exp_output, output), file=sys.stderr)
+        return True
+    
+    except Exception as e:
+        print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
+        return True
+
+def checkScriptFileOutput(script_name, out_file, args):
+    script_dir = os.environ['PYTHON_EXAMPLES_DIR']
+    script_path = os.path.join(script_dir, script_name + '.py')
+
+    print('Checking output of script \'%s.py\'...' % (script_name), end=' ', file=sys.stderr)
+
+    try:
+        result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, capture_output=False, check=True)
+        output = open(out_file, 'r').read()
         exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
         if output == exp_output:
@@ -67,13 +95,16 @@ def checkScriptExecution(script_name, args):
         print('\nScript execution FAILED:\n' + str(e), file=sys.stderr)
         return True
 
-def testDataFilePath(fname):
-    return os.path.join(os.environ['CDPKIT_TEST_DATA_DIR'], fname)
-
 
 if __name__ == '__main__':
     errors = False
     
-    errors |= checkScriptOutput('seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('chem_seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('molprop_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('molprop_atom_class_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('molprop_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('molprop_atom_elec_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('molprop_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptFileOutput('descr_gen_ecfp', outputFilePath('test.out'), [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out') ])
 
     sys.exit(errors)

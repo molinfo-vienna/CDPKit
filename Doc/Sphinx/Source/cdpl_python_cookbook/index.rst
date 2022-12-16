@@ -6,3 +6,7 @@ CDPL Python Cookbook
 
    chem/index
    pharm/index
+   biomol/index
+   molprop/index
+   descr/index
+   confgen/index

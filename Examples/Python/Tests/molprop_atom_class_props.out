@@ -1,0 +1,495 @@
+- Atom #0
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #1
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #2
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #3
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #4
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #5
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #6
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: True
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #7
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #8
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #9
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #10
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #11
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #12
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #13
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #14
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #15
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #16
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: True
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #17
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #18
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #19
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #20
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #21
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #22
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #23
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #24
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: True
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: True
+	Is planar nitrogen: False
+- Atom #25
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #26
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #27
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #28
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #29
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #30
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #31
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #32
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #33
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #34
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #35
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #36
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #37
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #38
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #39
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #40
+	Is std. hydrogen: False
+	Is heavy atom: True
+	Is unsaturated: True
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #41
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #42
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #43
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False
+- Atom #44
+	Is std. hydrogen: True
+	Is heavy atom: False
+	Is unsaturated: False
+	Is hydrogen acceptor: False
+	Is hydrogen donor: False
+	Is carbonyl carbon: False
+	Is amide carbon: False
+	Is amide nitrogen: False
+	Is invertible nitrogen: False
+	Is planar nitrogen: False

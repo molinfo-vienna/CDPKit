@@ -1,4 +1,4 @@
-Pharmacophore Generation and Processing
+Processing of Biological Macromolecules
 =======================================
 
 .. toctree::

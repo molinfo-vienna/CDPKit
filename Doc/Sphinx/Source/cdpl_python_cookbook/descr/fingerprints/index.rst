@@ -1,7 +1,7 @@
-Processing of Chemical Data
+Calculation of Fingerprints
 ===========================
 
 .. toctree::
    :maxdepth: 2
 
-   molecule/index
+   gen_ecfp

@@ -1,0 +1,855 @@
+- Atom #0
+	Atomic weight: 18.9984032
+	PTE IUPAC group: 17
+	PTE period: 2
+	VdW radius: 1.47
+	Covalent radius (bond order=1): 0.64
+	Covalent radius (bond order=2): 0.59
+	Covalent radius (bond order=3): 0.53
+	Allred Rochow electronegativity: 4.1
+	Element name: Fluorine
+	Valence electron count: 7
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: True
+	Is noble gas: False
+- Atom #1
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #2
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #3
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #4
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #5
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #6
+	Atomic weight: 15.9994
+	PTE IUPAC group: 16
+	PTE period: 2
+	VdW radius: 1.52
+	Covalent radius (bond order=1): 0.63
+	Covalent radius (bond order=2): 0.57
+	Covalent radius (bond order=3): 0.53
+	Allred Rochow electronegativity: 3.5
+	Element name: Oxygen
+	Valence electron count: 6
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #7
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #8
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #9
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #10
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #11
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #12
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #13
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #14
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #15
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #16
+	Atomic weight: 14.0067
+	PTE IUPAC group: 15
+	PTE period: 2
+	VdW radius: 1.55
+	Covalent radius (bond order=1): 0.71
+	Covalent radius (bond order=2): 0.6
+	Covalent radius (bond order=3): 0.54
+	Allred Rochow electronegativity: 3.1
+	Element name: Nitrogen
+	Valence electron count: 5
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #17
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #18
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #19
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #20
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #21
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #22
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #23
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #24
+	Atomic weight: 14.0067
+	PTE IUPAC group: 15
+	PTE period: 2
+	VdW radius: 1.55
+	Covalent radius (bond order=1): 0.71
+	Covalent radius (bond order=2): 0.6
+	Covalent radius (bond order=3): 0.54
+	Allred Rochow electronegativity: 3.1
+	Element name: Nitrogen
+	Valence electron count: 5
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #25
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #26
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #27
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #28
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #29
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #30
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #31
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #32
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #33
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #34
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #35
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #36
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #37
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #38
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #39
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #40
+	Atomic weight: 12.0107
+	PTE IUPAC group: 14
+	PTE period: 2
+	VdW radius: 1.7
+	Covalent radius (bond order=1): 0.75
+	Covalent radius (bond order=2): 0.67
+	Covalent radius (bond order=3): 0.6
+	Allred Rochow electronegativity: 2.5
+	Element name: Carbon
+	Valence electron count: 4
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #41
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #42
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #43
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False
+- Atom #44
+	Atomic weight: 1.00794
+	PTE IUPAC group: 1
+	PTE period: 1
+	VdW radius: 1.2
+	Covalent radius (bond order=1): 0.32
+	Covalent radius (bond order=2): 0.0
+	Covalent radius (bond order=3): 0.0
+	Allred Rochow electronegativity: 2.2
+	Element name: Hydrogen
+	Valence electron count: 1
+	Atom type specifies chemical element: True
+	Is main group element: True
+	Is metal: False
+	Is transition metal: False
+	Is non-metal: True
+	Is semi-metal: False
+	Is halogen: False
+	Is noble gas: False

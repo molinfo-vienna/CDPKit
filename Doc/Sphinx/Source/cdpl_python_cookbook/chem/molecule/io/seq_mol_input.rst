@@ -1,9 +1,9 @@
-Sequential File Input
-=====================
+Sequential Molecule Input
+=========================
 
-.. literalinclude:: /examples/seq_mol_input.py
+.. literalinclude:: /examples/chem_seq_mol_input.py
    :language: python
    :linenos:
    :lines: 27-
 
-:download:`Download source file</examples/seq_mol_input.py>`
+:download:`Download source file</examples/chem_seq_mol_input.py>`

@@ -1,0 +1,1170 @@
+- Atom #0
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 1
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 4
+	VSEPR coordination geometry: NONE
+- Atom #1
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 1
+	Num. connected heavy atoms: 3
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 3
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #2
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #3
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #4
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 3
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 3
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 3
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 3
+	Num. incident rotatable bonds (incl. impl. H): 1
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #5
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 3
+	Num. connected heteroatoms: 1
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 4
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 3
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 2
+	Num. incident chain bonds (incl. impl. H): 2
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 4
+	Num. incident rotatable bonds (incl. impl. H): 2
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #6
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 2
+	Num. incident bonds (incl. impl. H): 2
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 0
+	Num. incident chain bonds (incl. impl. H): 0
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 2
+	Valence (incl. impl. H): 2
+	Steric number: 4
+	VSEPR coordination geometry: BENT
+- Atom #7
+	Num. connected std. hydrogens (incl. impl. H): 2
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 1
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 2
+	Num. connected chain atoms (incl. impl. H): 2
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 2
+	Num. incident chain bonds (incl. impl. H): 2
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #8
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 3
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 3
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 3
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 0
+	Num. incident chain bonds (incl. impl. H): 0
+	Num. incident ring bonds (incl. impl. H): 3
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 3
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #9
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 3
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 3
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 3
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 0
+	Num. incident chain bonds (incl. impl. H): 0
+	Num. incident ring bonds (incl. impl. H): 3
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 3
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #10
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #11
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #12
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 3
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 3
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 3
+	Num. incident rotatable bonds (incl. impl. H): 1
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #13
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #14
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #15
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 1
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 2
+	Num. incident bonds (incl. impl. H): 2
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 1
+	Num. incident chain bonds (excl. impl. H): 2
+	Num. incident chain bonds (incl. impl. H): 2
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 1
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 2
+	VSEPR coordination geometry: LINEAR
+- Atom #16
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 0
+	Num. incident single bonds (incl. impl. H): 0
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 1
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 1
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 3
+	Valence (incl. impl. H): 3
+	Steric number: 2
+	VSEPR coordination geometry: NONE
+- Atom #17
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #18
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #19
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #20
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #21
+	Num. connected std. hydrogens (incl. impl. H): 2
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 3
+	Num. connected chain atoms (incl. impl. H): 3
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 4
+	Num. incident chain bonds (incl. impl. H): 4
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 2
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #22
+	Num. connected std. hydrogens (incl. impl. H): 2
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 4
+	Num. connected chain atoms (incl. impl. H): 4
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 4
+	Num. incident chain bonds (incl. impl. H): 4
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 2
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #23
+	Num. connected std. hydrogens (incl. impl. H): 2
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 1
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 4
+	Num. connected chain atoms (incl. impl. H): 4
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 4
+	Num. incident chain bonds (incl. impl. H): 4
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 2
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #24
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 3
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 3
+	Num. connected chain atoms (excl. impl. H): 3
+	Num. connected chain atoms (incl. impl. H): 3
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 3
+	Num. incident single bonds (incl. impl. H): 3
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 3
+	Num. incident chain bonds (incl. impl. H): 3
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 3
+	Num. incident rotatable bonds (incl. impl. H): 1
+	Valence (excl. impl. H): 3
+	Valence (incl. impl. H): 3
+	Steric number: 4
+	VSEPR coordination geometry: TRIGONAL_PYRAMIDAL
+- Atom #25
+	Num. connected std. hydrogens (incl. impl. H): 3
+	Num. connected carbon atoms: 0
+	Num. connected heteroatoms: 1
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 4
+	Num. connected chain atoms (incl. impl. H): 4
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 4
+	Num. incident chain bonds (incl. impl. H): 4
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 1
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #26
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #27
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #28
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #29
+	Num. connected std. hydrogens (incl. impl. H): 3
+	Num. connected carbon atoms: 0
+	Num. connected heteroatoms: 1
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 4
+	Num. connected chain atoms (incl. impl. H): 4
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 4
+	Num. incident bonds (incl. impl. H): 4
+	Num. incident single bonds (excl. impl. H): 4
+	Num. incident single bonds (incl. impl. H): 4
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 4
+	Num. incident chain bonds (incl. impl. H): 4
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 1
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 4
+	VSEPR coordination geometry: TETRAHEDRAL
+- Atom #30
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #31
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #32
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #33
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #34
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #35
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #36
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #37
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #38
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 0
+	Num. connected aromatic atoms: 0
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #39
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #40
+	Num. connected std. hydrogens (incl. impl. H): 1
+	Num. connected carbon atoms: 2
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 2
+	Num. connected chain atoms (excl. impl. H): 1
+	Num. connected chain atoms (incl. impl. H): 1
+	Num. connected ring atoms: 2
+	Num. connected aromatic atoms: 2
+	Num. incident bonds (excl. impl. H): 3
+	Num. incident bonds (incl. impl. H): 3
+	Num. incident single bonds (excl. impl. H): 2
+	Num. incident single bonds (incl. impl. H): 2
+	Num. incident double bonds: 1
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 2
+	Num. incident aromatic bonds (incl. impl. H): 2
+	Num. incident heavy atom bonds (incl. impl. H): 2
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 4
+	Valence (incl. impl. H): 4
+	Steric number: 3
+	VSEPR coordination geometry: TRIGONAL_PLANAR
+- Atom #41
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #42
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #43
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
+- Atom #44
+	Num. connected std. hydrogens (incl. impl. H): 0
+	Num. connected carbon atoms: 1
+	Num. connected heteroatoms: 0
+	Num. connected halogens: 0
+	Num. connected heavy atoms: 1
+	Num. connected chain atoms (excl. impl. H): 0
+	Num. connected chain atoms (incl. impl. H): 0
+	Num. connected ring atoms: 1
+	Num. connected aromatic atoms: 1
+	Num. incident bonds (excl. impl. H): 1
+	Num. incident bonds (incl. impl. H): 1
+	Num. incident single bonds (excl. impl. H): 1
+	Num. incident single bonds (incl. impl. H): 1
+	Num. incident double bonds: 0
+	Num. incident triple bonds: 0
+	Num. incident chain bonds (excl. impl. H): 1
+	Num. incident chain bonds (incl. impl. H): 1
+	Num. incident ring bonds (incl. impl. H): 0
+	Num. incident aromatic bonds (incl. impl. H): 0
+	Num. incident heavy atom bonds (incl. impl. H): 0
+	Num. incident rotatable bonds (incl. impl. H): 0
+	Valence (excl. impl. H): 1
+	Valence (incl. impl. H): 1
+	Steric number: 1
+	VSEPR coordination geometry: NONE
