@@ -32,25 +32,25 @@ import CDPL.MolProp as MolProp
 
 
 # function called for read molecule
-def procMolecule(mol: Chem.MolecularGraph) -> None:
-    Chem.calcImplicitHydrogenCounts(mol, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(mol, False) # perceive atom hybridization and set corresponding property for all atoms
-    Chem.perceiveSSSR(mol, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(mol, False)                # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(mol, False)         # perceive aromaticity and set corresponding atom and bond properties
+def procMolecule(molgraph: Chem.MolecularGraph) -> None:
+    Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
+    Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
+    Chem.setRingFlags(molgraph, False)                # perceive cycles and set corresponding atom and bond properties
+    Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
 
-    for atom in mol.atoms:
-        print('- Atom #%s' % str(atom.getIndex()))
-        print('\tIs std. hydrogen: %s' % str(MolProp.isOrdinaryHydrogen(atom, mol)))
+    for atom in molgraph.atoms:
+        print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
+        print('\tIs std. hydrogen: %s' % str(MolProp.isOrdinaryHydrogen(atom, molgraph)))
         print('\tIs heavy atom: %s' % str(MolProp.isHeavy(atom)))
-        print('\tIs unsaturated: %s' % str(MolProp.isUnsaturated(atom, mol)))
-        print('\tIs hydrogen acceptor: %s' % str(MolProp.isHydrogenAcceptor(atom, mol)))
-        print('\tIs hydrogen donor: %s' % str(MolProp.isHydrogenDonor(atom, mol)))
-        print('\tIs carbonyl carbon: %s' % str(MolProp.isCarbonylLikeAtom(atom, mol, True, True)))
-        print('\tIs amide carbon: %s' % str(MolProp.isAmideCenterAtom(atom, mol, True, True)))
-        print('\tIs amide nitrogen: %s' % str(MolProp.isAmideNitrogen(atom, mol, True, True)))
-        print('\tIs invertible nitrogen: %s' % str(MolProp.isInvertibleNitrogen(atom, mol)))
-        print('\tIs planar nitrogen: %s' % str(MolProp.isPlanarNitrogen(atom, mol)))
+        print('\tIs unsaturated: %s' % str(MolProp.isUnsaturated(atom, molgraph)))
+        print('\tIs hydrogen acceptor: %s' % str(MolProp.isHydrogenAcceptor(atom, molgraph)))
+        print('\tIs hydrogen donor: %s' % str(MolProp.isHydrogenDonor(atom, molgraph)))
+        print('\tIs carbonyl carbon: %s' % str(MolProp.isCarbonylLikeAtom(atom, molgraph, True, True)))
+        print('\tIs amide carbon: %s' % str(MolProp.isAmideCenterAtom(atom, molgraph, True, True)))
+        print('\tIs amide nitrogen: %s' % str(MolProp.isAmideNitrogen(atom, molgraph, True, True)))
+        print('\tIs invertible nitrogen: %s' % str(MolProp.isInvertibleNitrogen(atom, molgraph)))
+        print('\tIs planar nitrogen: %s' % str(MolProp.isPlanarNitrogen(atom, molgraph)))
         
 def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # get the extension of the input file
@@ -72,8 +72,8 @@ def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input file>' % sys.argv[0])
 
-    # if input are expected to be in a specific format, a reader for the specific format could be create directly,
-    # e.g. reader = Chem.FileSDFMoleculeReader(sys.argv[1])
+    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(sys.argv[1]) 
     
     # create an instance of the default implementation of the Chem.Molecule interface

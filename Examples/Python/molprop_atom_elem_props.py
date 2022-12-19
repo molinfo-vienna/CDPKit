@@ -32,9 +32,9 @@ import CDPL.MolProp as MolProp
 
 
 # function called for read molecule
-def procMolecule(mol: Chem.MolecularGraph) -> None:
-    for atom in mol.atoms:
-        print('- Atom #%s' % str(atom.getIndex()))
+def procMolecule(molgraph: Chem.MolecularGraph) -> None:
+    for atom in molgraph.atoms:
+        print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
         print('\tAtomic weight: %s' % str(MolProp.getAtomicWeight(atom)))
         print('\tPTE IUPAC group: %s' % str(MolProp.getIUPACGroup(atom)))
         print('\tPTE period: %s' % str(MolProp.getPeriod(atom)))
@@ -74,8 +74,8 @@ def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input file>' % sys.argv[0])
 
-    # if input are expected to be in a specific format, a reader for the specific format could be create directly,
-    # e.g. reader = Chem.FileSDFMoleculeReader(sys.argv[1])
+    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(sys.argv[1]) 
     
     # create an instance of the default implementation of the Chem.Molecule interface

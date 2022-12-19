@@ -32,12 +32,12 @@ import CDPL.MolProp as MolProp
 
 
 # function called for read molecule
-def procMolecule(mol: Chem.MolecularGraph) -> None:
-    Chem.calcImplicitHydrogenCounts(mol, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(mol, False) # perceive atom hybridization and set corresponding property for all atoms
-    Chem.perceiveSSSR(mol, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(mol, False)                # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(mol, False)         # perceive aromaticity and set corresponding atom and bond properties
+def procMolecule(molgraph: Chem.MolecularGraph) -> None:
+    Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
+    Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
+    Chem.setRingFlags(molgraph, False)                # perceive cycles and set corresponding atom and bond properties
+    Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
 
     vsepr_geom_str = { MolProp.CoordinationGeometry.UNDEF                  : 'UNDEF',
 	               MolProp.CoordinationGeometry.NONE                   : 'NONE',
@@ -57,33 +57,33 @@ def procMolecule(mol: Chem.MolecularGraph) -> None:
 	               MolProp.CoordinationGeometry.PENTAGONAL_PYRAMIDAL   : 'PENTAGONAL_PYRAMIDAL',
 	               MolProp.CoordinationGeometry.PENTAGONAL_PLANAR      : 'PENTAGONAL_PLANAR' }
     
-    for atom in mol.atoms:
-        print('- Atom #%s' % str(atom.getIndex()))
-        print('\tNum. connected std. hydrogens (incl. impl. H): %s' % str(MolProp.getOrdinaryHydrogenCount(atom, mol)))
-        print('\tNum. connected carbon atoms: %s' % str(MolProp.getExplicitAtomCount(atom, mol, Chem.AtomType.C)))
-        print('\tNum. connected heteroatoms: %s' % str(MolProp.getExplicitAtomCount(atom, mol, Chem.AtomType.HET, False)))
-        print('\tNum. connected halogens: %s' % str(MolProp.getExplicitAtomCount(atom, mol, Chem.AtomType.X, False)))
-        print('\tNum. connected heavy atoms: %s' % str(MolProp.getHeavyAtomCount(atom, mol)))
-        print('\tNum. connected chain atoms (excl. impl. H): %s' % str(MolProp.getExplicitChainAtomCount(atom, mol)))
-        print('\tNum. connected chain atoms (incl. impl. H): %s' % str(MolProp.getChainAtomCount(atom, mol)))
-        print('\tNum. connected ring atoms: %s' % str(MolProp.getRingAtomCount(atom, mol)))
-        print('\tNum. connected aromatic atoms: %s' % str(MolProp.getAromaticAtomCount(atom, mol)))
-        print('\tNum. incident bonds (excl. impl. H): %s' % str(MolProp.getExplicitBondCount(atom, mol)))
-        print('\tNum. incident bonds (incl. impl. H): %s' % str(MolProp.getBondCount(atom, mol)))
-        print('\tNum. incident single bonds (excl. impl. H): %s' % str(MolProp.getExplicitBondCount(atom, mol, 1)))
-        print('\tNum. incident single bonds (incl. impl. H): %s' % str(MolProp.getBondCount(atom, mol, 1)))
-        print('\tNum. incident double bonds: %s' % str(MolProp.getBondCount(atom, mol, 2)))
-        print('\tNum. incident triple bonds: %s' % str(MolProp.getBondCount(atom, mol, 3)))
-        print('\tNum. incident chain bonds (excl. impl. H): %s' % str(MolProp.getExplicitChainBondCount(atom, mol)))
-        print('\tNum. incident chain bonds (incl. impl. H): %s' % str(MolProp.getChainBondCount(atom, mol)))
-        print('\tNum. incident ring bonds (incl. impl. H): %s' % str(MolProp.getRingBondCount(atom, mol)))
-        print('\tNum. incident aromatic bonds (incl. impl. H): %s' % str(MolProp.getAromaticBondCount(atom, mol)))
-        print('\tNum. incident heavy atom bonds (incl. impl. H): %s' % str(MolProp.getHeavyBondCount(atom, mol)))
-        print('\tNum. incident rotatable bonds (incl. impl. H): %s' % str(MolProp.getRotatableBondCount(atom, mol, False, False)))
-        print('\tValence (excl. impl. H): %s' % str(MolProp.calcExplicitValence(atom, mol)))
-        print('\tValence (incl. impl. H): %s' % str(MolProp.calcValence(atom, mol)))
-        print('\tSteric number: %s' % str(MolProp.calcStericNumber(atom, mol)))
-        print('\tVSEPR coordination geometry: %s' % vsepr_geom_str[MolProp.getVSEPRCoordinationGeometry(atom, mol)])
+    for atom in molgraph.atoms:
+        print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
+        print('\tNum. connected std. hydrogens (incl. impl. H): %s' % str(MolProp.getOrdinaryHydrogenCount(atom, molgraph)))
+        print('\tNum. connected carbon atoms: %s' % str(MolProp.getExplicitAtomCount(atom, molgraph, Chem.AtomType.C)))
+        print('\tNum. connected heteroatoms: %s' % str(MolProp.getExplicitAtomCount(atom, molgraph, Chem.AtomType.HET, False)))
+        print('\tNum. connected halogens: %s' % str(MolProp.getExplicitAtomCount(atom, molgraph, Chem.AtomType.X, False)))
+        print('\tNum. connected heavy atoms: %s' % str(MolProp.getHeavyAtomCount(atom, molgraph)))
+        print('\tNum. connected chain atoms (excl. impl. H): %s' % str(MolProp.getExplicitChainAtomCount(atom, molgraph)))
+        print('\tNum. connected chain atoms (incl. impl. H): %s' % str(MolProp.getChainAtomCount(atom, molgraph)))
+        print('\tNum. connected ring atoms: %s' % str(MolProp.getRingAtomCount(atom, molgraph)))
+        print('\tNum. connected aromatic atoms: %s' % str(MolProp.getAromaticAtomCount(atom, molgraph)))
+        print('\tNum. incident bonds (excl. impl. H): %s' % str(MolProp.getExplicitBondCount(atom, molgraph)))
+        print('\tNum. incident bonds (incl. impl. H): %s' % str(MolProp.getBondCount(atom, molgraph)))
+        print('\tNum. incident single bonds (excl. impl. H): %s' % str(MolProp.getExplicitBondCount(atom, molgraph, 1)))
+        print('\tNum. incident single bonds (incl. impl. H): %s' % str(MolProp.getBondCount(atom, molgraph, 1)))
+        print('\tNum. incident double bonds: %s' % str(MolProp.getBondCount(atom, molgraph, 2)))
+        print('\tNum. incident triple bonds: %s' % str(MolProp.getBondCount(atom, molgraph, 3)))
+        print('\tNum. incident chain bonds (excl. impl. H): %s' % str(MolProp.getExplicitChainBondCount(atom, molgraph)))
+        print('\tNum. incident chain bonds (incl. impl. H): %s' % str(MolProp.getChainBondCount(atom, molgraph)))
+        print('\tNum. incident ring bonds (incl. impl. H): %s' % str(MolProp.getRingBondCount(atom, molgraph)))
+        print('\tNum. incident aromatic bonds (incl. impl. H): %s' % str(MolProp.getAromaticBondCount(atom, molgraph)))
+        print('\tNum. incident heavy atom bonds (incl. impl. H): %s' % str(MolProp.getHeavyBondCount(atom, molgraph)))
+        print('\tNum. incident rotatable bonds (incl. impl. H): %s' % str(MolProp.getRotatableBondCount(atom, molgraph, False, False)))
+        print('\tValence (excl. impl. H): %s' % str(MolProp.calcExplicitValence(atom, molgraph)))
+        print('\tValence (incl. impl. H): %s' % str(MolProp.calcValence(atom, molgraph)))
+        print('\tSteric number: %s' % str(MolProp.calcStericNumber(atom, molgraph)))
+        print('\tVSEPR coordination geometry: %s' % vsepr_geom_str[MolProp.getVSEPRCoordinationGeometry(atom, molgraph)])
         
 def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # get the extension of the input file
@@ -105,8 +105,8 @@ def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input file>' % sys.argv[0])
 
-    # if input are expected to be in a specific format, a reader for the specific format could be create directly,
-    # e.g. reader = Chem.FileSDFMoleculeReader(sys.argv[1])
+    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(sys.argv[1]) 
     
     # create an instance of the default implementation of the Chem.Molecule interface

@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# molprop_atom_elec_props.py 
+# chem_atom_env_extraction.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -28,39 +28,28 @@ import sys
 import os
 
 import CDPL.Chem as Chem
-import CDPL.MolProp as MolProp
 
 
-# function called for read molecule
-def procMolecule(mol: Chem.Molecule) -> None:
-    Chem.calcImplicitHydrogenCounts(mol, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.makeHydrogenComplete(mol)               # make all implicit hydrogens explicit
-    Chem.perceiveHybridizationStates(mol, False) # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(mol, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(mol, False)                # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(mol, False)         # perceive aromaticity and set corresponding atom and bond properties
-    Chem.perceivePiElectronSystems(mol, False)   # perceive pi electron systems and store info as Chem.MolecularGraph property
-                                                 # (required for MHMO calculations)
+# function called for each read molecule
+def procMolecule(molgraph: Chem.MolecularGraph) -> None: 
+    Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
+    Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
+    Chem.setRingFlags(molgraph, False)                # perceive cycles and set corresponding atom and bond properties
+    Chem.setAromaticityFlags(molgraph, False)         # perceive aromaticity and set corresponding atom and bond properties
 
-    # calculate sigma charges and electronegativities using the PEOE method and store values as atom properties
-    # (prerequisite for MHMO calculations)
-    MolProp.calcPEOEProperties(mol, False)  
+    frag = Chem.Fragment()                            # for storing extracted atom environments
+    
+    print('- Atom environments (radius = 3 bonds)')
+    
+    for atom in molgraph.atoms:
+        Chem.getEnvironment(atom, molgraph, 3, frag)     # extract environment of atom reaching out up to three bonds
+        Chem.perceiveComponents(frag, False)             # perceive molecular graph components (required for SMILES generation)
 
-    # calculate pi charges, electronegativities and other properties by a modified Hueckel MO method and store values as properties
-    MolProp.calcMHMOProperties(mol, False)
-                
-    for atom in mol.atoms:
-        print('- Atom #%s' % str(atom.getIndex()))
-        print('\tSigma charge: %s' % str(MolProp.getPEOESigmaCharge(atom)))
-        print('\tPi charge: %s' % str(MolProp.getMHMOPiCharge(atom)))
-        print('\tTotal partial charge: %s' % str(MolProp.calcTotalPartialCharge(atom)))
-        print('\tLone-pair electronegativity: %s' % str(MolProp.calcLonePairElectronegativity(atom, mol)))
-        print('\tPi electronegativity: %s' % str(MolProp.calcPiElectronegativity(atom, mol)))
-        print('\tSigma electronegativity: %s' % str(MolProp.getPEOESigmaElectronegativity(atom)))
-        print('\tExerted inductive effect: %s' % str(MolProp.calcInductiveEffect(atom, mol)))
-        print('\tFree valence electron count: %s' % str(MolProp.calcFreeValenceElectronCount(atom, mol)))
-        print('\tValence electron count: %s' % str(MolProp.calcValenceElectronCount(atom)))
+        smiles = Chem.generateSMILES(frag, False, False) # generate non-canonical SMILES string with explicit hydrogen atoms
         
+        print('Atom #%s: %s' % (str(molgraph.getAtomIndex(atom)), smiles))
+
 def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # get the extension of the input file
     name_and_ext = os.path.splitext(filename)
@@ -90,7 +79,7 @@ def main() -> None:
     
     # read and process molecules one after the other until the end of input has been reached
     try:
-        if reader.read(mol):
+        while reader.read(mol): 
             try:
                 procMolecule(mol)
             except Exception as e:
@@ -103,4 +92,3 @@ def main() -> None:
         
 if __name__ == '__main__':
     main()
-

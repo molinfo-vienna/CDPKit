@@ -32,19 +32,18 @@ import CDPL.MolProp as MolProp
 
 
 # function called for read molecule
-def procMolecule(mol: Chem.MolecularGraph) -> None:
-    Chem.calcImplicitHydrogenCounts(mol, False)    # calculate implicit hydrogen counts and set corresponding property for all atoms
-    Chem.perceiveHybridizationStates(mol, False)   # perceive atom hybridization and set corresponding property for all atoms
-    Chem.perceiveSSSR(mol, False)                  # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
-    Chem.setRingFlags(mol, False)                  # perceive cycles and set corresponding atom and bond properties
-    Chem.setAromaticityFlags(mol, False)           # perceive aromaticity and set corresponding atom and bond properties
-    Chem.calcTopologicalDistanceMatrix(mol, False) # calculate topological distance matrix and store as Chem.MolecularGraph property
-                                                   # (required for effective polarizability calculations)
-    
-    for atom in mol.atoms:
-        print('- Atom #%s' % str(atom.getIndex()))
-        print('\tHybrid polarizability: %s' % str(MolProp.getHybridPolarizability(atom, mol)))
-        print('\tEffective polarizability: %s' % str(MolProp.calcEffectivePolarizability(atom, mol)))
+def procMolecule(molgraph: Chem.MolecularGraph) -> None:
+    Chem.calcImplicitHydrogenCounts(molgraph, False)    # calculate implicit hydrogen counts and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(molgraph, False)   # perceive atom hybridization states and set corresponding property for all atoms
+    Chem.perceiveSSSR(molgraph, False)                  # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
+    Chem.setRingFlags(molgraph, False)                  # perceive cycles and set corresponding atom and bond properties
+    Chem.setAromaticityFlags(molgraph, False)           # perceive aromaticity and set corresponding atom and bond properties
+    Chem.calcTopologicalDistanceMatrix(molgraph, False) # calculate topological distance matrix and store as Chem.MolecularGraph property
+                                                        # (required for effective polarizability calculations)
+    for atom in molgraph.atoms:
+        print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
+        print('\tHybrid polarizability: %s' % str(MolProp.getHybridPolarizability(atom, molgraph)))
+        print('\tEffective polarizability: %s' % str(MolProp.calcEffectivePolarizability(atom, molgraph)))
         
 def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # get the extension of the input file
@@ -66,8 +65,8 @@ def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input file>' % sys.argv[0])
 
-    # if input are expected to be in a specific format, a reader for the specific format could be create directly,
-    # e.g. reader = Chem.FileSDFMoleculeReader(sys.argv[1])
+    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(sys.argv[1]) 
     
     # create an instance of the default implementation of the Chem.Molecule interface

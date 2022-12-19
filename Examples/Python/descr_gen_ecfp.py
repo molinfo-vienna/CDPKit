@@ -36,13 +36,13 @@ import CDPL.Util as Util
 # generate ECFP for read molecule
 def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, strip_hs: bool) -> Util.BitSet:
     if strip_hs:
-        if Chem.makeHydrogenDeplete(mol):              # remove all presents hydrogen atoms
+        if Chem.makeHydrogenDeplete(mol):              # remove all present hydrogen atoms
             Chem.calcImplicitHydrogenCounts(mol, True) # recalculate implicit hydrogen counts if hydrogens were removed
     else:
         Chem.calcImplicitHydrogenCounts(mol, False)    # calculate implicit hydrogen counts (if not yet done)
         Chem.makeHydrogenComplete(mol)                 # add explicit hydrogens to atoms having an implicit hydrogen count > 0
 
-    Chem.perceiveHybridizationStates(mol, False)       # perceive atom hybridization and set corresponding property for all atoms
+    Chem.perceiveHybridizationStates(mol, False)       # perceive atom hybridization states and set corresponding property for all atoms
     Chem.setRingFlags(mol, False)                      # perceive cycles and set corresponding atom and bond properties
     Chem.perceiveSSSR(mol, False)                      # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
     Chem.setAromaticityFlags(mol, False)               # perceive aromaticity and set corresponding atom and bond properties
@@ -50,10 +50,13 @@ def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, strip_hs: bool) -> U
     ecfp_gen = Descr.CircularFingerprintGenerator()
     fp = Util.BitSet()
 
-    ecfp_gen.setNumIterations(radius)
-    ecfp_gen.setNumBits(num_bits)
-    ecfp_gen.generate(mol, fp)
+    ecfp_gen.setNumIterations(radius)                  # set num. iterations (=atom. env. radius)
+    ecfp_gen.setNumBits(num_bits)                      # set fingerprint size
+    ecfp_gen.generate(mol, fp)                         # generate fingerprint
 
+    # if needed, fp could be converted into a numpy single precision float array as follows:
+    # fp = numpy.array(fp, dtype=numpy.float32)
+    
     return fp
     
 def parseArgs() -> argparse.Namespace:
@@ -91,7 +94,7 @@ def parseArgs() -> argparse.Namespace:
                         dest='strip_hs',
                         required=False,
                         action='store_true',
-                        help='Strip hydrogens (by default, molecules will be hydrogen completed)')
+                        help='Strip hydrogens (by default, molecules will be staturated with hydrogens before fingerprint generation)')
 
     parse_args = parser.parse_args()
 
@@ -116,8 +119,8 @@ def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
 def main() -> None:
     args = parseArgs()
     
-    # if input are expected to be in a specific format, a reader for the specific format could be create directly,
-    # e.g. reader = Chem.FileSDFMoleculeReader(sys.argv[1])
+    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(args.in_file[0]) 
 
     # open output file storing the generated fingerprints

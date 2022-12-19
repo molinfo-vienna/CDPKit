@@ -86,7 +86,7 @@ namespace
 
 	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MMFF94SymbolicType)
 	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, MMFF94NumericType)
-	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, MMFF94Charge)
+	MAKE_ATOM_FUNC_WRAPPERS(double, MMFF94Charge)
 }
 
 

@@ -40,11 +40,11 @@ namespace CDPL
     namespace Util
     {
 
-	template <typename InputIt1, typename InputIt2, typename BinaryFunc>
-	void forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, BinaryFunc func);
+		template <typename InputIt1, typename InputIt2, typename BinaryFunc>
+		void forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, BinaryFunc func);
 
-	template <typename InputIt1, typename InputIt2, typename BinaryFunc>
-	void forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, InputIt2 end2, BinaryFunc func);
+		template <typename InputIt1, typename InputIt2, typename BinaryFunc>
+		void forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, InputIt2 end2, BinaryFunc func);
     }
 }
 
@@ -56,14 +56,14 @@ template <typename InputIt1, typename InputIt2, typename BinaryFunc>
 void CDPL::Util::forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, BinaryFunc func)
 {
     for ( ; it1 != end1; ++it1, ++it2)
-	func(*it1, *it2);
+		func(*it1, *it2);
 }
 
 template <typename InputIt1, typename InputIt2, typename BinaryFunc>
 void CDPL::Util::forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, InputIt2 end2, BinaryFunc func)
 {
     for ( ; it1 != end1 && it2 != end2; ++it1, ++it2)
-	func(*it1, *it2);
+		func(*it1, *it2);
 }
 
 // \endcond

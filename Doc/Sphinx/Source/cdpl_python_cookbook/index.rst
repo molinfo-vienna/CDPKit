@@ -10,3 +10,4 @@ CDPL Python Cookbook
    molprop/index
    descr/index
    confgen/index
+   forcefield/index

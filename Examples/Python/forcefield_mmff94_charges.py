@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# molprop_atom_elec_props.py 
+# forcefield_mmff94_charges.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -28,7 +28,7 @@ import sys
 import os
 
 import CDPL.Chem as Chem
-import CDPL.MolProp as MolProp
+import CDPL.ForceField as ForceField
 
 
 # function called for read molecule
@@ -39,27 +39,16 @@ def procMolecule(mol: Chem.Molecule) -> None:
     Chem.perceiveSSSR(mol, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
     Chem.setRingFlags(mol, False)                # perceive cycles and set corresponding atom and bond properties
     Chem.setAromaticityFlags(mol, False)         # perceive aromaticity and set corresponding atom and bond properties
-    Chem.perceivePiElectronSystems(mol, False)   # perceive pi electron systems and store info as Chem.MolecularGraph property
-                                                 # (required for MHMO calculations)
+  
+    ForceField.perceiveMMFF94AromaticRings(mol, False)        # perceive aromatic rings according to the MMFF94 aroamticity model and store data as Chem.MolecularGraph property
+    ForceField.assignMMFF94AtomTypes(mol, False, False)       # perceive MMFF94 atom types (tolerant mode) set corresponding property for all atoms
+    ForceField.assignMMFF94BondTypeIndices(mol, False, False) # perceive MMFF94 bond types (tolerant mode) set corresponding property for all bonds
+    ForceField.calcMMFF94AtomCharges(mol, False, False)       # calculate MMFF94 atom charges (tolerant mode) set corresponding property for all atoms
 
-    # calculate sigma charges and electronegativities using the PEOE method and store values as atom properties
-    # (prerequisite for MHMO calculations)
-    MolProp.calcPEOEProperties(mol, False)  
-
-    # calculate pi charges, electronegativities and other properties by a modified Hueckel MO method and store values as properties
-    MolProp.calcMHMOProperties(mol, False)
-                
+    print('- MMFF94 partial charges')
+    
     for atom in mol.atoms:
-        print('- Atom #%s' % str(atom.getIndex()))
-        print('\tSigma charge: %s' % str(MolProp.getPEOESigmaCharge(atom)))
-        print('\tPi charge: %s' % str(MolProp.getMHMOPiCharge(atom)))
-        print('\tTotal partial charge: %s' % str(MolProp.calcTotalPartialCharge(atom)))
-        print('\tLone-pair electronegativity: %s' % str(MolProp.calcLonePairElectronegativity(atom, mol)))
-        print('\tPi electronegativity: %s' % str(MolProp.calcPiElectronegativity(atom, mol)))
-        print('\tSigma electronegativity: %s' % str(MolProp.getPEOESigmaElectronegativity(atom)))
-        print('\tExerted inductive effect: %s' % str(MolProp.calcInductiveEffect(atom, mol)))
-        print('\tFree valence electron count: %s' % str(MolProp.calcFreeValenceElectronCount(atom, mol)))
-        print('\tValence electron count: %s' % str(MolProp.calcValenceElectronCount(atom)))
+        print('Atom #%s: %s' % (str(atom.getIndex()), str(ForceField.getMMFF94Charge(atom))))
         
 def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # get the extension of the input file
