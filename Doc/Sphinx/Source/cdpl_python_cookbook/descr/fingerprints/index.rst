@@ -5,3 +5,4 @@ Calculation of Fingerprints
    :maxdepth: 2
 
    gen_ecfp
+   gen_fame_fp

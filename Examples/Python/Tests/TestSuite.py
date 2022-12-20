@@ -101,12 +101,14 @@ if __name__ == '__main__':
     
     errors |= checkScriptOutput('chem_seq_mol_input', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('chem_atom_env_extraction', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('chem_sd_proc', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_class_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_elec_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('descr_gen_ecfp', outputFilePath('test.out'), [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out') ])
+    errors |= checkScriptOutput('descr_gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('forcefield_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
     
     sys.exit(errors)
