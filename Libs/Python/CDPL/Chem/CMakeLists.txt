@@ -137,6 +137,7 @@ SET(chem_MOD_SRCS
     RECAPFragmentGeneratorExport.cpp
     BRICSFragmentGeneratorExport.cpp
     ResonanceStructureGeneratorExport.cpp
+    ChEMBLStandardizerExport.cpp
     
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 

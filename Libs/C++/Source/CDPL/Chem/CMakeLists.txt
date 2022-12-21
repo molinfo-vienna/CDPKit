@@ -130,6 +130,7 @@ SET(cdpl-chem_LIB_SRCS
     GenericHydrogen13ShiftTautomerization.cpp  
     GenericHydrogen15ShiftTautomerization.cpp  
     ResonanceStructureGenerator.cpp
+    ChEMBLStandardizer.cpp
     
     FragmentGenerator.cpp
     RECAPFragmentGenerator.cpp
