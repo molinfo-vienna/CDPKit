@@ -39,14 +39,16 @@ void CDPLPythonChem::exportChEMBLStandardizer()
     using namespace CDPL;
 
     python::class_<Chem::ChEMBLStandardizer, Chem::ChEMBLStandardizer::SharedPointer> cl("ChEMBLStandardizer", python::no_init);
-
     python::scope scope = cl;
 
+	python::enum_<Chem::ChEMBLStandardizer::Result>("Result")
+		.export_values();
+
     cl
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<Chem::ChEMBLStandardizer>((python::arg("self"), python::arg("standardizer"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ChEMBLStandardizer>())	
-	.def("assign", &Chem::ChEMBLStandardizer::operator=, 
-	     (python::arg("self"), python::arg("standardizer")), python::return_self<>())
-	;
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<Chem::ChEMBLStandardizer>((python::arg("self"), python::arg("standardizer"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ChEMBLStandardizer>())	
+		.def("assign", &Chem::ChEMBLStandardizer::operator=, 
+			 (python::arg("self"), python::arg("standardizer")), python::return_self<>())
+		;
 }

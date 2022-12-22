@@ -28,6 +28,42 @@
 
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
 
+#include <boost/thread.hpp>
+
 
 using namespace CDPL;
 
+
+namespace
+{
+
+	const char* CHEMBL_SALT_STRUCTURES =                 
+    #include "ChEMBL-Salts.smi.str" 
+	;
+
+	const char* CHEMBL_SOLVENT_STRUCTURES =                 
+    #include "ChEMBL-Solvents.smi.str" 
+	;
+
+	boost::once_flag initSaltAndSolventDataFlag = BOOST_ONCE_INIT;
+
+	void initSaltAndSolventData() 
+	{ 
+
+	}
+}
+
+
+Chem::ChEMBLStandardizer::ChEMBLStandardizer()
+{}
+
+Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)
+{}
+
+Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStandardizer& standardizer)
+{
+	if (&standardizer == this)
+		return *this;
+
+	return *this;
+}

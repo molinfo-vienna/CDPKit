@@ -40,7 +40,6 @@ void CDPLPythonChem::exportResonanceStructureGenerator()
     using namespace CDPL;
 
     python::class_<Chem::ResonanceStructureGenerator, Chem::ResonanceStructureGenerator::SharedPointer> cl("ResonanceStructureGenerator", python::no_init);
-
 	python::scope scope = cl;
 
 	python::class_<Chem::ResonanceStructureGenerator::StructureData>("StructureData", python::no_init)

@@ -50,7 +50,7 @@ void CDPLPythonPharm::exportDefaultPharmacophoreGenerator()
 
 	cls
 		.def(python::init<Pharm::DefaultPharmacophoreGenerator::Configuration>((python::arg("self"), python::arg("config") = 
-																		 Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
+																				Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
 		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, Pharm::DefaultPharmacophoreGenerator::Configuration>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("config") = 
 				  Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))

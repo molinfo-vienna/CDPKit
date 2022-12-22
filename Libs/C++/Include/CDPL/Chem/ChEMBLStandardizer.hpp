@@ -3,9 +3,8 @@
 /* 
  * ChEMBLStandardizer.hpp 
  *
- * Implementation of the ChEMBL structure standardization pipeline
- * (A. P. Bento, A. Hersey, E. Félix, G. Landrum, A. Gaulton, F. Atkinson, L. J. Bellis, M. De Veij,
- * and A. R. Leach, An open source chemical structure curation pipeline using RDKit, J. Cheminformatics 2020, 12, 51) 
+ * Implementation of the ChEMBL molecule standardization and parent compound extraction procedure
+ * (A. P. Bento et al., An open source chemical structure curation pipeline using RDKit, J. Cheminformatics 2020, 12, 51) 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -46,23 +45,32 @@ namespace CDPL
     namespace Chem
     {
 
-	/**
-	 * \brief ChEMBLStandardizer.
-	 * \see [\ref CSSP]
-	 */
-	class CDPL_CHEM_API ChEMBLStandardizer 
-	{
+		/**
+		 * \brief ChEMBLStandardizer.
+		 * \see [\ref CSCP]
+		 */
+		class CDPL_CHEM_API ChEMBLStandardizer 
+		{
 
-	  public:
-	    typedef boost::shared_ptr<ChEMBLStandardizer> SharedPointer;
+		  public:
+			typedef boost::shared_ptr<ChEMBLStandardizer> SharedPointer;
 
-	    ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer) {
-	        return *this;
-	    }
+			enum Result	{
+			
+			  NO_CHANGES = 0x0,
+			  EXCLUDED   = 0x1
+			  
+			};
+
+			ChEMBLStandardizer();
+
+			ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
+
+			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
+
 	    
-	  private:			
-		
-	};
+		  private:			
+		};
     }
 }
 

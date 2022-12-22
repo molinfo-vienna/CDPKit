@@ -23,9 +23,27 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+
+ADD_CUSTOM_COMMAND(OUTPUT "ChEMBL-Solvents.smi.str"
+		   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+		   "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
+		   "ChEMBL-Solvents.smi.str"
+		   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Solvents.smi" 
+		   COMMENT "-- Processing ChEMBL-Solvents.smi, please wait..."
+		   )
+ADD_CUSTOM_COMMAND(OUTPUT "ChEMBL-Salts.smi.str"
+		   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
+		   "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
+		   "ChEMBL-Salts.smi.str"
+		   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Chem/ChEMBL-Salts.smi" 
+		   COMMENT "-- Processing ChEMBL-Salts.smi, please wait..."
+		   )
 
 SET(cdpl-chem_LIB_SRCS
+    ChEMBL-Solvents.smi.str
+    ChEMBL-Salts.smi.str
+
     Entity3D.cpp
     Entity3DContainer.cpp
     AtomContainer.cpp

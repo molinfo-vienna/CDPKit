@@ -145,9 +145,9 @@ Chemoinformatics - A Textbook; Johann Gasteiger and Thomas Engel (Eds.), WILEY-V
 </tr>
 
 <tr>
-<td valign="top">\anchor CSSP<i>[CSSP]</i></td>
+<td valign="top">\anchor CSSP<i>[CSCP]</i></td>
 <td valign="top">
-A. P. Bento1  <i>et al.</i>,
+A. P. Bento <i>et al.</i>,
 An open source chemical structure curation pipeline using RDKit,
 <i>J. Cheminformatics</i> <b>2020</b>, 12, 51
 </td>
