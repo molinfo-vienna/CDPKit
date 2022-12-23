@@ -50,7 +50,7 @@ namespace
 
 
 const std::size_t MolProp::PEOESigmaChargeCalculator::DEF_NUM_ITERATIONS;
-const double      MolProp::PEOESigmaChargeCalculator::DEF_DAMPING_FACTOR = 0.5;
+const double      MolProp::PEOESigmaChargeCalculator::DEF_DAMPING_FACTOR = 0.48;
 
 
 MolProp::PEOESigmaChargeCalculator::PEOESigmaChargeCalculator():

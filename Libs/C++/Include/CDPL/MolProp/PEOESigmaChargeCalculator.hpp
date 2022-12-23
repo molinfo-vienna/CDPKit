@@ -65,7 +65,7 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<PEOESigmaChargeCalculator> SharedPointer;
 
-			static const std::size_t DEF_NUM_ITERATIONS = 6;
+			static const std::size_t DEF_NUM_ITERATIONS = 20;
 			static const double      DEF_DAMPING_FACTOR;
 
 			/**

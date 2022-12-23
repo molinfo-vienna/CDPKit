@@ -124,7 +124,7 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 
 	python::def("calcMeanPolarizability", &MolProp::calcMeanPolarizability, python::arg("molgraph"));
 	python::def("calcPEOEProperties", &MolProp::calcPEOEProperties,
-				(python::arg("molgraph"), python::arg("overwrite"), python::arg("num_iter") = 6, python::arg("damping") = 0.5));
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("num_iter") = 20, python::arg("damping") = 0.48));
 	python::def("calcMHMOProperties", &MolProp::calcMHMOProperties,	(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("buildMassCompositionString", &buildMassCompositionStringWrapper, python::arg("molgraph"));
 	python::def("buildMolecularFormula", &buildMolecularFormulaWrapper, python::arg("molgraph"));

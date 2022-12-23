@@ -93,6 +93,10 @@ namespace CDPL
 			double getEnergy() const;
 			
 		  private:
+			MHMOPiChargeCalculator(const MHMOPiChargeCalculator&);
+
+			MHMOPiChargeCalculator& operator=(const MHMOPiChargeCalculator&);
+
 			void initAtomPiSysCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 			void initAtomFreeElecCounts(const Chem::ElectronSystemList& pi_sys_list, const Chem::MolecularGraph& molgraph);
 
