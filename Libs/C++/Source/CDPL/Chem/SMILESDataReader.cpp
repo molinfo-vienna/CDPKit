@@ -77,10 +77,9 @@ bool Chem::SMILESDataReader::readReaction(std::istream& is, Reaction& rxn)
 
 	getParameters();
 
-	atomMappingIDOffset = getMaxAtomMappingID(rxn);
+	readRecord(is, rxnSMILESString, name, "SMILESDataReader: reading of reaction data record failed");
 
-	if (!(is >> rxnSMILESString)) 
-		throw Base::IOError("SMILESDataReader: reading of reaction SMILES string failed");
+	atomMappingIDOffset = getMaxAtomMappingID(rxn);
 
 	typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
@@ -161,7 +160,7 @@ bool Chem::SMILESDataReader::readReaction(std::istream& is, Reaction& rxn)
 	if (rxn_role != ReactionRole::PRODUCT)
 		throw Base::IOError("SMILESDataReader: unexpected end of input");
 
-	readName(is, rxn, rxnSMILESString, "SMILESDataReader: reading of reaction name failed");
+	setName(rxn, name);
 
 	return true;
 }
@@ -170,12 +169,9 @@ bool Chem::SMILESDataReader::skipReaction(std::istream& is)
 {
 	if (!hasMoreData(is))
 		return false;
-	
-	if (!(is >> rxnSMILESString)) 
-		throw Base::IOError("SMILESDataReader: reading of reaction SMILES string failed");
 
 	getParameters();
-	skipName(is, rxnSMILESString, "SMILESDataReader: skipping to next reaction data record failed");
+	skipRecord(is, rxnSMILESString, "SMILESDataReader: skipping to next reaction data record failed");
 
 	return true;
 }
@@ -187,10 +183,9 @@ bool Chem::SMILESDataReader::readMolecule(std::istream& is, Molecule& mol)
 
 	getParameters();
 
-	atomMappingIDOffset = getMaxAtomMappingID(mol);
+	readRecord(is, molSMILESString, name, "SMILESDataReader: reading of molecule data record failed");
 
-	if (!(is >> molSMILESString)) 
-		throw Base::IOError("SMILESDataReader: reading of molecule SMILES string failed");
+	atomMappingIDOffset = getMaxAtomMappingID(mol);
 
 	init(mol);
 
@@ -199,8 +194,7 @@ bool Chem::SMILESDataReader::readMolecule(std::istream& is, Molecule& mol)
 	kekulizeBonds(mol);
 	setAtomStereoDescriptors(mol);
 	setBondStereoDescriptors(mol);
-
-	readName(is, mol, molSMILESString, "SMILESDataReader: reading of molecule name failed");
+	setName(mol, name);
 
 	return true;
 }
@@ -210,11 +204,8 @@ bool Chem::SMILESDataReader::skipMolecule(std::istream& is)
 	if (!hasMoreData(is))
 		return false;
 
-	if (!(is >> molSMILESString)) 
-		throw Base::IOError("SMILESDataReader: reading of molecule SMILES string failed");
-
 	getParameters();
-	skipName(is, rxnSMILESString, "SMILESDataReader: skipping to next molecule data record failed");
+	skipRecord(is, molSMILESString, "SMILESDataReader: skipping to next molecule data record failed");
 
 	return true;
 }
@@ -225,55 +216,98 @@ void Chem::SMILESDataReader::getParameters()
 	recordFormat = getSMILESRecordFormatParameter(ioBase);
 	recordSeparator = getRecordSeparatorParameter(ioBase);
 
-	if (recordFormat != "S" && recordFormat != "SN")
+	if (recordFormat != "S" && recordFormat != "SN" && recordFormat != "NS")
 		throw Base::IOError("SMILESDataReader: invalid smiles record format control-parameter");
 }
 
-template <typename T>
-void Chem::SMILESDataReader::readName(std::istream& is, T& obj, std::string& str, 
-									  const std::string& error_msg) const
+void Chem::SMILESDataReader::skipRecord(std::istream& is, std::string& str, 
+										const std::string& error_msg) const
 {
-	if (recordFormat == "SN") {
-		if (is.eof()) {
-			str.clear();
-			return;
-		}
+	if (recordSeparator.size() == 1)
+		std::getline(is, str, recordSeparator[0]);
+	else
+		std::getline(is, str);
 
-		if (recordSeparator.size() == 1)
-			std::getline(is, str, recordSeparator[0]);
-		else
-			std::getline(is, str);
-
-		if (!is)
-			throw Base::IOError(error_msg);
-
-		Internal::trimString(str);
-
-		setName(obj, str);
-	}
+	if (!is)
+		throw Base::IOError(error_msg);
 }
 
-void Chem::SMILESDataReader::skipName(std::istream& is, std::string& str, const std::string& error_msg) const
+void Chem::SMILESDataReader::readRecord(std::istream& is, std::string& smi_str,
+										std::string& name, const std::string& error_msg) const
 {
-	if (recordFormat == "SN") {
-		if (is.eof())
-			return;
+	name.clear();
 
+	if (recordFormat == "S") {
 		if (recordSeparator.size() == 1)
-			std::getline(is, str, recordSeparator[0]);
+			std::getline(is, smi_str, recordSeparator[0]);
 		else
-			std::getline(is, str);
+			std::getline(is, smi_str);
 
 		if (!is)
 			throw Base::IOError(error_msg);
+
+		Internal::trimString(smi_str);
+
+	} else if (recordFormat == "SN") {
+		if (recordSeparator.size() == 1)
+			std::getline(is, smi_str, recordSeparator[0]);
+		else
+			std::getline(is, smi_str);
+
+		if (!is)
+			throw Base::IOError(error_msg);
+
+		Internal::trimString(smi_str);
+
+		std::string::const_iterator ws_it = std::find_if(smi_str.begin(), smi_str.end(), Internal::IsWhitespace());
+
+		if (ws_it == smi_str.end())
+			return;
+		
+		std::string::size_type name_start = ws_it - smi_str.begin() + 1;
+
+		name.append(smi_str, name_start, smi_str.length() - name_start);
+
+		Internal::trimString(name, true, false);
+				
+		smi_str.resize(name_start - 1);
+		
+	} else if (recordFormat == "NS") {
+		if (recordSeparator.size() == 1)
+			std::getline(is, name, recordSeparator[0]);
+		else
+			std::getline(is, name);
+
+		if (!is)
+			throw Base::IOError(error_msg);
+
+		Internal::trimString(name);
+
+		std::string::const_reverse_iterator ws_it = std::find_if(name.rbegin(), name.rend(), Internal::IsWhitespace());
+
+		if (ws_it == name.rend()) {
+			name.swap(smi_str);
+			name.clear();
+			return;
+		}
+		
+		std::string::size_type smi_start = ws_it.base() - name.begin();
+
+		smi_str.clear();
+		smi_str.append(name, smi_start, name.length() - smi_start);
+
+		name.resize(smi_start - 1);
+
+		Internal::trimString(name, false, true);
 	}
 }
 
 bool Chem::SMILESDataReader::hasMoreData(std::istream& is) const
 {
-	is.imbue(std::locale::classic());
+	return !std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof());
 
-	return bool(std::istream::sentry(is, false));
+	//is.imbue(std::locale::classic());
+	//return bool(std::istream::sentry(is, true));
 }
 
 void Chem::SMILESDataReader::init(const Molecule& mol)

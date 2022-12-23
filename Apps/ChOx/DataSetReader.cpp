@@ -245,7 +245,6 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 	}
 
 	std::size_t num_records = reader_ptr->getNumRecords();
-
 	std::vector<DataRecord::SharedPointer> records;
 
 	records.reserve(num_records);

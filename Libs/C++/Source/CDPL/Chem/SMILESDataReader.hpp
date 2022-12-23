@@ -83,12 +83,10 @@ namespace CDPL
 
 			void getParameters();
 
-			template <typename T>
-			void readName(std::istream&, T&, std::string&, 
-						  const std::string&) const;
+			void skipRecord(std::istream&, std::string& str, const std::string& error_msg) const;
 
-			void skipName(std::istream&, std::string&, const std::string&) const;
-
+			void readRecord(std::istream&, std::string& smi_str, std::string& name, const std::string& error_msg) const;
+			
 			void init(const Molecule&);
 		
 			void parseSMILES(Molecule&, Atom*);
@@ -156,6 +154,7 @@ namespace CDPL
 			const Base::DataIOBase& ioBase;
 			std::string             molSMILESString;
 			std::string             rxnSMILESString;
+			std::string             name;
 			std::size_t             nextCharIndex;
 			std::size_t             openBranchCount;
 			std::size_t             startAtomIndex;

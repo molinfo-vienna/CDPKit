@@ -47,6 +47,8 @@ void SMILESRecordFormatEditWidget::updateGUI()
 		recordFormatComboBox->setCurrentIndex(0);
 	else if (recordFormat == "SN")
 		recordFormatComboBox->setCurrentIndex(1);
+	else if (recordFormat == "NS")
+		recordFormatComboBox->setCurrentIndex(2);
 	else
 		recordFormatComboBox->setCurrentIndex(0);
 
@@ -59,6 +61,10 @@ void SMILESRecordFormatEditWidget::handleFormatSelection(int idx)
 
 		case 1:
 			recordFormat = "SN";
+			break;
+
+		case 2:
+			recordFormat = "NS";
 			break;
 
 		default:
@@ -80,8 +86,9 @@ void SMILESRecordFormatEditWidget::init()
 
 	setFocusProxy(recordFormatComboBox);
 
-	recordFormatComboBox->addItem(tr("Smiles"));
-	recordFormatComboBox->addItem(tr("Smiles:Name"));
+	recordFormatComboBox->addItem(tr("SMILES"));
+	recordFormatComboBox->addItem(tr("SMILES:Name"));
+	recordFormatComboBox->addItem(tr("Name:SMILES"));
 
 	main_layout->addWidget(recordFormatComboBox);
 
