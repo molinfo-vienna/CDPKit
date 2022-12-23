@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -42,6 +43,9 @@ void CDPLPythonChem::exportChEMBLStandardizer()
     python::scope scope = cl;
 
 	python::enum_<Chem::ChEMBLStandardizer::Result>("Result")
+		.value("NO_CHANGES", Chem::ChEMBLStandardizer::NO_CHANGES)
+		.value("EXCLUDED", Chem::ChEMBLStandardizer::EXCLUDED)
+		.value("H_REMOVED", Chem::ChEMBLStandardizer::H_REMOVED)
 		.export_values();
 
     cl
@@ -50,5 +54,13 @@ void CDPLPythonChem::exportChEMBLStandardizer()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ChEMBLStandardizer>())	
 		.def("assign", &Chem::ChEMBLStandardizer::operator=, 
 			 (python::arg("self"), python::arg("standardizer")), python::return_self<>())
+		.def("standardize", static_cast<Chem::ChEMBLStandardizer::Result (Chem::ChEMBLStandardizer::*)(Chem::Molecule&)>
+			 (&Chem::ChEMBLStandardizer::standardize), (python::arg("self"), python::arg("mol")))
+		.def("standardize", static_cast<Chem::ChEMBLStandardizer::Result (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
+			 (&Chem::ChEMBLStandardizer::standardize), (python::arg("self"), python::arg("mol"), python::arg("std_mol")))
+		.def("getParent", static_cast<bool (Chem::ChEMBLStandardizer::*)(Chem::Molecule&)>
+			 (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol")))
+		.def("getParent", static_cast<bool (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
+			 (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol"), python::arg("parent_mol")))
 		;
 }

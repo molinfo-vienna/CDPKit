@@ -45,6 +45,8 @@ namespace CDPL
     namespace Chem
     {
 
+		class Molecule;
+		
 		/**
 		 * \brief ChEMBLStandardizer.
 		 * \see [\ref CSCP]
@@ -57,17 +59,24 @@ namespace CDPL
 
 			enum Result	{
 			
-			  NO_CHANGES = 0x0,
-			  EXCLUDED   = 0x1
-			  
+			    NO_CHANGES = 0x0,
+				EXCLUDED   = 0x1,
+				H_REMOVED  = 0x2
 			};
 
 			ChEMBLStandardizer();
 
 			ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
 
-			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
+			Result standardize(Molecule& mol);
 
+			Result standardize(const Molecule& mol, Molecule& std_mol);
+
+			bool getParent(Molecule& mol);
+
+			bool getParent(const Molecule& mol, Molecule& parent_mol);
+			
+			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
 	    
 		  private:			
 		};

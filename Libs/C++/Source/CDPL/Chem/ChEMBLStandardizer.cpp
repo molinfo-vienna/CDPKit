@@ -26,9 +26,24 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/ChEMBLStandardizer.hpp"
+#include <cstring>
+
+#include "CDPL/Config.hpp"
 
 #include <boost/thread.hpp>
+
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+#include <boost/iostreams/device/array.hpp>
+#include <boost/iostreams/stream.hpp>
+
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+#include <sstream>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/ChEMBLStandardizer.hpp"
 
 
 using namespace CDPL;
@@ -47,23 +62,69 @@ namespace
 
 	boost::once_flag initSaltAndSolventDataFlag = BOOST_ONCE_INIT;
 
-	void initSaltAndSolventData() 
-	{ 
+	void initSaltAndSolventData()
+	{
+#if defined(HAVE_BOOST_IOSTREAMS)
 
+		boost::iostreams::stream<boost::iostreams::array_source> salts_is(CHEMBL_SALT_STRUCTURES, std::strlen(CHEMBL_SALT_STRUCTURES));
+		boost::iostreams::stream<boost::iostreams::array_source> solvents_is(CHEMBL_SOLVENT_STRUCTURES, std::strlen(CHEMBL_SOLVENT_STRUCTURES));
+
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+		std::istringstream salts_is(CHEMBL_SALT_STRUCTURES);
+		std::istringstream solvents_is(CHEMBL_SOLVENT_STRUCTURES);
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+		// TODO
 	}
 }
 
 
-Chem::ChEMBLStandardizer::ChEMBLStandardizer()
+Chem::ChEMBLStandardizer::ChEMBLStandardizer() // TODO
 {}
 
-Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)
+Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)  // TODO
 {}
+
+Chem::ChEMBLStandardizer::Result Chem::ChEMBLStandardizer::standardize(Molecule& mol)
+{
+	// TODO
+
+	return NO_CHANGES;
+}
+
+Chem::ChEMBLStandardizer::Result Chem::ChEMBLStandardizer::standardize(const Molecule& mol, Molecule& std_mol)
+{
+	// TODO
+	
+	return NO_CHANGES;
+}
+
+bool Chem::ChEMBLStandardizer::getParent(Molecule& mol)
+{
+	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+	
+	// TODO
+	
+	return false;
+}
+
+bool Chem::ChEMBLStandardizer::getParent(const Molecule& mol, Molecule& parent_mol)
+{
+	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+	
+// TODO
+	
+	return false;
+}
 
 Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStandardizer& standardizer)
 {
 	if (&standardizer == this)
 		return *this;
 
+	// TODO
+	
 	return *this;
 }
