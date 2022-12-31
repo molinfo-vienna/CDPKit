@@ -36,6 +36,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <memory>
 
 #include <boost/shared_ptr.hpp>
 
@@ -59,6 +60,8 @@ namespace CDPL
 
     namespace MolProp
     {
+
+		class PEOESigmaChargeCalculator;
 
 		/**
 		 * \brief MHMOPiChargeCalculator.
@@ -110,6 +113,7 @@ namespace CDPL
 			void getInvolvedBonds(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 			void initHueckelMatrix(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph);
 
+			void calcSigmaCharges(const Chem::MolecularGraph& molgraph);
 			double getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 			double getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 			double getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
@@ -140,22 +144,24 @@ namespace CDPL
 			typedef std::vector<double> DoubleArray;
 			typedef std::vector<MODescr> MODescrArray;
 			typedef std::vector<MODescr*> MODescrPtrArray;
+			typedef std::auto_ptr<PEOESigmaChargeCalculator> PEOECalculatorPtr;
 			
-			Matrix          hueckelMatrix;
-			Matrix          hmEigenVectors;
-			Vector          hmEigenValues;
-			BondList        piSysBonds;
-			CountsArray     atomPiSysCounts;
-			CountsArray     atomFreeElecCounts;
-			CountsArray     atomPiElecCounts;
-			Util::BitSet    specialAtomTypes;
-			MODescrArray    moDescriptors;
-			MODescrPtrArray moDescriptorPtrs;
-			bool            locPiBonds;
-			DoubleArray     atomElecDensities;
-			DoubleArray     bondElecDensities;
-			DoubleArray     atomPiCharges;
-			double          energy;
+			Matrix            hueckelMatrix;
+			Matrix            hmEigenVectors;
+			Vector            hmEigenValues;
+			BondList          piSysBonds;
+			CountsArray       atomPiSysCounts;
+			CountsArray       atomFreeElecCounts;
+			CountsArray       atomPiElecCounts;
+			Util::BitSet      specialAtomTypes;
+			MODescrArray      moDescriptors;
+			MODescrPtrArray   moDescriptorPtrs;
+			bool              locPiBonds;
+			DoubleArray       atomElecDensities;
+			DoubleArray       bondElecDensities;
+			DoubleArray       atomPiCharges;
+			double            energy;
+			PEOECalculatorPtr peoeCalculatorPtr;
 		};
     }
 }

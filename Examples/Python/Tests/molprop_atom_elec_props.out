@@ -1,450 +1,450 @@
 - Atom #0
-	Sigma charge: -0.20548818062530538
-	Pi charge: 0.03393007539706483
-	Total partial charge: -0.17155810522824055
-	Lone-pair electronegativity: 4.933807319031711
-	Pi electronegativity: 6.317790455146629
-	Sigma electronegativity: 11.911529354729694
-	Exerted inductive effect: 24.99254458293381
+	Sigma charge: -0.19743878532183057
+	Pi charge: 0.033927880351130923
+	Total partial charge: -0.16351090497069964
+	Lone-pair electronegativity: 5.036054989879319
+	Pi electronegativity: 6.375440171650052
+	Sigma electronegativity: 12.01552141411567
+	Exerted inductive effect: 25.034199940915727
 	Free valence electron count: 6
 	Valence electron count: 7
 - Atom #1
-	Sigma charge: 0.12342233600262448
-	Pi charge: 0.01694267183068121
-	Total partial charge: 0.1403650078333057
+	Sigma charge: 0.12413716570239582
+	Pi charge: 0.016671669815045975
+	Total partial charge: 0.14080883551744178
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.745364929854271
-	Sigma electronegativity: 9.96329811181122
-	Exerted inductive effect: 51.299952112336626
+	Pi electronegativity: 5.743026500571142
+	Sigma electronegativity: 9.97022753856835
+	Exerted inductive effect: 51.61760965119876
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #2
-	Sigma charge: -0.026094046678615854
-	Pi charge: -0.021911952716225258
-	Total partial charge: -0.04800599939484111
+	Sigma charge: -0.02674803476341382
+	Pi charge: -0.021837739725420136
+	Total partial charge: -0.04858577448883396
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.414502636325802
-	Sigma electronegativity: 8.547831642856119
-	Exerted inductive effect: 51.342383821652696
+	Pi electronegativity: 5.4151261275585325
+	Sigma electronegativity: 8.541788656624178
+	Exerted inductive effect: 51.69759578851705
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #3
-	Sigma charge: -0.05280657267329697
-	Pi charge: 0.004919206898790107
-	Total partial charge: -0.04788736577450686
+	Sigma charge: -0.05136368283743562
+	Pi charge: 0.005103678338195028
+	Total partial charge: -0.046260004499240594
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.642031978720428
-	Sigma electronegativity: 8.302053429202296
-	Exerted inductive effect: 49.39056539475531
+	Pi electronegativity: 5.643610955970588
+	Sigma electronegativity: 8.315274200106183
+	Exerted inductive effect: 49.71438534287647
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #4
-	Sigma charge: -0.011273328237591532
-	Pi charge: -0.016887255592876738
-	Total partial charge: -0.02816058383046827
+	Sigma charge: -0.011154722829764789
+	Pi charge: -0.017131427391726683
+	Total partial charge: -0.028286150221491474
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.456790137233051
-	Sigma electronegativity: 8.68512448359927
-	Exerted inductive effect: 42.731683140370706
+	Pi electronegativity: 5.454731772613736
+	Sigma electronegativity: 8.686225869267117
+	Exerted inductive effect: 43.02259104841501
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #5
-	Sigma charge: 0.12007157434526296
+	Sigma charge: 0.124463030542395
 	Pi charge: 0.0
-	Total partial charge: 0.12007157434526296
+	Total partial charge: 0.124463030542395
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 9.109361356465124
-	Exerted inductive effect: 48.31965671156107
+	Sigma electronegativity: 9.151693786806165
+	Exerted inductive effect: 48.65454454958518
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #6
-	Sigma charge: -0.3595147962031278
+	Sigma charge: -0.350583435249159
 	Pi charge: 0.0
-	Total partial charge: -0.3595147962031278
-	Lone-pair electronegativity: 3.4889301955613234
-	Pi electronegativity: 3.4889301955613234
-	Sigma electronegativity: 9.714727568333265
-	Exerted inductive effect: 42.06225910674755
+	Total partial charge: -0.350583435249159
+	Lone-pair electronegativity: 3.577313399459457
+	Pi electronegativity: 3.577313399459457
+	Sigma electronegativity: 9.821305172229694
+	Exerted inductive effect: 42.30417192780788
 	Free valence electron count: 4
 	Valence electron count: 6
 - Atom #7
-	Sigma charge: 0.07466227677700811
+	Sigma charge: 0.07851861227006815
 	Pi charge: 0.0
-	Total partial charge: 0.07466227677700811
+	Total partial charge: 0.07851861227006815
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 8.675879677291165
-	Exerted inductive effect: 46.350583094331355
+	Sigma electronegativity: 8.712391384888123
+	Exerted inductive effect: 46.67178322584794
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #8
-	Sigma charge: -0.014432098904598798
-	Pi charge: -0.0015994791521685148
-	Total partial charge: -0.01603157805676731
+	Sigma charge: -0.014431328341953275
+	Pi charge: -0.0017119886912542182
+	Total partial charge: -0.016143317033207493
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.586363964332663
-	Sigma electronegativity: 8.655807349282114
-	Exerted inductive effect: 60.29158937711367
+	Pi electronegativity: 5.585405353325122
+	Sigma electronegativity: 8.655814497341941
+	Exerted inductive effect: 60.71659855072372
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #9
-	Sigma charge: -0.00602395318314408
-	Pi charge: 0.016728859789354456
-	Total partial charge: 0.010704906606210375
+	Sigma charge: -0.006535262406970195
+	Pi charge: 0.016512635272432075
+	Total partial charge: 0.00997737286546188
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.743519946967758
-	Sigma electronegativity: 8.733911551231145
-	Exerted inductive effect: 56.3359746499138
+	Pi electronegativity: 5.741654420217348
+	Sigma electronegativity: 8.729155845945677
+	Exerted inductive effect: 56.76719842027073
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #10
-	Sigma charge: -0.05396901594431603
-	Pi charge: 0.002528784784651905
-	Total partial charge: -0.051440231159664125
+	Sigma charge: -0.05232306087259815
+	Pi charge: 0.002605376914421864
+	Total partial charge: -0.04971768395817629
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.6215893347853925
-	Sigma electronegativity: 8.29140687996879
-	Exerted inductive effect: 63.460875525256085
+	Pi electronegativity: 5.6222438217672845
+	Sigma electronegativity: 8.306483003742992
+	Exerted inductive effect: 63.91579227723197
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #11
-	Sigma charge: -0.043976134596747436
-	Pi charge: 0.02423308572156946
-	Total partial charge: -0.019743048875177978
+	Sigma charge: -0.043167103902568935
+	Pi charge: 0.02428141485036539
+	Total partial charge: -0.018885689052203544
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.808434713989138
-	Sigma electronegativity: 8.383062615183562
-	Exerted inductive effect: 65.951736302312
+	Pi electronegativity: 5.808853854768595
+	Sigma electronegativity: 8.390496323905653
+	Exerted inductive effect: 66.45517671190235
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #12
-	Sigma charge: 0.05212304968118334
-	Pi charge: -0.017849716106740132
-	Total partial charge: 0.034273333574443204
+	Sigma charge: 0.05043634546594092
+	Pi charge: -0.017815844724915486
+	Total partial charge: 0.03262050074102543
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.448678641962874
-	Sigma electronegativity: 9.27988920961381
-	Exerted inductive effect: 51.98888868001857
+	Pi electronegativity: 5.4489640132068615
+	Sigma electronegativity: 9.263907915407946
+	Exerted inductive effect: 52.41594424609129
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #13
-	Sigma charge: -0.03862460138419188
-	Pi charge: 0.023494068184441774
-	Total partial charge: -0.015130533199750107
+	Sigma charge: -0.03846905917894388
+	Pi charge: 0.023636323829940742
+	Total partial charge: -0.014832735349003139
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.802027197058463
-	Sigma electronegativity: 8.432271423445783
-	Exerted inductive effect: 66.26925197589937
+	Pi electronegativity: 5.8032603491337245
+	Sigma electronegativity: 8.433702969908552
+	Exerted inductive effect: 66.80765696672404
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #14
-	Sigma charge: 0.0633873906420294
+	Sigma charge: 0.06033576812192752
 	Pi charge: 0.0
-	Total partial charge: 0.0633873906420294
+	Total partial charge: 0.06033576812192752
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.563287259282516
-	Exerted inductive effect: 37.59511963795683
+	Sigma electronegativity: 7.544456566328504
+	Exerted inductive effect: 37.889269434966394
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #15
-	Sigma charge: 0.09916316453581474
-	Pi charge: 0.25429577119672053
-	Total partial charge: 0.3534589357325353
+	Sigma charge: 0.09723071103211513
+	Pi charge: 0.25364728489338406
+	Total partial charge: 0.3508779959254992
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 7.959261965698718
-	Sigma electronegativity: 11.334270238100002
-	Exerted inductive effect: 42.953274627865824
+	Pi electronegativity: 7.952761958833895
+	Sigma electronegativity: 11.31573150140599
+	Exerted inductive effect: 43.35002484102831
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #16
-	Sigma charge: -0.19086904025381626
-	Pi charge: -0.30183137441782915
-	Total partial charge: -0.4927004146716454
-	Lone-pair electronegativity: 2.1689103824540297
-	Pi electronegativity: 6.256423543731014
-	Sigma electronegativity: 13.436995861587947
-	Exerted inductive effect: 52.8770660312853
+	Sigma charge: -0.18263839225070008
+	Pi charge: -0.30115520234437576
+	Total partial charge: -0.48379359459507587
+	Lone-pair electronegativity: 2.235588683595788
+	Pi electronegativity: 6.261914078439771
+	Sigma electronegativity: 13.53412447943935
+	Exerted inductive effect: 53.09252802302599
 	Free valence electron count: 2
 	Valence electron count: 5
 - Atom #17
-	Sigma charge: 0.06304302305316742
+	Sigma charge: 0.06005769882873894
 	Pi charge: 0.0
-	Total partial charge: 0.06304302305316742
+	Total partial charge: 0.06005769882873894
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.561162787108583
-	Exerted inductive effect: 36.81131404190891
+	Sigma electronegativity: 7.542740161465713
+	Exerted inductive effect: 37.088953561726065
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #18
-	Sigma charge: 0.06217610963025851
+	Sigma charge: 0.059347266257900426
 	Pi charge: 0.0
-	Total partial charge: 0.06217610963025851
+	Total partial charge: 0.059347266257900426
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.555814037671911
-	Exerted inductive effect: 36.63164130977531
+	Sigma electronegativity: 7.538354566562418
+	Exerted inductive effect: 36.911626490072145
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #19
-	Sigma charge: 0.06104476307207405
+	Sigma charge: 0.056757588314477504
 	Pi charge: 0.0
-	Total partial charge: 0.06104476307207405
+	Total partial charge: 0.056757588314477504
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.548832502234568
-	Exerted inductive effect: 28.276581921357057
+	Sigma electronegativity: 7.522363353736825
+	Exerted inductive effect: 28.50769186968725
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #20
-	Sigma charge: 0.06104476307207405
+	Sigma charge: 0.056757588314477504
 	Pi charge: 0.0
-	Total partial charge: 0.06104476307207405
+	Total partial charge: 0.056757588314477504
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.548832502234568
-	Exerted inductive effect: 28.276581921357057
+	Sigma electronegativity: 7.522363353736825
+	Exerted inductive effect: 28.50769186968725
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #21
-	Sigma charge: -0.014152656523774019
+	Sigma charge: -0.015391279464276772
 	Pi charge: 0.0
-	Total partial charge: -0.014152656523774019
+	Total partial charge: -0.015391279464276772
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.850455172762714
-	Exerted inductive effect: 30.330320754964674
+	Sigma electronegativity: 7.839153410507009
+	Exerted inductive effect: 30.568807115041455
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #22
-	Sigma charge: -0.03697795804610718
+	Sigma charge: -0.036608456572135926
 	Pi charge: 0.0
-	Total partial charge: -0.03697795804610718
+	Total partial charge: -0.036608456572135926
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.643112999573505
-	Exerted inductive effect: 18.27431774085019
+	Sigma electronegativity: 7.646453905361869
+	Exerted inductive effect: 18.42149549202137
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #23
-	Sigma charge: -0.0015796771267166405
+	Sigma charge: 0.0023920958722880533
 	Pi charge: 0.0
-	Total partial charge: -0.0015796771267166405
+	Total partial charge: 0.0023920958722880533
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.9655032552908125
-	Exerted inductive effect: 11.146592380047533
+	Sigma electronegativity: 8.00197019769821
+	Exerted inductive effect: 11.244714671478935
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #24
-	Sigma charge: -0.3083406547856823
+	Sigma charge: -0.3007851968667249
 	Pi charge: 0.0
-	Total partial charge: -0.3083406547856823
-	Lone-pair electronegativity: 1.5790212170034237
-	Pi electronegativity: 1.5790212170034237
-	Sigma electronegativity: 8.3330546999943
-	Exerted inductive effect: 6.653701868042446
+	Total partial charge: -0.3007851968667249
+	Lone-pair electronegativity: 1.6349406628290533
+	Pi electronegativity: 1.6349406628290533
+	Sigma electronegativity: 8.408545729031685
+	Exerted inductive effect: 6.711675472161389
 	Free valence electron count: 2
 	Valence electron count: 5
 - Atom #25
-	Sigma charge: -0.013050397513689383
+	Sigma charge: -0.009572515364496574
 	Pi charge: 0.0
-	Total partial charge: -0.013050397513689383
+	Total partial charge: -0.009572515364496574
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.86051753902983
-	Exerted inductive effect: 3.28653338184268
+	Sigma electronegativity: 7.892296579088681
+	Exerted inductive effect: 3.327917309106125
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #26
-	Sigma charge: 0.03905168747981323
+	Sigma charge: 0.037009538544604405
 	Pi charge: 0.0
-	Total partial charge: 0.03905168747981323
+	Total partial charge: 0.037009538544604405
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.412828510668822
-	Exerted inductive effect: 1.729007096292111
+	Sigma electronegativity: 7.400172485190092
+	Exerted inductive effect: 1.7744874824867545
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #27
-	Sigma charge: 0.03905168747981323
+	Sigma charge: 0.037009538544604405
 	Pi charge: 0.0
-	Total partial charge: 0.03905168747981323
+	Total partial charge: 0.037009538544604405
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.412828510668822
-	Exerted inductive effect: 1.729007096292111
+	Sigma electronegativity: 7.400172485190092
+	Exerted inductive effect: 1.7744874824867545
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #28
-	Sigma charge: 0.03905168747981323
+	Sigma charge: 0.037009538544604405
 	Pi charge: 0.0
-	Total partial charge: 0.03905168747981323
+	Total partial charge: 0.037009538544604405
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.412828510668822
-	Exerted inductive effect: 1.729007096292111
+	Sigma electronegativity: 7.400172485190092
+	Exerted inductive effect: 1.7744874824867545
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #29
-	Sigma charge: -0.013050397513689383
+	Sigma charge: -0.009572515364496574
 	Pi charge: 0.0
-	Total partial charge: -0.013050397513689383
+	Total partial charge: -0.009572515364496574
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.86051753902983
-	Exerted inductive effect: 3.28653338184268
+	Sigma electronegativity: 7.892296579088681
+	Exerted inductive effect: 3.327917309106125
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #30
-	Sigma charge: 0.03905168747981323
+	Sigma charge: 0.037009538544604405
 	Pi charge: 0.0
-	Total partial charge: 0.03905168747981323
+	Total partial charge: 0.037009538544604405
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.412828510668822
-	Exerted inductive effect: 1.729007096292111
+	Sigma electronegativity: 7.400172485190092
+	Exerted inductive effect: 1.7744874824867545
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #31
-	Sigma charge: 0.03905168747981323
+	Sigma charge: 0.037009538544604405
 	Pi charge: 0.0
-	Total partial charge: 0.03905168747981323
+	Total partial charge: 0.037009538544604405
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.412828510668822
-	Exerted inductive effect: 1.729007096292111
+	Sigma electronegativity: 7.400172485190092
+	Exerted inductive effect: 1.7744874824867545
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #32
-	Sigma charge: 0.03905168747981323
+	Sigma charge: 0.037009538544604405
 	Pi charge: 0.0
-	Total partial charge: 0.03905168747981323
+	Total partial charge: 0.037009538544604405
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.412828510668822
-	Exerted inductive effect: 1.729007096292111
+	Sigma electronegativity: 7.400172485190092
+	Exerted inductive effect: 1.7744874824867545
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #33
-	Sigma charge: 0.04262999760855917
+	Sigma charge: 0.04025372793740587
 	Pi charge: 0.0
-	Total partial charge: 0.04262999760855917
+	Total partial charge: 0.04025372793740587
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.43499348772759
-	Exerted inductive effect: 6.629867816987954
+	Sigma electronegativity: 7.420275859266211
+	Exerted inductive effect: 6.713741176906788
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #34
-	Sigma charge: 0.04262999760855917
+	Sigma charge: 0.04025372793740587
 	Pi charge: 0.0
-	Total partial charge: 0.04262999760855917
+	Total partial charge: 0.04025372793740587
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.43499348772759
-	Exerted inductive effect: 6.629867816987954
+	Sigma electronegativity: 7.420275859266211
+	Exerted inductive effect: 6.713741176906788
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #35
-	Sigma charge: 0.027865109356298174
+	Sigma charge: 0.026733226209445057
 	Pi charge: 0.0
-	Total partial charge: 0.027865109356298174
+	Total partial charge: 0.026733226209445057
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.343443462364415
-	Exerted inductive effect: 10.78820039305899
+	Sigma electronegativity: 7.33641511893214
+	Exerted inductive effect: 10.880312441723596
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #36
-	Sigma charge: 0.027865109356298174
+	Sigma charge: 0.026733226209445057
 	Pi charge: 0.0
-	Total partial charge: 0.027865109356298174
+	Total partial charge: 0.026733226209445057
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.343443462364415
-	Exerted inductive effect: 10.78820039305899
+	Sigma electronegativity: 7.33641511893214
+	Exerted inductive effect: 10.880312441723596
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #37
-	Sigma charge: 0.030006462624431417
+	Sigma charge: 0.028489268827862953
 	Pi charge: 0.0
-	Total partial charge: 0.030006462624431417
+	Total partial charge: 0.028489268827862953
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.356736109608883
-	Exerted inductive effect: 17.864242110638845
+	Sigma electronegativity: 7.347318519960392
+	Exerted inductive effect: 17.994319645074224
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #38
-	Sigma charge: 0.030006462624431417
+	Sigma charge: 0.028489268827862953
 	Pi charge: 0.0
-	Total partial charge: 0.030006462624431417
+	Total partial charge: 0.028489268827862953
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.356736109608883
-	Exerted inductive effect: 17.864242110638845
+	Sigma electronegativity: 7.347318519960392
+	Exerted inductive effect: 17.994319645074224
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #39
-	Sigma charge: -0.05280657267329697
-	Pi charge: 0.004919206898789885
-	Total partial charge: -0.047887365774507085
+	Sigma charge: -0.05136368283743562
+	Pi charge: 0.005103678338194917
+	Total partial charge: -0.046260004499240705
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.642031978720426
-	Sigma electronegativity: 8.302053429202296
-	Exerted inductive effect: 49.39056539475531
+	Pi electronegativity: 5.643610955970587
+	Sigma electronegativity: 8.315274200106183
+	Exerted inductive effect: 49.71438534287647
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #40
-	Sigma charge: -0.026094046678615854
-	Pi charge: -0.02191195271622437
-	Total partial charge: -0.048005999394840224
+	Sigma charge: -0.02674803476341382
+	Pi charge: -0.021837739725420136
+	Total partial charge: -0.04858577448883396
 	Lone-pair electronegativity: 0.0
-	Pi electronegativity: 5.4145026363258095
-	Sigma electronegativity: 8.547831642856119
-	Exerted inductive effect: 51.342383821652696
+	Pi electronegativity: 5.4151261275585325
+	Sigma electronegativity: 8.541788656624178
+	Exerted inductive effect: 51.697595788517056
 	Free valence electron count: 0
 	Valence electron count: 4
 - Atom #41
-	Sigma charge: 0.06462047301854192
+	Sigma charge: 0.0613478704318821
 	Pi charge: 0.0
-	Total partial charge: 0.06462047301854192
+	Total partial charge: 0.0613478704318821
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.570893300537143
-	Exerted inductive effect: 28.376318796798774
+	Sigma electronegativity: 7.550703117219289
+	Exerted inductive effect: 28.586137318891808
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #42
-	Sigma charge: 0.062215734320143025
+	Sigma charge: 0.05937763019238762
 	Pi charge: 0.0
-	Total partial charge: 0.062215734320143025
+	Total partial charge: 0.05937763019238762
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.556058535503376
-	Exerted inductive effect: 28.30371915652937
+	Sigma electronegativity: 7.5385420187388315
+	Exerted inductive effect: 28.516928655507627
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #43
-	Sigma charge: 0.062215734320143025
+	Sigma charge: 0.05937763019238762
 	Pi charge: 0.0
-	Total partial charge: 0.062215734320143025
+	Total partial charge: 0.05937763019238762
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.556058535503376
-	Exerted inductive effect: 28.303719156529375
+	Sigma electronegativity: 7.5385420187388315
+	Exerted inductive effect: 28.516928655507623
 	Free valence electron count: 0
 	Valence electron count: 1
 - Atom #44
-	Sigma charge: 0.06462047301854192
+	Sigma charge: 0.0613478704318821
 	Pi charge: 0.0
-	Total partial charge: 0.06462047301854192
+	Total partial charge: 0.0613478704318821
 	Lone-pair electronegativity: 0.0
 	Pi electronegativity: 0.0
-	Sigma electronegativity: 7.570893300537143
-	Exerted inductive effect: 28.376318796798778
+	Sigma electronegativity: 7.550703117219289
+	Exerted inductive effect: 28.586137318891804
 	Free valence electron count: 0
 	Valence electron count: 1

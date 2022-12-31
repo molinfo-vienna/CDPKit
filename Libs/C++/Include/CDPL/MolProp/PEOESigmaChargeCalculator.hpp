@@ -55,6 +55,8 @@ namespace CDPL
 	namespace MolProp
 	{
 
+		class MHMOPiChargeCalculator;
+		
 		/**
 		 * \brief PEOESigmaChargeCalculator.
 		 * \see [\ref PEOE]
@@ -129,6 +131,8 @@ namespace CDPL
 			double getElectronegativity(std::size_t idx) const;
 
 		  private:
+			friend class MHMOPiChargeCalculator;
+			
 			PEOESigmaChargeCalculator(const PEOESigmaChargeCalculator&);
 
 			PEOESigmaChargeCalculator& operator=(const PEOESigmaChargeCalculator&);
@@ -136,33 +140,37 @@ namespace CDPL
 			void init(const Chem::MolecularGraph& molgraph);
 			void calcCharges();
 
+			double getNbrElectronegativityAvg(std::size_t idx) const;
+			
 			class AtomState
 		    {
 
-			public:
-			  typedef boost::shared_ptr<AtomState> SharedPointer;
+			  public:
+				typedef boost::shared_ptr<AtomState> SharedPointer;
 
-			  AtomState();
-			  AtomState(const Chem::Atom&, const Chem::MolecularGraph&);
+				AtomState();
+				AtomState(const Chem::Atom&, const Chem::MolecularGraph&);
 
-			  void linkTo(AtomState* nbr_state);
+				void linkTo(AtomState* nbr_state);
 
-			  double getCharge() const;
-			  double getElectronegativity() const;
+				double getCharge() const;
+				double getElectronegativity() const;
 
-			  void shiftCharges(double att_fact);
-			  void updateElectronegativity();
+				void shiftCharges(double att_fact);
+				void updateElectronegativity();
 
+				double getNbrElectronegativityAvg() const;
+				
 			 private:
-			  typedef std::vector<AtomState*> AtomStateList;
+				typedef std::vector<AtomState*> AtomStateList;
 
-			  AtomStateList  nbrAtomStates;
-			  double         a;
-			  double         b;
-			  double         c;
-			  double         enegativity;
-			  double         enegativityP1;
-			  double         charge;
+				AtomStateList  nbrAtomStates;
+				double         a;
+				double         b;
+				double         c;
+				double         enegativity;
+				double         enegativityP1;
+				double         charge;
 			};
 
 			typedef std::vector<AtomState::SharedPointer> AtomStateList;

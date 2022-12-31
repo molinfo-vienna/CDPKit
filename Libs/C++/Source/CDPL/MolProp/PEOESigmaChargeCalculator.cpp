@@ -178,6 +178,10 @@ void MolProp::PEOESigmaChargeCalculator::calcCharges()
 	}
 }
 
+double MolProp::PEOESigmaChargeCalculator::getNbrElectronegativityAvg(std::size_t idx) const
+{
+	return atomStates[idx]->getNbrElectronegativityAvg();
+}
 
 MolProp::PEOESigmaChargeCalculator::AtomState::AtomState(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph): 
 	charge(0.0) 
@@ -394,4 +398,17 @@ void MolProp::PEOESigmaChargeCalculator::AtomState::shiftCharges(double att_fact
 void MolProp::PEOESigmaChargeCalculator::AtomState::updateElectronegativity()
 {
 	enegativity = a + b * charge + c * charge * charge;
+}
+
+double MolProp::PEOESigmaChargeCalculator::AtomState::getNbrElectronegativityAvg() const
+{
+	double sum = 0.0;
+
+	for (AtomStateList::const_iterator it = nbrAtomStates.begin(), nbrs_end = nbrAtomStates.end(); it != nbrs_end; ++it)
+		sum += (*it)->enegativity;
+
+	if (nbrAtomStates.size() > 1)
+		sum /= nbrAtomStates.size();
+	
+	return sum;
 }

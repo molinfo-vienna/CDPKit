@@ -34,6 +34,7 @@ h * along with this library; see the file COPYING. If not, write to
 
 #include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -136,7 +137,7 @@ namespace
 	} init;
 
 	const double ENERGY_LEVEL_COMP_TOL = 0.01;
-	const double SIGMA_CORR_REF        = 7.324379833683146;
+	const double SIGMA_CORR_REF        = 7.325405621223034;
 	const double SIGMA_FACTOR          = 0.029;
 	const double HYPER_CONJ_FACTOR     = 0.58;
 }
@@ -181,7 +182,7 @@ void MolProp::MHMOPiChargeCalculator::calculate(const Chem::ElectronSystemList& 
 	atomPiCharges.assign(num_atoms, 0.0);
 	bondElecDensities.assign(molgraph.getNumBonds(), 0.0);
 	energy = 0.0;
-	
+		  
 	initAtomPiSysCounts(pi_sys_list, molgraph);
 	initAtomFreeElecCounts(pi_sys_list, molgraph);
 	
@@ -252,7 +253,7 @@ void MolProp::MHMOPiChargeCalculator::initAtomFreeElecCounts(const Chem::Electro
 			atomFreeElecCounts[molgraph.getAtomIndex(pi_sys.getAtom(0))] += pi_sys.getNumElectrons();
 	}
 }
-
+		
 void MolProp::MHMOPiChargeCalculator::calcForPiSys(const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph)
 {
 	if (pi_sys.getNumAtoms() < 2)
@@ -387,6 +388,8 @@ void MolProp::MHMOPiChargeCalculator::initHueckelMatrix(const Chem::ElectronSyst
 {
 	using namespace Chem;
 
+	calcSigmaCharges(molgraph);
+	
 	std::size_t num_atoms = pi_sys.getNumAtoms();
 	
 	hueckelMatrix.resize(num_atoms, num_atoms);
@@ -413,6 +416,14 @@ void MolProp::MHMOPiChargeCalculator::initHueckelMatrix(const Chem::ElectronSyst
 	}
 }
 
+void MolProp::MHMOPiChargeCalculator::calcSigmaCharges(const Chem::MolecularGraph& molgraph)
+{
+	if (!peoeCalculatorPtr.get())
+		peoeCalculatorPtr.reset(new PEOESigmaChargeCalculator());
+
+	peoeCalculatorPtr->calculate(molgraph);
+}
+
 double MolProp::MHMOPiChargeCalculator::getAlpha(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
 													  const Chem::MolecularGraph& molgraph) const
 {
@@ -425,32 +436,18 @@ double MolProp::MHMOPiChargeCalculator::getAlpha(const Chem::Atom& atom, const C
 }
 
 double MolProp::MHMOPiChargeCalculator::getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
-																const Chem::MolecularGraph& molgraph) const
+														   const Chem::MolecularGraph& molgraph) const
 {
 	using namespace Chem;
-		
-	std::size_t nbr_count = 0;
-	double sigma_corr = 0.0;
-
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 	
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		if (!molgraph.containsBond(*b_it))
-			continue;
-
-		sigma_corr += getPEOESigmaElectronegativity(*a_it);
-		nbr_count++;
-	}
-
-	if (nbr_count > 1)
-		sigma_corr /= nbr_count;
+	double sigma_corr = peoeCalculatorPtr->getNbrElectronegativityAvg(molgraph.getAtomIndex(atom));
 	
 	sigma_corr = SIGMA_FACTOR * (sigma_corr - SIGMA_CORR_REF);
 	
 	double hyp_conj_corr = 0.0;
 
 	if (atomPiElecCounts[pi_sys.getAtomIndex(atom)] == 1) {
-		b_it = atom.getBondsBegin();
+		Atom::ConstBondIterator b_it = atom.getBondsBegin();
 	
 		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
 			if (!molgraph.containsBond(*b_it))
@@ -467,7 +464,7 @@ double MolProp::MHMOPiChargeCalculator::getAlphaCorrection(const Chem::Atom& ato
 			if (getBondCount(nbr_atom, molgraph, 1, AtomType::H) == 0)
 				continue;
 
-			double sig_charge = getPEOESigmaCharge(nbr_atom);
+			double sig_charge = peoeCalculatorPtr->getCharge(molgraph.getAtomIndex(nbr_atom));
 
 			if(sig_charge < 0.0)
 				hyp_conj_corr += sig_charge;
