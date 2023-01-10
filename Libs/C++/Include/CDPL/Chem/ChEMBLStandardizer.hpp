@@ -68,6 +68,10 @@ namespace CDPL
 
 			ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
 
+			void ignoreExcludedFlag(bool ignore);
+
+			bool excludedFlagIgnored() const;
+			
 			Result standardize(Molecule& mol);
 
 			Result standardize(const Molecule& mol, Molecule& std_mol);
@@ -78,7 +82,11 @@ namespace CDPL
 			
 			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
 	    
-		  private:			
+		  private:
+			bool checkIfExcluded(const Molecule& mol) const;
+			void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
+
+			bool ignoreExcldFlag;
 		};
     }
 }

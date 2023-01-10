@@ -44,6 +44,9 @@
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/HashCodeCalculator.hpp"
 
 
 using namespace CDPL;
@@ -81,24 +84,45 @@ namespace
 }
 
 
-Chem::ChEMBLStandardizer::ChEMBLStandardizer() // TODO
+Chem::ChEMBLStandardizer::ChEMBLStandardizer():
+	ignoreExcldFlag(false)
 {}
 
-Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)  // TODO
+Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer):
+	ignoreExcldFlag(standardizer.ignoreExcldFlag)
 {}
+
+void Chem::ChEMBLStandardizer::ignoreExcludedFlag(bool ignore)
+{
+	ignoreExcldFlag = ignore;
+}
+
+bool Chem::ChEMBLStandardizer::excludedFlagIgnored() const
+{
+	return ignoreExcldFlag;
+}
 
 Chem::ChEMBLStandardizer::Result Chem::ChEMBLStandardizer::standardize(Molecule& mol)
 {
+	Result result = NO_CHANGES;
+
+	if (checkIfExcluded(mol)) {
+		if (!ignoreExcldFlag)
+			return EXCLUDED;
+
+		result = EXCLUDED;
+	}
+	
 	// TODO
 
-	return NO_CHANGES;
+	return result;
 }
 
 Chem::ChEMBLStandardizer::Result Chem::ChEMBLStandardizer::standardize(const Molecule& mol, Molecule& std_mol)
 {
-	// TODO
+	copyMolecule(mol, std_mol);
 	
-	return NO_CHANGES;
+	return standardize(std_mol);
 }
 
 bool Chem::ChEMBLStandardizer::getParent(Molecule& mol)
@@ -112,11 +136,9 @@ bool Chem::ChEMBLStandardizer::getParent(Molecule& mol)
 
 bool Chem::ChEMBLStandardizer::getParent(const Molecule& mol, Molecule& parent_mol)
 {
-	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+	copyMolecule(mol, parent_mol);
 	
-// TODO
-	
-	return false;
+	return getParent(parent_mol);
 }
 
 Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStandardizer& standardizer)
@@ -124,7 +146,28 @@ Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStanda
 	if (&standardizer == this)
 		return *this;
 
+	ignoreExcldFlag = standardizer.ignoreExcldFlag;
+	
 	// TODO
 	
 	return *this;
+}
+
+bool Chem::ChEMBLStandardizer::checkIfExcluded(const Molecule& mol) const
+{
+	// TODO
+	
+	return false;
+}
+
+void Chem::ChEMBLStandardizer::copyMolecule(const Molecule& mol, Molecule& mol_copy) const
+{
+	mol_copy.copy(mol);
+	mol_copy.clearProperties();
+
+	copyAtomStereoDescriptors(mol, mol_copy);
+	copyBondStereoDescriptors(mol, mol_copy);
+
+	if (hasSSSR(mol))
+		copySSSR(mol, mol_copy);
 }
