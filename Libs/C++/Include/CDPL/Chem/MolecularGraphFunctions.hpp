@@ -495,9 +495,9 @@ namespace CDPL
 
 		CDPL_CHEM_API void perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);
+		CDPL_CHEM_API FragmentList::SharedPointer getAromaticRings(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API FragmentList::SharedPointer extractAromaticSSSRSubset(const MolecularGraph& molgraph);
+		CDPL_CHEM_API FragmentList::SharedPointer getAromaticSSSRSubset(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API bool containsMolecularGraph(const MolecularGraph& molgraph, const MolecularGraph& sub_molgraph, 
 												  bool atoms = true, bool bonds = true);
@@ -510,11 +510,11 @@ namespace CDPL
 												 FragmentList& cont_frag_list, bool append = false, bool atoms = true, 
 												 bool bonds = true);
 
-		CDPL_CHEM_API void copyAtomStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph,
+		CDPL_CHEM_API void copyAtomStereoDescriptors(const MolecularGraph& molgraph, MolecularGraph& tgt_molgraph, 
 													 std::size_t atom_idx_offs = 0);
 
-		CDPL_CHEM_API void copyBondStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph, 
-													 std::size_t atom_idx_offs = 0, std::size_t bond_start_idx = 0);
+		CDPL_CHEM_API void copyBondStereoDescriptors(const MolecularGraph& molgraph, MolecularGraph& tgt_molgraph, 
+													 std::size_t atom_idx_offs = 0, std::size_t bond_idx_offs = 0);
 
 		CDPL_CHEM_API void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frag_list, 
 											  const Util::BitSet& split_bond_mask, bool append = false);

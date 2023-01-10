@@ -223,9 +223,9 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("perceiveAromaticSubstructure", 
 				static_cast<Chem::Fragment::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveAromaticSubstructure),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveAromaticRings", &Chem::perceiveAromaticRings,
+	python::def("getAromaticRings", &Chem::getAromaticRings,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("extractAromaticSSSRSubset", &Chem::extractAromaticSSSRSubset,
+	python::def("getAromaticSSSRSubset", &Chem::getAromaticSSSRSubset,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("calcTopologicalDistanceMatrix", 
 				static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
@@ -292,10 +292,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				 python::arg("atom_nbrs") = true, python::arg("bonds") = true, python::arg("bond_atoms") = false));
 
 	python::def("copyAtomStereoDescriptors", &Chem::copyAtomStereoDescriptors,
-				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0));
+				(python::arg("molgraph"), python::arg("tgt_molgraph"), python::arg("atom_idx_offs") = 0));
 	python::def("copyBondStereoDescriptors", &Chem::copyBondStereoDescriptors,
-				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0, 
-				 python::arg("bond_start_idx") = 0));
+				(python::arg("molgraph"), python::arg("tgt_molgraph"), python::arg("atom_idx_offs") = 0, 
+				 python::arg("bond_idx_offs") = 0));
 
 	python::def("setConformation", &Chem::setConformation,
 				(python::arg("molgraph"), python::arg("conf_idx"), python::arg("coords"), python::arg("energy")));

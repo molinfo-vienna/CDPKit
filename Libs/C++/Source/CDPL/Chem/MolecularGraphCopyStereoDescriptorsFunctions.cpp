@@ -32,24 +32,25 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::copyAtomStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph,
-									 std::size_t atom_idx_offs)
+void Chem::copyAtomStereoDescriptors(const MolecularGraph& molgraph, MolecularGraph& tgt_molgraph, std::size_t atom_idx_offs)
 {
-	MolecularGraph::AtomIterator atoms_end = molgraph_copy.getAtomsEnd();
-	std::size_t i = 0;
-	std::size_t num_mg_atoms = molgraph.getNumAtoms();
+	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
+	std::size_t i = atom_idx_offs;
+	std::size_t num_tgt_atoms = tgt_molgraph.getNumAtoms();
 
-	for (MolecularGraph::AtomIterator a_it = molgraph_copy.getAtomsBegin() + atom_idx_offs; a_it != atoms_end && i < num_mg_atoms; ++a_it, i++) {
-		Atom& atom = *a_it;
+	for (MolecularGraph::ConstAtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end && i < num_tgt_atoms; ++a_it, i++) {
+		const Atom& atom = *a_it;
+		Atom& tgt_atom = tgt_molgraph.getAtom(i);
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
 
-		if (!stereo_desc.isValid(molgraph.getAtom(i))) {
-			clearStereoDescriptor(atom);
+		if (!stereo_desc.isValid(atom)) {
+			clearStereoDescriptor(tgt_atom);
 			continue;
 		}
 
@@ -57,52 +58,53 @@ void Chem::copyAtomStereoDescriptors(MolecularGraph& molgraph_copy, const Molecu
 
 		try {
 			if (stereo_desc.getNumReferenceAtoms() == 3) 
-				setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs)));
+				setStereoDescriptor(tgt_atom, StereoDescriptor(stereo_desc.getConfiguration(),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs)));
 			else
-				setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
-														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+				setStereoDescriptor(tgt_atom, StereoDescriptor(stereo_desc.getConfiguration(),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+															   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
 		} catch (const Base::IndexError& e) {
-			clearStereoDescriptor(atom);
+			clearStereoDescriptor(tgt_atom);
 		} catch (const Base::ItemNotFound& e) {
-			clearStereoDescriptor(atom);
+			clearStereoDescriptor(tgt_atom);
 		} 
 	}
 }
 
-void Chem::copyBondStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph, 
-									 std::size_t atom_idx_offs, std::size_t bond_start_idx)
+void Chem::copyBondStereoDescriptors(const MolecularGraph& molgraph, MolecularGraph& tgt_molgraph, 
+									 std::size_t atom_idx_offs, std::size_t bond_idx_offs)
 {
-	MolecularGraph::BondIterator bonds_end = molgraph_copy.getBondsEnd();
-	std::size_t i = 0;
-	std::size_t num_mg_bonds = molgraph.getNumBonds();
+	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
+	std::size_t i = bond_idx_offs;
+	std::size_t num_tgt_bonds = tgt_molgraph.getNumBonds();
 
-	for (MolecularGraph::BondIterator b_it = molgraph_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end && i < num_mg_bonds; ++b_it, i++) {
-		Bond& bond = *b_it;
+	for (MolecularGraph::ConstBondIterator b_it = molgraph.getBondsBegin(); b_it != bonds_end && i < num_tgt_bonds; ++b_it, i++) {
+		const Bond& bond = *b_it;
+		Bond& tgt_bond = tgt_molgraph.getBond(i);
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
 
-		if (!stereo_desc.isValid(molgraph.getBond(i))) {
-			clearStereoDescriptor(bond);
+		if (!stereo_desc.isValid(bond)) {
+			clearStereoDescriptor(tgt_bond);
 			continue;
 		}
 
 		const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
 
 		try {
-			setStereoDescriptor(bond, StereoDescriptor(stereo_desc.getConfiguration(),
-													   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
-													   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
-													   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
-													   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+			setStereoDescriptor(tgt_bond, StereoDescriptor(stereo_desc.getConfiguration(),
+														   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+														   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+														   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+														   tgt_molgraph.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
 		} catch (const Base::IndexError& e) {
-			clearStereoDescriptor(bond);
+			clearStereoDescriptor(tgt_bond);
 		} catch (const Base::ItemNotFound& e) {
-			clearStereoDescriptor(bond);
+			clearStereoDescriptor(tgt_bond);
 		} 
 	}
 }
