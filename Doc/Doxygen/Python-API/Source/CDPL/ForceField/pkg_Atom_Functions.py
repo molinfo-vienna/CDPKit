@@ -37,7 +37,7 @@ def hasMMFF94Charge(atom: CDPL.Chem.Atom) -> bool: pass
 # \param atom 
 # \return 
 #
-def getMMFF94Charge(atom: CDPL.Chem.Atom) -> int: pass
+def getMMFF94Charge(atom: CDPL.Chem.Atom) -> float: pass
 
 ##
 # \brief 

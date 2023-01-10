@@ -97,7 +97,7 @@ def calcAtomHydrophobicities(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool
 # \param num_iter 
 # \param damping 
 #
-def calcPEOEProperties(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool, num_iter: int = 6, damping: float = 0.5) -> None: pass
+def calcPEOEProperties(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool, num_iter: int = 20, damping: float = 0.48) -> None: pass
 
 ##
 # \brief 

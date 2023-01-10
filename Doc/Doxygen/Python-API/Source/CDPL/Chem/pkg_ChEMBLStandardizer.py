@@ -22,34 +22,44 @@
 ##
 # \brief 
 #
-class PEOESigmaChargeCalculator(Boost.Python.instance):
+class ChEMBLStandardizer(Boost.Python.instance):
 
     ##
     # \brief 
     #
-    DEF_NUM_ITERATIONS = 20
+    class Result(Boost.Python.enum):
+
+        ##
+        # \brief NO_CHANGES.
+        #
+        NO_CHANGES = 0
+
+        ##
+        # \brief EXCLUDED.
+        #
+        EXCLUDED = 1
+
+        ##
+        # \brief H_REMOVED.
+        #
+        H_REMOVED = 2
 
     ##
-    # \brief 
-    #
-    DEF_DAMPING_FACTOR = 0.48
-
-    ##
-    # \brief Initializes the \e %PEOESigmaChargeCalculator instance.
+    # \brief Initializes the \e %ChEMBLStandardizer instance.
     #
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %PEOESigmaChargeCalculator instance.
-    # \param molgraph 
+    # \brief Initializes the \e %ChEMBLStandardizer instance.
+    # \param standardizer 
     #
-    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+    def __init__(standardizer: ChEMBLStandardizer) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
-    # Different Python \e %PEOESigmaChargeCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %PEOESigmaChargeCalculator instances \e a and \e b reference different C++ objects. 
+    # Different Python \e %ChEMBLStandardizer instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %ChEMBLStandardizer instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     #
@@ -58,48 +68,53 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param num_iter 
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %ChEMBLStandardizer instance \a standardizer.
+    # \param standardizer The \e %ChEMBLStandardizer instance to copy.
+    # \return \a self
     #
-    def setNumIterations(num_iter: int) -> None: pass
+    def assign(standardizer: ChEMBLStandardizer) -> ChEMBLStandardizer: pass
 
     ##
     # \brief 
-    # \param factor 
+    # \param ignore 
     #
-    def setDampingFactor(factor: float) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getNumIterations() -> int: pass
+    def ignoreExcludedFlag(ignore: bool) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getDampingFactor() -> float: pass
+    def excludedFlagIgnored() -> bool: pass
 
     ##
     # \brief 
-    # \param molgraph 
-    #
-    def calculate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
-
-    ##
-    # \brief 
-    # \param idx 
+    # \param mol 
     # \return 
     #
-    def getCharge(idx: int) -> float: pass
+    def standardize(mol: Molecule) -> Result: pass
 
     ##
     # \brief 
-    # \param idx 
+    # \param mol 
+    # \param std_mol 
     # \return 
     #
-    def getElectronegativity(idx: int) -> float: pass
+    def standardize(mol: Molecule, std_mol: Molecule) -> Result: pass
+
+    ##
+    # \brief 
+    # \param mol 
+    # \return 
+    #
+    def getParent(mol: Molecule) -> bool: pass
+
+    ##
+    # \brief 
+    # \param mol 
+    # \param parent_mol 
+    # \return 
+    #
+    def getParent(mol: Molecule, parent_mol: Molecule) -> bool: pass
 
     ##
     # \brief 
@@ -107,11 +122,6 @@ class PEOESigmaChargeCalculator(Boost.Python.instance):
     objectID = property(getObjectID)
 
     ##
-    # \brief 
+    # \brief FIXME!
     #
-    numIterations = property(getNumIterations, setNumIterations)
-
-    ##
-    # \brief 
-    #
-    dampingFactor = property(getDampingFactor, setDampingFactor)
+    ignoreExclFlag = property(getIgnoreExclFlag, setIgnoreExclFlag)

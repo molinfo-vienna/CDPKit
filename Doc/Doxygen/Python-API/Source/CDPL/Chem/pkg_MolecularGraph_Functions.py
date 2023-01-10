@@ -780,7 +780,7 @@ def setAromaticityFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \param molgraph 
 # \return 
 #
-def perceiveAromaticRings(molgraph: MolecularGraph) -> FragmentList: pass
+def getAromaticRings(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
 # \brief 
@@ -1015,12 +1015,12 @@ def calcBondStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 
 ##
 # \brief 
-# \param mol_copy 
 # \param molgraph 
+# \param tgt_molgraph 
 # \param atom_idx_offs 
-# \param bond_start_idx 
+# \param bond_idx_offs 
 #
-def copyBondStereoDescriptors(mol_copy: MolecularGraph, molgraph: MolecularGraph, atom_idx_offs: int = 0, bond_start_idx: int = 0) -> None: pass
+def copyBondStereoDescriptors(molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, atom_idx_offs: int = 0, bond_idx_offs: int = 0) -> None: pass
 
 ##
 # \brief 
@@ -1032,11 +1032,11 @@ def calcAtomStereoDescriptors(molgraph: MolecularGraph, overwrite: bool, dim: in
 
 ##
 # \brief 
-# \param mol_copy 
 # \param molgraph 
+# \param tgt_molgraph 
 # \param atom_idx_offs 
 #
-def copyAtomStereoDescriptors(mol_copy: MolecularGraph, molgraph: MolecularGraph, atom_idx_offs: int = 0) -> None: pass
+def copyAtomStereoDescriptors(molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, atom_idx_offs: int = 0) -> None: pass
 
 ##
 # \brief 
@@ -1173,7 +1173,7 @@ def initSubstructureSearchTarget(molgraph: MolecularGraph, overwrite: bool) -> N
 # \param molgraph 
 # \return 
 #
-def extractAromaticSSSRSubset(molgraph: MolecularGraph) -> FragmentList: pass
+def getAromaticSSSRSubset(molgraph: MolecularGraph) -> FragmentList: pass
 
 ##
 # \brief 
