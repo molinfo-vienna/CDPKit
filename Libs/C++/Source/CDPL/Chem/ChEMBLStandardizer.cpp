@@ -27,10 +27,12 @@
 #include "StaticInit.hpp"
 
 #include <cstring>
+#include <utility>
 
 #include "CDPL/Config.hpp"
 
 #include <boost/thread.hpp>
+#include <boost/unordered_set.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -44,9 +46,12 @@
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
+#include "CDPL/Chem/SMILESMoleculeReader.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
 
 
 using namespace CDPL;
@@ -55,51 +60,93 @@ using namespace CDPL;
 namespace
 {
 
-	const char* CHEMBL_SALT_STRUCTURES =                 
+	const char* CHEMBL_SALT_STRUCTURE_LIBRARY =                 
     #include "ChEMBL-Salts.smi.str" 
 	;
 
-	const char* CHEMBL_SOLVENT_STRUCTURES =                 
+	const char* CHEMBL_SOLVENT_STRUCTURE_LIBRARY =                 
     #include "ChEMBL-Solvents.smi.str" 
 	;
 
 	boost::once_flag initSaltAndSolventDataFlag = BOOST_ONCE_INIT;
+	
+	typedef std::pair<Base::uint64, std::size_t> StructureID;
+	typedef boost::unordered_set<StructureID> StructureIDSet;
+
+	StructureIDSet chemblSaltStructureIDs;
+	StructureIDSet chemblSolventStructureIDs;
 
 	void initSaltAndSolventData()
 	{
+		using namespace Chem;
+
 #if defined(HAVE_BOOST_IOSTREAMS)
 
-		boost::iostreams::stream<boost::iostreams::array_source> salts_is(CHEMBL_SALT_STRUCTURES, std::strlen(CHEMBL_SALT_STRUCTURES));
-		boost::iostreams::stream<boost::iostreams::array_source> solvents_is(CHEMBL_SOLVENT_STRUCTURES, std::strlen(CHEMBL_SOLVENT_STRUCTURES));
+		boost::iostreams::stream<boost::iostreams::array_source> salts_is(CHEMBL_SALT_STRUCTURE_LIBRARY, std::strlen(CHEMBL_SALT_STRUCTURE_LIBRARY));
+		boost::iostreams::stream<boost::iostreams::array_source> solvents_is(CHEMBL_SOLVENT_STRUCTURE_LIBRARY, std::strlen(CHEMBL_SOLVENT_STRUCTURE_LIBRARY));
 
 #else // defined(HAVE_BOOST_IOSTREAMS)
 
-		std::istringstream salts_is(CHEMBL_SALT_STRUCTURES);
-		std::istringstream solvents_is(CHEMBL_SOLVENT_STRUCTURES);
+		std::istringstream salts_is(CHEMBL_SALT_STRUCTURE_LIBRARY);
+		std::istringstream solvents_is(CHEMBL_SOLVENT_STRUCTURE_LIBRARY);
 
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
-		// TODO
+		HashCodeCalculator hash_calc;
+
+		hash_calc.includeGlobalStereoFeatures(false);
+		hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
+		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, 
+																					 BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
+																					 BondPropertyFlag::AROMATICITY));
+		BasicMolecule mol;
+		SMILESMoleculeReader salts_reader(salts_is);
+
+		setSMILESRecordFormatParameter(salts_reader, "NS");
+
+		while (salts_reader.read(mol)) {
+			calcImplicitHydrogenCounts(mol, makeHydrogenDeplete(mol));
+			perceiveHybridizationStates(mol, false);
+			perceiveSSSR(mol, false);
+			setRingFlags(mol, false);
+			setAromaticityFlags(mol, false);
+
+			chemblSaltStructureIDs.insert(StructureID(hash_calc.calculate(mol), mol.getNumAtoms()));
+		}
+
+		SMILESMoleculeReader solvents_reader(solvents_is);
+
+		setSMILESRecordFormatParameter(solvents_reader, "NS");
+
+		while (solvents_reader.read(mol)) {
+			calcImplicitHydrogenCounts(mol, makeHydrogenDeplete(mol));
+			perceiveHybridizationStates(mol, false);
+			perceiveSSSR(mol, false);
+			setRingFlags(mol, false);
+			setAromaticityFlags(mol, false);
+
+			chemblSolventStructureIDs.insert(StructureID(hash_calc.calculate(mol), mol.getNumAtoms()));
+		}
 	}
 }
 
 
 Chem::ChEMBLStandardizer::ChEMBLStandardizer():
-	ignoreExcldFlag(false)
+	procExcldMols(false)
 {}
 
 Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer):
-	ignoreExcldFlag(standardizer.ignoreExcldFlag)
+	procExcldMols(standardizer.procExcldMols)
 {}
 
-void Chem::ChEMBLStandardizer::ignoreExcludedFlag(bool ignore)
+void Chem::ChEMBLStandardizer::processExcludedMolecules(bool process)
 {
-	ignoreExcldFlag = ignore;
+	procExcldMols = process;
 }
 
-bool Chem::ChEMBLStandardizer::excludedFlagIgnored() const
+bool Chem::ChEMBLStandardizer::excludedMoleculesProcessed() const
 {
-	return ignoreExcldFlag;
+	return procExcldMols;
 }
 
 Chem::ChEMBLStandardizer::Result Chem::ChEMBLStandardizer::standardize(Molecule& mol)
@@ -107,7 +154,7 @@ Chem::ChEMBLStandardizer::Result Chem::ChEMBLStandardizer::standardize(Molecule&
 	Result result = NO_CHANGES;
 
 	if (checkIfExcluded(mol)) {
-		if (!ignoreExcldFlag)
+		if (!procExcldMols)
 			return EXCLUDED;
 
 		result = EXCLUDED;
@@ -146,7 +193,7 @@ Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStanda
 	if (&standardizer == this)
 		return *this;
 
-	ignoreExcldFlag = standardizer.ignoreExcldFlag;
+	procExcldMols = standardizer.procExcldMols;
 	
 	// TODO
 	

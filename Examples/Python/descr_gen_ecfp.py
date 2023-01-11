@@ -94,6 +94,7 @@ def parseArgs() -> argparse.Namespace:
                         dest='strip_hs',
                         required=False,
                         action='store_true',
+                        default=False,
                         help='Strip hydrogens (by default, molecules will be staturated with hydrogens before fingerprint generation)')
 
     parse_args = parser.parse_args()
@@ -128,7 +129,7 @@ def main() -> None:
     
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
-    
+
     # read and process molecules one after the other until the end of input has been reached
     try:
         if reader.read(mol):

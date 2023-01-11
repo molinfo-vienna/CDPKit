@@ -68,9 +68,9 @@ namespace CDPL
 
 			ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
 
-			void ignoreExcludedFlag(bool ignore);
+			void processExcludedMolecules(bool process);
 
-			bool excludedFlagIgnored() const;
+			bool excludedMoleculesProcessed() const;
 			
 			Result standardize(Molecule& mol);
 
@@ -86,7 +86,7 @@ namespace CDPL
 			bool checkIfExcluded(const Molecule& mol) const;
 			void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
 
-			bool ignoreExcldFlag;
+			bool procExcldMols;
 		};
     }
 }

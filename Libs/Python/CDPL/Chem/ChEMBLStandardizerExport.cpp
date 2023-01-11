@@ -54,8 +54,8 @@ void CDPLPythonChem::exportChEMBLStandardizer()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ChEMBLStandardizer>())	
 		.def("assign", &Chem::ChEMBLStandardizer::operator=, 
 			 (python::arg("self"), python::arg("standardizer")), python::return_self<>())
-		.def("ignoreExcludedFlag",  &Chem::ChEMBLStandardizer::ignoreExcludedFlag, (python::arg("self"), python::arg("ignore")))
-		.def("excludedFlagIgnored",  &Chem::ChEMBLStandardizer::excludedFlagIgnored, python::arg("self"))
+		.def("processExcludedMolecules",  &Chem::ChEMBLStandardizer::processExcludedMolecules, (python::arg("self"), python::arg("process")))
+		.def("excludedMoleculesProcessed",  &Chem::ChEMBLStandardizer::excludedMoleculesProcessed, python::arg("self"))
 		.def("standardize", static_cast<Chem::ChEMBLStandardizer::Result (Chem::ChEMBLStandardizer::*)(Chem::Molecule&)>
 			 (&Chem::ChEMBLStandardizer::standardize), (python::arg("self"), python::arg("mol")))
 		.def("standardize", static_cast<Chem::ChEMBLStandardizer::Result (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
@@ -64,6 +64,6 @@ void CDPLPythonChem::exportChEMBLStandardizer()
 			 (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol")))
 		.def("getParent", static_cast<bool (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
 			 (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol"), python::arg("parent_mol")))
-		.add_property("ignoreExclFlag", &Chem::ChEMBLStandardizer::excludedFlagIgnored, &Chem::ChEMBLStandardizer::ignoreExcludedFlag)
+		.add_property("procExcludedMolecules", &Chem::ChEMBLStandardizer::excludedMoleculesProcessed, &Chem::ChEMBLStandardizer::processExcludedMolecules)
 		;
 }
