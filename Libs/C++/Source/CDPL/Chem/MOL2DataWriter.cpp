@@ -42,6 +42,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -60,8 +61,6 @@ namespace
 
 	TypeToStringMap moleculeTypeToStringMap;
 	TypeToStringMap chargeTypeToStringMap;
-	TypeToStringMap atomTypeToStringMap;
-	TypeToStringMap bondTypeToStringMap;
 
 	struct Init {
 
@@ -74,12 +73,6 @@ namespace
 	
 			for (std::size_t i = 0; i < sizeof(CHARGE_TYPE_STRINGS) / sizeof(TypeToString); i++)
 				chargeTypeToStringMap.insert(TypeToStringMap::value_type(CHARGE_TYPE_STRINGS[i].type, CHARGE_TYPE_STRINGS[i].string));
-
-			for (std::size_t i = 0; i < sizeof(ATOM_TYPE_STRINGS) / sizeof(TypeToString); i++)
-				atomTypeToStringMap.insert(TypeToStringMap::value_type(ATOM_TYPE_STRINGS[i].type, ATOM_TYPE_STRINGS[i].string));
-
-			for (std::size_t i = 0; i < sizeof(BOND_TYPE_STRINGS) / sizeof(TypeToString); i++)
-				bondTypeToStringMap.insert(TypeToStringMap::value_type(BOND_TYPE_STRINGS[i].type, BOND_TYPE_STRINGS[i].string));
 		}
 
 	} init;
@@ -440,10 +433,10 @@ const std::string& Chem::MOL2DataWriter::getAtomTypeString(const Atom& atom, con
 	if (type > SybylAtomType::MAX_TYPE && strictErrorChecking)
 		throw Base::IOError("MOL2DataWriter: invalid Sybyl atom type");
 
-	TypeToStringMap::const_iterator it = atomTypeToStringMap.find(type);
+	const std::string& type_str = sybylAtomTypeToString(type);
 
-	if (it != atomTypeToStringMap.end())
-		return it->second;
+	if (!type_str.empty())
+		return type_str;
 
     if (extendedAtomTypes) {
 		const std::string& symbol = getSymbol(atom);
@@ -455,7 +448,7 @@ const std::string& Chem::MOL2DataWriter::getAtomTypeString(const Atom& atom, con
 	if (strictErrorChecking)
 		throw Base::IOError("MOL2DataWriter: unable to specify atom type");
 
-	return atomTypeToStringMap[SybylAtomType::Any];
+	return sybylAtomTypeToString(SybylAtomType::Any);
 }
 
 const std::string& Chem::MOL2DataWriter::getBondTypeString(const Bond& bond, const MolecularGraph& molgraph) const
@@ -470,10 +463,10 @@ const std::string& Chem::MOL2DataWriter::getBondTypeString(const Bond& bond, con
 	if (type == SybylBondType::AROMATIC && !aromaticBondTypes)
 		return getBondOrderString(bond);
 
-	TypeToStringMap::const_iterator it = bondTypeToStringMap.find(type);
+	const std::string& type_str = sybylBondTypeToString(type);
 
-	if (it != bondTypeToStringMap.end())
-		return it->second;
+	if (!type_str.empty())
+		return type_str;
 
 	if (strictErrorChecking)
 		throw Base::IOError("MOL2DataWriter: invalid Sybyl bond type");
@@ -486,18 +479,18 @@ const std::string& Chem::MOL2DataWriter::getBondOrderString(const Bond& bond) co
 	switch (getOrder(bond)) {
 
 		case 1:
-			return bondTypeToStringMap[SybylBondType::SINGLE];
+			return sybylBondTypeToString(SybylBondType::SINGLE);
 
 		case 2:
-			return bondTypeToStringMap[SybylBondType::DOUBLE];
+			return sybylBondTypeToString(SybylBondType::DOUBLE);
 
 		case 3:
-			return bondTypeToStringMap[SybylBondType::TRIPLE];
+			return sybylBondTypeToString(SybylBondType::TRIPLE);
 
 		default:
 			if (strictErrorChecking)
 				throw Base::IOError("MOL2DataWriter: invalid bond order");
 
-			return bondTypeToStringMap[SybylBondType::UNKNOWN];
+			return sybylBondTypeToString(SybylBondType::UNKNOWN);
 	}
 }

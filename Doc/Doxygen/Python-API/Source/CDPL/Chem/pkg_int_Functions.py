@@ -28,6 +28,20 @@ def sybylToAtomType(sybyl_type: int) -> int: pass
 
 ##
 # \brief 
+# \param sybyl_type 
+# \return 
+#
+def sybylBondTypeToString(sybyl_type: int) -> str: pass
+
+##
+# \brief 
+# \param sybyl_type 
+# \return 
+#
+def sybylAtomTypeToString(sybyl_type: int) -> str: pass
+
+##
+# \brief 
 # \param qry_type 
 # \param tgt_type 
 # \return 

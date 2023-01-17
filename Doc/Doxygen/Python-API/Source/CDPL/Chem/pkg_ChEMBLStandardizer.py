@@ -27,12 +27,12 @@ class ChEMBLStandardizer(Boost.Python.instance):
     ##
     # \brief 
     #
-    class Result(Boost.Python.enum):
+    class ChangeFlags(Boost.Python.enum):
 
         ##
-        # \brief NO_CHANGES.
+        # \brief NONE.
         #
-        NO_CHANGES = 0
+        NONE = 0
 
         ##
         # \brief EXCLUDED.
@@ -43,6 +43,26 @@ class ChEMBLStandardizer(Boost.Python.instance):
         # \brief H_REMOVED.
         #
         H_REMOVED = 2
+
+        ##
+        # \brief UNKNOWN_STEREO_STANDARDIZED.
+        #
+        UNKNOWN_STEREO_STANDARDIZED = 4
+
+        ##
+        # \brief BONDS_KEKULIZED.
+        #
+        BONDS_KEKULIZED = 8
+
+        ##
+        # \brief STRUCTURE_NORMALIZED.
+        #
+        STRUCTURE_NORMALIZED = 16
+
+        ##
+        # \brief CHARGES_REMOVED.
+        #
+        CHARGES_REMOVED = 32
 
     ##
     # \brief Initializes the \e %ChEMBLStandardizer instance.
@@ -76,30 +96,20 @@ class ChEMBLStandardizer(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param ignore 
-    #
-    def ignoreExcludedFlag(ignore: bool) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def excludedFlagIgnored() -> bool: pass
-
-    ##
-    # \brief 
     # \param mol 
+    # \param proc_excld 
     # \return 
     #
-    def standardize(mol: Molecule) -> Result: pass
+    def standardize(mol: Molecule, proc_excld: bool = True) -> ChangeFlags: pass
 
     ##
     # \brief 
     # \param mol 
     # \param std_mol 
+    # \param proc_excld 
     # \return 
     #
-    def standardize(mol: Molecule, std_mol: Molecule) -> Result: pass
+    def standardize(mol: Molecule, std_mol: Molecule, proc_excld: bool = True) -> ChangeFlags: pass
 
     ##
     # \brief 
@@ -120,8 +130,3 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \brief 
     #
     objectID = property(getObjectID)
-
-    ##
-    # \brief FIXME!
-    #
-    ignoreExclFlag = property(getIgnoreExclFlag, setIgnoreExclFlag)

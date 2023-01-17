@@ -74,7 +74,12 @@ namespace CDPL
 
 		CDPL_CHEM_API bool atomTypesMatch(unsigned int qry_type, unsigned int tgt_type);
 
+
 		CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
+
+		CDPL_CHEM_API const std::string& sybylAtomTypeToString(unsigned int sybyl_type);
+
+		CDPL_CHEM_API const std::string& sybylBondTypeToString(unsigned int sybyl_type);
 	}
 }
 

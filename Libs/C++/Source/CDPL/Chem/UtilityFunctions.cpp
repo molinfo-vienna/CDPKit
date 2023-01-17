@@ -31,6 +31,7 @@
 #include <functional>
 
 #include <boost/bind.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -46,8 +47,36 @@
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
 #include "CDPL/Chem/SMILESMoleculeReader.hpp"
 
+#include "MOL2FormatData.hpp"
+
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+	typedef boost::unordered_map<unsigned int, std::string> SybylTypeToStringMap;
+
+	SybylTypeToStringMap sybylAtomTypeToStringMap;
+	SybylTypeToStringMap sybylBondTypeToStringMap;
+	const std::string    EMPTY_STRING;
+	
+	struct Init {
+
+		Init() {
+			using namespace Chem;
+			using namespace MOL2;
+
+			for (std::size_t i = 0; i < sizeof(ATOM_TYPE_STRINGS) / sizeof(TypeToString); i++)
+				sybylAtomTypeToStringMap.insert(SybylTypeToStringMap::value_type(ATOM_TYPE_STRINGS[i].type, ATOM_TYPE_STRINGS[i].string));
+
+			for (std::size_t i = 0; i < sizeof(BOND_TYPE_STRINGS) / sizeof(TypeToString); i++)
+				sybylBondTypeToStringMap.insert(SybylTypeToStringMap::value_type(BOND_TYPE_STRINGS[i].type, BOND_TYPE_STRINGS[i].string));
+		}
+
+	} init;
+}
 
 
 Chem::Molecule::SharedPointer Chem::parseSMARTS(const std::string& smarts, bool init_qry)
@@ -576,6 +605,26 @@ unsigned int Chem::sybylToAtomType(unsigned int sybyl_type)
 		default:
 			return AtomType::UNKNOWN;
 	}
+}
+
+const std::string& Chem::sybylAtomTypeToString(unsigned int sybyl_type)
+{
+	SybylTypeToStringMap::const_iterator it = sybylAtomTypeToStringMap.find(sybyl_type);
+
+	if (it != sybylAtomTypeToStringMap.end())
+		return it->second;
+
+	return EMPTY_STRING;
+}
+
+const std::string& Chem::sybylBondTypeToString(unsigned int sybyl_type)
+{
+	SybylTypeToStringMap::const_iterator it = sybylBondTypeToStringMap.find(sybyl_type);
+
+	if (it != sybylBondTypeToStringMap.end())
+		return it->second;
+
+	return EMPTY_STRING;
 }
 
 bool Chem::atomTypesMatch(unsigned int qry_type, unsigned int tgt_type)

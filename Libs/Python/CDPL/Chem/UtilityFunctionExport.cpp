@@ -64,4 +64,8 @@ void CDPLPythonChem::exportUtilityFunctions()
 	python::def("containsFragmentWithMinSize", &Chem::containsFragmentWithMinSize, (python::arg("frag_list"), python::arg("min_size")));
 	python::def("atomTypesMatch", &Chem::atomTypesMatch, (python::arg("qry_type"), python::arg("tgt_type")));
 	python::def("sybylToAtomType", &Chem::sybylToAtomType, python::arg("sybyl_type"));
+	python::def("sybylAtomTypeToString", &Chem::sybylAtomTypeToString,  python::arg("sybyl_type"),
+				python::return_value_policy<python::copy_const_reference>());
+	python::def("sybylBondTypeToString", &Chem::sybylBondTypeToString,  python::arg("sybyl_type"),
+				python::return_value_policy<python::copy_const_reference>());
 }
