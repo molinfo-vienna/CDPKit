@@ -607,7 +607,7 @@ unsigned int Chem::sybylToAtomType(unsigned int sybyl_type)
 	}
 }
 
-const std::string& Chem::sybylAtomTypeToString(unsigned int sybyl_type)
+const std::string& Chem::getSybylAtomTypeString(unsigned int sybyl_type)
 {
 	SybylTypeToStringMap::const_iterator it = sybylAtomTypeToStringMap.find(sybyl_type);
 
@@ -617,7 +617,7 @@ const std::string& Chem::sybylAtomTypeToString(unsigned int sybyl_type)
 	return EMPTY_STRING;
 }
 
-const std::string& Chem::sybylBondTypeToString(unsigned int sybyl_type)
+const std::string& Chem::getSybylBondTypeString(unsigned int sybyl_type)
 {
 	SybylTypeToStringMap::const_iterator it = sybylBondTypeToStringMap.find(sybyl_type);
 

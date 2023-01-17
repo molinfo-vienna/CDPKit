@@ -77,9 +77,9 @@ namespace CDPL
 
 		CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
 
-		CDPL_CHEM_API const std::string& sybylAtomTypeToString(unsigned int sybyl_type);
+		CDPL_CHEM_API const std::string& getSybylAtomTypeString(unsigned int sybyl_type);
 
-		CDPL_CHEM_API const std::string& sybylBondTypeToString(unsigned int sybyl_type);
+		CDPL_CHEM_API const std::string& getSybylBondTypeString(unsigned int sybyl_type);
 	}
 }
 

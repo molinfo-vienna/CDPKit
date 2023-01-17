@@ -433,7 +433,7 @@ const std::string& Chem::MOL2DataWriter::getAtomTypeString(const Atom& atom, con
 	if (type > SybylAtomType::MAX_TYPE && strictErrorChecking)
 		throw Base::IOError("MOL2DataWriter: invalid Sybyl atom type");
 
-	const std::string& type_str = sybylAtomTypeToString(type);
+	const std::string& type_str = getSybylAtomTypeString(type);
 
 	if (!type_str.empty())
 		return type_str;
@@ -448,7 +448,7 @@ const std::string& Chem::MOL2DataWriter::getAtomTypeString(const Atom& atom, con
 	if (strictErrorChecking)
 		throw Base::IOError("MOL2DataWriter: unable to specify atom type");
 
-	return sybylAtomTypeToString(SybylAtomType::Any);
+	return getSybylAtomTypeString(SybylAtomType::Any);
 }
 
 const std::string& Chem::MOL2DataWriter::getBondTypeString(const Bond& bond, const MolecularGraph& molgraph) const
@@ -463,7 +463,7 @@ const std::string& Chem::MOL2DataWriter::getBondTypeString(const Bond& bond, con
 	if (type == SybylBondType::AROMATIC && !aromaticBondTypes)
 		return getBondOrderString(bond);
 
-	const std::string& type_str = sybylBondTypeToString(type);
+	const std::string& type_str = getSybylBondTypeString(type);
 
 	if (!type_str.empty())
 		return type_str;
@@ -479,18 +479,18 @@ const std::string& Chem::MOL2DataWriter::getBondOrderString(const Bond& bond) co
 	switch (getOrder(bond)) {
 
 		case 1:
-			return sybylBondTypeToString(SybylBondType::SINGLE);
+			return getSybylBondTypeString(SybylBondType::SINGLE);
 
 		case 2:
-			return sybylBondTypeToString(SybylBondType::DOUBLE);
+			return getSybylBondTypeString(SybylBondType::DOUBLE);
 
 		case 3:
-			return sybylBondTypeToString(SybylBondType::TRIPLE);
+			return getSybylBondTypeString(SybylBondType::TRIPLE);
 
 		default:
 			if (strictErrorChecking)
 				throw Base::IOError("MOL2DataWriter: invalid bond order");
 
-			return sybylBondTypeToString(SybylBondType::UNKNOWN);
+			return getSybylBondTypeString(SybylBondType::UNKNOWN);
 	}
 }

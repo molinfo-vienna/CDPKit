@@ -31,14 +31,14 @@ def sybylToAtomType(sybyl_type: int) -> int: pass
 # \param sybyl_type 
 # \return 
 #
-def sybylBondTypeToString(sybyl_type: int) -> str: pass
+def getSybylBondTypeString(sybyl_type: int) -> str: pass
 
 ##
 # \brief 
 # \param sybyl_type 
 # \return 
 #
-def sybylAtomTypeToString(sybyl_type: int) -> str: pass
+def getSybylAtomTypeString(sybyl_type: int) -> str: pass
 
 ##
 # \brief 
