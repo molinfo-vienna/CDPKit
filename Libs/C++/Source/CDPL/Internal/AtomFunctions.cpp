@@ -32,6 +32,9 @@
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondStereoFlag.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 
 #include "AtomFunctions.hpp"
@@ -54,8 +57,18 @@ bool Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularG
 		return false;
  
 	if (flags == AtomPropertyFlag::DEFAULT)
-		flags = AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT;
+		flags = AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT |
+			AtomPropertyFlag::ATOM_MAPPING_ID | AtomPropertyFlag::CONFIGURATION;
 
+	if ((flags & AtomPropertyFlag::ISOTOPE) && getIsotope(atom) > 0)
+		return false;
+
+    if ((flags & AtomPropertyFlag::FORMAL_CHARGE) && getFormalCharge(atom) != 0)
+		return false;
+
+    if ((flags & AtomPropertyFlag::H_COUNT) && getImplicitHydrogenCount(atom) != 0)
+		return false;
+	
 	bool first_bond = true;
 
 	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
@@ -75,18 +88,29 @@ bool Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularG
 			return false;
 
 		first_bond = false;
+				
+		if (flags & AtomPropertyFlag::CONFIGURATION) {
+			if (get2DStereoFlag(bond) != BondStereoFlag::PLAIN)
+				return false;
+
+			const StereoDescriptor& sto_descr = getStereoDescriptor(nbr_atom);
+			unsigned int config = sto_descr.getConfiguration();
+
+			if (config != AtomConfiguration::R && config != AtomConfiguration::S)
+				continue;
+
+			if (!sto_descr.isValid(nbr_atom))
+				continue;
+
+			const Chem::Atom* const* ref_atoms = sto_descr.getReferenceAtoms();
+
+			for (std::size_t i = 0, num_ref = sto_descr.getNumReferenceAtoms(); i < num_ref; i++)
+				if (ref_atoms[i] == &atom)
+					return false;
+		}
 	}
 
 	if (first_bond)
-		return false;
-
-    if ((flags & AtomPropertyFlag::ISOTOPE) && getIsotope(atom) > 1)
-		return false;
-
-    if ((flags & AtomPropertyFlag::FORMAL_CHARGE) && getFormalCharge(atom) != 0)
-		return false;
-
-    if ((flags & AtomPropertyFlag::H_COUNT) && getImplicitHydrogenCount(atom) != 0)
 		return false;
 
     return true;

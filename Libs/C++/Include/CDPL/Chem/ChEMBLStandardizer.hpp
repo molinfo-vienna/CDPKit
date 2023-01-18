@@ -34,9 +34,17 @@
 #ifndef CDPL_CHEM_CHEMBLSTANDARDIZER_HPP
 #define CDPL_CHEM_CHEMBLSTANDARDIZER_HPP
 
+#include <vector>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/KekuleStructureCalculator.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
+#include "CDPL/Chem/HashCodeCalculator.hpp"
+#include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -57,36 +65,73 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<ChEMBLStandardizer> SharedPointer;
 
-			enum Result	{
+			enum ChangeFlags {
 			
-			    NO_CHANGES = 0x0,
-				EXCLUDED   = 0x1,
-				H_REMOVED  = 0x2
+			    NONE                         = 0x0,
+				EXCLUDED                     = 0x1,
+				H_REMOVED                    = 0x2,
+				UNKNOWN_STEREO_STANDARDIZED  = 0x4,
+				BONDS_KEKULIZED              = 0x8,
+				STRUCTURE_NORMALIZED         = 0x10,
+				CHARGES_REMOVED              = 0x20,
+				TARTRATE_STEREO_CLEARED      = 0x40,
+				STRUCTURE_2D_CLEANED         = 0x80
 			};
 
 			ChEMBLStandardizer();
 
 			ChEMBLStandardizer(const ChEMBLStandardizer& standardizer);
+		
+			ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
 
-			void processExcludedMolecules(bool process);
+			ChangeFlags standardize(const Molecule& mol, Molecule& std_mol, bool proc_excld = false);
 
-			bool excludedMoleculesProcessed() const;
-			
-			Result standardize(Molecule& mol);
+			ChangeFlags getParent(Molecule& mol);
 
-			Result standardize(const Molecule& mol, Molecule& std_mol);
-
-			bool getParent(Molecule& mol);
-
-			bool getParent(const Molecule& mol, Molecule& parent_mol);
+			ChangeFlags getParent(const Molecule& mol, Molecule& parent_mol);
 			
 			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
 	    
 		  private:
-			bool checkIfExcluded(const Molecule& mol) const;
+			typedef std::vector<Atom*> AtomList;
+
 			void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
 
-			bool procExcldMols;
+			bool checkExclusionCriterions(const Molecule& mol) const;
+
+			bool standardizeUnknownStereochemistry(Molecule& mol) const;
+
+			bool kekulizeBonds(Molecule& mol);
+
+			bool removeExplicitHydrogens(Molecule& mol) const;			
+			bool isRemovableHydrogen(const Atom& atom) const;
+
+			bool normalizeStructure(Molecule& mol);
+			const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
+
+			bool removeCharges(Molecule& mol);
+			std::size_t getMatches(const Molecule& ptn, const Molecule& mol, AtomList& matches);
+			bool cmpCanonicalNumber(const Atom* atom1, const Atom* atom2) const;
+			bool incrementCharge(Atom& atom, bool checked) const;
+
+			bool removeTartrateStereochemistry(Molecule& mol);
+
+			bool cleanup2DStructure(Molecule& mol);
+			double calc2DBondAngle(const Molecule& mol, const Atom& ctr_atom, const Atom& nbr_atom1, const Atom& nbr_atom2);
+			void rotateSubstituent(const Molecule& mol, const Atom& ctr_atom, const Atom& subst_atom, double rot_ang);
+
+			HashCodeCalculator           hashCodeCalc;
+			KekuleStructureCalculator    kekuleStructureCalc;
+			Util::STArray                kekulizedBondOrders;
+			SubstructureSearch           substructSearch;
+			CanonicalNumberingCalculator canonNumberingCalc;
+			Util::STArray                canonAtomNumbering;
+			AtomList                     posChargedAtoms;
+			AtomList                     posChargedNoHAtoms;
+			AtomList                     negChargedAtoms;
+			AtomList                     negChargedAcidAtoms;
+			Math::Vector2DArray          atom2DCoords;
+			Util::BitSet                 tmpBitSet;
 		};
     }
 }

@@ -42,10 +42,16 @@ void CDPLPythonChem::exportChEMBLStandardizer()
     python::class_<Chem::ChEMBLStandardizer, Chem::ChEMBLStandardizer::SharedPointer> cl("ChEMBLStandardizer", python::no_init);
     python::scope scope = cl;
 
-	python::enum_<Chem::ChEMBLStandardizer::Result>("Result")
-		.value("NO_CHANGES", Chem::ChEMBLStandardizer::NO_CHANGES)
+	python::enum_<Chem::ChEMBLStandardizer::ChangeFlags>("ChangeFlags")
+		.value("NONE", Chem::ChEMBLStandardizer::NONE)
 		.value("EXCLUDED", Chem::ChEMBLStandardizer::EXCLUDED)
 		.value("H_REMOVED", Chem::ChEMBLStandardizer::H_REMOVED)
+		.value("UNKNOWN_STEREO_STANDARDIZED", Chem::ChEMBLStandardizer::UNKNOWN_STEREO_STANDARDIZED)
+		.value("BONDS_KEKULIZED", Chem::ChEMBLStandardizer::BONDS_KEKULIZED)
+		.value("STRUCTURE_NORMALIZED", Chem::ChEMBLStandardizer::STRUCTURE_NORMALIZED)
+		.value("CHARGES_REMOVED", Chem::ChEMBLStandardizer::CHARGES_REMOVED)
+		.value("TARTRATE_STEREO_CLEARED", Chem::ChEMBLStandardizer::TARTRATE_STEREO_CLEARED)
+		.value("STRUCTURE_2D_CLEANED", Chem::ChEMBLStandardizer::STRUCTURE_2D_CLEANED)
 		.export_values();
 
     cl
@@ -54,16 +60,15 @@ void CDPLPythonChem::exportChEMBLStandardizer()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::ChEMBLStandardizer>())	
 		.def("assign", &Chem::ChEMBLStandardizer::operator=, 
 			 (python::arg("self"), python::arg("standardizer")), python::return_self<>())
-		.def("processExcludedMolecules",  &Chem::ChEMBLStandardizer::processExcludedMolecules, (python::arg("self"), python::arg("process")))
-		.def("excludedMoleculesProcessed",  &Chem::ChEMBLStandardizer::excludedMoleculesProcessed, python::arg("self"))
-		.def("standardize", static_cast<Chem::ChEMBLStandardizer::Result (Chem::ChEMBLStandardizer::*)(Chem::Molecule&)>
-			 (&Chem::ChEMBLStandardizer::standardize), (python::arg("self"), python::arg("mol")))
-		.def("standardize", static_cast<Chem::ChEMBLStandardizer::Result (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
-			 (&Chem::ChEMBLStandardizer::standardize), (python::arg("self"), python::arg("mol"), python::arg("std_mol")))
-		.def("getParent", static_cast<bool (Chem::ChEMBLStandardizer::*)(Chem::Molecule&)>
+		.def("standardize", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(Chem::Molecule&, bool)>
+			 (&Chem::ChEMBLStandardizer::standardize),
+			 (python::arg("self"), python::arg("mol"), python::arg("proc_excld") = false))
+		.def("standardize", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&, bool)>
+			 (&Chem::ChEMBLStandardizer::standardize),
+			 (python::arg("self"), python::arg("mol"), python::arg("std_mol"), python::arg("proc_excld") = false))
+		.def("getParent", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(Chem::Molecule&)>
 			 (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol")))
-		.def("getParent", static_cast<bool (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
+		.def("getParent", static_cast<Chem::ChEMBLStandardizer::ChangeFlags (Chem::ChEMBLStandardizer::*)(const Chem::Molecule&, Chem::Molecule&)>
 			 (&Chem::ChEMBLStandardizer::getParent), (python::arg("self"), python::arg("mol"), python::arg("parent_mol")))
-		.add_property("procExcludedMolecules", &Chem::ChEMBLStandardizer::excludedMoleculesProcessed, &Chem::ChEMBLStandardizer::processExcludedMolecules)
 		;
 }

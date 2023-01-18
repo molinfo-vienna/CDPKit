@@ -64,6 +64,16 @@ class ChEMBLStandardizer(Boost.Python.instance):
         #
         CHARGES_REMOVED = 32
 
+        ##
+        # \brief TARTRATE_STEREO_CLEARED.
+        #
+        TARTRATE_STEREO_CLEARED = 64
+
+        ##
+        # \brief STRUCTURE_2D_CLEANED.
+        #
+        STRUCTURE_2D_CLEANED = 128
+
     ##
     # \brief Initializes the \e %ChEMBLStandardizer instance.
     #
@@ -100,7 +110,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \param proc_excld 
     # \return 
     #
-    def standardize(mol: Molecule, proc_excld: bool = True) -> ChangeFlags: pass
+    def standardize(mol: Molecule, proc_excld: bool = False) -> ChangeFlags: pass
 
     ##
     # \brief 
@@ -109,14 +119,14 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \param proc_excld 
     # \return 
     #
-    def standardize(mol: Molecule, std_mol: Molecule, proc_excld: bool = True) -> ChangeFlags: pass
+    def standardize(mol: Molecule, std_mol: Molecule, proc_excld: bool = False) -> ChangeFlags: pass
 
     ##
     # \brief 
     # \param mol 
     # \return 
     #
-    def getParent(mol: Molecule) -> bool: pass
+    def getParent(mol: Molecule) -> ChangeFlags: pass
 
     ##
     # \brief 
@@ -124,7 +134,7 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \param parent_mol 
     # \return 
     #
-    def getParent(mol: Molecule, parent_mol: Molecule) -> bool: pass
+    def getParent(mol: Molecule, parent_mol: Molecule) -> ChangeFlags: pass
 
     ##
     # \brief 

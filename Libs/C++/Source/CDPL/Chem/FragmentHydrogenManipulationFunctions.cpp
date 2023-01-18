@@ -26,15 +26,10 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/FragmentFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
@@ -57,9 +52,6 @@ bool Chem::makeHydrogenDeplete(Fragment& frag)
 
 		frag.removeAtom(i);
 
-		std::for_each(atom.getBondsBegin(), atom.getBondsEnd(),
-					  boost::bind<bool>(&Fragment::removeBond, boost::ref(frag), _1));
-
 		num_atoms--;
 		changes = true;
 	}
@@ -81,9 +73,6 @@ bool Chem::makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags)
 		}
 
 		frag.removeAtom(i);
-
-		std::for_each(atom.getBondsBegin(), atom.getBondsEnd(),
-					  boost::bind<bool>(&Fragment::removeBond, boost::ref(frag), _1));
 
 		num_atoms--;
 		changes = true;

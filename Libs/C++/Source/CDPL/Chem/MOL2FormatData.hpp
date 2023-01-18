@@ -66,7 +66,6 @@ namespace CDPL
 
 			const TypeToString ATOM_TYPE_STRINGS[] = {
 			
-				{ SybylAtomType::UNKNOWN, ""      },
 				{ SybylAtomType::C_3    , "C.3"   },
 				{ SybylAtomType::C_2    , "C.2"   },
 				{ SybylAtomType::C_1    , "C.1"   },
