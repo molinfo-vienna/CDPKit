@@ -35,10 +35,14 @@
 #define CDPL_CHEM_CHEMBLSTANDARDIZER_HPP
 
 #include <vector>
+#include <utility>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/unordered_set.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/KekuleStructureCalculator.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
@@ -52,11 +56,9 @@ namespace CDPL
 
     namespace Chem
     {
-
-		class Molecule;
 		
 		/**
-		 * \brief ChEMBLStandardizer.
+		 * \brief Implementation of the ChEMBL structure preprocessing pipeline.
 		 * \see [\ref CSCP]
 		 */
 		class CDPL_CHEM_API ChEMBLStandardizer 
@@ -69,13 +71,16 @@ namespace CDPL
 			
 			    NONE                         = 0x0,
 				EXCLUDED                     = 0x1,
-				H_REMOVED                    = 0x2,
+				EXPLICIT_H_REMOVED           = 0x2,
 				UNKNOWN_STEREO_STANDARDIZED  = 0x4,
 				BONDS_KEKULIZED              = 0x8,
 				STRUCTURE_NORMALIZED         = 0x10,
 				CHARGES_REMOVED              = 0x20,
 				TARTRATE_STEREO_CLEARED      = 0x40,
-				STRUCTURE_2D_CLEANED         = 0x80
+				STRUCTURE_2D_CORRECTED       = 0x80,
+				ISOTOPE_INFO_CLEARED         = 0x100,
+				SALT_COMPONENTS_REMOVED      = 0x200,
+				SOLVENT_COMPONENTS_REMOVED   = 0x400
 			};
 
 			ChEMBLStandardizer();
@@ -84,11 +89,11 @@ namespace CDPL
 		
 			ChangeFlags standardize(Molecule& mol, bool proc_excld = false);
 
-			ChangeFlags standardize(const Molecule& mol, Molecule& std_mol, bool proc_excld = false);
+			ChangeFlags standardize(const Molecule& mol, Molecule& std_mol, bool proc_excluded = false);
 
-			ChangeFlags getParent(Molecule& mol);
+			ChangeFlags getParent(Molecule& mol, bool neutralize = true, bool check_exclusion = true);
 
-			ChangeFlags getParent(const Molecule& mol, Molecule& parent_mol);
+			ChangeFlags getParent(const Molecule& mol, Molecule& parent_mol, bool neutralize = true, bool check_exclusion = true);
 			
 			ChEMBLStandardizer& operator=(const ChEMBLStandardizer& standardizer);
 	    
@@ -120,6 +125,11 @@ namespace CDPL
 			double calc2DBondAngle(const Molecule& mol, const Atom& ctr_atom, const Atom& nbr_atom1, const Atom& nbr_atom2);
 			void rotateSubstituent(const Molecule& mol, const Atom& ctr_atom, const Atom& subst_atom, double rot_ang);
 
+			typedef std::pair<Base::uint64, Base::uint64> StructureID;
+			typedef std::pair<const Fragment*, StructureID> MoleculeComponent;
+			typedef std::vector<MoleculeComponent> MoleculeComponentList;
+			typedef boost::unordered_set<StructureID> MoleculeComponentSet;
+
 			HashCodeCalculator           hashCodeCalc;
 			KekuleStructureCalculator    kekuleStructureCalc;
 			Util::STArray                kekulizedBondOrders;
@@ -131,7 +141,12 @@ namespace CDPL
 			AtomList                     negChargedAtoms;
 			AtomList                     negChargedAcidAtoms;
 			Math::Vector2DArray          atom2DCoords;
-			Util::BitSet                 tmpBitSet;
+			Util::BitSet                 markedAtomSet;
+			Fragment                     tmpFragment;
+			BasicMolecule                tmpMolecule;
+			MoleculeComponentList        molCompList1;
+			MoleculeComponentList        molCompList2;
+			MoleculeComponentSet         molCompSet;
 		};
     }
 }

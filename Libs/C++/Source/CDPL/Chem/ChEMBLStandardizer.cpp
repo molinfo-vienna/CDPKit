@@ -34,7 +34,6 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/thread.hpp>
-#include <boost/unordered_set.hpp>
 #include <boost/bind.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
@@ -49,9 +48,9 @@
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/FragmentFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -82,13 +81,28 @@ namespace
 
 	boost::once_flag initSaltAndSolventDataFlag = BOOST_ONCE_INIT;
 	
-	typedef std::pair<Base::uint64, std::size_t> StructureID;
+	typedef std::pair<Base::uint64, Base::uint64> StructureID;
 	typedef boost::unordered_set<StructureID> StructureIDSet;
 
 	StructureIDSet chemblSaltStructureIDs;
 	StructureIDSet chemblSolventStructureIDs;
 
+	inline StructureID genStructureID(Chem::MolecularGraph& molgraph, Chem::HashCodeCalculator& hash_calc)
+	{
+		return StructureID(hash_calc.calculate(molgraph), (molgraph.getNumAtoms() << 32) + molgraph.getNumBonds());
+	}
+
+	void initStructureIDHashCalculator(Chem::HashCodeCalculator& hash_calc)
+	{
+		using namespace Chem;
+
+		hash_calc.includeGlobalStereoFeatures(false);
+		hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
+		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
+	}
+
 	void initSaltAndSolventData()
+
 	{
 		using namespace Chem;
 
@@ -105,13 +119,9 @@ namespace
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 		HashCodeCalculator hash_calc;
-
-		hash_calc.includeGlobalStereoFeatures(false);
-		hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
-		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, 
-																					 BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-																					 BondPropertyFlag::AROMATICITY));
 		BasicMolecule mol;
+
+		initStructureIDHashCalculator(hash_calc);
 
 		for (std::size_t i = 0; i < 2; i++) {
 			SMILESMoleculeReader smi_reader(i == 0 ? salts_is : solvents_is);
@@ -125,7 +135,7 @@ namespace
 				setRingFlags(mol, false);
 				setAromaticityFlags(mol, false);
 
-				(i == 0 ? chemblSaltStructureIDs : chemblSolventStructureIDs).insert(StructureID(hash_calc.calculate(mol), mol.getNumAtoms()));
+				(i == 0 ? chemblSaltStructureIDs : chemblSolventStructureIDs).insert(genStructureID(mol, hash_calc));
 			}
 		}
 	}
@@ -244,7 +254,7 @@ namespace
       false,  // #29 Cu
       true,   // #30 Zn
       true,   // #31 Ga
-      true,   // #32 Ge  see github #2606
+      true,   // #32 Ge
       false,  // #33 As
       false,  // #34 Se
       false,  // #35 Br
@@ -262,8 +272,8 @@ namespace
       false,  // #47 Ag
       true,   // #48 Cd
       true,   // #49 In
-      true,   // #50 Sn  see github #2606
-      true,   // #51 Sb  see github #2775
+      true,   // #50 Sn
+      true,   // #51 Sb
       false,  // #52 Te
       false,  // #53 I
       false,  // #54 Xe
@@ -294,8 +304,8 @@ namespace
       false,  // #79 Au
       true,   // #80 Hg
       true,   // #81 Tl
-      true,   // #82 Pb  see github #2606
-      true,   // #83 Bi  see github #2775
+      true,   // #82 Pb
+      true,   // #83 Bi
       false,  // #84 Po
       false,  // #85 At
       false,  // #86 Rn
@@ -355,19 +365,26 @@ namespace
 Chem::ChEMBLStandardizer::ChEMBLStandardizer()
 {
 	substructSearch.uniqueMappingsOnly(true);
+
+	initStructureIDHashCalculator(hashCodeCalc);
 }
 
 Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)
 {
 	substructSearch.uniqueMappingsOnly(true);
+
+	initStructureIDHashCalculator(hashCodeCalc);
 }
 
-Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Molecule& mol, bool proc_excld)
+Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Molecule& mol, bool proc_excluded)
 {
 	ChangeFlags changes = NONE;
 
+	if (mol.getNumAtoms() == 0)
+		return NONE;
+
 	if (checkExclusionCriterions(mol)) {
-		if (!proc_excld)
+		if (!proc_excluded)
 			return EXCLUDED;
 
 		changes = EXCLUDED;
@@ -380,7 +397,7 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Mole
 		changes = ChangeFlags(changes | BONDS_KEKULIZED);
 
 	if (removeExplicitHydrogens(mol))
-		changes = ChangeFlags(changes | H_REMOVED);
+		changes = ChangeFlags(changes | EXPLICIT_H_REMOVED);
 
 	if (normalizeStructure(mol))
 		changes = ChangeFlags(changes | STRUCTURE_NORMALIZED);
@@ -392,34 +409,138 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Mole
 		changes = ChangeFlags(changes | TARTRATE_STEREO_CLEARED);
 	
 	if (cleanup2DStructure(mol))
-		changes = ChangeFlags(changes | STRUCTURE_2D_CLEANED);
+		changes = ChangeFlags(changes | STRUCTURE_2D_CORRECTED);
 	
 	return changes;
 }
 
-Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(const Molecule& mol, Molecule& std_mol, bool proc_excld)
+Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(const Molecule& mol, Molecule& std_mol, bool proc_excluded)
 {
 	copyMolecule(mol, std_mol);
 	
-	return standardize(std_mol, proc_excld);
+	return standardize(std_mol, proc_excluded);
 }
 
-Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecule& mol)
+Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecule& mol, bool neutralize, bool check_exclusion)
 {
-	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+	if (mol.getNumAtoms() == 0)
+		return NONE;
 
 	ChangeFlags changes = NONE;
 	
+	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+
+		if (getIsotope(atom) > 0) {
+			setIsotope(atom, 0);
+
+			changes = ChangeFlags(changes | ISOTOPE_INFO_CLEARED);
+		}
+	}   
+
+	if (removeExplicitHydrogens(mol))
+		changes = ChangeFlags(changes | EXPLICIT_H_REMOVED);
+
+	FragmentList::SharedPointer mol_comps = perceiveComponents(mol, false);
+
+	if (mol_comps->getSize() == 1) {
+		if (check_exclusion && checkExclusionCriterions(mol))
+			changes = ChangeFlags(changes | EXCLUDED);
+
+		if (neutralize && removeCharges(mol))
+			changes = ChangeFlags(changes | CHARGES_REMOVED);
+
+		return changes;
+	}
+
+	perceiveSSSR(mol, false);
+	perceiveHybridizationStates(mol, false);
+	setRingFlags(mol, false);
+	setAromaticityFlags(mol, false);
+
+	molCompList1.clear();
+
+	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+
+	for (FragmentList::ConstElementIterator it = mol_comps->getElementsBegin(), end = mol_comps->getElementsEnd(); it != end; ++it) {
+		const Fragment& orig_comp = *it;
+
+		tmpFragment = orig_comp;
+
+		makeHydrogenDeplete(tmpFragment);
+
+		StructureID struct_id = genStructureID(tmpFragment, hashCodeCalc);
+
+		if (chemblSolventStructureIDs.find(struct_id) != chemblSolventStructureIDs.end())
+			continue;
+
+		molCompList1.push_back(MoleculeComponent(&orig_comp, struct_id));
+	}
+
+	if (molCompList1.empty()) {
+		if (check_exclusion && checkExclusionCriterions(mol))
+			changes = ChangeFlags(changes | EXCLUDED);
+
+		if (neutralize && removeCharges(mol))
+			changes = ChangeFlags(changes | CHARGES_REMOVED);
+
+		return changes;
+	}
+
+	changes = ChangeFlags(changes | SOLVENT_COMPONENTS_REMOVED);
+
+	molCompList2.clear();
+
+	for (MoleculeComponentList::const_iterator it = molCompList1.begin(), end = molCompList1.end(); it != end; ++it) {
+		const MoleculeComponent& comp = *it;
+
+		if (chemblSaltStructureIDs.find(comp.second) != chemblSaltStructureIDs.end())
+			continue;
+
+		molCompList2.push_back(comp);
+	}
+
+	if (molCompList2.empty())
+		molCompList2.swap(molCompList1);
+
+	molCompSet.clear();
+
+	for (MoleculeComponentList::const_iterator it1 = molCompList2.begin(), end1 = molCompList2.end(); it1 != end1; ++it1) {
+		const MoleculeComponent& comp = *it1;
+
+		tmpMolecule = *comp.first;
+
+		if (neutralize && removeCharges(tmpMolecule)) {
+			perceiveSSSR(tmpMolecule, false);
+			perceiveHybridizationStates(tmpMolecule, false);
+			setAromaticityFlags(tmpMolecule, false);
+		}
+
+		calcImplicitHydrogenCounts(tmpMolecule, makeHydrogenDeplete(tmpMolecule));
+
+		molCompSet.insert(genStructureID(tmpMolecule, hashCodeCalc));
+	
+	}
+
+	if (molCompSet.size() == 1) {
+		
+	} else {
+	}
+
+
 	// TODO
+
+	clearComponents(mol);
+	clearSSSR(mol);
 	
 	return changes;
 }
 
-Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(const Molecule& mol, Molecule& parent_mol)
+Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(const Molecule& mol, Molecule& parent_mol, bool neutralize, bool check_exclusion)
 {
 	copyMolecule(mol, parent_mol);
 	
-	return getParent(parent_mol);
+	return getParent(parent_mol, neutralize, check_exclusion);
 }
 
 Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStandardizer& standardizer)
@@ -768,16 +889,16 @@ bool Chem::ChEMBLStandardizer::removeCharges(Molecule& mol)
 		long neg_surplus = num_neg_atoms - q_matched;
 
 		if (neg_surplus > 0 && n_matched > 0) { // zwitterion with more negative charges than quaternary positive centres
-			tmpBitSet.resize(mol.getNumAtoms());
-			tmpBitSet.reset();
+			markedAtomSet.resize(mol.getNumAtoms());
+			markedAtomSet.reset();
 
 			for (AtomList::const_iterator it = negChargedAcidAtoms.begin(), end = negChargedAcidAtoms.end(); it != end; ++it)
-				tmpBitSet.set((*it)->getIndex());
+				markedAtomSet.set((*it)->getIndex());
 				
 			for (AtomList::const_iterator it = negChargedAtoms.begin(), end = negChargedAtoms.end(); it != end; ++it) {
 				Atom* atom = *it;
 
-				if (tmpBitSet.test(atom->getIndex()))
+				if (markedAtomSet.test(atom->getIndex()))
 					continue;
 			
 				if (incrementCharge(*atom, true)) {
@@ -795,8 +916,8 @@ bool Chem::ChEMBLStandardizer::removeCharges(Molecule& mol)
 		neg_surplus = a_matched - q_matched;
 		
 		if (neg_surplus > 0) { 	// now do the other negative groups if we still have charges left:
-			tmpBitSet.resize(mol.getNumAtoms());
-			tmpBitSet.reset();
+			markedAtomSet.resize(mol.getNumAtoms());
+			markedAtomSet.reset();
 
 			for (AtomList::const_iterator it = negChargedAtoms.begin(), end = negChargedAtoms.end(); it != end; ++it) {
 				Atom* atom = *it;
@@ -805,10 +926,10 @@ bool Chem::ChEMBLStandardizer::removeCharges(Molecule& mol)
 					const Atom& nbr_atom = *n_it;
 				
 					if (getFormalCharge(nbr_atom) > 0) {  // if the neighbor has a positive charge, neutralize only once (e.g., NO3-)
-						if (!tmpBitSet.test(nbr_atom.getIndex()))
-							tmpBitSet.set(nbr_atom.getIndex());
+						if (!markedAtomSet.test(nbr_atom.getIndex()))
+							markedAtomSet.set(nbr_atom.getIndex());
 						else
-							tmpBitSet.set(atom->getIndex());
+							markedAtomSet.set(atom->getIndex());
 
 						break;
 					}
@@ -819,7 +940,7 @@ bool Chem::ChEMBLStandardizer::removeCharges(Molecule& mol)
 			for (AtomList::const_iterator it = negChargedAcidAtoms.begin(), end = negChargedAcidAtoms.end(); it != end; ++it) {
 				Atom* atom = *it;
 				
-				if (getFormalCharge(*atom)  >= 0 || tmpBitSet.test(atom->getIndex())) // skip ahead if we already neutralized this or if it is part of a zwitterion
+				if (getFormalCharge(*atom)  >= 0 || markedAtomSet.test(atom->getIndex())) // skip ahead if we already neutralized this or if it is part of a zwitterion
 					continue;
 				
 				incrementCharge(*atom, false); // add hydrogen to first negative acidic atom, increase formal charge
@@ -1073,17 +1194,17 @@ double Chem::ChEMBLStandardizer::calc2DBondAngle(const Molecule& mol, const Atom
 
 void Chem::ChEMBLStandardizer::rotateSubstituent(const Molecule& mol, const Atom& ctr_atom, const Atom& subst_atom, double rot_ang)
 {
-	tmpBitSet.resize(mol.getNumAtoms());
-	tmpBitSet.reset();
-	tmpBitSet.set(ctr_atom.getIndex());
+	markedAtomSet.resize(mol.getNumAtoms());
+	markedAtomSet.reset();
+	markedAtomSet.set(ctr_atom.getIndex());
 
-	markReachableAtoms(subst_atom, mol, tmpBitSet, false);
+	markReachableAtoms(subst_atom, mol, markedAtomSet, false);
 
 	double rot_ang_cos = std::cos(rot_ang);
 	double rot_ang_sin = std::sin(rot_ang);
 	const Math::Vector2D& ctr_atom_pos = atom2DCoords[ctr_atom.getIndex()];
 	
-	for (Util::BitSet::size_type atom_idx = tmpBitSet.find_first(); atom_idx != Util::BitSet::npos; atom_idx = tmpBitSet.find_next(atom_idx)) {
+	for (Util::BitSet::size_type atom_idx = markedAtomSet.find_first(); atom_idx != Util::BitSet::npos; atom_idx = markedAtomSet.find_next(atom_idx)) {
 		Math::Vector2D& atom_pos = atom2DCoords[atom_idx];
 		double x_transl = atom_pos(0) - ctr_atom_pos(0);
 		double y_transl = atom_pos(1) - ctr_atom_pos(1);
