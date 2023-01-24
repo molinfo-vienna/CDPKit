@@ -74,7 +74,7 @@ def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input file>' % sys.argv[0])
 
-    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(sys.argv[1]) 
     
@@ -83,7 +83,7 @@ def main() -> None:
     
     # read and process molecules one after the other until the end of input has been reached
     try:
-        if reader.read(mol):
+        while reader.read(mol):
             try:
                 procMolecule(mol)
             except Exception as e:
@@ -96,4 +96,3 @@ def main() -> None:
         
 if __name__ == '__main__':
     main()
-

@@ -114,7 +114,7 @@ def main() -> None:
     
     # read and process molecules one after the other until the end of input has been reached
     try:
-        if reader.read(mol):
+        while reader.read(mol):
             try:
                 procMolecule(mol)
             except Exception as e:
@@ -127,4 +127,3 @@ def main() -> None:
         
 if __name__ == '__main__':
     main()
-

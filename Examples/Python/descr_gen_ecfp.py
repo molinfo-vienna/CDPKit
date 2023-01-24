@@ -66,29 +66,25 @@ def parseArgs() -> argparse.Namespace:
                         dest='in_file',
                         required=True,
                         metavar='<input file>',
-                        help='Input molecule file',
-                        nargs=1)
+                        help='Input molecule file')
     parser.add_argument('-o',
                         dest='out_file',
                         required=True,
                         metavar='<output file>',
-                        help='Fingerprint output file',
-                        nargs=1)
+                        help='Fingerprint output file')
     parser.add_argument('-n',
                         dest='num_bits',
                         required=False,
                         metavar='<num. bits>',
                         default=1024,
-                        help='Fingerprint size in bits',
-                        nargs=1,
+                        help='Fingerprint size in bits (default: 1024)',
                         type=int)
     parser.add_argument('-r',
                         dest='radius',
                         required=False,
                         metavar='<radius>',
                         default=2,
-                        help='Max. atom environment radius in number of bonds',
-                        nargs=1,
+                        help='Max. atom environment radius in number of bonds (default: 2)',
                         type=int)
     parser.add_argument('-s',
                         dest='strip_hs',
@@ -120,19 +116,19 @@ def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
 def main() -> None:
     args = parseArgs()
     
-    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
-    # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
-    reader = getReaderByFileExt(args.in_file[0]) 
+    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
+    # reader = Chem.FileSDFMoleculeReader(args.in_file)
+    reader = getReaderByFileExt(args.in_file) 
 
     # open output file storing the generated fingerprints
-    out_file = open(args.out_file[0], 'w')
+    out_file = open(args.out_file, 'w')
     
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
 
     # read and process molecules one after the other until the end of input has been reached
     try:
-        if reader.read(mol):
+        while reader.read(mol):
             try:
                 fp = genECFP(mol, args.num_bits, args.radius, args.strip_hs)
 
@@ -150,4 +146,3 @@ def main() -> None:
         
 if __name__ == '__main__':
     main()
-

@@ -35,7 +35,7 @@ import CDPL.MolProp as MolProp
 def procMolecule(molgraph: Chem.MolecularGraph) -> None:
     Chem.calcImplicitHydrogenCounts(molgraph, False)    # calculate implicit hydrogen counts and set corresponding property for all atoms
     Chem.perceiveHybridizationStates(molgraph, False)   # perceive atom hybridization states and set corresponding property for all atoms
-    Chem.perceiveSSSR(molgraph, False)                  # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
+    Chem.perceiveSSSR(molgraph, False)                  # perceive SSSR and store as Chem.MolecularGraph property
     Chem.setRingFlags(molgraph, False)                  # perceive cycles and set corresponding atom and bond properties
     Chem.setAromaticityFlags(molgraph, False)           # perceive aromaticity and set corresponding atom and bond properties
     Chem.calcTopologicalDistanceMatrix(molgraph, False) # calculate topological distance matrix and store as Chem.MolecularGraph property
@@ -65,7 +65,7 @@ def main() -> None:
     if len(sys.argv) < 2:
         sys.exit('Usage: %s <input file>' % sys.argv[0])
 
-    # if the input molecules are expected to be in a specific format, a reader for this format could be create directly, e.g.
+    # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(sys.argv[1])
     reader = getReaderByFileExt(sys.argv[1]) 
     
@@ -74,7 +74,7 @@ def main() -> None:
     
     # read and process molecules one after the other until the end of input has been reached
     try:
-        if reader.read(mol):
+        while reader.read(mol):
             try:
                 procMolecule(mol)
             except Exception as e:
@@ -87,4 +87,3 @@ def main() -> None:
         
 if __name__ == '__main__':
     main()
-
