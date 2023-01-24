@@ -71,7 +71,7 @@ namespace CDPL
 			
 			    NONE                         = 0x0,
 				EXCLUDED                     = 0x1,
-				EXPLICIT_H_REMOVED           = 0x2,
+				EXPLICIT_HYDROGENS_REMOVED   = 0x2,
 				UNKNOWN_STEREO_STANDARDIZED  = 0x4,
 				BONDS_KEKULIZED              = 0x8,
 				STRUCTURE_NORMALIZED         = 0x10,
@@ -80,7 +80,8 @@ namespace CDPL
 				STRUCTURE_2D_CORRECTED       = 0x80,
 				ISOTOPE_INFO_CLEARED         = 0x100,
 				SALT_COMPONENTS_REMOVED      = 0x200,
-				SOLVENT_COMPONENTS_REMOVED   = 0x400
+				SOLVENT_COMPONENTS_REMOVED   = 0x400,
+				DUPLICATE_COMPONENTS_REMOVED = 0x800
 			};
 
 			ChEMBLStandardizer();
@@ -103,7 +104,8 @@ namespace CDPL
 			void copyMolecule(const Molecule& mol, Molecule& mol_copy) const;
 
 			bool checkExclusionCriterions(const Molecule& mol) const;
-
+			bool checkExclusionCriterions(const MolecularGraph& molgraph, std::size_t& boron_cnt) const;
+			
 			bool standardizeUnknownStereochemistry(Molecule& mol) const;
 
 			bool kekulizeBonds(Molecule& mol);
@@ -125,10 +127,12 @@ namespace CDPL
 			double calc2DBondAngle(const Molecule& mol, const Atom& ctr_atom, const Atom& nbr_atom1, const Atom& nbr_atom2);
 			void rotateSubstituent(const Molecule& mol, const Atom& ctr_atom, const Atom& subst_atom, double rot_ang);
 
+			void clearMatchConstraints(Molecule& mol) const;
+			
 			typedef std::pair<Base::uint64, Base::uint64> StructureID;
 			typedef std::pair<const Fragment*, StructureID> MoleculeComponent;
 			typedef std::vector<MoleculeComponent> MoleculeComponentList;
-			typedef boost::unordered_set<StructureID> MoleculeComponentSet;
+			typedef boost::unordered_set<StructureID> StructureIDSet;
 
 			HashCodeCalculator           hashCodeCalc;
 			KekuleStructureCalculator    kekuleStructureCalc;
@@ -146,7 +150,7 @@ namespace CDPL
 			BasicMolecule                tmpMolecule;
 			MoleculeComponentList        molCompList1;
 			MoleculeComponentList        molCompList2;
-			MoleculeComponentSet         molCompSet;
+			StructureIDSet               uniqueMolComps;
 		};
     }
 }

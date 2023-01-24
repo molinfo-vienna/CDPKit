@@ -92,15 +92,6 @@ namespace
 		return StructureID(hash_calc.calculate(molgraph), (molgraph.getNumAtoms() << 32) + molgraph.getNumBonds());
 	}
 
-	void initStructureIDHashCalculator(Chem::HashCodeCalculator& hash_calc)
-	{
-		using namespace Chem;
-
-		hash_calc.includeGlobalStereoFeatures(false);
-		hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
-		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
-	}
-
 	void initSaltAndSolventData()
 
 	{
@@ -119,9 +110,12 @@ namespace
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 		HashCodeCalculator hash_calc;
-		BasicMolecule mol;
 
-		initStructureIDHashCalculator(hash_calc);
+		hash_calc.includeGlobalStereoFeatures(false);
+		hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
+		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
+
+		BasicMolecule mol;
 
 		for (std::size_t i = 0; i < 2; i++) {
 			SMILESMoleculeReader smi_reader(i == 0 ? salts_is : solvents_is);
@@ -161,7 +155,8 @@ namespace
 		{ "[C:1]([OH1;D1:2])=;!@[NH0:3]", { 0 }, { 2, 1, 2, 2, 1, 3, 1 } },               // [C:1](=[OH0:2])-[NH1:3]    Bad amide tautomer2
 		{ "[F,Cl,Br,I;X0;+0:1]", { 1, 1, -1 }, { 0 } },                                   // [*-1:1]                    Halogen with no neighbors
 		{ "[C,N;-;D2,D3:1]-[N+2;D3:2]-[O-;D1:3]", {2, 1, 0, 2, 1 }, { 1, 1, 2, 2 } },     // [*-0:1]=[*+1:2]-[*-:3]     Odd pyridine/pyridazine oxide structure
-		{ "[*:1][N-:2][N+:3]#[N:4]", {2, 2, 0, 4, -1 }, { 2, 2, 3, 2, 3, 4, 2 } }         // [*:1][N+0:2]=[N+:3]=[N-:4] Odd azide
+		{ "[*:1][N-:2][N+:3]#[N:4]", {2, 2, 0, 4, -1 }, { 2, 2, 3, 2, 3, 4, 2 } },        // [*:1][N+0:2]=[N+:3]=[N-:4] Odd azide 1
+		{ "[*:1][N:2]=[N+0:3]=[N:4]", {3, 2, 0, 3, 1, 4, -1 }, { 0 } }                    // [*:1][N+0:2]=[N+:3]=[N-:4] Odd azide 2
 	};
 
 	Chem::Molecule::SharedPointer STRUCT_NORM_TRANSFORM_PATTERNS[sizeof(STRUCT_NORM_TRANSFORMS) / sizeof(SubstructureTransform)];
@@ -211,7 +206,7 @@ namespace
 		Chem::AtomType::Ce, Chem::AtomType::Pr, Chem::AtomType::Nd, Chem::AtomType::Pm,
 		Chem::AtomType::Sm, Chem::AtomType::Eu, Chem::AtomType::Gd, Chem::AtomType::Tb,
 		Chem::AtomType::Dy, Chem::AtomType::Ho, Chem::AtomType::Er, Chem::AtomType::Tm,
-		Chem::AtomType::Yb, Chem::AtomType::Lu, Chem::AtomType::T, Chem::AtomType::Pa,
+		Chem::AtomType::Yb, Chem::AtomType::Lu, Chem::AtomType::Th, Chem::AtomType::Pa,
 		Chem::AtomType::U, Chem::AtomType::Np, Chem::AtomType::Pu, Chem::AtomType::Am,
 		Chem::AtomType::Cm, Chem::AtomType::Bk, Chem::AtomType::Cf, Chem::AtomType::Es,
 		Chem::AtomType::Fm, Chem::AtomType::Md, Chem::AtomType::No, Chem::AtomType::Lr,
@@ -353,7 +348,7 @@ namespace
 
 		Init() {
 			excludeAtomTypeMask.resize(Chem::AtomType::MAX_ATOMIC_NO + 1);
-
+				
 			for (std::size_t i = 0; i < sizeof(EXCLUDE_ATOM_TYPES) / sizeof(unsigned int); i++)
 				excludeAtomTypeMask.set(EXCLUDE_ATOM_TYPES[i]);
 		}
@@ -366,14 +361,16 @@ Chem::ChEMBLStandardizer::ChEMBLStandardizer()
 {
 	substructSearch.uniqueMappingsOnly(true);
 
-	initStructureIDHashCalculator(hashCodeCalc);
+	hashCodeCalc.includeGlobalStereoFeatures(false);
+	hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCodeCalc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 }
 
 Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)
 {
 	substructSearch.uniqueMappingsOnly(true);
 
-	initStructureIDHashCalculator(hashCodeCalc);
+	hashCodeCalc.includeGlobalStereoFeatures(false);
+	hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCodeCalc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 }
 
 Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Molecule& mol, bool proc_excluded)
@@ -397,7 +394,7 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Mole
 		changes = ChangeFlags(changes | BONDS_KEKULIZED);
 
 	if (removeExplicitHydrogens(mol))
-		changes = ChangeFlags(changes | EXPLICIT_H_REMOVED);
+		changes = ChangeFlags(changes | EXPLICIT_HYDROGENS_REMOVED);
 
 	if (normalizeStructure(mol))
 		changes = ChangeFlags(changes | STRUCTURE_NORMALIZED);
@@ -407,9 +404,11 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Mole
 
 	if (removeTartrateStereochemistry(mol))
 		changes = ChangeFlags(changes | TARTRATE_STEREO_CLEARED);
-	
+
 	if (cleanup2DStructure(mol))
 		changes = ChangeFlags(changes | STRUCTURE_2D_CORRECTED);
+
+	clearMatchConstraints(mol);
 	
 	return changes;
 }
@@ -439,7 +438,7 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecu
 	}   
 
 	if (removeExplicitHydrogens(mol))
-		changes = ChangeFlags(changes | EXPLICIT_H_REMOVED);
+		changes = ChangeFlags(changes | EXPLICIT_HYDROGENS_REMOVED);
 
 	FragmentList::SharedPointer mol_comps = perceiveComponents(mol, false);
 
@@ -458,9 +457,10 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecu
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
 
-	molCompList1.clear();
-
 	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+		
+	hashCodeCalc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCodeCalc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
+	molCompList1.clear();
 
 	for (FragmentList::ConstElementIterator it = mol_comps->getElementsBegin(), end = mol_comps->getElementsEnd(); it != end; ++it) {
 		const Fragment& orig_comp = *it;
@@ -487,7 +487,8 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecu
 		return changes;
 	}
 
-	changes = ChangeFlags(changes | SOLVENT_COMPONENTS_REMOVED);
+	if (mol_comps->getSize() > molCompList1.size())
+		changes = ChangeFlags(changes | SOLVENT_COMPONENTS_REMOVED);
 
 	molCompList2.clear();
 
@@ -500,38 +501,104 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecu
 		molCompList2.push_back(comp);
 	}
 
-	if (molCompList2.empty())
-		molCompList2.swap(molCompList1);
+	if (molCompList2.empty())  // go back to state after solvent stripping
+		molCompList2 = molCompList1;  
 
-	molCompSet.clear();
+	bool salts_stripped = (molCompList1.size() > molCompList2.size());
+	
+	hashCodeCalc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCodeCalc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::FORMAL_CHARGE));
+	uniqueMolComps.clear();
 
-	for (MoleculeComponentList::const_iterator it1 = molCompList2.begin(), end1 = molCompList2.end(); it1 != end1; ++it1) {
-		const MoleculeComponent& comp = *it1;
+	for (MoleculeComponentList::const_iterator it = molCompList2.begin(), end = molCompList2.end(); it != end; ++it) {
+		const MoleculeComponent& comp = *it;
 
 		tmpMolecule = *comp.first;
 
 		if (neutralize && removeCharges(tmpMolecule)) {
-			perceiveSSSR(tmpMolecule, false);
+			perceiveSSSR(tmpMolecule, true);
 			perceiveHybridizationStates(tmpMolecule, false);
 			setAromaticityFlags(tmpMolecule, false);
 		}
 
-		calcImplicitHydrogenCounts(tmpMolecule, makeHydrogenDeplete(tmpMolecule));
+		makeHydrogenDeplete(tmpMolecule);
 
-		molCompSet.insert(genStructureID(tmpMolecule, hashCodeCalc));
+		uniqueMolComps.insert(genStructureID(tmpMolecule, hashCodeCalc));
+	}
+
+	bool dups_removed = false;
+			
+	if (uniqueMolComps.size() == 1 && molCompList2.size() > 1) {
+		molCompList2.resize(1);
+		dups_removed = true;
+	}
 	
+	bool excluded = false;
+	
+	if (check_exclusion) {
+		std::size_t boron_count = 0;
+
+		for (MoleculeComponentList::const_iterator it = molCompList2.begin(), end = molCompList2.end(); it != end; ++it) {
+			const MoleculeComponent& comp = *it;
+
+			if (checkExclusionCriterions(*comp.first, boron_count)) {
+				excluded = true;
+				break;
+			}
+		}
 	}
-
-	if (molCompSet.size() == 1) {
-		
-	} else {
+	
+	if (excluded) { // go back to state after solvent stripping
+		molCompList2 = molCompList1;
+		salts_stripped = false;
+		dups_removed = false;
 	}
+	
+	if (molCompList2.size() != mol_comps->getSize()) {
+		bool clear_sssr = false;
 
+		for (FragmentList::ElementIterator it1 = mol_comps->getElementsBegin(); it1 != mol_comps->getElementsEnd(); ) {
+			const Fragment& comp = *it1;
+			bool keep_comp = false;
+			
+			for (MoleculeComponentList::const_iterator it2 = molCompList2.begin(), end2 = molCompList2.end(); it2 != end2; ++it2) {
+				if (&comp == it2->first) {
+					keep_comp = true;
+					break;
+				}
+			}
 
-	// TODO
+			if (keep_comp) {
+				++it1;
+				continue;
+			}
 
-	clearComponents(mol);
-	clearSSSR(mol);
+			for (Fragment::ConstAtomIterator a_it = comp.getAtomsBegin(), a_end = comp.getAtomsEnd(); a_it != a_end; ++a_it) {
+				const Atom& atom = *a_it;
+
+				if (getRingFlag(atom))
+					clear_sssr = true;
+
+				mol.removeAtom(mol.getAtomIndex(atom));
+			}
+			
+			it1 = mol_comps->removeElement(it1);
+		}
+
+		if (clear_sssr)
+			clearSSSR(mol);
+	}
+	
+	if (excluded)
+		changes = ChangeFlags(changes | EXCLUDED);
+
+	if (salts_stripped)
+		changes = ChangeFlags(changes | SALT_COMPONENTS_REMOVED);
+
+	if (dups_removed)
+		changes = ChangeFlags(changes | DUPLICATE_COMPONENTS_REMOVED);
+
+	if (neutralize && removeCharges(mol))
+		changes = ChangeFlags(changes | CHARGES_REMOVED);
 	
 	return changes;
 }
@@ -551,20 +618,27 @@ Chem::ChEMBLStandardizer& Chem::ChEMBLStandardizer::operator=(const ChEMBLStanda
 void Chem::ChEMBLStandardizer::copyMolecule(const Molecule& mol, Molecule& mol_copy) const
 {
 	mol_copy.copy(mol);
-	mol_copy.clearProperties();
+//	mol_copy.clearProperties();
 
 	copyAtomStereoDescriptors(mol, mol_copy);
 	copyBondStereoDescriptors(mol, mol_copy);
 
 	if (hasSSSR(mol))
 		copySSSR(mol, mol_copy);
+
+	clearComponents(mol_copy);
 }
 
 bool Chem::ChEMBLStandardizer::checkExclusionCriterions(const Molecule& mol) const
 {
 	std::size_t boron_count = 0;
 	
-	for (Molecule::ConstAtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+	return checkExclusionCriterions(mol, boron_count);
+}
+
+bool Chem::ChEMBLStandardizer::checkExclusionCriterions(const MolecularGraph& molgraph, std::size_t& boron_count) const
+{
+	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
 		unsigned int atom_type = getType(*it);
 
 		if (atom_type > AtomType::MAX_ATOMIC_NO)
@@ -576,34 +650,69 @@ bool Chem::ChEMBLStandardizer::checkExclusionCriterions(const Molecule& mol) con
 		if (atom_type == AtomType::B && boron_count++ == 7)
 			return true;
 	}
-	
+
 	return false;
 }
 
 bool Chem::ChEMBLStandardizer::standardizeUnknownStereochemistry(Molecule& mol) const
 {
+	
+		
 	bool changes = false;
 	
 	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
 		Bond& bond = *it;
+
+		if (getOrder(bond) != 1)
+			continue;
+		
 		unsigned int stereo_flag = get2DStereoFlag(bond);
 		
 		if (stereo_flag != BondStereoFlag::EITHER && stereo_flag != BondStereoFlag::REVERSE_EITHER)
 			continue;
 
-		clear2DStereoFlag(bond);
-
 		for (std::size_t i = 0; i < 2; i++) {
 			Atom& atom = (i == 0 ? bond.getBegin() : bond.getEnd());
 
 			clearStereoDescriptor(atom);
-			
-			std::for_each(atom.getBondsBegin(), atom.getBondsEnd(), static_cast<void (*)(Bond&)>(&clearStereoDescriptor));
+
+			for (Atom::BondIterator nb_it = atom.getBondsBegin(), nb_end = atom.getBondsEnd(); nb_it != nb_end; ++nb_it) {
+				Bond& nbr_bond = *nb_it;
+
+				clearStereoDescriptor(nbr_bond);
+				
+				if (getOrder(nbr_bond) == 2 && Internal::getBondCount(nbr_bond.getNeighbor(atom), mol, 2) == 1)
+					set2DStereoFlag(nbr_bond, BondStereoFlag::EITHER);
+				else
+					clear2DStereoFlag(nbr_bond);
+			}
 		}
 		
 		changes = true;
 	}
 
+	FragmentList::SharedPointer sssr = perceiveSSSR(mol, false);
+
+	for (FragmentList::ElementIterator it = sssr->getElementsBegin(), end = sssr->getElementsEnd(); it != end; ++it) {
+		Fragment& ring = *it;
+
+		if (ring.getNumBonds() > 8)
+			continue;
+
+		for (Fragment::BondIterator b_it = ring.getBondsBegin(), b_end = ring.getBondsEnd(); b_it != b_end; ++b_it) {
+			Bond& bond = *b_it;
+			unsigned int stereo_flag = get2DStereoFlag(bond);
+		
+			if (stereo_flag != BondStereoFlag::EITHER && stereo_flag != BondStereoFlag::REVERSE_EITHER)
+				continue;
+		
+			if (getOrder(bond) == 2) {
+				clear2DStereoFlag(bond);
+				changes = true;
+			}
+		}
+	}
+	
 	return changes;
 }
 
@@ -636,6 +745,10 @@ bool Chem::ChEMBLStandardizer::kekulizeBonds(Molecule& mol)
 bool Chem::ChEMBLStandardizer::removeExplicitHydrogens(Molecule& mol) const
 {
 	calcImplicitHydrogenCounts(mol, false);
+	setRingFlags(mol, false);
+	perceiveHybridizationStates(mol, false);
+	setAromaticityFlags(mol, false);
+	calcAtomStereoDescriptors(mol, false);
 	
 	bool changes = false;
 
@@ -679,7 +792,7 @@ bool Chem::ChEMBLStandardizer::isRemovableHydrogen(const Atom& atom) const
 
 	if (excludeAtomTypeMask.test(con_atom_type))
 		return false;
-	
+
 	const Bond& bond = atom.getBond(0);
 
 	switch (get2DStereoFlag(bond)) {
@@ -688,7 +801,8 @@ bool Chem::ChEMBLStandardizer::isRemovableHydrogen(const Atom& atom) const
 		case BondStereoFlag::REVERSE_UP:
 		case BondStereoFlag::DOWN:
 		case BondStereoFlag::REVERSE_DOWN:
-			return false;
+			if (con_atom.getNumBonds() == 3 || con_atom.getNumBonds() == 4)
+				return false;
 
 		default:
 			break;
@@ -715,16 +829,14 @@ bool Chem::ChEMBLStandardizer::isRemovableHydrogen(const Atom& atom) const
 
 	if (Internal::getRingBondCount(con_atom, atom.getMolecule()) >= 3)
 		return false;
-	
+
 	return true;
 }
 
 bool Chem::ChEMBLStandardizer::normalizeStructure(Molecule& mol)
 {
 	boost::call_once(&initStructNormTransformPatterns, initStructNormTransformPatternsFlag);
-
-	setRingFlags(mol, false);
-
+	
 	bool changes = false;
 	bool clr_comps = false;
 	bool clr_arom = false;
@@ -820,7 +932,7 @@ bool Chem::ChEMBLStandardizer::normalizeStructure(Molecule& mol)
 	if (clr_comps)
 		clearComponents(mol);
 
-	if (clr_sssr)
+	if (clr_sssr) 
 		clearSSSR(mol);
 
 	if (clr_arom) {
@@ -851,7 +963,7 @@ bool Chem::ChEMBLStandardizer::removeCharges(Molecule& mol)
 	boost::call_once(&initChargedAtomPatterns, initChargedAtomPatternsFlag);
 
 	perceiveSSSR(mol, false);
-	perceiveComponents(mol, false);
+	perceiveHybridizationStates(mol, false);
 	setAromaticityFlags(mol, false);
 
 	std::size_t n_matched = getMatches(*NEG_CHARGED_ATOM_PATTERN, mol, negChargedAtoms);
@@ -1070,6 +1182,9 @@ bool Chem::ChEMBLStandardizer::removeTartrateStereochemistry(Molecule& mol)
 {
 	boost::call_once(&initTartratePattern, initTartratePatternFlag);
 
+	perceiveHybridizationStates(mol, false);
+	setAromaticityFlags(mol, false);
+	
 	substructSearch.setQuery(*TARTRATE_PATTERN);
 
 	if (!substructSearch.findMappings(mol))
@@ -1084,6 +1199,12 @@ bool Chem::ChEMBLStandardizer::removeTartrateStereochemistry(Molecule& mol)
 			Atom* atom = const_cast<Atom*>(atom_mpg[getAtomWithMappingID(*TARTRATE_PATTERN, i)]);
 
 			if (!atom || !hasStereoDescriptor(*atom))
+				continue;
+
+			const StereoDescriptor& sto_descr = getStereoDescriptor(*atom);
+
+			if (!sto_descr.isValid(*atom) ||
+				(sto_descr.getConfiguration() != AtomConfiguration::R && sto_descr.getConfiguration() != AtomConfiguration::S))
 				continue;
 			
 			clearStereoDescriptor(*atom);
@@ -1212,4 +1333,10 @@ void Chem::ChEMBLStandardizer::rotateSubstituent(const Molecule& mol, const Atom
 		atom_pos(0) = x_transl * rot_ang_cos - y_transl * rot_ang_sin + ctr_atom_pos(0);
 		atom_pos(1) = x_transl * rot_ang_sin + y_transl * rot_ang_cos + ctr_atom_pos(1);
 	}
+}
+
+void Chem::ChEMBLStandardizer::clearMatchConstraints(Molecule& mol) const
+{
+	std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), static_cast<void (*)(Atom&)>(&Chem::clearMatchConstraints));
+	std::for_each(mol.getBondsBegin(), mol.getBondsEnd(), static_cast<void (*)(Bond&)>(&Chem::clearMatchConstraints));
 }

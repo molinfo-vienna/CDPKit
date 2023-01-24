@@ -44,7 +44,7 @@ void CDPLPythonChem::exportChEMBLStandardizer()
 	python::enum_<Chem::ChEMBLStandardizer::ChangeFlags>("ChangeFlags")
 		.value("NONE", Chem::ChEMBLStandardizer::NONE)
 		.value("EXCLUDED", Chem::ChEMBLStandardizer::EXCLUDED)
-		.value("EXPLICIT_H_REMOVED", Chem::ChEMBLStandardizer::EXPLICIT_H_REMOVED)
+		.value("EXPLICIT_HYDROGENS_REMOVED", Chem::ChEMBLStandardizer::EXPLICIT_HYDROGENS_REMOVED)
 		.value("UNKNOWN_STEREO_STANDARDIZED", Chem::ChEMBLStandardizer::UNKNOWN_STEREO_STANDARDIZED)
 		.value("BONDS_KEKULIZED", Chem::ChEMBLStandardizer::BONDS_KEKULIZED)
 		.value("STRUCTURE_NORMALIZED", Chem::ChEMBLStandardizer::STRUCTURE_NORMALIZED)
@@ -54,6 +54,7 @@ void CDPLPythonChem::exportChEMBLStandardizer()
 		.value("ISOTOPE_INFO_CLEARED", Chem::ChEMBLStandardizer::ISOTOPE_INFO_CLEARED)
 		.value("SALT_COMPONENTS_REMOVED", Chem::ChEMBLStandardizer::SALT_COMPONENTS_REMOVED)
 		.value("SOLVENT_COMPONENTS_REMOVED", Chem::ChEMBLStandardizer::SOLVENT_COMPONENTS_REMOVED)
+		.value("DUPLICATE_COMPONENTS_REMOVED", Chem::ChEMBLStandardizer::DUPLICATE_COMPONENTS_REMOVED)
 		.export_values();
 
     cl
