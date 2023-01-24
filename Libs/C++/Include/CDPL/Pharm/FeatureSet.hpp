@@ -215,6 +215,14 @@ namespace CDPL
 	     */
 	    FeatureSet& operator+=(const FeatureContainer& cntnr);
 
+		/**
+		 * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this \c %FeatureSet instance.
+		 * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
+		 * \return A reference to itself.
+		 * \note Does not affect any properties if <tt>this != &cntr</tt>.
+		 */
+	    FeatureSet& operator-=(const FeatureContainer& cntnr);
+
 	  private:
 	    typedef boost::unordered_map<const Feature*, std::size_t> FeatureIndexMap;
 

@@ -79,6 +79,8 @@ void CDPLPythonPharm::exportFeatureSet()
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.def(FeatureContainerSpecialFunctionsVisitor(false))
 		.def("__iadd__", &Pharm::FeatureSet::operator+=, (python::arg("self"), python::arg("cntnr")), 
-			 python::return_self<python::with_custodian_and_ward<1, 2> >());
+			 python::return_self<python::with_custodian_and_ward<1, 2> >())
+		.def("__isub__", &Pharm::FeatureSet::operator-=, (python::arg("self"), python::arg("cntnr")), 
+			 python::return_self<>());
 }
 

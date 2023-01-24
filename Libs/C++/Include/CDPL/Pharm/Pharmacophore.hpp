@@ -162,10 +162,17 @@ namespace CDPL
 			/**
 			 * \brief Extends the current set of pharmacophore features by a copy of the features in the
 			 *        feature container \a cntnr.
-			 * \param cntnr The pharmacophore providing the features to append.
+			 * \param cntnr The Pharm::FeatureContainer instance providing the features to append.
 			 * \note Does not affect any properties.
 			 */
 			virtual void append(const FeatureContainer& cntnr) = 0;
+
+			/**
+			 * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this \c %Pharmacophore instance.
+			 * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
+			 * \note Does not affect any properties if <tt>this != &cntr</tt>.
+			 */
+			virtual void remove(const FeatureContainer& cntnr) = 0;
 
 			/**
 			 * \brief Creates a copy of the current pharmacophore state.
@@ -216,6 +223,16 @@ namespace CDPL
 			 * \return A reference to itself.
 			 */
 			Pharmacophore& operator+=(const FeatureContainer& cntnr);
+
+			/**
+			 * \brief Removes the pharmacophore features referenced by the feature container \a cntnr from this \c %Pharmacophore instance.
+			 *
+			 * Internally calls remove() to perform the actual work.
+			 *
+			 * \param cntnr The Pharm::FeatureContainer instance providing the features to remove.
+			 * \return A reference to itself.
+			 */
+			Pharmacophore& operator-=(const FeatureContainer& cntnr);
 		};
     }
 }

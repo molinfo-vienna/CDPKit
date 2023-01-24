@@ -77,3 +77,10 @@ Pharm::Pharmacophore& Pharm::Pharmacophore::operator+=(const FeatureContainer& c
 
     return *this;
 }
+
+Pharm::Pharmacophore& Pharm::Pharmacophore::operator-=(const FeatureContainer& cntnr) 
+{
+    remove(cntnr);
+
+    return *this;
+}

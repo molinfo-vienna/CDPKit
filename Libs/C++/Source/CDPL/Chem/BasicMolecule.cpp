@@ -432,6 +432,32 @@ void Chem::BasicMolecule::append(const MolecularGraph& molgraph)
 	doAppend(molgraph);
 }
 
+void Chem::BasicMolecule::remove(const MolecularGraph& molgraph)
+{
+	if (this == &molgraph) {
+		clear();
+		return;
+	}
+	
+	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (!containsAtom(atom))
+			continue;
+
+		removeAtom(atom.getIndex());
+	}
+
+	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+		const Bond& bond = *it;
+
+		if (!containsBond(bond))
+			continue;
+
+		removeBond(bond.getIndex());
+	}
+}
+
 void Chem::BasicMolecule::reserveMemoryForAtoms(std::size_t num_atoms)
 {
 	atoms.reserve(num_atoms);

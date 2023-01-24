@@ -277,6 +277,23 @@ void Pharm::BasicPharmacophore::append(const FeatureContainer& cntnr)
     doAppend(cntnr);
 }
 
+void Pharm::BasicPharmacophore::remove(const FeatureContainer& cntnr)
+{   
+	if (this == &cntnr) {
+		clear();
+		return;
+	}
+
+	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
+		const Feature& feature = *it;
+
+		if (!containsFeature(feature))
+			continue;
+
+		removeFeature(feature.getIndex());
+	}
+}
+
 template <typename T>
 void Pharm::BasicPharmacophore::doAppend(const T& pharm)
 {   

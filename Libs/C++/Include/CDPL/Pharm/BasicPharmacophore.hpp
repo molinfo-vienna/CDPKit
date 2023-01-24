@@ -196,6 +196,8 @@ namespace CDPL
 			void append(const Pharmacophore& pharm);
 
 			void append(const FeatureContainer& cntnr);
+
+			void remove(const FeatureContainer& cntnr);
 	
 		  private:
 			template <typename T>

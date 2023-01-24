@@ -202,7 +202,10 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureSet& ftr_set)
 
 Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureContainer& cntnr)
 {
-    features.clear();
+	if (this == &cntnr)
+		return *this;
+
+	features.clear();
     featureIndices.clear();
 
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
@@ -215,10 +218,26 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureContainer& cntnr)
 
 Pharm::FeatureSet& Pharm::FeatureSet::operator+=(const FeatureContainer& cntnr)
 {
-    features.reserve(features.size() + cntnr.getNumFeatures());
+ 	if (this == &cntnr)
+		return *this;
+
+	features.reserve(features.size() + cntnr.getNumFeatures());
 
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
 				  boost::bind(&FeatureSet::addFeature, this, _1));
+
+    return *this;
+}
+
+Pharm::FeatureSet& Pharm::FeatureSet::operator-=(const FeatureContainer& cntnr)
+{
+ 	if (this == &cntnr) {
+		clear();
+		return *this;
+	}
+	
+    std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
+				  boost::bind(static_cast<bool (FeatureSet::*)(const Feature&)>(&FeatureSet::removeFeature), this, _1));
 
     return *this;
 }

@@ -89,6 +89,10 @@ namespace
 			this->get_override("append")(boost::ref(molgraph));
 		}
 
+		void remove(const CDPL::Chem::MolecularGraph& molgraph) {
+			this->get_override("remove")(boost::ref(molgraph));
+		}
+
 		void reserveMemoryForAtoms(std::size_t num_atoms) {
 			if (boost::python::override f = this->get_override("reserveMemoryForAtoms"))
 				f(num_atoms);    
@@ -158,6 +162,7 @@ void CDPLPythonChem::exportMolecule()
 		.def("copy", python::pure_virtual(copyMolGraphFunc), (python::arg("self"), python::arg("molgraph")))
 		.def("append", python::pure_virtual(appendMolFunc), (python::arg("self"), python::arg("mol")))
 		.def("append", python::pure_virtual(appendMolGraphFunc), (python::arg("self"), python::arg("molgraph")))
+		.def("remove", python::pure_virtual(&Chem::Molecule::remove), (python::arg("self"), python::arg("molgraph")))
 		.def("assign", assignMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
 		.def("assign", assignMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
 		.def("getAtoms", &createMutableAtomSequence<Chem::Molecule>, python::arg("self"),
@@ -166,6 +171,7 @@ void CDPLPythonChem::exportMolecule()
 			 python::with_custodian_and_ward_postcall<0, 1>())
 		.def("__iadd__", addMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
 		.def("__iadd__", addMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
+		.def("__isub__", &Chem::Molecule::operator-=, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
 		.def(AtomContainerVirtualFunctionsVisitor<MoleculeWrapper>())
 		.def(BondContainerVirtualFunctionsVisitor())
 		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<MoleculeWrapper>())

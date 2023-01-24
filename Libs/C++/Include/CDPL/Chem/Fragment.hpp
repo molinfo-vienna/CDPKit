@@ -347,11 +347,19 @@ namespace CDPL
 			/**
 			 * \brief Extends the current set of atoms and bonds by the atoms and bonds in the
 			 *        molecular graph \a molgraph.
-			 * \param molgraph The Chem::MolecularGraph instance providing the atoms and bonds to append.
+			 * \param molgraph The Chem::MolecularGraph instance providing the atoms and bonds to add.
 			 * \return A reference to itself.
 			 * \note Does not affect any properties.
 			 */
 			Fragment& operator+=(const MolecularGraph& molgraph);
+
+			/**
+			 * \brief Removes the atoms and bonds referenced by the molecular graph \a molgraph from this \c %Fragment instance.
+			 * \param molgraph The Chem::MolecularGraph instance specifying the atoms and bonds to remove.
+			 * \return A reference to itself.
+			 * \note Does not affect any properties if <tt>this != &molgraph</tt>.
+			 */
+			Fragment& operator-=(const MolecularGraph& molgraph);
 
 			MolecularGraph::SharedPointer clone() const;
 

@@ -76,6 +76,10 @@ namespace
 			this->get_override("append")(boost::ref(cntnr));
 		}
 
+		void remove(const FeatureContainer& cntnr) {
+			this->get_override("remove")(boost::ref(cntnr));
+		}
+
 		Pharmacophore::SharedPointer clone() const {
 			return this->get_override("clone")();
 		}
@@ -114,11 +118,13 @@ void CDPLPythonPharm::exportPharmacophore()
 		.def("copy", python::pure_virtual(copyFtrContainerFunc), (python::arg("self"), python::arg("cntnr")))
 		.def("append", python::pure_virtual(appendPharmFunc), (python::arg("self"), python::arg("pharm")))
 		.def("append", python::pure_virtual(appendFtrContainerFunc), (python::arg("self"), python::arg("cntnr")))
+		.def("remove", python::pure_virtual(&Pharm::Pharmacophore::remove), (python::arg("self"), python::arg("cntnr")))
 		.def("assign", assignPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
 		.def("assign", assignFtrContainerFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>())
 		.def("clone", python::pure_virtual(&Pharm::Pharmacophore::clone), python::arg("self"))
 		.def("__iadd__", addPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
 		.def("__iadd__", addFtrContainerFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>())
+		.def("__isub__", &Pharm::Pharmacophore::operator-=, (python::arg("self"), python::arg("cntnr")), python::return_self<>())
 		.def("__delitem__", removeFeatureFunc, (python::arg("self"), python::arg("idx")))
 		.def(FeatureContainerVirtualFunctionsVisitor<PharmacophoreWrapper>())
 		.def(FeatureContainerSpecialFunctionsVisitor(false))

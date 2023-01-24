@@ -387,6 +387,9 @@ Chem::Fragment& Chem::Fragment::operator=(const Fragment& frag)
 
 Chem::Fragment& Chem::Fragment::operator=(const MolecularGraph& molgraph)
 {
+	if (this == &molgraph)
+		return *this;
+
 	atoms.clear();
 	bonds.clear();
 	atomIndices.clear();
@@ -408,6 +411,9 @@ Chem::Fragment& Chem::Fragment::operator=(const MolecularGraph& molgraph)
 
 Chem::Fragment& Chem::Fragment::operator+=(const MolecularGraph& molgraph)
 {
+	if (this == &molgraph)
+		return *this;
+
 	atoms.reserve(atoms.size() + molgraph.getNumAtoms());
 	bonds.reserve(bonds.size() + molgraph.getNumBonds());
 
@@ -417,6 +423,22 @@ Chem::Fragment& Chem::Fragment::operator+=(const MolecularGraph& molgraph)
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
 				  boost::bind(&Fragment::addBond, this, _1));
 
+	return *this;
+}
+
+Chem::Fragment& Chem::Fragment::operator-=(const MolecularGraph& molgraph)
+{
+	if (this == &molgraph) {
+		clear();
+		return *this;
+	}
+
+	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
+				  boost::bind(static_cast<bool (Fragment::*)(const Atom&)>(&Fragment::removeAtom), this, _1));
+
+	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),  
+				  boost::bind(static_cast<bool (Fragment::*)(const Bond&)>(&Fragment::removeBond), this, _1));
+	
 	return *this;
 }
 

@@ -107,6 +107,8 @@ void CDPLPythonChem::exportFragment()
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.def("__iadd__", &Chem::Fragment::operator+=, (python::arg("self"), python::arg("molgraph")), 
 			 python::return_self<python::with_custodian_and_ward<1, 2> >())
+		.def("__isub__", &Chem::Fragment::operator-=, (python::arg("self"), python::arg("molgraph")), 
+			 python::return_self<>())
 		.add_property("atoms", python::make_function(&createMutableAtomSequence<Chem::Fragment>,
 													 python::with_custodian_and_ward_postcall<0, 1>()))
 		.add_property("bonds", python::make_function(&createMutableBondSequence<Chem::Fragment>,

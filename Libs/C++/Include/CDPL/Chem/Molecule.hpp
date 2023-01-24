@@ -261,6 +261,13 @@ namespace CDPL
 			 * \note Does not affect any properties.
 			 */
 			virtual void append(const MolecularGraph& molgraph) = 0;
+
+			/**
+			 * \brief Removes atoms and bonds referenced by the molecular graph \a molgraph that are part of this \c %Molecule instance.
+			 * \param molgraph The Chem::MolecularGraph instance specifying the atoms and bonds to remove.
+			 * \note Does not affect any properties if <tt>this != &molgraph</tt>.
+			 */
+			virtual void remove(const MolecularGraph& molgraph) = 0;
 		
 			/**
 			 * \brief Reserves memory for \a num_atoms atoms.
@@ -323,6 +330,16 @@ namespace CDPL
 			 * \return A reference to itself.
 			 */
 			Molecule& operator+=(const MolecularGraph& molgraph);
+
+			/**
+			 * \brief Removes atoms and bonds referenced by the molecular graph \a molgraph that are part of this \c %Molecule instance.
+			 *
+			 * Internally calls remove() to perform the actual work.
+			 *
+			 * \param molgraph The Chem::MolecularGraph instance specifying the atoms and bonds to remove.
+			 * \return A reference to itself.
+			 */
+			Molecule& operator-=(const MolecularGraph& molgraph);
 		};
 	}
 }

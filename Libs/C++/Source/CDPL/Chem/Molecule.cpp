@@ -88,3 +88,10 @@ Chem::Molecule& Chem::Molecule::operator+=(const MolecularGraph& molgraph)
 
 	return *this;
 }
+
+Chem::Molecule& Chem::Molecule::operator-=(const MolecularGraph& molgraph)
+{
+	remove(molgraph);
+
+	return *this;
+}
