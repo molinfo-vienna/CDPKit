@@ -6,3 +6,4 @@ Molecules
 
    io/index
    fragmentation/index
+   standardization/index
