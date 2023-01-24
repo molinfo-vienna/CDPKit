@@ -729,9 +729,7 @@ void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
 		throw Base::IOError("MDLDataReader: invalid dimension code in molfile header block");
 
 	else
-		coordsDim = 3;
-
-	setMDLDimensionality(mol, coordsDim); 
+		coordsDim = 0;
 
 	setMDLScalingFactor1(mol, readMDLNumber<long, 2>(is, "MDLDataReader: error while reading scaling factor1 from molfile header block", 
 													 strictErrorChecking));
@@ -864,7 +862,7 @@ void Chem::MDLDataReader::readCTabV2000(std::istream& is, Molecule& mol)
 	atomQueryHCountList.clear();
 	stereoAtoms.clear();
 
-	readCTabV2000AtomBlock(is, mol);
+	readCTabV2000AtomBlock(is, mol, atom_index_offs);
 
 	if (readCTabV2000BondBlock(is, mol, atom_index_offs))
 		kekulizeUndefBonds(mol);
@@ -889,12 +887,14 @@ void Chem::MDLDataReader::skipCTabV2000(std::istream& is)
 	skipCTabV2000PropertyBlock(is);
 }
 
-void Chem::MDLDataReader::readCTabV2000AtomBlock(std::istream& is, Molecule& mol)
+void Chem::MDLDataReader::readCTabV2000AtomBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs)
 {
-	mol.reserveMemoryForAtoms(mol.getNumAtoms() + atomCount);
+	mol.reserveMemoryForAtoms(atom_index_offs + atomCount);
 
 	for (std::size_t i = 0; i < atomCount; i++)
 		readCTabV2000Atom(is, mol);
+
+	fixAtomCoordsDim(mol, atom_index_offs);
 }
 
 bool Chem::MDLDataReader::readCTabV2000BondBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
@@ -1027,30 +1027,18 @@ void Chem::MDLDataReader::readCTabV2000Atom(std::istream& is, Molecule& mol)
 	skipMDLLines(is, 1, "MDLDataReader: error while reading atom block");	
 }
 
-void Chem::MDLDataReader::readCTabV2000AtomCoords(std::istream& is, Atom& atom) const
+void Chem::MDLDataReader::readCTabV2000AtomCoords(std::istream& is, Atom& atom)
 {
-	double x_coords = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom x coordinate");  
-	double y_coords = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom y coordinate");  
+	Math::Vector3D coords;
 
-	if (coordsDim == 3) {
-		Math::Vector3D coords;
+	coords(0) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom x coordinate");  
+	coords(1) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom y coordinate");
+	coords(2) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom z coordinate"); 
 
-		coords(0) = x_coords;
-		coords(1) = y_coords;
-		coords(2) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom z coordinate"); 
+	set3DCoordinates(atom, coords);
 
-		set3DCoordinates(atom, coords);
-
-	} else {
-		skipMDLChars(is, 10, "MDLDataReader: error while reading atom block");
-
-		Math::Vector2D coords;
-
-		coords(0) = x_coords;
-		coords(1) = y_coords;
-
-		set2DCoordinates(atom, coords);
-	}
+	if (coords(2) != 0.0) 
+		coordsDim = 3;
 }
 
 void Chem::MDLDataReader::readCTabV2000AtomSymbol(std::istream& is, Atom& atom) 
@@ -2785,32 +2773,7 @@ void Chem::MDLDataReader::readCTabV3000AtomBlock(std::istream& is, Molecule& mol
 
 	readV3000BlockEnd(is, AtomBlock::BLOCK_TYPE_KEY);
 
-	fixCTabV3000AtomCoordsDim(mol, old_num_atoms);
-}
-
-void Chem::MDLDataReader::fixCTabV3000AtomCoordsDim(Molecule& mol, std::size_t old_num_atoms) const
-{
-	if (coordsDim == 3) {
-		setMDLDimensionality(mol, 3); 
-		return;
-	}
-
-	Molecule::AtomIterator atoms_end = mol.getAtomsEnd();
-
-	for (Molecule::AtomIterator it = mol.getAtomsBegin() + old_num_atoms; it != atoms_end; ++it) {
-		Atom& atom = *it;
-
-		const Math::Vector3D& coords_3d = get3DCoordinates(atom);
-		Math::Vector2D coords_2d;
- 
-		coords_2d(0) = coords_3d(0);
-		coords_2d(1) = coords_3d(1);
-
-		clear3DCoordinates(atom);
-		set2DCoordinates(atom, coords_2d);
-	}
-
-	setMDLDimensionality(mol, 2); 
+	fixAtomCoordsDim(mol, old_num_atoms);
 }
 
 bool Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol)
@@ -3952,6 +3915,31 @@ void Chem::MDLDataReader::skipV3000Data(std::istream& is)
 		if (line == MDL::V3000::DATA_END_TAG || line == MDL::V3000::DATA_END_TAG_ALT)
 			return;
 	}
+}
+
+void Chem::MDLDataReader::fixAtomCoordsDim(Molecule& mol, std::size_t old_num_atoms) const
+{
+	if (coordsDim == 3) {
+		setMDLDimensionality(mol, 3); 
+		return;
+	}
+
+	Molecule::AtomIterator atoms_end = mol.getAtomsEnd();
+
+	for (Molecule::AtomIterator it = mol.getAtomsBegin() + old_num_atoms; it != atoms_end; ++it) {
+		Atom& atom = *it;
+
+		const Math::Vector3D& coords_3d = get3DCoordinates(atom);
+		Math::Vector2D coords_2d;
+ 
+		coords_2d(0) = coords_3d(0);
+		coords_2d(1) = coords_3d(1);
+
+		clear3DCoordinates(atom);
+		set2DCoordinates(atom, coords_2d);
+	}
+
+	setMDLDimensionality(mol, 2); 
 }
 
 void Chem::MDLDataReader::addAtomQueryHCountConstraints() const

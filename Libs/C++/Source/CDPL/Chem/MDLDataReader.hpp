@@ -95,7 +95,7 @@ namespace CDPL
 			void readCTabV2000(std::istream&, Molecule&);
 			void skipCTabV2000(std::istream&);
 
-			void readCTabV2000AtomBlock(std::istream&, Molecule&);
+			void readCTabV2000AtomBlock(std::istream&, Molecule&, std::size_t);
 			bool readCTabV2000BondBlock(std::istream&, Molecule&, std::size_t) const;
 			void readCTabV2000AListBlock(std::istream&, Molecule&, std::size_t);
 			void readCTabV2000STextBlock(std::istream&) const;
@@ -104,7 +104,7 @@ namespace CDPL
 			void skipCTabV2000PropertyBlock(std::istream&);
 
 			void readCTabV2000Atom(std::istream&, Molecule&);
-			void readCTabV2000AtomCoords(std::istream&, Atom&) const;
+			void readCTabV2000AtomCoords(std::istream&, Atom&);
 			void readCTabV2000AtomSymbol(std::istream&, Atom&);
 			void readCTabV2000AtomMass(std::istream&, Atom&) const;
 			void readCTabV2000AtomCharge(std::istream&, Atom&) const;
@@ -163,7 +163,6 @@ namespace CDPL
 			void readCTabV3000CountsLine(std::istream&, Molecule&);
 			void readCTabV3000AtomBlock(std::istream&, Molecule&);
 			bool readCTabV3000BondBlock(std::istream&, Molecule&);
-			void fixCTabV3000AtomCoordsDim(Molecule&, std::size_t) const;
 			void readPastCTabV3000BlockEnd(std::istream&);
 
 			void readCTabV3000Atom(std::istream&, Molecule&);
@@ -213,6 +212,7 @@ namespace CDPL
 			void readV3000DataEndTag(std::istream&);
 			void skipV3000Data(std::istream&);
 
+			void fixAtomCoordsDim(Molecule&, std::size_t) const;
 			void addAtomQueryHCountConstraints() const;
 			void kekulizeUndefBonds(Molecule&) const;
 			void convertParities(Molecule&) const;
