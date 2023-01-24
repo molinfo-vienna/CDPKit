@@ -40,9 +40,9 @@ class ChEMBLStandardizer(Boost.Python.instance):
         EXCLUDED = 1
 
         ##
-        # \brief H_REMOVED.
+        # \brief EXPLICIT_HYDROGENS_REMOVED.
         #
-        H_REMOVED = 2
+        EXPLICIT_HYDROGENS_REMOVED = 2
 
         ##
         # \brief UNKNOWN_STEREO_STANDARDIZED.
@@ -70,9 +70,29 @@ class ChEMBLStandardizer(Boost.Python.instance):
         TARTRATE_STEREO_CLEARED = 64
 
         ##
-        # \brief STRUCTURE_2D_CLEANED.
+        # \brief STRUCTURE_2D_CORRECTED.
         #
-        STRUCTURE_2D_CLEANED = 128
+        STRUCTURE_2D_CORRECTED = 128
+
+        ##
+        # \brief ISOTOPE_INFO_CLEARED.
+        #
+        ISOTOPE_INFO_CLEARED = 256
+
+        ##
+        # \brief SALT_COMPONENTS_REMOVED.
+        #
+        SALT_COMPONENTS_REMOVED = 512
+
+        ##
+        # \brief SOLVENT_COMPONENTS_REMOVED.
+        #
+        SOLVENT_COMPONENTS_REMOVED = 1024
+
+        ##
+        # \brief DUPLICATE_COMPONENTS_REMOVED.
+        #
+        DUPLICATE_COMPONENTS_REMOVED = 2048
 
     ##
     # \brief Initializes the \e %ChEMBLStandardizer instance.
@@ -116,25 +136,29 @@ class ChEMBLStandardizer(Boost.Python.instance):
     # \brief 
     # \param mol 
     # \param std_mol 
-    # \param proc_excld 
+    # \param proc_excluded 
     # \return 
     #
-    def standardize(mol: Molecule, std_mol: Molecule, proc_excld: bool = False) -> ChangeFlags: pass
+    def standardize(mol: Molecule, std_mol: Molecule, proc_excluded: bool = False) -> ChangeFlags: pass
 
     ##
     # \brief 
     # \param mol 
+    # \param neutralize 
+    # \param check_exclusion 
     # \return 
     #
-    def getParent(mol: Molecule) -> ChangeFlags: pass
+    def getParent(mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
 
     ##
     # \brief 
     # \param mol 
     # \param parent_mol 
+    # \param neutralize 
+    # \param check_exclusion 
     # \return 
     #
-    def getParent(mol: Molecule, parent_mol: Molecule) -> ChangeFlags: pass
+    def getParent(mol: Molecule, parent_mol: Molecule, neutralize: bool = True, check_exclusion: bool = True) -> ChangeFlags: pass
 
     ##
     # \brief 

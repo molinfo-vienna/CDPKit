@@ -159,6 +159,12 @@ class Molecule(MolecularGraph):
     def append(molgraph: MolecularGraph) -> None: pass
 
     ##
+    # \brief 
+    # \param molgraph 
+    #
+    def remove(molgraph: MolecularGraph) -> None: pass
+
+    ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Molecule instance \a mol.
     # \param mol The \e %Molecule instance to copy.
     # \return \a self
@@ -328,6 +334,13 @@ class Molecule(MolecularGraph):
     # \return The updated \e %Molecule instance \a self.
     #
     def __iadd__(molgraph: MolecularGraph) -> Molecule: pass
+
+    ##
+    # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
+    # \param molgraph Specifies the subtrahend.
+    # \return The updated \e %Molecule instance \a self.
+    #
+    def __isub__(molgraph: MolecularGraph) -> Molecule: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.

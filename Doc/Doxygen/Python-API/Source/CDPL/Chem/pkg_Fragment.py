@@ -248,6 +248,13 @@ class Fragment(MolecularGraph):
     def __iadd__(molgraph: MolecularGraph) -> Fragment: pass
 
     ##
+    # \brief Performs the in-place subtraction operation <tt>self -= molgraph</tt>.
+    # \param molgraph Specifies the subtrahend.
+    # \return The updated \e %Fragment instance \a self.
+    #
+    def __isub__(molgraph: MolecularGraph) -> Fragment: pass
+
+    ##
     # \brief 
     #
     atoms = property(getAtoms)

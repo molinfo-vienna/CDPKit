@@ -134,3 +134,10 @@ class FeatureSet(FeatureContainer):
     # \return The updated \e %FeatureSet instance \a self.
     #
     def __iadd__(cntnr: FeatureContainer) -> FeatureSet: pass
+
+    ##
+    # \brief Performs the in-place subtraction operation <tt>self -= cntnr</tt>.
+    # \param cntnr Specifies the subtrahend.
+    # \return The updated \e %FeatureSet instance \a self.
+    #
+    def __isub__(cntnr: FeatureContainer) -> FeatureSet: pass

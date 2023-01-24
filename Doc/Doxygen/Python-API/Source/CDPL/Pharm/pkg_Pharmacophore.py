@@ -71,6 +71,12 @@ class Pharmacophore(FeatureContainer):
     def append(cntnr: FeatureContainer) -> None: pass
 
     ##
+    # \brief 
+    # \param cntnr 
+    #
+    def remove(cntnr: FeatureContainer) -> None: pass
+
+    ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %Pharmacophore instance \a pharm.
     # \param pharm The \e %Pharmacophore instance to copy.
     # \return \a self
@@ -195,6 +201,13 @@ class Pharmacophore(FeatureContainer):
     # \return The updated \e %Pharmacophore instance \a self.
     #
     def __iadd__(cntnr: FeatureContainer) -> Pharmacophore: pass
+
+    ##
+    # \brief Performs the in-place subtraction operation <tt>self -= cntnr</tt>.
+    # \param cntnr Specifies the subtrahend.
+    # \return The updated \e %Pharmacophore instance \a self.
+    #
+    def __isub__(cntnr: FeatureContainer) -> Pharmacophore: pass
 
     ##
     # \brief 
