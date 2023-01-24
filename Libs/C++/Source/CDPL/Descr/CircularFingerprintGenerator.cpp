@@ -426,9 +426,7 @@ void Descr::CircularFingerprintGenerator::emitFingerprintSetEntries()
 		fingerprintSet.resize(fingerprintSet.size() + 1);
 
 		fingerprintSet.back().first = ftr_id;
-
-		if (remDuplicates)
-			fingerprintSet.back().second = ftr.getBondSet();
+		fingerprintSet.back().second = ftr.getBondSet();
 	}
 }
 
