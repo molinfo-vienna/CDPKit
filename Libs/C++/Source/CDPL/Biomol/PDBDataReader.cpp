@@ -882,7 +882,6 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 	if (atomSequence.empty())
 		return;
 
-	prevResidueAtoms.clear();
 	prevResidueLinkAtoms.clear();
 
 	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : *ResidueDictionary::get());
@@ -942,9 +941,6 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 					coords->addElement(get3DCoordinates(*atom));					
 				}
 
-				//std::cerr << "alt. loc. atom: " << getSerialNumber(*next_atom) << " "
-				//		  << getResidueAtomName(*next_atom) << " " << getAltLocationID(*next_atom) << std::endl;
-
 				coords->addElement(get3DCoordinates(*next_atom));
 
 				serialToAtomMap[currModelID][getSerialNumber(*next_atom)] = atom;
@@ -959,8 +955,6 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 		bool is_std_res = res_dict.isStdResidue(res_code);
 
 		if (res_tmplt) {
-			//std::cerr << "Using residue dictionary template for " << res_code << std::endl;
-
 			if (applyDictAtomTypes || applyDictAtomCharges) {
 				for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
 					const Atom& atom = *a_it;
@@ -996,7 +990,83 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 			}
 		}
 
+		for (AtomList::const_iterator a_it = res_as_start_it; a_it != as_it; ++a_it) {
+			Atom* atom = *a_it;
+			
+			if (!mol.containsAtom(*atom))
+				continue;
+			
+			if (getType(*atom) != AtomType::UNKNOWN)
+				continue;
+
+			const std::string& atom_name = getResidueAtomName(*atom);
+
+			// as a last resort, try to extract the element symbol from the residue atom name
+			for (std::size_t i = 0; i < atom_name.length(); i++) {
+				switch (atom_name[i]) {
+
+					case 'H':
+					case 'N':
+					case 'O':
+					case 'C':
+					case 'S': {
+						std::string sym(1, atom_name[i]);
+							
+						setSymbol(*atom, sym);
+						setType(*atom, AtomDictionary::getType(sym));
+
+						i = atom_name.length();
+						break;
+					}
+				}
+			}
+		}
+
+		// create potentially missing intra-residue bonds
+		for (AtomList::const_iterator a_it1 = res_as_start_it; a_it1 != as_it; ) {
+			Atom* atom1 = *a_it1;
+			
+			if (!mol.containsAtom(*atom1)) {
+				++a_it1;
+				continue;
+			}
+
+			const std::string& atom1_name = getResidueAtomName(*atom1);
+			bool has_tmplt_bonds1 = (res_tmplt && ((is_std_res && applyDictAtomBondingToStdResidues) ||
+												   (!is_std_res && applyDictAtomBondingToNonStdResidues)) &&
+									getResTemplateAtom(*res_tmplt, atom1_name));
+			bool atom1_is_h = (getType(*atom1) == AtomType::H);
+			const Math::Vector3D& atom1_pos = get3DCoordinates(*atom1);
+			double cov_rad1 = MolProp::getCovalentRadius(*atom1, 1);
+				
+			for (AtomList::const_iterator a_it2 = ++a_it1; a_it2 != as_it; ++a_it2) {
+				const Atom* atom2 = *a_it2;
+			
+				if (!mol.containsAtom(*atom2))
+					continue;
+
+				if (atom1_is_h && (getType(*atom2) == AtomType::H)) // do not connect hydrogens!
+					continue;
+				
+				bool has_tmplt_bonds2 = (res_tmplt && ((is_std_res && applyDictAtomBondingToStdResidues) ||
+													   (!is_std_res && applyDictAtomBondingToNonStdResidues)) &&
+										 getResTemplateAtom(*res_tmplt, getResidueAtomName(*atom2)));
+
+				if (has_tmplt_bonds1 && has_tmplt_bonds2) // atom pair already processed before
+					continue;
+
+				const Math::Vector3D& atom2_pos = get3DCoordinates(*atom2);
+				double cov_rad2 = MolProp::getCovalentRadius(*atom2, 1);
+				double dist = norm2(atom1_pos - atom2_pos);
+
+				if (dist > 0.4 && dist <= (cov_rad1 + cov_rad2 + 0.4))
+					mol.addBond(mol.getAtomIndex(*atom1), mol.getAtomIndex(*atom2));
+			}
+		}
+		
 		if (chain_term) {
+			// connect residues
+			
 			if (res_tmplt) {
 				for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
 					const Atom& atom = *a_it;
@@ -1012,10 +1082,13 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 					} else if (getResidueLeavingAtomFlag(atom))
 						setResidueLeavingAtomFlag(*res_atom, true);
 				} 
-
-			} else
-				currResidueLinkAtoms.insert(currResidueLinkAtoms.end(), res_as_start_it, as_it);
-
+			}
+			
+			if (currResidueLinkAtoms.empty())
+				for (AtomList::const_iterator a_it = res_as_start_it; a_it != as_it; ++a_it)
+					if (mol.containsAtom(**a_it))
+						currResidueLinkAtoms.push_back(*a_it);
+			
 			bool exit = false;
 
 			for (AtomList::const_iterator a_it1 = prevResidueLinkAtoms.begin(), a_end1 = prevResidueLinkAtoms.end(); a_it1 != a_end1; ++a_it1) {
@@ -1032,7 +1105,6 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 					if (dist > 0.4 && dist <= (cov_rad1 + cov_rad2 + 0.4)) {
 						mol.addBond(mol.getAtomIndex(*atom1), mol.getAtomIndex(*atom2));
-						//setOrder(bond, 1);
 						exit = true;
 						break;
 					}
@@ -1042,7 +1114,6 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 					break;
 			}
 
-			prevResidueAtoms.swap(currResidueAtoms);
 			prevResidueLinkAtoms.swap(currResidueLinkAtoms);
 		}
 	}

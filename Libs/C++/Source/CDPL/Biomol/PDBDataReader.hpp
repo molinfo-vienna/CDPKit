@@ -140,7 +140,6 @@ namespace CDPL
 			SerialToAtomMap         serialToAtomMap;
 			AtomList                atomSequence;
 			NameToAtomMap           currResidueAtoms;
-			NameToAtomMap           prevResidueAtoms;
 			AtomList                currResidueLinkAtoms;
 			AtomList                prevResidueLinkAtoms;
 			BondOrderCache          bondOrderCache;
