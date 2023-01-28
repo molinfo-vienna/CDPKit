@@ -108,6 +108,15 @@ namespace CDPL
 			 */
 			const Math::DVector& getFeatureVector() const;
 
+			/**
+			 * \brief Returns the contribution of each atom the total obtained by the last \f$ \log P \f$ calculation.
+			 * \return The contribution of each atom the total \f$ \log P \f$.
+			 * \note The sum of the atom contributions does not necessarily equal the calculated molecule \f$ \log P \f$ and
+			 *       might be lower!
+			 * \see XLogPCalculator::calculate()
+			 */
+			const Math::DVector& getAtomContributions() const;
+
 		private:
 			void init(const Chem::MolecularGraph& molgraph);
 
@@ -116,6 +125,7 @@ namespace CDPL
 			void calcLogP(const Chem::MolecularGraph& molgraph);
 		
 			Math::DVector                         featureVector;
+			Math::DVector                         atomContribs;
 			double                                logP;
 			Chem::PatternAtomTyper                atomTyper;
 			Chem::SubstructureHistogramCalculator corrSubstructHistoCalc;

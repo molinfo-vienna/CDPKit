@@ -356,8 +356,15 @@ const Math::DVector& MolProp::XLogPCalculator::getFeatureVector() const
 	return featureVector;
 }
 
+const Math::DVector& MolProp::XLogPCalculator::getAtomContributions() const
+{
+	return atomContribs;
+}
+
 void MolProp::XLogPCalculator::init(const Chem::MolecularGraph& molgraph)
 {
+	atomContribs = Math::ScalarVector<double>(molgraph.getNumAtoms(), 0.0);
+	
 	featureVector.clear();
 	featureVector[LOGP_OFFSET_INDEX] = 1;
 
@@ -425,8 +432,10 @@ void MolProp::XLogPCalculator::countHydrophicCarbons(const Chem::MolecularGraph&
 			}
 		}
 
-		if (hydrophobic)
+		if (hydrophobic) {
+			atomContribs[i] += REGRESSION_COEFFS[HYDROPHOBIC_C_INDEX];
 			featureVector[HYDROPHOBIC_C_INDEX]++;
+		}
 	}
 }
 
@@ -435,10 +444,16 @@ void MolProp::XLogPCalculator::calcLogP(const Chem::MolecularGraph& molgraph)
 	corrSubstructHistoCalc.calculate(molgraph, featureVector);
 	atomTyper.execute(molgraph);
 
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
-		if (atomTyper.hasAtomLabel(i))
-			featureVector[atomTyper.getAtomLabel(i)]++;
+	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
+		if (!atomTyper.hasAtomLabel(i))
+			continue;
 
+		std::size_t label = atomTyper.getAtomLabel(i);
+		
+		atomContribs[i] += REGRESSION_COEFFS[label];
+		featureVector[label]++;
+	}
+	
 	countHydrophicCarbons(molgraph);
 
 	logP = std::inner_product(Math::vectorBegin(featureVector), Math::vectorEnd(featureVector), REGRESSION_COEFFS, 0.0);

@@ -51,6 +51,8 @@ void CDPLPythonMolProp::exportXLogPCalculator()
 		.def("getResult", &MolProp::XLogPCalculator::getResult, python::arg("self"))
 		.def("getFeatureVector", &MolProp::XLogPCalculator::getFeatureVector, python::arg("self"),
 			 python::return_internal_reference<>())
+		.def("getAtomContributions", &MolProp::XLogPCalculator::getAtomContributions, python::arg("self"),
+			 python::return_internal_reference<>())
 		.add_property("result", &MolProp::XLogPCalculator::getResult)
 		.def_readonly("FEATURE_VECTOR_SIZE", &MolProp::XLogPCalculator::FEATURE_VECTOR_SIZE);
 }

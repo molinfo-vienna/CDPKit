@@ -291,7 +291,7 @@ SET(cdpl-chem_LIB_SRCS
 
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeRemoveAtomsFunctions.cpp
-    MoleculeNeutralizeFunction.cpp
+    MoleculeMinChargedAtomCountFunction.cpp
 
     FragmentHydrogenManipulationFunctions.cpp
     FragmentRemoveAtomsFunctions.cpp
