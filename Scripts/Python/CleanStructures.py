@@ -62,7 +62,7 @@ def processMolecule(mol, stats):
     modified = False
 
     if NEUTRALIZE:
-        modified = Chem.neutralize(mol)
+        modified = Chem.minimizeChargedAtomCount(mol)
 
     Chem.perceiveComponents(mol, False)
     Chem.perceiveSSSR(mol, False)

@@ -71,7 +71,7 @@ namespace CDPL
 		 */
 		CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count = true);
 
-		CDPL_CHEM_API bool neutralize(Molecule& mol);
+		CDPL_CHEM_API bool minimizeChargedAtomCount(Molecule& mol);
 
 		CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 

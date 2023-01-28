@@ -235,7 +235,7 @@ private:
 
 		try {
 			if (parent->neutralize)
-				CDPL::Chem::neutralize(molecule);
+				CDPL::Chem::minimizeChargedAtomCount(molecule);
 
 			if (parent->regardStereo) {
 				calcImplicitHydrogenCounts(molecule, false);

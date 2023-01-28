@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MoleculeNeutralizeFunction.cpp 
+ * MoleculeMinChargedAtomCountFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -143,7 +143,7 @@ namespace
 }
 
 
-bool Chem::neutralize(Molecule& mol)
+bool Chem::minimizeChargedAtomCount(Molecule& mol)
 {
     bool changes = false;
 
