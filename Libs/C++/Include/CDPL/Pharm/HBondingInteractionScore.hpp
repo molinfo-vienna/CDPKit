@@ -34,7 +34,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
 namespace CDPL 
@@ -43,12 +43,10 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
-
 		/**
 		 * \brief HBondingInteractionScore.
 		 */
-		class CDPL_PHARM_API HBondingInteractionScore
+		class CDPL_PHARM_API HBondingInteractionScore : public FeatureInteractionScore
 		{
 
 		  public:
@@ -56,6 +54,11 @@ namespace CDPL
 			static const double DEF_MAX_HB_LENGTH;
 			static const double DEF_MIN_AHD_ANGLE;
 			static const double DEF_MAX_ACC_ANGLE;
+
+			/**	
+			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %HBondingInteractionScore instances.
+			 */
+			typedef boost::shared_ptr<HBondingInteractionScore> SharedPointer;
 
 			typedef boost::function1<double, double> NormalizationFunction;
 

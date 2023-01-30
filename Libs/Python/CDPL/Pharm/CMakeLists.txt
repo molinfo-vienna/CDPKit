@@ -95,7 +95,8 @@ SET(pharm_MOD_SRCS
     XBondingInteractionConstraintExport.cpp
     InteractionPharmacophoreGeneratorExport.cpp
 
-    InteractionScoreCombinerExport.cpp
+    FeatureInteractionScoreExport.cpp
+    FeatureInteractionScoreCombinerExport.cpp
     FeatureDistanceScoreExport.cpp
     HydrophobicInteractionScoreExport.cpp
     IonicInteractionScoreExport.cpp

@@ -27,29 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/CationPiInteractionScore.hpp"
-#include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    double callOperator1(CDPL::Pharm::CationPiInteractionScore& score, 
-						 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1, ftr2);
-    }
-
-	double callOperator2(CDPL::Pharm::CationPiInteractionScore& score, 
-						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1_pos, ftr2);
-    }
-}
 
 
 void CDPLPythonPharm::exportCationPiInteractionScore()
@@ -57,21 +38,19 @@ void CDPLPythonPharm::exportCationPiInteractionScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::CationPiInteractionScore, boost::noncopyable>("CationPiInteractionScore", python::no_init)
+    python::class_<Pharm::CationPiInteractionScore, Pharm::CationPiInteractionScore::SharedPointer,
+				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("CationPiInteractionScore", python::no_init)
 		.def(python::init<const Pharm::CationPiInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<bool, double, double, double>((python::arg("self"), python::arg("aro_cat"), 
 														 python::arg("min_dist") = Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE, 
 														 python::arg("max_dist") = Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE,
 														 python::arg("max_ang") = Pharm::CationPiInteractionScore::DEF_MAX_ANGLE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::CationPiInteractionScore>())
 		.def("setNormalizationFunction", &Pharm::CationPiInteractionScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinDistance", &Pharm::CationPiInteractionScore::getMinDistance, python::arg("self"))
 		.def("getMaxDistance", &Pharm::CationPiInteractionScore::getMaxDistance, python::arg("self"))
 		.def("getMaxAngle", &Pharm::CationPiInteractionScore::getMaxAngle, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::CationPiInteractionScore::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minDistance", &Pharm::CationPiInteractionScore::getMinDistance)
 		.add_property("maxDistance", &Pharm::CationPiInteractionScore::getMaxDistance)
 		.add_property("maxAngle", &Pharm::CationPiInteractionScore::getMaxAngle)

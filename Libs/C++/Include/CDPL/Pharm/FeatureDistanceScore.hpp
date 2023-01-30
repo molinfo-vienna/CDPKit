@@ -34,7 +34,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
 namespace CDPL 
@@ -48,10 +48,15 @@ namespace CDPL
 		/**
 		 * \brief FeatureDistanceScore.
 		 */
-		class CDPL_PHARM_API FeatureDistanceScore
+		class CDPL_PHARM_API FeatureDistanceScore : public FeatureInteractionScore
 		{
 
 		  public:
+			/**	
+			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FeatureDistanceScore instances.
+			 */
+			typedef boost::shared_ptr<FeatureDistanceScore> SharedPointer;
+
 			typedef boost::function1<double, double> NormalizationFunction;
 
 			/**

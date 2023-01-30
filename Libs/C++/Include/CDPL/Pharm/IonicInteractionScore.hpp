@@ -51,6 +51,11 @@ namespace CDPL
 			static const double DEF_MIN_DISTANCE;
 			static const double DEF_MAX_DISTANCE;
 
+			/**	
+			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %IonicInteractionScore instances.
+			 */
+			typedef boost::shared_ptr<IonicInteractionScore> SharedPointer;
+
 			/**
 			 * \brief Constructs a \c %IonicInteractionScore functor with a 
 			 *        minimum ionic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.

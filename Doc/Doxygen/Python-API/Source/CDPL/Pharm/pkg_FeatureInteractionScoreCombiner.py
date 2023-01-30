@@ -21,44 +21,26 @@
 
 ##
 # \brief 
-# \param mol 
-# \return 
 #
-def makeHydrogenDeplete(mol: Molecule) -> bool: pass
+class FeatureInteractionScoreCombiner(FeatureInteractionScore):
 
-##
-# \brief 
-# \param mol 
-# \param flags 
-# \return 
-#
-def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int) -> bool: pass
+    ##
+    # \brief Initializes the \e %FeatureInteractionScoreCombiner instance.
+    # \param comb 
+    #
+    def __init__(comb: FeatureInteractionScoreCombiner) -> None: pass
 
-##
-# \brief 
-# \param mol 
-# \param corr_impl_h_count 
-# \return 
-#
-def makeHydrogenComplete(mol: Molecule, corr_impl_h_count: bool = True) -> bool: pass
+    ##
+    # \brief Initializes the \e %FeatureInteractionScoreCombiner instance.
+    # \param score1 
+    # \param score2 
+    # \param comb_func 
+    #
+    def __init__(score1: FeatureInteractionScore, score2: FeatureInteractionScore, comb_func: DoubleDouble2Functor) -> None: pass
 
-##
-# \brief 
-# \param mol 
-# \param pred 
-#
-def removeAtomsIf(mol: Molecule, pred: AtomPredicate) -> None: pass
-
-##
-# \brief 
-# \param mol 
-# \return 
-#
-def minimizeChargedAtomCount(mol: Molecule) -> bool: pass
-
-##
-# \brief 
-# \param mol 
-# \param pred 
-#
-def removeAtomsIfNot(mol: Molecule, pred: AtomPredicate) -> None: pass
+    ##
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreCombiner instance \a con.
+    # \param con The \e %FeatureInteractionScoreCombiner instance to copy.
+    # \return \a self
+    #
+    def assign(con: FeatureInteractionScoreCombiner) -> FeatureInteractionScoreCombiner: pass

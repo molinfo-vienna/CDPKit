@@ -118,7 +118,8 @@ namespace CDPLPythonPharm
 	void exportXBondingInteractionConstraint();	
 	void exportInteractionPharmacophoreGenerator();
 
-	void exportInteractionScoreCombiner();
+	void exportFeatureInteractionScore();
+	void exportFeatureInteractionScoreCombiner();
 	void exportFeatureDistanceScore();
 	void exportHydrophobicInteractionScore();
 	void exportIonicInteractionScore();

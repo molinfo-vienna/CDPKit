@@ -119,7 +119,8 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportXBondingInteractionConstraint();
 	exportInteractionPharmacophoreGenerator();
 
-	exportInteractionScoreCombiner();
+	exportFeatureInteractionScore();
+	exportFeatureInteractionScoreCombiner();
 	exportFeatureDistanceScore();
 	exportHydrophobicInteractionScore();
 	exportIonicInteractionScore();

@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class OrthogonalPiPiInteractionScore(Boost.Python.instance):
+class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
 
     ##
     # \brief 
@@ -60,18 +60,6 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
     def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, ang_tol: float = 35.0) -> None: pass
 
     ##
-    # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
-    # Different Python \e %OrthogonalPiPiInteractionScore instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %OrthogonalPiPiInteractionScore instances \e a and \e b reference different C++ objects. 
-    # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
-    # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
-    # \return The numeric ID of the internally referenced C++ class instance.
-    #
-    def getObjectID() -> int: pass
-
-    ##
     # \brief 
     # \param func 
     #
@@ -107,27 +95,6 @@ class OrthogonalPiPiInteractionScore(Boost.Python.instance):
     # \return \a self
     #
     def assign(constr: OrthogonalPiPiInteractionScore) -> OrthogonalPiPiInteractionScore: pass
-
-    ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
-    def __call__(ftr1: Feature, ftr2: Feature) -> float: pass
-
-    ##
-    # \brief 
-    # \param ftr1_pos 
-    # \param ftr2 
-    # \return 
-    #
-    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
-
-    ##
-    # \brief 
-    #
-    objectID = property(getObjectID)
 
     ##
     # \brief 

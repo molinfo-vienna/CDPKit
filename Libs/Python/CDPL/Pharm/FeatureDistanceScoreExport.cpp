@@ -27,29 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"
-#include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    double callOperator1(CDPL::Pharm::FeatureDistanceScore& score, 
-						CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1, ftr2);
-    }
-
-	double callOperator2(CDPL::Pharm::FeatureDistanceScore& score, 
-						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1_pos, ftr2);
-    }
-}
 
 
 void CDPLPythonPharm::exportFeatureDistanceScore()
@@ -57,17 +38,15 @@ void CDPLPythonPharm::exportFeatureDistanceScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::FeatureDistanceScore, boost::noncopyable>("FeatureDistanceScore", python::no_init)
+    python::class_<Pharm::FeatureDistanceScore, Pharm::FeatureDistanceScore::SharedPointer,
+				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("FeatureDistanceScore", python::no_init)
 		.def(python::init<const Pharm::FeatureDistanceScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double>((python::arg("self"), python::arg("min_dist"), python::arg("max_dist"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureDistanceScore>())
 		.def("setNormalizationFunction", &Pharm::FeatureDistanceScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinDistance", &Pharm::FeatureDistanceScore::getMinDistance, python::arg("self"))
 		.def("getMaxDistance", &Pharm::FeatureDistanceScore::getMaxDistance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceScore::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minDistance", &Pharm::FeatureDistanceScore::getMinDistance)
 		.add_property("maxDistance", &Pharm::FeatureDistanceScore::getMaxDistance);
 }

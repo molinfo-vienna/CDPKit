@@ -51,6 +51,11 @@ namespace CDPL
 			static const double DEF_MIN_DISTANCE;
 			static const double DEF_MAX_DISTANCE;
 
+			/**	
+			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %HydrophobicInteractionScore instances.
+			 */
+			typedef boost::shared_ptr<HydrophobicInteractionScore> SharedPointer;
+			
 			/**
 			 * \brief Constructs a \c %HydrophobicInteractionScore functor with a 
 			 *        minimum hydrophobic-feature pair distance of \a min_dist and a maximum distance of \a max_dist.

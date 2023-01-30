@@ -27,29 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/XBondingInteractionScore.hpp"
-#include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    double callOperator1(CDPL::Pharm::XBondingInteractionScore& score, 
-						 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1, ftr2);
-    }
-
-	double callOperator2(CDPL::Pharm::XBondingInteractionScore& score, 
-						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1_pos, ftr2);
-    }
-}
 
 
 void CDPLPythonPharm::exportXBondingInteractionScore()
@@ -57,14 +38,14 @@ void CDPLPythonPharm::exportXBondingInteractionScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::XBondingInteractionScore, boost::noncopyable>("XBondingInteractionScore", python::no_init)
+    python::class_<Pharm::XBondingInteractionScore, Pharm::XBondingInteractionScore::SharedPointer,
+				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("XBondingInteractionScore", python::no_init)
 		.def(python::init<const Pharm::XBondingInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<bool, double, double, double, double>((python::arg("self"), python::arg("don_acc"), 
 																 python::arg("min_ax_dist") = Pharm::XBondingInteractionScore::DEF_MIN_AX_DISTANCE, 
 																 python::arg("max_ax_dist") = Pharm::XBondingInteractionScore::DEF_MAX_AX_DISTANCE,
 																 python::arg("min_axb_ang") = Pharm::XBondingInteractionScore::DEF_MIN_AXB_ANGLE,
 																 python::arg("acc_ang_tol") = Pharm::XBondingInteractionScore::DEF_ACC_ANGLE_TOLERANCE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::XBondingInteractionScore>())
 		.def("setNormalizationFunction", &Pharm::XBondingInteractionScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinAXDistance", &Pharm::XBondingInteractionScore::getMinAXDistance, python::arg("self"))
 		.def("getMaxAXDistance", &Pharm::XBondingInteractionScore::getMaxAXDistance, python::arg("self"))
@@ -72,8 +53,6 @@ void CDPLPythonPharm::exportXBondingInteractionScore()
 		.def("getAcceptorAngleTolerance", &Pharm::XBondingInteractionScore::getAcceptorAngleTolerance, python::arg("self"))	
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondingInteractionScore::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minAXDistance", &Pharm::XBondingInteractionScore::getMinAXDistance)
 		.add_property("maxAXDistance", &Pharm::XBondingInteractionScore::getMaxAXDistance)
 		.add_property("minAXBAngle", &Pharm::XBondingInteractionScore::getMinAXBAngle)

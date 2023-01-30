@@ -27,29 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"
-#include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    double callOperator1(CDPL::Pharm::OrthogonalPiPiInteractionScore& score, 
-						 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1, ftr2);
-    }
-
-	double callOperator2(CDPL::Pharm::OrthogonalPiPiInteractionScore& score, 
-						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1_pos, ftr2);
-    }
-}
 
 
 void CDPLPythonPharm::exportOrthogonalPiPiInteractionScore()
@@ -57,14 +38,15 @@ void CDPLPythonPharm::exportOrthogonalPiPiInteractionScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::OrthogonalPiPiInteractionScore, boost::noncopyable>("OrthogonalPiPiInteractionScore", python::no_init)
+    python::class_<Pharm::OrthogonalPiPiInteractionScore, Pharm::OrthogonalPiPiInteractionScore::SharedPointer,
+				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("OrthogonalPiPiInteractionScore", python::no_init)
 		.def(python::init<const Pharm::OrthogonalPiPiInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double, double, double>((python::arg("self"),
 														 python::arg("min_h_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_H_DISTANCE, 
 														 python::arg("max_h_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_H_DISTANCE,
 														 python::arg("max_v_dist") = Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE,
 														 python::arg("ang_tol") = Pharm::OrthogonalPiPiInteractionScore::DEF_ANGLE_TOLERANCE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::OrthogonalPiPiInteractionScore>())
+
 		.def("setNormalizationFunction", &Pharm::OrthogonalPiPiInteractionScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinHDistance, python::arg("self"))
 		.def("getMaxHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxHDistance, python::arg("self"))
@@ -72,8 +54,6 @@ void CDPLPythonPharm::exportOrthogonalPiPiInteractionScore()
 		.def("getAngleTolerance", &Pharm::OrthogonalPiPiInteractionScore::getAngleTolerance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::OrthogonalPiPiInteractionScore::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMinHDistance)
 		.add_property("maxHDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxHDistance)
 		.add_property("maxVDistance", &Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance)

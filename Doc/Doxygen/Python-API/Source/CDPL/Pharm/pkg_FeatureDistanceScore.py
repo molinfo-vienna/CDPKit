@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class FeatureDistanceScore(Boost.Python.instance):
+class FeatureDistanceScore(FeatureInteractionScore):
 
     ##
     # \brief Initializes the \e %FeatureDistanceScore instance.
@@ -36,18 +36,6 @@ class FeatureDistanceScore(Boost.Python.instance):
     # \param max_dist 
     #
     def __init__(min_dist: float, max_dist: float) -> None: pass
-
-    ##
-    # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
-    #
-    # Different Python \e %FeatureDistanceScore instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureDistanceScore instances \e a and \e b reference different C++ objects. 
-    # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
-    # <tt>a.getObjectID() != b.getObjectID()</tt>.
-    #
-    # \return The numeric ID of the internally referenced C++ class instance.
-    #
-    def getObjectID() -> int: pass
 
     ##
     # \brief 
@@ -73,27 +61,6 @@ class FeatureDistanceScore(Boost.Python.instance):
     # \return \a self
     #
     def assign(func: FeatureDistanceScore) -> FeatureDistanceScore: pass
-
-    ##
-    # \brief 
-    # \param ftr1 
-    # \param ftr2 
-    # \return 
-    #
-    def __call__(ftr1: Feature, ftr2: Feature) -> float: pass
-
-    ##
-    # \brief 
-    # \param ftr1_pos 
-    # \param ftr2 
-    # \return 
-    #
-    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
-
-    ##
-    # \brief 
-    #
-    objectID = property(getObjectID)
 
     ##
     # \brief 

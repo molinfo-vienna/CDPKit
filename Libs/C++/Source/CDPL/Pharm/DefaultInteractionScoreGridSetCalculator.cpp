@@ -29,7 +29,7 @@
 #include <algorithm>
 
 #include "CDPL/Pharm/DefaultInteractionScoreGridSetCalculator.hpp"
-#include "CDPL/Pharm/InteractionScoreCombiner.hpp"  
+#include "CDPL/Pharm/FeatureInteractionScoreCombiner.hpp"  
 #include "CDPL/Pharm/HydrophobicInteractionScore.hpp"  
 #include "CDPL/Pharm/IonicInteractionScore.hpp"  
 #include "CDPL/Pharm/HBondingInteractionScore.hpp"
@@ -174,7 +174,8 @@ void Pharm::DefaultInteractionScoreGridSetCalculator::init()
 	enableInteraction(FeatureType::HYDROPHOBIC, FeatureType::HYDROPHOBIC, true);
 
 	setScoringFunction(FeatureType::AROMATIC, FeatureType::AROMATIC, 
-								  InteractionScoreCombiner(OrthogonalPiPiInteractionScore(), ParallelPiPiInteractionScore()));
+					   FeatureInteractionScoreCombiner(FeatureInteractionScore::SharedPointer(new OrthogonalPiPiInteractionScore()),
+													   FeatureInteractionScore::SharedPointer(new ParallelPiPiInteractionScore())));
 	enableInteraction(FeatureType::AROMATIC, FeatureType::AROMATIC, true);
 
 	setScoringFunction(FeatureType::H_BOND_DONOR, FeatureType::H_BOND_ACCEPTOR, HBondingInteractionScore(true));

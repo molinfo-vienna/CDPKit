@@ -27,29 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"
-#include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    double callOperator1(CDPL::Pharm::ParallelPiPiInteractionScore& score, 
-						 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1, ftr2);
-    }
-
-	double callOperator2(CDPL::Pharm::ParallelPiPiInteractionScore& score, 
-						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
-    {
-		return score(ftr1_pos, ftr2);
-    }
-}
 
 
 void CDPLPythonPharm::exportParallelPiPiInteractionScore()
@@ -57,14 +38,14 @@ void CDPLPythonPharm::exportParallelPiPiInteractionScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::ParallelPiPiInteractionScore, boost::noncopyable>("ParallelPiPiInteractionScore", python::no_init)
+    python::class_<Pharm::ParallelPiPiInteractionScore, Pharm::ParallelPiPiInteractionScore::SharedPointer,
+				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("ParallelPiPiInteractionScore", python::no_init)
 		.def(python::init<const Pharm::ParallelPiPiInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double, double, double>((python::arg("self"),
 														 python::arg("min_v_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE, 
 														 python::arg("max_v_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE,
 														 python::arg("max_h_dist") = Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE,
 														 python::arg("ang_tol") = Pharm::ParallelPiPiInteractionScore::DEF_ANGLE_TOLERANCE)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::ParallelPiPiInteractionScore>())
 		.def("setNormalizationFunction", &Pharm::ParallelPiPiInteractionScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance, python::arg("self"))
 		.def("getMaxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance, python::arg("self"))
@@ -72,8 +53,6 @@ void CDPLPythonPharm::exportParallelPiPiInteractionScore()
 		.def("getAngleTolerance", &Pharm::ParallelPiPiInteractionScore::getAngleTolerance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::ParallelPiPiInteractionScore::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
-		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minVDistance", &Pharm::ParallelPiPiInteractionScore::getMinVDistance)
 		.add_property("maxVDistance", &Pharm::ParallelPiPiInteractionScore::getMaxVDistance)
 		.add_property("maxHDistance", &Pharm::ParallelPiPiInteractionScore::getMaxHDistance)

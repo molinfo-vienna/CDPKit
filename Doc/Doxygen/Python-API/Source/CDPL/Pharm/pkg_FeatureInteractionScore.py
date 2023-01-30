@@ -22,27 +22,18 @@
 ##
 # \brief 
 #
-class InteractionScoreCombiner(Boost.Python.instance):
+class FeatureInteractionScore(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %InteractionScoreCombiner instance.
-    # \param comb 
+    # \brief Initializes the \e %FeatureInteractionScore instance.
     #
-    def __init__(comb: InteractionScoreCombiner) -> None: pass
-
-    ##
-    # \brief Initializes the \e %InteractionScoreCombiner instance.
-    # \param func1 
-    # \param func2 
-    # \param comb_func 
-    #
-    def __init__(func1: DoubleVector3DFeatureFunctor, func2: DoubleVector3DFeatureFunctor, comb_func: DoubleDouble2Functor) -> None: pass
+    def __init__() -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
-    # Different Python \e %InteractionScoreCombiner instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionScoreCombiner instances \e a and \e b reference different C++ objects. 
+    # Different Python \e %FeatureInteractionScore instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureInteractionScore instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     #
@@ -51,19 +42,20 @@ class InteractionScoreCombiner(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionScoreCombiner instance \a con.
-    # \param con The \e %InteractionScoreCombiner instance to copy.
-    # \return \a self
+    # \brief 
+    # \param arg1 
+    # \param arg2 
+    # \return 
     #
-    def assign(con: InteractionScoreCombiner) -> InteractionScoreCombiner: pass
+    def __call__(arg2: Feature, self: Feature) -> float: pass
 
     ##
     # \brief 
-    # \param ftr1_pos 
-    # \param ftr2 
+    # \param arg1 
+    # \param arg2 
     # \return 
     #
-    def __call__(ftr1_pos: CDPL.Math.Vector3D, ftr2: Feature) -> float: pass
+    def __call__(arg2: CDPL.Math.Vector3D, self: Feature) -> float: pass
 
     ##
     # \brief 

@@ -37,8 +37,8 @@ void CDPLPythonPharm::exportHydrophobicInteractionScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::HydrophobicInteractionScore, python::bases<Pharm::FeatureDistanceScore>,
-				   boost::noncopyable>("HydrophobicInteractionScore", python::no_init)
+    python::class_<Pharm::HydrophobicInteractionScore, Pharm::HydrophobicInteractionScore::SharedPointer,
+				   python::bases<Pharm::FeatureDistanceScore>, boost::noncopyable>("HydrophobicInteractionScore", python::no_init)
 		.def(python::init<const Pharm::HydrophobicInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double>((python::arg("self"), 
 										   python::arg("min_dist") = Pharm::HydrophobicInteractionScore::DEF_MIN_DISTANCE,

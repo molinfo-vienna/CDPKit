@@ -96,21 +96,18 @@ bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, c
 			return false;
     
 		double v_dist1 = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
-		double v_dist2 = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
-
-		if (std::min(v_dist1, v_dist2) < minVDist)
-			return false;
-  
-		if (std::max(v_dist1, v_dist2) > maxVDist)
-			return false;
-    
 		double h_dist1 = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
-		double h_dist2 = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
-  
-		if (std::max(h_dist1, h_dist2) > maxHDist)
-			return false;
+
+		if (v_dist1 >= minVDist && v_dist1 <= maxVDist && h_dist1 <= maxHDist)
+			return true;
+			
+		double v_dist2 = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
+  		double h_dist2 = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
+
+		if (v_dist2 >= minVDist && v_dist2 <= maxVDist && h_dist2 <= maxHDist)
+			return true;
    
-		return true;
+		return false;
 	}
 
 	if (has_orient1) {

@@ -69,7 +69,7 @@ SET(cdpl-pharm_LIB_SRCS
     ParallelPiPiInteractionConstraint.cpp
     InteractionPharmacophoreGenerator.cpp
 
-    InteractionScoreCombiner.cpp
+    FeatureInteractionScoreCombiner.cpp
     FeatureDistanceScore.cpp
     HydrophobicInteractionScore.cpp
     IonicInteractionScore.cpp

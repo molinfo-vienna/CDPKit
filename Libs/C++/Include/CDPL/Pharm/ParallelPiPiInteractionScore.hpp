@@ -34,7 +34,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Pharm/FeatureInteractionScore.hpp"
 
 
 namespace CDPL 
@@ -43,12 +43,10 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
-
 		/**
 		 * \brief ParallelPiPiInteractionScore.
 		 */
-		class CDPL_PHARM_API ParallelPiPiInteractionScore
+		class CDPL_PHARM_API ParallelPiPiInteractionScore : public FeatureInteractionScore
 		{
 
 		  public:
@@ -57,6 +55,11 @@ namespace CDPL
 			static const double DEF_MAX_V_DISTANCE;
 			static const double DEF_ANGLE_TOLERANCE;
 	
+			/**	
+			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ParallelPiPiInteractionScore instances.
+			 */
+			typedef boost::shared_ptr<ParallelPiPiInteractionScore> SharedPointer;
+
 			typedef boost::function1<double, double> NormalizationFunction;
 
 			/**
@@ -84,6 +87,8 @@ namespace CDPL
 			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
 		  private:
+			double calcDistanceScore(const Math::Vector3D& orient, const Math::Vector3D& ftr1_ftr2_vec) const;
+
 			double                minVDist;
 			double                maxVDist;
 			double                maxHDist;

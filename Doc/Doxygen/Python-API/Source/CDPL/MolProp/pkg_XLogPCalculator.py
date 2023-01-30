@@ -86,6 +86,12 @@ class XLogPCalculator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \return 
+    #
+    def getAtomContributions() -> CDPL.Math.DVector: pass
+
+    ##
+    # \brief 
     #
     objectID = property(getObjectID)
 

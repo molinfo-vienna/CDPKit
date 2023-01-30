@@ -37,8 +37,8 @@ void CDPLPythonPharm::exportIonicInteractionScore()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::IonicInteractionScore, python::bases<Pharm::FeatureDistanceScore>,
-				   boost::noncopyable>("IonicInteractionScore", python::no_init)
+    python::class_<Pharm::IonicInteractionScore, Pharm::IonicInteractionScore::SharedPointer,
+				   python::bases<Pharm::FeatureDistanceScore>, boost::noncopyable>("IonicInteractionScore", python::no_init)
 		.def(python::init<const Pharm::IonicInteractionScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double>((python::arg("self"), 
 										   python::arg("min_dist") = Pharm::IonicInteractionScore::DEF_MIN_DISTANCE,

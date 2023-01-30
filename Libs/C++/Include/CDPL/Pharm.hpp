@@ -83,7 +83,8 @@
 #include "CDPL/Pharm/XBondingInteractionConstraint.hpp"  
 #include "CDPL/Pharm/InteractionPharmacophoreGenerator.hpp"  
 
-#include "CDPL/Pharm/InteractionScoreCombiner.hpp"  
+#include "CDPL/Pharm/FeatureInteractionScore.hpp"  
+#include "CDPL/Pharm/FeatureInteractionScoreCombiner.hpp"  
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"  
 #include "CDPL/Pharm/HydrophobicInteractionScore.hpp"  
 #include "CDPL/Pharm/IonicInteractionScore.hpp"  

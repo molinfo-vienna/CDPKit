@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * InteractionConstraintConnector.cpp 
+ * FeatureInteractionScoreCombiner.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -28,7 +28,8 @@
 
 #include <algorithm>
 
-#include "CDPL/Pharm/InteractionScoreCombiner.hpp"
+#include "CDPL/Pharm/FeatureInteractionScoreCombiner.hpp"
+
 
 using namespace CDPL; 
 
@@ -43,13 +44,18 @@ namespace
 }
 
 
-Pharm::InteractionScoreCombiner::InteractionScoreCombiner(const ScoringFunction& func1, const ScoringFunction& func2, const CombinationFunction& comb_func): 
-    scoringFunc1(func1), scoringFunc2(func2), combFunc(comb_func) {}
+Pharm::FeatureInteractionScoreCombiner::FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2, const CombinationFunction& comb_func): 
+    scoringFunc1(score1), scoringFunc2(score2), combFunc(comb_func) {}
 
-Pharm::InteractionScoreCombiner::InteractionScoreCombiner(const ScoringFunction& func1, const ScoringFunction& func2): 
-    scoringFunc1(func1), scoringFunc2(func2), combFunc(&maxValue) {}
+Pharm::FeatureInteractionScoreCombiner::FeatureInteractionScoreCombiner(const InteractionScore& score1, const InteractionScore& score2): 
+    scoringFunc1(score1), scoringFunc2(score2), combFunc(&maxValue) {}
 
-double Pharm::InteractionScoreCombiner::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
+double Pharm::FeatureInteractionScoreCombiner::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
 {
-    return combFunc(scoringFunc1(ftr1_pos, ftr2), scoringFunc2(ftr1_pos, ftr2));
+    return combFunc((*scoringFunc1)(ftr1_pos, ftr2), (*scoringFunc2)(ftr1_pos, ftr2));
+}
+
+double Pharm::FeatureInteractionScoreCombiner::operator()(const Feature& ftr1, const Feature& ftr2) const
+{
+    return combFunc((*scoringFunc1)(ftr1, ftr2), (*scoringFunc2)(ftr1, ftr2));
 }
