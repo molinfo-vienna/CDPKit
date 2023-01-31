@@ -232,11 +232,13 @@ void Chem::BondStereoFlagCalculator::assignStereoFlags(Util::UIArray& flags)
 			switch (stereo_flag) {
 
 				case BondStereoFlag::UP:
-					flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
+					flags[bond_idx] = BondStereoFlag::REVERSE_UP;
+					//flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
 					break;
 
 				case BondStereoFlag::DOWN:
-					flags[bond_idx] = BondStereoFlag::REVERSE_UP;
+					flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
+					//flags[bond_idx] = BondStereoFlag::REVERSE_UP;
 					break;
 
 				case BondStereoFlag::EITHER:
@@ -591,13 +593,21 @@ bool Chem::BondStereoFlagCalculator::StereoAtomInfo::configMatches(const Util::U
 		switch (stereo_flags[ligands[i].second]) {
 
 			case BondStereoFlag::UP:
+				z_signs[i] = 1;
+				continue;
+
+			case BondStereoFlag::DOWN:
+				z_signs[i] = -1;
+				continue;
+/*
+			case BondStereoFlag::UP:
 				z_signs[i] = (bondEndFlags[i] ? 1 : -1);
 				continue;
 
 			case BondStereoFlag::DOWN:
 				z_signs[i] = (bondEndFlags[i] ? -1 : 1);
 				continue;
-
+*/
 			case BondStereoFlag::EITHER:
 				return (configuration == AtomConfiguration::EITHER);
 

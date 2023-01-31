@@ -122,6 +122,18 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 			switch (bnd_stereo) {
 
 				case BondStereoFlag::UP:
+				case BondStereoFlag::REVERSE_UP:
+					*z_sign = 1;
+					has_stereo_bond = true;
+					break;
+
+				case BondStereoFlag::DOWN:
+				case BondStereoFlag::REVERSE_DOWN:
+					*z_sign = -1;
+					has_stereo_bond = true;
+					break;
+/*
+				case BondStereoFlag::UP:
 				case BondStereoFlag::REVERSE_DOWN:
 					*z_sign = (&lig_bond->getEnd() == lig_atom ? 1 : -1);
 					has_stereo_bond = true;
@@ -132,7 +144,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 					*z_sign = (&lig_bond->getEnd() == lig_atom ? -1 : 1);
 					has_stereo_bond = true;
 					break;
-
+*/
 				case BondStereoFlag::EITHER:
 				case BondStereoFlag::REVERSE_EITHER:
 					if (dim == 2)
