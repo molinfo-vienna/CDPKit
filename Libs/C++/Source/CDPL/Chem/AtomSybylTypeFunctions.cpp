@@ -397,6 +397,12 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 		case AtomType::Sn:
 			return SybylAtomType::Sn;
 
+		case AtomType::B:
+			return SybylAtomType::B;
+
+		case AtomType::Pt:
+			return SybylAtomType::Pt;
+
 		case AtomType::AH:
 			return SybylAtomType::Any;
 

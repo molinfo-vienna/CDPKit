@@ -433,6 +433,13 @@ const std::string& Chem::MOL2DataWriter::getAtomTypeString(const Atom& atom, con
 	if (type > SybylAtomType::MAX_TYPE && strictErrorChecking)
 		throw Base::IOError("MOL2DataWriter: invalid Sybyl atom type");
 
+	if (!extendedAtomTypes && type > SybylAtomType::MAX_DEFAULT_TYPE) {
+		if (strictErrorChecking)
+			throw Base::IOError("MOL2DataWriter: unable to specify atom type");
+
+		return getSybylAtomTypeString(SybylAtomType::Any);
+	}
+	
 	const std::string& type_str = getSybylAtomTypeString(type);
 
 	if (!type_str.empty())

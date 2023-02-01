@@ -602,6 +602,12 @@ unsigned int Chem::sybylToAtomType(unsigned int sybyl_type)
 	    case SybylAtomType::Sn:
 			return AtomType::Sn;
 
+	    case SybylAtomType::B:
+			return AtomType::B;
+
+	    case SybylAtomType::Pt:
+			return AtomType::Pt;
+
 		default:
 			return AtomType::UNKNOWN;
 	}

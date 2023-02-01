@@ -315,9 +315,24 @@ namespace CDPL
 			const unsigned int Sn               = 53;
 
 			/**
+			 * \brief Marks the end of the default Sybyl atom types.
+			 */
+			const unsigned int MAX_DEFAULT_TYPE = Sn;
+
+			/**
+			 * \brief Specifies \e Boron.
+			 */
+			const unsigned int B                = 54;
+
+			/**
+			 * \brief Specifies \e Platinum.
+			 */
+			const unsigned int Pt               = 55;
+
+			/**
 			 * \brief Marks the end of all supported atom types.
 			 */
-			const unsigned int MAX_TYPE         = Sn;
+			const unsigned int MAX_TYPE         = Pt;
 		}
     }
 }

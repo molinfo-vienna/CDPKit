@@ -119,7 +119,9 @@ namespace CDPL
 				{ SybylAtomType::Sn     , "Sn"    },
 				{ SybylAtomType::Cl     , "Cl"    },
 				{ SybylAtomType::Br     , "Br"    },
-				{ SybylAtomType::I      , "I"     }
+				{ SybylAtomType::I      , "I"     },
+				{ SybylAtomType::B      , "B"     },
+				{ SybylAtomType::Pt     , "Pt"    }
 			};
 
 			const TypeToString BOND_TYPE_STRINGS[] = {
