@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <iterator>
 
-#include <boost/core/addressof.hpp>
-
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Atom.hpp"
