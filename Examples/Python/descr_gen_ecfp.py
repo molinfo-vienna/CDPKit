@@ -50,9 +50,11 @@ def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, strip_hs: bool) -> U
     ecfp_gen = Descr.CircularFingerprintGenerator()
     fp = Util.BitSet()
 
+    fp.resize(num_bits)                                # set desired fingerprint size
+
     ecfp_gen.setNumIterations(radius)                  # set num. iterations (=atom. env. radius)
-    ecfp_gen.setNumBits(num_bits)                      # set fingerprint size
-    ecfp_gen.generate(mol, fp)                         # generate fingerprint
+    ecfp_gen.generate(mol)                             # extract chracteristic structural features
+    ecfp_gen.setFeatureBits(fp)                        # set bits associated with the extracted structural features
 
     # if needed, fp could be converted into a numpy single precision float array as follows:
     # fp = numpy.array(fp, dtype=numpy.float32)

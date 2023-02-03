@@ -297,4 +297,4 @@ class SybylAtomType(Boost.Python.instance):
     ##
     # \brief 
     #
-    MAX_TYPE = 53
+    MAX_TYPE = 55

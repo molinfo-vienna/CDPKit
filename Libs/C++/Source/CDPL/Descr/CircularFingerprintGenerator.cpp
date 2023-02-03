@@ -26,14 +26,13 @@
 
 #include "StaticInit.hpp"
 
-#include <cmath>
 #include <algorithm>
-#include <functional>
+#include <iterator>
 
-#include <boost/bind.hpp>
+#include <boost/core/addressof.hpp>
 
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -47,19 +46,6 @@
 
 
 using namespace CDPL;
-
-
-struct Descr::CircularFingerprintGenerator::UInt64PairLessCmpFunc : 
-	public std::binary_function<Descr::CircularFingerprintGenerator::UInt64Pair, Descr::CircularFingerprintGenerator::UInt64Pair, bool>
-{
-
-	bool operator()(const UInt64Pair& p1, const UInt64Pair& p2) const {
-		if (p1.first == p2.first)
-			return (p1.second < p2.second);
-
-		return (p1.first < p2.first);
-	}
-};
 
 
 const unsigned int Descr::CircularFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS;
@@ -116,23 +102,9 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::oper
 		id += getRingFlag(atom);
     }
 
-	if (flags & AtomPropertyFlag::CIP_CONFIGURATION) {
-		id <<= 2;
-
-		unsigned int config = getCIPConfiguration(atom);
-
-		switch (config) {
-
-			case AtomConfiguration::R: 
-				id += 1;
-				break;
-				
-			case AtomConfiguration::S: 
-				id += 2;
-
-			default:
-				break;
-		}
+	if (flags & AtomPropertyFlag::AROMATICITY) {
+		id <<= 1;
+		id += getAromaticityFlag(atom);
     }
 
     return id;
@@ -146,23 +118,6 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 
     Base::uint64 id = 0;
 
-	if (flags & BondPropertyFlag::CIP_CONFIGURATION) {
-		unsigned int config = getCIPConfiguration(bond);
-
-		switch (config) {
-
-			case BondConfiguration::E: 
-				id = 0x10000;
-				break;
-				
-			case BondConfiguration::Z: 
-				id += 0x20000;
-
-			default:
-				break;
-		}
-    }
-
     if (flags & BondPropertyFlag::TOPOLOGY) {
 		if (getRingFlag(bond))
 			id += 0x8000;
@@ -174,8 +129,8 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 			return id;
 		}
     }
-
-    if (flags & BondPropertyFlag::ORDER)
+	
+	if (flags & BondPropertyFlag::ORDER)
 		id += getOrder(bond);
 	
     return id;
@@ -184,24 +139,16 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 //-----
 
 Descr::CircularFingerprintGenerator::CircularFingerprintGenerator():
-    numBits(1024), numIterations(2), remDuplicates(true),
-    atomIdentifierFunc(DefAtomIdentifierFunctor()), bondIdentifierFunc(DefBondIdentifierFunctor()) {}
+    numIterations(2), 
+    atomIdentifierFunc(DefAtomIdentifierFunctor()),
+	bondIdentifierFunc(DefBondIdentifierFunctor()) {}
 
-Descr::CircularFingerprintGenerator::CircularFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp):
-    numBits(1024), numIterations(2), remDuplicates(true),
-    atomIdentifierFunc(DefAtomIdentifierFunctor()), bondIdentifierFunc(DefBondIdentifierFunctor())
+Descr::CircularFingerprintGenerator::CircularFingerprintGenerator(const Chem::MolecularGraph& molgraph):
+    numIterations(2), 
+    atomIdentifierFunc(DefAtomIdentifierFunctor()),
+	bondIdentifierFunc(DefBondIdentifierFunctor())
 {
-    generate(molgraph, fp);
-}
-
-void Descr::CircularFingerprintGenerator::setNumBits(std::size_t num_bits)
-{
-    numBits = num_bits;
-}
-
-std::size_t Descr::CircularFingerprintGenerator::getNumBits() const
-{
-    return numBits;
+    generate(molgraph);
 }
 
 void Descr::CircularFingerprintGenerator::setAtomIdentifierFunction(const AtomIdentifierFunction& func)
@@ -224,54 +171,96 @@ std::size_t Descr::CircularFingerprintGenerator::getNumIterations() const
 	return numIterations;
 }
 
-void Descr::CircularFingerprintGenerator::removeDuplicates(bool remove)
-{
-	remDuplicates = remove;
-}
-
-bool Descr::CircularFingerprintGenerator::duplicatesRemoved() const
-{
-	return remDuplicates;
-}
-
-std::size_t Descr::CircularFingerprintGenerator::getNumFeatures() const
-{
-	return fingerprintSet.size();
-}
-
-Base::uint64 Descr::CircularFingerprintGenerator::getFeatureIdentifier(std::size_t idx) const
-{
-	if (idx >= fingerprintSet.size())
-		throw Base::IndexError("CircularFingerprintGenerator: feature index out of bounds");
-
-	return fingerprintSet[idx].first;
-}
-
-const Util::BitSet& Descr::CircularFingerprintGenerator::getFeatureSubstructure(std::size_t idx) const
-{
-	if (idx >= fingerprintSet.size())
-		throw Base::IndexError("CircularFingerprintGenerator: feature index out of bounds");
-
-	return fingerprintSet[idx].second;
-}
-
-void Descr::CircularFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp)
-{
-    generateFingerprintSet(molgraph);	
-	setFeatureBits(fp);
-}
-
 void Descr::CircularFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph)
-{
-    generateFingerprintSet(molgraph);	
-}
-
-void Descr::CircularFingerprintGenerator::generateFingerprintSet(const Chem::MolecularGraph& molgraph)
 {
 	init(molgraph);
 
 	for (std::size_t i = 0; i < numIterations; )
 		performIteration(++i);
+}
+
+void Descr::CircularFingerprintGenerator::setFeatureBits(Util::BitSet& bs, bool reset) const
+{
+	std::size_t bs_size = bs.size();
+	
+	if (bs_size == 0)
+		return;
+
+	if (reset)
+		bs.reset();
+	
+	for (FeaturePtrList::const_iterator it = outputFeatures.begin(), end = outputFeatures.end(); it != end; ++it)
+		bs.set((*it)->first % bs_size);
+}
+
+void Descr::CircularFingerprintGenerator::setFeatureBits(std::size_t atom_idx, Util::BitSet& bs, bool reset) const
+{
+	std::size_t bs_size = bs.size();
+	
+	if (bs_size == 0)
+		return;
+
+	if (reset)
+		bs.reset();
+
+	if (atom_idx >= (features.size() / (numIterations + 1)))
+		throw Base::IndexError("CircularFingerprintGenerator: atom index out of bounds");
+	
+	for (FeaturePtrList::const_iterator it = outputFeatures.begin(), end = outputFeatures.end(); it != end; ++it)
+		if ((*it)->second.test(atom_idx))
+			bs.set((*it)->first % bs_size);
+}
+
+std::size_t Descr::CircularFingerprintGenerator::getNumFeatures() const
+{
+	return outputFeatures.size();
+}
+
+Base::uint64 Descr::CircularFingerprintGenerator::getFeatureIdentifier(std::size_t ftr_idx) const
+{
+	if (ftr_idx >= outputFeatures.size())
+		throw Base::IndexError("CircularFingerprintGenerator: feature index out of bounds");
+
+	return outputFeatures[ftr_idx]->first;
+}
+
+const Util::BitSet& Descr::CircularFingerprintGenerator::getFeatureSubstructure(std::size_t ftr_idx) const
+{
+	if (ftr_idx >= outputFeatures.size())
+		throw Base::IndexError("CircularFingerprintGenerator: feature index out of bounds");
+
+	return outputFeatures[ftr_idx]->second;
+}
+
+void Descr::CircularFingerprintGenerator::getFeatureSubstructure(std::size_t ftr_idx, Chem::Fragment& frag, bool clear) const
+{
+	if (ftr_idx >= outputFeatures.size())
+		throw Base::IndexError("CircularFingerprintGenerator: feature index out of bounds");
+
+	if (clear)
+		frag.clear();
+
+	bitSetToFragment(outputFeatures[ftr_idx]->second, frag);
+}
+
+void Descr::CircularFingerprintGenerator::getFeatureSubstructures(std::size_t bit_idx, std::size_t bs_size, Chem::FragmentList& frags, bool clear) const
+{
+	using namespace Chem;
+	
+	if (clear)
+		frags.clear();
+	
+	for (FeaturePtrList::const_iterator it = outputFeatures.begin(), end = outputFeatures.end(); it != end; ++it) {
+		const Feature* ftr = *it;
+
+		if ((ftr->first % bs_size) != bit_idx)
+			continue;
+
+		Fragment::SharedPointer frag_ptr(new Fragment());
+
+		bitSetToFragment(ftr->second, *frag_ptr);
+		frags.addElement(frag_ptr);
+	}
 }
 
 void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgraph)
@@ -281,30 +270,31 @@ void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgr
 	molGraph = &molgraph;
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
-
-	features.clear();
-	features.reserve(num_atoms);
-
-	fingerprintSet.clear();
-	fingerprintSet.reserve(num_atoms * (numIterations + 1));
-
 	std::size_t num_bonds = molgraph.getNumBonds();
+	
+	features.resize(num_atoms * (numIterations + 1));
+	duplicateMask.resize(num_atoms);
+	
+	for (std::size_t i = 0; i < num_atoms; i++) {
+		Feature& ftr = features[i];
+
+		randGenerator.seed(atomIdentifierFunc(molgraph.getAtom(i), molgraph));
+
+		ftr.first = randGenerator();
+
+		ftr.second.resize(num_bonds + num_atoms);
+		ftr.second.reset();
+		ftr.second.set(i);
+	}
+
+	outputFeatures.clear();
+	outputFeatures.reserve(features.size());
+
+	std::transform(features.begin(), features.begin() + num_atoms, std::back_inserter(outputFeatures),
+				   static_cast<Feature* (*)(Feature&)>(&boost::addressof<Feature>));
 
 	if (bondIdentifiers.size() < num_bonds)
 		bondIdentifiers.resize(num_bonds);
-	
-	bondSet.resize(num_bonds);
-
-	FingerprintSetEntry fp_entry;
-
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-
-		fp_entry.first = atomIdentifierFunc(atom, molgraph);
-
-		features.push_back(fp_entry.first);
-		fingerprintSet.push_back(fp_entry);
-	}
 
 	std::size_t i = 0;
 
@@ -321,166 +311,104 @@ void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgr
 			continue;
 
 		bondIdentifiers[i] = bondIdentifierFunc(bond);
-
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
-		features[atom1_idx].addNeighbor(i, atom2_idx);
-		features[atom2_idx].addNeighbor(i, atom1_idx);
 	}
 }
 
 void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 {
-	extendFeatures(iter_num);
-	emitFingerprintSetEntries();
-}
+	using namespace Chem;
 
-void Descr::CircularFingerprintGenerator::extendFeatures(std::size_t iter_num)
-{
-	std::for_each(features.begin(), features.end(), boost::bind(&CircularFingerprintGenerator::extendFeature, this, iter_num, _1));
-	std::for_each(features.begin(), features.end(), boost::bind(&Feature::update, _1));
-}
+	std::size_t num_atoms = molGraph->getNumAtoms();
+		
+	for (std::size_t i = 0; i < num_atoms; i++) {
+		std::size_t ftr_idx = num_atoms * (iter_num - 1) + i;
+		std::size_t ext_ftr_idx = ftr_idx + num_atoms;
 
-void Descr::CircularFingerprintGenerator::extendFeature(std::size_t iter_num, Feature& feature)
-{
-	const Feature::NeighborList& nbrs = feature.getNeighborList();
+		nbrFeatureData.clear();
+		features[ext_ftr_idx].second = features[ftr_idx].second;
 
-	nbrFeatureData.clear();
+		const Atom& ctr_atom = molGraph->getAtom(i);
+		Atom::ConstBondIterator b_it = ctr_atom.getBondsBegin();
+		
+		for (Atom::ConstAtomIterator a_it = ctr_atom.getAtomsBegin(), a_end = ctr_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+			const Bond& nbr_bond = *b_it;
 
-	if (iter_num > 1)
-		bondSet = feature.getBondSet();
-	else
-		bondSet.reset();	
-
-	for (Feature::NeighborList::const_iterator it = nbrs.begin(), end = nbrs.end(); it != end; ++it) {
-		const Feature::NeighborData& nbr_data = *it;
-		const Feature& nbr_ftr = features[nbr_data.second];
-
-		if (iter_num > 1)
-			bondSet |= nbr_ftr.getBondSet();
-		else
-			bondSet.set(nbr_data.first);
-
-		nbrFeatureData.push_back(UInt64Pair(bondIdentifiers[nbr_data.first], nbr_ftr.getID()));
-	}
-
-	std::sort(nbrFeatureData.begin(), nbrFeatureData.end(), UInt64PairLessCmpFunc());
-
-	idCalculationData.clear();
-	idCalculationData.push_back(iter_num);
-	idCalculationData.push_back(feature.getID());
-
-	for (UInt64PairArray::const_iterator it = nbrFeatureData.begin(), end = nbrFeatureData.end(); it != end; ++it) {
-		idCalculationData.push_back(it->first);
-		idCalculationData.push_back(it->second);
-	}
-
-	feature.setNextID(Internal::calcHashCode<Base::uint64>(idCalculationData.begin(), idCalculationData.end()));
-	feature.setNextBondSet(bondSet);
-}
-
-void Descr::CircularFingerprintGenerator::setFeatureBits(Util::BitSet& fp)
-{
-	fp.resize(numBits);
-
-	if (numBits == 0)
-		return;
-
-	fp.reset();
-
-	for (FingerprintSet::const_iterator it = fingerprintSet.begin(), end = fingerprintSet.end(); it != end; ++it)
-		fp.set(it->first % numBits);
-}
-
-void Descr::CircularFingerprintGenerator::emitFingerprintSetEntries()
-{
-	if (remDuplicates)
-		std::for_each(features.begin(), features.end(), boost::bind(&Feature::setDuplicateFlag, _1, false));
-
-	for (FeatureList::iterator it1 = features.begin(), end = features.end(); it1 != end; ++it1) {
-		const Feature& ftr = *it1;
-
-		if (remDuplicates && ftr.isDuplicate())
-			continue;
-
-		Base::uint64 ftr_id = ftr.getID();
-
-		if (remDuplicates) {
-			const Util::BitSet& bond_set = ftr.getBondSet();
-
-			for (FeatureList::iterator it2 = it1 + 1; it2 != end; ++it2) {
-				Feature& ftr2 = *it2;
- 
-				if (ftr2.getBondSet() == bond_set) {
-					ftr2.setDuplicateFlag(true);
-
-					ftr_id = std::min(ftr_id, ftr2.getID());
-				}
-			}
-
-			if (fingerprintSetContainsSubstruct(bond_set))
+			if (!molGraph->containsBond(nbr_bond))
 				continue;
+
+			const Atom& nbr_atom = *a_it;
+
+			if (!molGraph->containsAtom(nbr_atom))
+				continue;
+
+			std::size_t nbr_bond_idx = molGraph->getBondIndex(nbr_bond);
+			const Feature& nbr_ftr = features[num_atoms * (iter_num - 1) + molGraph->getAtomIndex(nbr_atom)];
+			
+			features[ext_ftr_idx].second |= nbr_ftr.second;
+
+			if (iter_num == 1)
+				features[ext_ftr_idx].second.set(num_atoms + nbr_bond_idx);
+
+			nbrFeatureData.push_back(UInt64Pair(bondIdentifiers[nbr_bond_idx], nbr_ftr.first));
 		}
 
-		fingerprintSet.resize(fingerprintSet.size() + 1);
+		std::sort(nbrFeatureData.begin(), nbrFeatureData.end());
 
-		fingerprintSet.back().first = ftr_id;
-		fingerprintSet.back().second = ftr.getBondSet();
+		idCalculationData.clear();
+		idCalculationData.push_back(iter_num);
+		idCalculationData.push_back(features[ftr_idx].first);
+
+		for (UInt64PairArray::const_iterator it = nbrFeatureData.begin(), end = nbrFeatureData.end(); it != end; ++it) {
+			idCalculationData.push_back(it->first);
+			idCalculationData.push_back(it->second);
+		}
+
+		features[ext_ftr_idx].first = Internal::calcHashCode<Base::uint64>(idCalculationData.begin(), idCalculationData.end());
+	}
+
+	duplicateMask.reset();
+	
+	for (std::size_t i = 0, ftr_offs = num_atoms * iter_num; i < num_atoms; i++) {
+		if (duplicateMask.test(i))
+			continue;
+		
+		const Feature* output_ftr = &features[ftr_offs + i];
+		
+		for (std::size_t j = i + 1; j < num_atoms; j++) {
+			Feature& ftr = features[ftr_offs + j];
+ 
+			if (ftr.second == output_ftr->second) {
+				duplicateMask.set(j);
+
+				if (output_ftr->first > ftr.first)
+					output_ftr = &ftr;
+			}
+		}
+
+		bool duplicate = false;
+
+		for (FeaturePtrList::const_iterator it = outputFeatures.begin(), end = outputFeatures.begin() + ftr_offs; it != end; ++it) {
+			if ((*it)->second == output_ftr->second) {
+				duplicate = true;
+				break;
+			}
+		}
+
+		if (duplicate)
+			continue;
+		
+		outputFeatures.push_back(output_ftr);
 	}
 }
 
-bool Descr::CircularFingerprintGenerator::fingerprintSetContainsSubstruct(const Util::BitSet& bs) const
+void Descr::CircularFingerprintGenerator::bitSetToFragment(const Util::BitSet& ab_mask, Chem::Fragment& frag) const
 {
-	return (std::find_if(fingerprintSet.begin(), fingerprintSet.end(), 
-						 boost::bind(std::equal_to<Util::BitSet>(), boost::ref(bs),
-									 boost::bind(&FingerprintSetEntry::second, _1))) != fingerprintSet.end());
-}
-
-//--------
-
-void Descr::CircularFingerprintGenerator::Feature::addNeighbor(std::size_t bond_idx, std::size_t nbr_idx)
-{
-	nbrList.push_back(NeighborData(bond_idx, nbr_idx));
-}
-
-const Descr::CircularFingerprintGenerator::Feature::NeighborList& Descr::CircularFingerprintGenerator::Feature::getNeighborList() const
-{
-	return nbrList;
-}
-
-void Descr::CircularFingerprintGenerator::Feature::update()
-{
-	currentID = nextID;
-	currentBondSet.swap(nextBondSet);
-}
-
-Base::uint64 Descr::CircularFingerprintGenerator::Feature::getID() const
-{
-	return currentID;
-}
-
-const Util::BitSet& Descr::CircularFingerprintGenerator::Feature::getBondSet() const
-{
-	return currentBondSet;
-}
-
-void Descr::CircularFingerprintGenerator::Feature::setNextID(Base::uint64 next_id)
-{
-	nextID = next_id;
-}
-
-void Descr::CircularFingerprintGenerator::Feature::setNextBondSet(const Util::BitSet& bond_set)
-{
-	nextBondSet = bond_set;
-}
-
-void Descr::CircularFingerprintGenerator::Feature::setDuplicateFlag(bool flag)
-{
-	duplicate = flag;
-}
-
-bool Descr::CircularFingerprintGenerator::Feature::isDuplicate() const
-{
-	return duplicate;
+	std::size_t num_atoms = molGraph->getNumAtoms();
+	
+	for (Util::BitSet::size_type i = ab_mask.find_first(); i != Util::BitSet::npos; i = ab_mask.find_next(i)) {
+		if (i < num_atoms)
+			frag.addAtom(molGraph->getAtom(i));
+		else
+			frag.addBond(molGraph->getBond(i - num_atoms));
+	}
 }

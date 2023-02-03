@@ -38,6 +38,7 @@
 #include <utility>
 
 #include <boost/function.hpp>
+#include <boost/random/linear_congruential.hpp>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -55,6 +56,8 @@ namespace CDPL
 		class MolecularGraph;
 		class Atom;
 		class Bond;
+		class Fragment;
+		class FragmentList;
 	}
 	
 	namespace Descr
@@ -67,48 +70,49 @@ namespace CDPL
 		class CDPL_DESCR_API CircularFingerprintGenerator
 		{
 
-		public:
+		  public:
 			/**
 			 * \brief Specifies the default set of atomic properties considered in the generation
 			 *        of atom identifiers by CircularFingerprintGenerator::DefAtomIdentifierFunction.
 			 */
 			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
-				Chem::AtomPropertyFlag::HEAVY_BOND_COUNT | Chem::AtomPropertyFlag::VALENCE | Chem::AtomPropertyFlag::TYPE |
-				Chem::AtomPropertyFlag::ISOTOPE | Chem::AtomPropertyFlag::FORMAL_CHARGE |
-				Chem::AtomPropertyFlag::H_COUNT | Chem::AtomPropertyFlag::TOPOLOGY;
+			  Chem::AtomPropertyFlag::HEAVY_BOND_COUNT | Chem::AtomPropertyFlag::VALENCE | Chem::AtomPropertyFlag::TYPE |
+			  Chem::AtomPropertyFlag::FORMAL_CHARGE |Chem::AtomPropertyFlag::H_COUNT | Chem::AtomPropertyFlag::TOPOLOGY |
+			  Chem::AtomPropertyFlag::ISOTOPE;
 
 			/**
 			 * \brief Specifies the default set of bond properties considered in the generation
 			 *        of bond identifiers by CircularFingerprintGenerator::DefBondIdentifierFunction.
 			 */
 			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
-				Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY;
+			  Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY;
 
 			/**
 			 * \brief The functor for the generation of ECFP atom identifiers.
 			 */
 			class CDPL_DESCR_API DefAtomIdentifierFunctor
-			{
+		    {
 
-			public:
+			  public:
 				/**
 				 * \brief Constructs the atom identifier functor object for the specified set of atomic properties.
 				 *
 				 * The \a flags argument is an OR combination of the constants defined in namespace
-				 * Chem::AtomPropertyFlag. Supported property flags are:
+				 * Chem::AtomPropertyFlag. 
+				 *
+				 * Supported property flags are:
 				 *  - Chem::AtomPropertyFlag::TYPE
 				 *  - Chem::AtomPropertyFlag::ISOTOPE
 				 *  - Chem::AtomPropertyFlag::VALENCE
 				 *  - Chem::AtomPropertyFlag::HEAVY_BOND_COUNT
 				 *  - Chem::AtomPropertyFlag::VALENCE
 				 *  - Chem::AtomPropertyFlag::TOPOLOGY
-				 *  - Chem::AtomPropertyFlag::CIP_CONFIGURATION
-				 *  - and Chem::AtomPropertyFlag::FORMAL_CHARGE
+				 *  - Chem::AtomPropertyFlag::FORMAL_CHARGE
+				 *  - Chem::AtomPropertyFlag::AROMATICITY
 				 *
 				 * \param flags Specifies the set of considered atomic properties.
 				 */
-				DefAtomIdentifierFunctor(unsigned int flags = DEF_ATOM_PROPERTY_FLAGS):
-					flags(flags) {}
+				DefAtomIdentifierFunctor(unsigned int flags = DEF_ATOM_PROPERTY_FLAGS): flags(flags) {}
  
 				/**
 				 * \brief Generates an identifier for the argument atom.
@@ -122,7 +126,7 @@ namespace CDPL
 				 */
 				Base::uint64 operator()(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
 
-			private:
+			  private:
 				unsigned int flags;
 			};
 
@@ -130,23 +134,23 @@ namespace CDPL
 			 * \brief The default functor for the generation of bond identifiers.
 			 */
 			class CDPL_DESCR_API DefBondIdentifierFunctor
-			{
+		    {
 
-			public:
+			  public:
 				/**
 				 * \brief Constructs the bond identifier functor object for the specified set of bond properties.
 				 *
 				 * The \a flags argument is an OR combination of the constants defined in namespace
-				 * Chem::BondPropertyFlag. Supported property flags are:
+				 * Chem::BondPropertyFlag. 
+				 *
+				 * Supported property flags are:
 				 *  - Chem::BondPropertyFlag::ORDER
 				 *  - Chem::BondPropertyFlag::TOPOLOGY
-				 *  - Chem::BondPropertyFlag::CIP_CONFIGURATION
-				 *  - and Chem::BondPropertyFlag::AROMATICITY
+				 *  - Chem::BondPropertyFlag::AROMATICITY
 				 *
 				 * \param flags Specifies the set of considered bond properties.
 				 */
-				DefBondIdentifierFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS): 
-					flags(flags) {}
+				DefBondIdentifierFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS): flags(flags) {}
 
 				/**
 				 * \brief Generates an identifier for the argument bond.
@@ -159,7 +163,7 @@ namespace CDPL
 				 */
 				Base::uint64 operator()(const Chem::Bond& bond) const;
 
-			private:
+			  private:
 				unsigned int flags;
 			};
 
@@ -189,145 +193,101 @@ namespace CDPL
 			CircularFingerprintGenerator();
 
 			/**
-			 * \brief Constructs the \c %CircularFingerprintGenerator instance and generates the fingerprint of the
-			 *        molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the fingerprint.
-			 * \param fp The generated fingerprint.
+			 * \brief Constructs the \c %CircularFingerprintGenerator instance and generates the atom-centered circular 
+			 *        substructure fingerprint of the molecular graph \a molgraph.
+			 * \param molgraph The molecular graph to process.
 			 */
-			CircularFingerprintGenerator(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
+			CircularFingerprintGenerator(const Chem::MolecularGraph& molgraph);
 
 			/**
-			 * \brief Allows to specify a custom function for the generation of atom identifiers.
+			 * \brief Allows to specify a customized function for the generation of initial atom identifiers.
 			 * \param func A CircularFingerprintGenerator::AtomIdentifierFunction instance that wraps the target function.
-			 * \note By default, atom identifiers are generated by CircularFingerprintGenerator::DefAtomIdentifierFunctor.
+			 * \note By default, atom identifiers are generated by a CircularFingerprintGenerator::DefAtomIdentifierFunctor instance.
 			 */
 			void setAtomIdentifierFunction(const AtomIdentifierFunction& func);
 
 			/**
-			 * \brief Allows to specify a custom function for the generation of bond identifiers.
+			 * \brief Allows to specify a customized function for the generation of initial bond identifiers.
 			 * \param func A CircularFingerprintGenerator::BondIdentifierFunction instance that wraps the target function.
-			 * \note By default, bond identifiers are generated by CircularFingerprintGenerator::DefBondIdentifierFunctor.
+			 * \note By default, bond identifiers are generated by a CircularFingerprintGenerator::DefBondIdentifierFunctor instance.
 			 */
 			void setBondIdentifierFunction(const BondIdentifierFunction& func);
 
 			/**
-			 * \brief Allows to specify the desired number of substructure growing iterations.
-			 * \param num_iter The desired number of growing iterations.
+			 * \brief Allows to specify the desired number of feature substructure growing iterations.
+			 * \param num_iter The number of iterations.
 			 * \note The default number of iterations is \e 2.
 			 */
 			void setNumIterations(std::size_t num_iter);
 
 			/**
-			 * \brief Returns the number of substructure growing iterations.
+			 * \brief Returns the number of feature substructure growing iterations.
 			 * \return The number of iterations.
 			 */
 			std::size_t getNumIterations() const;
 
 			/**
-			 * \brief Allows to specify the desired fingerprint size.
-			 * \param num_bits The desired fingerprint size in number of bits.
-			 * \note By default, the generated fingerprints are \e 1024 bits wide.
-			 */
-			void setNumBits(std::size_t num_bits);
-
-			/**
-			 * \brief Returns the size of the generated fingerprints.
-			 * \return The fingerprint size in number of bits.
-			 */
-			std::size_t getNumBits() const;
-
-			void removeDuplicates(bool remove);
-
-			bool duplicatesRemoved() const;
-
-			/**
-			 * \brief Generates the fingerprint of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the fingerprint.
-			 * \param fp The generated fingerprint.
-			 */
-			void generate(const Chem::MolecularGraph& molgraph, Util::BitSet& fp);
-
-			/**
-			 * \brief Enumerates the features of the molecular graph \a molgraph .
-			 * \param molgraph The molecular graph for which to enumerate the features.
+			 * \brief Generates the atom-centered circular substructure fingerprint of the molecular graph \a molgraph.
+			 * \param molgraph The molecular graph to process.
 			 */
 			void generate(const Chem::MolecularGraph& molgraph);
+			
+			/**
+			 * \brief Maps previously generated feature identifiers to bit indices and sets the correponding bits of \a bs.
+			 * \param bs The target bitset.
+			 * \param reset If \e true, \a bs will be cleared before any feature bits are set.
+			 * \note The binary fingerprint size is specified implicitly via the size of \a bs.  
+			 * \see generate()
+			 */
+			void setFeatureBits(Util::BitSet& bs, bool reset = true) const;
+
+			/**
+			 * \brief Maps previously generated identifiers of structural features involving the atom specified by \a atom_idx
+			 *        to bit indices and sets the correponding bits of \a bs.
+			 * \param atom_idx The index of the atom that has to be involved in the structural features.
+			 * \param bs The target bitset.
+			 * \param reset If \e true, \a bs will be cleared before any feature bits are set.
+			 * \note The binary fingerprint size is specified implicitly via the size of \a bs.  
+			 * \see generate()
+			 */
+			void setFeatureBits(std::size_t atom_idx, Util::BitSet& bs, bool reset = true) const;
 
 			std::size_t getNumFeatures() const;
 
-			Base::uint64 getFeatureIdentifier(std::size_t idx) const;
+			Base::uint64 getFeatureIdentifier(std::size_t ftr_idx) const;
 
-			const Util::BitSet& getFeatureSubstructure(std::size_t idx) const;
+			const Util::BitSet& getFeatureSubstructure(std::size_t ftr_idx) const;
 
-		private:
-			class Feature
-			{
+			void getFeatureSubstructure(std::size_t ftr_idx, Chem::Fragment& frag, bool clear = true) const;
 
-			public:
-				typedef std::pair<std::size_t, std::size_t> NeighborData;
-				typedef std::vector<NeighborData> NeighborList;
+			void getFeatureSubstructures(std::size_t bit_idx, std::size_t bs_size, Chem::FragmentList& frags, bool clear = true) const;
 
-				Feature(Base::uint64 init_id): currentID(init_id), nextID(0), duplicate(false) {}
-
-				void addNeighbor(std::size_t bond_idx, std::size_t nbr_idx);
-
-				const NeighborList& getNeighborList() const;
-
-				void update();
-
-				Base::uint64 getID() const;
-				const Util::BitSet& getBondSet() const;
-
-				void setNextID(Base::uint64 next_id);
-				void setNextBondSet(const Util::BitSet& bond_set);
-
-				void setDuplicateFlag(bool flag);
-				bool isDuplicate() const;
-
-			private:
-				Base::uint64 currentID;
-				Base::uint64 nextID;
-				Util::BitSet currentBondSet;
-				Util::BitSet nextBondSet;
-				NeighborList nbrList;
-				bool         duplicate;
-			};
-
-			struct UInt64PairLessCmpFunc;
-		
-			void generateFingerprintSet(const Chem::MolecularGraph& molgraph);
+		  private:
+			typedef std::pair<Base::uint64, Util::BitSet> Feature;
 
 			void init(const Chem::MolecularGraph& molgraph);
+
 			void performIteration(std::size_t iter_num);
 
-			void extendFeatures(std::size_t iter_num);
-			void emitFingerprintSetEntries();
-
-			void extendFeature(std::size_t iter_num, Feature& feature);
-
-			void setFeatureBits(Util::BitSet& fp);
-
-			bool fingerprintSetContainsSubstruct(const Util::BitSet& bs) const;
-
-			typedef std::vector<Feature> FeatureList;
-			typedef std::pair<Base::uint64, Util::BitSet> FingerprintSetEntry;
-			typedef std::vector<FingerprintSetEntry> FingerprintSet;
+			void bitSetToFragment(const Util::BitSet& ab_mask, Chem::Fragment& frag) const;
+			
+			typedef std::vector<Feature> FeatureArray;
+			typedef std::vector<const Feature*> FeaturePtrList;
 			typedef std::vector<Base::uint64> UInt64Array;
 			typedef std::pair<Base::uint64, Base::uint64> UInt64Pair;
 			typedef std::vector<UInt64Pair> UInt64PairArray;
 	
 			const Chem::MolecularGraph*  molGraph;
-			std::size_t                  numBits;
 			std::size_t                  numIterations;
-			bool                         remDuplicates;
 			AtomIdentifierFunction       atomIdentifierFunc;
 			BondIdentifierFunction       bondIdentifierFunc;
+			boost::rand48                randGenerator;
 			UInt64Array                  bondIdentifiers;
-			FeatureList                  features;
-			FingerprintSet               fingerprintSet;
+			FeatureArray                 features;
+			FeaturePtrList               outputFeatures;
 			UInt64Array                  idCalculationData;
 			UInt64PairArray              nbrFeatureData;
-			Util::BitSet                 bondSet;
+			Util::BitSet                 duplicateMask;
 		}; 
 	}
 }

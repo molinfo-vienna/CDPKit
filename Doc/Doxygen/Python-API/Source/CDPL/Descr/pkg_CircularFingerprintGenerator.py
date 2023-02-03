@@ -85,9 +85,8 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief Initializes the \e %CircularFingerprintGenerator instance.
     # \param molgraph 
-    # \param fp 
     #
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, fp: CDPL.Util.BitSet) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -115,18 +114,6 @@ class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param num_bits 
-    #
-    def setNumBits(num_bits: int) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getNumBits() -> int: pass
-
-    ##
-    # \brief 
     # \param num_iter 
     #
     def setNumIterations(num_iter: int) -> None: pass
@@ -139,22 +126,24 @@ class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param remove 
-    #
-    def removeDuplicates(remove: bool) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def duplicatesRemoved() -> bool: pass
-
-    ##
-    # \brief 
     # \param molgraph 
-    # \param fp 
     #
-    def generate(molgraph: CDPL.Chem.MolecularGraph, fp: CDPL.Util.BitSet) -> None: pass
+    def generate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
+
+    ##
+    # \brief 
+    # \param bs 
+    # \param reset 
+    #
+    def setFeatureBits(bs: CDPL.Util.BitSet, reset: bool = True) -> None: pass
+
+    ##
+    # \brief 
+    # \param atom_idx 
+    # \param bs 
+    # \param reset 
+    #
+    def setFeatureBits(atom_idx: int, bs: CDPL.Util.BitSet, reset: bool = True) -> None: pass
 
     ##
     # \brief 
@@ -164,17 +153,34 @@ class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param idx 
+    # \param ftr_idx 
     # \return 
     #
-    def getFeatureIdentifier(idx: int) -> int: pass
+    def getFeatureIdentifier(ftr_idx: int) -> int: pass
 
     ##
     # \brief 
-    # \param idx 
+    # \param ftr_idx 
     # \return 
     #
-    def getFeatureSubstructure(idx: int) -> CDPL.Util.BitSet: pass
+    def getFeatureSubstructure(ftr_idx: int) -> CDPL.Util.BitSet: pass
+
+    ##
+    # \brief 
+    # \param ftr_idx 
+    # \param frag 
+    # \param clear 
+    #
+    def getFeatureSubstructure(ftr_idx: int, frag: CDPL.Chem.Fragment, clear: bool = True) -> None: pass
+
+    ##
+    # \brief 
+    # \param bit_idx 
+    # \param bs_size 
+    # \param frags 
+    # \param clear 
+    #
+    def getFeatureSubstructures(bit_idx: int, bs_size: int, frags: CDPL.Chem.FragmentList, clear: bool = True) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %CircularFingerprintGenerator instance \a gen.
@@ -196,14 +202,4 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     ##
     # \brief 
     #
-    numBits = property(getNumBits, setNumBits)
-
-    ##
-    # \brief 
-    #
     numIterations = property(getNumIterations, setNumIterations)
-
-    ##
-    # \brief FIXME!
-    #
-    remDuplicates = property(getRemDuplicates, setRemDuplicates)

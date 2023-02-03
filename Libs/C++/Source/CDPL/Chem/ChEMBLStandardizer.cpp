@@ -656,8 +656,6 @@ bool Chem::ChEMBLStandardizer::checkExclusionCriterions(const MolecularGraph& mo
 
 bool Chem::ChEMBLStandardizer::standardizeUnknownStereochemistry(Molecule& mol) const
 {
-	
-		
 	bool changes = false;
 	
 	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
@@ -667,7 +665,7 @@ bool Chem::ChEMBLStandardizer::standardizeUnknownStereochemistry(Molecule& mol) 
 			continue;
 		
 		unsigned int stereo_flag = get2DStereoFlag(bond);
-		
+
 		if (stereo_flag != BondStereoFlag::EITHER && stereo_flag != BondStereoFlag::REVERSE_EITHER)
 			continue;
 
@@ -680,8 +678,8 @@ bool Chem::ChEMBLStandardizer::standardizeUnknownStereochemistry(Molecule& mol) 
 				Bond& nbr_bond = *nb_it;
 
 				clearStereoDescriptor(nbr_bond);
-				
-				if (getOrder(nbr_bond) == 2 && Internal::getBondCount(nbr_bond.getNeighbor(atom), mol, 2) == 1)
+
+				if (getOrder(nbr_bond) == 2 && Internal::getBondCount(nbr_bond.getNeighbor(atom), mol, 2) > 1)
 					set2DStereoFlag(nbr_bond, BondStereoFlag::EITHER);
 				else
 					clear2DStereoFlag(nbr_bond);
@@ -867,7 +865,7 @@ bool Chem::ChEMBLStandardizer::normalizeStructure(Molecule& mol)
 				if (!bond_atom2)
 					continue;
 
-				const Bond* bond = bond_atom1->findBondToAtom(*bond_atom2);
+				Bond* bond = const_cast<Bond*>(bond_atom1->findBondToAtom(*bond_atom2));
 
 				if (!bond)
 					continue;
@@ -889,8 +887,13 @@ bool Chem::ChEMBLStandardizer::normalizeStructure(Molecule& mol)
 				} else {
 					if (is_ring_bond || getRingFlag(*bond_atom1) || getRingFlag(*bond_atom2))
 						clr_arom = true;
+
+					if (getOrder(*bond) == 2 && order == 1) {
+						clear2DStereoFlag(*bond);
+						clearStereoDescriptor(*bond);
+					}
 					
-					setOrder(const_cast<Bond&>(*bond), order);
+					setOrder(*bond, order);
 				}
 				
 				changes = true;
