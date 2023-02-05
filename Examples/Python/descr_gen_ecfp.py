@@ -34,22 +34,20 @@ import CDPL.Util as Util
 
 
 # generate ECFP for read molecule
-def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, strip_hs: bool) -> Util.BitSet:
-    if strip_hs:
-        if Chem.makeHydrogenDeplete(mol):              # remove all present hydrogen atoms
-            Chem.calcImplicitHydrogenCounts(mol, True) # recalculate implicit hydrogen counts if hydrogens were removed
-    else:
-        Chem.calcImplicitHydrogenCounts(mol, False)    # calculate implicit hydrogen counts (if not yet done)
-        Chem.makeHydrogenComplete(mol)                 # add explicit hydrogens to atoms having an implicit hydrogen count > 0
-
+def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool) -> Util.BitSet:
+    Chem.calcImplicitHydrogenCounts(mol, False)        # calculate implicit hydrogen counts (if not yet done)
     Chem.perceiveHybridizationStates(mol, False)       # perceive atom hybridization states and set corresponding property for all atoms
     Chem.setRingFlags(mol, False)                      # perceive cycles and set corresponding atom and bond properties
     Chem.perceiveSSSR(mol, False)                      # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
     Chem.setAromaticityFlags(mol, False)               # perceive aromaticity and set corresponding atom and bond properties
     
-    ecfp_gen = Descr.CircularFingerprintGenerator()
-    fp = Util.BitSet()
+    ecfp_gen = Descr.CircularFingerprintGenerator()    # create ECFP generator instance
 
+    if inc_hs:        
+        ecfp_gen.includeHydrogens(True)                # include explicit hydrogens in the ECFP generation
+        Chem.makeHydrogenComplete(mol)                 # make any implicit hydrogens explicit
+
+    fp = Util.BitSet()                                 # create fingerprint bitset
     fp.resize(num_bits)                                # set desired fingerprint size
 
     ecfp_gen.setNumIterations(radius)                  # set num. iterations (=atom. env. radius)
@@ -88,12 +86,12 @@ def parseArgs() -> argparse.Namespace:
                         default=2,
                         help='Max. atom environment radius in number of bonds (default: 2)',
                         type=int)
-    parser.add_argument('-s',
-                        dest='strip_hs',
+    parser.add_argument('-c',
+                        dest='inc_hs',
                         required=False,
                         action='store_true',
                         default=False,
-                        help='Strip hydrogens (by default, molecules will be staturated with hydrogens before fingerprint generation)')
+                        help='Do not ignore hydrogens (by default, the fingerprint is generated for the H-deplete molecular graph)')
 
     parse_args = parser.parse_args()
 
@@ -132,7 +130,7 @@ def main() -> None:
     try:
         while reader.read(mol):
             try:
-                fp = genECFP(mol, args.num_bits, args.radius, args.strip_hs)
+                fp = genECFP(mol, args.num_bits, args.radius, args.inc_hs)
 
                 out_file.write(str(fp))
                 out_file.write('\n')

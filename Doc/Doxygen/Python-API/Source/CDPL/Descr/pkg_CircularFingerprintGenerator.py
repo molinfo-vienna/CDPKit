@@ -126,6 +126,18 @@ class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param include 
+    #
+    def includeHydrogens(include: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def hydrogensIncluded() -> bool: pass
+
+    ##
+    # \brief 
     # \param molgraph 
     #
     def generate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
@@ -203,3 +215,8 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     # \brief 
     #
     numIterations = property(getNumIterations, setNumIterations)
+
+    ##
+    # \brief FIXME!
+    #
+    incHydrogens = property(getIncHydrogens, setIncHydrogens)

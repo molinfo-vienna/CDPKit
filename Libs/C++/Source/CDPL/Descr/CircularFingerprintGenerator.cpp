@@ -78,7 +78,7 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::oper
     }
  
 	std::size_t exp_h_count = ((flags & AtomPropertyFlag::VALENCE) || (flags & AtomPropertyFlag::HEAVY_BOND_COUNT) || (flags & AtomPropertyFlag::H_COUNT) ?
-							   MolProp::getExplicitAtomCount(atom, molgraph, AtomType::H, true) : std::size_t(0));
+							   MolProp::getExplicitBondCount(atom, molgraph, 1, AtomType::H) : std::size_t(0));
 
 	if (flags & AtomPropertyFlag::VALENCE) {
 		id <<= 8;
@@ -105,6 +105,9 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::oper
 		id += getAromaticityFlag(atom);
     }
 
+	if (id == 0)
+		return ~id;
+	
     return id;
 }
 
@@ -118,7 +121,7 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 
     if (flags & BondPropertyFlag::TOPOLOGY) {
 		if (getRingFlag(bond))
-			id += 0x8000;
+			id |= 0x8000;
     }
 
     if (flags & BondPropertyFlag::AROMATICITY) {
@@ -130,6 +133,9 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 	
 	if (flags & BondPropertyFlag::ORDER)
 		id += getOrder(bond);
+
+	if (id == 0)
+		return ~id;
 	
     return id;
 }
@@ -137,14 +143,12 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 //-----
 
 Descr::CircularFingerprintGenerator::CircularFingerprintGenerator():
-    numIterations(2), 
-    atomIdentifierFunc(DefAtomIdentifierFunctor()),
-	bondIdentifierFunc(DefBondIdentifierFunctor()) {}
+    numIterations(2), atomIdentifierFunc(DefAtomIdentifierFunctor()),
+	bondIdentifierFunc(DefBondIdentifierFunctor()), incHydrogens(false) {}
 
 Descr::CircularFingerprintGenerator::CircularFingerprintGenerator(const Chem::MolecularGraph& molgraph):
-    numIterations(2), 
-    atomIdentifierFunc(DefAtomIdentifierFunctor()),
-	bondIdentifierFunc(DefBondIdentifierFunctor())
+    numIterations(2), atomIdentifierFunc(DefAtomIdentifierFunctor()),
+	bondIdentifierFunc(DefBondIdentifierFunctor()), incHydrogens(false)
 {
     generate(molgraph);
 }
@@ -167,6 +171,16 @@ void Descr::CircularFingerprintGenerator::setNumIterations(std::size_t num_iter)
 std::size_t Descr::CircularFingerprintGenerator::getNumIterations() const
 {
 	return numIterations;
+}
+
+void Descr::CircularFingerprintGenerator::includeHydrogens(bool include)
+{
+	incHydrogens = include;
+}
+
+bool Descr::CircularFingerprintGenerator::hydrogensIncluded() const
+{
+	return incHydrogens;
 }
 
 void Descr::CircularFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph)
@@ -275,11 +289,18 @@ void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgr
 	
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Feature& ftr = features[i];
+		Base::uint64 id = atomIdentifierFunc(molgraph.getAtom(i), molgraph);
 
-		randGenerator.seed(atomIdentifierFunc(molgraph.getAtom(i), molgraph));
+		if (id == 0 || (!incHydrogens && getType(molgraph.getAtom(i)) == AtomType::H)) {
+			ftr.first = 0;
+			ftr.second.clear();
+			continue;
+		}
+
+		randGenerator.seed(id);
 
 		ftr.first = randGenerator();
-
+		
 		ftr.second.resize(num_bonds + num_atoms);
 		ftr.second.reset();
 		ftr.second.set(i);
@@ -322,8 +343,12 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 		std::size_t ftr_idx = num_atoms * (iter_num - 1) + i;
 		std::size_t ext_ftr_idx = ftr_idx + num_atoms;
 
-		nbrFeatureData.clear();
 		features[ext_ftr_idx].second = features[ftr_idx].second;
+				
+		if (features[ext_ftr_idx].second.empty())  // to be ignored?
+			continue;
+		
+		nbrFeatureData.clear();
 
 		const Atom& ctr_atom = molGraph->getAtom(i);
 		Atom::ConstBondIterator b_it = ctr_atom.getBondsBegin();
@@ -340,7 +365,14 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 				continue;
 
 			std::size_t nbr_bond_idx = molGraph->getBondIndex(nbr_bond);
+
+			if (bondIdentifiers[nbr_bond_idx] == 0) // to be ignored?
+				continue;
+			
 			const Feature& nbr_ftr = features[num_atoms * (iter_num - 1) + molGraph->getAtomIndex(nbr_atom)];
+
+			if (nbr_ftr.second.empty())  // to be ignored?
+				continue;
 			
 			features[ext_ftr_idx].second |= nbr_ftr.second;
 
@@ -366,11 +398,16 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 
 	duplicateMask.reset();
 	
+	FeaturePtrList::const_iterator prev_of_end = outputFeatures.end();
+		
 	for (std::size_t i = 0, ftr_offs = num_atoms * iter_num; i < num_atoms; i++) {
 		if (duplicateMask.test(i))
 			continue;
 		
 		const Feature* output_ftr = &features[ftr_offs + i];
+
+		if (output_ftr->second.empty())
+			continue;
 		
 		for (std::size_t j = i + 1; j < num_atoms; j++) {
 			Feature& ftr = features[ftr_offs + j];
@@ -385,7 +422,7 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 
 		bool duplicate = false;
 
-		for (FeaturePtrList::const_iterator it = outputFeatures.begin(), end = outputFeatures.begin() + ftr_offs; it != end; ++it) {
+		for (FeaturePtrList::const_iterator it = outputFeatures.begin(); it != prev_of_end; ++it) {
 			if ((*it)->second == output_ftr->second) {
 				duplicate = true;
 				break;

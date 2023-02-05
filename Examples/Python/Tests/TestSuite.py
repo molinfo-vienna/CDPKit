@@ -112,7 +112,7 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('molprop_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])
 
     errors |= checkScriptFileOutput('descr_gen_ecfp', outputFilePath('test.out'),
-                                    [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out') ])
+                                    [ '-i', testDataFilePath('Citalopram.sdf'), '-o', outputFilePath('test.out'), '-c' ])
     errors |= checkScriptOutput('descr_gen_fame_fp', [ testDataFilePath('Citalopram.sdf') ])
 
     errors |= checkScriptOutput('forcefield_mmff94_charges', [ testDataFilePath('Citalopram.sdf') ])
