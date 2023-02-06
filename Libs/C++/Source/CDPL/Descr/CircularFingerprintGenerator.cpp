@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <iterator>
 
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -283,8 +282,12 @@ void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgr
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 	std::size_t num_bonds = molgraph.getNumBonds();
-	
+
 	features.resize(num_atoms * (numIterations + 1));
+	
+	outputFeatures.clear();
+	outputFeatures.reserve(features.size());
+
 	duplicateMask.resize(num_atoms);
 	
 	for (std::size_t i = 0; i < num_atoms; i++) {
@@ -304,13 +307,9 @@ void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgr
 		ftr.second.resize(num_bonds + num_atoms);
 		ftr.second.reset();
 		ftr.second.set(i);
+
+		outputFeatures.push_back(&ftr);
 	}
-
-	outputFeatures.clear();
-	outputFeatures.reserve(features.size());
-
-	std::transform(features.begin(), features.begin() + num_atoms, std::back_inserter(outputFeatures),
-				   static_cast<Feature* (*)(Feature&)>(&boost::addressof<Feature>));
 
 	if (bondIdentifiers.size() < num_bonds)
 		bondIdentifiers.resize(num_bonds);
