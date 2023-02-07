@@ -34,9 +34,9 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
-#include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/RangeHashCode.hpp"
@@ -143,11 +143,13 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::oper
 
 Descr::CircularFingerprintGenerator::CircularFingerprintGenerator():
     numIterations(2), atomIdentifierFunc(DefAtomIdentifierFunctor()),
-	bondIdentifierFunc(DefBondIdentifierFunctor()), incHydrogens(false) {}
+	bondIdentifierFunc(DefBondIdentifierFunctor()), incHydrogens(false),
+	incChirality(false) {}
 
 Descr::CircularFingerprintGenerator::CircularFingerprintGenerator(const Chem::MolecularGraph& molgraph):
     numIterations(2), atomIdentifierFunc(DefAtomIdentifierFunctor()),
-	bondIdentifierFunc(DefBondIdentifierFunctor()), incHydrogens(false)
+	bondIdentifierFunc(DefBondIdentifierFunctor()), incHydrogens(false),
+	incChirality(false)
 {
     generate(molgraph);
 }
@@ -180,6 +182,16 @@ void Descr::CircularFingerprintGenerator::includeHydrogens(bool include)
 bool Descr::CircularFingerprintGenerator::hydrogensIncluded() const
 {
 	return incHydrogens;
+}
+
+void Descr::CircularFingerprintGenerator::includeChirality(bool include)
+{
+	incChirality = include;
+}
+
+bool Descr::CircularFingerprintGenerator::chiralityIncluded() const
+{
+	return incChirality;
 }
 
 void Descr::CircularFingerprintGenerator::generate(const Chem::MolecularGraph& molgraph)
@@ -347,7 +359,7 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 		if (features[ext_ftr_idx].second.empty())  // to be ignored?
 			continue;
 		
-		nbrFeatureData.clear();
+		neighborData.clear();
 
 		const Atom& ctr_atom = molGraph->getAtom(i);
 		Atom::ConstBondIterator b_it = ctr_atom.getBondsBegin();
@@ -378,20 +390,25 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 			if (iter_num == 1)
 				features[ext_ftr_idx].second.set(num_atoms + nbr_bond_idx);
 
-			nbrFeatureData.push_back(UInt64Pair(bondIdentifiers[nbr_bond_idx], nbr_ftr.first));
+			neighborData.push_back(NeighborData({ { bondIdentifiers[nbr_bond_idx], nbr_ftr.first }, &nbr_atom }));
 		}
 
-		std::sort(nbrFeatureData.begin(), nbrFeatureData.end());
+		std::sort(neighborData.begin(), neighborData.end(), &compareNeighborData);
 
 		idCalculationData.clear();
 		idCalculationData.push_back(iter_num);
 		idCalculationData.push_back(features[ftr_idx].first);
 
-		for (UInt64PairArray::const_iterator it = nbrFeatureData.begin(), end = nbrFeatureData.end(); it != end; ++it) {
-			idCalculationData.push_back(it->first);
-			idCalculationData.push_back(it->second);
-		}
+		unsigned int stereo_flag = getStereoFlag(ctr_atom);
 
+		if (stereo_flag)
+			idCalculationData.push_back(stereo_flag);
+		
+		for (NeighborDataList::const_iterator it = neighborData.begin(), end = neighborData.end(); it != end; ++it) {
+			idCalculationData.push_back(it->first.first);
+			idCalculationData.push_back(it->first.second);
+		}
+		
 		features[ext_ftr_idx].first = Internal::calcHashCode<Base::uint64>(idCalculationData.begin(), idCalculationData.end());
 	}
 
@@ -435,6 +452,50 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 	}
 }
 
+unsigned int Descr::CircularFingerprintGenerator::getStereoFlag(const Chem::Atom& ctr_atom) const
+{
+	using namespace Chem;
+	
+	if (!incChirality)
+		return 0;
+	
+	std::size_t num_nbrs = neighborData.size();
+		
+	if (num_nbrs != 3 && num_nbrs != 4)
+		return 0;
+
+	const StereoDescriptor& sto_descr = getStereoDescriptor(ctr_atom);
+	unsigned int config = sto_descr.getConfiguration();
+	
+	if (config != AtomConfiguration::R && config != AtomConfiguration::S)
+		return 0;
+
+	if (!sto_descr.isValid(ctr_atom))
+		return 0;
+
+	if (neighborData[0].first == neighborData[1].first || neighborData[1].first == neighborData[2].first)
+		return 0;
+
+	if (num_nbrs == 4 && neighborData[2].first == neighborData[3].first)
+		return 0;
+
+	unsigned int parity = 0;
+
+	if (num_nbrs == 4)
+		parity = sto_descr.getPermutationParity(*neighborData[0].second, *neighborData[1].second,
+												*neighborData[2].second, *neighborData[3].second);
+	else
+		parity = sto_descr.getPermutationParity(*neighborData[0].second, *neighborData[1].second,
+												*neighborData[2].second);
+	if (parity == 0)
+		return 0;
+
+	if (parity == 1)
+		return (config == AtomConfiguration::R ? 1 : 2);
+
+	return (config == AtomConfiguration::R ? 2 : 1);
+}
+	
 void Descr::CircularFingerprintGenerator::bitSetToFragment(const Util::BitSet& ab_mask, Chem::Fragment& frag) const
 {
 	std::size_t num_atoms = molGraph->getNumAtoms();
@@ -445,4 +506,9 @@ void Descr::CircularFingerprintGenerator::bitSetToFragment(const Util::BitSet& a
 		else
 			frag.addBond(molGraph->getBond(i - num_atoms));
 	}
+}
+
+bool Descr::CircularFingerprintGenerator::compareNeighborData(const NeighborData& nbr1, const NeighborData& nbr2)
+{
+	return (nbr1.first < nbr2.first);
 }

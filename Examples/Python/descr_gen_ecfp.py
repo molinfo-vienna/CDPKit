@@ -34,7 +34,7 @@ import CDPL.Util as Util
 
 
 # generate ECFP for read molecule
-def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool) -> Util.BitSet:
+def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_config: bool) -> Util.BitSet:
     Chem.calcImplicitHydrogenCounts(mol, False)        # calculate implicit hydrogen counts (if not yet done)
     Chem.perceiveHybridizationStates(mol, False)       # perceive atom hybridization states and set corresponding property for all atoms
     Chem.setRingFlags(mol, False)                      # perceive cycles and set corresponding atom and bond properties
@@ -43,10 +43,14 @@ def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool) -> Uti
     
     ecfp_gen = Descr.CircularFingerprintGenerator()    # create ECFP generator instance
 
+    if inc_config:
+        ecfp_gen.includeChirality(True)                # allow atom chirality to have an impact on the ECFP generation
+        Chem.calcAtomStereoDescriptors(mol, False)     # calculate atom stereo descriptors and set corresponding property for all atoms
+
     if inc_hs:        
         ecfp_gen.includeHydrogens(True)                # include explicit hydrogens in the ECFP generation
         Chem.makeHydrogenComplete(mol)                 # make any implicit hydrogens explicit
-
+         
     fp = Util.BitSet()                                 # create fingerprint bitset
     fp.resize(num_bits)                                # set desired fingerprint size
 
@@ -86,12 +90,18 @@ def parseArgs() -> argparse.Namespace:
                         default=2,
                         help='Max. atom environment radius in number of bonds (default: 2)',
                         type=int)
-    parser.add_argument('-c',
+    parser.add_argument('-y',
                         dest='inc_hs',
                         required=False,
                         action='store_true',
                         default=False,
                         help='Do not ignore hydrogens (by default, the fingerprint is generated for the H-deplete molecular graph)')
+    parser.add_argument('-c',
+                        dest='inc_config',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Include atom chirality (by default, atom chirality is not considered)')
 
     parse_args = parser.parse_args()
 
@@ -130,7 +140,7 @@ def main() -> None:
     try:
         while reader.read(mol):
             try:
-                fp = genECFP(mol, args.num_bits, args.radius, args.inc_hs)
+                fp = genECFP(mol, args.num_bits, args.radius, args.inc_hs, args.inc_config)
 
                 out_file.write(str(fp))
                 out_file.write('\n')

@@ -138,6 +138,18 @@ class CircularFingerprintGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param include 
+    #
+    def includeChirality(include: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def chiralityIncluded() -> bool: pass
+
+    ##
+    # \brief 
     # \param molgraph 
     #
     def generate(molgraph: CDPL.Chem.MolecularGraph) -> None: pass
@@ -220,3 +232,8 @@ class CircularFingerprintGenerator(Boost.Python.instance):
     # \brief FIXME!
     #
     incHydrogens = property(getIncHydrogens, setIncHydrogens)
+
+    ##
+    # \brief FIXME!
+    #
+    incChirality = property(getIncChirality, setIncChirality)

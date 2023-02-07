@@ -234,6 +234,10 @@ namespace CDPL
 			void includeHydrogens(bool include);
 
 			bool hydrogensIncluded() const;
+
+			void includeChirality(bool include);
+
+			bool chiralityIncluded() const;
 		
 			/**
 			 * \brief Generates the atom-centered circular substructure fingerprint of the molecular graph \a molgraph.
@@ -272,31 +276,36 @@ namespace CDPL
 			void getFeatureSubstructures(std::size_t bit_idx, std::size_t bs_size, Chem::FragmentList& frags, bool clear = true) const;
 
 		  private:
-			typedef std::pair<Base::uint64, Util::BitSet> Feature;
+			typedef std::pair<std::pair<Base::uint64, Base::uint64>, const Chem::Atom*> NeighborData;
 
 			void init(const Chem::MolecularGraph& molgraph);
 
 			void performIteration(std::size_t iter_num);
 
-			void bitSetToFragment(const Util::BitSet& ab_mask, Chem::Fragment& frag) const;
+			unsigned int getStereoFlag(const Chem::Atom& ctr_atom) const;
 			
+			void bitSetToFragment(const Util::BitSet& ab_mask, Chem::Fragment& frag) const;
+
+			static bool compareNeighborData(const NeighborData& nbr1, const NeighborData& nbr2);
+			
+			typedef std::pair<Base::uint64, Util::BitSet> Feature;
 			typedef std::vector<Feature> FeatureArray;
 			typedef std::vector<const Feature*> FeaturePtrList;
 			typedef std::vector<Base::uint64> UInt64Array;
-			typedef std::pair<Base::uint64, Base::uint64> UInt64Pair;
-			typedef std::vector<UInt64Pair> UInt64PairArray;
+			typedef std::vector<NeighborData> NeighborDataList;
 	
 			const Chem::MolecularGraph*  molGraph;
 			std::size_t                  numIterations;
 			AtomIdentifierFunction       atomIdentifierFunc;
 			BondIdentifierFunction       bondIdentifierFunc;
 			bool                         incHydrogens;
+			bool                         incChirality;
 			boost::rand48                randGenerator;
 			UInt64Array                  bondIdentifiers;
 			FeatureArray                 features;
 			FeaturePtrList               outputFeatures;
 			UInt64Array                  idCalculationData;
-			UInt64PairArray              nbrFeatureData;
+			NeighborDataList             neighborData;
 			Util::BitSet                 duplicateMask;
 		}; 
 	}

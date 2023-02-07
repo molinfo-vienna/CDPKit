@@ -74,6 +74,9 @@ void CDPLPythonDescr::exportCircularFingerprintGenerator()
 		.def("includeHydrogens", &Descr::CircularFingerprintGenerator::includeHydrogens, 
 			 (python::arg("self"), python::arg("include")))
 		.def("hydrogensIncluded", &Descr::CircularFingerprintGenerator::hydrogensIncluded, python::arg("self"))
+		.def("includeChirality", &Descr::CircularFingerprintGenerator::includeChirality, 
+			 (python::arg("self"), python::arg("include")))
+		.def("chiralityIncluded", &Descr::CircularFingerprintGenerator::chiralityIncluded, python::arg("self"))
 		.def("generate", &Descr::CircularFingerprintGenerator::generate, (python::arg("self"), python::arg("molgraph")),
 			 python::with_custodian_and_ward<1, 2>())
 		.def("setFeatureBits", static_cast<void (Descr::CircularFingerprintGenerator::*)(Util::BitSet&, bool) const>
@@ -101,6 +104,8 @@ void CDPLPythonDescr::exportCircularFingerprintGenerator()
 					  &Descr::CircularFingerprintGenerator::setNumIterations)
 		.add_property("incHydrogens", &Descr::CircularFingerprintGenerator::hydrogensIncluded,
 					  &Descr::CircularFingerprintGenerator::includeHydrogens)
+		.add_property("incChirality", &Descr::CircularFingerprintGenerator::chiralityIncluded,
+					  &Descr::CircularFingerprintGenerator::includeChirality)
 		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Descr::CircularFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)
 		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Descr::CircularFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS);
 
