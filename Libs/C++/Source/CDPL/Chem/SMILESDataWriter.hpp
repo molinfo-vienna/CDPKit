@@ -75,9 +75,6 @@ namespace CDPL
 			class DFSTreeNode;
 			class DFSTreeEdge;
 
-			template <typename T>
-		 	void writeName(std::ostream&, const T&) const;
-
 			void init(std::ostream&, bool);
 			void init();
 

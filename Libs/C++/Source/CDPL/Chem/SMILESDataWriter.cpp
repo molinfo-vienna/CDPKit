@@ -98,12 +98,16 @@ bool Chem::SMILESDataWriter::writeReaction(std::ostream& os, const Reaction& rxn
 {
 	init(os, true);
 
+	if (ctrlParameters.recordFormat == "NS") 
+		os << getName(rxn) << ' ';
+
 	if (ctrlParameters.canonicalize)
 		writeCanonSMILES(os, rxn);
 	else
 		writeNonCanonSMILES(os, rxn);
 
-	writeName(os, rxn);
+	if (ctrlParameters.recordFormat == "SN") 
+		os << ' ' << getName(rxn);
 
 	return os.good();
 }
@@ -112,24 +116,18 @@ bool Chem::SMILESDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
 {
 	init(os, false);
 
+	if (ctrlParameters.recordFormat == "NS") 
+		os << getName(molgraph) << ' ';
+	
 	if (ctrlParameters.canonicalize)
 		writeCanonSMILES(os, molgraph);
 	else
 		writeNonCanonSMILES(os, molgraph);
 
-	writeName(os, molgraph);
+	if (ctrlParameters.recordFormat == "SN") 
+		os << ' ' << getName(molgraph);
 
 	return os.good();
-}
-
-template <typename T>
-void Chem::SMILESDataWriter::writeName(std::ostream& os, const T& obj) const
-{
-	if (ctrlParameters.recordFormat == "S")
-		return;
-
-	if (ctrlParameters.recordFormat == "SN") 
-		os << ' ' << getName(obj);
 }
 
 void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
@@ -149,7 +147,7 @@ void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
 	ctrlParameters.writeRxnAtomMappingID  =  rxn_context ? getSMILESRxnWriteAtomMappingIDParameter(ioBase) : getSMILESMolWriteAtomMappingIDParameter(ioBase);
 	ctrlParameters.recordFormat           =  getSMILESRecordFormatParameter(ioBase); 
 
-	if (ctrlParameters.recordFormat != "S" && ctrlParameters.recordFormat != "SN")
+	if (ctrlParameters.recordFormat != "S" && ctrlParameters.recordFormat != "SN" && ctrlParameters.recordFormat != "NS")
 		throw Base::IOError("SMILESDataWriter: invalid smiles record format control-parameter '" + ctrlParameters.recordFormat + '\'');
 
 	os.imbue(std::locale::classic());
