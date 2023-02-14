@@ -62,7 +62,7 @@ def processMolecule(mol, stats):
     modified = False
 
     if NEUTRALIZE:
-        modified = Chem.minimizeChargedAtomCount(mol)
+        modified = Chem.ProtonationStateStandardizer().standardize(mol, Chem.ProtonationStateStandardizer.MIN_CHARGED_ATOM_COUNT)
 
     Chem.perceiveComponents(mol, False)
     Chem.perceiveSSSR(mol, False)

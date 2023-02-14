@@ -149,6 +149,7 @@ SET(cdpl-chem_LIB_SRCS
     GenericHydrogen15ShiftTautomerization.cpp  
     ResonanceStructureGenerator.cpp
     ChEMBLStandardizer.cpp
+    ProtonationStateStandardizer.cpp
     
     FragmentGenerator.cpp
     RECAPFragmentGenerator.cpp
@@ -291,7 +292,6 @@ SET(cdpl-chem_LIB_SRCS
 
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeRemoveAtomsFunctions.cpp
-    MoleculeMinChargedAtomCountFunction.cpp
 
     FragmentHydrogenManipulationFunctions.cpp
     FragmentRemoveAtomsFunctions.cpp

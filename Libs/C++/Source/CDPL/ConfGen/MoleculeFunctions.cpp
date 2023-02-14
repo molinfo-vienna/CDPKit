@@ -88,8 +88,6 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 	using namespace Chem;
 	using namespace MolProp;
 
-	calcImplicitHydrogenCounts(mol, false);
-
 	bool added_hs = makeHydrogenComplete(mol, true);
 
 	perceiveComponents(mol, added_hs);

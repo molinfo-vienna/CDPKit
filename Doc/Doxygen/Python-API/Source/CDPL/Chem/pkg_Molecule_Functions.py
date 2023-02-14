@@ -21,18 +21,20 @@
 
 ##
 # \brief 
+# \param arg1 
 # \param mol 
 # \return 
 #
-def makeHydrogenDeplete(mol: Molecule) -> bool: pass
+def makeHydrogenDeplete(arg1: Molecule, mol: bool) -> bool: pass
 
 ##
 # \brief 
 # \param mol 
 # \param flags 
+# \param corr_impl_h_count 
 # \return 
 #
-def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int) -> bool: pass
+def makeOrdinaryHydrogenDeplete(mol: Molecule, flags: int, corr_impl_h_count: bool = True) -> bool: pass
 
 ##
 # \brief 
@@ -48,13 +50,6 @@ def makeHydrogenComplete(mol: Molecule, corr_impl_h_count: bool = True) -> bool:
 # \param pred 
 #
 def removeAtomsIf(mol: Molecule, pred: AtomPredicate) -> None: pass
-
-##
-# \brief 
-# \param mol 
-# \return 
-#
-def minimizeChargedAtomCount(mol: Molecule) -> bool: pass
 
 ##
 # \brief 

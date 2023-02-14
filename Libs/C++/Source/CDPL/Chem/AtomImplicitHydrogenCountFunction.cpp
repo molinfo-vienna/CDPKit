@@ -41,7 +41,7 @@ std::size_t Chem::calcImplicitHydrogenCount(const Atom& atom, const MolecularGra
 {
     unsigned int atom_type = getType(atom);
 
-    if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
+    if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::Ba)
 		return std::size_t(0);
 
     long explicit_val = Internal::calcExplicitValence(atom, molgraph);

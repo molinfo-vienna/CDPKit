@@ -45,8 +45,8 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/KekuleStructureCalculator.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
-#include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
+#include "CDPL/Chem/ProtonationStateStandardizer.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -117,9 +117,6 @@ namespace CDPL
 			const Chem::Atom* getAtomWithMappingID(const Molecule& ptn, std::size_t id) const;
 
 			bool removeCharges(Molecule& mol);
-			std::size_t getMatches(const Molecule& ptn, const Molecule& mol, AtomList& matches);
-			bool cmpCanonicalNumber(const Atom* atom1, const Atom* atom2) const;
-			bool incrementCharge(Atom& atom, bool checked) const;
 
 			bool removeTartrateStereochemistry(Molecule& mol);
 
@@ -138,12 +135,7 @@ namespace CDPL
 			KekuleStructureCalculator    kekuleStructureCalc;
 			Util::STArray                kekulizedBondOrders;
 			SubstructureSearch           substructSearch;
-			CanonicalNumberingCalculator canonNumberingCalc;
-			Util::STArray                canonAtomNumbering;
-			AtomList                     posChargedAtoms;
-			AtomList                     posChargedNoHAtoms;
-			AtomList                     negChargedAtoms;
-			AtomList                     negChargedAcidAtoms;
+			ProtonationStateStandardizer chargeStandardizer;
 			Math::Vector2DArray          atom2DCoords;
 			Util::BitSet                 markedAtomSet;
 			Fragment                     tmpFragment;

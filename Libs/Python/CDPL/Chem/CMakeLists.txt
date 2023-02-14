@@ -138,6 +138,7 @@ SET(chem_MOD_SRCS
     BRICSFragmentGeneratorExport.cpp
     ResonanceStructureGeneratorExport.cpp
     ChEMBLStandardizerExport.cpp
+    ProtonationStateStandardizerExport.cpp
     
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 

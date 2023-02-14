@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -39,7 +40,7 @@
 using namespace CDPL; 
 
 
-bool Chem::makeHydrogenDeplete(Molecule& mol)
+bool Chem::makeHydrogenDeplete(Molecule& mol, bool corr_impl_h_count)
 {
 	std::size_t num_atoms = mol.getNumAtoms();
 	bool changes = false;
@@ -57,10 +58,13 @@ bool Chem::makeHydrogenDeplete(Molecule& mol)
 		changes = true;
 	}
 
+	if (changes && corr_impl_h_count)
+		calcImplicitHydrogenCounts(mol, true);
+	
 	return changes;
 }
 	
-bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
+bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags, bool corr_impl_h_count)
 {
 	std::size_t num_atoms = mol.getNumAtoms();
 	bool changes = false;
@@ -78,11 +82,16 @@ bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
 		changes = true;
 	}
 
+	if (changes && corr_impl_h_count)
+		calcImplicitHydrogenCounts(mol, true);
+	
 	return changes;
 }
 
 bool Chem::makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count)
 {
+	calcImplicitHydrogenCounts(mol, false);
+	
 	std::size_t num_atoms = mol.getNumAtoms();
 	bool changes = false;
 

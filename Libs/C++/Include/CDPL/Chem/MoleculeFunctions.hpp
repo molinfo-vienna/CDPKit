@@ -49,18 +49,22 @@ namespace CDPL
 		/**
 		 * \brief Removes all explicit hydrogen atoms from the molecule \a mol.
 		 * \param mol The molecule for which to remove all explicit hydrogen atoms.
+		 * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero,
+		 *                          \c false if the property shall be left unchanged.
 		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 */
-		CDPL_CHEM_API bool makeHydrogenDeplete(Molecule& mol);
+		CDPL_CHEM_API bool makeHydrogenDeplete(Molecule& mol, bool corr_impl_h_count = true);
 
 		/**
 		 * \brief Removes all explicit ordinary hydrogen atoms from the molecule \a mol.
 		 * \param mol The molecule for which to remove all explicit ordinary hydrogen atoms.
 		 * \param flags Specifies the set of atom properties to check (see namespace Chem::AtomPropertyFlag).
+		 * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero,
+		 *                          \c false if the property shall be left unchanged.
 		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 * \see Chem::isOrdinaryHydrogen
 		 */
-		CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags);
+		CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags, bool corr_impl_h_count = true);
 
 		/**
 		 * \brief Converts all implicit hydrogens of the molecule \a mol to explicit hydrogen atoms.
@@ -70,8 +74,6 @@ namespace CDPL
 		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 */
 		CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count = true);
-
-		CDPL_CHEM_API bool minimizeChargedAtomCount(Molecule& mol);
 
 		CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 

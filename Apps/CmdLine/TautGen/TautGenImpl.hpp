@@ -38,6 +38,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/ProtonationStateStandardizer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -127,36 +128,38 @@ namespace TautGen
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
 		typedef boost::chrono::system_clock Clock;
-
-		StringList                     inputFiles;
-		std::string                    outputFile;
-		bool                           regardStereo;
-		bool                           regardIsotopes;
-		bool                           neutralize;
-		bool                           ketoEnol;
-		bool                           imineEnamine;
-		bool                           nitrosoOxime;
-		bool                           amideImidicAcid;
-		bool                           lactamLactim;
-		bool                           keteneYnol;
-		bool                           nitroAci;
-		bool                           phosphinicAcid;
-		bool                           sulfenicAcid;
-		bool                           genericH13Shift;
-		bool                           genericH15Shift;
-		std::size_t                    numThreads;
-		std::size_t                    maxNumTautomers;
-		Mode                           mode;
-		InputHandlerPtr                inputHandler;
-		CompMoleculeReader             inputReader;
-		OutputHandlerPtr               outputHandler;
-		MoleculeWriterPtr              outputWriter;
-		boost::mutex                   mutex;
-		boost::mutex                   readMolMutex;
-		boost::mutex                   writeMolMutex;
-		std::string                    errorMessage;
-		Clock::time_point              startTime;
-		std::size_t                    numOutTautomers;
+		typedef CDPL::Chem::ProtonationStateStandardizer ChargeNeutralizer;
+		
+		StringList         inputFiles;
+		std::string        outputFile;
+		bool               regardStereo;
+		bool               regardIsotopes;
+		bool               neutralize;
+		bool               ketoEnol;
+		bool               imineEnamine;
+		bool               nitrosoOxime;
+		bool               amideImidicAcid;
+		bool               lactamLactim;
+		bool               keteneYnol;
+		bool               nitroAci;
+		bool               phosphinicAcid;
+		bool               sulfenicAcid;
+		bool               genericH13Shift;
+		bool               genericH15Shift;
+		std::size_t        numThreads;
+		std::size_t        maxNumTautomers;
+		Mode               mode;
+		InputHandlerPtr    inputHandler;
+		CompMoleculeReader inputReader;
+		OutputHandlerPtr   outputHandler;
+		MoleculeWriterPtr  outputWriter;
+		boost::mutex       mutex;
+		boost::mutex       readMolMutex;
+		boost::mutex       writeMolMutex;
+		std::string        errorMessage;
+		Clock::time_point  startTime;
+		std::size_t        numOutTautomers;
+		ChargeNeutralizer  neutralizer;
     };
 }
 
