@@ -49,15 +49,17 @@ namespace
 
 
 const double Pharm::XBondingInteractionScore::DEF_MIN_AX_DISTANCE = 1.6;
-const double Pharm::XBondingInteractionScore::DEF_MAX_AX_DISTANCE = 3.75;
-const double Pharm::XBondingInteractionScore::DEF_MIN_AXB_ANGLE = 140.0;
-const double Pharm::XBondingInteractionScore::DEF_ACC_ANGLE_TOLERANCE = 45.0;
+const double Pharm::XBondingInteractionScore::DEF_MAX_AX_DISTANCE = 4.0;
+const double Pharm::XBondingInteractionScore::DEF_MIN_AXB_ANGLE   = 150.0;
+const double Pharm::XBondingInteractionScore::DEF_MAX_ACC_ANGLE   = 35.0;
 
 
 Pharm::XBondingInteractionScore::XBondingInteractionScore(bool don_acc, double min_ax_dist, double max_ax_dist,
-														  double min_axb_ang, double acc_ang_tol): 
+														  double min_axb_ang, double max_acc_ang): 
 	donAccOrder(don_acc), minAXDist(min_ax_dist), maxAXDist(max_ax_dist), minAXBAngle(min_axb_ang),
-	accAngleTol(acc_ang_tol), normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
+	maxAccAngle(max_acc_ang), distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
+	accAngleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 5, 0.0)),
+	axbAngleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::XBondingInteractionScore::getMinAXDistance() const
 {
@@ -74,14 +76,24 @@ double Pharm::XBondingInteractionScore::getMinAXBAngle() const
 	return minAXBAngle;
 }
 
-double Pharm::XBondingInteractionScore::getAcceptorAngleTolerance() const
+double Pharm::XBondingInteractionScore::getMaxAcceptorAngle() const
 {
-	return accAngleTol;
+	return maxAccAngle;
 }
 
-void Pharm::XBondingInteractionScore::setNormalizationFunction(const NormalizationFunction& func)
+void Pharm::XBondingInteractionScore::setDistanceScoringFunction(const DistanceScoringFunction& func)
 {
-    normFunc = func;
+    distScoringFunc = func;
+}
+
+void Pharm::XBondingInteractionScore::setAcceptorAngleScoringFunction(const AngleScoringFunction& func)
+{
+    accAngleScoringFunc = func;
+}
+
+void Pharm::XBondingInteractionScore::setAXBAngleScoringFunction(const AngleScoringFunction& func)
+{
+    axbAngleScoringFunc = func;
 }
 
 double Pharm::XBondingInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -95,12 +107,12 @@ double Pharm::XBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 	Math::Vector3D x_acc_vec(acc_pos - don_pos);
 	double ax_dist = length(x_acc_vec);
 
-	double score = normFunc((ax_dist - (maxAXDist + minAXDist) * 0.5) / (maxAXDist - minAXDist));
+	double score = distScoringFunc((ax_dist - (maxAXDist + minAXDist) * 0.5) / (maxAXDist - minAXDist));
 	
 	if (hasOrientation(don_ftr)) {
 		double axb_ang = std::acos(angleCos(x_acc_vec, getOrientation(don_ftr), ax_dist)) * 180.0 / M_PI;
 		
-		score *= normFunc(axb_ang * 0.5 / (180.0 - minAXBAngle));
+		score *= axbAngleScoringFunc(axb_ang * 0.5 / (180.0 - minAXBAngle));
 	}
 	
 	if (hasOrientation(acc_ftr)) {
@@ -110,7 +122,7 @@ double Pharm::XBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		if (getGeometry(acc_ftr) != FeatureGeometry::VECTOR) 
 			acc_ang_dev = std::abs(acc_ang_dev - DEF_LP_TO_AXIS_ANGLE);
 
-		score *= normFunc(acc_ang_dev * 0.5 / accAngleTol);
+		score *= accAngleScoringFunc(acc_ang_dev * 0.5 / maxAccAngle);
 	}
 
 	return score * getWeight(ftr2);
@@ -122,7 +134,7 @@ double Pharm::XBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 	Math::Vector3D x_acc_vec(ftr2_pos - ftr1_pos);
 	double ax_dist = length(x_acc_vec);
 
-	double score = normFunc((ax_dist - (maxAXDist + minAXDist) * 0.5) / (maxAXDist - minAXDist));
+	double score = distScoringFunc((ax_dist - (maxAXDist + minAXDist) * 0.5) / (maxAXDist - minAXDist));
 
 	if (donAccOrder) { 
 		if (hasOrientation(ftr2)) {
@@ -132,13 +144,13 @@ double Pharm::XBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 			if (getGeometry(ftr2) != FeatureGeometry::VECTOR) 
 				acc_ang_dev = std::abs(acc_ang_dev - DEF_LP_TO_AXIS_ANGLE);
 
-			score *= normFunc(acc_ang_dev * 0.5 / accAngleTol);
+			score *= accAngleScoringFunc(acc_ang_dev * 0.5 / maxAccAngle);
 		}
 
 	} else if (hasOrientation(ftr2)) {
 		double axb_ang = 180.0 - std::acos(angleCos(x_acc_vec, getOrientation(ftr2), ax_dist)) * 180.0 / M_PI;
 		
-		score *= normFunc(axb_ang * 0.5 / (180.0 - minAXBAngle));
+		score *= axbAngleScoringFunc(axb_ang * 0.5 / (180.0 - minAXBAngle));
 	}
 	
 	return score * getWeight(ftr2);

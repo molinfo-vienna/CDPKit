@@ -57,21 +57,21 @@ void CDPLPythonPharm::exportXBondingInteractionConstraint()
 																 python::arg("min_ax_dist") = Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE, 
 																 python::arg("max_ax_dist") = Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE,
 																 python::arg("min_axb_ang") = Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE,
-																 python::arg("acc_ang_tol") = Pharm::XBondingInteractionConstraint::DEF_ACC_ANGLE_TOLERANCE)))
+																 python::arg("max_acc_ang") = Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::XBondingInteractionConstraint>())
 		.def("getMinAXDistance", &Pharm::XBondingInteractionConstraint::getMinAXDistance, python::arg("self"))
 		.def("getMaxAXDistance", &Pharm::XBondingInteractionConstraint::getMaxAXDistance, python::arg("self"))
 		.def("getMinAXBAngle", &Pharm::XBondingInteractionConstraint::getMinAXBAngle, python::arg("self"))
-		.def("getAcceptorAngleTolerance", &Pharm::XBondingInteractionConstraint::getAcceptorAngleTolerance, python::arg("self"))
+		.def("getMaxAcceptorAngle", &Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::XBondingInteractionConstraint::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.add_property("minAXDistance", &Pharm::XBondingInteractionConstraint::getMinAXDistance)
 		.add_property("maxAXDistance", &Pharm::XBondingInteractionConstraint::getMaxAXDistance)
 		.add_property("minAXBAngle", &Pharm::XBondingInteractionConstraint::getMinAXBAngle)
-		.add_property("acceptorAngleTolerance", &Pharm::XBondingInteractionConstraint::getAcceptorAngleTolerance)
+		.add_property("maxAcceptorAngle", &Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle)
 		.def_readonly("DEF_MIN_AX_DISTANCE", Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE)
 		.def_readonly("DEF_MAX_AX_DISTANCE", Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE)
 		.def_readonly("DEF_MIN_AXB_ANGLE", Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE)
-		.def_readonly("DEF_ACC_ANGLE_TOLERANCE", Pharm::XBondingInteractionConstraint::DEF_ACC_ANGLE_TOLERANCE);
+		.def_readonly("DEF_MAX_ACC_ANGLE", Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE);
 }

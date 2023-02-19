@@ -47,13 +47,14 @@ using namespace CDPL;
 const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_V_DISTANCE  = 1.4;
 const double Pharm::OrthogonalPiPiInteractionScore::DEF_MIN_H_DISTANCE  = 4.0;
 const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_H_DISTANCE  = 6.0;
-const double Pharm::OrthogonalPiPiInteractionScore::DEF_ANGLE_TOLERANCE = 35.0;
+const double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_ANGLE       = 20.0;
 
 
 Pharm::OrthogonalPiPiInteractionScore::OrthogonalPiPiInteractionScore(double min_h_dist, double max_h_dist,
-																	  double max_v_dist, double ang_tol):
-	minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), angleTol(ang_tol),
-	normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
+																	  double max_v_dist, double max_ang):
+	minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), maxAngle(max_ang),
+	distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
+	angleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::OrthogonalPiPiInteractionScore::getMinHDistance() const
 {
@@ -70,14 +71,19 @@ double Pharm::OrthogonalPiPiInteractionScore::getMaxVDistance() const
     return maxVDist;
 }
 
-double Pharm::OrthogonalPiPiInteractionScore::getAngleTolerance() const
+double Pharm::OrthogonalPiPiInteractionScore::getMaxAngle() const
 {
-    return angleTol;
+    return maxAngle;
 }
 
-void Pharm::OrthogonalPiPiInteractionScore::setNormalizationFunction(const NormalizationFunction& func)
+void Pharm::OrthogonalPiPiInteractionScore::setDistanceScoringFunction(const DistanceScoringFunction& func)
 {
-    normFunc = func;
+    distScoringFunc = func;
+}
+
+void Pharm::OrthogonalPiPiInteractionScore::setAngleScoringFunction(const AngleScoringFunction& func)
+{
+    angleScoringFunc = func;
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -91,7 +97,7 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 		double min_dist = minHDist;
 		double max_dist = std::sqrt(maxVDist * maxVDist + maxHDist * maxHDist);
 
-		return normFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
+		return distScoringFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
 	}
 
 	double ang_score = 1.0;
@@ -103,7 +109,7 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 		double ang_cos = angleCos(orient1, orient2, 1);
 		double ang = std::acos(ang_cos) * 180.0 / M_PI - 90.0;
 
-		ang_score = normFunc(ang / angleTol * 0.5);
+		ang_score = angleScoringFunc(ang / maxAngle * 0.5);
 	}
 
 	double dist_score1 = (has_orient1 ? calcDistanceScore(getOrientation(ftr1), ftr1_ftr2_vec) : 0.0);
@@ -120,7 +126,7 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& f
 		double min_dist = minHDist;
 		double max_dist = std::sqrt(maxVDist * maxVDist + maxHDist * maxHDist);
 
-		return normFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
+		return distScoringFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
 	}
 
 	return calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) * getWeight(ftr2);
@@ -129,10 +135,10 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& f
 double Pharm::OrthogonalPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient, const Math::Vector3D& ftr1_ftr2_vec) const
 {
 	double h_dist = calcHPlaneDistance(orient, ftr1_ftr2_vec);
-	double h_dist_score = normFunc((h_dist - (maxHDist + minHDist) * 0.5) / (maxHDist - minHDist));
+	double h_dist_score = distScoringFunc((h_dist - (maxHDist + minHDist) * 0.5) / (maxHDist - minHDist));
 
     double v_dist = calcVPlaneDistance(orient, ftr1_ftr2_vec);
-	double v_dist_score = normFunc(v_dist / maxVDist * 0.5);
+	double v_dist_score = distScoringFunc(v_dist / maxVDist * 0.5);
 	
     return (h_dist_score * v_dist_score);
 }

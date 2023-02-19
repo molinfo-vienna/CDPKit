@@ -44,7 +44,7 @@ using namespace CDPL;
 const double Pharm::ParallelPiPiInteractionConstraint::DEF_MAX_H_DISTANCE  = 2.8;
 const double Pharm::ParallelPiPiInteractionConstraint::DEF_MIN_V_DISTANCE  = 3.0;
 const double Pharm::ParallelPiPiInteractionConstraint::DEF_MAX_V_DISTANCE  = 5.5;
-const double Pharm::ParallelPiPiInteractionConstraint::DEF_ANGLE_TOLERANCE = 20.0;
+const double Pharm::ParallelPiPiInteractionConstraint::DEF_MAX_ANGLE       = 30.0;
 
 
 double Pharm::ParallelPiPiInteractionConstraint::getMinVDistance() const
@@ -62,9 +62,9 @@ double Pharm::ParallelPiPiInteractionConstraint::getMaxHDistance() const
     return maxHDist;
 }
 
-double Pharm::ParallelPiPiInteractionConstraint::getAngleTolerance() const
+double Pharm::ParallelPiPiInteractionConstraint::getMaxAngle() const
 {
-    return angleTol;
+    return maxAngle;
 }
 
 bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -92,7 +92,7 @@ bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, c
 		double ang_cos = std::abs(angleCos(orient1, orient2, 1));
 		double ang = std::acos(ang_cos) * 180.0 / M_PI;
 
-		if (ang > angleTol)
+		if (ang > maxAngle)
 			return false;
     
 		double v_dist1 = calcVPlaneDistance(orient1, ftr1_ftr2_vec);

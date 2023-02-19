@@ -47,8 +47,8 @@ namespace
 
 const double Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE = 1.6;
 const double Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE = 3.75;
-const double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE = 140.0;
-const double Pharm::XBondingInteractionConstraint::DEF_ACC_ANGLE_TOLERANCE = 45.0;
+const double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE   = 135.0;
+const double Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE   = 45.0;
 
 
 double Pharm::XBondingInteractionConstraint::getMinAXDistance() const
@@ -66,9 +66,9 @@ double Pharm::XBondingInteractionConstraint::getMinAXBAngle() const
 	return minAXBAngle;
 }
 
-double Pharm::XBondingInteractionConstraint::getAcceptorAngleTolerance() const
+double Pharm::XBondingInteractionConstraint::getMaxAcceptorAngle() const
 {
-	return accAngleTol;
+	return maxAccAngle;
 }
 
 bool Pharm::XBondingInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -99,7 +99,7 @@ bool Pharm::XBondingInteractionConstraint::operator()(const Feature& ftr1, const
 		if (getGeometry(acc_ftr) != FeatureGeometry::VECTOR) 
 			acc_ang_dev = std::abs(acc_ang_dev - DEF_LP_TO_AXIS_ANGLE);
 		
-		if (acc_ang_dev > accAngleTol)
+		if (acc_ang_dev > maxAccAngle)
 			return false;
 	}
 

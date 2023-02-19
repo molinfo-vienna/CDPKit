@@ -57,21 +57,21 @@ void CDPLPythonPharm::exportOrthogonalPiPiInteractionConstraint()
 														 python::arg("min_h_dist") = Pharm::OrthogonalPiPiInteractionConstraint::DEF_MIN_H_DISTANCE, 
 														 python::arg("max_h_dist") = Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_H_DISTANCE,
 														 python::arg("max_v_dist") = Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_V_DISTANCE,
-														 python::arg("ang_tol") = Pharm::OrthogonalPiPiInteractionConstraint::DEF_ANGLE_TOLERANCE)))
+														 python::arg("max_ang") = Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_ANGLE)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::OrthogonalPiPiInteractionConstraint>())
 		.def("getMinHDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMinHDistance, python::arg("self"))
 		.def("getMaxHDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxHDistance, python::arg("self"))
 		.def("getMaxVDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxVDistance, python::arg("self"))
-		.def("getAngleTolerance", &Pharm::OrthogonalPiPiInteractionConstraint::getAngleTolerance, python::arg("self"))
+		.def("getMaxAngle", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxAngle, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::OrthogonalPiPiInteractionConstraint::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.add_property("minHDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMinHDistance)
 		.add_property("maxHDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxHDistance)
 		.add_property("maxVDistance", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxVDistance)
-		.add_property("angleTolerance", &Pharm::OrthogonalPiPiInteractionConstraint::getAngleTolerance)
+		.add_property("maxAngle", &Pharm::OrthogonalPiPiInteractionConstraint::getMaxAngle)
 		.def_readonly("DEF_MIN_H_DISTANCE", Pharm::OrthogonalPiPiInteractionConstraint::DEF_MIN_H_DISTANCE)
 		.def_readonly("DEF_MAX_H_DISTANCE", Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_H_DISTANCE)
 		.def_readonly("DEF_MAX_V_DISTANCE", Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_V_DISTANCE)
-		.def_readonly("DEF_ANGLE_TOLERANCE", Pharm::OrthogonalPiPiInteractionConstraint::DEF_ANGLE_TOLERANCE);
+		.def_readonly("DEF_MAX_ANGLE", Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_ANGLE);
 }

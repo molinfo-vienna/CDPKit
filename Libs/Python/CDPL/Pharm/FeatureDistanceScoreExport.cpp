@@ -42,7 +42,7 @@ void CDPLPythonPharm::exportFeatureDistanceScore()
 				   python::bases<Pharm::FeatureInteractionScore>, boost::noncopyable>("FeatureDistanceScore", python::no_init)
 		.def(python::init<const Pharm::FeatureDistanceScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double>((python::arg("self"), python::arg("min_dist"), python::arg("max_dist"))))
-		.def("setNormalizationFunction", &Pharm::FeatureDistanceScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
+		.def("setDistanceScoringFunction", &Pharm::FeatureDistanceScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinDistance", &Pharm::FeatureDistanceScore::getMinDistance, python::arg("self"))
 		.def("getMaxDistance", &Pharm::FeatureDistanceScore::getMaxDistance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceScore::operator=), 

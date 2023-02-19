@@ -54,18 +54,18 @@ namespace CDPL
 			static const double DEF_MAX_H_DISTANCE;
 			static const double DEF_MIN_V_DISTANCE;
 			static const double DEF_MAX_V_DISTANCE;
-			static const double DEF_ANGLE_TOLERANCE;
+			static const double DEF_MAX_ANGLE;
 	
 			/**
 			 * \brief Constructs a \c %ParallelPiPiInteractionConstraint functor with the specified constraints.
 			 * \param min_v_dist The minimum allowed distance of the two feature-positions orthogonal to the ring-planes.
 			 * \param max_v_dist The maximum allowed distance of the two feature-positions orthogonal to the ring-planes.
 			 * \param max_h_dist The maximum allowed distance of the feature-position along the their ring-planes.
-			 * \param ang_tol The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
+			 * \param max_ang The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
 			 */
 			ParallelPiPiInteractionConstraint(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
-											  double max_h_dist = DEF_MAX_H_DISTANCE, double ang_tol = DEF_ANGLE_TOLERANCE):
-				minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), angleTol(ang_tol) {}
+											  double max_h_dist = DEF_MAX_H_DISTANCE, double max_ang = DEF_MAX_ANGLE):
+				minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), maxAngle(max_ang) {}
 
 			double getMinVDistance() const;
 
@@ -73,7 +73,7 @@ namespace CDPL
 
 			double getMaxHDistance() const;
 
-			double getAngleTolerance() const;
+			double getMaxAngle() const;
 
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
@@ -81,7 +81,7 @@ namespace CDPL
 			double minVDist;
 			double maxVDist;
 			double maxHDist;
-			double angleTol;
+			double maxAngle;
 		};
     }
 }

@@ -40,7 +40,7 @@ using namespace CDPL;
 
 const double Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE = 3.5;
 const double Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE = 5.5;
-const double Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE    = 60.0;
+const double Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE    = 45.0;
 
 
 double Pharm::CationPiInteractionConstraint::getMinDistance() const
@@ -66,19 +66,20 @@ bool Pharm::CationPiInteractionConstraint::operator()(const Feature& ftr1, const
     const Math::Vector3D& cat_pos = get3DCoordinates(cat_ftr);
 
     Math::Vector3D aro_cat_vec(aro_pos - cat_pos);
-    double dist = length(aro_cat_vec);
-
-    if (dist < minDist || dist > maxDist)
-		return false;
-
+    double ctr_dist = length(aro_cat_vec);
+   
     if (hasOrientation(aro_ftr)) {
 		const Math::Vector3D& orient = getOrientation(aro_ftr);
-		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
+		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
 
 		if (angle > maxAngle)
 			return false;
+
+		double plane_dist = ang_cos * ctr_dist;
+
+		return (plane_dist >= minDist && plane_dist <= maxDist);
     }
 
-    return true;
+	return (ctr_dist >= minDist && ctr_dist <= maxDist);
 }

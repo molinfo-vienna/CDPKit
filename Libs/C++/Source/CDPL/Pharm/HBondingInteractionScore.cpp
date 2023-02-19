@@ -51,13 +51,15 @@ namespace
 
 const double Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH = 1.2;
 const double Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH = 2.8;
-const double Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE = 130.0;
-const double Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE = 85.0;
+const double Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE = 150.0;
+const double Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE = 75.0;
 
 
 Pharm::HBondingInteractionScore::HBondingInteractionScore(bool don_acc, double min_len, double max_len, double min_ahd_ang, double max_acc_ang): 
 	donAccOrder(don_acc), minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), 
-	maxAccAngle(max_acc_ang), normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
+	maxAccAngle(max_acc_ang), distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
+	accAngleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 5.0, 0.0)),
+	ahdAngleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::HBondingInteractionScore::getMinLength() const
 {
@@ -79,9 +81,19 @@ double Pharm::HBondingInteractionScore::getMaxAcceptorAngle() const
 	return maxAccAngle;
 }
 
-void Pharm::HBondingInteractionScore::setNormalizationFunction(const NormalizationFunction& func)
+void Pharm::HBondingInteractionScore::setDistanceScoringFunction(const DistanceScoringFunction& func)
 {
-    normFunc = func;
+    distScoringFunc = func;
+}
+
+void Pharm::HBondingInteractionScore::setAcceptorAngleScoringFunction(const AngleScoringFunction& func)
+{
+    accAngleScoringFunc = func;
+}
+
+void Pharm::HBondingInteractionScore::setAHDAngleScoringFunction(const AngleScoringFunction& func)
+{
+    ahdAngleScoringFunc = func;
 }
 
 double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -105,14 +117,14 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 			double hb_len = length(h_acc_vec);
 			double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
-			score = normFunc(ctr_dev);
+			score = distScoringFunc(ctr_dev);
 
 			h_acc_vec /= hb_len;
 
 			double ahd_ang = std::acos(angleCos(-orient, h_acc_vec, 1)) * 180.0 / M_PI;
 			double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle); 
 
-			score *= normFunc(opt_ang_dev);
+			score *= ahdAngleScoringFunc(opt_ang_dev);
 			
 		} else {
 			h_acc_vec.assign(acc_pos - don_pos);
@@ -122,12 +134,12 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 			double hb_len = std::sqrt(H_BOND_LENGTH * H_BOND_LENGTH + don_acc_vec_len * don_acc_vec_len - 2 * H_BOND_LENGTH * don_acc_vec_len * std::cos(hda_ang));
 			double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
-			score = normFunc(ctr_dev);
+			score = distScoringFunc(ctr_dev);
 
 			double ahd_ang = std::acos((H_BOND_LENGTH * H_BOND_LENGTH - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * H_BOND_LENGTH * hb_len)) * 180.0 / M_PI;
 			double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle);
 
-			score *= normFunc(opt_ang_dev);
+			score *= ahdAngleScoringFunc(opt_ang_dev);
 			h_acc_vec /= don_acc_vec_len;
 		}
 		
@@ -138,7 +150,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		double hb_len = don_acc_vec_len - H_BOND_LENGTH;
 		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
-		score = normFunc(ctr_dev);
+		score = distScoringFunc(ctr_dev);
 
 		h_acc_vec /= don_acc_vec_len;
 	}
@@ -148,7 +160,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		double acc_ang = std::acos(angleCos(h_acc_vec, acc_vec, 1)) * 180.0 / M_PI;
 		double opt_ang_dev = acc_ang * 0.5 / maxAccAngle; 
 
-		score *= normFunc(opt_ang_dev);
+		score *= accAngleScoringFunc(opt_ang_dev);
 	}
 
 	return score * getWeight(ftr2);
@@ -162,7 +174,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 		double don_acc_vec_len = length(h_acc_vec);
 		double hb_len = don_acc_vec_len - H_BOND_LENGTH;
 		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
-		double score = normFunc(ctr_dev);
+		double score = distScoringFunc(ctr_dev);
 
 		h_acc_vec /= don_acc_vec_len;
 
@@ -171,7 +183,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 			double acc_ang = std::acos(angleCos(h_acc_vec, acc_vec, 1)) * 180.0 / M_PI;
 			double opt_ang_dev = acc_ang * 0.5 / maxAccAngle; 
 
-			score *= normFunc(opt_ang_dev);
+			score *= accAngleScoringFunc(opt_ang_dev);
 		}
 		
 		return score * getWeight(ftr2);
@@ -188,14 +200,14 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 
 			double hb_len = length(h_acc_vec);
 			double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
-			double score = normFunc(ctr_dev);
+			double score = distScoringFunc(ctr_dev);
 
 			h_acc_vec /= hb_len;
 
 			double ahd_ang = std::acos(angleCos(-orient, h_acc_vec, 1)) * 180.0 / M_PI;
 			double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle); 
 
-			return score * normFunc(opt_ang_dev) * getWeight(ftr2);
+			return score * ahdAngleScoringFunc(opt_ang_dev) * getWeight(ftr2);
 		}
 
 		Math::Vector3D don_acc_vec(ftr1_pos - get3DCoordinates(ftr2));
@@ -205,19 +217,19 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 		double hb_len = std::sqrt(H_BOND_LENGTH * H_BOND_LENGTH + don_acc_vec_len * don_acc_vec_len - 2 * H_BOND_LENGTH * don_acc_vec_len * std::cos(hda_ang));
 		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
-		double score = normFunc(ctr_dev);
+		double score = distScoringFunc(ctr_dev);
 
 		double ahd_ang = std::acos((H_BOND_LENGTH * H_BOND_LENGTH - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * H_BOND_LENGTH * hb_len)) * 180.0 / M_PI;
 		double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle);
 
-		return score * normFunc(opt_ang_dev) * getWeight(ftr2);
+		return score * ahdAngleScoringFunc(opt_ang_dev) * getWeight(ftr2);
 	}
 
 	double don_acc_vec_len = length(ftr1_pos - get3DCoordinates(ftr2));
 	double hb_len = don_acc_vec_len - H_BOND_LENGTH;
 	double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
-	return normFunc(ctr_dev) * getWeight(ftr2);
+	return distScoringFunc(ctr_dev) * getWeight(ftr2);
 }
 
 

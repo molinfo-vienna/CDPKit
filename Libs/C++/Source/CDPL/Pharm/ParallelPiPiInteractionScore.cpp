@@ -47,13 +47,14 @@ using namespace CDPL;
 const double Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE  = 2.8;
 const double Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE  = 3.0;
 const double Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE  = 5.5;
-const double Pharm::ParallelPiPiInteractionScore::DEF_ANGLE_TOLERANCE = 20.0;
+const double Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE       = 20.0;
 
 
 Pharm::ParallelPiPiInteractionScore::ParallelPiPiInteractionScore(double min_v_dist, double max_v_dist,
-																  double max_h_dist, double ang_tol):
-	minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), angleTol(ang_tol), 
-	normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
+																  double max_h_dist, double max_ang):
+	minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), maxAngle(max_ang), 
+	distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
+	angleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::ParallelPiPiInteractionScore::getMinVDistance() const
 {
@@ -70,14 +71,19 @@ double Pharm::ParallelPiPiInteractionScore::getMaxHDistance() const
     return maxHDist;
 }
 
-double Pharm::ParallelPiPiInteractionScore::getAngleTolerance() const
+double Pharm::ParallelPiPiInteractionScore::getMaxAngle() const
 {
-    return angleTol;
+    return maxAngle;
 }
 
-void Pharm::ParallelPiPiInteractionScore::setNormalizationFunction(const NormalizationFunction& func)
+void Pharm::ParallelPiPiInteractionScore::setDistanceScoringFunction(const DistanceScoringFunction& func)
 {
-    normFunc = func;
+    distScoringFunc = func;
+}
+
+void Pharm::ParallelPiPiInteractionScore::setAngleScoringFunction(const AngleScoringFunction& func)
+{
+    angleScoringFunc = func;
 }
 
 double Pharm::ParallelPiPiInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -91,7 +97,7 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Feature& ftr1, cons
 		double min_dist = minVDist;
 		double max_dist = std::sqrt(maxHDist * maxHDist + maxVDist * maxVDist);
 
-		return normFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
+		return distScoringFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
 	}
 
 	double ang_score = 1.0;
@@ -103,7 +109,7 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Feature& ftr1, cons
 		double ang_cos = std::abs(angleCos(orient1, orient2, 1));
 		double ang = std::acos(ang_cos) * 180.0 / M_PI;
 
-		ang_score = normFunc(ang / angleTol * 0.5);
+		ang_score = angleScoringFunc(ang / maxAngle * 0.5);
 
 		double dist_score1 = calcDistanceScore(orient1, ftr1_ftr2_vec);
 		double dist_score2 = calcDistanceScore(orient2, ftr1_ftr2_vec);
@@ -125,7 +131,7 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Math::Vector3D& ftr
 		double min_dist = minVDist;
 		double max_dist = std::sqrt(maxHDist * maxHDist + maxVDist * maxVDist);
 
-		return normFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
+		return distScoringFunc((length(ftr1_ftr2_vec) - (max_dist + min_dist) * 0.5) / (max_dist - min_dist));
 	}
 
 	return (calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) * getWeight(ftr2));
@@ -134,10 +140,10 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Math::Vector3D& ftr
 double Pharm::ParallelPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient, const Math::Vector3D& ftr1_ftr2_vec) const
 {
 	double v_dist = calcVPlaneDistance(orient, ftr1_ftr2_vec);
-	double v_dist_score = normFunc((v_dist - (maxVDist + minVDist) * 0.5) / (maxVDist - minVDist));
+	double v_dist_score = distScoringFunc((v_dist - (maxVDist + minVDist) * 0.5) / (maxVDist - minVDist));
 
 	double h_dist = calcHPlaneDistance(orient, ftr1_ftr2_vec);
-	double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
+	double h_dist_score = distScoringFunc(h_dist / maxHDist * 0.5);
 
     return (h_dist_score * v_dist_score);
 }

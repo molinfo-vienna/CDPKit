@@ -57,7 +57,7 @@ namespace CDPL
 			 */
 			typedef boost::shared_ptr<FeatureDistanceScore> SharedPointer;
 
-			typedef boost::function1<double, double> NormalizationFunction;
+			typedef boost::function1<double, double> DistanceScoringFunction;
 
 			/**
 			 * \brief Constructs a \c %FeatureDistanceScore functor with a 
@@ -71,16 +71,16 @@ namespace CDPL
 
 			double getMaxDistance() const;
 
-			void setNormalizationFunction(const NormalizationFunction& func);
+			void setDistanceScoringFunction(const DistanceScoringFunction& func);
 
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
 		  private:
-			double                minDist;
-			double                maxDist;
-			NormalizationFunction normFunc;
+			double                  minDist;
+			double                  maxDist;
+			DistanceScoringFunction distScoringFunc;
 		};
     }
 }

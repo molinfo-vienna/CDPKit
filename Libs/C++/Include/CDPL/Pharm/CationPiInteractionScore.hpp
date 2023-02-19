@@ -59,7 +59,8 @@ namespace CDPL
 			 */
 			typedef boost::shared_ptr<CationPiInteractionScore> SharedPointer;
 
-			typedef boost::function1<double, double> NormalizationFunction;
+			typedef boost::function1<double, double> DistanceScoringFunction;
+			typedef boost::function1<double, double> AngleScoringFunction;
 
 			/**
 			 * \brief Constructs a \c %CationPiInteractionScore functor with the specified constraints.
@@ -78,18 +79,21 @@ namespace CDPL
 
 			double getMaxAngle() const;
 
-			void setNormalizationFunction(const NormalizationFunction& func);
+			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+
+			void setAngleScoringFunction(const AngleScoringFunction& func);
 
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
 		  private:
-			bool                  aroCatOrder;
-			double                minDist;
-			double                maxDist;
-			double                maxAngle;
-			NormalizationFunction normFunc;
+			bool                    aroCatOrder;
+			double                  minDist;
+			double                  maxDist;
+			double                  maxAngle;
+			DistanceScoringFunction distScoringFunc;
+			AngleScoringFunction    angleScoringFunc;
 		};
     }
 }

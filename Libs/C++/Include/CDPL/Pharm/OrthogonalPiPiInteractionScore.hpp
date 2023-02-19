@@ -53,24 +53,25 @@ namespace CDPL
 			static const double DEF_MAX_V_DISTANCE;
 			static const double DEF_MIN_H_DISTANCE;
 			static const double DEF_MAX_H_DISTANCE;
-			static const double DEF_ANGLE_TOLERANCE;
+			static const double DEF_MAX_ANGLE;
 
 			/**	
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %OrthogonalPiPiInteractionScore instances.
 			 */
 			typedef boost::shared_ptr<OrthogonalPiPiInteractionScore> SharedPointer;
 
-			typedef boost::function1<double, double> NormalizationFunction;
+			typedef boost::function1<double, double> DistanceScoringFunction;
+			typedef boost::function1<double, double> AngleScoringFunction;
 
 			/**
 			 * \brief Constructs a \c %OrthogonalPiPiInteractionScore functor with the specified constraints.
 			 * \param min_h_dist The minimum allowed aromatic ring center distance in the plane of the vertically oriented ring.
 			 * \param max_h_dist The maximum allowed aromatic ring center distance in the plane of the vertically oriented ring.
 			 * \param max_v_dist The maximum allowed distance distance of the center of the horizontally oriented aromatic ring to the plane of the vertically oriented ring.
-			 * \param ang_tol The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
+			 * \param max_ang The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
 			 */
 			OrthogonalPiPiInteractionScore(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
-										   double max_V_dist = DEF_MAX_V_DISTANCE, double ang_tol = DEF_ANGLE_TOLERANCE);
+										   double max_V_dist = DEF_MAX_V_DISTANCE, double max_ang = DEF_MAX_ANGLE);
 
 			double getMinHDistance() const;
 
@@ -78,9 +79,11 @@ namespace CDPL
 
 			double getMaxVDistance() const;
 
-			double getAngleTolerance() const;
+			double getMaxAngle() const;
 
-			void setNormalizationFunction(const NormalizationFunction& func);
+			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+
+			void setAngleScoringFunction(const AngleScoringFunction& func);
 
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
@@ -89,11 +92,12 @@ namespace CDPL
 		  private:
 			double calcDistanceScore(const Math::Vector3D&, const Math::Vector3D&) const;
 
-			double                minHDist;
-			double                maxHDist;
-			double                maxVDist;
-			double                angleTol;
-			NormalizationFunction normFunc;
+			double                  minHDist;
+			double                  maxHDist;
+			double                  maxVDist;
+			double                  maxAngle;
+			DistanceScoringFunction distScoringFunc;
+			AngleScoringFunction    angleScoringFunc;
 		};
     }
 }

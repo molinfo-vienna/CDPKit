@@ -46,7 +46,9 @@ void CDPLPythonPharm::exportHBondingInteractionScore()
 																 python::arg("max_len") = Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH,
 																 python::arg("min_ahd_ang") = Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE,
 																 python::arg("max_acc_ang") = Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE)))
-		.def("setNormalizationFunction", &Pharm::HBondingInteractionScore::setNormalizationFunction, (python::arg("self"), python::arg("func")))
+		.def("setDistanceScoringFunction", &Pharm::HBondingInteractionScore::setDistanceScoringFunction, (python::arg("self"), python::arg("func")))
+		.def("setAcceptorAngleScoringFunction", &Pharm::HBondingInteractionScore::setAcceptorAngleScoringFunction, (python::arg("self"), python::arg("func")))
+		.def("setAHDAngleScoringFunction", &Pharm::HBondingInteractionScore::setAHDAngleScoringFunction, (python::arg("self"), python::arg("func")))
 		.def("getMinLength", &Pharm::HBondingInteractionScore::getMinLength, python::arg("self"))
 		.def("getMaxLength", &Pharm::HBondingInteractionScore::getMaxLength, python::arg("self"))
 		.def("getMinAHDAngle", &Pharm::HBondingInteractionScore::getMinAHDAngle, python::arg("self"))

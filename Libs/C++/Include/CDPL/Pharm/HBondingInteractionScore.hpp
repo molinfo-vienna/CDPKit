@@ -60,7 +60,8 @@ namespace CDPL
 			 */
 			typedef boost::shared_ptr<HBondingInteractionScore> SharedPointer;
 
-			typedef boost::function1<double, double> NormalizationFunction;
+			typedef boost::function1<double, double> DistanceScoringFunction;
+			typedef boost::function1<double, double> AngleScoringFunction;
 
 			/**
 			 * \brief Constructs a \c %HBondingInteractionScore functor with the specified constraints.
@@ -82,19 +83,25 @@ namespace CDPL
 
 			double getMaxAcceptorAngle() const;
 
-			void setNormalizationFunction(const NormalizationFunction& func);
+			void setDistanceScoringFunction(const DistanceScoringFunction& func);
+
+			void setAcceptorAngleScoringFunction(const AngleScoringFunction& func);
+
+			void setAHDAngleScoringFunction(const AngleScoringFunction& func);
 
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
 		  private:
-			bool                  donAccOrder;
-			double                minLength;
-			double                maxLength;
-			double                minAHDAngle;
-			double                maxAccAngle;
-			NormalizationFunction normFunc;
+			bool                    donAccOrder;
+			double                  minLength;
+			double                  maxLength;
+			double                  minAHDAngle;
+			double                  maxAccAngle;
+			DistanceScoringFunction distScoringFunc;
+			AngleScoringFunction    accAngleScoringFunc;
+			AngleScoringFunction    ahdAngleScoringFunc;
 		};
     }
 }

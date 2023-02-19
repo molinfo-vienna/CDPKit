@@ -43,13 +43,15 @@ using namespace CDPL;
 
 const double Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE = 3.5;
 const double Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE = 5.5;
-const double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE    = 60.0;
+const double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE    = 30.0;
 
 
 Pharm::CationPiInteractionScore::CationPiInteractionScore(bool aro_cat, double min_dist, double max_dist,
 														  double max_ang):
 	aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang), 
-	normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
+	distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
+	angleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0))
+{}
 
 double Pharm::CationPiInteractionScore::getMinDistance() const
 {
@@ -66,9 +68,14 @@ double Pharm::CationPiInteractionScore::getMaxAngle() const
     return maxAngle;
 }
 
-void Pharm::CationPiInteractionScore::setNormalizationFunction(const NormalizationFunction& func)
+void Pharm::CationPiInteractionScore::setDistanceScoringFunction(const DistanceScoringFunction& func)
 {
-    normFunc = func;
+    distScoringFunc = func;
+}
+
+void Pharm::CationPiInteractionScore::setAngleScoringFunction(const AngleScoringFunction& func)
+{
+    angleScoringFunc = func;
 }
 
 double Pharm::CationPiInteractionScore::operator()(const Feature& ftr1, const Feature& ftr2) const
@@ -79,36 +86,38 @@ double Pharm::CationPiInteractionScore::operator()(const Feature& ftr1, const Fe
     const Math::Vector3D& cat_pos = get3DCoordinates(cat_ftr);
 
     Math::Vector3D aro_cat_vec(aro_pos - cat_pos);
-    double dist = length(aro_cat_vec);
-	double score = normFunc((dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
+    double ctr_dist = length(aro_cat_vec);
 
     if (hasOrientation(aro_ftr)) {
 		const Math::Vector3D& orient = getOrientation(aro_ftr);
-		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
+		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
+		double plane_dist = ang_cos * ctr_dist;
+		double score = distScoringFunc((plane_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
 
-		return (score * normFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
+		return (score * angleScoringFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
     }
 
-    return score * getWeight(ftr2);
+	return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
 }
 
 double Pharm::CationPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
 {
     Math::Vector3D aro_cat_vec(get3DCoordinates(ftr2) - ftr1_pos);
-    double dist = length(aro_cat_vec);
-	double score = normFunc((dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
+    double ctr_dist = length(aro_cat_vec);
 
 	if (aroCatOrder)
-		return score * getWeight(ftr2);
+		return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
 
     if (hasOrientation(ftr2)) {
 		const Math::Vector3D& orient = getOrientation(ftr2);
-		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
+		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, ctr_dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
-
-		return (score * normFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
+		double plane_dist = ang_cos * ctr_dist;
+		double score = distScoringFunc((plane_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
+		
+		return (score * angleScoringFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
     }
 
-    return score * getWeight(ftr2);
+    return distScoringFunc((ctr_dist - (maxDist + minDist) * 0.5) / (maxDist - minDist)) * getWeight(ftr2);
 }
