@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * AtomPropertyDefault.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,20 +24,26 @@
  */
 
 
-#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#include "StaticInit.hpp"
+
+#include "CDPL/MolProp/AtomPropertyDefault.hpp"
+#include "CDPL/MolProp/HBondDonorAtomType.hpp"
+#include "CDPL/MolProp/HBondAcceptorAtomType.hpp"
 
 
-namespace CDPLPythonMolProp
+namespace CDPL
 {
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportAtomPropertyDefaults();
-	
-	void exportCoordinationGeometries();
-	void exportHBondDonorAtomTypes();
-	void exportHBondAcceptorAtomTypes();
-}
+	namespace MolProp
+	{
 
-#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+		namespace AtomPropertyDefault
+		{
+
+			const unsigned int H_BOND_DONOR_TYPE    = HBondDonorAtomType::UNDEF;
+			const unsigned int H_BOND_ACCEPTOR_TYPE = HBondAcceptorAtomType::UNDEF;
+		}
+
+		void initAtomPropertyDefaults() {}
+	}
+}

@@ -27,99 +27,99 @@ class ReactionProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    AGENT_ALIGNMENT = CDPL.Base.LookupKey(id=200, name='AGENT_ALIGNMENT')
+    AGENT_ALIGNMENT = CDPL.Base.LookupKey(id=202, name='AGENT_ALIGNMENT')
 
     ##
     # \brief 
     #
-    AGENT_LAYOUT = CDPL.Base.LookupKey(id=201, name='AGENT_LAYOUT')
+    AGENT_LAYOUT = CDPL.Base.LookupKey(id=203, name='AGENT_LAYOUT')
 
     ##
     # \brief 
     #
-    AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=202, name='AGENT_LAYOUT_DIRECTION')
+    AGENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=204, name='AGENT_LAYOUT_DIRECTION')
 
     ##
     # \brief 
     #
-    ARROW_COLOR = CDPL.Base.LookupKey(id=188, name='ARROW_COLOR')
+    ARROW_COLOR = CDPL.Base.LookupKey(id=190, name='ARROW_COLOR')
 
     ##
     # \brief 
     #
-    ARROW_HEAD_LENGTH = CDPL.Base.LookupKey(id=190, name='ARROW_HEAD_LENGTH')
+    ARROW_HEAD_LENGTH = CDPL.Base.LookupKey(id=192, name='ARROW_HEAD_LENGTH')
 
     ##
     # \brief 
     #
-    ARROW_HEAD_WIDTH = CDPL.Base.LookupKey(id=191, name='ARROW_HEAD_WIDTH')
+    ARROW_HEAD_WIDTH = CDPL.Base.LookupKey(id=193, name='ARROW_HEAD_WIDTH')
 
     ##
     # \brief 
     #
-    ARROW_LENGTH = CDPL.Base.LookupKey(id=189, name='ARROW_LENGTH')
+    ARROW_LENGTH = CDPL.Base.LookupKey(id=191, name='ARROW_LENGTH')
 
     ##
     # \brief 
     #
-    ARROW_LINE_WIDTH = CDPL.Base.LookupKey(id=193, name='ARROW_LINE_WIDTH')
+    ARROW_LINE_WIDTH = CDPL.Base.LookupKey(id=195, name='ARROW_LINE_WIDTH')
 
     ##
     # \brief 
     #
-    ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey(id=192, name='ARROW_SHAFT_WIDTH')
+    ARROW_SHAFT_WIDTH = CDPL.Base.LookupKey(id=194, name='ARROW_SHAFT_WIDTH')
 
     ##
     # \brief 
     #
-    ARROW_STYLE = CDPL.Base.LookupKey(id=187, name='ARROW_STYLE')
+    ARROW_STYLE = CDPL.Base.LookupKey(id=189, name='ARROW_STYLE')
 
     ##
     # \brief 
     #
-    COMPONENT_LAYOUT = CDPL.Base.LookupKey(id=194, name='COMPONENT_LAYOUT')
+    COMPONENT_LAYOUT = CDPL.Base.LookupKey(id=196, name='COMPONENT_LAYOUT')
 
     ##
     # \brief 
     #
-    COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=195, name='COMPONENT_LAYOUT_DIRECTION')
+    COMPONENT_LAYOUT_DIRECTION = CDPL.Base.LookupKey(id=197, name='COMPONENT_LAYOUT_DIRECTION')
 
     ##
     # \brief 
     #
-    COMPONENT_MARGIN = CDPL.Base.LookupKey(id=196, name='COMPONENT_MARGIN')
+    COMPONENT_MARGIN = CDPL.Base.LookupKey(id=198, name='COMPONENT_MARGIN')
 
     ##
     # \brief 
     #
-    SHOW_REACTANTS = CDPL.Base.LookupKey(id=197, name='SHOW_REACTANTS')
+    SHOW_REACTANTS = CDPL.Base.LookupKey(id=199, name='SHOW_REACTANTS')
 
     ##
     # \brief 
     #
-    SHOW_AGENTS = CDPL.Base.LookupKey(id=198, name='SHOW_AGENTS')
+    SHOW_AGENTS = CDPL.Base.LookupKey(id=200, name='SHOW_AGENTS')
 
     ##
     # \brief 
     #
-    SHOW_PRODUCTS = CDPL.Base.LookupKey(id=199, name='SHOW_PRODUCTS')
+    SHOW_PRODUCTS = CDPL.Base.LookupKey(id=201, name='SHOW_PRODUCTS')
 
     ##
     # \brief 
     #
-    PLUS_SIGN_COLOR = CDPL.Base.LookupKey(id=203, name='PLUS_SIGN_COLOR')
+    PLUS_SIGN_COLOR = CDPL.Base.LookupKey(id=205, name='PLUS_SIGN_COLOR')
 
     ##
     # \brief 
     #
-    PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey(id=205, name='PLUS_SIGN_LINE_WIDTH')
+    PLUS_SIGN_LINE_WIDTH = CDPL.Base.LookupKey(id=207, name='PLUS_SIGN_LINE_WIDTH')
 
     ##
     # \brief 
     #
-    PLUS_SIGN_SIZE = CDPL.Base.LookupKey(id=204, name='PLUS_SIGN_SIZE')
+    PLUS_SIGN_SIZE = CDPL.Base.LookupKey(id=206, name='PLUS_SIGN_SIZE')
 
     ##
     # \brief 
     #
-    SHOW_PLUS_SIGNS = CDPL.Base.LookupKey(id=206, name='SHOW_PLUS_SIGNS')
+    SHOW_PLUS_SIGNS = CDPL.Base.LookupKey(id=208, name='SHOW_PLUS_SIGNS')

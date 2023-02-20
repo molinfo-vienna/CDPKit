@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * AtomPropertyDefault.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,21 +23,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::MolProp::AtomPropertyDefault.
+ */
 
-#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_MOLPROP_ATOMPROPERTYDEFAULT_HPP
+#define CDPL_MOLPROP_ATOMPROPERTYDEFAULT_HPP
+
+#include "CDPL/MolProp/APIPrefix.hpp"
 
 
-namespace CDPLPythonMolProp
+namespace CDPL 
 {
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportAtomPropertyDefaults();
-	
-	void exportCoordinationGeometries();
-	void exportHBondDonorAtomTypes();
-	void exportHBondAcceptorAtomTypes();
+    namespace MolProp
+    {
+
+		/**
+		 * \brief Provides default values for built-in Chem::Atom properties.
+		 */
+		namespace AtomPropertyDefault
+		{
+		
+			extern CDPL_MOLPROP_API const unsigned int H_BOND_DONOR_TYPE;
+			extern CDPL_MOLPROP_API const unsigned int H_BOND_ACCEPTOR_TYPE;
+		}
+    }
 }
 
-#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#endif // CDPL_MOLPROP_ATOMPROPERTYDEFAULT_HPP

@@ -42,7 +42,7 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_ANGLE_TOLERANCE = 20.0
+    DEF_MAX_ANGLE = 30.0
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionConstraint instance.
@@ -55,9 +55,9 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     # \param min_v_dist 
     # \param max_v_dist 
     # \param max_h_dist 
-    # \param ang_tol 
+    # \param max_ang 
     #
-    def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, ang_tol: float = 20.0) -> None: pass
+    def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, max_ang: float = 30.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -93,7 +93,7 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getAngleTolerance() -> float: pass
+    def getMaxAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionConstraint instance \a constr.
@@ -133,4 +133,4 @@ class ParallelPiPiInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    angleTolerance = property(getAngleTolerance)
+    maxAngle = property(getMaxAngle)

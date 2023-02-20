@@ -42,7 +42,7 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    DEF_ANGLE_TOLERANCE = 20.0
+    DEF_MAX_ANGLE = 20.0
 
     ##
     # \brief Initializes the \e %ParallelPiPiInteractionScore instance.
@@ -55,15 +55,21 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     # \param min_v_dist 
     # \param max_v_dist 
     # \param max_h_dist 
-    # \param ang_tol 
+    # \param max_ang 
     #
-    def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, ang_tol: float = 20.0) -> None: pass
+    def __init__(min_v_dist: float = 3.0, max_v_dist: float = 5.5, max_h_dist: float = 2.8, max_ang: float = 20.0) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
+    def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 
@@ -87,7 +93,7 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     # \brief 
     # \return 
     #
-    def getAngleTolerance() -> float: pass
+    def getMaxAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %ParallelPiPiInteractionScore instance \a constr.
@@ -114,4 +120,4 @@ class ParallelPiPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    angleTolerance = property(getAngleTolerance)
+    maxAngle = property(getMaxAngle)

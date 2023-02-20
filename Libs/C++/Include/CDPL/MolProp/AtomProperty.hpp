@@ -58,6 +58,9 @@ namespace CDPL
 			extern CDPL_MOLPROP_API const Base::LookupKey PEOE_SIGMA_ELECTRONEGATIVITY;
 
 			extern CDPL_MOLPROP_API const Base::LookupKey MHMO_PI_CHARGE;
+
+			extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_DONOR_TYPE;
+			extern CDPL_MOLPROP_API const Base::LookupKey H_BOND_ACCEPTOR_TYPE;
 		}
 	}
 }

@@ -37,7 +37,7 @@ class CationPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    DEF_MAX_ANGLE = 60.0
+    DEF_MAX_ANGLE = 30.0
 
     ##
     # \brief Initializes the \e %CationPiInteractionScore instance.
@@ -52,13 +52,19 @@ class CationPiInteractionScore(FeatureInteractionScore):
     # \param max_dist 
     # \param max_ang 
     #
-    def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 60.0) -> None: pass
+    def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 30.0) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
+    def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 

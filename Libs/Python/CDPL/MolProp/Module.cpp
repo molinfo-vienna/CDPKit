@@ -37,8 +37,12 @@ BOOST_PYTHON_MODULE(_molprop)
 
 	exportAtomProperties();
 	exportBondProperties();
-	exportCoordinationGeometries();
+	exportAtomPropertyDefaults();
 
+	exportCoordinationGeometries();
+	exportHBondDonorAtomTypes();
+	exportHBondAcceptorAtomTypes();
+	
 	exportElementHistogram();
 	exportMassComposition();
 

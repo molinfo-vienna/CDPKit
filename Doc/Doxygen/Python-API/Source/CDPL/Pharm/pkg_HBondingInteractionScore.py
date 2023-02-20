@@ -37,12 +37,12 @@ class HBondingInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    DEF_MIN_AHD_ANGLE = 130.0
+    DEF_MIN_AHD_ANGLE = 150.0
 
     ##
     # \brief 
     #
-    DEF_MAX_ACC_ANGLE = 85.0
+    DEF_MAX_ACC_ANGLE = 75.0
 
     ##
     # \brief Initializes the \e %HBondingInteractionScore instance.
@@ -58,13 +58,25 @@ class HBondingInteractionScore(FeatureInteractionScore):
     # \param min_ahd_ang 
     # \param max_acc_ang 
     #
-    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 2.8, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
+    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 2.8, min_ahd_ang: float = 150.0, max_acc_ang: float = 75.0) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
+    def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAcceptorAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAHDAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 

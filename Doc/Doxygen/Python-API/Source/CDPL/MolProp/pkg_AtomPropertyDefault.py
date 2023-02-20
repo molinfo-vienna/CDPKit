@@ -22,9 +22,14 @@
 ##
 # \brief 
 #
-class BondProperty(Boost.Python.instance):
+class AtomPropertyDefault(Boost.Python.instance):
 
     ##
     # \brief 
     #
-    MMFF94_TYPE_INDEX = CDPL.Base.LookupKey(id=330, name='MMFF94_TYPE_INDEX')
+    H_BOND_DONOR_TYPE = 0
+
+    ##
+    # \brief 
+    #
+    H_BOND_ACCEPTOR_TYPE = 0

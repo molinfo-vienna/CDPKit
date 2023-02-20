@@ -28,6 +28,7 @@
 
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/AtomProperty.hpp"
+#include "CDPL/MolProp/AtomPropertyDefault.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
 
@@ -72,3 +73,5 @@ MAKE_ATOM_PROPERTY_FUNCTIONS(HYDROPHOBICITY, double, Hydrophobicity)
 MAKE_ATOM_PROPERTY_FUNCTIONS(PEOE_SIGMA_CHARGE, double, PEOESigmaCharge)
 MAKE_ATOM_PROPERTY_FUNCTIONS(PEOE_SIGMA_ELECTRONEGATIVITY, double, PEOESigmaElectronegativity)
 MAKE_ATOM_PROPERTY_FUNCTIONS(MHMO_PI_CHARGE, double, MHMOPiCharge)
+MAKE_ATOM_PROPERTY_FUNCTIONS_WITH_DEF(H_BOND_DONOR_TYPE, unsigned int, HBondDonorType)
+MAKE_ATOM_PROPERTY_FUNCTIONS_WITH_DEF(H_BOND_ACCEPTOR_TYPE, unsigned int, HBondAcceptorType)

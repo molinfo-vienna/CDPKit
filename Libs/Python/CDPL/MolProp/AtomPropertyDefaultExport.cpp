@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * AtomPropertyDefaultExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,20 +24,26 @@
  */
 
 
-#ifndef CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/MolProp/AtomPropertyDefault.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonMolProp
+namespace 
 {
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportAtomPropertyDefaults();
-	
-	void exportCoordinationGeometries();
-	void exportHBondDonorAtomTypes();
-	void exportHBondAcceptorAtomTypes();
+	struct AtomPropertyDefault {};
 }
 
-#endif // CDPL_PYTHON_MOLPROP_NAMESPACEEXPORTS_HPP
+
+void CDPLPythonMolProp::exportAtomPropertyDefaults()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<AtomPropertyDefault, boost::noncopyable>("AtomPropertyDefault", python::no_init)
+		.def_readonly("H_BOND_DONOR_TYPE", &MolProp::AtomPropertyDefault::H_BOND_DONOR_TYPE)
+		.def_readonly("H_BOND_ACCEPTOR_TYPE", &MolProp::AtomPropertyDefault::H_BOND_ACCEPTOR_TYPE);
+}

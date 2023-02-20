@@ -32,17 +32,17 @@ class XBondingInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    DEF_MAX_AX_DISTANCE = 3.75
+    DEF_MAX_AX_DISTANCE = 4.0
 
     ##
     # \brief 
     #
-    DEF_MIN_AXB_ANGLE = 140.0
+    DEF_MIN_AXB_ANGLE = 150.0
 
     ##
     # \brief 
     #
-    DEF_ACC_ANGLE_TOLERANCE = 45.0
+    DEF_MAX_ACC_ANGLE = 35.0
 
     ##
     # \brief Initializes the \e %XBondingInteractionScore instance.
@@ -56,15 +56,27 @@ class XBondingInteractionScore(FeatureInteractionScore):
     # \param min_ax_dist 
     # \param max_ax_dist 
     # \param min_axb_ang 
-    # \param acc_ang_tol 
+    # \param max_acc_ang 
     #
-    def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 3.75, min_axb_ang: float = 140.0, acc_ang_tol: float = 45.0) -> None: pass
+    def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 4.0, min_axb_ang: float = 150.0, max_acc_ang: float = 35.0) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
+    def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAcceptorAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAXBAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 
@@ -88,7 +100,7 @@ class XBondingInteractionScore(FeatureInteractionScore):
     # \brief 
     # \return 
     #
-    def getAcceptorAngleTolerance() -> float: pass
+    def getMaxAcceptorAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondingInteractionScore instance \a constr.
@@ -115,4 +127,4 @@ class XBondingInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    acceptorAngleTolerance = property(getAcceptorAngleTolerance)
+    maxAcceptorAngle = property(getMaxAcceptorAngle)

@@ -42,7 +42,7 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_ANGLE_TOLERANCE = 35.0
+    DEF_MAX_ANGLE = 30.0
 
     ##
     # \brief Initializes the \e %OrthogonalPiPiInteractionConstraint instance.
@@ -55,9 +55,9 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     # \param min_h_dist 
     # \param max_h_dist 
     # \param max_v_dist 
-    # \param ang_tol 
+    # \param max_ang 
     #
-    def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, ang_tol: float = 35.0) -> None: pass
+    def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, max_ang: float = 30.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -93,7 +93,7 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getAngleTolerance() -> float: pass
+    def getMaxAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %OrthogonalPiPiInteractionConstraint instance \a constr.
@@ -133,4 +133,4 @@ class OrthogonalPiPiInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    angleTolerance = property(getAngleTolerance)
+    maxAngle = property(getMaxAngle)

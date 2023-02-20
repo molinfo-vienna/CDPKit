@@ -37,12 +37,12 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_MIN_AXB_ANGLE = 140.0
+    DEF_MIN_AXB_ANGLE = 135.0
 
     ##
     # \brief 
     #
-    DEF_ACC_ANGLE_TOLERANCE = 45.0
+    DEF_MAX_ACC_ANGLE = 45.0
 
     ##
     # \brief Initializes the \e %XBondingInteractionConstraint instance.
@@ -56,9 +56,9 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     # \param min_ax_dist 
     # \param max_ax_dist 
     # \param min_axb_ang 
-    # \param acc_ang_tol 
+    # \param max_acc_ang 
     #
-    def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 1.6, min_axb_ang: float = 140.0, acc_ang_tol: float = 45.0) -> None: pass
+    def __init__(don_acc: bool, min_ax_dist: float = 1.6, max_ax_dist: float = 1.6, min_axb_ang: float = 135.0, max_acc_ang: float = 45.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -94,7 +94,7 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getAcceptorAngleTolerance() -> float: pass
+    def getMaxAcceptorAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %XBondingInteractionConstraint instance \a constr.
@@ -134,4 +134,4 @@ class XBondingInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    acceptorAngleTolerance = property(getAcceptorAngleTolerance)
+    maxAcceptorAngle = property(getMaxAcceptorAngle)

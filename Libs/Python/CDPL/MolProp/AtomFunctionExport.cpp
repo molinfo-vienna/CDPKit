@@ -156,6 +156,8 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaCharge)
 	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaElectronegativity)
 	MAKE_ATOM_FUNC_WRAPPERS(double, MHMOPiCharge)
+	MAKE_ATOM_FUNC_WRAPPERS(double, HBondDonorType)
+	MAKE_ATOM_FUNC_WRAPPERS(double, HBondAcceptorType)
 }
 
 
@@ -259,4 +261,6 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	EXPORT_ATOM_FUNCS(PEOESigmaElectronegativity, e_neg)
 	EXPORT_ATOM_FUNCS(MHMOPiCharge, charge)
 	EXPORT_ATOM_FUNCS(Hydrophobicity, hyd)
+	EXPORT_ATOM_FUNCS(HBondDonorType, type)
+	EXPORT_ATOM_FUNCS(HBondAcceptorType, type)
 }

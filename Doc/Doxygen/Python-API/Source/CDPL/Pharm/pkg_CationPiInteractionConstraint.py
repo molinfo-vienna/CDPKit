@@ -37,7 +37,7 @@ class CationPiInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_MAX_ANGLE = 60.0
+    DEF_MAX_ANGLE = 45.0
 
     ##
     # \brief Initializes the \e %CationPiInteractionConstraint instance.
@@ -52,7 +52,7 @@ class CationPiInteractionConstraint(Boost.Python.instance):
     # \param max_dist 
     # \param max_ang 
     #
-    def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 60.0) -> None: pass
+    def __init__(aro_cat: bool, min_dist: float = 3.5, max_dist: float = 5.5, max_ang: float = 45.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.

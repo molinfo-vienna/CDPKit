@@ -37,7 +37,7 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_MIN_AHD_ANGLE = 130.0
+    DEF_MIN_AHD_ANGLE = 135.0
 
     ##
     # \brief 
@@ -58,7 +58,7 @@ class HBondingInteractionConstraint(Boost.Python.instance):
     # \param min_ahd_ang 
     # \param max_acc_ang 
     #
-    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 130.0, max_acc_ang: float = 85.0) -> None: pass
+    def __init__(don_acc: bool, min_len: float = 1.2, max_len: float = 1.2, min_ahd_ang: float = 135.0, max_acc_ang: float = 85.0) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.

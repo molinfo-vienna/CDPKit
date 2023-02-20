@@ -36,7 +36,11 @@ SET(molprop_MOD_SRCS
 
     AtomPropertyExport.cpp
     BondPropertyExport.cpp
-    CoordinationGeometryExport.cpp 
+    AtomPropertyDefaultExport.cpp
+    
+    CoordinationGeometryExport.cpp
+    HBondDonorAtomTypeExport.cpp
+    HBondAcceptorAtomTypeExport.cpp 
 
     MolecularGraphFunctionExport.cpp
     AtomContainerFunctionExport.cpp

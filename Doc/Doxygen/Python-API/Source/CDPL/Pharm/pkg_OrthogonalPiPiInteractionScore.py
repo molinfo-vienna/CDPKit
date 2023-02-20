@@ -42,7 +42,7 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    DEF_ANGLE_TOLERANCE = 35.0
+    DEF_MAX_ANGLE = 20.0
 
     ##
     # \brief Initializes the \e %OrthogonalPiPiInteractionScore instance.
@@ -55,15 +55,21 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     # \param min_h_dist 
     # \param max_h_dist 
     # \param max_v_dist 
-    # \param ang_tol 
+    # \param max_ang 
     #
-    def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, ang_tol: float = 35.0) -> None: pass
+    def __init__(min_h_dist: float = 4.0, max_h_dist: float = 6.0, max_v_dist: float = 1.4, max_ang: float = 20.0) -> None: pass
 
     ##
     # \brief 
     # \param func 
     #
-    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
+    def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \param func 
+    #
+    def setAngleScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 
@@ -87,7 +93,7 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     # \brief 
     # \return 
     #
-    def getAngleTolerance() -> float: pass
+    def getMaxAngle() -> float: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %OrthogonalPiPiInteractionScore instance \a constr.
@@ -114,4 +120,4 @@ class OrthogonalPiPiInteractionScore(FeatureInteractionScore):
     ##
     # \brief 
     #
-    angleTolerance = property(getAngleTolerance)
+    maxAngle = property(getMaxAngle)

@@ -87,7 +87,7 @@ namespace
 
 		return false;
 	}
-
+/*
 	bool isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
 		using namespace Internal;
@@ -103,7 +103,7 @@ namespace
 
 		return true;
 	}
-
+*/
 	bool isCarboxylateOxygen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
 		using namespace Internal;
@@ -253,13 +253,14 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 
 			if (::isAmideNitrogen(atom, molgraph))
 				return SybylAtomType::N_am;
-	
-			if (::isPlanarNitrogen(atom, molgraph))
-				return SybylAtomType::N_pl3;
 
 			switch (getHybridizationState(atom)) {
 
 				case HybridizationState::SP3:
+					//if (::isPlanarNitrogen(atom, molgraph))
+					if (Internal::isPlanarNitrogen(atom, molgraph))
+						return SybylAtomType::N_pl3;
+
 					return SybylAtomType::N_3;
 		
 				case HybridizationState::SP2:

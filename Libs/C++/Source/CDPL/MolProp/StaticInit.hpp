@@ -38,6 +38,7 @@ namespace CDPL
 		
 		void initAtomProperties();
 		void initBondProperties();
+		void initAtomPropertyDefaults();
 	}
 }
 
@@ -50,6 +51,7 @@ namespace
 		CDPLMolPropInit() {
 			initAtomProperties();
 			initBondProperties();
+			initAtomPropertyDefaults();
 		}
 
 	} cdplMolPropInit;

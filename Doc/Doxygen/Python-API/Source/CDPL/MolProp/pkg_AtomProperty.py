@@ -43,3 +43,13 @@ class AtomProperty(Boost.Python.instance):
     # \brief 
     #
     MHMO_PI_CHARGE = CDPL.Base.LookupKey(id=146, name='MHMO_PI_CHARGE')
+
+    ##
+    # \brief 
+    #
+    H_BOND_DONOR_TYPE = CDPL.Base.LookupKey(id=147, name='H_BOND_DONOR_TYPE')
+
+    ##
+    # \brief 
+    #
+    H_BOND_ACCEPTOR_TYPE = CDPL.Base.LookupKey(id=148, name='H_BOND_ACCEPTOR_TYPE')

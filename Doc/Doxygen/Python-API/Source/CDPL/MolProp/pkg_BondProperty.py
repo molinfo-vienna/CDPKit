@@ -27,4 +27,4 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    MHMO_PI_ORDER = CDPL.Base.LookupKey(id=147, name='MHMO_PI_ORDER')
+    MHMO_PI_ORDER = CDPL.Base.LookupKey(id=149, name='MHMO_PI_ORDER')

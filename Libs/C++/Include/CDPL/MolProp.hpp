@@ -33,11 +33,14 @@
 
 #include "CDPL/MolProp/AtomProperty.hpp"
 #include "CDPL/MolProp/BondProperty.hpp"
+#include "CDPL/MolProp/AtomPropertyDefault.hpp"
 
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
 
 #include "CDPL/MolProp/CoordinationGeometry.hpp"
+#include "CDPL/MolProp/HBondDonorAtomType.hpp"
+#include "CDPL/MolProp/HBondAcceptorAtomType.hpp"
 
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/BondFunctions.hpp"

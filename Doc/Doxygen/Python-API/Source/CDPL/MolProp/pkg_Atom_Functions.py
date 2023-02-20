@@ -121,6 +121,60 @@ def getElementName(atom: CDPL.Chem.Atom) -> str: pass
 ##
 # \brief 
 # \param atom 
+#
+def clearHBondDonorType(atom: CDPL.Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasHBondDonorType(atom: CDPL.Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHBondDonorType(atom: CDPL.Chem.Atom) -> float: pass
+
+##
+# \brief 
+# \param atom 
+# \param type 
+#
+def setHBondDonorType(atom: CDPL.Chem.Atom, type: int) -> None: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearHBondAcceptorType(atom: CDPL.Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasHBondAcceptorType(atom: CDPL.Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getHBondAcceptorType(atom: CDPL.Chem.Atom) -> float: pass
+
+##
+# \brief 
+# \param atom 
+# \param type 
+#
+def setHBondAcceptorType(atom: CDPL.Chem.Atom, type: int) -> None: pass
+
+##
+# \brief 
+# \param atom 
 # \param molgraph 
 # \param size 
 # \return 

@@ -85,6 +85,24 @@ namespace CDPL
 		CDPL_MOLPROP_API void clearMHMOPiCharge(Chem::Atom& atom);
 	
 		CDPL_MOLPROP_API bool hasMHMOPiCharge(const Chem::Atom& atom);
+		
+
+		CDPL_MOLPROP_API unsigned int getHBondDonorType(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API void setHBondDonorType(Chem::Atom& atom, unsigned int type);
+
+		CDPL_MOLPROP_API void clearHBondDonorType(Chem::Atom& atom);
+	
+		CDPL_MOLPROP_API bool hasHBondDonorType(const Chem::Atom& atom);
+
+
+		CDPL_MOLPROP_API unsigned int getHBondAcceptorType(const Chem::Atom& atom);
+
+		CDPL_MOLPROP_API void setHBondAcceptorType(Chem::Atom& atom, unsigned int type);
+
+		CDPL_MOLPROP_API void clearHBondAcceptorType(Chem::Atom& atom);
+	
+		CDPL_MOLPROP_API bool hasHBondAcceptorType(const Chem::Atom& atom);
 
 		
 		CDPL_MOLPROP_API bool isInRing(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);

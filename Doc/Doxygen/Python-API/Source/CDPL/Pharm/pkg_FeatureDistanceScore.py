@@ -41,7 +41,7 @@ class FeatureDistanceScore(FeatureInteractionScore):
     # \brief 
     # \param func 
     #
-    def setNormalizationFunction(func: DoubleDoubleFunctor) -> None: pass
+    def setDistanceScoringFunction(func: DoubleDoubleFunctor) -> None: pass
 
     ##
     # \brief 

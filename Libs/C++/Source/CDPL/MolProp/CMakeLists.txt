@@ -28,7 +28,8 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 SET(cdpl-molprop_LIB_SRCS
     AtomProperty.cpp
     BondProperty.cpp
-
+    AtomPropertyDefault.cpp
+    
     AtomPropertyFunctions.cpp
     BondPropertyFunctions.cpp
     
