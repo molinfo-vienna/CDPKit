@@ -54,5 +54,7 @@
 #include "CDPL/MolProp/XLogPCalculator.hpp"
 #include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
 #include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
+#include "CDPL/MolProp/HBondDonorAtomTyper.hpp"
+#include "CDPL/MolProp/HBondAcceptorAtomTyper.hpp"
 
 #endif // CDPL_MOLPROP_HPP

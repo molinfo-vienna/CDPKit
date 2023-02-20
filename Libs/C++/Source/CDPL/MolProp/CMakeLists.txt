@@ -55,6 +55,7 @@ SET(cdpl-molprop_LIB_SRCS
     MolecularGraphTPSAFunction.cpp
     MolecularGraphLogSFunction.cpp
     MolecularGraphXLogPFunction.cpp
+    MolecularGraphHBDHBAAtomTypeFunctions.cpp
 
     AtomPolarizabilityFunctions.cpp
     AtomBondCountFunctions.cpp
@@ -79,6 +80,8 @@ SET(cdpl-molprop_LIB_SRCS
     MHMOPiChargeCalculator.cpp
     TPSACalculator.cpp
     XLogPCalculator.cpp
+    HBondDonorAtomTyper.cpp
+    HBondAcceptorAtomTyper.cpp
    )
 
 LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})

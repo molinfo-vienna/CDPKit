@@ -34,9 +34,7 @@
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/SequenceFunctions.hpp"
 
 

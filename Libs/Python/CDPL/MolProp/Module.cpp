@@ -52,7 +52,9 @@ BOOST_PYTHON_MODULE(_molprop)
 	exportTPSACalculator();
 	exportPEOESigmaChargeCalculator();
 	exportMHMOPiChargeCalculator();
-
+	exportHBondDonorAtomTyper();
+	exportHBondAcceptorAtomTyper();
+	
 	exportAtomContainerFunctions();
 	exportBondContainerFunctions();
 	exportAtomFunctions();

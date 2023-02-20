@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondTyperExport.cpp 
+ * HBondDonorAtomTyperExport.cpp 
  *
  * This file is part of the Chemical Parameterizer Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/ForceField/MMFF94BondTyper.hpp"
+#include "CDPL/MolProp/HBondDonorAtomTyper.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
@@ -34,25 +34,18 @@
 #include "ClassExports.hpp"
 
 
-void CDPLPythonForceField::exportMMFF94BondTyper()
+void CDPLPythonMolProp::exportHBondDonorAtomTyper()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<ForceField::MMFF94BondTyper>("MMFF94BondTyper", python::no_init)
+    python::class_<MolProp::HBondDonorAtomTyper, MolProp::HBondDonorAtomTyper::SharedPointer>("HBondDonorAtomTyper", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94BondTyper&>((python::arg("self"), python::arg("typer"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondTyper>())	
-		.def("setAtomTypeFunction", &ForceField::MMFF94BondTyper::setAtomTypeFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAromaticRingSetFunction", &ForceField::MMFF94BondTyper::setAromaticRingSetFunction, 
-			 (python::arg("self"), python::arg("func"))) 
-		.def("setAtomTypePropertyTable", &ForceField::MMFF94BondTyper::setAtomTypePropertyTable, 
-			 (python::arg("self"), python::arg("table")))
-		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondTyper::operator=),
+		.def(python::init<const MolProp::HBondDonorAtomTyper&>((python::arg("self"), python::arg("typer"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("types"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::HBondDonorAtomTyper>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::HBondDonorAtomTyper::operator=),
 			 (python::arg("self"), python::arg("typer")), python::return_self<>())
-		.def("perceiveTypes", &ForceField::MMFF94BondTyper::perceiveTypes, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("types"), python::arg("strict")));
+		.def("perceiveTypes", &MolProp::HBondDonorAtomTyper::perceiveTypes, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("types")));
 }

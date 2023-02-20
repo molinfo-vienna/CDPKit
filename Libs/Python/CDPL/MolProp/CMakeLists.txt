@@ -57,6 +57,8 @@ SET(molprop_MOD_SRCS
     PEOESigmaChargeCalculatorExport.cpp
     MHMOPiChargeCalculatorExport.cpp    
     TPSACalculatorExport.cpp
+    HBondDonorAtomTyperExport.cpp
+    HBondAcceptorAtomTyperExport.cpp
    )
 
 ADD_LIBRARY(_molprop MODULE ${molprop_MOD_SRCS})

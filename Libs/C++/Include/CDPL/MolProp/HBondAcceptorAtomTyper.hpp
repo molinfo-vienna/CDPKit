@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ClassExports.hpp 
+ * HBondAcceptorAtomTyper.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,25 +23,43 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::MolProp::HBondAcceptorAtomTyper.
+ */
 
-#ifndef CDPL_PYTHON_MOLPROP_CLASSEXPORTS_HPP
-#define CDPL_PYTHON_MOLPROP_CLASSEXPORTS_HPP
+#ifndef CDPL_MOLPROP_HBONDACCEPTORATOMTYPER_HPP
+#define CDPL_MOLPROP_HBONDACCEPTORATOMTYPER_HPP
+
+#include <boost/shared_ptr.hpp>
+
+#include "CDPL/MolProp/APIPrefix.hpp"
+#include "CDPL/Chem/PatternAtomTyper.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
-namespace CDPLPythonMolProp
+namespace CDPL 
 {
 
-	void exportElementHistogram();
-	void exportMassComposition();
+    namespace MolProp 
+    {
 
-	void exportAtomHydrophobicityCalculator();
-	void exportLogSCalculator();
-	void exportXLogPCalculator();
-	void exportTPSACalculator();
-	void exportPEOESigmaChargeCalculator();
-	void exportMHMOPiChargeCalculator();
-	void exportHBondDonorAtomTyper();
-	void exportHBondAcceptorAtomTyper();
+		class CDPL_MOLPROP_API HBondAcceptorAtomTyper
+		{
+
+		  public:
+			typedef boost::shared_ptr<HBondAcceptorAtomTyper> SharedPointer;
+
+			HBondAcceptorAtomTyper();
+
+			HBondAcceptorAtomTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
+
+			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
+
+		  private:
+			Chem::PatternAtomTyper atomTyper;
+		};
+    }
 }
 
-#endif // CDPL_PYTHON_MOLPROP_CLASSEXPORTS_HPP
+#endif // CDPL_MOLPROP_HBONDACCEPTORATOMTYPER_HPP

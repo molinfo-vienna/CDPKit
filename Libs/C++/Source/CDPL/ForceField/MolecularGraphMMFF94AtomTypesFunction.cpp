@@ -34,9 +34,7 @@
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Util/Array.hpp"
 
 
 using namespace CDPL; 

@@ -128,4 +128,9 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 	python::def("calcMHMOProperties", &MolProp::calcMHMOProperties,	(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("buildMassCompositionString", &buildMassCompositionStringWrapper, python::arg("molgraph"));
 	python::def("buildMolecularFormula", &buildMolecularFormulaWrapper, python::arg("molgraph"));
+
+	python::def("perceiveHBondDonorAtomTypes", &MolProp::perceiveHBondDonorAtomTypes,
+				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("perceiveHBondAcceptorAtomTypes", &MolProp::perceiveHBondAcceptorAtomTypes,
+				(python::arg("molgraph"), python::arg("overwrite")));
 }

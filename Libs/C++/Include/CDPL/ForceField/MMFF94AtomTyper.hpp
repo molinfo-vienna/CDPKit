@@ -54,7 +54,6 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class MolecularGraph;
 		class Fragment;
 	}
 
