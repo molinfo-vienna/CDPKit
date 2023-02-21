@@ -114,7 +114,7 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 	python::def("getHydrogenBondCount", &MolProp::getHydrogenBondCount, python::arg("molgraph"));
 	python::def("getChainBondCount", &MolProp::getChainBondCount, python::arg("molgraph"));
 	python::def("getRotatableBondCount", &MolProp::getRotatableBondCount, 
-				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
+				(python::arg("molgraph"), python::arg("h_rotors") = false, python::arg("ring_bonds") = false, python::arg("amide_bonds") = false));
 
 	python::def("getRuleOfFiveScore", &MolProp::getRuleOfFiveScore, python::arg("molgraph"));
 

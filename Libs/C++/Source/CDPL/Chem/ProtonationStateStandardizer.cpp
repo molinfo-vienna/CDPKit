@@ -421,7 +421,7 @@ bool Chem::ProtonationStateStandardizer::protForPhysCond(Molecule& mol)
 					continue;
 
 				atomSet.insert(atom);
-				
+
 				setFormalCharge(*atom, prot_changes[j + 1]);
 				adaptHydrogenCount(*atom, mol, prot_changes[j + 2]);
 		

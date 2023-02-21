@@ -109,14 +109,16 @@ namespace CDPL
 			const unsigned int N_AZINE                 = 28;
 			
 			const unsigned int N_DIAZINE               = 29;
+
+			const unsigned int N_IMINE                 = 30;
 			
-			const unsigned int S_SULFIDE               = 30;
+			const unsigned int S_SULFIDE               = 31;
 			
-			const unsigned int S_THIOUREA              = 31;
+			const unsigned int S_THIOUREA              = 32;
 			
-			const unsigned int P_MONO_DI_PHOSPHINE     = 32;
+			const unsigned int P_MONO_DI_PHOSPHINE     = 33;
 			
-			const unsigned int P_TRI_PHOSPHINE         = 33;
+			const unsigned int P_TRI_PHOSPHINE         = 34;
 
 			const unsigned int MAX_TYPE                = P_TRI_PHOSPHINE;
 

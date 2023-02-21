@@ -73,82 +73,92 @@ namespace CDPL
 			const unsigned int N_HN3                       = 10;
 			
 			const unsigned int N_NH3                       = 11;
+
+			const unsigned int N_NH4                       = 12;
 			
-			const unsigned int N_ANILINE                   = 12;
+			const unsigned int N_AMINE                     = 13;
+
+			const unsigned int N_AMINIUM                   = 14;
+
+			const unsigned int N_ANILINE                   = 15;
 			
-			const unsigned int N_MONO_DI_NITRO_ANILINE     = 13;
+			const unsigned int N_MONO_DI_NITRO_ANILINE     = 16;
 			
-			const unsigned int N_TRI_NITRO_ANILINE         = 14;
+			const unsigned int N_TRI_NITRO_ANILINE         = 17;
 			
-			const unsigned int N_PYRROLE                   = 15;
+			const unsigned int N_PYRROLE                   = 18;
 			
-			const unsigned int N_AMIDE                     = 16;
+			const unsigned int N_AMIDE                     = 19;
+
+			const unsigned int N_IMINE                     = 20;
+
+			const unsigned int N_IMINIUM                   = 21;
 			
-			const unsigned int S_H2S                       = 17;
+			const unsigned int S_H2S                       = 22;
 			
-			const unsigned int S_HS                        = 18;
+			const unsigned int S_HS                        = 23;
 			
-			const unsigned int S_THIOLE                    = 19;
+			const unsigned int S_THIOLE                    = 24;
 			
-			const unsigned int O_H3PO4                     = 20;
+			const unsigned int O_H3PO4                     = 25;
 			
-			const unsigned int O_H2CO3                     = 21;
+			const unsigned int O_H2CO3                     = 26;
 			
-			const unsigned int O_HCO3                      = 22;
+			const unsigned int O_HCO3                      = 27;
 			
-			const unsigned int O_H2O2                      = 23;
+			const unsigned int O_H2O2                      = 28;
 			
-			const unsigned int O_H2O                       = 24;
+			const unsigned int O_H2O                       = 29;
 			
-			const unsigned int O_CF3SO3H                   = 25;
+			const unsigned int O_CF3SO3H                   = 30;
 			
-			const unsigned int O_HCLO4                     = 26;
+			const unsigned int O_HCLO4                     = 31;
 			
-			const unsigned int O_H2SO4                     = 27;
+			const unsigned int O_H2SO4                     = 32;
 			
-			const unsigned int O_HNO3                      = 28;
+			const unsigned int O_HNO3                      = 33;
 			
-			const unsigned int O_HSO4                      = 29;
+			const unsigned int O_HSO4                      = 34;
 			
-			const unsigned int O_HNO2                      = 30;
+			const unsigned int O_HNO2                      = 35;
 			
-			const unsigned int O_NH2OH                     = 31;
+			const unsigned int O_NH2OH                     = 36;
 			
-			const unsigned int O_H2PO4                     = 32;
+			const unsigned int O_H2PO4                     = 37;
 			
-			const unsigned int O_H3BO3                     = 33;
+			const unsigned int O_H3BO3                     = 38;
 			
-			const unsigned int O_H4SIO4                    = 34;
+			const unsigned int O_H4SIO4                    = 39;
 			
-			const unsigned int O_HPO4                      = 35;
+			const unsigned int O_HPO4                      = 40;
 			
-			const unsigned int O_H2BO3                     = 36;
+			const unsigned int O_H2BO3                     = 41;
 			
-			const unsigned int O_HO                        = 37;
+			const unsigned int O_HO                        = 42;
 			
-			const unsigned int O_SULFONIC_ACID             = 38;
+			const unsigned int O_SULFONIC_ACID             = 43;
 			
-			const unsigned int O_MONO_DI_NITRO_PHENOL      = 39;
+			const unsigned int O_MONO_DI_NITRO_PHENOL      = 44;
 			
-			const unsigned int O_HALOGENO_ALCOHOL          = 40;
+			const unsigned int O_HALOGENO_ALCOHOL          = 45;
 			
-			const unsigned int O_ALCOHOL                   = 41;
+			const unsigned int O_ALCOHOL                   = 46;
 			
-			const unsigned int O_TRI_NITRO_PHENOL          = 42;
+			const unsigned int O_TRI_NITRO_PHENOL          = 47;
 			
-			const unsigned int O_HALOGENO_PHENOL           = 43;
+			const unsigned int O_HALOGENO_PHENOL           = 48;
 			
-			const unsigned int O_PHENOL                    = 44;
+			const unsigned int O_PHENOL                    = 49;
 			
-			const unsigned int O_CARBOXYLIC_ACID           = 45;
+			const unsigned int O_CARBOXYLIC_ACID           = 50;
 			
-			const unsigned int O_HALOGENO_CARBOXYCLIC_ACID = 46;
+			const unsigned int O_HALOGENO_CARBOXYCLIC_ACID = 51;
 			
-			const unsigned int O_ENOL                      = 47;
+			const unsigned int O_ENOL                      = 52;
 			
-			const unsigned int O_OXIME                     = 48;
+			const unsigned int O_OXIME                     = 53;
 			
-			const unsigned int O_CL5_PHENOL                = 49;
+			const unsigned int O_CL5_PHENOL                = 54;
 
 			const unsigned int MAX_TYPE                    = O_CL5_PHENOL;
 

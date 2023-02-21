@@ -49,7 +49,26 @@ namespace
     };
     
     TypePattern TYPE_PATTERNS[] = {
-    // TODO
+      { "[IX1H1:1]", MolProp::HBondDonorAtomType::I_HI },
+      { "[BrX1H1:1]", MolProp::HBondDonorAtomType::BR_HBR },
+	  { "[ClX1H1:1]", MolProp::HBondDonorAtomType::CL_HCL },
+	  { "[FX1H1:1]", MolProp::HBondDonorAtomType::F_HF },
+	  { "[#1X1H1:1]", MolProp::HBondDonorAtomType::H_H2 },
+	  { "[SX2H1:1]-C#N", MolProp::HBondDonorAtomType::S_HSCN },
+	  { "[CX2H1:1]#N", MolProp::HBondDonorAtomType::C_HCN },
+	  { "[CX2H1:1]#C", MolProp::HBondDonorAtomType::C_ETHINE },
+	  { "[NX2H1:1]=N=N", MolProp::HBondDonorAtomType::N_HN3 },
+	  { "[NX2H1:1]-N#N", MolProp::HBondDonorAtomType::N_HN3 },
+	  { "[NX3H3:1]", MolProp::HBondDonorAtomType::N_NH3 },
+	  { "[NX4H4+1:1]", MolProp::HBondDonorAtomType::N_NH4 },
+	  { "[NX3;H1,H2:1]", MolProp::HBondDonorAtomType::N_AMINE },
+	  { "[NX4+1;H1,H2,H3:1]", MolProp::HBondDonorAtomType::N_AMINIUM },
+	  { "[NX3;H1,H2:1]-[a]", MolProp::HBondDonorAtomType::N_ANILINE },
+	  { "[NX3;H1,H2:1]-c1c(-N(=O)-O)cccc1", MolProp::HBondDonorAtomType::N_MONO_DI_NITRO_ANILINE },
+	  { "[NX3;H1,H2:1]-c1cc(-N(=O)-O)ccc1", MolProp::HBondDonorAtomType::N_MONO_DI_NITRO_ANILINE },
+	  { "[NX3;H1,H2:1]-c1ccc(-N(=O)-O)cc1", MolProp::HBondDonorAtomType::N_MONO_DI_NITRO_ANILINE },
+	  { "[NX3;H1,H2:1]-c1c(-N(=O)-O)cc(-N(=O)-O)cc1(-N(=O)-O)", MolProp::HBondDonorAtomType::N_TRI_NITRO_ANILINE },
+	  { "[nX3;H1:1]", MolProp::HBondDonorAtomType::N_PYRROLE },
     };
     
     typedef std::vector<Chem::MolecularGraph::SharedPointer> AtomTyperPatternList;

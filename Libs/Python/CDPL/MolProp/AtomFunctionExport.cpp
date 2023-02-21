@@ -147,10 +147,10 @@ namespace
 	MAKE_FUNCTION_WRAPPER4(bool, isAmideNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
-	MAKE_FUNCTION_WRAPPER4(std::size_t, getRotatableBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	
 	MAKE_FUNCTION_WRAPPER5(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER5(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
+	MAKE_FUNCTION_WRAPPER5(std::size_t, getRotatableBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
 
 	MAKE_ATOM_FUNC_WRAPPERS(double, Hydrophobicity)
 	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaCharge)
@@ -239,8 +239,6 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	python::def("calcInductiveEffect", &calcInductiveEffectWrapper3,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("num_bonds") = 10));
 	
-	python::def("getRotatableBondCount", &getRotatableBondCountWrapper4, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 	python::def("isCarbonylLikeAtom", &isCarbonylLikeAtomWrapper4, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
 	python::def("isAmideCenterAtom", &isAmideCenterAtomWrapper4, 
@@ -256,6 +254,9 @@ void CDPLPythonMolProp::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
 	python::def("getBondCount", &getBondCountWrapper5,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
+	python::def("getRotatableBondCount", &getRotatableBondCountWrapper5, 
+				(python::arg("atom"), python::arg("molgraph"), python::arg("h_rotors") = false, python::arg("ring_bonds") = false, 
+				 python::arg("amide_bonds") = false));
 	
 	EXPORT_ATOM_FUNCS(PEOESigmaCharge, charge)
 	EXPORT_ATOM_FUNCS(PEOESigmaElectronegativity, e_neg)
