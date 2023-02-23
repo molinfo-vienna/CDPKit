@@ -49,7 +49,39 @@ namespace
     };
     
     TypePattern TYPE_PATTERNS[] = {
-    // TODO
+	  { "", MolProp::HBondAcceptorAtomType::O_H2O },
+	  { "", MolProp::HBondAcceptorAtomType::O_UREA },
+	  { "", MolProp::HBondAcceptorAtomType::O_BARBITURIC_ACID },
+	  { "", MolProp::HBondAcceptorAtomType::O_URIC_ACID },
+	  { "", MolProp::HBondAcceptorAtomType::O_ETHER },
+	  { "", MolProp::HBondAcceptorAtomType::O_AMIDE },
+	  { "", MolProp::HBondAcceptorAtomType::O_N_OXIDE },
+	  { "", MolProp::HBondAcceptorAtomType::O_ACID },
+	  { "", MolProp::HBondAcceptorAtomType::O_ESTER },
+	  { "", MolProp::HBondAcceptorAtomType::O_SULFOXIDE },
+	  { "", MolProp::HBondAcceptorAtomType::O_NITRO },
+	  { "", MolProp::HBondAcceptorAtomType::O_SELEN_OXIDE },
+	  { "", MolProp::HBondAcceptorAtomType::O_ALDEHYD },
+	  { "", MolProp::HBondAcceptorAtomType::O_KETONE },
+	  { "", MolProp::HBondAcceptorAtomType::O_ALCOHOL },
+	  { "", MolProp::HBondAcceptorAtomType::N_NH3 },
+	  { "", MolProp::HBondAcceptorAtomType::N_DIAMINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_MONO_DI_NITRO_ANILINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_TRI_NITRO_ANILINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_HALOGENO_ANILINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_ANILINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_NITRILE },
+	  { "", MolProp::HBondAcceptorAtomType::N_AZOLE },
+	  { "", MolProp::HBondAcceptorAtomType::N_AMINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_AMIDINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_AZO },
+	  { "", MolProp::HBondAcceptorAtomType::N_AZINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_DIAZINE },
+	  { "", MolProp::HBondAcceptorAtomType::N_IMINE },
+	  { "", MolProp::HBondAcceptorAtomType::S_SULFIDE },
+	  { "", MolProp::HBondAcceptorAtomType::S_THIOUREA },
+	  { "", MolProp::HBondAcceptorAtomType::P_MONO_DI_PHOSPHINE },
+	  { "", MolProp::HBondAcceptorAtomType::P_TRI_PHOSPHINE }
     };
     
     typedef std::vector<Chem::MolecularGraph::SharedPointer> AtomTyperPatternList;

@@ -48,7 +48,7 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class MolecularGraph;
+		class Atom;
 	}
 
 	namespace MolProp
@@ -122,8 +122,11 @@ namespace CDPL
 
 			void countHydrophicCarbons(const Chem::MolecularGraph& molgraph);
 	
-			void calcLogP(const Chem::MolecularGraph& molgraph);
+			bool hasTopDistanceBelow4(const Chem::Atom& curr_atom, const Chem::Atom& tgt_atom, const Chem::MolecularGraph& molgraph,
+									  const Chem::Atom& prev_atom, std::size_t curr_dist);
 		
+			void calcLogP(const Chem::MolecularGraph& molgraph);
+	
 			Math::DVector                         featureVector;
 			Math::DVector                         atomContribs;
 			double                                logP;

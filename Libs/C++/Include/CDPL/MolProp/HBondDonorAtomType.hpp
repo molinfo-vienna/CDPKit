@@ -98,7 +98,7 @@ namespace CDPL
 			
 			const unsigned int S_HS                        = 23;
 			
-			const unsigned int S_THIOLE                    = 24;
+			const unsigned int S_THIOL                     = 24;
 			
 			const unsigned int O_H3PO4                     = 25;
 			
