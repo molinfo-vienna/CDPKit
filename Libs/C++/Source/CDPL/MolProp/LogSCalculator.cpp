@@ -32,8 +32,9 @@
 #include <boost/thread.hpp>
 
 #include "CDPL/MolProp/LogSCalculator.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -299,8 +300,6 @@ void MolProp::LogSCalculator::countHydrophicCarbons(const Chem::MolecularGraph& 
 {
 	using namespace Chem;
 	
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
-	
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& atom = molgraph.getAtom(i);
 
@@ -333,9 +332,8 @@ void MolProp::LogSCalculator::countHydrophicCarbons(const Chem::MolecularGraph& 
 					continue;
 
 				default:
-					if (dist_mtx(i, j) < 4)
+					if (hasTopDistanceBelow4(atom, molgraph.getAtom(j), molgraph, atom, 0))
 						hydrophobic = false;
-					continue;
 			}
 		}
 
@@ -344,6 +342,36 @@ void MolProp::LogSCalculator::countHydrophicCarbons(const Chem::MolecularGraph& 
 	}
 }
 
+bool MolProp::LogSCalculator::hasTopDistanceBelow4(const Chem::Atom& curr_atom, const Chem::Atom& tgt_atom, const Chem::MolecularGraph& molgraph,
+												   const Chem::Atom& prev_atom, std::size_t curr_dist)
+{
+	using namespace Chem;
+	
+	Atom::ConstBondIterator b_it = curr_atom.getBondsBegin();
+	
+	for (Atom::ConstAtomIterator a_it = curr_atom.getAtomsBegin(), a_end = curr_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& atom = *a_it;
+
+		if (&atom == &prev_atom)
+			continue;
+		
+		if (!molgraph.containsBond(*b_it))
+			continue;
+
+		if (&atom == &tgt_atom)
+			return true;
+
+		if (!molgraph.containsAtom(atom))
+			continue;
+
+		if (curr_dist < 2)
+			if (hasTopDistanceBelow4(atom, tgt_atom, molgraph, curr_atom, curr_dist + 1))
+				return true;
+	}
+	
+	return false;
+}
+	
 void MolProp::LogSCalculator::calcLogS(const Chem::MolecularGraph& molgraph)
 {
 	atomTyper.execute(molgraph);
