@@ -119,23 +119,23 @@ std::size_t MolProp::getExplicitOrdinaryHydrogenCount(const Chem::MolecularGraph
 	return count;
 }
 
-std::size_t MolProp::getHydrogenAcceptorAtomCount(const Chem::MolecularGraph& molgraph)
+std::size_t MolProp::getHBondAcceptorAtomCount(const Chem::MolecularGraph& molgraph)
 {
 	std::size_t count = 0;
 
 	for (Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
-		if (isHydrogenAcceptor(*it, molgraph))
+		if (isHBondAcceptor(*it, molgraph))
 			count++;
 
 	return count;
 }
 
-std::size_t MolProp::getHydrogenDonorAtomCount(const Chem::MolecularGraph& molgraph)
+std::size_t MolProp::getHBondDonorAtomCount(const Chem::MolecularGraph& molgraph)
 {
 	std::size_t count = 0;
 
 	for (Chem::MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it)
-		if (isHydrogenDonor(*it, molgraph))
+		if (isHBondDonor(*it, molgraph))
 			count++;
 
 	return count;

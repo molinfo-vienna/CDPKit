@@ -27,9 +27,11 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 
 #include "FunctionExports.hpp"
+#include "FunctionWrapper.hpp"
 
 
 #define MAKE_ATOM_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
@@ -87,6 +89,9 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MMFF94SymbolicType)
 	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, MMFF94NumericType)
 	MAKE_ATOM_FUNC_WRAPPERS(double, MMFF94Charge)
+	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, UFFType)
+
+	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveUFFType, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 }
 
 
@@ -95,7 +100,10 @@ void CDPLPythonForceField::exportAtomFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
+	python::def("perceiveUFFType", &perceiveUFFTypeWrapper2, (python::arg("atom"), python::arg("molgraph")));
+	
 	EXPORT_ATOM_FUNCS_COPY_REF(MMFF94SymbolicType, type)
 	EXPORT_ATOM_FUNCS(MMFF94NumericType, type)
 	EXPORT_ATOM_FUNCS(MMFF94Charge, charge)
+	EXPORT_ATOM_FUNCS(UFFType, type)
 }

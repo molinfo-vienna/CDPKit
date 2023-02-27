@@ -152,9 +152,9 @@ namespace CDPL
 
 		CDPL_MOLPROP_API bool isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
-		CDPL_MOLPROP_API bool isHydrogenAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+		CDPL_MOLPROP_API bool isHBondAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
-		CDPL_MOLPROP_API bool isHydrogenDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
+		CDPL_MOLPROP_API bool isHBondDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
 		CDPL_MOLPROP_API bool isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
 

@@ -68,6 +68,8 @@ SET(cdpl-forcefield_LIB_SRCS
     MolecularGraphProperty.cpp
 
     AtomPropertyFunctions.cpp
+    AtomUFFTypeFunction.cpp
+    
     BondPropertyFunctions.cpp
 
     MolecularGraphPropertyFunctions.cpp
@@ -75,7 +77,8 @@ SET(cdpl-forcefield_LIB_SRCS
     MolecularGraphMMFF94BondTypeIndicesFunction.cpp 
     MolecularGraphMMFF94AromaticRingSetFunctions.cpp 
     MolecularGraphMMFF94AtomChargesFunction.cpp
-
+    MolecularGraphUFFAtomTypesFunction.cpp
+    
     MMFF94AtomTyper.cpp
     MMFF94BondTyper.cpp
     MMFF94ChargeCalculator.cpp

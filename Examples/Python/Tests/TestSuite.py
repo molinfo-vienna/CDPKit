@@ -106,7 +106,7 @@ if __name__ == '__main__':
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_chembl_preproc.sdf') ])
 
     errors |= checkScriptOutput('molprop_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
-    errors |= checkScriptOutput('molprop_atom_class_props', [ testDataFilePath('Citalopram.sdf') ])
+    errors |= checkScriptOutput('molprop_atom_class_props', [ testDataFilePath('Morphine.jme') ])
     errors |= checkScriptOutput('molprop_atom_elem_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_elec_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_physchem_props', [ testDataFilePath('Citalopram.sdf') ])

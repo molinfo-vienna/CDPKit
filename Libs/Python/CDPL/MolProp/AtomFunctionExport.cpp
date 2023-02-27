@@ -112,8 +112,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, calcValence, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, calcFreeValenceElectronCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(bool, isUnsaturated, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenAcceptor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenDonor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isHBondAcceptor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isHBondDonor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getChainAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getRingAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getAromaticAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
@@ -156,8 +156,8 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaCharge)
 	MAKE_ATOM_FUNC_WRAPPERS(double, PEOESigmaElectronegativity)
 	MAKE_ATOM_FUNC_WRAPPERS(double, MHMOPiCharge)
-	MAKE_ATOM_FUNC_WRAPPERS(double, HBondDonorType)
-	MAKE_ATOM_FUNC_WRAPPERS(double, HBondAcceptorType)
+	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, HBondDonorType)
+	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, HBondAcceptorType)
 }
 
 
@@ -200,8 +200,8 @@ void CDPLPythonMolProp::exportAtomFunctions()
 	python::def("isPlanarNitrogen", &isPlanarNitrogenWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("isInvertibleNitrogen", &isInvertibleNitrogenWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("isUnsaturated", &isUnsaturatedWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("isHydrogenAcceptor", &isHydrogenAcceptorWrapper2, (python::arg("atom"), python::arg("molgraph")));
-	python::def("isHydrogenDonor", &isHydrogenDonorWrapper2, (python::arg("atom"), python::arg("molgraph")));
+	python::def("isHBondAcceptor", &isHBondAcceptorWrapper2, (python::arg("atom"), python::arg("molgraph")));
+	python::def("isHBondDonor", &isHBondDonorWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("getChainAtomCount", &getChainAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("getRingAtomCount", &getRingAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper2, (python::arg("atom"), python::arg("molgraph")));

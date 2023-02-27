@@ -24,49 +24,49 @@
  */
 
 
-#ifndef CDPL_PYTHON_PHARM_FUNCTIONWRAPPER_HPP
-#define CDPL_PYTHON_PHARM_FUNCTIONWRAPPER_HPP
+#ifndef CDPL_PYTHON_FORCEFIELD_FUNCTIONWRAPPER_HPP
+#define CDPL_PYTHON_FORCEFIELD_FUNCTIONWRAPPER_HPP
 
 #define MAKE_FUNCTION_WRAPPER1(RET_TYPE, FUNC_NAME, ARG_TYPE) \
 RET_TYPE FUNC_NAME##Wrapper1(ARG_TYPE arg)                    \
 {                                                             \
-	return CDPL::Pharm::FUNC_NAME(arg);                        \
+	return CDPL::ForceField::FUNC_NAME(arg);                        \
 }
 
 #define MAKE_FUNCTION_WRAPPER2(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE) \
 RET_TYPE FUNC_NAME##Wrapper2(ARG1_TYPE arg1, ARG2_TYPE arg2)              \
 {                                                                         \
-	return CDPL::Pharm::FUNC_NAME(arg1, arg2);                             \
+	return CDPL::ForceField::FUNC_NAME(arg1, arg2);                             \
 }
 
 #define MAKE_FUNCTION_WRAPPER3(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE) \
 RET_TYPE FUNC_NAME##Wrapper3(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3)         \
 {                                                                                    \
-	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3);                                  \
+	return CDPL::ForceField::FUNC_NAME(arg1, arg2, arg3);                                  \
 }
 
 #define MAKE_FUNCTION_WRAPPER4(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE, ARG4_TYPE) \
 RET_TYPE FUNC_NAME##Wrapper4(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG4_TYPE arg4)    \
 {                                                                                               \
-	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3, arg4);                                       \
+	return CDPL::ForceField::FUNC_NAME(arg1, arg2, arg3, arg4);                                       \
 }
 
 #define MAKE_FUNCTION_WRAPPER5(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE, ARG4_TYPE, ARG5_TYPE)   \
 RET_TYPE FUNC_NAME##Wrapper5(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG4_TYPE arg4, ARG5_TYPE arg5) \
 {                                                                                                            \
-	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3, arg4, arg5);                                              \
+	return CDPL::ForceField::FUNC_NAME(arg1, arg2, arg3, arg4, arg5);                                              \
 }
 
 #define MAKE_FUNCTION_WRAPPER6(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE, ARG4_TYPE, ARG5_TYPE, ARG6_TYPE)        \
 RET_TYPE FUNC_NAME##Wrapper6(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG4_TYPE arg4, ARG5_TYPE arg5, ARG6_TYPE arg6) \
 {                                                                                                                            \
-	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6);                                                        \
+	return CDPL::ForceField::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6);                                                        \
 }
 
 #define MAKE_FUNCTION_WRAPPER7(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE, ARG4_TYPE, ARG5_TYPE, ARG6_TYPE, ARG7_TYPE)        \
 RET_TYPE FUNC_NAME##Wrapper7(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG4_TYPE arg4, ARG5_TYPE arg5, ARG6_TYPE arg6, ARG7_TYPE arg7) \
 {                                                                                                                            \
-	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6, arg7);	\
+	return CDPL::ForceField::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6, arg7);	\
 }
 
-#endif // CDPL_PYTHON_PHARM_FUNCTIONWRAPPER_HPP
+#endif // CDPL_PYTHON_FORCEFIELD_FUNCTIONWRAPPER_HPP

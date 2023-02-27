@@ -405,6 +405,14 @@ and its application to the prediction of drug transport properties, <i>J. Med. C
 </tr>
 
 <tr>
+<td valign="top">\anchor UFF<i>[UFF]</i></td>
+<td valign="top">
+A. K. Rappé, C. J. Casewit, K. S. Colwell, W. A. Goddard III, W. M. Skiff, UFF, a full periodic table force field for molecular
+mechanics and molecular dynamics simulations, <i>J. Am. Chem. Soc.</i> <b>1992</b>, 114, 25, 10024–10035
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor VFLIB2<i>[VFLIB2]</i></td>
 <td valign="top">
 P. Foggia, C. Sansone, M. Vento, An Improved Algorithm for Matching Large Graphs, 3rd IAPR-TC15 Workshop on Graph-based Representations (Ischia, 2001),

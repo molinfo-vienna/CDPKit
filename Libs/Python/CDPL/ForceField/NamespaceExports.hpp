@@ -32,6 +32,7 @@ namespace CDPLPythonForceField
 {
 
 	void exportInteractionTypes();
+	void exportUFFAtomTypes();
 	void exportMMFF94ParameterSets();
 
 	void exportAtomProperties();

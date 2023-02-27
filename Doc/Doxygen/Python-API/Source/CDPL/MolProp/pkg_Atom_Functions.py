@@ -136,7 +136,7 @@ def hasHBondDonorType(atom: CDPL.Chem.Atom) -> bool: pass
 # \param atom 
 # \return 
 #
-def getHBondDonorType(atom: CDPL.Chem.Atom) -> float: pass
+def getHBondDonorType(atom: CDPL.Chem.Atom) -> int: pass
 
 ##
 # \brief 
@@ -163,7 +163,7 @@ def hasHBondAcceptorType(atom: CDPL.Chem.Atom) -> bool: pass
 # \param atom 
 # \return 
 #
-def getHBondAcceptorType(atom: CDPL.Chem.Atom) -> float: pass
+def getHBondAcceptorType(atom: CDPL.Chem.Atom) -> int: pass
 
 ##
 # \brief 
@@ -300,7 +300,7 @@ def calcStericNumber(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -
 # \param molgraph 
 # \return 
 #
-def isHydrogenDonor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isHBondDonor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -308,7 +308,7 @@ def isHydrogenDonor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) ->
 # \param molgraph 
 # \return 
 #
-def isHydrogenAcceptor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
+def isHBondAcceptor(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> bool: pass
 
 ##
 # \brief 
@@ -382,11 +382,12 @@ def getAromaticBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGrap
 # \brief 
 # \param atom 
 # \param molgraph 
-# \param inc_h_rotors 
-# \param inc_amide_bonds 
+# \param h_rotors 
+# \param ring_bonds 
+# \param amide_bonds 
 # \return 
 #
-def getRotatableBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, inc_h_rotors: bool, inc_amide_bonds: bool) -> int: pass
+def getRotatableBondCount(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
 
 ##
 # \brief 

@@ -70,6 +70,6 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
 				 python::arg("append") = true));
 	python::def("removeExclusionVolumesWithClashes", &removeExclusionVolumesWithClashesWrapper4,
 				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
-	python::def("resizeExclusionVolumesWithClashes", &removeExclusionVolumesWithClashesWrapper4,
+	python::def("resizeExclusionVolumesWithClashes", &resizeExclusionVolumesWithClashesWrapper4,
 				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("vdw_scaling_fact") = 1.0));
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphRO5ScoreFunction.cpp 
+ * MolecularGraphUFFAtomTypesFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,28 +26,27 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/ForceField/MolecularGraphFunctions.hpp"
+#include "CDPL/ForceField/AtomFunctions.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Atom.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t MolProp::getRuleOfFiveScore(const Chem::MolecularGraph& molgraph)
+void ForceField::assignUFFAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite)
 {
-	std::size_t score = 0;
+	using namespace Chem;
+	
+    MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
-	if (getHBondDonorAtomCount(molgraph) <= 5)
-		score++;
+    for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
+		Atom& atom = *a_it;
+ 
+		if (!overwrite && hasUFFType(atom))
+			continue;
 
-	if (getHBondAcceptorAtomCount(molgraph) <= 10)
-		score++;
-
-	if (calcXLogP(molgraph) <= 5.0)
-		score++;
-
-	if (calcMass(molgraph) <= 500.0)
-		score++;
-
-	return score;
+		setUFFType(atom, perceiveUFFType(atom, molgraph));
+    }
 }

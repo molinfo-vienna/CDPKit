@@ -46,6 +46,13 @@ def assignMMFF94AtomTypes(molgraph: CDPL.Chem.MolecularGraph, strict: bool, over
 ##
 # \brief 
 # \param molgraph 
+# \param overwrite 
+#
+def assignUFFAtomTypes(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
 # \return 
 #
 def perceiveMMFF94AromaticRings(molgraph: CDPL.Chem.MolecularGraph) -> CDPL.Chem.FragmentList: pass

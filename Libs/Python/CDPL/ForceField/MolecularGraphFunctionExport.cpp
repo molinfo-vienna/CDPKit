@@ -59,5 +59,8 @@ void CDPLPythonForceField::exportMolecularGraphFunctions()
 	python::def("calcMMFF94AtomCharges", &ForceField::calcMMFF94AtomCharges, 
 				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
 
+	python::def("assignUFFAtomTypes", &ForceField::assignUFFAtomTypes, 
+				(python::arg("molgraph"), python::arg("overwrite")));
+	
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MMFF94AromaticRings, rings)
 }

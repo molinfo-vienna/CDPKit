@@ -162,6 +162,11 @@ class HBondAcceptorAtomType(Boost.Python.instance):
     ##
     # \brief 
     #
+    N_IMINE = 30
+
+    ##
+    # \brief 
+    #
     N_AZO = 27
 
     ##
@@ -177,24 +182,24 @@ class HBondAcceptorAtomType(Boost.Python.instance):
     ##
     # \brief 
     #
-    S_SULFIDE = 30
+    S_SULFIDE = 31
 
     ##
     # \brief 
     #
-    S_THIOUREA = 31
+    S_THIOUREA = 32
 
     ##
     # \brief 
     #
-    P_MONO_DI_PHOSPHINE = 32
+    P_MONO_DI_PHOSPHINE = 33
 
     ##
     # \brief 
     #
-    P_TRI_PHOSPHINE = 33
+    P_TRI_PHOSPHINE = 34
 
     ##
     # \brief 
     #
-    MAX_TYPE = 33
+    MAX_TYPE = 34

@@ -109,6 +109,20 @@ def calcMHMOProperties(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> N
 ##
 # \brief 
 # \param molgraph 
+# \param overwrite 
+#
+def perceiveHBondDonorAtomTypes(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
+# \param overwrite 
+#
+def perceiveHBondAcceptorAtomTypes(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
+
+##
+# \brief 
+# \param molgraph 
 # \return 
 #
 def calcMass(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
@@ -116,11 +130,12 @@ def calcMass(molgraph: CDPL.Chem.MolecularGraph) -> float: pass
 ##
 # \brief 
 # \param molgraph 
-# \param inc_h_rotors 
-# \param inc_amide_bonds 
+# \param h_rotors 
+# \param ring_bonds 
+# \param amide_bonds 
 # \return 
 #
-def getRotatableBondCount(molgraph: CDPL.Chem.MolecularGraph, inc_h_rotors: bool, inc_amide_bonds: bool) -> int: pass
+def getRotatableBondCount(molgraph: CDPL.Chem.MolecularGraph, h_rotors: bool = False, ring_bonds: bool = False, amide_bonds: bool = False) -> int: pass
 
 ##
 # \brief 
@@ -164,14 +179,14 @@ def getChainAtomCount(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 # \param molgraph 
 # \return 
 #
-def getHydrogenDonorAtomCount(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getHBondDonorAtomCount(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \return 
 #
-def getHydrogenAcceptorAtomCount(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+def getHBondAcceptorAtomCount(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 
 ##
 # \brief 

@@ -27,4 +27,4 @@ class MolecularGraphProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    MMFF94_AROMATIC_RINGS = CDPL.Base.LookupKey(id=331, name='MMFF94_AROMATIC_RINGS')
+    MMFF94_AROMATIC_RINGS = CDPL.Base.LookupKey(id=332, name='MMFF94_AROMATIC_RINGS')

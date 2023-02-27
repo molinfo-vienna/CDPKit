@@ -55,6 +55,8 @@ namespace CDPL
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_SYMBOLIC_TYPE;
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_NUMERIC_TYPE;
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
+
+			extern CDPL_FORCEFIELD_API const Base::LookupKey UFF_TYPE;
 		}
 	}
 }

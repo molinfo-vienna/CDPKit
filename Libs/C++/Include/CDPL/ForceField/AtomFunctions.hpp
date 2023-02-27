@@ -43,6 +43,7 @@ namespace CDPL
 	{
 
 		class Atom;
+		class MolecularGraph;
 	}
 
 	namespace ForceField 
@@ -73,6 +74,19 @@ namespace CDPL
 		CDPL_FORCEFIELD_API void clearMMFF94Charge(Chem::Atom& atom);
 
 		CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
+
+
+		CDPL_FORCEFIELD_API unsigned int getUFFType(const Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API void setUFFType(Chem::Atom& atom, unsigned int type);
+
+		CDPL_FORCEFIELD_API void clearUFFType(Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API bool hasUFFType(const Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API unsigned int perceiveUFFType(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 	}
 }
 

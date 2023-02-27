@@ -43,6 +43,9 @@
 #include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/GradientVectorTraits.hpp"
+
+#include "CDPL/ForceField/UFFAtomtype.hpp"
+
 #include "CDPL/ForceField/MMFF94ParameterSet.hpp"
 
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"

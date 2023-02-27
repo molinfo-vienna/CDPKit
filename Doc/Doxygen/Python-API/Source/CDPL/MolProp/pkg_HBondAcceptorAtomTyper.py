@@ -22,32 +22,31 @@
 ##
 # \brief 
 #
-class MMFF94BondTyper(Boost.Python.instance):
+class HBondAcceptorAtomTyper(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \e %HBondAcceptorAtomTyper instance.
     #
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \e %HBondAcceptorAtomTyper instance.
     # \param typer 
     #
-    def __init__(typer: MMFF94BondTyper) -> None: pass
+    def __init__(typer: ._molprop.HBondAcceptorAtomTyper) -> None: pass
 
     ##
-    # \brief Initializes the \e %MMFF94BondTyper instance.
+    # \brief Initializes the \e %HBondAcceptorAtomTyper instance.
     # \param molgraph 
     # \param types 
-    # \param strict 
     #
-    def __init__(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray, strict: bool) -> None: pass
+    def __init__(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
-    # Different Python \e %MMFF94BondTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %MMFF94BondTyper instances \e a and \e b reference different C++ objects. 
+    # Different Python \e %HBondAcceptorAtomTyper instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %HBondAcceptorAtomTyper instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     #
@@ -56,37 +55,18 @@ class MMFF94BondTyper(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief 
-    # \param func 
-    #
-    def setAtomTypeFunction(func: MMFF94NumericAtomTypeFunction) -> None: pass
-
-    ##
-    # \brief 
-    # \param func 
-    #
-    def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
-
-    ##
-    # \brief 
-    # \param table 
-    #
-    def setAtomTypePropertyTable(table: MMFF94AtomTypePropertyTable) -> None: pass
-
-    ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94BondTyper instance \a typer.
-    # \param typer The \e %MMFF94BondTyper instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %HBondAcceptorAtomTyper instance \a typer.
+    # \param typer The \e %HBondAcceptorAtomTyper instance to copy.
     # \return \a self
     #
-    def assign(typer: MMFF94BondTyper) -> MMFF94BondTyper: pass
+    def assign(typer: ._molprop.HBondAcceptorAtomTyper) -> ._molprop.HBondAcceptorAtomTyper: pass
 
     ##
     # \brief 
     # \param molgraph 
     # \param types 
-    # \param strict 
     #
-    def perceiveTypes(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray, strict: bool) -> None: pass
+    def perceiveTypes(molgraph: CDPL.Chem.MolecularGraph, types: CDPL.Util.UIArray) -> None: pass
 
     ##
     # \brief 

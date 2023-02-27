@@ -93,11 +93,11 @@ class MMFF94AtomTyper(Boost.Python.instance):
     def setAromaticRingSetFunction(func: MMFF94RingSetFunction) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AtomTyper instance \a parameterizer.
-    # \param parameterizer The \e %MMFF94AtomTyper instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94AtomTyper instance \a typer.
+    # \param typer The \e %MMFF94AtomTyper instance to copy.
     # \return \a self
     #
-    def assign(parameterizer: MMFF94AtomTyper) -> MMFF94AtomTyper: pass
+    def assign(typer: MMFF94AtomTyper) -> MMFF94AtomTyper: pass
 
     ##
     # \brief 

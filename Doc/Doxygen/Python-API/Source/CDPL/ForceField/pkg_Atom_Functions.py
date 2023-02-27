@@ -49,6 +49,41 @@ def setMMFF94Charge(atom: CDPL.Chem.Atom, charge: float) -> None: pass
 ##
 # \brief 
 # \param atom 
+# \param molgraph 
+# \return 
+#
+def perceiveUFFType(atom: CDPL.Chem.Atom, molgraph: CDPL.Chem.MolecularGraph) -> int: pass
+
+##
+# \brief 
+# \param atom 
+#
+def clearUFFType(atom: CDPL.Chem.Atom) -> None: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def hasUFFType(atom: CDPL.Chem.Atom) -> bool: pass
+
+##
+# \brief 
+# \param atom 
+# \return 
+#
+def getUFFType(atom: CDPL.Chem.Atom) -> int: pass
+
+##
+# \brief 
+# \param atom 
+# \param type 
+#
+def setUFFType(atom: CDPL.Chem.Atom, type: int) -> None: pass
+
+##
+# \brief 
+# \param atom 
 #
 def clearMMFF94SymbolicType(atom: CDPL.Chem.Atom) -> None: pass
 

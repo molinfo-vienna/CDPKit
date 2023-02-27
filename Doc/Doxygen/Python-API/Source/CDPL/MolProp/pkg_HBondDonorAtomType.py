@@ -87,194 +87,219 @@ class HBondDonorAtomType(Boost.Python.instance):
     ##
     # \brief 
     #
-    N_ANILINE = 12
+    N_NH4 = 12
 
     ##
     # \brief 
     #
-    N_MONO_DI_NITRO_ANILINE = 13
+    N_AMINE = 13
 
     ##
     # \brief 
     #
-    N_TRI_NITRO_ANILINE = 14
+    N_AMINIUM = 14
 
     ##
     # \brief 
     #
-    N_PYRROLE = 15
+    N_ANILINE = 15
 
     ##
     # \brief 
     #
-    N_AMIDE = 16
+    N_MONO_DI_NITRO_ANILINE = 16
 
     ##
     # \brief 
     #
-    S_H2S = 17
+    N_TRI_NITRO_ANILINE = 17
 
     ##
     # \brief 
     #
-    S_HS = 18
+    N_PYRROLE = 18
 
     ##
     # \brief 
     #
-    S_THIOLE = 19
+    N_AMIDE = 19
 
     ##
     # \brief 
     #
-    O_H3PO4 = 20
+    N_IMINE = 20
 
     ##
     # \brief 
     #
-    O_H2CO3 = 21
+    N_IMINIUM = 21
 
     ##
     # \brief 
     #
-    O_HCO3 = 22
+    S_H2S = 22
 
     ##
     # \brief 
     #
-    O_H2O2 = 23
+    S_HS = 23
 
     ##
     # \brief 
     #
-    O_H2O = 24
+    S_THIOL = 24
 
     ##
     # \brief 
     #
-    O_CF3SO3H = 25
+    O_H3PO4 = 25
 
     ##
     # \brief 
     #
-    O_HCLO4 = 26
+    O_H2CO3 = 26
 
     ##
     # \brief 
     #
-    O_H2SO4 = 27
+    O_HCO3 = 27
 
     ##
     # \brief 
     #
-    O_HNO3 = 28
+    O_H2O2 = 28
 
     ##
     # \brief 
     #
-    O_HSO4 = 29
+    O_H2O = 29
 
     ##
     # \brief 
     #
-    O_HNO2 = 30
+    O_CF3SO3H = 30
 
     ##
     # \brief 
     #
-    O_NH2OH = 31
+    O_HCLO4 = 31
 
     ##
     # \brief 
     #
-    O_H2PO4 = 32
+    O_H2SO4 = 32
 
     ##
     # \brief 
     #
-    O_H3BO3 = 33
+    O_HNO3 = 33
 
     ##
     # \brief 
     #
-    O_H4SIO4 = 34
+    O_HSO4 = 34
 
     ##
     # \brief 
     #
-    O_HPO4 = 35
+    O_HNO2 = 35
 
     ##
     # \brief 
     #
-    O_H2BO3 = 36
+    O_NH2OH = 36
 
     ##
     # \brief 
     #
-    O_HO = 37
+    O_H2PO4 = 37
 
     ##
     # \brief 
     #
-    O_SULFONIC_ACID = 38
+    O_H3BO3 = 38
 
     ##
     # \brief 
     #
-    O_MONO_DI_NITRO_PHENOL = 39
+    O_H4SIO4 = 39
 
     ##
     # \brief 
     #
-    O_HALOGENO_ALCOHOL = 40
+    O_HPO4 = 40
 
     ##
     # \brief 
     #
-    O_ALCOHOL = 41
+    O_H2BO3 = 41
 
     ##
     # \brief 
     #
-    O_TRI_NITRO_PHENOL = 42
+    O_HO = 42
 
     ##
     # \brief 
     #
-    O_HALOGENO_PHENOL = 43
+    O_SULFONIC_ACID = 43
 
     ##
     # \brief 
     #
-    O_PHENOL = 44
+    O_MONO_DI_NITRO_PHENOL = 44
 
     ##
     # \brief 
     #
-    O_CARBOXYLIC_ACID = 45
+    O_HALOGENO_ALCOHOL = 45
 
     ##
     # \brief 
     #
-    O_HALOGENO_CARBOXYCLIC_ACID = 46
+    O_ALCOHOL = 46
 
     ##
     # \brief 
     #
-    O_ENOL = 47
+    O_TRI_NITRO_PHENOL = 47
 
     ##
     # \brief 
     #
-    O_OXIME = 48
+    O_HALOGENO_PHENOL = 48
 
     ##
     # \brief 
     #
-    O_CL5_PHENOL = 49
+    O_PHENOL = 49
 
     ##
     # \brief 
     #
-    MAX_TYPE = 49
+    O_CARBOXYLIC_ACID = 50
+
+    ##
+    # \brief 
+    #
+    O_HALOGENO_CARBOXYCLIC_ACID = 51
+
+    ##
+    # \brief 
+    #
+    O_ENOL = 52
+
+    ##
+    # \brief 
+    #
+    O_OXIME = 53
+
+    ##
+    # \brief 
+    #
+    O_CL5_PHENOL = 54
+
+    ##
+    # \brief 
+    #
+    MAX_TYPE = 54

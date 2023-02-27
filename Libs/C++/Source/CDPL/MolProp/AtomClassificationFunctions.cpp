@@ -50,7 +50,7 @@ bool MolProp::isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& 
 	return Internal::isUnsaturated(atom, molgraph);
 }
 
-bool MolProp::isHydrogenAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+bool MolProp::isHBondAcceptor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 		
@@ -89,7 +89,7 @@ bool MolProp::isHydrogenAcceptor(const Chem::Atom& atom, const Chem::MolecularGr
     return true;
 }
 
-bool MolProp::isHydrogenDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+bool MolProp::isHBondDonor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	

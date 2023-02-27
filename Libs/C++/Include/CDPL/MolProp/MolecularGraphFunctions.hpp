@@ -79,9 +79,9 @@ namespace CDPL
 
 		CDPL_MOLPROP_API std::size_t getChainAtomCount(const Chem::MolecularGraph& molgraph);
 
-		CDPL_MOLPROP_API std::size_t getHydrogenAcceptorAtomCount(const Chem::MolecularGraph& molgraph);
+		CDPL_MOLPROP_API std::size_t getHBondAcceptorAtomCount(const Chem::MolecularGraph& molgraph);
 
-		CDPL_MOLPROP_API std::size_t getHydrogenDonorAtomCount(const Chem::MolecularGraph& molgraph);
+		CDPL_MOLPROP_API std::size_t getHBondDonorAtomCount(const Chem::MolecularGraph& molgraph);
 
 
 		CDPL_MOLPROP_API std::size_t getBondCount(const Chem::MolecularGraph& molgraph);

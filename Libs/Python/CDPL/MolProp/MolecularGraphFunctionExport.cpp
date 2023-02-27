@@ -104,8 +104,8 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 	python::def("getExplicitOrdinaryHydrogenCount", &MolProp::getExplicitOrdinaryHydrogenCount, 
 				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 	python::def("getChainAtomCount", &MolProp::getChainAtomCount, python::arg("molgraph"));
-	python::def("getHydrogenAcceptorAtomCount", &MolProp::getHydrogenAcceptorAtomCount, python::arg("molgraph"));
-	python::def("getHydrogenDonorAtomCount", &MolProp::getHydrogenDonorAtomCount, python::arg("molgraph"));
+	python::def("getHBondAcceptorAtomCount", &MolProp::getHBondAcceptorAtomCount, python::arg("molgraph"));
+	python::def("getHBondDonorAtomCount", &MolProp::getHBondDonorAtomCount, python::arg("molgraph"));
 
 	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&MolProp::getBondCount),
 				python::arg("molgraph"));
