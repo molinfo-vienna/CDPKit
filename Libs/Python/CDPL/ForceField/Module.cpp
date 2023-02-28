@@ -38,12 +38,16 @@ BOOST_PYTHON_MODULE(_forcefield)
 	using namespace CDPLPythonForceField;
 
 	exportInteractionTypes();
+
 	exportUFFAtomTypes();
+
 	exportMMFF94ParameterSets();
 
 	exportAtomProperties();
 	exportBondProperties();
 	exportMolecularGraphProperties();
+
+	exportUFFAtomTypePropertyTable();
 
 	exportMMFF94AromaticSSSRSubset();
 	exportMMFF94AtomTyper();

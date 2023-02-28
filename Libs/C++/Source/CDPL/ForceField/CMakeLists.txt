@@ -79,6 +79,8 @@ SET(cdpl-forcefield_LIB_SRCS
     MolecularGraphMMFF94AtomChargesFunction.cpp
     MolecularGraphUFFAtomTypesFunction.cpp
     
+    UFFAtomTypePropertyTable.cpp
+
     MMFF94AtomTyper.cpp
     MMFF94BondTyper.cpp
     MMFF94ChargeCalculator.cpp

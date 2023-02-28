@@ -44,7 +44,8 @@
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/GradientVectorTraits.hpp"
 
-#include "CDPL/ForceField/UFFAtomtype.hpp"
+#include "CDPL/ForceField/UFFAtomType.hpp"
+#include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
 
 #include "CDPL/ForceField/MMFF94ParameterSet.hpp"
 

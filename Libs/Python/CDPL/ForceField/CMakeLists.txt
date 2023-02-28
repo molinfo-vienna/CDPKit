@@ -38,7 +38,10 @@ SET(forcefield_MOD_SRCS
     AtomPropertyExport.cpp 
     BondPropertyExport.cpp 
     InteractionTypeExport.cpp
+
     UFFAtomTypeExport.cpp
+    UFFAtomTypePropertyTableExport.cpp
+
     MMFF94ParameterSetExport.cpp
 
     MMFF94AromaticSSSRSubsetExport.cpp

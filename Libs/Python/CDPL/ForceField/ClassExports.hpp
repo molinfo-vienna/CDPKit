@@ -31,6 +31,8 @@
 namespace CDPLPythonForceField
 {
 
+	void exportUFFAtomTypePropertyTable();
+
 	void exportMMFF94AromaticSSSRSubset();
 	void exportMMFF94AtomTyper();
 	void exportMMFF94BondTyper();
