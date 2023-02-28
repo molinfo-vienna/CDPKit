@@ -37,7 +37,7 @@ void CDPLPythonChem::exportMoleculeFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("makeHydrogenDeplete", &Chem::makeHydrogenDeplete, python::arg("mol"), python::arg("corr_impl_h_count") = true);
+	python::def("makeHydrogenDeplete", &Chem::makeHydrogenDeplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
 	python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
 				(python::arg("mol"), python::arg("flags"), python::arg("corr_impl_h_count") = true));
 	python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
