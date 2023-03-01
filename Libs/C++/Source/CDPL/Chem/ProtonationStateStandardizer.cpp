@@ -282,6 +282,8 @@ void Chem::ProtonationStateStandardizer::copyMolecule(const Molecule& mol, Molec
 
 bool Chem::ProtonationStateStandardizer::minChargedAtomCount(Molecule& mol)
 {
+	calcImplicitHydrogenCounts(mol, false);
+
 	bool changes = false;
 	std::size_t init_atom_cnt = mol.getNumAtoms();
 	
@@ -389,7 +391,7 @@ bool Chem::ProtonationStateStandardizer::protForPhysCond(Molecule& mol)
 
     bool changes = minChargedAtomCount(mol);
 	std::size_t init_atom_cnt = mol.getNumAtoms();
-	
+
 	calcImplicitHydrogenCounts(mol, false);
     perceiveHybridizationStates(mol, false);
     perceiveSSSR(mol, false);
@@ -397,7 +399,7 @@ bool Chem::ProtonationStateStandardizer::protForPhysCond(Molecule& mol)
     setAromaticityFlags(mol, false);
 
 	atomSet.clear();
-	
+
     for (std::size_t i = 0; i < sizeof(PROT_STATE_TRANSFORMS) / sizeof(ProtStateTransform); i++) {
 		const Molecule& ptn_mol = *PROT_STATE_TRANSFORM_PATTERNS[i];
 	
