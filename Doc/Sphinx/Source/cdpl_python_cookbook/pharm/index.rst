@@ -5,3 +5,6 @@ Pharmacophore Generation and Processing
    :maxdepth: 2
 
    io/index
+   generation/index
+   analysis/index
+   

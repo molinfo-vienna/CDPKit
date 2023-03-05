@@ -203,15 +203,15 @@ def main() -> None:
     # reader = Chem.FileSDFMoleculeReader(args.in_file)
     reader = getReaderByFileExt(args.in_file) 
 
-    # if the output molecules are expected to be in a specific format, a writer for this format could be created directly, e.g.
+    # if the output molecules have to be stored in a specific format, a writer for this format could be created directly, e.g.
     # writer = Chem.FileSDFMolecularGraphWriter(args.out_file)
     writer = getWriterByFileExt(args.out_file) 
     
-    # create instances of the Chem.Molecule interface for the input and output molecules
+    # create instances of the default implementation of the Chem.Molecule interface for the input and output molecules
     in_mol = Chem.BasicMolecule()
     out_mol = Chem.BasicMolecule()
 
-    # create an instance of the CDPKit's ChEMBL structure curation pipeline implementation
+    # create an instance of CDPKit's ChEMBL structure curation pipeline implementation
     chembl_proc = Chem.ChEMBLStandardizer()
     i = 1
     
@@ -225,7 +225,7 @@ def main() -> None:
                 mol_id = '#' + str(i)  # fallback if name is empty or not available
             else:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
-                
+         
             try:
                 # perform standardization and parent structure extraction (optional)
                 change_flags = process(chembl_proc, in_mol, out_mol, args) 
@@ -251,13 +251,13 @@ def main() -> None:
                               
                     # write output molecule
                     if not writer.write(out_mol):
-                        sys.exit('Error: Writing of molecule %s failed: %s\n' % (mol_id, str(e)))
+                        sys.exit('Error: Writing molecule %s failed: %s\n' % (mol_id, str(e)))
 
                 except Exception as e: # handle exception raised in case of severe write errors
-                    sys.exit('Error: Writing of molecule %s failed: %s\n' % (mol_id, str(e)))
+                    sys.exit('Error: writing molecule %s failed: %s\n' % (mol_id, str(e)))
                 
             except Exception as e: # handle exception raised in case of severe structure processing errors
-                sys.exit('Error: Processing of molecule %s failed: %s\n' % (mol_id, str(e)))
+                sys.exit('Error: processing of molecule %s failed: %s\n' % (mol_id, str(e)))
 
             i += 1
             

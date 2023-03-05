@@ -21,11 +21,11 @@
 
 ##
 # \brief 
-# \param arg1 
 # \param mol 
+# \param corr_impl_h_count 
 # \return 
 #
-def makeHydrogenDeplete(arg1: Molecule, mol: bool) -> bool: pass
+def makeHydrogenDeplete(mol: Molecule, corr_impl_h_count: bool = True) -> bool: pass
 
 ##
 # \brief 

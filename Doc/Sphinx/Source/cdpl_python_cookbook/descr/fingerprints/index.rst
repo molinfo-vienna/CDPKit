@@ -4,5 +4,5 @@ Calculation of Fingerprints
 .. toctree::
    :maxdepth: 2
 
-   gen_ecfp
-   gen_fame_fp
+   ecfp
+   fame_fp

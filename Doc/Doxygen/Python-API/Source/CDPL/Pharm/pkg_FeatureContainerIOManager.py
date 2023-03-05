@@ -162,7 +162,7 @@ class FeatureContainerIOManager(Boost.Python.instance):
     ##
     # \brief 
     #
-    numOutputHandlers = 0
+    numOutputHandlers = 4
 
     ##
     # \brief 

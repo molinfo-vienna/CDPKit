@@ -455,14 +455,14 @@ def setMDLChiralFlag(molgraph: MolecularGraph, flag: bool) -> None: pass
 # \param atom_flags 
 # \param bond_flags 
 #
-def calculateCanonicalNumbering(molgraph: MolecularGraph, overwrite: bool, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> None: pass
+def calcCanonicalNumbering(molgraph: MolecularGraph, overwrite: bool, atom_flags: int = 2147483648, bond_flags: int = 2147483648) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param overwrite 
 #
-def calculateMorganNumbering(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def calcMorganNumbering(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -738,14 +738,14 @@ def perceiveSymmetryClasses(molgraph: MolecularGraph, overwrite: bool, atom_flag
 # \param molgraph 
 # \param overwrite 
 #
-def calculate2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def calc2DCoordinates(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param undef_only 
 #
-def calculateHydrogen3DCoordinates(molgraph: MolecularGraph, undef_only: bool = True) -> None: pass
+def calcHydrogen3DCoordinates(molgraph: MolecularGraph, undef_only: bool = True) -> None: pass
 
 ##
 # \brief 
@@ -766,7 +766,7 @@ def setRingFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 # \param molgraph 
 # \param overwrite 
 #
-def calculateBond2DStereoFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
+def calcBond2DStereoFlags(molgraph: MolecularGraph, overwrite: bool) -> None: pass
 
 ##
 # \brief 
@@ -935,7 +935,7 @@ def calcAtomCIPConfigurations(molgraph: MolecularGraph, overwrite: bool) -> None
 # \param ring_bonds 
 # \param min_ring_size 
 #
-def calculateBondDirections(molgraph: MolecularGraph, overwrite: bool, ring_bonds: bool = True, min_ring_size: int = 8) -> None: pass
+def calcBondDirections(molgraph: MolecularGraph, overwrite: bool, ring_bonds: bool = True, min_ring_size: int = 8) -> None: pass
 
 ##
 # \brief 

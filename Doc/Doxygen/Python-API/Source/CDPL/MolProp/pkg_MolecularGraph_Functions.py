@@ -87,8 +87,9 @@ def calcCyclomaticNumber(molgraph: CDPL.Chem.MolecularGraph) -> int: pass
 # \brief 
 # \param molgraph 
 # \param overwrite 
+# \param from_logp 
 #
-def calcAtomHydrophobicities(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool) -> None: pass
+def calcAtomHydrophobicities(molgraph: CDPL.Chem.MolecularGraph, overwrite: bool, from_logp: bool = False) -> None: pass
 
 ##
 # \brief 

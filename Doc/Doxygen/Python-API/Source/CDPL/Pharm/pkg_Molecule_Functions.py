@@ -22,5 +22,7 @@
 ##
 # \brief 
 # \param mol 
+# \param calc_hyd 
+# \param from_logp 
 #
-def prepareForPharmacophoreGeneration(mol: CDPL.Chem.Molecule) -> None: pass
+def prepareForPharmacophoreGeneration(mol: CDPL.Chem.Molecule, calc_hyd: bool = True, from_logp: bool = False) -> None: pass

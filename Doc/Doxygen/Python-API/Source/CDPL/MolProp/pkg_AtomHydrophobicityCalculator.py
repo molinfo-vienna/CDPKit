@@ -63,18 +63,6 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param func 
-    #
-    def setAtom3DCoordinatesFunction(func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getAtom3DCoordinatesFunction() -> CDPL.Chem.Atom3DCoordinatesFunction: pass
-
-    ##
-    # \brief 
     # \param molgraph 
     # \param hyd_table 
     #
@@ -84,8 +72,3 @@ class AtomHydrophobicityCalculator(Boost.Python.instance):
     # \brief 
     #
     objectID = property(getObjectID)
-
-    ##
-    # \brief FIXME!
-    #
-    atomCoordinatesFunction = property(getAtomCoordinatesFunction, setAtomCoordinatesFunction)
