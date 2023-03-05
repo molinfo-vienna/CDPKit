@@ -41,7 +41,7 @@
 using namespace CDPL; 
 
 
-void Chem::calculateMorganNumbering(MolecularGraph& molgraph, bool overwrite)
+void Chem::calcMorganNumbering(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,

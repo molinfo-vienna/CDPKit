@@ -84,7 +84,7 @@ void CDPLPythonMolProp::exportMolecularGraphFunctions()
 	using namespace CDPL;
 
 	python::def("calcAtomHydrophobicities", &MolProp::calcAtomHydrophobicities, 
-				(python::arg("molgraph"), python::arg("overwrite")));
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("from_logp") = false));
 	python::def("calcMass", &MolProp::calcMass, python::arg("molgraph"));
 	python::def("calcMassComposition", &MolProp::calcMassComposition, 
 				(python::arg("molgraph"), python::arg("comp")));

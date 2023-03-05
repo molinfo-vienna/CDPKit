@@ -44,7 +44,7 @@ using namespace CDPL;
 namespace
 {
 
-	const double H_BOND_LENGTH = 1.05;
+	const double DEF_DONOR_TO_H_DIST = 1.05;
 	const double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
 }
 
@@ -110,7 +110,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		const Math::Vector3D& orient = getOrientation(don_ftr);
 
 		if (don_geom == FeatureGeometry::VECTOR) { 
-			Math::Vector3D don_h_vec(orient * H_BOND_LENGTH /*getLength(don_ftr)*/);
+			Math::Vector3D don_h_vec(orient * (hasLength(don_ftr) ? getLength(don_ftr) : DEF_DONOR_TO_H_DIST));
 		
 			h_acc_vec.assign(acc_pos - (don_pos + don_h_vec));
 
@@ -131,12 +131,12 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 			
 			double don_acc_vec_len = length(h_acc_vec);
 			double hda_ang = std::abs(std::acos(angleCos(orient, h_acc_vec, don_acc_vec_len)) - DEF_H_BOND_TO_AXIS_ANGLE / 180.0 * M_PI);
-			double hb_len = std::sqrt(H_BOND_LENGTH * H_BOND_LENGTH + don_acc_vec_len * don_acc_vec_len - 2 * H_BOND_LENGTH * don_acc_vec_len * std::cos(hda_ang));
+			double hb_len = std::sqrt(DEF_DONOR_TO_H_DIST * DEF_DONOR_TO_H_DIST + don_acc_vec_len * don_acc_vec_len - 2 * DEF_DONOR_TO_H_DIST * don_acc_vec_len * std::cos(hda_ang));
 			double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
 			score = distScoringFunc(ctr_dev);
 
-			double ahd_ang = std::acos((H_BOND_LENGTH * H_BOND_LENGTH - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * H_BOND_LENGTH * hb_len)) * 180.0 / M_PI;
+			double ahd_ang = std::acos((DEF_DONOR_TO_H_DIST * DEF_DONOR_TO_H_DIST - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * DEF_DONOR_TO_H_DIST * hb_len)) * 180.0 / M_PI;
 			double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle);
 
 			score *= ahdAngleScoringFunc(opt_ang_dev);
@@ -147,7 +147,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		h_acc_vec.assign(acc_pos - don_pos);
 
 		double don_acc_vec_len = length(h_acc_vec);
-		double hb_len = don_acc_vec_len - H_BOND_LENGTH;
+		double hb_len = don_acc_vec_len - DEF_DONOR_TO_H_DIST;
 		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
 		score = distScoringFunc(ctr_dev);
@@ -172,7 +172,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 		Math::Vector3D h_acc_vec(get3DCoordinates(ftr2) - ftr1_pos);
 
 		double don_acc_vec_len = length(h_acc_vec);
-		double hb_len = don_acc_vec_len - H_BOND_LENGTH;
+		double hb_len = don_acc_vec_len - DEF_DONOR_TO_H_DIST;
 		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 		double score = distScoringFunc(ctr_dev);
 
@@ -195,7 +195,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 		const Math::Vector3D& orient = getOrientation(ftr2);
 		
 		if (don_geom == FeatureGeometry::VECTOR) { 
-			Math::Vector3D don_h_vec(orient * H_BOND_LENGTH /*getLength(ftr2)*/);
+			Math::Vector3D don_h_vec(orient * (hasLength(ftr2) ? getLength(ftr2) : DEF_DONOR_TO_H_DIST));
 			Math::Vector3D h_acc_vec(ftr1_pos - (get3DCoordinates(ftr2) + don_h_vec));
 
 			double hb_len = length(h_acc_vec);
@@ -214,19 +214,19 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 			
 		double don_acc_vec_len = length(don_acc_vec);
 		double hda_ang = std::abs(std::acos(angleCos(orient, don_acc_vec, don_acc_vec_len)) - DEF_H_BOND_TO_AXIS_ANGLE / 180.0 * M_PI);
-		double hb_len = std::sqrt(H_BOND_LENGTH * H_BOND_LENGTH + don_acc_vec_len * don_acc_vec_len - 2 * H_BOND_LENGTH * don_acc_vec_len * std::cos(hda_ang));
+		double hb_len = std::sqrt(DEF_DONOR_TO_H_DIST * DEF_DONOR_TO_H_DIST + don_acc_vec_len * don_acc_vec_len - 2 * DEF_DONOR_TO_H_DIST * don_acc_vec_len * std::cos(hda_ang));
 		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
 		double score = distScoringFunc(ctr_dev);
 
-		double ahd_ang = std::acos((H_BOND_LENGTH * H_BOND_LENGTH - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * H_BOND_LENGTH * hb_len)) * 180.0 / M_PI;
+		double ahd_ang = std::acos((DEF_DONOR_TO_H_DIST * DEF_DONOR_TO_H_DIST - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * DEF_DONOR_TO_H_DIST * hb_len)) * 180.0 / M_PI;
 		double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle);
 
 		return score * ahdAngleScoringFunc(opt_ang_dev) * getWeight(ftr2);
 	}
 
 	double don_acc_vec_len = length(ftr1_pos - get3DCoordinates(ftr2));
-	double hb_len = don_acc_vec_len - H_BOND_LENGTH;
+	double hb_len = don_acc_vec_len - DEF_DONOR_TO_H_DIST;
 	double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
 	return distScoringFunc(ctr_dev) * getWeight(ftr2);

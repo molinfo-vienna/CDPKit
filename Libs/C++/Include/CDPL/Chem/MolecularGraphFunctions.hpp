@@ -421,13 +421,13 @@ namespace CDPL
 		CDPL_CHEM_API void canonicalize(MolecularGraph& molgraph, bool atoms = true, bool atom_nbrs = true, 
 										bool bonds = true, bool bond_atoms = false);
 
-		CDPL_CHEM_API void calculate2DCoordinates(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void calc2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API void calculateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
+		CDPL_CHEM_API void calcHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
 
-		CDPL_CHEM_API void calculateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API void calculateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 
+		CDPL_CHEM_API void calcBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 
 												   std::size_t min_ring_size = 8);
 
 		CDPL_CHEM_API void calcCIPPriorities(MolecularGraph& molgraph, bool overwrite);
@@ -436,11 +436,11 @@ namespace CDPL
 												   unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
 												   unsigned int bond_flags = BondPropertyFlag::DEFAULT, bool inc_impl_h = true);
 
-		CDPL_CHEM_API void calculateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
+		CDPL_CHEM_API void calcCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
 													   unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
 													   unsigned int bond_flags = BondPropertyFlag::DEFAULT);
 
-		CDPL_CHEM_API void calculateMorganNumbering(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void calcMorganNumbering(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void calcImplicitHydrogenCounts(MolecularGraph& molgraph, bool overwrite);
 

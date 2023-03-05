@@ -109,13 +109,13 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcGeometricalDistanceMatrix", &Chem::calcGeometricalDistanceMatrix, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calculate2DCoordinates", &Chem::calculate2DCoordinates, 
+	python::def("calc2DCoordinates", &Chem::calc2DCoordinates, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calculateHydrogen3DCoordinates", &Chem::calculateHydrogen3DCoordinates, 
+	python::def("calcHydrogen3DCoordinates", &Chem::calcHydrogen3DCoordinates, 
 				(python::arg("molgraph"), python::arg("undef_only") = true));
-	python::def("calculateBond2DStereoFlags", &Chem::calculateBond2DStereoFlags, 
+	python::def("calcBond2DStereoFlags", &Chem::calcBond2DStereoFlags, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calculateBondDirections", &Chem::calculateBondDirections,
+	python::def("calcBondDirections", &Chem::calcBondDirections,
 				(python::arg("molgraph"), python::arg("overwrite"), 
 				 python::arg("ring_bonds") = true, python::arg("min_ring_size") = 8));
 	python::def("calcCIPPriorities", &Chem::calcCIPPriorities,
@@ -123,10 +123,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("perceiveSymmetryClasses", &Chem::perceiveSymmetryClasses, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT, 
 				 python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, python::arg("inc_impl_h") = true));
-	python::def("calculateCanonicalNumbering", &Chem::calculateCanonicalNumbering, 
+	python::def("calcCanonicalNumbering", &Chem::calcCanonicalNumbering, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
 				 python::arg("bond_flags") =  Chem::BondPropertyFlag::DEFAULT));
-	python::def("calculateMorganNumbering", &Chem::calculateMorganNumbering, 
+	python::def("calcMorganNumbering", &Chem::calcMorganNumbering, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcImplicitHydrogenCounts", &Chem::calcImplicitHydrogenCounts, 
 				(python::arg("molgraph"), python::arg("overwrite")));

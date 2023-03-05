@@ -41,7 +41,7 @@
 using namespace CDPL; 
 
 
-void Chem::calculateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
+void Chem::calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,

@@ -46,7 +46,7 @@ namespace CDPL
     namespace Pharm 
     {
 	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
+		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol, bool calc_hyd = true, bool from_logp = false);
     }
 }
 

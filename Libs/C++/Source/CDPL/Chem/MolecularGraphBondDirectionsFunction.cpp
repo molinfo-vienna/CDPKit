@@ -41,7 +41,8 @@
 using namespace CDPL; 
 
 
-void Chem::calculateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds, std::size_t min_ring_size)
+void Chem::calcBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds,
+							  std::size_t min_ring_size)
 {
 	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,

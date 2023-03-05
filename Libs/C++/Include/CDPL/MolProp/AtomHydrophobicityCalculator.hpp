@@ -31,11 +31,11 @@
 #ifndef CDPL_MOLPROP_ATOMHYDROPHOBICITYCALCULATOR_HPP
 #define CDPL_MOLPROP_ATOMHYDROPHOBICITYCALCULATOR_HPP
 
+#include <string>
 #include <vector>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -45,79 +45,62 @@ namespace CDPL
 	namespace MolProp
     {
 
-	/**
-	 * \brief AtomHydrophobicityCalculator.
-	 * \see [\ref CATA] 
-	 */
-	class CDPL_MOLPROP_API AtomHydrophobicityCalculator
-	{
+		/**
+		 * \brief AtomHydrophobicityCalculator.
+		 * \see [\ref CATA] 
+		 */
+		class CDPL_MOLPROP_API AtomHydrophobicityCalculator
+		{
 
-	  public:
-	    /**
-	     * \brief Constructs the \c %AtomHydrophobicityCalculator instance.
-	     */
-	    AtomHydrophobicityCalculator();
+		  public:
+			/**
+			 * \brief Constructs the \c %AtomHydrophobicityCalculator instance.
+			 */
+			AtomHydrophobicityCalculator();
 		
-	    /**
-	     * \brief Constructs a copy of the \c %AtomHydrophobicityCalculator instance \a calculator.
-	     * \param calculator The \c %AtomHydrophobicityCalculator to copy.
-	     */
-	    AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calculator);
+			/**
+			 * \brief Constructs a copy of the \c %AtomHydrophobicityCalculator instance \a calculator.
+			 * \param calculator The \c %AtomHydrophobicityCalculator to copy.
+			 */
+			AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calculator);
 		
-	    /**
-	     * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
-	     * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
-	     * \param hyd_table The output vector where to store the atom hydrophobicities.
-	     */
-	    AtomHydrophobicityCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table);
+			/**
+			 * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+			 * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
+			 * \param hyd_table The output vector where to store the atom hydrophobicities.
+			 */
+			AtomHydrophobicityCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table);
 
-	    /**
-	     * Destructor.
-	     */
-	    ~AtomHydrophobicityCalculator();
+			/**
+			 * Destructor.
+			 */
+			~AtomHydrophobicityCalculator();
 
-	    /**
-	     * \brief Specifies a function for the retrieval of atom 3D-coordinates.
-	     * \param func The atom 3D-coordinates function.
-	     */
-	    void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+			/**
+			 * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
+			 * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
+			 * \param hyd_table The output vector where to store the atom hydrophobicities.
+			 */
+			void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table);
 
-	    /**
-	     * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
-	     * \return The registered atom 3D-coordinates function.
-	     */
-	    const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+			/**
+			 * \brief Copies the \c %AtomHydrophobicityCalculator instance \a calculator.
+			 * \param calculator The \c %AtomHydrophobicityCalculator to copy.
+			 * \return A reference to itself.
+			 */
+			AtomHydrophobicityCalculator& operator=(const AtomHydrophobicityCalculator& calculator);
 
-	    /**
-	     * \brief Perceives the hydrophobicities of the atoms in the molecular graph a\ molgraph.
-	     * \param molgraph The molecular graph for which to perceive the atom hydrophobicities.
-	     * \param hyd_table The output vector where to store the atom hydrophobicities.
-	     */
-	    void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table);
+		  private:
+			typedef std::vector<std::string> StringList;
+			
+			void calcHydrophobicities(const Chem::MolecularGraph& molgraph, Util::DArray& atom_hyds);
+			
+			double calcAccessibleSurfaceFactor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph);
 
-	    /**
-	     * \brief Copies the \c %AtomHydrophobicityCalculator instance \a calculator.
-	     * \param calculator The \c %AtomHydrophobicityCalculator to copy.
-	     * \return A reference to itself.
-	     */
-	    AtomHydrophobicityCalculator& operator=(const AtomHydrophobicityCalculator& calculator);
-
-	  private:
-	    typedef std::vector<double> DoubleArray;
-	    typedef std::vector<Math::Vector3D> CoordsArray;
-	    typedef std::vector<Chem::SubstructureSearch::SharedPointer> HydPatternSubSearchTable;
-	
-	    void init(const Chem::MolecularGraph& molgraph);
-
-	    void calcHydrophobicities(Util::DArray& atom_hyds);
-	    double calcAccessibleSurfaceFactor(const Chem::Atom& atom);
-
-		Chem::Atom3DCoordinatesFunction coordsFunc;
-	    const Chem::MolecularGraph*     molGraph;
-	    HydPatternSubSearchTable        hydSubSearchTable;
-	    DoubleArray                     nbrAtomVdWRadii;
-	    CoordsArray                     nbrAtomPositions;
-	};
+			Chem::SubstructureSearch substructSearch;
+			std::string              atomDescr;
+			StringList               atomEnvData;
+		};
     }
 }
 

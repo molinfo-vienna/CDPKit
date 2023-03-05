@@ -114,7 +114,7 @@ namespace CDPL
 
 		CDPL_MOLPROP_API void calcMHMOProperties(Chem::MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_MOLPROP_API void calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite);
+		CDPL_MOLPROP_API void calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite, bool from_logp = false);
 
 		CDPL_MOLPROP_API void perceiveHBondDonorAtomTypes(Chem::MolecularGraph& molgraph, bool overwrite);
 

@@ -42,6 +42,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
 
 
@@ -393,25 +394,31 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 		if (coords_func.empty())
 			return;
 
-		if (featureAtoms.size() == 1) {
-			set3DCoordinates(feature, coords_func(*featureAtoms[0]));
-
-		} else {
-			bool term_atom1 = (MolProp::getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
-			bool term_atom2 = (MolProp::getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
-
-			if (term_atom1 && !term_atom2) {
-				set3DCoordinates(feature, coords_func(*featureAtoms.front()));
-
-			} else if (term_atom2 && !term_atom1) { 
-				set3DCoordinates(feature, coords_func(*featureAtoms.back()));
+		try {
+			if (featureAtoms.size() == 1) {
+				set3DCoordinates(feature, coords_func(*featureAtoms[0]));
 
 			} else {
-				Math::Vector3D pos;
+				bool term_atom1 = (MolProp::getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
+				bool term_atom2 = (MolProp::getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
 
-				if (calcHydWeightedCentroid(featureAtoms, pos))
-					set3DCoordinates(feature, pos);
+				if (term_atom1 && !term_atom2) {
+					set3DCoordinates(feature, coords_func(*featureAtoms.front()));
+
+				} else if (term_atom2 && !term_atom1) { 
+					set3DCoordinates(feature, coords_func(*featureAtoms.back()));
+
+				} else {
+					Math::Vector3D pos;
+
+					if (calcHydWeightedCentroid(featureAtoms, pos) > 0.0)
+						set3DCoordinates(feature, pos);
+				}
 			}
+
+		} catch (const Base::ItemNotFound& e) {
+		} catch (...) {
+			throw;
 		}
 	}
 }
@@ -422,15 +429,15 @@ Pharm::Feature& Pharm::HydrophobicFeatureGenerator::emitFeature(const AtomList& 
 {
 	Feature& feature = pharm.addFeature();
 	Math::Vector3D pos;
-	double tot_hyd = calcHydWeightedCentroid(alist, pos);
+	double tot_hyd = (set_pos ? calcHydWeightedCentroid(alist, pos) : calcSummedHydrophobicity(alist));
 
 	setType(feature, featureType);
 	setTolerance(feature, featureTol);
 	setGeometry(feature, featureGeom);
 	setSubstructure(feature, substruct);
-	setHydrophobicity(feature, tot_hyd);
+	setHydrophobicity(feature, std::abs(tot_hyd));
 
-	if (tot_hyd > 0.0)
+	if (set_pos && tot_hyd > 0.0)
 		set3DCoordinates(feature, pos);
 
 	return feature;
@@ -591,18 +598,31 @@ double Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomLis
 		return false;
 
 	double total_hyd = 0.0;
-
+	bool no_coords = false;
+	
 	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
 		const Chem::Atom& atom = **it;
 		double atom_hyd = atomHydTable[molGraph->getAtomIndex(atom)];
 
-		centroid.plusAssign(coords_func(atom) * atom_hyd);
+		if (!no_coords && !coords_func.empty()) {
+			try {
+				centroid.plusAssign(coords_func(atom) * atom_hyd);
+			} catch (const Base::ItemNotFound& e) {
+				no_coords = true;
+			} catch (...) {
+				throw;
+			}
+		}
+		
 		total_hyd += atom_hyd;
 	}
 
 	if (total_hyd == 0.0)
 		return 0.0;
 
+	if (no_coords)
+		return -total_hyd;
+	
 	centroid /= total_hyd;
 
 	return total_hyd;
@@ -616,18 +636,8 @@ void Pharm::HydrophobicFeatureGenerator::getAtomHydrophobicities()
 
 	atomHydTable.resize(num_atoms);
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		const Atom& atom = molGraph->getAtom(i);
-
-		if (MolProp::hasHydrophobicity(atom)) {
-			atomHydTable[i] = MolProp::getHydrophobicity(atom);
-			continue;
-		}
-
-		atomHydCalculator.setAtom3DCoordinatesFunction(getAtom3DCoordinatesFunction());
-		atomHydCalculator.calculate(*molGraph, atomHydTable);
-		return;
-	}
+	for (std::size_t i = 0; i < num_atoms; i++)
+		atomHydTable[i] = MolProp::getHydrophobicity(molGraph->getAtom(i));
 }
 
 void Pharm::HydrophobicFeatureGenerator::buildAtomMask(const AtomList& alist, Util::BitSet& mask) const

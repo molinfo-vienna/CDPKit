@@ -159,8 +159,8 @@ void ChOx::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFo
 									   (getCoordinatesDimensionParameter(params) == 2 || getMDLDimensionality(mol) == 2))) {
 
 		if (!hasCoordinates(mol, 2)) {
-			calculate2DCoordinates(mol, true);
-			calculateBond2DStereoFlags(mol, true);
+			calc2DCoordinates(mol, true);
+			calcBond2DStereoFlags(mol, true);
 		}
 	}
 }

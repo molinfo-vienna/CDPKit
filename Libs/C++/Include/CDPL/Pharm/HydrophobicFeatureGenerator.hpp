@@ -36,7 +36,6 @@
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -218,20 +217,19 @@ namespace CDPL
 
 			bool isChainEndAtom(const Chem::Atom&) const;
 
-			const Chem::MolecularGraph*           molGraph;
-			Util::BitSet                          procAtomMask;
-			Util::BitSet                          hAtomMask;
-			Util::BitSet                          tmpAtomMask;
-			unsigned int                          featureType;
-			double                                featureTol;
-			unsigned int                          featureGeom;
-			double                                hydThreshRing;  
-			double                                hydThreshChain; 
-			double                                hydThreshGroup;
-			Util::DArray                          atomHydTable;
-			AtomList                              featureAtoms;
-			AtomList                              chainAtoms;
-			MolProp::AtomHydrophobicityCalculator atomHydCalculator;
+			const Chem::MolecularGraph*  molGraph;
+			Util::BitSet                 procAtomMask;
+			Util::BitSet                 hAtomMask;
+			Util::BitSet                 tmpAtomMask;
+			unsigned int                 featureType;
+			double                       featureTol;
+			unsigned int                 featureGeom;
+			double                       hydThreshRing;  
+			double                       hydThreshChain; 
+			double                       hydThreshGroup;
+			Util::DArray                 atomHydTable;
+			AtomList                     featureAtoms;
+			AtomList                     chainAtoms;
 		};
     }
 }

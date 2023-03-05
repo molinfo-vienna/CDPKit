@@ -26,17 +26,23 @@
 
 #include "StaticInit.hpp"
 
+#include <locale>
+#include <algorithm>
+
 #include <boost/thread.hpp>
+#include <boost/unordered_map.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
-#include "CDPL/Math/Matrix.hpp"
 
 
 using namespace CDPL; 
@@ -45,116 +51,11 @@ using namespace CDPL;
 namespace
 {
 
-    const double spherePoints[] = { -0.3090169944, -0.5,
-									0.8090169944, -0.5877852523, -0.4253254042, 0.6881909602,
-									-0.4253254042, -0.6881909602, 0.5877852523, 0.3090169944, 0.5,
-									-0.8090169944, 0.4253254042, 0.6881909602, -0.5877852523,
-									0.1606220356, 0.7020464448, -0.6937804776, 0.259891913,
-									-0.8626684804, 0.4338885646, 0, -0.9619383578, 0.2732665289, 0,
-									-0.8506508084, 0.5257311121, -0.5257311121, 0.8506508084, 0,
-									-0.2628655561, 0.9510565163, 0.1624598481, -0.5, 0.8090169944,
-									0.3090169944, -0.8090169944, 0.3090169944, -0.5, -0.8626684804,
-									0.4338885646, -0.259891913, -0.6881909602, 0.5877852523,
-									-0.4253254042, -0.4253254042, 0.6881909602, 0.5877852523,
-									-0.259891913, 0.8626684804, 0.4338885646, -0.4338885646,
-									0.259891913, 0.8626684804, -0.2732665289, 0, 0.9619383578,
-									-0.1624598481, 0.2628655561, 0.9510565163, 1, 0, 0, 0.9619383578,
-									-0.2732665289, 0, 0.9510565163, -0.1624598481, 0.2628655561, -1,
-									0, 0, -0.9619383578, -0.2732665289, 0, -0.9510565163,
-									-0.1624598481, -0.2628655561, -0.9510565163, 0.1624598481,
-									0.2628655561, -0.8626684804, 0.4338885646, 0.259891913,
-									-0.8090169944, 0.3090169944, 0.5, 0.5257311121, 0, 0.8506508084,
-									0.6937804776, -0.1606220356, 0.7020464448, 0.4338885646,
-									-0.259891913, 0.8626684804, 0.2732665289, 0, 0.9619383578,
-									0.5257311121, 0, -0.8506508084, 0.2732665289, 0, -0.9619383578,
-									0.4338885646, -0.259891913, -0.8626684804, -0.4338885646,
-									-0.259891913, -0.8626684804, -0.5877852523, -0.4253254042,
-									-0.6881909602, -0.3090169944, -0.5, -0.8090169944, 0.2628655561,
-									-0.9510565163, 0.1624598481, 0.2628655561, -0.9510565163,
-									-0.1624598481, 0.5257311121, -0.8506508084, 0, 0, -0.9619383578,
-									-0.2732665289, 0, -1, 0, 0.1624598481, -0.2628655561,
-									0.9510565163, 0.6881909602, 0.5877852523, 0.4253254042,
-									0.8626684804, 0.4338885646, 0.259891913, 0.7020464448, 0.6937804776,
-									0.1606220356, -0.6881909602, -0.5877852523, 0.4253254042, -0.5,
-									-0.8090169944, -0.3090169944, -0.7020464448, -0.6937804776,
-									-0.1606220356, -0.5257311121, -0.8506508084, 0, -0.5257311121, 0,
-									0.8506508084, 0.3090169944, 0.5, 0.8090169944, 0, 0.5257311121,
-									0.8506508084, 0.1606220356, 0.7020464448, 0.6937804776,
-									0.8090169944, 0.3090169944, -0.5, 0.9510565163, 0.1624598481,
-									-0.2628655561, 0.8506508084, 0, -0.5257311121, -0.2628655561,
-									0.9510565163, -0.1624598481, 0, 1, 0, 0.2628655561, 0.9510565163,
-									0.1624598481, 0, 0.9619383578, 0.2732665289, -0.9510565163,
-									0.1624598481, -0.2628655561, 0, 0, 1, -0.1624598481,
-									-0.2628655561, 0.9510565163, -0.4338885646, -0.259891913,
-									0.8626684804, 0.5, -0.8090169944, -0.3090169944, 0.8506508084,
-									-0.5257311121, 0, 0.7020464448, -0.6937804776, -0.1606220356,
-									0.7020464448, -0.6937804776, 0.1606220356, 0.259891913,
-									0.8626684804, -0.4338885646, 0.259891913, -0.8626684804,
-									-0.4338885646, 0.1606220356, -0.7020464448, -0.6937804776, 0,
-									-0.8506508084, -0.5257311121, 0.1624598481, -0.2628655561,
-									-0.9510565163, 0, -0.5257311121, -0.8506508084, 0.3090169944, -0.5,
-									-0.8090169944, -0.3090169944, 0.5, -0.8090169944, -0.5877852523,
-									0.4253254042, -0.6881909602, -0.4253254042, 0.6881909602,
-									-0.5877852523, 0.8090169944, -0.3090169944, -0.5, 0.6937804776,
-									-0.1606220356, -0.7020464448, 0.8506508084, 0, 0.5257311121,
-									0.9510565163, 0.1624598481, 0.2628655561, -0.8506508084,
-									0.5257311121, 0, -0.7020464448, 0.6937804776, 0.1606220356,
-									0.7020464448, 0.6937804776, -0.1606220356, 0.5257311121,
-									0.8506508084, 0, 0.5, 0.8090169944, -0.3090169944, 0.2628655561,
-									0.9510565163, -0.1624598481, -0.6937804776, 0.1606220356,
-									-0.7020464448, -0.6937804776, -0.1606220356, -0.7020464448,
-									-0.5257311121, 0, -0.8506508084, -0.259891913, -0.8626684804,
-									0.4338885646, -0.1606220356, -0.7020464448, 0.6937804776,
-									0.9619383578, 0.2732665289, 0, -0.6937804776, 0.1606220356,
-									0.7020464448, -0.5877852523, 0.4253254042, 0.6881909602,
-									-0.8506508084, 0, 0.5257311121, -0.8090169944, -0.3090169944, -0.5,
-									-0.6881909602, -0.5877852523, -0.4253254042, 0.1624598481,
-									0.2628655561, 0.9510565163, -0.5, -0.8090169944, 0.3090169944,
-									-0.2628655561, -0.9510565163, 0.1624598481, -0.8506508084,
-									-0.5257311121, 0, -0.8626684804, -0.4338885646, -0.259891913,
-									0.8626684804, -0.4338885646, -0.259891913, 0, 0, -1, 0.1624598481,
-									0.2628655561, -0.9510565163, -0.1624598481, 0.2628655561,
-									-0.9510565163, -0.8090169944, -0.3090169944, 0.5, -0.6937804776,
-									-0.1606220356, 0.7020464448, 0.6881909602, -0.5877852523,
-									-0.4253254042, 0.5877852523, 0.4253254042, 0.6881909602,
-									0.4338885646, 0.259891913, 0.8626684804, -0.9510565163,
-									-0.1624598481, 0.2628655561, -0.8626684804, -0.4338885646,
-									0.259891913, -0.1606220356, -0.7020464448, -0.6937804776,
-									0.259891913, 0.8626684804, 0.4338885646, 0, 0.8506508084,
-									0.5257311121, 0.4253254042, 0.6881909602, 0.5877852523, 0.5,
-									0.8090169944, 0.3090169944, -0.7020464448, -0.6937804776,
-									0.1606220356, 0.8506508084, 0.5257311121, 0, 0.8626684804,
-									0.4338885646, -0.259891913, 0.5877852523, -0.4253254042,
-									-0.6881909602, 0, 0.8506508084, -0.5257311121, -0.9619383578,
-									0.2732665289, 0, 0.5877852523, -0.4253254042, 0.6881909602,
-									0.4253254042, -0.6881909602, 0.5877852523, 0.3090169944, -0.5,
-									0.8090169944, -0.7020464448, 0.6937804776, -0.1606220356,
-									-0.3090169944, 0.5, 0.8090169944, -0.1606220356, 0.7020464448,
-									0.6937804776, 0.8626684804, -0.4338885646, 0.259891913,
-									0.8090169944, -0.3090169944, 0.5, 0, -0.5257311121, 0.8506508084,
-									0.1606220356, -0.7020464448, 0.6937804776, 0.4338885646,
-									0.259891913, -0.8626684804, -0.5, 0.8090169944, -0.3090169944,
-									-0.259891913, 0.8626684804, -0.4338885646, 0.9510565163,
-									-0.1624598481, -0.2628655561, -0.4253254042, -0.6881909602,
-									-0.5877852523, -0.8506508084, 0, -0.5257311121, 0.5, -0.8090169944,
-									0.3090169944, 0.6881909602, 0.5877852523, -0.4253254042,
-									0.6937804776, 0.1606220356, -0.7020464448, -0.6881909602,
-									0.5877852523, 0.4253254042, -0.259891913, -0.8626684804,
-									-0.4338885646, -0.2732665289, 0, -0.9619383578, -0.2628655561,
-									-0.9510565163, -0.1624598481, 0.8090169944, 0.3090169944, 0.5, 0,
-									0.5257311121, -0.8506508084, 0.4253254042, -0.6881909602,
-									-0.5877852523, 0.5877852523, 0.4253254042, -0.6881909602,
-									-0.4338885646, 0.259891913, -0.8626684804, 0, 0.9619383578,
-									-0.2732665289, -0.1606220356, 0.7020464448, -0.6937804776,
-									0.6937804776, 0.1606220356, 0.7020464448, 0.6881909602,
-									-0.5877852523, 0.4253254042, -0.1624598481, -0.2628655561,
-									-0.9510565163 };
-
     double atomHydCategoryFactors[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.6, 0.6, 0.6, 0, 0.25, 0 };
 
     typedef std::vector<Chem::MolecularGraph::SharedPointer> PatternTable;
+	
     PatternTable atomHydCategoryPatterns;
-
     boost::once_flag initHydCategoryPatternsFlag = BOOST_ONCE_INIT;
 
     void initHydCategoryPatterns() 
@@ -202,20 +103,80 @@ namespace
 
 		atomHydCategoryPatterns.push_back(parseSMARTS("[N,O;!$(*-*=,:*)]~[*:14]~[N,O;!$(*-*=,:*)]"));
     }
+
+    typedef boost::unordered_map<std::string, double> AtomSurfaceAccessibilityTable;
+
+	AtomSurfaceAccessibilityTable atomSurfAccTable;
+    boost::once_flag initAtomSurfAccTableFlag = BOOST_ONCE_INIT;
+
+    void initAtomSurfAccTable() 
+    {
+		// TODO
+	}
+	
+	void appendBondSymbol(std::string& str, const Chem::Bond& bond)
+	{
+		if (getAromaticityFlag(bond)) {
+			str.push_back(':');
+			return;
+		}
+
+		switch (getOrder(bond)) {
+
+			case 1:
+				return;
+
+			case 2:
+				str.push_back('=');
+				return;
+
+			case 3:
+				str.push_back('#');
+				return;
+		}
+
+		str.push_back('~');
+	}
+
+	void appendAtomSymbol(std::string& str, const Chem::Atom& atom)
+	{
+		using namespace Chem;
+		
+		unsigned int type = getType(atom);
+
+		if (type > AtomType::MAX_ATOMIC_NO)
+			type = AtomType::ANY;
+
+		const std::string& elem_sym = AtomDictionary::getSymbol(type);
+
+		if (elem_sym.empty())
+			return;
+		
+		if (getAromaticityFlag(atom))
+			str.push_back(std::tolower(elem_sym[0], std::locale::classic()));
+		else
+			str.push_back(elem_sym[0]);
+
+		if (elem_sym.size() > 1)
+			str.push_back(elem_sym[1]);
+	}
 }
 
 
-MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(): 
-	coordsFunc(&Chem::get3DCoordinates) 
-{}
-
-MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calc): 
-	coordsFunc(&Chem::get3DCoordinates) 
-{}
-
-MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table): 
-	coordsFunc(&Chem::get3DCoordinates)
+MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator()
 {
+	substructSearch.uniqueMappingsOnly(true);
+}
+
+MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calc)
+{
+	substructSearch.uniqueMappingsOnly(true);
+}
+
+MolProp::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table)
+{
+	substructSearch.uniqueMappingsOnly(true);
+
     calculate(molgraph, hyd_table);
 }
 
@@ -226,56 +187,30 @@ MolProp::AtomHydrophobicityCalculator& MolProp::AtomHydrophobicityCalculator::op
     return *this;
 }
 
-void MolProp::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func)
-{
-    coordsFunc = func;
-}
-
-const Chem::Atom3DCoordinatesFunction& MolProp::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction() const
-{
-    return coordsFunc;
-}
-
 void MolProp::AtomHydrophobicityCalculator::calculate(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table)
 {
-    init(molgraph);
-
-    calcHydrophobicities(hyd_table);
+    calcHydrophobicities(molgraph, hyd_table);
 }
 
-void MolProp::AtomHydrophobicityCalculator::init(const Chem::MolecularGraph& molgraph)
-{
-	molGraph = &molgraph;
-
-    boost::call_once(&initHydCategoryPatterns, initHydCategoryPatternsFlag);
-
-    if (hydSubSearchTable.empty()) {
-		for (PatternTable::const_iterator p_it = atomHydCategoryPatterns.begin(), p_end = atomHydCategoryPatterns.end(); p_it != p_end; ++p_it) {
-			const Chem::MolecularGraph& ptn = **p_it;
-			Chem::SubstructureSearch::SharedPointer ss_ptr(new Chem::SubstructureSearch(ptn));
-
-			hydSubSearchTable.push_back(ss_ptr);
-		}
-    }
-}
-
-void MolProp::AtomHydrophobicityCalculator::calcHydrophobicities(Util::DArray& hyd_table)
+void MolProp::AtomHydrophobicityCalculator::calcHydrophobicities(const Chem::MolecularGraph& molgraph, Util::DArray& hyd_table)
 {
 	using namespace Chem;
 
-	std::size_t num_atoms = molGraph->getNumAtoms();
+    boost::call_once(&initHydCategoryPatterns, initHydCategoryPatternsFlag);
+    boost::call_once(&initAtomSurfAccTable, initAtomSurfAccTableFlag);
+
+	std::size_t num_atoms = molgraph.getNumAtoms();
 
     hyd_table.assign(num_atoms, 1.0);
 
-    for (HydPatternSubSearchTable::const_iterator ss_it = hydSubSearchTable.begin(), ss_end = hydSubSearchTable.end(); 
-		 ss_it != ss_end; ++ss_it) {
+    for (PatternTable::const_iterator p_it = atomHydCategoryPatterns.begin(), p_end = atomHydCategoryPatterns.end(); 
+		 p_it != p_end; ++p_it) {
 
-		SubstructureSearch& sub_search = **ss_it;
+		substructSearch.setQuery(**p_it);
+		substructSearch.findMappings(molgraph);
 
-		sub_search.findMappings(*molGraph);
-
-		for (SubstructureSearch::ConstMappingIterator m_it = sub_search.getMappingsBegin(),
-				 m_end = sub_search.getMappingsEnd(); m_it != m_end; ++m_it) {
+		for (SubstructureSearch::ConstMappingIterator m_it = substructSearch.getMappingsBegin(),
+				 m_end = substructSearch.getMappingsEnd(); m_it != m_end; ++m_it) {
 
 			const AtomMapping& mapping = m_it->getAtomMapping();
 
@@ -285,110 +220,80 @@ void MolProp::AtomHydrophobicityCalculator::calcHydrophobicities(Util::DArray& h
 				if (hyd_cat == 0)
 					continue;
 
-				hyd_table[molGraph->getAtomIndex(*it->second)] *= atomHydCategoryFactors[hyd_cat];
+				hyd_table[molgraph.getAtomIndex(*it->second)] *= atomHydCategoryFactors[hyd_cat];
 			}
 		}
     }
 
-    for (std::size_t i = 0; i < num_atoms; i++) {
+	for (std::size_t i = 0; i < num_atoms; i++) {
 		if (hyd_table[i] == 0.0)
 			continue;
-
-		hyd_table[i] *= calcAccessibleSurfaceFactor(molGraph->getAtom(i));
-    }
+		
+		hyd_table[i] *= calcAccessibleSurfaceFactor(molgraph.getAtom(i), molgraph);
+	}
 }
 
-
-// Simplified implementation without probe-sphere
-
-double MolProp::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const Chem::Atom& atom)
+double MolProp::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
-	double vdw_radius = getVdWRadius(atom);
+	atomEnvData.clear();
 
-    if (coordsFunc.empty())
-		return vdw_radius * vdw_radius;
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-    const Math::Vector3D& atom_pos = coordsFunc(atom);
-
-    nbrAtomVdWRadii.clear();
-    nbrAtomPositions.clear();
-
-    Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
-
-    for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
-		if (!molGraph->containsBond(*b_it))
-			continue;
-
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
 		const Atom& nbr_atom = *a_it;
 
-		if (!molGraph->containsAtom(nbr_atom))
+		if (!molgraph.containsAtom(nbr_atom))
 			continue;
 
-		nbrAtomPositions.push_back(coordsFunc(nbr_atom) - atom_pos);
-		nbrAtomVdWRadii.push_back(getVdWRadius(nbr_atom));
-    }
+		const Bond& nbr_bond = *b_it;
 
-    std::size_t num_nbrs = nbrAtomPositions.size();
+		if (!molgraph.containsBond(nbr_bond))
+			continue;
+		
+		atomDescr.clear();
 
-    if (num_nbrs == 0)
-		return vdw_radius * vdw_radius;
+		appendBondSymbol(atomDescr, nbr_bond);
+		appendAtomSymbol(atomDescr, nbr_atom);
 
-    Math::Vector3D ref_vec1(nbrAtomPositions[0] - atom_pos);
-    Math::Vector3D ref_vec2;
+		atomEnvData.push_back(atomDescr);
+	}
 
-    if (num_nbrs > 1) {
-		ref_vec2.assign(nbrAtomPositions[1] - atom_pos);
+	for (std::size_t i = 0, num_impl_hs = calcImplicitHydrogenCount(atom, molgraph); i < num_impl_hs; i++)
+		atomEnvData.push_back("H");
+	
+	std::sort(atomEnvData.begin(), atomEnvData.end());
+	
+	atomDescr.clear();
+			
+	appendAtomSymbol(atomDescr, atom);
 
-    } else {
-		if (ref_vec1(0) != 0) {
-			ref_vec2(0) = ref_vec1(1);
-			ref_vec2(1) = -ref_vec1(0);
-			ref_vec2(2) = 0.0;
+	for (StringList::const_iterator it = atomEnvData.begin(), end = atomEnvData.end(); it != end; ++it)
+		atomDescr.append(*it);
 
-		} else if (ref_vec1(1) != 0) {
-			ref_vec2(0) = -ref_vec1(1);
-			ref_vec2(1) = ref_vec1(0);
-			ref_vec2(2) = 0.0;
+	AtomSurfaceAccessibilityTable::const_iterator it = atomSurfAccTable.find(atomDescr);
 
-		} else {
-			ref_vec2(0) = 0.0;
-			ref_vec2(1) = -ref_vec1(2);
-			ref_vec2(2) = ref_vec1(1);
-		}
-    }
+	if (it != atomSurfAccTable.end())
+		return it->second;
 
-    ref_vec1 /= length(ref_vec1);
+	// fallback 1
+	
+	atomDescr.clear();
 
-    Math::Matrix3D xform;
+	appendAtomSymbol(atomDescr, atom);
 
-    column(xform, 0) = ref_vec1;
-    column(xform, 1) = crossProd(ref_vec1, ref_vec2);
-    column(xform, 1) /= length(column(xform, 1));
-    column(xform, 2) = crossProd(ref_vec1, column(xform, 1));
+	atomDescr.append(boost::lexical_cast<std::string>(atomEnvData.size()));
+	atomDescr.append(boost::lexical_cast<std::string>(std::count(atomEnvData.begin(), atomEnvData.end(), "H")));
 
-    Math::Vector3D trans_sp;
-    std::size_t inacc_cnt = 0;
+	it = atomSurfAccTable.find(atomDescr);
 
-    for (std::size_t i = 0; i < sizeof(spherePoints) / sizeof(double); i += 3) {
-		double sp_x = spherePoints[i] * vdw_radius;
-		double sp_y = spherePoints[i + 1] * vdw_radius;
-		double sp_z = spherePoints[i + 2] * vdw_radius;
+	if (it != atomSurfAccTable.end())
+		return it->second;
 
-		trans_sp(0) = xform(0, 0) * sp_x + xform(0, 1) * sp_y +  xform(0, 2) * sp_z;
-		trans_sp(1) = xform(1, 0) * sp_x + xform(1, 1) * sp_y +  xform(1, 2) * sp_z;
-		trans_sp(2) = xform(2, 0) * sp_x + xform(2, 1) * sp_y +  xform(2, 2) * sp_z;
+	// fallback 2
 
-		for (std::size_t j = 0; j < num_nbrs; j++) {
-			if (length(trans_sp - nbrAtomPositions[j]) < nbrAtomVdWRadii[j]) {
-				inacc_cnt++;
-				break;
-			}
-		}
-    } 
+	double vdw_radius = MolProp::getVdWRadius(atom);
 
-    std::size_t num_spts = sizeof(spherePoints) / sizeof(double) / 3;
-
-    return double(num_spts - inacc_cnt) * vdw_radius * vdw_radius / num_spts;
+	return (vdw_radius * vdw_radius);
 }

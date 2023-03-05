@@ -36,13 +36,14 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
-void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
+void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol, bool calc_hyd, bool from_logp)
 {
     perceiveSSSR(mol, false);
     setRingFlags(mol, false);
@@ -51,14 +52,21 @@ void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
     setAromaticityFlags(mol, false);
 
 	if (makeHydrogenComplete(mol)) {
-		calculateHydrogen3DCoordinates(mol);
-
+		try {
+			calcHydrogen3DCoordinates(mol);
+		} catch (const Base::ItemNotFound& e) {
+		} catch (...) {
+			throw;
+		}
+		
 		try {
 			Biomol::setHydrogenResidueSequenceInfo(mol, false);
-
 		} catch (const Base::ItemNotFound& e) {
 		} catch (...) {
 			throw;
 		}
 	}
+
+	if (calc_hyd)
+		MolProp::calcAtomHydrophobicities(mol, false, from_logp);
 }

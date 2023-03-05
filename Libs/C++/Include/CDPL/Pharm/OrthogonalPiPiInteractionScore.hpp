@@ -71,7 +71,7 @@ namespace CDPL
 			 * \param max_ang The maximum allowed angle deviation from 90° of the two ring-plane orientation vectors.
 			 */
 			OrthogonalPiPiInteractionScore(double min_h_dist = DEF_MIN_H_DISTANCE, double max_h_dist = DEF_MAX_H_DISTANCE,
-										   double max_V_dist = DEF_MAX_V_DISTANCE, double max_ang = DEF_MAX_ANGLE);
+										   double max_v_dist = DEF_MAX_V_DISTANCE, double max_ang = DEF_MAX_ANGLE);
 
 			double getMinHDistance() const;
 

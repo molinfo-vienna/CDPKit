@@ -160,7 +160,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 			}
 		}
 		
-		calculateCanonicalNumbering(mol, false);
+		calcCanonicalNumbering(mol, false);
 		canonicalize(mol, true, true, true, true);
 		perceiveSSSR(mol, true);
 		perceiveComponents(mol, true);

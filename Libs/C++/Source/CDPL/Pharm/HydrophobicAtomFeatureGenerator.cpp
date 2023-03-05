@@ -36,6 +36,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
@@ -128,30 +129,16 @@ Pharm::FeatureGenerator::SharedPointer Pharm::HydrophobicAtomFeatureGenerator::c
 
 void Pharm::HydrophobicAtomFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
-	init(molgraph);
-	genFeatures(pharm);
-}
-
-void Pharm::HydrophobicAtomFeatureGenerator::init(const Chem::MolecularGraph& molgraph)
-{
-	molGraph = &molgraph;
-
-	getAtomHydrophobicities();
-}
-
-void Pharm::HydrophobicAtomFeatureGenerator::genFeatures(Pharmacophore& pharm)
-{
 	using namespace Chem;
 
-	std::size_t idx = 0;
-
-	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it, idx++) {
+	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
-
-		if (atomHydTable[idx] < hydThreshold)
+		double hyd = MolProp::getHydrophobicity(atom);
+		
+		if (hyd < hydThreshold)
 			continue;
 
-		emitFeature(atom, pharm, makeFragment(atom), atomHydTable[idx]);
+		emitFeature(atom, pharm, makeFragment(atom), hyd);
 	}
 }
 
@@ -169,28 +156,14 @@ void Pharm::HydrophobicAtomFeatureGenerator::emitFeature(const Chem::Atom& atom,
 
 	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (!coords_func.empty())
-		set3DCoordinates(feature, coords_func(atom));
-}
-
-void Pharm::HydrophobicAtomFeatureGenerator::getAtomHydrophobicities()
-{
-	using namespace Chem;
-
-	std::size_t num_atoms = molGraph->getNumAtoms();
-
-	atomHydTable.resize(num_atoms);
-
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		const Atom& atom = molGraph->getAtom(i);
-
-		if (MolProp::hasHydrophobicity(atom)) {
-			atomHydTable[i] = MolProp::getHydrophobicity(atom);
-			continue;
-		}
-
-		atomHydCalculator.calculate(*molGraph, atomHydTable);
+	if (coords_func.empty())
 		return;
+
+	try {
+		set3DCoordinates(feature, coords_func(atom));
+	} catch (const Base::ItemNotFound& e) {
+	} catch (...) {
+		throw;
 	}
 }
 

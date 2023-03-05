@@ -369,6 +369,9 @@ namespace CDPL
 		class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
 
 		extern template
+		class CDPL_BASE_API DataIOManager<Pharm::FeatureContainer>;
+
+		extern template
 		class CDPL_BASE_API DataIOManager<Grid::RegularGrid<double, double> >;
 
 		extern template

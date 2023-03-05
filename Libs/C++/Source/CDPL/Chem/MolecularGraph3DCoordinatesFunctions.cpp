@@ -54,7 +54,7 @@ namespace
 }
 
 
-void Chem::calculateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
+void Chem::calcHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
 {
   	Math::Vector3DArray coords;
 	Hydrogen3DCoordinatesCalculator calculator;

@@ -41,6 +41,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Math/SVDecomposition.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 namespace
@@ -292,7 +293,13 @@ bool Pharm::PatternBasedFeatureGenerator::calcCentroid(const AtomList& alist, Ma
 	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
 		const Atom& atom = **it;
 
-		centroid.plusAssign(coords_func(atom));
+		try {
+			centroid.plusAssign(coords_func(atom));
+		} catch (const Base::ItemNotFound& e) {
+			return false;
+		} catch (...) {
+			throw;
+		}
 	}
 
 	if (alist.size() == 0)

@@ -41,19 +41,12 @@ void CDPLPythonMolProp::exportAtomHydrophobicityCalculator()
     using namespace CDPL;
 
     python::class_<MolProp::AtomHydrophobicityCalculator, boost::noncopyable>("AtomHydrophobicityCalculator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const MolProp::AtomHydrophobicityCalculator&>((python::arg("self"), python::arg("calculator"))))
-	.def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::AtomHydrophobicityCalculator>())	
-	.def("assign", CDPLPythonBase::copyAssOp(&MolProp::AtomHydrophobicityCalculator::operator=), 
-	     (python::arg("self"), python::arg("calculator")), python::return_self<>())
-	.def("setAtom3DCoordinatesFunction", &MolProp::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction,
-	     (python::arg("self"), python::arg("func")))
-	.def("getAtom3DCoordinatesFunction", &MolProp::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction,
-	     python::arg("self"), python::return_internal_reference<>())
-	.def("calculate", &MolProp::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")))
-	.add_property("atomCoordinatesFunction", 
-		      python::make_function(&MolProp::AtomHydrophobicityCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
-		      &MolProp::AtomHydrophobicityCalculator::setAtom3DCoordinatesFunction);
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const MolProp::AtomHydrophobicityCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::AtomHydrophobicityCalculator>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::AtomHydrophobicityCalculator::operator=), 
+			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("calculate", &MolProp::AtomHydrophobicityCalculator::calculate, (python::arg("self"), python::arg("molgraph"), python::arg("hyd_table")));
 }

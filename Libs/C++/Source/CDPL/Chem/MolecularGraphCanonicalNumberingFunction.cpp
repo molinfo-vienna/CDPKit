@@ -41,8 +41,8 @@
 using namespace CDPL; 
 
 
-void Chem::calculateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
-									  unsigned int atom_flags, unsigned int bond_flags)
+void Chem::calcCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
+								  unsigned int atom_flags, unsigned int bond_flags)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,
