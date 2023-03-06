@@ -51,7 +51,7 @@ void MolProp::calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool over
 		return;
 
 	if (from_logp) {
-		const double SCALING_FACTOR = 2.0;
+		const double SCALING_FACTOR = 2.3;
 		
 		XLogPCalculator calculator(molgraph);
 		const Math::DVector& logp_contribs = calculator.getAtomContributions();

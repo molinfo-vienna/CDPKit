@@ -38,7 +38,7 @@ def procMolecule(mol: Chem.Molecule) -> None:
 
     struct_data = Chem.getStructureData(mol)  # retrieve structure data
     
-    print('Structure data (%s entries) for molecule \'%s\':\n' % (str(len(struct_data)), Chem.getName(mol)))
+    print('Structure data (%s entries) of molecule \'%s\':\n' % (str(len(struct_data)), Chem.getName(mol)))
 
     i = 1
     
@@ -51,7 +51,7 @@ def procMolecule(mol: Chem.Molecule) -> None:
     
 def main() -> None:
     if len(sys.argv) < 2:
-        sys.exit('Usage: %s <input file>' % sys.argv[0])
+        sys.exit('Usage: %s <input SD-file>' % sys.argv[0])
 
     # create reader for MDL SD-files
     reader = Chem.FileSDFMoleculeReader(sys.argv[1])

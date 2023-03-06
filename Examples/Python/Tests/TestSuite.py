@@ -104,6 +104,11 @@ if __name__ == '__main__':
     errors |= checkScriptOutput('chem_sd_proc', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptFileOutput('chem_chembl_preproc', outputFilePath('chem_chembl_preproc.sdf'),
                                     [ '-i', testDataFilePath('ChEMBLStandardizerTestData.sdf'), '-o', outputFilePath('chem_chembl_preproc.sdf') ])
+ 
+    errors |= checkScriptFileOutput('pharm_gen_mol_ph4s', outputFilePath('pharm_gen_mol_ph4s.pml'),
+                                    [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('pharm_gen_mol_ph4s.pml') ])
+    errors |= checkScriptOutput('pharm_seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
+    errors |= checkScriptOutput('pharm_print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 
     errors |= checkScriptOutput('molprop_atom_con_props', [ testDataFilePath('Citalopram.sdf') ])
     errors |= checkScriptOutput('molprop_atom_class_props', [ testDataFilePath('Morphine.jme') ])

@@ -1,5 +1,5 @@
-Generation of Pharmacophores
-============================
+Pharmacophore Generation
+========================
 
 .. toctree::
    :maxdepth: 2

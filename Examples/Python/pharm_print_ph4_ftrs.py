@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# pharm_seq_ph4_input.py 
+# pharm_print_ph4_ftrs.py 
 #
 # This file is part of the Pharmical Data Processing Toolkit
 #
@@ -28,11 +28,47 @@ import sys
 import os
 
 import CDPL.Pharm as Pharm
+import CDPL.Chem as Chem
 
 
 # function called for each read pharmacophore
 def procPharmacophore(ph4: Pharm.Pharmacophore) -> None: 
-    print('Read pharmacophore \'%s\' comprising %s features' % (Pharm.getName(ph4), str(ph4.numFeatures)))
+    ftr_type_str = { Pharm.FeatureType.UNKNOWN               : 'UNKNOWN',
+                     Pharm.FeatureType.HYDROPHOBIC           : 'HYDROPHOBIC',
+                     Pharm.FeatureType.AROMATIC              : 'AROMATIC',
+                     Pharm.FeatureType.NEGATIVE_IONIZABLE    : 'NEGATIVE_IONIZABLE',
+                     Pharm.FeatureType.POSITIVE_IONIZABLE    : 'POSITIVE_IONIZABLE',
+                     Pharm.FeatureType.H_BOND_DONOR          : 'H_BOND_DONOR',
+                     Pharm.FeatureType.H_BOND_ACCEPTOR       : 'H_BOND_ACCEPTOR',
+                     Pharm.FeatureType.HALOGEN_BOND_DONOR    : 'HALOGEN_BOND_DONOR',
+                     Pharm.FeatureType.HALOGEN_BOND_ACCEPTOR : 'HALOGEN_BOND_ACCEPTOR',
+                     Pharm.FeatureType.EXCLUSION_VOLUME      : 'EXCLUSION_VOLUME' }
+  
+    geom_str = { Pharm.FeatureGeometry.UNDEF   : 'UNDEF',
+                 Pharm.FeatureGeometry.SPHERE  : 'SPHERE',
+                 Pharm.FeatureGeometry.VECTOR  : 'VECTOR',
+                 Pharm.FeatureGeometry.PLANE   : 'PLANE' }
+
+    print('Composition of pharmacophore \'%s\':' % Pharm.getName(ph4))
+
+    for i in range(0, len(ph4)):
+        ftr = ph4[i]
+
+        print(' - Feature #%s:' % str(i))
+        print('  - Type: %s' % ftr_type_str[Pharm.getType(ftr)])
+        print('  - Geometry: %s' % geom_str[Pharm.getGeometry(ftr)])
+        print('  - Tolerance: %s' % Pharm.getTolerance(ftr))
+        print('  - Weight: %s' % Pharm.getWeight(ftr))
+        print('  - Optional: %s' % Pharm.getOptionalFlag(ftr))
+        print('  - Disabled: %s' % Pharm.getDisabledFlag(ftr))
+        print('  - Length: %s' % Pharm.getLength(ftr))
+        print('  - Hydrophobicity: %s' % Pharm.getHydrophobicity(ftr))
+
+        if Chem.has3DCoordinates(ftr):         # Pharm.Feature derives from Chem.Entity3D - therefore a function from the Chem package is used here!
+            print('  - Position: %s' % Chem.get3DCoordinates(ftr))
+ 
+        if Pharm.hasOrientation(ftr):
+            print('  - Orientation: %s' % Pharm.getOrientation(ftr))
 
 def getReaderByFileExt(filename: str) -> Pharm.PharmacophoreReader:
     # get the extension of the input file

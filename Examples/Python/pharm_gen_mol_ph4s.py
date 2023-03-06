@@ -34,14 +34,14 @@ import CDPL.Pharm as Pharm
 
 # generates the pharmacophore of a given molecule
 def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
-    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function that prepares the molecule for pharm. generation
+    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
         
-    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator implementation
+    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
     ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
 
     ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
 
-    Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore name to the name of the input molecule
+    Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore's name to the name of the input molecule
 
     return ph4
     
@@ -122,7 +122,7 @@ def main() -> None:
             mol_id = Chem.getName(mol).strip() 
 
             if mol_id == '':
-                mol_id = '#' + str(i)  # fallback if name is empty or not available
+                mol_id = '#' + str(i)  # fallback if name is empty
             else:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
@@ -133,10 +133,10 @@ def main() -> None:
                 ph4 = genPharmacophore(mol) # generate pharmacophore
                 
                 if not writer.write(ph4):   # output pharmacophore
-                    sys.exit('Error: writing pharmacophore of molecule %s failed' % mol_id)
+                    sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
                         
             except Exception as e:
-                sys.exit('Error: pharmacophore generation/output for molecule %s failed:\n%s' % (mol_id, str(e)))
+                sys.exit('Error: pharmacophore generation or output for molecule %s failed:\n%s' % (mol_id, str(e)))
 
             i += 1
                 

@@ -44,6 +44,8 @@
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 
+#include "AtomSurfaceAccessibilityData.hpp"
+
 
 using namespace CDPL; 
 
@@ -111,7 +113,8 @@ namespace
 
     void initAtomSurfAccTable() 
     {
-		// TODO
+		for (std::size_t i = 0; i < sizeof(ATOM_SURF_ACC_DATA) / sizeof(AtomSurfAccData); i++)
+			atomSurfAccTable.insert(AtomSurfaceAccessibilityTable::value_type(ATOM_SURF_ACC_DATA[i].pattern, ATOM_SURF_ACC_DATA[i].value));
 	}
 	
 	void appendBondSymbol(std::string& str, const Chem::Bond& bond)
@@ -284,6 +287,7 @@ double MolProp::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const 
 	appendAtomSymbol(atomDescr, atom);
 
 	atomDescr.append(boost::lexical_cast<std::string>(atomEnvData.size()));
+	atomDescr.push_back('.');
 	atomDescr.append(boost::lexical_cast<std::string>(std::count(atomEnvData.begin(), atomEnvData.end(), "H")));
 
 	it = atomSurfAccTable.find(atomDescr);
