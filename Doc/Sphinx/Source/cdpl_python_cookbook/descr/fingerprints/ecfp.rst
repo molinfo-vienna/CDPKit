@@ -1,5 +1,5 @@
-Calculation of Extended Connectivity Fingerprints (ECFPs)
-=========================================================
+Extended Connectivity Fingerprints (ECFPs)
+==========================================
 
 .. literalinclude:: /examples/descr_gen_ecfp.py
    :language: python

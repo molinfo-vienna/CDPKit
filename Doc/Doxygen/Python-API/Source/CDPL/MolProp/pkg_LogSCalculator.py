@@ -38,7 +38,7 @@ class LogSCalculator(Boost.Python.instance):
     # \brief Initializes the \e %LogSCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: ._molprop.LogSCalculator) -> None: pass
+    def __init__(calculator: LogSCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
@@ -63,7 +63,7 @@ class LogSCalculator(Boost.Python.instance):
     # \param calculator The \e %LogSCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: ._molprop.LogSCalculator) -> ._molprop.LogSCalculator: pass
+    def assign(calculator: LogSCalculator) -> LogSCalculator: pass
 
     ##
     # \brief 

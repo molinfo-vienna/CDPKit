@@ -1,5 +1,5 @@
-Sequential Molecule Input
-=========================
+Sequential Input
+================
 
 .. literalinclude:: /examples/chem_seq_mol_input.py
    :language: python

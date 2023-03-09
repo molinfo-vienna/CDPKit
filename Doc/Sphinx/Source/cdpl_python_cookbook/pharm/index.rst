@@ -7,4 +7,3 @@ Pharmacophore Generation and Processing
    io/index
    generation/index
    analysis/index
-   

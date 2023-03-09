@@ -1,5 +1,5 @@
-Calculation of Fingerprints
-===========================
+Generation of Fingerprints
+==========================
 
 .. toctree::
    :maxdepth: 2

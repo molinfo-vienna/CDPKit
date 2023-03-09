@@ -33,7 +33,7 @@ class ElementHistogram(Boost.Python.instance):
     # \brief Initializes the \e %ElementHistogram instance.
     # \param hist 
     #
-    def __init__(hist: ._molprop.ElementHistogram) -> None: pass
+    def __init__(hist: ElementHistogram) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -69,7 +69,7 @@ class ElementHistogram(Boost.Python.instance):
     # \param map The \e %ElementHistogram instance to copy.
     # \return \a self
     #
-    def assign(map: ._molprop.ElementHistogram) -> ._molprop.ElementHistogram: pass
+    def assign(map: ElementHistogram) -> ElementHistogram: pass
 
     ##
     # \brief 

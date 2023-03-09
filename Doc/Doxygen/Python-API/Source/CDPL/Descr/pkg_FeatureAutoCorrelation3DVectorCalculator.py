@@ -33,7 +33,7 @@ class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     # \brief Initializes the \e %FeatureAutoCorrelation3DVectorCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: ._descr.FeatureAutoCorrelation3DVectorCalculator) -> None: pass
+    def __init__(calculator: FeatureAutoCorrelation3DVectorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureAutoCorrelation3DVectorCalculator instance.
@@ -59,7 +59,7 @@ class FeatureAutoCorrelation3DVectorCalculator(Boost.Python.instance):
     # \param calculator The \e %FeatureAutoCorrelation3DVectorCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: ._descr.FeatureAutoCorrelation3DVectorCalculator) -> ._descr.FeatureAutoCorrelation3DVectorCalculator: pass
+    def assign(calculator: FeatureAutoCorrelation3DVectorCalculator) -> FeatureAutoCorrelation3DVectorCalculator: pass
 
     ##
     # \brief 

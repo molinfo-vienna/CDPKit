@@ -67,14 +67,14 @@ def buildMassCompositionString(molgraph: CDPL.Chem.MolecularGraph) -> object: pa
 # \param molgraph 
 # \param hist 
 #
-def buildElementHistogram(arg1: CDPL.Chem.MolecularGraph, molgraph: ._molprop.ElementHistogram, hist: bool) -> None: pass
+def buildElementHistogram(arg1: CDPL.Chem.MolecularGraph, molgraph: ElementHistogram, hist: bool) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param comp 
 #
-def calcMassComposition(molgraph: CDPL.Chem.MolecularGraph, comp: ._molprop.MassComposition) -> None: pass
+def calcMassComposition(molgraph: CDPL.Chem.MolecularGraph, comp: MassComposition) -> None: pass
 
 ##
 # \brief 

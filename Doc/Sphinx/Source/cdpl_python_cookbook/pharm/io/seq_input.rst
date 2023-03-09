@@ -1,5 +1,5 @@
-Sequential Pharmacophore Input
-==============================
+Sequential Input
+================
 
 .. literalinclude:: /examples/pharm_seq_ph4_input.py
    :language: python

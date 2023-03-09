@@ -217,6 +217,7 @@ namespace CDPL
 
 			/**
 			 * \brief Changes the number of electrons that are contributed by the specified atom.
+			 * \param atom The atom for which to update the electron contribution.
 			 * \param elec_contrib The number of electrons contributed by the specified atom.
 			 * \throw Base::ItemNotFound if the specified atom is not part of the electron system.
 			 */
@@ -224,6 +225,7 @@ namespace CDPL
 
 			/**
 			 * \brief Changes the number of electrons that are contributed by the atom at the specified index.
+			 * \param idx The index of the atom for which to update the electron contribution.			 
 			 * \param elec_contrib The number of electrons contributed by the specified atom.
 			 * \throw Base::IndexError if the number of atoms is zero or \a idx is not in the range [0, getNumAtoms() - 1].
 			 */
@@ -256,7 +258,7 @@ namespace CDPL
 			/**
 			 * \brief Checks if the atom sets of the electron systems do not intersect but are linked by at least one bond.
 			 * \param elec_sys The electron system to check.
-			 * \paran bonds The set of available bonds.
+			 * \param bonds The set of available bonds.
 			 * \return \c true if the electron systems do not share any atoms but are linked by at least one bond and \c false, otherwise.
 			 */
 			bool connected(const ElectronSystem& elec_sys, const BondContainer& bonds) const;

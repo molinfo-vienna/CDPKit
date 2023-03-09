@@ -7,8 +7,8 @@ Composition of pharmacophore '1dwc_MIT_1_H_1__D___':
   - Optional: False
   - Disabled: False
   - Length: 1.0
-  - Hydrophobicity: 2.3684005737304688
-  - Position: [3](30.643,10.2079,24.6582)
+  - Hydrophobicity: 2.3680062294006348
+  - Position: [3](30.6431,10.208,24.6583)
  - Feature #1:
   - Type: HYDROPHOBIC
   - Geometry: SPHERE
@@ -17,8 +17,8 @@ Composition of pharmacophore '1dwc_MIT_1_H_1__D___':
   - Optional: False
   - Disabled: False
   - Length: 1.0
-  - Hydrophobicity: 2.012547731399536
-  - Position: [3](31.8826,10.8059,27.1098)
+  - Hydrophobicity: 2.0086073875427246
+  - Position: [3](31.8824,10.8049,27.1081)
  - Feature #2:
   - Type: HYDROPHOBIC
   - Geometry: SPHERE
@@ -27,7 +27,7 @@ Composition of pharmacophore '1dwc_MIT_1_H_1__D___':
   - Optional: False
   - Disabled: False
   - Length: 1.0
-  - Hydrophobicity: 0.8423612117767334
+  - Hydrophobicity: 0.8417263627052307
   - Position: [3](33.794,10.424,28.673)
  - Feature #3:
   - Type: HYDROPHOBIC
@@ -37,8 +37,8 @@ Composition of pharmacophore '1dwc_MIT_1_H_1__D___':
   - Optional: False
   - Disabled: False
   - Length: 1.0
-  - Hydrophobicity: 1.138533353805542
-  - Position: [3](31.1549,17.8956,24.2791)
+  - Hydrophobicity: 1.134719967842102
+  - Position: [3](31.1545,17.8945,24.2796)
  - Feature #4:
   - Type: HYDROPHOBIC
   - Geometry: SPHERE
@@ -47,7 +47,7 @@ Composition of pharmacophore '1dwc_MIT_1_H_1__D___':
   - Optional: False
   - Disabled: False
   - Length: 1.0
-  - Hydrophobicity: 0.8423612117767334
+  - Hydrophobicity: 0.8417263627052307
   - Position: [3](32.8,10.219,20.483)
  - Feature #5:
   - Type: AROMATIC

@@ -33,7 +33,7 @@ class MassComposition(Boost.Python.instance):
     # \brief Initializes the \e %MassComposition instance.
     # \param mass_comp 
     #
-    def __init__(mass_comp: ._molprop.MassComposition) -> None: pass
+    def __init__(mass_comp: MassComposition) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -69,7 +69,7 @@ class MassComposition(Boost.Python.instance):
     # \param map The \e %MassComposition instance to copy.
     # \return \a self
     #
-    def assign(map: ._molprop.MassComposition) -> ._molprop.MassComposition: pass
+    def assign(map: MassComposition) -> MassComposition: pass
 
     ##
     # \brief 

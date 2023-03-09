@@ -1,5 +1,5 @@
-Molecule Pharmacophore Generation
-=================================
+Plain Molecule Pharmacophores
+=============================
 
 .. literalinclude:: /examples/pharm_gen_mol_ph4s.py
    :language: python

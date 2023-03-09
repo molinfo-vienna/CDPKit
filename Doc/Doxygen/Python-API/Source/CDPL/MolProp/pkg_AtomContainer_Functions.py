@@ -46,14 +46,14 @@ def buildExplicitMassCompositionString(cntnr: CDPL.Chem.AtomContainer) -> str: p
 # \param hist 
 # \param append 
 #
-def buildExplicitElementHistogram(cntnr: CDPL.Chem.AtomContainer, hist: ._molprop.ElementHistogram, append: bool = False) -> None: pass
+def buildExplicitElementHistogram(cntnr: CDPL.Chem.AtomContainer, hist: ElementHistogram, append: bool = False) -> None: pass
 
 ##
 # \brief 
 # \param cntnr 
 # \param mass_comp 
 #
-def calcExplicitMassComposition(cntnr: CDPL.Chem.AtomContainer, mass_comp: ._molprop.MassComposition) -> None: pass
+def calcExplicitMassComposition(cntnr: CDPL.Chem.AtomContainer, mass_comp: MassComposition) -> None: pass
 
 ##
 # \brief 

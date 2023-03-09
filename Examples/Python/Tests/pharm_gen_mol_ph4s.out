@@ -2,16 +2,16 @@
 <alignmentElement name="1dwc_MIT_1_H_1__D___" id="alignmentElement0" flagCode="111000000">
 <pharmacophore name="1dwc_MIT_1_H_1__D___" id="pharmacophore0" pharmacophoreType="LIGAND_SCOUT">
 <point name="H" featureId="1" optional="false" disabled="false" weight="1.000000" id="feature0">
-<position x3="30.643047" y3="10.207925" z3="24.658153" tolerance="1.500000" />
+<position x3="30.643124" y3="10.207980" z3="24.658338" tolerance="1.500000" />
 </point>
 <point name="H" featureId="2" optional="false" disabled="false" weight="1.000000" id="feature1">
-<position x3="31.882589" y3="10.805861" z3="27.109758" tolerance="1.500000" />
+<position x3="31.882419" y3="10.804919" z3="27.108098" tolerance="1.500000" />
 </point>
 <point name="H" featureId="3" optional="false" disabled="false" weight="1.000000" id="feature2">
 <position x3="33.794000" y3="10.424000" z3="28.673000" tolerance="1.500000" />
 </point>
 <point name="H" featureId="4" optional="false" disabled="false" weight="1.000000" id="feature3">
-<position x3="31.154856" y3="17.895569" z3="24.279104" tolerance="1.500000" />
+<position x3="31.154493" y3="17.894479" z3="24.279580" tolerance="1.500000" />
 </point>
 <point name="H" featureId="5" optional="false" disabled="false" weight="1.000000" id="feature4">
 <position x3="32.800000" y3="10.219000" z3="20.483000" tolerance="1.500000" />

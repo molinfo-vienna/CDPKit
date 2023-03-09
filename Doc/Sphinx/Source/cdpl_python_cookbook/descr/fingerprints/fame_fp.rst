@@ -1,5 +1,5 @@
-Calculation of FAME Atom Environment Fingerprints
-=================================================
+FAME Atom Environment Fingerprints
+==================================
 
 .. literalinclude:: /examples/descr_gen_fame_fp.py
    :language: python

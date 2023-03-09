@@ -1,5 +1,5 @@
-Printing Feature Properties
-===========================
+Retrieving Feature Properties
+=============================
 
 .. literalinclude:: /examples/pharm_print_ph4_ftrs.py
    :language: python

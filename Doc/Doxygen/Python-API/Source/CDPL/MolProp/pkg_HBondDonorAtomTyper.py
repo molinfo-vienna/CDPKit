@@ -33,7 +33,7 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     # \brief Initializes the \e %HBondDonorAtomTyper instance.
     # \param typer 
     #
-    def __init__(typer: ._molprop.HBondDonorAtomTyper) -> None: pass
+    def __init__(typer: HBondDonorAtomTyper) -> None: pass
 
     ##
     # \brief Initializes the \e %HBondDonorAtomTyper instance.
@@ -59,7 +59,7 @@ class HBondDonorAtomTyper(Boost.Python.instance):
     # \param typer The \e %HBondDonorAtomTyper instance to copy.
     # \return \a self
     #
-    def assign(typer: ._molprop.HBondDonorAtomTyper) -> ._molprop.HBondDonorAtomTyper: pass
+    def assign(typer: HBondDonorAtomTyper) -> HBondDonorAtomTyper: pass
 
     ##
     # \brief 

@@ -33,7 +33,7 @@ class TPSACalculator(Boost.Python.instance):
     # \brief Initializes the \e %TPSACalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: ._molprop.TPSACalculator) -> None: pass
+    def __init__(calculator: TPSACalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %TPSACalculator instance.
@@ -58,7 +58,7 @@ class TPSACalculator(Boost.Python.instance):
     # \param calculator The \e %TPSACalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: ._molprop.TPSACalculator) -> ._molprop.TPSACalculator: pass
+    def assign(calculator: TPSACalculator) -> TPSACalculator: pass
 
     ##
     # \brief 

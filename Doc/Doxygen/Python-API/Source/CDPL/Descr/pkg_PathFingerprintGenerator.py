@@ -86,7 +86,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
     # \brief Initializes the \e %PathFingerprintGenerator instance.
     # \param gen 
     #
-    def __init__(gen: ._descr.PathFingerprintGenerator) -> None: pass
+    def __init__(gen: PathFingerprintGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -105,7 +105,7 @@ class PathFingerprintGenerator(Boost.Python.instance):
     # \param gen The \e %PathFingerprintGenerator instance to copy.
     # \return \a self
     #
-    def assign(gen: ._descr.PathFingerprintGenerator) -> ._descr.PathFingerprintGenerator: pass
+    def assign(gen: PathFingerprintGenerator) -> PathFingerprintGenerator: pass
 
     ##
     # \brief 

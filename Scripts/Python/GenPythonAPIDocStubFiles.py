@@ -300,6 +300,8 @@ def stripExtModuleName(name):
     name = name.replace('._grid', '')
     name = name.replace('._shape', '')
     name = name.replace('._confgen', '')
+    name = name.replace('._descr', '')
+    name = name.replace('._molprop', '')
     name = name.replace('OpenMode24', 'OpenMode(24)')
     name = name.replace('OpenMode60', 'OpenMode(60)')
 
@@ -830,7 +832,7 @@ def genPythonAPIDocFiles():
     functions = []
     variables = []
     
-    ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_grid', '_forcefield', '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '__package__' ]
+    ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_grid', '_forcefield', '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '_descr', '_molprop', '__package__' ]
     exported_names = []
 
     if hasattr(module, '__all__'):
