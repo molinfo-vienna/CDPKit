@@ -107,19 +107,19 @@ Pharm::PMLDataReader::PMLDataReader(const Base::DataIOBase& io_base):
 
 bool Pharm::PMLDataReader::hasMoreData(std::istream& is)
 {
-	return Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader:", false);
+	return Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader", false);
 }
 
 bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& pharm)
 {
 	init();
 
-	if (!Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader:", false))
+	if (!Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader", false))
 		return false;
 
 	pharmData.clear();
 
-	if (!Internal::readToString(is, PHARMACOPHORE_END_TAG, pharmData, "PMLDataReader:", true)) {
+	if (!Internal::readToString(is, PHARMACOPHORE_END_TAG, pharmData, "PMLDataReader", true)) {
 		if (strictErrorChecking)
 			throw Base::IOError("PMLDataReader: error while reading pharmacophore, no closing pharmacophore tag found");
 
@@ -143,10 +143,10 @@ bool Pharm::PMLDataReader::skipPharmacophore(std::istream& is)
 {
 	init();
 
-	if (!Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader:", false))
+	if (!Internal::skipToString(is, PHARMACOPHORE_START_TAG, "PMLDataReader", false))
 		return false;
 
-	if (!Internal::skipToString(is, PHARMACOPHORE_END_TAG, "PMLDataReader:", true)) {
+	if (!Internal::skipToString(is, PHARMACOPHORE_END_TAG, "PMLDataReader", true)) {
 		if (strictErrorChecking)
 			throw Base::IOError("PMLDataReader: error while skipping input pharmacophore, no closing pharmacophore tag found");
 
