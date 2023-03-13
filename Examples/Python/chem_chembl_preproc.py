@@ -53,12 +53,12 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-i',
                         dest='in_file',
                         required=True,
-                        metavar='<input file>',
+                        metavar='<file>',
                         help='Input molecule file')
     parser.add_argument('-o',
                         dest='out_file',
                         required=True,
-                        metavar='<output file>',
+                        metavar='<file>',
                         help='Output molecule file')
     parser.add_argument('-v',
                         dest='verb_level',

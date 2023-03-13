@@ -47,5 +47,8 @@ void CDPLPythonBiomol::exportDataFormats()
 	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
 		.def_readonly("PDB", &Biomol::DataFormat::PDB)
 		.def_readonly("PDB_GZ", &Biomol::DataFormat::PDB_GZ)
-		.def_readonly("PDB_BZ2", &Biomol::DataFormat::PDB_BZ2);
+		.def_readonly("PDB_BZ2", &Biomol::DataFormat::PDB_BZ2)
+		.def_readonly("MMTF", &Biomol::DataFormat::MMTF)
+		.def_readonly("MMTF_GZ", &Biomol::DataFormat::MMTF_GZ)
+		.def_readonly("MMTF_BZ2", &Biomol::DataFormat::MMTF_BZ2);
 }

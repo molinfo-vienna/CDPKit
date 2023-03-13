@@ -78,7 +78,7 @@ def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     
 def main() -> None:
     if len(sys.argv) < 2:
-        sys.exit('Usage: %s <input file>' % sys.argv[0])
+        sys.exit('Usage: %s <input mol. file>' % sys.argv[0])
 
     # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(sys.argv[1])

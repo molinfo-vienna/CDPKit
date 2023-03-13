@@ -88,7 +88,7 @@ def getReaderByFileExt(filename: str) -> Pharm.PharmacophoreReader:
     
 def main() -> None:
     if len(sys.argv) < 2:
-        sys.exit('Usage: %s <input file>' % sys.argv[0])
+        sys.exit('Usage: %s <input pharm. file>' % sys.argv[0])
 
     # if the input pharmacophores are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Pharm.FileCDFPharmacophoreReader(sys.argv[1])

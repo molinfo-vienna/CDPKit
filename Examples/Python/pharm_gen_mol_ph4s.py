@@ -51,12 +51,12 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-i',
                         dest='in_file',
                         required=True,
-                        metavar='<input file>',
-                        help='Input molecule file')
+                        metavar='<file>',
+                        help='Molecule input file')
     parser.add_argument('-o',
                         dest='out_file',
                         required=True,
-                        metavar='<output file>',
+                        metavar='<file>',
                         help='Pharmacophore output file')
     parser.add_argument('-q',
                         dest='quiet',
@@ -69,7 +69,7 @@ def parseArgs() -> argparse.Namespace:
 
     return parse_args
 
-def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
+def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # get the extension of the input file
     name_and_ext = os.path.splitext(filename)
 
@@ -85,7 +85,7 @@ def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # return file reader instance
     return ipt_handler.createReader(filename)
 
-def getWriterByFileExt(filename: str) -> Pharm.FeatureContainerWriter:
+def getPharmWriterByFileExt(filename: str) -> Pharm.FeatureContainerWriter:
     # get the extension of the output file
     name_and_ext = os.path.splitext(filename)
 
@@ -106,11 +106,11 @@ def main() -> None:
     
     # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(args.in_file)
-    reader = getReaderByFileExt(args.in_file) 
+    reader = getMolReaderByFileExt(args.in_file) 
 
     # if the output pharmacophores have to be stored in a specific format, a writer for this format could be created directly, e.g.
     # writer = Pharm.FilePMLFeatureContainerWriter(args.out_file)
-    writer = getWriterByFileExt(args.out_file) 
+    writer = getPharmWriterByFileExt(args.out_file) 
      
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()

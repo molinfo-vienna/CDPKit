@@ -69,13 +69,13 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-i',
                         dest='in_file',
                         required=True,
-                        metavar='<input file>',
+                        metavar='<file>',
                         help='Input molecule file')
     parser.add_argument('-o',
                         dest='out_file',
                         required=True,
-                        metavar='<output file>',
-                        help='Fingerprint output file')
+                        metavar='<file>',
+                        help='ECFP fingerprint output file')
     parser.add_argument('-n',
                         dest='num_bits',
                         required=False,
@@ -86,7 +86,7 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-r',
                         dest='radius',
                         required=False,
-                        metavar='<radius>',
+                        metavar='<value>',
                         default=2,
                         help='Max. atom environment radius in number of bonds (default: 2)',
                         type=int)
