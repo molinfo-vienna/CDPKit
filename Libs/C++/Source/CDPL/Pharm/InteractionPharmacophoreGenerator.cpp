@@ -141,7 +141,7 @@ void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGra
 
 	corePharmGen.generate(core, corePharm, false);
 	envPharmGen.generate(*env, envPharm, false);
-	
+
 	iaAnalyzer.analyze(corePharm, envPharm, iaMapping, false);
 
 	buildInteractionPharmacophore(ia_pharm, iaMapping, append);

@@ -33,7 +33,7 @@ import CDPL.Chem as Chem
 # function called for each read molecule
 def procMolecule(mol: Chem.Molecule) -> None: 
     if not Chem.hasStructureData(mol):        # is a structure data property available?
-        print('Error: structure data not available for molecule \'%s\'!' % Chem.getName(mol))
+        print('Error: no structure data available for molecule \'%s\'' % Chem.getName(mol))
         return
 
     struct_data = Chem.getStructureData(mol)  # retrieve structure data
@@ -65,10 +65,10 @@ def main() -> None:
             try:
                 procMolecule(mol)
             except Exception as e:
-                sys.exit('Error: processing of molecule failed:\n' + str(e))
+                sys.exit('Error: processing of molecule failed: ' + str(e))
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed:\n' + str(e))
+        sys.exit('Error: reading molecule failed: ' + str(e))
 
     sys.exit(0)
         

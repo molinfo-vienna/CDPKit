@@ -110,7 +110,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		const Math::Vector3D& orient = getOrientation(don_ftr);
 
 		if (don_geom == FeatureGeometry::VECTOR) { 
-			Math::Vector3D don_h_vec(orient * (hasLength(don_ftr) ? getLength(don_ftr) : DEF_DONOR_TO_H_DIST));
+			Math::Vector3D don_h_vec(orient * DEF_DONOR_TO_H_DIST);
 		
 			h_acc_vec.assign(acc_pos - (don_pos + don_h_vec));
 
@@ -195,7 +195,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 		const Math::Vector3D& orient = getOrientation(ftr2);
 		
 		if (don_geom == FeatureGeometry::VECTOR) { 
-			Math::Vector3D don_h_vec(orient * (hasLength(ftr2) ? getLength(ftr2) : DEF_DONOR_TO_H_DIST));
+			Math::Vector3D don_h_vec(orient * DEF_DONOR_TO_H_DIST);
 			Math::Vector3D h_acc_vec(ftr1_pos - (get3DCoordinates(ftr2) + don_h_vec));
 
 			double hb_len = length(h_acc_vec);

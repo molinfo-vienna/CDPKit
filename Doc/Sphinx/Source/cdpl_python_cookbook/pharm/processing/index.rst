@@ -1,5 +1,5 @@
-Pharmacophore Analysis
-======================
+Processing
+==========
 
 .. toctree::
    :maxdepth: 2

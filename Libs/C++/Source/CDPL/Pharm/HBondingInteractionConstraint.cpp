@@ -48,7 +48,7 @@ namespace
 
 const double Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH = 1.2;
 const double Pharm::HBondingInteractionConstraint::DEF_MAX_HB_LENGTH = 2.8;
-const double Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE = 135.0;
+const double Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE = 130.0;
 const double Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE = 85.0;
 
 
@@ -85,7 +85,7 @@ bool Pharm::HBondingInteractionConstraint::operator()(const Feature& ftr1, const
 		const Math::Vector3D& orient = getOrientation(don_ftr);
 
 		if (don_geom == FeatureGeometry::VECTOR) { 
-			Math::Vector3D don_h_vec(orient * (hasLength(don_ftr) ? getLength(don_ftr) : DEF_DONOR_TO_H_DIST));
+			Math::Vector3D don_h_vec(orient * DEF_DONOR_TO_H_DIST);
 		
 			h_acc_vec.assign(acc_pos - (don_pos + don_h_vec));
 

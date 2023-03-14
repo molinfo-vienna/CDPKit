@@ -1,7 +1,7 @@
 #!/bin/env python
 
 ##
-# pharm_gen_mol_ph4s.py 
+# pharm_align_mols.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -31,43 +31,61 @@ import argparse
 import CDPL.Chem as Chem
 import CDPL.Pharm as Pharm
 
-
-# generates the pharmacophore of a given molecule
-def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
-    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
-        
-    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
-    ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
-
-    ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
-
-    Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore's name to the name of the input molecule
-
-    return ph4
     
 def parseArgs() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generates pharmacophores of the given input molecules.')
+    parser = argparse.ArgumentParser(description='Aligns a set of input molecules onto a given reference pharmacophore.')
 
+    parser.add_argument('-r',
+                        dest='ref_ph4_file',
+                        required=True,
+                        metavar='<file>',
+                        help='Reference pharmacophore input file (*.pml, *.cdf)')
     parser.add_argument('-i',
                         dest='in_file',
                         required=True,
                         metavar='<file>',
-                        help='Molecule input file')
+                        help='Ligand structure input file')
     parser.add_argument('-o',
                         dest='out_file',
                         required=True,
                         metavar='<file>',
-                        help='Pharmacophore output file')
+                        help='e output file (*.pml, *.cdf)')
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
                         action='store_true',
                         default=False,
                         help='Disable progress output (default: false)')
-    
     parse_args = parser.parse_args()
 
     return parse_args
+
+def readRefPharmacophore(filename: str) -> Pharm.Pharmacophorer:
+    name_and_ext = os.path.splitext(filename)
+
+    if name_and_ext[1] == '':
+        sys.exit('Error: could not determine pharmacophore input file format (file extension missing)')
+
+    # get input handler for the format specified by the input file's extension
+    ipt_handler = Pharm.PharmacophoreIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
+
+    if not ipt_handler:
+        sys.exit('Error: unsupported pharmacophore input file format \'%s\'' % name_and_ext[1])
+
+    # create reader instance
+    reader = ipt_handler.createReader(filename)
+
+    # create an instance of the default implementation of the Pharm.Pharmacophore interface
+    ph4 = Pharm.BasicPharmacophore()
+
+    try:
+        if not reader.read(ph4): # read reference pharmacophore
+            sys.exit('Error: reading reference pharmacophore failed')
+                
+    except Exception as e: # handle exception raised in case of severe read errors
+        sys.exit('Error: reading reference pharmacophore failed: ' + str(e))
+
+    return ph4
 
 def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     name_and_ext = os.path.splitext(filename)
@@ -84,39 +102,55 @@ def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # create and return file reader instance
     return ipt_handler.createReader(filename)
 
-def getPharmWriterByFileExt(filename: str) -> Pharm.FeatureContainerWriter:
+def getMolWriterByFileExt(filename: str) -> Chem.MolecularGraphWriter:
     name_and_ext = os.path.splitext(filename)
 
     if name_and_ext[1] == '':
-        sys.exit('Error: could not determine pharmacophore output file format (file extension missing)')
+        sys.exit('Error: could not determine molecule output file format (file extension missing)')
 
     # get output handler for the format specified by the output file's extension
-    opt_handler = Pharm.FeatureContainerIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
+    opt_handler = Chem.MolecularGraphIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
 
     if not opt_handler:
-        sys.exit('Error: unsupported pharmacophore output file format \'%s\'' % name_and_ext[1])
+        sys.exit('Error: unsupported molecule output file format \'%s\'' % name_and_ext[1])
 
     # create and return file writer instance
     return opt_handler.createWriter(filename)
+
+# generates the pharmacophore of a given molecule
+def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
+    Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
+        
+    ph4_gen = Pharm.DefaultPharmacophoreGenerator()    # create an instance of the pharmacophore generator default implementation
+    ph4 = Pharm.BasicPharmacophore()                   # create an instance of the default implementation of the Pharm.Pharmacophore interface
+
+    ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
+
+    Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore's name to the name of the input molecule
+
+    return ph4
     
 def main() -> None:
     args = parseArgs()
-    
+
+    ref_ph4 = readRefPharmacophore(args.ref_ph4_file) 
+        
     # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(args.in_file)
-    reader = getMolReaderByFileExt(args.in_file) 
+    mol_reader = getMolReaderByFileExt(args.in_file) 
 
-    # if the output pharmacophores have to be stored in a specific format, a writer for this format could be created directly, e.g.
-    # writer = Pharm.FilePMLFeatureContainerWriter(args.out_file)
-    writer = getPharmWriterByFileExt(args.out_file) 
-     
+    # if the output molecules have to be stored in a specific format, a writer for this format could be created directly, e.g.
+    # writer = Chem.FileSDFMolecularGraphWriter(args.out_file)
+    mol_writer = getMolWriterByFileExt(args.out_file) 
+
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
-    i = 1
     
+    i = 1
+
     # read and process molecules one after the other until the end of input has been reached
     try:
-        while reader.read(mol):
+        while mol_reader.read(mol):
             # compose a simple molecule identifier
             mol_id = Chem.getName(mol).strip() 
 
@@ -126,23 +160,20 @@ def main() -> None:
                 mol_id = '\'%s\' (#%s)' % (mol_id, str(i))
 
             if not args.quiet:
-                print('- Generating pharmacophore of molecule %s...' % mol_id)
+                print('- Aligning molecule %s...' % mol_id)
 
             try:
-                ph4 = genPharmacophore(mol) # generate pharmacophore
-                
-                if not writer.write(ph4):   # output pharmacophore
-                    sys.exit('Error: writing generated pharmacophore %s failed' % mol_id)
-                        
+                mol_ph4 = genPharmacophore(mol) # generate pharmacophore
+                  
             except Exception as e:
                 sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
 
             i += 1
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed: ' + str(e))
+        sys.exit('Error: reading input molecule failed: ' + str(e))
 
-    writer.close()
+    mol_writer.close()
     sys.exit(0)
         
 if __name__ == '__main__':

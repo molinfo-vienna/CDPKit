@@ -32,7 +32,7 @@ import distutils.util
 import CDPL.Chem as Chem
 
     
-# Procedure called from the main loop which performs ChEMBL molecule standardization
+# procedure called from the main loop which performs ChEMBL molecule standardization
 # and parent structure extraction (optional) for an input molecule
 def process(chembl_proc: Chem.ChEMBLStandardizer, in_mol: Chem.Molecule, out_mol: Chem.Molecule, args: argparse.Namespace) -> Chem.ChEMBLStandardizer.ChangeFlags:
     # here, the standardization is carried out on a copy of the read input molecule
@@ -95,33 +95,31 @@ def parseArgs() -> argparse.Namespace:
     return parse_args
 
 def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
-    # get the extension of the input file
     name_and_ext = os.path.splitext(filename)
 
     if name_and_ext[1] == '':
-        sys.exit('Error: could not determine input file format (file extension missing).')
+        sys.exit('Error: could not determine molecule input file format (file extension missing)')
 
     # get input handler for the format specified by the input file's extension
     ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
 
     if not ipt_handler:
-        sys.exit('Error: unknown input file format \'%s\'' % name_and_ext[1])
+        sys.exit('Error: unsupported molecule input file format \'%s\'' % name_and_ext[1])
 
-    # return file reader instance
+    # create and return file reader instance
     return ipt_handler.createReader(filename)
 
 def getWriterByFileExt(filename: str) -> Chem.MolecularGraphWriter:
-    # get the extension of the output file
     name_and_ext = os.path.splitext(filename)
 
     if name_and_ext[1] == '':
-        sys.exit('Error: could not determine output file format (file extension missing).')
+        sys.exit('Error: could not determine molecule output file format (file extension missing)')
 
     # get output handler for the format specified by the output file's extension
     opt_handler = Chem.MolecularGraphIOManager.getOutputHandlerByFileExtension(name_and_ext[1][1:].lower())
 
     if not opt_handler:
-        sys.exit('Error: unknown output file format \'%s\'' % name_and_ext[1])
+        sys.exit('Error: unsupported molecule output file format \'%s\'' % name_and_ext[1])
 
     # create file writer instance
     writer = opt_handler.createWriter(filename)
@@ -251,18 +249,18 @@ def main() -> None:
                               
                     # write output molecule
                     if not writer.write(out_mol):
-                        sys.exit('Error: Writing molecule %s failed: %s\n' % (mol_id, str(e)))
+                        sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))
 
                 except Exception as e: # handle exception raised in case of severe write errors
-                    sys.exit('Error: writing molecule %s failed: %s\n' % (mol_id, str(e)))
+                    sys.exit('Error: writing molecule %s failed: %s' % (mol_id, str(e)))
                 
             except Exception as e: # handle exception raised in case of severe structure processing errors
-                sys.exit('Error: processing of molecule %s failed: %s\n' % (mol_id, str(e)))
+                sys.exit('Error: processing of molecule %s failed: %s' % (mol_id, str(e)))
 
             i += 1
             
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading of molecule %s failed: %s\n' % (str(i), str(e)))
+        sys.exit('Error: reading of molecule %s failed: %s' % (str(i), str(e)))
 
     writer.close()
     sys.exit(0)

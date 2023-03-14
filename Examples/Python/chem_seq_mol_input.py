@@ -39,15 +39,15 @@ def getReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     name_and_ext = os.path.splitext(filename)
 
     if name_and_ext[1] == '':
-        sys.exit('Error: could not determine input file format (file extension missing).')
+        sys.exit('Error: could not determine molecule input file format (file extension missing)')
 
     # get input handler for the format specified by the input file's extension
     ipt_handler = Chem.MoleculeIOManager.getInputHandlerByFileExtension(name_and_ext[1][1:].lower())
 
     if not ipt_handler:
-        sys.exit('Error: unknown input file format \'%s\'' % name_and_ext[1])
+        sys.exit('Error: unupported molecule input file format \'%s\'' % name_and_ext[1])
 
-    # return file reader instance
+    # create and return file reader instance
     return ipt_handler.createReader(filename)
     
 def main() -> None:
@@ -67,10 +67,10 @@ def main() -> None:
             try:
                 procMolecule(mol)
             except Exception as e:
-                sys.exit('Error: processing of molecule failed:\n' + str(e))
+                sys.exit('Error: processing of molecule failed: ' + str(e))
                 
     except Exception as e: # handle exception raised in case of severe read errors
-        sys.exit('Error: reading molecule failed:\n' + str(e))
+        sys.exit('Error: reading molecule failed: ' + str(e))
 
     sys.exit(0)
         
