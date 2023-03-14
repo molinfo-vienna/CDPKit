@@ -34,6 +34,7 @@
 #include <cstddef>
 #include <string>
 #include <locale>
+#include <clocale>
 #include <limits>
 #include <cstdlib>
 
