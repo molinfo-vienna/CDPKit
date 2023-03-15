@@ -62,13 +62,14 @@ namespace CDPLPythonMath
 			static const int Value = NPY_FLOAT64;
 		};
 
+#ifdef NPY_FLOAT128
 		template <>
 		struct FloatDataTypeNum<16> 
 		{
 
 			static const int Value = NPY_FLOAT128;
 		};
-
+#endif // NPY_FLOAT128
 
 		template <std::size_t Size>
 		struct IntDataTypeNum {};
