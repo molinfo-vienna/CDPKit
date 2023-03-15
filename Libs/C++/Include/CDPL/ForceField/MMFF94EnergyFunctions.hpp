@@ -700,7 +700,9 @@ ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& t
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94TorsionEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-	return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, &calcMMFF94TorsionEnergy<ValueType, CoordsArray>);
+	return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords,
+															 static_cast<ValueType (*)(const MMFF94TorsionInteraction&, const CoordsArray&)>(
+																 &calcMMFF94TorsionEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
