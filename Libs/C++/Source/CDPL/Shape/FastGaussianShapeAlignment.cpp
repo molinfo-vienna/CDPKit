@@ -33,6 +33,7 @@
 #include <algorithm>
 
 #include <boost/random/uniform_real.hpp>
+#include <boost/math/special_functions/fpclassify.hpp>
 #include <boost/bind.hpp>
 
 #include "FastExp/fastexp.h"
