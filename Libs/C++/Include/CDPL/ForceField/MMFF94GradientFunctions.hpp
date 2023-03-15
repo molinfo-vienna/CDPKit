@@ -477,7 +477,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94BondStretchingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad, 
-															&calcMMFF94BondStretchingGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94BondStretchingInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94BondStretchingGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
@@ -515,7 +516,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad, 
-															&calcMMFF94AngleBendingGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94AngleBendingInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94AngleBendingGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
@@ -574,7 +576,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
-															&calcMMFF94StretchBendGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94StretchBendInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94StretchBendGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
@@ -641,7 +644,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
-															&calcMMFF94OutOfPlaneBendingGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94OutOfPlaneBendingInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94OutOfPlaneBendingGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
@@ -691,7 +695,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94TorsionGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
-															&calcMMFF94TorsionGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94TorsionInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94TorsionGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
@@ -744,7 +749,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad,
-															&calcMMFF94ElectrostaticGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94ElectrostaticInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94ElectrostaticGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
@@ -785,7 +791,8 @@ template <typename ValueType, typename Iter, typename CoordsArray, typename Grad
 ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(Iter beg, const Iter& end, const CoordsArray& coords, GradVector& grad)
 {
 	return Detail::calcMMFF94InteractionGradient<ValueType>(beg, end, coords, grad, 
-															&calcMMFF94VanDerWaalsGradient<ValueType, CoordsArray, GradVector>);
+															static_cast<ValueType (*)(const MMFF94VanDerWaalsInteraction&, const CoordsArray&, GradVector&)>(
+																&calcMMFF94VanDerWaalsGradient<ValueType, CoordsArray, GradVector>));
 }
 
 template <typename ValueType, typename CoordsArray, typename GradVector>
