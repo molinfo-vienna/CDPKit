@@ -132,7 +132,7 @@ namespace
 }
 
 
-class Chem::Atom2DCoordinatesCalculator::AtomNode::EdgePriorityGreaterCmpFunc : 
+class Chem::Atom2DCoordinatesCalculator::LGNode::EdgePriorityGreaterCmpFunc : 
 	public std::binary_function<const LGEdge*, const LGEdge*, bool>
 {
 
@@ -161,7 +161,7 @@ private:
 };
 
 
-class Chem::Atom2DCoordinatesCalculator::AtomNode::LinkedNodePriorityLessCmpFunc : 
+class Chem::Atom2DCoordinatesCalculator::LGNode::LinkedNodePriorityLessCmpFunc : 
 	public std::binary_function<const LGEdge*, const LGEdge*, bool>
 {
 
@@ -177,7 +177,7 @@ private:
 };
 
 
-class Chem::Atom2DCoordinatesCalculator::AtomNode::LinkedNodePriorityEqualCmpFunc : 
+class Chem::Atom2DCoordinatesCalculator::LGNode::LinkedNodePriorityEqualCmpFunc : 
 	public std::binary_function<const LGEdge*, const LGEdge*, bool>
 {
 

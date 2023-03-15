@@ -473,8 +473,6 @@ namespace CDPL
 
 			void setAtomNodeChainIDs();
 
-			class AtomNode;
-
 			void findLongestNodePath(AtomNode*, const AtomNode*);
 
 			void createBFSNodeList();
