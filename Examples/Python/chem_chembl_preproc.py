@@ -32,9 +32,9 @@ import distutils.util
 import CDPL.Chem as Chem
 
     
-# procedure called from the main loop which performs ChEMBL molecule standardization
-# and parent structure extraction (optional) for an input molecule
-def process(chembl_proc: Chem.ChEMBLStandardizer, in_mol: Chem.Molecule, out_mol: Chem.Molecule, args: argparse.Namespace) -> Chem.ChEMBLStandardizer.ChangeFlags:
+# performs ChEMBL molecule standardization and parent structure extraction (optional)
+# for a given input molecule using a provided Chem.ChEMBLStandardizer instance
+def standardize(chembl_proc: Chem.ChEMBLStandardizer, in_mol: Chem.Molecule, out_mol: Chem.Molecule, args: argparse.Namespace) -> Chem.ChEMBLStandardizer.ChangeFlags:
     # here, the standardization is carried out on a copy of the read input molecule
     # (if only one molecule instance gets provided as argument, modifications will be made in-place)
     change_flags = chembl_proc.standardize(in_mol, out_mol, args.proc_excluded)
@@ -226,7 +226,7 @@ def main() -> None:
          
             try:
                 # perform standardization and parent structure extraction (optional)
-                change_flags = process(chembl_proc, in_mol, out_mol, args) 
+                change_flags = standardize(chembl_proc, in_mol, out_mol, args) 
 
                 log_msg = getLogMessage(change_flags, args, mol_id)
 

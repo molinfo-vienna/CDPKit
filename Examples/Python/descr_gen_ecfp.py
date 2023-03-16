@@ -33,7 +33,7 @@ import CDPL.Descr as Descr
 import CDPL.Util as Util
 
 
-# generate ECFP for read molecule
+# generates the binary ECFP for the given molecule
 def genECFP(mol: Chem.Molecule, num_bits: int, radius: int, inc_hs: bool, inc_config: bool) -> Util.BitSet:
     Chem.calcImplicitHydrogenCounts(mol, False)        # calculate implicit hydrogen counts (if not yet done)
     Chem.perceiveHybridizationStates(mol, False)       # perceive atom hybridization states and set corresponding property for all atoms
@@ -79,14 +79,14 @@ def parseArgs() -> argparse.Namespace:
     parser.add_argument('-n',
                         dest='num_bits',
                         required=False,
-                        metavar='<num. bits>',
+                        metavar='<integer>',
                         default=1024,
                         help='Fingerprint size in bits (default: 1024)',
                         type=int)
     parser.add_argument('-r',
                         dest='radius',
                         required=False,
-                        metavar='<value>',
+                        metavar='<integer>',
                         default=2,
                         help='Max. atom environment radius in number of bonds (default: 2)',
                         type=int)

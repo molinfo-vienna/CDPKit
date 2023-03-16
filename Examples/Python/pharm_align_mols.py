@@ -30,6 +30,7 @@ import argparse
 
 import CDPL.Chem as Chem
 import CDPL.Pharm as Pharm
+import CDPL.Math as Math
 
     
 def parseArgs() -> argparse.Namespace:
@@ -50,6 +51,20 @@ def parseArgs() -> argparse.Namespace:
                         required=True,
                         metavar='<file>',
                         help='e output file (*.pml, *.cdf)')
+    parser.add_argument('-n',
+                        dest='num_out_almnts',
+                        required=False,
+                        metavar='<integer>',
+                        default=1,
+                        help='Number of top-ranked alignment solutions to output (default: best alignment solution only)',
+                        type=int)
+    parser.add_argument('-d',
+                        dest='min_pose_rmsd',
+                        required=False,
+                        metavar='<float>',
+                        default=0.5,
+                        help='Minimum RMSD required between two successively output alignment poses (default: 0.5)',
+                        type=float)
     parser.add_argument('-q',
                         dest='quiet',
                         required=False,
@@ -60,7 +75,8 @@ def parseArgs() -> argparse.Namespace:
 
     return parse_args
 
-def readRefPharmacophore(filename: str) -> Pharm.Pharmacophorer:
+# reads and returns the specified alignment reference pharmacophore
+def readRefPharmacophore(filename: str) -> Pharm.Pharmacophore:
     name_and_ext = os.path.splitext(filename)
 
     if name_and_ext[1] == '':
@@ -87,6 +103,7 @@ def readRefPharmacophore(filename: str) -> Pharm.Pharmacophorer:
 
     return ph4
 
+# returns a Chem.MoleculeReader instance for the specifed input molecule file format
 def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     name_and_ext = os.path.splitext(filename)
 
@@ -102,6 +119,7 @@ def getMolReaderByFileExt(filename: str) -> Chem.MoleculeReader:
     # create and return file reader instance
     return ipt_handler.createReader(filename)
 
+# returns a Chem.MolecularGraphWriter instance for the specifed outut molecule file format
 def getMolWriterByFileExt(filename: str) -> Chem.MolecularGraphWriter:
     name_and_ext = os.path.splitext(filename)
 
@@ -117,7 +135,7 @@ def getMolWriterByFileExt(filename: str) -> Chem.MolecularGraphWriter:
     # create and return file writer instance
     return opt_handler.createWriter(filename)
 
-# generates the pharmacophore of a given molecule
+# generates and returns the pharmacophore of the specified molecule
 def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
     Pharm.prepareForPharmacophoreGeneration(mol)       # call utility function preparing the molecule for pharmacophore generation
         
@@ -133,23 +151,33 @@ def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
 def main() -> None:
     args = parseArgs()
 
-    ref_ph4 = readRefPharmacophore(args.ref_ph4_file) 
+    ref_ph4 = readRefPharmacophore(args.ref_ph4_file) # read the reference pharmacophore
         
     # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(args.in_file)
     mol_reader = getMolReaderByFileExt(args.in_file) 
 
+    Chem.setMultiConfImportParameter(mol_reader, False) # treat conformers as individual molecules
+    
     # if the output molecules have to be stored in a specific format, a writer for this format could be created directly, e.g.
     # writer = Chem.FileSDFMolecularGraphWriter(args.out_file)
     mol_writer = getMolWriterByFileExt(args.out_file) 
 
     # create an instance of the default implementation of the Chem.Molecule interface
     mol = Chem.BasicMolecule()
-    
-    i = 1
 
+    # create instance of class implementing the pharmacophore alignment algorithm
+    almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
+
+    almnt.addFeatures(ref_ph4, True) # set reference features (True = first set = reference)
+
+    # create pharmacophore fit score calculator instance
+    almnt_score = Pharm.PharmacophoreFitScore()
+    
     # read and process molecules one after the other until the end of input has been reached
     try:
+        i = 1
+
         while mol_reader.read(mol):
             # compose a simple molecule identifier
             mol_id = Chem.getName(mol).strip() 
@@ -163,10 +191,79 @@ def main() -> None:
                 print('- Aligning molecule %s...' % mol_id)
 
             try:
-                mol_ph4 = genPharmacophore(mol) # generate pharmacophore
-                  
+                mol_ph4 = genPharmacophore(mol)    # generate input molecule pharmacophore
+
+                almnt.clearEntities(False)         # clear pharmacophore features of prev. molecule
+                almnt.addFeatures(mol_ph4, False)  # specify features of the pharmacophore to align
+
+                almnt_solutions = []               # stores the found alignment solutions
+                
+                while almnt.nextAlignment():                                    # iterate over all alignment solutions that can be found
+                    score = almnt_score(ref_ph4, mol_ph4, almnt.getTransform()) # calculate alignment score
+                    xform = Math.Matrix4D(almnt.getTransform())                 # make a copy of the alignment transformation (mol. ph4 -> ref. ph4) 
+
+                    almnt_solutions.append((score, xform))                      # save the current solution
+
+                if not args.quiet:
+                    print(' -> Found %s alignment solutions' % str(len(almnt_solutions)))
+
+                # order solutions by desc. alignment score
+                almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True) 
+                
+                saved_coords = Math.Vector3DArray()      # create data structure for storing 3D coordinates
+
+                Chem.get3DCoordinates(mol, saved_coords) # save the original atom coordinates
+
+                struct_data = None
+
+                if Chem.hasStructureData(mol):    # get existing structure data if available
+                    struct_data = Chem.getStructureData(mol)
+                else:                             # otherwise create and set new structure data
+                    struct_data = Chem.StringDataBlock()
+
+                    Chem.setStructureData(mol, strut)
+
+                # add alignment score entry to struct. data
+                struct_data.addEntry('<PharmFitScore>', '') 
+                
+                output_cnt = 0
+                last_pose = None
+                
+                # output molecule alignment poses until the max. number of best output solutions has been reached
+                for solution in almnt_solutions:
+                    if output_cnt == args.num_out_almnts:
+                        break
+
+                    curr_pose = Math.Vector3DArray(saved_coords)
+
+                    Math.transform(curr_pose, solution[1])  # transform atom coordinates
+
+                    # check whether the current pose is 'different enough' from
+                    # the last pose to qualify for output
+                    if last_pose and Math.calcRMSD(last_pose, curr_pose) < args.min_pose_rmsd:
+                        continue
+
+                    # apply the transformed atom coordinates
+                    Chem.set3DCoordinates(mol, curr_pose)  
+
+                    # store alignment score in the struct. data entry
+                    struct_data[len(struct_data) - 1].setData(str(solution[0]))     
+                    
+                    try:
+                        if not mol_writer.write(mol): # output the alignment pose of the molecule
+                            sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
+
+                    except Exception as e: # handle exception raised in case of severe write errors
+                        sys.exit('Error: writing alignment pose of molecule %s failed: %s' % (mol_id, str(e)))
+
+                    last_pose = curr_pose
+                    output_cnt += 1
+
+                if not args.quiet:
+                    print(' -> %s alignment poses saved' % str(output_cnt))
+
             except Exception as e:
-                sys.exit('Error: pharmacophore generation or output for molecule %s failed: %s' % (mol_id, str(e)))
+                sys.exit('Error: pharmacophore alignment of molecule %s failed: %s' % (mol_id, str(e)))
 
             i += 1
                 

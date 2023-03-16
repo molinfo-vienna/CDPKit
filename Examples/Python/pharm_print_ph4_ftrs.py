@@ -31,8 +31,8 @@ import CDPL.Pharm as Pharm
 import CDPL.Chem as Chem
 
 
-# function called for each read pharmacophore
-def procPharmacophore(ph4: Pharm.Pharmacophore) -> None: 
+# outputs all (available) properties of the features stored in the given feature container
+def outputFeatureProps(ph4: Pharm.FeatureContainer) -> None: 
     ftr_type_str = { Pharm.FeatureType.UNKNOWN               : 'UNKNOWN',
                      Pharm.FeatureType.HYDROPHOBIC           : 'HYDROPHOBIC',
                      Pharm.FeatureType.AROMATIC              : 'AROMATIC',
@@ -100,7 +100,7 @@ def main() -> None:
     try:
         while reader.read(ph4): 
             try:
-                procPharmacophore(ph4)
+                outputFeatureProps(ph4)
             except Exception as e:
                 sys.exit('Error: processing of pharmacophore failed: ' + str(e))
                 

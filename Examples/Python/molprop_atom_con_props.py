@@ -31,8 +31,8 @@ import CDPL.Chem as Chem
 import CDPL.MolProp as MolProp
 
 
-# function called for read molecule
-def procMolecule(molgraph: Chem.MolecularGraph) -> None:
+# outputs the corresponding properties of each atom of the provided molecular graph
+def outputProperties(molgraph: Chem.MolecularGraph) -> None:
     Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
     Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
     Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
@@ -115,7 +115,7 @@ def main() -> None:
     try:
         while reader.read(mol):
             try:
-                procMolecule(mol)
+                outputProperties(mol)
             except Exception as e:
                 sys.exit('Error: processing of molecule failed: ' + str(e))
                 

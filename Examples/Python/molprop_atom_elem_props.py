@@ -31,8 +31,8 @@ import CDPL.Chem as Chem
 import CDPL.MolProp as MolProp
 
 
-# function called for read molecule
-def procMolecule(molgraph: Chem.MolecularGraph) -> None:
+# outputs the corresponding properties of each atom of the provided molecular graph
+def outputProperties(molgraph: Chem.MolecularGraph) -> None:
     for atom in molgraph.atoms:
         print('- Atom #%s' % str(molgraph.getAtomIndex(atom)))
         print('\tAtomic weight: %s' % str(MolProp.getAtomicWeight(atom)))
@@ -84,7 +84,7 @@ def main() -> None:
     try:
         while reader.read(mol):
             try:
-                procMolecule(mol)
+                outputProperties(mol)
             except Exception as e:
                 sys.exit('Error: processing of molecule failed: ' + str(e))
                 

@@ -107,8 +107,12 @@ if __name__ == '__main__':
  
     errors |= checkScriptFileOutput('pharm_gen_mol_ph4s', outputFilePath('pharm_gen_mol_ph4s.pml'),
                                     [ '-i', testDataFilePath('1dwc_MIT.sdf'), '-o', outputFilePath('pharm_gen_mol_ph4s.pml') ])
-    errors |= checkScriptFileOutput('pharm_gen_ia_ph4s', outputFilePath('pharm_gen_ia_ph4s.pml'),
-                                    [ '-r', testDataFilePath('1ke6.pdb'), '-l', testDataFilePath('1ke6_B_LS2.sdf'), '-s', 'LS2', '-o', outputFilePath('pharm_gen_ia_ph4s.pml') ])
+    errors |= checkScriptOutput('pharm_gen_ia_ph4s',
+                                    [ '-r', testDataFilePath('1ke6.pdb'), '-l', testDataFilePath('1ke6_B_LS2.sdf'), '-s', 'LS2',
+                                      '-o', outputFilePath('pharm_gen_ia_ph4s.pml'), '-x' ])
+    errors |= checkScriptFileOutput('pharm_align_mols', outputFilePath('pharm_align_mols.sdf'),
+                                    [ '-r', outputFilePath('pharm_gen_ia_ph4s.pml'), '-i', testDataFilePath('LS1.sdf'),
+                                      '-o', outputFilePath('pharm_align_mols.sdf'), '-n', '10', '-d', '1.0' ])
     errors |= checkScriptOutput('pharm_seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
     errors |= checkScriptOutput('pharm_print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 

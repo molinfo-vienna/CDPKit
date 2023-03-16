@@ -31,8 +31,8 @@ import CDPL.Chem as Chem
 import CDPL.ForceField as ForceField
 
 
-# function called for read molecule
-def procMolecule(mol: Chem.Molecule) -> None:
+# calculates and outputs the MMFF94 charges of the atoms of the provided molecular graph
+def calcAndOutputCharges(mol: Chem.Molecule) -> None:
     Chem.calcImplicitHydrogenCounts(mol, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
     Chem.makeHydrogenComplete(mol)               # make all implicit hydrogens explicit
     Chem.perceiveHybridizationStates(mol, False) # perceive atom hybridization states and set corresponding property for all atoms
@@ -80,7 +80,7 @@ def main() -> None:
     try:
         while reader.read(mol):
             try:
-                procMolecule(mol)
+                calcAndOutputCharges(mol)
             except Exception as e:
                 sys.exit('Error: processing of molecule failed: ' + str(e))
                 

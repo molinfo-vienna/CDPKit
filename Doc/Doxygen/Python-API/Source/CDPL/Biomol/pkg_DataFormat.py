@@ -38,3 +38,18 @@ class DataFormat(Boost.Python.instance):
     # \brief 
     #
     PDB_BZ2 = CDPL.Base.DataFormat(name='PDB_BZ2', descr='BZip2-Compressed Brookhaven Protein Data Bank Entry', mime_type'chemical/x-pdb', file_exts=['pdb.bz2', 'ent.bz2'], multi_rec=False)
+
+    ##
+    # \brief 
+    #
+    MMTF = CDPL.Base.DataFormat(name='MMTF', descr='Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf'], multi_rec=False)
+
+    ##
+    # \brief 
+    #
+    MMTF_GZ = CDPL.Base.DataFormat(name='MMTF_GZ', descr='GZip-Compressed Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf.gz'], multi_rec=False)
+
+    ##
+    # \brief 
+    #
+    MMTF_BZ2 = CDPL.Base.DataFormat(name='MMTF_BZ2', descr='BZip2-Compressed Macromolecular Transmission Format', mime_type'chemical/x-mmtf', file_exts=['mmtf.bz2'], multi_rec=False)

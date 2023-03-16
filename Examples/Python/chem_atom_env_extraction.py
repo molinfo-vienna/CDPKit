@@ -30,8 +30,8 @@ import os
 import CDPL.Chem as Chem
 
 
-# function called for each read molecule
-def procMolecule(molgraph: Chem.MolecularGraph) -> None: 
+# extracts the structural environments of the atoms in the specified molecular graph and outputs them as SMILES strings
+def printEnvironments(molgraph: Chem.MolecularGraph) -> None: 
     Chem.calcImplicitHydrogenCounts(molgraph, False)  # calculate implicit hydrogen counts and set corresponding property for all atoms
     Chem.perceiveHybridizationStates(molgraph, False) # perceive atom hybridization states and set corresponding property for all atoms
     Chem.perceiveSSSR(molgraph, False)                # perceive smallest set of smallest rings and store as Chem.MolecularGraph property
@@ -80,7 +80,7 @@ def main() -> None:
     try:
         while reader.read(mol): 
             try:
-                procMolecule(mol)
+                printEnvironments(mol)
             except Exception as e:
                 sys.exit('Error: processing of molecule failed: ' + str(e))
                 
