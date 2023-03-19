@@ -36,29 +36,19 @@ ADD_EXECUTABLE(tautgen ${tautgen_SRCS})
 
 SET_TARGET_PROPERTIES(tautgen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
-IF(NOT APPLE)
-  IF(WIN32)
-    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/tautgen.exe")
-  ELSE()
-    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/tautgen")
-  ENDIF(WIN32)
+IF(WIN32)
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/tautgen.exe")
+ELSE()
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/tautgen")
+ENDIF(WIN32)
 
-  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-    @ONLY
-    )
+CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+	       @ONLY
+	       )
 
-  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
-ENDIF(NOT APPLE)
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
 
 TARGET_LINK_LIBRARIES(tautgen cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared)
-
-# Special non-dynamic version without external dependencies
-#SET_TARGET_PROPERTIES(tautgen PROPERTIES LINK_FLAGS "-static")
-#TARGET_LINK_LIBRARIES(tautgen cmdline-lib-static cdpl-util-static cdpl-base-static cdpl-chem-static pthread) 
-
-#IF(Boost_IOSTREAMS_FOUND)
-#  TARGET_LINK_LIBRARIES(tautgen ${Boost_IOSTREAMS_LIBRARY} z bz2) 
-#ENDIF(Boost_IOSTREAMS_FOUND)
 
 INSTALL(TARGETS tautgen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

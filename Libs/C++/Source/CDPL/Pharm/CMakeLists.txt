@@ -194,39 +194,32 @@ ADD_LIBRARY(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-grid-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static)
 
-IF(APPLE)
-  SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"
-                        FRAMEWORK TRUE
-                        OUTPUT_NAME CDPL-Biomol
-                        INSTALL_NAME_DIR "${CDPKIT_FRAMEWORK_INSTALL_NAME_DIR}"
-                        LINK_FLAGS "-Wl,-rpath,\"${CDPKIT_FRAMEWORK_INSTALL_RPATH}\""
-                       )
-ELSE(APPLE)
-  SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
-                        OUTPUT_NAME cdpl-pharm
-                        CLEAN_DIRECT_OUTPUT 1
-                        INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-                       )
+SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
+                      OUTPUT_NAME cdpl-pharm
+		      CLEAN_DIRECT_OUTPUT 1
+		      INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
+		      )
 
-  IF(WIN32)
-    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.dll")
-  ELSE()			
-    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.so")
-  ENDIF(WIN32)
+IF(WIN32)
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.dll")
+ELSEIF(APPLE)
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.dylib")
+ELSE()			
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.so")
+ENDIF(WIN32)
 
-  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake"
-    @ONLY
-    )
-  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
-ENDIF(APPLE)
+CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+	       @ONLY
+	       )
+
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 
 INSTALL(TARGETS cdpl-pharm-shared
         RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-        LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
-        ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
-        FRAMEWORK DESTINATION "${CDPKIT_FRAMEWORK_INSTALL_DIR}" COMPONENT CDPLFrameworks
-       )
+	LIBRARY DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLSharedLibraries
+	ARCHIVE DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLImportLibraries
+	)
 
 IF(CDPL_CXX_UNIT_TESTS_ENABLED)
   ADD_SUBDIRECTORY(Tests)
