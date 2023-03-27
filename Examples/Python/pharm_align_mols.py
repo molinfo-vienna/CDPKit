@@ -45,25 +45,31 @@ def parseArgs() -> argparse.Namespace:
                         dest='in_file',
                         required=True,
                         metavar='<file>',
-                        help='Ligand structure input file')
+                        help='Molecule input file')
     parser.add_argument('-o',
                         dest='out_file',
                         required=True,
                         metavar='<file>',
-                        help='e output file (*.pml, *.cdf)')
+                        help='Aligned molecule output file (*.pml, *.cdf)')
     parser.add_argument('-n',
                         dest='num_out_almnts',
                         required=False,
                         metavar='<integer>',
                         default=1,
-                        help='Number of top-ranked alignment solutions to output (default: best alignment solution only)',
+                        help='Number of top-ranked alignment solutions to output per molecule (default: best alignment solution only)',
                         type=int)
+    parser.add_argument('-x',
+                        dest='exhaustive',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Perform an exhaustive alignment search (default: false)')
     parser.add_argument('-d',
                         dest='min_pose_rmsd',
                         required=False,
                         metavar='<float>',
-                        default=0.5,
-                        help='Minimum RMSD required between two successively output alignment poses (default: 0.5)',
+                        default=0.0,
+                        help='Minimum required RMSD between two consecutively output molecule alignment poses (default: 0.0)',
                         type=float)
     parser.add_argument('-q',
                         dest='quiet',
@@ -71,6 +77,12 @@ def parseArgs() -> argparse.Namespace:
                         action='store_true',
                         default=False,
                         help='Disable progress output (default: false)')
+    parser.add_argument('-p',
+                        dest='pos_only',
+                        required=False,
+                        action='store_true',
+                        default=False,
+                        help='Ignore feature orientations, feature position matching only (default: false)')
     parse_args = parser.parse_args()
 
     return parse_args
@@ -147,12 +159,18 @@ def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
     Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore's name to the name of the input molecule
 
     return ph4
-    
+
+# remove feature orientation informations and set the feature geometry to Pharm.FeatureGeometry.SPHERE
+def clearFeatureOrientations(ph4: Pharm.BasicPharmacophore) -> None:
+    for ftr in ph4:
+        Pharm.clearOrientation(ftr)
+        Pharm.setGeometry(ftr, Pharm.FeatureGeometry.SPHERE)
+
 def main() -> None:
     args = parseArgs()
 
     ref_ph4 = readRefPharmacophore(args.ref_ph4_file) # read the reference pharmacophore
-        
+
     # if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
     # reader = Chem.FileSDFMoleculeReader(args.in_file)
     mol_reader = getMolReaderByFileExt(args.in_file) 
@@ -169,8 +187,12 @@ def main() -> None:
     # create instance of class implementing the pharmacophore alignment algorithm
     almnt = Pharm.PharmacophoreAlignment(True) # True = aligned features have to be within the tolerance spheres of the ref. features
 
-    almnt.addFeatures(ref_ph4, True) # set reference features (True = first set = reference)
-
+    if args.pos_only:                          # clear feature orientation information
+        clearFeatureOrientations(ref_ph4)
+    
+    almnt.addFeatures(ref_ph4, True)               # set reference features (True = first set = reference)
+    almnt.performExhaustiveSearch(args.exhaustive) # set minimum number of top. mapped feature pairs
+    
     # create pharmacophore fit score calculator instance
     almnt_score = Pharm.PharmacophoreFitScore()
     
@@ -193,22 +215,22 @@ def main() -> None:
             try:
                 mol_ph4 = genPharmacophore(mol)    # generate input molecule pharmacophore
 
-                almnt.clearEntities(False)         # clear pharmacophore features of prev. molecule
+                if args.pos_only:                  # clear feature orientation information
+                    clearFeatureOrientations(mol_ph4)
+
+                almnt.clearEntities(False)         # clear features of previously aligned pharmacophore
                 almnt.addFeatures(mol_ph4, False)  # specify features of the pharmacophore to align
 
                 almnt_solutions = []               # stores the found alignment solutions
                 
-                while almnt.nextAlignment():                                    # iterate over all alignment solutions that can be found
-                    score = almnt_score(ref_ph4, mol_ph4, almnt.getTransform()) # calculate alignment score
-                    xform = Math.Matrix4D(almnt.getTransform())                 # make a copy of the alignment transformation (mol. ph4 -> ref. ph4) 
+                while almnt.nextAlignment():                                     # iterate over all alignment solutions that can be found
+                    score = almnt_score(ref_ph4, mol_ph4, almnt.getTransform())  # calculate alignment score
+                    xform = Math.Matrix4D(almnt.getTransform())                  # make a copy of the alignment transformation (mol. ph4 -> ref. ph4) 
 
-                    almnt_solutions.append((score, xform))                      # save the current solution
+                    almnt_solutions.append((score, xform))
 
                 if not args.quiet:
                     print(' -> Found %s alignment solutions' % str(len(almnt_solutions)))
-
-                # order solutions by desc. alignment score
-                almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True) 
                 
                 saved_coords = Math.Vector3DArray()      # create data structure for storing 3D coordinates
 
@@ -216,9 +238,9 @@ def main() -> None:
 
                 struct_data = None
 
-                if Chem.hasStructureData(mol):    # get existing structure data if available
+                if Chem.hasStructureData(mol):           # get existing structure data if available
                     struct_data = Chem.getStructureData(mol)
-                else:                             # otherwise create and set new structure data
+                else:                                    # otherwise create and set new structure data
                     struct_data = Chem.StringDataBlock()
 
                     Chem.setStructureData(mol, strut)
@@ -229,6 +251,9 @@ def main() -> None:
                 output_cnt = 0
                 last_pose = None
                 
+                # order solutions by desc. alignment score
+                almnt_solutions = sorted(almnt_solutions, key=lambda entry: entry[0], reverse=True)
+
                 # output molecule alignment poses until the max. number of best output solutions has been reached
                 for solution in almnt_solutions:
                     if output_cnt == args.num_out_almnts:
@@ -240,7 +265,7 @@ def main() -> None:
 
                     # check whether the current pose is 'different enough' from
                     # the last pose to qualify for output
-                    if last_pose and Math.calcRMSD(last_pose, curr_pose) < args.min_pose_rmsd:
+                    if args.min_pose_rmsd > 0.0 and last_pose and Math.calcRMSD(last_pose, curr_pose) < args.min_pose_rmsd:
                         continue
 
                     # apply the transformed atom coordinates

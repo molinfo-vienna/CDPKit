@@ -73,6 +73,10 @@ namespace CDPLPythonChem
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityWeightFunction", &AlignmentType::getEntityWeightFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
+				.def("performExhaustiveSearch", &AlignmentType::performExhaustiveSearch,
+					 (python::arg("self"), python::arg("exhaustive")))
+				.def("exhaustiveSearchPerformed", &AlignmentType::exhaustiveSearchPerformed,
+					 python::arg("self"))
 				.def("addEntity", &addEntityFunc, (python::arg("self"), python::arg("entity"), python::arg("first_set")),
 					 python::with_custodian_and_ward<1, 2>())
 				.def("clearEntities", &AlignmentType::clearEntities, 
@@ -98,7 +102,9 @@ namespace CDPLPythonChem
 				.add_property("topMapping", 
 							  python::make_function(&AlignmentType::getTopologicalMapping, python::return_internal_reference<>()))
 				.add_property("minTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
-					  &AlignmentType::setMinTopologicalMappingSize)
+							  &AlignmentType::setMinTopologicalMappingSize)
+				.add_property("exhaustiveSearch", &AlignmentType::exhaustiveSearchPerformed,
+							  &AlignmentType::performExhaustiveSearch)
 				.add_property("transform", 
 							  python::make_function(&AlignmentType::getTransform, python::return_internal_reference<>()))
 				.add_property("entityMatchFunction", 

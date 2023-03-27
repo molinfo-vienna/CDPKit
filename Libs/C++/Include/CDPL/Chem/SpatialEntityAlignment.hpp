@@ -184,6 +184,10 @@ namespace CDPL
 			 */
 			const EntityPairMatchFunction& getEntityPairMatchFunction() const;
 	 
+			void performExhaustiveSearch(bool exhaustive);
+
+			bool exhaustiveSearchPerformed() const;
+			
 			/**
 			 * \brief Adds an entity to the specified alignment entity set.
 			 * \param entity The entity object to add.
@@ -304,6 +308,7 @@ namespace CDPL
 			Math::Matrix4D                         transform;
 			std::size_t                            minTopMappingSize;
 			bool                                   changes;
+			bool                                   exhaustiveMode;
 			TopMappingHashSet                      seenTopMappings;
 			TopMappingCache                        topMappingCache;
 		};
@@ -314,7 +319,8 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-CDPL::Chem::SpatialEntityAlignment<T>::SpatialEntityAlignment(): minTopMappingSize(3), changes(true), topMappingCache(5000)
+CDPL::Chem::SpatialEntityAlignment<T>::SpatialEntityAlignment():
+	minTopMappingSize(3), changes(true), exhaustiveMode(true), topMappingCache(5000)
 {
 	currTopMapping = allocTopMapping();
 }
@@ -401,6 +407,19 @@ CDPL::Chem::SpatialEntityAlignment<T>::getEntityPairMatchFunction() const
 }
 
 template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::performExhaustiveSearch(bool exhaustive)
+{
+	exhaustiveMode = exhaustive;
+	changes = true;
+}
+
+template <typename T>
+bool CDPL::Chem::SpatialEntityAlignment<T>::exhaustiveSearchPerformed() const
+{
+	return exhaustiveMode;
+}
+
+template <typename T>
 std::size_t CDPL::Chem::SpatialEntityAlignment<T>::getNumEntities(bool first_set) const  
 {
 	return topAlignment.getNumEntities(first_set);
@@ -458,7 +477,7 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 
 	bool have_weights = !firstSetWeights.empty();
 	std::size_t min_sub_mpg_size = (minTopMappingSize < 3 ? minTopMappingSize : std::size_t(3));
-
+	
 	while (nextTopMappingIter != topMappings.end()) {
 		currTopMapping = *nextTopMappingIter;
 
@@ -485,7 +504,7 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 				almntWeights(i) = std::max(firstSetWeights[first_idx], secondSetWeights[sec_idx]);
 		}
 
-		if (num_points > min_sub_mpg_size) {
+		if (exhaustiveMode && (num_points > min_sub_mpg_size)) {
 			Util::STPairArray* sub_mpg = 0;
 			
 			for (std::size_t j = 0; j < num_points; j++) {
@@ -498,9 +517,10 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 					if (k != j)
 						sub_mpg->addElement(currTopMapping->getElement(k));
 
-				if (!seenTopMappings.insert(sub_mpg).second)
+				if (!seenTopMappings.insert(sub_mpg).second) {
 					continue;
-
+				}
+				
 				topMappings.insert(sub_mpg);
 				sub_mpg = 0;
 			}
