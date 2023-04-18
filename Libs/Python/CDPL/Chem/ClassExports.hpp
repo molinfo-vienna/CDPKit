@@ -117,10 +117,6 @@ namespace CDPLPythonChem
 	void exportSurfaceAtomExtractor();
 	void exportPatternAtomTyper();
 	void exportSubstructureHistogramCalculator();
-	void exportGeneralizedBellAtomDensity();
-	void exportAtomDensityGridCalculator();
-	void exportBuriednessScore();
-	void exportBuriednessGridCalculator();
 	void exportTautomerScore();
 	void exportTautomerGenerator();
 	void exportDefaultTautomerGenerator();

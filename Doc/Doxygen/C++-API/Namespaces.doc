@@ -27,6 +27,9 @@
 \namespace CDPL::Grid
 \brief Contains classes and functions related to grid based data representation and processing.
 
+\namespace CDPL::GRAILS
+\brief Contains classes and functions related to the GRAILS method.
+
 \namespace CDPL::ForceField
 \brief Contains classes and functions related to molecular force fields.
 
@@ -35,6 +38,12 @@
 
 \namespace CDPL::ConfGen
 \brief Contains classes and functions related to conformer ensemble generation.
+
+\namespace CDPL::MolProp
+\brief Contains classes and functions related to the calculation/preciction of physicochemical molecular properties.
+
+\namespace CDPL::Descr
+\brief Contains classes and functions related to the generation and processing of pharmacophore and molecule descriptors.
 
 \namespace boost
 \brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).

@@ -40,8 +40,8 @@ void CDPLPythonPharm::exportPharmacophoreFitScreeningScore()
 				   boost::noncopyable>("PharmacophoreFitScreeningScore", python::no_init)
 		.def(python::init<const Pharm::PharmacophoreFitScreeningScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double, double>((python::arg("self"), 
-												   python::arg("match_cnt_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR, 
-												   python::arg("pos_match_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR,
-												   python::arg("geom_match_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR)))
+												   python::arg("match_cnt_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT, 
+												   python::arg("pos_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT,
+												   python::arg("geom_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT)))
 		.def("__call__", &Pharm::PharmacophoreFitScreeningScore::operator(), (python::arg("self"), python::arg("hit")));
 }

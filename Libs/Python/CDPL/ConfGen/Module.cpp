@@ -26,6 +26,8 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
+
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"

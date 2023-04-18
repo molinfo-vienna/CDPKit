@@ -46,7 +46,6 @@
 #include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"
 #include "CDPL/Pharm/FeatureInteractionScoreCombiner.hpp"
-#include "CDPL/Pharm/InteractionScoreGridCalculator.hpp"
 
 #include "Base/GenericFromPythonConverter.hpp"
 
@@ -56,11 +55,6 @@
 void CDPLPythonPharm::registerFromPythonConverters()
 {
 	using namespace CDPL;
-
-	CDPLPythonBase::GenericFromPythonConverter<const Pharm::InteractionScoreGridCalculator::MaxScoreFunctor&,
-											   Pharm::InteractionScoreGridCalculator::ScoreCombinationFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<const Pharm::InteractionScoreGridCalculator::ScoreSumFunctor&,
-											   Pharm::InteractionScoreGridCalculator::ScoreCombinationFunction>();
 
 	CDPLPythonBase::GenericFromPythonConverter<const Pharm::PharmacophoreFitScore&,
 											   boost::function3<double, const Pharm::FeatureContainer&, const Pharm::FeatureContainer&, 

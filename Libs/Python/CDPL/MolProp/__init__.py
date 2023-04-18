@@ -26,9 +26,6 @@
 
 from __future__ import absolute_import
 
-import CDPL.Base
-import CDPL.Math
-import CDPL.Util
 import CDPL.Chem
 
 from ._molprop import *

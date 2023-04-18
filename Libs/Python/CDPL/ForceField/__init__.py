@@ -26,7 +26,6 @@
 
 from __future__ import absolute_import
 
-import CDPL.Math
 import CDPL.Chem
 
 from ._forcefield import *

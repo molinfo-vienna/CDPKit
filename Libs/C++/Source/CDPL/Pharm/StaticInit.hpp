@@ -38,11 +38,9 @@ namespace CDPL
 
 		void initFeatureContainerProperties();
 		void initFeatureProperties();
-		void initAttributedGridProperties();
 		void initFeaturePropertyDefaults();
 		void initFeatureContainerPropertyDefaults();
 		void initFeaturePropertyDefaults();
-		void initAttributedGridPropertyDefaults();
 		void initDataFormats();
 		void initControlParameters();
 		void initControlParameterDefaults();
@@ -58,10 +56,8 @@ namespace
 		CDPLPharmInit() {
 			CDPL::Pharm::initFeatureContainerProperties();
 			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initAttributedGridProperties();
 			CDPL::Pharm::initFeatureContainerPropertyDefaults();
 			CDPL::Pharm::initFeaturePropertyDefaults();
-			CDPL::Pharm::initAttributedGridPropertyDefaults();
 			CDPL::Pharm::initDataFormats();
 			CDPL::Pharm::initControlParameters();
 			CDPL::Pharm::initControlParameterDefaults();

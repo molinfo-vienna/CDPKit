@@ -49,9 +49,9 @@ namespace CDPL
 		{
 
 		  public:
-			PharmacophoreFitScreeningScore(double ftr_match_cnt_factor = DEF_FTR_MATCH_COUNT_FACTOR, 
-										   double ftr_pos_match_factor = DEF_FTR_POS_MATCH_FACTOR,
-										   double ftr_geom_match_factor = DEF_FTR_GEOM_MATCH_FACTOR);
+			PharmacophoreFitScreeningScore(double ftr_match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
+										   double ftr_pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
+										   double ftr_geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
 			double operator()(const ScreeningProcessor::SearchHit& hit);
 		};

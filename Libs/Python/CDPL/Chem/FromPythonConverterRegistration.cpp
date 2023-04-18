@@ -24,8 +24,6 @@
  */
 
 
-#include <boost/function.hpp>
-
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
@@ -38,8 +36,6 @@
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
-#include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"
-#include "CDPL/Chem/AtomDensityGridCalculator.hpp"
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"
 
 #include "Base/GenericVariantFromPythonConverter.hpp"
@@ -139,9 +135,6 @@ void CDPLPythonChem::registerFromPythonConverters()
 											   Chem::HashCodeCalculator::AtomHashSeedFunction>();
 	CDPLPythonBase::GenericFromPythonConverter<const Chem::HashCodeCalculator::DefBondHashSeedFunctor&,
 											   Chem::HashCodeCalculator::BondHashSeedFunction>();
-
-	CDPLPythonBase::GenericFromPythonConverter<const Chem::GeneralizedBellAtomDensity&, 
-											   Chem::AtomDensityGridCalculator::DensityFunction>();
 
 	BondOrderChangeFromPySequenceConverter();
 }

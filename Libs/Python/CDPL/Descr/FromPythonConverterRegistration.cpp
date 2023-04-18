@@ -24,8 +24,6 @@
  */
 
 
-#include <boost/function.hpp>
-
 #include "CDPL/Descr/PathFingerprintGenerator.hpp"
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
 

@@ -121,10 +121,6 @@ BOOST_PYTHON_MODULE(_chem)
 
 	exportPatternAtomTyper();
 	exportSubstructureHistogramCalculator();
-	exportGeneralizedBellAtomDensity();
-	exportAtomDensityGridCalculator();
-	exportBuriednessScore();
-	exportBuriednessGridCalculator();
 	exportTautomerScore();
 	exportTautomerGenerator();
 	exportDefaultTautomerGenerator();

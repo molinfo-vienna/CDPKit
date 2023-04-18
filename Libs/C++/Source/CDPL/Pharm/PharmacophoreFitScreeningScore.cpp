@@ -33,9 +33,9 @@
 using namespace CDPL;
 
 
-Pharm::PharmacophoreFitScreeningScore::PharmacophoreFitScreeningScore(double match_cnt_factor, double pos_match_factor, 
-																	  double geom_match_factor):
-    PharmacophoreFitScore(match_cnt_factor, pos_match_factor, geom_match_factor)
+Pharm::PharmacophoreFitScreeningScore::PharmacophoreFitScreeningScore(double match_cnt_weight, double pos_match_weight, 
+																	  double geom_match_weight):
+    PharmacophoreFitScore(match_cnt_weight, pos_match_weight, geom_match_weight)
 {}
 
 double Pharm::PharmacophoreFitScreeningScore::operator()(const ScreeningProcessor::SearchHit& hit)

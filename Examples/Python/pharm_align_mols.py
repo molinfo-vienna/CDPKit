@@ -156,8 +156,6 @@ def genPharmacophore(mol: Chem.Molecule) -> Pharm.Pharmacophore:
 
     ph4_gen.generate(mol, ph4)                         # generate the pharmacophore
 
-    Pharm.setName(ph4, Chem.getName(mol))              # set the pharmacophore's name to the name of the input molecule
-
     return ph4
 
 # remove feature orientation informations and set the feature geometry to Pharm.FeatureGeometry.SPHERE
@@ -272,7 +270,7 @@ def main() -> None:
                     Chem.set3DCoordinates(mol, curr_pose)  
 
                     # store alignment score in the struct. data entry
-                    struct_data[len(struct_data) - 1].setData(str(solution[0]))     
+                    struct_data[len(struct_data) - 1].setData(format(solution[0], '.4f'))     
                     
                     try:
                         if not mol_writer.write(mol): # output the alignment pose of the molecule

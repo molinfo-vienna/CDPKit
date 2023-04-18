@@ -53,25 +53,25 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_FTR_MATCH_COUNT_FACTOR;
-			static const double DEF_FTR_POS_MATCH_FACTOR;
-			static const double DEF_FTR_GEOM_MATCH_FACTOR;
+			static const double DEF_FTR_MATCH_COUNT_WEIGHT;
+			static const double DEF_FTR_POS_MATCH_WEIGHT;
+			static const double DEF_FTR_GEOM_MATCH_WEIGHT;
 	  
-			PharmacophoreFitScore(double match_cnt_factor = DEF_FTR_MATCH_COUNT_FACTOR, 
-								  double pos_match_factor = DEF_FTR_POS_MATCH_FACTOR,
-								  double geom_match_factor = DEF_FTR_GEOM_MATCH_FACTOR);
+			PharmacophoreFitScore(double match_cnt_weight = DEF_FTR_MATCH_COUNT_WEIGHT, 
+								  double pos_match_weight = DEF_FTR_POS_MATCH_WEIGHT,
+								  double geom_match_weight = DEF_FTR_GEOM_MATCH_WEIGHT);
 
-			double getFeatureMatchCountFactor() const;
+			double getFeatureMatchCountWeight() const;
 
-			void setFeatureMatchCountFactor(double factor);
+			void setFeatureMatchCountWeight(double weight);
 
-			double getFeaturePositionMatchFactor() const;
+			double getFeaturePositionMatchWeight() const;
 
-			void setFeaturePositionMatchFactor(double factor);
+			void setFeaturePositionMatchWeight(double weight);
 
-			double getFeatureGeometryMatchFactor() const;
+			double getFeatureGeometryMatchWeight() const;
 
-			void setFeatureGeometryMatchFactor(double factor);
+			void setFeatureGeometryMatchWeight(double weight);
 
 			double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
 							  const Math::Matrix4D& xform);
@@ -82,9 +82,9 @@ namespace CDPL
 			typedef std::vector<const Feature*> FeatureList;
 
 			SpatialFeatureMapping spatFtrMapping;
-			double                ftrMatchCntFactor;
-			double                ftrPosMatchFactor;
-			double                ftrGeomMatchFactor;
+			double                ftrMatchCntWeight;
+			double                ftrPosMatchWeight;
+			double                ftrGeomMatchWeight;
 			FeatureList           groupedRefFtrs;
 		};
     }

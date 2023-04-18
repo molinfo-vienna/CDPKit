@@ -26,9 +26,6 @@
 
 from __future__ import absolute_import
 
-import CDPL.Math
-import CDPL.Util
-import CDPL.Chem
 import CDPL.Pharm
 
 from ._descr import *

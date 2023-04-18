@@ -26,6 +26,8 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
+
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
@@ -129,9 +131,6 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportCationPiInteractionScore();
 	exportHBondingInteractionScore();
 	exportXBondingInteractionScore();
-	exportInteractionScoreGridCalculator();
-	exportInteractionScoreGridSetCalculator();
-	exportDefaultInteractionScoreGridSetCalculator();
 
 	exportTopologicalEntityAlignment();
 	exportPharmacophoreAlignment();
@@ -143,10 +142,8 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportFeatureContainerProperties();
 	exportFeatureProperties();
-	exportAttributedGridProperties();
 	exportFeatureContainerPropertyDefaults();
 	exportFeaturePropertyDefaults();
-	exportAttributedGridPropertyDefaults();
 
 	exportControlParameters();
 	exportControlParameterDefaults();
@@ -159,7 +156,6 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFeatureFunctions();
 	exportFeatureContainerFunctions();
 	exportFeatureSetFunctions();
-	exportAttributedGridFunctions();
 	exportControlParameterFunctions();
 	exportMoleculeFunctions();
 

@@ -105,9 +105,6 @@ SET(pharm_MOD_SRCS
     CationPiInteractionScoreExport.cpp
     HBondingInteractionScoreExport.cpp
     XBondingInteractionScoreExport.cpp
-    InteractionScoreGridCalculatorExport.cpp
-    InteractionScoreGridSetCalculatorExport.cpp
-    DefaultInteractionScoreGridSetCalculatorExport.cpp
 
     FeatureTypeMatchFunctorExport.cpp
     FeaturePairDistanceMatchFunctorExport.cpp
@@ -117,9 +114,6 @@ SET(pharm_MOD_SRCS
     FeaturePositionMatchFunctorExport.cpp
     FeatureGeometryMatchFunctorExport.cpp
     
-    AttributedGridPropertyExport.cpp 
-    AttributedGridPropertyDefaultExport.cpp 
-
     FeatureContainerPropertyExport.cpp 
     FeaturePropertyExport.cpp 
     FeatureContainerPropertyDefaultExport.cpp 
@@ -134,7 +128,6 @@ SET(pharm_MOD_SRCS
     FeatureFunctionExport.cpp 
     FeatureContainerFunctionExport.cpp 
     FeatureSetFunctionExport.cpp 
-    AttributedGridFunctionExport.cpp 
     ControlParameterFunctionExport.cpp 
     MoleculeFunctionExport.cpp 
 

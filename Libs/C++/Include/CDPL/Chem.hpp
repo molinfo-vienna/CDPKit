@@ -276,10 +276,6 @@
 #include "CDPL/Chem/SurfaceAtomExtractor.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
 #include "CDPL/Chem/SubstructureHistogramCalculator.hpp"
-#include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"  
-#include "CDPL/Chem/AtomDensityGridCalculator.hpp"  
-#include "CDPL/Chem/BuriednessScore.hpp"  
-#include "CDPL/Chem/BuriednessGridCalculator.hpp"  
 
 #include "CDPL/Chem/TautomerScore.hpp"  
 #include "CDPL/Chem/TautomerGenerator.hpp"  

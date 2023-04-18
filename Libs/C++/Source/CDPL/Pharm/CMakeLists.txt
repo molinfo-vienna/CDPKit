@@ -35,10 +35,8 @@ SET(cdpl-pharm_LIB_SRCS
   
     FeatureContainerProperty.cpp
     FeatureProperty.cpp
-    AttributedGridProperty.cpp
     FeatureContainerPropertyDefault.cpp
     FeaturePropertyDefault.cpp
-    AttributedGridPropertyDefault.cpp
     DataFormat.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
@@ -78,9 +76,6 @@ SET(cdpl-pharm_LIB_SRCS
     OrthogonalPiPiInteractionScore.cpp
     ParallelPiPiInteractionScore.cpp
     CationPiInteractionScore.cpp
-    InteractionScoreGridCalculator.cpp
-    InteractionScoreGridSetCalculator.cpp
-    DefaultInteractionScoreGridSetCalculator.cpp
 
     FeatureTypeMatchFunctor.cpp
     FeaturePairDistanceMatchFunctor.cpp
@@ -95,8 +90,6 @@ SET(cdpl-pharm_LIB_SRCS
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
 
-    CDFAttributedGridPropertyReader.cpp
-    CDFAttributedGridPropertyWriter.cpp
     CDFPharmacophoreDataReader.cpp
     CDFPharmacophoreDataWriter.cpp
     CDFPharmacophoreReader.cpp
@@ -118,8 +111,6 @@ SET(cdpl-pharm_LIB_SRCS
 
     FeatureSetGetFeaturesFunction.cpp
 
-    AttributedGridPropertyFunctions.cpp
-
     PharmacophoreBuildInteractionPharmFunction.cpp
     PharmacophoreCreateXVolumesFunctions.cpp
     PharmacophoreXVolumesModificationFunctions.cpp
@@ -133,8 +124,6 @@ SET(cdpl-pharm_LIB_SRCS
     ThreePointPharmacophore.cpp
     QueryThreePointPharmacophore.cpp
    )
-
-LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY})
  
 IF(Boost_FILESYSTEM_FOUND)
   SET(cdpl-pharm_LIB_SRCS
@@ -181,10 +170,10 @@ ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-pharm-static PROPERTIES 
                       OUTPUT_NAME cdpl-pharm
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_GRID_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_BIOMOL_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-grid-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
 
 INSTALL(TARGETS cdpl-pharm-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -192,7 +181,7 @@ INSTALL(TARGETS cdpl-pharm-static
 
 ADD_LIBRARY(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-grid-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-molprop-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static)
 
 SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-pharm

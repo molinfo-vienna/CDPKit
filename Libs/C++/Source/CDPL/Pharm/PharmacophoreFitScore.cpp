@@ -72,44 +72,44 @@ namespace
 }
 
 
-const double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR   = 0.8;
-const double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR     = 0.1;
-const double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR    = 0.1;
+const double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT   = 1.0;
+const double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT     = 0.5;
+const double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT    = 0.4;
 
 
-Pharm::PharmacophoreFitScore::PharmacophoreFitScore(double match_cnt_factor, double pos_match_factor, 
-						    double geom_match_factor):
-    ftrMatchCntFactor(match_cnt_factor), ftrPosMatchFactor(pos_match_factor), ftrGeomMatchFactor(geom_match_factor)
+Pharm::PharmacophoreFitScore::PharmacophoreFitScore(double match_cnt_weight, double pos_match_weight, 
+						    double geom_match_weight):
+    ftrMatchCntWeight(match_cnt_weight), ftrPosMatchWeight(pos_match_weight), ftrGeomMatchWeight(geom_match_weight)
 {}
 
-double Pharm::PharmacophoreFitScore::getFeatureMatchCountFactor() const
+double Pharm::PharmacophoreFitScore::getFeatureMatchCountWeight() const
 {
-    return ftrMatchCntFactor;
+    return ftrMatchCntWeight;
 }
 
-void Pharm::PharmacophoreFitScore::setFeatureMatchCountFactor(double factor)
+void Pharm::PharmacophoreFitScore::setFeatureMatchCountWeight(double weight)
 {
-    ftrMatchCntFactor = factor;
+    ftrMatchCntWeight = weight;
 }
 
-double Pharm::PharmacophoreFitScore::getFeaturePositionMatchFactor() const
+double Pharm::PharmacophoreFitScore::getFeaturePositionMatchWeight() const
 {
-    return ftrPosMatchFactor;
+    return ftrPosMatchWeight;
 }
 
-void Pharm::PharmacophoreFitScore::setFeaturePositionMatchFactor(double factor)
+void Pharm::PharmacophoreFitScore::setFeaturePositionMatchWeight(double weight)
 {
-    ftrPosMatchFactor = factor;
+    ftrPosMatchWeight = weight;
 }
 
-double Pharm::PharmacophoreFitScore::getFeatureGeometryMatchFactor() const
+double Pharm::PharmacophoreFitScore::getFeatureGeometryMatchWeight() const
 {
-    return ftrGeomMatchFactor;
+    return ftrGeomMatchWeight;
 }
 
-void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor(double factor)
+void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchWeight(double weight)
 {
-    ftrGeomMatchFactor = factor;
+    ftrGeomMatchWeight = weight;
 }
 
 double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
@@ -141,13 +141,14 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 
 	std::sort(groupedRefFtrs.begin(), groupedRefFtrs.end(), FeatureCmpFunc());
 
-	double score = 0.0;
-	double num_ftrs = 0;
-
+	std::size_t mat_ftr_cnt = 0;
+	std::size_t num_ftrs = 0;
+	double tot_fit_score = 0.0;
+	
 	for (FeatureList::const_iterator it = groupedRefFtrs.begin(), end = groupedRefFtrs.end(); it != end; ) {
 		unsigned int ref_type = 0;
 		const Math::Vector3D* ref_pos = 0;
-		double max_score = 0.0;
+		double best_fit_score = 0.0;
 		bool found_mapping = false;
 
 		for (num_ftrs++; it != end; ++it) {
@@ -167,18 +168,19 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 				double pair_pos_score = mapping.getPositionMatchScore(*ref_ftr, *m_ftr);
 				double pair_geom_score = mapping.getGeometryMatchScore(*ref_ftr, *m_ftr);
 			
-				max_score = std::max(max_score, ftrPosMatchFactor * pair_pos_score + ftrGeomMatchFactor * pair_geom_score);
+				best_fit_score = std::max(best_fit_score, ftrPosMatchWeight * pair_pos_score + ftrGeomMatchWeight * pair_geom_score);
 				found_mapping = true;
 			}
 		}
 
 		if (found_mapping) {
-			score += ftrMatchCntFactor;
-			score += max_score;
+			mat_ftr_cnt++;
+			tot_fit_score += best_fit_score;
 		}
 	}
 
-	score = (score / (num_ftrs * (ftrMatchCntFactor + ftrPosMatchFactor + ftrGeomMatchFactor)));
-
-	return score;
+	if (mat_ftr_cnt == 0)
+		return 0.0;
+	
+	return (ftrMatchCntWeight * mat_ftr_cnt + tot_fit_score / mat_ftr_cnt);
 }

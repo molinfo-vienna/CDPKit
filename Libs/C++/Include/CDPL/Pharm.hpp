@@ -51,9 +51,6 @@
 #include "CDPL/Pharm/ControlParameter.hpp"  
 #include "CDPL/Pharm/ControlParameterDefault.hpp"  
 #include "CDPL/Pharm/DataFormat.hpp"
-#include "CDPL/Pharm/AttributedGridProperty.hpp"
-#include "CDPL/Pharm/AttributedGridPropertyDefault.hpp"
-
 #include "CDPL/Pharm/FeatureType.hpp"  
 #include "CDPL/Pharm/FeatureGeometry.hpp"  
 
@@ -93,9 +90,6 @@
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"  
 #include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"  
 #include "CDPL/Pharm/CationPiInteractionScore.hpp"  
-#include "CDPL/Pharm/InteractionScoreGridCalculator.hpp"  
-#include "CDPL/Pharm/InteractionScoreGridSetCalculator.hpp"  
-#include "CDPL/Pharm/DefaultInteractionScoreGridSetCalculator.hpp"  
 
 #include "CDPL/Pharm/SpatialFeatureMapping.hpp"  
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"  
@@ -126,7 +120,6 @@
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureSetFunctions.hpp"
-#include "CDPL/Pharm/AttributedGridFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM)

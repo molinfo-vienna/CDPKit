@@ -24,8 +24,6 @@
  */
 
 
-#include <boost/function.hpp>
-
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"

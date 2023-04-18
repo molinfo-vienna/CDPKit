@@ -34,8 +34,6 @@
 #include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
-#include "CDPL/Pharm/CDFAttributedGridPropertyReader.hpp"
-#include "CDPL/Pharm/CDFAttributedGridPropertyWriter.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
@@ -100,9 +98,6 @@ namespace
 			using namespace Base;
 			using namespace Pharm;
 			using namespace Chem;
-
-			CDFAttributedGridPropertyReader::registerExternalPropertyHandlers();
-			CDFAttributedGridPropertyWriter::registerExternalPropertyHandlers();
 
 			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFPharmacophoreInputHandler()));
 			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PMLPharmacophoreInputHandler()));

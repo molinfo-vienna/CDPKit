@@ -43,9 +43,9 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
     python::class_<Pharm::PharmacophoreFitScore, boost::noncopyable>("PharmacophoreFitScore", python::no_init)
 		.def(python::init<const Pharm::PharmacophoreFitScore&>((python::arg("self"), python::arg("score"))))
 		.def(python::init<double, double, double>((python::arg("self"), 
-												   python::arg("match_cnt_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR, 
-												   python::arg("pos_match_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR,
-												   python::arg("geom_match_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR)))
+												   python::arg("match_cnt_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT, 
+												   python::arg("pos_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT,
+												   python::arg("geom_match_weight") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreFitScore>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreFitScore::operator=), 
 			 (python::arg("self"), python::arg("score")), python::return_self<>())
@@ -55,13 +55,13 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
 		.def("__call__", static_cast<double (Pharm::PharmacophoreFitScore::*)
 			 (const Pharm::FeatureContainer&, const Pharm::SpatialFeatureMapping&)>(&Pharm::PharmacophoreFitScore::operator()),
 			 (python::arg("self"), python::arg("ref_ftrs"), python::arg("mapping")))
-		.add_property("featureMatchCountFactor", &Pharm::PharmacophoreFitScore::getFeatureMatchCountFactor, 
-					  &Pharm::PharmacophoreFitScore::setFeatureMatchCountFactor)
-		.add_property("featurePositionMatchFactor", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchFactor, 
-					  &Pharm::PharmacophoreFitScore::setFeaturePositionMatchFactor)
-		.add_property("featureGeometryMatchFactor", &Pharm::PharmacophoreFitScore::getFeatureGeometryMatchFactor, 
-					  &Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor)
-		.def_readonly("DEF_FTR_MATCH_COUNT_FACTOR", Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR)
-		.def_readonly("DEF_FTR_POS_MATCH_FACTOR", Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR)
-		.def_readonly("DEF_FTR_GEOM_MATCH_FACTOR", Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR);
+		.add_property("featureMatchCountWeight", &Pharm::PharmacophoreFitScore::getFeatureMatchCountWeight, 
+					  &Pharm::PharmacophoreFitScore::setFeatureMatchCountWeight)
+		.add_property("featurePositionMatchWeight", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchWeight, 
+					  &Pharm::PharmacophoreFitScore::setFeaturePositionMatchWeight)
+		.add_property("featureGeometryMatchWeight", &Pharm::PharmacophoreFitScore::getFeatureGeometryMatchWeight, 
+					  &Pharm::PharmacophoreFitScore::setFeatureGeometryMatchWeight)
+		.def_readonly("DEF_FTR_MATCH_COUNT_WEIGHT", Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT)
+		.def_readonly("DEF_FTR_POS_MATCH_WEIGHT", Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT)
+		.def_readonly("DEF_FTR_GEOM_MATCH_WEIGHT", Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT);
 }

@@ -113,10 +113,6 @@ SET(chem_MOD_SRCS
     SurfaceAtomExtractorExport.cpp 
     PatternAtomTyperExport.cpp 
     SubstructureHistogramCalculatorExport.cpp 
-    GeneralizedBellAtomDensityExport.cpp
-    AtomDensityGridCalculatorExport.cpp
-    BuriednessScoreExport.cpp
-    BuriednessGridCalculatorExport.cpp
     TautomerScoreExport.cpp
     TautomerGeneratorExport.cpp
     DefaultTautomerGeneratorExport.cpp

@@ -112,7 +112,7 @@ if __name__ == '__main__':
                                       '-o', outputFilePath('pharm_gen_ia_ph4s.pml'), '-x' ])
     errors |= checkScriptFileOutput('pharm_align_mols', outputFilePath('pharm_align_mols.sdf'),
                                     [ '-r', outputFilePath('pharm_gen_ia_ph4s.pml'), '-i', testDataFilePath('LS1.sdf'),
-                                      '-o', outputFilePath('pharm_align_mols.sdf'), '-n', '10', '-d', '1.0' ])
+                                      '-o', outputFilePath('pharm_align_mols.sdf'), '-n', '10', '-d', '0.5' ])
     errors |= checkScriptOutput('pharm_seq_ph4_input', [ testDataFilePath('1dwc_MIT_ph4.pml') ])
     errors |= checkScriptOutput('pharm_print_ph4_ftrs', [ testDataFilePath('1dwc_MIT_ph4.cdf') ])
 
