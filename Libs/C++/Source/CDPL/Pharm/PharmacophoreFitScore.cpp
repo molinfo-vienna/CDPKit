@@ -142,7 +142,6 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 	std::sort(groupedRefFtrs.begin(), groupedRefFtrs.end(), FeatureCmpFunc());
 
 	std::size_t mat_ftr_cnt = 0;
-	std::size_t num_ftrs = 0;
 	double tot_fit_score = 0.0;
 	
 	for (FeatureList::const_iterator it = groupedRefFtrs.begin(), end = groupedRefFtrs.end(); it != end; ) {
@@ -151,7 +150,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 		double best_fit_score = 0.0;
 		bool found_mapping = false;
 
-		for (num_ftrs++; it != end; ++it) {
+		for ( ; it != end; ++it) {
 			const Feature* ref_ftr = *it;
 
 			if (ref_pos == 0) {

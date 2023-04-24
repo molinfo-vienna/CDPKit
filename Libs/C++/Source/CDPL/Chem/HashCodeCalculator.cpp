@@ -231,14 +231,14 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHash
 //-----
 
 Chem::HashCodeCalculator::HashCodeCalculator():
-	atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor(*this)),
+	atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor()),
 	incGlobalStereoFeatures(true) 
 {
 	std::fill(shaHashCode, shaHashCode + sizeof(shaHashCode), 0);
 }
 
 Chem::HashCodeCalculator::HashCodeCalculator(const MolecularGraph& molgraph):
-	atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor(*this)),
+	atomHashSeedFunc(DefAtomHashSeedFunctor(*this)), bondHashSeedFunc(DefBondHashSeedFunctor()),
 	incGlobalStereoFeatures(true)
 {
 	std::fill(shaHashCode, shaHashCode + sizeof(shaHashCode), 0);

@@ -139,7 +139,6 @@ namespace CDPL
 				STArray                  lineValues;
 				LArray                   modifications;
 				STPairArrayIterator      lastSymClass;
-				std::size_t              fromAtomNumber;
 				std::size_t              centerAtomNumber;
 				std::size_t              nextAtomNumber;
 				bool                     sortRCList;

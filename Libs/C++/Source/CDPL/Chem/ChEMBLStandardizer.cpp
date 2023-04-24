@@ -113,7 +113,7 @@ namespace
 
 		hash_calc.includeGlobalStereoFeatures(false);
 		hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
-		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
+		hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 
 		BasicMolecule mol;
 
@@ -219,7 +219,7 @@ Chem::ChEMBLStandardizer::ChEMBLStandardizer()
 	substructSearch.uniqueMappingsOnly(true);
 
 	hashCodeCalc.includeGlobalStereoFeatures(false);
-	hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCodeCalc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
+	hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 }
 
 Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardizer)
@@ -227,7 +227,7 @@ Chem::ChEMBLStandardizer::ChEMBLStandardizer(const ChEMBLStandardizer& standardi
 	substructSearch.uniqueMappingsOnly(true);
 
 	hashCodeCalc.includeGlobalStereoFeatures(false);
-	hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCodeCalc, BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
+	hashCodeCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | BondPropertyFlag::AROMATICITY));
 }
 
 Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::standardize(Molecule& mol, bool proc_excluded)

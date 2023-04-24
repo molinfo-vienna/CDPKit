@@ -201,7 +201,6 @@ namespace ShapeScreen
 		bool                           colorCenterStarts;
 		bool                           atomCenterStarts;
 		bool                           shapeCenterStarts;
-		std::size_t                    numRandomStarts;
 		std::string                    hitNamePattern;
 		std::size_t                    numBestHits;
 		std::size_t                    maxNumHits;

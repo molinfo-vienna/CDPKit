@@ -302,7 +302,7 @@ bool Chem::AromaticSubstructure::isAromatic(const RingDescriptor::SharedPointer&
 
 
 Chem::AromaticSubstructure::RingDescriptor::RingDescriptor(const Fragment::SharedPointer& ring_ptr, const MolecularGraph& molgraph): 
-	ringPtr(ring_ptr), subRing1(0), subRing2(0), bondMask(molgraph.getNumBonds()), aromatic(false) 
+	ringPtr(ring_ptr), subRing1(0), subRing2(0), bondMask(molgraph.getNumBonds())
 {
 	std::for_each(ringPtr->getBondsBegin(), ringPtr->getBondsEnd(),
 				  boost::bind(&Util::BitSet::set, boost::ref(bondMask),
@@ -311,7 +311,7 @@ Chem::AromaticSubstructure::RingDescriptor::RingDescriptor(const Fragment::Share
 
 Chem::AromaticSubstructure::RingDescriptor::RingDescriptor(const Fragment::SharedPointer& ring_ptr, Util::BitSet& bond_mask,
 														   const RingDescriptor& sub_ring1, const RingDescriptor& sub_ring2):
-	ringPtr(ring_ptr), subRing1(&sub_ring1), subRing2(&sub_ring2), aromatic(false) 
+	ringPtr(ring_ptr), subRing1(&sub_ring1), subRing2(&sub_ring2)
 {
 	bondMask.swap(bond_mask);
 }

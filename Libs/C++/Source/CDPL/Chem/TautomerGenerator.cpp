@@ -235,7 +235,7 @@ void Chem::TautomerGenerator::initHashCalculator()
 	}
 
 	hashCalculator.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCalculator, atom_flags));
-	hashCalculator.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCalculator, bond_flags));
+	hashCalculator.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(bond_flags));
 	hashCalculator.includeGlobalStereoFeatures(regStereo);
 }
 

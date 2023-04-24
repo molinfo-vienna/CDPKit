@@ -40,12 +40,6 @@
 namespace CDPL 
 {
 
-    namespace Base
-    {
-
-		class DataIOBase;
-    }
-
     namespace Chem
     {
 
@@ -60,7 +54,7 @@ namespace CDPL
 		{
 
 		public:
-			MMTFDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+			MMTFDataWriter() {}
 		
 			bool writeRecord(std::ostream& os, const Chem::MolecularGraph& molgraph);
 		
@@ -83,7 +77,6 @@ namespace CDPL
 			typedef std::vector<const Chem::Atom*> AtomArray;
 			typedef std::vector<std::size_t> AtomIndexArray;
 
-			const Base::DataIOBase& ioBase;
 			AtomArray               atoms;
 			AtomIndexArray          atomIndices;
 			mmtf::StructureData     structData;

@@ -45,7 +45,7 @@ Base::uint64 Chem::calcHashCode(const MolecularGraph& molgraph, unsigned int ato
 		bond_flags = HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS;
 
 	hash_calc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hash_calc, atom_flags));
-	hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hash_calc, bond_flags));
+	hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(bond_flags));
 	hash_calc.includeGlobalStereoFeatures(global_stereo);
 
 	Base::uint64 hash_code;

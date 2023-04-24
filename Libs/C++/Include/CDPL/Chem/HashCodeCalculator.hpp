@@ -142,11 +142,9 @@ namespace CDPL
 				 *  - Chem::BondPropertyFlag::AROMATICITY
 				 *  - and Chem::BondPropertyFlag::CIP_CONFIGURATION
 				 *
-				 * \param calculator The \c %HashCodeCalculator instance that 'owns' the functor object.
 				 * \param flags Specifies the set of considered bond properties.
 				 */
-				DefBondHashSeedFunctor(const HashCodeCalculator& calculator, unsigned int flags = DEF_BOND_PROPERTY_FLAGS): 
-					calculator(calculator), flags(flags) {}
+				DefBondHashSeedFunctor(unsigned int flags = DEF_BOND_PROPERTY_FLAGS): flags(flags) {}
 
 				/**
 				 * \brief Generates an initial hash code value (seed) for the specified bond.
@@ -164,8 +162,7 @@ namespace CDPL
 				Base::uint64 getBondConfigHashSeed(const Bond&) const;
 				Base::uint64 getBondTopologyHashSeed(const Bond&) const;
 
-				const HashCodeCalculator& calculator;
-				unsigned int              flags;
+				unsigned int flags;
 			};
 
 			/**

@@ -38,7 +38,7 @@ using namespace CDPL;
 
 
 Biomol::MMTFMolecularGraphWriter::MMTFMolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new MMTFDataWriter(*this)) {}
+	output(os), state(os.good()), writer(new MMTFDataWriter()) {}
 
 Biomol::MMTFMolecularGraphWriter::~MMTFMolecularGraphWriter() {}
 

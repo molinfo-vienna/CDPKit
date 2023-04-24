@@ -45,7 +45,7 @@ namespace
 		return func(atom);
 	}
 
-	CDPL::Base::uint64 defBondHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefBondHashSeedFunctor& func, 
+	CDPL::Base::uint64 defBondHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefBondHashSeedFunctor& func,
 											   CDPL::Chem::Bond& bond)
 	{
 		return func(bond);
@@ -80,13 +80,12 @@ void CDPLPythonChem::exportHashCodeCalculator()
 
 	python::class_<Chem::HashCodeCalculator::DefAtomHashSeedFunctor>("DefAtomHashSeedFunctor", python::no_init)
 		.def(python::init<const Chem::HashCodeCalculator&, 
-			 std::size_t>((python::arg("self"), python::arg("calculator"), 
-						   python::arg("flags") = Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)))
+			 unsigned int>((python::arg("self"), python::arg("calculator"), 
+							python::arg("flags") = Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)))
 		.def("__call__", &defAtomHashSeedFunction, (python::arg("self"), python::arg("atom")));
 
 	python::class_<Chem::HashCodeCalculator::DefBondHashSeedFunctor>("DefBondHashSeedFunctor", python::no_init)
-		.def(python::init<const Chem::HashCodeCalculator&, 
-			 std::size_t>((python::arg("self"), python::arg("calculator"), 
-						   python::arg("flags") = Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)))
+		.def(python::init<unsigned int>((python::arg("self"), 
+										python::arg("flags") = Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS)))
 		.def("__call__", &defBondHashSeedFunction, (python::arg("self"), python::arg("bond")));
 }

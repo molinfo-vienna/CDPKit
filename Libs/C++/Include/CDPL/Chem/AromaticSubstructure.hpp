@@ -100,7 +100,6 @@ namespace CDPL
 				const RingDescriptor*   subRing1;
 				const RingDescriptor*   subRing2;
 				Util::BitSet            bondMask;
-				bool                    aromatic;
 			};
 
 			AromaticSubstructure(const AromaticSubstructure&);
