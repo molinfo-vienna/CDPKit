@@ -5,7 +5,7 @@ For a successful build of CDPKit the following packages
 have to be installed on the build host:
 
 - a c++11 compliant compiler (mandatory)
-- cmake
+- cmake (V >= 3.17, mandatory)
 - boost-devel C++ libraries (V >= 1.52, mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
@@ -13,6 +13,7 @@ have to be installed on the build host:
 - sqlite-devel V3 (optional)
 - sphinx (V >= 4.5, optional)
 - sphinx-rtd-theme (optional)
+- sphinxcontrib-bibtex (optional)
 - doxygen (V >= 1.8.5, optional)
 
 CDPKit requires CMake V3.17 or higher for generating 
@@ -41,7 +42,7 @@ the CMake documentation for how to change the default path).
 
 * Generating CDPKit documentation:
 
-For a successful build of the CDPKit documentation pages, both sphinx and sphinx-rtd-theme
+For a successful build of the CDPKit documentation pages, sphinx, the sphinx-rtd-theme and sphinxcontrib-bibtex
 need to be installed on the build host. Furthermore, doxygen has to be available for the generation
 of the CDPL C++ and Python API-documentation.
 
