@@ -112,7 +112,7 @@ public:
 		}
 
 		hashCalc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCalc, atom_flags));
-		hashCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCalc, bond_flags));
+		hashCalc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(bond_flags));
 		hashCalc.includeGlobalStereoFeatures(parent->regardStereo);
 	}
 
