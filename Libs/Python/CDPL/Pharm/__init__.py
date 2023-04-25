@@ -28,6 +28,5 @@ from __future__ import absolute_import
 
 import CDPL.Biomol
 import CDPL.MolProp
-import CDPL.Grid
 
 from ._pharm import *
