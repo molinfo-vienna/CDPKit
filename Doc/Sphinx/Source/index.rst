@@ -13,8 +13,8 @@ Welcome to the Chemical Data Processing Toolkit (CDPKit) Documentation
 Chemical Data Processing Library (CDPL) API documentation
 ---------------------------------------------------------
 
-* `CDPL C++-API <cpp_api_doc/index.html>`_
-* `CDPL Python-API <python_api_doc/index.html>`_
+* `CDPL C++-API <cpp_api/index.html>`_
+* `CDPL Python-API <python_apiindex.html>`_
 
 Indices and tables
 ------------------

@@ -176,24 +176,13 @@ ELSE(NOT PYTHONINTERP_FOUND)
   CONFIGURE_FILE("${RUN_PYTHON_TESTS_IN}" "${RUN_PYTHON_TESTS}" @ONLY)
 ENDIF(NOT PYTHONINTERP_FOUND)
 
-IF("cxx_std_11" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
-  SET(HAVE_CXX11_SUPPORT TRUE)
-ELSE("cxx_std_11" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
-  SET(HAVE_CXX11_SUPPORT FALSE)
-ENDIF("cxx_std_11" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+FIND_PACKAGE(Qt5Gui PATHS "/opt/homebrew/opt/qt@5")
+FIND_PACKAGE(Qt5Widgets PATHS "/opt/homebrew/opt/qt@5")
+FIND_PACKAGE(Qt5PrintSupport PATHS "/opt/homebrew/opt/qt@5")
 
-IF(HAVE_CXX11_SUPPORT)
-  FIND_PACKAGE(Qt5Gui)
-  FIND_PACKAGE(Qt5Widgets)
-  FIND_PACKAGE(Qt5PrintSupport)
-
-  IF(NOT Qt5Gui_FOUND)
-    MESSAGE("!! Warning: Qt5 not found -> can't build Qt rendering backend and Qt applications.")
-  ENDIF(NOT Qt5Gui_FOUND)
-
-ELSE(HAVE_CXX11_SUPPORT)
-  MESSAGE("!! Warning: Compiler does not support the c++11 standard which is required by Qt5 -> can't build Qt rendering backend and Qt applications.")
-ENDIF(HAVE_CXX11_SUPPORT)
+IF(NOT Qt5Gui_FOUND)
+  MESSAGE("!! Warning: Qt5 not found -> can't build Qt rendering backend and Qt applications.")
+ENDIF(NOT Qt5Gui_FOUND)
 
 FIND_PACKAGE(Cairo)
 FIND_PACKAGE(SQLite3)
@@ -204,6 +193,10 @@ SET(Boost_USE_MULTITHREAD ON)
 SET(Boost_USE_STATIC_LIBS OFF)
 
 FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time system thread atomic OPTIONAL_COMPONENTS iostreams program_options unit_test_framework filesystem chrono timer)
+
+IF(APPLE)
+  SET(Sphinx_DIR "/opt/homebrew/opt/sphinx-doc")
+ENDIF(APPLE)
 
 FIND_PACKAGE(Sphinx COMPONENTS build)
 
@@ -454,3 +447,8 @@ ADD_SUBDIRECTORY(Libs)
 ADD_SUBDIRECTORY(Apps)
 ADD_SUBDIRECTORY(Doc)
 ADD_SUBDIRECTORY(Examples)
+
+#IF(APPLE)
+#  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/PostInstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/PostInstall.cmake" @ONLY)
+#  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/PostInstall.cmake")
+#ENDIF(APPLE)

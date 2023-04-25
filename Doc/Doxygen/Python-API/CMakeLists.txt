@@ -23,18 +23,17 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-IF(DOXYGEN_EXECUTABLE)
-  SET(DOC_FILE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source")
-  SET(PROC_DOC_FILE_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
-  CONFIGURE_FILE(Doxyfile.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
-  CONFIGURE_FILE(CopySources.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopySources.cmake" @ONLY)
+SET(DOC_FILE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source")
+SET(PROC_DOC_FILE_SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/Source")
 
-  ADD_CUSTOM_TARGET(copy-python-api-doc-sources 
-    COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySources.cmake"
-    COMMENT "Preprocessing Python API documentation source files")
+CONFIGURE_FILE(Doxyfile.in "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
+CONFIGURE_FILE(CopySources.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/CopySources.cmake" @ONLY)
 
-  ADD_CUSTOM_TARGET(python-api-doc "${DOXYGEN_EXECUTABLE}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+ADD_CUSTOM_TARGET(copy-python-api-doc-sources 
+  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySources.cmake"
+  COMMENT "Preprocessing Python API documentation source files")
 
-  ADD_DEPENDENCIES(python-api-doc copy-python-api-doc-sources)
-ENDIF(DOXYGEN_EXECUTABLE)
+ADD_CUSTOM_TARGET(python-api-doc "${DOXYGEN_EXECUTABLE}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+
+ADD_DEPENDENCIES(python-api-doc copy-python-api-doc-sources)
