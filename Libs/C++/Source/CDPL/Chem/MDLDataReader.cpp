@@ -170,7 +170,7 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 		
 				coords_array->addElement(get3DCoordinates(atom));
 			}
-
+			
 			while (hasMoreData(is)) {
 				std::istream::pos_type last_spos = is.tellg();
 
@@ -272,8 +272,9 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 				readMDLString(is, MDL::SDFile::RECORD_DELIMITER.length(), tmpString, true, "MDLDataReader: error while skipping molecule");
 				skipMDLLines(is, 1, "MDLDataReader: error while skipping molecule");
 
-				if (tmpString == MDL::SDFile::RECORD_DELIMITER)
+				if (tmpString == MDL::SDFile::RECORD_DELIMITER) 
 					return true;
+				
 			} while (hasMoreData(is));
 
 			return false;
@@ -301,9 +302,9 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 	MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
 
 	if (!mc_input_proc) {
-		if (!hasCoordinates(*confTargetMolecule, 3))
+	   	if (!hasCoordinates(*confTargetMolecule, 3))
 			return true;
-
+		
 		while (hasMoreData(is)) {
 			std::istream::pos_type last_spos = is.tellg();
 
@@ -929,7 +930,8 @@ void Chem::MDLDataReader::readCTabV2000PropertyBlock(std::istream& is, Molecule&
 
 	for (std::size_t i = 0; !exit && (ctabVersion == MDLDataFormatVersion::V2000 || i < propertyCount); i++) {
 		std::size_t skip_cnt = 1;
-
+		std::istream::pos_type last_spos = is.tellg();
+				
 		readMDLString(is, 3, tmpString, true, "MDLDataReader: error while reading property line prefix", false);
 
 		if (tmpString == PropertyBlock::ATOM_ALIAS_PREFIX || tmpString == PropertyBlock::GROUP_ABBREV_PREFIX)
@@ -968,10 +970,14 @@ void Chem::MDLDataReader::readCTabV2000PropertyBlock(std::istream& is, Molecule&
 			else if (tmpString == MOLFile::END_TAG || tmpString == MOLFile::END_TAG_ALT)
 				exit = true;
 
-			else {}
+			else if (tmpString.find(PropertyBlock::LINE_PREFIX)) {
+				is.seekg(last_spos);
+				return;
+			}
 		}
 
 		skipMDLLines(is, skip_cnt, "MDLDataReader: error while reading property block");
+		i += (skip_cnt - 1);
 	}
 }
 
@@ -984,6 +990,7 @@ void Chem::MDLDataReader::skipCTabV2000PropertyBlock(std::istream& is)
 
 	for (std::size_t i = 0; !exit && (ctabVersion == MDLDataFormatVersion::V2000 || i < propertyCount); i++) {
 		std::size_t skip_cnt = 1;
+		std::istream::pos_type last_spos = is.tellg();
 
 		readMDLString(is, 3, tmpString, true, "MDLDataReader: error while reading property line prefix", false);
 
@@ -998,9 +1005,15 @@ void Chem::MDLDataReader::skipCTabV2000PropertyBlock(std::istream& is)
 
 			else if (tmpString == MOLFile::END_TAG || tmpString == MOLFile::END_TAG_ALT)
 				exit = true;
+
+			else if (tmpString.find(PropertyBlock::LINE_PREFIX) != 0) {
+				is.seekg(last_spos);
+				return;
+			}
 		}
 
 		skipMDLLines(is, skip_cnt, "MDLDataReader: error while skipping property block");
+		i += (skip_cnt - 1);
 	}
 }
 
@@ -2053,8 +2066,8 @@ void Chem::MDLDataReader::skipSDFData(std::istream& is)
 			continue;
 		
 		if (line == SDFile::RECORD_DELIMITER)
-			break;
-
+		   	break;
+		
 		if (line.find(SDFile::DATA_HEADER_PREFIX) != 0) 
 			continue;
 		
@@ -2744,7 +2757,7 @@ void Chem::MDLDataReader::readCTabV3000CountsLine(std::istream& is, Molecule& mo
 
 	if (!readCTabV3000PropertyKeyword(line_iss, tmpString))
 		return;
-
+	
 	if (tmpString != CountsLine::REGISTRY_NO_KEYWORD) {
 		if (strictErrorChecking)
 			throw Base::IOError("MDLDataReader: found invalid registry number keyword in ctab V3000 counts-line");
@@ -3682,6 +3695,9 @@ void Chem::MDLDataReader::readCTabV3000BondRxnCenterStatus(std::istream& is, Bon
 
 bool Chem::MDLDataReader::readCTabV3000PropertyKeyword(std::istream& is, std::string& keyword) const
 {
+	if (is.eof()) 
+		return false;
+		
 	if (!(is >> std::ws))
 		throw Base::IOError("MDLDataReader: error while reading ctab V3000 property keyword");		
 

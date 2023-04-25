@@ -189,6 +189,7 @@ namespace CDPL
 							const std::string UNSATURATION_PREFIX            =  "M  UNS";
 							const std::string ATOM_LIST_PREFIX               =  "M  ALS";
 							const std::string REGISTRY_NO_PREFIX             =  "M  REG";
+							const std::string LINE_PREFIX                    =  "M  ";
 
 							const std::size_t MAX_CHARGE_ENTRIES             =  8;
 							const std::size_t MAX_RADICAL_ENTRIES            =  8;
