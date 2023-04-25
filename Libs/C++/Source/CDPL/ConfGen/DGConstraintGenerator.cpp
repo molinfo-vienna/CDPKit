@@ -552,12 +552,12 @@ void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoord
 
 		std::size_t num_nbrs1 = getNeighborAtoms(atom1, atomIndexList1, &atom2);
 
-		if (num_nbrs1 < 1 && num_nbrs1 > 2)
+		if (num_nbrs1 < 1 || num_nbrs1 > 2)
 			continue;
 	
 		std::size_t num_nbrs2 = getNeighborAtoms(atom2, atomIndexList2, &atom1);
 
-		if (num_nbrs2 < 1 && num_nbrs2 > 2)
+		if (num_nbrs2 < 1 || num_nbrs2 > 2)
 			continue;
 	
 		for (std::size_t i = 0; i < num_nbrs1; i++) {

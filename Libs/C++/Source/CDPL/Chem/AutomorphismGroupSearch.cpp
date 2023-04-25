@@ -295,7 +295,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
 																	const Bond& target_bond, const MolecularGraph& target_molgraph, 
 																	const AtomBondMapping& mapping, const Base::Variant& aux_data) const
 {
- 	if (!(parent->bondPropFlags & BondPropertyFlag::CONFIGURATION) == 0)
+ 	if ((parent->bondPropFlags & BondPropertyFlag::CONFIGURATION) == 0)
 		return true;
 
 	return BondConfigurationMatchExpression(getStereoDescriptor(query_bond), query_bond, false, false)(query_bond, query_molgraph, target_bond, target_molgraph, 

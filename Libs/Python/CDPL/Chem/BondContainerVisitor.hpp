@@ -25,7 +25,7 @@
 
 
 #ifndef CDPL_PYTHON_CHEM_BONDCONTAINERVISITOR_HPP
-#define CDPL_PYTHON_BASE_BONDCONTAINERVISITOR_HPP
+#define CDPL_PYTHON_CHEM_BONDCONTAINERVISITOR_HPP
 
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
