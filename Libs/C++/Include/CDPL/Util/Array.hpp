@@ -1018,7 +1018,7 @@ void CDPL::Util::Array<ValueType>::checkIterator(const ElementIterator& it, bool
 template <typename ValueType>
 void CDPL::Util::Array<ValueType>::checkIterator(const ConstElementIterator& it, bool allow_end) const 
 {
-	if (it < data.begin() || allow_end && it > data.end() || !allow_end && it >= data.end())	
+	if (it < data.begin() || (allow_end && it > data.end()) || (!allow_end && it >= data.end()))	
 		throwRangeError();
 }
 

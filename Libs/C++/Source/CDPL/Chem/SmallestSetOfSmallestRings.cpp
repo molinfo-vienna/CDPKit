@@ -346,7 +346,7 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* ctrl)
 		for (std::size_t j = 0; j < num_nbr_nodes; j++) {
 			std::size_t bond_idx = bondIndices[j]; 
 
-			if (msg->containsAtom(nbrNodes[j]->index) | msg->containsBond(bond_idx)) // check path collisions
+			if (msg->containsAtom(nbrNodes[j]->index) || msg->containsBond(bond_idx)) // check path collisions
 				continue;
 
 			MessagePtr new_msg = ctrl->allocMessage();		

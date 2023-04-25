@@ -50,7 +50,7 @@
 using namespace PSDCreate;
 
 
-class PSDCreateImpl::InputScanProgressCallback
+struct PSDCreateImpl::InputScanProgressCallback
 {
 
 public:
@@ -91,7 +91,7 @@ struct PSDCreateImpl::MergeDBsProgressCallback
 	double         scale;
 };
 
-class PSDCreateImpl::DBCreationWorker
+struct PSDCreateImpl::DBCreationWorker
 {
 
 public:

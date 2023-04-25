@@ -78,6 +78,11 @@ namespace CDPLPythonMath
 
 		virtual ~QuaternionExpression() {} 
 
+		using ConstQuaternionExpression<T>::getC1;
+		using ConstQuaternionExpression<T>::getC2;
+		using ConstQuaternionExpression<T>::getC3;
+		using ConstQuaternionExpression<T>::getC4;
+		
 		virtual Reference getC1() = 0;
 		virtual Reference getC2() = 0;
 		virtual Reference getC3() = 0;

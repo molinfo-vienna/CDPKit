@@ -309,6 +309,8 @@ namespace CDPL
 			 */
 			void clear();
 
+			using Base::PropertyContainer::swap;
+			
 			/**
 			 * \brief Exchanges the atoms, bonds and properties of this fragment with the atoms, bonds and
 			 *        properties of the fragment \a frag.

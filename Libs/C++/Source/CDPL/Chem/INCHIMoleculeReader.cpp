@@ -216,9 +216,7 @@ bool Chem::INCHIMoleculeReader::readMolecule(std::istream& is, Molecule& mol)
 		INCHIInputManager inchi_input_mgr(&inchi_input);
 
 		returnCode = Get_inchi_Input_FromAuxInfo(&inputData[0], 1, 0, &inchi_inp_data);
-
-		if (inchi_inp_data.szErrMsg)
-			message = inchi_inp_data.szErrMsg;
+		message = inchi_inp_data.szErrMsg;
 
 		if (returnCode != INCHIReturnCode::OKAY && returnCode != INCHIReturnCode::WARNING) 
 			throw Base::IOError(message);
@@ -244,9 +242,7 @@ bool Chem::INCHIMoleculeReader::readMolecule(std::istream& is, Molecule& mol)
 		InChIOutputStructManager inchi_opt_struc_data_mgr(&inchi_opt_struc_data);
 
 		returnCode = GetStructFromINCHI(&inchi_input, &inchi_opt_struc_data);
-
-		if (inchi_opt_struc_data.szMessage)
-			message = inchi_opt_struc_data.szMessage;
+		message = inchi_opt_struc_data.szMessage;
 
 		if (inchi_opt_struc_data.szLog)
 			logOutput = inchi_opt_struc_data.szLog;
