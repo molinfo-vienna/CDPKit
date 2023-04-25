@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <functional>
 #include <cmath>
+#include <set>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>

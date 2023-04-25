@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <set>
 
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
