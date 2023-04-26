@@ -37,9 +37,9 @@ ADD_EXECUTABLE(genfraglib ${genfraglib_SRCS})
 SET_TARGET_PROPERTIES(genfraglib PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
 IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/genfraglib.exe")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/genfraglib.exe")
 ELSE()
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/genfraglib")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/genfraglib")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
@@ -47,9 +47,8 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
-
 TARGET_LINK_LIBRARIES(genfraglib cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
 		      cdpl-confgen-shared)
 
 INSTALL(TARGETS genfraglib DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

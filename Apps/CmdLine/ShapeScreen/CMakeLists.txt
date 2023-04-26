@@ -37,9 +37,9 @@ ADD_EXECUTABLE(shapescreen ${shapescreen_SRCS})
 SET_TARGET_PROPERTIES(shapescreen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
 IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/shapescreen.exe")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/shapescreen.exe")
 ELSE()
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/shapescreen")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/shapescreen")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
@@ -47,9 +47,8 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
-
 TARGET_LINK_LIBRARIES(shapescreen cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
 		      cdpl-shape-shared)
 
 INSTALL(TARGETS shapescreen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

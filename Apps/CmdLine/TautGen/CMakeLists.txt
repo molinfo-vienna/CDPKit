@@ -37,9 +37,9 @@ ADD_EXECUTABLE(tautgen ${tautgen_SRCS})
 SET_TARGET_PROPERTIES(tautgen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
 IF(WIN32)
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/tautgen.exe")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/tautgen.exe")
 ELSE()
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/tautgen")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/tautgen")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
@@ -47,8 +47,7 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
-
 TARGET_LINK_LIBRARIES(tautgen cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared)
 
 INSTALL(TARGETS tautgen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

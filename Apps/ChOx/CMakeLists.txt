@@ -159,7 +159,7 @@ IF(WIN32)
   INCLUDE(WinDeployQt)
   WinDeployQt(chox "${CMAKE_CURRENT_BINARY_DIR}" Applications "${CDPKIT_EXECUTABLE_INSTALL_DIR}")
 
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/chox.exe")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox.exe")
 ELSE(WIN32)
   ADD_EXECUTABLE(chox ${chox_SRCS})
 
@@ -173,15 +173,15 @@ ELSE(WIN32)
     INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
   ENDIF(NOT APPLE)
   
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/chox")
+  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox")
 ENDIF(WIN32)
 
 CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
 	       "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
                @ONLY
               )
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
-  
+ 
 TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 
 INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
