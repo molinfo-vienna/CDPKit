@@ -182,7 +182,7 @@ FIND_PACKAGE(Qt5PrintSupport PATHS "/opt/homebrew/opt/qt@5")
 
 IF(NOT Qt5Gui_FOUND)
   MESSAGE("!! Warning: Qt5 not found -> can't build Qt rendering backend and Qt applications.")
-ELSE()
+ELSEIF(APPLE)
   GET_TARGET_PROPERTY(_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
   GET_FILENAME_COMPONENT(_QT_BIN_DIR "${_QMAKE_EXECUTABLE}" DIRECTORY)
 
