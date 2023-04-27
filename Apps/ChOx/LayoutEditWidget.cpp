@@ -35,7 +35,7 @@
 #include "LayoutEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 LayoutEditWidget::LayoutEditWidget(QWidget* parent, unsigned int& layout_style, unsigned int& layout_dir):

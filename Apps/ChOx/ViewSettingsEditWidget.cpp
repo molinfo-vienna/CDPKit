@@ -46,7 +46,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 ViewSettingsEditWidget::ViewSettingsEditWidget(QWidget* parent, Settings& settings): 

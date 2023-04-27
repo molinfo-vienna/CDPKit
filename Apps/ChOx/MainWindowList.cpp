@@ -30,7 +30,7 @@
 #include "MainWindow.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 MainWindowList::MainWindowList() {} 

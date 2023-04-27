@@ -23,5 +23,10 @@
 # Boston, MA 02111-1307, USA.
 ##
 
+INSTALL(DIRECTORY Python DESTINATION "${CDPKIT_EXAMPLES_INSTALL_DIR}" 
+        COMPONENT Examples
+        REGEX "\\.txt$|~$|\\.in$|Tests" EXCLUDE
+       )
+
 ADD_SUBDIRECTORY(C++)
 ADD_SUBDIRECTORY(Python)

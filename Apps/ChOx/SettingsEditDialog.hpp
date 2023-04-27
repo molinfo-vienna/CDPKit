@@ -40,7 +40,7 @@ class QStackedWidget;
 class QPushButton;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

@@ -36,7 +36,7 @@
 #include "DataRecordVisitor.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataRecord;

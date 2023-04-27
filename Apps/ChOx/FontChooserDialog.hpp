@@ -33,7 +33,7 @@
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class FontChooserDialog : public QDialog

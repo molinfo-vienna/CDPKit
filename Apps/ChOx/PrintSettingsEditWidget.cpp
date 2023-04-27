@@ -44,7 +44,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 PrintSettingsEditWidget::PrintSettingsEditWidget(QWidget* parent, Settings& settings): 

@@ -36,7 +36,7 @@
 #include "DataSet.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 PrintProgressDialog::PrintProgressDialog(QWidget* parent, const DataSet& data_set, int num_pages):
@@ -57,7 +57,7 @@ bool PrintProgressDialog::aborted() const
 
 void PrintProgressDialog::init(const DataSet& data_set)
 {
-	setWindowTitle(tr("ChOx - Printing Data"));
+	setWindowTitle(tr("ChOX - Printing Data"));
 	setResult(Accepted);
 
 // ------

@@ -32,7 +32,7 @@
 #include "ArrowStyleEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 ArrowStyleEditWidget::ArrowStyleEditWidget(QWidget* parent, unsigned int& arrow_style):

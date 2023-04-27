@@ -35,7 +35,7 @@
 class QFrame;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class ColorEditWidget : public QWidget

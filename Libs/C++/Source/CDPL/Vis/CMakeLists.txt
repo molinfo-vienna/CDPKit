@@ -55,6 +55,7 @@ SET(cdpl-vis_LIB_SRCS
     Pen.cpp
     Brush.cpp
     Color.cpp
+    ColorTable.cpp	
     Font.cpp
     Rectangle2D.cpp
     Line2D.cpp

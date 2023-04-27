@@ -33,7 +33,7 @@
 class QComboBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class CTabVersionEditWidget : public QWidget

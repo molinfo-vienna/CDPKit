@@ -39,7 +39,7 @@ namespace CDPL
 }
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	namespace ControlParameter

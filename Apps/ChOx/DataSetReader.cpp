@@ -46,7 +46,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 namespace
@@ -63,7 +63,7 @@ namespace
 
 		IndexingProgressCallback(const ReaderPointer& reader_ptr, QWidget* parent): 
 			QObject(), reader(reader_ptr), progressDlg(tr("Please wait ..."), tr("Abort"), 0, 1000, parent) {
-			progressDlg.setWindowTitle(tr("ChOx - Indexing File"));
+			progressDlg.setWindowTitle(tr("ChOX - Indexing File"));
 			progressDlg.setAutoClose(true);
 			progressDlg.setAutoReset(true);
             progressDlg.setWindowModality(Qt::ApplicationModal);

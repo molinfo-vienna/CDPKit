@@ -32,7 +32,7 @@
 #include "SizeAdjustmentEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 SizeAdjustmentEditWidget::SizeAdjustmentEditWidget(QWidget* parent, unsigned int& size_adjustment):

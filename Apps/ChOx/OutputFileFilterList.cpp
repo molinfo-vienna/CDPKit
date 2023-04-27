@@ -65,7 +65,7 @@ namespace
 }
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 OutputFileFilterList::OutputFileFilterList(const DataSet& data_set)

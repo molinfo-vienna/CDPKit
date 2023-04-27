@@ -39,7 +39,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 MOLFileIOSettingsEditWidget::MOLFileIOSettingsEditWidget(QWidget* parent, Settings& settings): 

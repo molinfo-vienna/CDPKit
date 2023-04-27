@@ -38,7 +38,7 @@
 #include "DataSet.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 DataSetViewControl::DataSetViewControl(QMainWindow* parent, DataSetView& view): 

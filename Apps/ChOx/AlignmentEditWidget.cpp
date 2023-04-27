@@ -32,7 +32,7 @@
 #include "AlignmentEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 AlignmentEditWidget::AlignmentEditWidget(QWidget* parent, unsigned int& alignment, bool hor_dir, bool allow_center):

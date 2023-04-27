@@ -28,12 +28,12 @@
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
-#include "CDPL/Vis/AtomColorTable.hpp"
+#include "CDPL/Vis/ColorTable.hpp"
 
 #include "ControlParameterDefault.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	namespace ControlParameterDefault
@@ -80,7 +80,7 @@ namespace ChOx
                                                                                              CDPL::Vis::Alignment::LEFT;
 
 		const bool                                 USE_ATOM_COLOR_TABLE                    = true;
-		const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable(CDPL::Vis::AtomColorTable::ELEMENT_COLORS_2D));
+		const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable());
 
 		const std::string                          DEFAULT_MOL_OUTPUT_FORMAT               = "SDF";
 		const std::string                          DEFAULT_RXN_OUTPUT_FORMAT               = "RDF";

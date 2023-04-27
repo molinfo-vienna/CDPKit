@@ -33,7 +33,7 @@
 #include "FontChooserWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 FontChooserDialog::FontChooserDialog(QWidget* parent, CDPL::Vis::Font& font, CDPL::Vis::SizeSpecification& size_spec, 
@@ -56,7 +56,7 @@ void FontChooserDialog::applyChanges()
 
 void FontChooserDialog::init(bool size_type_editable, bool policy_editable)
 {
-	setWindowTitle(tr("ChOx - Choose Font"));
+	setWindowTitle(tr("ChOX - Choose Font"));
 
 // ---------
 

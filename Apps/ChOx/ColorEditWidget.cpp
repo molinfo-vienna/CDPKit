@@ -36,7 +36,7 @@
 #include "ColorEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 ColorEditWidget::ColorEditWidget(QWidget* parent, CDPL::Vis::Color& color, bool v_layout):

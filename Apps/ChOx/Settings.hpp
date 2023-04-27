@@ -42,7 +42,7 @@
 class QSettings;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings : public QObject, public SettingsContainer

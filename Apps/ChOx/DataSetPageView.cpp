@@ -46,7 +46,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 DataSetPageView::DataSetPageView(QWidget* parent, Settings& settings, DataSet& data_set): 

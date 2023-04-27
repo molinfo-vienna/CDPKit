@@ -39,7 +39,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 DataSetPagePainter::DataSetPagePainter(QPainter& painter, const Settings& settings): painter(painter), settings(settings) {}

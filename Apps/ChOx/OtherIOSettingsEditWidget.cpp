@@ -43,7 +43,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 OtherIOSettingsEditWidget::OtherIOSettingsEditWidget(QWidget* parent, Settings& settings): 

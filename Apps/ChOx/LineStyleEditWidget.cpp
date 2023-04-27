@@ -30,7 +30,7 @@
 #include "LineStyleEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 LineStyleEditWidget::LineStyleEditWidget(QWidget* parent, CDPL::Vis::Pen::LineStyle& line_style):

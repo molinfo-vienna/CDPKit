@@ -67,7 +67,7 @@ namespace
 }
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 DataRecordPainter::DataRecordPainter(CDPL::Vis::QtFontMetrics& fm, QPainter& painter, 

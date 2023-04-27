@@ -33,7 +33,7 @@
 #include "OtherIOSettingsEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 IOSettingsEditWidget::IOSettingsEditWidget(QWidget* parent, Settings& settings): 

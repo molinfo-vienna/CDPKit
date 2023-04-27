@@ -38,7 +38,7 @@
 class QCheckBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

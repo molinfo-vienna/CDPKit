@@ -39,7 +39,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 SDFileIOSettingsEditWidget::SDFileIOSettingsEditWidget(QWidget* parent, Settings& settings): 

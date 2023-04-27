@@ -30,7 +30,7 @@
 #include <QWidget>
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class SettingsEditWidget : public QWidget

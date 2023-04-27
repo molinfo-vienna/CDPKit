@@ -38,7 +38,7 @@
 class QWidget;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

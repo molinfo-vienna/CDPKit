@@ -34,7 +34,7 @@ class QPainter;
 class QString;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	void drawText(QPainter& painter, const QString& text, unsigned int alignment, 

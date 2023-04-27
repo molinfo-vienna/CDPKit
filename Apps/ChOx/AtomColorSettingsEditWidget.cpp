@@ -94,7 +94,7 @@ namespace
 }
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 AtomColorSettingsEditWidget::AtomColorSettingsEditWidget(QWidget* parent, Settings& settings): 
@@ -115,7 +115,7 @@ void AtomColorSettingsEditWidget::apply()
 	Vis::ColorTable::SharedPointer color_tab_ptr(new Vis::ColorTable(atomColors));
 
 	Vis::setAtomColorParameter(settings, defaultColor);
-	ChOx::setAtomColorTableParameter(settings, color_tab_ptr);
+	ChOX::setAtomColorTableParameter(settings, color_tab_ptr);
 	setUseAtomColorTableParameter(settings, enableColorTabCheckBox->isChecked());
 
 	if (enableColorTabCheckBox->isChecked())

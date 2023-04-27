@@ -47,7 +47,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 SettingsEditDialog::SettingsEditDialog(QWidget* parent, Settings& settings, Qt::WindowFlags f):
@@ -126,7 +126,7 @@ void SettingsEditDialog::addCategoryEditWidget(SettingsEditWidget* widget, const
 
 void SettingsEditDialog::init()
 {
-	setWindowTitle(tr("ChOx - Settings"));
+	setWindowTitle(tr("ChOX - Settings"));
 
 // --------
 

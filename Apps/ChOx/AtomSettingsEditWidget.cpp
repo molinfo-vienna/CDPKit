@@ -29,7 +29,7 @@
 #include "AtomGeneralSettingsEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 AtomSettingsEditWidget::AtomSettingsEditWidget(QWidget* parent, Settings& settings): 

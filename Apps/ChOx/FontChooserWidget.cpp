@@ -41,7 +41,7 @@
 #include "SizeSpecEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 FontChooserWidget::FontChooserWidget(QWidget* parent, CDPL::Vis::Font& font, CDPL::Vis::SizeSpecification& size_spec, 

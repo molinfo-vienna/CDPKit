@@ -35,7 +35,7 @@
 class QTabWidget;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class TabSettingsEditWidget : public SettingsEditWidget

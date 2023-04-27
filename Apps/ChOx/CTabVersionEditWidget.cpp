@@ -32,7 +32,7 @@
 #include "CTabVersionEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 CTabVersionEditWidget::CTabVersionEditWidget(QWidget* parent, unsigned int& ctab_version):

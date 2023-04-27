@@ -30,7 +30,7 @@
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class SettingsContainer : public CDPL::Base::ControlParameterContainer {};

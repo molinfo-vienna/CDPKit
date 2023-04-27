@@ -51,7 +51,7 @@
 #include "ControlParameterFunctions.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 namespace
@@ -189,7 +189,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
 	QProgressDialog progress_dlg(tr("Please wait ..."), tr("Abort"), 0, 100, parent);
 
-	progress_dlg.setWindowTitle(tr("ChOx - Writing Data"));
+	progress_dlg.setWindowTitle(tr("ChOX - Writing Data"));
 	progress_dlg.setAutoClose(true);
 	progress_dlg.setAutoReset(true);
 	progress_dlg.setWindowModality(Qt::ApplicationModal);

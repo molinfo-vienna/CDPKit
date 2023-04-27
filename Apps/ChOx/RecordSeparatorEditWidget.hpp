@@ -35,7 +35,7 @@
 class QComboBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class RecordSeparatorEditWidget : public QWidget

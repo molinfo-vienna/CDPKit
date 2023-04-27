@@ -35,7 +35,7 @@
 class QComboBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class SMILESRecordFormatEditWidget : public QWidget

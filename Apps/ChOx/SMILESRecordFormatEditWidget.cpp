@@ -30,7 +30,7 @@
 #include "SMILESRecordFormatEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 SMILESRecordFormatEditWidget::SMILESRecordFormatEditWidget(QWidget* parent, std::string& format):

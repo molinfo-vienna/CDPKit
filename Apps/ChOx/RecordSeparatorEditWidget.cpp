@@ -30,7 +30,7 @@
 #include "RecordSeparatorEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 RecordSeparatorEditWidget::RecordSeparatorEditWidget(QWidget* parent, std::string& separator):

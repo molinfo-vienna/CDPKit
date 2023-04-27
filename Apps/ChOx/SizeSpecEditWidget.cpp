@@ -36,7 +36,7 @@
 #include "SizeSpecEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 SizeSpecEditWidget::SizeSpecEditWidget(QWidget* parent, CDPL::Vis::SizeSpecification& size_spec, 

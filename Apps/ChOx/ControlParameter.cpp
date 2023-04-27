@@ -29,7 +29,7 @@
 #include "ControlParameter.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	namespace ControlParameter

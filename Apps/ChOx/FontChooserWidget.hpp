@@ -37,7 +37,7 @@ class QListWidgetItem;
 class QLineEdit;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class SizeSpecEditWidget;

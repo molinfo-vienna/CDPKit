@@ -30,7 +30,7 @@
 #include <boost/shared_ptr.hpp>
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataRecordVisitor;

@@ -35,7 +35,7 @@
 #include "Utilities.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	template <typename T, typename ImplT>

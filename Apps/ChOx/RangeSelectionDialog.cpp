@@ -34,7 +34,7 @@
 #include "DataSet.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 RangeSelectionDialog::RangeSelectionDialog(QWidget* parent, DataSet& data_set, Qt::WindowFlags f):
@@ -89,7 +89,7 @@ void RangeSelectionDialog::handleRangeEndChange(int end)
 
 void RangeSelectionDialog::init()
 {
-	setWindowTitle(tr("ChOx - Select/Unselect Record Range"));
+	setWindowTitle(tr("ChOX - Select/Unselect Record Range"));
 
 // ------
 

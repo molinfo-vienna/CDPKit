@@ -31,7 +31,7 @@
 #include <QStringList>
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class RecentFilesList : public QObject

@@ -58,9 +58,7 @@ namespace CDPL
 			ColorTable(const Iter& beg, const Iter& end): Map<std::size_t, Color>(beg, end) {}
 
 		  private:
-			const char* getClassName() const {
-				return "ColorTable";
-			}
+			const char* getClassName() const;
 		};
 	}
 }

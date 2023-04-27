@@ -76,18 +76,18 @@
 #endif // QT_VERSION <= 0x040400
 
 
-ChOx::MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags f):
+ChOX::MainWindow::MainWindow(QWidget* parent, Qt::WindowFlags f):
 	QMainWindow(parent, f)
 {
     init();
 }
 
-ChOx::MainWindow::~MainWindow()
+ChOX::MainWindow::~MainWindow()
 {
     destroy();
 }
 
-void ChOx::MainWindow::init()
+void ChOX::MainWindow::init()
 {
 	setAttribute(Qt::WA_DeleteOnClose);
 
@@ -232,7 +232,7 @@ void ChOx::MainWindow::init()
 	MainWindowList::instance().addWindow(this);
 }
 
-void ChOx::MainWindow::setupContextMenu()
+void ChOX::MainWindow::setupContextMenu()
 {
 	contextMenu = new QMenu(this);
 
@@ -280,31 +280,31 @@ void ChOx::MainWindow::setupContextMenu()
 	dataSetView->getPageView().setContextMenu(contextMenu);
 }
 
-void ChOx::MainWindow::destroy()
+void ChOX::MainWindow::destroy()
 {
 }
 
-void ChOx::MainWindow::fileNew()
+void ChOX::MainWindow::fileNew()
 {
-    ChOx::MainWindow* new_win = new ChOx::MainWindow(0, 0);
+    ChOX::MainWindow* new_win = new ChOX::MainWindow(0, 0);
 
 	setupNewWindow(new_win);
 
 	new_win->show();
 }
 
-void ChOx::MainWindow::fileOpen()
+void ChOX::MainWindow::fileOpen()
 {
 	setupFileOpenDialog(true);
 
-	fileOpenDialog->setWindowTitle(tr("ChOx - Open File(s)"));
+	fileOpenDialog->setWindowTitle(tr("ChOX - Open File(s)"));
 
 	if (fileOpenDialog->exec() == QDialog::Accepted) {
 		if (dataSet->getFileNames().empty())
 			openFiles(fileOpenDialog->selectedFiles());
 
 		else {
-			ChOx::MainWindow* new_win = new ChOx::MainWindow(0, 0);
+			ChOX::MainWindow* new_win = new ChOX::MainWindow(0, 0);
 
 			new_win->show();
 			new_win->openFiles(fileOpenDialog->selectedFiles());
@@ -314,7 +314,7 @@ void ChOx::MainWindow::fileOpen()
 	}
 }
 
-void ChOx::MainWindow::setupNewWindow(MainWindow* new_win)
+void ChOX::MainWindow::setupNewWindow(MainWindow* new_win)
 {
 	if (fileOpenDialog) {
 		new_win->setupFileOpenDialog(true);
@@ -329,11 +329,11 @@ void ChOx::MainWindow::setupNewWindow(MainWindow* new_win)
 	}
 }
 
-void ChOx::MainWindow::fileSaveAs()
+void ChOX::MainWindow::fileSaveAs()
 {
 	setupFileSaveDialog();
 
-	fileSaveDialog->setWindowTitle(tr("ChOx - Save Records As"));
+	fileSaveDialog->setWindowTitle(tr("ChOX - Save Records As"));
 
 	if (fileSaveDialog->exec() == QDialog::Accepted && !fileSaveDialog->selectedFiles().isEmpty()) {
 		DataSetWriter data_writer(*dataSet, this, fileSaveDialog->selectedFiles().first(),
@@ -347,11 +347,11 @@ void ChOx::MainWindow::fileSaveAs()
 	}
 }
 
-void ChOx::MainWindow::fileSaveSelectionAs()
+void ChOX::MainWindow::fileSaveSelectionAs()
 {
 	setupFileSaveDialog();
 
-	fileSaveDialog->setWindowTitle(tr("ChOx - Save Selected Records As"));
+	fileSaveDialog->setWindowTitle(tr("ChOX - Save Selected Records As"));
 
 	if (fileSaveDialog->exec() == QDialog::Accepted && !fileSaveDialog->selectedFiles().isEmpty()) {
 		DataSetWriter data_writer(*dataSet, this, fileSaveDialog->selectedFiles().first(),
@@ -365,17 +365,17 @@ void ChOx::MainWindow::fileSaveSelectionAs()
 	}
 }
 
-void ChOx::MainWindow::fileAppend()
+void ChOX::MainWindow::fileAppend()
 {
 	setupFileOpenDialog(false);
 
-	fileOpenDialog->setWindowTitle(tr("ChOx - Append File(s)"));
+	fileOpenDialog->setWindowTitle(tr("ChOX - Append File(s)"));
 
 	if (fileOpenDialog->exec() == QDialog::Accepted) 
 		openFiles(fileOpenDialog->selectedFiles());
 }
 
-bool ChOx::MainWindow::openFiles(const QStringList& file_names)
+bool ChOX::MainWindow::openFiles(const QStringList& file_names)
 {
 	QStringList::ConstIterator files_end = file_names.end();
 	bool success = false;
@@ -388,7 +388,7 @@ bool ChOx::MainWindow::openFiles(const QStringList& file_names)
 		connect(&data_reader, SIGNAL(statusMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
 
 		if (data_reader.read()) {
-			ChOx::RecentFilesList::instance().addEntry(*it);
+			ChOX::RecentFilesList::instance().addEntry(*it);
 			success = true;
 		}
 	}
@@ -396,12 +396,12 @@ bool ChOx::MainWindow::openFiles(const QStringList& file_names)
 	return success;
 }
 
-void ChOx::MainWindow::filePrint()
+void ChOX::MainWindow::filePrint()
 {
 	QPrinter printer;
-	printer.setCreator("ChOx");
+	printer.setCreator("ChOX");
 
-	ChOx::DataSetPrinter data_printer(*settings, *dataSet);
+	ChOX::DataSetPrinter data_printer(*settings, *dataSet);
 
 	connect(&data_printer, SIGNAL(errorMessage(const QString&)), this, SLOT(showErrorMessage(const QString&)));
 	connect(&data_printer, SIGNAL(errorMessage(const QString&)), this, SLOT(showStatusMessage(const QString&)));
@@ -410,40 +410,40 @@ void ChOx::MainWindow::filePrint()
 	data_printer.print(this, printer);
 }
 
-void ChOx::MainWindow::fileQuit()
+void ChOX::MainWindow::fileQuit()
 {
 	qApp->closeAllWindows();
 }
 
-void ChOx::MainWindow::selectRecordRange()
+void ChOX::MainWindow::selectRecordRange()
 {
 	if (!rangeSelectionDialog)
-		rangeSelectionDialog = new ChOx::RangeSelectionDialog(this, *dataSet);
+		rangeSelectionDialog = new ChOX::RangeSelectionDialog(this, *dataSet);
 
 	rangeSelectionDialog->exec();
 }
 
-void ChOx::MainWindow::editSettings()
+void ChOX::MainWindow::editSettings()
 {
 	if (!settingsEditDialog)
-		settingsEditDialog = new ChOx::SettingsEditDialog(this, *settings);
+		settingsEditDialog = new ChOX::SettingsEditDialog(this, *settings);
 
 	settingsEditDialog->exec();
 }
 
-void ChOx::MainWindow::saveSettings()
+void ChOX::MainWindow::saveSettings()
 {
 	settings->save();
 }
 
-void ChOx::MainWindow::helpAbout()
+void ChOX::MainWindow::helpAbout()
 {
-	QDialog* dlg = new ChOx::AboutDialog(this);
+	QDialog* dlg = new ChOX::AboutDialog(this);
 
 	dlg->exec();
 }
 
-void ChOx::MainWindow::setupFileOpenDialog(bool all_types)
+void ChOX::MainWindow::setupFileOpenDialog(bool all_types)
 {
 	if (!fileOpenDialog) {
 		fileOpenDialog = new QFileDialog(this);
@@ -460,7 +460,7 @@ void ChOx::MainWindow::setupFileOpenDialog(bool all_types)
 	fileOpenDialog->selectNameFilter(prev_filter);
 }
 
-void ChOx::MainWindow::setupFileSaveDialog()
+void ChOX::MainWindow::setupFileSaveDialog()
 {
 	bool first_time = false;
 
@@ -485,17 +485,17 @@ void ChOx::MainWindow::setupFileSaveDialog()
 		fileSaveDialog->selectFile(fileSaveDialog->selectedFiles().first());
 }
 
-void ChOx::MainWindow::handleNumColumnsChange(int num_cols)
+void ChOX::MainWindow::handleNumColumnsChange(int num_cols)
 {
 	uiMainWindow.deletePageColumnAction->setDisabled(num_cols <= 1);
 }
 
-void ChOx::MainWindow::handleNumRowsChange(int num_rows)
+void ChOX::MainWindow::handleNumRowsChange(int num_rows)
 {
 	uiMainWindow.deletePageRowAction->setDisabled(num_rows <= 1);
 }
 
-void ChOx::MainWindow::handleDataSetSizeChange(int new_size)
+void ChOX::MainWindow::handleDataSetSizeChange(int new_size)
 {
 	uiMainWindow.editClearAction->setEnabled(new_size > 0 || !dataSet->getFileNames().empty());
 	uiMainWindow.editSelectAllAction->setEnabled(new_size > 0);
@@ -507,20 +507,20 @@ void ChOx::MainWindow::handleDataSetSizeChange(int new_size)
 	uiMainWindow.fileSaveAsAction->setEnabled(new_size > 0);
 }
 
-void ChOx::MainWindow::handleSelectionStatusChange(bool selected)
+void ChOX::MainWindow::handleSelectionStatusChange(bool selected)
 {
 	uiMainWindow.editRemoveSelectionAction->setEnabled(selected);
 	uiMainWindow.fileSaveSelectionAsAction->setEnabled(selected);
 }
 
-void ChOx::MainWindow::handleViewSettingsChange(int)
+void ChOX::MainWindow::handleViewSettingsChange(int)
 {
 	if (dataSet->getSize() == 0) {
 		viewInfoLabel->setText(tr("Nothing to Display"));
 		return;
 	}
 
-	ChOx::DataSetPageView& page_view = dataSetView->getPageView();
+	ChOX::DataSetPageView& page_view = dataSetView->getPageView();
 
 	viewInfoLabel->setText(tr("Showing %1-%2 of %3")
 						   .arg(page_view.getPageOffset() + 1)
@@ -529,13 +529,13 @@ void ChOx::MainWindow::handleViewSettingsChange(int)
 						   .arg(dataSet->getSize()));
 }
 
-void ChOx::MainWindow::showErrorMessage(const QString& msg)
+void ChOX::MainWindow::showErrorMessage(const QString& msg)
 {
-	QMessageBox::critical(this, QString("ChOx - ") + tr("Error"), msg, QMessageBox::Ok, 
+	QMessageBox::critical(this, QString("ChOX - ") + tr("Error"), msg, QMessageBox::Ok, 
 						  QMessageBox::NoButton, QMessageBox::NoButton); 
 }
 
-void ChOx::MainWindow::showStatusMessage(const QString& msg)
+void ChOX::MainWindow::showStatusMessage(const QString& msg)
 {
 	if (msg.isEmpty())
 		statusMessageLabel->setText(tr("Ready.")); 
@@ -546,16 +546,16 @@ void ChOx::MainWindow::showStatusMessage(const QString& msg)
 }
 
 
-void ChOx::MainWindow::updateCaption()
+void ChOX::MainWindow::updateCaption()
 {
 	const QStringList& file_list = dataSet->getFileNames();
 
 	if (file_list.empty()) {
-		setWindowTitle("ChOx - " + tr("Nothing to display"));
+		setWindowTitle("ChOX - " + tr("Nothing to display"));
 		return;
 	}
 
-	QString caption("ChOx - ");
+	QString caption("ChOX - ");
 
 	for (QStringList::ConstIterator it = file_list.begin(); it != file_list.end(); ) {
 		caption.append("'" + QFileInfo(*it).fileName() + "'");
@@ -567,7 +567,7 @@ void ChOx::MainWindow::updateCaption()
 	setWindowTitle(caption);
 }
 
-void ChOx::MainWindow::recentFileSelected(QAction* action)
+void ChOX::MainWindow::recentFileSelected(QAction* action)
 {
 	if (action == uiMainWindow.clearRecentFilesAction)
 		return;
@@ -580,21 +580,21 @@ void ChOx::MainWindow::recentFileSelected(QAction* action)
 		openFiles(files);
 
 	else {
-		ChOx::MainWindow* new_win = new ChOx::MainWindow(0);
+		ChOX::MainWindow* new_win = new ChOX::MainWindow(0);
 
 		new_win->show();
 		new_win->openFiles(files);
 	}
 }
 
-void ChOx::MainWindow::setupRecentFilesMenu()
+void ChOX::MainWindow::setupRecentFilesMenu()
 {
 	std::for_each(recentFilesMenuActions.begin(), recentFilesMenuActions.end(), 
 				  boost::bind(&QWidget::removeAction, uiMainWindow.recentFilesMenu, _1));
 
 	recentFilesMenuActions.clear();
 
-	const QStringList& recent_files =  ChOx::RecentFilesList::instance().getEntries();
+	const QStringList& recent_files =  ChOX::RecentFilesList::instance().getEntries();
 
 	if (recent_files.empty()) {
 		uiMainWindow.recentFilesMenu->setEnabled(false);
@@ -616,7 +616,7 @@ void ChOx::MainWindow::setupRecentFilesMenu()
 	}
 }
 
-void ChOx::MainWindow::closeEvent(QCloseEvent* e)
+void ChOX::MainWindow::closeEvent(QCloseEvent* e)
 {
 	QSettings win_settings;
 
@@ -633,9 +633,9 @@ void ChOx::MainWindow::closeEvent(QCloseEvent* e)
 	QMainWindow::closeEvent(e);
 }
 
-void ChOx::MainWindow::setupWindowMenu()
+void ChOX::MainWindow::setupWindowMenu()
 {
-	using namespace ChOx;
+	using namespace ChOX;
 
 	if (windowListGroup) {
 		QList<QAction*> actions = windowListGroup->actions();
@@ -654,7 +654,7 @@ void ChOx::MainWindow::setupWindowMenu()
 	int i = 1;
 
 	for (MainWindowList::ConstIterator it = win_list.getBegin(); it != list_end; ++it, i++) {
-		ChOx::MainWindow* win = *it;
+		ChOX::MainWindow* win = *it;
 		QString menu_txt = QString("%1 - %2").arg(i).arg(win->windowTitle());
 
 		QAction* action = new QAction(windowListGroup);
@@ -671,9 +671,9 @@ void ChOx::MainWindow::setupWindowMenu()
 	uiMainWindow.windowMenu->addActions(windowListGroup->actions());
 }
 
-void ChOx::MainWindow::tileWindows()
+void ChOX::MainWindow::tileWindows()
 {
-	using namespace ChOx;
+	using namespace ChOX;
 
 	const QRect& avail_geom = QApplication::desktop()->availableGeometry();
 
@@ -688,7 +688,7 @@ void ChOx::MainWindow::tileWindows()
 
 	for (int i = 0, win_idx = 0; i < num_wins_per_col && win_idx < num_wins; i++) {
 		for (int j = 0; j < num_wins_per_row && win_idx < num_wins; j++, win_idx++) {
-			ChOx::MainWindow* win = MainWindowList::instance().getWindow(win_idx);
+			ChOX::MainWindow* win = MainWindowList::instance().getWindow(win_idx);
 
 			if (free_space > 0 && num_wins_per_row - j > 1) {
 				win->resize(2 * win_width - (win->frameSize().width() - win->size().width()), 
@@ -711,9 +711,9 @@ void ChOx::MainWindow::tileWindows()
 	}
 }
 
-void ChOx::MainWindow::cascadeWindows()
+void ChOX::MainWindow::cascadeWindows()
 {
-	using namespace ChOx;
+	using namespace ChOX;
 
 	const QRect& avail_geom = QApplication::desktop()->availableGeometry();
 
@@ -730,7 +730,7 @@ void ChOx::MainWindow::cascadeWindows()
 	MainWindowList::ConstIterator list_end = win_list.getEnd();
 	
 	for (MainWindowList::ConstIterator it = win_list.getBegin(); it != list_end; ++it) {
-		ChOx::MainWindow* win = *it;
+		ChOX::MainWindow* win = *it;
 
 		if (win == this)
 			continue;
@@ -753,13 +753,13 @@ void ChOx::MainWindow::cascadeWindows()
 	setWindowActive();
 }
 
-void ChOx::MainWindow::setWindowActive()
+void ChOX::MainWindow::setWindowActive()
 {
 	activateWindow();
 	raise();
 }
 
-void ChOx::MainWindow::handleSizeAdjustmentChange()
+void ChOX::MainWindow::handleSizeAdjustmentChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -784,7 +784,7 @@ void ChOx::MainWindow::handleSizeAdjustmentChange()
 	uiMainWindow.viewSizeAdjustmentActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleAlignmentChange()
+void ChOX::MainWindow::handleAlignmentChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -828,7 +828,7 @@ void ChOx::MainWindow::handleAlignmentChange()
 	uiMainWindow.viewHorAlignmentActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleArrowStyleChange()
+void ChOX::MainWindow::handleArrowStyleChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -852,7 +852,7 @@ void ChOx::MainWindow::handleArrowStyleChange()
 	uiMainWindow.viewArrowStyleActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleComponentLayoutChange()
+void ChOX::MainWindow::handleComponentLayoutChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -874,7 +874,7 @@ void ChOx::MainWindow::handleComponentLayoutChange()
 	uiMainWindow.viewComponentLayoutActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleComponentLayoutDirChange()
+void ChOX::MainWindow::handleComponentLayoutDirChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -894,7 +894,7 @@ void ChOx::MainWindow::handleComponentLayoutDirChange()
 	uiMainWindow.viewComponentLayoutDirActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleReactantVisibilityChange( )
+void ChOX::MainWindow::handleReactantVisibilityChange( )
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -904,7 +904,7 @@ void ChOx::MainWindow::handleReactantVisibilityChange( )
 	uiMainWindow.viewShowReactantsAction->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleAgentVisibilityChange()
+void ChOX::MainWindow::handleAgentVisibilityChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -914,7 +914,7 @@ void ChOx::MainWindow::handleAgentVisibilityChange()
 	uiMainWindow.viewShowAgentsAction->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleProductVisibilityChange()
+void ChOX::MainWindow::handleProductVisibilityChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -924,7 +924,7 @@ void ChOx::MainWindow::handleProductVisibilityChange()
 	uiMainWindow.viewShowProductsAction->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleAgentAlignmentChange()
+void ChOX::MainWindow::handleAgentAlignmentChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -950,7 +950,7 @@ void ChOx::MainWindow::handleAgentAlignmentChange()
 	uiMainWindow.viewAgentAlignmentActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleAgentLayoutChange()
+void ChOX::MainWindow::handleAgentLayoutChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -972,7 +972,7 @@ void ChOx::MainWindow::handleAgentLayoutChange()
 	uiMainWindow.viewAgentLayoutActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleAgentLayoutDirChange()
+void ChOX::MainWindow::handleAgentLayoutDirChange()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -992,7 +992,7 @@ void ChOx::MainWindow::handleAgentLayoutDirChange()
 	uiMainWindow.viewAgentLayoutDirActionGroup->blockSignals(false);
 }
 
-void ChOx::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& val)
+void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& val)
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1157,7 +1157,7 @@ void ChOx::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key
 	}
 }
 
-void ChOx::MainWindow::viewAlignmentChanged()
+void ChOX::MainWindow::viewAlignmentChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1181,7 +1181,7 @@ void ChOx::MainWindow::viewAlignmentChanged()
 	setAlignmentParameter(*settings, alignment);
 }
 
-void ChOx::MainWindow::viewSizeAdjustmentChanged()
+void ChOX::MainWindow::viewSizeAdjustmentChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1198,7 +1198,7 @@ void ChOx::MainWindow::viewSizeAdjustmentChanged()
 	setSizeAdjustmentParameter(*settings, adjust);
 }
 
-void ChOx::MainWindow::reactionArrowStyleChanged()
+void ChOX::MainWindow::reactionArrowStyleChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1215,7 +1215,7 @@ void ChOx::MainWindow::reactionArrowStyleChanged()
 	setReactionArrowStyleParameter(*settings, style);
 }
 
-void ChOx::MainWindow::reactionAgentAlignmentChanged()
+void ChOX::MainWindow::reactionAgentAlignmentChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1232,7 +1232,7 @@ void ChOx::MainWindow::reactionAgentAlignmentChanged()
 	setReactionAgentAlignmentParameter(*settings, alignment);
 }
 
-void ChOx::MainWindow::reactionAgentLayoutStyleChanged()
+void ChOX::MainWindow::reactionAgentLayoutStyleChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1247,7 +1247,7 @@ void ChOx::MainWindow::reactionAgentLayoutStyleChanged()
 	setReactionAgentLayoutParameter(*settings, layout);
 }
 
-void ChOx::MainWindow::reactionAgentLayoutDirChanged()
+void ChOX::MainWindow::reactionAgentLayoutDirChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1262,7 +1262,7 @@ void ChOx::MainWindow::reactionAgentLayoutDirChanged()
 	setReactionAgentLayoutDirectionParameter(*settings, dir);
 }
 
-void ChOx::MainWindow::reactionCompLayoutStyleChanged()
+void ChOX::MainWindow::reactionCompLayoutStyleChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1277,7 +1277,7 @@ void ChOx::MainWindow::reactionCompLayoutStyleChanged()
 	setReactionComponentLayoutParameter(*settings, layout);
 }
 
-void ChOx::MainWindow::reactionCompLayoutDirChanged()
+void ChOX::MainWindow::reactionCompLayoutDirChanged()
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1292,7 +1292,7 @@ void ChOx::MainWindow::reactionCompLayoutDirChanged()
 	setReactionComponentLayoutDirectionParameter(*settings, dir);
 }
 
-void ChOx::MainWindow::viewReactionSettingsChanged(bool checked)
+void ChOX::MainWindow::viewReactionSettingsChanged(bool checked)
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1312,7 +1312,7 @@ void ChOx::MainWindow::viewReactionSettingsChanged(bool checked)
 		setShowReactionPlusSignsParameter(*settings, checked);
 }
 
-void ChOx::MainWindow::viewBondSettingsChanged(bool checked)
+void ChOX::MainWindow::viewBondSettingsChanged(bool checked)
 {
 	using namespace CDPL;
 	using namespace Vis;
@@ -1329,7 +1329,7 @@ void ChOx::MainWindow::viewBondSettingsChanged(bool checked)
 		setShowStereoBondsParameter(*settings, checked);
 }
 
-void ChOx::MainWindow::viewAtomSettingsChanged(bool checked)
+void ChOX::MainWindow::viewAtomSettingsChanged(bool checked)
 {
 	using namespace CDPL;
 	using namespace Vis;

@@ -32,10 +32,10 @@
 #include <qobject.h>
 
 
-namespace ChOx { class MainWindow; }
+namespace ChOX { class MainWindow; }
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class MainWindowList : public QObject

@@ -37,7 +37,7 @@ class QCheckBox;
 class QDoubleSpinBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class FloatSpinBox;

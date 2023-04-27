@@ -42,7 +42,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 BondSettingsEditWidget::BondSettingsEditWidget(QWidget* parent, Settings& settings): 

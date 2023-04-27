@@ -36,11 +36,11 @@
 namespace
 {
 
-	class ChOxApplication : public QApplication
+	class ChOXApplication : public QApplication
 	{
 
 	public:
-		ChOxApplication(int& argc, char** argv): QApplication(argc, argv) {}
+		ChOXApplication(int& argc, char** argv): QApplication(argc, argv) {}
 
 		bool notify(QObject *receiver_, QEvent *event_) {
 			try {
@@ -57,13 +57,13 @@ namespace
 
 int main(int argc, char** argv)
 {
-	ChOxApplication app(argc, argv);
+	ChOXApplication app(argc, argv);
 
 	QCoreApplication::setOrganizationName("CDPKit");
     QCoreApplication::setOrganizationDomain("cdpkit.org");
-    QCoreApplication::setApplicationName("ChOx");
+    QCoreApplication::setApplicationName("ChOX");
 
-    ChOx::MainWindow* main_win = new ChOx::MainWindow(0);
+    ChOX::MainWindow* main_win = new ChOX::MainWindow(0);
 
 	app.connect(&app, SIGNAL(lastWindowClosed()), &app, SLOT(quit()));
 

@@ -40,7 +40,7 @@
 #include "FontChooserDialog.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 FontEditWidget::FontEditWidget(QWidget* parent, CDPL::Vis::Font& font, CDPL::Vis::SizeSpecification& size_spec, 

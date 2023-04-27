@@ -33,7 +33,7 @@
 class QScrollBar;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSet;

@@ -80,5 +80,7 @@ namespace CDPL
 
 			const ColorTable ELEMENT_COLORS_2D(&elementColors2D[0], &elementColors2D[0] + sizeof(elementColors2D) / sizeof(ColorTable::Entry));
 		}
+
+		void initAtomColors() {}
 	}
 }

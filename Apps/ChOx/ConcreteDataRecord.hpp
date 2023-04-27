@@ -31,7 +31,7 @@
 #include "DataRecordVisitor.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	template <typename T>

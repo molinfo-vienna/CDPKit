@@ -49,6 +49,7 @@
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/AtomColorTable.hpp"
 
 #include "Settings.hpp"
 #include "ControlParameter.hpp"
@@ -56,7 +57,7 @@
 #include "ControlParameterFunctions.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 Settings::Settings(QObject* parent): QObject(parent) 
@@ -669,7 +670,7 @@ void Settings::load()
 	// ------
 
 	if (getUseAtomColorTableParameter(*this))
-		Vis::setAtomColorTableParameter(*this, ChOx::getAtomColorTableParameter(*this));
+		Vis::setAtomColorTableParameter(*this, ChOX::getAtomColorTableParameter(*this));
 	else
 		Vis::clearAtomColorTableParameter(*this);
 
@@ -1296,7 +1297,7 @@ void Settings::writeAtomColorTableParam(QSettings& settings) const
 	using namespace CDPL;
 	using namespace Vis;
 
-	Base::Variant val = getParameter(ChOx::ControlParameter::ATOM_COLOR_TABLE);
+	Base::Variant val = getParameter(ChOX::ControlParameter::ATOM_COLOR_TABLE);
 
 	if (val.isEmpty()) {
 		settings.remove("ATOM_COLOR_TABLE/entries");
@@ -1458,7 +1459,7 @@ void Settings::readAtomColorTableParam(QSettings& settings)
 	Vis::ColorTable::SharedPointer color_tab_ptr;
 
 	if (entries_var.isNull()) {
-		color_tab_ptr.reset(new Vis::ColorTable(*ControlParameterDefault::ATOM_COLOR_TABLE));
+		color_tab_ptr.reset(new Vis::ColorTable(AtomColorTable::ELEMENT_COLORS_2D));
 
 	} else {
 		color_tab_ptr.reset(new Vis::ColorTable());
@@ -1486,7 +1487,7 @@ void Settings::readAtomColorTableParam(QSettings& settings)
 		}
 	}
 
-	ChOx::setAtomColorTableParameter(*this, color_tab_ptr);
+	ChOX::setAtomColorTableParameter(*this, color_tab_ptr);
 }
 
 void Settings::readDBCreationModeParameter(SettingsContainer& params, QSettings& settings, 

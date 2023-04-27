@@ -57,7 +57,7 @@
 #include "PrintProgressDialog.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 DataSetPrinter::DataSetPrinter(const Settings& settings, const DataSet& data_set): 

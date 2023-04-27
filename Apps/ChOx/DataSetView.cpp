@@ -35,7 +35,7 @@
 #include "DataSet.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 DataSetView::DataSetView(QWidget* parent, Settings& settings, DataSet& data_set): 

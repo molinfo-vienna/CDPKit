@@ -37,7 +37,7 @@
 #include "AtomColorButton.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 AtomColorButton::AtomColorButton(QWidget* parent, CDPL::Vis::ColorTable& color_tab, const CDPL::Vis::Color& def_color, std::size_t atom_type): 

@@ -27,7 +27,7 @@
 #include "SettingsEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 SettingsEditWidget::SettingsEditWidget(QWidget* parent): QWidget(parent) {}

@@ -33,7 +33,7 @@
 class QLabel;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSet;

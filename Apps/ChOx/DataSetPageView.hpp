@@ -41,7 +41,7 @@
 class QMenu;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSet;

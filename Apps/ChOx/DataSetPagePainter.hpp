@@ -31,7 +31,7 @@
 class QPainter;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

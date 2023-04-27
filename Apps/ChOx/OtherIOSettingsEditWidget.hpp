@@ -36,7 +36,7 @@ class QCheckBox;
 class QLineEdit;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

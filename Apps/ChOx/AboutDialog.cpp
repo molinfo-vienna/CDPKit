@@ -36,7 +36,7 @@ namespace
 {
 
 	const char* ABOUT_TEXT =
-	"<h2 align=center><b>- ChOx -</b></h2>"
+	"<h2 align=center><b>- ChOX -</b></h2>"
 	"<h3 align=center><b><u>Ch</u>emical <u>O</u>bject E<u>x</u>plorer</b></h2>"
 	"<p align=center><i>An Application for the Visualization and Manipulation of Chemical Datasets</i></p>"
 	"<p align=center>&copy; 2003-2010 Thomas A. Seidel (thomas.seidel@univie.ac.at)</p>"
@@ -49,7 +49,7 @@ namespace
 }
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 AboutDialog::AboutDialog(QWidget* parent, Qt::WindowFlags f):
@@ -61,7 +61,7 @@ AboutDialog::AboutDialog(QWidget* parent, Qt::WindowFlags f):
 void AboutDialog::init()
 {
 	setAttribute(Qt::WA_DeleteOnClose);
-	setWindowTitle(tr("ChOx - About"));
+	setWindowTitle(tr("ChOX - About"));
 
 // -------
 

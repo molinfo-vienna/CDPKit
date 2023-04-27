@@ -34,7 +34,7 @@
 #include "TabSettingsEditWidget.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 TabSettingsEditWidget::TabSettingsEditWidget(QWidget* parent): 

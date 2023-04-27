@@ -30,7 +30,7 @@
 #include "TabSettingsEditWidget.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

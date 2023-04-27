@@ -37,7 +37,7 @@
 class QMenu;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class AtomColorButton : public QLabel

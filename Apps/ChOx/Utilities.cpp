@@ -53,7 +53,7 @@
 #include "Utilities.hpp"
 
 
-void ChOx::drawText(QPainter& painter, const QString& text, unsigned int alignment, 
+void ChOX::drawText(QPainter& painter, const QString& text, unsigned int alignment, 
 					double width, double height, double margin)
 {
 	using namespace CDPL;
@@ -93,7 +93,7 @@ void ChOx::drawText(QPainter& painter, const QString& text, unsigned int alignme
 	painter.drawText(QPointF(text_x_pos, text_y_pos), text);
 }
 
-void ChOx::initData(CDPL::Chem::Reaction& rxn)
+void ChOX::initData(CDPL::Chem::Reaction& rxn)
 {
 	using namespace CDPL;
 	using namespace Chem;
@@ -104,7 +104,7 @@ void ChOx::initData(CDPL::Chem::Reaction& rxn)
 	perceiveComponentGroups(rxn, false);
 }
 
-void ChOx::initData(CDPL::Chem::Molecule& mol)
+void ChOX::initData(CDPL::Chem::Molecule& mol)
 {
 	using namespace CDPL;
 	using namespace Chem;
@@ -148,7 +148,7 @@ void ChOx::initData(CDPL::Chem::Molecule& mol)
 	buildMatchExpressionStrings(mol, false);
 }
 
-void ChOx::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt, 
+void ChOX::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFormat& opt_fmt, 
 							 const CDPL::Base::ControlParameterContainer& params)
 {
 	using namespace CDPL;
@@ -165,7 +165,7 @@ void ChOx::prepareOutputData(CDPL::Chem::Molecule& mol, const CDPL::Base::DataFo
 	}
 }
 
-void ChOx::prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFormat& opt_fmt, 
+void ChOX::prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFormat& opt_fmt, 
 							 const CDPL::Base::ControlParameterContainer& params)
 {
 	using namespace CDPL;

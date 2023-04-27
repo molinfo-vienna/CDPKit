@@ -134,54 +134,81 @@ SET(chox_MOC_HDRS
     RangeSelectionDialog.hpp 
    )
 
-
 QT5_WRAP_UI(chox_SRCS ${chox_UI_FILES})
 QT5_WRAP_CPP(chox_SRCS ${chox_MOC_HDRS})
 QT5_ADD_RESOURCES(chox_SRCS ${chox_RESOURCES})
 
-IF(WIN32)
-  IF(MINGW) # resource compilation for mingw
-    FIND_PROGRAM(WINDRES_EXECUTABLE NAMES windres.exe windres)
+IF(APPLE)
+  ADD_EXECUTABLE(chox MACOSX_BUNDLE ${chox_SRCS} Icons/chox.icns)
 
-    IF(WINDRES_EXECUTABLE)
-      ADD_CUSTOM_COMMAND(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj"
-                         COMMAND "${WINDRES_EXECUTABLE}" "-I${CMAKE_CURRENT_SOURCE_DIR}/Icons"
-                                 "-i${CMAKE_CURRENT_SOURCE_DIR}/Icons/chox.rc"
-                                 "-o${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj")
-      SET(chox_SRCS ${chox_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj")
-    ELSE(WINDRES_EXECUTABLE)
-      MESSAGE("!! Warning: windres.exe not found -> can't compile application resource files.")
-    ENDIF(WINDRES_EXECUTABLE)
-  ENDIF(MINGW)
+  SET_TARGET_PROPERTIES(chox PROPERTIES
+                        MACOSX_BUNDLE_BUNDLE_NAME ChOX
+                        MACOSX_BUNDLE_BUNDLE_VERSION "${CDPKIT_VERSION}"
+                        MACOSX_BUNDLE_ICON_FILE chox.icns
+                        MACOSX_BUNDLE_COPYRIGHT "Thomas Seidel"
+                        MACOSX_BUNDLE_LONG_VERSION_STRING "${CDPKIT_VERSION}"
+                        MACOSX_BUNDLE_SHORT_VERSION_STRING "${CDPKIT_VERSION}"
+                        OUTPUT_NAME ChOX
+                       )
 
-  ADD_EXECUTABLE(chox WIN32 ${chox_SRCS})
+  SET_SOURCE_FILES_PROPERTIES(Icons/chox.icns PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 
-  INCLUDE(WinDeployQt)
-  WinDeployQt(chox "${CMAKE_CURRENT_BINARY_DIR}" Applications "${CDPKIT_EXECUTABLE_INSTALL_DIR}")
+  CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/MacDeployQt.cmake.in"
+  	         "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" 
+                 @ONLY
+                )
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-molprop-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+ELSE(APPLE)
+  IF(WIN32)
+    IF(MINGW) # resource compilation for mingw
+      FIND_PROGRAM(WINDRES_EXECUTABLE NAMES windres.exe windres)
 
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox.exe")
-ELSE(WIN32)
-  ADD_EXECUTABLE(chox ${chox_SRCS})
+      IF(WINDRES_EXECUTABLE)
+        ADD_CUSTOM_COMMAND(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj"
+                           COMMAND "${WINDRES_EXECUTABLE}" "-I${CMAKE_CURRENT_SOURCE_DIR}/Icons"
+                                   "-i${CMAKE_CURRENT_SOURCE_DIR}/Icons/chox.rc"
+                                   "-o${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj")
+        SET(chox_SRCS ${chox_SRCS} "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj")
+      ELSE(WINDRES_EXECUTABLE)
+        MESSAGE("!! Warning: windres.exe not found -> can't compile application resource files.")
+      ENDIF(WINDRES_EXECUTABLE)
+    ENDIF(MINGW)
 
-  SET_TARGET_PROPERTIES(chox PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
+    ADD_EXECUTABLE(chox WIN32 ${chox_SRCS})
+    SET_TARGET_PROPERTIES(chox PROPERTIES OUTPUT_NAME ChOX)
 
-  IF(NOT APPLE)
+    INCLUDE(WinDeployQt)
+    WinDeployQt(chox "${CMAKE_CURRENT_BINARY_DIR}" Applications "${CDPKIT_EXECUTABLE_INSTALL_DIR}")
+
+    SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/ChOX.exe")
+  ELSE(WIN32)
+    ADD_EXECUTABLE(chox ${chox_SRCS})
+
+    SET_TARGET_PROPERTIES(chox PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
+
     CONFIGURE_FILE(chox.desktop "${CMAKE_CURRENT_BINARY_DIR}/chox.desktop" COPYONLY)
     CONFIGURE_FILE(Icons/chox.png "${CMAKE_CURRENT_BINARY_DIR}/chox.png" COPYONLY)
 
     INSTALL(FILES chox.desktop DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
     INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
-  ENDIF(NOT APPLE)
   
-  SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox")
-ENDIF(WIN32)
+    SET(BINARY_INPUT_FILE "${CDPKIT_EXECUTABLE_INSTALL_DIR}/chox")
+  ENDIF(WIN32)
 
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
-	       "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-               @ONLY
-              )
- 
-TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in"
+  	         "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+                 @ONLY
+                )
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-molprop-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+ENDIF(APPLE)
 
-INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
+IF(NOT APPLE)
+  INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
+ELSE(NOT APPLE)
+  INSTALL(TARGETS chox BUNDLE DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
+  
+  IF(MACDEPLOYQT_EXECUTABLE)
+    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" COMPONENT Applications)
+  ENDIF(MACDEPLOYQT_EXECUTABLE)
+ENDIF(NOT APPLE)

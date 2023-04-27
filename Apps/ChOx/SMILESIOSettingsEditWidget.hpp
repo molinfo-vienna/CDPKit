@@ -36,7 +36,7 @@ class QCheckBox;
 class QSpinBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class Settings;

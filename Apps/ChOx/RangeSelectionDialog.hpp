@@ -33,7 +33,7 @@
 class QSpinBox;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSet;

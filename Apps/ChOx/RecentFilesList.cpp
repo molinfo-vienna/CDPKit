@@ -29,7 +29,7 @@
 #include "RecentFilesList.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 RecentFilesList::RecentFilesList() 

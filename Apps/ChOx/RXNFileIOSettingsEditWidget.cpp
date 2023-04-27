@@ -40,7 +40,7 @@
 #include "Settings.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 RXNFileIOSettingsEditWidget::RXNFileIOSettingsEditWidget(QWidget* parent, Settings& settings): 

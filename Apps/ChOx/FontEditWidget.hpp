@@ -35,7 +35,7 @@
 class QLabel;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class FontEditWidget : public QWidget

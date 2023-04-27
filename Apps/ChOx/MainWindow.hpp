@@ -41,15 +41,15 @@ class QMenu;
 class QActionGroup;
 class QAction;
 
-namespace ChOx { class DataSetView; }
-namespace ChOx { class DataSet; }
-namespace ChOx { class DataSetViewControl; }
-namespace ChOx { class Settings; }
-namespace ChOx { class SettingsEditDialog; }
-namespace ChOx { class RangeSelectionDialog; }
+namespace ChOX { class DataSetView; }
+namespace ChOX { class DataSet; }
+namespace ChOX { class DataSetViewControl; }
+namespace ChOX { class Settings; }
+namespace ChOX { class SettingsEditDialog; }
+namespace ChOX { class RangeSelectionDialog; }
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class MainWindow : public QMainWindow
@@ -134,12 +134,12 @@ namespace ChOx
 		QActionGroup*               windowListGroup;
 		QMenu*                      contextMenu;
 		QFileDialog*                fileSaveDialog;
-		ChOx::Settings*             settings;
-		ChOx::SettingsEditDialog*   settingsEditDialog;
-		ChOx::DataSetViewControl*   dataSetViewControl;
-		ChOx::DataSet*              dataSet;
-		ChOx::DataSetView*          dataSetView;
-		ChOx::RangeSelectionDialog* rangeSelectionDialog;
+		ChOX::Settings*             settings;
+		ChOX::SettingsEditDialog*   settingsEditDialog;
+		ChOX::DataSetViewControl*   dataSetViewControl;
+		ChOX::DataSet*              dataSet;
+		ChOX::DataSetView*          dataSetView;
+		ChOX::RangeSelectionDialog* rangeSelectionDialog;
 		Ui::MainWindow              uiMainWindow;
 		std::vector<QAction*>       recentFilesMenuActions;
 	};

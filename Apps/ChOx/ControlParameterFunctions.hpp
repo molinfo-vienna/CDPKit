@@ -36,7 +36,7 @@
 #include "CDPLFwd.hpp"
 
 
-namespace ChOx 
+namespace ChOX 
 {
 
 	const CDPL::Vis::Color& getViewBackgroundColorParameter(const CDPL::Base::ControlParameterContainer& cntnr);

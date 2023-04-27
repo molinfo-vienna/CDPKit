@@ -30,7 +30,7 @@
 #include <QDialog>
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class AboutDialog : public QDialog

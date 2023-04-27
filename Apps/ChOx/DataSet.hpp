@@ -38,7 +38,7 @@
 #include "DataRecord.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSet : public QObject

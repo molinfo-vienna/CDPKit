@@ -36,7 +36,7 @@ class QLineEdit;
 class QIntValidator;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSetView;

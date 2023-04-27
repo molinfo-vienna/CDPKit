@@ -37,7 +37,7 @@ class QPrinter;
 class QWidget;
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	class DataSet;

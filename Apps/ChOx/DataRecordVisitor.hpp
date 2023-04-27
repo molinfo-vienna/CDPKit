@@ -30,7 +30,7 @@
 #include "CDPLFwd.hpp"
 
 
-namespace ChOx
+namespace ChOX
 {
 
 	template <typename T> class ConcreteDataRecord;

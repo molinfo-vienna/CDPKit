@@ -29,7 +29,7 @@
 #include "DataSet.hpp"
 
 
-using namespace ChOx;
+using namespace ChOX;
 
 
 namespace
