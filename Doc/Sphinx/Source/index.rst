@@ -14,7 +14,7 @@ Chemical Data Processing Library (CDPL) API documentation
 ---------------------------------------------------------
 
 * `CDPL C++-API <cpp_api/index.html>`_
-* `CDPL Python-API <python_apiindex.html>`_
+* `CDPL Python-API <python_api/index.html>`_
 
 Indices and tables
 ------------------
