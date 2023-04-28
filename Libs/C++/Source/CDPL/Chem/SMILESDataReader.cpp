@@ -59,7 +59,7 @@
 #include "SMILESDataReader.hpp"
 #include "SMILESData.hpp"
 
-
+#include <iostream>
 using namespace CDPL;
 
 
@@ -323,7 +323,7 @@ void Chem::SMILESDataReader::init(const Molecule& mol)
 	bondDirectionTable.clear();
 	bondTable.clear();
 	closureBondMap.clear();
-	nbrBondListTable.assign(nbrBondListTable.size(), STArray());
+	nbrBondListTable.clear();
 }
 
 void Chem::SMILESDataReader::parseSMILES(Molecule& mol, Atom* prev_atom)
@@ -427,10 +427,10 @@ void Chem::SMILESDataReader::parseRingClosures(Molecule& mol, Atom& atom)
 
 			createBond(mol, closure_bond.startAtom, &atom, bond_params, closure_bond.lexBondNumber);
 		
-			closureBondMap.erase(lb);
-
 			addToBondList(mol.getAtomIndex(atom), closure_bond.lexBondNumber);
 
+			closureBondMap.erase(lb);
+			
 		} else {      // create a new map item for a future ring closure
 			closureBondMap.insert(lb, 
 								  ClosureBondMap::value_type(closure_no, ClosureBond(lexicalBondNumber, &atom, bond_params)));
@@ -1007,7 +1007,7 @@ void Chem::SMILESDataReader::setAtomStereoDescriptors(const Molecule& mol) const
 			std::size_t lex_bond_no = lex_bond_list[0];
 			
 			assert(lex_bond_no < bondTable.size());
-
+			
 			ref_atoms[3] = &bondTable[lex_bond_no]->getNeighbor(*atom);
 
 		} else {
