@@ -598,8 +598,6 @@ namespace CDPL
 			};
 
 			Data* data;
-
-			/** \endcond */
 		};
 
 		template <>
