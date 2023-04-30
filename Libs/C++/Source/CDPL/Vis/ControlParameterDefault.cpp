@@ -83,7 +83,7 @@ namespace CDPL
 			const SizeSpecification         ATOM_LABEL_MARGIN                    = SizeSpecification(2.0, false, false, true);
 			const SizeSpecification         RADICAL_ELECTRON_DOT_SIZE            = SizeSpecification(1.0, false, false, true);
 			const bool                      SHOW_CARBONS                         = false;
-			const bool                      SHOW_EXPLICIT_HYDROGENS              = true;
+			const bool                      SHOW_EXPLICIT_HYDROGENS              = false;
 			const bool                      SHOW_CHARGES                         = true;
 			const bool                      SHOW_ISOTOPES                        = true;
 			const bool                      SHOW_HYDROGEN_COUNTS                 = false;
