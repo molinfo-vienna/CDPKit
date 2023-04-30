@@ -36,7 +36,7 @@ using namespace CDPL;
 namespace
 {
 
-	const Vis::ColorTable::Entry elementColors2D[] = {
+	const Vis::ColorTable::Entry ELEM_COLORS_2D[] = {
 		Vis::ColorTable::Entry(Chem::AtomType::C , Vis::Color( 40.0 / 255.0,  40.0 / 255.0,  40.0 / 255.0)),
 		Vis::ColorTable::Entry(Chem::AtomType::O , Vis::Color(240.0 / 255.0,   0.0        ,   0.0        )),
 		Vis::ColorTable::Entry(Chem::AtomType::H , Vis::Color(100.0 / 255.0, 100.0 / 255.0, 100.0 / 255.0)),
@@ -78,7 +78,7 @@ namespace CDPL
 		namespace AtomColorTable
 		{
 
-			const ColorTable ELEMENT_COLORS_2D(&elementColors2D[0], &elementColors2D[0] + sizeof(elementColors2D) / sizeof(ColorTable::Entry));
+			const ColorTable ELEMENT_COLORS_2D(&ELEM_COLORS_2D[0], &ELEM_COLORS_2D[0] + sizeof(ELEM_COLORS_2D) / sizeof(ColorTable::Entry));
 		}
 
 		void initAtomColors() {}

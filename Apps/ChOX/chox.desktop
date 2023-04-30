@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=ChOx
+Name=ChOX
 GenericName=Chemical Object Explorer
 Comment=Load and inspect chemical data files
-Exec=/usr/bin/chox
+Exec=/opt/CDPKit
 Icon=/usr/share/pixmaps/chox.png
 Terminal=false
 MultipleArgs=false

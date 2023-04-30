@@ -29,8 +29,45 @@
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/ColorTable.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 
 #include "ControlParameterDefault.hpp"
+
+
+namespace
+{
+	
+	const CDPL::Vis::ColorTable::Entry ELEM_COLORS_2D[] = {
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::C , CDPL::Vis::Color( 40.0 / 255.0,  40.0 / 255.0,  40.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::O , CDPL::Vis::Color(240.0 / 255.0,   0.0        ,   0.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::H , CDPL::Vis::Color(100.0 / 255.0, 100.0 / 255.0, 100.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::N , CDPL::Vis::Color(143.0 / 255.0, 143.0 / 255.0, 255.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::S , CDPL::Vis::Color(255.0 / 255.0, 200.0 / 255.0,  50.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cl, CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::B , CDPL::Vis::Color(  0.0        ,   1.0        ,   0.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::P , CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Fe, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ba, CDPL::Vis::Color(255.0 / 255.0, 165.0 / 255.0,   0.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Na, CDPL::Vis::Color(  0.0        ,   0.0        ,   1.0        )),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mg, CDPL::Vis::Color( 34.0 / 255.0, 139.0 / 255.0,  34.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Zn, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cu, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ni, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Br, CDPL::Vis::Color(165.0 / 255.0,  42.0 / 255.0,  42.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ca, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Mn, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Al, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ti, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Cr, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Ag, CDPL::Vis::Color(128.0 / 255.0, 128.0 / 255.0, 144.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::F , CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Si, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Au, CDPL::Vis::Color(218.0 / 255.0, 165.0 / 255.0,  32.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::I , CDPL::Vis::Color(160.0 / 255.0,  32.0 / 255.0, 240.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::Li, CDPL::Vis::Color(178.0 / 255.0,  34.0 / 255.0,  34.0 / 255.0)),
+		CDPL::Vis::ColorTable::Entry(CDPL::Chem::AtomType::He, CDPL::Vis::Color(255.0 / 255.0, 192.0 / 255.0, 203.0 / 255.0))
+	};
+}
 
 
 namespace ChOX
@@ -39,7 +76,7 @@ namespace ChOX
 	namespace ControlParameterDefault
 	{
 
-		const CDPL::Vis::Color                     VIEW_BACKGROUND_COLOR                   = CDPL::Vis::Color::WHITE;
+		const CDPL::Vis::Color                     VIEW_BACKGROUND_COLOR                   = CDPL::Vis::Color(1.0, 1.0, 1.0);
 		const CDPL::Vis::Color                     VIEW_SELECTION_COLOR                    = CDPL::Vis::Color(0.8, 0.8, 1.0);
 		const CDPL::Vis::SizeSpecification         VIEWPORT_MARGIN                         = CDPL::Vis::SizeSpecification(10.0);
 		const std::size_t                          GRID_ROW_COUNT                          = 1;
@@ -54,24 +91,24 @@ namespace ChOX
 		const CDPL::Vis::SizeSpecification         RECORD_NUMBER_LABEL_SIZE                = CDPL::Vis::SizeSpecification(10.0);
 		const unsigned int                         RECORD_NUMBER_LABEL_ALIGNMENT           = CDPL::Vis::Alignment::BOTTOM | 
                                                                                              CDPL::Vis::Alignment::LEFT;
-		const CDPL::Vis::Color                     RECORD_NUMBER_LABEL_COLOR               = CDPL::Vis::Color::BLACK;
+		const CDPL::Vis::Color                     RECORD_NUMBER_LABEL_COLOR               = CDPL::Vis::Color(0.0, 0.0, 0.0);
 		const CDPL::Vis::Font                      RECORD_NAME_LABEL_FONT                  = CDPL::Vis::Font();
 		const CDPL::Vis::SizeSpecification         RECORD_NAME_LABEL_SIZE                  = CDPL::Vis::SizeSpecification(10.0);
 		const unsigned int                         RECORD_NAME_LABEL_ALIGNMENT             = CDPL::Vis::Alignment::TOP | 
                                                                                              CDPL::Vis::Alignment::H_CENTER;
-		const CDPL::Vis::Color                     RECORD_NAME_LABEL_COLOR                 = CDPL::Vis::Color::BLACK;
+		const CDPL::Vis::Color                     RECORD_NAME_LABEL_COLOR                 = CDPL::Vis::Color(0.0, 0.0, 0.0);
 
 		const bool                                 PRINT_FRAME                             = true;
 		const bool                                 PRINT_DATE                              = true;
 		const bool                                 PRINT_PAGE_NUMBER                       = true;
 		const bool                                 PRINT_FILE_NAME                         = true;
 		const CDPL::Vis::Pen::LineStyle            FRAME_LINE_STYLE                        = CDPL::Vis::Pen::SOLID_LINE;
-		const CDPL::Vis::Color                     FRAME_LINE_COLOR                        = CDPL::Vis::Color::BLACK;
+		const CDPL::Vis::Color                     FRAME_LINE_COLOR                        = CDPL::Vis::Color(0.0, 0.0, 0.0);
 		const CDPL::Vis::SizeSpecification         FRAME_LINE_WIDTH                        = CDPL::Vis::SizeSpecification(0.5);
 		const CDPL::Vis::Font                      PRINTING_TEXT_LABEL_FONT                = CDPL::Vis::Font();
 		const CDPL::Vis::SizeSpecification         PRINTING_TEXT_LABEL_SIZE                = CDPL::Vis::SizeSpecification(10.0);
 		const CDPL::Vis::SizeSpecification         PRINTING_TEXT_LABEL_SPACING             = CDPL::Vis::SizeSpecification(10.0);
-		const CDPL::Vis::Color                     PRINTING_TEXT_LABEL_COLOR               = CDPL::Vis::Color::BLACK;
+		const CDPL::Vis::Color                     PRINTING_TEXT_LABEL_COLOR               = CDPL::Vis::Color(0.0, 0.0, 0.0);
 		const unsigned int                         PAGE_NUMBER_LABEL_ALIGNMENT             = CDPL::Vis::Alignment::BOTTOM |
 		                                                                                     CDPL::Vis::Alignment::H_CENTER;
 		const unsigned int                         DATE_LABEL_ALIGNMENT                    = CDPL::Vis::Alignment::TOP | 
@@ -80,7 +117,9 @@ namespace ChOX
                                                                                              CDPL::Vis::Alignment::LEFT;
 
 		const bool                                 USE_ATOM_COLOR_TABLE                    = true;
-		const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable());
+		const CDPL::Vis::ColorTable::SharedPointer ATOM_COLOR_TABLE                        = CDPL::Vis::ColorTable::SharedPointer(new CDPL::Vis::ColorTable(&ELEM_COLORS_2D[0],
+																																							&ELEM_COLORS_2D[0] +
+																																							sizeof(ELEM_COLORS_2D) / sizeof(CDPL::Vis::ColorTable::Entry)));
 
 		const std::string                          DEFAULT_MOL_OUTPUT_FORMAT               = "SDF";
 		const std::string                          DEFAULT_RXN_OUTPUT_FORMAT               = "RDF";
@@ -89,12 +128,12 @@ namespace ChOX
 
 		const std::string                          RECORD_SEPARATOR                        = "";
 
-		const bool                                 MOL2_INPUT_STRICT_ERROR_CHECKING         = false;
-		const bool                                 MOL2_INPUT_MULTI_CONF_IMPORT             = true;
+		const bool                                 MOL2_INPUT_STRICT_ERROR_CHECKING        = false;
+		const bool                                 MOL2_INPUT_MULTI_CONF_IMPORT            = true;
 
-		const bool                                 MOL2_OUTPUT_STRICT_ERROR_CHECKING        = false;
-		const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
-		const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT            = true;
+		const bool                                 MOL2_OUTPUT_STRICT_ERROR_CHECKING       = false;
+		const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES   = false;
+		const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT           = true;
 
 		const bool                                 MOL_INPUT_STRICT_ERROR_CHECKING         = false;
 		const bool                                 MOL_INPUT_IGNORE_PARITY                 = true;
@@ -226,6 +265,6 @@ namespace ChOX
 		const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE                        = CDPL::Pharm::ScreeningDBCreator::CREATE;
 
 		const bool                                 IMG_OUTPUT_ERASE_BACKGROUND             = false;
-		const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR             = CDPL::Vis::Color::WHITE;
+		const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR             = CDPL::Vis::Color(1.0, 1.0, 1.0);
 	}
 }

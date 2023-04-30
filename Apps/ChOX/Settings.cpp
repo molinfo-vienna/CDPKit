@@ -49,7 +49,6 @@
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
-#include "CDPL/Vis/AtomColorTable.hpp"
 
 #include "Settings.hpp"
 #include "ControlParameter.hpp"
@@ -1459,7 +1458,7 @@ void Settings::readAtomColorTableParam(QSettings& settings)
 	Vis::ColorTable::SharedPointer color_tab_ptr;
 
 	if (entries_var.isNull()) {
-		color_tab_ptr.reset(new Vis::ColorTable(AtomColorTable::ELEMENT_COLORS_2D));
+		color_tab_ptr.reset(new Vis::ColorTable(*ControlParameterDefault::ATOM_COLOR_TABLE));
 
 	} else {
 		color_tab_ptr.reset(new Vis::ColorTable());
