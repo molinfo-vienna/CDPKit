@@ -27,19 +27,19 @@ class ControlParameter(Boost.Python.instance):
     ##
     # \brief 
     #
-    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=323, name='STRICT_ERROR_CHECKING')
+    STRICT_ERROR_CHECKING = CDPL.Base.LookupKey(id=318, name='STRICT_ERROR_CHECKING')
 
     ##
     # \brief 
     #
-    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=324, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')
+    CDF_WRITE_SINGLE_PRECISION_FLOATS = CDPL.Base.LookupKey(id=319, name='CDF_WRITE_SINGLE_PRECISION_FLOATS')
 
     ##
     # \brief 
     #
-    PSD_CREATION_MODE = CDPL.Base.LookupKey(id=325, name='PSD_CREATION_MODE')
+    PSD_CREATION_MODE = CDPL.Base.LookupKey(id=320, name='PSD_CREATION_MODE')
 
     ##
     # \brief 
     #
-    PSD_ALLOW_DUPLICATES = CDPL.Base.LookupKey(id=326, name='PSD_ALLOW_DUPLICATES')
+    PSD_ALLOW_DUPLICATES = CDPL.Base.LookupKey(id=321, name='PSD_ALLOW_DUPLICATES')

@@ -35,7 +35,7 @@ class FVectorSlice(Boost.Python.instance):
     # \param e 
     # \param s 
     #
-    def __init__(e: FVectorExpression, s: _ast.Slice) -> None: pass
+    def __init__(e: FVectorExpression, s: ast.Slice) -> None: pass
 
     ##
     # \brief 

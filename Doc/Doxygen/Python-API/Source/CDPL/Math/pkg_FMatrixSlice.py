@@ -36,7 +36,7 @@ class FMatrixSlice(Boost.Python.instance):
     # \param s1 
     # \param s2 
     #
-    def __init__(e: FMatrixExpression, s1: _ast.Slice, s2: _ast.Slice) -> None: pass
+    def __init__(e: FMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> None: pass
 
     ##
     # \brief 

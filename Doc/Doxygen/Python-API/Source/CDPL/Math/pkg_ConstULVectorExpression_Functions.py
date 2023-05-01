@@ -88,7 +88,7 @@ def prod(e1: ConstULVectorExpression, e2: ConstULMatrixExpression, c: ULVectorEx
 # \param s 
 # \return 
 #
-def slice(e: ConstULVectorExpression, s: _ast.Slice) -> ConstULVectorSlice: pass
+def slice(e: ConstULVectorExpression, s: ast.Slice) -> ConstULVectorSlice: pass
 
 ##
 # \brief 

@@ -25,7 +25,7 @@
 # \param s 
 # \return 
 #
-def slice(e: FVectorExpression, s: _ast.Slice) -> FVectorSlice: pass
+def slice(e: FVectorExpression, s: ast.Slice) -> FVectorSlice: pass
 
 ##
 # \brief 

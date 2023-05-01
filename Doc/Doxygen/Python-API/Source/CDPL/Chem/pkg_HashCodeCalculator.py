@@ -50,10 +50,9 @@ class HashCodeCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DefBondHashSeedFunctor instance.
-        # \param calculator 
         # \param flags 
         #
-        def __init__(calculator: HashCodeCalculator, flags: int = 15) -> None: pass
+        def __init__(flags: int = 15) -> None: pass
 
         ##
         # \brief 

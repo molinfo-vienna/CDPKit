@@ -27,17 +27,17 @@ class PharmacophoreFitScore(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_FTR_MATCH_COUNT_FACTOR = 0.8
+    DEF_FTR_MATCH_COUNT_WEIGHT = 1.0
 
     ##
     # \brief 
     #
-    DEF_FTR_POS_MATCH_FACTOR = 0.1
+    DEF_FTR_POS_MATCH_WEIGHT = 0.5
 
     ##
     # \brief 
     #
-    DEF_FTR_GEOM_MATCH_FACTOR = 0.1
+    DEF_FTR_GEOM_MATCH_WEIGHT = 0.4
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScore instance.
@@ -47,11 +47,11 @@ class PharmacophoreFitScore(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScore instance.
-    # \param match_cnt_factor 
-    # \param pos_match_factor 
-    # \param geom_match_factor 
+    # \param match_cnt_weight 
+    # \param pos_match_weight 
+    # \param geom_match_weight 
     #
-    def __init__(match_cnt_factor: float = 0.8, pos_match_factor: float = 0.1, geom_match_factor: float = 0.1) -> None: pass
+    def __init__(match_cnt_weight: float = 1.0, pos_match_weight: float = 0.5, geom_match_weight: float = 0.4) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -97,14 +97,14 @@ class PharmacophoreFitScore(Boost.Python.instance):
     ##
     # \brief FIXME!
     #
-    featureMatchCountFactor = property(getFeatureMatchCountFactor, setFeatureMatchCountFactor)
+    featureMatchCountWeight = property(getFeatureMatchCountWeight, setFeatureMatchCountWeight)
 
     ##
     # \brief FIXME!
     #
-    featurePositionMatchFactor = property(getFeaturePositionMatchFactor, setFeaturePositionMatchFactor)
+    featurePositionMatchWeight = property(getFeaturePositionMatchWeight, setFeaturePositionMatchWeight)
 
     ##
     # \brief FIXME!
     #
-    featureGeometryMatchFactor = property(getFeatureGeometryMatchFactor, setFeatureGeometryMatchFactor)
+    featureGeometryMatchWeight = property(getFeatureGeometryMatchWeight, setFeatureGeometryMatchWeight)

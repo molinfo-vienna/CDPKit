@@ -26,7 +26,7 @@
 # \param s2 
 # \return 
 #
-def slice(e: LMatrixExpression, s1: _ast.Slice, s2: _ast.Slice) -> LMatrixSlice: pass
+def slice(e: LMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> LMatrixSlice: pass
 
 ##
 # \brief 

@@ -27,59 +27,59 @@ class BondProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    COLOR = CDPL.Base.LookupKey(id=157, name='COLOR')
+    COLOR = CDPL.Base.LookupKey(id=154, name='COLOR')
 
     ##
     # \brief 
     #
-    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=164, name='DOUBLE_BOND_TRIM_LENGTH')
+    DOUBLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=161, name='DOUBLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief 
     #
-    LABEL_FONT = CDPL.Base.LookupKey(id=166, name='LABEL_FONT')
+    LABEL_FONT = CDPL.Base.LookupKey(id=163, name='LABEL_FONT')
 
     ##
     # \brief 
     #
-    LABEL_MARGIN = CDPL.Base.LookupKey(id=168, name='LABEL_MARGIN')
+    LABEL_MARGIN = CDPL.Base.LookupKey(id=165, name='LABEL_MARGIN')
 
     ##
     # \brief 
     #
-    LABEL_SIZE = CDPL.Base.LookupKey(id=167, name='LABEL_SIZE')
+    LABEL_SIZE = CDPL.Base.LookupKey(id=164, name='LABEL_SIZE')
 
     ##
     # \brief 
     #
-    LINE_SPACING = CDPL.Base.LookupKey(id=159, name='LINE_SPACING')
+    LINE_SPACING = CDPL.Base.LookupKey(id=156, name='LINE_SPACING')
 
     ##
     # \brief 
     #
-    LINE_WIDTH = CDPL.Base.LookupKey(id=158, name='LINE_WIDTH')
+    LINE_WIDTH = CDPL.Base.LookupKey(id=155, name='LINE_WIDTH')
 
     ##
     # \brief 
     #
-    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=162, name='REACTION_CENTER_LINE_LENGTH')
+    REACTION_CENTER_LINE_LENGTH = CDPL.Base.LookupKey(id=159, name='REACTION_CENTER_LINE_LENGTH')
 
     ##
     # \brief 
     #
-    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=163, name='REACTION_CENTER_LINE_SPACING')
+    REACTION_CENTER_LINE_SPACING = CDPL.Base.LookupKey(id=160, name='REACTION_CENTER_LINE_SPACING')
 
     ##
     # \brief 
     #
-    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=165, name='TRIPLE_BOND_TRIM_LENGTH')
+    TRIPLE_BOND_TRIM_LENGTH = CDPL.Base.LookupKey(id=162, name='TRIPLE_BOND_TRIM_LENGTH')
 
     ##
     # \brief 
     #
-    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=161, name='STEREO_BOND_HASH_SPACING')
+    STEREO_BOND_HASH_SPACING = CDPL.Base.LookupKey(id=158, name='STEREO_BOND_HASH_SPACING')
 
     ##
     # \brief 
     #
-    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=160, name='STEREO_BOND_WEDGE_WIDTH')
+    STEREO_BOND_WEDGE_WIDTH = CDPL.Base.LookupKey(id=157, name='STEREO_BOND_WEDGE_WIDTH')

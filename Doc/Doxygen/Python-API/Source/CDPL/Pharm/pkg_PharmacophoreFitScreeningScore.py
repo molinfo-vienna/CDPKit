@@ -32,11 +32,11 @@ class PharmacophoreFitScreeningScore(PharmacophoreFitScore):
 
     ##
     # \brief Initializes the \e %PharmacophoreFitScreeningScore instance.
-    # \param match_cnt_factor 
-    # \param pos_match_factor 
-    # \param geom_match_factor 
+    # \param match_cnt_weight 
+    # \param pos_match_weight 
+    # \param geom_match_weight 
     #
-    def __init__(match_cnt_factor: float = 0.8, pos_match_factor: float = 0.1, geom_match_factor: float = 0.1) -> None: pass
+    def __init__(match_cnt_weight: float = 1.0, pos_match_weight: float = 0.5, geom_match_weight: float = 0.4) -> None: pass
 
     ##
     # \brief 

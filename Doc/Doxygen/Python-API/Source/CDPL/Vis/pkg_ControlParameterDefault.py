@@ -192,7 +192,7 @@ class ControlParameterDefault(Boost.Python.instance):
     ##
     # \brief 
     #
-    SHOW_EXPLICIT_HYDROGENS = True
+    SHOW_EXPLICIT_HYDROGENS = False
 
     ##
     # \brief 

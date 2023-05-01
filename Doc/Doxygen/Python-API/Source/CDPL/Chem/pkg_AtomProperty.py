@@ -27,174 +27,174 @@ class AtomProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    NAME = CDPL.Base.LookupKey(id=5, name='NAME')
+    NAME = CDPL.Base.LookupKey(id=2, name='NAME')
 
     ##
     # \brief 
     #
-    SYMBOL = CDPL.Base.LookupKey(id=6, name='SYMBOL')
+    SYMBOL = CDPL.Base.LookupKey(id=3, name='SYMBOL')
 
     ##
     # \brief 
     #
-    TYPE = CDPL.Base.LookupKey(id=7, name='TYPE')
+    TYPE = CDPL.Base.LookupKey(id=4, name='TYPE')
 
     ##
     # \brief 
     #
-    FORMAL_CHARGE = CDPL.Base.LookupKey(id=8, name='FORMAL_CHARGE')
+    FORMAL_CHARGE = CDPL.Base.LookupKey(id=5, name='FORMAL_CHARGE')
 
     ##
     # \brief 
     #
-    ISOTOPE = CDPL.Base.LookupKey(id=9, name='ISOTOPE')
+    ISOTOPE = CDPL.Base.LookupKey(id=6, name='ISOTOPE')
 
     ##
     # \brief 
     #
-    RADICAL_TYPE = CDPL.Base.LookupKey(id=10, name='RADICAL_TYPE')
+    RADICAL_TYPE = CDPL.Base.LookupKey(id=7, name='RADICAL_TYPE')
 
     ##
     # \brief 
     #
-    HYBRIDIZATION = CDPL.Base.LookupKey(id=11, name='HYBRIDIZATION')
+    HYBRIDIZATION = CDPL.Base.LookupKey(id=8, name='HYBRIDIZATION')
 
     ##
     # \brief 
     #
-    RING_FLAG = CDPL.Base.LookupKey(id=12, name='RING_FLAG')
+    RING_FLAG = CDPL.Base.LookupKey(id=9, name='RING_FLAG')
 
     ##
     # \brief 
     #
-    AROMATICITY_FLAG = CDPL.Base.LookupKey(id=13, name='AROMATICITY_FLAG')
+    AROMATICITY_FLAG = CDPL.Base.LookupKey(id=10, name='AROMATICITY_FLAG')
 
     ##
     # \brief 
     #
-    UNPAIRED_ELECTRON_COUNT = CDPL.Base.LookupKey(id=14, name='UNPAIRED_ELECTRON_COUNT')
+    UNPAIRED_ELECTRON_COUNT = CDPL.Base.LookupKey(id=11, name='UNPAIRED_ELECTRON_COUNT')
 
     ##
     # \brief 
     #
-    IMPLICIT_HYDROGEN_COUNT = CDPL.Base.LookupKey(id=15, name='IMPLICIT_HYDROGEN_COUNT')
+    IMPLICIT_HYDROGEN_COUNT = CDPL.Base.LookupKey(id=12, name='IMPLICIT_HYDROGEN_COUNT')
 
     ##
     # \brief 
     #
-    COORDINATES_2D = CDPL.Base.LookupKey(id=16, name='COORDINATES_2D')
+    COORDINATES_2D = CDPL.Base.LookupKey(id=13, name='COORDINATES_2D')
 
     ##
     # \brief 
     #
-    COORDINATES_3D_ARRAY = CDPL.Base.LookupKey(id=17, name='COORDINATES_3D_ARRAY')
+    COORDINATES_3D_ARRAY = CDPL.Base.LookupKey(id=14, name='COORDINATES_3D_ARRAY')
 
     ##
     # \brief 
     #
-    MORGAN_NUMBER = CDPL.Base.LookupKey(id=18, name='MORGAN_NUMBER')
+    MORGAN_NUMBER = CDPL.Base.LookupKey(id=15, name='MORGAN_NUMBER')
 
     ##
     # \brief 
     #
-    CANONICAL_NUMBER = CDPL.Base.LookupKey(id=19, name='CANONICAL_NUMBER')
+    CANONICAL_NUMBER = CDPL.Base.LookupKey(id=16, name='CANONICAL_NUMBER')
 
     ##
     # \brief 
     #
-    CIP_PRIORITY = CDPL.Base.LookupKey(id=20, name='CIP_PRIORITY')
+    CIP_PRIORITY = CDPL.Base.LookupKey(id=17, name='CIP_PRIORITY')
 
     ##
     # \brief 
     #
-    SYMMETRY_CLASS = CDPL.Base.LookupKey(id=21, name='SYMMETRY_CLASS')
+    SYMMETRY_CLASS = CDPL.Base.LookupKey(id=18, name='SYMMETRY_CLASS')
 
     ##
     # \brief 
     #
-    STEREO_DESCRIPTOR = CDPL.Base.LookupKey(id=22, name='STEREO_DESCRIPTOR')
+    STEREO_DESCRIPTOR = CDPL.Base.LookupKey(id=19, name='STEREO_DESCRIPTOR')
 
     ##
     # \brief 
     #
-    STEREO_CENTER_FLAG = CDPL.Base.LookupKey(id=23, name='STEREO_CENTER_FLAG')
+    STEREO_CENTER_FLAG = CDPL.Base.LookupKey(id=20, name='STEREO_CENTER_FLAG')
 
     ##
     # \brief 
     #
-    CIP_CONFIGURATION = CDPL.Base.LookupKey(id=24, name='CIP_CONFIGURATION')
+    CIP_CONFIGURATION = CDPL.Base.LookupKey(id=21, name='CIP_CONFIGURATION')
 
     ##
     # \brief 
     #
-    MDL_PARITY = CDPL.Base.LookupKey(id=25, name='MDL_PARITY')
+    MDL_PARITY = CDPL.Base.LookupKey(id=22, name='MDL_PARITY')
 
     ##
     # \brief 
     #
-    MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey(id=26, name='MDL_DB_STEREO_CARE_FLAG')
+    MDL_DB_STEREO_CARE_FLAG = CDPL.Base.LookupKey(id=23, name='MDL_DB_STEREO_CARE_FLAG')
 
     ##
     # \brief 
     #
-    SYBYL_TYPE = CDPL.Base.LookupKey(id=27, name='SYBYL_TYPE')
+    SYBYL_TYPE = CDPL.Base.LookupKey(id=24, name='SYBYL_TYPE')
 
     ##
     # \brief 
     #
-    MOL2_NAME = CDPL.Base.LookupKey(id=29, name='MOL2_NAME')
+    MOL2_NAME = CDPL.Base.LookupKey(id=26, name='MOL2_NAME')
 
     ##
     # \brief 
     #
-    MOL2_CHARGE = CDPL.Base.LookupKey(id=28, name='MOL2_CHARGE')
+    MOL2_CHARGE = CDPL.Base.LookupKey(id=25, name='MOL2_CHARGE')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_ID = CDPL.Base.LookupKey(id=30, name='MOL2_SUBSTRUCTURE_ID')
+    MOL2_SUBSTRUCTURE_ID = CDPL.Base.LookupKey(id=27, name='MOL2_SUBSTRUCTURE_ID')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_NAME = CDPL.Base.LookupKey(id=31, name='MOL2_SUBSTRUCTURE_NAME')
+    MOL2_SUBSTRUCTURE_NAME = CDPL.Base.LookupKey(id=28, name='MOL2_SUBSTRUCTURE_NAME')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_SUBTYPE = CDPL.Base.LookupKey(id=32, name='MOL2_SUBSTRUCTURE_SUBTYPE')
+    MOL2_SUBSTRUCTURE_SUBTYPE = CDPL.Base.LookupKey(id=29, name='MOL2_SUBSTRUCTURE_SUBTYPE')
 
     ##
     # \brief 
     #
-    MOL2_SUBSTRUCTURE_CHAIN = CDPL.Base.LookupKey(id=33, name='MOL2_SUBSTRUCTURE_CHAIN')
+    MOL2_SUBSTRUCTURE_CHAIN = CDPL.Base.LookupKey(id=30, name='MOL2_SUBSTRUCTURE_CHAIN')
 
     ##
     # \brief 
     #
-    REACTION_CENTER_STATUS = CDPL.Base.LookupKey(id=34, name='REACTION_CENTER_STATUS')
+    REACTION_CENTER_STATUS = CDPL.Base.LookupKey(id=31, name='REACTION_CENTER_STATUS')
 
     ##
     # \brief 
     #
-    ATOM_MAPPING_ID = CDPL.Base.LookupKey(id=35, name='ATOM_MAPPING_ID')
+    ATOM_MAPPING_ID = CDPL.Base.LookupKey(id=32, name='ATOM_MAPPING_ID')
 
     ##
     # \brief 
     #
-    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=36, name='MATCH_CONSTRAINTS')
+    MATCH_CONSTRAINTS = CDPL.Base.LookupKey(id=33, name='MATCH_CONSTRAINTS')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=37, name='MATCH_EXPRESSION')
+    MATCH_EXPRESSION = CDPL.Base.LookupKey(id=34, name='MATCH_EXPRESSION')
 
     ##
     # \brief 
     #
-    MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey(id=38, name='MATCH_EXPRESSION_STRING')
+    MATCH_EXPRESSION_STRING = CDPL.Base.LookupKey(id=35, name='MATCH_EXPRESSION_STRING')
 
     ##
     # \brief 
     #
-    COMPONENT_GROUP_ID = CDPL.Base.LookupKey(id=39, name='COMPONENT_GROUP_ID')
+    COMPONENT_GROUP_ID = CDPL.Base.LookupKey(id=36, name='COMPONENT_GROUP_ID')

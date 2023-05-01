@@ -109,6 +109,18 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param exhaustive 
+    #
+    def performExhaustiveSearch(exhaustive: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def exhaustiveSearchPerformed() -> bool: pass
+
+    ##
+    # \brief 
     # \param entity 
     # \param first_set 
     #
@@ -199,6 +211,11 @@ class SpatialEntity3DAlignment(Boost.Python.instance):
     # \brief 
     #
     minTopologicalMappingSize = property(getMinTopologicalMappingSize, setMinTopologicalMappingSize)
+
+    ##
+    # \brief FIXME!
+    #
+    exhaustiveSearch = property(getExhaustiveSearch, setExhaustiveSearch)
 
     ##
     # \brief 

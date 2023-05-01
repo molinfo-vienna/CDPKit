@@ -88,7 +88,7 @@ def prod(e1: ConstFVectorExpression, e2: ConstFMatrixExpression, c: FVectorExpre
 # \param s 
 # \return 
 #
-def slice(e: ConstFVectorExpression, s: _ast.Slice) -> ConstFVectorSlice: pass
+def slice(e: ConstFVectorExpression, s: ast.Slice) -> ConstFVectorSlice: pass
 
 ##
 # \brief 

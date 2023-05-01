@@ -88,7 +88,7 @@ def prod(e1: ConstLVectorExpression, e2: ConstLMatrixExpression, c: LVectorExpre
 # \param s 
 # \return 
 #
-def slice(e: ConstLVectorExpression, s: _ast.Slice) -> ConstLVectorSlice: pass
+def slice(e: ConstLVectorExpression, s: ast.Slice) -> ConstLVectorSlice: pass
 
 ##
 # \brief 

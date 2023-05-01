@@ -27,4 +27,4 @@ class Entity3DProperty(Boost.Python.instance):
     ##
     # \brief 
     #
-    COORDINATES_3D = CDPL.Base.LookupKey(id=4, name='COORDINATES_3D')
+    COORDINATES_3D = CDPL.Base.LookupKey(id=1, name='COORDINATES_3D')

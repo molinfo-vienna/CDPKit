@@ -33,7 +33,7 @@ class PatternAtomTyper(Boost.Python.instance):
         # \brief Initializes the \e %Pattern instance.
         # \param ptn 
         #
-        def __init__(ptn: re.Pattern) -> None: pass
+        def __init__(ptn: Pattern) -> None: pass
 
         ##
         # \brief Initializes the \e %Pattern instance.
@@ -62,7 +62,7 @@ class PatternAtomTyper(Boost.Python.instance):
         # \param ptn The \e %Pattern instance to copy.
         # \return \a self
         #
-        def assign(ptn: re.Pattern) -> re.Pattern: pass
+        def assign(ptn: Pattern) -> Pattern: pass
 
         ##
         # \brief 
@@ -161,14 +161,14 @@ class PatternAtomTyper(Boost.Python.instance):
     # \brief 
     # \param ptn 
     #
-    def addPattern(ptn: re.Pattern) -> None: pass
+    def addPattern(ptn: Pattern) -> None: pass
 
     ##
     # \brief 
     # \param idx 
     # \return 
     #
-    def getPattern(idx: int) -> re.Pattern: pass
+    def getPattern(idx: int) -> Pattern: pass
 
     ##
     # \brief 

@@ -26,7 +26,7 @@
 # \param s2 
 # \return 
 #
-def slice(e: ULMatrixExpression, s1: _ast.Slice, s2: _ast.Slice) -> ULMatrixSlice: pass
+def slice(e: ULMatrixExpression, s1: ast.Slice, s2: ast.Slice) -> ULMatrixSlice: pass
 
 ##
 # \brief 
