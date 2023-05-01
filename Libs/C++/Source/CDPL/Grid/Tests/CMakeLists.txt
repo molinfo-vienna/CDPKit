@@ -28,8 +28,10 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
-   )
+    )
 
+SET(CMAKE_BUILD_TYPE "Debug")
+   
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 ADD_EXECUTABLE(grid-test-suite ${test-suite_SRCS})

@@ -32,6 +32,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/MOL2MoleculeReader.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Util/FileDataReader.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 
@@ -60,7 +61,7 @@ namespace
 		for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 			Atom& atom = *it;
 
-			if (isMetal(atom) && !isNonMetal(atom))
+			if (MolProp::isMetal(atom) && !MolProp::isNonMetal(atom))
 				setFormalCharge(atom, getMOL2Charge(atom));
 		}
 

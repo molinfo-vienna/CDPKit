@@ -41,6 +41,8 @@ SET(test-suite_SRCS
     DGCoordinatesGeneratorTest.cpp
    )
 
+SET(CMAKE_BUILD_TYPE "Debug")
+
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 ADD_EXECUTABLE(util-test-suite ${test-suite_SRCS})

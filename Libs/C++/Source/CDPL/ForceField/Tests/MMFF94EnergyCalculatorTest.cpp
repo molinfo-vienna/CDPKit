@@ -33,7 +33,7 @@
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 
 #include "MMFF94TestData.hpp"
 

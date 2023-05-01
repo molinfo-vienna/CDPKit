@@ -29,14 +29,14 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/SimilarityFunctions.hpp"
+#include "CDPL/Descr/SimilarityFunctions.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
 BOOST_AUTO_TEST_CASE(SimilarityFunctionsTest)
 {
 	using namespace CDPL;
-	using namespace Chem;
+	using namespace Descr;
 	using namespace Util;
 	
 	BitSet bs1 = boost::lexical_cast<BitSet>("1001000011101010111010110100110");

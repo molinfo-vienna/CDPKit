@@ -34,6 +34,8 @@ SET(test-suite_SRCS
     PharmacophoreTest.cpp
    )
 
+SET(CMAKE_BUILD_TYPE "Debug")
+
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 ADD_EXECUTABLE(pharm-test-suite ${test-suite_SRCS})

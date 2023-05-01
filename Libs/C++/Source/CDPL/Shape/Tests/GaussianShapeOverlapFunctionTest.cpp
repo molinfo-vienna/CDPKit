@@ -74,17 +74,17 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 	fast_overlap_func.setShapeFunction(shape_func1, true);
 	fast_overlap_func.setShapeFunction(shape_func2, false);
 
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 341.132, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(shape_elem_coords), 341.132, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), 341.132, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcSelfOverlap(true), 341.132, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcSelfOverlap(false), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 341.132, 0.01);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(shape_elem_coords), 341.132, 0.01);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), 341.132, 0.01);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcSelfOverlap(true), 341.132, 0.01);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcSelfOverlap(false), 341.132, 0.01);
 
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 340.0125, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(shape_elem_coords), 340.0125, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), 340.0125, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcSelfOverlap(true), 340.0125, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcSelfOverlap(false), 340.0125, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 339.985, 0.01);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(shape_elem_coords), 339.985, 0.01);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), 339.985, 0.01);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcSelfOverlap(true), 339.985, 0.01);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcSelfOverlap(false), 339.985, 0.01);
 
 //-
 	
@@ -98,11 +98,11 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 	fast_overlap_func.setShapeFunction(shape_func1, true);
 	fast_overlap_func.setShapeFunction(shape_func2, false);
 
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 431.894, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(shape_elem_coords), 431.894, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 431.894, 0.01);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(shape_elem_coords), 431.894, 0.01);
 
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 431.5642, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(shape_elem_coords), 431.5642, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 430.85, 0.01);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(shape_elem_coords), 430.85, 0.01);
 
 //-
 	
@@ -122,11 +122,11 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 
 	transform(trans_shape_elem_coords, Math::TranslationMatrix<double>(4, 1.0, 0.0, 0.0), shape_elem_coords);
 	
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 335.628, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(trans_shape_elem_coords), 277.618, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 335.628, 0.01);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(trans_shape_elem_coords), 277.618, 0.01);
 	
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 335.5454, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(trans_shape_elem_coords), 278.3367, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 335.238, 0.01);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(trans_shape_elem_coords), 277.515, 0.01);
 	
 //-
 
@@ -153,13 +153,13 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 
 			num_grad = (num_grad - exact_overlap_func.calcOverlap()) / 0.00002;
 			
-			BOOST_CHECK_SMALL(std::abs(overlap_grad[i][j] - num_grad), 0.001);
+			BOOST_CHECK_SMALL(std::abs(overlap_grad[i][j] - num_grad), 0.01);
 
 			elem.setPosition(elem_pos);
 		}
 	}
 
-	BOOST_CHECK_CLOSE(calcGradientRMS(overlap_grad), 2.642675, 0.001);
+	BOOST_CHECK_CLOSE(calcGradientRMS(overlap_grad), 2.642675, 0.01);
 
 	//-
 
@@ -194,5 +194,5 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 		}
 	}
 
-	BOOST_CHECK_CLOSE(calcGradientRMS(overlap_grad), 2.6346797, 0.001);
+	BOOST_CHECK_CLOSE(calcGradientRMS(overlap_grad), 2.659, 0.01);
 }

@@ -28,7 +28,10 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
+    TPSACalculatorTest.cpp
    )
+
+SET(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 

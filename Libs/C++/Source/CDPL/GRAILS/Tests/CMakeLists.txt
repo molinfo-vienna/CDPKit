@@ -30,6 +30,8 @@ SET(test-suite_SRCS
     ConvenienceHeaderTest.cpp
    )
 
+SET(CMAKE_BUILD_TYPE "Debug")
+   
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 ADD_EXECUTABLE(grails-test-suite ${test-suite_SRCS})

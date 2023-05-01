@@ -83,8 +83,6 @@ SET(test-suite_SRCS
     #ConnectedSubstructureSetTest.cpp 
     #ComponentSetTest.cpp 
 
-    SimilarityFunctionsTest.cpp
-    UtilityFunctionsTest.cpp
     #AtomFunctionsTest.cpp
     #BondFunctionsTest.cpp
     MoleculeHydrogenManipulationFunctionsTest.cpp
@@ -153,9 +151,9 @@ SET(test-suite_SRCS
     #ReactionReactantCountTest.cpp
     #ReactionAgentCountTest.cpp
     #ReactionProductCountTest.cpp 
+    )
 
-    TPSACalculatorTest.cpp 
-   )
+SET(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 

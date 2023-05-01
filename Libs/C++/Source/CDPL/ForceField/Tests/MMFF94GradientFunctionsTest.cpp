@@ -43,7 +43,7 @@
 #include "CDPL/ForceField/MMFF94GradientFunctions.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Math/IO.hpp"
 

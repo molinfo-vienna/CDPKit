@@ -45,7 +45,9 @@ SET(test-suite_SRCS
 
     OptimolLogReader.cpp
     TestUtils.cpp
-   )
+    )
+
+SET(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
