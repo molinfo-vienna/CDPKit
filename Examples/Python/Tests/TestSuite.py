@@ -42,7 +42,7 @@ def checkScriptOutput(script_name, args):
     print('Checking output of script \'%s.py\'...' % (script_name), end=' ', file=sys.stderr)
 
     try:
-        result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, capture_output=False, check=True)
+        result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
         output = result.stdout.decode('ascii').replace('\r\n', '\n')
         exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
@@ -64,7 +64,7 @@ def checkScriptFileOutput(script_name, out_file, args):
     print('Checking output of script \'%s.py\'...' % (script_name), end=' ', file=sys.stderr)
 
     try:
-        result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, capture_output=False, check=True)
+        result = subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
         output = open(out_file, 'r').read()
         exp_output = open(os.path.join(os.path.join(script_dir, 'Tests'), script_name + '.out'), 'r').read()
 
@@ -86,7 +86,7 @@ def checkScriptExecution(script_name, args):
     print('Checking execution of script \'%s.py\'...' % (script_name), end=' ', file=sys.stderr)
 
     try:
-        subprocess.run([ sys.executable, script_path ] + args, capture_output=False, check=True)
+        subprocess.run([ sys.executable, script_path ] + args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
 
         print('OK', file=sys.stderr)
         return False
