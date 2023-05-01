@@ -120,6 +120,7 @@
 *   [o:1]                                                OFUR    AROMATIC OXYGEN AS IN FURAN
 
 *   Nitrogen
+    [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X1+0:1]-[*]                                       NSP     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X1+0:1]=[*]                                       =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X2H1+0:1]                                         N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
@@ -130,7 +131,6 @@
     [nX3+:1]-[#1]                                        N2OX    SPECIAL ENTRY FOR CONFGEN: SP2-HYDRIDIZED N-OXIDE NITROGEN
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
-    [#7;X3,X2-:1]-[#7;X2+0,X3+1]                         NN=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 NITROGEN
     [#7X3:1]-[#6X3H2]                                    NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 CARBON
     [#7X3:1]-[aX1]                                       NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO AROMATIC ATOM
     [#7X2:1]=[#6]                                        N=C     NITROGEN IN IMINES
