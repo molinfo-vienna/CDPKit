@@ -269,7 +269,7 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		double prod1_fact_exp = 0.0;
+		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
