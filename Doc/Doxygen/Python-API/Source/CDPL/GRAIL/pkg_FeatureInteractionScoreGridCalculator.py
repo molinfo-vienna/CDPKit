@@ -22,7 +22,7 @@
 ##
 # \brief 
 #
-class InteractionScoreGridCalculator(Boost.Python.instance):
+class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
     # \brief 
@@ -59,34 +59,34 @@ class InteractionScoreGridCalculator(Boost.Python.instance):
         def __call__(scores: CDPL.Math.DVector) -> float: pass
 
     ##
-    # \brief Initializes the \e %InteractionScoreGridCalculator instance.
+    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
     #
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %InteractionScoreGridCalculator instance.
+    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
     # \param func 
     #
     def __init__(func: DoubleVector3DFeatureFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %InteractionScoreGridCalculator instance.
+    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
     # \param scoring_func 
     # \param comb_func 
     #
     def __init__(scoring_func: DoubleVector3DFeatureFunctor, comb_func: CDPL.Math.DoubleDVectorFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %InteractionScoreGridCalculator instance.
+    # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
     # \param calculator 
     #
-    def __init__(calculator: InteractionScoreGridCalculator) -> None: pass
+    def __init__(calculator: FeatureInteractionScoreGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
-    # Different Python \e %InteractionScoreGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
-    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %InteractionScoreGridCalculator instances \e a and \e b reference different C++ objects. 
+    # Different Python \e %FeatureInteractionScoreGridCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %FeatureInteractionScoreGridCalculator instances \e a and \e b reference different C++ objects. 
     # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
     # <tt>a.getObjectID() != b.getObjectID()</tt>.
     #
@@ -95,11 +95,11 @@ class InteractionScoreGridCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %InteractionScoreGridCalculator instance \a calculator.
-    # \param calculator The \e %InteractionScoreGridCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreGridCalculator instance \a calculator.
+    # \param calculator The \e %FeatureInteractionScoreGridCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: InteractionScoreGridCalculator) -> InteractionScoreGridCalculator: pass
+    def assign(calculator: FeatureInteractionScoreGridCalculator) -> FeatureInteractionScoreGridCalculator: pass
 
     ##
     # \brief 
@@ -139,6 +139,18 @@ class InteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param func 
+    #
+    def setFeatureSelectionPredicate(func: CDPL.Pharm.BoolFeatureFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getFeatureSelectionPredicate() -> CDPL.Pharm.BoolFeatureFunctor: pass
+
+    ##
+    # \brief 
     # \param normalize 
     #
     def normalizeScores(normalize: bool) -> None: pass
@@ -151,18 +163,10 @@ class InteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param features 
+    # \param tgt_ftrs 
     # \param grid 
     #
-    def calculate(features: CDPL.Pharm.FeatureContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
-
-    ##
-    # \brief 
-    # \param features 
-    # \param grid 
-    # \param tgt_ftr_pred 
-    #
-    def calculate(features: CDPL.Pharm.FeatureContainer, grid: CDPL.Grid.DSpatialGrid, tgt_ftr_pred: CDPL.Pharm.BoolFeatureFunctor) -> None: pass
+    def calculate(tgt_ftrs: CDPL.Pharm.FeatureContainer, grid: CDPL.Grid.DSpatialGrid) -> None: pass
 
     ##
     # \brief 
@@ -172,7 +176,7 @@ class InteractionScoreGridCalculator(Boost.Python.instance):
     ##
     # \brief FIXME!
     #
-    normalizedScores = property(getNormalizedScores, setNormalizedScores)
+    normScores = property(getNormScores, setNormScores)
 
     ##
     # \brief 
@@ -188,3 +192,8 @@ class InteractionScoreGridCalculator(Boost.Python.instance):
     # \brief 
     #
     scoreCombinationFunction = property(getScoreCombinationFunction, setScoreCombinationFunction)
+
+    ##
+    # \brief 
+    #
+    featureSelectionPredicate = property(getFeatureSelectionPredicate, setFeatureSelectionPredicate)

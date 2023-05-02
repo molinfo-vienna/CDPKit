@@ -148,10 +148,10 @@ class DefaultInteractionScoreGridSetCalculator(InteractionScoreGridSetCalculator
 
     ##
     # \brief 
-    # \param features 
+    # \param tgt_ftrs 
     # \param grid_set 
     #
-    def calculate(features: CDPL.Pharm.FeatureContainer, grid_set: CDPL.Grid.DRegularGridSet) -> None: pass
+    def calculate(tgt_ftrs: CDPL.Pharm.FeatureContainer, grid_set: CDPL.Grid.DRegularGridSet) -> None: pass
 
     ##
     # \brief 

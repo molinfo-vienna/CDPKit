@@ -32,7 +32,7 @@
 #include "ConverterRegistration.hpp"
 
 
-BOOST_PYTHON_MODULE(_grails)
+BOOST_PYTHON_MODULE(_grail)
 {
 	using namespace CDPLPythonGRAIL;
 
