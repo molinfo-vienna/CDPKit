@@ -161,6 +161,14 @@ Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/
 </tr>
 
 <tr>
+<td valign="top">\anchor GRAIL<i>[GRAIL]</i></td>
+<td valign="top">
+D. A. Schuetz et al., GRAIL: GRids of phArmacophore Interaction fieLds, 
+<i>J. Chem. Theory Comput.</i> <b>2018</b>, 11, 4958-4970
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor GSIM<i>[GSIM]</i></td>
 <td valign="top">
 OpenEye GraphSim TK documentation: https://docs.eyesopen.com/toolkits/cpp/graphsimtk/

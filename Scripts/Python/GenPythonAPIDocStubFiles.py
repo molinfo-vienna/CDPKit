@@ -44,7 +44,7 @@ import CDPL.ConfGen
 import CDPL.Biomol
 import CDPL.Descr
 import CDPL.MolProp
-import CDPL.GRAILS
+import CDPL.GRAIL
 
 
 HIDE_SELF_ARG = True
@@ -303,7 +303,7 @@ def stripExtModuleName(name):
     name = name.replace('._confgen', '')
     name = name.replace('._descr', '')
     name = name.replace('._molprop', '')
-    name = name.replace('._grails', '')
+    name = name.replace('._grail', '')
     name = name.replace('OpenMode24', 'OpenMode(24)')
     name = name.replace('OpenMode60', 'OpenMode(60)')
 

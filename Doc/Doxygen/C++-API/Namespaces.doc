@@ -27,8 +27,8 @@
 \namespace CDPL::Grid
 \brief Contains classes and functions related to grid based data representation and processing.
 
-\namespace CDPL::GRAILS
-\brief Contains classes and functions related to the GRAILS method.
+\namespace CDPL::GRAIL
+\brief Contains classes and functions related to the GRAIL method.
 
 \namespace CDPL::ForceField
 \brief Contains classes and functions related to molecular force fields.

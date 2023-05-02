@@ -42,8 +42,8 @@
 \package CDPL.Descr
 \brief Contains classes and functions related to the generation and processing of pharmacophore and molecule descriptors.
 
-\package CDPL.GRAILS
-\brief Contains classes and functions related to the GRAILS method.
+\package CDPL.GRAIL
+\brief Contains classes and functions related to the GRAIL method.
 
 \package CDPL.Vis.QtBackend
 \brief Contains classes related to the implementation of CDPL.Vis interfaces on top of the <em>Qt Toolkit</em> [\ref QTDOC].
