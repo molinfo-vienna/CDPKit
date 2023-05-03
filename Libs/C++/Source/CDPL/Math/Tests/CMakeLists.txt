@@ -64,6 +64,10 @@ SET(test-suite_SRCS
     #VectorIteratorTest.cpp
    )
 
+IF(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-self-assign-overloaded")
+ENDIF()
+
 SET(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)

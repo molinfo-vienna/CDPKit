@@ -58,7 +58,7 @@ namespace CDPL
 			typedef FeatureInteractionScoreGridCalculator::ScoringFunction ScoringFunction;
 			typedef FeatureInteractionScoreGridCalculator::ScoreCombinationFunction ScoreCombinationFunction;
 
-			GRAILDataSetCalculator();
+			GRAILDataSetGenerator();
 
 			~GRAILDataSetGenerator() {}
 		

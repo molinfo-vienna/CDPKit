@@ -401,14 +401,18 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionGradientFunctionTest)
 									getMOL2Name(mol.getAtom(iaction.getTerminalAtom2Index())) << ") of molecule #" << mol_idx << " (" << getName(mol) <<
 									"): grad. func. energy " << grad_energy << " != " << energy);
 
-				calcNumericalGradient(iaction, coords, iaction.getTerminalAtom1Index(), num_term_atom1_grad, 
-									  &ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>);
+				calcNumericalGradient(iaction, coords, iaction.getTerminalAtom1Index(), num_term_atom1_grad,
+									  static_cast<double (*)(const ForceField::MMFF94TorsionInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>));
 				calcNumericalGradient(iaction, coords, iaction.getTerminalAtom2Index(), num_term_atom2_grad, 
-									  &ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94TorsionInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>));
 				calcNumericalGradient(iaction, coords, iaction.getCenterAtom1Index(), num_ctr_atom1_grad, 
-									  &ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94TorsionInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>));
 				calcNumericalGradient(iaction, coords, iaction.getCenterAtom2Index(), num_ctr_atom2_grad, 
-									  &ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94TorsionInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94TorsionEnergy<double, Math::Vector3DArray>));
 			
 				double max_diff = std::max(
 					std::max(normInf(num_term_atom1_grad - grad[iaction.getTerminalAtom1Index()]), normInf(num_term_atom2_grad - grad[iaction.getTerminalAtom2Index()])),
