@@ -157,6 +157,10 @@ IF(APPLE)
   	         "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" 
                  @ONLY
                 )
+  CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/MacCodeSigning.cmake.in"
+  	         "${CMAKE_CURRENT_BINARY_DIR}/MacCodeSigning.cmake" 
+                 @ONLY
+                )
   TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-molprop-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ELSE(APPLE)
   IF(WIN32)
@@ -211,4 +215,6 @@ ELSE(NOT APPLE)
   IF(MACDEPLOYQT_EXECUTABLE)
     INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/MacDeployQt.cmake" COMPONENT Applications)
   ENDIF(MACDEPLOYQT_EXECUTABLE)
+
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/MacCodeSigning.cmake" COMPONENT Applications)
 ENDIF(NOT APPLE)

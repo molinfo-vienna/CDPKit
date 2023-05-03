@@ -1,0 +1,1 @@
+EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--deep" "--timestamp" "--preserve-metadata=entitlements,requirements,flags,runtime" "--sign" "@CDPKIT_CODESIGN_IDENTITY@" "${CMAKE_INSTALL_PREFIX}/@CDPKIT_EXECUTABLE_INSTALL_DIR@/ChOX.app" OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)							
