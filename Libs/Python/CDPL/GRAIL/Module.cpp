@@ -44,9 +44,8 @@ BOOST_PYTHON_MODULE(_grail)
 	exportBuriednessScore();
 	exportBuriednessGridCalculator();
 	exportFeatureInteractionScoreGridCalculator();
-	exportInteractionScoreGridSetCalculator();
-	exportDefaultInteractionScoreGridSetCalculator();
-
+	exportGRAILDataSetGenerator();
+	
 	exportAttributedGridFunctions();
 
 	exportBoostFunctionWrappers();

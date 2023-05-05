@@ -40,8 +40,7 @@ SET(grail_MOD_SRCS
     BuriednessScoreExport.cpp
     BuriednessGridCalculatorExport.cpp
     FeatureInteractionScoreGridCalculatorExport.cpp
-    InteractionScoreGridSetCalculatorExport.cpp
-    DefaultInteractionScoreGridSetCalculatorExport.cpp
+    GRAILDataSetGeneratorExport.cpp    
 
     BoostFunctionWrapperExport.cpp
 

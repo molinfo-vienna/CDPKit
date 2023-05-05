@@ -39,8 +39,6 @@
 #include "CDPL/GRAIL/BuriednessScore.hpp"  
 #include "CDPL/GRAIL/BuriednessGridCalculator.hpp"  
 #include "CDPL/GRAIL/FeatureInteractionScoreGridCalculator.hpp"  
-#include "CDPL/GRAIL/InteractionScoreGridSetCalculator.hpp"  
-#include "CDPL/GRAIL/DefaultInteractionScoreGridSetCalculator.hpp"  
 #include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"  
 
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
