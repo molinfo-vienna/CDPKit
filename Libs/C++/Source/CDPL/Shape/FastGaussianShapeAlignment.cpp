@@ -50,6 +50,12 @@
 
 #include "Utilities.hpp"
 
+#if defined(__APPLE__) && defined(__clang__)
+#  define exp_func(arg) std::exp(arg)
+#else
+#  define exp_func(arg) fastexp::IEEE<double, 3>::evaluate(arg)
+#endif
+
 
 using namespace CDPL;
 
@@ -1137,7 +1143,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlap(const ShapeData& ref_data,
 
 					double prod_fact_exp = -delta_fact * sqrd_ctr_dist;
 
-					overlap += fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					overlap += exp_func(prod_fact_exp);
 				}
 			}
 
@@ -1161,7 +1167,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlap(const ShapeData& ref_data,
 					double prod_fact_exp = -elem1.delta * elem2.delta * sqrd_ctr_dist / delta;
 
 					overlap += elem1.weightFactor * elem2.weightFactor * vol_factor *
-						std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+						std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 				}
 			}
 		}
@@ -1188,7 +1194,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlap(const ShapeData& ref_data,
 			double prod_fact_exp = -elem1.delta * elem2.delta * sqrd_ctr_dist / delta;
 
 			overlap += elem1.weightFactor * elem2.weightFactor * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+				std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 		}
 	}
 		
@@ -1231,7 +1237,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 					continue;
 
 				double prod_fact_exp = -delta_fact * sqrd_ctr_dist;
-				double overlap_contrib = fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+				double overlap_contrib = exp_func(prod_fact_exp);
 
 				overlap += overlap_contrib;
 	
@@ -1270,7 +1276,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 				double vol_factor = M_PI / delta;
 				double prod_fact_exp = -elem1.delta * elem2.delta * sqrd_ctr_dist / delta;
 				double overlap_contrib = elem1.weightFactor * elem2.weightFactor * vol_factor *
-					std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 
 				overlap += overlap_contrib;
 
@@ -1313,7 +1319,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 			double vol_factor = M_PI / delta;
 			double prod_fact_exp = -elem1.delta * elem2.delta * sqrd_ctr_dist / delta;
 			double overlap_contrib = elem1.weightFactor * elem2.weightFactor * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+				std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 
 			overlap += overlap_contrib;
 

@@ -40,6 +40,12 @@
 #include "GaussianProduct.hpp"
 #include "Utilities.hpp"
 
+#if defined(__APPLE__) && defined(__clang__)
+#  define exp_func(arg) std::exp(arg)
+#else
+#  define exp_func(arg) fastexp::IEEE<double, 3>::evaluate(arg)
+#endif
+
 
 using namespace CDPL;
 
@@ -406,7 +412,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 				double prod_fact_exp = -prod1_delta * prod2_delta * calcSquaredDistance(prod1_ctr, prod2->getCenter().getData()) / delta;
 
 				overlap += prod1_weight * prod2->getWeightFactor() * vol_factor *
-					std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 			}
 		}
 		
@@ -466,7 +472,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 			}
 			
 			overlap += (prod1_odd ^ prod2->hasOddOrder() ? -prod1_weight : prod1_weight) * prod2->getWeightFactor() * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(-prod_fact_exp / delta);
+				std::sqrt(vol_factor) * exp_func(-prod_fact_exp / delta);
 		}
 	}
 
@@ -659,7 +665,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 				double prod_fact_exp = -prod1_delta * prod2_delta * sqrd_prod_ctr_dist / delta;
 
 				overlap += prod1_weight * prod2->getWeightFactor() * vol_factor *
-					std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 			}
 		}
 		
@@ -727,7 +733,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 			}
 			
 			overlap += (prod1_odd ^ prod2->hasOddOrder() ? -prod1_weight : prod1_weight) * prod2->getWeightFactor() * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(-prod_fact_exp / delta);
+				std::sqrt(vol_factor) * exp_func(-prod_fact_exp / delta);
 		}
 	}
 
@@ -917,7 +923,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 				double prod_fact_exp = -prod1_delta * prod2_delta * sqrd_prod_ctr_dist / delta;
 
 				overlap += prod1_weight * prod2->getWeightFactor() * vol_factor * std::sqrt(vol_factor) *
-					fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					exp_func(prod_fact_exp);
 			}
 		}
 		
@@ -977,7 +983,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 			}
 			
 			overlap += (prod1_odd ^ prod2->hasOddOrder() ? -prod1_weight : prod1_weight) * prod2->getWeightFactor() * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(-prod_fact_exp / delta);
+				std::sqrt(vol_factor) * exp_func(-prod_fact_exp / delta);
 		}
 	}
 
@@ -1202,7 +1208,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 				double prod_fact_exp = -prod1_delta * prod2_delta * sqrd_prod_ctr_dist / delta;
 
 				overlap += prod1_weight * prod2->getWeightFactor() * vol_factor * std::sqrt(vol_factor) *
-					fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					exp_func(prod_fact_exp);
 			}
 		}
 		
@@ -1300,7 +1306,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 			}
 			
 			overlap += (prod1_odd ^ prod2->hasOddOrder() ? -prod1_weight : prod1_weight) * prod2->getWeightFactor() * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(-prod_fact_exp / delta);
+				std::sqrt(vol_factor) * exp_func(-prod_fact_exp / delta);
 		}
 	}
 
@@ -1508,7 +1514,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const
 				double prod_fact_exp = -prod1_delta * prod2_delta * sqrd_prod_ctr_dist / delta;
 
 				double overlap_contrib = prod1_weight * prod2->getWeightFactor() * vol_factor *
-					std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 
 				overlap += overlap_contrib;
 
@@ -1594,7 +1600,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const
 			}
 			
 			double overlap_contrib = (prod1_odd ^ prod2->hasOddOrder() ? -prod1_weight : prod1_weight) * prod2->getWeightFactor() * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(-prod_fact_exp / delta);
+				std::sqrt(vol_factor) * exp_func(-prod_fact_exp / delta);
 
 			overlap += overlap_contrib;
 
@@ -1822,7 +1828,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCh
 				double prod_fact_exp = -prod1_delta * prod2_delta * sqrd_prod_ctr_dist / delta;
 
 				double overlap_contrib = prod1_weight * prod2->getWeightFactor() * vol_factor *
-					std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					std::sqrt(vol_factor) * exp_func(prod_fact_exp);
 
 				overlap += overlap_contrib;
 
@@ -1915,7 +1921,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCh
 			}
 			
 			double overlap_contrib = (prod1_odd ^ prod2->hasOddOrder() ? -prod1_weight : prod1_weight) * prod2->getWeightFactor() * vol_factor *
-				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(-prod_fact_exp / delta);
+				std::sqrt(vol_factor) * exp_func(-prod_fact_exp / delta);
 
 			overlap += overlap_contrib;
 
