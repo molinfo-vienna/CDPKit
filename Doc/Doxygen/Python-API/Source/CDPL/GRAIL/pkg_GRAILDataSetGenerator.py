@@ -155,6 +155,42 @@ class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param diminish 
+    #
+    def diminishScoresByAtomDensity(diminish: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def scoresDiminishedByAtomDensity() -> bool: pass
+
+    ##
+    # \brief 
+    # \param store 
+    #
+    def storeEnvironmentAtomDensityGrid(store: bool) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def environmentAtomDensityGridStored() -> bool: pass
+
+    ##
+    # \brief 
+    # \param  
+    #
+    def setEnvironmentAtomDensityGridName(: str) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getEnvironmentAtomDensityGridName() -> str: pass
+
+    ##
+    # \brief 
     # \return 
     #
     def getGridStepSize() -> float: pass
@@ -229,6 +265,18 @@ class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param func 
+    #
+    def setPharmacophoreProcessingFunction(func: VoidPharmacophoreFunctor) -> None: pass
+
+    ##
+    # \brief 
+    # \return 
+    #
+    def getPharmacophoreProcessingFunction() -> VoidPharmacophoreFunctor: pass
+
+    ##
+    # \brief 
     # \param tgt_env 
     # \param coords_func 
     # \param grid_set 
@@ -260,6 +308,11 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     scoreCombinationFunction = property(getScoreCombinationFunction, setScoreCombinationFunction)
 
     ##
+    # \brief FIXME!
+    #
+    pharmProcessingFunction = property(getPharmProcessingFunction, setPharmProcessingFunction)
+
+    ##
     # \brief 
     #
     gridStepSize = property(getGridStepSize, setGridStepSize)
@@ -288,3 +341,18 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \brief 
     #
     pharmacophoreGenerator = property(getPharmacophoreGenerator)
+
+    ##
+    # \brief FIXME!
+    #
+    dimScoresByAtomDensity = property(getDimScoresByAtomDensity, setDimScoresByAtomDensity)
+
+    ##
+    # \brief FIXME!
+    #
+    storeEnvAtomDensityGrid = property(getStoreEnvAtomDensityGrid, setStoreEnvAtomDensityGrid)
+
+    ##
+    # \brief FIXME!
+    #
+    envAtomDensityGridName = property(getEnvAtomDensityGridName, setEnvAtomDensityGridName)

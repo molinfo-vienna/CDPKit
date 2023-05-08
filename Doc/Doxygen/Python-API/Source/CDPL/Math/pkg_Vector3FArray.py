@@ -97,9 +97,9 @@ class Vector3FArray(Boost.Python.instance):
     def assign(array: Vector3FArray) -> Vector3FArray: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %int instance \a num_elem.
-    # \param num_elem The \e %int instance to copy.
-    # \return \a self
+    # \brief 
+    # \param num_elem 
+    # \param value 
     #
     def assign(num_elem: int, value: Vector3F) -> None: pass
 
