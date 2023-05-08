@@ -64,7 +64,8 @@ constexpr double GRAIL::GRAILDataSetGenerator::DEF_GRID_STEP_SIZE;
 GRAIL::GRAILDataSetGenerator::GRAILDataSetGenerator(): 
 	pharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS),
     gridStepSize(DEF_GRID_STEP_SIZE), gridXSize(0), gridYSize(0), gridZSize(0), 
-    gridTransform(Math::IdentityMatrix<double>(4, 4))
+    gridTransform(Math::IdentityMatrix<double>(4, 4)), diminishByAtomDensity(true),
+	storeEnvAtomDensityGrid(true), envAtomDensityGridName("ENV")
 {
     init();
 }
@@ -203,6 +204,36 @@ bool GRAIL::GRAILDataSetGenerator::scoresNormalized() const
     return ftrInteractionGridCalc.scoresNormalized();
 }
 
+void GRAIL::GRAILDataSetGenerator::diminishScoresByAtomDensity(bool diminish)
+{
+	diminishByAtomDensity = diminish;
+}
+
+bool GRAIL::GRAILDataSetGenerator::scoresDiminishedByAtomDensity() const
+{
+	return diminishByAtomDensity;
+}
+
+void GRAIL::GRAILDataSetGenerator::storeEnvironmentAtomDensityGrid(bool store)
+{
+	storeEnvAtomDensityGrid = store;
+}
+
+bool GRAIL::GRAILDataSetGenerator::environmentAtomDensityGridStored() const
+{
+	return storeEnvAtomDensityGrid;
+}
+
+void GRAIL::GRAILDataSetGenerator::setEnvironmentAtomDensityGridName(const std::string& name)
+{
+	envAtomDensityGridName = name;
+}
+
+const std::string& GRAIL::GRAILDataSetGenerator::getEnvironmentAtomDensityGridName() const
+{
+	return envAtomDensityGridName;
+}
+
 const Pharm::PharmacophoreGenerator& GRAIL::GRAILDataSetGenerator::getPharmacophoreGenerator() const
 {
 	return pharmGenerator;
@@ -213,15 +244,32 @@ Pharm::PharmacophoreGenerator& GRAIL::GRAILDataSetGenerator::getPharmacophoreGen
 	return pharmGenerator;
 }
 
+void GRAIL::GRAILDataSetGenerator::setPharmacophoreProcessingFunction(const PharmacophoreProcessingFunction& func)
+{
+	pharmProcessingFunc = func;
+}
+
+const GRAIL::GRAILDataSetGenerator::PharmacophoreProcessingFunction&
+GRAIL::GRAILDataSetGenerator::getPharmacophoreProcessingFunction() const
+{
+	return pharmProcessingFunc;
+}
+			
 void GRAIL::GRAILDataSetGenerator::calcInteractionGrids(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
 														Grid::DRegularGridSet& grid_set)
 {
-	Grid::DRegularGrid::SharedPointer env_atom_grid_ptr = calcAtomDensityGrid(tgt_env, coords_func, "ENV");
+	Grid::DRegularGrid::SharedPointer env_atom_grid_ptr;
+
+	if (diminishByAtomDensity || storeEnvAtomDensityGrid)
+		env_atom_grid_ptr = calcAtomDensityGrid(tgt_env, coords_func, envAtomDensityGridName);
 
 	pharmGenerator.setAtom3DCoordinatesFunction(coords_func);
 	pharmGenerator.generate(tgt_env, pharmacophore);
 
-	std::size_t num_grid_pts = env_atom_grid_ptr->getNumElements();
+	if (pharmProcessingFunc)
+		pharmProcessingFunc(pharmacophore);
+	
+	std::size_t num_grid_pts = (diminishByAtomDensity ? env_atom_grid_ptr->getNumElements() : 0);
 	
     for (ScoringFuncMap::const_iterator it = ftrInteractionScoringFuncMap.begin(), end = ftrInteractionScoringFuncMap.end(); it != end; ++it) {
 		if (!it->second)
@@ -251,7 +299,8 @@ void GRAIL::GRAILDataSetGenerator::calcInteractionGrids(const Chem::MolecularGra
 			(*grid_ptr)(i) *= (1.0 - (*env_atom_grid_ptr)(i));
     }
 
-	grid_set.addElement(env_atom_grid_ptr);
+	if (storeEnvAtomDensityGrid)
+		grid_set.addElement(env_atom_grid_ptr);
 }
 
 Grid::DRegularGrid::SharedPointer

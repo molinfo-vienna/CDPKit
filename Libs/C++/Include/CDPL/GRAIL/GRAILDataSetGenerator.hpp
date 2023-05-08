@@ -37,6 +37,7 @@
 #include <string>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/GRAIL/FeatureInteractionScoreGridCalculator.hpp"
@@ -68,6 +69,8 @@ namespace CDPL
 			typedef FeatureInteractionScoreGridCalculator::ScoringFunction ScoringFunction;
 			typedef FeatureInteractionScoreGridCalculator::ScoreCombinationFunction ScoreCombinationFunction;
 
+			typedef boost::function1<void, CDPL::Pharm::Pharmacophore&> PharmacophoreProcessingFunction;
+			
 			static constexpr double DEF_GRID_STEP_SIZE = 0.5;
 			
 			GRAILDataSetGenerator();
@@ -99,6 +102,18 @@ namespace CDPL
 			void normalizeScores(bool normalize);
 
 			bool scoresNormalized() const;
+
+			void diminishScoresByAtomDensity(bool diminish);
+
+			bool scoresDiminishedByAtomDensity() const;
+
+			void storeEnvironmentAtomDensityGrid(bool store);
+
+			bool environmentAtomDensityGridStored() const;
+
+			void setEnvironmentAtomDensityGridName(const std::string& name);
+
+			const std::string& getEnvironmentAtomDensityGridName() const;
 			
 			const Math::Matrix4D& getGridTransform() const;
 
@@ -128,6 +143,10 @@ namespace CDPL
 			const Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
 
 			Pharm::PharmacophoreGenerator& getPharmacophoreGenerator();
+
+			void setPharmacophoreProcessingFunction(const PharmacophoreProcessingFunction& func);
+
+			const PharmacophoreProcessingFunction& getPharmacophoreProcessingFunction() const;
 			
 			void calcInteractionGrids(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
 									  Grid::DRegularGridSet& grid_set);
@@ -152,12 +171,16 @@ namespace CDPL
             FeatureInteractionScoreGridCalculator ftrInteractionGridCalc;
 			AtomDensityGridCalculator             atomDensityGridCalc;
 			Pharm::DefaultPharmacophoreGenerator  pharmGenerator;
+			PharmacophoreProcessingFunction       pharmProcessingFunc;
 			Pharm::BasicPharmacophore             pharmacophore;
             double                                gridStepSize;          
 			std::size_t                           gridXSize;
 			std::size_t                           gridYSize;
 			std::size_t                           gridZSize;
 			Math::Matrix4D                        gridTransform;
+			bool                                  diminishByAtomDensity;
+			bool                                  storeEnvAtomDensityGrid;
+			std::string                           envAtomDensityGridName;
 		};
 	}
 }

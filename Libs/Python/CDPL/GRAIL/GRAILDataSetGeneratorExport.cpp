@@ -86,6 +86,16 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("normalizeScores", &GRAIL::GRAILDataSetGenerator::normalizeScores, (python::arg("self"), python::arg("normalize")))
 		.def("scoresNormalized", &GRAIL::GRAILDataSetGenerator::scoresNormalized, python::arg("self"))
+		.def("diminishScoresByAtomDensity", &GRAIL::GRAILDataSetGenerator::diminishScoresByAtomDensity,
+			 (python::arg("self"), python::arg("diminish")))
+		.def("scoresDiminishedByAtomDensity", &GRAIL::GRAILDataSetGenerator::scoresDiminishedByAtomDensity, python::arg("self"))
+		.def("storeEnvironmentAtomDensityGrid", &GRAIL::GRAILDataSetGenerator::storeEnvironmentAtomDensityGrid,
+			 (python::arg("self"), python::arg("store")))
+		.def("environmentAtomDensityGridStored", &GRAIL::GRAILDataSetGenerator::environmentAtomDensityGridStored, python::arg("self"))
+		.def("setEnvironmentAtomDensityGridName", &GRAIL::GRAILDataSetGenerator::setEnvironmentAtomDensityGridName,
+			 (python::arg("self"), python::arg("")))
+		.def("getEnvironmentAtomDensityGridName", &GRAIL::GRAILDataSetGenerator::getEnvironmentAtomDensityGridName, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
 		.def("getGridStepSize", &GRAIL::GRAILDataSetGenerator::getGridStepSize, python::arg("self"))
 		.def("setGridStepSize", &GRAIL::GRAILDataSetGenerator::setGridStepSize, (python::arg("self"), python::arg("size")))
 		.def("getGridXSize", &GRAIL::GRAILDataSetGenerator::getGridXSize, python::arg("self"))
@@ -104,6 +114,10 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 		.def("getPharmacophoreGenerator", static_cast<Pharm::PharmacophoreGenerator& (GRAIL::GRAILDataSetGenerator::*)()>
 			 (&GRAIL::GRAILDataSetGenerator::getPharmacophoreGenerator), python::arg("self"),
 			 python::return_internal_reference<>())
+		.def("setPharmacophoreProcessingFunction", &GRAIL::GRAILDataSetGenerator::setPharmacophoreProcessingFunction,
+			 (python::arg("self"), python::arg("func")))
+		.def("getPharmacophoreProcessingFunction", &GRAIL::GRAILDataSetGenerator::getPharmacophoreProcessingFunction,
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("calcInteractionGrids", &GRAIL::GRAILDataSetGenerator::calcInteractionGrids,
 			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("grid_set")))
 		.def("calcAtomDensityGrid", &calcAtomDensityGrid,
@@ -114,6 +128,9 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 		.add_property("scoreCombinationFunction",
 					  python::make_function(&GRAIL::GRAILDataSetGenerator::getScoreCombinationFunction, python::return_internal_reference<>()),
 					  &GRAIL::GRAILDataSetGenerator::setScoreCombinationFunction)
+		.add_property("pharmProcessingFunction",
+					  python::make_function(&GRAIL::GRAILDataSetGenerator::getPharmacophoreProcessingFunction, python::return_internal_reference<>()),
+					  &GRAIL::GRAILDataSetGenerator::setPharmacophoreProcessingFunction)
 		.add_property("gridStepSize", &GRAIL::GRAILDataSetGenerator::getGridStepSize, &GRAIL::GRAILDataSetGenerator::setGridStepSize)
 		.add_property("gridXSize", &GRAIL::GRAILDataSetGenerator::getGridXSize, &GRAIL::GRAILDataSetGenerator::setGridXSize)
 		.add_property("gridYSize", &GRAIL::GRAILDataSetGenerator::getGridYSize, &GRAIL::GRAILDataSetGenerator::setGridYSize)
@@ -125,5 +142,12 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 					  python::make_function(static_cast<Pharm::PharmacophoreGenerator& (GRAIL::GRAILDataSetGenerator::*)()>
 											(&GRAIL::GRAILDataSetGenerator::getPharmacophoreGenerator),
 											python::return_internal_reference<>()))
-		;
+		.add_property("dimScoresByAtomDensity", &GRAIL::GRAILDataSetGenerator::scoresDiminishedByAtomDensity,
+					  &GRAIL::GRAILDataSetGenerator::diminishScoresByAtomDensity)
+		.add_property("storeEnvAtomDensityGrid", &GRAIL::GRAILDataSetGenerator::environmentAtomDensityGridStored,
+					  &GRAIL::GRAILDataSetGenerator::storeEnvironmentAtomDensityGrid)
+		.add_property("envAtomDensityGridName",
+					  python::make_function(&GRAIL::GRAILDataSetGenerator::getEnvironmentAtomDensityGridName,
+											python::return_value_policy<python::copy_const_reference>()),
+					  &GRAIL::GRAILDataSetGenerator::setEnvironmentAtomDensityGridName);
 }

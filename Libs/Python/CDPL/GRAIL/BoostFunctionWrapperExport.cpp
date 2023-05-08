@@ -26,6 +26,7 @@
 
 #include <boost/function.hpp>
 
+#include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -37,6 +38,8 @@
 void CDPLPythonGRAIL::exportBoostFunctionWrappers()
 {
     using namespace CDPL;
+
+	CDPLPythonBase::BoostFunction1Export<GRAIL::GRAILDataSetGenerator::PharmacophoreProcessingFunction>("VoidPharmacophoreFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Math::Vector3D&, const Pharm::Feature&>, const Math::Vector3D&, Pharm::Feature&>("DoubleVector3DFeatureFunctor");
 }
