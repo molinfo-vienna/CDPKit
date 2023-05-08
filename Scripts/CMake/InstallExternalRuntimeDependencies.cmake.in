@@ -100,7 +100,7 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
   ENDFOREACH(DEPENDENCY)
   
   IF(APPLE)
-    EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags,runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "${BINARY_INPUT_FILE}"
+    EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags" "--options" "runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "${BINARY_INPUT_FILE}"
                     OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
   ENDIF()
 
