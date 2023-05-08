@@ -351,6 +351,9 @@ def printSpecialMethodDoc(class_obj, func_obj, method_name, out_file, ident, fun
     if method_name not in mn_to_doc_tmplts:
         return False
 
+    if method_name == "assign" and len(func_data['arg_names']) > 2:
+        return False
+    
     tmplt = mn_to_doc_tmplts[method_name]
     proc_args = []
    
