@@ -365,7 +365,7 @@ TautGenImpl::TautGenImpl():
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
-	addOption("output,o", "Output fragment library file.", 
+	addOption("output,o", "Tautomers output file.", 
 			  value<std::string>(&outputFile)->required());
 	addOption("mode,m", "Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: TOP_UNIQUE).", 
 			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setMode, this, _1)));
