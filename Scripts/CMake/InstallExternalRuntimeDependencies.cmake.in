@@ -87,10 +87,6 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
         EXECUTE_PROCESS(COMMAND "@CMAKE_INSTALL_NAME_TOOL@" "-change" "${DEPENDENCY}" "@rpath/${FILE_NAME}" "${BINARY_INPUT_FILE}"
                         OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
       ENDIF()
-
-      IF("${STDERR}" MATCHES ".*warning: changes being made to the file will invalidate the code signature.*$")
-        SET(FIX_CODE_SIGNATURE TRUE)
-      ENDIF()
     ENDIF()
     
     IF(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${DEPENDENCY_INSTALL_DIR}/${FILE_NAME}")
@@ -102,9 +98,9 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
       ENDIF()
     ENDIF()
   ENDFOREACH(DEPENDENCY)
-
-  IF(APPLE AND FIX_CODE_SIGNATURE)
-    EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags,runtime" "--sign" "@CDPKIT_CODESIGN_IDENTITY@" "${BINARY_INPUT_FILE}"
+  
+  IF(APPLE)
+    EXECUTE_PROCESS(COMMAND "@CODESIGN_EXECUTABLE@" "--force" "--timestamp" "--preserve-metadata=entitlements,requirements,flags,runtime" "--sign" "@CDPKIT_CODE_SIGNING_IDENTITY@" "${BINARY_INPUT_FILE}"
                     OUTPUT_VARIABLE STDOUT ERROR_VARIABLE STDERR)
   ENDIF()
 
