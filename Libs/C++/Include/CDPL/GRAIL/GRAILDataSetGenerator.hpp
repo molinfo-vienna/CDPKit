@@ -140,16 +140,16 @@ namespace CDPL
 
 			void setGridParamsForBoundingBox(const Math::Vector3D& bbox_min, const Math::Vector3D& bbox_max, double step_size = DEF_GRID_STEP_SIZE);
 			
-			const Pharm::PharmacophoreGenerator& getPharmacophoreGenerator() const;
+			const Pharm::DefaultPharmacophoreGenerator& getPharmacophoreGenerator() const;
 
-			Pharm::PharmacophoreGenerator& getPharmacophoreGenerator();
+			Pharm::DefaultPharmacophoreGenerator& getPharmacophoreGenerator();
 
 			void setPharmacophoreProcessingFunction(const PharmacophoreProcessingFunction& func);
 
 			const PharmacophoreProcessingFunction& getPharmacophoreProcessingFunction() const;
 			
 			void calcInteractionGrids(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
-									  Grid::DRegularGridSet& grid_set);
+									  Grid::DRegularGridSet& grid_set, bool append = false);
 
 			Grid::DRegularGrid::SharedPointer
 			calcAtomDensityGrid(const Chem::AtomContainer& atoms, const Chem::Atom3DCoordinatesFunction& coords_func,

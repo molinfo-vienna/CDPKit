@@ -111,7 +111,7 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 		.def("setGridParamsForBoundingBox", &GRAIL::GRAILDataSetGenerator::setGridParamsForBoundingBox,
 			 (python::arg("self"), python::arg("bbox_min"), python::arg("bbox_max"),
 			  python::arg("step_size") = GRAIL::GRAILDataSetGenerator::DEF_GRID_STEP_SIZE))
-		.def("getPharmacophoreGenerator", static_cast<Pharm::PharmacophoreGenerator& (GRAIL::GRAILDataSetGenerator::*)()>
+		.def("getPharmacophoreGenerator", static_cast<Pharm::DefaultPharmacophoreGenerator& (GRAIL::GRAILDataSetGenerator::*)()>
 			 (&GRAIL::GRAILDataSetGenerator::getPharmacophoreGenerator), python::arg("self"),
 			 python::return_internal_reference<>())
 		.def("setPharmacophoreProcessingFunction", &GRAIL::GRAILDataSetGenerator::setPharmacophoreProcessingFunction,
@@ -119,7 +119,7 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 		.def("getPharmacophoreProcessingFunction", &GRAIL::GRAILDataSetGenerator::getPharmacophoreProcessingFunction,
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("calcInteractionGrids", &GRAIL::GRAILDataSetGenerator::calcInteractionGrids,
-			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("grid_set")))
+			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("grid_set"), python::arg("append") = false))
 		.def("calcAtomDensityGrid", &calcAtomDensityGrid,
 			 (python::arg("self"), python::arg("atoms"), python::arg("coords_func"), python::arg("grid_name")))
 		.def_readonly("DEF_GRID_STEP_SIZE", GRAIL::GRAILDataSetGenerator::DEF_GRID_STEP_SIZE)
@@ -138,8 +138,8 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
 		.add_property("gridTransform", 
 					  python::make_function(&GRAIL::GRAILDataSetGenerator::getGridTransform, python::return_internal_reference<>()),
 					  &GRAIL::GRAILDataSetGenerator::setGridTransform<Math::Matrix4D>)
-		.add_property("pharmacophoreGenerator", 
-					  python::make_function(static_cast<Pharm::PharmacophoreGenerator& (GRAIL::GRAILDataSetGenerator::*)()>
+		.add_property("pharmGenerator", 
+					  python::make_function(static_cast<Pharm::DefaultPharmacophoreGenerator& (GRAIL::GRAILDataSetGenerator::*)()>
 											(&GRAIL::GRAILDataSetGenerator::getPharmacophoreGenerator),
 											python::return_internal_reference<>()))
 		.add_property("dimScoresByAtomDensity", &GRAIL::GRAILDataSetGenerator::scoresDiminishedByAtomDensity,
