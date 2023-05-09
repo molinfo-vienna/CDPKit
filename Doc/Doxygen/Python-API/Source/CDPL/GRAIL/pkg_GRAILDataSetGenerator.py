@@ -261,7 +261,7 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getPharmacophoreGenerator() -> CDPL.Pharm.PharmacophoreGenerator: pass
+    def getPharmacophoreGenerator() -> CDPL.Pharm.DefaultPharmacophoreGenerator: pass
 
     ##
     # \brief 
@@ -280,8 +280,9 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     # \param tgt_env 
     # \param coords_func 
     # \param grid_set 
+    # \param append 
     #
-    def calcInteractionGrids(tgt_env: CDPL.Chem.MolecularGraph, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, grid_set: CDPL.Grid.DRegularGridSet) -> None: pass
+    def calcInteractionGrids(tgt_env: CDPL.Chem.MolecularGraph, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, grid_set: CDPL.Grid.DRegularGridSet, append: bool = False) -> None: pass
 
     ##
     # \brief 
@@ -338,9 +339,9 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     gridTransform = property(getGridTransform, setGridTransform)
 
     ##
-    # \brief 
+    # \brief FIXME!
     #
-    pharmacophoreGenerator = property(getPharmacophoreGenerator)
+    pharmGenerator = property(getPharmGenerator)
 
     ##
     # \brief FIXME!

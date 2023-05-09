@@ -63,3 +63,9 @@ class DefaultPharmacophoreGenerator(PharmacophoreGenerator):
     # \param gen 
     #
     def __init__(gen: DefaultPharmacophoreGenerator) -> None: pass
+
+    ##
+    # \brief 
+    # \param config 
+    #
+    def applyConfiguration(config: Configuration) -> None: pass
