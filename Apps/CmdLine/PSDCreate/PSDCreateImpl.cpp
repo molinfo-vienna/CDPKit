@@ -37,6 +37,7 @@
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
+#include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Util/FileRemover.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
@@ -129,7 +130,8 @@ private:
 			calcCIPPriorities(molecule, false);
 			calcAtomCIPConfigurations(molecule, false);
 			calcBondCIPConfigurations(molecule, false);
-
+			CDPL::MolProp::calcAtomHydrophobicities(molecule, false);
+			
 			if (!dbCreator->process(molecule))
 				parent->printMessage(VERBOSE, "Dropped duplicate molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
 
