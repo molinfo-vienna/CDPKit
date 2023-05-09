@@ -5,7 +5,7 @@
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
-# Copyright (C) 2003-2020 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+# Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -145,7 +145,7 @@ IF(APPLE)
                         MACOSX_BUNDLE_BUNDLE_NAME ChOX
                         MACOSX_BUNDLE_BUNDLE_VERSION "${CDPKIT_VERSION}"
                         MACOSX_BUNDLE_ICON_FILE chox.icns
-                        MACOSX_BUNDLE_COPYRIGHT "Thomas A. Seidel"
+                        MACOSX_BUNDLE_COPYRIGHT "Thomas Seidel"
                         MACOSX_BUNDLE_LONG_VERSION_STRING "${CDPKIT_VERSION}"
                         MACOSX_BUNDLE_SHORT_VERSION_STRING "${CDPKIT_VERSION}"
                         OUTPUT_NAME ChOX

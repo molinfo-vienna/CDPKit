@@ -5,7 +5,7 @@
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
-# Copyright (C) 2003-2020 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+# Copyright (C) 2003 Thomas Seidel <thomas.seidel@univie.ac.at>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -359,10 +359,10 @@ INCLUDE_DIRECTORIES("${CDPL_INCLUDE_DIR}" "${Boost_INCLUDE_DIR}")
 
 # CPack related setup
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "CDPKit - Chemical Data Processing Toolkit")
-SET(CPACK_PACKAGE_VENDOR "CDPKit Development Team")
+SET(CPACK_PACKAGE_VENDOR "Thomas Seidel/University of Vienna")
 #SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Readme.txt")
 #SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/Readme.txt")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copying.txt")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
 SET(CPACK_PACKAGE_VERSION_MAJOR "${CDPKIT_MAJOR_VERSION}")
 SET(CPACK_PACKAGE_VERSION_MINOR "${CDPKIT_MINOR_VERSION}")
 SET(CPACK_PACKAGE_VERSION_PATCH "${CDPKIT_PATCH_VERSION}")
