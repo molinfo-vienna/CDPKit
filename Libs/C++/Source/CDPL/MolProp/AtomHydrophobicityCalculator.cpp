@@ -66,7 +66,7 @@ namespace
 			
 		atomHydCategoryPatterns.push_back(parseSMARTS("[#1,#7,#8:1]"));
 			
-		atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0:2]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[SX2v2;!H0:2]"));
 			
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~*~[!+0]"));
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~[!+0]"));
@@ -74,14 +74,11 @@ namespace
 			
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~*~[O,N;!H0;!$(*-*=,:*)]"));
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~[O,N;!H0;!$(*-*=,:*)]"));
-		atomHydCategoryPatterns.push_back(parseSMARTS("[O,N;!H0;!$(*-*=,:*):4]"));
 			
-		atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[S;!H0;!$(*-*=,:*)]"));
-		atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0;!$(*-*=,:*):5]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[SX2;!H0;!$(*-*=,:*)]"));
 			
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]~*=[O]"));
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]=[O]"));
-		atomHydCategoryPatterns.push_back(parseSMARTS("[O:6]=*"));
 			
 		atomHydCategoryPatterns.push_back(parseSMARTS("[*:7]~[#16;v3,v4,v5,v6]"));
 		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6:7]"));
@@ -101,9 +98,9 @@ namespace
 		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~[#16;$(*=*)]"));
 		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;$(*=*)]~[*:12]~[#16;$(*=*)]"));
 
-		atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,O;!$(*-*=,:*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,OX2;!$(*-*=,:*)]"));
 
-		atomHydCategoryPatterns.push_back(parseSMARTS("[N,O;!$(*-*=,:*)]~[*:14]~[N,O;!$(*-*=,:*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[N,OX2;!$(*-*=,:*)]~[*:14]~[N,OX2;!$(*-*=,:*)]"));
     }
 
     typedef boost::unordered_map<std::string, double> AtomSurfaceAccessibilityTable;
