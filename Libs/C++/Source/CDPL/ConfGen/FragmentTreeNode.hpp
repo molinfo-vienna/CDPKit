@@ -55,7 +55,7 @@ namespace CDPL
     {
 
 		class FragmentTree;
-		class ForceFieldInteractionMask;
+		struct ForceFieldInteractionMask;
 
 		class FragmentTreeNode
 		{
