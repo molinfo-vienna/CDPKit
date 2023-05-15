@@ -167,7 +167,7 @@ namespace CDPLPythonUtil
 			for (typename MapType::EntryIterator it = map.getEntriesBegin(); it != entries_end; ++it)  
 				keys.append(mpl::if_c<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first));
 
-			return keys;
+			return std::move(keys);
 		}
 
 		static boost::python::object getValues(MapType& map) {
@@ -181,7 +181,7 @@ namespace CDPLPythonUtil
 				values.append(mpl::if_c<GetValueOrDefaultWithLValue, LValueGetter<MapType>, 
 							  RValueGetter<MapType> >::type::getValue((*it).second));
 
-			return values;
+			return std::move(values);
 		}
 
 		static boost::python::object getEntries(MapType& map)
@@ -196,7 +196,7 @@ namespace CDPLPythonUtil
 				entries.append(python::make_tuple(mpl::if_c<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first), 
 												  mpl::if_c<GetValueOrDefaultWithLValue, 
 												  LValueGetter<MapType>, RValueGetter<MapType> >::type::getValue((*it).second)));
-			return entries;
+			return std::move(entries);
 		}
 	};
 
@@ -270,7 +270,7 @@ namespace CDPLPythonUtil
 				values.append(mpl::if_c<GetValueOrDefaultWithLValue, LValueGetter<MapType>,
 							  RValueGetter<MapType> >::type::getValue((*entry_range.first).second));
 
-			return values;
+			return std::move(values);
 		}
 	};
 }

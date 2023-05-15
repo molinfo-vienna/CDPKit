@@ -63,7 +63,7 @@ namespace
 		for (std::size_t i = 0; i < MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES; i++)
 			types.append(entry.getParameterTypes()[i]);
 
-		return types;
+		return std::move(types);
     }
 
 	void addEntry(CDPL::ForceField::MMFF94PrimaryToParameterAtomTypeMap& map, unsigned int atom_type, boost::python::object param_types)

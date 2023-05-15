@@ -48,7 +48,7 @@ namespace
 					  boost::bind(&python::list::append<CDPL::Biomol::PDBData::RecordType>, boost::ref(types),
 								  boost::bind(&CDPL::Biomol::PDBData::Record::first, _1)));
 
-		return types;
+		return std::move(types);
 	}
 
 	boost::python::object getRecordData(CDPL::Biomol::PDBData& pdb_data) {
@@ -60,7 +60,7 @@ namespace
 					  boost::bind(&python::list::append<std::string>, boost::ref(values),
 								  boost::bind(&CDPL::Biomol::PDBData::Record::second, _1)));
 
-		return values;
+		return std::move(values);
 	}
 
 	boost::python::object getRecords(CDPL::Biomol::PDBData& pdb_data)
@@ -74,7 +74,7 @@ namespace
 		for (CDPL::Biomol::PDBData::RecordIterator it = pdb_data.getRecordsBegin(); it != records_end; ++it)  
 			records.append(python::make_tuple(it->first, it->second));
 
-		return records;
+		return std::move(records);
 	}
 
 	void setRecord(CDPL::Biomol::PDBData& pdb_data, const CDPL::Biomol::PDBData::RecordType& type, const std::string& data) 

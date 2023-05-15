@@ -92,7 +92,7 @@ namespace CDPLPythonChem
 					 end = alignment.getEntitiesEnd(first_set); it != end; ++it)
 				entities.append(boost::ref(*it));
 
-			return entities;
+			return std::move(entities);
 		}
 
 		static void addEntityFunc(AlignmentType& alignment, T& ent, bool first_set) {
