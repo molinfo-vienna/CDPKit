@@ -68,7 +68,7 @@ namespace CDPL
 
 			static const std::size_t COORDS_DIM                  = Dim;
 			static const std::size_t DEF_NUM_CYCLES              = 50;
-			static const std::size_t DEF_CYCLE_STEP_COUNT_FACTOR = 1;
+			static const double      DEF_CYCLE_STEP_COUNT_FACTOR;
 			static const ValueType   DEF_START_LEARNING_RATE;
 			static const ValueType   DEF_LEARNING_RATE_DECREMENT;
 
@@ -119,7 +119,7 @@ namespace CDPL
 
 			void setNumCycles(std::size_t num_cycles);
 
-			void setCycleStepCountFactor(std::size_t fact);
+			void setCycleStepCountFactor(double fact);
 
 			void setStartLearningRate(const ValueType& rate);
 
@@ -127,7 +127,7 @@ namespace CDPL
 
 			std::size_t getNumCycles() const;
 
-			std::size_t getCycleStepCountFactor() const;
+			double getCycleStepCountFactor() const;
 
 			const ValueType& getStartLearningRate() const;
 
@@ -173,7 +173,7 @@ namespace CDPL
 			typedef boost::random::mt11213b RandNumEngine;
 
 			std::size_t            numCycles;
-			std::size_t            cycleStepCountFactor;
+			double                 cycleStepCountFactor;
 			ValueType              startLearningRate;
 			ValueType              learningRateDecr;
 			DistanceConstraintList distConstraints;
@@ -187,7 +187,7 @@ namespace CDPL
 		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_NUM_CYCLES;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR;
+		const double DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR = 1.0;
 
 		template <std::size_t Dim, typename T, typename Derived> 
 		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
@@ -469,7 +469,7 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setNumCycles(std::
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setCycleStepCountFactor(std::size_t fact)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setCycleStepCountFactor(double fact)
 {
 	cycleStepCountFactor = fact;
 }
@@ -493,7 +493,7 @@ std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getNumCycle
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getCycleStepCountFactor() const
+double CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getCycleStepCountFactor() const
 {
 	return cycleStepCountFactor;
 }
@@ -583,7 +583,7 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::s
 	if ((num_dist_constrs + num_vol_constrs) == 0)
 		return;
 
-	std::size_t num_steps = (num_dist_constrs + num_vol_constrs) * cycleStepCountFactor;
+	std::size_t num_steps = std::size_t((num_dist_constrs + num_vol_constrs) * cycleStepCountFactor);
 	ValueType lambda = startLearningRate;
 
 	if (num_dist_constrs > 0 && num_vol_constrs > 0) {
