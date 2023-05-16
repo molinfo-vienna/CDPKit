@@ -37,6 +37,7 @@ namespace CDPLPythonGRAIL
 	void exportBuriednessGridCalculator();
 	void exportFeatureInteractionScoreGridCalculator();
 	void exportGRAILDataSetGenerator();
+	void exportGRAILDescriptorCalculator();
 	void exportBoostFunctionWrappers();
 }
 

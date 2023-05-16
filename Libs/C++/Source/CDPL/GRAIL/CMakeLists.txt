@@ -36,6 +36,7 @@ SET(cdpl-grail_LIB_SRCS
     BuriednessGridCalculator.cpp
     FeatureInteractionScoreGridCalculator.cpp
     GRAILDataSetGenerator.cpp
+    GRAILDescriptorCalculator.cpp
     
     CDFAttributedGridPropertyReader.cpp
     CDFAttributedGridPropertyWriter.cpp

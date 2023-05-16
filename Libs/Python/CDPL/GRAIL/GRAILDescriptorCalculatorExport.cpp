@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * GRAILDescriptorCalculatorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,27 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "Base/CopyAssOp.hpp"
+#include "Base/ObjectIdentityCheckVisitor.hpp"
+
 #include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
 
 
-BOOST_PYTHON_MODULE(_grail)
+void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
 {
-	using namespace CDPLPythonGRAIL;
-
-	exportAttributedGridProperties();
-	exportAttributedGridPropertyDefaults();
-	exportFeatureTypes();
-	
-	exportGeneralizedBellAtomDensity();
-	exportAtomDensityGridCalculator();
-	exportBuriednessScore();
-	exportBuriednessGridCalculator();
-	exportFeatureInteractionScoreGridCalculator();
-	exportGRAILDataSetGenerator();
-	exportGRAILDescriptorCalculator();
-		
-	exportAttributedGridFunctions();
-
-	exportBoostFunctionWrappers();
-	registerFromPythonConverters();
+    using namespace boost;
+    using namespace CDPL;
+  
+    python::class_<GRAIL::GRAILDescriptorCalculator, GRAIL::GRAILDescriptorCalculator::SharedPointer,
+				   boost::noncopyable>("GRAILDescriptorCalculator", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const GRAIL::GRAILDescriptorCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDescriptorCalculator>())
+		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDescriptorCalculator::operator=), 
+			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		;
 }

@@ -33,6 +33,7 @@ namespace CDPLPythonGRAIL
 
 	void exportAttributedGridProperties();
 	void exportAttributedGridPropertyDefaults();
+	void exportFeatureTypes();
 }
 
 #endif // CDPL_PYTHON_GRAIL_NAMESPACEEXPORTS_HPP

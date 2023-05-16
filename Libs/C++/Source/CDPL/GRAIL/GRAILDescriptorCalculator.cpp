@@ -1,7 +1,7 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+/* -*- mode: c++; c-basic-offcalculator: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * GRAILDescriptorCalculator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,33 +23,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
+ 
+#include "StaticInit.hpp"
 
-#include <boost/python.hpp>
-
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
+#include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
 
 
-BOOST_PYTHON_MODULE(_grail)
+using namespace CDPL;
+
+
+GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator()
 {
-	using namespace CDPLPythonGRAIL;
-
-	exportAttributedGridProperties();
-	exportAttributedGridPropertyDefaults();
-	exportFeatureTypes();
-	
-	exportGeneralizedBellAtomDensity();
-	exportAtomDensityGridCalculator();
-	exportBuriednessScore();
-	exportBuriednessGridCalculator();
-	exportFeatureInteractionScoreGridCalculator();
-	exportGRAILDataSetGenerator();
-	exportGRAILDescriptorCalculator();
-		
-	exportAttributedGridFunctions();
-
-	exportBoostFunctionWrappers();
-	registerFromPythonConverters();
 }

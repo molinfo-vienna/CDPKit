@@ -33,13 +33,15 @@
 
 #include "CDPL/GRAIL/AttributedGridProperty.hpp"
 #include "CDPL/GRAIL/AttributedGridPropertyDefault.hpp"
+#include "CDPL/GRAIL/FeatureType.hpp"
 
 #include "CDPL/GRAIL/GeneralizedBellAtomDensity.hpp"  
 #include "CDPL/GRAIL/AtomDensityGridCalculator.hpp"  
 #include "CDPL/GRAIL/BuriednessScore.hpp"  
 #include "CDPL/GRAIL/BuriednessGridCalculator.hpp"  
 #include "CDPL/GRAIL/FeatureInteractionScoreGridCalculator.hpp"  
-#include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"  
+#include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
+#include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"  
 
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
 

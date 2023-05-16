@@ -33,14 +33,16 @@ SET(grail_MOD_SRCS
     Module.cpp
   
     AttributedGridPropertyExport.cpp 
-    AttributedGridPropertyDefaultExport.cpp 
+    AttributedGridPropertyDefaultExport.cpp
+    FeatureTypeExport.cpp 
 
     GeneralizedBellAtomDensityExport.cpp
     AtomDensityGridCalculatorExport.cpp
     BuriednessScoreExport.cpp
     BuriednessGridCalculatorExport.cpp
     FeatureInteractionScoreGridCalculatorExport.cpp
-    GRAILDataSetGeneratorExport.cpp    
+    GRAILDataSetGeneratorExport.cpp
+    GRAILDescriptorCalculatorExport.cpp
 
     BoostFunctionWrapperExport.cpp
 
