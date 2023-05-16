@@ -149,7 +149,7 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     ##
     # \brief 
     #
-    DEF_CYCLE_STEP_COUNT_FACTOR = 1
+    DEF_CYCLE_STEP_COUNT_FACTOR = 1.0
 
     ##
     # \brief 
@@ -240,13 +240,13 @@ class DG2DCoordinatesGenerator(Boost.Python.instance):
     # \brief 
     # \param fact 
     #
-    def setCycleStepCountFactor(fact: int) -> None: pass
+    def setCycleStepCountFactor(fact: float) -> None: pass
 
     ##
     # \brief 
     # \return 
     #
-    def getCycleStepCountFactor() -> int: pass
+    def getCycleStepCountFactor() -> float: pass
 
     ##
     # \brief 
