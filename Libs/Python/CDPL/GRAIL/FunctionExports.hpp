@@ -32,6 +32,7 @@ namespace CDPLPythonGRAIL
 {
 
 	void exportAttributedGridFunctions();
+	void exportFeatureFunctions();
 }
 
 #endif // CDPL_PYTHON_GRAIL_FUNCTIONEXPORTS_HPP

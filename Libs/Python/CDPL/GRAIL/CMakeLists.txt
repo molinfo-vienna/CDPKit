@@ -47,6 +47,7 @@ SET(grail_MOD_SRCS
     BoostFunctionWrapperExport.cpp
 
     AttributedGridFunctionExport.cpp
+    FeatureFunctionExport.cpp
     
     FromPythonConverterRegistration.cpp
    )

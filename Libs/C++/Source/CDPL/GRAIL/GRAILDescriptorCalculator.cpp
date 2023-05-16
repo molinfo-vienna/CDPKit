@@ -27,11 +27,32 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
+#include "CDPL/GRAIL/FeatureType.hpp"
+#include "CDPL/Pharm/HydrophobicAtomFeatureGenerator.hpp"
 
 
 using namespace CDPL;
 
 
-GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator()
+namespace
 {
+
+	const double HYDROPHOBICIY_THRESHOLD = 0.15;
+}
+
+
+GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator():
+	tgtPharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS)
+{
+	Pharm::HydrophobicAtomFeatureGenerator::SharedPointer h_gen(new Pharm::HydrophobicAtomFeatureGenerator());
+	
+    h_gen->setHydrophobicityThreshold(HYDROPHOBICIY_THRESHOLD);
+
+    tgtPharmGenerator.setFeatureGenerator(FeatureType::HYDROPHOBIC, h_gen);
+	tgtPharmGenerator.enableFeature(FeatureType::HALOGEN_BOND_ACCEPTOR, true);
+}
+
+void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func)
+{
+	// TODO
 }

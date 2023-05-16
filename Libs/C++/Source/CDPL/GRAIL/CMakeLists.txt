@@ -42,6 +42,8 @@ SET(cdpl-grail_LIB_SRCS
     CDFAttributedGridPropertyWriter.cpp
 
     AttributedGridPropertyFunctions.cpp
+
+    FeatureExtendedTypeFunction.cpp
    )
 
 ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS})

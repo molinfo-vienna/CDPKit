@@ -44,5 +44,6 @@
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"  
 
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
+#include "CDPL/GRAIL/FeatureFunctions.hpp"
 
 #endif // CDPL_GRAIL_HPP

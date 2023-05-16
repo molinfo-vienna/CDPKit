@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * FeatureFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,31 +26,25 @@
 
 #include <boost/python.hpp>
 
-#include "ClassExports.hpp"
+#include "CDPL/GRAIL/FeatureFunctions.hpp"
+#include "CDPL/Pharm/Feature.hpp"
+
 #include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
+#include "FunctionWrapper.hpp"
 
 
-BOOST_PYTHON_MODULE(_grail)
+namespace
 {
-	using namespace CDPLPythonGRAIL;
 
-	exportAttributedGridProperties();
-	exportAttributedGridPropertyDefaults();
-	exportFeatureTypes();
-	
-	exportGeneralizedBellAtomDensity();
-	exportAtomDensityGridCalculator();
-	exportBuriednessScore();
-	exportBuriednessGridCalculator();
-	exportFeatureInteractionScoreGridCalculator();
-	exportGRAILDataSetGenerator();
-	exportGRAILDescriptorCalculator();
-		
-	exportAttributedGridFunctions();
-	exportFeatureFunctions();
-	
-	exportBoostFunctionWrappers();
-	registerFromPythonConverters();
+    MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveExtendedType, CDPL::Pharm::Feature&, bool);
+}
+
+
+void CDPLPythonGRAIL::exportFeatureFunctions()
+{
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::def("perceiveExtendedType", &perceiveExtendedTypeWrapper2,
+		(python::arg("feature"), python::arg("ligand")));
 }

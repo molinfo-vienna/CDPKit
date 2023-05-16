@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GRAILDescriptorCalculator.hpp 
+ * FeatureFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,19 +25,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::GRAIL::GRAILDescriptorCalculator.
+ * \brief Declaration of functions that operate on Pharm::Feature instances.
  */
 
-#ifndef CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP
-#define CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP
-
-#include <boost/shared_ptr.hpp>
+#ifndef CDPL_GRAIL_FEATUREFUNCTIONS_HPP
+#define CDPL_GRAIL_FEATUREFUNCTIONS_HPP
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
-#include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
-#include "CDPL/Pharm/BasicPharmacophore.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
-#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -46,31 +40,14 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class FeatureContainer;
-	}
-	
-	namespace GRAIL
+		class Feature;
+	};
+
+    namespace GRAIL 
     {
-	
-		/**
-		 * \brief GRAILDescriptorCalculator.
-		 * \see [\ref GRAIL]
-		 */
-		class CDPL_GRAIL_API GRAILDescriptorCalculator
-		{
-
-		  public:
-			typedef boost::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
-			
-			GRAILDescriptorCalculator();
-
-			void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func);
-			
-		  private:
-			Pharm::DefaultPharmacophoreGenerator  tgtPharmGenerator;
-			Pharm::BasicPharmacophore             tgtPharmacophore;
-		};
-	}
+		
+		CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool ligand);
+    }
 }
 
-#endif // CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP
+#endif // CDPL_GRAIL_FEATUREFUNCTIONS_HPP

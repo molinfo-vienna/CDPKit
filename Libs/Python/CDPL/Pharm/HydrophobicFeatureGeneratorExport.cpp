@@ -38,7 +38,8 @@ void CDPLPythonPharm::exportHydrophobicFeatureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::HydrophobicFeatureGenerator, python::bases<Pharm::PatternBasedFeatureGenerator>, 
+    python::class_<Pharm::HydrophobicFeatureGenerator, Pharm::HydrophobicFeatureGenerator::SharedPointer,
+				   python::bases<Pharm::PatternBasedFeatureGenerator>, 
 				   boost::noncopyable>("HydrophobicFeatureGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(

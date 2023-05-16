@@ -48,5 +48,7 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDescriptorCalculator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDescriptorCalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("initTargetData", &GRAIL::GRAILDescriptorCalculator::initTargetData,
+			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func")))
 		;
 }
