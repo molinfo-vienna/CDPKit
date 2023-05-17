@@ -46,7 +46,7 @@ namespace CDPL
     namespace GRAIL 
     {
 		
-		CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool ligand);
+		CDPL_GRAIL_API unsigned int perceiveExtendedType(const Pharm::Feature& feature, bool lig_side);
     }
 }
 

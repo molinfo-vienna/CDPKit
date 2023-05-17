@@ -31,6 +31,9 @@
 #ifndef CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP
 #define CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
@@ -43,12 +46,12 @@
 namespace CDPL 
 {
 
-	namespace Pharm
+	namespace Internal 
 	{
 
-		class FeatureContainer;
+		template <typename PT, typename CT, typename ST> class Octree;
 	}
-	
+
 	namespace GRAIL
     {
 	
@@ -64,11 +67,36 @@ namespace CDPL
 			
 			GRAILDescriptorCalculator();
 
-			void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func);
+			GRAILDescriptorCalculator(const GRAILDescriptorCalculator& calc);
+
+			GRAILDescriptorCalculator& operator=(const GRAILDescriptorCalculator& calc);
+
+			void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func, bool tgt_env_changed = true);
 			
 		  private:
+			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::vector<std::size_t> IndexList;
+			typedef std::vector<const Pharm::Feature*> FeatureList;
+			
+			struct FeatureSubset
+			{
+
+				FeatureList features;
+				OctreePtr   octree;
+			};
+
+			typedef std::vector<FeatureSubset> FeatureSubsetList;
+
+			void copyTargetFtrSubsetList(const FeatureSubsetList& ftr_ss_list);
+
 			Pharm::DefaultPharmacophoreGenerator  tgtPharmGenerator;
 			Pharm::BasicPharmacophore             tgtPharmacophore;
+			Math::Vector3DArray                   tgtAtomCoords;
+			OctreePtr                             tgtAtomOctree;
+			FeatureSubsetList                     tgtFtrSubsets;
+			Math::Vector3DArray                   tgtFtrCoords;
+			IndexList                             indexList;
 		};
 	}
 }

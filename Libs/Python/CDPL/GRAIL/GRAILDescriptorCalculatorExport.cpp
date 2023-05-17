@@ -44,11 +44,11 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
     python::class_<GRAIL::GRAILDescriptorCalculator, GRAIL::GRAILDescriptorCalculator::SharedPointer,
 				   boost::noncopyable>("GRAILDescriptorCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const GRAIL::GRAILDescriptorCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const GRAIL::GRAILDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDescriptorCalculator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDescriptorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("initTargetData", &GRAIL::GRAILDescriptorCalculator::initTargetData,
-			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func")))
+			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("tgt_env_changed") = true))
 		;
 }
