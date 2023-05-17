@@ -52,12 +52,12 @@ void CDPLPythonDescr::exportPharmacophoreRDFDescriptorCalculator()
 
     python::class_<Descr::PharmacophoreRDFDescriptorCalculator, boost::noncopyable>("PharmacophoreRDFDescriptorCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::PharmacophoreRDFDescriptorCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const Descr::PharmacophoreRDFDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(python::init<Pharm::FeatureContainer&, Math::DVector&>(
 				 (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::PharmacophoreRDFDescriptorCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Descr::PharmacophoreRDFDescriptorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("setFeature3DCoordinatesFunction", &Descr::PharmacophoreRDFDescriptorCalculator::setFeature3DCoordinatesFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("setFeaturePairWeightFunction", &Descr::PharmacophoreRDFDescriptorCalculator::setFeaturePairWeightFunction, 

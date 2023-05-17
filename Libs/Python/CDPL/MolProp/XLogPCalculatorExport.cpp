@@ -42,11 +42,11 @@ void CDPLPythonMolProp::exportXLogPCalculator()
 
 	python::class_<MolProp::XLogPCalculator, boost::noncopyable>("XLogPCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const MolProp::XLogPCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const MolProp::XLogPCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MolProp::XLogPCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&MolProp::XLogPCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("calculate", &MolProp::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
 		.def("getResult", &MolProp::XLogPCalculator::getResult, python::arg("self"))
 		.def("getFeatureVector", &MolProp::XLogPCalculator::getFeatureVector, python::arg("self"),

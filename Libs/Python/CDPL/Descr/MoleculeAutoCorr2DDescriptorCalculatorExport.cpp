@@ -51,12 +51,12 @@ void CDPLPythonDescr::exportMoleculeAutoCorr2DDescriptorCalculator()
 
 	cl
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::MoleculeAutoCorr2DDescriptorCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const Descr::MoleculeAutoCorr2DDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeAutoCorr2DDescriptorCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeAutoCorr2DDescriptorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("setMaxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance,
 			 (python::arg("self"), python::arg("max_dist")))
 		.def("getMaxDistance", &Descr::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,

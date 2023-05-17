@@ -66,7 +66,7 @@ void CDPLPythonChem::exportSubstructureHistogramCalculator()
 
 	cl
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::SubstructureHistogramCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const Chem::SubstructureHistogramCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SubstructureHistogramCalculator>())	
 		.def("addPattern", 
 			 static_cast<void (Chem::SubstructureHistogramCalculator::*)(const Chem::MolecularGraph::SharedPointer&, std::size_t, std::size_t, bool, bool)>(&Chem::SubstructureHistogramCalculator::addPattern), 
@@ -84,6 +84,6 @@ void CDPLPythonChem::exportSubstructureHistogramCalculator()
 		.def("calculate", &Chem::SubstructureHistogramCalculator::calculate<python::object>, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("histo")))
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::SubstructureHistogramCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.add_property("numPatterns", &Chem::SubstructureHistogramCalculator::getNumPatterns);
 }

@@ -41,7 +41,7 @@ void CDPLPythonForceField::exportMMFF94ChargeCalculator()
 
     python::class_<ForceField::MMFF94ChargeCalculator, ForceField::MMFF94ChargeCalculator::SharedPointer>("MMFF94ChargeCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94ChargeCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const ForceField::MMFF94ChargeCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(python::init<const Chem::MolecularGraph&, Util::DArray&, bool>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ChargeCalculator>())	

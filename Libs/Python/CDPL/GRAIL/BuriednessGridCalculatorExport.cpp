@@ -53,10 +53,10 @@ void CDPLPythonGRAIL::exportBuriednessGridCalculator()
 
     python::class_<GRAIL::BuriednessGridCalculator, GRAIL::BuriednessGridCalculator::SharedPointer, boost::noncopyable>("BuriednessGridCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const GRAIL::BuriednessGridCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const GRAIL::BuriednessGridCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BuriednessGridCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::BuriednessGridCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("setMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::setMinVdWSurfaceDistance, (python::arg("self"), python::arg("dist")))
 		.def("getMinVdWSurfaceDistance", &GRAIL::BuriednessGridCalculator::getMinVdWSurfaceDistance, python::arg("self"))
 		.def("setProbeRadius", &GRAIL::BuriednessGridCalculator::setProbeRadius, (python::arg("self"), python::arg("radius")))

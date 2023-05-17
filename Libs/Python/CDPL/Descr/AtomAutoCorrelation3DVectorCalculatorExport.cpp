@@ -52,12 +52,12 @@ void CDPLPythonDescr::exportAtomAutoCorrelation3DVectorCalculator()
 
     python::class_<Descr::AtomAutoCorrelation3DVectorCalculator, boost::noncopyable>("AtomAutoCorrelation3DVectorCalculator", python::no_init)
 	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Descr::AtomAutoCorrelation3DVectorCalculator&>((python::arg("self"), python::arg("calculator"))))
+	.def(python::init<const Descr::AtomAutoCorrelation3DVectorCalculator&>((python::arg("self"), python::arg("calc"))))
 	.def(python::init<Chem::AtomContainer&, Math::DVector&>(
 		 (python::arg("self"), python::arg("cntnr"), python::arg("vec"))))
 	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AtomAutoCorrelation3DVectorCalculator>())	
 	.def("assign", CDPLPythonBase::copyAssOp(&Descr::AtomAutoCorrelation3DVectorCalculator::operator=), 
-	     (python::arg("self"), python::arg("calculator")), python::return_self<>())
+	     (python::arg("self"), python::arg("calc")), python::return_self<>())
 	.def("setEntityPairWeightFunction", &Descr::AtomAutoCorrelation3DVectorCalculator::setEntityPairWeightFunction, 
 	     (python::arg("self"), python::arg("func")))
 	.def("setEntity3DCoordinatesFunction", &Descr::AtomAutoCorrelation3DVectorCalculator::setEntity3DCoordinatesFunction, 

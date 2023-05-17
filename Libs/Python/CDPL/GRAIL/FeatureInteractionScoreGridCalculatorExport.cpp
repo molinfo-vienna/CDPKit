@@ -48,10 +48,10 @@ void CDPLPythonGRAIL::exportFeatureInteractionScoreGridCalculator()
 				 (python::arg("self"), python::arg("func"))))
 		.def(python::init<const GRAIL::FeatureInteractionScoreGridCalculator::ScoringFunction&, const GRAIL::FeatureInteractionScoreGridCalculator::ScoreCombinationFunction&>(
 				 (python::arg("self"), python::arg("scoring_func"), python::arg("comb_func"))))
-		.def(python::init<const GRAIL::FeatureInteractionScoreGridCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const GRAIL::FeatureInteractionScoreGridCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::FeatureInteractionScoreGridCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::FeatureInteractionScoreGridCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("setDistanceCutoff", &GRAIL::FeatureInteractionScoreGridCalculator::setDistanceCutoff,
 			 (python::arg("self"), python::arg("dist")))
 		.def("getDistanceCutoff", &GRAIL::FeatureInteractionScoreGridCalculator::getDistanceCutoff,

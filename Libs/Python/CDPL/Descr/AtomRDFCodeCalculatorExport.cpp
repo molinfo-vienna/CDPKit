@@ -52,12 +52,12 @@ void CDPLPythonDescr::exportAtomRDFCodeCalculator()
 
 	python::class_<Descr::AtomRDFCodeCalculator, boost::noncopyable>("AtomRDFCodeCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::AtomRDFCodeCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const Descr::AtomRDFCodeCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(python::init<Chem::AtomContainer&, Math::DVector&>(
 				 (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AtomRDFCodeCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Descr::AtomRDFCodeCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("setEntityPairWeightFunction", &Descr::AtomRDFCodeCalculator::setEntityPairWeightFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("setEntity3DCoordinatesFunction", &Descr::AtomRDFCodeCalculator::setEntity3DCoordinatesFunction, 

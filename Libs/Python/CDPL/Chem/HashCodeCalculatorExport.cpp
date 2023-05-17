@@ -80,7 +80,7 @@ void CDPLPythonChem::exportHashCodeCalculator()
 
 	python::class_<Chem::HashCodeCalculator::DefAtomHashSeedFunctor>("DefAtomHashSeedFunctor", python::no_init)
 		.def(python::init<const Chem::HashCodeCalculator&, 
-			 unsigned int>((python::arg("self"), python::arg("calculator"), 
+			 unsigned int>((python::arg("self"), python::arg("calc"), 
 							python::arg("flags") = Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS)))
 		.def("__call__", &defAtomHashSeedFunction, (python::arg("self"), python::arg("atom")));
 

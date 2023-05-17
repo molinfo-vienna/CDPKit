@@ -43,12 +43,12 @@ void CDPLPythonDescr::exportAutoCorrelation2DVectorCalculator()
 
 	python::class_<Descr::AutoCorrelation2DVectorCalculator, boost::noncopyable>("AutoCorrelation2DVectorCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Descr::AutoCorrelation2DVectorCalculator&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const Descr::AutoCorrelation2DVectorCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::AutoCorrelation2DVectorCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Descr::AutoCorrelation2DVectorCalculator::operator=), 
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("setMaxDistance", &Descr::AutoCorrelation2DVectorCalculator::setMaxDistance,
 			 (python::arg("self"), python::arg("max_dist")))
 		.def("getMaxDistance", &Descr::AutoCorrelation2DVectorCalculator::getMaxDistance,

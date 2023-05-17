@@ -57,10 +57,10 @@ void CDPLPythonGRAIL::exportGRAILDataSetGenerator()
     python::class_<GRAIL::GRAILDataSetGenerator, GRAIL::GRAILDataSetGenerator::SharedPointer,
 				   boost::noncopyable>("GRAILDataSetGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const GRAIL::GRAILDataSetGenerator&>((python::arg("self"), python::arg("generator"))))
+		.def(python::init<const GRAIL::GRAILDataSetGenerator&>((python::arg("self"), python::arg("gen"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::GRAILDataSetGenerator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::GRAILDataSetGenerator::operator=), 
-			 (python::arg("self"), python::arg("generator")), python::return_self<>())
+			 (python::arg("self"), python::arg("gen")), python::return_self<>())
 		.def("setScoringFunction", &GRAIL::GRAILDataSetGenerator::setScoringFunction, 
 			 (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type"), python::arg("func")))
 		.def("removeScoringFunction", &GRAIL::GRAILDataSetGenerator::removeScoringFunction, 

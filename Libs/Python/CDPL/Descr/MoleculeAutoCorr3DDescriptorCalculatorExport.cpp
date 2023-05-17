@@ -52,12 +52,12 @@ void CDPLPythonDescr::exportMoleculeAutoCorr3DDescriptorCalculator()
 
     python::class_<Descr::MoleculeAutoCorr3DDescriptorCalculator, boost::noncopyable>("MoleculeAutoCorr3DDescriptorCalculator", python::no_init)
 	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Descr::MoleculeAutoCorr3DDescriptorCalculator&>((python::arg("self"), python::arg("calculator"))))
+	.def(python::init<const Descr::MoleculeAutoCorr3DDescriptorCalculator&>((python::arg("self"), python::arg("calc"))))
 	.def(python::init<Chem::AtomContainer&, Math::DVector&>(
 		 (python::arg("self"), python::arg("cntnr"), python::arg("descr"))))
 	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Descr::MoleculeAutoCorr3DDescriptorCalculator>())	
 	.def("assign", CDPLPythonBase::copyAssOp(&Descr::MoleculeAutoCorr3DDescriptorCalculator::operator=), 
-	     (python::arg("self"), python::arg("calculator")), python::return_self<>())
+	     (python::arg("self"), python::arg("calc")), python::return_self<>())
 	.def("setAtom3DCoordinatesFunction", &Descr::MoleculeAutoCorr3DDescriptorCalculator::setAtom3DCoordinatesFunction, 
 	     (python::arg("self"), python::arg("func")))
 	.def("setAtomPairWeightFunction", &Descr::MoleculeAutoCorr3DDescriptorCalculator::setAtomPairWeightFunction, 
