@@ -31,9 +31,9 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: FeatureRDFCodeCalculator) -> None: pass
+    def __init__(calc: FeatureRDFCodeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %FeatureRDFCodeCalculator instance.
@@ -55,11 +55,11 @@ class FeatureRDFCodeCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureRDFCodeCalculator instance \a calculator.
-    # \param calculator The \e %FeatureRDFCodeCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureRDFCodeCalculator instance \a calc.
+    # \param calc The \e %FeatureRDFCodeCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
+    def assign(calc: FeatureRDFCodeCalculator) -> FeatureRDFCodeCalculator: pass
 
     ##
     # \brief 

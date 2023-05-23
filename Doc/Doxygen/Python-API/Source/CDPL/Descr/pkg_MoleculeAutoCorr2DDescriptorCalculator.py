@@ -46,9 +46,9 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
+    def __init__(calc: MoleculeAutoCorr2DDescriptorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MoleculeAutoCorr2DDescriptorCalculator instance.
@@ -70,11 +70,11 @@ class MoleculeAutoCorr2DDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calculator.
-    # \param calculator The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MoleculeAutoCorr2DDescriptorCalculator instance \a calc.
+    # \param calc The \e %MoleculeAutoCorr2DDescriptorCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: MoleculeAutoCorr2DDescriptorCalculator) -> MoleculeAutoCorr2DDescriptorCalculator: pass
+    def assign(calc: MoleculeAutoCorr2DDescriptorCalculator) -> MoleculeAutoCorr2DDescriptorCalculator: pass
 
     ##
     # \brief 

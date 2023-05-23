@@ -78,9 +78,9 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %FeatureInteractionScoreGridCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: FeatureInteractionScoreGridCalculator) -> None: pass
+    def __init__(calc: FeatureInteractionScoreGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -95,11 +95,11 @@ class FeatureInteractionScoreGridCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreGridCalculator instance \a calculator.
-    # \param calculator The \e %FeatureInteractionScoreGridCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %FeatureInteractionScoreGridCalculator instance \a calc.
+    # \param calc The \e %FeatureInteractionScoreGridCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: FeatureInteractionScoreGridCalculator) -> FeatureInteractionScoreGridCalculator: pass
+    def assign(calc: FeatureInteractionScoreGridCalculator) -> FeatureInteractionScoreGridCalculator: pass
 
     ##
     # \brief 

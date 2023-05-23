@@ -36,9 +36,9 @@ class GRAILDataSetGenerator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %GRAILDataSetGenerator instance.
-    # \param generator 
+    # \param gen 
     #
-    def __init__(generator: GRAILDataSetGenerator) -> None: pass
+    def __init__(gen: GRAILDataSetGenerator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -53,11 +53,11 @@ class GRAILDataSetGenerator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDataSetGenerator instance \a generator.
-    # \param generator The \e %GRAILDataSetGenerator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDataSetGenerator instance \a gen.
+    # \param gen The \e %GRAILDataSetGenerator instance to copy.
     # \return \a self
     #
-    def assign(generator: GRAILDataSetGenerator) -> GRAILDataSetGenerator: pass
+    def assign(gen: GRAILDataSetGenerator) -> GRAILDataSetGenerator: pass
 
     ##
     # \brief 

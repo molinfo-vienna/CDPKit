@@ -31,9 +31,9 @@ class MMFF94GradientCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: MMFF94GradientCalculator) -> None: pass
+    def __init__(calc: MMFF94GradientCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94GradientCalculator instance.
@@ -55,11 +55,11 @@ class MMFF94GradientCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94GradientCalculator instance \a calculator.
-    # \param calculator The \e %MMFF94GradientCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %MMFF94GradientCalculator instance \a calc.
+    # \param calc The \e %MMFF94GradientCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: MMFF94GradientCalculator) -> MMFF94GradientCalculator: pass
+    def assign(calc: MMFF94GradientCalculator) -> MMFF94GradientCalculator: pass
 
     ##
     # \brief 

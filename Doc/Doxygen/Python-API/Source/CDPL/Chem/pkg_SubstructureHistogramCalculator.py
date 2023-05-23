@@ -131,9 +131,9 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %SubstructureHistogramCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: SubstructureHistogramCalculator) -> None: pass
+    def __init__(calc: SubstructureHistogramCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -195,11 +195,11 @@ class SubstructureHistogramCalculator(Boost.Python.instance):
     def calculate(molgraph: MolecularGraph, histo: object) -> None: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %SubstructureHistogramCalculator instance \a calculator.
-    # \param calculator The \e %SubstructureHistogramCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %SubstructureHistogramCalculator instance \a calc.
+    # \param calc The \e %SubstructureHistogramCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: SubstructureHistogramCalculator) -> SubstructureHistogramCalculator: pass
+    def assign(calc: SubstructureHistogramCalculator) -> SubstructureHistogramCalculator: pass
 
     ##
     # \brief 

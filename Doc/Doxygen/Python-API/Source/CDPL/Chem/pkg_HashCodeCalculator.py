@@ -31,10 +31,10 @@ class HashCodeCalculator(Boost.Python.instance):
 
         ##
         # \brief Initializes the \e %DefAtomHashSeedFunctor instance.
-        # \param calculator 
+        # \param calc 
         # \param flags 
         #
-        def __init__(calculator: HashCodeCalculator, flags: int = 159) -> None: pass
+        def __init__(calc: HashCodeCalculator, flags: int = 159) -> None: pass
 
         ##
         # \brief 

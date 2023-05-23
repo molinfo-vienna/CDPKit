@@ -36,9 +36,9 @@ class LogSCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: LogSCalculator) -> None: pass
+    def __init__(calc: LogSCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %LogSCalculator instance.
@@ -59,11 +59,11 @@ class LogSCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %LogSCalculator instance \a calculator.
-    # \param calculator The \e %LogSCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %LogSCalculator instance \a calc.
+    # \param calc The \e %LogSCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: LogSCalculator) -> LogSCalculator: pass
+    def assign(calc: LogSCalculator) -> LogSCalculator: pass
 
     ##
     # \brief 

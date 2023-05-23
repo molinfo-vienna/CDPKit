@@ -31,9 +31,9 @@ class BuriednessGridCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %BuriednessGridCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: BuriednessGridCalculator) -> None: pass
+    def __init__(calc: BuriednessGridCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -48,11 +48,11 @@ class BuriednessGridCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessGridCalculator instance \a calculator.
-    # \param calculator The \e %BuriednessGridCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %BuriednessGridCalculator instance \a calc.
+    # \param calc The \e %BuriednessGridCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
+    def assign(calc: BuriednessGridCalculator) -> BuriednessGridCalculator: pass
 
     ##
     # \brief 

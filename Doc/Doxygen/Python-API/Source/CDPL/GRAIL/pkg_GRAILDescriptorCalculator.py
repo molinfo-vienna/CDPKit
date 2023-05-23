@@ -25,15 +25,25 @@
 class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
+    # \brief 
+    #
+    TOTAL_DESCRIPTOR_SIZE = 101
+
+    ##
+    # \brief 
+    #
+    LIGAND_DESCRIPTOR_SIZE = 28
+
+    ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
     #
     def __init__() -> None: pass
 
     ##
     # \brief Initializes the \e %GRAILDescriptorCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: GRAILDescriptorCalculator) -> None: pass
+    def __init__(calc: GRAILDescriptorCalculator) -> None: pass
 
     ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
@@ -48,18 +58,25 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDescriptorCalculator instance \a calculator.
-    # \param calculator The \e %GRAILDescriptorCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GRAILDescriptorCalculator instance \a calc.
+    # \param calc The \e %GRAILDescriptorCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: GRAILDescriptorCalculator) -> GRAILDescriptorCalculator: pass
+    def assign(calc: GRAILDescriptorCalculator) -> GRAILDescriptorCalculator: pass
 
     ##
     # \brief 
     # \param tgt_env 
     # \param coords_func 
+    # \param tgt_env_changed 
     #
-    def initTargetData(tgt_env: CDPL.Chem.MolecularGraph, coords_func: CDPL.Chem.Atom3DCoordinatesFunction) -> None: pass
+    def initTargetData(tgt_env: CDPL.Chem.MolecularGraph, coords_func: CDPL.Chem.Atom3DCoordinatesFunction, tgt_env_changed: bool = True) -> None: pass
+
+    ##
+    # \brief 
+    # \param ligand 
+    #
+    def initLigandData(ligand: CDPL.Chem.MolecularGraph) -> None: pass
 
     ##
     # \brief 

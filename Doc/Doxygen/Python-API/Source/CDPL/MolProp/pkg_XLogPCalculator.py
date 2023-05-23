@@ -36,9 +36,9 @@ class XLogPCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %XLogPCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: XLogPCalculator) -> None: pass
+    def __init__(calc: XLogPCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %XLogPCalculator instance.
@@ -59,11 +59,11 @@ class XLogPCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %XLogPCalculator instance \a calculator.
-    # \param calculator The \e %XLogPCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %XLogPCalculator instance \a calc.
+    # \param calc The \e %XLogPCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: XLogPCalculator) -> XLogPCalculator: pass
+    def assign(calc: XLogPCalculator) -> XLogPCalculator: pass
 
     ##
     # \brief 

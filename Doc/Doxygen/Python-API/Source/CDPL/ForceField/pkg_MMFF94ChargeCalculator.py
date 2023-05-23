@@ -31,9 +31,9 @@ class MMFF94ChargeCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: MMFF94ChargeCalculator) -> None: pass
+    def __init__(calc: MMFF94ChargeCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %MMFF94ChargeCalculator instance.

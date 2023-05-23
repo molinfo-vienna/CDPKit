@@ -31,9 +31,9 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: AutoCorrelation2DVectorCalculator) -> None: pass
+    def __init__(calc: AutoCorrelation2DVectorCalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %AutoCorrelation2DVectorCalculator instance.
@@ -55,11 +55,11 @@ class AutoCorrelation2DVectorCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %AutoCorrelation2DVectorCalculator instance \a calculator.
-    # \param calculator The \e %AutoCorrelation2DVectorCalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %AutoCorrelation2DVectorCalculator instance \a calc.
+    # \param calc The \e %AutoCorrelation2DVectorCalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: AutoCorrelation2DVectorCalculator) -> AutoCorrelation2DVectorCalculator: pass
+    def assign(calc: AutoCorrelation2DVectorCalculator) -> AutoCorrelation2DVectorCalculator: pass
 
     ##
     # \brief 

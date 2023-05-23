@@ -31,9 +31,9 @@ class TPSACalculator(Boost.Python.instance):
 
     ##
     # \brief Initializes the \e %TPSACalculator instance.
-    # \param calculator 
+    # \param calc 
     #
-    def __init__(calculator: TPSACalculator) -> None: pass
+    def __init__(calc: TPSACalculator) -> None: pass
 
     ##
     # \brief Initializes the \e %TPSACalculator instance.
@@ -54,11 +54,11 @@ class TPSACalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %TPSACalculator instance \a calculator.
-    # \param calculator The \e %TPSACalculator instance to copy.
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %TPSACalculator instance \a calc.
+    # \param calc The \e %TPSACalculator instance to copy.
     # \return \a self
     #
-    def assign(calculator: TPSACalculator) -> TPSACalculator: pass
+    def assign(calc: TPSACalculator) -> TPSACalculator: pass
 
     ##
     # \brief 
