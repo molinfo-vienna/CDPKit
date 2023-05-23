@@ -55,7 +55,15 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     "libpython"
     "system32"
     "ms-win-core"
-    "Qt"	
+    "Qt"
+    "libstdc\\+\\+"
+    "libgcc"
+    "libm\\.so"
+    "libm-"
+    "libc\\.so"
+    "libc-"
+    "librt"
+    "libdl"
     "${CMAKE_INSTALL_PREFIX_X_PTN}"
     )
  
