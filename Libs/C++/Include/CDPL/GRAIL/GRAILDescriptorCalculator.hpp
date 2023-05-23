@@ -32,6 +32,7 @@
 #define CDPL_GRAIL_GRAILDESCRIPTORCALCULATOR_HPP
 
 #include <vector>
+#include <utility>
 #include <cstddef>
 
 #include <boost/shared_ptr.hpp>
@@ -41,6 +42,7 @@
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
@@ -51,7 +53,7 @@ namespace CDPL
 
 		template <typename PT, typename CT, typename ST> class Octree;
 	}
-
+	
 	namespace GRAIL
     {
 	
@@ -63,6 +65,9 @@ namespace CDPL
 		{
 
 		  public:
+			static const std::size_t TOTAL_DESCRIPTOR_SIZE  = 101;
+			static const std::size_t LIGAND_DESCRIPTOR_SIZE = 28;
+			
 			typedef boost::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
 			
 			GRAILDescriptorCalculator();
@@ -72,12 +77,31 @@ namespace CDPL
 			GRAILDescriptorCalculator& operator=(const GRAILDescriptorCalculator& calc);
 
 			void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func, bool tgt_env_changed = true);
+
+			void initLigandData(const Chem::MolecularGraph& ligand);
+
+			void calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res);
 			
 		  private:
+			void calcLigDescriptor(const Chem::MolecularGraph& ligand);
+			
+			void calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords);
+			
+			void calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx);
+			double calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray& atom_coords, unsigned int tgt_ftr_type, bool is_hba_type);
+			
+			void calcFeatureInteractionScores(Math::DVector& res, std::size_t& idx);
+
+			void calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx);
+
+			void calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t idx);
+			
 			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
 			typedef boost::shared_ptr<Octree> OctreePtr;
 			typedef std::vector<std::size_t> IndexList;
 			typedef std::vector<const Pharm::Feature*> FeatureList;
+			typedef std::vector<double> DoubleArray;
+			typedef std::vector<IndexList> IndexListArray;
 			
 			struct FeatureSubset
 			{
@@ -87,16 +111,31 @@ namespace CDPL
 			};
 
 			typedef std::vector<FeatureSubset> FeatureSubsetList;
-
-			void copyTargetFtrSubsetList(const FeatureSubsetList& ftr_ss_list);
+			typedef std::pair<double, double> DoublePair;
+			typedef std::vector<DoublePair> DoublePairArray;
+			
+			void initPharmGenerators();
+			void copyTgtFtrSubsets(const FeatureSubsetList& ftr_ss_list);
 
 			Pharm::DefaultPharmacophoreGenerator  tgtPharmGenerator;
 			Pharm::BasicPharmacophore             tgtPharmacophore;
+			DoubleArray                           tgtAtomCharges;
+			DoublePairArray                       tgtAtomVdWParams;
 			Math::Vector3DArray                   tgtAtomCoords;
 			OctreePtr                             tgtAtomOctree;
 			FeatureSubsetList                     tgtFtrSubsets;
 			Math::Vector3DArray                   tgtFtrCoords;
-			IndexList                             indexList;
+			Pharm::DefaultPharmacophoreGenerator  ligPharmGenerator;
+			Pharm::BasicPharmacophore             ligPharmacophore;
+			DoubleArray                           ligAtomCharges;
+			DoublePairArray                       ligAtomVdWParams;
+			IndexList                             ligHeavyAtoms;
+			IndexListArray                        ligFtrSubsets;
+			IndexListArray                        ligFtrAtoms;
+			DoubleArray                           ligFtrWeights;
+			Math::Vector3DArray                   ligFtrCoords;
+			double                                ligDescriptor[LIGAND_DESCRIPTOR_SIZE];
+			IndexList                             tmpIndexList;
 		};
 	}
 }

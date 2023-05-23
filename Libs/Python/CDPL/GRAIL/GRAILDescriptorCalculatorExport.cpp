@@ -50,5 +50,9 @@ void CDPLPythonGRAIL::exportGRAILDescriptorCalculator()
 			 (python::arg("self"), python::arg("calc")), python::return_self<>())
 		.def("initTargetData", &GRAIL::GRAILDescriptorCalculator::initTargetData,
 			 (python::arg("self"), python::arg("tgt_env"), python::arg("coords_func"), python::arg("tgt_env_changed") = true))
+		.def("initLigandData", &GRAIL::GRAILDescriptorCalculator::initLigandData, (python::arg("self"), python::arg("ligand")))
+		.def("calculate", &GRAIL::GRAILDescriptorCalculator::calculate, (python::arg("atom_coords"), python::arg("res")))
+		.def_readonly("TOTAL_DESCRIPTOR_SIZE", GRAIL::GRAILDescriptorCalculator::TOTAL_DESCRIPTOR_SIZE)
+		.def_readonly("LIGAND_DESCRIPTOR_SIZE", GRAIL::GRAILDescriptorCalculator::LIGAND_DESCRIPTOR_SIZE)
 		;
 }
