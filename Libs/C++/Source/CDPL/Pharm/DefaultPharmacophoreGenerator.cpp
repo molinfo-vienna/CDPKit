@@ -41,18 +41,18 @@
 using namespace CDPL; 
 
 
-Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(Configuration config)
+Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(int config)
 {
     init(config);
 }
 
-Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, Configuration config)
+Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, int config)
 {
     init(config);
     generate(molgraph, pharm);
 }
 
-void Pharm::DefaultPharmacophoreGenerator::init(Configuration config)
+void Pharm::DefaultPharmacophoreGenerator::init(int config)
 {
 	setFeatureGenerator(FeatureType::HYDROPHOBIC, FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator()));
 	setFeatureGenerator(FeatureType::AROMATIC, FeatureGenerator::SharedPointer(new AromaticFeatureGenerator()));
@@ -71,7 +71,7 @@ void Pharm::DefaultPharmacophoreGenerator::init(Configuration config)
     enableFeature(FeatureType::HALOGEN_BOND_DONOR, true);
 }
 
-void Pharm::DefaultPharmacophoreGenerator::applyConfiguration(Configuration config)
+void Pharm::DefaultPharmacophoreGenerator::applyConfiguration(int config)
 {
 	setFeatureGenerator(FeatureType::NEGATIVE_IONIZABLE, FeatureGenerator::SharedPointer(new NegIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
 	setFeatureGenerator(FeatureType::POSITIVE_IONIZABLE, FeatureGenerator::SharedPointer(new PosIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));

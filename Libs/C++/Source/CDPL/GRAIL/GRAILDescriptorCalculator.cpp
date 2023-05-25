@@ -51,6 +51,8 @@
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
+#include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Internal/Octree.hpp"
 
 
@@ -170,12 +172,50 @@ namespace
                      
 		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::HALOGEN_BOND_DONOR, GRAIL::FeatureType::HALOGEN_BOND_ACCEPTOR, FISPtr(new XBondingInteractionScore(true)), true });
 	}
+
+	struct LigandFtrType
+	{
+
+		unsigned int type;
+		bool         isHBD;
+
+	} LIGAND_DESCR_FTR_TYPES[] = {
+	    { GRAIL::FeatureType::POSITIVE_IONIZABLE, false },
+		{ GRAIL::FeatureType::NEGATIVE_IONIZABLE, false },
+		{ GRAIL::FeatureType::AROMATIC, false },
+		{ GRAIL::FeatureType::HYDROPHOBIC, false },
+		{ GRAIL::FeatureType::H_BOND_DONOR, true },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR, false },
+		{ GRAIL::FeatureType::HALOGEN_BOND_DONOR, false },
+		{ GRAIL::FeatureType::HALOGEN_BOND_ACCEPTOR, false },
+		{ GRAIL::FeatureType::H_BOND_DONOR_N3, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_N2, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_Nar, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_Nam, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_Npl3, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_N4, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_O3, true },
+		{ GRAIL::FeatureType::H_BOND_DONOR_S3, true },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, false },
+		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, false }
+	};
+
+	const std::size_t NUM_LIGAND_DESCR_FTR_TYPES = sizeof(LIGAND_DESCR_FTR_TYPES) / sizeof(LigandFtrType);
 	
-	const double HYDROPHOBICIY_THRESHOLD = 0.15;
-	const double FEATURE_DISTANCE_CUTOFF = 10.0;
-	const double ESTAT_DISTANCE_CUTOFF   = 20.0;
-	const double VDW_DISTANCE_CUTOFF     = 20.0;
-	const double DIELECTRIC_CONST        = 1.0;
+	const double HYDROPHOBICIY_THRESHOLD         = 0.15;
+	const double FEATURE_DISTANCE_CUTOFF         = 10.0;
+	const double ESTAT_DISTANCE_CUTOFF           = 30.0;
+	const double DIELECTRIC_CONST                = 1.0;
+	const double VDW_DISTANCE_CUTOFF             = 10.0;
+	const double VDW_POLAR_H_DIST_SCALING_FACTOR = 0.5;
 }
 
 
@@ -184,19 +224,20 @@ const std::size_t GRAIL::GRAILDescriptorCalculator::LIGAND_DESCRIPTOR_SIZE;
 
 
 GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator():
-	tgtPharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS),
+	tgtPharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS | Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY),
 	tgtAtomOctree(new Octree()), tgtFtrSubsets(FeatureType::MAX_EXT_TYPE + 1),
-	ligPharmGenerator(), ligFtrSubsets(FeatureType::MAX_EXT_TYPE + 1)
+	ligPharmGenerator(Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY), ligFtrSubsets(FeatureType::MAX_EXT_TYPE + 1)
 {
 	initPharmGenerators();
 }
 
 GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator(const GRAILDescriptorCalculator& calc):
-	tgtPharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS), tgtPharmacophore(calc.tgtPharmacophore),
-	tgtAtomCharges(calc.tgtAtomCharges), tgtAtomVdWParams(calc.tgtAtomVdWParams), tgtAtomCoords(calc.tgtAtomCoords),
-	tgtAtomOctree(new Octree()), tgtFtrSubsets(FeatureType::MAX_EXT_TYPE + 1), ligPharmGenerator(),
-	ligAtomCharges(calc.ligAtomCharges), ligAtomVdWParams(calc.ligAtomVdWParams), ligHeavyAtoms(calc.ligHeavyAtoms),
-	ligFtrSubsets(calc.ligFtrSubsets), ligFtrAtoms(calc.ligFtrAtoms), ligFtrWeights(calc.ligFtrWeights)
+	tgtPharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS | Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY),
+	tgtPharmacophore(calc.tgtPharmacophore), tgtAtomCharges(calc.tgtAtomCharges), tgtAtomVdWParams(calc.tgtAtomVdWParams),
+	tgtAtomCoords(calc.tgtAtomCoords), tgtAtomOctree(new Octree()), tgtFtrSubsets(FeatureType::MAX_EXT_TYPE + 1),
+	ligPharmGenerator(Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY), ligAtomCharges(calc.ligAtomCharges),
+	ligAtomVdWParams(calc.ligAtomVdWParams), ligHeavyAtoms(calc.ligHeavyAtoms), ligFtrSubsets(calc.ligFtrSubsets),
+	ligFtrAtoms(calc.ligFtrAtoms), ligFtrWeights(calc.ligFtrWeights)
 {
 	initPharmGenerators();
 
@@ -256,7 +297,7 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 		if (tgt_env_changed) {
 			tgtAtomCharges[i] = ForceField::getMMFF94Charge(atom);
 
-			// TODO: VdW params
+			getVdWParameters(atom, tgt_env, tgtAtomVdWParams[i]);
 		}
 	}
 	
@@ -316,6 +357,9 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 	if (ligAtomVdWParams.size() < num_atoms)
 		ligAtomVdWParams.resize(num_atoms);
 
+	ligDescriptor[TOTAL_HYD] = 0.0;
+	ligDescriptor[LOGP] = 0.0;
+	
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		const Atom& atom = ligand.getAtom(i);
 
@@ -324,7 +368,9 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 
 		ligAtomCharges[i] = ForceField::getMMFF94Charge(atom);
 
-		// TODO: VdW params
+		getVdWParameters(atom, ligand, ligAtomVdWParams[i]);
+
+		ligDescriptor[LOGP] += MolProp::getHydrophobicity(atom); 
 	}
 	
 	ligPharmGenerator.generate(ligand, ligPharmacophore);
@@ -357,9 +403,11 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 		
 		unsigned int ext_type = perceiveExtendedType(ftr, true);
 
-		if (ext_type == FeatureType::HYDROPHOBIC)
+		if (ext_type == FeatureType::HYDROPHOBIC) {
 			ligFtrWeights[i] = getHydrophobicity(ftr);
-		else
+			ligDescriptor[TOTAL_HYD] += ligFtrWeights[i];
+			
+		} else
 			ligFtrWeights[i] = 1.0;
 
 		if (ext_type > FeatureType::MAX_EXT_TYPE) // sanity check
@@ -368,29 +416,50 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 		ligFtrSubsets[ext_type].push_back(i);
 	}
 
-	calcLigDescriptor(ligand);
+	for (std::size_t i = 0; i < NUM_LIGAND_DESCR_FTR_TYPES; i++) {
+		const IndexList& ftrs = ligFtrSubsets[LIGAND_DESCR_FTR_TYPES[i].type];
+		
+		if (!LIGAND_DESCR_FTR_TYPES[i].isHBD) {
+			ligDescriptor[i] = ftrs.size();
+			continue;
+		}
+
+		// for H-donor atoms the number of attached Hs has to be considered 
+		ligDescriptor[i] = 0;
+
+		for (IndexList::const_iterator f_it = ftrs.begin(), f_end = ftrs.end(); f_it != f_end; ++f_it) {
+			const Feature& ftr = ligPharmacophore.getFeature(*f_it);
+			const Fragment::SharedPointer& ftr_substruct = getSubstructure(ftr);
+
+			for (Fragment::ConstAtomIterator a_it = ftr_substruct->getAtomsBegin(), a_end = ftr_substruct->getAtomsEnd(); a_it != a_end; ++a_it) {
+				const Atom& atom = *a_it;
+
+				if (getType(atom) == AtomType::H)
+					continue;
+
+				ligDescriptor[i] += MolProp::getAtomCount(atom, ligand, AtomType::H);
+				break;
+			}
+		}
+	}
 }
 
-void GRAIL::GRAILDescriptorCalculator::calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res)
+void GRAIL::GRAILDescriptorCalculator::calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res, bool update_lig_descr)
 {
 	if (res.getSize() < TOTAL_DESCRIPTOR_SIZE)
 		res.resize(TOTAL_DESCRIPTOR_SIZE);
 
-	std::size_t idx = 0;
+	std::size_t idx = (update_lig_descr ? std::size_t(0) : LIGAND_DESCRIPTOR_SIZE);
 
-	for ( ; idx < LIGAND_DESCRIPTOR_SIZE; idx++)
-		res[idx] = ligDescriptor[idx];
+	if (update_lig_descr)
+		for ( ; idx < LIGAND_DESCRIPTOR_SIZE; idx++)
+			res[idx] = ligDescriptor[idx];
 	
 	calcLigFtrCoordinates(atom_coords);
 	calcTgtEnvHBAHBDOccupations(atom_coords, res, idx);
 	calcFeatureInteractionScores(res, idx);
 	calcElectrostaticInteractionEnergy(atom_coords, res, idx);
 	calcVdWInteractionEnergy(atom_coords, res, idx);
-}
-
-void GRAIL::GRAILDescriptorCalculator::calcLigDescriptor(const Chem::MolecularGraph& ligand)
-{
-	// TODO
 }
 
 void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords)
@@ -514,9 +583,80 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
 	res[idx++] = energy;
 }
 
+/*
+ * Uses a Morse potential:
+ * V = D,i,j * (e^(-2 * alpha * (r,i,j - x,i,j)) - 2 * e^(-alpha * (r,i,j - x,i,j)))
+ * D,i,j = sqrt(D,i * D,j)
+ * x,i,j = sqrt(x,i * x,j) * 2^(1/6)
+ */
 void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t idx)
 {
-	// TODO
+	const double RMIN_FACT = std::pow(2, 1.0 / 6);
+	const double ALPHA = 1.1;
+
+	double energy = 0.0;
+	
+	for (std::size_t i = 0, num_lig_atoms = atom_coords.getSize(); i < num_lig_atoms; i++) {
+		const DoublePair& la_params = ligAtomVdWParams[i];
+		const Math::Vector3D& la_pos = atom_coords[i];
+
+		tmpIndexList.clear();
+		tgtAtomOctree->radiusNeighbors<Octree::L2Distance>(la_pos, VDW_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
+
+		for (IndexList::const_iterator ta_it = tmpIndexList.begin(), ta_end = tmpIndexList.end(); ta_it != ta_end; ++ta_it) {
+			std::size_t tgt_atom_idx = *ta_it;
+			const DoublePair& ta_params = tgtAtomVdWParams[tgt_atom_idx];
+
+			double r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
+			double D_ij = std::sqrt(la_params.second * ta_params.second);
+            double x_ij = RMIN_FACT * std::sqrt(la_params.first * ta_params.first);
+			double r_delta = r_ij - x_ij;
+
+            energy += D_ij * (std::exp(-2 * ALPHA * r_delta) - 2 * std::exp(-ALPHA * r_delta));
+		}
+	}
+
+	res[idx++] = energy;
+}
+
+void GRAIL::GRAILDescriptorCalculator::getVdWParameters(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, DoublePair& params) const
+{
+	using namespace ForceField;
+	
+	const UFFAtomTypePropertyTable::Entry& uff_props = UFFAtomTypePropertyTable::get()->getEntry(perceiveUFFType(atom, molgraph));
+
+	if (!uff_props) {
+		params.first = 0.0;
+		params.second = 0.0;
+		return;
+	}
+	
+	params.first = uff_props.getVdWDistance();
+	params.second = uff_props.getVdWEnergy();
+
+	if (isPolarHydrogen(atom, molgraph))
+		params.first *= VDW_POLAR_H_DIST_SCALING_FACTOR;
+}
+			
+bool GRAIL::GRAILDescriptorCalculator::isPolarHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const
+{
+	using namespace Chem;
+
+	if (getType(atom) != AtomType::H)
+		return false;
+	
+	if (atom.getNumAtoms() != 1 || !molgraph.containsAtom(atom.getAtom(0)))
+        return false;
+        
+    switch (getType(atom.getAtom(0))) {
+
+		case AtomType::N:
+		case AtomType::O:
+		case AtomType::S:
+			return true;
+	}
+
+	return false;
 }
 
 void GRAIL::GRAILDescriptorCalculator::initPharmGenerators()
@@ -527,7 +667,6 @@ void GRAIL::GRAILDescriptorCalculator::initPharmGenerators()
 
     tgtPharmGenerator.setFeatureGenerator(FeatureType::HYDROPHOBIC, tgt_h_gen);
 	tgtPharmGenerator.enableFeature(FeatureType::HALOGEN_BOND_ACCEPTOR, true);
-	tgtPharmGenerator.enableFeature(FeatureType::POSITIVE_IONIZABLE, false);
 	tgtPharmGenerator.enableFeature(FeatureType::NEGATIVE_IONIZABLE, false);
 
 	Pharm::HydrophobicAtomFeatureGenerator::SharedPointer lig_h_gen(new Pharm::HydrophobicAtomFeatureGenerator());
@@ -535,8 +674,6 @@ void GRAIL::GRAILDescriptorCalculator::initPharmGenerators()
     lig_h_gen->setHydrophobicityThreshold(HYDROPHOBICIY_THRESHOLD);
 
     ligPharmGenerator.setFeatureGenerator(FeatureType::HYDROPHOBIC, lig_h_gen);
-	ligPharmGenerator.enableFeature(FeatureType::POSITIVE_IONIZABLE, false);
-	ligPharmGenerator.enableFeature(FeatureType::NEGATIVE_IONIZABLE, false);
 }
 
 void GRAIL::GRAILDescriptorCalculator::copyTgtFtrSubsets(const FeatureSubsetList& ftr_ss_list)

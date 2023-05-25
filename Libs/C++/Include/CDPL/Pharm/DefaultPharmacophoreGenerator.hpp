@@ -76,7 +76,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %DefaultPharmacophoreGenerator instance.
 			 */
-			DefaultPharmacophoreGenerator(Configuration config = DEFAULT_CONFIG);
+			DefaultPharmacophoreGenerator(int config = DEFAULT_CONFIG);
 
 			/**
 			 * \brief Perceives all pharmacophore features of the molecular graph a\ molgraph
@@ -85,12 +85,12 @@ namespace CDPL
 			 * \param pharm The output pharmacophore where to add the generated features.
 			 * \param config Feature generation configuration.
 			 */
-			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, Configuration config = DEFAULT_CONFIG);
+			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, int config = DEFAULT_CONFIG);
 
-			void applyConfiguration(Configuration config);
+			void applyConfiguration(int config);
 			
 		  private:
-			void init(Configuration config);
+			void init(int config);
 		};
     }
 }

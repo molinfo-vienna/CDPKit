@@ -49,11 +49,10 @@ void CDPLPythonPharm::exportDefaultPharmacophoreGenerator()
 		.export_values();
 
 	cls
-		.def(python::init<Pharm::DefaultPharmacophoreGenerator::Configuration>((python::arg("self"), python::arg("config") = 
-																				Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
-		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, Pharm::DefaultPharmacophoreGenerator::Configuration>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("config") = 
-				  Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
+		.def(python::init<int>((python::arg("self"), python::arg("config") = Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
+		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, int>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"),
+				  python::arg("config") = Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
 		.def(python::init<const Pharm::DefaultPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))))
 		.def("applyConfiguration", &Pharm::DefaultPharmacophoreGenerator::applyConfiguration, (python::arg("self"), python::arg("config")));
 }

@@ -69,6 +69,112 @@ namespace CDPL
 			static const std::size_t LIGAND_DESCRIPTOR_SIZE = 28;
 			
 			typedef boost::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
+
+			enum ElementIndex
+		    {
+
+			  PI_COUNT,
+			  NI_COUNT,
+			  AR_COUNT,
+			  H_COUNT,
+			  HBD_COUNT,
+			  HBA_COUNT,
+			  XBD_COUNT,
+			  XBA_COUNT,
+			  HBD_N3_COUNT,
+			  HBD_N2_COUNT,
+			  HBD_Nar_COUNT,
+			  HBD_Nam_COUNT,
+			  HBD_Npl3_COUNT,
+			  HBD_N4_COUNT,
+			  HBD_O3_COUNT,
+			  HBD_S3_COUNT,
+			  HBA_N3_COUNT,
+			  HBA_N2_COUNT,
+			  HBA_N1_COUNT,
+			  HBA_Nar_COUNT,
+			  HBA_Npl3_COUNT,
+			  HBA_O3_COUNT,
+			  HBA_O2_COUNT,
+			  HBA_Oco2_COUNT,
+			  HBA_S3_COUNT,
+			  HBA_S2_COUNT,
+			  TOTAL_HYD,
+			  LOGP,
+			  ENV_HBA_N_OCC,
+			  ENV_HBA_O_OCC,
+			  ENV_HBA_S_OCC,
+			  ENV_HBD_N_OCC,
+			  ENV_HBD_O_OCC,
+			  ENV_HBD_S_OCC,
+			  PI_AR_SCORE,
+			  AR_PI_SCORE,
+			  H_H_SCORE,
+			  AR_AR_SCORE,
+			  HBD_HBA_N_SCORE,
+			  HBD_HBA_O_SCORE,
+			  HBD_HBA_S_SCORE,
+			  HBD_N3_HBA_N_SCORE,
+			  HBD_N3_HBA_O_SCORE,
+			  HBD_N3_HBA_S_SCORE,
+			  HBD_N2_HBA_N_SCORE,
+			  HBD_N2_HBA_O_SCORE,
+			  HBD_N2_HBA_S_SCORE,
+			  HBD_Nar_HBA_N_SCORE,
+			  HBD_Nar_HBA_O_SCORE,
+			  HBD_Nar_HBA_S_SCORE,
+			  HBD_Nam_HBA_N_SCORE,
+			  HBD_Nam_HBA_O_SCORE,
+			  HBD_Nam_HBA_S_SCORE,
+			  HBD_Npl3_HBA_N_SCORE,
+			  HBD_Npl3_HBA_O_SCORE,
+			  HBD_Npl3_HBA_S_SCORE,
+			  HBD_N4_HBA_N_SCORE,
+			  HBD_N4_HBA_O_SCORE,
+			  HBD_N4_HBA_S_SCORE,
+			  HBD_O3_HBA_N_SCORE,
+			  HBD_O3_HBA_O_SCORE,
+			  HBD_O3_HBA_S_SCORE,
+			  HBD_S3_HBA_N_SCORE,
+			  HBD_S3_HBA_O_SCORE,
+			  HBD_S3_HBA_S_SCORE,
+			  HBA_HBD_N_SCORE,
+			  HBA_HBD_O_SCORE,
+			  HBA_HBD_S_SCORE,
+			  HBA_N3_HBD_N_SCORE,
+			  HBA_N3_HBD_O_SCORE,
+			  HBA_N3_HBD_S_SCORE,
+			  HBA_N2_HBD_N_SCORE,
+			  HBA_N2_HBD_O_SCORE,
+			  HBA_N2_HBD_S_SCORE,
+			  HBA_N1_HBD_N_SCORE,
+			  HBA_N1_HBD_O_SCORE,
+			  HBA_N1_HBD_S_SCORE,
+			  HBA_Nar_HBD_N_SCORE,
+			  HBA_Nar_HBD_O_SCORE,
+			  HBA_Nar_HBD_S_SCORE,
+			  HBA_Npl3_HBD_N_SCORE,
+			  HBA_Npl3_HBD_O_SCORE,
+			  HBA_Npl3_HBD_S_SCORE,
+			  HBA_O3_HBD_N_SCORE,
+			  HBA_O3_HBD_O_SCORE,
+			  HBA_O3_HBD_S_SCORE,
+			  HBA_O2_HBD_N_SCORE,
+			  HBA_O2_HBD_O_SCORE,
+			  HBA_O2_HBD_S_SCORE,
+			  HBA_Oco2_HBD_N_SCORE,
+			  HBA_Oco2_HBD_O_SCORE,
+			  HBA_Oco2_HBD_S_SCORE,
+			  HBA_S3_HBD_N_SCORE,
+			  HBA_S3_HBD_O_SCORE,
+			  HBA_S3_HBD_S_SCORE,
+			  HBA_S2_HBD_N_SCORE,
+			  HBA_S2_HBD_O_SCORE,
+			  HBA_S2_HBD_S_SCORE,
+			  XBD_XBA_SCORE,
+			  ES_ENERGY,
+			  VDW_ENERGY
+		    };
 			
 			GRAILDescriptorCalculator();
 
@@ -80,11 +186,9 @@ namespace CDPL
 
 			void initLigandData(const Chem::MolecularGraph& ligand);
 
-			void calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res);
+			void calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res, bool update_lig_descr = true);
 			
 		  private:
-			void calcLigDescriptor(const Chem::MolecularGraph& ligand);
-			
 			void calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords);
 			
 			void calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx);
@@ -113,8 +217,12 @@ namespace CDPL
 			typedef std::vector<FeatureSubset> FeatureSubsetList;
 			typedef std::pair<double, double> DoublePair;
 			typedef std::vector<DoublePair> DoublePairArray;
+
+			void getVdWParameters(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, DoublePair& params) const;
+			bool isPolarHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
 			
 			void initPharmGenerators();
+
 			void copyTgtFtrSubsets(const FeatureSubsetList& ftr_ss_list);
 
 			Pharm::DefaultPharmacophoreGenerator  tgtPharmGenerator;
