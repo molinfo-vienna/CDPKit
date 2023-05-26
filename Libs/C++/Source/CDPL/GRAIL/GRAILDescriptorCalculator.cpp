@@ -36,7 +36,6 @@
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
 #include "CDPL/GRAIL/FeatureType.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -303,7 +302,7 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 	
 	tgtAtomOctree->initialize(tgtAtomCoords);
 
-	tgtPharmGenerator.setAtom3DCoordinatesFunction(Chem::AtomArray3DCoordinatesFunctor(tgtAtomCoords, tgt_env));
+	tgtPharmGenerator.setAtom3DCoordinatesFunction(TargetAtomCoordsFunc(tgt_env, tgtAtomCoords));
 	tgtPharmGenerator.generate(tgt_env, tgtPharmacophore);
 
 	for (FeatureSubsetList::iterator it = tgtFtrSubsets.begin(), end = tgtFtrSubsets.end(); it != end; ++it)
@@ -324,21 +323,17 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 
 	for (FeatureSubsetList::iterator it = tgtFtrSubsets.begin(), end = tgtFtrSubsets.end(); it != end; ++it) {
 		FeatureSubset& ftr_ss = *it;
-
-		if (ftr_ss.features.empty())
-			continue;
-
 		std::size_t num_ftrs = ftr_ss.features.size();
 		
-		tgtFtrCoords.resize(num_ftrs);
+		ftr_ss.ftrCoords.resize(num_ftrs);
 
 		for (std::size_t i = 0; i < num_ftrs; i++) 
-			tgtFtrCoords[i].assign(get3DCoordinates(*ftr_ss.features[i]));
+			ftr_ss.ftrCoords[i].assign(get3DCoordinates(*ftr_ss.features[i]));
 
 		if (!ftr_ss.octree)
 			ftr_ss.octree.reset(new Octree());
 
-		ftr_ss.octree->initialize(tgtFtrCoords);
+		ftr_ss.octree->initialize(ftr_ss.ftrCoords);
 	}
 }
 
@@ -444,27 +439,27 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 	}
 }
 
-void GRAIL::GRAILDescriptorCalculator::calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res, bool update_lig_descr)
+void GRAIL::GRAILDescriptorCalculator::calculate(const Math::Vector3DArray& atom_coords, Math::DVector& descr, bool update_lig_part)
 {
-	if (res.getSize() < TOTAL_DESCRIPTOR_SIZE)
-		res.resize(TOTAL_DESCRIPTOR_SIZE);
+	if (descr.getSize() < TOTAL_DESCRIPTOR_SIZE)
+		descr.resize(TOTAL_DESCRIPTOR_SIZE);
 
-	std::size_t idx = (update_lig_descr ? std::size_t(0) : LIGAND_DESCRIPTOR_SIZE);
+	std::size_t idx = (update_lig_part ? std::size_t(0) : LIGAND_DESCRIPTOR_SIZE);
 
-	if (update_lig_descr)
+	if (update_lig_part)
 		for ( ; idx < LIGAND_DESCRIPTOR_SIZE; idx++)
-			res[idx] = ligDescriptor[idx];
-	
+			descr[idx] = ligDescriptor[idx];
+
 	calcLigFtrCoordinates(atom_coords);
-	calcTgtEnvHBAHBDOccupations(atom_coords, res, idx);
-	calcFeatureInteractionScores(res, idx);
-	calcElectrostaticInteractionEnergy(atom_coords, res, idx);
-	calcVdWInteractionEnergy(atom_coords, res, idx);
+	calcTgtEnvHBAHBDOccupations(atom_coords, descr, idx);
+	calcFeatureInteractionScores(descr, idx);
+	calcElectrostaticInteractionEnergy(atom_coords, descr, idx);
+	calcVdWInteractionEnergy(atom_coords, descr, idx);
 }
 
 void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords)
 {
-	for (std::size_t i = 0, num_ftrs = ligFtrCoords.getSize(); i < num_ftrs; i++) {
+	for (std::size_t i = 0, num_ftrs = ligFtrCoords.size(); i < num_ftrs; i++) {
 		Math::Vector3D& ftr_pos = ligFtrCoords[i];
 		const IndexList& ftr_atoms  = ligFtrAtoms[i];
 		std::size_t num_atoms = ftr_atoms.size();
@@ -486,15 +481,15 @@ void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3
 	}
 }
 
-void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx)
+void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx)
 {
-	res[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_N, true);
-	res[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_O, true);
-	res[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_S, true);
+	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_N, true);
+	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_O, true);
+	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_S, true);
 
-	res[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_N, false);
-	res[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_O, false);
-	res[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_S, false);
+	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_N, false);
+	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_O, false);
+	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_S, false);
 }
 
 double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray& atom_coords, unsigned int tgt_ftr_type,
@@ -511,7 +506,7 @@ double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::
 
 		tmpIndexList.clear();
 		tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_atom_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
-			
+
 		for (IndexList::const_iterator tf_it = tmpIndexList.begin(), tf_end = tmpIndexList.end(); tf_it != tf_end; ++tf_it) {
 			double s = scoring_func(lig_atom_pos, *tgt_ftr_ss.features[*tf_it]);
 
@@ -527,7 +522,7 @@ double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::
 	return tot_score;
 }
 
-void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVector& res, std::size_t& idx)
+void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVector& descr, std::size_t& idx)
 {
 	boost::call_once(&initFtrInteractionFuncList, initFtrInteractionFuncListFlag);
 
@@ -558,11 +553,11 @@ void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVecto
 			tot_score += lf_score;
 		}
 
-		res[idx++] = tot_score;
+		descr[idx++] = tot_score;
 	}
 }
 
-void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx)
+void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx)
 {
 	double energy = 0.0;
 	
@@ -580,7 +575,7 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
 		}
 	}
 
-	res[idx++] = energy;
+	descr[idx++] = energy;
 }
 
 /*
@@ -589,7 +584,7 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
  * D,i,j = sqrt(D,i * D,j)
  * x,i,j = sqrt(x,i * x,j) * 2^(1/6)
  */
-void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t idx)
+void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t idx)
 {
 	const double RMIN_FACT = std::pow(2, 1.0 / 6);
 	const double ALPHA = 1.1;
@@ -616,7 +611,7 @@ void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vect
 		}
 	}
 
-	res[idx++] = energy;
+	descr[idx++] = energy;
 }
 
 void GRAIL::GRAILDescriptorCalculator::getVdWParameters(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, DoublePair& params) const
@@ -681,18 +676,19 @@ void GRAIL::GRAILDescriptorCalculator::copyTgtFtrSubsets(const FeatureSubsetList
 	for (std::size_t i = 0; i < (FeatureType::MAX_EXT_TYPE + 1); i++) {
 		tgtFtrSubsets[i].features.clear();
 
-		std::size_t num_ftrs = ftr_ss_list[i].features.size();
-
-		tgtFtrCoords.resize(num_ftrs);
-
-		for (std::size_t j = 0; j < num_ftrs; j++) {
+		for (std::size_t j = 0, num_ftrs = ftr_ss_list[i].features.size(); j < num_ftrs; j++)
 			tgtFtrSubsets[i].features.push_back(&tgtPharmacophore.getFeature(ftr_ss_list[i].features[j]->getIndex()));
-			tgtFtrCoords[j].assign(get3DCoordinates(*tgtFtrSubsets[i].features.back()));
-		}
 
+		tgtFtrSubsets[i].ftrCoords = ftr_ss_list[i].ftrCoords;
+	
 		if (!tgtFtrSubsets[i].octree)
 			tgtFtrSubsets[i].octree.reset(new Octree());
 		
-		tgtFtrSubsets[i].octree->initialize(tgtFtrCoords);
+		tgtFtrSubsets[i].octree->initialize(tgtFtrSubsets[i].ftrCoords);
 	}
+}
+
+inline const Math::Vector3D& GRAIL::GRAILDescriptorCalculator::TargetAtomCoordsFunc::operator()(const Chem::Atom& atom) const
+{
+	return (*coords)[tgtEnv->getAtomIndex(atom)];
 }

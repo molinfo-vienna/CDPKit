@@ -48,6 +48,7 @@ SET(grail_MOD_SRCS
 
     AttributedGridFunctionExport.cpp
     FeatureFunctionExport.cpp
+    MoleculeFunctionExport.cpp
     
     FromPythonConverterRegistration.cpp
    )

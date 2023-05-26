@@ -186,34 +186,48 @@ namespace CDPL
 
 			void initLigandData(const Chem::MolecularGraph& ligand);
 
-			void calculate(const Math::Vector3DArray& atom_coords, Math::DVector& res, bool update_lig_descr = true);
+			void calculate(const Math::Vector3DArray& atom_coords, Math::DVector& descr, bool update_lig_part = true);
 			
 		  private:
 			void calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords);
 			
-			void calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx);
+			void calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx);
 			double calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray& atom_coords, unsigned int tgt_ftr_type, bool is_hba_type);
 			
-			void calcFeatureInteractionScores(Math::DVector& res, std::size_t& idx);
+			void calcFeatureInteractionScores(Math::DVector& descr, std::size_t& idx);
 
-			void calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t& idx);
+			void calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx);
 
-			void calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& res, std::size_t idx);
+			void calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t idx);
 			
-			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-			typedef boost::shared_ptr<Octree> OctreePtr;
 			typedef std::vector<std::size_t> IndexList;
 			typedef std::vector<const Pharm::Feature*> FeatureList;
 			typedef std::vector<double> DoubleArray;
 			typedef std::vector<IndexList> IndexListArray;
-			
+			typedef std::vector<Math::Vector3D> FastVector3DArray;
+			typedef Internal::Octree<Math::Vector3D, FastVector3DArray, double> Octree;
+			typedef boost::shared_ptr<Octree> OctreePtr;
+
 			struct FeatureSubset
 			{
 
-				FeatureList features;
-				OctreePtr   octree;
+				FeatureList       features;
+				OctreePtr         octree;
+				FastVector3DArray ftrCoords;
 			};
 
+			struct TargetAtomCoordsFunc
+		    {
+
+				TargetAtomCoordsFunc(const Chem::MolecularGraph& tgt_env, const FastVector3DArray& coords):
+					tgtEnv(&tgt_env), coords(&coords) {}
+
+				const Math::Vector3D& operator()(const Chem::Atom& atom) const;
+				
+				const Chem::MolecularGraph* tgtEnv;
+				const FastVector3DArray*    coords;
+			};
+			
 			typedef std::vector<FeatureSubset> FeatureSubsetList;
 			typedef std::pair<double, double> DoublePair;
 			typedef std::vector<DoublePair> DoublePairArray;
@@ -229,10 +243,9 @@ namespace CDPL
 			Pharm::BasicPharmacophore             tgtPharmacophore;
 			DoubleArray                           tgtAtomCharges;
 			DoublePairArray                       tgtAtomVdWParams;
-			Math::Vector3DArray                   tgtAtomCoords;
+			FastVector3DArray                     tgtAtomCoords;
 			OctreePtr                             tgtAtomOctree;
 			FeatureSubsetList                     tgtFtrSubsets;
-			Math::Vector3DArray                   tgtFtrCoords;
 			Pharm::DefaultPharmacophoreGenerator  ligPharmGenerator;
 			Pharm::BasicPharmacophore             ligPharmacophore;
 			DoubleArray                           ligAtomCharges;
@@ -241,7 +254,7 @@ namespace CDPL
 			IndexListArray                        ligFtrSubsets;
 			IndexListArray                        ligFtrAtoms;
 			DoubleArray                           ligFtrWeights;
-			Math::Vector3DArray                   ligFtrCoords;
+			FastVector3DArray                     ligFtrCoords;
 			double                                ligDescriptor[LIGAND_DESCRIPTOR_SIZE];
 			IndexList                             tmpIndexList;
 		};

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * MoleculeFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,32 +26,17 @@
 
 #include <boost/python.hpp>
 
-#include "ClassExports.hpp"
+#include "CDPL/GRAIL/MoleculeFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+
 #include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
 
 
-BOOST_PYTHON_MODULE(_grail)
+void CDPLPythonGRAIL::exportMoleculeFunctions()
 {
-	using namespace CDPLPythonGRAIL;
-
-	exportAttributedGridProperties();
-	exportAttributedGridPropertyDefaults();
-	exportFeatureTypes();
-	
-	exportGeneralizedBellAtomDensity();
-	exportAtomDensityGridCalculator();
-	exportBuriednessScore();
-	exportBuriednessGridCalculator();
-	exportFeatureInteractionScoreGridCalculator();
-	exportGRAILDataSetGenerator();
-	exportGRAILDescriptorCalculator();
-		
-	exportAttributedGridFunctions();
-	exportFeatureFunctions();
-	exportMoleculeFunctions();
-	
-	exportBoostFunctionWrappers();
-	registerFromPythonConverters();
+    using namespace boost;
+    using namespace CDPL;
+    
+    python::def("prepareForGRAILDescriptorCalculation", &GRAIL::prepareForGRAILDescriptorCalculation,
+		(python::arg("mol"), python::arg("std_prot_state") = false));
 }

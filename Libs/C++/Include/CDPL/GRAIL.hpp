@@ -45,5 +45,6 @@
 
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
+#include "CDPL/GRAIL/MoleculeFunctions.hpp"
 
 #endif // CDPL_GRAIL_HPP

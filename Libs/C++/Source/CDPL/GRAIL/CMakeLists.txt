@@ -42,7 +42,7 @@ SET(cdpl-grail_LIB_SRCS
     CDFAttributedGridPropertyWriter.cpp
 
     AttributedGridPropertyFunctions.cpp
-
+    MoleculeFunctions.cpp
     FeatureExtendedTypeFunction.cpp
    )
 
