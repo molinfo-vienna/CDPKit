@@ -315,12 +315,17 @@ namespace CDPL
 		{
 			octantCache.putAll();
 
+			const std::size_t num_pts = pts.size();
+
+			if (num_pts == 0) {
+				rootNode = 0;
+				return;
+			}
+			
 			pointData = &pts;
 			bucketSize = bucket_size;
 			minExtent = min_extent;
-
-			const std::size_t num_pts = pts.size();
-
+			
 			succIndices.resize(num_pts);
 
 			// determine axis-aligned bounding box.
@@ -561,7 +566,7 @@ namespace CDPL
 		void Octree<PointT, ContainerT, ScalarT>::radiusNeighbors(const PointT& query, ScalarT radius,
 																  IdxOutputIter result_indices) const
 		{
-			if (rootNode == 0) 
+			if (!rootNode) 
 				return;
 
 			ScalarT sqr_radius = Distance::sqr(radius);  // "squared" radius
@@ -574,7 +579,7 @@ namespace CDPL
 																  IdxOutputIter result_indices,
 																  DistOutputIter distances) const
 		{
-			if (rootNode == 0) 
+			if (!rootNode) 
 				return;
 
 			ScalarT sqr_radius = Distance::sqr(radius);  // "squared" radius
@@ -636,7 +641,8 @@ namespace CDPL
 			ScalarT max_distance = std::numeric_limits<ScalarT>::infinity();
 			long result_index = -1;
 
-			findNeighbor<Distance>(rootNode, query, min_distance, max_distance, result_index);
+			if (rootNode)
+				findNeighbor<Distance>(rootNode, query, min_distance, max_distance, result_index);
 
 			return result_index;
 		}
