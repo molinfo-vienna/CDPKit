@@ -182,23 +182,28 @@ namespace CDPL
 
 			GRAILDescriptorCalculator& operator=(const GRAILDescriptorCalculator& calc);
 
-			void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func, bool tgt_env_changed = true);
+			void initTargetData(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
+								bool tgt_env_changed = true);
 
 			void initLigandData(const Chem::MolecularGraph& ligand);
 
 			void calculate(const Math::Vector3DArray& atom_coords, Math::DVector& descr, bool update_lig_part = true);
 			
 		  private:
-			void calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords);
+			void calcLigFtrCoordinates(const Math::Vector3DArray::StorageType& atom_coords);
 			
-			void calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx);
-			double calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray& atom_coords, unsigned int tgt_ftr_type, bool is_hba_type);
+			void calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray::StorageType& atom_coords,
+											 Math::DVector& descr, std::size_t& idx);
+			double calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray::StorageType& atom_coords,
+											  unsigned int tgt_ftr_type, bool is_hba_type);
 			
 			void calcFeatureInteractionScores(Math::DVector& descr, std::size_t& idx);
 
-			void calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx);
+			void calcElectrostaticInteractionEnergy(const Math::Vector3DArray::StorageType& atom_coords,
+													Math::DVector& descr, std::size_t& idx);
 
-			void calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t idx);
+			void calcVdWInteractionEnergy(const Math::Vector3DArray::StorageType& atom_coords,
+										  Math::DVector& descr, std::size_t idx);
 			
 			typedef std::vector<std::size_t> IndexList;
 			typedef std::vector<const Pharm::Feature*> FeatureList;
@@ -256,6 +261,7 @@ namespace CDPL
 			DoubleArray                           ligFtrWeights;
 			FastVector3DArray                     ligFtrCoords;
 			double                                ligDescriptor[LIGAND_DESCRIPTOR_SIZE];
+			std::size_t                           numLigAtoms;
 			IndexList                             tmpIndexList;
 		};
 	}

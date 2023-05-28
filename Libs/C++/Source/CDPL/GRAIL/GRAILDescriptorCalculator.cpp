@@ -52,6 +52,7 @@
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/Octree.hpp"
 
 
@@ -225,7 +226,8 @@ const std::size_t GRAIL::GRAILDescriptorCalculator::LIGAND_DESCRIPTOR_SIZE;
 GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator():
 	tgtPharmGenerator(Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS | Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY),
 	tgtAtomOctree(new Octree()), tgtFtrSubsets(FeatureType::MAX_EXT_TYPE + 1),
-	ligPharmGenerator(Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY), ligFtrSubsets(FeatureType::MAX_EXT_TYPE + 1)
+	ligPharmGenerator(Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY), ligFtrSubsets(FeatureType::MAX_EXT_TYPE + 1),
+	numLigAtoms(0)
 {
 	initPharmGenerators();
 }
@@ -236,7 +238,7 @@ GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator(const GRAILDescripto
 	tgtAtomCoords(calc.tgtAtomCoords), tgtAtomOctree(new Octree()), tgtFtrSubsets(FeatureType::MAX_EXT_TYPE + 1),
 	ligPharmGenerator(Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY), ligAtomCharges(calc.ligAtomCharges),
 	ligAtomVdWParams(calc.ligAtomVdWParams), ligHeavyAtoms(calc.ligHeavyAtoms), ligFtrSubsets(calc.ligFtrSubsets),
-	ligFtrAtoms(calc.ligFtrAtoms), ligFtrWeights(calc.ligFtrWeights)
+	ligFtrAtoms(calc.ligFtrAtoms), ligFtrWeights(calc.ligFtrWeights), numLigAtoms(calc.numLigAtoms)
 {
 	initPharmGenerators();
 
@@ -258,6 +260,7 @@ GRAIL::GRAILDescriptorCalculator& GRAIL::GRAILDescriptorCalculator::operator=(co
 	ligHeavyAtoms = calc.ligHeavyAtoms;
 	ligAtomCharges = calc.ligAtomCharges;
 	ligAtomVdWParams = calc.ligAtomVdWParams;
+	numLigAtoms = calc.numLigAtoms;
 	tgtAtomCharges = calc.tgtAtomCharges;
 	tgtAtomVdWParams = calc.tgtAtomVdWParams;
 	tgtAtomCoords = calc.tgtAtomCoords;
@@ -342,20 +345,20 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 	using namespace Pharm;
 	using namespace Chem;
 
-	std::size_t num_atoms = ligand.getNumAtoms();
+	numLigAtoms = ligand.getNumAtoms();
 		
 	ligHeavyAtoms.clear();
 
-	if (ligAtomCharges.size() < num_atoms)
-		ligAtomCharges.resize(num_atoms);
+	if (ligAtomCharges.size() < numLigAtoms)
+		ligAtomCharges.resize(numLigAtoms);
 
-	if (ligAtomVdWParams.size() < num_atoms)
-		ligAtomVdWParams.resize(num_atoms);
+	if (ligAtomVdWParams.size() < numLigAtoms)
+		ligAtomVdWParams.resize(numLigAtoms);
 
 	ligDescriptor[TOTAL_HYD] = 0.0;
 	ligDescriptor[LOGP] = 0.0;
 	
-	for (std::size_t i = 0; i < num_atoms; i++) {
+	for (std::size_t i = 0; i < numLigAtoms; i++) {
 		const Atom& atom = ligand.getAtom(i);
 
 		if (getType(atom) != AtomType::H)
@@ -441,6 +444,9 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 
 void GRAIL::GRAILDescriptorCalculator::calculate(const Math::Vector3DArray& atom_coords, Math::DVector& descr, bool update_lig_part)
 {
+	if (atom_coords.getSize() != numLigAtoms)
+		throw Base::SizeError("GRAILDescriptorCalculator: atom coordinates array size does not match number of atoms");
+	
 	if (descr.getSize() < TOTAL_DESCRIPTOR_SIZE)
 		descr.resize(TOTAL_DESCRIPTOR_SIZE);
 
@@ -450,14 +456,14 @@ void GRAIL::GRAILDescriptorCalculator::calculate(const Math::Vector3DArray& atom
 		for ( ; idx < LIGAND_DESCRIPTOR_SIZE; idx++)
 			descr[idx] = ligDescriptor[idx];
 
-	calcLigFtrCoordinates(atom_coords);
-	calcTgtEnvHBAHBDOccupations(atom_coords, descr, idx);
+	calcLigFtrCoordinates(atom_coords.getData());
+	calcTgtEnvHBAHBDOccupations(atom_coords.getData(), descr, idx);
 	calcFeatureInteractionScores(descr, idx);
-	calcElectrostaticInteractionEnergy(atom_coords, descr, idx);
-	calcVdWInteractionEnergy(atom_coords, descr, idx);
+	calcElectrostaticInteractionEnergy(atom_coords.getData(), descr, idx);
+	calcVdWInteractionEnergy(atom_coords.getData(), descr, idx);
 }
 
-void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3DArray& atom_coords)
+void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3DArray::StorageType& atom_coords)
 {
 	for (std::size_t i = 0, num_ftrs = ligFtrCoords.size(); i < num_ftrs; i++) {
 		Math::Vector3D& ftr_pos = ligFtrCoords[i];
@@ -481,7 +487,8 @@ void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3
 	}
 }
 
-void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx)
+void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray::StorageType& atom_coords,
+																   Math::DVector& descr, std::size_t& idx)
 {
 	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_N, true);
 	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_O, true);
@@ -492,8 +499,8 @@ void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupations(const Math::V
 	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_S, false);
 }
 
-double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray& atom_coords, unsigned int tgt_ftr_type,
-																	bool is_hba_type)
+double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray::StorageType& atom_coords,
+																	unsigned int tgt_ftr_type, bool is_hba_type)
 {
 	Pharm::HBondingInteractionScore scoring_func(is_hba_type);
 	const FeatureSubset& tgt_ftr_ss = tgtFtrSubsets[tgt_ftr_type];
@@ -557,11 +564,12 @@ void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVecto
 	}
 }
 
-void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t& idx)
+void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const Math::Vector3DArray::StorageType& atom_coords,
+																		  Math::DVector& descr, std::size_t& idx)
 {
 	double energy = 0.0;
 	
-	for (std::size_t i = 0, num_lig_atoms = atom_coords.getSize(); i < num_lig_atoms; i++) {
+	for (std::size_t i = 0; i < numLigAtoms; i++) {
 		double la_charge = ligAtomCharges[i];
 		const Math::Vector3D& la_pos = atom_coords[i];
 
@@ -584,14 +592,15 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
  * D,i,j = sqrt(D,i * D,j)
  * x,i,j = sqrt(x,i * x,j) * 2^(1/6)
  */
-void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vector3DArray& atom_coords, Math::DVector& descr, std::size_t idx)
+void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vector3DArray::StorageType& atom_coords,
+																Math::DVector& descr, std::size_t idx)
 {
 	const double RMIN_FACT = std::pow(2, 1.0 / 6);
 	const double ALPHA = 1.1;
 
 	double energy = 0.0;
 	
-	for (std::size_t i = 0, num_lig_atoms = atom_coords.getSize(); i < num_lig_atoms; i++) {
+	for (std::size_t i = 0; i < numLigAtoms; i++) {
 		const DoublePair& la_params = ligAtomVdWParams[i];
 		const Math::Vector3D& la_pos = atom_coords[i];
 
