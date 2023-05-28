@@ -65,7 +65,7 @@ namespace
 		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
 					  boost::bind(&python::list::append<Base::LookupKey>, boost::ref(keys),
 								  boost::bind(&Base::ControlParameterContainer::ParameterEntry::first, _1)));
-		return keys;
+		return std::move(keys);
 	}
 
 	boost::python::list getParameterValues(CDPL::Base::ControlParameterContainer& cntnr)
@@ -78,7 +78,7 @@ namespace
 		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
 					  boost::bind(&python::list::append<Base::Variant>, boost::ref(values),
 								  boost::bind(&Base::ControlParameterContainer::ParameterEntry::second, _1)));
-		return values;
+		return std::move(values);
 	}
 
 	boost::python::list getParameters(CDPL::Base::ControlParameterContainer& cntnr)
@@ -93,7 +93,7 @@ namespace
 		for (Base::ControlParameterContainer::ConstParameterIterator it = cntnr.getParametersBegin(); it!= params_end; ++it)  
 			params.append(python::make_tuple(it->first, it->second));
 
-		return params;
+		return std::move(params);
 	}
 
 	void addParameters(CDPL::Base::ControlParameterContainer& cntnr, CDPL::Base::ControlParameterContainer& other)

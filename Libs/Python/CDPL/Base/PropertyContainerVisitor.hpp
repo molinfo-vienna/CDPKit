@@ -31,7 +31,9 @@
 #include <boost/python/def_visitor.hpp>
 
 
-#define PROPERTYCONTAINER_IMPL(Wrapper)                                                             \
+#define PROPERTYCONTAINER_IMPL(Wrapper)
+/*	
+#define PROPERTYCONTAINER_IMPL(Wrapper)			                                                    \
 	void setProperty(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& value) {          \
 		if (boost::python::override f = this->get_override("setProperty")) {                        \
 			f(boost::ref(key), boost::ref(value));                                                  \
@@ -99,15 +101,6 @@
                                                                                                     \
 		CDPL::Base::PropertyContainer::addProperties(cntnr);                                        \
 	}                                                                                               \
-                                                                                                    \
-	void swap(CDPL::Base::PropertyContainer& cntnr) {                                               \
-		if (boost::python::override f = this->get_override("swap")) {                               \
-			f(boost::ref(cntnr));                                                                   \
-			return;                                                                                 \
-		}                                                                                           \
-                                                                                                    \
-		CDPL::Base::PropertyContainer::swap(cntnr);                                                 \
-	}                                                                                               \
 	                                                                                                \
 	static void addPropertiesDef(CDPL::Base::PropertyContainer& self, CDPL::Base::PropertyContainer& cntnr) { \
 		if (dynamic_cast<Wrapper*>(boost::addressof(self)))                                         \
@@ -130,8 +123,17 @@
 			self.PropertyContainer::copyProperties(cntnr);                                          \
 		else                                                                                        \
 			self.copyProperties(cntnr);                                                             \
+	}                                                                                               \
+                                                                                                    \
+	void swap(CDPL::Base::PropertyContainer& cntnr) {                                               \
+		if (boost::python::override f = this->get_override("swap")) {                               \
+			f(boost::ref(cntnr));                                                                   \
+			return;                                                                                 \
+		}                                                                                           \
+                                                                                                    \
+		CDPL::Base::PropertyContainer::swap(cntnr);                                                 \
 	}
-
+*/
 
 namespace CDPLPythonBase
 {
@@ -145,6 +147,7 @@ namespace CDPLPythonBase
 
 		template <typename ClassType>
 		void visit(ClassType& cl) const {
+/*
 			using namespace boost;
 			using namespace CDPL;
 
@@ -169,6 +172,7 @@ namespace CDPLPythonBase
 					 (python::arg("self"), python::arg("cntnr")))
 				.def("swap", &Wrapper::swap,
 					 (python::arg("self"), python::arg("cntnr")));
+*/
 		}
 	};
 

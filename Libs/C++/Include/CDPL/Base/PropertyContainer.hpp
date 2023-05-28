@@ -38,6 +38,7 @@
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 namespace CDPL 
@@ -104,7 +105,7 @@ namespace CDPL
 			 * \param key The key of the property value to assign.
 			 * \param value The value of the property.
 			 */
-			virtual void setProperty(const LookupKey& key, const Variant& value);
+			inline void setProperty(const LookupKey& key, const Variant& value);
 
 			/**
 			 * \brief Returns the value of the property specified by \a key as a \c const reference to an object of type \a T.
@@ -148,14 +149,14 @@ namespace CDPL
 			 * \return The stored property value or and empty Base::Variant object.
 			 * \throw Base::ItemNotFound if an entry for the requested property value does not exist and \a throw_ is \c true.
 			 */
-			virtual const Variant& getProperty(const LookupKey& key, bool throw_ = false) const;
+			inline const Variant& getProperty(const LookupKey& key, bool throw_ = false) const;
 
 			/**
 			 * \brief Tells whether or not a value has been assigned to the property specified by \a key.
 			 * \param key The key of the property.
 			 * \return \c true if a value has been assigned to the specified property, and \c false otherwise.
 			 */
-			virtual bool isPropertySet(const LookupKey& key) const;
+			inline bool isPropertySet(const LookupKey& key) const;
 
 			/**
 			 * \brief Returns a constant iterator pointing to the beginning of the property entries.
@@ -174,12 +175,12 @@ namespace CDPL
 			 * \param key The key of the property value to erase.
 			 * \return \c true if an entry for \a key could be found and was erased, and \c false otherwise.
 			 */
-			virtual bool removeProperty(const LookupKey& key);
+			bool removeProperty(const LookupKey& key);
 
 			/**
 			 * \brief Clears all property values.
 			 */
-			virtual void clearProperties();
+			void clearProperties();
 
 			/**
 			 * \brief Adds the property value entries in the \c %PropertyContainer instance \a cntnr.
@@ -189,19 +190,19 @@ namespace CDPL
 			 *
 			 * \param cntnr The \c %PropertyContainer instance containing the property value entries to add.
 			 */
-			virtual void addProperties(const PropertyContainer& cntnr);
+			void addProperties(const PropertyContainer& cntnr);
 
 			/**
 			 * \brief Replaces the current set of properties by a copy of the entries in \a cntnr.
 			 * \param cntnr The \c %PropertyContainer instance containing the property value entries to add.
 			 */
-			virtual void copyProperties(const PropertyContainer& cntnr);
+			void copyProperties(const PropertyContainer& cntnr);
 
 			/**
 			 * \brief Exchanges the properties of this container with the properties of the container \a cntnr.
 			 * \param cntnr The container to exchange the properties with.
 			 */
-			virtual void swap(PropertyContainer& cntnr);
+			void swap(PropertyContainer& cntnr);
 
 		protected:
 			/**
@@ -251,6 +252,36 @@ const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& ke
 	const Variant& val = getProperty(key, false);
 
 	return (val.isEmpty() ? def : val.template getData<T>());
+}
+
+const CDPL::Base::Variant& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key, bool throw_ex) const
+{
+	static const Variant NOT_FOUND;
+	
+	ConstPropertyIterator it = properties.find(key);
+	
+	if (it != properties.end())
+		return it->second;
+
+	if (throw_ex)
+		throw ItemNotFound("PropertyContainer: property " + key.getName() + " not found");
+	
+	return NOT_FOUND;
+}
+
+void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, const Variant& val)
+{
+	if (val.isEmpty()) { 
+		removeProperty(key);
+		return;
+	}
+
+	properties[key] = val;
+}
+
+bool CDPL::Base::PropertyContainer::isPropertySet(const LookupKey& key) const
+{
+	return (properties.find(key) != properties.end());
 }
 
 #endif // CDPL_BASE_PROPERTYCONTAINER_HPP

@@ -27,17 +27,9 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Base/PropertyContainer.hpp"
-#include "CDPL/Base/Exceptions.hpp"
  
 
 using namespace CDPL;
-
-
-namespace 
-{
-
-	const Base::Variant NIL;
-}
 
 
 Base::PropertyContainer::PropertyContainer(const PropertyContainer& cntnr): properties(cntnr.properties) {}
@@ -47,34 +39,6 @@ Base::PropertyContainer::~PropertyContainer() {}
 std::size_t Base::PropertyContainer::getNumProperties() const
 {
 	return properties.size();
-}
-
-void Base::PropertyContainer::setProperty(const LookupKey& key, const Variant& val)
-{
-	if (val.isEmpty()) { 
-		removeProperty(key);
-		return;
-	}
-
-	properties[key] = val;
-}
-
-bool Base::PropertyContainer::isPropertySet(const LookupKey& key) const
-{
-	return (properties.find(key) != properties.end());
-}
-
-const Base::Variant& Base::PropertyContainer::getProperty(const LookupKey& key, bool throw_ex) const
-{
-	ConstPropertyIterator it = properties.find(key);
-	
-	if (it != properties.end())
-		return it->second;
-
-	if (throw_ex)
-		throw ItemNotFound("PropertyContainer: property " 
-						   + key.getName() + " not found");
-	return NIL;
 }
 
 Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::getPropertiesBegin() const

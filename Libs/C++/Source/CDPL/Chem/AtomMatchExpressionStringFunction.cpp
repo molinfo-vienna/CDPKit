@@ -749,7 +749,7 @@ namespace
 		
 				case AtomMatchConstraint::RING_TOPOLOGY:
 					createBooleanPropertyExpressionString(atom, constraint, expr_str, RING_FLAG_SYMBOL, 
-														  boost::bind(&getRingFlag, _1));
+														  boost::bind(static_cast<bool (*)(const Atom&)>(&getRingFlag), _1));
 					break;
 
 				case AtomMatchConstraint::CONFIGURATION:
