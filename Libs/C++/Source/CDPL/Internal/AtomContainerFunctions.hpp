@@ -41,8 +41,10 @@ namespace CDPL
     namespace Internal
     {
 
-		std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
+		inline std::size_t getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict = true);
     }
 }
+
+#include "CDPL/Internal/AtomContainerFunctions.cpp"
 
 #endif // CDPL_INTERNAL_ATOMCONTAINERFUNCTIONS_HPP

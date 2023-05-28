@@ -26,8 +26,6 @@
 #ifndef CDPL_INTERNAL_BONDFUNCTIONS_HPP
 #define CDPL_INTERNAL_BONDFUNCTIONS_HPP
 
-#include <cstddef>
-
 
 namespace CDPL 
 {
@@ -41,8 +39,10 @@ namespace CDPL
     namespace Internal
     {
 
-		bool isHydrogenBond(const Chem::Bond& bond);
+		inline bool isHydrogenBond(const Chem::Bond& bond);
     }
 }
+
+#include "CDPL/Internal/BondFunctions.cpp"
 
 #endif // CDPL_INTERNAL_BONDFUNCTIONS_HPP

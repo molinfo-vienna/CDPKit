@@ -29,19 +29,14 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 
-#include "AtomContainerFunctions.hpp"
 
-
-using namespace CDPL; 
-
-
-std::size_t Internal::getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict)
+std::size_t CDPL::Internal::getExplicitAtomCount(const Chem::AtomContainer& cntnr, unsigned int type, bool strict)
 {
     std::size_t count = 0;
 
     for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-	if (strict ? type == getType(*it) : Chem::atomTypesMatch(type, getType(*it)))
-	    count++;
+		if (strict ? type == getType(*it) : Chem::atomTypesMatch(type, getType(*it)))
+			count++;
 
     return count;
 }

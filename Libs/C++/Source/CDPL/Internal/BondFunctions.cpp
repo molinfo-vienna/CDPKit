@@ -28,13 +28,8 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
-#include "BondFunctions.hpp"
 
-
-using namespace CDPL; 
-
-
-bool Internal::isHydrogenBond(const Chem::Bond& bond)
+bool CDPL::Internal::isHydrogenBond(const Chem::Bond& bond)
 {
 	using namespace Chem;
 

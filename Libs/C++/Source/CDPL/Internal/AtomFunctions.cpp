@@ -37,19 +37,15 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 
-#include "AtomFunctions.hpp"
 #include "BondFunctions.hpp"
 
 
-using namespace CDPL;
-
-
-std::size_t Internal::getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::getNumContainingSSSRRings(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	return getNumContainingFragments(atom, *getSSSR(molgraph));
 }
 
-bool Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
+bool CDPL::Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
 	using namespace Chem;
 	
@@ -116,7 +112,7 @@ bool Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::MolecularG
     return true;
 }
 
-bool Internal::isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+bool CDPL::Internal::isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -136,7 +132,7 @@ bool Internal::isUnsaturated(const Chem::Atom& atom, const Chem::MolecularGraph&
 	return false;
 }
 
-bool Internal::isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
+bool CDPL::Internal::isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
 	using namespace Chem;
 	
@@ -163,7 +159,7 @@ bool Internal::isAmideNitrogen(const Chem::Atom& atom, const Chem::MolecularGrap
 	return false;
 }
 
-bool Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+bool CDPL::Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -214,7 +210,7 @@ bool Internal::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::Molecula
 	return ((bond_count + getImplicitHydrogenCount(atom)) == 3);
 }
 
-bool Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+bool CDPL::Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -258,7 +254,7 @@ bool Internal::isPlanarNitrogen(const Chem::Atom& atom, const Chem::MolecularGra
 	return (unsat_nbrs || getAromaticityFlag(atom));
 }
 
-bool Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
+bool CDPL::Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
 	using namespace Chem;
 	
@@ -297,12 +293,12 @@ bool Internal::isCarbonylLikeAtom(const Chem::Atom& atom, const Chem::MolecularG
 	return (type != AtomType::S && getExplicitBondCount(atom, molgraph, 2, AtomType::S, true) > 0);
 }
 
-double Internal::getVdWRadius(const Chem::Atom& atom)
+double CDPL::Internal::getVdWRadius(const Chem::Atom& atom)
 {
     return Chem::AtomDictionary::getVdWRadius(getType(atom));
 }
 
-std::size_t Internal::calcExplicitValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::calcExplicitValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
@@ -318,26 +314,26 @@ std::size_t Internal::calcExplicitValence(const Chem::Atom& atom, const Chem::Mo
 	return exp_val;
 }
 	
-std::size_t Internal::calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::calcValence(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	return (calcExplicitValence(atom, molgraph) + getImplicitHydrogenCount(atom));
 }
 
-std::size_t Internal::calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::calcFreeValenceElectronCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	long free_el_count = calcValenceElectronCount(atom) - calcValence(atom, molgraph);
 
 	return std::size_t(free_el_count < 0 ? 0 : free_el_count); 
 }
 
-std::size_t Internal::calcValenceElectronCount(const Chem::Atom& atom)
+std::size_t CDPL::Internal::calcValenceElectronCount(const Chem::Atom& atom)
 {
 	long el_count = Chem::AtomDictionary::getNumValenceElectrons(getType(atom)) - getFormalCharge(atom);
 
 	return std::size_t(el_count < 0 ? 0 : el_count); 
 }
 
-std::size_t Internal::getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
+std::size_t CDPL::Internal::getExplicitAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
 {
 	using namespace Chem;
 	
@@ -353,7 +349,7 @@ std::size_t Internal::getExplicitAtomCount(const Chem::Atom& atom, const Chem::M
     return count;
 }
 
-std::size_t Internal::getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
+std::size_t CDPL::Internal::getAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int type, bool strict)
 {
 	using namespace Chem;
 	
@@ -365,7 +361,7 @@ std::size_t Internal::getAtomCount(const Chem::Atom& atom, const Chem::Molecular
     return count;
 }
 
-std::size_t Internal::getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::getHeavyAtomCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -381,7 +377,7 @@ std::size_t Internal::getHeavyAtomCount(const Chem::Atom& atom, const Chem::Mole
 	return count;
 }
 
-std::size_t Internal::getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
+std::size_t CDPL::Internal::getOrdinaryHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, unsigned int flags)
 {
 	using namespace Chem;
 	
@@ -397,7 +393,7 @@ std::size_t Internal::getOrdinaryHydrogenCount(const Chem::Atom& atom, const Che
     return (count + getImplicitHydrogenCount(atom));
 }
 
-std::size_t Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -416,12 +412,12 @@ std::size_t Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::M
 	return count;
 }
 
-std::size_t Internal::getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
     return (getExplicitBondCount(atom, molgraph) + getImplicitHydrogenCount(atom));
 }
 
-std::size_t Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order)
+std::size_t CDPL::Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order)
 {
 	using namespace Chem;
 	
@@ -437,7 +433,7 @@ std::size_t Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::M
 	return count;
 }
 
-std::size_t Internal::getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order)
+std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order)
 {
 	std::size_t count = getExplicitBondCount(atom, molgraph, order);
 
@@ -447,7 +443,7 @@ std::size_t Internal::getBondCount(const Chem::Atom& atom, const Chem::Molecular
     return count;
 }
 
-std::size_t Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
+std::size_t CDPL::Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
 {
 	using namespace Chem;
 	
@@ -464,7 +460,7 @@ std::size_t Internal::getExplicitBondCount(const Chem::Atom& atom, const Chem::M
     return count;
 }
 
-std::size_t Internal::getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
+std::size_t CDPL::Internal::getBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
 {
 	using namespace Chem;
 
@@ -476,7 +472,7 @@ std::size_t Internal::getBondCount(const Chem::Atom& atom, const Chem::Molecular
     return count;
 }
 
-std::size_t Internal::getRingBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::getRingBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
@@ -492,7 +488,7 @@ std::size_t Internal::getRingBondCount(const Chem::Atom& atom, const Chem::Molec
     return count;
 }
 
-std::size_t Internal::getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+std::size_t CDPL::Internal::getHeavyBondCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 	
