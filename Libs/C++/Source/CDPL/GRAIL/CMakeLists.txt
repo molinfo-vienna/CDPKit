@@ -37,6 +37,7 @@ SET(cdpl-grail_LIB_SRCS
     FeatureInteractionScoreGridCalculator.cpp
     GRAILDataSetGenerator.cpp
     GRAILDescriptorCalculator.cpp
+    BindingAffinityCalculator.cpp
     
     CDFAttributedGridPropertyReader.cpp
     CDFAttributedGridPropertyWriter.cpp

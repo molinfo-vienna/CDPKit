@@ -38,6 +38,7 @@ namespace CDPLPythonGRAIL
 	void exportFeatureInteractionScoreGridCalculator();
 	void exportGRAILDataSetGenerator();
 	void exportGRAILDescriptorCalculator();
+	void exportBindingAffinityCalculator();
 	void exportBoostFunctionWrappers();
 }
 

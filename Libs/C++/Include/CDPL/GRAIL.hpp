@@ -42,6 +42,7 @@
 #include "CDPL/GRAIL/FeatureInteractionScoreGridCalculator.hpp"  
 #include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"  
+#include "CDPL/GRAIL/BindingAffinityCalculator.hpp"
 
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
