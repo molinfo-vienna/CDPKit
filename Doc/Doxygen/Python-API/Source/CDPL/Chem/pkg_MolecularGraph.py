@@ -177,58 +177,6 @@ class MolecularGraph(AtomContainer, BondContainer, CDPL.Base.PropertyContainer):
     def getNumBonds() -> int: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
-    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \param throw_ 
-    # \return 
-    #
-    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
-
-    ##
-    # \brief 
-    #
-    def clearProperties() -> None: pass
-
-    ##
-    # \brief 
-    # \param cntnr 
-    #
-    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
-
-    ##
-    # \brief 
-    # \param cntnr 
-    #
-    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
-
-    ##
-    # \brief 
-    # \param cntnr 
-    #
-    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
-
-    ##
     # \brief Returns the result of the membership test operation <tt>atom in self</tt>.
     # \param atom The value to test for membership.
     # \return The result of the membership test operation.

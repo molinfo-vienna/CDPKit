@@ -137,58 +137,6 @@ class Pharmacophore(FeatureContainer):
     def getNumEntities() -> int: pass
 
     ##
-    # \brief 
-    # \param key 
-    # \param value 
-    #
-    def setProperty(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def removeProperty(key: CDPL.Base.LookupKey) -> bool: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \param throw_ 
-    # \return 
-    #
-    def getProperty(key: CDPL.Base.LookupKey, throw_: bool = False) -> CDPL.Base.Variant: pass
-
-    ##
-    # \brief 
-    # \param key 
-    # \return 
-    #
-    def isPropertySet(key: CDPL.Base.LookupKey) -> bool: pass
-
-    ##
-    # \brief 
-    #
-    def clearProperties() -> None: pass
-
-    ##
-    # \brief 
-    # \param cntnr 
-    #
-    def addProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
-
-    ##
-    # \brief 
-    # \param cntnr 
-    #
-    def copyProperties(cntnr: CDPL.Base.PropertyContainer) -> None: pass
-
-    ##
-    # \brief 
-    # \param cntnr 
-    #
-    def swap(cntnr: CDPL.Base.PropertyContainer) -> None: pass
-
-    ##
     # \brief Performs the in-place addition operation <tt>self += pharm</tt>.
     # \param pharm Specifies the second addend.
     # \return The updated \e %Pharmacophore instance \a self.

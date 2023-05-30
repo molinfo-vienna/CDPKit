@@ -590,5 +590,13 @@ class GRAILDescriptorCalculator(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param atom_coords 
+    # \param descr 
+    # \param update_lig_part 
+    #
+    def calculate(atom_coords: CDPL.Math.Vector3DArray, descr: CDPL.Math.DVector, update_lig_part: bool = True) -> None: pass
+
+    ##
+    # \brief 
     #
     objectID = property(getObjectID)
