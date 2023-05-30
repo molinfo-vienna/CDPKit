@@ -219,7 +219,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 				
 				ret_code = selectOutputConformers(struct_gen_only, have_ipt_coords);
 
-				if (ret_code == ReturnCode::SUCCESS && have_ipt_coords)
+				if ((ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::TOO_MUCH_SYMMETRY) && have_ipt_coords)
 					orderConformersByEnergy(outputConfs);
 			}
 
@@ -274,7 +274,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		logCallback("Found " + boost::lexical_cast<std::string>(comps.getSize()) + " molecular graph components\n");
 
 	bool have_full_ipt_coords = true;
-
+	bool too_much_sym = false;
+	
 	for (std::size_t i = 0, num_comps = comps.getSize(); i < num_comps; i++) {
 		const Fragment::SharedPointer& comp = comps.getBase()[i];
 
@@ -293,7 +294,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 
 		ret_code = selectOutputConformers(struct_gen_only, comp_conf_data->haveInputCoords);
 
-		if (ret_code != ReturnCode::SUCCESS)
+		if (ret_code == ReturnCode::TOO_MUCH_SYMMETRY)
+			too_much_sym = true;
+		else if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
 		
 		comp_conf_data->fragment = comp;
@@ -309,6 +312,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	if (outputConfs.empty())
 		return ReturnCode::CONF_GEN_FAILED;
 
+	if (too_much_sym)
+		return ReturnCode::TOO_MUCH_SYMMETRY;
+	
 	return ReturnCode::SUCCESS;
 }
 
@@ -1255,6 +1261,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 		}
 	}
 
+	bool too_much_sym = false;
+	
 	for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); 
 		 it != end && (max_num_confs == 0 || outputConfs.size() < max_num_confs); ++it) {
 
@@ -1273,7 +1281,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 			}
 
 			if (outputConfs.empty() && confSelector.getNumSymmetryMappings() > MAX_NUM_SYMMETRY_MAPPINGS)
-				return ReturnCode::TOO_MUCH_SYMMETRY;
+				too_much_sym = true;
 				
 			if (selected)
 				outputConfs.push_back(conf_data);
@@ -1287,9 +1295,13 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 			logCallback("Performing RMSD-based output conformer selection (min. RMSD: " + (boost::format("%.4f") % settings.getMinRMSD()).str() + 
 						", num. top. sym. mappings: " + boost::lexical_cast<std::string>(confSelector.getNumSymmetryMappings()) + ")...\n");
 		
-		logCallback("Selected " +  boost::lexical_cast<std::string>(outputConfs.size()) + " conformer(s)\n"); 
+		logCallback("Selected " +  boost::lexical_cast<std::string>(outputConfs.size()) + " conformer(s)\n");
+		logCallback("Warning: max. number of top. symmetry mappings exceeded\n");
 	}
 
+	if (too_much_sym)
+		return ReturnCode::TOO_MUCH_SYMMETRY;
+	
 	return ReturnCode::SUCCESS;
 }
 

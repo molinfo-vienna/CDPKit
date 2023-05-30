@@ -167,6 +167,7 @@ private:
 						return false;
 
 					case ReturnCode::SUCCESS:
+					case ReturnCode::TOO_MUCH_SYMMETRY:
 						outputConformers(rec_idx, ret_code);
 						break;
 
@@ -228,9 +229,14 @@ private:
 
 		if (verbLevel == VERBOSE) {
 			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << 
-				num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format(3, "%w") << 's';
+				num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format(3, "%w") << 's' << std::endl;
 
-			logRecordStream << std::endl;
+			if (ret_code == ReturnCode::TOO_MUCH_SYMMETRY)
+				logRecordStream << "Warning: not all top. symmetry mappings could be considered, output ensemble may contain confs. violating the specified RMSD threshold" << std::endl;
+
+		} else if (verbLevel == ERROR && ret_code == ReturnCode::TOO_MUCH_SYMMETRY) {
+			logRecordStream << "Molecule " <<  parent->createMoleculeIdentifier(rec_idx, molecule) << ": " <<
+				"not all top. symmetry mappings could be considered, output ensemble may contain confs. violating the specified RMSD threshold" << std::endl;
 		}
 
 		confGen.setConformers(molecule);
@@ -288,10 +294,6 @@ private:
 
 			case ReturnCode::TIMEOUT:
 				err_msg = "time limit exceeded";
-				break;
-
-			case ReturnCode::TOO_MUCH_SYMMETRY:
-				err_msg = "too much symmetry";
 				break;
 
 			default:
