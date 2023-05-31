@@ -49,9 +49,9 @@ namespace
 	{
 
 		CDPLMolPropInit() {
-			initAtomProperties();
-			initBondProperties();
-			initAtomPropertyDefaults();
+			CDPL::MolProp::initAtomProperties();
+			CDPL::MolProp::initBondProperties();
+			CDPL::MolProp::initAtomPropertyDefaults();
 		}
 
 	} cdplMolPropInit;
