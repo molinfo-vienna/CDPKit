@@ -29,7 +29,6 @@
 #include <locale>
 #include <istream>
 #include <algorithm>
-#include <functional>
 #include <cmath>
 #include <set>
 
@@ -97,7 +96,7 @@ namespace
 		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Biomol::PDB::END_OF_LINE);
 	}
 
-	struct ResidueAtomCmpFunc : public std::binary_function<const Chem::Atom*, const Chem::Atom*, bool>
+	struct ResidueAtomCmpFunc
 	{
 
 		bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {

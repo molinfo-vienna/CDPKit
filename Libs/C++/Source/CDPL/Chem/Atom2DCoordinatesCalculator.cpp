@@ -57,7 +57,7 @@ using namespace CDPL;
 namespace
 {
 
-	class PriorityCountPred : std::unary_function<std::size_t, bool>
+	class PriorityCountPred
 	{
 
 	public:
@@ -132,8 +132,7 @@ namespace
 }
 
 
-class Chem::Atom2DCoordinatesCalculator::LGNode::EdgePriorityGreaterCmpFunc : 
-	public std::binary_function<const LGEdge*, const LGEdge*, bool>
+class Chem::Atom2DCoordinatesCalculator::LGNode::EdgePriorityGreaterCmpFunc
 {
 
 public:
@@ -161,11 +160,12 @@ private:
 };
 
 
-class Chem::Atom2DCoordinatesCalculator::LGNode::LinkedNodePriorityLessCmpFunc : 
-	public std::binary_function<const LGEdge*, const LGEdge*, bool>
+class Chem::Atom2DCoordinatesCalculator::LGNode::LinkedNodePriorityLessCmpFunc
 {
 
 public:
+	typedef bool result_type;
+	
 	LinkedNodePriorityLessCmpFunc(const LGNode* org): origin(org) {}
 
 	bool operator()(const LGEdge* lhs_edge, const LGEdge* rhs_edge) const {
@@ -177,11 +177,12 @@ private:
 };
 
 
-class Chem::Atom2DCoordinatesCalculator::LGNode::LinkedNodePriorityEqualCmpFunc : 
-	public std::binary_function<const LGEdge*, const LGEdge*, bool>
+class Chem::Atom2DCoordinatesCalculator::LGNode::LinkedNodePriorityEqualCmpFunc
 {
 
 public:
+	typedef bool result_type;
+	
 	LinkedNodePriorityEqualCmpFunc(const LGNode* org): origin(org) {}
 
 	bool operator()(const LGEdge* lhs_edge, const LGEdge* rhs_edge) const {
@@ -193,11 +194,12 @@ private:
 };
 
 
-class Chem::Atom2DCoordinatesCalculator::LGNode::NodeLayoutInfoListEqualCmpFunc : 
-	public std::unary_function<Chem::Atom2DCoordinatesCalculator::LGNode::NodeLayoutInfoList, bool>
+class Chem::Atom2DCoordinatesCalculator::LGNode::NodeLayoutInfoListEqualCmpFunc 
 {
 
 public:
+	typedef bool result_type;
+	
 	NodeLayoutInfoListEqualCmpFunc(const LGNode* org, const NodeLayoutInfoList& lhs_list): 
 		origin(org), lhsList(lhs_list) {}
 

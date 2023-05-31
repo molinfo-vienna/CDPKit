@@ -31,8 +31,6 @@
 #ifndef CDPL_PHARM_PARALLELPIPIINTERACTIONCONSTRAINT_HPP
 #define CDPL_PHARM_PARALLELPIPIINTERACTIONCONSTRAINT_HPP
 
-#include <functional>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
@@ -47,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief ParallelPiPiInteractionConstraint.
 		 */
-		class CDPL_PHARM_API ParallelPiPiInteractionConstraint : public std::binary_function<Feature, Feature, bool>
+		class CDPL_PHARM_API ParallelPiPiInteractionConstraint
 		{
 
 		  public:

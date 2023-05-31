@@ -29,7 +29,6 @@
 
 #include <vector>
 #include <algorithm>
-#include <functional>
 #include <iterator>
 #include <cstddef>
 #include <limits>
@@ -54,7 +53,7 @@ using namespace CDPL;
 namespace
 {
 
-    struct AtomLessCompareFunc : public std::binary_function<const Chem::Atom*, const Chem::Atom*, bool>
+    struct AtomLessCompareFunc
     {
 
 	bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {

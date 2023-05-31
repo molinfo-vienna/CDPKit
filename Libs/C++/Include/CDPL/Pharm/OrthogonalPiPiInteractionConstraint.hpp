@@ -31,8 +31,6 @@
 #ifndef CDPL_PHARM_ORTHOGONALPIPIINTERACTIONCONSTRAINT_HPP
 #define CDPL_PHARM_ORTHOGONALPIPIINTERACTIONCONSTRAINT_HPP
 
-#include <functional>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -48,7 +46,7 @@ namespace CDPL
 		/**
 		 * \brief OrthogonalPiPiInteractionConstraint.
 		 */
-		class CDPL_PHARM_API OrthogonalPiPiInteractionConstraint : public std::binary_function<Feature, Feature, bool>
+		class CDPL_PHARM_API OrthogonalPiPiInteractionConstraint
 		{
 
 		  public:

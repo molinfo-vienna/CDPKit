@@ -37,7 +37,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <functional>
 #include <utility>
 
 #include <boost/function.hpp>
@@ -246,7 +245,7 @@ namespace CDPL
 
 				static bool terminalAndOnCommonNonStereoNode(const AtomNode* node1, const AtomNode* node2);
 
-				struct LessCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
+				struct LessCmpFunc
 				{
 
 					bool operator()(const AtomNode*, const AtomNode*) const;
@@ -288,7 +287,7 @@ namespace CDPL
 
 				std::size_t getID() const;
 
-				struct LessCmpFunc : public std::binary_function<const Edge*, const Edge*, bool>
+				struct LessCmpFunc
 				{
 
 					bool operator()(const Edge*, const Edge*) const;
@@ -309,7 +308,7 @@ namespace CDPL
 
 			typedef std::pair<const Fragment*, const ConnectionTable*> CanonComponentInfo;
 
-			struct ComponentCmpFunc : public std::binary_function<CanonComponentInfo, CanonComponentInfo, bool>
+			struct ComponentCmpFunc
 			{
 					
 				bool operator()(const CanonComponentInfo&, const CanonComponentInfo&) const;

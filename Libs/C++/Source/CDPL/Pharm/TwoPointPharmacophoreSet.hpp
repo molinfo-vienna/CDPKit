@@ -27,8 +27,6 @@
 #ifndef CDPL_PHARM_TWOPOINTPHARMACOPHORESET_HPP
 #define CDPL_PHARM_TWOPOINTPHARMACOPHORESET_HPP
 
-#include <functional>
-
 #include <boost/functional/hash.hpp>
 #include <boost/unordered_set.hpp>
 
@@ -41,7 +39,7 @@ namespace CDPL
     namespace Pharm
     {
 
-		struct TwoPointPharmHashFunc : public std::unary_function<TwoPointPharmacophore, std::size_t>
+		struct TwoPointPharmHashFunc
 		{
 
 			inline std::size_t operator()(const TwoPointPharmacophore& pharm) const {
@@ -54,7 +52,7 @@ namespace CDPL
 			}
 		};
 
-		struct TwoPointPharmEqCmpFunc : public std::binary_function<TwoPointPharmacophore, TwoPointPharmacophore, bool>
+		struct TwoPointPharmEqCmpFunc
 		{
 
 			inline bool operator()(const TwoPointPharmacophore& pharm1, const TwoPointPharmacophore& pharm2) const {

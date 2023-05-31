@@ -30,7 +30,6 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include <functional>
 #include <memory>
 #include <cstddef>
 
@@ -129,7 +128,7 @@ namespace CDPL
 				std::string recordFormat;
 			};
 
-			class CanonAtomCmpFunc : public std::binary_function<const Atom*, const Atom*, bool>
+			class CanonAtomCmpFunc
 			{
 
 			public:

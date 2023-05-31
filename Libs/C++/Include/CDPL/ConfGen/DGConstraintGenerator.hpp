@@ -33,7 +33,6 @@
 
 #include <utility>
 #include <cstddef>
-#include <functional>
 
 #include <boost/unordered_map.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -156,13 +155,13 @@ namespace CDPL
 			typedef std::pair<std::size_t, std::size_t> BondLengthKey;
 			typedef boost::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
 
-			struct CDPL_CONFGEN_API BondAngleKeyHash : public std::unary_function<BondAngleKey, std::size_t>
+			struct CDPL_CONFGEN_API BondAngleKeyHash
 			{
 
 				std::size_t operator()(const BondAngleKey& k) const;
 			};
 
-			struct CDPL_CONFGEN_API BondLengthKeyHash : public std::unary_function<BondLengthKey, std::size_t>
+			struct CDPL_CONFGEN_API BondLengthKeyHash
 			{
 
 				std::size_t operator()(const BondLengthKey& k) const;

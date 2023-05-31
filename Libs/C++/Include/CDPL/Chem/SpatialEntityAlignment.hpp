@@ -35,7 +35,6 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <functional>
 
 #include <boost/function.hpp>
 #include <boost/unordered_set.hpp>
@@ -259,7 +258,7 @@ namespace CDPL
 
 			Util::STPairArray* allocTopMapping();
 			
-			struct TopMappingCmpFunc : public std::binary_function<const Util::STPairArray*, const Util::STPairArray*, bool>
+			struct TopMappingCmpFunc
 			{
 
 				bool operator()(const Util::STPairArray* m1, const Util::STPairArray* m2) const {
@@ -267,7 +266,7 @@ namespace CDPL
 				}
 			};
 
-			struct TopMappingHashFunc : public std::unary_function<const Util::STPairArray*, std::size_t>
+			struct TopMappingHashFunc
 			{
 
 				std::size_t operator()(const Util::STPairArray* m) const {
@@ -275,7 +274,7 @@ namespace CDPL
 				}
 			};
 	
-			struct TopMappingEqCmpFunc : public std::binary_function<const Util::STPairArray*, const Util::STPairArray*, bool>
+			struct TopMappingEqCmpFunc
 			{
 
 				bool operator()(const Util::STPairArray* m1, const Util::STPairArray* m2) const {

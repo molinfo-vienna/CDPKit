@@ -27,7 +27,6 @@
 #ifndef CDPL_PYTHON_BASE_CALLABLEOBJECTADAPTER_HPP
 #define CDPL_PYTHON_BASE_CALLABLEOBJECTADAPTER_HPP
 
-#include <functional>
 #include <string>
 
 #include <boost/python.hpp>
@@ -155,7 +154,7 @@ namespace CDPLPythonBase
 //----------
 
 	template <typename ResType, typename Arg1Type, typename Arg2Type>
-	class BinaryFunctionAdapter : public std::binary_function<Arg1Type, Arg2Type, ResType>
+	class BinaryFunctionAdapter
 	{
 
 	public:
@@ -172,7 +171,7 @@ namespace CDPLPythonBase
 	};
 
 	template <typename ResType, typename Arg1Type, typename Arg2Type>
-	class BinaryFunctionAdapter<ResType&, Arg1Type, Arg2Type> : public std::binary_function<Arg1Type, Arg2Type, ResType&>
+	class BinaryFunctionAdapter<ResType&, Arg1Type, Arg2Type>
 	{
 
 	public:
@@ -194,7 +193,7 @@ namespace CDPLPythonBase
 //----------
 
 	template <typename ResType, typename ArgType>
-	class UnaryFunctionAdapter : public std::unary_function<ArgType, ResType>
+	class UnaryFunctionAdapter
 	{
 
 	public:
@@ -211,7 +210,7 @@ namespace CDPLPythonBase
 	};
 
 	template <typename ResType, typename ArgType>
-	class UnaryFunctionAdapter<ResType&, ArgType>  : public std::unary_function<ArgType, ResType&>
+	class UnaryFunctionAdapter<ResType&, ArgType>
 	{
 
 	public:

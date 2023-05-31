@@ -26,8 +26,6 @@
 #ifndef CDPL_INTERNAL_ADDRESSOF_HPP
 #define CDPL_INTERNAL_ADDRESSOF_HPP
 
-#include <functional>
-
 
 namespace CDPL
 {
@@ -43,10 +41,12 @@ namespace CDPL
 		 * \note <tt>ArgType*</tt> must be convertible to <tt>ResType*</tt>.
 		 */
 		template <typename ArgType, typename ResType = ArgType>
-		class AddressOf : public std::unary_function<ArgType, ResType*>
+		struct AddressOf
 		{
 
 		public:
+			typedef ResType* result_type;
+			
 			/**
 			 * \brief Returns a pointer to the object referenced by the argument.
 			 * \param ref A reference to an object of type \a ArgType.

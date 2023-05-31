@@ -49,7 +49,7 @@ using namespace CDPL;
 namespace
 {
 
-	class SymClassCountPred : public std::unary_function<Base::uint64, bool>
+	class SymClassCountPred
 	{
 
 	public:

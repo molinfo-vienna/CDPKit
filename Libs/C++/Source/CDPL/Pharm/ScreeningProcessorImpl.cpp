@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <functional>
 #include <limits>
 #include <cmath>
 #include <iterator>
@@ -61,7 +60,7 @@ namespace
     const double NAN_SCORE         = std::numeric_limits<double>::quiet_NaN();
     const double VDW_RADIUS_FACTOR = 0.5;
 
-	struct FeatureTolCmpFunc : public std::binary_function<const Pharm::Feature*, const Pharm::Feature*, bool> 
+	struct FeatureTolCmpFunc
 	{
 
 		bool operator()(const Pharm::Feature* ftr1, const Pharm::Feature* ftr2) const {

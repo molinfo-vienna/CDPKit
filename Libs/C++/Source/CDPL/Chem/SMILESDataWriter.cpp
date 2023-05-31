@@ -31,6 +31,7 @@
 #include <locale>
 #include <iomanip>
 #include <algorithm>
+#include <functional>
 #include <iterator>
 #include <cassert>
 
@@ -68,7 +69,7 @@
 namespace
 {
 
-	struct StringCmpFunc : public std::binary_function<std::string, std::string, bool>
+	struct StringCmpFunc
 	{
 
 		bool operator()(const std::string& str1, const std::string& str2) const {

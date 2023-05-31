@@ -31,8 +31,6 @@
 #ifndef CDPL_CHEM_ENTITY3DCOORDINATESFUNCTOR_HPP
 #define CDPL_CHEM_ENTITY3DCOORDINATESFUNCTOR_HPP
 
-#include <functional>
-
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -48,7 +46,7 @@ namespace CDPL
 		/**
 		 * \brief Entity3DCoordinatesFunctor.
 		 */
-		class CDPL_CHEM_API Entity3DCoordinatesFunctor : public std::unary_function<Entity3D, const Math::Vector3D&>
+		struct CDPL_CHEM_API Entity3DCoordinatesFunctor
 		{
 
 		  public:

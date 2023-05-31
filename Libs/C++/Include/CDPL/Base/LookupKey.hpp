@@ -33,7 +33,6 @@
 
 #include <cstddef>
 #include <string>
-#include <functional>
 
 #include "CDPL/Base/APIPrefix.hpp"
 
@@ -60,7 +59,7 @@ namespace CDPL
 			/**
 			 * \brief A functor class implementing the generation of hash codes for \c %LookupKey instances.
 			 */
-			struct HashFunc : public std::unary_function<const LookupKey&, std::size_t>
+			struct HashFunc
 			{
 
 				/**

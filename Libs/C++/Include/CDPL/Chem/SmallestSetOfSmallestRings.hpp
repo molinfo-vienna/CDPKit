@@ -35,7 +35,6 @@
 #define CDPL_CHEM_SMALLESTSETOFSMALLESTRINGS_HPP
 
 #include <vector>
-#include <functional>
 #include <cstddef>
 #include <set>
 
@@ -144,7 +143,7 @@ namespace CDPL
 			{
 
 			public:
-				struct LessCmpFunc : public std::binary_function<const MessagePtr, const MessagePtr, bool>
+				struct LessCmpFunc
 				{
 
 					bool operator()(const MessagePtr&, const MessagePtr&) const;
@@ -189,7 +188,7 @@ namespace CDPL
 				bool         edgeCollFlag;
 			};
 
-			struct TestMatrixRowCmpFunc : public std::binary_function<const MessagePtr, const MessagePtr, bool>
+			struct TestMatrixRowCmpFunc
 			{
 
 				bool operator()(const MessagePtr&, const MessagePtr&) const;

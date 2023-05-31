@@ -31,7 +31,6 @@
 #ifndef CDPL_CHEM_ATOMARRAY3DCOORDINATESFUNCTOR_HPP
 #define CDPL_CHEM_ATOMARRAY3DCOORDINATESFUNCTOR_HPP
 
-#include <functional>
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -50,7 +49,7 @@ namespace CDPL
 		/**
 		 * \brief AtomArray3DCoordinatesFunctor.
 		 */
-		class CDPL_CHEM_API AtomArray3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
+		class CDPL_CHEM_API AtomArray3DCoordinatesFunctor
 		{
 
 		  public:

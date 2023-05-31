@@ -31,8 +31,6 @@
 #ifndef CDPL_PHARM_HBONDINGINTERACTIONCONSTRAINT_HPP
 #define CDPL_PHARM_HBONDINGINTERACTIONCONSTRAINT_HPP
 
-#include <functional>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
@@ -47,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief HBondingInteractionConstraint.
 		 */
-		class CDPL_PHARM_API HBondingInteractionConstraint : public std::binary_function<Feature, Feature, bool>
+		class CDPL_PHARM_API HBondingInteractionConstraint
 		{
 
 		  public:

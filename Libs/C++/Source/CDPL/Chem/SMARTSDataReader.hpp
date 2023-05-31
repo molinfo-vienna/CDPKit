@@ -33,7 +33,6 @@
 #include <string>
 #include <iosfwd>
 #include <cstddef>
-#include <functional>
 
 #include <boost/shared_ptr.hpp>
 

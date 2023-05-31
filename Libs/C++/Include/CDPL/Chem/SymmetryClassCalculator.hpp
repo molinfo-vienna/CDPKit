@@ -32,7 +32,6 @@
 #define CDPL_CHEM_SYMMETRYCLASSCALCULATOR_HPP
 
 #include <vector>
-#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -196,13 +195,13 @@ namespace CDPL
 				std::size_t getSymClassID() const;
 				void setSymClassID(Base::uint64 class_id);
 
-				struct SymClassCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
+				struct SymClassCmpFunc
 				{
 
 					bool operator()(const AtomNode*, const AtomNode*) const;
 				};
 
-				struct SVMNumberCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
+				struct SVMNumberCmpFunc
 				{
 
 					bool operator()(const AtomNode*, const AtomNode*) const;

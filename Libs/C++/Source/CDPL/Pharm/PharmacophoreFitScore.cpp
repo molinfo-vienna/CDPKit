@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <functional>
 
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -44,7 +43,7 @@ using namespace CDPL;
 namespace
 {
 
-	struct FeatureCmpFunc : public std::binary_function<const Pharm::Feature*, const Pharm::Feature*, bool>
+	struct FeatureCmpFunc
 	{
 
 	public:

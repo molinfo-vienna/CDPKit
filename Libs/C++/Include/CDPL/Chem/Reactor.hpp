@@ -34,7 +34,6 @@
 #include <map>
 #include <vector>
 #include <utility>
-#include <functional>
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -209,7 +208,7 @@ namespace CDPL
 
 			typedef std::pair<std::size_t, std::size_t> IDPair;
 
-			struct IDPairLessCmpFunc : public std::binary_function<IDPair, IDPair, bool>
+			struct IDPairLessCmpFunc
 			{
 
 				bool operator()(const IDPair&, const IDPair&) const;

@@ -33,7 +33,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <functional>
 
 #include <boost/shared_ptr.hpp>
 
@@ -150,8 +149,7 @@ namespace CDPL
 				const Atom*           startAtom;
 			};
 
-			struct SubstructDescriptorLessCmpFunc : 
-				public std::binary_function<const SubstructDescriptorPtr, const SubstructDescriptorPtr, bool> 
+			struct SubstructDescriptorLessCmpFunc
 			{
 
 				bool operator()(const SubstructDescriptorPtr&, const SubstructDescriptorPtr&) const;

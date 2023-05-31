@@ -31,8 +31,6 @@
 #ifndef CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP
 #define CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP
 
-#include <functional>
-
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
@@ -49,7 +47,7 @@ namespace CDPL
 		/**
 		 * \brief InteractionConstraintConnector.
 		 */
-		class CDPL_PHARM_API InteractionConstraintConnector : public std::binary_function<Feature, Feature, bool>
+		class CDPL_PHARM_API InteractionConstraintConnector
 		{
 
 		  public:

@@ -27,7 +27,6 @@
 #ifndef CDPL_INTERNAL_STRINGUTILITIES_HPP
 #define CDPL_INTERNAL_STRINGUTILITIES_HPP
 
-#include <functional>
 #include <string>
 #include <locale>
 
@@ -38,17 +37,21 @@ namespace CDPL
 	namespace Internal
 	{
 
-		struct IsNonWhitespace : public std::unary_function<char, bool>
+		struct IsNonWhitespace
 		{
 
+			typedef bool result_type;
+			
 			bool operator()(char c) const {
 				return !std::isspace(c, std::locale::classic());
 			}
 		};
 
-		struct IsWhitespace : public std::unary_function<char, bool>
+		struct IsWhitespace
 		{
 
+			typedef bool result_type;
+			
 			bool operator()(char c) const {
 				return std::isspace(c, std::locale::classic());
 			}

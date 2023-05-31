@@ -31,8 +31,6 @@
 #ifndef CDPL_UTIL_PROPERTYVALUE_HPP
 #define CDPL_UTIL_PROPERTYVALUE_HPP
 
-#include <functional>
-
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
 
@@ -49,7 +47,7 @@ namespace CDPL
 		 * \tparam T The type of the property value.
 		 */
 		template <typename T>
-		class PropertyValue : public std::unary_function<Base::PropertyContainer, T>
+		class PropertyValue
 		{
 
 		public:

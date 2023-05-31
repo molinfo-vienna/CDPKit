@@ -82,7 +82,7 @@ namespace
 
 	typedef std::pair<const Chem::Atom*, const Chem::Bond*> Ligand;
 
-	class AtomCIPPGreaterCmpFunc : public std::binary_function<Ligand, Ligand, bool>
+	class AtomCIPPGreaterCmpFunc
 	{
 
 	public:

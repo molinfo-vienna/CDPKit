@@ -33,7 +33,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <functional>
 
 #include <boost/function.hpp>
 
@@ -120,19 +119,19 @@ namespace CDPL
 
 				std::size_t getPriority() const;
 
-				struct LessCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
+				struct LessCmpFunc
 				{
 
 					bool operator()(const AtomNode*, const AtomNode*) const;
 				};
 
-				struct PriorityLessCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
+				struct PriorityLessCmpFunc
 				{
 
 					bool operator()(const AtomNode*, const AtomNode*) const;
 				};
 
-				struct PriorityGreaterCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
+				struct PriorityGreaterCmpFunc
 				{
 
 					bool operator()(const AtomNode*, const AtomNode*) const;

@@ -31,8 +31,6 @@
 #ifndef CDPL_UTIL_PROPERTYVALUEPRODUCT_HPP
 #define CDPL_UTIL_PROPERTYVALUEPRODUCT_HPP
 
-#include <functional>
-
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
 
@@ -50,7 +48,7 @@ namespace CDPL
 		 * \tparam PropertyValueType The property value type.
 		 */
 		template <typename ResType, typename PropertyValueType = ResType>
-		class PropertyValueProduct : public std::binary_function<Base::PropertyContainer, Base::PropertyContainer, ResType>
+		class PropertyValueProduct
 		{
 
 		public:

@@ -33,7 +33,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -123,7 +122,7 @@ namespace CDPL
 		private:
 			class StereoBond;
 
-			class StereoBondOrderingFunction : public std::binary_function<const StereoBond*, const StereoBond*, bool>
+			class StereoBondOrderingFunction
 			{
 
 			public:

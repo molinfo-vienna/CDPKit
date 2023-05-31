@@ -31,8 +31,6 @@
 #ifndef CDPL_UTIL_DEREFERENCER_HPP
 #define CDPL_UTIL_DEREFERENCER_HPP
 
-#include <functional>
-
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -52,10 +50,12 @@ namespace CDPL
 		 *       pointed-to object will be returned. 
 		 */
 		template <typename ArgType, typename ResType>
-		class Dereferencer : public std::unary_function<ArgType, ResType>
+		struct Dereferencer
 		{
 
 		public:
+			typedef ResType result_type;
+			
 			/**
 			 * \brief Returns a reference to or copy of the pointed-to argument object.
 			 * \param ptr A pointer of type \a ArgType to an object.
@@ -74,10 +74,12 @@ namespace CDPL
 		 *       pointed-to object will be returned. 
 		 */
 		template <typename ArgType, typename ResType>
-		class NullCheckDereferencer : public std::unary_function<ArgType, ResType>
+		struct NullCheckDereferencer
 		{
 
 		public:
+			typedef ResType result_type;
+			
 			/**
 			 * \brief Returns a reference to or copy of the pointed-to argument object.
 			 * \param ptr A pointer of type \a ArgType to an object.

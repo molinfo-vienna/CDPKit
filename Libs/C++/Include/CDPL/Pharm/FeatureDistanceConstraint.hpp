@@ -31,8 +31,6 @@
 #ifndef CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP
 #define CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP
 
-#include <functional>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
@@ -47,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief FeatureDistanceConstraint.
 		 */
-		class CDPL_PHARM_API FeatureDistanceConstraint : public std::binary_function<Feature, Feature, bool>
+		class CDPL_PHARM_API FeatureDistanceConstraint
 		{
 
 		  public:

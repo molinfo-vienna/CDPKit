@@ -35,7 +35,6 @@
 #define CDPL_CHEM_COMPLETERINGSET_HPP
 
 #include <queue>
-#include <functional>
 #include <vector>
 #include <list>
 #include <cstddef>
@@ -114,7 +113,7 @@ namespace CDPL
 			public:
 				typedef EdgeList::iterator EdgeIterator;
 
-				struct GreaterCmpFunc : public std::binary_function<const Node*, const Node*, bool>
+				struct GreaterCmpFunc
 				{
 			
 					bool operator()(const Node*, const Node*) const;

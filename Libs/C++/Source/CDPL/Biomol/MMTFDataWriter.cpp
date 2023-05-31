@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <functional>
 #include <iterator>
 #include <limits>
 
@@ -54,7 +53,7 @@ using namespace CDPL;
 namespace
 {
 
-    struct AtomOrderingFunc : public std::binary_function<const Chem::Atom*, const Chem::Atom*, bool>
+    struct AtomOrderingFunc
     {
 
 		bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {
