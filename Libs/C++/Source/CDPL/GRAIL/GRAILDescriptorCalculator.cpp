@@ -490,26 +490,28 @@ void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3
 void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupations(const Math::Vector3DArray::StorageType& atom_coords,
 																   Math::DVector& descr, std::size_t& idx)
 {
-	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_N, true);
-	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_O, true);
-	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_ACCEPTOR_S, true);
+	calcTgtEnvHBAHBDOccupation(atom_coords, descr, FeatureType::H_BOND_ACCEPTOR_N, true, idx);
+	calcTgtEnvHBAHBDOccupation(atom_coords, descr, FeatureType::H_BOND_ACCEPTOR_O, true, idx);
+	calcTgtEnvHBAHBDOccupation(atom_coords, descr, FeatureType::H_BOND_ACCEPTOR_S, true, idx);
 
-	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_N, false);
-	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_O, false);
-	descr[idx++] = calcTgtEnvHBAHBDOccupation(atom_coords, FeatureType::H_BOND_DONOR_S, false);
+	calcTgtEnvHBAHBDOccupation(atom_coords, descr, FeatureType::H_BOND_DONOR_N, false, idx);
+	calcTgtEnvHBAHBDOccupation(atom_coords, descr, FeatureType::H_BOND_DONOR_O, false, idx);
+	calcTgtEnvHBAHBDOccupation(atom_coords, descr, FeatureType::H_BOND_DONOR_S, false, idx);
 }
 
-double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray::StorageType& atom_coords,
-																	unsigned int tgt_ftr_type, bool is_hba_type)
+void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Vector3DArray::StorageType& atom_coords,
+																  Math::DVector& descr, unsigned int tgt_ftr_type,
+																  bool is_hba_type, std::size_t& idx)
 {
 	Pharm::HBondingInteractionScore scoring_func(is_hba_type);
 	const FeatureSubset& tgt_ftr_ss = tgtFtrSubsets[tgt_ftr_type];
-	double tot_score = 0.0;
-	
+	double score_sum = 0.0;
+	double score_max = 0.0;
+
 	for (IndexList::const_iterator ai_it = ligHeavyAtoms.begin(), ai_end = ligHeavyAtoms.end(); ai_it != ai_end; ++ai_it) {
 		std::size_t lig_atom_idx = *ai_it;
 		const Math::Vector3D& lig_atom_pos = atom_coords[lig_atom_idx];
-		double la_score = 0.0;
+		double max_score = 0.0;
 
 		tmpIndexList.clear();
 		tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_atom_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
@@ -517,16 +519,15 @@ double GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::
 		for (IndexList::const_iterator tf_it = tmpIndexList.begin(), tf_end = tmpIndexList.end(); tf_it != tf_end; ++tf_it) {
 			double s = scoring_func(lig_atom_pos, *tgt_ftr_ss.features[*tf_it]);
 
-			if (is_hba_type)
-				la_score = std::max(la_score, s);
-			else
-				la_score += s;
+			max_score = std::max(max_score, s);
+			score_sum += s;
 		}
 
-		tot_score += la_score;
+		score_max += max_score;
 	}
-	
-	return tot_score;
+
+	descr[idx++] = score_sum;
+	descr[idx++] = score_max;
 }
 
 void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVector& descr, std::size_t& idx)
@@ -537,13 +538,14 @@ void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVecto
 		const FtrInteractionFuncData& func_data = *it;
 		const IndexList& lig_ftrs = ligFtrSubsets[func_data.ligFtrType];
 		const FeatureSubset& tgt_ftr_ss = tgtFtrSubsets[func_data.tgtFtrType];
-		double tot_score = 0.0;
+		double score_sum = 0.0;
+		double score_max = 0.0;
 		
 		for (IndexList::const_iterator lf_it = lig_ftrs.begin(), lf_end = lig_ftrs.end(); lf_it != lf_end; ++lf_it) {
 			std::size_t lig_ftr_idx = *lf_it;
 			double lig_ftr_wt = ligFtrWeights[lig_ftr_idx];
 			const Math::Vector3D& lig_ftr_pos = ligFtrCoords[lig_ftr_idx];
-			double lf_score = 0.0;
+			double max_score = 0.0;
 			
 			tmpIndexList.clear();
 			tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_ftr_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
@@ -551,16 +553,15 @@ void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVecto
 			for (IndexList::const_iterator tf_it = tmpIndexList.begin(), tf_end = tmpIndexList.end(); tf_it != tf_end; ++tf_it) {
 				double s = lig_ftr_wt * (*func_data.scoringFunc)(lig_ftr_pos, *tgt_ftr_ss.features[*tf_it]);
 
-				if (func_data.maxScoreSum)
-					lf_score = std::max(lf_score, s);
-				else
-					lf_score += s;
+				max_score = std::max(max_score, s);
+				score_sum += s;
 			}
 
-			tot_score += lf_score;
+			score_max += max_score;
 		}
 
-		descr[idx++] = tot_score;
+		descr[idx++] = score_sum;
+		descr[idx++] = score_max;
 	}
 }
 
@@ -568,6 +569,7 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
 																		  Math::DVector& descr, std::size_t& idx)
 {
 	double energy = 0.0;
+	double energy_sqrd_dist = 0.0;
 	
 	for (std::size_t i = 0; i < numLigAtoms; i++) {
 		double la_charge = ligAtomCharges[i];
@@ -578,12 +580,16 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
 
 		for (IndexList::const_iterator ta_it = tmpIndexList.begin(), ta_end = tmpIndexList.end(); ta_it != ta_end; ++ta_it) {
 			std::size_t tgt_atom_idx = *ta_it;
+			double r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
+			double e = la_charge * tgtAtomCharges[tgt_atom_idx] / (r_ij * DIELECTRIC_CONST);
 
-			energy += la_charge * tgtAtomCharges[tgt_atom_idx] / (ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]) * DIELECTRIC_CONST);
+			energy += e;
+			energy_sqrd_dist += e / r_ij;
 		}
 	}
 
 	descr[idx++] = energy;
+	descr[idx++] = energy_sqrd_dist;
 }
 
 /*
