@@ -73,7 +73,7 @@ namespace CDPL
 			typedef boost::shared_ptr<ResonanceStructureGenerator> SharedPointer;
 			typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
 
-			class StructureData
+			class CDPL_CHEM_API StructureData
 		    {
 
 				friend class ResonanceStructureGenerator;
