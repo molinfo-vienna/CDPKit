@@ -80,7 +80,7 @@ void ForceField::MMFF94AromaticSSSRSubset::perceiveAromaticRings(const Chem::Fra
 		const Fragment::SharedPointer& ring = *it;
 		std::size_t r_size = ring->getNumAtoms();
 
-		if (r_size < 4 && r_size > 6)
+		if (r_size < 4 || r_size > 6)
 			continue;
 
 		if (!isNotAromatic(*ring, *molGraph)) {
