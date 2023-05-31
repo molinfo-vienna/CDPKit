@@ -207,7 +207,7 @@ FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time system thread atomic OPTIONAL_COM
 IF(APPLE)
   IF(EXISTS "/opt/homebrew/opt/sphinx-doc")
     SET(Sphinx_DIR "/opt/homebrew/opt/sphinx-doc")
-  ELIF(EXISTS "/usr/local/opt/sphinx-doc")
+  ELSEIF(EXISTS "/usr/local/opt/sphinx-doc")
     SET(Sphinx_DIR "/usr/local/opt/sphinx-doc")
   ENDIF()
 ENDIF(APPLE)
