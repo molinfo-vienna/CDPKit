@@ -62,7 +62,7 @@ namespace
 					  boost::bind(&python::list::append<Base::LookupKey>, boost::ref(keys),
 								  boost::bind(&Base::PropertyContainer::PropertyEntry::first, _1)));
 
-		return std::move(keys);
+		return keys;
 	}
 
 	boost::python::list getPropertyValues(CDPL::Base::PropertyContainer& cntnr)
@@ -76,7 +76,7 @@ namespace
 					  boost::bind(&python::list::append<Base::Variant>, boost::ref(values),
 								  boost::bind(&Base::PropertyContainer::PropertyEntry::second, _1)));
 
-		return std::move(values);
+		return values;
 	}
 
 	boost::python::list getProperties(CDPL::Base::PropertyContainer& cntnr)
@@ -91,7 +91,7 @@ namespace
 		for (Base::PropertyContainer::ConstPropertyIterator it = cntnr.getPropertiesBegin(); it!= props_end; ++it)  
 			props.append(python::make_tuple(it->first, it->second));
 
-		return std::move(props);
+		return props;
 	}
 
 	void addProperties(CDPL::Base::PropertyContainer& cntnr, CDPL::Base::PropertyContainer& other)
