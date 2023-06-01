@@ -31,6 +31,7 @@
 #include <cmath>
 
 #include <boost/thread.hpp>
+#include <boost/iterator.hpp>
 
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
@@ -70,7 +71,6 @@ namespace
 		unsigned int   ligFtrType;
 		unsigned int   tgtFtrType;
 		ScoringFuncPtr scoringFunc;
-		bool           maxScoreSum;
 	};
 
 	typedef std::vector<FtrInteractionFuncData> FtrInteractionFuncList;
@@ -84,93 +84,93 @@ namespace
 
 		typedef FeatureInteractionScore::SharedPointer FISPtr;
 		
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::POSITIVE_IONIZABLE, GRAIL::FeatureType::AROMATIC, FISPtr(new CationPiInteractionScore(false)), true });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::AROMATIC, GRAIL::FeatureType::POSITIVE_IONIZABLE, FISPtr(new CationPiInteractionScore(true)), true });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::HYDROPHOBIC, GRAIL::FeatureType::HYDROPHOBIC, FISPtr(new HydrophobicInteractionScore()), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::POSITIVE_IONIZABLE, GRAIL::FeatureType::AROMATIC, FISPtr(new CationPiInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::AROMATIC, GRAIL::FeatureType::POSITIVE_IONIZABLE, FISPtr(new CationPiInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::HYDROPHOBIC, GRAIL::FeatureType::HYDROPHOBIC, FISPtr(new HydrophobicInteractionScore()) });
 		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::AROMATIC, GRAIL::FeatureType::AROMATIC,
-				  FISPtr(new FeatureInteractionScoreCombiner(FISPtr(new OrthogonalPiPiInteractionScore()), FISPtr(new ParallelPiPiInteractionScore()))), true });
+				  FISPtr(new FeatureInteractionScoreCombiner(FISPtr(new OrthogonalPiPiInteractionScore()), FISPtr(new ParallelPiPiInteractionScore()))) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N2, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N2, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N2, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N2, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N2, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N2, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
                       
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nar, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nar, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nar, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nar, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nar, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nar, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nam, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nam, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nam, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nam, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nam, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Nam, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Npl3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Npl3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Npl3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Npl3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Npl3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_Npl3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N4, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N4, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N4, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N4, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N4, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_N4, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
                 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_O3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_O3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_O3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_O3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_O3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_O3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_S3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_S3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_S3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_S3, GRAIL::FeatureType::H_BOND_ACCEPTOR_N, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_S3, GRAIL::FeatureType::H_BOND_ACCEPTOR_O, FISPtr(new HBondingInteractionScore(true)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_DONOR_S3, GRAIL::FeatureType::H_BOND_ACCEPTOR_S, FISPtr(new HBondingInteractionScore(true)) });
 
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                       
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                        
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                         
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_N1, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                       
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Nar, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                         
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Npl3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                       
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                      
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_O2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                     
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_Oco2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                     
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S3, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                        
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)), false });
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)), false });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, GRAIL::FeatureType::H_BOND_DONOR_N, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, GRAIL::FeatureType::H_BOND_DONOR_O, FISPtr(new HBondingInteractionScore(false)) });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, GRAIL::FeatureType::H_BOND_DONOR_S, FISPtr(new HBondingInteractionScore(false)) });
                      
-		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::HALOGEN_BOND_DONOR, GRAIL::FeatureType::HALOGEN_BOND_ACCEPTOR, FISPtr(new XBondingInteractionScore(true)), true });
+		ftrInteractionFuncList.push_back({ GRAIL::FeatureType::HALOGEN_BOND_DONOR, GRAIL::FeatureType::HALOGEN_BOND_ACCEPTOR, FISPtr(new XBondingInteractionScore(true)) });
 	}
 
 	struct LigandFtrType
@@ -208,8 +208,6 @@ namespace
 		{ GRAIL::FeatureType::H_BOND_ACCEPTOR_S2, false }
 	};
 
-	const std::size_t NUM_LIGAND_DESCR_FTR_TYPES = sizeof(LIGAND_DESCR_FTR_TYPES) / sizeof(LigandFtrType);
-	
 	const double HYDROPHOBICIY_THRESHOLD         = 0.15;
 	const double FEATURE_DISTANCE_CUTOFF         = 10.0;
 	const double ESTAT_DISTANCE_CUTOFF           = 20.0;
@@ -308,11 +306,10 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 	tgtPharmGenerator.setAtom3DCoordinatesFunction(TargetAtomCoordsFunc(tgt_env, tgtAtomCoords));
 	tgtPharmGenerator.generate(tgt_env, tgtPharmacophore);
 
-	for (FeatureSubsetList::iterator it = tgtFtrSubsets.begin(), end = tgtFtrSubsets.end(); it != end; ++it)
-		it->features.clear();
+	for (auto& ftr_ss : tgtFtrSubsets)
+		ftr_ss.features.clear();
 
-	for (BasicPharmacophore::FeatureIterator it = tgtPharmacophore.getFeaturesBegin(), end = tgtPharmacophore.getFeaturesEnd(); it != end; ++it) {
-		Feature& ftr = *it;
+	for (auto& ftr : boost::make_iterator_range(tgtPharmacophore.getFeaturesBegin(), tgtPharmacophore.getFeaturesEnd())) {
 		unsigned int ext_type = perceiveExtendedType(ftr, false);
 		
 		if (ext_type > FeatureType::MAX_EXT_TYPE) // sanity check
@@ -324,8 +321,7 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 		tgtFtrSubsets[ext_type].features.push_back(&ftr);
 	}
 
-	for (FeatureSubsetList::iterator it = tgtFtrSubsets.begin(), end = tgtFtrSubsets.end(); it != end; ++it) {
-		FeatureSubset& ftr_ss = *it;
+	for (auto& ftr_ss : tgtFtrSubsets) {
 		std::size_t num_ftrs = ftr_ss.features.size();
 		
 		ftr_ss.ftrCoords.resize(num_ftrs);
@@ -373,8 +369,8 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 	
 	ligPharmGenerator.generate(ligand, ligPharmacophore);
 	
-	for (IndexListArray::iterator it = ligFtrSubsets.begin(), end = ligFtrSubsets.end(); it != end; ++it)
-		it->clear();
+	for (auto& il : ligFtrSubsets)
+		il.clear();
 
 	std::size_t num_ftrs = ligPharmacophore.getNumFeatures();
 
@@ -392,12 +388,9 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 
 		ligFtrAtoms[i].clear();
 
-		for (Fragment::ConstAtomIterator it = ftr_substruct->getAtomsBegin(), end = ftr_substruct->getAtomsEnd(); it != end; ++it) {
-			const Atom& atom = *it;
-
+		for (const auto& atom : boost::make_iterator_range(ftr_substruct->getAtomsBegin(),ftr_substruct->getAtomsEnd()))
 			if (getType(atom) != AtomType::H)
 				ligFtrAtoms[i].push_back(ligand.getAtomIndex(atom));
-		}
 		
 		unsigned int ext_type = perceiveExtendedType(ftr, true);
 
@@ -414,10 +407,11 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 		ligFtrSubsets[ext_type].push_back(i);
 	}
 
-	for (std::size_t i = 0; i < NUM_LIGAND_DESCR_FTR_TYPES; i++) {
-		const IndexList& ftrs = ligFtrSubsets[LIGAND_DESCR_FTR_TYPES[i].type];
+	for (std::size_t i = 0; i < sizeof(LIGAND_DESCR_FTR_TYPES) / sizeof(LigandFtrType); i++) {
+		const LigandFtrType& ftr_type = LIGAND_DESCR_FTR_TYPES[i];
+		const IndexList& ftrs = ligFtrSubsets[ftr_type.type];
 		
-		if (!LIGAND_DESCR_FTR_TYPES[i].isHBD) {
+		if (!ftr_type.isHBD) {
 			ligDescriptor[i] = ftrs.size();
 			continue;
 		}
@@ -425,13 +419,11 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 		// for H-donor atoms the number of attached Hs has to be considered 
 		ligDescriptor[i] = 0;
 
-		for (IndexList::const_iterator f_it = ftrs.begin(), f_end = ftrs.end(); f_it != f_end; ++f_it) {
-			const Feature& ftr = ligPharmacophore.getFeature(*f_it);
+		for (auto ftr_idx : ftrs) {
+			const Feature& ftr = ligPharmacophore.getFeature(ftr_idx);
 			const Fragment::SharedPointer& ftr_substruct = getSubstructure(ftr);
 
-			for (Fragment::ConstAtomIterator a_it = ftr_substruct->getAtomsBegin(), a_end = ftr_substruct->getAtomsEnd(); a_it != a_end; ++a_it) {
-				const Atom& atom = *a_it;
-
+			for (const auto& atom : boost::make_iterator_range(ftr_substruct->getAtomsBegin(), ftr_substruct->getAtomsEnd())) {
 				if (getType(atom) == AtomType::H)
 					continue;
 
@@ -480,8 +472,8 @@ void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3
 
 		ftr_pos.clear();
 		
-		for (IndexList::const_iterator it = ftr_atoms.begin(), end = ftr_atoms.end(); it != end; ++it)
-			ftr_pos.plusAssign(atom_coords[*it]);
+		for (auto atom_idx : ftr_atoms)
+			ftr_pos.plusAssign(atom_coords[atom_idx]);
 
 		ftr_pos /= num_atoms;
 	}
@@ -508,16 +500,15 @@ void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Ve
 	double score_sum = 0.0;
 	double score_max = 0.0;
 
-	for (IndexList::const_iterator ai_it = ligHeavyAtoms.begin(), ai_end = ligHeavyAtoms.end(); ai_it != ai_end; ++ai_it) {
-		std::size_t lig_atom_idx = *ai_it;
+	for (auto lig_atom_idx : ligHeavyAtoms) {
 		const Math::Vector3D& lig_atom_pos = atom_coords[lig_atom_idx];
 		double max_score = 0.0;
 
 		tmpIndexList.clear();
 		tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_atom_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 
-		for (IndexList::const_iterator tf_it = tmpIndexList.begin(), tf_end = tmpIndexList.end(); tf_it != tf_end; ++tf_it) {
-			double s = scoring_func(lig_atom_pos, *tgt_ftr_ss.features[*tf_it]);
+		for (auto tgt_ftr_idx : tmpIndexList) {
+			double s = scoring_func(lig_atom_pos, *tgt_ftr_ss.features[tgt_ftr_idx]);
 
 			max_score = std::max(max_score, s);
 			score_sum += s;
@@ -534,15 +525,13 @@ void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVecto
 {
 	boost::call_once(&initFtrInteractionFuncList, initFtrInteractionFuncListFlag);
 
-	for (FtrInteractionFuncList::const_iterator it = ftrInteractionFuncList.begin(), end = ftrInteractionFuncList.end(); it != end; ++it) {
-		const FtrInteractionFuncData& func_data = *it;
+	for (const auto& func_data : ftrInteractionFuncList) {
 		const IndexList& lig_ftrs = ligFtrSubsets[func_data.ligFtrType];
 		const FeatureSubset& tgt_ftr_ss = tgtFtrSubsets[func_data.tgtFtrType];
 		double score_sum = 0.0;
 		double score_max = 0.0;
 		
-		for (IndexList::const_iterator lf_it = lig_ftrs.begin(), lf_end = lig_ftrs.end(); lf_it != lf_end; ++lf_it) {
-			std::size_t lig_ftr_idx = *lf_it;
+		for (auto lig_ftr_idx : lig_ftrs) {
 			double lig_ftr_wt = ligFtrWeights[lig_ftr_idx];
 			const Math::Vector3D& lig_ftr_pos = ligFtrCoords[lig_ftr_idx];
 			double max_score = 0.0;
@@ -550,8 +539,8 @@ void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVecto
 			tmpIndexList.clear();
 			tgt_ftr_ss.octree->radiusNeighbors<Octree::L2Distance>(lig_ftr_pos, FEATURE_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 			
-			for (IndexList::const_iterator tf_it = tmpIndexList.begin(), tf_end = tmpIndexList.end(); tf_it != tf_end; ++tf_it) {
-				double s = lig_ftr_wt * (*func_data.scoringFunc)(lig_ftr_pos, *tgt_ftr_ss.features[*tf_it]);
+			for (auto tgt_ftr_idx : tmpIndexList) {
+				double s = lig_ftr_wt * (*func_data.scoringFunc)(lig_ftr_pos, *tgt_ftr_ss.features[tgt_ftr_idx]);
 
 				max_score = std::max(max_score, s);
 				score_sum += s;
@@ -578,8 +567,7 @@ void GRAIL::GRAILDescriptorCalculator::calcElectrostaticInteractionEnergy(const 
 		tmpIndexList.clear();
 		tgtAtomOctree->radiusNeighbors<Octree::L2Distance>(la_pos, ESTAT_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 
-		for (IndexList::const_iterator ta_it = tmpIndexList.begin(), ta_end = tmpIndexList.end(); ta_it != ta_end; ++ta_it) {
-			std::size_t tgt_atom_idx = *ta_it;
+		for (auto tgt_atom_idx : tmpIndexList) {
 			double r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);
 			double e = la_charge * tgtAtomCharges[tgt_atom_idx] / (r_ij * DIELECTRIC_CONST);
 
@@ -613,8 +601,7 @@ void GRAIL::GRAILDescriptorCalculator::calcVdWInteractionEnergy(const Math::Vect
 		tmpIndexList.clear();
 		tgtAtomOctree->radiusNeighbors<Octree::L2Distance>(la_pos, VDW_DISTANCE_CUTOFF, std::back_inserter(tmpIndexList));
 
-		for (IndexList::const_iterator ta_it = tmpIndexList.begin(), ta_end = tmpIndexList.end(); ta_it != ta_end; ++ta_it) {
-			std::size_t tgt_atom_idx = *ta_it;
+		for (auto tgt_atom_idx : tmpIndexList) {
 			const DoublePair& ta_params = tgtAtomVdWParams[tgt_atom_idx];
 
 			double r_ij = ForceField::calcDistance<double>(la_pos, tgtAtomCoords[tgt_atom_idx]);

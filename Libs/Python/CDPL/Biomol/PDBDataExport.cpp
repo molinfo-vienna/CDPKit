@@ -25,6 +25,7 @@
 
 
 #include <algorithm>
+#include <utility>
 
 #include <boost/python.hpp>
 #include <boost/bind.hpp>

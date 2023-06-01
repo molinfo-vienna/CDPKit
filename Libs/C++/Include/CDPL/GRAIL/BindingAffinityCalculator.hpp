@@ -43,37 +43,36 @@ namespace CDPL
     namespace GRAIL
     {
 
-	/**
-	 * \brief BindingAffinityCalculator.
-	 */
-	class CDPL_GRAIL_API BindingAffinityCalculator
-	{
+		/**
+		 * \brief BindingAffinityCalculator.
+		 */
+		class CDPL_GRAIL_API BindingAffinityCalculator
+		{
 
-	  public:
-	    typedef boost::shared_ptr<BindingAffinityCalculator> SharedPointer;
+		  public:
+			typedef boost::shared_ptr<BindingAffinityCalculator> SharedPointer;
 
-	    enum AffinityMeasure
-	    {
+			enum AffinityMeasure
+		    {
 
-	      PKD,
-	      PKI,
-	      DG,
-	      PKD_PKI
-	    };
+			  PKD,
+			  PKI,
+			  PKD_PKI
+			};
 	    
-	    BindingAffinityCalculator();
+			BindingAffinityCalculator();
 
-	    BindingAffinityCalculator(AffinityMeasure measure);
+			BindingAffinityCalculator(AffinityMeasure measure);
 
-	    void setAffinityMeasure(AffinityMeasure measure);
+			void setAffinityMeasure(AffinityMeasure measure);
 
-	    AffinityMeasure getAffinityMeasure() const;
+			AffinityMeasure getAffinityMeasure() const;
 	    
-	    double operator()(const Math::DVector& grail_descr) const;
+			double operator()(const Math::DVector& grail_descr) const;
 
-	  private:
-	    AffinityMeasure affMeasure;
-	};
+		  private:
+			AffinityMeasure affMeasure;
+		};
     }
 }
 

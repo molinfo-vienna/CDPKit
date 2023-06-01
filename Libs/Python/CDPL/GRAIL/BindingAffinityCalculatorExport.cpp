@@ -47,7 +47,6 @@ void CDPLPythonGRAIL::exportBindingAffinityCalculator()
 	python::enum_<GRAIL::BindingAffinityCalculator::AffinityMeasure>("AffinityMeasure")
 		.value("PKD", GRAIL::BindingAffinityCalculator::PKD)
 		.value("PKI", GRAIL::BindingAffinityCalculator::PKI)
-		.value("DG", GRAIL::BindingAffinityCalculator::DG)
 		.value("PKD_PKI", GRAIL::BindingAffinityCalculator::PKD_PKI)
 		.export_values();
 
@@ -63,7 +62,7 @@ void CDPLPythonGRAIL::exportBindingAffinityCalculator()
 		.def("getAffinityMeasure", &GRAIL::BindingAffinityCalculator::getAffinityMeasure,
 			 python::arg("self"))
 		.def("__call__", &GRAIL::BindingAffinityCalculator::operator(),
-			 (python::arg("self"), python::arg("descr")))
+			 (python::arg("self"), python::arg("grail_descr")))
 		.add_property("affinityMeasure", &GRAIL::BindingAffinityCalculator::getAffinityMeasure,
 					  &GRAIL::BindingAffinityCalculator::setAffinityMeasure);
 }
