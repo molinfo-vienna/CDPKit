@@ -40,14 +40,9 @@ class BindingAffinityCalculator(Boost.Python.instance):
         PKI = 1
 
         ##
-        # \brief DG.
-        #
-        DG = 2
-
-        ##
         # \brief PKD_PKI.
         #
-        PKD_PKI = 3
+        PKD_PKI = 2
 
     ##
     # \brief Initializes the \e %BindingAffinityCalculator instance.
@@ -99,10 +94,10 @@ class BindingAffinityCalculator(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param descr 
+    # \param grail_descr 
     # \return 
     #
-    def __call__(descr: CDPL.Math.DVector) -> float: pass
+    def __call__(grail_descr: CDPL.Math.DVector) -> float: pass
 
     ##
     # \brief 
