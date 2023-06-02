@@ -32,9 +32,10 @@
 #include <vector>
 #include <cstddef>
 #include <utility>
+#include <unordered_map>
+#include <unordered_set>
 
-#include <boost/unordered_map.hpp>
-#include <boost/unordered_set.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
@@ -115,11 +116,11 @@ namespace CDPL
 */
 			typedef std::vector<const Chem::Atom*> AtomList;
 			typedef std::vector<long> AtomSerialList;
-			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
-			typedef boost::unordered_map<const Chem::Atom*, std::size_t> AtomToSerialMap;
+			typedef std::unordered_map<std::string, std::size_t> RecordHistogram;
+			typedef std::unordered_map<const Chem::Atom*, std::size_t> AtomToSerialMap;
 			typedef std::pair<long, long> SerialPair;
-			typedef boost::unordered_set<SerialPair> SerialPairSet;
-			typedef boost::unordered_set<const Chem::Bond*> BondSet;
+			typedef std::unordered_set<SerialPair, boost::hash<SerialPair> > SerialPairSet;
+			typedef std::unordered_set<const Chem::Bond*> BondSet;
 
 			typedef ResidueDictionary::SharedPointer ResDictPointer;
 

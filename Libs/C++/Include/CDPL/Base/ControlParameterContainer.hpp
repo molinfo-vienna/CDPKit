@@ -34,9 +34,9 @@
 #include <vector>
 #include <utility>
 #include <cstddef>
+#include <unordered_map>
 
 #include <boost/function.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/LookupKey.hpp"
@@ -95,7 +95,7 @@ namespace CDPL
 		class CDPL_BASE_API ControlParameterContainer
 		{
 
-			typedef boost::unordered_map<LookupKey, Variant, LookupKey::HashFunc> ParameterMap;
+			typedef std::unordered_map<LookupKey, Variant, LookupKey::HashFunc> ParameterMap;
 
 		public:
 			/**

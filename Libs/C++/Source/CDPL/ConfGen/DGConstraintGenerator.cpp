@@ -74,9 +74,9 @@ std::size_t ConfGen::DGConstraintGenerator::BondAngleKeyHash::operator()(const B
 {
 	std::size_t hash = 0;
 
-	boost::hash_combine(hash, k.get<0>());
-	boost::hash_combine(hash, k.get<1>());
-	boost::hash_combine(hash, k.get<2>());
+	boost::hash_combine(hash, std::get<0>(k));
+	boost::hash_combine(hash, std::get<1>(k));
+	boost::hash_combine(hash, std::get<2>(k));
 
 	return hash;
 }
@@ -266,9 +266,9 @@ void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordina
 void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	for (BondAngleTable::const_iterator it = bondAngleTable.begin(), end = bondAngleTable.end(); it != end; ++it) {
-		std::size_t atom1_idx = it->first.get<0>();
-		std::size_t atom2_idx = it->first.get<1>();
-		std::size_t atom3_idx = it->first.get<2>();
+		std::size_t atom1_idx = std::get<0>(it->first);
+		std::size_t atom2_idx = std::get<1>(it->first);
+		std::size_t atom3_idx = std::get<2>(it->first);
 
 		if (atomPairProcessed(atom1_idx, atom3_idx))
 			continue;

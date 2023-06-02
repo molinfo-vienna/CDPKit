@@ -33,13 +33,13 @@
 #include <algorithm>
 #include <vector>
 #include <limits>
+#include <unordered_map>
 
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/utility.hpp>
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
@@ -352,7 +352,7 @@ namespace CDPL
 			ArrayType data;
 		};
  
-		template <typename T, typename A = boost::unordered_map<std::size_t, T> > 
+		template <typename T, typename A = std::unordered_map<std::size_t, T> > 
 		class SparseVector : public VectorContainer<SparseVector<T, A> >
 		{
 

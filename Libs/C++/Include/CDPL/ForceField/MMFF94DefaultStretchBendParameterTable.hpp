@@ -33,9 +33,9 @@
 
 #include <cstddef>
 #include <iosfwd>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/function.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
@@ -56,7 +56,7 @@ namespace CDPL
 			class Entry;
 
 		  private:
-            typedef boost::unordered_map<Base::uint32, Entry> DataStorage;
+            typedef std::unordered_map<Base::uint32, Entry> DataStorage;
 
 		  public:
 			typedef boost::shared_ptr<MMFF94DefaultStretchBendParameterTable> SharedPointer;

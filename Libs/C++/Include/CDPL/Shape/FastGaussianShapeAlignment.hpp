@@ -34,10 +34,11 @@
 #include <vector>
 #include <cstddef>
 #include <utility>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
-#include <boost/unordered_map.hpp>
+#include <boost/functional/hash.hpp>
 #include <boost/random/mersenne_twister.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
@@ -247,7 +248,7 @@ namespace CDPL
 			bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
 
 			typedef std::vector<ShapeData> ShapeDataArray;
-			typedef boost::unordered_map<ResultID, std::size_t> ResultIndexMap;
+			typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
 			typedef std::vector<QuaternionTransformation> StartTransformList;
 			typedef boost::random::mt11213b RandomEngine;
 			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;

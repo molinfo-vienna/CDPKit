@@ -34,9 +34,9 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -82,7 +82,7 @@ namespace CDPL
 
 			void initChainList() const;
 
-			typedef boost::unordered_map<std::string, ChainPtr> IDToChainMap;
+			typedef std::unordered_map<std::string, ChainPtr> IDToChainMap;
 
 			mutable ChainList    chains;
 			mutable IDToChainMap idToChainMap;

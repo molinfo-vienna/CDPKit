@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <unordered_map>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
@@ -101,7 +102,7 @@ namespace CDPL
 			VectorArrayPtr buildCoordsArrayForMapping(const IndexArray& mapping, 
 													  const Math::Vector3DArray& conf_coords);
 
-			typedef boost::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;
+			typedef std::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;
 			typedef std::vector<const Chem::Atom*> AtomList;
 			typedef Util::ObjectStack<IndexArray> IndexArrayCache;
 			typedef std::vector<IndexArray*> IndexArrayList;

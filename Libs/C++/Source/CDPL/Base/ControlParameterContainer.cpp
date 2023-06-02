@@ -38,13 +38,6 @@
 using namespace CDPL;
 
 
-namespace
-{
-
-	const Base::Variant NIL;
-}
-
-
 Base::ControlParameterContainer::~ControlParameterContainer()
 {
 	if (parent)
@@ -100,6 +93,8 @@ void Base::ControlParameterContainer::clearParameters()
 
 const Base::Variant& Base::ControlParameterContainer::getParameter(const LookupKey& key, bool throw_ex, bool local) const
 {
+	static const Base::Variant NOT_FOUND;
+	
 	ConstParameterIterator it = parameters.find(key);
 	
 	if (it != parameters.end())
@@ -107,9 +102,9 @@ const Base::Variant& Base::ControlParameterContainer::getParameter(const LookupK
 
 	if (local || !parent) {
 		if (throw_ex)
-			throw ItemNotFound("ControlParameterContainer: parameter " 
-							   + key.getName() + " not found");
-		return NIL;
+			throw ItemNotFound("ControlParameterContainer: parameter " + key.getName() + " not found");
+
+		return NOT_FOUND;
 	}
 
 	return parent->getParameter(key, throw_ex);

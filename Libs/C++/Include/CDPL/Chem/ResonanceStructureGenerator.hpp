@@ -33,11 +33,10 @@
 
 #include <vector>
 #include <cstddef>
+#include <unordered_set>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/unordered_set.hpp>
-#include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -202,14 +201,7 @@ namespace CDPL
 			struct StructureDataPtrHashFunc
 		    {
 
-				std::size_t operator()(const StructureDataPtr& rs_ptr) const {
-					std::size_t seed = 0;
-					
-					boost::hash_combine(seed, boost::hash_value(rs_ptr->getBondOrders().getData()));
-					boost::hash_combine(seed, boost::hash_value(rs_ptr->getAtomCharges().getData()));
-
-					return seed;
-				}
+				std::size_t operator()(const StructureDataPtr& rs_ptr) const;
 			};
 
 			struct StructureDataPtrCmpFunc
@@ -224,7 +216,7 @@ namespace CDPL
 			typedef std::vector<AtomData> AtomDataArray;
 			typedef std::vector<const AtomData*> AtomDataPtrArray;
 			typedef std::vector<BondData> BondDataList;
-			typedef boost::unordered_set<StructureDataPtr, StructureDataPtrHashFunc, StructureDataPtrCmpFunc> StructureDataSet;
+			typedef std::unordered_set<StructureDataPtr, StructureDataPtrHashFunc, StructureDataPtrCmpFunc> StructureDataSet;
 			
 			void init(const MolecularGraph& molgraph);
 

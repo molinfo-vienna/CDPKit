@@ -33,9 +33,10 @@
 
 #include <utility>
 #include <cstddef>
+#include <unordered_map>
 
-#include <boost/unordered_map.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
@@ -131,7 +132,7 @@ namespace CDPL
 
 			unsigned int getPTERow(const Chem::MolecularGraph& molgraph, const Chem::Atom& atom, unsigned int atom_type) const;
 
-			typedef boost::unordered_map<std::pair<std::size_t, std::size_t>, const MMFF94BondStretchingInteraction*> BondStretchingParamLookupTable;
+			typedef std::unordered_map<std::pair<std::size_t, std::size_t>, const MMFF94BondStretchingInteraction*, boost::hash<std::pair<std::size_t, std::size_t> > > BondStretchingParamLookupTable;
 
 			InteractionFilterFunction3                            filterFunc;
 			MMFF94NumericAtomTypeFunction                         atomTypeFunc;	

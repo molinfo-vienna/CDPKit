@@ -35,9 +35,9 @@
 #include <deque>
 #include <set>
 #include <cstddef>
+#include <unordered_map>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
@@ -345,7 +345,7 @@ namespace CDPL
 			typedef std::vector<const Bond*> BondList;
 			typedef std::vector<AtomMatchExprPtr> AtomMatchExprTable;
 			typedef std::vector<BondMatchExprPtr> BondMatchExprTable;
-			typedef boost::unordered_multimap<std::size_t, std::size_t> MappingConstraintMap;
+			typedef std::unordered_multimap<std::size_t, std::size_t> MappingConstraintMap;
 			typedef Util::ObjectStack<AtomBondMapping> MappingCache;
 
 			const MolecularGraph*                 query;

@@ -57,7 +57,7 @@ using namespace CDPL;
 namespace
 {
 
-	typedef boost::unordered_map<unsigned int, std::string> TypeToStringMap;
+	typedef std::unordered_map<unsigned int, std::string> TypeToStringMap;
 
 	TypeToStringMap moleculeTypeToStringMap;
 	TypeToStringMap chargeTypeToStringMap;

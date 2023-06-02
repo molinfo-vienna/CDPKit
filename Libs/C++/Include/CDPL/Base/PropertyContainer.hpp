@@ -32,8 +32,7 @@
 #define CDPL_BASE_PROPERTYCONTAINER_HPP
 
 #include <utility>
-
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/LookupKey.hpp"
@@ -77,7 +76,7 @@ namespace CDPL
 		class CDPL_BASE_API PropertyContainer
 		{
 
-			typedef boost::unordered_map<LookupKey, Variant, LookupKey::HashFunc> PropertyMap;
+			typedef std::unordered_map<LookupKey, Variant, LookupKey::HashFunc> PropertyMap;
 
 		public:
 			/**	

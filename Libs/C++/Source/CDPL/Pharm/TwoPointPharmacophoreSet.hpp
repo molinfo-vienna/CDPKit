@@ -27,8 +27,9 @@
 #ifndef CDPL_PHARM_TWOPOINTPHARMACOPHORESET_HPP
 #define CDPL_PHARM_TWOPOINTPHARMACOPHORESET_HPP
 
+#include <unordered_set>
+
 #include <boost/functional/hash.hpp>
-#include <boost/unordered_set.hpp>
 
 #include "CDPL/Pharm/TwoPointPharmacophore.hpp"
 
@@ -61,7 +62,7 @@ namespace CDPL
 			}
 		};
 
-		typedef boost::unordered_multiset<TwoPointPharmacophore, TwoPointPharmHashFunc, TwoPointPharmEqCmpFunc> TwoPointPharmacophoreSet;
+		typedef std::unordered_multiset<TwoPointPharmacophore, TwoPointPharmHashFunc, TwoPointPharmEqCmpFunc> TwoPointPharmacophoreSet;
     }
 }
 

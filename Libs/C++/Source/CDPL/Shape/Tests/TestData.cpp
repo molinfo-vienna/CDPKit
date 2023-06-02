@@ -25,8 +25,7 @@
 
 
 #include <cstdlib>
-
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -50,7 +49,7 @@ using namespace CDPL;
 namespace
 {
 
-	boost::unordered_map<std::string, Shape::GaussianShape::SharedPointer> nameToShapeMap;
+	std::unordered_map<std::string, Shape::GaussianShape::SharedPointer> nameToShapeMap;
 	
 	double getRadius(const Chem::Atom& atom)
 	{

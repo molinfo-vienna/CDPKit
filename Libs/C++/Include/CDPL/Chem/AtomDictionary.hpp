@@ -34,11 +34,12 @@
 #include <cstddef>
 #include <string>
 #include <utility>
+#include <unordered_map>
 
-#include <boost/unordered_map.hpp>
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/iterator/transform_iterator.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -59,18 +60,6 @@ namespace CDPL
 		{
 
 		  public:
-			class Entry;
-
-		  private:
-			typedef boost::unordered_map<std::pair<unsigned int, std::size_t>, Entry> EntryLookupTable;
-			typedef boost::unordered_map<std::string, unsigned int> SymbolToTypeLookupTable;
-
-		  public:
-			typedef boost::shared_ptr<AtomDictionary> SharedPointer;
-
-			typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
-											  EntryLookupTable::const_iterator> ConstEntryIterator;
-	
 			class CDPL_CHEM_API Entry
 			{
 
@@ -131,6 +120,16 @@ namespace CDPL
 				double             allredRochowEneg;
 				IsotopeMassMap     isoMassMap;
 			};
+
+		  private:
+			typedef std::unordered_map<std::pair<unsigned int, std::size_t>, Entry, boost::hash<std::pair<unsigned int, std::size_t> > > EntryLookupTable;
+			typedef std::unordered_map<std::string, unsigned int> SymbolToTypeLookupTable;
+
+		  public:
+			typedef boost::shared_ptr<AtomDictionary> SharedPointer;
+
+			typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
+											  EntryLookupTable::const_iterator> ConstEntryIterator;
 			
 			void addEntry(const Entry& entry);
 

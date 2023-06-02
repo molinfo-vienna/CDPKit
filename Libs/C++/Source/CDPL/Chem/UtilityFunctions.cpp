@@ -29,9 +29,9 @@
 #include <sstream>
 #include <algorithm>
 #include <functional>
+#include <unordered_map>
 
 #include <boost/bind.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -56,7 +56,7 @@ using namespace CDPL;
 namespace
 {
 
-	typedef boost::unordered_map<unsigned int, std::string> SybylTypeToStringMap;
+	typedef std::unordered_map<unsigned int, std::string> SybylTypeToStringMap;
 
 	SybylTypeToStringMap sybylAtomTypeToStringMap;
 	SybylTypeToStringMap sybylBondTypeToStringMap;

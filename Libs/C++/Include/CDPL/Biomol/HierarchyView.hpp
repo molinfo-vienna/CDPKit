@@ -33,10 +33,10 @@
 
 #include <cstddef>
 #include <vector>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -101,7 +101,7 @@ namespace CDPL
 		  private:
 			void initModelList() const;
 		
-			typedef boost::unordered_map<std::size_t, ModelPtr> IDToModelMap;
+			typedef std::unordered_map<std::size_t, ModelPtr> IDToModelMap;
 
 			const Chem::MolecularGraph* molGraph;
 			mutable ResidueList         residues;

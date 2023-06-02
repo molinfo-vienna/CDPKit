@@ -33,9 +33,9 @@
 
 #include <iosfwd>
 #include <cstddef>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/thread.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
@@ -52,7 +52,7 @@ namespace CDPL
 		class CDPL_CONFGEN_API FragmentLibrary
 		{
 
-			typedef boost::unordered_map<Base::uint64, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
+			typedef std::unordered_map<Base::uint64, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
 
 		  public:
 			typedef boost::shared_ptr<FragmentLibrary> SharedPointer;

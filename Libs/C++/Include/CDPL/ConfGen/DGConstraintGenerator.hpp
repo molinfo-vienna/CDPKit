@@ -33,9 +33,8 @@
 
 #include <utility>
 #include <cstddef>
-
-#include <boost/unordered_map.hpp>
-#include <boost/tuple/tuple.hpp>
+#include <unordered_map>
+#include <tuple>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
@@ -153,7 +152,7 @@ namespace CDPL
 										 const Chem::Atom* x_atom = 0) const;
 
 			typedef std::pair<std::size_t, std::size_t> BondLengthKey;
-			typedef boost::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
+			typedef std::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
 
 			struct CDPL_CONFGEN_API BondAngleKeyHash
 			{
@@ -167,8 +166,8 @@ namespace CDPL
 				std::size_t operator()(const BondLengthKey& k) const;
 			};
 
-			typedef boost::unordered_map<BondLengthKey, double, BondLengthKeyHash> BondLengthTable;
-			typedef boost::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
+			typedef std::unordered_map<BondLengthKey, double, BondLengthKeyHash> BondLengthTable;
+			typedef std::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
 
 			const Chem::MolecularGraph*   molGraph;
 			Util::BitSet                  hAtomMask;

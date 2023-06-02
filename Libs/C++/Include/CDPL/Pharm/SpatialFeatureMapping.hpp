@@ -32,9 +32,10 @@
 #define CDPL_PHARM_SPATIALFEATUREMAPPING_HPP
 
 #include <utility>
+#include <unordered_map>
 
 #include <boost/function.hpp>
-#include <boost/unordered_map.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
@@ -122,7 +123,7 @@ namespace CDPL
 
 		  private:
             typedef std::pair<const Feature*, const Feature*> FeaturePair;
-            typedef boost::unordered_map<FeaturePair, double> FeaturePairToScoreMap;
+            typedef std::unordered_map<FeaturePair, double, boost::hash<FeaturePair> > FeaturePairToScoreMap;
 
 			TypeMatchFunction     typeMatchFunc;
 			PositionMatchFunction posMatchFunc;

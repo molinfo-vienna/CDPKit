@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <boost/functional/hash.hpp>
+
 #include "CDPL/Biomol/ResidueList.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"

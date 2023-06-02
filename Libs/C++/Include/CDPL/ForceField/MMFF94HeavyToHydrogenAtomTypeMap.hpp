@@ -34,9 +34,9 @@
 #include <string>
 #include <iosfwd>
 #include <cstddef>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 
@@ -50,7 +50,7 @@ namespace CDPL
 	class CDPL_FORCEFIELD_API MMFF94HeavyToHydrogenAtomTypeMap
 	{
 
-	    typedef boost::unordered_map<std::string, std::string> DataStorage;
+	    typedef std::unordered_map<std::string, std::string> DataStorage;
 
 	  public:
 	    typedef boost::shared_ptr<MMFF94HeavyToHydrogenAtomTypeMap> SharedPointer;

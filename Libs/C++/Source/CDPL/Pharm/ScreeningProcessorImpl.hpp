@@ -29,9 +29,9 @@
 
 #include <vector>
 #include <utility>
+#include <unordered_map>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"
@@ -111,7 +111,7 @@ namespace CDPL
 			typedef std::vector<unsigned int> FeatureTypeTable;
 			typedef std::vector<std::size_t> IndexList;
 			typedef std::vector<double> RadiusTable;
-			typedef boost::unordered_map<unsigned int, FeatureList> TypeToFeatureListMap;
+			typedef std::unordered_map<unsigned int, FeatureList> TypeToFeatureListMap;
 
 			typedef TwoPointPharmacophoreGenerator<TwoPointPharmacophore> DB2PointPharmGenerator;
 			typedef TwoPointPharmacophoreGenerator<QueryTwoPointPharmacophore> Query2PointPharmGenerator;

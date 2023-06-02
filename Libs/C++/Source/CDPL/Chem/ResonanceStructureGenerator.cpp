@@ -32,6 +32,7 @@
 #include <cstdlib>
 
 #include <boost/bind.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/ResonanceStructureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -766,4 +767,15 @@ std::size_t Chem::ResonanceStructureGenerator::AtomData::countRepChargePairs(con
 	}
 	
 	return count;
+}
+
+
+std::size_t Chem::ResonanceStructureGenerator::StructureDataPtrHashFunc::operator()(const StructureDataPtr& rs_ptr) const
+{
+	std::size_t seed = 0;
+					
+	boost::hash_combine(seed, boost::hash_value(rs_ptr->getBondOrders().getData()));
+	boost::hash_combine(seed, boost::hash_value(rs_ptr->getAtomCharges().getData()));
+
+	return seed;
 }

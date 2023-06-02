@@ -35,10 +35,10 @@
 #include <algorithm>
 #include <vector>
 #include <set>
+#include <unordered_set>
 
-#include <boost/function.hpp>
-#include <boost/unordered_set.hpp>
 #include <boost/functional/hash.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Math/KabschAlgorithm.hpp"
@@ -287,7 +287,7 @@ namespace CDPL
 			typedef std::vector<double>                                                                     DoubleArray;
 			typedef std::multiset<Util::STPairArray*, TopMappingCmpFunc>                                    TopMappingSet;
 			typedef typename TopMappingSet::iterator                                                        TopMappingSetIterator;
-			typedef boost::unordered_set<const Util::STPairArray*, TopMappingHashFunc, TopMappingEqCmpFunc> TopMappingHashSet;
+			typedef std::unordered_set<const Util::STPairArray*, TopMappingHashFunc, TopMappingEqCmpFunc> TopMappingHashSet;
 
 			TopologicalAlignment                   topAlignment;
 			TopMappingSet                          topMappings;

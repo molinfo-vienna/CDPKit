@@ -32,9 +32,9 @@
 #define CDPL_CONFGEN_FRAGMENTCONFORMERCACHE_HPP
 
 #include <cstddef>
+#include <unordered_map>
 
 #include <boost/thread.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -78,7 +78,7 @@ namespace CDPL
 			static FragmentConformerCache& getInstance();
 			static void createInstance();
 	    
-			typedef boost::unordered_map<Base::uint64, Entry*> HashToCacheEntryMap;
+			typedef std::unordered_map<Base::uint64, Entry*> HashToCacheEntryMap;
 
 			static FragmentConformerCache* instance;
 			static boost::once_flag        onceFlag;

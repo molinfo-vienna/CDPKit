@@ -28,7 +28,8 @@
 
 #include "CDPL/Config.hpp"
 
-#include <boost/unordered_set.hpp>
+#include <unordered_set>
+
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
@@ -61,9 +62,9 @@ using namespace CDPL;
 namespace 
 {
   
-    typedef boost::unordered_set<std::string> StdResidueSet;
-    typedef boost::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
-    typedef boost::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
+    typedef std::unordered_set<std::string> StdResidueSet;
+    typedef std::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
+    typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
 
 	StdResidueSet                            stdResidueSet;
     ResCodeToDataEntryMap                    resCodeToDataEntryMap;

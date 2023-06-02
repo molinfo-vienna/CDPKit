@@ -31,8 +31,8 @@
 #include <string>
 #include <cstddef>
 #include <vector>
+#include <unordered_map>
 
-#include <boost/unordered_map.hpp>
 #include <boost/tokenizer.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
@@ -82,8 +82,8 @@ namespace CDPL
 
 			bool skipInputToRTI(std::istream& is, const std::string& rti, bool skip_rti);
 
-			typedef boost::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
-			typedef boost::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
+			typedef std::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
+			typedef std::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
             typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 			typedef std::vector<const Atom*> StereoAtomList;
 

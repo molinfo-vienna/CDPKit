@@ -33,12 +33,12 @@
 #include <algorithm>
 #include <vector>
 #include <limits>
+#include <unordered_map>
 
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/is_const.hpp>
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/MatrixExpression.hpp"
@@ -380,7 +380,7 @@ namespace CDPL
 			ArrayType data;
 		};
 
-		template <typename T, typename A = boost::unordered_map<std::size_t, T> > 
+		template <typename T, typename A = std::unordered_map<std::size_t, T> > 
 		class SparseMatrix : public MatrixContainer<SparseMatrix<T, A> >
 		{
 
@@ -393,7 +393,7 @@ namespace CDPL
 			typedef const T& ConstReference;
 			typedef std::size_t SizeType;
 			typedef std::ptrdiff_t DifferenceType;
-			typedef boost::unordered_map<Base::uint64, ValueType> ArrayType;
+			typedef A ArrayType;
 			typedef T* Pointer;
 			typedef const T* ConstPointer;
 			typedef MatrixReference<SelfType> ClosureType;

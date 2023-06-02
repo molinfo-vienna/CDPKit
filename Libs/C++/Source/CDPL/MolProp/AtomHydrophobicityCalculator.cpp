@@ -28,9 +28,9 @@
 
 #include <locale>
 #include <algorithm>
+#include <unordered_map>
 
 #include <boost/thread.hpp>
-#include <boost/unordered_map.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
@@ -103,7 +103,7 @@ namespace
 		atomHydCategoryPatterns.push_back(parseSMARTS("[N,OX2;!$(*-*=,:*)]~[*:14]~[N,OX2;!$(*-*=,:*)]"));
     }
 
-    typedef boost::unordered_map<std::string, double> AtomSurfaceAccessibilityTable;
+    typedef std::unordered_map<std::string, double> AtomSurfaceAccessibilityTable;
 
 	AtomSurfaceAccessibilityTable atomSurfAccTable;
     boost::once_flag initAtomSurfAccTableFlag = BOOST_ONCE_INIT;

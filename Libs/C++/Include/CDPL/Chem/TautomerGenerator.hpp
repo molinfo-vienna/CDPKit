@@ -33,10 +33,10 @@
 
 #include <vector>
 #include <cstddef>
+#include <unordered_set>
+#include <array>
 
 #include <boost/function.hpp>
-#include <boost/unordered_set.hpp>
-#include <boost/array.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -133,13 +133,13 @@ namespace CDPL
 
 			Base::uint64 calcTautomerHashCode(const BasicMolecule& tautomer);
 		
-			typedef boost::array<std::size_t, 3> BondDescriptor;
+			typedef std::array<std::size_t, 3> BondDescriptor;
 			typedef std::vector<MoleculePtr> MoleculeList;
 			typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
 			typedef std::vector<BondDescriptor> BondDescrArray;
 			typedef std::vector<std::size_t> SizeTArray;
-			typedef boost::unordered_set<Base::uint64> HashCodeSet;
-			typedef boost::array<std::size_t, 6> StereoCenter;
+			typedef std::unordered_set<Base::uint64> HashCodeSet;
+			typedef std::array<std::size_t, 6> StereoCenter;
 			typedef std::vector<StereoCenter> StereoCenterList;
 
 			MoleculeCache         molCache;

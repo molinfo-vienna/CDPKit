@@ -33,9 +33,9 @@
 
 #include <cstddef>
 #include <string>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
@@ -100,7 +100,7 @@ namespace CDPL
 
 			void initResidueID(const Chem::Atom& atom, ResidueID& res_id, unsigned int flags) const; 
 
-			typedef boost::unordered_map<ResidueID, Chem::Fragment::SharedPointer, ResidueIDHashFunc> ResidueIDToFragmentMap;
+			typedef std::unordered_map<ResidueID, Chem::Fragment::SharedPointer, ResidueIDHashFunc> ResidueIDToFragmentMap;
 
 			ResidueIDToFragmentMap resIDsToFragments;
 		};

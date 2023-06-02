@@ -29,8 +29,9 @@
 
 #include <vector>
 #include <utility>
+#include <unordered_map>
 
-#include <boost/unordered_map.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Pharm/SQLiteDataIOBase.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
@@ -100,8 +101,8 @@ namespace CDPL
 			typedef std::pair<Base::int64, std::size_t> MolIDConfIdxPair;
 			typedef std::vector<Base::int64> MolIDArray;
 			typedef std::vector<MolIDConfIdxPair> MolIDConfIdxPairArray;
-			typedef boost::unordered_map<Base::int64, std::size_t> MolIDToUIntMap;
-			typedef boost::unordered_map<MolIDConfIdxPair, std::size_t> MolIDConfIdxToPharmIdxMap;
+			typedef std::unordered_map<Base::int64, std::size_t> MolIDToUIntMap;
+			typedef std::unordered_map<MolIDConfIdxPair, std::size_t, boost::hash<MolIDConfIdxPair> > MolIDConfIdxToPharmIdxMap;
 
 			SQLite3StmtPointer               selMolDataStmt;
 			SQLite3StmtPointer               selPharmDataStmt;

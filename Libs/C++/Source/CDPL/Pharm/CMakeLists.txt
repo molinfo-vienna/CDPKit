@@ -121,8 +121,6 @@ SET(cdpl-pharm_LIB_SRCS
     PiPiInteractionUtilities.cpp
     TwoPointPharmacophore.cpp
     QueryTwoPointPharmacophore.cpp
-    ThreePointPharmacophore.cpp
-    QueryThreePointPharmacophore.cpp
    )
  
 IF(Boost_FILESYSTEM_FOUND)

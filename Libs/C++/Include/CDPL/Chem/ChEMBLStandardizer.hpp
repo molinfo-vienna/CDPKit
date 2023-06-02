@@ -36,9 +36,10 @@
 
 #include <vector>
 #include <utility>
+#include <unordered_set>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_set.hpp>
+#include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -129,7 +130,7 @@ namespace CDPL
 			typedef std::pair<Base::uint64, Base::uint64> StructureID;
 			typedef std::pair<const Fragment*, StructureID> MoleculeComponent;
 			typedef std::vector<MoleculeComponent> MoleculeComponentList;
-			typedef boost::unordered_set<StructureID> StructureIDSet;
+			typedef std::unordered_set<StructureID, boost::hash<StructureID> > StructureIDSet;
 
 			HashCodeCalculator           hashCodeCalc;
 			KekuleStructureCalculator    kekuleStructureCalc;

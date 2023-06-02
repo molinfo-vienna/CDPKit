@@ -33,10 +33,10 @@
 
 #include <vector>
 #include <utility>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
@@ -271,7 +271,7 @@ namespace CDPL
 		
 		  private:
 			typedef std::pair<std::size_t, std::size_t> UIPair;
-			typedef boost::unordered_map<const Atom*, UIPair> AtomIdxAndElecContribMap;
+			typedef std::unordered_map<const Atom*, UIPair> AtomIdxAndElecContribMap;
 
 			AtomList                 atoms;
 			AtomIdxAndElecContribMap atomIndsAndElecContribs;

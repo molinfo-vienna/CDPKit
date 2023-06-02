@@ -28,9 +28,9 @@ h * along with this library; see the file COPYING. If not, write to
 
 #include <algorithm>
 #include <functional>
+#include <unordered_map>
 
 #include <boost/bind.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
@@ -51,7 +51,7 @@ using namespace CDPL;
 namespace
 {
 
-	typedef boost::unordered_map<Base::uint64, double> ParameterMap;
+	typedef std::unordered_map<Base::uint64, double> ParameterMap;
 
 	ParameterMap alphaParams;
 	ParameterMap betaParams;

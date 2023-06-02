@@ -27,9 +27,9 @@
 #include "StaticInit.hpp"
 
 #include <cstring>
+#include <unordered_map>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -59,7 +59,7 @@ namespace
 	const std::string FALSE                   = "false";
 	const std::string ZERO                    = "0";
 
-	typedef boost::unordered_map<std::string, unsigned int> FeatureNameToTypeMap;
+	typedef std::unordered_map<std::string, unsigned int> FeatureNameToTypeMap;
 
 	FeatureNameToTypeMap ls4FeatureTypes;
 

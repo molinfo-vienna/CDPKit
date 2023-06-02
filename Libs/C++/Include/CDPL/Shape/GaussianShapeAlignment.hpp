@@ -34,10 +34,11 @@
 #include <vector>
 #include <cstddef>
 #include <utility>
+#include <unordered_map>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
-#include <boost/unordered_map.hpp>
+#include <boost/functional/hash.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
@@ -229,7 +230,7 @@ namespace CDPL
 
 			typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
 			typedef std::vector<ShapeMetaData> ShapeMetaDataArray;
-			typedef boost::unordered_map<ResultID, std::size_t> ResultIndexMap;
+			 typedef std::unordered_map<ResultID, std::size_t, boost::hash<ResultID> > ResultIndexMap;
 
 			ShapeFunctionCache             shapeFuncCache;
 			bool                           calcSlfOverlaps;

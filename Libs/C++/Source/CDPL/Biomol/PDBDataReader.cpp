@@ -112,7 +112,7 @@ namespace
 		}
 	};
 
-	typedef boost::unordered_map<std::string, std::vector<std::size_t> > RecordOrderIDMap;
+	typedef std::unordered_map<std::string, std::vector<std::size_t> > RecordOrderIDMap;
 	typedef std::set<std::string> RecordNameSet;
 
 	RecordOrderIDMap recordOrderIDs;

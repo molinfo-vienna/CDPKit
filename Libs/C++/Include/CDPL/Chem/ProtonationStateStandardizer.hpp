@@ -33,9 +33,9 @@
 
 #include <cstddef>
 #include <vector>
+#include <unordered_set>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_set.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -110,7 +110,7 @@ namespace CDPL
 
 			bool removeConnectedHydrogens(const AtomList& atoms, Molecule& mol) const;
 			
-			typedef boost::unordered_set<const Atom*> AtomSet;
+			typedef std::unordered_set<const Atom*> AtomSet;
 			
 			SubstructureSearch           substructSearch;
 			CanonicalNumberingCalculator canonNumberingCalc;

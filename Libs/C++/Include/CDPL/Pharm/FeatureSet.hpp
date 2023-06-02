@@ -32,10 +32,10 @@
 #define CDPL_PHARM_FEATURESET_HPP
 
 #include <vector>
+#include <unordered_map>
 
 #include <boost/iterator/indirect_iterator.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -224,7 +224,7 @@ namespace CDPL
 	    FeatureSet& operator-=(const FeatureContainer& cntnr);
 
 	  private:
-	    typedef boost::unordered_map<const Feature*, std::size_t> FeatureIndexMap;
+	    typedef std::unordered_map<const Feature*, std::size_t> FeatureIndexMap;
 
 	    FeatureList     features;
 	    FeatureIndexMap featureIndices;

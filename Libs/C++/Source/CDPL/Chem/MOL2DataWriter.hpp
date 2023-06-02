@@ -31,8 +31,7 @@
 #include <cstddef>
 #include <string>
 #include <vector>
-
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -91,8 +90,8 @@ namespace CDPL
 				std::string chain;
 			};
 
-			typedef boost::unordered_map<std::string, std::size_t> StringToSizeMap;
-			typedef boost::unordered_map<const Atom*, std::size_t> AtomToIDMap;
+			typedef std::unordered_map<std::string, std::size_t> StringToSizeMap;
+			typedef std::unordered_map<const Atom*, std::size_t> AtomToIDMap;
 			typedef std::vector<SubstructData> SubstructDataArray;
 
 			const Base::DataIOBase& ioBase;

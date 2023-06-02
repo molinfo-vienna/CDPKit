@@ -31,8 +31,7 @@
 #include <string>
 #include <vector>
 #include <cstddef>
-
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 
 namespace Testing
@@ -154,7 +153,7 @@ namespace Testing
 		bool skipToLine(std::string& line, const char* srch_str);
 		bool seekToRecord(const std::string& mol_name);
 
-		typedef boost::unordered_map<std::string, std::istream::pos_type> RecordFileOffsetMap;
+		typedef std::unordered_map<std::string, std::istream::pos_type> RecordFileOffsetMap;
 
 		std::ifstream       logIStream;
 		RecordFileOffsetMap recordOffsets;

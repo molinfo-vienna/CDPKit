@@ -27,8 +27,8 @@
 #ifndef CDPL_PHARM_PSDSCREENINGDBCREATORIMPL_HPP
 #define CDPL_PHARM_PSDSCREENINGDBCREATORIMPL_HPP
 
-#include <boost/unordered_map.hpp>
-#include <boost/unordered_set.hpp>
+#include <unordered_map>
+#include <unordered_set>
 
 #include "CDPL/Pharm/SQLiteDataIOBase.hpp"
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
@@ -113,8 +113,8 @@ namespace CDPL
 			void beginTransaction();
 			void commitTransaction();
 
-			typedef boost::unordered_multimap<Base::uint64, Base::int64> MolHashToIDMap;
-			typedef boost::unordered_set<Base::uint64> MolHashSet;
+			typedef std::unordered_multimap<Base::uint64, Base::int64> MolHashToIDMap;
+			typedef std::unordered_set<Base::uint64> MolHashSet;
 
 			SQLite3StmtPointer               beginTransStmt;
 			SQLite3StmtPointer               commitTransStmt;

@@ -32,10 +32,10 @@
 #define CDPL_CHEM_FRAGMENT_HPP
 
 #include <vector>
+#include <unordered_map>
 
 #include <boost/iterator/indirect_iterator.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -370,8 +370,8 @@ namespace CDPL
 			void reserveMemoryForBonds(std::size_t num_bonds);
 
 		private:
-			typedef boost::unordered_map<const Atom*, std::size_t> AtomIndexMap;
-			typedef boost::unordered_map<const Bond*, std::size_t> BondIndexMap;
+			typedef std::unordered_map<const Atom*, std::size_t> AtomIndexMap;
+			typedef std::unordered_map<const Bond*, std::size_t> BondIndexMap;
 
 			AtomList     atoms;
 			BondList     bonds;

@@ -32,8 +32,7 @@
 #include <string>
 #include <vector>
 #include <list>
-
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
@@ -105,10 +104,10 @@ namespace CDPL
 			const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
 			typedef std::vector<Chem::Atom*> AtomList;
-			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
-			typedef boost::unordered_map<std::size_t, boost::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
-			typedef boost::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
-			typedef boost::unordered_map<std::string, std::size_t> BondOrderCache;
+			typedef std::unordered_map<std::string, std::size_t> RecordHistogram;
+			typedef std::unordered_map<std::size_t, std::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
+			typedef std::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
+			typedef std::unordered_map<std::string, std::size_t> BondOrderCache;
 
 			typedef ResidueDictionary::SharedPointer ResDictPointer;
 
