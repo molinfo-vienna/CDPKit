@@ -30,7 +30,7 @@ SET(cmdline-lib_LIB_SRCS
     HelperFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_ATOMIC_LIBRARY})
+LINK_LIBRARIES(${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_CHRONO_LIBRARY})
 
 ADD_LIBRARY(cmdline-lib-static STATIC ${cmdline-lib_LIB_SRCS})
 

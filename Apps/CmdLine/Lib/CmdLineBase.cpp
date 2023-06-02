@@ -31,6 +31,7 @@
 #include <cmath>
 #include <csignal>
 #include <iostream>
+#include <atomic>
 
 #include <boost/program_options/parsers.hpp>
 #include <boost/shared_ptr.hpp>
@@ -39,7 +40,6 @@
 #include <boost/bind.hpp>
 
 #include <boost/tokenizer.hpp>
-#include <boost/atomic.hpp>
 
 #include "CDPL/Version.hpp"
 #include "CDPL/BuildInfo.hpp"
@@ -57,7 +57,7 @@ namespace
 
 	const std::size_t TEXT_BLOCK_WIDTH = 80;
 
-	boost::atomic<bool> signalCaught(false);
+	std::atomic<bool> signalCaught(false);
 
 	const char* sigNumberToString(int sig)
 	{
