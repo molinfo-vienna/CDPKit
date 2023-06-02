@@ -571,7 +571,7 @@ void TautGenImpl::processSingleThreaded()
 		return;
 
 	printStatistics(worker.getNumProcMolecules(), worker.getNumGenTautomers(),
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
 void TautGenImpl::processMultiThreaded()
@@ -631,7 +631,7 @@ void TautGenImpl::processMultiThreaded()
 	}
 
 	printStatistics(num_proc_mols, num_gen_tauts,
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 }
 

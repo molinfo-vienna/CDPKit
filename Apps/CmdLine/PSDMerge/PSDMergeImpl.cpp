@@ -177,7 +177,7 @@ int PSDMergeImpl::mergeDatabases()
 
 	printStatistics(db_creator.getNumProcessed(), db_creator.getNumRejected(),
 					db_creator.getNumDeleted(), db_creator.getNumInserted(),
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 	return EXIT_SUCCESS;
 }

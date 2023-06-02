@@ -288,7 +288,7 @@ private:
 		return false;
 	}
 
-	typedef boost::chrono::system_clock Clock;
+	typedef std::chrono::system_clock Clock;
 
 	StructGenImpl*                       parent;
 	CDPL::ConfGen::StructureGenerator    structGen;
@@ -687,7 +687,7 @@ void StructGenImpl::processSingleThreaded()
 		return;
 
 	printStatistics(worker.getNumProcMolecules(), worker.getNumFailedMolecules(),
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
 void StructGenImpl::processMultiThreaded()
@@ -747,7 +747,7 @@ void StructGenImpl::processMultiThreaded()
 	}
 
 	printStatistics(num_proc_mols, num_failed_mols,
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 }
 

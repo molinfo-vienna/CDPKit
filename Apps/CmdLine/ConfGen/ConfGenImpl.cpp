@@ -315,7 +315,7 @@ private:
 		return false;
 	}
 
-	typedef boost::chrono::system_clock Clock;
+	typedef std::chrono::system_clock Clock;
 
 	ConfGenImpl*                         parent;
 	CDPL::ConfGen::ConformerGenerator    confGen;
@@ -851,7 +851,7 @@ void ConfGenImpl::processSingleThreaded()
 		return;
 
 	printStatistics(worker.getNumProcMolecules(), worker.getNumFailedMolecules(), worker.getNumGenConformers(),
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
 void ConfGenImpl::processMultiThreaded()
@@ -913,7 +913,7 @@ void ConfGenImpl::processMultiThreaded()
 	}
 
 	printStatistics(num_proc_mols, num_failed_mols, num_gen_confs,
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 }
 

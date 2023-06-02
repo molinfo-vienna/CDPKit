@@ -30,9 +30,9 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <chrono>
 
 #include <boost/thread.hpp>
-#include <boost/chrono/chrono.hpp>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -109,7 +109,7 @@ namespace PSDCreate
 		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-		typedef boost::chrono::system_clock Clock;
+		typedef std::chrono::system_clock Clock;
 
 		StringList             inputFiles;
 		std::string            outputDatabase;

@@ -31,10 +31,10 @@
 #include <fstream>
 #include <cstddef>
 #include <map>
+#include <chrono>
 
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
-#include <boost/chrono/chrono.hpp>
 
 
 namespace CmdLineLib
@@ -135,7 +135,7 @@ namespace CmdLineLib
 		typedef boost::program_options::options_description OptionsDescription;
 		typedef boost::program_options::variables_map VariablesMap;
 		typedef std::map<std::string, std::string> StringMap;
-		typedef boost::chrono::system_clock Clock;
+		typedef std::chrono::system_clock Clock;
 
 		OptionsDescription optOptions;
 		OptionsDescription mandOptions;

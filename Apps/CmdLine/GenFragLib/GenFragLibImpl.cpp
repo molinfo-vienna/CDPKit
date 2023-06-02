@@ -574,7 +574,7 @@ void GenFragLibImpl::processSingleThreaded()
 
 	printStatistics(worker.getNumProcMolecules(), worker.getNumProcFragments(), worker.getNumErrorFragments(),
 					worker.getNumAddedFragments(), worker.getNumGeneratedConfs(),
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
 void GenFragLibImpl::processMultiThreaded()
@@ -640,7 +640,7 @@ void GenFragLibImpl::processMultiThreaded()
 	}
 
 	printStatistics(num_proc_mols, num_proc_frags, num_error_frags, num_added_frags, num_gen_confs,
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 }
 

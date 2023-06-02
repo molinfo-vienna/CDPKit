@@ -30,9 +30,9 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <chrono>
 
 #include <boost/thread.hpp>
-#include <boost/chrono/chrono.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
@@ -121,7 +121,7 @@ namespace PSDScreen
 		void addOptionLongDescriptions();
 	
 		typedef CDPL::Pharm::ScreeningProcessor::HitReportMode MatchingMode;
-		typedef boost::chrono::system_clock Clock;
+		typedef std::chrono::system_clock Clock;
 		typedef boost::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer HitWriterPtr;
 		typedef CDPL::Base::DataReader<CDPL::Pharm::Pharmacophore>::SharedPointer QueryReaderPtr;

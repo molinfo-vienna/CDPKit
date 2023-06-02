@@ -30,10 +30,10 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <chrono>
 
 #include <boost/thread.hpp>
-#include <boost/chrono/chrono.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
@@ -133,10 +133,10 @@ namespace GenFragLib
 		class FragLibGenerationWorker;
 
 		typedef std::vector<std::string> StringList;
-		typedef boost::unordered_map<CDPL::Base::uint64, std::size_t> FragmentFrequencyMap;
+		typedef std::unordered_map<CDPL::Base::uint64, std::size_t> FragmentFrequencyMap;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-		typedef boost::chrono::system_clock Clock;
+		typedef std::chrono::system_clock Clock;
 		typedef CDPL::ConfGen::FragmentConformerGeneratorSettings ConformerGeneratorSettings;
 
 		StringList                     inputFiles;

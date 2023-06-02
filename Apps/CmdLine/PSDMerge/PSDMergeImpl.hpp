@@ -30,8 +30,7 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-
-#include <boost/chrono/chrono.hpp>
+#include <chrono>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
@@ -70,7 +69,7 @@ namespace PSDMerge
 
 		typedef std::vector<std::string> StringList;
 		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
-		typedef boost::chrono::system_clock Clock;
+		typedef std::chrono::system_clock Clock;
 
 		StringList         inputDatabases;
 		std::string        outputDatabase;
