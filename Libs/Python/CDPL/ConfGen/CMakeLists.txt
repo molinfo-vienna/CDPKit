@@ -48,6 +48,11 @@ SET(confgen_MOD_SRCS
     DGConstraintGeneratorSettingsExport.cpp
     DGStructureGeneratorExport.cpp
     DGStructureGeneratorSettingsExport.cpp
+    StructureGeneratorExport.cpp
+    ConformerGeneratorExport.cpp
+    FragmentConformerGeneratorExport.cpp
+    FragmentLibraryGeneratorExport.cpp
+    FragmentAssemblerExport.cpp
     CanonicalFragmentExport.cpp
     FragmentLibraryEntryExport.cpp
     FragmentLibraryExport.cpp
@@ -77,18 +82,7 @@ SET(confgen_MOD_SRCS
    
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
-   )
-
-IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
-  SET(confgen_MOD_SRCS
-      ${confgen_MOD_SRCS}
-      StructureGeneratorExport.cpp
-      ConformerGeneratorExport.cpp
-      FragmentConformerGeneratorExport.cpp
-      FragmentLibraryGeneratorExport.cpp
-      FragmentAssemblerExport.cpp
-     )	
-ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
+    )	
 
 ADD_LIBRARY(_confgen MODULE ${confgen_MOD_SRCS})
 

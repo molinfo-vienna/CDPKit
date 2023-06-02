@@ -66,7 +66,7 @@ SET(cdpl-pharm_LIB_SRCS
     OrthogonalPiPiInteractionConstraint.cpp
     ParallelPiPiInteractionConstraint.cpp
     InteractionPharmacophoreGenerator.cpp
-
+    
     FeatureInteractionScoreCombiner.cpp
     FeatureDistanceScore.cpp
     HydrophobicInteractionScore.cpp
@@ -89,7 +89,8 @@ SET(cdpl-pharm_LIB_SRCS
     ScreeningProcessor.cpp
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
-
+    FileScreeningHitCollector.cpp
+    
     CDFPharmacophoreDataReader.cpp
     CDFPharmacophoreDataWriter.cpp
     CDFPharmacophoreReader.cpp
@@ -123,14 +124,7 @@ SET(cdpl-pharm_LIB_SRCS
     QueryTwoPointPharmacophore.cpp
    )
  
-IF(Boost_FILESYSTEM_FOUND)
-  SET(cdpl-pharm_LIB_SRCS
-      ${cdpl-pharm_LIB_SRCS}	
-      FileScreeningHitCollector.cpp
-     )
-
-  LINK_LIBRARIES(${Boost_FILESYSTEM_LIBRARY})
-ENDIF(Boost_FILESYSTEM_FOUND)
+LINK_LIBRARIES(${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 IF(SQLITE3_FOUND)
   SET(cdpl-pharm_LIB_SRCS
@@ -141,27 +135,18 @@ IF(SQLITE3_FOUND)
       SQLiteDataIOBase.cpp
       PSDScreeningDBCreatorImpl.cpp
       PSDScreeningDBAccessorImpl.cpp
+
+      PSDPharmacophoreInputHandler.cpp
+      PSDMoleculeInputHandler.cpp
+      PSDMolecularGraphOutputHandler.cpp
+      PSDPharmacophoreReader.cpp
+      PSDMoleculeReader.cpp
+      PSDMolecularGraphWriter.cpp
      )	
 
   LINK_LIBRARIES(${SQLITE3_LIBRARY})
   INCLUDE_DIRECTORIES("${SQLITE3_INCLUDE_DIR}")
-
-  IF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
-    SET(cdpl-pharm_LIB_SRCS
-        ${cdpl-pharm_LIB_SRCS}
-        PSDPharmacophoreInputHandler.cpp
-        PSDMoleculeInputHandler.cpp
-        PSDMolecularGraphOutputHandler.cpp
-        PSDPharmacophoreReader.cpp
-        PSDMoleculeReader.cpp
-        PSDMolecularGraphWriter.cpp
-       )	
-
-    LINK_LIBRARIES(${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
-  ENDIF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
 ENDIF(SQLITE3_FOUND)
-
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS})
 

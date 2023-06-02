@@ -29,17 +29,10 @@
 #include <cstring>
 #include <sstream>
 
-#include "CDPL/Config.hpp"
-
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ForceField/MMFF94TorsionParameterTable.hpp"
 #include "CDPL/ForceField/MMFF94ParameterSet.hpp"
@@ -258,42 +251,18 @@ void ForceField::MMFF94TorsionParameterTable::load(std::istream& is)
 void ForceField::MMFF94TorsionParameterTable::loadDefaults(unsigned int param_set)
 {
 	if (param_set == MMFF94ParameterSet::DYNAMIC) {
-		#if defined(HAVE_BOOST_IOSTREAMS)
-
 		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::TORSION_PARAMETERS, 
 																	std::strlen(MMFF94ParameterData::TORSION_PARAMETERS));
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-		std::istringstream is(std::string(MMFF94ParameterData::TORSION_PARAMETERS));
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
 		load(is);
 
 	} else if (param_set == MMFF94ParameterSet::STATIC_RTOR || param_set == MMFF94ParameterSet::STATIC_RTOR_XOOP) {
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_REF_TORSION_PARAMETERS, 
 																	std::strlen(MMFF94ParameterData::STATIC_REF_TORSION_PARAMETERS));
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-		std::istringstream is(std::string(MMFF94ParameterData::STATIC_REF_TORSION_PARAMETERS));
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
 		load(is);
 
 	} else {
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_TORSION_PARAMETERS, 
 																	std::strlen(MMFF94ParameterData::STATIC_TORSION_PARAMETERS));
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-		std::istringstream is(std::string(MMFF94ParameterData::STATIC_TORSION_PARAMETERS));
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
 		load(is);
 	}
 }

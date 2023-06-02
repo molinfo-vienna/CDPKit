@@ -27,23 +27,11 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-util_LIB_SRCS
     BronKerboschAlgorithm.cpp
+    FileRemover.cpp
+    FileFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY})
-
-IF(Boost_FILESYSTEM_FOUND)
-   SET(cdpl-util_LIB_SRCS
-      ${cdpl-util_LIB_SRCS}
-      FileRemover.cpp
-      FileFunctions.cpp
-      )	  
-
-   LINK_LIBRARIES(${Boost_FILESYSTEM_LIBRARY})
-ENDIF(Boost_FILESYSTEM_FOUND)
-
-IF(Boost_IOSTREAMS_FOUND)
-   LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
-ENDIF(Boost_IOSTREAMS_FOUND)
+LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
 
 ADD_LIBRARY(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})
 

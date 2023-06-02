@@ -36,10 +36,6 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
-#if PY_MAJOR_VERSION >= 3
-#define PyString_AsStringAndSize PyBytes_AsStringAndSize
-#endif
-
 
 namespace CDPLPythonBase
 {
@@ -147,7 +143,7 @@ namespace CDPLPythonBase
 			char* buf;
 			python::ssize_t length;
 
-			if (PyString_AsStringAndSize(str, &buf, &length) != 0) {
+			if (PyBytes_AsStringAndSize(str, &buf, &length) != 0) {
 				PyErr_SetString(PyExc_TypeError, "IOStream: write() argument must be a string");
 
 				python::throw_error_already_set();
@@ -188,7 +184,7 @@ namespace CDPLPythonBase
 				char* buf;
 				python::ssize_t length;
 
-				if (PyString_AsStringAndSize(item, &buf, &length) != 0) {
+				if (PyBytes_AsStringAndSize(item, &buf, &length) != 0) {
 					PyErr_SetString(PyExc_TypeError, "IOStream: argument to writelines() must be a sequence of strings");
 
 					boost::python::throw_error_already_set();

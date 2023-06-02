@@ -26,19 +26,12 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
-
 #include <cstring>
 #include <sstream>
 
 #include <boost/thread.hpp>
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ForceField/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -153,17 +146,8 @@ void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::load(std::istream& is)
 
 void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults()
 {
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
     boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS, 
 																std::strlen(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS));
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-	std::istringstream is(std::string(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS);
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
     load(is);
 }
 

@@ -26,16 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SDFMolecularGraphWriter.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Chem/SDFGZMolecularGraphWriter.hpp"
 #include "CDPL/Chem/SDFBZ2MolecularGraphWriter.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
@@ -56,8 +49,6 @@ void CDPLPythonChem::exportSDFMolecularGraphWriter()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Chem::SDFGZMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
 		boost::noncopyable>("SDFGZMolecularGraphWriter", python::no_init)
@@ -80,6 +71,4 @@ void CDPLPythonChem::exportSDFMolecularGraphWriter()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

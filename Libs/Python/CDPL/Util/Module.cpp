@@ -26,8 +26,6 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
-
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "ConverterRegistration.hpp"
@@ -41,19 +39,9 @@ BOOST_PYTHON_MODULE(_util)
 	exportArrays();
 	exportBronKerboschAlgorithm();
 	exportDGCoordinatesGenerator();
-	
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	exportCompressionStreams();
 
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
-#if defined(HAVE_BOOST_FILESYSTEM)
-
 	exportFileFunctions();
-		
-#endif  // defined(HAVE_BOOST_FILESYSTEM)
-
 	exportSequenceFunctions();
 	
 	registerToPythonConverters();

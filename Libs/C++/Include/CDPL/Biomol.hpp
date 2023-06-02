@@ -31,8 +31,6 @@
 #ifndef CDPL_BIOMOL_HPP
 #define CDPL_BIOMOL_HPP
 
-#include "CDPL/Config.hpp"
-
 #include "CDPL/Biomol/PDBData.hpp"
 
 #include "CDPL/Biomol/AtomProperty.hpp"
@@ -72,8 +70,6 @@
 #include "CDPL/Biomol/MoleculeFunctions.hpp"
 #include "CDPL/Biomol/UtilityFunctions.hpp"
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFGZMoleculeInputHandler.hpp"
@@ -94,5 +90,4 @@
 #include "CDPL/Biomol/MMTFBZ2MoleculeReader.hpp"
 #include "CDPL/Biomol/MMTFBZ2MolecularGraphWriter.hpp"
 
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #endif // CDPL_BIOMOL_HPP

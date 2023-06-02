@@ -26,8 +26,6 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
-
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
@@ -42,6 +40,11 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportDGConstraintGenerator();
 	exportDGStructureGeneratorSettings();
 	exportDGStructureGenerator();
+	exportStructureGenerator();
+	exportConformerGenerator();
+	exportFragmentConformerGenerator();
+	exportFragmentLibraryGenerator();
+	exportFragmentAssembler();
 	exportCanonicalFragment();
 	exportFragmentLibraryEntry();
 	exportFragmentLibrary();
@@ -61,16 +64,6 @@ BOOST_PYTHON_MODULE(_confgen)
 
 	exportCFLMoleculeReader();
 	exportCFLMoleculeInputHandler();
-
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-
-	exportStructureGenerator();
-	exportConformerGenerator();
-	exportFragmentConformerGenerator();
-	exportFragmentLibraryGenerator();
-	exportFragmentAssembler();
-
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 	exportFragmentTypes();
 	exportForceFieldTypes();

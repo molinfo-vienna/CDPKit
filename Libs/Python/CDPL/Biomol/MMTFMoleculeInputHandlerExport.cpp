@@ -26,15 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Biomol/MMTFMoleculeInputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Biomol/MMTFGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/MMTFBZ2MoleculeInputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,8 +42,6 @@ void CDPLPythonBiomol::exportMMTFMoleculeInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFMoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Biomol::MMTFGZMoleculeInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFGZMoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
@@ -57,6 +49,4 @@ void CDPLPythonBiomol::exportMMTFMoleculeInputHandler()
 	python::class_<Biomol::MMTFBZ2MoleculeInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("MMTFBZ2MoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

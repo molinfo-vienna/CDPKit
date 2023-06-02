@@ -120,9 +120,7 @@ SET(cdpl-forcefield_LIB_SRCS
     DataIOUtilities.cpp
    )
 
-IF(Boost_IOSTREAMS_FOUND)
-   LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
-ENDIF(Boost_IOSTREAMS_FOUND)
+LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS})
 

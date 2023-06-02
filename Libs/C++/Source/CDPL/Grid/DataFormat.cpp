@@ -26,7 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Grid/DataFormat.hpp"
@@ -34,9 +33,6 @@
 #include "CDPL/Grid/CDFDRegularGridOutputHandler.hpp"
 #include "CDPL/Grid/CDFDRegularGridSetInputHandler.hpp"
 #include "CDPL/Grid/CDFDRegularGridSetOutputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Grid/CDFGZDRegularGridInputHandler.hpp"
 #include "CDPL/Grid/CDFGZDRegularGridOutputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridInputHandler.hpp"
@@ -45,8 +41,6 @@
 #include "CDPL/Grid/CDFGZDRegularGridSetOutputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridSetInputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridSetOutputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
@@ -96,8 +90,6 @@ namespace
 
 			DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFDRegularGridOutputHandler()));
 			DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFDRegularGridSetOutputHandler()));
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 	
 			DataIOManager<DRegularGrid>::registerInputHandler(DataIOManager<DRegularGrid>::InputHandlerPointer(new CDFGZDRegularGridInputHandler()));
 			DataIOManager<DRegularGridSet>::registerInputHandler(DataIOManager<DRegularGridSet>::InputHandlerPointer(new CDFGZDRegularGridSetInputHandler()));
@@ -108,8 +100,6 @@ namespace
 			DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFGZDRegularGridSetOutputHandler()));
 			DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFBZ2DRegularGridOutputHandler()));
 			DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFBZ2DRegularGridSetOutputHandler()));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

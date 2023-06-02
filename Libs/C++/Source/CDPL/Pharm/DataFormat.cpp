@@ -35,7 +35,6 @@
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
 
 #include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
@@ -48,8 +47,6 @@
 #include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
@@ -105,7 +102,6 @@ namespace
 			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFFeatureContainerOutputHandler()));
 			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new PMLFeatureContainerOutputHandler()));
 		
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
 
 			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PSDPharmacophoreInputHandler()));
@@ -119,8 +115,6 @@ namespace
 	
 			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFGZFeatureContainerOutputHandler()));
 			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFBZ2FeatureContainerOutputHandler()));
-	
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

@@ -26,15 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Grid/CDFDRegularGridInputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Grid/CDFGZDRegularGridInputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridInputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,8 +42,6 @@ void CDPLPythonGrid::exportCDFRegularGridInputHandler()
 		python::bases<Base::DataInputHandler<Grid::DRegularGrid> > >("CDFDRegularGridInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Grid::CDFGZDRegularGridInputHandler, 
 		python::bases<Base::DataInputHandler<Grid::DRegularGrid> > >("CDFGZDRegularGridInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
@@ -57,6 +49,4 @@ void CDPLPythonGrid::exportCDFRegularGridInputHandler()
 	python::class_<Grid::CDFBZ2DRegularGridInputHandler, 
 		python::bases<Base::DataInputHandler<Grid::DRegularGrid> > >("CDFBZ2DRegularGridInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

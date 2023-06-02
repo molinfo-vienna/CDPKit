@@ -31,8 +31,6 @@
 #ifndef CDPL_GRID_HPP
 #define CDPL_GRID_HPP
 
-#include "CDPL/Config.hpp"      
-
 #include "CDPL/Grid/AttributedGrid.hpp"
 #include "CDPL/Grid/SpatialGrid.hpp"
 #include "CDPL/Grid/RegularGrid.hpp"
@@ -43,8 +41,6 @@
 #include "CDPL/Grid/ControlParameter.hpp"  
 #include "CDPL/Grid/ControlParameterDefault.hpp"  
 #include "CDPL/Grid/DataFormat.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Grid/CDFGZDRegularGridWriter.hpp"
 #include "CDPL/Grid/CDFDRegularGridOutputHandler.hpp"
@@ -70,8 +66,6 @@
 #include "CDPL/Grid/CDFBZ2DRegularGridReader.hpp"
 #include "CDPL/Grid/CDFDRegularGridReader.hpp"
 #include "CDPL/Grid/CDFGZDRegularGridInputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Grid/AttributedGridFunctions.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"

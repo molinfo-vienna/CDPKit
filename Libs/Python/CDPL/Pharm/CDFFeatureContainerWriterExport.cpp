@@ -26,16 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Pharm/CDFGZFeatureContainerWriter.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerWriter.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
@@ -56,8 +49,6 @@ void CDPLPythonPharm::exportCDFFeatureContainerWriter()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Pharm::CDFGZFeatureContainerWriter, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
 		boost::noncopyable>("CDFGZFeatureContainerWriter", python::no_init)
@@ -80,6 +71,4 @@ void CDPLPythonPharm::exportCDFFeatureContainerWriter()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

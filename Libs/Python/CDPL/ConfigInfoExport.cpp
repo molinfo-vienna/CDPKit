@@ -79,18 +79,6 @@ void CDPLPython::exportConfigInfo()
     module.attr("HAVE_SQLITE3") = false;
 #endif
 
-#ifdef HAVE_BOOST_FILESYSTEM
-    module.attr("HAVE_BOOST_FILESYSTEM") = true;
-#else
-    module.attr("HAVE_BOOST_FILESYSTEM") = false;
-#endif
-
-#ifdef HAVE_BOOST_IOSTREAMS
-    module.attr("HAVE_BOOST_IOSTREAMS") = true;
-#else
-    module.attr("HAVE_BOOST_IOSTREAMS") = false;
-#endif
-
 #ifdef HAVE_NUMPY
     module.attr("HAVE_NUMPY") = true;
 #else

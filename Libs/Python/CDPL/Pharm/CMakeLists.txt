@@ -66,7 +66,8 @@ SET(pharm_MOD_SRCS
     ScreeningDBAccessorExport.cpp
     ScreeningProcessorExport.cpp
     PharmacophoreFitScreeningScoreExport.cpp
-
+    FileScreeningHitCollectorExport.cpp
+    
     BoostFunctionWrapperExport.cpp
 
     FeatureGeneratorExport.cpp
@@ -135,31 +136,20 @@ SET(pharm_MOD_SRCS
     FromPythonConverterRegistration.cpp
    )
 
-IF(Boost_FILESYSTEM_FOUND)
-  SET(pharm_MOD_SRCS
-      ${pharm_MOD_SRCS}
-      FileScreeningHitCollectorExport.cpp
-     )	
-ENDIF(Boost_FILESYSTEM_FOUND)
-
 IF(SQLITE3_FOUND)
   SET(pharm_MOD_SRCS
       ${pharm_MOD_SRCS}
       PSDScreeningDBCreatorExport.cpp
       PSDScreeningDBAccessorExport.cpp
-     )	
-  IF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
-    SET(pharm_MOD_SRCS
-        ${pharm_MOD_SRCS}
-        PSDPharmacophoreInputHandlerExport.cpp 
-        PSDMoleculeInputHandlerExport.cpp 
-        PSDMolecularGraphOutputHandlerExport.cpp 
+  
+      PSDPharmacophoreInputHandlerExport.cpp 
+      PSDMoleculeInputHandlerExport.cpp 
+      PSDMolecularGraphOutputHandlerExport.cpp 
 
-        PSDPharmacophoreReaderExport.cpp 
-        PSDMoleculeReaderExport.cpp 
-        PSDMolecularGraphWriterExport.cpp
-       )	
-  ENDIF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+      PSDPharmacophoreReaderExport.cpp 
+      PSDMoleculeReaderExport.cpp 
+      PSDMolecularGraphWriterExport.cpp
+      )	
 ENDIF(SQLITE3_FOUND)
 
 ADD_LIBRARY(_pharm MODULE ${pharm_MOD_SRCS})

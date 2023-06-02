@@ -26,23 +26,12 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
-
 #include <unordered_set>
 
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-#include <sstream>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
@@ -77,17 +66,8 @@ namespace
 
 	const Biomol::ResidueDictionary::Entry   DEF_ENTRY;
 
-#if defined(HAVE_BOOST_IOSTREAMS)
-
     boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(Biomol::ResidueDictionaryData::residueStructureData, 
 																				 Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
-
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-	std::istringstream resStructureIStream(std::string(Biomol::ResidueDictionaryData::residueStructureData, 
-													   Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN), std::ios_base::in | std::ios_base::binary);
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
     Chem::CDFMoleculeReader resStructureReader(resStructureIStream);
 

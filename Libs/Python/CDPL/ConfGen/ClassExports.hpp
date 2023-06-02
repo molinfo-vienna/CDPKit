@@ -27,8 +27,6 @@
 #ifndef CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP
 #define CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP
 
-#include "CDPL/Config.hpp"
-
 
 namespace CDPLPythonConfGen
 {
@@ -53,21 +51,16 @@ namespace CDPLPythonConfGen
 	void exportConformerGeneratorSettings();
 	void exportFragmentConformerGeneratorSettings();
 	void exportFragmentAssemblerSettings();
-
-	void exportCFLMoleculeReader();
-	void exportCFLMoleculeInputHandler();
-
-	void exportBoostFunctionWrappers();
-
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-
 	void exportStructureGenerator();
 	void exportConformerGenerator();
 	void exportFragmentConformerGenerator();
 	void exportFragmentLibraryGenerator();
 	void exportFragmentAssembler();
+	
+	void exportCFLMoleculeReader();
+	void exportCFLMoleculeInputHandler();
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+	void exportBoostFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

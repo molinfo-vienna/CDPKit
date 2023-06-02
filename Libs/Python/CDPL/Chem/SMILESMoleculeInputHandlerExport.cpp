@@ -26,15 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SMILESMoleculeInputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Chem/SMILESGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SMILESBZ2MoleculeInputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,8 +42,6 @@ void CDPLPythonChem::exportSMILESMoleculeInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESMoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Chem::SMILESGZMoleculeInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESGZMoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
@@ -57,6 +49,4 @@ void CDPLPythonChem::exportSMILESMoleculeInputHandler()
 	python::class_<Chem::SMILESBZ2MoleculeInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("SMILESBZ2MoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

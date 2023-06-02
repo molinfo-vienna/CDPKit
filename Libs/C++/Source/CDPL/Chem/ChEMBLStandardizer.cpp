@@ -31,21 +31,10 @@
 #include <utility>
 #include <cmath>
 
-#include "CDPL/Config.hpp"
-
 #include <boost/thread.hpp>
 #include <boost/bind.hpp>
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-#include <sstream>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -97,17 +86,8 @@ namespace
 	{
 		using namespace Chem;
 
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 		boost::iostreams::stream<boost::iostreams::array_source> salts_is(CHEMBL_SALT_STRUCTURE_LIBRARY, std::strlen(CHEMBL_SALT_STRUCTURE_LIBRARY));
 		boost::iostreams::stream<boost::iostreams::array_source> solvents_is(CHEMBL_SOLVENT_STRUCTURE_LIBRARY, std::strlen(CHEMBL_SOLVENT_STRUCTURE_LIBRARY));
-
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-		std::istringstream salts_is(CHEMBL_SALT_STRUCTURE_LIBRARY);
-		std::istringstream solvents_is(CHEMBL_SOLVENT_STRUCTURE_LIBRARY);
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 		HashCodeCalculator hash_calc;
 

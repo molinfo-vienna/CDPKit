@@ -155,21 +155,13 @@ ELSE(WIN32)
   SET(RUN_PYTHON_TESTS_IN "${CDPKIT_SHELL_SCRIPTS_DIR}/RunPythonTests.sh.in")
 ENDIF(WIN32)
 
-IF(BUILD_CDPL_PYTHON2_BINDINGS)
-  FIND_PACKAGE(Python2 COMPONENTS Interpreter Development)
-  SET(PYTHONINTERP_FOUND ${Python2_Interpreter_FOUND})
-  SET(PYTHONLIBS_FOUND ${Python2_Development_FOUND})
-  SET(PYTHON_EXECUTABLE ${Python2_EXECUTABLE})
-  SET(PYTHON_LIBRARIES ${Python2_LIBRARIES})
-  SET(PYTHON_INCLUDE_DIRS ${Python2_INCLUDE_DIRS})
-ELSE(BUILD_CDPL_PYTHON2_BINDINGS)
-  FIND_PACKAGE(Python3 COMPONENTS Interpreter Development)
-  SET(PYTHONINTERP_FOUND ${Python3_Interpreter_FOUND})
-  SET(PYTHONLIBS_FOUND ${Python3_Development_FOUND})
-  SET(PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
-  SET(PYTHON_LIBRARIES ${Python3_LIBRARIES})
-  SET(PYTHON_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
-ENDIF(BUILD_CDPL_PYTHON2_BINDINGS)
+FIND_PACKAGE(Python3 COMPONENTS Interpreter Development)
+
+SET(PYTHONINTERP_FOUND ${Python3_Interpreter_FOUND})
+SET(PYTHONLIBS_FOUND ${Python3_Development_FOUND})
+SET(PYTHON_EXECUTABLE ${Python3_EXECUTABLE})
+SET(PYTHON_LIBRARIES ${Python3_LIBRARIES})
+SET(PYTHON_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
 
 IF(NOT PYTHONINTERP_FOUND)
   MESSAGE(FATAL_ERROR "Python interpreter not found.")
@@ -195,89 +187,6 @@ ELSEIF(APPLE)
 ENDIF(NOT Qt5Gui_FOUND)
 
 FIND_PACKAGE(Cairo)
-FIND_PACKAGE(SQLite3)
-FIND_PACKAGE(Doxygen)
-FIND_PACKAGE(NumPy)
-
-SET(Boost_USE_MULTITHREAD ON)
-SET(Boost_USE_STATIC_LIBS OFF)
-
-FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time system thread OPTIONAL_COMPONENTS iostreams program_options unit_test_framework filesystem chrono timer)
-
-IF(APPLE)
-  IF(EXISTS "/opt/homebrew/opt/sphinx-doc")
-    SET(Sphinx_DIR "/opt/homebrew/opt/sphinx-doc")
-  ELSEIF(EXISTS "/usr/local/opt/sphinx-doc")
-    SET(Sphinx_DIR "/usr/local/opt/sphinx-doc")
-  ENDIF()
-ENDIF(APPLE)
-
-FIND_PACKAGE(Sphinx COMPONENTS build)
-
-IF(BUILD_CDPL_PYTHON2_BINDINGS)
-  FIND_PACKAGE(Boost 1.52.0 OPTIONAL_COMPONENTS python)
-ELSE(BUILD_CDPL_PYTHON2_BINDINGS)
-  FIND_PACKAGE(Boost 1.52.0 OPTIONAL_COMPONENTS python python3)
-ENDIF(BUILD_CDPL_PYTHON2_BINDINGS)
-
-IF(NOT SQLITE3_FOUND)
-  MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
-ENDIF(NOT SQLITE3_FOUND)
-
-IF(NOT Boost_DATE_TIME_FOUND)
-  MESSAGE(FATAL_ERROR "Boost date_time library not found.")
-ENDIF(NOT Boost_DATE_TIME_FOUND)
-
-IF(NOT Boost_THREAD_FOUND)
-  MESSAGE(FATAL_ERROR "Boost thread library not found.")
-ENDIF(NOT Boost_THREAD_FOUND)
-
-IF(NOT Boost_SYSTEM_FOUND)
-  MESSAGE(FATAL_ERROR "Boost system library not found.")
-ENDIF(NOT Boost_SYSTEM_FOUND)
-
-IF(NOT Boost_FILESYSTEM_FOUND)
-  MESSAGE("!! Warning: Boost filesystem library not found -> dependent components won't be built.")
-ENDIF(NOT Boost_FILESYSTEM_FOUND)
-
-IF(NOT Boost_IOSTREAMS_FOUND)
-  MESSAGE("!! Warning: Boost iostreams library not found -> dependent components won't be built.")
-ENDIF(NOT Boost_IOSTREAMS_FOUND)
-
-IF(NOT Boost_PROGRAM_OPTIONS_FOUND)
-  MESSAGE("!! Warning: Boost program_options library not found -> commandline applications won't be built.")
-ENDIF(NOT Boost_PROGRAM_OPTIONS_FOUND)
-
-IF(NOT Boost_CHRONO_FOUND)
-  MESSAGE("!! Warning: Boost chrono library not found -> commandline applications and conformer generators won't be built.")
-ENDIF(NOT Boost_CHRONO_FOUND)
-
-IF(NOT Boost_TIMER_FOUND)
-  MESSAGE("!! Warning: Boost timer library not found -> conformer generation components won't be built.")
-ENDIF(NOT Boost_TIMER_FOUND)
-
-IF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
-  MESSAGE("!! Warning: Boost unit_test_framework not found -> can't build and run C++ unit test cases.")
-  SET(CDPL_CXX_UNIT_TESTS_ENABLED FALSE)
-ELSE(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
-  CONFIGURE_FILE("${RUN_CXX_TESTS_IN}" "${RUN_CXX_TESTS}" @ONLY)
-ENDIF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
-
-IF(NOT BUILD_CDPL_PYTHON2_BINDINGS AND Boost_PYTHON3_FOUND)
- SET(Boost_PYTHON_FOUND ${Boost_PYTHON3_FOUND})
- SET(Boost_PYTHON_LIBRARY ${Boost_PYTHON3_LIBRARY})
-ENDIF(NOT BUILD_CDPL_PYTHON2_BINDINGS AND Boost_PYTHON3_FOUND)
-
-IF(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
-  SET(BUILD_PYTHON_MODULES TRUE)
-ELSE(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
-  MESSAGE("!! Warning: Python library and/or Boost python library not found -> can't build CDPL Python bindings.")
-  SET(BUILD_PYTHON_MODULES FALSE)
-ENDIF(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
-
-IF(NOT NUMPY_FOUND)
-  MESSAGE("!! Warning: NumPy python package not found -> CDPL.Math NDArray support won't be built.")
-ENDIF(NOT NUMPY_FOUND)
 
 IF(NOT CAIRO_FOUND)
   MESSAGE("!! Warning: CAIRO library not found -> can't build Cairo rendering backend.")
@@ -293,6 +202,14 @@ ELSE(NOT CAIRO_FOUND)
   CHECK_FUNCTION_EXISTS(cairo_svg_surface_create HAVE_CAIRO_SVG_SUPPORT)
 ENDIF(NOT CAIRO_FOUND)
 
+FIND_PACKAGE(SQLite3)
+
+IF(NOT SQLITE3_FOUND)
+  MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
+ENDIF(NOT SQLITE3_FOUND)
+
+FIND_PACKAGE(Doxygen)
+
 IF(NOT DOXYGEN_EXECUTABLE)
   MESSAGE("!! Warning: Doxygen not found -> can't generate CDPL API documentation.")
   SET(HAVE_DOT NO)
@@ -304,20 +221,84 @@ ELSE(NOT DOXYGEN_EXECUTABLE)
   ENDIF(DOXYGEN_DOT_EXECUTABLE)
 ENDIF(NOT DOXYGEN_EXECUTABLE)
 
+FIND_PACKAGE(NumPy)
+
+IF(NOT NUMPY_FOUND)
+  MESSAGE("!! Warning: NumPy python package not found -> CDPL.Math NDArray support won't be built.")
+ENDIF(NOT NUMPY_FOUND)
+
+IF(APPLE)
+  IF(EXISTS "/opt/homebrew/opt/sphinx-doc")
+    SET(Sphinx_DIR "/opt/homebrew/opt/sphinx-doc")
+  ELSEIF(EXISTS "/usr/local/opt/sphinx-doc")
+    SET(Sphinx_DIR "/usr/local/opt/sphinx-doc")
+  ENDIF()
+ENDIF(APPLE)
+
+FIND_PACKAGE(Sphinx COMPONENTS build)
+
 IF(NOT SPHINX_FOUND)
   MESSAGE("!! Warning: Sphinx not found -> can't generate dependent documentation.")
 ENDIF(NOT SPHINX_FOUND)
 
-SET(HAVE_CAIRO ${CAIRO_FOUND})
-SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
-SET(HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
-SET(HAVE_BOOST_IOSTREAMS ${Boost_IOSTREAMS_FOUND})
-SET(HAVE_BOOST_CHRONO ${Boost_CHRONO_FOUND})
-SET(HAVE_BOOST_TIMER ${Boost_TIMER_FOUND})
-SET(HAVE_QT ${Qt5Gui_FOUND})
-SET(HAVE_NUMPY ${NUMPY_FOUND})
+SET(Boost_USE_MULTITHREAD ON)
+SET(Boost_USE_STATIC_LIBS OFF)
+
+FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time system thread iostreams filesystem chrono timer OPTIONAL_COMPONENTS program_options unit_test_framework python python3)
+
+IF(NOT Boost_DATE_TIME_FOUND)
+  MESSAGE(FATAL_ERROR "Boost date_time library not found.")
+ENDIF(NOT Boost_DATE_TIME_FOUND)
+
+IF(NOT Boost_THREAD_FOUND)
+  MESSAGE(FATAL_ERROR "Boost thread library not found.")
+ENDIF(NOT Boost_THREAD_FOUND)
+
+IF(NOT Boost_SYSTEM_FOUND)
+  MESSAGE(FATAL_ERROR "Boost system library not found.")
+ENDIF(NOT Boost_SYSTEM_FOUND)
+
+IF(NOT Boost_FILESYSTEM_FOUND)
+  MESSAGE(FATAL_ERROR "Boost filesystem library not found.")
+ENDIF(NOT Boost_FILESYSTEM_FOUND)
+
+IF(NOT Boost_IOSTREAMS_FOUND)
+  MESSAGE(FATAL_ERROR "Boost iostreams library not found.")
+ENDIF(NOT Boost_IOSTREAMS_FOUND)
+
+IF(NOT Boost_CHRONO_FOUND)
+  MESSAGE(FATAL_ERROR "Boost chrono library not found.")
+ENDIF(NOT Boost_CHRONO_FOUND)
+
+IF(NOT Boost_TIMER_FOUND)
+  MESSAGE(FATAL_ERROR "Boost timer library not found .")
+ENDIF(NOT Boost_TIMER_FOUND)
+
+IF(NOT Boost_PROGRAM_OPTIONS_FOUND)
+  MESSAGE("!! Warning: Boost program_options library not found -> commandline applications won't be built.")
+ENDIF(NOT Boost_PROGRAM_OPTIONS_FOUND)
+
+IF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
+  MESSAGE("!! Warning: Boost unit_test_framework not found -> can't build and run C++ unit test cases.")
+  SET(CDPL_CXX_UNIT_TESTS_ENABLED FALSE)
+ELSE(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
+  CONFIGURE_FILE("${RUN_CXX_TESTS_IN}" "${RUN_CXX_TESTS}" @ONLY)
+ENDIF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
+
+IF(Boost_PYTHON3_FOUND)
+ SET(Boost_PYTHON_FOUND ${Boost_PYTHON3_FOUND})
+ SET(Boost_PYTHON_LIBRARY ${Boost_PYTHON3_LIBRARY})
+ENDIF(Boost_PYTHON3_FOUND)
+
+IF(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
+  SET(BUILD_PYTHON_MODULES TRUE)
+ELSE(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
+  MESSAGE("!! Warning: Python library and/or Boost python library not found -> can't build CDPL Python bindings.")
+  SET(BUILD_PYTHON_MODULES FALSE)
+ENDIF(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
 
 INCLUDE(CheckTypeSize)
+
 CHECK_TYPE_SIZE("long int" SIZEOF_LONG_INT)
 CHECK_TYPE_SIZE("unsigned int" SIZEOF_UNSIGNED_INT)
 CHECK_TYPE_SIZE("float" SIZEOF_FLOAT)
@@ -344,6 +325,10 @@ IF(SIZEOF_SIZE_T LESS 4)
   MESSAGE(FATAL_ERROR "sizeof(size_t) < 4.")
 ENDIF(SIZEOF_SIZE_T LESS 4)
 
+SET(HAVE_CAIRO ${CAIRO_FOUND})
+SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
+SET(HAVE_QT ${Qt5Gui_FOUND})
+SET(HAVE_NUMPY ${NUMPY_FOUND})
 
 CONFIGURE_FILE("${CDPL_INCLUDE_DIR}/CDPL/Config.hpp.in" "${CDPL_INCLUDE_DIR}/CDPL/Config.hpp") 
 CONFIGURE_FILE("${CDPL_INCLUDE_DIR}/CDPL/Version.hpp.in" "${CDPL_INCLUDE_DIR}/CDPL/Version.hpp") 

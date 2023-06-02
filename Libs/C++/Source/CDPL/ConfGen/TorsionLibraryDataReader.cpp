@@ -29,14 +29,8 @@
 #include <sstream>
 #include <cstring>
 
-#include "CDPL/Config.hpp"
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRule.hpp"
@@ -208,16 +202,7 @@ Chem::MolecularGraph::SharedPointer ConfGen::TorsionLibraryDataReader::parseSMAR
 {
 	using namespace Chem;
 
-#if defined(HAVE_BOOST_IOSTREAMS)
-
     boost::iostreams::stream<boost::iostreams::array_source> is(str, std::strlen(str));
-
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-	std::istringstream is(str);
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
 	BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
 	SMARTSMoleculeReader reader(is);
 

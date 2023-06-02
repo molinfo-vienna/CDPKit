@@ -26,15 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SMILESMolecularGraphOutputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Chem/SMILESGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SMILESBZ2MolecularGraphOutputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,8 +42,6 @@ void CDPLPythonChem::exportSMILESMolecularGraphOutputHandler()
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SMILESMolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Chem::SMILESGZMolecularGraphOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SMILESGZMolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
@@ -57,6 +49,4 @@ void CDPLPythonChem::exportSMILESMolecularGraphOutputHandler()
 	python::class_<Chem::SMILESBZ2MolecularGraphOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SMILESBZ2MolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

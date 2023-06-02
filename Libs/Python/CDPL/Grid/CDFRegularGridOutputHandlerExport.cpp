@@ -26,15 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Grid/CDFDRegularGridOutputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Grid/CDFGZDRegularGridOutputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridOutputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,8 +42,6 @@ void CDPLPythonGrid::exportCDFRegularGridOutputHandler()
 		python::bases<Base::DataOutputHandler<Grid::DRegularGrid> > >("CDFDRegularGridOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Grid::CDFGZDRegularGridOutputHandler, 
 		python::bases<Base::DataOutputHandler<Grid::DRegularGrid> > >("CDFGZDRegularGridOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
@@ -57,6 +49,4 @@ void CDPLPythonGrid::exportCDFRegularGridOutputHandler()
 	python::class_<Grid::CDFBZ2DRegularGridOutputHandler, 
 		python::bases<Base::DataOutputHandler<Grid::DRegularGrid> > >("CDFBZ2DRegularGridOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

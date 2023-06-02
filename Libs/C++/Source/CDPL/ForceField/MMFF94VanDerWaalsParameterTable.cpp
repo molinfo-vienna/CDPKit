@@ -29,17 +29,10 @@
 #include <cstring>
 #include <sstream>
 
-#include "CDPL/Config.hpp"
-
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ForceField/MMFF94VanDerWaalsParameterTable.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -309,16 +302,8 @@ void ForceField::MMFF94VanDerWaalsParameterTable::load(std::istream& is)
 
 void ForceField::MMFF94VanDerWaalsParameterTable::loadDefaults()
 {
-#if defined(HAVE_BOOST_IOSTREAMS)
-
     boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS, 
 																std::strlen(MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS));
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-	std::istringstream is(std::string(MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS));
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
     load(is);
 }
 

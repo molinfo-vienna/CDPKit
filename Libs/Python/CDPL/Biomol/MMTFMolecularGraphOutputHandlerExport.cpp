@@ -26,15 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Biomol/MMTFMolecularGraphOutputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Biomol/MMTFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFBZ2MolecularGraphOutputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,8 +42,6 @@ void CDPLPythonBiomol::exportMMTFMolecularGraphOutputHandler()
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFMolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Biomol::MMTFGZMolecularGraphOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFGZMolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
@@ -57,6 +49,4 @@ void CDPLPythonBiomol::exportMMTFMolecularGraphOutputHandler()
 	python::class_<Biomol::MMTFBZ2MolecularGraphOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("MMTFBZ2MolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

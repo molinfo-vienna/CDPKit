@@ -65,26 +65,6 @@
 #cmakedefine HAVE_SQLITE3
 
 /**	
- * \brief Defined if the \e Boost filesystem library is available.
- */
-#cmakedefine HAVE_BOOST_FILESYSTEM
-
-/**	
- * \brief Defined if the \e Boost chrono library is available.
- */
-#cmakedefine HAVE_BOOST_CHRONO
-
-/**	
- * \brief Defined if the \e Boost timer library is available.
- */
-#cmakedefine HAVE_BOOST_TIMER
-
-/**	
- * \brief Defined if the \e Boost iostreams library is available.
- */
-#cmakedefine HAVE_BOOST_IOSTREAMS
-
-/**	
  * \brief Defined if the \e NumPy python module is available.
  */
 #cmakedefine HAVE_NUMPY

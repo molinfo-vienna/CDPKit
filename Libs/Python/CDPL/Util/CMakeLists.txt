@@ -37,26 +37,14 @@ SET(util_MOD_SRCS
     ArrayExport.cpp
     BronKerboschAlgorithmExport.cpp
     DGCoordinatesGeneratorExport.cpp
-
+    CompressionStreamExport.cpp
+    
     SequenceFunctionExport.cpp
+    FileFunctionExport.cpp
     
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )
-
-IF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
-  SET(util_MOD_SRCS
-      ${util_MOD_SRCS}
-      CompressionStreamExport.cpp 
-     )	
-ENDIF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
-
-IF(Boost_FILESYSTEM_FOUND)
-  SET(util_MOD_SRCS
-      ${util_MOD_SRCS}
-      FileFunctionExport.cpp 
-     )	
-ENDIF(Boost_FILESYSTEM_FOUND)
 
 ADD_LIBRARY(_util MODULE ${util_MOD_SRCS})
 

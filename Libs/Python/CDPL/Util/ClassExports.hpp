@@ -27,8 +27,6 @@
 #ifndef CDPL_PYTHON_UTIL_CLASSEXPORTS_HPP
 #define CDPL_PYTHON_UTIL_CLASSEXPORTS_HPP
 
-#include "CDPL/Config.hpp"
-
 
 namespace CDPLPythonUtil
 {
@@ -37,12 +35,7 @@ namespace CDPLPythonUtil
 	void exportArrays();
 	void exportBronKerboschAlgorithm();
 	void exportDGCoordinatesGenerator();
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	void exportCompressionStreams();
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }
 
 #endif // CDPL_PYTHON_UTIL_CLASSEXPORTS_HPP

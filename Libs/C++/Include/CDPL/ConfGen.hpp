@@ -31,8 +31,6 @@
 #ifndef CDPL_CONFGEN_HPP
 #define CDPL_CONFGEN_HPP
 
-#include "CDPL/Config.hpp"
-
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
@@ -69,17 +67,13 @@
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
-
-#include "CDPL/ConfGen/CFLMoleculeInputHandler.hpp"
-#include "CDPL/ConfGen/CFLMoleculeReader.hpp"
-
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-
 #include "CDPL/ConfGen/StructureGenerator.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/FragmentAssembler.hpp"
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+#include "CDPL/ConfGen/CFLMoleculeInputHandler.hpp"
+#include "CDPL/ConfGen/CFLMoleculeReader.hpp"
+
 #endif // CDPL_CONFGEN_HPP

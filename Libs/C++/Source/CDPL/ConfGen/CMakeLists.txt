@@ -95,29 +95,18 @@ SET(cdpl-confgen_LIB_SRCS
     MolecularGraphFunctions.cpp
     MoleculeFunctions.cpp
     UtilityFunctions.cpp
+
+    StructureGenerator.cpp
+    ConformerGenerator.cpp
+    ConformerGeneratorImpl.cpp
+    FragmentConformerGenerator.cpp
+    FragmentConformerGeneratorImpl.cpp
+    FragmentLibraryGenerator.cpp
+    FragmentAssembler.cpp
+    FragmentAssemblerImpl.cpp
    )
 
-IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
-   SET(cdpl-confgen_LIB_SRCS
-       ${cdpl-confgen_LIB_SRCS}
-       StructureGenerator.cpp
-       ConformerGenerator.cpp
-       ConformerGeneratorImpl.cpp
-       FragmentConformerGenerator.cpp
-       FragmentConformerGeneratorImpl.cpp
-       FragmentLibraryGenerator.cpp
-       FragmentAssembler.cpp
-       FragmentAssemblerImpl.cpp
-     )	  
-
-   LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	
-ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
-
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
-IF(Boost_IOSTREAMS_FOUND)
-   LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
-ENDIF(Boost_IOSTREAMS_FOUND)
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
 
 ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS})
 

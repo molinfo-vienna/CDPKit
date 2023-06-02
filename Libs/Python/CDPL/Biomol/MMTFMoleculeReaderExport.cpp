@@ -26,16 +26,9 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Biomol/MMTFMoleculeReader.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Biomol/MMTFGZMoleculeReader.hpp"
 #include "CDPL/Biomol/MMTFBZ2MoleculeReader.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
@@ -56,8 +49,6 @@ void CDPLPythonBiomol::exportMMTFMoleculeReader()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 	python::class_<Biomol::MMTFGZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
 		boost::noncopyable>("MMTFGZMoleculeReader", python::no_init)
 		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
@@ -77,6 +68,4 @@ void CDPLPythonBiomol::exportMMTFMoleculeReader()
 		boost::noncopyable>("FileMMTFBZ2MoleculeReader", python::no_init)
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

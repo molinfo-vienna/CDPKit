@@ -31,8 +31,6 @@
 #ifndef CDPL_UTIL_HPP
 #define CDPL_UTIL_HPP
 
-#include "CDPL/Config.hpp"
-
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
@@ -53,17 +51,10 @@
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/SequenceFunctions.hpp"
 
-#if defined(HAVE_BOOST_FILESYSTEM)
-
 #include "CDPL/Util/FileRemover.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Util/CompressionStreams.hpp"
 #include "CDPL/Util/CompressedDataReader.hpp"
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-#endif // defined(HAVE_BOOST_FILESYSTEM)
 #endif // CDPL_UTIL_HPP

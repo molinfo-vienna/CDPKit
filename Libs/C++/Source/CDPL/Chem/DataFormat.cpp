@@ -26,7 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
@@ -58,9 +57,6 @@
 #include "CDPL/Chem/CDFReactionOutputHandler.hpp"
 #include "CDPL/Chem/MOL2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
-
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 #include "CDPL/Chem/SDFGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SDFBZ2MoleculeInputHandler.hpp"
@@ -89,8 +85,6 @@
 #include "CDPL/Chem/MOL2GZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/MOL2BZ2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2BZ2MolecularGraphOutputHandler.hpp"
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
@@ -216,8 +210,6 @@ namespace
 			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMARTSReactionOutputHandler()));
 			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFReactionOutputHandler()));
 
-#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
-
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFGZMoleculeInputHandler()));
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFBZ2MoleculeInputHandler()));
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFGZMoleculeInputHandler()));
@@ -249,8 +241,6 @@ namespace
 			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESBZ2ReactionOutputHandler()));
 			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFGZReactionOutputHandler()));
 			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFBZ2ReactionOutputHandler()));
-
-#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

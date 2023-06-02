@@ -26,19 +26,12 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
-
 #include <cstring>
 #include <sstream>
 
 #include <boost/thread.hpp>
-
-#if defined(HAVE_BOOST_IOSTREAMS)
-
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ForceField/MMFF94SymbolicAtomTypePatternTable.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -200,16 +193,8 @@ void ForceField::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 
 void ForceField::MMFF94SymbolicAtomTypePatternTable::loadDefaults()
 {
-#if defined(HAVE_BOOST_IOSTREAMS)
-
     boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS, 
 																std::strlen(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS));
-#else // defined(HAVE_BOOST_IOSTREAMS)
-
-	std::istringstream is(std::string(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS);
-
-#endif // defined(HAVE_BOOST_IOSTREAMS)
-
     load(is);
 }
 
