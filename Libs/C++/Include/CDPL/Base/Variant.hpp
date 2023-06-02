@@ -37,10 +37,10 @@
 
 #include <cstddef>
 #include <typeinfo>
+#include <atomic>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/numeric/conversion/cast.hpp>
-#include <boost/atomic.hpp>
 
 #include "CDPL/Config.hpp"
 
@@ -503,12 +503,12 @@ namespace CDPL
 				virtual const void* getDataPointer() const = 0;
 
 				void addRef() throw() {
-					refCount.fetch_add(1, boost::memory_order_relaxed);
+					refCount.fetch_add(1, std::memory_order_relaxed);
 				}
 
 				void release() {
-					if (refCount.fetch_sub(1, boost::memory_order_release) == 1) {
-						boost::atomic_thread_fence(boost::memory_order_acquire);
+					if (refCount.fetch_sub(1, std::memory_order_release) == 1) {
+						std::atomic_thread_fence(std::memory_order_acquire);
 						delete this;
 					}
 				}
@@ -539,7 +539,7 @@ namespace CDPL
 #undef CDPL_MAKE_CONVERSION_FUNC_DEF_IMPL
 
 			private:
-				boost::atomic<std::size_t> refCount;
+				std::atomic<std::size_t> refCount;
 			};
 
 			template <typename T>

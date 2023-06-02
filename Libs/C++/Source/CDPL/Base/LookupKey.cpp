@@ -26,8 +26,9 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/unordered_map.hpp>
-#include <boost/atomic.hpp>
+#include <unordered_map>
+#include <atomic>
+
 #include <boost/thread.hpp>
 
 #include "CDPL/Base/LookupKey.hpp"
@@ -48,7 +49,7 @@ namespace CDPL
 namespace
 {
 
-	typedef boost::unordered_map<std::size_t, std::string> KeyNameMap;
+	typedef std::unordered_map<std::size_t, std::string> KeyNameMap;
 
 	KeyNameMap& getNameMap()
 	{
@@ -67,9 +68,9 @@ const Base::LookupKey Base::LookupKey::NONE = Base::LookupKey::create("NONE");
 
 Base::LookupKey Base::LookupKey::create(const std::string& name)
 {
-	static boost::atomic<std::size_t> next_id(0);
+	static std::atomic<std::size_t> next_id(0);
 
-	LookupKey key(next_id.fetch_add(1, boost::memory_order_relaxed));
+	LookupKey key(next_id.fetch_add(1, std::memory_order_relaxed));
 
 	key.setName(name);
 

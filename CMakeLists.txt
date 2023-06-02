@@ -202,7 +202,7 @@ FIND_PACKAGE(NumPy)
 SET(Boost_USE_MULTITHREAD ON)
 SET(Boost_USE_STATIC_LIBS OFF)
 
-FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time system thread atomic OPTIONAL_COMPONENTS iostreams program_options unit_test_framework filesystem chrono timer)
+FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time system thread OPTIONAL_COMPONENTS iostreams program_options unit_test_framework filesystem chrono timer)
 
 IF(APPLE)
   IF(EXISTS "/opt/homebrew/opt/sphinx-doc")
@@ -235,10 +235,6 @@ ENDIF(NOT Boost_THREAD_FOUND)
 IF(NOT Boost_SYSTEM_FOUND)
   MESSAGE(FATAL_ERROR "Boost system library not found.")
 ENDIF(NOT Boost_SYSTEM_FOUND)
-
-IF(NOT Boost_ATOMIC_FOUND)
-  MESSAGE(FATAL_ERROR "Boost atomic library not found.")
-ENDIF(NOT Boost_ATOMIC_FOUND)
 
 IF(NOT Boost_FILESYSTEM_FOUND)
   MESSAGE("!! Warning: Boost filesystem library not found -> dependent components won't be built.")
