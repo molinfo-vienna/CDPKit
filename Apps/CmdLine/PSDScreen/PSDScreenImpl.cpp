@@ -547,7 +547,7 @@ void PSDScreenImpl::printStatistics()
 	using namespace CDPL;
 	using namespace Pharm;
 
-	std::size_t proc_time = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
 
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Num. Screened Molecules: " + boost::lexical_cast<std::string>(endMolIndex - startMolIndex));
