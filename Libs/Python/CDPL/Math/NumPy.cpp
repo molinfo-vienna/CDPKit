@@ -34,18 +34,12 @@
 namespace
 {
 
-#if PY_MAJOR_VERSION == 2
-    void
-#else
-    PyObject *
-#endif
-    importArrayWrapper()
+
+    PyObject* importArrayWrapper()
     {
 		import_array();
 
-#if PY_MAJOR_VERSION > 2
 		Py_RETURN_NONE;
-#endif
     }
 
 	void* checkNDArrayObject(PyObject* obj) 
@@ -74,14 +68,6 @@ namespace CDPLPythonMath
 			if (PyErr_Occurred())
 				return false;
 
-#if PY_MAJOR_VERSION == 2
-			importArrayWrapper();
-
-			if (PyErr_Occurred()) {
-				PyErr_Clear();
-				return false;
-			}
-#else
 			PyObject* r = importArrayWrapper();
 
 			if (!r) {
@@ -90,7 +76,7 @@ namespace CDPLPythonMath
 			}
 
 			Py_DECREF(r);
-#endif
+
 			boost::python::converter::registry::insert(&checkNDArrayObject, boost::python::type_id<PyArrayObject>());
 			MODULE_IMPORTED = true;
 

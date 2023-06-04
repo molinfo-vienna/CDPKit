@@ -38,12 +38,6 @@
 #include "GenericVariantFromPythonConverter.hpp"
 
 
-#if PY_MAJOR_VERSION >= 3
-# define PyInt_Check PyLong_Check
-# define PyInt_AS_LONG PyLong_AS_LONG
-#endif
-
-
 namespace
 {
 
@@ -123,10 +117,10 @@ namespace
 	struct PyIntToIntConversionPolicy
 	{
 		static void* convertible(PyObject* obj_ptr) {
-			if (!PyInt_Check(obj_ptr))
+			if (!PyLong_Check(obj_ptr))
 				return 0;
 
-			long value = PyInt_AS_LONG(obj_ptr);
+			long value = PyLong_AS_LONG(obj_ptr);
 
 			if (std::numeric_limits<T>::max() < value || std::numeric_limits<T>::min() > value)
 				return 0;
@@ -139,10 +133,10 @@ namespace
 	struct PyIntToUIntConversionPolicy
 	{
 		static void* convertible(PyObject* obj_ptr) {
-			if (!PyInt_Check(obj_ptr))
+			if (!PyLong_Check(obj_ptr))
 				return 0;
 
-			long value = PyInt_AS_LONG(obj_ptr);
+			long value = PyLong_AS_LONG(obj_ptr);
 
 			if (value < 0 || static_cast<unsigned long>(std::numeric_limits<T>::max()) < static_cast<unsigned long>(value))
 				return 0;
