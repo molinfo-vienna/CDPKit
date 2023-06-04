@@ -301,6 +301,14 @@ IF(SIZEOF_SIZE_T LESS 4)
   MESSAGE(FATAL_ERROR "sizeof(size_t) < 4.")
 ENDIF(SIZEOF_SIZE_T LESS 4)
 
+INCLUDE(CheckCXXSourceCompiles)
+
+CHECK_CXX_SOURCE_COMPILES("#include <cstdint>\nint main() { std::uint64_t i; std::uint32_t j; std::uint8_t k; return 0; }" FIXED_WIDTH_UINT_TYPES)
+
+IF(NOT FIXED_WIDTH_UINT_TYPES)
+  MESSAGE(FATAL_ERROR "Required fixed width integer types not available.")
+ENDIF(NOT FIXED_WIDTH_UINT_TYPES)
+
 SET(HAVE_CAIRO ${CAIRO_FOUND})
 SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
 SET(HAVE_QT ${Qt5Gui_FOUND})
