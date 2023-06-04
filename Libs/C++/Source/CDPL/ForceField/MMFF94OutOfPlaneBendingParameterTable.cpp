@@ -29,9 +29,9 @@
 #include <cstring>
 #include <sstream>
 #include <algorithm>
+#include <mutex>
 
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -53,7 +53,7 @@ namespace
     ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
     ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatExtTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
 
- 	boost::once_flag initBuiltinTablesFlag = BOOST_ONCE_INIT;
+ 	std::once_flag initBuiltinTablesFlag;
 
 	void initBuiltinTables() 
 	{ 
@@ -261,7 +261,7 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer&
 
 const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer& ForceField::MMFF94OutOfPlaneBendingParameterTable::get(unsigned int param_set)
 {
- 	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
+ 	std::call_once(initBuiltinTablesFlag, &initBuiltinTables);
 
 	switch (param_set) {
 		

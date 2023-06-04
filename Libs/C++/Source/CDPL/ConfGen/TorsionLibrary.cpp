@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -47,7 +47,7 @@ namespace
 
     ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
 
-	boost::once_flag initBuiltinTorLibFlag = BOOST_ONCE_INIT;
+	std::once_flag initBuiltinTorLibFlag;
 
 	void initBuiltinTorLib()
 	{
@@ -82,7 +82,7 @@ void ConfGen::TorsionLibrary::set(const SharedPointer& lib)
 
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
 {
-    boost::call_once(&initBuiltinTorLib, initBuiltinTorLibFlag);
+    std::call_once(initBuiltinTorLibFlag, &initBuiltinTorLib);
 
     return defaultLib;
 }

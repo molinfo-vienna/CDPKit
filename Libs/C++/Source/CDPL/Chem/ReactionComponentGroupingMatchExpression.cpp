@@ -55,7 +55,7 @@ bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&,
 	if (!compGrouping || compGrouping->getSize() == 0)
 		return true;
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	compList.clear();
 

@@ -68,7 +68,7 @@ SET(pharm_MOD_SRCS
     PharmacophoreFitScreeningScoreExport.cpp
     FileScreeningHitCollectorExport.cpp
     
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
 
     FeatureGeneratorExport.cpp
     PharmacophoreGeneratorExport.cpp

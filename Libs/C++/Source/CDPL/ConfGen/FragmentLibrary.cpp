@@ -52,7 +52,7 @@ namespace
 
 	ConfGen::FragmentLibrary::SharedPointer builtinFragLib(new ConfGen::FragmentLibrary());
 
-	boost::once_flag initBuiltinFragLibFlag = BOOST_ONCE_INIT;
+	std::once_flag initBuiltinFragLibFlag;
 	
 	void initBuiltinFragLib()
 	{
@@ -150,7 +150,7 @@ ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::getEntriesEnd(
     return hashToEntryMap.end();
 }
 
-boost::mutex& ConfGen::FragmentLibrary::getMutex()
+std::mutex& ConfGen::FragmentLibrary::getMutex()
 {
 	return mutex;
 }
@@ -203,7 +203,7 @@ void ConfGen::FragmentLibrary::set(const SharedPointer& lib)
 
 const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibrary::get()
 {
-	boost::call_once(&initBuiltinFragLib, initBuiltinFragLibFlag);
+	std::call_once(initBuiltinFragLibFlag, &initBuiltinFragLib);
 
     return defaultLib;
 }

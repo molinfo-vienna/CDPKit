@@ -273,7 +273,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportFragmentFunctions();
 	exportReactionFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

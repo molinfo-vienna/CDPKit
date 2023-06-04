@@ -30,8 +30,6 @@ SET(psdscreen_SRCS
     PSDScreenImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_EXECUTABLE(psdscreen ${psdscreen_SRCS})
 
 SET_TARGET_PROPERTIES(psdscreen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
@@ -47,8 +45,8 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(psdscreen cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
-		      cdpl-pharm-shared cdpl-biomol-shared)
+TARGET_LINK_LIBRARIES(psdscreen cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
+		      cdpl-pharm-shared cdpl-biomol-shared Threads::Threads)
 
 INSTALL(TARGETS psdscreen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

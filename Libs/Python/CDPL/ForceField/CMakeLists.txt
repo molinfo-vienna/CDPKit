@@ -103,7 +103,7 @@ SET(forcefield_MOD_SRCS
     BondFunctionExport.cpp 
     MolecularGraphFunctionExport.cpp 
 
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

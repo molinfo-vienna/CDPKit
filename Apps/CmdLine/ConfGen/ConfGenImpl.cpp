@@ -28,6 +28,7 @@
 #include <iterator>
 #include <fstream>
 #include <sstream>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -343,9 +344,9 @@ ConfGenImpl::ConfGenImpl():
 	addOption("failed,f", "Failed molecule output file.",
 			  value<std::string>(&failedFile));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("conf-gen-preset,C", "Conformer generation preset to use (SMALL_SET_DIVERSE, MEDIUM_SET_DIVERSE, " 
 			  "LARGE_SET_DIVERSE, SMALL_SET_DENSE, MEDIUM_SET_DENSE, LARGE_SET_DENSE, default: MEDIUM_SET_DIVERSE).", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyConfGenPreset, this, _1)));
@@ -860,8 +861,9 @@ void ConfGenImpl::processMultiThreaded()
 
 	typedef boost::shared_ptr<ConformerGenerationWorker> ConformerGenerationWorkerPtr;
 	typedef std::vector<ConformerGenerationWorkerPtr> ConformerGenerationWorkerList;
-
-	boost::thread_group thread_grp;
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
 	ConformerGenerationWorkerList worker_list;
 
 	try {
@@ -871,7 +873,7 @@ void ConfGenImpl::processMultiThreaded()
 
 			ConformerGenerationWorkerPtr worker_ptr(new ConformerGenerationWorker(this));
 
-			thread_grp.create_thread(boost::bind(&ConformerGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(boost::bind(&ConformerGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -883,7 +885,8 @@ void ConfGenImpl::processMultiThreaded()
 	}
 
 	try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
 	} catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -920,7 +923,7 @@ void ConfGenImpl::processMultiThreaded()
 void ConfGenImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -934,7 +937,7 @@ void ConfGenImpl::setErrorMessage(const std::string& msg)
 bool ConfGenImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
 
@@ -971,7 +974,7 @@ std::size_t ConfGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(readMolMutex);
+		std::lock_guard<std::mutex> lock(readMolMutex);
 
 		return doReadNextMolecule(mol);
 	}
@@ -1013,7 +1016,7 @@ std::size_t ConfGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 void ConfGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(writeMolMutex);
+		std::lock_guard<std::mutex> lock(writeMolMutex);
 
 		doWriteMolecule(mol, failed);
 
@@ -1068,7 +1071,7 @@ void ConfGenImpl::printMessage(VerbosityLevel level, const std::string& msg, boo
 		return;
 	}
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	CmdLineBase::printMessage(level, msg, nl, file_only);
 }

@@ -31,8 +31,7 @@
 #include <vector>
 #include <string>
 #include <chrono>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataWriter.hpp"
@@ -183,9 +182,9 @@ namespace ConfGen
 		MoleculeWriterPtr              outputWriter;
 		OutputHandlerPtr               failedOutputHandler;
 		MoleculeWriterPtr              failedOutputWriter;
-		boost::mutex                   mutex;
-		boost::mutex                   readMolMutex;
-		boost::mutex                   writeMolMutex;
+		std::mutex                     mutex;
+		std::mutex                     readMolMutex;
+		std::mutex                     writeMolMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
     };

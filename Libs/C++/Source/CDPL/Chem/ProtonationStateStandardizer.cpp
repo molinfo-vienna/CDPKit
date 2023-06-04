@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cmath>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Chem/ProtonationStateStandardizer.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -75,7 +74,7 @@ namespace
 
     Chem::Molecule::SharedPointer PROT_STATE_TRANSFORM_PATTERNS[sizeof(PROT_STATE_TRANSFORMS) / sizeof(ProtStateTransform)];
 	
-    boost::once_flag initProtStateTransformsFlag = BOOST_ONCE_INIT;
+    std::once_flag initProtStateTransformsFlag;
 	
     void initProtStateTransforms()
     {
@@ -88,7 +87,7 @@ namespace
 	Chem::Molecule::SharedPointer NEG_CHARGED_ATOM_PATTERN;
 	Chem::Molecule::SharedPointer NEG_CHARGED_ACID_ATOM_PATTERN;
 
-	boost::once_flag initChargedAtomPatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initChargedAtomPatternsFlag;
 	
 	void initChargedAtomPatterns()
 	{
@@ -387,7 +386,7 @@ bool Chem::ProtonationStateStandardizer::minChargedAtomCount(Molecule& mol)
 
 bool Chem::ProtonationStateStandardizer::protForPhysCond(Molecule& mol)
 {
-    boost::call_once(&initProtStateTransforms, initProtStateTransformsFlag);
+    std::call_once(initProtStateTransformsFlag, &initProtStateTransforms);
 
     bool changes = minChargedAtomCount(mol);
 	std::size_t init_atom_cnt = mol.getNumAtoms();
@@ -444,7 +443,7 @@ bool Chem::ProtonationStateStandardizer::protForPhysCond(Molecule& mol)
 // Port of RDKit's Uncharger:uncharge() method
 bool Chem::ProtonationStateStandardizer::maxChargeComp(Molecule& mol)
 {
-	boost::call_once(&initChargedAtomPatterns, initChargedAtomPatternsFlag);
+	std::call_once(initChargedAtomPatternsFlag, &initChargedAtomPatterns);
 
 	calcImplicitHydrogenCounts(mol, false);
     perceiveHybridizationStates(mol, false);

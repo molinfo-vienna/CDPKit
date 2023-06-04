@@ -32,11 +32,11 @@
 #include <cmath>
 #include <cassert>
 #include <limits>
+#include <mutex>
 
 #include <boost/bind.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/max_cardinality_matching.hpp>
-#include <boost/thread.hpp>
 
 #include "CDPL/Chem/BondOrderCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -95,7 +95,7 @@ namespace
 	typedef std::vector<Chem::Molecule::SharedPointer> MoleculeTable;
 
 	MoleculeTable funcGroupPatternMols;
-	boost::once_flag initFunctionalGroupPatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initFunctionalGroupPatternsFlag;
 
 	void initFunctionalGroupPatterns() 
 	{
@@ -291,7 +291,7 @@ void Chem::BondOrderCalculator::init(const MolecularGraph& molgraph, Util::STArr
 	if (!funcGroupPatterns.empty())
 		return;
 
-	boost::call_once(&initFunctionalGroupPatterns, initFunctionalGroupPatternsFlag);
+	std::call_once(initFunctionalGroupPatternsFlag, &initFunctionalGroupPatterns);
 
 	MatchExpression<Atom, MolecularGraph>::SharedPointer atom_expr(new AtomMatchExpression());
 	MatchExpression<Bond, MolecularGraph>::SharedPointer bond_expr(new BondMatchExpression(*this, orders));

@@ -30,8 +30,6 @@ SET(psdcreate_SRCS
     PSDCreateImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_EXECUTABLE(psdcreate ${psdcreate_SRCS})
 
 SET_TARGET_PROPERTIES(psdcreate PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
@@ -47,8 +45,8 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(psdcreate cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
-		      cdpl-pharm-shared cdpl-biomol-shared)
+TARGET_LINK_LIBRARIES(psdcreate cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
+		      cdpl-pharm-shared cdpl-biomol-shared ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} Threads::Threads)
 
 INSTALL(TARGETS psdcreate DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

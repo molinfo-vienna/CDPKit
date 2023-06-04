@@ -26,8 +26,9 @@
  
 #include "StaticInit.hpp"
 
+#include <mutex>
+
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 
 #include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
 
@@ -169,7 +170,7 @@ namespace
 
     ForceField::UFFAtomTypePropertyTable::SharedPointer builtinTable(new ForceField::UFFAtomTypePropertyTable());
 
-	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
+	std::once_flag initBuiltinTableFlag;
 
 	void initBuiltinTable() 
 	{
@@ -323,7 +324,7 @@ void ForceField::UFFAtomTypePropertyTable::set(const SharedPointer& table)
 
 const ForceField::UFFAtomTypePropertyTable::SharedPointer& ForceField::UFFAtomTypePropertyTable::get()
 {
-	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }

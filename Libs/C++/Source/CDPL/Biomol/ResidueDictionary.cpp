@@ -27,9 +27,9 @@
 #include "StaticInit.hpp"
 
 #include <unordered_set>
+#include <mutex>
 
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -60,9 +60,9 @@ namespace
 	StructureCache                           resStructureCache;
 	Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
 
-	boost::mutex                             loadStructureMutex;
-	boost::once_flag                         initBuiltinDictionaryFlag     = BOOST_ONCE_INIT;
-	boost::once_flag                         initResCodeToDataEntryMapFlag = BOOST_ONCE_INIT;
+	std::mutex                               loadStructureMutex;
+	std::once_flag                           initBuiltinDictionaryFlag;
+	std::once_flag                           initResCodeToDataEntryMapFlag;
 
 	const Biomol::ResidueDictionary::Entry   DEF_ENTRY;
 
@@ -108,7 +108,7 @@ namespace
 		using namespace Biomol;
 		using namespace ResidueDictionaryData;
 
-		boost::lock_guard<boost::mutex> lock(loadStructureMutex);
+		std::lock_guard<std::mutex> lock(loadStructureMutex);
 
 		StructureCache::const_iterator rsc_it = resStructureCache.find(code);
 
@@ -270,7 +270,7 @@ void Biomol::ResidueDictionary::loadDefaults()
 {
 	using namespace ResidueDictionaryData;
 
-	boost::call_once(&initResCodeToDataEntryMap, initResCodeToDataEntryMapFlag);
+	std::call_once(initResCodeToDataEntryMapFlag, &initResCodeToDataEntryMap);
 
 	Entry::StructureRetrievalFunction struc_ret_func(&loadResidueStructure);
 
@@ -291,7 +291,7 @@ void Biomol::ResidueDictionary::set(const SharedPointer& dict)
 
 const Biomol::ResidueDictionary::SharedPointer& Biomol::ResidueDictionary::get()
 {
-	boost::call_once(&initBuiltinDictionary, initBuiltinDictionaryFlag);
+	std::call_once(initBuiltinDictionaryFlag, &initBuiltinDictionary);
 
     return defaultDict;
 }

@@ -29,8 +29,8 @@
 #include <locale>
 #include <algorithm>
 #include <unordered_map>
+#include <mutex>
 
-#include <boost/thread.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
@@ -58,7 +58,7 @@ namespace
     typedef std::vector<Chem::MolecularGraph::SharedPointer> PatternTable;
 	
     PatternTable atomHydCategoryPatterns;
-    boost::once_flag initHydCategoryPatternsFlag = BOOST_ONCE_INIT;
+    std::once_flag initHydCategoryPatternsFlag;
 
     void initHydCategoryPatterns() 
     {
@@ -106,7 +106,7 @@ namespace
     typedef std::unordered_map<std::string, double> AtomSurfaceAccessibilityTable;
 
 	AtomSurfaceAccessibilityTable atomSurfAccTable;
-    boost::once_flag initAtomSurfAccTableFlag = BOOST_ONCE_INIT;
+    std::once_flag initAtomSurfAccTableFlag;
 
     void initAtomSurfAccTable() 
     {
@@ -196,8 +196,8 @@ void MolProp::AtomHydrophobicityCalculator::calcHydrophobicities(const Chem::Mol
 {
 	using namespace Chem;
 
-    boost::call_once(&initHydCategoryPatterns, initHydCategoryPatternsFlag);
-    boost::call_once(&initAtomSurfAccTable, initAtomSurfAccTableFlag);
+    std::call_once(initHydCategoryPatternsFlag, &initHydCategoryPatterns);
+    std::call_once(initAtomSurfAccTableFlag, &initAtomSurfAccTable);
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 

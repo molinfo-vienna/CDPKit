@@ -55,7 +55,7 @@ bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const Mole
 
 	const FragmentList& target_comps = *getComponents(target_molgraph);
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	compList.clear();
 	compList.reserve(target_comps.getSize());

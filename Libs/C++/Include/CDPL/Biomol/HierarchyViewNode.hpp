@@ -31,7 +31,7 @@
 #ifndef CDPL_BIOMOL_HIERARCHYVIEWNODE_HPP
 #define CDPL_BIOMOL_HIERARCHYVIEWNODE_HPP
 
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/ResidueList.hpp"
@@ -57,12 +57,12 @@ namespace CDPL
 
 			~HierarchyViewNode() {}
 
-			boost::mutex& getMutex() const;
+			std::mutex& getMutex() const;
 
 		  private:
 			mutable ResidueList  residues;
 			mutable bool         initResidues;
-			mutable boost::mutex initMutex;
+			mutable std::mutex   initMutex;
 		};
     }
 }

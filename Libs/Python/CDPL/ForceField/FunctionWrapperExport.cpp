@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * FunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -31,29 +31,29 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
-#include "Base/BoostFunctionWrapperExport.hpp"
+#include "Base/FunctionWrapperExport.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonForceField::exportBoostFunctionWrappers()
+void CDPLPythonForceField::exportFunctionWrappers()
 {
 	using namespace boost;
     using namespace CDPL;
     using namespace Chem;
     using namespace ForceField;
 
-	CDPLPythonBase::BoostFunction1Export<MMFF94NumericAtomTypeFunction, Atom&>("MMFF94NumericAtomTypeFunction");
-	CDPLPythonBase::BoostFunction1Export<MMFF94SymbolicAtomTypeFunction, Atom&,
-										 python::return_internal_reference<> >("MMFF94SymbolicAtomTypeFunction");
-	CDPLPythonBase::BoostFunction1Export<MMFF94AtomChargeFunction, Atom&>("MMFF94AtomChargeFunction");
-	CDPLPythonBase::BoostFunction1Export<MMFF94BondTypeIndexFunction, Bond&>("MMFF94BondTypeIndexFunction");
-	CDPLPythonBase::BoostFunction1Export<MMFF94RingSetFunction, MolecularGraph&, 
-										 python::return_value_policy<python::copy_const_reference> >("MMFF94RingSetFunction");
+	CDPLPythonBase::Function1Export<MMFF94NumericAtomTypeFunction, Atom&>("MMFF94NumericAtomTypeFunction");
+	CDPLPythonBase::Function1Export<MMFF94SymbolicAtomTypeFunction, Atom&,
+									python::return_internal_reference<> >("MMFF94SymbolicAtomTypeFunction");
+	CDPLPythonBase::Function1Export<MMFF94AtomChargeFunction, Atom&>("MMFF94AtomChargeFunction");
+	CDPLPythonBase::Function1Export<MMFF94BondTypeIndexFunction, Bond&>("MMFF94BondTypeIndexFunction");
+	CDPLPythonBase::Function1Export<MMFF94RingSetFunction, MolecularGraph&, 
+									python::return_value_policy<python::copy_const_reference> >("MMFF94RingSetFunction");
 
-	CDPLPythonBase::BoostFunction2Export<InteractionFilterFunction2, Atom&, Atom&>("InteractionFilterFunction2");
-	CDPLPythonBase::BoostFunction3Export<InteractionFilterFunction3, Atom&, Atom&, Atom&>("InteractionFilterFunction3");
-	CDPLPythonBase::BoostFunction4Export<InteractionFilterFunction4, Atom&, Atom&, Atom&, Atom&>("InteractionFilterFunction4");
+	CDPLPythonBase::Function2Export<InteractionFilterFunction2, Atom&, Atom&>("InteractionFilterFunction2");
+	CDPLPythonBase::Function3Export<InteractionFilterFunction3, Atom&, Atom&, Atom&>("InteractionFilterFunction3");
+	CDPLPythonBase::Function4Export<InteractionFilterFunction4, Atom&, Atom&, Atom&, Atom&>("InteractionFilterFunction4");
 
-	CDPLPythonBase::BoostFunction3Export<TopologicalAtomDistanceFunction, Atom&, Atom&, MolecularGraph&>("TopologicalAtomDistanceFunction");
+	CDPLPythonBase::Function3Export<TopologicalAtomDistanceFunction, Atom&, Atom&, MolecularGraph&>("TopologicalAtomDistanceFunction");
 }

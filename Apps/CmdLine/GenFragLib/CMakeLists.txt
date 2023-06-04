@@ -30,8 +30,6 @@ SET(genfraglib_SRCS
     GenFragLibImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_EXECUTABLE(genfraglib ${genfraglib_SRCS})
 
 SET_TARGET_PROPERTIES(genfraglib PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
@@ -47,8 +45,8 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(genfraglib cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
-		      cdpl-confgen-shared)
+TARGET_LINK_LIBRARIES(genfraglib cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
+		      cdpl-confgen-shared Threads::Threads)
 
 INSTALL(TARGETS genfraglib DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

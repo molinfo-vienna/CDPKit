@@ -29,6 +29,7 @@
 #include <iterator>
 #include <fstream>
 #include <sstream>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -307,9 +308,9 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("mode,m", "Processing mode (CREATE, UPDATE, MERGE default: CREATE).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setMode, this, _1)));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setInputFormat, this, _1)));
 	addOption("preset,F", "Fragment conformer generation preset to use (FAST, THROUGH, default: THOROUGH).", 
@@ -583,8 +584,9 @@ void GenFragLibImpl::processMultiThreaded()
 
 	typedef boost::shared_ptr<FragLibGenerationWorker> FragLibGenerationWorkerPtr;
 	typedef std::vector<FragLibGenerationWorkerPtr> FragLibGenerationWorkerList;
-
-	boost::thread_group thread_grp;
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
 	FragLibGenerationWorkerList worker_list;
 
 	try {
@@ -594,7 +596,7 @@ void GenFragLibImpl::processMultiThreaded()
 
 			FragLibGenerationWorkerPtr worker_ptr(new FragLibGenerationWorker(this));
 
-			thread_grp.create_thread(boost::bind(&FragLibGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(boost::bind(&FragLibGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -606,7 +608,8 @@ void GenFragLibImpl::processMultiThreaded()
 	}
 
 	try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
 	} catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -674,7 +677,7 @@ void GenFragLibImpl::updateOccurrenceCount(CDPL::Base::uint64 hash_code)
 		return;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		fragmentOccCounts[hash_code]++;
 		return;
@@ -723,7 +726,7 @@ int GenFragLibImpl::saveFragmentLibrary()
 void GenFragLibImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -737,7 +740,7 @@ void GenFragLibImpl::setErrorMessage(const std::string& msg)
 bool GenFragLibImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
 
@@ -766,7 +769,7 @@ std::size_t GenFragLibImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(molReadMutex);
+		std::lock_guard<std::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
 	}
@@ -826,7 +829,7 @@ void GenFragLibImpl::printMessage(VerbosityLevel level, const std::string& msg, 
 		return;
 	}
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	CmdLineBase::printMessage(level, msg, nl, file_only);
 }

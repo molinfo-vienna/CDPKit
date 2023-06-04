@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * FunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,19 +24,20 @@
  */
 
 
-#include "CDPL/ConfGen/CallbackFunction.hpp"
-#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
+#include <string>
 
-#include "Base/BoostFunctionWrapperExport.hpp"
+#include <boost/function.hpp>
+
+#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "Base/FunctionWrapperExport.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonConfGen::exportBoostFunctionWrappers()
+void CDPLPythonBiomol::exportFunctionWrappers()
 {
     using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction0Export<ConfGen::CallbackFunction>("CallbackFunction");
-
-	CDPLPythonBase::BoostFunction1Export<ConfGen::LogMessageCallbackFunction>("LogMessageCallbackFunction");
+    CDPLPythonBase::Function1Export<boost::function1<Chem::MolecularGraph::SharedPointer, const std::string&> >("MolecularGraphPointerStringFunctor");
 }

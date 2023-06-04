@@ -32,9 +32,9 @@
 #define CDPL_CHEM_MOLECULARGRAPHCOMPONENTGROUPINGMATCHEXPRESSION_HPP
 
 #include <vector>
+#include <mutex>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/thread.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -106,7 +106,7 @@ namespace CDPL
 
 			FragmentList::SharedPointer compGrouping;
 			mutable ComponentList       compList;
-			mutable boost::mutex        mutex;
+			mutable std::mutex          mutex;
 		};
 	}
 }

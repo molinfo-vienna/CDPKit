@@ -32,8 +32,7 @@
 #include <string>
 #include <unordered_map>
 #include <chrono>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
@@ -150,8 +149,8 @@ namespace GenFragLib
 		CompMoleculeReader             inputReader;
 		FragmentLibrary::SharedPointer fragmentLibPtr;
 		FragmentFrequencyMap           fragmentOccCounts;
-		boost::mutex                   mutex;
-		boost::mutex                   molReadMutex;
+		std::mutex                     mutex;
+		std::mutex                     molReadMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
     };

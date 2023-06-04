@@ -85,7 +85,7 @@ namespace CDPLPythonForceField
 	void exportMMFF94TorsionParameterTable();
 	void exportMMFF94VanDerWaalsParameterTable();
 
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_FORCEFIELD_CLASSEXPORTS_HPP

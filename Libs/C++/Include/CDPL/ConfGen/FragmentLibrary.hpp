@@ -34,9 +34,9 @@
 #include <iosfwd>
 #include <cstddef>
 #include <unordered_map>
+#include <mutex>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/thread.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
@@ -99,7 +99,7 @@ namespace CDPL
 
 			void loadDefaults();
 
-			boost::mutex& getMutex();
+			std::mutex& getMutex();
 
 			static void set(const SharedPointer& lib);
 
@@ -108,7 +108,7 @@ namespace CDPL
 		  private:
 			static SharedPointer   defaultLib;
 			mutable HashToEntryMap hashToEntryMap;
-			mutable boost::mutex   mutex;
+			mutable std::mutex     mutex;
 		};
     }
 }

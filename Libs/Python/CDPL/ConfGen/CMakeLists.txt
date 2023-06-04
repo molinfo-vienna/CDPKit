@@ -78,7 +78,7 @@ SET(confgen_MOD_SRCS
     MoleculeFunctionExport.cpp
     ControlParameterFunctionExport.cpp 
 
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
    
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

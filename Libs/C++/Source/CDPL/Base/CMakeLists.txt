@@ -36,8 +36,6 @@ SET(cdpl-base_LIB_SRCS
     Exceptions.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-base-static PROPERTIES 

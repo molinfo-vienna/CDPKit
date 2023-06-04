@@ -28,9 +28,9 @@
 
 #include <cstring>
 #include <sstream>
+#include <mutex>
 
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -49,7 +49,7 @@ namespace
  
     ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer builtinMap(new ForceField::MMFF94PrimaryToParameterAtomTypeMap());
 
- 	boost::once_flag initBuiltinMapFlag = BOOST_ONCE_INIT;
+ 	std::once_flag initBuiltinMapFlag;
 
 	void initBuiltinMap() 
 	{
@@ -196,7 +196,7 @@ void ForceField::MMFF94PrimaryToParameterAtomTypeMap::set(const SharedPointer& t
 
 const ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& ForceField::MMFF94PrimaryToParameterAtomTypeMap::get()
 {
- 	boost::call_once(&initBuiltinMap, initBuiltinMapFlag);
+ 	std::call_once(initBuiltinMapFlag, &initBuiltinMap);
 
 	return defaultMap;
 }

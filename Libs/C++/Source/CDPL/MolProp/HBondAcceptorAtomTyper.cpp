@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <vector>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/MolProp/HBondAcceptorAtomTyper.hpp"
 #include "CDPL/MolProp/HBondAcceptorAtomType.hpp"
@@ -95,7 +94,7 @@ namespace
     typedef std::vector<Chem::MolecularGraph::SharedPointer> AtomTyperPatternList;
 
     AtomTyperPatternList atomTyperPatterns;
-    boost::once_flag initAtomTyperPatternsFlag = BOOST_ONCE_INIT;
+    std::once_flag initAtomTyperPatternsFlag;
 
     void initAtomTyperPatterns()
     {
@@ -119,7 +118,7 @@ void MolProp::HBondAcceptorAtomTyper::perceiveTypes(const Chem::MolecularGraph& 
     types.resize(num_atoms);
 
     if (atomTyper.getNumPatterns() == 0) {
-		boost::call_once(&initAtomTyperPatterns, initAtomTyperPatternsFlag);
+		std::call_once(initAtomTyperPatternsFlag, &initAtomTyperPatterns);
 
 		for (AtomTyperPatternList::const_iterator it = atomTyperPatterns.begin(), end = atomTyperPatterns.end(); it != end; ++it)
 			atomTyper.addPattern(*it);

@@ -43,7 +43,7 @@ BOOST_PYTHON_MODULE(_base)
 	exportDataIOBase();
 	exportIOStreams();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

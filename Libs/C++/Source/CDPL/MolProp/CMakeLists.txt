@@ -84,8 +84,6 @@ SET(cdpl-molprop_LIB_SRCS
     HBondAcceptorAtomTyper.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_LIBRARY(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-molprop-static PROPERTIES 

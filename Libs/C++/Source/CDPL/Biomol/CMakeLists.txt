@@ -74,7 +74,7 @@ SET(cdpl-biomol_LIB_SRCS
     MoleculeUtilityFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 IF(WIN32 AND MINGW)		     
    LINK_LIBRARIES(libwsock32.a)

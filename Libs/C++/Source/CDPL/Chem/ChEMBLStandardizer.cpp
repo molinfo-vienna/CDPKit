@@ -30,8 +30,8 @@
 #include <algorithm>
 #include <utility>
 #include <cmath>
+#include <mutex>
 
-#include <boost/thread.hpp>
 #include <boost/bind.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
@@ -68,7 +68,7 @@ namespace
     #include "ChEMBL-Solvents.smi.str" 
 	;
 
-	boost::once_flag initSaltAndSolventDataFlag = BOOST_ONCE_INIT;
+	std::once_flag initSaltAndSolventDataFlag;
 	
 	typedef std::pair<Base::uint64, Base::uint64> StructureID;
 	typedef std::unordered_set<StructureID, boost::hash<StructureID> > StructureIDSet;
@@ -141,7 +141,7 @@ namespace
 
 	Chem::Molecule::SharedPointer STRUCT_NORM_TRANSFORM_PATTERNS[sizeof(STRUCT_NORM_TRANSFORMS) / sizeof(SubstructureTransform)];
 	
-	boost::once_flag initStructNormTransformPatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initStructNormTransformPatternsFlag;
 	
 	void initStructNormTransformPatterns()
 	{
@@ -151,7 +151,7 @@ namespace
 	
 	Chem::Molecule::SharedPointer TARTRATE_PATTERN;
 
-	boost::once_flag initTartratePatternFlag = BOOST_ONCE_INIT;
+	std::once_flag initTartratePatternFlag;
 
 	void initTartratePattern()
 	{
@@ -294,7 +294,7 @@ Chem::ChEMBLStandardizer::ChangeFlags Chem::ChEMBLStandardizer::getParent(Molecu
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
 
-	boost::call_once(&initSaltAndSolventData, initSaltAndSolventDataFlag);
+	std::call_once(initSaltAndSolventDataFlag, &initSaltAndSolventData);
 		
 	hashCodeCalc.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCodeCalc, AtomPropertyFlag::TYPE | AtomPropertyFlag::AROMATICITY));
 	molCompList1.clear();
@@ -615,7 +615,7 @@ bool Chem::ChEMBLStandardizer::isRemovableHydrogen(const Atom& atom) const
 
 bool Chem::ChEMBLStandardizer::normalizeStructure(Molecule& mol)
 {
-	boost::call_once(&initStructNormTransformPatterns, initStructNormTransformPatternsFlag);
+	std::call_once(initStructNormTransformPatternsFlag, &initStructNormTransformPatterns);
 	
 	bool changes = false;
 	bool clr_comps = false;
@@ -749,7 +749,7 @@ bool Chem::ChEMBLStandardizer::removeCharges(Molecule& mol)
 
 bool Chem::ChEMBLStandardizer::removeTartrateStereochemistry(Molecule& mol)
 {
-	boost::call_once(&initTartratePattern, initTartratePatternFlag);
+	std::call_once(initTartratePatternFlag, &initTartratePattern);
 
 	perceiveHybridizationStates(mol, false);
 	setAromaticityFlags(mol, false);

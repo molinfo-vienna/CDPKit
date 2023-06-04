@@ -108,7 +108,7 @@ BOOST_PYTHON_MODULE(_forcefield)
 	exportBondFunctions();
 	exportMolecularGraphFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

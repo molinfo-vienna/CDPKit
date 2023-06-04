@@ -77,7 +77,7 @@ BOOST_PYTHON_MODULE(_biomol)
 	exportControlParameterFunctions();
 	exportUtilityFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

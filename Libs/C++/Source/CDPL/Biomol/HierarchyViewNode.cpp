@@ -34,7 +34,7 @@ using namespace CDPL;
 
 const Biomol::ResidueList& Biomol::HierarchyViewNode::getResidues() const
 {
-    boost::lock_guard<boost::mutex> lock(initMutex);
+    std::lock_guard<std::mutex> lock(initMutex);
 
     if (!initResidues)
 		return residues;
@@ -45,7 +45,7 @@ const Biomol::ResidueList& Biomol::HierarchyViewNode::getResidues() const
     return residues;
 }
 
-boost::mutex& Biomol::HierarchyViewNode::getMutex() const
+std::mutex& Biomol::HierarchyViewNode::getMutex() const
 {
     return initMutex;
 }

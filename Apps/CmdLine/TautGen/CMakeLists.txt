@@ -30,8 +30,6 @@ SET(tautgen_SRCS
     TautGenImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_EXECUTABLE(tautgen ${tautgen_SRCS})
 
 SET_TARGET_PROPERTIES(tautgen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
@@ -47,7 +45,7 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(tautgen cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared)
+TARGET_LINK_LIBRARIES(tautgen cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared Threads::Threads)
 
 INSTALL(TARGETS tautgen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

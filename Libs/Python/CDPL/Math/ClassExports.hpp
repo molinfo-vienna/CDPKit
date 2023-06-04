@@ -104,7 +104,7 @@ namespace CDPLPythonMath
 
 	void exportVectorArrayTypes();
 
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_MATH_CLASSEXPORTS_HPP

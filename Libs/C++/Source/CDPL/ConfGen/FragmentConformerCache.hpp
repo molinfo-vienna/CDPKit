@@ -33,8 +33,7 @@
 
 #include <cstddef>
 #include <unordered_map>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -56,7 +55,7 @@ namespace CDPL
 								 const ConformerDataArray::const_iterator& confs_beg, 
 								 const ConformerDataArray::const_iterator& confs_end);
 
-			static boost::mutex& getMutex();
+			static std::mutex& getMutex();
 
 		private:
 			struct Entry
@@ -81,12 +80,12 @@ namespace CDPL
 			typedef std::unordered_map<Base::uint64, Entry*> HashToCacheEntryMap;
 
 			static FragmentConformerCache* instance;
-			static boost::once_flag        onceFlag;
+			static std::once_flag          onceFlag;
 			ConformerDataArray             confDataCache;
 			HashToCacheEntryMap            hashToEntryMap;
 			Entry*                         lruListHead;
 			std::size_t                    numEntries;
-			boost::mutex                   mutex;
+			std::mutex                     mutex;
 		};
     }
 }

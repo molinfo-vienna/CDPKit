@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.hpp 
+ * FunctionWrapperExport.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef CDPL_PYTHON_BASE_BOOSTFUNCTIONWRAPPEREXPORT_HPP
-#define CDPL_PYTHON_BASE_BOOSTFUNCTIONWRAPPEREXPORT_HPP
+#ifndef CDPL_PYTHON_BASE_FUNCTIONWRAPPEREXPORT_HPP
+#define CDPL_PYTHON_BASE_FUNCTIONWRAPPEREXPORT_HPP
 
 #include <boost/python.hpp>
 
@@ -36,7 +36,7 @@ namespace CDPLPythonBase
 {
 
 	template <typename FunctionType> 
-    struct BoostFunctionExportBase
+    struct FunctionExportBase
 	{
 
 		static void* convertible(PyObject* obj_ptr) {
@@ -54,10 +54,10 @@ namespace CDPLPythonBase
 			  typename Arg3Type = typename FunctionType::arg3_type, 
 			  typename Arg4Type = typename FunctionType::arg4_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> >
-    struct BoostFunction4Export : private BoostFunctionExportBase<FunctionType>
+    struct Function4Export : private FunctionExportBase<FunctionType>
     {
 
-		BoostFunction4Export(const char* name) {
+		Function4Export(const char* name) {
 			using namespace boost;
 
 			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
@@ -109,10 +109,10 @@ namespace CDPLPythonBase
 			  typename Arg2Type = typename FunctionType::arg2_type, 
 			  typename Arg3Type = typename FunctionType::arg3_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
-    struct BoostFunction3Export : private BoostFunctionExportBase<FunctionType>
+    struct Function3Export : private FunctionExportBase<FunctionType>
     {
 
-		BoostFunction3Export(const char* name) {
+		Function3Export(const char* name) {
 			using namespace boost;
 
 			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
@@ -162,10 +162,10 @@ namespace CDPLPythonBase
 			  typename Arg1Type = typename FunctionType::arg1_type, 
 			  typename Arg2Type = typename FunctionType::arg2_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> >
-    struct BoostFunction2Export : private BoostFunctionExportBase<FunctionType>
+    struct Function2Export : private FunctionExportBase<FunctionType>
     {
 
-		BoostFunction2Export(const char* name) {
+		Function2Export(const char* name) {
 			using namespace boost;
 
 			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
@@ -213,10 +213,10 @@ namespace CDPLPythonBase
 
     template <typename FunctionType, typename Arg1Type = typename FunctionType::arg1_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
-    struct BoostFunction1Export : private BoostFunctionExportBase<FunctionType>
+    struct Function1Export : private FunctionExportBase<FunctionType>
     {
 
-		BoostFunction1Export(const char* name) {
+		Function1Export(const char* name) {
 			using namespace boost;
 
 			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
@@ -261,10 +261,10 @@ namespace CDPLPythonBase
 
 	template <typename FunctionType,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
-    struct BoostFunction0Export : private BoostFunctionExportBase<FunctionType>
+    struct Function0Export : private FunctionExportBase<FunctionType>
     {
 
-		BoostFunction0Export(const char* name) {
+		Function0Export(const char* name) {
 			using namespace boost;
 
 			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
@@ -305,4 +305,4 @@ namespace CDPLPythonBase
 	};
 }
 
-#endif // CDPL_PYTHON_BASE_BOOSTFUNCTIONWRAPPEREXPORT_HPP
+#endif // CDPL_PYTHON_BASE_FUNCTIONWRAPPEREXPORT_HPP

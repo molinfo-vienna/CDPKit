@@ -39,7 +39,7 @@ namespace CDPLPythonGRAIL
 	void exportGRAILDataSetGenerator();
 	void exportGRAILDescriptorCalculator();
 	void exportBindingAffinityCalculator();
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_GRAIL_CLASSEXPORTS_HPP

@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cassert>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Chem/Reactor.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -60,7 +59,7 @@ namespace
 
 	PropertyToConstraintIDMap propertyToConstraintIDMap;
 
-	boost::once_flag initPropertyConstraintIDMapFlag = BOOST_ONCE_INIT;
+	std::once_flag initPropertyConstraintIDMapFlag;
 
 	void initPropertyConstraintIDMap() 
 	{
@@ -195,7 +194,7 @@ Chem::Reactor::ConstReactionSiteIterator Chem::Reactor::getReactionSitesEnd() co
 
 void Chem::Reactor::init()
 {
-	boost::call_once(&initPropertyConstraintIDMap, initPropertyConstraintIDMapFlag);
+	std::call_once(initPropertyConstraintIDMapFlag, &initPropertyConstraintIDMap);
 
 	reacAtomsToDelete.clear();
 	reacBondsToDelete.clear();

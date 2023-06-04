@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "FallbackTorsionLibrary.hpp"
 #include "TorsionLibraryDataReader.hpp"
@@ -42,7 +42,7 @@ namespace
         #include "FallbackTorsionLibrary.xml.str" 
 		;
 
-    boost::once_flag initFallbackTorLibFlag = BOOST_ONCE_INIT;
+    std::once_flag initFallbackTorLibFlag;
 
     ConfGen::TorsionLibrary::SharedPointer fallbackTorLib;
 
@@ -57,7 +57,7 @@ namespace
 
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::getFallbackTorsionLibrary()
 {
-    boost::call_once(&initFallbackTorLib, initFallbackTorLibFlag);
+    std::call_once(initFallbackTorLibFlag, &initFallbackTorLib);
 
     return fallbackTorLib;
 }

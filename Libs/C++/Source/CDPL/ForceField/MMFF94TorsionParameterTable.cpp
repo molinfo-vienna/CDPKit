@@ -28,9 +28,9 @@
 
 #include <cstring>
 #include <sstream>
+#include <mutex>
 
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -52,7 +52,7 @@ namespace
     ForceField::MMFF94TorsionParameterTable::SharedPointer builtinStatTable(new ForceField::MMFF94TorsionParameterTable());
     ForceField::MMFF94TorsionParameterTable::SharedPointer builtinStatRefTable(new ForceField::MMFF94TorsionParameterTable());
 
-	boost::once_flag initBuiltinTablesFlag = BOOST_ONCE_INIT;
+	std::once_flag initBuiltinTablesFlag;
 
 	void initBuiltinTables() 
 	{
@@ -288,7 +288,7 @@ void ForceField::MMFF94TorsionParameterTable::set(const SharedPointer& table, un
 
 const ForceField::MMFF94TorsionParameterTable::SharedPointer& ForceField::MMFF94TorsionParameterTable::get(unsigned int param_set)
 {
- 	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
+ 	std::call_once(initBuiltinTablesFlag, &initBuiltinTables);
 
 	switch (param_set) {
 		

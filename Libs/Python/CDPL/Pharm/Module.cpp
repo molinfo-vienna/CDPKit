@@ -151,7 +151,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportControlParameterFunctions();
 	exportMoleculeFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

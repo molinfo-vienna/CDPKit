@@ -51,7 +51,7 @@ namespace CDPLPythonBiomol
 	void exportHierarchyViewFragment();
 	void exportHierarchyView();
 
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_BIOMOL_CLASSEXPORTS_HPP

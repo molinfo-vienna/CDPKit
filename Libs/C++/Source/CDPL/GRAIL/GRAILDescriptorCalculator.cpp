@@ -29,8 +29,8 @@
 #include <iterator>
 #include <algorithm>
 #include <cmath>
+#include <mutex>
 
-#include <boost/thread.hpp>
 #include <boost/iterator.hpp>
 
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
@@ -76,7 +76,7 @@ namespace
 	typedef std::vector<FtrInteractionFuncData> FtrInteractionFuncList;
 
 	FtrInteractionFuncList ftrInteractionFuncList;
-	boost::once_flag initFtrInteractionFuncListFlag = BOOST_ONCE_INIT;
+	std::once_flag initFtrInteractionFuncListFlag;
 	
 	void initFtrInteractionFuncList()
 	{
@@ -523,7 +523,7 @@ void GRAIL::GRAILDescriptorCalculator::calcTgtEnvHBAHBDOccupation(const Math::Ve
 
 void GRAIL::GRAILDescriptorCalculator::calcFeatureInteractionScores(Math::DVector& descr, std::size_t& idx)
 {
-	boost::call_once(&initFtrInteractionFuncList, initFtrInteractionFuncListFlag);
+	std::call_once(initFtrInteractionFuncListFlag, &initFtrInteractionFuncList);
 
 	for (const auto& func_data : ftrInteractionFuncList) {
 		const IndexList& lig_ftrs = ligFtrSubsets[func_data.ligFtrType];

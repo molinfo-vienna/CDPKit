@@ -29,7 +29,6 @@
 #include <string>
 #include <exception>
 
-#include <boost/thread.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
@@ -175,7 +174,7 @@ ConfGen::FragmentLibraryEntry::SharedPointer ConfGen::FragmentLibraryGenerator::
 
 	canonFrag.create(frag, parent);
 
-	boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
+	std::lock_guard<std::mutex> lock(fragLib->getMutex());
 
 	if (fragLib->containsEntry(canonFrag.getHashCode())) 
 		return FragmentLibraryEntry::SharedPointer();
@@ -190,7 +189,7 @@ ConfGen::FragmentLibraryEntry::SharedPointer ConfGen::FragmentLibraryGenerator::
 
 void ConfGen::FragmentLibraryGenerator::removeNewLibraryEntry() const
 {
-	boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
+	std::lock_guard<std::mutex> lock(fragLib->getMutex());
 
 	fragLib->removeEntry(canonFrag.getHashCode());
 }

@@ -53,7 +53,7 @@ void Biomol::HierarchyView::build(const Chem::MolecularGraph& molgraph)
 
 const Biomol::ResidueList& Biomol::HierarchyView::getResidues() const
 {
-    boost::lock_guard<boost::mutex> lock(initMutex);
+    std::lock_guard<std::mutex> lock(initMutex);
 
     if (!initResidues)
 		return residues;
@@ -118,7 +118,7 @@ Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::getModelsEnd() 
 
 void Biomol::HierarchyView::initModelList() const
 {
-    boost::lock_guard<boost::mutex> lock(initMutex);
+    std::lock_guard<std::mutex> lock(initMutex);
 
     if (!initModels)
 		return;

@@ -89,7 +89,7 @@ Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::getCh
 
 void Biomol::HierarchyViewModel::initChainList() const
 {
-    boost::lock_guard<boost::mutex> lock(getMutex());
+    std::lock_guard<std::mutex> lock(getMutex());
 
     if (!initChains)
 		return;

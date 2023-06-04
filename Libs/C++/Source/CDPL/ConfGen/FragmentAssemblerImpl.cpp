@@ -31,7 +31,6 @@
 #include <string>
 
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
@@ -433,7 +432,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag, 
 																	  FragmentTreeNode* node)
 {
-	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
+	std::lock_guard<std::mutex> cache_lock(FragmentConformerCache::getMutex());
 	const ConformerDataArray* cache_confs = FragmentConformerCache::getEntry(canonFrag.getHashCode());
 
 	if (!cache_confs)
@@ -535,7 +534,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 		node->addConformer(conf_data);
 	}
 
-	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
+	std::lock_guard<std::mutex> cache_lock(FragmentConformerCache::getMutex());
 
 	FragmentConformerCache::addEntry(canonFrag.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
 

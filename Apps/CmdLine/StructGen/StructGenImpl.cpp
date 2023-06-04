@@ -28,6 +28,7 @@
 #include <iterator>
 #include <fstream>
 #include <sstream>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -316,9 +317,9 @@ StructGenImpl::StructGenImpl():
 	addOption("failed,f", "Failed molecule output file.", 
 			  value<std::string>(&failedFile));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("mode,m", "Structure generation method to use (AUTO, DG, FRAGMENT, default: " + getGenerationModeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setGenerationMode, this, _1)));
 	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
@@ -696,8 +697,9 @@ void StructGenImpl::processMultiThreaded()
 
 	typedef boost::shared_ptr<StructureGenerationWorker> StructureGenerationWorkerPtr;
 	typedef std::vector<StructureGenerationWorkerPtr> StructureGenerationWorkerList;
-
-	boost::thread_group thread_grp;
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
 	StructureGenerationWorkerList worker_list;
 
 	try {
@@ -707,7 +709,7 @@ void StructGenImpl::processMultiThreaded()
 
 			StructureGenerationWorkerPtr worker_ptr(new StructureGenerationWorker(this));
 
-			thread_grp.create_thread(boost::bind(&StructureGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(boost::bind(&StructureGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -719,7 +721,8 @@ void StructGenImpl::processMultiThreaded()
 	}
 
 	try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
 	} catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -754,7 +757,7 @@ void StructGenImpl::processMultiThreaded()
 void StructGenImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -768,7 +771,7 @@ void StructGenImpl::setErrorMessage(const std::string& msg)
 bool StructGenImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
 
@@ -799,7 +802,7 @@ std::size_t StructGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(readMolMutex);
+		std::lock_guard<std::mutex> lock(readMolMutex);
 
 		return doReadNextMolecule(mol);
 	}
@@ -841,7 +844,7 @@ std::size_t StructGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 void StructGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(writeMolMutex);
+		std::lock_guard<std::mutex> lock(writeMolMutex);
 
 		doWriteMolecule(mol, failed);
 
@@ -896,7 +899,7 @@ void StructGenImpl::printMessage(VerbosityLevel level, const std::string& msg, b
 		return;
 	}
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	CmdLineBase::printMessage(level, msg, nl, file_only);
 }

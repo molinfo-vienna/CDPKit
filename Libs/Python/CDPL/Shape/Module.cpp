@@ -66,5 +66,5 @@ BOOST_PYTHON_MODULE(_shape)
 	exportUtilityFunctions();
 	exportGaussianShapeFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 }

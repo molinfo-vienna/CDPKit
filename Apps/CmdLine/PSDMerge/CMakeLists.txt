@@ -30,8 +30,6 @@ SET(psdmerge_SRCS
     PSDMergeImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_CHRONO_LIBRARY})
-
 ADD_EXECUTABLE(psdmerge ${psdmerge_SRCS})
 
 SET_TARGET_PROPERTIES(psdmerge PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
@@ -47,7 +45,7 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(psdmerge cmdline-lib-static cdpl-pharm-shared cdpl-util-shared)
+TARGET_LINK_LIBRARIES(psdmerge cmdline-static cdpl-pharm-shared cdpl-util-shared)
 
 INSTALL(TARGETS psdmerge DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

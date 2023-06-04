@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * FunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,22 +24,19 @@
  */
 
 
-#include <boost/function.hpp>
+#include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 
-#include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
-#include "CDPL/Pharm/Feature.hpp"
-#include "CDPL/Math/Vector.hpp"
-
-#include "Base/BoostFunctionWrapperExport.hpp"
+#include "Base/FunctionWrapperExport.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonGRAIL::exportBoostFunctionWrappers()
+void CDPLPythonConfGen::exportFunctionWrappers()
 {
     using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction1Export<GRAIL::GRAILDataSetGenerator::PharmacophoreProcessingFunction>("VoidPharmacophoreFunctor");
+	CDPLPythonBase::Function0Export<ConfGen::CallbackFunction>("CallbackFunction");
 
-    CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Math::Vector3D&, const Pharm::Feature&>, const Math::Vector3D&, Pharm::Feature&>("DoubleVector3DFeatureFunctor");
+	CDPLPythonBase::Function1Export<ConfGen::LogMessageCallbackFunction>("LogMessageCallbackFunction");
 }

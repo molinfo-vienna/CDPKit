@@ -69,7 +69,7 @@ Biomol::HierarchyViewChain::ConstFragmentIterator Biomol::HierarchyViewChain::ge
 
 void Biomol::HierarchyViewChain::initFragmentList() const
 {
-    boost::lock_guard<boost::mutex> lock(getMutex());
+    std::lock_guard<std::mutex> lock(getMutex());
 
     if (!initFragments)
 		return;

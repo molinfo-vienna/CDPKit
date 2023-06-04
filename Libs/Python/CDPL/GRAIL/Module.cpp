@@ -53,6 +53,6 @@ BOOST_PYTHON_MODULE(_grail)
 	exportFeatureFunctions();
 	exportMoleculeFunctions();
 	
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 	registerFromPythonConverters();
 }

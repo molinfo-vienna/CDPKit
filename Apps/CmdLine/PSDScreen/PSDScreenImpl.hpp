@@ -31,8 +31,8 @@
 #include <vector>
 #include <string>
 #include <chrono>
+#include <mutex>
 
-#include <boost/thread.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
@@ -149,8 +149,8 @@ namespace PSDScreen
 		HitWriterPtr             hitMolWriter;
 		QueryReaderPtr           queryPharmReader;
 		HitCollectorPtr          hitCollector;
-		boost::mutex             mutex;
-		boost::mutex             collHitMutex;
+		std::mutex               mutex;
+		std::mutex               collHitMutex;
 		std::string              errorMessage;
 		Clock::time_point        startTime;
 		std::size_t              numQueryPharms;

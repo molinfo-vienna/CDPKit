@@ -72,7 +72,7 @@ SET(biomol_MOD_SRCS
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 
 
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

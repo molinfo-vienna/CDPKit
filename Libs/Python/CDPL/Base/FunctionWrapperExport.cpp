@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * FunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,20 +24,26 @@
  */
 
 
-#include <string>
-
 #include <boost/function.hpp>
 
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Base/LookupKey.hpp"
+#include "CDPL/Base/Variant.hpp"
 
-#include "Base/BoostFunctionWrapperExport.hpp"
-
+#include "FunctionWrapperExport.hpp"
 #include "ClassExports.hpp"
 
 
-void CDPLPythonBiomol::exportBoostFunctionWrappers()
+void CDPLPythonBase::exportFunctionWrappers()
 {
+	using namespace boost;
     using namespace CDPL;
+    using namespace Base;
 
-    CDPLPythonBase::BoostFunction1Export<boost::function1<Chem::MolecularGraph::SharedPointer, const std::string&> >("MolecularGraphPointerStringFunctor");
+    Function0Export<boost::function0<void> >("VoidFunctor");
+
+    Function2Export<boost::function2<void, const DataIOBase&, double>, DataIOBase&, double, python::return_value_policy<python::return_by_value> >("VoidDataIOBaseFunctor");
+    Function1Export<boost::function1<void, const LookupKey&> >("VoidLookupKeyFunctor");
+
+    Function2Export<boost::function2<void, const LookupKey&, const Variant&> >("VoidLookupKeyVariantFunctor");
 }

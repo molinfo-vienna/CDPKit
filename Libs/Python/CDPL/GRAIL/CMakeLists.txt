@@ -45,7 +45,7 @@ SET(grail_MOD_SRCS
     GRAILDescriptorCalculatorExport.cpp
     BindingAffinityCalculatorExport.cpp    
 
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
 
     AttributedGridFunctionExport.cpp
     FeatureFunctionExport.cpp

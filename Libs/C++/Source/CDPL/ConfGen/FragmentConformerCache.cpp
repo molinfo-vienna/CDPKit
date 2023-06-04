@@ -41,7 +41,7 @@ namespace
 
 ConfGen::FragmentConformerCache* ConfGen::FragmentConformerCache::instance = 0;
 
-boost::once_flag ConfGen::FragmentConformerCache::onceFlag = BOOST_ONCE_INIT;
+std::once_flag ConfGen::FragmentConformerCache::onceFlag;
 
 
 ConfGen::FragmentConformerCache::FragmentConformerCache():
@@ -141,7 +141,7 @@ void ConfGen::FragmentConformerCache::addEntry(Base::uint64 frag_hash,
 	inst.lruListHead = entry;
 }
 
-boost::mutex& ConfGen::FragmentConformerCache::getMutex()
+std::mutex& ConfGen::FragmentConformerCache::getMutex()
 {
     return getInstance().mutex;
 }
@@ -153,7 +153,7 @@ void ConfGen::FragmentConformerCache::createInstance()
 
 ConfGen::FragmentConformerCache& ConfGen::FragmentConformerCache::getInstance() 
 {
-    boost::call_once(&createInstance, onceFlag);
+    std::call_once(onceFlag, &createInstance);
 
     return *instance;
 }

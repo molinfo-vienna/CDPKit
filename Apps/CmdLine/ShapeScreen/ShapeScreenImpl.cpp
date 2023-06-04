@@ -28,6 +28,7 @@
 #include <iterator>
 #include <fstream>
 #include <iomanip>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -200,9 +201,9 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  "and @i@ = database molecule index, default: " + hitNamePattern + ").",
 			  value<std::string>(&hitNamePattern));
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("query-format,Q", "Query molecule input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setQueryFormat, this, _1)));
 	addOption("database-format,D", "Screening database input file format (default: auto-detect from file extension).", 
@@ -517,8 +518,9 @@ void ShapeScreenImpl::processMultiThreaded()
 
     typedef boost::shared_ptr<ScreeningWorker> ScreeningWorkerPtr;
     typedef std::vector<ScreeningWorkerPtr> ScreeningWorkerList;
-
-    boost::thread_group thread_grp;
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
     ScreeningWorkerList worker_list;
 
     try {
@@ -528,7 +530,7 @@ void ShapeScreenImpl::processMultiThreaded()
 
 			ScreeningWorkerPtr worker_ptr(new ScreeningWorker(this));
 
-			thread_grp.create_thread(boost::bind(&ScreeningWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(boost::bind(&ScreeningWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -540,7 +542,8 @@ void ShapeScreenImpl::processMultiThreaded()
     }
 
     try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
     } catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -557,7 +560,7 @@ bool ShapeScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_m
 		return true;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(hitProcMutex);
+		std::lock_guard<std::mutex> lock(hitProcMutex);
 
 		return doProcessHit(db_mol_idx, db_mol_name, db_mol, res);
     }
@@ -983,7 +986,7 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 void ShapeScreenImpl::setErrorMessage(const std::string& msg)
 {
     if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -1003,7 +1006,7 @@ std::size_t ShapeScreenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
     if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(molReadMutex);
+		std::lock_guard<std::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
     }
@@ -1043,7 +1046,7 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 bool ShapeScreenImpl::haveErrorMessage()
 {
     if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
     }
 
@@ -1101,7 +1104,7 @@ void ShapeScreenImpl::printMessage(VerbosityLevel level, const std::string& msg,
 		return;
     }
 
-    boost::lock_guard<boost::mutex> lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
 
     CmdLineBase::printMessage(level, msg, nl, file_only);
 }

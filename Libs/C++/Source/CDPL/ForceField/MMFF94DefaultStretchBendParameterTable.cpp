@@ -28,9 +28,9 @@
 
 #include <cstring>
 #include <sstream>
+#include <mutex>
 
 #include <boost/bind.hpp>
-#include <boost/thread.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -49,7 +49,7 @@ namespace
  
     ForceField::MMFF94DefaultStretchBendParameterTable::SharedPointer builtinTable(new ForceField::MMFF94DefaultStretchBendParameterTable());
 
-	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
+	std::once_flag initBuiltinTableFlag;
 
 	void initBuiltinTable() 
 	{
@@ -226,7 +226,7 @@ void ForceField::MMFF94DefaultStretchBendParameterTable::set(const SharedPointer
 
 const ForceField::MMFF94DefaultStretchBendParameterTable::SharedPointer& ForceField::MMFF94DefaultStretchBendParameterTable::get()
 {
-	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }

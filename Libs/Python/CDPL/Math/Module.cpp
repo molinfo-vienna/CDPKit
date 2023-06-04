@@ -125,7 +125,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportSpecialFunctions();
 	exportVectorArrayFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 

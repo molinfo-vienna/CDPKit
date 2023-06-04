@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <vector>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/MolProp/TPSACalculator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -45,7 +44,7 @@ namespace
 
 	PatternTable atomTypePatterns;
 
-	boost::once_flag initAtomTypePatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initAtomTypePatternsFlag;
 
 	void initAtomTypePatterns() 
 	{
@@ -172,7 +171,7 @@ double MolProp::TPSACalculator::getResult() const
 void MolProp::TPSACalculator::init()
 {
 	if (atomTyper.getNumPatterns() == 0) {
-		boost::call_once(&initAtomTypePatterns, initAtomTypePatternsFlag);
+		std::call_once(initAtomTypePatternsFlag, &initAtomTypePatterns);
 	
 		for (PatternTable::const_iterator p_it = atomTypePatterns.begin(), p_end = atomTypePatterns.end(); p_it != p_end; ++p_it)
 			atomTyper.addPattern(*p_it);

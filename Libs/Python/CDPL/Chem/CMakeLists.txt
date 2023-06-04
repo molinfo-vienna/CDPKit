@@ -261,7 +261,7 @@ SET(chem_MOD_SRCS
     FragmentFunctionExport.cpp 
     ReactionFunctionExport.cpp 
 
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
     Atom3DCoordinatesFunctorExport.cpp
     AtomConformer3DCoordinatesFunctorExport.cpp
     AtomArray3DCoordinatesFunctorExport.cpp

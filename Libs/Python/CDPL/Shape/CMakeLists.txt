@@ -64,7 +64,7 @@ SET(shape_MOD_SRCS
     ScoringFunctionExport.cpp
     GaussianShapeFunctionsExport.cpp
 
-    BoostFunctionWrapperExport.cpp
+    FunctionWrapperExport.cpp
    )
 
 ADD_LIBRARY(_shape MODULE ${shape_MOD_SRCS})

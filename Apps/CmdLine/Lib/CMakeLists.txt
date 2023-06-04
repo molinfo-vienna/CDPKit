@@ -25,16 +25,17 @@
 
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
-SET(cmdline-lib_LIB_SRCS
+SET(cmdline_LIB_SRCS
     CmdLineBase.cpp
     HelperFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_CHRONO_LIBRARY})
+ADD_LIBRARY(cmdline-static STATIC ${cmdline_LIB_SRCS})
 
-ADD_LIBRARY(cmdline-lib-static STATIC ${cmdline-lib_LIB_SRCS})
-
-SET_TARGET_PROPERTIES(cmdline-lib-static PROPERTIES 
-                      OUTPUT_NAME cmdline-lib
+SET_TARGET_PROPERTIES(cmdline-static PROPERTIES 
+                      OUTPUT_NAME cmdline
                       CLEAN_DIRECT_OUTPUT 1
                      )
+
+TARGET_LINK_LIBRARIES(cmdline-static ${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+		   

@@ -312,7 +312,7 @@ SET(cdpl-chem_LIB_SRCS
     ReactionComponentGroupingMatchExpression.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_DATE_TIME_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+LINK_LIBRARIES(${Boost_DATE_TIME_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
 
 ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})
 

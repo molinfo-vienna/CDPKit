@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * FunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,24 +26,21 @@
 
 #include <boost/function.hpp>
 
-#include "CDPL/Base/DataIOBase.hpp"
-#include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
+#include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Math/Vector.hpp"
 
-#include "BoostFunctionWrapperExport.hpp"
+#include "Base/FunctionWrapperExport.hpp"
+
 #include "ClassExports.hpp"
 
 
-void CDPLPythonBase::exportBoostFunctionWrappers()
+void CDPLPythonGRAIL::exportFunctionWrappers()
 {
-	using namespace boost;
     using namespace CDPL;
-    using namespace Base;
 
-    BoostFunction0Export<boost::function0<void> >("VoidFunctor");
+	CDPLPythonBase::Function1Export<GRAIL::GRAILDataSetGenerator::PharmacophoreProcessingFunction>("VoidPharmacophoreFunctor");
 
-    BoostFunction2Export<boost::function2<void, const DataIOBase&, double>, DataIOBase&, double, python::return_value_policy<python::return_by_value> >("VoidDataIOBaseFunctor");
-    BoostFunction1Export<boost::function1<void, const LookupKey&> >("VoidLookupKeyFunctor");
-
-    BoostFunction2Export<boost::function2<void, const LookupKey&, const Variant&> >("VoidLookupKeyVariantFunctor");
+    CDPLPythonBase::Function2Export<boost::function2<double, const Math::Vector3D&, const Pharm::Feature&>,
+									const Math::Vector3D&, Pharm::Feature&>("DoubleVector3DFeatureFunctor");
 }

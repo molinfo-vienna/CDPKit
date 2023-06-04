@@ -32,8 +32,8 @@
 #include <vector>
 #include <set>
 #include <iosfwd>
+#include <mutex>
 
-#include <boost/thread.hpp>
 #include <boost/timer/timer.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -217,9 +217,9 @@ namespace ShapeScreen
 		std::size_t                    numProcMols;
 		std::size_t                    numHits;
 		std::size_t                    numSavedHits;
-		boost::mutex                   mutex;
-		boost::mutex                   molReadMutex;
-		boost::mutex                   hitProcMutex;
+		std::mutex                     mutex;
+		std::mutex                     molReadMutex;
+		std::mutex                     hitProcMutex;
 		std::string                    errorMessage;
 		boost::timer::cpu_timer        timer;
     };

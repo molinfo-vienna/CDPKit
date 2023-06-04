@@ -60,7 +60,7 @@ namespace CDPLPythonConfGen
 	void exportCFLMoleculeReader();
 	void exportCFLMoleculeInputHandler();
 
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

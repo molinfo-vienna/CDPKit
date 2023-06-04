@@ -34,9 +34,9 @@
 #include <cstddef>
 #include <vector>
 #include <unordered_map>
+#include <mutex>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/thread.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -109,7 +109,7 @@ namespace CDPL
 			mutable IDToModelMap        idToModelMap;
 			mutable bool                initResidues;
 			mutable bool                initModels;
-			mutable boost::mutex        initMutex;
+			mutable std::mutex          initMutex;
 		};
     }
 }

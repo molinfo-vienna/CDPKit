@@ -30,6 +30,7 @@
 #include <numeric>
 #include <sstream>
 #include <iomanip>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -199,9 +200,9 @@ PSDScreenImpl::PSDScreenImpl():
 	addOption("output-pharm-index,P", "Output query pharmacophore index property for hit molecule (default: false).", 
 			  value<bool>(&outputPharmIndex)->implicit_value(true));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&PSDScreenImpl::setHitOutputFormat, this, _1)));
 	addOption("query-format,Q", "Query pharmacophore input file format (default: auto-detect from file extension).", 
@@ -365,7 +366,10 @@ void PSDScreenImpl::processMultiThreaded()
 	using namespace CDPL;
 
 	workerProgArray.resize(numThreads, 0.0);
-	boost::thread_group thread_grp;
+
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
 
 	try {
 		std::size_t num_mols_per_thread = (endMolIndex - startMolIndex) / numThreads;
@@ -374,9 +378,9 @@ void PSDScreenImpl::processMultiThreaded()
 			if (termSignalCaught())
 				break;
 
-			thread_grp.create_thread(ScreeningWorker(this, i, start_mol_idx, 
-													 i == numThreads - 1 ? endMolIndex : 
-													 start_mol_idx + num_mols_per_thread));
+			thread_grp.emplace_back(ScreeningWorker(this, i, start_mol_idx, 
+													i == numThreads - 1 ? endMolIndex : 
+													start_mol_idx + num_mols_per_thread));
 		}
 
 	} catch (const std::exception& e) {
@@ -387,7 +391,8 @@ void PSDScreenImpl::processMultiThreaded()
 	}
 
 	try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
 	} catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -406,7 +411,7 @@ bool PSDScreenImpl::collectHit(const SearchHit& hit, double score)
 		return false;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(collHitMutex);
+		std::lock_guard<std::mutex> lock(collHitMutex);
 
 		return doCollectHit(hit, score);
 	}
@@ -446,7 +451,7 @@ bool PSDScreenImpl::getQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmaco
 		return false;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		return doGetQueryPharmacophore(idx, pharm);
 	}
@@ -478,7 +483,7 @@ bool PSDScreenImpl::printProgress(std::size_t worker_idx, double progress)
 		return true;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		return doPrintProgress(worker_idx, progress);
 	}
@@ -521,7 +526,7 @@ bool PSDScreenImpl::doPrintProgress(std::size_t worker_idx, double progress)
 void PSDScreenImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -535,7 +540,7 @@ void PSDScreenImpl::setErrorMessage(const std::string& msg)
 bool PSDScreenImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
 

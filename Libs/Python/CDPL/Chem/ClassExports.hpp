@@ -58,7 +58,7 @@ namespace CDPLPythonChem
 	void exportDefaultMultiConfMoleculeInputProcessor();
 	void exportAtomDictionary();
 
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 
 	void exportMatchConstraintList();
 	void exportMatchExpressions();

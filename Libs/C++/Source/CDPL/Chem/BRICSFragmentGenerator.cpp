@@ -26,8 +26,9 @@
  
 #include "StaticInit.hpp"
 
+#include <mutex>
+
 #include <boost/lexical_cast.hpp>
-#include <boost/thread.hpp>
 
 #include "CDPL/Chem/BRICSFragmentGenerator.hpp"
 #include "CDPL/Chem/BRICSRuleID.hpp"
@@ -95,7 +96,7 @@ namespace
 	Chem::Molecule::SharedPointer isopropylXPattern;
 	Chem::Molecule::SharedPointer trifluormethylXPattern;
 	
-	boost::once_flag initPatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initPatternsFlag;
 
 	inline std::string str(unsigned int label)
 	{
@@ -178,7 +179,7 @@ namespace
 
 Chem::BRICSFragmentGenerator::BRICSFragmentGenerator(): FragmentGenerator()
 {
-	boost::call_once(&initPatterns, initPatternsFlag);
+	std::call_once(initPatternsFlag, &initPatterns);
 
 	addFragmentationRule(L1_L2_Pattern, BRICSRuleID::L1_L2);
 	addFragmentationRule(L1_L3_Pattern, BRICSRuleID::L1_L3);

@@ -31,8 +31,7 @@
 #include <vector>
 #include <string>
 #include <chrono>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataWriter.hpp"
@@ -153,9 +152,9 @@ namespace TautGen
 		CompMoleculeReader inputReader;
 		OutputHandlerPtr   outputHandler;
 		MoleculeWriterPtr  outputWriter;
-		boost::mutex       mutex;
-		boost::mutex       readMolMutex;
-		boost::mutex       writeMolMutex;
+		std::mutex         mutex;
+		std::mutex         readMolMutex;
+		std::mutex         writeMolMutex;
 		std::string        errorMessage;
 		Clock::time_point  startTime;
 		std::size_t        numOutTautomers;

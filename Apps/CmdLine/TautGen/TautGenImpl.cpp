@@ -26,6 +26,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -370,9 +371,9 @@ TautGenImpl::TautGenImpl():
 	addOption("mode,m", "Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: TOP_UNIQUE).", 
 			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setMode, this, _1)));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
@@ -580,8 +581,9 @@ void TautGenImpl::processMultiThreaded()
 
 	typedef boost::shared_ptr<TautGenerationWorker> TautGenerationWorkerPtr;
 	typedef std::vector<TautGenerationWorkerPtr> TautGenerationWorkerList;
-
-	boost::thread_group thread_grp;
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
 	TautGenerationWorkerList worker_list;
 
 	try {
@@ -591,7 +593,7 @@ void TautGenImpl::processMultiThreaded()
 
 			TautGenerationWorkerPtr worker_ptr(new TautGenerationWorker(this));
 
-			thread_grp.create_thread(boost::bind(&TautGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(boost::bind(&TautGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -603,7 +605,8 @@ void TautGenImpl::processMultiThreaded()
 	}
 
 	try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
 	} catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -638,7 +641,7 @@ void TautGenImpl::processMultiThreaded()
 void TautGenImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -652,7 +655,7 @@ void TautGenImpl::setErrorMessage(const std::string& msg)
 bool TautGenImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
 
@@ -678,7 +681,7 @@ std::size_t TautGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(readMolMutex);
+		std::lock_guard<std::mutex> lock(readMolMutex);
 
 		return doReadNextMolecule(mol);
 	}
@@ -720,7 +723,7 @@ std::size_t TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 void TautGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(writeMolMutex);
+		std::lock_guard<std::mutex> lock(writeMolMutex);
 
 		doWriteMolecule(mol);
 
@@ -759,7 +762,7 @@ void TautGenImpl::printMessage(VerbosityLevel level, const std::string& msg, boo
 		return;
 	}
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	CmdLineBase::printMessage(level, msg, nl, file_only);
 }

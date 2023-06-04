@@ -28,8 +28,8 @@
 
 #include <cstring>
 #include <sstream>
+#include <mutex>
 
-#include <boost/thread.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -48,7 +48,7 @@ namespace
  
     ForceField::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer builtinMap(new ForceField::MMFF94SymbolicToNumericAtomTypeMap());
 
-	boost::once_flag initBuiltinMapFlag = BOOST_ONCE_INIT;
+	std::once_flag initBuiltinMapFlag;
 
 	void initBuiltinMap() 
 	{
@@ -157,7 +157,7 @@ void ForceField::MMFF94SymbolicToNumericAtomTypeMap::set(const SharedPointer& ma
 
 const ForceField::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& ForceField::MMFF94SymbolicToNumericAtomTypeMap::get()
 {
-	boost::call_once(&initBuiltinMap, initBuiltinMapFlag);
+	std::call_once(initBuiltinMapFlag, &initBuiltinMap);
 
     return defaultMap;
 }

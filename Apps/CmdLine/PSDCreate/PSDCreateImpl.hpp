@@ -31,8 +31,7 @@
 #include <vector>
 #include <string>
 #include <chrono>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -118,8 +117,8 @@ namespace PSDCreate
 		CreationMode           creationMode;
 		InputHandlerPtr        inputHandler;
 		CompMoleculeReader     inputReader;   
-		boost::mutex           mutex;
-		boost::mutex           molReadMutex;
+		std::mutex             mutex;
+		std::mutex             molReadMutex;
 		std::string            errorMessage;
 		bool                   addSourceFileProp;
 		Clock::time_point      startTime;

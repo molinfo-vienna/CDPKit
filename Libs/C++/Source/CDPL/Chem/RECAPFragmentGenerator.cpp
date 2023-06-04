@@ -26,8 +26,9 @@
  
 #include "StaticInit.hpp"
 
+#include <mutex>
+
 #include <boost/lexical_cast.hpp>
-#include <boost/thread.hpp>
 
 #include "CDPL/Chem/RECAPFragmentGenerator.hpp"
 #include "CDPL/Chem/RECAPRuleID.hpp"
@@ -58,7 +59,7 @@ namespace
 	Chem::Molecule::SharedPointer propylXPattern;
 	Chem::Molecule::SharedPointer butylXPattern;
 
-	boost::once_flag initPatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initPatternsFlag;
 
 	inline std::string str(unsigned int label)
 	{
@@ -91,7 +92,7 @@ namespace
 
 Chem::RECAPFragmentGenerator::RECAPFragmentGenerator(): FragmentGenerator()
 {
-	boost::call_once(&initPatterns, initPatternsFlag);
+	std::call_once(initPatternsFlag, &initPatterns);
 
 	addFragmentationRule(aminePattern, RECAPRuleID::AMINE);
 	addFragmentationRule(etherPattern, RECAPRuleID::ETHER);

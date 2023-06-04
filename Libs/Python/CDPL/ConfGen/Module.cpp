@@ -80,7 +80,7 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportMoleculeFunctions();
 	exportControlParameterFunctions();
 
-	exportBoostFunctionWrappers();
+	exportFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

@@ -54,7 +54,7 @@ namespace CDPLPythonShape
 	void exportGaussianShapeAlignment();
 	void exportFastGaussianShapeAlignment();
 
-	void exportBoostFunctionWrappers();
+	void exportFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP

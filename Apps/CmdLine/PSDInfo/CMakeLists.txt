@@ -45,7 +45,7 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(psdinfo cmdline-lib-static cdpl-pharm-shared cdpl-util-shared)
+TARGET_LINK_LIBRARIES(psdinfo cmdline-static cdpl-pharm-shared cdpl-util-shared)
 
 INSTALL(TARGETS psdinfo DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

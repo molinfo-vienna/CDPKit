@@ -28,8 +28,7 @@
 
 #include <unordered_map>
 #include <atomic>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -79,9 +78,9 @@ Base::LookupKey Base::LookupKey::create(const std::string& name)
 
 void Base::LookupKey::setName(const std::string& name) const
 {
-	static boost::mutex mutex;
+	static std::mutex mutex;
 
-	boost::lock_guard<boost::mutex> lock(mutex);
+	std::lock_guard<std::mutex> lock(mutex);
 
 	getNameMap()[numericID] = name;
 }

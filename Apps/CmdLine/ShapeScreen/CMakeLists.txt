@@ -30,8 +30,6 @@ SET(shapescreen_SRCS
     ShapeScreenImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_TIMER_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
 ADD_EXECUTABLE(shapescreen ${shapescreen_SRCS})
 
 SET_TARGET_PROPERTIES(shapescreen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
@@ -47,8 +45,8 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       @ONLY
 	       )
 
-TARGET_LINK_LIBRARIES(shapescreen cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
-		      cdpl-shape-shared)
+TARGET_LINK_LIBRARIES(shapescreen cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
+		      cdpl-shape-shared ${Boost_CHRONO_LIBRARY} ${Boost_TIMER_LIBRARY} Threads::Threads)
 
 INSTALL(TARGETS shapescreen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

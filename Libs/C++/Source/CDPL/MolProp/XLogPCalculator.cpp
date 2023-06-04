@@ -28,8 +28,7 @@
 
 #include <numeric>
 #include <vector>
-
-#include <boost/thread.hpp>
+#include <mutex>
 
 #include "CDPL/MolProp/XLogPCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -86,7 +85,7 @@ namespace
 	typedef std::vector<Chem::MolecularGraph::SharedPointer> AtomTyperPatternList;
 
 	AtomTyperPatternList atomTyperPatterns;
-	boost::once_flag initAtomTyperPatternsFlag = BOOST_ONCE_INIT;
+	std::once_flag initAtomTyperPatternsFlag;
 
 	void initAtomTyperPatterns()
 	{
@@ -369,7 +368,7 @@ void MolProp::XLogPCalculator::init(const Chem::MolecularGraph& molgraph)
 	featureVector[LOGP_OFFSET_INDEX] = 1;
 
 	if (corrSubstructHistoCalc.getNumPatterns() == 0) {
-		boost::call_once(&initAtomTyperPatterns, initAtomTyperPatternsFlag);
+		std::call_once(initAtomTyperPatternsFlag, &initAtomTyperPatterns);
 
 		corrSubstructHistoCalc.addPattern(internalHBondQuery1, INTERNAL_H_BOND_INDEX);
 		corrSubstructHistoCalc.addPattern(internalHBondQuery2, INTERNAL_H_BOND_INDEX);

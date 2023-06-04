@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * FunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -31,21 +31,21 @@
 #include "CDPL/Shape/AlignmentResult.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
-#include "Base/BoostFunctionWrapperExport.hpp"
+#include "Base/FunctionWrapperExport.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonShape::exportBoostFunctionWrappers()
+void CDPLPythonShape::exportFunctionWrappers()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Shape::AlignmentResult&> >("DoubleAlignmentResultFunctor");
-	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, std::size_t> >("BoolSizeTypeFunctor");
+	CDPLPythonBase::Function1Export<boost::function1<double, const Shape::AlignmentResult&> >("DoubleAlignmentResultFunctor");
+	CDPLPythonBase::Function1Export<boost::function1<bool, std::size_t> >("BoolSizeTypeFunctor");
 
-	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Shape::AlignmentResult&, const Shape::AlignmentResult&> >("BoolAlignmentResult2Functor");
-	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t> >("BoolSizeType2Functor");
+	CDPLPythonBase::Function2Export<boost::function2<bool, const Shape::AlignmentResult&, const Shape::AlignmentResult&> >("BoolAlignmentResult2Functor");
+	CDPLPythonBase::Function2Export<boost::function2<bool, std::size_t, std::size_t> >("BoolSizeType2Functor");
 
-	CDPLPythonBase::BoostFunction3Export<boost::function3<void, const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Shape::AlignmentResult&> >("VoidMolecularGraph2AlignmentResultFunctor");
+	CDPLPythonBase::Function3Export<boost::function3<void, const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Shape::AlignmentResult&> >("VoidMolecularGraph2AlignmentResultFunctor");
 }

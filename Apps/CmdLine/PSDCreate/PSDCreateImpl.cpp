@@ -27,6 +27,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <iterator>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -166,9 +167,9 @@ PSDCreateImpl::PSDCreateImpl():
 	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
 			  value<bool>(&dropDuplicates)->implicit_value(true));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
-			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
+			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setInputFormat, this, _1)));
 	addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().string() + "')", 
@@ -333,15 +334,16 @@ void PSDCreateImpl::processMultiThreaded()
 	typedef Pharm::ScreeningDBCreator::SharedPointer DBCreatorPtr;
 	typedef std::vector<Util::FileRemover> DBFileList;
 	typedef std::vector<DBCreatorPtr> DBCreatorList;
-
-	boost::thread_group thread_grp;
+	typedef std::vector<std::thread> ThreadGroup;
+	
+	ThreadGroup thread_grp;
 	DBCreatorList tmp_db_creators;
 	DBFileList tmp_db_files(numThreads - 1, Util::FileRemover(""));
 
 	DBCreatorPtr main_db_creator(new Pharm::PSDScreeningDBCreator(outputDatabase, creationMode, !dropDuplicates));
 	
 	try {
-		thread_grp.create_thread(DBCreationWorker(this, main_db_creator));
+		thread_grp.emplace_back(DBCreationWorker(this, main_db_creator));
 
 		for (std::size_t i = 0; i < numThreads - 1; i++) {
 			if (termSignalCaught())
@@ -353,7 +355,7 @@ void PSDCreateImpl::processMultiThreaded()
 
 			DBCreatorPtr tmp_db_creator(new Pharm::PSDScreeningDBCreator(tmp_db_name, creationMode, !dropDuplicates));
 
-			thread_grp.create_thread(DBCreationWorker(this, tmp_db_creator));
+			thread_grp.emplace_back(DBCreationWorker(this, tmp_db_creator));
 			tmp_db_creators.push_back(tmp_db_creator);
 		}
 
@@ -365,7 +367,8 @@ void PSDCreateImpl::processMultiThreaded()
 	}
 
 	try {
-		thread_grp.join_all();
+		for (auto& thread : thread_grp)
+			thread.join();
 
 	} catch (const std::exception& e) {
 		setErrorMessage(std::string("error while waiting for worker-threads to finish: ") + e.what());
@@ -422,7 +425,7 @@ void PSDCreateImpl::processMultiThreaded()
 void PSDCreateImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 
 		if (errorMessage.empty())
 			errorMessage = msg;
@@ -436,7 +439,7 @@ void PSDCreateImpl::setErrorMessage(const std::string& msg)
 bool PSDCreateImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		std::lock_guard<std::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
 
@@ -464,7 +467,7 @@ std::size_t PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(molReadMutex);
+		std::lock_guard<std::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
 	}
