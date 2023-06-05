@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <cmath>
 #include <string>
+#include <mutex>
 
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
@@ -84,12 +85,12 @@ namespace
 
     ConfGen::TorsionLibrary::SharedPointer assemblerTorLib(new ConfGen::TorsionLibrary());
 
-	struct Init {
+	std::once_flag initAssemblerTorLibFlag;
 
-		Init() {
-			ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TOR_LIB_DATA, *assemblerTorLib);
-		}
-	};
+	void initAssemblerTorLib() 
+	{
+		ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TOR_LIB_DATA, *assemblerTorLib);
+	}
 
 	bool compTorsionAngleEntryScore(const ConfGen::TorsionRule::AngleEntry& entry1, const ConfGen::TorsionRule::AngleEntry& entry2)
 	{
@@ -220,6 +221,8 @@ unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph
 
 void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_molgraph)
 {
+	std::call_once(initAssemblerTorLibFlag, &initAssemblerTorLib);
+
 	fragConfGen.getSettings() = settings.getFragmentBuildSettings();
 
 	confDataCache.putAll();

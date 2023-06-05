@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <mutex>
 
 #include <boost/lexical_cast.hpp>
 
@@ -58,34 +59,45 @@ namespace
 	struct SymmetryPattern
 	{
 
+		SymmetryPattern(Chem::MolecularGraph::SharedPointer&& ptn, std::size_t sym):
+			pattern(std::move(ptn)), symmetry(sym) {}
+
 		Chem::MolecularGraph::SharedPointer pattern;
 		std::size_t                         symmetry;
 	};
 
-	SymmetryPattern SYMMETRY_PATTERN_LIST[] = {
-  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[#1])(-[#1])-[#1]"), 3 },
-  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3 },
-  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3 },
-  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3 },
-  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3 },
-  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3 },
+	typedef std::vector<SymmetryPattern> SymmetryPatternList;
 
-  	    { Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2 },
-  	    { Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2 },
+	SymmetryPatternList symmetryPatterns;
 
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2 },
+	std::once_flag initSymmetryPatternsFlag;
 
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2 },
-  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2 },
+	void initSymmetryPatterns()
+	{
+		symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[#1])(-[#1])-[#1]"), 3);
 
-	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[#1,*X1,CH3]"), 360 },
-	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360 }
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3);
+
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2);
+
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2);
+
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2);
+  	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2);
+
+	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[#1,*X1,CH3]"), 360);
+	    symmetryPatterns.emplace_back(Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360);
 	};
 
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE   = 10000;
@@ -114,6 +126,8 @@ ConfGen::TorsionDriverImpl::TorsionDriverImpl():
 	torRuleMatcher.stopAtFirstMatchingRule(true);
 
 	subSearch.uniqueMappingsOnly(true);
+
+	std::call_once(initSymmetryPatternsFlag, &initSymmetryPatterns);
 } 
 
 ConfGen::TorsionDriverImpl::~TorsionDriverImpl() {}
@@ -489,8 +503,8 @@ std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& 
 	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
 	std::size_t node_bond_idx = molgraph.getBondIndex(bond);
 
-	for (std::size_t i = 0; i < sizeof(SYMMETRY_PATTERN_LIST) / sizeof(SymmetryPattern); i++) {
-		const MolecularGraph& ptn = *SYMMETRY_PATTERN_LIST[i].pattern;
+	for (const auto& ptn_data : symmetryPatterns) {
+		const MolecularGraph& ptn = *ptn_data.pattern;
 		std::size_t num_ptn_bonds = ptn.getNumBonds();
 		std::size_t ptn_bond_idx = 0;
 
@@ -511,7 +525,7 @@ std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& 
 		if (!subSearch.mappingExists(molgraph)) 
 			continue;
 
-		return SYMMETRY_PATTERN_LIST[i].symmetry;
+		return ptn_data.symmetry;
 	}
 
 	return 1;
