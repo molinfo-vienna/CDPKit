@@ -34,15 +34,8 @@
 #include <limits>
 #include <istream>
 
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/lexical_cast.hpp>
-
-#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
-# define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#endif
-
 #include <boost/bind.hpp>
-
 #include <boost/tokenizer.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
@@ -690,32 +683,25 @@ void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
 	readMDLString(is, 8, tmpString, true, "MDLDataReader: error while reading program name from molfile header block", trimStrings);
 	setMDLProgramName(mol, tmpString);
 
-	using namespace boost::posix_time;
-	using namespace boost::gregorian;
+  	std::tm ts{};
   
-	unsigned short month = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp month part from molfile header block", 
-															strictErrorChecking, 100);
-	unsigned short day = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp day part from molfile header block", 
-														  strictErrorChecking, 100);
-	unsigned short year = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp year part from molfile header block", 
-														   strictErrorChecking, 100);
-	unsigned short hour = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from molfile header block", 
-														   strictErrorChecking, 100);
-	unsigned short minute = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from molfile header block", 
-															 strictErrorChecking, 100);
+	ts.tm_mon = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp month part from rxn-file header block", 
+									  strictErrorChecking, 100);
+	ts.tm_mday = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp day part from rxn-file header block", 
+									   strictErrorChecking, 100);
+	ts.tm_year = readMDLNumber<int, 4>(is, "MDLDataReader: error while reading date/timestamp year part from rxn-file header block", 
+									   strictErrorChecking, 10000);
+	ts.tm_hour = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from rxn-file header block", 
+									   strictErrorChecking, 100);
+	ts.tm_min = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from rxn-file header block", 
+									  strictErrorChecking, 100);
 
-	if (month != 100 || day != 100 || year != 100 || hour != 100 || minute != 100) {
-		try {
-			date date_part(greg_year(year + (year > 50 ? 1900 : 2000)), greg_month(month), greg_day(day));
-			time_duration time_part = hours(hour) + minutes(minute);
-			time_duration duration = ptime(date_part, time_part) - ptime(date(1970, 1, 1));
-
-			setMDLTimestamp(mol, duration.total_seconds());
-
-		} catch (const std::out_of_range&) {
-			if (strictErrorChecking)
-				throw Base::IOError("MDLDataReader: invalid timestamp in molfile header block");
-		}
+	if (ts.tm_mon != 100 || ts.tm_mday != 100 || ts.tm_year != 10000 || ts.tm_hour != 100 || ts.tm_min != 100) {
+	    ts.tm_mon -= 1;
+		ts.tm_year -= 1900;
+		ts.tm_isdst = 0;
+	
+		setMDLTimestamp(mol, std::mktime(&ts));
 	}
 
 	readMDLString(is, 2, tmpString, true, "MDLDataReader: error while reading dimension code from molfile header block");
@@ -2123,35 +2109,25 @@ void Chem::MDLDataReader::readRXNHeaderBlock(std::istream& is, Reaction& rxn)
 	readMDLString(is, 9, tmpString, true, "MDLDataReader: error while reading program name from rxn-file header block", trimStrings);
 	setMDLProgramName(rxn, tmpString);
 
-	using namespace boost::posix_time;
-	using namespace boost::gregorian;
+	std::tm ts{};
   
-	unsigned short month = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp month part from rxn-file header block", 
-															strictErrorChecking, 100);
-	unsigned short day = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp day part from rxn-file header block", 
-														  strictErrorChecking, 100);
-	unsigned short year = readMDLNumber<unsigned short, 4>(is, "MDLDataReader: error while reading date/timestamp year part from rxn-file header block", 
-														   strictErrorChecking, 10000);
-	unsigned short hour = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from rxn-file header block", 
-														   strictErrorChecking, 100);
-	unsigned short minute = readMDLNumber<unsigned short, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from rxn-file header block", 
-															 strictErrorChecking, 100);
+	ts.tm_mon = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp month part from rxn-file header block", 
+									  strictErrorChecking, 100);
+	ts.tm_mday = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp day part from rxn-file header block", 
+									   strictErrorChecking, 100);
+	ts.tm_year = readMDLNumber<int, 4>(is, "MDLDataReader: error while reading date/timestamp year part from rxn-file header block", 
+									   strictErrorChecking, 10000);
+	ts.tm_hour = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from rxn-file header block", 
+									   strictErrorChecking, 100);
+	ts.tm_min = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from rxn-file header block", 
+									  strictErrorChecking, 100);
 
-	if (month != 100 || day != 100 || year != 10000 || hour != 100 || minute != 100) {
-		try {
-			date date_part(greg_year(year + 0), greg_month(month), greg_day(day));
-			time_duration time_part = hours(hour) + minutes(minute);
-			time_duration duration = ptime(date_part, time_part) - ptime(date(greg_year(1970), greg_month(1), greg_day(1)));
+	if (ts.tm_mon != 100 || ts.tm_mday != 100 || ts.tm_year != 10000 || ts.tm_hour != 100 || ts.tm_min != 100) {
+	   ts.tm_mon -= 1;
+	   ts.tm_year -= 1900;
+	   ts.tm_isdst = 0;
 
-			setMDLTimestamp(rxn, duration.total_seconds());
-
-		} catch (const std::out_of_range&) {
-			if (strictErrorChecking)
-				throw Base::IOError("MDLDataReader: invalid timestamp in rxn-file header block");
-
-		} catch (...) {
-			throw;
-		}
+	   setMDLTimestamp(rxn, std::mktime(&ts));
 	}
 
 	std::size_t reg_no = readMDLNumber<std::size_t, 7>(is, "MDLDataReader: error while reading registry number from rxn-file header block ", 
