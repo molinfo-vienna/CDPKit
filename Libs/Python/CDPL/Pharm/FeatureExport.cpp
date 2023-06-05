@@ -40,8 +40,6 @@ namespace
     struct FeatureWrapper : CDPL::Pharm::Feature, boost::python::wrapper<CDPL::Pharm::Feature> 
     {
 
-		PROPERTYCONTAINER_IMPL(FeatureWrapper) 
-
 		const CDPL::Pharm::Pharmacophore& getPharmacophore() const {
 			return this->get_override("getPharmacophore")();
 		}
@@ -76,7 +74,6 @@ void CDPLPythonPharm::exportFeature()
 		.def("getIndex", python::pure_virtual(&Pharm::Feature::getIndex), python::arg("self"))
 		.def("assign", &FeatureWrapper::assign, (python::arg("self"), python::arg("ftr")), 
 			 python::return_self<>())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<FeatureWrapper>())
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.add_property("pharmacophore", python::make_function(getPharmacophoreFunc, 
 															 python::return_internal_reference<1>()))

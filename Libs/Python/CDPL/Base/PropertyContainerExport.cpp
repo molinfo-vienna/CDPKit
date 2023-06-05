@@ -106,8 +106,6 @@ namespace
 
 	struct PropertyContainerWrapper : CDPL::Base::PropertyContainer, boost::python::wrapper<CDPL::Base::PropertyContainer>
 	{
-
-		PROPERTYCONTAINER_IMPL(PropertyContainerWrapper) 
 	};
 }
 
@@ -123,8 +121,6 @@ void CDPLPythonBase::exportPropertyContainer()
 	python::class_<PropertyContainerWrapper, boost::noncopyable>("PropertyContainer", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(ObjectIdentityCheckVisitor<Base::PropertyContainer>())
-		.def(PropertyContainerVirtualFunctionsVisitor<PropertyContainerWrapper>())
-		
 		.def("getNumProperties", &Base::PropertyContainer::getNumProperties, python::arg("self"))
 		.def("getPropertyOrDefault", &getPropertyOrDef, 
 			 ((python::arg("self"), python::arg("key"), python::arg("def_value"))),
@@ -149,7 +145,6 @@ void CDPLPythonBase::exportPropertyContainer()
 			 (python::arg("self"), python::arg("cntnr")))
 		.def("swap", &Base::PropertyContainer::swap,
 			 (python::arg("self"), python::arg("cntnr")))
-		
 		.def(PropertyContainerSpecialFunctionsVisitor())
 		.add_property("propertyKeys", &getPropertyKeys)
 		.add_property("propertyValues", &getPropertyValues)

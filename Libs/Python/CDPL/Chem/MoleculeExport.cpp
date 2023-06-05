@@ -51,8 +51,6 @@ namespace
 		ATOMCONTAINER_IMPL()
 		BONDCONTAINER_IMPL()
 
-		PROPERTYCONTAINER_IMPL(MoleculeWrapper) 
-
 		void clear() {
 			this->get_override("clear")();
 		}
@@ -174,7 +172,6 @@ void CDPLPythonChem::exportMolecule()
 		.def("__isub__", &Chem::Molecule::operator-=, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
 		.def(AtomContainerVirtualFunctionsVisitor<MoleculeWrapper>())
 		.def(BondContainerVirtualFunctionsVisitor())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<MoleculeWrapper>())
 		.def(AtomContainerSpecialFunctionsVisitor(true))
 		.def(BondContainerSpecialFunctionsVisitor(true))
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())

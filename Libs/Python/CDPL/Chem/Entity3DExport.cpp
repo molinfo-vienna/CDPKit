@@ -38,8 +38,6 @@ namespace
 
     struct Entity3DWrapper : CDPL::Chem::Entity3D, boost::python::wrapper<CDPL::Chem::Entity3D> 
     {
-
-		PROPERTYCONTAINER_IMPL(Entity3DWrapper) 
     };
 }
 
@@ -51,6 +49,5 @@ void CDPLPythonChem::exportEntity3D()
 
     python::class_<Entity3DWrapper, python::bases<Base::PropertyContainer>, boost::noncopyable>("Entity3D", python::no_init)
 	.def(python::init<>(python::arg("self")))
-	.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<Entity3DWrapper>())
 	.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
 }

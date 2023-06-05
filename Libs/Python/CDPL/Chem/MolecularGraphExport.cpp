@@ -51,8 +51,6 @@ namespace
 		ATOMCONTAINER_IMPL()
 		BONDCONTAINER_IMPL()
 
-		PROPERTYCONTAINER_IMPL(MolecularGraphWrapper) 	
-
 		MolecularGraph::SharedPointer clone() const {
 			return this->get_override("clone")();
 		}
@@ -76,7 +74,6 @@ void CDPLPythonChem::exportMolecularGraph()
 		.def("clone", python::pure_virtual(&Chem::MolecularGraph::clone), python::arg("self"))
 		.def(AtomContainerVirtualFunctionsVisitor<MolecularGraphWrapper>())
 		.def(BondContainerVirtualFunctionsVisitor())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<MolecularGraphWrapper>())
 		.def(AtomContainerSpecialFunctionsVisitor(true))
 		.def(BondContainerSpecialFunctionsVisitor(true))
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())

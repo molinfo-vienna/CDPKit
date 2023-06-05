@@ -48,8 +48,6 @@ namespace
 		ATOMCONTAINER_IMPL()
 		BONDCONTAINER_IMPL()
 
-		PROPERTYCONTAINER_IMPL(AtomWrapper) 
-
 		const CDPL::Chem::Molecule& getMolecule() const {
 			return this->get_override("getMolecule")();
 		}
@@ -117,7 +115,6 @@ void CDPLPythonChem::exportAtom()
 			 python::with_custodian_and_ward_postcall<0, 1>())
 		.def(AtomContainerVirtualFunctionsVisitor<AtomWrapper>())
 		.def(BondContainerVirtualFunctionsVisitor())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<AtomWrapper>())
 		.def(AtomContainerSpecialFunctionsVisitor(true))
 		.def(BondContainerSpecialFunctionsVisitor(true))
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())

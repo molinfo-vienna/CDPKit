@@ -46,8 +46,6 @@ namespace
 
 		FEATURECONTAINER_IMPL() 
 
-		PROPERTYCONTAINER_IMPL(PharmacophoreWrapper) 
-
 		void clear() {
 			this->get_override("clear")();
 		}
@@ -128,7 +126,6 @@ void CDPLPythonPharm::exportPharmacophore()
 		.def("__delitem__", removeFeatureFunc, (python::arg("self"), python::arg("idx")))
 		.def(FeatureContainerVirtualFunctionsVisitor<PharmacophoreWrapper>())
 		.def(FeatureContainerSpecialFunctionsVisitor(false))
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<PharmacophoreWrapper>())
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true));
 
 	python::register_ptr_to_python<Pharm::Pharmacophore::SharedPointer>();

@@ -93,8 +93,6 @@ namespace
 
 		typedef boost::shared_ptr<ReactionWrapper> SharedPointer;
 
-		PROPERTYCONTAINER_IMPL(ReactionWrapper) 
-
 		unsigned int getComponentRole(const CDPL::Chem::Molecule& mol) const {
 			return this->get_override("getComponentRole")(boost::ref(mol));
 		}
@@ -234,7 +232,6 @@ void CDPLPythonChem::exportReaction()
 		.def("__delitem__", removeComponentFunc, (python::arg("self"), python::arg("idx")))
 		.def("__contains__", &Chem::Reaction::containsComponent, (python::arg("self"), python::arg("mol"))) 
 		//.def("__len__", getNumComponentsFunc, python::arg("self"))
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<ReactionWrapper>())
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.add_property("reactants", python::make_function(&createComponentSequence<Chem::ReactionRole::REACTANT>, 
 														 python::with_custodian_and_ward_postcall<0, 1>()))

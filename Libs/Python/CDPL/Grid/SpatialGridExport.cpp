@@ -49,8 +49,6 @@ namespace
 
 		ATTRIBUTEDGRID_IMPL()
 		SPATIALGRID_IMPL()
-
-		PROPERTYCONTAINER_IMPL(SpatialGridWrapper<GridType>)
     };
 
     template <typename GridType>
@@ -66,7 +64,6 @@ namespace
 				.def(python::init<>(python::arg("self")))
 				.def(CDPLPythonGrid::AttributedGridVirtualFunctionsVisitor())
 				.def(CDPLPythonGrid::SpatialGridVirtualFunctionsVisitor<GridType>())
-				.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<SpatialGridWrapper<GridType> >())
 				.def(CDPLPythonGrid::AttributedGridSpecialFunctionsVisitor())
 				.def(CDPLPythonGrid::SpatialGridSpecialFunctionsVisitor<GridType>())
 				.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());

@@ -49,8 +49,6 @@ namespace
 
 		GaussianShapeWrapper(const CDPL::Shape::GaussianShape& shape): 
 			CDPL::Shape::GaussianShape(shape) {}
-
-		PROPERTYCONTAINER_IMPL(GaussianShapeWrapper) 	
 	};
 }
 
@@ -66,7 +64,6 @@ void CDPLPythonShape::exportGaussianShape()
 		.def(python::init<const Shape::GaussianShape&>((python::arg("self"), python::arg("shape"))))
 		.def("assign", CDPLPythonBase::copyAssOp(&Shape::GaussianShape::operator=), (python::arg("self"), python::arg("shape")),
 			 python::return_self<>())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<GaussianShapeWrapper>())
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true))	
 		.def("clear", &Shape::GaussianShape::clear, python::arg("self"))
 		.def("getNumElements", &Shape::GaussianShape::getNumElements, python::arg("self"))

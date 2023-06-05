@@ -44,8 +44,6 @@ namespace
 		typedef boost::shared_ptr<AttributedGridWrapper> SharedPointer;
 
 		ATTRIBUTEDGRID_IMPL()
-
-		PROPERTYCONTAINER_IMPL(AttributedGridWrapper)
     };
 }
 
@@ -60,7 +58,6 @@ void CDPLPythonGrid::exportAttributedGrid()
 										 boost::noncopyable>("AttributedGrid", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(CDPLPythonGrid::AttributedGridVirtualFunctionsVisitor())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<AttributedGridWrapper>())
 		.def(CDPLPythonGrid::AttributedGridSpecialFunctionsVisitor())
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.add_property("numElements", &Grid::AttributedGrid::getNumElements);
