@@ -31,6 +31,8 @@
 #include <cmath>
 #include <algorithm>
 
+#include <boost/lexical_cast.hpp>
+
 #include "CDPL/ForceField/MMFF94TorsionInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"

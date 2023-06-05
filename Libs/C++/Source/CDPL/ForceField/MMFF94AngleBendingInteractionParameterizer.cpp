@@ -29,6 +29,8 @@
 #include <iterator>
 #include <cmath>
 
+#include <boost/lexical_cast.hpp>
+
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
