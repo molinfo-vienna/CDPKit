@@ -307,7 +307,7 @@ namespace
 				expr_ptr.reset(new PropertyMatchExpression<bool, std::equal_to<bool>, Atom, MolecularGraph>(func(atom, molgraph), func));
 
 		} else {
-			bool value = constraint.getValue().toBool();
+			bool value = constraint.getValue().getData<bool>();
 
 			if (not_match)
 				expr_ptr.reset(new PropertyMatchExpression<bool, std::not_equal_to<bool>, Atom, MolecularGraph>(value, func));

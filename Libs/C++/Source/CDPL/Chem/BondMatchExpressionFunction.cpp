@@ -294,7 +294,7 @@ namespace
 				expr_ptr.reset(new PropertyMatchExpression<bool, std::equal_to<bool>, Bond, MolecularGraph>(func(bond, molgraph), func));
 
 		} else {
-			bool value = constraint.getValue().toBool();
+			bool value = constraint.getValue().getData<bool>();
 
 			if (not_match)
 				expr_ptr.reset(new PropertyMatchExpression<bool, std::not_equal_to<bool>, Bond, MolecularGraph>(value, func));

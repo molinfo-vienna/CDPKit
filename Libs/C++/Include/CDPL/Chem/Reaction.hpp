@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_REACTION_HPP
 #define CDPL_CHEM_REACTION_HPP
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"

@@ -31,7 +31,7 @@
 #include <cmath>
 #include <mutex>
 
-#include <boost/iterator.hpp>
+#include <boost/range/iterator_range.hpp>
 
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
