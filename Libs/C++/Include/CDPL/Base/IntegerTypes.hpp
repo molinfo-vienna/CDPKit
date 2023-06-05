@@ -31,9 +31,7 @@
 #ifndef CDPL_BASE_INTEGERTYPES_HPP
 #define CDPL_BASE_INTEGERTYPES_HPP
 
-#include <boost/cstdint.hpp>
-
-#include "CDPL/Config.hpp"
+#include <cstdint>
 
 
 namespace CDPL 
@@ -45,56 +43,42 @@ namespace CDPL
 		/**
 		 * \brief A 8-bit wide signed integer.
 		 */
-		typedef boost::int8_t int8;			 
+		typedef std::int8_t int8;			 
 
 		/**
 		 * \brief A 8-bit wide unsigned integer.
 		 */
-		typedef boost::uint8_t uint8;			
+		typedef std::uint8_t uint8;			
 	
 		/**
 		 * \brief A 16-bit wide signed integer.
 		 */
-		typedef boost::int16_t int16;			
+		typedef std::int16_t int16;			
 
 		/**
 		 * \brief A 16-bit wide unsigned integer.
 		 */
-		typedef boost::uint16_t uint16;		   
+		typedef std::uint16_t uint16;		   
 		
 		/**
 		 * \brief A 32-bit wide signed integer.
 		 */			 
-		typedef boost::int32_t int32;			
+		typedef std::int32_t int32;			
 
 		/**
 		 * \brief A 32-bit wide unsigned integer.
 		 */
-		typedef boost::uint32_t uint32;		   
-
-#if	SIZEOF_LONG_INT == 8	
+		typedef std::uint32_t uint32;		   
 
 		/**
 		 * \brief A 64-bit wide signed integer.
 		 */	
-		typedef signed long int64;			
+		typedef std::int64_t int64;			
 
 		/**
 		 * \brief A 64-bit wide unsigned integer.
 		 */
-		typedef unsigned long uint64;		   
-#else
-		/**
-		 * \brief A 64-bit wide signed integer.
-		 */	
-		typedef boost::int64_t int64;			
-
-		/**
-		 * \brief A 64-bit wide unsigned integer.
-		 */
-		typedef boost::uint64_t uint64;		   
-
-#endif // SIZEOF_LONG_INT == 8		
+		typedef std::uint64_t uint64;		   
 	}
 }
 
