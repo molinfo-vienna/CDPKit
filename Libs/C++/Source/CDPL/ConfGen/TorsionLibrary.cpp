@@ -45,14 +45,12 @@ namespace
         #include "TorsionLibrary.xml.str" 
 		;
 
-    ConfGen::TorsionLibrary::SharedPointer builtinTorLib;
+    ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
 
 	std::once_flag initBuiltinTorLibFlag;
 
 	void initBuiltinTorLib()
 	{
-		builtinTorLib.reset(new ConfGen::TorsionLibrary());
-		
 		builtinTorLib->loadDefaults();
 	}
 }
