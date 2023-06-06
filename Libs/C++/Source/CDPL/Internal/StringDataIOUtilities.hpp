@@ -157,13 +157,13 @@ namespace CDPL
 
 		template <typename T>
 		void writeIntegerNumber(std::ostream& os, std::size_t field_size, const T value, const char* err_msg = "Error", 
-								bool align_left = false)
+								bool align_left = false, char fill = ' ')
 		{
 			std::ostringstream oss;
 
 			oss.imbue(std::locale::classic());
 
-			oss << std::setw(field_size);
+			oss << std::setw(field_size) << std::setfill(fill);
 	
 			if (align_left)
 				oss << std::left;

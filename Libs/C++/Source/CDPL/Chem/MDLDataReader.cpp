@@ -102,11 +102,50 @@ namespace
 
 	template <typename T, std::size_t FieldSize>
 	T readMDLNumber(std::istream& is, const char* err_msg, bool throw_ex = true, 
-						   const T empty_def_val = T(0), const T err_def_val = T(0))
+					const T empty_def_val = T(0), const T err_def_val = T(0))
 	{
 		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Chem::MDL::END_OF_LINE);
 	}
 
+	template <std::size_t YearFieldSize>
+	std::time_t readMDLTimestamp(std::istream& is, bool throw_ex)
+	{
+		std::tm ts{};
+		std::time_t time{-1};
+		
+		ts.tm_mon = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp month part from header block", 
+										  throw_ex, 100);
+		ts.tm_mday = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp day part from header block", 
+										   throw_ex, 100);
+		ts.tm_year = readMDLNumber<int, YearFieldSize>(is, "MDLDataReader: error while reading date/timestamp year part from header block", 
+													   throw_ex, (YearFieldSize == 2 ? 100 : 10000));
+		ts.tm_hour = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from header block", 
+										   throw_ex, 100);
+		ts.tm_min = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from header block", 
+										  throw_ex, 100);
+
+		if (ts.tm_mon != 100 && ts.tm_mday != 100 && ts.tm_year != (YearFieldSize == 2 ? 100 : 10000) && ts.tm_hour != 100 && ts.tm_min != 100) {
+			ts.tm_mon -= 1;
+
+			if (YearFieldSize == 2) {
+				if (ts.tm_year < 50)
+					ts.tm_year += 2000;
+				else
+					ts.tm_year += 1900;
+			}
+			
+			ts.tm_year -= 1900;
+			ts.tm_isdst = -1;
+	
+			time = std::mktime(&ts);
+		}
+
+		if (time == -1 && throw_ex)
+			throw Base::IOError("MDLDataReader: invalid date/timestamp in header block");
+		
+		return time;
+	}
+	
 	const unsigned int RXN_FILE_ID_LENGTH = Chem::MDL::RXNFile::RXN_FILE_IDENTIFIER.length() + 1;
 }
 
@@ -683,26 +722,10 @@ void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
 	readMDLString(is, 8, tmpString, true, "MDLDataReader: error while reading program name from molfile header block", trimStrings);
 	setMDLProgramName(mol, tmpString);
 
-  	std::tm ts{};
-  
-	ts.tm_mon = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp month part from rxn-file header block", 
-									  strictErrorChecking, 100);
-	ts.tm_mday = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp day part from rxn-file header block", 
-									   strictErrorChecking, 100);
-	ts.tm_year = readMDLNumber<int, 4>(is, "MDLDataReader: error while reading date/timestamp year part from rxn-file header block", 
-									   strictErrorChecking, 10000);
-	ts.tm_hour = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from rxn-file header block", 
-									   strictErrorChecking, 100);
-	ts.tm_min = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from rxn-file header block", 
-									  strictErrorChecking, 100);
-
-	if (ts.tm_mon != 100 || ts.tm_mday != 100 || ts.tm_year != 10000 || ts.tm_hour != 100 || ts.tm_min != 100) {
-	    ts.tm_mon -= 1;
-		ts.tm_year -= 1900;
-		ts.tm_isdst = 0;
+	std::time_t ts = readMDLTimestamp<2>(is, strictErrorChecking);
 	
-		setMDLTimestamp(mol, std::mktime(&ts));
-	}
+  	if (ts != -1)
+		setMDLTimestamp(mol, ts);
 
 	readMDLString(is, 2, tmpString, true, "MDLDataReader: error while reading dimension code from molfile header block");
 	
@@ -2109,26 +2132,10 @@ void Chem::MDLDataReader::readRXNHeaderBlock(std::istream& is, Reaction& rxn)
 	readMDLString(is, 9, tmpString, true, "MDLDataReader: error while reading program name from rxn-file header block", trimStrings);
 	setMDLProgramName(rxn, tmpString);
 
-	std::tm ts{};
-  
-	ts.tm_mon = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp month part from rxn-file header block", 
-									  strictErrorChecking, 100);
-	ts.tm_mday = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp day part from rxn-file header block", 
-									   strictErrorChecking, 100);
-	ts.tm_year = readMDLNumber<int, 4>(is, "MDLDataReader: error while reading date/timestamp year part from rxn-file header block", 
-									   strictErrorChecking, 10000);
-	ts.tm_hour = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp hour part from rxn-file header block", 
-									   strictErrorChecking, 100);
-	ts.tm_min = readMDLNumber<int, 2>(is, "MDLDataReader: error while reading date/timestamp minute part from rxn-file header block", 
-									  strictErrorChecking, 100);
-
-	if (ts.tm_mon != 100 || ts.tm_mday != 100 || ts.tm_year != 10000 || ts.tm_hour != 100 || ts.tm_min != 100) {
-	   ts.tm_mon -= 1;
-	   ts.tm_year -= 1900;
-	   ts.tm_isdst = 0;
-
-	   setMDLTimestamp(rxn, std::mktime(&ts));
-	}
+	std::time_t ts = readMDLTimestamp<4>(is, strictErrorChecking);
+	
+  	if (ts != -1)
+		setMDLTimestamp(rxn, ts);
 
 	std::size_t reg_no = readMDLNumber<std::size_t, 7>(is, "MDLDataReader: error while reading registry number from rxn-file header block ", 
 													   strictErrorChecking, ~std::size_t(0), ~std::size_t(0));
@@ -2276,7 +2283,6 @@ void Chem::MDLDataReader::readRDFHeaderBlock(std::istream& is)
 
 		if (tmpString != RDFile::RD_FILE_VERSION_STAMP)
 			throw Base::IOError("MDLDataReader: missing or invalid rd-file version stamp in header block");		
-
 
 		readMDLString(is, RDFile::DATE_TIME_KEYWORD.length() + 1, tmpString, true, 
 					  "MDLDataReader: error while reading rd-file header block", false);

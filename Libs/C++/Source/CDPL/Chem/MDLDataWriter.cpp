@@ -35,8 +35,8 @@
 #include <iterator>
 #include <limits>
 #include <cassert>
+#include <ctime>
 
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/math/special_functions.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -70,6 +70,7 @@
 #include "CDPL/Internal/StringUtilities.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
+#include "CDPL/Internal/Time.hpp"
 
 #include "MDLDataWriter.hpp"
 #include "MDLFormatData.hpp"
@@ -93,6 +94,28 @@ namespace
 		Internal::writeLine(os, line, err_msg, check_llen, trim, trunc, max_llen, Chem::MDL::END_OF_LINE);
 	}
 
+	template <std::size_t YearFieldSize>
+	void writeMDLTimestamp(std::ostream& os, std::time_t ts)
+	{
+		using namespace Internal;
+
+		std::tm tm;
+
+		if (!Internal::localtime(ts, tm))
+			throw Base::IOError("MDLDataWriter: invalid number of seconds since epoch specified for header block date/timestamp");
+	
+		writeIntegerNumber(os, 2, tm.tm_mon + 1, 
+						   "MDLDataWriter: error while writing date/timestamp month part to header block", false, '0');   // Month
+		writeIntegerNumber(os, 2, tm.tm_mday, 
+						   "MDLDataWriter: error while writing date/timestamp day part to header block", false, '0');     // Day
+		writeIntegerNumber(os, YearFieldSize, (YearFieldSize == 4 ? tm.tm_year + 1900 : tm.tm_year % 100),
+						   "MDLDataWriter: error while writing date/timestamp year part to header block", false, '0');    // Year
+		writeIntegerNumber(os, 2, tm.tm_hour,
+						   "MDLDataWriter: error while writing date/timestamp hour part to header block", false, '0');    // Hour
+		writeIntegerNumber(os, 2, tm.tm_min,
+						   "MDLDataWriter: error while writing date/timestamp minute part to header block", false, '0');  // Minute
+	}
+	
 	std::size_t calcHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
 	{
 		return (Internal::getExplicitAtomCount(atom, molgraph, Chem::AtomType::H) + calcImplicitHydrogenCount(atom, molgraph));
@@ -368,28 +391,14 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 	writeString(os, 8, prog_name, "MDLDataWriter: error while writing header block program name to molfile header block",
 				trimStrings, truncateStrings);
 
-	using namespace boost::posix_time;
-
-	bool has_ts_prop = hasMDLTimestamp(molgraph);
-	bool update_time = getMDLUpdateTimestampParameter(ioBase); 
-
-	std::string iso_time_str;  // ISO format: YYYYMMDDTHHMMSS
-
-	if (update_time || !has_ts_prop)
-		iso_time_str = to_iso_string(second_clock::universal_time());
+	std::time_t ts;
+	
+	if (getMDLUpdateTimestampParameter(ioBase) || !hasMDLTimestamp(molgraph))
+		ts = std::time(0);
 	else
-		iso_time_str = to_iso_string(from_time_t(getMDLTimestamp(molgraph)));
+		ts = getMDLTimestamp(molgraph);
 
-	writeString(os, 2, iso_time_str.substr(4, 2), 
-				"MDLDataWriter: error while writing date/timestamp month part to molfile header block");   // Month
-	writeString(os, 2, iso_time_str.substr(6, 2), 
-				"MDLDataWriter: error while writing date/timestamp day part to molfile header block");     // Day
-	writeString(os, 2, iso_time_str.substr(2, 2), 
-				"MDLDataWriter: error while writing date/timestamp year part to molfile header block");    // Year
-	writeString(os, 2, iso_time_str.substr(9, 2), 
-				"MDLDataWriter: error while writing date/timestamp hour part to molfile header block");    // Hour
-	writeString(os, 2, iso_time_str.substr(11, 2), 
-				"MDLDataWriter: error while writing date/timestamp minute part to molfile header block");  // Minute
+	writeMDLTimestamp<2>(os, ts);
 
 	writeString(os, 2, coordsDim == 2 ? Header::DIM_CODE_2D : Header::DIM_CODE_3D); 
 
@@ -1750,28 +1759,14 @@ void Chem::MDLDataWriter::writeRXNHeaderBlock(std::ostream& os, const Reaction& 
 	writeString(os, 9, prog_name, "MDLDataWriter: error while writing header block program name to rxn-file header block",
 				trimStrings, truncateStrings);
 
-	using namespace boost::posix_time;
-
-	bool has_ts_prop = hasMDLTimestamp(rxn);
-	bool update_time = getMDLUpdateTimestampParameter(ioBase); 
-
-	std::string iso_time_str;  // ISO format: YYYYMMDDTHHMMSS
-
-	if (update_time || !has_ts_prop)
-		iso_time_str = to_iso_string(second_clock::universal_time());
+	std::time_t ts;
+	
+	if (getMDLUpdateTimestampParameter(ioBase) || !hasMDLTimestamp(rxn))
+		ts = std::time(0);
 	else
-		iso_time_str = to_iso_string(from_time_t(getMDLTimestamp(rxn)));
+		ts = getMDLTimestamp(rxn);
 
-	writeString(os, 2, iso_time_str.substr(4, 2), 
-				"MDLDataWriter: error while writing date/timestamp month part to rxn-file header block");  // Month
-	writeString(os, 2, iso_time_str.substr(6, 2), 
-				"MDLDataWriter: error while writing date/timestamp day part to rxn-file header block");    // Day
-	writeString(os, 4, iso_time_str.substr(0, 4), 
-				"MDLDataWriter: error while writing date/timestamp year part to rxn-file header block");   // Year
-	writeString(os, 2, iso_time_str.substr(9, 2), 
-				"MDLDataWriter: error while writing date/timestamp hour part to rxn-file header block");   // Hour
-	writeString(os, 2, iso_time_str.substr(11, 2), 
-				"MDLDataWriter: error while writing date/timestamp minute to rxn-file header block");      // Min
+	writeMDLTimestamp<4>(os, ts);
 
 	if (hasMDLRegistryNumber(rxn)) {
 		std::size_t reg_no = getMDLRegistryNumber(rxn);
@@ -1858,36 +1853,29 @@ void Chem::MDLDataWriter::writeRDFHeaderBlock(std::ostream& os)
 
 	writeWhitespace(os, 1);
 
-	using namespace boost::posix_time;
+	std::tm tm;
 
-	std::string iso_time_str = to_iso_string(second_clock::universal_time());  // ISO format: YYYYMMDDTHHMMSS
-
-	writeString(os, 2, iso_time_str.substr(4, 2), 
-				"MDLDataWriter: error while writing date month part to rd-file header block");       // Month
-
+	Internal::localtime(std::time(0), tm);
+	
+	writeIntegerNumber(os, 2, tm.tm_mon + 1, 
+					   "MDLDataWriter: error while writing date/timestamp month part to rd-file header block", false, '0');   // Month
 	writeString(os, RDFile::DATE_PART_SEPARATOR.length(), RDFile::DATE_PART_SEPARATOR, 
 				"MDLDataWriter: error while writing date month/day separator to rd-file header block");
-
-	writeString(os, 2, iso_time_str.substr(6, 2), 
-				"MDLDataWriter: error while writing date day part to rd-file header block");         // Day
-
+	writeIntegerNumber(os, 2, tm.tm_mday, 
+					   "MDLDataWriter: error while writing date/timestamp day part to rd-file header block", false, '0');     // Day
 	writeString(os, RDFile::DATE_PART_SEPARATOR.length(), RDFile::DATE_PART_SEPARATOR, 
 				"MDLDataWriter: error while writing date date day/year separator to rd-file header block");
-
-	writeString(os, 4, iso_time_str.substr(0, 4), 
-				"MDLDataWriter: error while writing date year part to rd-file header block");        // Year
+	writeIntegerNumber(os, 4, tm.tm_year + 1900,
+					   "MDLDataWriter: error while writing date/timestamp year part to rd-file header block", false, '0');    // Year
 
 	writeWhitespace(os, 1);
-
-	writeString(os, 2, iso_time_str.substr(9, 2), 
-				"MDLDataWriter: error while writing timestamp hour part to rd-file header block");   // Hour
-
+			
+	writeIntegerNumber(os, 2, tm.tm_hour,
+					   "MDLDataWriter: error while writing date/timestamp hour part to rd-file header block", false, '0');    // Hour
 	writeString(os, RDFile::HOUR_MINUTE_SEPARATOR.length(), RDFile::HOUR_MINUTE_SEPARATOR, 
 				"MDLDataWriter: error while writing timestamp hour/minute separator to rd-file header block");
-
-	writeString(os, 2, iso_time_str.substr(11, 2), 
-				"MDLDataWriter: error while writing timestamp minute part to rd-file header block"); // Minute
-
+	writeIntegerNumber(os, 2, tm.tm_min,
+					   "MDLDataWriter: error while writing date/timestamp minute part to rd-file header block", false, '0');  // Minute
 	writeMDLEOL(os);
 
 	rdfHeaderWritten = true;
