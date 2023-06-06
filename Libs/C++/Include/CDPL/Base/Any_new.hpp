@@ -31,6 +31,7 @@
 #ifndef CDPL_BASE_ANY_HPP
 #define CDPL_BASE_ANY_HPP
 
+#include <string>
 #include <typeinfo>
 #include <type_traits>
 #include <stdexcept>
@@ -83,9 +84,9 @@ namespace CDPL
 				this->clear();
 			}
 
-			/// Constructs an object of type \c %Any that contains an object of type \e T direct-initialized with <tt>std::forward<ValueType>(value)</tt>.
+			/// Constructs an object of type \c %Any that contains an object of type \c T direct-initialized with <tt>std::forward<ValueType>(value)</tt>.
 			///
-			/// T shall satisfy the CopyConstructible requirements, otherwise the program is ill-formed.
+			/// \c T shall satisfy the CopyConstructible requirements, otherwise the program is ill-formed.
 			/// This is because an \c %Any may be copy constructed into another \c %Any at any time, so a copy should always be allowed.
 			template<typename ValueType, typename = typename std::enable_if<!std::is_same<typename std::decay<ValueType>::type, Any>::value>::type>
 			Any(ValueType&& value) {
@@ -101,19 +102,19 @@ namespace CDPL
 				return *this;
 			}
 
-			/// Has the same effect as Any(std::move(rhs)).swap(*this).
+			/// Has the same effect as <tt>Any(std::move(rhs)).swap(*this)</tt>.
 			///
-			/// The state of *this is equivalent to the original state of rhs and rhs is left in a valid
+			/// The state of <tt>*this</tt> is equivalent to the original state of \a rhs and rhs is left in a valid
 			/// but otherwise unspecified state.
 			Any& operator=(Any&& rhs) noexcept {
 				Any(std::move(rhs)).swap(*this);
 				return *this;
 			}
 
-			/// Has the same effect as Any(std::forward<ValueType>(value)).swap(*this). No effect if a exception is thrown.
+			/// Has the same effect as <tt>Any(std::forward<ValueType>(value)).swap(*this)</tt>. No effect if a exception is thrown.
 			///
-			/// T shall satisfy the CopyConstructible requirements, otherwise the program is ill-formed.
-			/// This is because an `Any` may be copy constructed into another `Any` at any time, so a copy should always be allowed.
+			/// \c T shall satisfy the CopyConstructible requirements, otherwise the program is ill-formed.
+			/// This is because an \c %Any may be copy constructed into another \c %Any at any time, so a copy should always be allowed.
 			template<typename ValueType, typename = typename std::enable_if<!std::is_same<typename std::decay<ValueType>::type, Any>::value>::type>
 			Any& operator=(ValueType&& value) {
 				static_assert(std::is_copy_constructible<typename std::decay<ValueType>::type>::value,
@@ -131,17 +132,17 @@ namespace CDPL
 				}
 			}
 
-			/// Returns true if *this has no contained object, otherwise false.
+			/// Returns true if <tt>*this</tt> has no contained object, otherwise false.
 			bool isEmpty() const noexcept {
 				return (this->vtable == nullptr);
 			}
 
-			/// If *this has a contained object of type T, typeid(T); otherwise typeid(void).
+			/// If *this has a contained object of type \c T, <tt>typeid(T)</tt>; otherwise <tt>typeid(void)</tt>.
 			const std::type_info& getTypeID() const noexcept {
 				return (isEmpty() ? typeid(void) : this->vtable->type());
 			}
 
-			/// Exchange the states of *this and rhs.
+			/// Exchange the states of <tt>*this</tt> and \a rhs.
 			void swap(Any& rhs) noexcept {
 				if (this->vtable != rhs.vtable) {
 					Any tmp(std::move(rhs));
@@ -168,7 +169,29 @@ namespace CDPL
 				}
 			}
 
-		private: // Storage and Virtual Method Table
+			template <typename ValueType>
+			const ValueType& getData() const {
+				if (this->isEmpty())
+					throw BadCast("Any: empty");
+				
+				using T = typename std::decay<ValueType>::type;
+
+				if (this->isTyped(typeid(T)))
+					return *this->cast<ValueType>();
+
+				throw BadCast(std::string("Any: extraction of stored value of type '") + this->getTypeID().name() + 
+							  std::string("' as type '") + typeid(T).name() + "' not possible");
+			}
+
+			const void* getDataPointer() const {
+				if (isEmpty())
+					return nullptr;
+
+				return this->vtable->data(this->storage);
+			}
+			
+		private:
+			// Storage and Virtual Method Table
 			union Storage
 			{
 				using StackStorageT = typename std::aligned_storage<2 * sizeof(void*), std::alignment_of<void*>::value>::type;
@@ -188,18 +211,20 @@ namespace CDPL
 
 				/// Destroys the object in the union.
 				/// The state of the union after this call is unspecified, caller must ensure not to use src anymore.
-				void(*destroy)(Storage&) noexcept;
+				void (*destroy)(Storage&) noexcept;
 
 				/// Copies the **inner** content of the src union into the yet unitialized dest union.
 				/// As such, both inner objects will have the same state, but on separate memory locations.
-				void(*copy)(const Storage& src, Storage& dest);
+				void (*copy)(const Storage& src, Storage& dest);
 
 				/// Moves the storage from src to the yet unitialized dest union.
 				/// The state of src after this call is unspecified, caller must ensure not to use src anymore.
-				void(*move)(Storage& src, Storage& dest) noexcept;
+				void (*move)(Storage& src, Storage& dest) noexcept;
 
 				/// Exchanges the storage between lhs and rhs.
-				void(*swap)(Storage& lhs, Storage& rhs) noexcept;
+				void (*swap)(Storage& lhs, Storage& rhs) noexcept;
+
+				const void* (*data)(const Storage& storage) noexcept;
 			};
 
 			/// VTable for dynamically allocated storage.
@@ -228,6 +253,10 @@ namespace CDPL
 				static void swap(Storage& lhs, Storage& rhs) noexcept {
 					// just exchage the storage pointers.
 					std::swap(lhs.dynamic, rhs.dynamic);
+				}
+
+				static const void* data(const Storage& storage) noexcept {
+					return storage.dynamic;
 				}
 			};
 
@@ -262,6 +291,10 @@ namespace CDPL
 					move(lhs, rhs);
 					move(tmp_storage, lhs);
 				}
+
+				static const void* data(const Storage& storage) noexcept {
+					return &storage.stack;
+				}
 			};
 
 			/// Whether the type T must be dynamically allocated or can be stored on the stack.
@@ -270,7 +303,7 @@ namespace CDPL
 				std::integral_constant<bool,
 									   !(std::is_nothrow_move_constructible<T>::value      // N4562 §6.3/3 [any.class]
 										 && sizeof(T) <= sizeof(Storage::stack)
-										 && std::alignment_of<T>::value <= std::alignment_of<Storage::stack_storage_t>::value)> {};
+										 && std::alignment_of<T>::value <= std::alignment_of<Storage::StackStorageT>::value)> {};
 
 			/// Returns the pointer to the vtable of the type T.
 			template<typename T>
@@ -284,19 +317,15 @@ namespace CDPL
 					VTableType::destroy,
 					VTableType::copy, VTableType::move,
 					VTableType::swap,
+					VTableType::data,
 				};
 				
 				return &table;
 			}
 
 			/// Same effect as is_same(this->getTypeID(), t);
-			bool is_typed(const std::type_info& t) const {
-				return is_same(this->getTypeID(), t);
-			}
-
-			/// Checks if two type infos are the same.
-			static bool is_same(const std::type_info& a, const std::type_info& b){
-				return (a == b);
+			bool isTyped(const std::type_info& t) const {
+				return (this->getTypeID() == t);
 			}
 
 			/// Casts (with no type_info checks) the storage pointer as const T*.
@@ -305,14 +334,6 @@ namespace CDPL
 				return RequiresAlloc<typename std::decay<T>::type>::value ?
 					reinterpret_cast<const T*>(storage.dynamic) :
 					reinterpret_cast<const T*>(&storage.stack);
-			}
-
-			/// Casts (with no type_info checks) the storage pointer as T*.
-			template<typename T>
-			T* cast() noexcept {
-				return RequiresAlloc<typename std::decay<T>::type>::value ?
-					reinterpret_cast<T*>(storage.dynamic) :
-					reinterpret_cast<T*>(&storage.stack);
 			}
 
 			template<typename ValueType, typename T>
@@ -341,7 +362,21 @@ namespace CDPL
 			Storage storage; // on offset(0) so no padding for align
 			VTable* vtable;
 		};
+
+		template <>
+		const Any& Any::getData<Any>() const {
+			return *this;
+		}
 	}
+}
+
+namespace std
+{
+	
+    inline void swap(CDPL::Base::Any& lhs, CDPL::Base::Any& rhs) noexcept
+    {
+        lhs.swap(rhs);
+    }
 }
 
 #endif // CDPL_BASE_ANY_HPP
