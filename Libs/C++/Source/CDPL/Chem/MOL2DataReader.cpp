@@ -385,7 +385,7 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 		std::size_t id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing atom ID number");
 		
 		if (strictErrorChecking && atomIDsToIndex.find(id) != atomIDsToIndex.end())
-			throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + boost::lexical_cast<std::string>(id));
+			throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + std::to_string(id));
 
 		atomIDsToIndex.insert(AtomIDToIndexMap::value_type(id, mol.getNumAtoms()));
 
@@ -725,7 +725,7 @@ bool Chem::MOL2DataReader::readNextConformer(std::istream& is, const MolecularGr
 		std::size_t id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing atom ID number");
 		
 		if (strictErrorChecking && atomIDsToIndex.find(id) != atomIDsToIndex.end())
-			throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + boost::lexical_cast<std::string>(id));
+			throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + std::to_string(id));
 
 		atomIDsToIndex.insert(AtomIDToIndexMap::value_type(id, i));
 

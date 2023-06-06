@@ -25,6 +25,7 @@
 
 
 #include <algorithm>
+#include <iterator>
 
 #include "StringDataIOUtilities.hpp"
 #include "StringUtilities.hpp"
@@ -186,7 +187,7 @@ void Internal::writeLine(std::ostream& os, const std::string& line, const char* 
 			if (trimmed_line.size() > max_llen) {
 				if (!trunc)
 					throw Base::IOError(std::string(err_msg) + ": length of '" + trimmed_line + "' exceeds limit of " 
-										+ boost::lexical_cast<std::string>(max_llen) + " allowed characters");
+										+ std::to_string(max_llen) + " allowed characters");
 				else
 					os << trimmed_line.substr(0, max_llen) << eol_char;
 
@@ -196,7 +197,7 @@ void Internal::writeLine(std::ostream& os, const std::string& line, const char* 
 		} else {
 			if (!trunc)
 				throw Base::IOError(std::string(err_msg) + ": length of '" + line + "' exceeds limit of " 
-									+ boost::lexical_cast<std::string>(max_llen) + " allowed characters");
+									+ std::to_string(max_llen) + " allowed characters");
 			else
 				os << line.substr(0, max_llen) << eol_char;
 		}
@@ -224,7 +225,7 @@ void Internal::writeString(std::ostream& os, std::size_t field_size, const std::
 			if (trimmed_str.size() > field_size) {
 				if (!trunc)
 					throw Base::IOError(std::string(err_msg) + ": length of '" + trimmed_str + "' exceeds limit of " 
-										+ boost::lexical_cast<std::string>(field_size) + " allowed characters");
+										+ std::to_string(field_size) + " allowed characters");
 				else
 					os << trimmed_str.substr(0, field_size);
 
@@ -234,7 +235,7 @@ void Internal::writeString(std::ostream& os, std::size_t field_size, const std::
 		} else {
 			if (!trunc)
 				throw Base::IOError(std::string(err_msg) + ": length of '" + str + "' exceeds limit of " 
-									+ boost::lexical_cast<std::string>(field_size) + " allowed characters");
+									+ std::to_string(field_size) + " allowed characters");
 			else
 				os << str.substr(0, field_size);
 		}

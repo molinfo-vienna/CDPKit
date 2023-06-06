@@ -30,7 +30,6 @@
 #include <locale>
 #include <algorithm>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/Atom.hpp"
@@ -246,7 +245,7 @@ void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const Molecular
 	}
 
 	if (multiConfExport && !confIdxSuffixPattern.empty()) {
-		std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", boost::lexical_cast<std::string>(conf_idx));
+		std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", std::to_string(conf_idx));
 
 		if (suffix != confIdxSuffixPattern) 
 			os << suffix;
@@ -410,7 +409,7 @@ std::string Chem::MOL2DataWriter::getAtomName(const Atom& atom)
 		name = getSymbol(atom);
 
 		boost::to_upper(name);
-		name.append(boost::lexical_cast<std::string>(++atomSymbolCounts[name]));
+		name.append(std::to_string(++atomSymbolCounts[name]));
 	}
 
 	removeWhitespace(name);

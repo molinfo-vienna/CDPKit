@@ -38,8 +38,6 @@
 #include <limits>
 #include <cstdlib>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -179,7 +177,7 @@ namespace CDPL
 
 			if (val_str.size() > field_size)
 				throw Base::IOError(std::string(err_msg )+ ": number exceeds limit of " 
-									+ boost::lexical_cast<std::string>(field_size) + " allowed digits"); 
+									+ std::to_string(field_size) + " allowed digits"); 
 
 			os << val_str; 
 		}
@@ -201,7 +199,7 @@ namespace CDPL
 
 			if (val_str.size() > field_size)
 				throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " 
-									+ boost::lexical_cast<std::string>(field_size) + " allowed characters"); 
+									+ std::to_string(field_size) + " allowed characters"); 
 			os << val_str; 
 		}
 	}

@@ -40,7 +40,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
@@ -369,7 +368,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
 	else {
 		std::string mol_name_with_suffix(mol_name);
-		std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", boost::lexical_cast<std::string>(conf_idx));
+		std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", std::to_string(conf_idx));
 
 		if (suffix != confIdxSuffixPattern) 
 			mol_name_with_suffix.append(suffix);
@@ -1612,7 +1611,7 @@ void Chem::MDLDataWriter::writeCTabV2000RegistryNumberProperty(std::ostream& os,
 	writeWhitespace(os, 1);
 
 	try {
-		writeMDLLine(os, boost::lexical_cast<std::string>(reg_no), 
+		writeMDLLine(os, std::to_string(reg_no), 
 					 "MDLDataWriter: error while writing molecule registry number to property line", 
 					 checkLineLength, false, truncateLines, MDL::MAX_LINE_LENGTH - 7);				
 
