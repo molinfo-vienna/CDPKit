@@ -69,9 +69,4 @@
  */
 #cmakedefine HAVE_NUMPY
 
-/**
- * \brief The size of <tt>long int</tt>.
- */
-#define SIZEOF_LONG_INT @SIZEOF_LONG_INT@
-
 #endif // CDPL_CONFIG_HPP

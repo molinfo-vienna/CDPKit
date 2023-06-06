@@ -316,7 +316,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr1.getProperty<char>(key7) == '7');
 	BOOST_CHECK(prop_cntnr1.getProperty(key7, false).getData<char>() == '7');
 	BOOST_CHECK(prop_cntnr1.getPropertyOrDefault<char>(key7, 'C') == '7');
-	BOOST_CHECK(prop_cntnr1.getProperty(key7).toString() == "7");
 
 	BOOST_CHECK(prop_cntnr1.getPropertiesBegin() != prop_cntnr1.getPropertiesEnd());
 
@@ -325,14 +324,14 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
 								  key7));
 
-	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.toString() == "7");
+	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
 					  boost::bind(std::equal_to<LookupKey>(), 
 								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
 								  key1));
 
-	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.toString() == "value1");
+	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.getData<std::string>() == "value1");
 
 //-----
 
@@ -407,7 +406,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr2.getProperty<char>(key7) == '7');
 	BOOST_CHECK(prop_cntnr2.getProperty(key7, false).getData<char>() == '7');
 	BOOST_CHECK(prop_cntnr2.getPropertyOrDefault<char>(key7, 'C') == '7');
-	BOOST_CHECK(prop_cntnr2.getProperty(key7).toChar() == '7');
 
 	BOOST_CHECK(prop_cntnr2.getPropertiesBegin() != prop_cntnr2.getPropertiesEnd());
 
@@ -416,7 +414,7 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
 								  key7));
 
-	BOOST_CHECK(it != prop_cntnr2.getPropertiesEnd() && it->second.toString() == "7");
+	BOOST_CHECK(it != prop_cntnr2.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr2.getPropertiesBegin(), prop_cntnr2.getPropertiesEnd(),
 					  boost::bind(std::equal_to<LookupKey>(), 
@@ -437,8 +435,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(!prop_cntnr3.getProperty(key1, true).isEmpty());
 	BOOST_CHECK(!prop_cntnr3.getProperty(key1, false).isEmpty());
 	BOOST_CHECK(prop_cntnr3.getPropertyOrDefault<int>(key1, 50) == 100);
-
-	BOOST_CHECK(prop_cntnr3.getProperty(key1).toString() == "100");
 
 	BOOST_CHECK(prop_cntnr3.isPropertySet(key1));
 
@@ -518,7 +514,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr3.getProperty<char>(key7) == '7');
 	BOOST_CHECK(prop_cntnr3.getProperty(key7, false).getData<char>() == '7');
 	BOOST_CHECK(prop_cntnr3.getPropertyOrDefault<char>(key7, 'C') == '7');
-	BOOST_CHECK(prop_cntnr3.getProperty(key7).toString() == "7");
 
 	BOOST_CHECK(prop_cntnr3.getPropertiesBegin() != prop_cntnr3.getPropertiesEnd());
 
@@ -527,7 +522,7 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
 								  key7));
 
-	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.toString() == "7");
+	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
 					  boost::bind(std::equal_to<LookupKey>(), 
@@ -659,7 +654,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr3.getProperty<char>(key7) == '7');
 	BOOST_CHECK(prop_cntnr3.getProperty(key7, false).getData<char>() == '7');
 	BOOST_CHECK(prop_cntnr3.getPropertyOrDefault<char>(key7, 'C') == '7');
-	BOOST_CHECK(prop_cntnr3.getProperty(key7).toString() == "7");
 
 	BOOST_CHECK(prop_cntnr3.getPropertiesBegin() != prop_cntnr3.getPropertiesEnd());
 
@@ -668,7 +662,7 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
 								  key7));
 
-	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.toString() == "7");
+	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
 					  boost::bind(std::equal_to<LookupKey>(), 
@@ -845,7 +839,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr3.getProperty<char>(key7) == '7');
 	BOOST_CHECK(prop_cntnr3.getProperty(key7, false).getData<char>() == '7');
 	BOOST_CHECK(prop_cntnr3.getPropertyOrDefault<char>(key7, 'C') == '7');
-	BOOST_CHECK(prop_cntnr3.getProperty(key7).toString() == "7");
 
 //-----
    
@@ -902,6 +895,6 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr3.getProperty<char>(key7) == '7');
 	BOOST_CHECK(prop_cntnr3.getProperty(key7, false).getData<char>() == '7');
 	BOOST_CHECK(prop_cntnr3.getPropertyOrDefault<char>(key7, 'C') == '7');
-	BOOST_CHECK(prop_cntnr3.getProperty(key7).toString() == "7");
+	BOOST_CHECK(prop_cntnr3.getProperty(key7).getData<char>() == '7');
 }
 
