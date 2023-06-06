@@ -80,7 +80,7 @@ namespace
 	   "     <angle value=\"0.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
 	   "    </torsions>"
 	   "   </rule>"
-	   "  </category"
+	   "  </category>"
 	   " </library>";
 
     ConfGen::TorsionLibrary::SharedPointer assemblerTorLib(new ConfGen::TorsionLibrary());
