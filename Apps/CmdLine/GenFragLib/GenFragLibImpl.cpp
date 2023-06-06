@@ -199,7 +199,7 @@ private:
 
 		numProcFrags++;
 
-		CDPL::Base::uint64 hash_code = fragLibGen.getLibraryEntryHashCode();
+		std::uint64_t hash_code = fragLibGen.getLibraryEntryHashCode();
 		std::size_t num_confs = fragLibGen.getNumGeneratedConformers();
 
 		parent->updateOccurrenceCount(hash_code);
@@ -671,7 +671,7 @@ void GenFragLibImpl::loadFragmentLibrary(const std::string& fname, FragmentLibra
 	printMessage(INFO, "");
 }
 
-void GenFragLibImpl::updateOccurrenceCount(CDPL::Base::uint64 hash_code)
+void GenFragLibImpl::updateOccurrenceCount(std::uint64_t hash_code)
 {
 	if (maxLibSize == 0)
 		return;
@@ -698,7 +698,7 @@ int GenFragLibImpl::saveFragmentLibrary()
 	printMessage(INFO, "Saving Fragments to Library '" + outputFile + "'...");
 
 	if (mode == CREATE && maxLibSize > 0) {
-		typedef std::pair<Base::uint64, std::size_t> HashCodeOccCountPair;
+		typedef std::pair<std::uint64_t, std::size_t> HashCodeOccCountPair;
 		typedef std::vector<HashCodeOccCountPair> HashCodeOccCountPairArray;
 
 		HashCodeOccCountPairArray occ_sorted_frags(fragmentOccCounts.begin(), fragmentOccCounts.end());

@@ -27,8 +27,8 @@
 #define CDPL_INTERNAL_SHA1_HPP
 
 #include <cstddef>
+#include <cstdint>
 
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -100,11 +100,11 @@ namespace CDPL
 			void padMessage();
 			void processMessageBlock();
 
-			Base::uint32  intermediateHash[HASH_SIZE / 4]; // Message Digest
-			Base::uint64  length;                          // Message length in b_its 
-			Base::uint32  messageBlockIndex;               // Index into message block array 
-			Base::uint8   messageBlock[64];                // 512-b_it message blocks
-			bool          digestComputed;                  // Tells whether the message digest has been computed
+			std::uint32_t  intermediateHash[HASH_SIZE / 4]; // Message Digest
+			std::uint64_t  length;                          // Message length in b_its 
+			std::uint32_t  messageBlockIndex;               // Index into message block array 
+			std::uint8_t   messageBlock[64];                // 512-b_it message blocks
+			bool           digestComputed;                  // Tells whether the message digest has been computed
 		};
 	}
 }
@@ -122,7 +122,7 @@ void CDPL::Internal::SHA1::input(InputIter in, InputIter end)
 		typename InputIter::value_type v = *in;
 
 		for (std::size_t i = 0; i < sizeof(typename InputIter::value_type); i++) {
-			messageBlock[messageBlockIndex++] = Base::uint8((v >> (i * 8)) & 0xff);
+			messageBlock[messageBlockIndex++] = std::uint8_t((v >> (i * 8)) & 0xff);
 			length += 8;
 
 			if (messageBlockIndex == 64)

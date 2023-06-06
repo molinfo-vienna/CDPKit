@@ -39,7 +39,6 @@
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/ObjectPool.hpp"

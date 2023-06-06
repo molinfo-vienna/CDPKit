@@ -30,6 +30,8 @@
 #include <vector>
 #include <utility>
 #include <unordered_map>
+#include <cstdint>
+#include <cstddef>
 
 #include <boost/functional/hash.hpp>
 
@@ -38,7 +40,6 @@
 #include "CDPL/Pharm/CDFPharmacophoreDataReader.hpp"
 #include "CDPL/Chem/CDFDataReader.hpp"
 #include "CDPL/Base/ControlParameterList.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
@@ -91,17 +92,17 @@ namespace CDPL
 
 			void closeDBConnection();
 
-			void loadPharmacophore(Base::int64 mol_id, int conf_idx, Pharmacophore& pharm);
+			void loadPharmacophore(std::int64_t mol_id, int conf_idx, Pharmacophore& pharm);
 
 			void initMolIdxIDMappings();
 			void initPharmIdxMolIDConfIdxMappings();
 			void loadFeatureCounts();
 	
 			typedef std::vector<FeatureTypeHistogram> FeatureCountsArray;
-			typedef std::pair<Base::int64, std::size_t> MolIDConfIdxPair;
-			typedef std::vector<Base::int64> MolIDArray;
+			typedef std::pair<std::int64_t, std::size_t> MolIDConfIdxPair;
+			typedef std::vector<std::int64_t> MolIDArray;
 			typedef std::vector<MolIDConfIdxPair> MolIDConfIdxPairArray;
-			typedef std::unordered_map<Base::int64, std::size_t> MolIDToUIntMap;
+			typedef std::unordered_map<std::int64_t, std::size_t> MolIDToUIntMap;
 			typedef std::unordered_map<MolIDConfIdxPair, std::size_t, boost::hash<MolIDConfIdxPair> > MolIDConfIdxToPharmIdxMap;
 
 			SQLite3StmtPointer               selMolDataStmt;

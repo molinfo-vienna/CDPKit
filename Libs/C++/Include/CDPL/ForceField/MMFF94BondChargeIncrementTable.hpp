@@ -32,6 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <iosfwd>
 #include <unordered_map>
 
@@ -40,7 +41,6 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -56,7 +56,7 @@ namespace CDPL
 			class Entry;
 
 		  private:
-			typedef std::unordered_map<Base::uint32, Entry> DataStorage;
+			typedef std::unordered_map<std::uint32_t, Entry> DataStorage;
 
 		  public:
 			typedef boost::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;

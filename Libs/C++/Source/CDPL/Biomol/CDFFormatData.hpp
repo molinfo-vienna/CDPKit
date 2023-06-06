@@ -27,6 +27,8 @@
 #ifndef CDPL_BIOMOL_CDFFORMATDATA_HPP
 #define CDPL_BIOMOL_CDFFORMATDATA_HPP
 
+#include <cstdint>
+
 #include "CDPL/Chem/CDFFormatData.hpp"
 
 
@@ -41,7 +43,7 @@ namespace CDPL
 			
 			using namespace Chem::CDF;
 
-			typedef Base::int8 CharType;
+			typedef std::int8_t CharType;
 
 			namespace AtomProperty
 			{

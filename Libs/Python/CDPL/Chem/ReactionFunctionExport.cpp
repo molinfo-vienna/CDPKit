@@ -95,7 +95,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveComponentGroups, CDPL::Chem::Reaction&)
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::AtomMapping::SharedPointer, perceiveAtomMapping, CDPL::Chem::Reaction&)
 
-	MAKE_FUNCTION_WRAPPER6(CDPL::Base::uint64, calcHashCode, CDPL::Chem::Reaction&,
+	MAKE_FUNCTION_WRAPPER6(std::uint64_t, calcHashCode, CDPL::Chem::Reaction&,
 						   unsigned int, unsigned int, unsigned int, bool, bool)
 
 	boost::python::object generateSMILESWrapper(CDPL::Chem::Reaction& rxn, bool canonical, bool ord_h_deplete,

@@ -249,7 +249,7 @@ bool Pharm::PSDScreeningDBCreatorImpl::process(const Chem::MolecularGraph& molgr
 		throw Base::IOError("PSDScreeningDBCreatorImpl: no open database connection");
 
 	numProcessed++;
-	Base::uint64 mol_hash = hashCalculator.calculate(molgraph);
+	std::uint64_t mol_hash = hashCalculator.calculate(molgraph);
 
 	if (!allowDupEntries) {
 		if (procMolecules.find(mol_hash) != procMolecules.end()) {
@@ -306,7 +306,7 @@ bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc,
 		calcCIPPriorities(mol, false);
 		numProcessed++;
 
-		Base::uint64 mol_hash = hashCalculator.calculate(mol);
+		std::uint64_t mol_hash = hashCalculator.calculate(mol);
 	
 		if (!allowDupEntries) {
 			if (procMolecules.find(mol_hash) != procMolecules.end()) {
@@ -328,7 +328,7 @@ bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc,
 		if (mode == ScreeningDBCreator::UPDATE)
 			num_del = deleteEntries(mol_hash);
 
-		Base::int64 mol_id = insertMolecule(mol, mol_hash);
+		std::int64_t mol_id = insertMolecule(mol, mol_hash);
 		std::size_t num_pharms = db_acc.getNumPharmacophores(i);
 
 		for (std::size_t j = 0; j < num_pharms; j++) {
@@ -413,13 +413,13 @@ void Pharm::PSDScreeningDBCreatorImpl::loadMolHashToIDMap()
 		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while loading existing molecule IDs and hashes");
 }
 
-std::size_t Pharm::PSDScreeningDBCreatorImpl::deleteEntries(Base::uint64 mol_hash)
+std::size_t Pharm::PSDScreeningDBCreatorImpl::deleteEntries(std::uint64_t mol_hash)
 {
 	std::size_t num_del = 0;
 	std::pair<MolHashToIDMap::iterator, MolHashToIDMap::iterator> mols_with_hash = molHashToIDMap.equal_range(mol_hash);
 
 	for (MolHashToIDMap::iterator it = mols_with_hash.first; it != mols_with_hash.second; ++it, num_del++) {
-		Base::uint64 mol_id = it->second;
+		std::uint64_t mol_id = it->second;
 		
 		deleteRowsWithMolID(delMolWithMolIDStmt, DELETE_MOL_WITH_MOL_ID_SQL, mol_id);
 		deleteRowsWithMolID(delPharmsWithMolIDStmt, DELETE_PHARMS_WITH_MOL_ID_SQL, mol_id);
@@ -429,7 +429,7 @@ std::size_t Pharm::PSDScreeningDBCreatorImpl::deleteEntries(Base::uint64 mol_has
 	return num_del;
 }
 
-Base::int64 Pharm::PSDScreeningDBCreatorImpl::insertMolecule(const Chem::MolecularGraph& molgraph, Base::uint64 mol_hash)
+std::int64_t Pharm::PSDScreeningDBCreatorImpl::insertMolecule(const Chem::MolecularGraph& molgraph, std::uint64_t mol_hash)
 {
 	molWriter.writeMolGraph(molgraph, byteBuffer);
 
@@ -447,7 +447,7 @@ Base::int64 Pharm::PSDScreeningDBCreatorImpl::insertMolecule(const Chem::Molecul
 	return sqlite3_last_insert_rowid(getDBConnection().get());
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id)
+void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id)
 {
 	std::size_t num_confs = getNumConformations(molgraph);
 
@@ -472,7 +472,7 @@ void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::Molecul
 	}
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id, std::size_t conf_idx)
+void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id, std::size_t conf_idx)
 {
 	pharmacophore.clear();
 	pharmGenerator.generate(molgraph, pharmacophore);
@@ -482,7 +482,7 @@ void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::Molecul
 	insertFtrCounts(mol_id, conf_idx);
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::insertPharmacophore(Base::int64 mol_id, std::size_t conf_idx)
+void Pharm::PSDScreeningDBCreatorImpl::insertPharmacophore(std::int64_t mol_id, std::size_t conf_idx)
 {
 	pharmWriter.writeFeatureContainer(pharmacophore, byteBuffer);
 
@@ -507,13 +507,13 @@ void Pharm::PSDScreeningDBCreatorImpl::genFtrCounts()
 	buildFeatureTypeHistogram(pharmacophore, featureCounts);
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::insertFtrCounts(Base::int64 mol_id, std::size_t conf_idx)
+void Pharm::PSDScreeningDBCreatorImpl::insertFtrCounts(std::int64_t mol_id, std::size_t conf_idx)
 {
 	for (FeatureTypeHistogram::ConstEntryIterator it = featureCounts.getEntriesBegin(), end = featureCounts.getEntriesEnd(); it != end; ++it)
 		insertFtrCount(mol_id, conf_idx, it->first, it->second);
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::insertFtrCount(Base::int64 mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count)
+void Pharm::PSDScreeningDBCreatorImpl::insertFtrCount(std::int64_t mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count)
 {
 	setupStatement(insFtrCountStmt, INSERT_FTR_COUNT_SQL, true);
 
@@ -532,7 +532,7 @@ void Pharm::PSDScreeningDBCreatorImpl::insertFtrCount(Base::int64 mol_id, std::s
 	evalStatement(insFtrCountStmt);
 }
 
-void Pharm::PSDScreeningDBCreatorImpl::deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, Base::int64 mol_id) const
+void Pharm::PSDScreeningDBCreatorImpl::deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, std::int64_t mol_id) const
 {
 	setupStatement(stmt_ptr, sql_stmt, true);
 

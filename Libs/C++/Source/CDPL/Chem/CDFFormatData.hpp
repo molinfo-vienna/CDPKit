@@ -28,8 +28,8 @@
 #define CDPL_CHEM_CDFFORMATDATA_HPP
 
 #include <cstddef>
+#include <cstdint>
 
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 
@@ -44,14 +44,14 @@ namespace CDPL
 			
 			using namespace Internal::CDF;
 
-			typedef Base::uint32 UIntType;
-			typedef Base::int32  LongType;
-			typedef Base::uint8  BoolType;
-			typedef Base::uint8  BondAtomIndexLengthTuple;
+			typedef std::uint32_t UIntType;
+			typedef std::int32_t  LongType;
+			typedef std::uint8_t  BoolType;
+			typedef std::uint8_t  BondAtomIndexLengthTuple;
 
-			const Base::uint8 MOLECULE_RECORD_ID  = 1;
-			const Base::uint8 REACTION_RECORD_ID  = 2;
-			const Base::uint8 CURR_FORMAT_VERSION = 1;
+			const std::uint8_t MOLECULE_RECORD_ID  = 1;
+			const std::uint8_t REACTION_RECORD_ID  = 2;
+			const std::uint8_t CURR_FORMAT_VERSION = 1;
 
 			const std::size_t              NUM_BOND_ATOM_INDEX_LENGTH_BITS = 4; 
 			const BondAtomIndexLengthTuple BOND_ATOM_INDEX_LENGTH_MASK     = 0xf; 

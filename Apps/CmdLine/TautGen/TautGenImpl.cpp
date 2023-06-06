@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <iterator>
 #include <thread>
+#include <cstdint>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -299,7 +300,7 @@ private:
 			outputMolecule(taut, score, hashCalc.calculate(taut));
 
 		} else if (score >= tautScore) {
-			Base::uint64 hash = hashCalc.calculate(taut);
+			std::uint64_t hash = hashCalc.calculate(taut);
 
 			if (score > tautScore || hash > hashCode) {
 				stdTautomer = taut;
@@ -324,7 +325,7 @@ private:
 		setAromaticityFlags(molgraph, override);
 	}
 
-	void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, CDPL::Base::uint64 hash) {
+	void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, std::uint64_t hash) {
 		using namespace CDPL;
 		using namespace Chem;
 
@@ -342,17 +343,17 @@ private:
 		parent->writeMolecule(molgraph);
 	}
 
-	TautGenImpl*                         parent;
-	CDPL::Chem::TautomerGenerator        tautGen;
-	CDPL::Chem::TautomerScore            tautScoreCalc;
-	CDPL::Chem::HashCodeCalculator       hashCalc;
-	CDPL::Chem::BasicMolecule            molecule;
-	CDPL::Chem::BasicMolecule            stdTautomer;
-	double                               tautScore;
-	CDPL::Base::uint64                   hashCode;
-	std::size_t                          numProcMols;
-	std::size_t                          numGenTauts;
-	std::size_t                          numGenMolTauts;
+	TautGenImpl*                   parent;
+	CDPL::Chem::TautomerGenerator  tautGen;
+	CDPL::Chem::TautomerScore      tautScoreCalc;
+	CDPL::Chem::HashCodeCalculator hashCalc;
+	CDPL::Chem::BasicMolecule      molecule;
+	CDPL::Chem::BasicMolecule      stdTautomer;
+	double                         tautScore;
+	std::uint64_t                  hashCode;
+	std::size_t                    numProcMols;
+	std::size_t                    numGenTauts;
+	std::size_t                    numGenMolTauts;
 };
 
 

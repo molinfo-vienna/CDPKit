@@ -64,7 +64,7 @@ namespace
 		builtinStatExtTable->loadDefaults(MMFF94ParameterSet::STATIC_XOOP);
 	}
 
-	Base::uint32 lookupKey(Base::uint32 term_atom1_type, Base::uint32 ctr_atom_type, Base::uint32 term_atom2_type, Base::uint32 oop_atom_type)
+	std::uint32_t lookupKey(std::uint32_t term_atom1_type, std::uint32_t ctr_atom_type, std::uint32_t term_atom2_type, std::uint32_t oop_atom_type)
 	{
 		unsigned int nbr_types[] = { term_atom1_type, term_atom2_type, oop_atom_type };
 

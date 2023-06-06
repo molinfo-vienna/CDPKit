@@ -65,7 +65,7 @@ bool ConfGen::CFLFragmentLibraryEntryWriter::write(std::ostream& os, const Fragm
 
 	CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<Base::uint64>(entryBuffer.getSize() - CDF::HEADER_SIZE);
+	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(entryBuffer.getSize() - CDF::HEADER_SIZE);
 	cdf_header.recordTypeID = CDF::FRAGLIB_DATA_RECORD_ID;
 	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 

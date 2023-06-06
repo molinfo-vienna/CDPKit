@@ -27,10 +27,10 @@
 #include "StaticInit.hpp"
 
 #include <ostream>
+#include <cstdint>
 
 #include <boost/numeric/conversion/cast.hpp>
 
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
 
 #include "CDFRegularGridDataWriter.hpp"
@@ -85,7 +85,7 @@ void Grid::CDFRegularGridDataWriter::outputGridHeader(const DRegularGrid& grid, 
 {
 	CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<Base::uint64>(rec_size);
+	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(rec_size);
 	cdf_header.recordTypeID = CDF::DREGULAR_GRID_RECORD_ID;
 	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
@@ -97,13 +97,13 @@ void Grid::CDFRegularGridDataWriter::outputGridData(const DRegularGrid& grid, In
 	bbuf.putInt(CDF::BoolType(grid.getDataMode() == DRegularGrid::CELL), false);
 
 	if (singlePrecisionFloats()) {
-		bbuf.putInt(boost::numeric_cast<Base::uint8>(sizeof(float)), false);				
+		bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(float)), false);				
 		bbuf.putFloat(float(grid.getXStepSize()));
 		bbuf.putFloat(float(grid.getYStepSize()));
 		bbuf.putFloat(float(grid.getZStepSize()));
 
 	} else {
-		bbuf.putInt(boost::numeric_cast<Base::uint8>(sizeof(typename DRegularGrid::CoordinatesValueType)), false);	
+		bbuf.putInt(boost::numeric_cast<std::uint8_t>(sizeof(typename DRegularGrid::CoordinatesValueType)), false);	
 		bbuf.putFloat(grid.getXStepSize());
 		bbuf.putFloat(grid.getYStepSize());
 		bbuf.putFloat(grid.getZStepSize());

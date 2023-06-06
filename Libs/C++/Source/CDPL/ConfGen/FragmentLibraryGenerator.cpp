@@ -163,7 +163,7 @@ std::size_t ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers() const
 	return numGenConfs;
 }
 
-Base::uint64 ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const
+std::uint64_t ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const
 {
 	return canonFrag.getHashCode();
 }

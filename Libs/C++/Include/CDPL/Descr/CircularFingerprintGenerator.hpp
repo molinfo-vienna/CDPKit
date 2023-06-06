@@ -34,6 +34,7 @@
 #define CDPL_DESCR_CIRCULARFINGERPRINTGENERATOR_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 #include <utility>
 
@@ -43,7 +44,6 @@
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -125,7 +125,7 @@ namespace CDPL
 				 * \return The generated atom identifier.
 				 * \
 				 */
-				Base::uint64 operator()(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
+				std::uint64_t operator()(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
 
 			  private:
 				unsigned int flags;
@@ -162,7 +162,7 @@ namespace CDPL
 				 * \param bond The bond for which to generate the identifier.
 				 * \return The generated bond identifier.
 				 */
-				Base::uint64 operator()(const Chem::Bond& bond) const;
+				std::uint64_t operator()(const Chem::Bond& bond) const;
 
 			  private:
 				unsigned int flags;
@@ -174,9 +174,9 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of atom identifiers are required to take
 			 * the atom (as a \c const reference to Chem::Atom) and containing molecular graph (as a \c const reference to Chem::MolecularGraph) as
-			 * argument and return the identifier as an integer of type Base::uint64. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * argument and return the identifier as an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<Base::uint64, const Chem::Atom&, const Chem::MolecularGraph&> AtomIdentifierFunction;
+			typedef boost::function2<std::uint64_t, const Chem::Atom&, const Chem::MolecularGraph&> AtomIdentifierFunction;
 
 			/**
 			 * \brief Type of the generic functor class used to store user-defined functions or function objects
@@ -184,9 +184,9 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of bond identifiers are required to take
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the identifier as
-			 * an integer of type Base::uint64. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<Base::uint64, const Chem::Bond&> BondIdentifierFunction;
+			typedef boost::function1<std::uint64_t, const Chem::Bond&> BondIdentifierFunction;
 
 			/**
 			 * \brief Constructs the \c %CircularFingerprintGenerator instance.
@@ -267,7 +267,7 @@ namespace CDPL
 
 			std::size_t getNumFeatures() const;
 
-			Base::uint64 getFeatureIdentifier(std::size_t ftr_idx) const;
+			std::uint64_t getFeatureIdentifier(std::size_t ftr_idx) const;
 
 			const Util::BitSet& getFeatureSubstructure(std::size_t ftr_idx) const;
 
@@ -276,7 +276,7 @@ namespace CDPL
 			void getFeatureSubstructures(std::size_t bit_idx, std::size_t bs_size, Chem::FragmentList& frags, bool clear = true) const;
 
 		  private:
-			typedef std::pair<std::pair<Base::uint64, Base::uint64>, const Chem::Atom*> NeighborData;
+			typedef std::pair<std::pair<std::uint64_t, std::uint64_t>, const Chem::Atom*> NeighborData;
 
 			void init(const Chem::MolecularGraph& molgraph);
 
@@ -288,10 +288,10 @@ namespace CDPL
 
 			static bool compareNeighborData(const NeighborData& nbr1, const NeighborData& nbr2);
 			
-			typedef std::pair<Base::uint64, Util::BitSet> Feature;
+			typedef std::pair<std::uint64_t, Util::BitSet> Feature;
 			typedef std::vector<Feature> FeatureArray;
 			typedef std::vector<const Feature*> FeaturePtrList;
-			typedef std::vector<Base::uint64> UInt64Array;
+			typedef std::vector<std::uint64_t> UInt64Array;
 			typedef std::vector<NeighborData> NeighborDataList;
 	
 			const Chem::MolecularGraph*  molGraph;

@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <cstdint>
 
 #include <boost/bind.hpp>
 
@@ -43,7 +44,6 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -494,7 +494,7 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 	CDF::PropertySpec prop_spec;
 	CDF::SizeType size_val;
 	std::string str_val;
-	Base::uint64 uint64_val;
+	std::uint64_t uint64_val;
 	double double_val;
 
 	while (true) {

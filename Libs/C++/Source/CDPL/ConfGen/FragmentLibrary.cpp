@@ -95,7 +95,7 @@ bool ConfGen::FragmentLibrary::addEntry(const FragmentLibraryEntry::SharedPointe
     return hashToEntryMap.insert(Entry(entry->getHashCode(), entry)).second;
 }
 
-const ConfGen::FragmentLibraryEntry::SharedPointer& ConfGen::FragmentLibrary::getEntry(Base::uint64 hash_code) const
+const ConfGen::FragmentLibraryEntry::SharedPointer& ConfGen::FragmentLibrary::getEntry(std::uint64_t hash_code) const
 {
     HashToEntryMap::iterator it = hashToEntryMap.find(hash_code);
 
@@ -105,7 +105,7 @@ const ConfGen::FragmentLibraryEntry::SharedPointer& ConfGen::FragmentLibrary::ge
     return it->second;
 }
 
-bool ConfGen::FragmentLibrary::containsEntry(Base::uint64 hash_code) const
+bool ConfGen::FragmentLibrary::containsEntry(std::uint64_t hash_code) const
 {
     return (hashToEntryMap.find(hash_code) != hashToEntryMap.end());
 }
@@ -120,7 +120,7 @@ void ConfGen::FragmentLibrary::clear()
     hashToEntryMap.clear();
 }
 
-bool ConfGen::FragmentLibrary::removeEntry(Base::uint64 hash_code)
+bool ConfGen::FragmentLibrary::removeEntry(std::uint64_t hash_code)
 {
    return (hashToEntryMap.erase(hash_code) > 0);
 }

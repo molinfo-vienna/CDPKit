@@ -34,7 +34,8 @@
 using namespace CDPL; 
 
 
-Base::uint64 Chem::calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags, unsigned int bond_flags, bool global_stereo, bool ord_h_deplete)
+std::uint64_t Chem::calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags, unsigned int bond_flags,
+								 bool global_stereo, bool ord_h_deplete)
 {
 	HashCodeCalculator hash_calc;
 
@@ -48,7 +49,7 @@ Base::uint64 Chem::calcHashCode(const MolecularGraph& molgraph, unsigned int ato
 	hash_calc.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(bond_flags));
 	hash_calc.includeGlobalStereoFeatures(global_stereo);
 
-	Base::uint64 hash_code;
+	std::uint64_t hash_code;
 
 	if (ord_h_deplete) {
 		Fragment tmp(molgraph);

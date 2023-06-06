@@ -50,11 +50,11 @@ const unsigned int Descr::CircularFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 //-----
 
-Base::uint64 Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::operator()(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const
+std::uint64_t Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::operator()(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const
 {
 	using namespace Chem;
 
-    Base::uint64 id = 0;
+    std::uint64_t id = 0;
 
 	if (flags & AtomPropertyFlag::ISOTOPE) {
 		id = getIsotope(atom);
@@ -112,11 +112,11 @@ Base::uint64 Descr::CircularFingerprintGenerator::DefAtomIdentifierFunctor::oper
 
 //-----
 
-Base::uint64 Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::operator()(const Chem::Bond& bond) const
+std::uint64_t Descr::CircularFingerprintGenerator::DefBondIdentifierFunctor::operator()(const Chem::Bond& bond) const
 {
 	using namespace Chem;
 
-    Base::uint64 id = 0;
+    std::uint64_t id = 0;
 
     if (flags & BondPropertyFlag::TOPOLOGY) {
 		if (getRingFlag(bond))
@@ -239,7 +239,7 @@ std::size_t Descr::CircularFingerprintGenerator::getNumFeatures() const
 	return outputFeatures.size();
 }
 
-Base::uint64 Descr::CircularFingerprintGenerator::getFeatureIdentifier(std::size_t ftr_idx) const
+std::uint64_t Descr::CircularFingerprintGenerator::getFeatureIdentifier(std::size_t ftr_idx) const
 {
 	if (ftr_idx >= outputFeatures.size())
 		throw Base::IndexError("CircularFingerprintGenerator: feature index out of bounds");
@@ -304,7 +304,7 @@ void Descr::CircularFingerprintGenerator::init(const Chem::MolecularGraph& molgr
 	
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Feature& ftr = features[i];
-		Base::uint64 id = atomIdentifierFunc(molgraph.getAtom(i), molgraph);
+		std::uint64_t id = atomIdentifierFunc(molgraph.getAtom(i), molgraph);
 
 		if (id == 0 || (!incHydrogens && getType(molgraph.getAtom(i)) == AtomType::H)) {
 			ftr.first = 0;
@@ -409,7 +409,7 @@ void Descr::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 			idCalculationData.push_back(it->first.second);
 		}
 		
-		features[ext_ftr_idx].first = Internal::calcHashCode<Base::uint64>(idCalculationData.begin(), idCalculationData.end());
+		features[ext_ftr_idx].first = Internal::calcHashCode<std::uint64_t>(idCalculationData.begin(), idCalculationData.end());
 	}
 
 	duplicateMask.reset();

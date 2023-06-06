@@ -40,7 +40,6 @@
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Base/ControlParameterList.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
@@ -95,26 +94,26 @@ namespace CDPL
 
 			void loadMolHashToIDMap();
 
-			std::size_t deleteEntries(Base::uint64 mol_hash);
+			std::size_t deleteEntries(std::uint64_t mol_hash);
 
-			Base::int64 insertMolecule(const Chem::MolecularGraph& molgraph, Base::uint64 mol_hash);
+			std::int64_t insertMolecule(const Chem::MolecularGraph& molgraph, std::uint64_t mol_hash);
 
-			void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id);
-			void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id, std::size_t conf_idx);
+			void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id);
+			void genAndInsertPharmData(const Chem::MolecularGraph& molgraph, std::int64_t mol_id, std::size_t conf_idx);
 
-			void insertPharmacophore(Base::int64 mol_id, std::size_t conf_idx);
+			void insertPharmacophore(std::int64_t mol_id, std::size_t conf_idx);
 
 			void genFtrCounts();
-			void insertFtrCounts(Base::int64 mol_id, std::size_t conf_idx);
-			void insertFtrCount(Base::int64 mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count);
+			void insertFtrCounts(std::int64_t mol_id, std::size_t conf_idx);
+			void insertFtrCount(std::int64_t mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count);
 
-			void deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, Base::int64 mol_id) const;
+			void deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, std::int64_t mol_id) const;
 
 			void beginTransaction();
 			void commitTransaction();
 
-			typedef std::unordered_multimap<Base::uint64, Base::int64> MolHashToIDMap;
-			typedef std::unordered_set<Base::uint64> MolHashSet;
+			typedef std::unordered_multimap<std::uint64_t, std::int64_t> MolHashToIDMap;
+			typedef std::unordered_set<std::uint64_t> MolHashSet;
 
 			SQLite3StmtPointer               beginTransStmt;
 			SQLite3StmtPointer               commitTransStmt;

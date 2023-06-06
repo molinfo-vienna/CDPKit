@@ -32,6 +32,7 @@
 #define CDPL_CHEM_HASHCODECALCULATOR_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 
 #include <boost/function.hpp>
@@ -39,7 +40,6 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -111,15 +111,15 @@ namespace CDPL
 				 * \param atom The atom for which to generate the initial hash code.
 				 * \return The generated atom hash seed.
 				 */
-				Base::uint64 operator()(const Atom& atom) const;
+				std::uint64_t operator()(const Atom& atom) const;
 
 			private:
-				Base::uint64 getAtomTypeHashSeed(const Atom&) const;
-				Base::uint64 getAtomIsotopeHashSeed(const Atom&) const;
-				Base::uint64 getAtomChargeHashSeed(const Atom&) const;
-				Base::uint64 getAtomHCountHashSeed(const Atom&) const;
-				Base::uint64 getAtomConfigHashSeed(const Atom&) const;
-				Base::uint64 getAtomAromaticityHashSeed(const Atom&) const;
+				std::uint64_t getAtomTypeHashSeed(const Atom&) const;
+				std::uint64_t getAtomIsotopeHashSeed(const Atom&) const;
+				std::uint64_t getAtomChargeHashSeed(const Atom&) const;
+				std::uint64_t getAtomHCountHashSeed(const Atom&) const;
+				std::uint64_t getAtomConfigHashSeed(const Atom&) const;
+				std::uint64_t getAtomAromaticityHashSeed(const Atom&) const;
 
 				const HashCodeCalculator& calculator;
 				unsigned int              flags;
@@ -155,12 +155,12 @@ namespace CDPL
 				 * \param bond The bond for which to generate the initial hash code.
 				 * \return The generated bond hash seed.
 				 */
-				Base::uint64 operator()(const Bond& bond) const;
+				std::uint64_t operator()(const Bond& bond) const;
 
 			private:
-				Base::uint64 getBondTypeHashSeed(const Bond&) const;
-				Base::uint64 getBondConfigHashSeed(const Bond&) const;
-				Base::uint64 getBondTopologyHashSeed(const Bond&) const;
+				std::uint64_t getBondTypeHashSeed(const Bond&) const;
+				std::uint64_t getBondConfigHashSeed(const Bond&) const;
+				std::uint64_t getBondTopologyHashSeed(const Bond&) const;
 
 				unsigned int flags;
 			};
@@ -171,9 +171,9 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of atom hash seeds are required to take
 			 * the atom (as a \c const reference to Chem::Atom) as argument and return the hash seed as
-			 * an integer of type Base::uint64. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<Base::uint64, const Atom&> AtomHashSeedFunction;
+			typedef boost::function1<std::uint64_t, const Atom&> AtomHashSeedFunction;
 
 			/**
 			 * \brief Type of the generic functor class used to store user-defined functions or function objects
@@ -181,9 +181,9 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of bond hash seeds are required to take
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the hash seed as
-			 * an integer of type Base::uint64. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<Base::uint64, const Bond&> BondHashSeedFunction;
+			typedef boost::function1<std::uint64_t, const Bond&> BondHashSeedFunction;
 
 			/**
 			 * \brief Constructs the \c %HashCodeCalculator instance.
@@ -241,13 +241,13 @@ namespace CDPL
 			 * \param molgraph The molecular graph for which to calculate the hash code.
 			 * \return The hash code of the molecular graph \a molgraph.
 			 */
-			Base::uint64 calculate(const MolecularGraph& molgraph);
+			std::uint64_t calculate(const MolecularGraph& molgraph);
 
 			/**
 			 * \brief Returns the result of the last hash code calculation.
 			 * \return The result of the last hash code calculation, or zero if a calculation has not yet been performed.
 			 */
-			Base::uint64 getResult() const;
+			std::uint64_t getResult() const;
 
 		private:
 			HashCodeCalculator(const HashCodeCalculator&);
@@ -268,7 +268,7 @@ namespace CDPL
 			void perceiveGlobalStereoReferenceBonds();
 			void perceiveGlobalStereoReferenceBond(const Bond&);
 
-			typedef std::vector<Base::uint64> UInt64Array;
+			typedef std::vector<std::uint64_t> UInt64Array;
  			typedef std::vector<std::size_t> IndexList;
 
 			const MolecularGraph*    molGraph;
@@ -284,7 +284,7 @@ namespace CDPL
 			IndexList                globalStereoReferenceAtoms;
 			IndexList                globalStereoReferenceBonds;
 			bool                     incGlobalStereoFeatures;
-			Base::uint8              shaHashCode[20];
+			std::uint8_t             shaHashCode[20];
 		}; 
 	}
 }

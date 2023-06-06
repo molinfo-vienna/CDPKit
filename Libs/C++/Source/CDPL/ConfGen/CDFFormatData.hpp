@@ -27,6 +27,8 @@
 #ifndef CDPL_CONFGEN_CDFFORMATDATA_HPP
 #define CDPL_CONFGEN_CDFFORMATDATA_HPP
 
+#include <cstdint>
+
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 
@@ -41,8 +43,8 @@ namespace CDPL
 			
 			using namespace Internal::CDF;
 
-			const Base::uint8 FRAGLIB_DATA_RECORD_ID  = 6;
-			const Base::uint8 CURR_FORMAT_VERSION     = 1;
+			const std::uint8_t FRAGLIB_DATA_RECORD_ID  = 6;
+			const std::uint8_t CURR_FORMAT_VERSION     = 1;
 		}
     }
 }

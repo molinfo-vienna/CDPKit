@@ -36,7 +36,6 @@
 
 #include "CDPL/Base/Variant.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace
@@ -78,9 +77,6 @@ BOOST_AUTO_TEST_CASE(VariantTest)
 	BOOST_CHECK_THROW(v1.getData<signed int>(), BadCast);
 	BOOST_CHECK_THROW(v1.getData<unsigned long>(), BadCast);
 	BOOST_CHECK_THROW(v1.getData<signed long>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<uint64>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<int64>(), BadCast);
-
 	BOOST_CHECK_THROW(v1.getData<float>(), BadCast);
 	BOOST_CHECK_THROW(v1.getData<double>(), BadCast);
 	BOOST_CHECK_THROW(v1.getData<long double>(), BadCast);

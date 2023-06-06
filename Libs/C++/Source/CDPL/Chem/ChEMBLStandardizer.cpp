@@ -70,7 +70,7 @@ namespace
 
 	std::once_flag initSaltAndSolventDataFlag;
 	
-	typedef std::pair<Base::uint64, Base::uint64> StructureID;
+	typedef std::pair<std::uint64_t, std::uint64_t> StructureID;
 	typedef std::unordered_set<StructureID, boost::hash<StructureID> > StructureIDSet;
 
 	StructureIDSet chemblSaltStructureIDs;

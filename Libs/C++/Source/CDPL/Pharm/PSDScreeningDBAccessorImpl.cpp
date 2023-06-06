@@ -252,7 +252,7 @@ const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeature
 	return featureCounts[pharm_idx];
 }
 
-void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(Base::int64 mol_id, int mol_conf_idx, Pharmacophore& pharm)
+void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(std::int64_t mol_id, int mol_conf_idx, Pharmacophore& pharm)
 {
 	setupStatement(selPharmDataStmt, PHARM_DATA_QUERY_SQL, true);
 

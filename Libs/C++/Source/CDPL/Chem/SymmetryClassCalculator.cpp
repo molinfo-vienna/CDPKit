@@ -114,7 +114,7 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 	const std::size_t AROMATICITY_PRIME_TAB_IDX = CHARGE_PRIME_TAB_IDX + 20; 
 	const std::size_t CONFIG_PRIME_TAB_IDX = AROMATICITY_PRIME_TAB_IDX + 1; 
 
-	const Base::uint64 IMPL_H_INIT_SYM_CLASS_ID = 1 
+	const std::uint64_t IMPL_H_INIT_SYM_CLASS_ID = 1 
 		* (atomPropertyFlags & AtomPropertyFlag::TYPE ? boost::math::prime(ATOMIC_NO_PRIME_TAB_IDX + 1) : 1)
 		* (atomPropertyFlags & AtomPropertyFlag::ISOTOPE ? boost::math::prime(ISO_PRIME_TAB_IDX) : 1)
 		* (atomPropertyFlags & AtomPropertyFlag::FORMAL_CHARGE ? boost::math::prime(CHARGE_PRIME_TAB_IDX + 10) : 1);
@@ -139,7 +139,7 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
 		const Atom& atom = *it;
-		Base::uint64 init_sym_class_id = 1;
+		std::uint64_t init_sym_class_id = 1;
 		
 		if (atomPropertyFlags & AtomPropertyFlag::TYPE) {
 			unsigned int atom_type = getType(atom) % (AtomType::MAX_TYPE + 1);
@@ -324,7 +324,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
 				  boost::bind(&Util::STArray::addElement, boost::ref(class_ids), boost::bind(&AtomNode::getSymClassID, _1)));
 }
 
-Chem::SymmetryClassCalculator::AtomNode* Chem::SymmetryClassCalculator::allocNode(Base::uint64 class_id)
+Chem::SymmetryClassCalculator::AtomNode* Chem::SymmetryClassCalculator::allocNode(std::uint64_t class_id)
 {
 	AtomNode* node = nodeCache.getRaw();
 
@@ -345,7 +345,7 @@ void Chem::SymmetryClassCalculator::AtomNode::addNbrNode(AtomNode* nbr_node)
 	nbrNodes.push_back(nbr_node);
 }
 
-void Chem::SymmetryClassCalculator::AtomNode::setSVMNumber(Base::uint64 no)
+void Chem::SymmetryClassCalculator::AtomNode::setSVMNumber(std::uint64_t no)
 {
 	svmNumber = no;
 }
@@ -353,7 +353,7 @@ void Chem::SymmetryClassCalculator::AtomNode::setSVMNumber(Base::uint64 no)
 void Chem::SymmetryClassCalculator::AtomNode::calcNextSVMNumber()
 {
 	nextSVMNumber = std::accumulate(nbrNodes.begin(), nbrNodes.end(), svmNumber,
-									boost::bind(std::plus<Base::uint64>(), _1, 
+									boost::bind(std::plus<std::uint64_t>(), _1, 
 												boost::bind(&AtomNode::svmNumber, _2)));
 }
 
@@ -367,7 +367,7 @@ void Chem::SymmetryClassCalculator::AtomNode::updateSVMHistory()
 	svmNumberHistory.push_back(svmNumber);
 }
 
-void Chem::SymmetryClassCalculator::AtomNode::setNextSymClassID(Base::uint64 class_id)
+void Chem::SymmetryClassCalculator::AtomNode::setNextSymClassID(std::uint64_t class_id)
 {
 	nextSymClassID = class_id;
 }
@@ -375,7 +375,7 @@ void Chem::SymmetryClassCalculator::AtomNode::setNextSymClassID(Base::uint64 cla
 void Chem::SymmetryClassCalculator::AtomNode::update()
 {
 	nbrSymClassIDProd = std::accumulate(nbrNodes.begin(), nbrNodes.end(), 1,
-										boost::bind(std::multiplies<Base::uint64>(), _1, 
+										boost::bind(std::multiplies<std::uint64_t>(), _1, 
 													boost::bind(&AtomNode::nextSymClassID, _2)));
 	symClassID = nextSymClassID;
 }
@@ -385,7 +385,7 @@ std::size_t Chem::SymmetryClassCalculator::AtomNode::getSymClassID() const
 	return std::size_t(symClassID);
 }
 
-void Chem::SymmetryClassCalculator::AtomNode::setSymClassID(Base::uint64 class_id)
+void Chem::SymmetryClassCalculator::AtomNode::setSymClassID(std::uint64_t class_id)
 {
 	symClassID = class_id;
 }

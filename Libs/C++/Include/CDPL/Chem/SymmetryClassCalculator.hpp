@@ -32,13 +32,13 @@
 #define CDPL_CHEM_SYMMETRYCLASSCALCULATOR_HPP
 
 #include <vector>
+#include <cstdint>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -170,7 +170,7 @@ namespace CDPL
 
 			class AtomNode;
 
-			AtomNode* allocNode(Base::uint64 class_id);
+			AtomNode* allocNode(std::uint64_t class_id);
 
 			typedef std::vector<AtomNode*> NodeList;
 
@@ -182,18 +182,18 @@ namespace CDPL
 
 				void addNbrNode(AtomNode*);
 
-				void setSVMNumber(Base::uint64);
+				void setSVMNumber(std::uint64_t);
 
 				void calcNextSVMNumber();
 				void updateSVMNumber();
 				void updateSVMHistory();
 
-				void setNextSymClassID(Base::uint64);
+				void setNextSymClassID(std::uint64_t);
 
 				void update();
 
 				std::size_t getSymClassID() const;
-				void setSymClassID(Base::uint64 class_id);
+				void setSymClassID(std::uint64_t class_id);
 
 				struct SymClassCmpFunc
 				{
@@ -208,13 +208,13 @@ namespace CDPL
 				};
 
 			private:
-				typedef std::vector<Base::uint64> SVMNumberList;
+				typedef std::vector<std::uint64_t> SVMNumberList;
  
-				Base::uint64  symClassID;
-				Base::uint64  nextSymClassID;
-				Base::uint64  nbrSymClassIDProd;
-				Base::uint64  svmNumber;
-				Base::uint64  nextSVMNumber;
+				std::uint64_t symClassID;
+				std::uint64_t nextSymClassID;
+				std::uint64_t nbrSymClassIDProd;
+				std::uint64_t svmNumber;
+				std::uint64_t nextSVMNumber;
 				SVMNumberList svmNumberHistory;
 				NodeList      nbrNodes;
 			};

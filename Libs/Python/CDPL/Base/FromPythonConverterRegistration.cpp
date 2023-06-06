@@ -25,13 +25,13 @@
 
 
 #include <string>
+#include <cstdint>
 #include <limits>
 
 #include <boost/python.hpp>
 #include <boost/numeric/conversion/bounds.hpp>
 
 #include "CDPL/Base/Variant.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 #include "ConverterRegistration.hpp"
@@ -225,8 +225,8 @@ void CDPLPythonBase::registerFromPythonConverters()
 //	VariantFromPythonConverter<double, PyFloatConversionPolicy<double> >();
 //	VariantFromPythonConverter<float, PyFloatConversionPolicy<float> >();
 
-	VariantFromPythonConverter<Base::uint64, PyLongToUIntConversionPolicy<Base::uint64> >();
-	VariantFromPythonConverter<Base::int64, PyLongToIntConversionPolicy<Base::int64> >();
+	VariantFromPythonConverter<std::uint64_t, PyLongToUIntConversionPolicy<std::uint64_t> >();
+	VariantFromPythonConverter<std::int64_t, PyLongToIntConversionPolicy<std::int64_t> >();
 
 	VariantFromPythonConverter<unsigned long, PyLongToUIntConversionPolicy<unsigned long> >();
 	VariantFromPythonConverter<signed long, PyLongToIntConversionPolicy<signed long> >();

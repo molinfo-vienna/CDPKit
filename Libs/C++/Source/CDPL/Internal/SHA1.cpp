@@ -74,16 +74,16 @@ void Internal::SHA1::reset()
 			
 void Internal::SHA1::processMessageBlock()
 {
-	static const Base::uint32 K[] = {   // Constants defined in SHA-1   
+	static const std::uint32_t K[] = {   // Constants defined in SHA-1   
 		0x5A827999,
 		0x6ED9EBA1,
 		0x8F1BBCDC,
 		0xCA62C1D6
 	};
 
-	Base::uint32 temp;			 // Temporary word value		
-	Base::uint32 W[80];			 // Word sequence			   
-	Base::uint32 A, B, C, D, E;	 // Word buffers				
+	std::uint32_t temp;			 // Temporary word value		
+	std::uint32_t W[80];			 // Word sequence			   
+	std::uint32_t A, B, C, D, E;	 // Word buffers				
 
 	// Initialize the first 16 words in the array W
 
@@ -177,14 +177,14 @@ void Internal::SHA1::padMessage()
 
 	// Store the message length as the last 8 octets
 
-	messageBlock[56] = Base::uint8((length >> 56) & 0xff);
-	messageBlock[57] = Base::uint8((length >> 48) & 0xff);
-	messageBlock[58] = Base::uint8((length >> 40) & 0xff);
-	messageBlock[59] = Base::uint8((length >> 32) & 0xff);
-	messageBlock[60] = Base::uint8((length >> 24) & 0xff);
-	messageBlock[61] = Base::uint8((length >> 16) & 0xff);
-	messageBlock[62] = Base::uint8((length >> 8) & 0xff);
-	messageBlock[63] = Base::uint8(length & 0xff);
+	messageBlock[56] = std::uint8_t((length >> 56) & 0xff);
+	messageBlock[57] = std::uint8_t((length >> 48) & 0xff);
+	messageBlock[58] = std::uint8_t((length >> 40) & 0xff);
+	messageBlock[59] = std::uint8_t((length >> 32) & 0xff);
+	messageBlock[60] = std::uint8_t((length >> 24) & 0xff);
+	messageBlock[61] = std::uint8_t((length >> 16) & 0xff);
+	messageBlock[62] = std::uint8_t((length >> 8) & 0xff);
+	messageBlock[63] = std::uint8_t(length & 0xff);
 
 	processMessageBlock();
 }

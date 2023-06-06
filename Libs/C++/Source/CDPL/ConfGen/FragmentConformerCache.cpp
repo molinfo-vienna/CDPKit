@@ -51,7 +51,7 @@ ConfGen::FragmentConformerCache::FragmentConformerCache():
 ConfGen::FragmentConformerCache::~FragmentConformerCache() 
 {}
 
-const ConfGen::ConformerDataArray* ConfGen::FragmentConformerCache::getEntry(Base::uint64 frag_hash)
+const ConfGen::ConformerDataArray* ConfGen::FragmentConformerCache::getEntry(std::uint64_t frag_hash)
 {
     FragmentConformerCache& inst = getInstance();
     HashToCacheEntryMap::const_iterator it = inst.hashToEntryMap.find(frag_hash);
@@ -77,7 +77,7 @@ const ConfGen::ConformerDataArray* ConfGen::FragmentConformerCache::getEntry(Bas
     return &entry->conformers;
 }
 
-void ConfGen::FragmentConformerCache::addEntry(Base::uint64 frag_hash, 
+void ConfGen::FragmentConformerCache::addEntry(std::uint64_t frag_hash, 
 											   const ConformerDataArray::const_iterator& confs_beg, 
 											   const ConformerDataArray::const_iterator& confs_end)
 {

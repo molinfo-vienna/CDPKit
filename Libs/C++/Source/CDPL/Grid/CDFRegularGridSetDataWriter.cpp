@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <ostream>
+#include <cstdint>
 
 #include <boost/numeric/conversion/cast.hpp>
 
@@ -84,7 +85,7 @@ void Grid::CDFRegularGridSetDataWriter::outputGridSetHeader(const DRegularGridSe
 {
 	CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<Base::uint64>(rec_size);
+	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(rec_size);
 	cdf_header.recordTypeID = CDF::DREGULAR_GRID_SET_RECORD_ID;
 	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 

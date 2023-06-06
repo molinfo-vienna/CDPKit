@@ -26,8 +26,9 @@
 
 #include "StaticInit.hpp"
 
+#include <cstdint>
+
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "CDFRegularGridDataReader.hpp"
@@ -107,7 +108,7 @@ bool Grid::CDFRegularGridDataReader::doReadGrid(DRegularGrid& grid, Internal::By
 void Grid::CDFRegularGridDataReader::readGridData(DRegularGrid& grid, Internal::ByteBuffer& bbuf) const
 {
 	CDF::BoolType cell_data_mode;
-	Base::uint8 fp_len;
+	std::uint8_t fp_len;
 
 	bbuf.getInt(cell_data_mode);
 	grid.setDataMode(cell_data_mode ? DRegularGrid::CELL : DRegularGrid::POINT);

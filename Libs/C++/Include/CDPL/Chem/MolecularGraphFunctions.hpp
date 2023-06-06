@@ -33,6 +33,7 @@
 
 #include <string>
 #include <cstddef>
+#include <cstdint>
 #include <ctime>
 
 #include "CDPL/Chem/APIPrefix.hpp" 
@@ -49,7 +50,6 @@
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -185,17 +185,17 @@ namespace CDPL
 		CDPL_CHEM_API double getConformationEnergy(const MolecularGraph& molgraph, std::size_t conf_idx);
 
 
-		CDPL_CHEM_API Base::uint64 getHashCode(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::uint64_t getHashCode(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API void setHashCode(MolecularGraph& molgraph, Base::uint64 hash_code);
+		CDPL_CHEM_API void setHashCode(MolecularGraph& molgraph, std::uint64_t hash_code);
 
 		CDPL_CHEM_API void clearHashCode(MolecularGraph& molgraph);
 
 		CDPL_CHEM_API bool hasHashCode(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API Base::uint64 calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
-												unsigned int bond_flags = BondPropertyFlag::DEFAULT,
-												bool global_stereo = true, bool ord_h_deplete = true);
+		CDPL_CHEM_API std::uint64_t calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
+												 unsigned int bond_flags = BondPropertyFlag::DEFAULT,
+												 bool global_stereo = true, bool ord_h_deplete = true);
 
 
 		CDPL_CHEM_API void extractReactionCenter(const MolecularGraph& molgraph, Fragment& rxn_center);

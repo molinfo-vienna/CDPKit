@@ -63,7 +63,7 @@ bool ConfGen::CFLFragmentLibraryEntryReader::read(std::istream& is, FragmentLibr
 
     readData(is, header.recordDataLength, entryBuffer);
 
-	Base::uint64 hash_code;
+	std::uint64_t hash_code;
 	CDF::SizeType num_confs;
 	std::string smiles;
 

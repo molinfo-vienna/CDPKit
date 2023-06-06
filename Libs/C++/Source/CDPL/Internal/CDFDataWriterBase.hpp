@@ -28,6 +28,7 @@
 #define CDPL_INTERNAL_CDFDATAWRITERBASE_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <string>
 
 #include <boost/static_assert.hpp>
@@ -35,7 +36,6 @@
 
 #include "CDPL/Math/VectorArray.hpp"
 
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -235,7 +235,7 @@ template <typename Mtx>
 void CDPL::Internal::CDFDataWriterBase::putCMatrix(const Mtx& mtx, ByteBuffer& bbuf, bool write_fp_len) const
 {
 	if (write_fp_len)
-		bbuf.putInt(boost::numeric_cast<Base::uint8>(singlePrecFloats ? sizeof(float) : sizeof(typename Mtx::ValueType)), false);
+		bbuf.putInt(boost::numeric_cast<std::uint8_t>(singlePrecFloats ? sizeof(float) : sizeof(typename Mtx::ValueType)), false);
 	
 	if (singlePrecFloats) {
 		for (std::size_t i = 0; i < Mtx::Size1; i++)
@@ -253,7 +253,7 @@ template <typename Grid>
 void CDPL::Internal::CDFDataWriterBase::putGrid(const Grid& grid, ByteBuffer& bbuf, bool write_fp_len) const
 {
 	if (write_fp_len)
-		bbuf.putInt(boost::numeric_cast<Base::uint8>(singlePrecFloats ? sizeof(float) : sizeof(typename Grid::ValueType)), false);
+		bbuf.putInt(boost::numeric_cast<std::uint8_t>(singlePrecFloats ? sizeof(float) : sizeof(typename Grid::ValueType)), false);
 
 	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid.getSize1()), false);
 	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid.getSize2()), false);

@@ -27,7 +27,8 @@
 #ifndef CDPL_PHARM_CDFFORMATDATA_HPP
 #define CDPL_PHARM_CDFFORMATDATA_HPP
 
-#include "CDPL/Base/IntegerTypes.hpp"
+#include <cstdint>
+
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 
@@ -42,12 +43,12 @@ namespace CDPL
 			
 			using namespace Internal::CDF;
 
-			typedef Base::uint32 UIntType;
-			typedef Base::uint8  BoolType;
+			typedef std::uint32_t UIntType;
+			typedef std::uint8_t  BoolType;
 
-			const Base::uint8 PHARMACOPHORE_RECORD_ID = 3;
+			const std::uint8_t PHARMACOPHORE_RECORD_ID = 3;
 
-			const Base::uint8 CURR_FORMAT_VERSION     = 1;
+			const std::uint8_t CURR_FORMAT_VERSION     = 1;
 
 			namespace FeatureProperty
 			{

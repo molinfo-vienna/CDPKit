@@ -63,12 +63,12 @@ namespace
 		builtinStatRefTable->loadDefaults(MMFF94ParameterSet::STATIC_RTOR);
 	}
 
-	Base::uint64 lookupKey(Base::uint32 tor_type_idx, Base::uint32 term_atom1_type, Base::uint32 ctr_atom1_type, Base::uint32 ctr_atom2_type, Base::uint32 term_atom2_type)
+	std::uint64_t lookupKey(std::uint32_t tor_type_idx, std::uint32_t term_atom1_type, std::uint32_t ctr_atom1_type, std::uint32_t ctr_atom2_type, std::uint32_t term_atom2_type)
 	{
 		if (term_atom1_type < term_atom2_type || (term_atom1_type == term_atom2_type && ctr_atom1_type <= ctr_atom2_type)) 
-			return ((Base::uint64(term_atom1_type) << 32) + (ctr_atom1_type << 24) + (ctr_atom2_type << 16) + (term_atom2_type << 8) + tor_type_idx);
+			return ((std::uint64_t(term_atom1_type) << 32) + (ctr_atom1_type << 24) + (ctr_atom2_type << 16) + (term_atom2_type << 8) + tor_type_idx);
 
-		return ((Base::uint64(term_atom2_type) << 32) + (ctr_atom2_type << 24) + (ctr_atom1_type << 16) + (term_atom1_type << 8) + tor_type_idx);
+		return ((std::uint64_t(term_atom2_type) << 32) + (ctr_atom2_type << 24) + (ctr_atom1_type << 16) + (term_atom1_type << 8) + tor_type_idx);
 	}
 
 	const ForceField::MMFF94TorsionParameterTable::Entry NOT_FOUND;

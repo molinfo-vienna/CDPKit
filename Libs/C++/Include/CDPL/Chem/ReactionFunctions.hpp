@@ -32,6 +32,7 @@
 #define CDPL_CHEM_REACTIONFUNCTIONS_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <ctime>
 #include <string>
 
@@ -45,7 +46,6 @@
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -117,10 +117,10 @@ namespace CDPL
 										  bool ord_h_deplete = true, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
 										  unsigned int bond_flags = BondPropertyFlag::DEFAULT);
 	
-		CDPL_CHEM_API Base::uint64 calcHashCode(const Reaction& rxn, unsigned int role_mask = ReactionRole::ALL, 
-												unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
-												unsigned int bond_flags = BondPropertyFlag::DEFAULT, 
-												bool global_stereo = true, bool ord_h_deplete = true);
+		CDPL_CHEM_API std::uint64_t calcHashCode(const Reaction& rxn, unsigned int role_mask = ReactionRole::ALL, 
+												 unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
+												 unsigned int bond_flags = BondPropertyFlag::DEFAULT, 
+												 bool global_stereo = true, bool ord_h_deplete = true);
 
 
 		CDPL_CHEM_API const std::string& getMDLUserInitials(const Reaction& rxn);

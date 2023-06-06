@@ -40,8 +40,8 @@
 using namespace CDPL; 
 
 
-Base::uint64 Chem::calcHashCode(const Reaction& rxn, unsigned int role_mask, 
-								unsigned int atom_flags, unsigned int bond_flags, bool global_stereo, bool ord_h_deplete)
+std::uint64_t Chem::calcHashCode(const Reaction& rxn, unsigned int role_mask, 
+								 unsigned int atom_flags, unsigned int bond_flags, bool global_stereo, bool ord_h_deplete)
 {
 	HashCodeCalculator hash_calc;
 
@@ -56,7 +56,7 @@ Base::uint64 Chem::calcHashCode(const Reaction& rxn, unsigned int role_mask,
 	hash_calc.includeGlobalStereoFeatures(global_stereo);
 
 	Fragment tmp_frag;
-	std::vector<Base::uint64> comp_hashes;
+	std::vector<std::uint64_t> comp_hashes;
 	std::size_t hash_offs = 0;
 
 	unsigned int roles[3] = { ReactionRole::REACTANT, ReactionRole::AGENT, ReactionRole::PRODUCT };
@@ -106,8 +106,8 @@ Base::uint64 Chem::calcHashCode(const Reaction& rxn, unsigned int role_mask,
 
 	sha.getResult(sha_hash);
 
-	return (Base::uint64(sha_hash[0]) | (Base::uint64(sha_hash[1]) << 8)
-			| (Base::uint64(sha_hash[2]) << 16) | (Base::uint64(sha_hash[3]) << 24)
-			| (Base::uint64(sha_hash[4]) << 32) | (Base::uint64(sha_hash[5]) << 40)
-			| (Base::uint64(sha_hash[6]) << 48) | (Base::uint64(sha_hash[7]) << 56));
+	return (std::uint64_t(sha_hash[0]) | (std::uint64_t(sha_hash[1]) << 8)
+			| (std::uint64_t(sha_hash[2]) << 16) | (std::uint64_t(sha_hash[3]) << 24)
+			| (std::uint64_t(sha_hash[4]) << 32) | (std::uint64_t(sha_hash[5]) << 40)
+			| (std::uint64_t(sha_hash[6]) << 48) | (std::uint64_t(sha_hash[7]) << 56));
 }

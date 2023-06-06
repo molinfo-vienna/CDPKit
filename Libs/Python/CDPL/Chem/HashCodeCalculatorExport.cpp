@@ -39,14 +39,14 @@
 namespace
 {
 
-	CDPL::Base::uint64 defAtomHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefAtomHashSeedFunctor& func, 
-											   CDPL::Chem::Atom& atom)
+	std::uint64_t defAtomHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefAtomHashSeedFunctor& func, 
+										  CDPL::Chem::Atom& atom)
 	{
 		return func(atom);
 	}
 
-	CDPL::Base::uint64 defBondHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefBondHashSeedFunctor& func,
-											   CDPL::Chem::Bond& bond)
+	std::uint64_t defBondHashSeedFunction(const CDPL::Chem::HashCodeCalculator::DefBondHashSeedFunctor& func,
+										  CDPL::Chem::Bond& bond)
 	{
 		return func(bond);
 	}

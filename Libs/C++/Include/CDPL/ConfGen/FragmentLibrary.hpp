@@ -40,7 +40,6 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -52,7 +51,7 @@ namespace CDPL
 		class CDPL_CONFGEN_API FragmentLibrary
 		{
 
-			typedef std::unordered_map<Base::uint64, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
+			typedef std::unordered_map<std::uint64_t, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
 
 		  public:
 			typedef boost::shared_ptr<FragmentLibrary> SharedPointer;
@@ -73,15 +72,15 @@ namespace CDPL
 
 			bool addEntry(const FragmentLibraryEntry::SharedPointer& entry);
 
-			const FragmentLibraryEntry::SharedPointer& getEntry(Base::uint64 hash_code) const;
+			const FragmentLibraryEntry::SharedPointer& getEntry(std::uint64_t hash_code) const;
 
-			bool containsEntry(Base::uint64 hash_code) const;
+			bool containsEntry(std::uint64_t hash_code) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(Base::uint64 hash_code);
+			bool removeEntry(std::uint64_t hash_code);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 

@@ -40,7 +40,6 @@
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Math/Vector.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 #include "Base/FunctionWrapperExport.hpp"
 
@@ -56,8 +55,8 @@ void CDPLPythonChem::exportFunctionWrappers()
     CDPLPythonBase::Function1Export<boost::function1<const MatchExpression<Atom, MolecularGraph>::SharedPointer&, const Atom&>, Atom&>("AtomMatchExpressionPtrAtomFunctor");
     CDPLPythonBase::Function1Export<boost::function1<const MatchExpression<Bond, MolecularGraph>::SharedPointer&, const Bond&>, Bond&>("BondMatchExpressionPtrBondFunctor");
     CDPLPythonBase::Function1Export<boost::function1<const MatchExpression<MolecularGraph>::SharedPointer&, const MolecularGraph&> >("MolGraphMatchExpressionPtrMolGraphFunctor");
-    CDPLPythonBase::Function1Export<boost::function1<Base::uint64, const Atom&>, Atom&>("UInt64AtomFunctor");
-    CDPLPythonBase::Function1Export<boost::function1<Base::uint64, const Bond&>, Bond&>("UInt64BondFunctor");
+    CDPLPythonBase::Function1Export<boost::function1<std::uint64_t, const Atom&>, Atom&>("UInt64AtomFunctor");
+    CDPLPythonBase::Function1Export<boost::function1<std::uint64_t, const Bond&>, Bond&>("UInt64BondFunctor");
     CDPLPythonBase::Function1Export<boost::function1<bool, const Entity3DMapping&> >("BoolEntity3DMappingFunctor");
     CDPLPythonBase::Function1Export<boost::function1<bool, const AtomMapping&> >("BoolAtomMappingFunctor");
 	CDPLPythonBase::Function1Export<boost::function1<bool, const Util::STPairArray&> >("BoolSTPairArrayFunctor");
@@ -82,7 +81,7 @@ void CDPLPythonChem::exportFunctionWrappers()
     CDPLPythonBase::Function2Export<boost::function2<bool, const Atom&, const Atom&>, Atom&, Atom&>("BoolAtom2Functor");
     CDPLPythonBase::Function2Export<boost::function2<bool, const Bond&, const Bond&>, Bond&, Bond&>("BoolBond2Functor");
     CDPLPythonBase::Function2Export<boost::function2<double, const Atom&, const Atom&>, Atom&, Atom&>("DoubleAtom2Functor");
-    CDPLPythonBase::Function2Export<boost::function2<Base::uint64, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
+    CDPLPythonBase::Function2Export<boost::function2<std::uint64_t, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
     CDPLPythonBase::Function2Export<boost::function2<std::size_t, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("SizeTypeAtomMolecularGraphFunctor");
 	CDPLPythonBase::Function2Export<boost::function2<bool, const MolecularGraph&, const AtomBondMapping&> >("BoolMolecularGraphAtomBondMappingFunctor");
 

@@ -33,7 +33,6 @@
 
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/Variant.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/LookupKeyDefinition.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"

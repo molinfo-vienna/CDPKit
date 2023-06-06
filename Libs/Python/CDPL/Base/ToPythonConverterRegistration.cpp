@@ -24,10 +24,11 @@
  */
 
 
+#include <cstdint>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Base/Variant.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 #include "ConverterRegistration.hpp"
 
@@ -89,11 +90,11 @@ namespace CDPLPythonBase
 			if (type == python::type_id<long double>()) 
 				return python::incref(python::object(var.getData<long double>()).ptr());
 
-			if (type == python::type_id<Base::uint64>()) 
-				return python::incref(python::object(var.getData<Base::uint64>()).ptr());
+			if (type == python::type_id<std::uint64_t>()) 
+				return python::incref(python::object(var.getData<std::uint64_t>()).ptr());
 
-			if (type == python::type_id<Base::int64>()) 
-				return python::incref(python::object(var.getData<Base::int64>()).ptr());
+			if (type == python::type_id<std::int64_t>()) 
+				return python::incref(python::object(var.getData<std::int64_t>()).ptr());
 
 			if (type == python::type_id<std::string>()) 
 				return python::incref(python::object(var.getData<std::string>()).ptr());

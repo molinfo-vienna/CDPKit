@@ -56,7 +56,7 @@ namespace
 		builtinTable->loadDefaults();
 	}
 
-	Base::uint32 lookupKey(Base::uint32 term_atom1_pte_row, Base::uint32 ctr_atom_pte_row, Base::uint32 term_atom2_pte_row)
+	std::uint32_t lookupKey(std::uint32_t term_atom1_pte_row, std::uint32_t ctr_atom_pte_row, std::uint32_t term_atom2_pte_row)
 	{
 		if (term_atom1_pte_row < term_atom2_pte_row)
 			return ((term_atom1_pte_row << 16) + (ctr_atom_pte_row << 8) + term_atom2_pte_row);

@@ -28,6 +28,7 @@
 #define GENFRAGLIB_GENFRAGLIBIMPL_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -105,7 +106,7 @@ namespace GenFragLib
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
-		void updateOccurrenceCount(CDPL::Base::uint64 hash_code);
+		void updateOccurrenceCount(std::uint64_t hash_code);
 
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
@@ -132,7 +133,7 @@ namespace GenFragLib
 		class FragLibGenerationWorker;
 
 		typedef std::vector<std::string> StringList;
-		typedef std::unordered_map<CDPL::Base::uint64, std::size_t> FragmentFrequencyMap;
+		typedef std::unordered_map<std::uint64_t, std::size_t> FragmentFrequencyMap;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef std::chrono::system_clock Clock;

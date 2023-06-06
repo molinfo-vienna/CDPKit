@@ -36,6 +36,7 @@
 #define CDPL_CHEM_CANONICALNUMBERINGCALCULATOR_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 #include <utility>
 
@@ -48,7 +49,6 @@
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -175,7 +175,7 @@ namespace CDPL
 
 			CanonicalNumberingCalculator& operator=(const CanonicalNumberingCalculator&);
 
-			typedef std::vector<Base::uint64> ConnectionTable;
+			typedef std::vector<std::uint64_t> ConnectionTable;
 
 			void init(const MolecularGraph&, Util::STArray&);
 			void setup(const MolecularGraph&);
@@ -196,9 +196,9 @@ namespace CDPL
 			void saveState();
 			void restoreState();
 
-			AtomNode* allocNode(Calculator* calculator, const Atom* atom, Base::uint64 label, std::size_t id);
+			AtomNode* allocNode(Calculator* calculator, const Atom* atom, std::uint64_t label, std::size_t id);
 
-			Edge* allocEdge(const Calculator* calculator, const Bond* bond, Base::uint64 label,
+			Edge* allocEdge(const Calculator* calculator, const Bond* bond, std::uint64_t label,
 							AtomNode* nbr_node, std::size_t id);
 
 			class AtomNode
@@ -209,15 +209,15 @@ namespace CDPL
 
 				AtomNode();
 
-				void init(Calculator* calculator, const Atom* atom, Base::uint64 label, std::size_t id);
+				void init(Calculator* calculator, const Atom* atom, std::uint64_t label, std::size_t id);
 
 				const Atom* getAtom() const;
 
 				void addEdge(Edge* edge);
 
-				Base::uint64 getLabel() const;
+				std::uint64_t getLabel() const;
 
-				void setLabel(Base::uint64 label);
+				void setLabel(std::uint64_t label);
 				void setNewLabel(std::size_t label);
 
 				void updateLabel();
@@ -256,8 +256,8 @@ namespace CDPL
 
 				Calculator*       calculator;
 				const Atom*       atom;
-				Base::uint64      initialLabel;
-				Base::uint64      label;
+				std::uint64_t     initialLabel;
+				std::uint64_t     label;
 				std::size_t       newLabel;
 				std::size_t       id;
 				Util::BitSet      equivNodeMask;
@@ -275,7 +275,7 @@ namespace CDPL
 			public:
 				Edge();
 
-				void init(const Calculator* calculator, const Bond* bond, Base::uint64 label, 
+				void init(const Calculator* calculator, const Bond* bond, std::uint64_t label, 
 						  AtomNode* nbr_node, std::size_t id);
 
 				void appendBondData(ConnectionTable&) const;
@@ -299,7 +299,7 @@ namespace CDPL
 				const Calculator*  calculator;
 				const Bond*        bond;
 				AtomNode*          nbrNode;
-				Base::uint64       label;
+				std::uint64_t      label;
 				std::size_t        id;
 				StereoDescriptor   stereoDescr;
 				bool               hasConfiguration;
@@ -314,7 +314,7 @@ namespace CDPL
 				bool operator()(const CanonComponentInfo&, const CanonComponentInfo&) const;
 			};
 
-			typedef std::pair<AtomNode*, Base::uint64> NodeLabelingState;
+			typedef std::pair<AtomNode*, std::uint64_t> NodeLabelingState;
 			typedef std::vector<NodeLabelingState> NodeLabelingStack;
 			typedef std::vector<AtomNode*> NodeList;
 			typedef std::vector<ConnectionTable> ConnectionTableList;

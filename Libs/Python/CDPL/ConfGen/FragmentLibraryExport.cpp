@@ -66,7 +66,7 @@ void CDPLPythonConfGen::exportFragmentLibrary()
 			 (python::arg("self"), python::arg("lib"))) 
 		.def("addEntry", &ConfGen::FragmentLibrary::addEntry, 
 			 (python::arg("self"), python::arg("entry"))) 
-		.def("removeEntry", static_cast<bool (ConfGen::FragmentLibrary::*)(Base::uint64)>(
+		.def("removeEntry", static_cast<bool (ConfGen::FragmentLibrary::*)(std::uint64_t)>(
 				 &ConfGen::FragmentLibrary::removeEntry), (python::arg("self"), python::arg("hash_code"))) 
 		.def("getEntry", &ConfGen::FragmentLibrary::getEntry, 
 			 (python::arg("self"), python::arg("hash_code")), python::return_value_policy<python::copy_const_reference>()) 

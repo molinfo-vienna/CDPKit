@@ -83,7 +83,7 @@ namespace CDPL
 		  private:
 			void init();
 
-			void outputHeader(Base::uint8 type_id, Internal::ByteBuffer& bbuf) const;
+			void outputHeader(std::uint8_t type_id, Internal::ByteBuffer& bbuf) const;
 
 			void writeConnectionTable(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 

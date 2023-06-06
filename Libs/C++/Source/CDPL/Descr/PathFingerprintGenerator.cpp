@@ -49,11 +49,11 @@ const unsigned int Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 //-----
 
-Base::uint64 Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor::operator()(const Chem::Atom& atom) const
+std::uint64_t Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor::operator()(const Chem::Atom& atom) const
 {
 	using namespace Chem;
 
-	Base::uint64 descr = 0;
+	std::uint64_t descr = 0;
 
 	if (flags & AtomPropertyFlag::ISOTOPE)
 		descr = getIsotope(atom);
@@ -84,11 +84,11 @@ Base::uint64 Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor::operator
 
 //-----
 
-Base::uint64 Descr::PathFingerprintGenerator::DefBondDescriptorFunctor::operator()(const Chem::Bond& bond) const
+std::uint64_t Descr::PathFingerprintGenerator::DefBondDescriptorFunctor::operator()(const Chem::Bond& bond) const
 {
 	using namespace Chem;
 
-	Base::uint64 descr = 0;
+	std::uint64_t descr = 0;
 
 	if (flags & BondPropertyFlag::TOPOLOGY) {
 		if (getRingFlag(bond))
@@ -280,8 +280,8 @@ std::size_t Descr::PathFingerprintGenerator::calcBitIndex()
 
 	std::reverse_copy(fwdPathDescriptor.begin(), fwdPathDescriptor.end(), std::back_inserter(revPathDescriptor));
 
-	Base::uint64 fwd_descr_hash = Internal::calcHashCode<Base::uint64>(fwdPathDescriptor.begin(), fwdPathDescriptor.end());
-	Base::uint64 rev_descr_hash = Internal::calcHashCode<Base::uint64>(revPathDescriptor.begin(), revPathDescriptor.end());
+	std::uint64_t fwd_descr_hash = Internal::calcHashCode<std::uint64_t>(fwdPathDescriptor.begin(), fwdPathDescriptor.end());
+	std::uint64_t rev_descr_hash = Internal::calcHashCode<std::uint64_t>(revPathDescriptor.begin(), revPathDescriptor.end());
 	boost::uint64_t rand_seed = (fwd_descr_hash < rev_descr_hash ? fwd_descr_hash : rev_descr_hash);
 
 	randGenerator.seed(rand_seed);

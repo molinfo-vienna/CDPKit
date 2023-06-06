@@ -36,6 +36,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <cstdint>
 #include <memory>
 
 #include <boost/shared_ptr.hpp>
@@ -45,7 +46,6 @@
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -118,8 +118,8 @@ namespace CDPL
 			double getAlphaCorrection(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 			double getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 
-			Base::uint64 getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
-			Base::uint64 getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+			std::uint64_t getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
+			std::uint64_t getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys, const Chem::MolecularGraph& molgraph) const;
 
 			bool diagHueckelMatrix();
 			void distElectrons(const Chem::ElectronSystem& pi_sys);

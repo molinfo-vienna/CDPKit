@@ -30,6 +30,7 @@
 #include <functional>
 #include <algorithm>
 #include <map>
+#include <cstdint>
 
 #include <boost/bind.hpp>
 
@@ -39,7 +40,6 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
 
@@ -53,9 +53,9 @@ namespace
 	{
 
 	public:
-		SymClassCountPred(): currEC(~Base::uint64(0)) {}
+		SymClassCountPred(): currEC(~std::uint64_t(0)) {}
 
-		bool operator()(Base::uint64 ec) {
+		bool operator()(std::uint64_t ec) {
 			if (ec != currEC) {
 				currEC = ec;
 				return true;
@@ -65,7 +65,7 @@ namespace
 		}
 		 
 	private:
-		Base::uint64 currEC;
+		std::uint64_t currEC;
 	};
 }
 
@@ -121,7 +121,7 @@ void Chem::MorganNumberingCalculator::NumberingState::perceiveSymClasses()
 	MolecularGraph::ConstAtomIterator atoms_end = molGraph->getAtomsEnd();
 	MolecularGraph::ConstAtomIterator atoms_beg = molGraph->getAtomsBegin();
 
-	typedef std::vector<Base::uint64> UI64Array; 
+	typedef std::vector<std::uint64_t> UI64Array; 
 
 	UI64Array ec_values;
 
@@ -143,7 +143,7 @@ void Chem::MorganNumberingCalculator::NumberingState::perceiveSymClasses()
 		UI64Array::iterator it1 = new_ec_values.begin();
 
 		for (MolecularGraph::ConstAtomIterator it2 = atoms_beg; it2 != atoms_end; ++it1, ++it2) {
-			Base::uint64 new_ec_value = 0;
+			std::uint64_t new_ec_value = 0;
 
 			const Atom& atom = *it2;
 			Atom::ConstAtomIterator nbrs_end = atom.getAtomsEnd();
@@ -170,12 +170,12 @@ void Chem::MorganNumberingCalculator::NumberingState::perceiveSymClasses()
 		num_classes = num_new_classes;
 	}
 
-	std::map<Base::uint64, std::size_t> ec_to_sym_class_id_map;
-	Base::uint64 last_ec_value = ~Base::uint64(0);
+	std::map<std::uint64_t, std::size_t> ec_to_sym_class_id_map;
+	std::uint64_t last_ec_value = ~std::uint64_t(0);
 	std::size_t last_sym_class_id = 0;
 
 	for (UI64Array::const_iterator it = new_ec_values.begin(), end = new_ec_values.end(); it != end; ++it) {
-		Base::uint64 ec_value = *it;
+		std::uint64_t ec_value = *it;
 
 		if (last_ec_value != ec_value) {
 			ec_to_sym_class_id_map[ec_value] = ++last_sym_class_id;

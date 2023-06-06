@@ -35,6 +35,7 @@
 #define CDPL_CHEM_CHEMBLSTANDARDIZER_HPP
 
 #include <vector>
+#include <cstdint>
 #include <utility>
 #include <unordered_set>
 
@@ -127,7 +128,7 @@ namespace CDPL
 
 			void clearMatchConstraints(Molecule& mol) const;
 			
-			typedef std::pair<Base::uint64, Base::uint64> StructureID;
+			typedef std::pair<std::uint64_t, std::uint64_t> StructureID;
 			typedef std::pair<const Fragment*, StructureID> MoleculeComponent;
 			typedef std::vector<MoleculeComponent> MoleculeComponentList;
 			typedef std::unordered_set<StructureID, boost::hash<StructureID> > StructureIDSet;

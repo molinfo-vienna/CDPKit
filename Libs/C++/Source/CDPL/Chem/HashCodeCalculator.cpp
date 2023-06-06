@@ -100,9 +100,9 @@ const unsigned int Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS;
 
 //-----
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::operator()(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::operator()(const Atom& atom) const
 {
-	Base::uint64 seed = 1;
+	std::uint64_t seed = 1;
 
 	if (flags & AtomPropertyFlag::TYPE)
 		seed = getAtomTypeHashSeed(atom);
@@ -125,17 +125,17 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::operator()(const 
 	return seed;
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomTypeHashSeed(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomTypeHashSeed(const Atom& atom) const
 {
 	return boost::math::prime(ATOM_TYPE_IDX + (getType(atom) % ATOM_TYPE_RANGE));
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomIsotopeHashSeed(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomIsotopeHashSeed(const Atom& atom) const
 {
 	return boost::math::prime(ATOM_ISOTOPE_IDX + (getIsotope(atom) % ATOM_ISOTOPE_RANGE));
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomAromaticityHashSeed(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomAromaticityHashSeed(const Atom& atom) const
 {
 	if (getAromaticityFlag(atom))
 		return boost::math::prime(ATOM_AROMATICITY_IDX);
@@ -143,7 +143,7 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomAromaticit
 	return 1;
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomChargeHashSeed(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomChargeHashSeed(const Atom& atom) const
 {
 	const long charge = getFormalCharge(atom);
 
@@ -153,12 +153,12 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomChargeHash
 	return boost::math::prime(ATOM_POS_CHARGE_IDX + (charge % ATOM_POS_CHARGE_RANGE));
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomHCountHashSeed(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomHCountHashSeed(const Atom& atom) const
 {
 	return boost::math::prime(ATOM_H_COUNT_IDX + (Internal::getBondCount(atom, *calculator.molGraph, 1, AtomType::H) % ATOM_H_COUNT_RANGE));
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHashSeed(const Atom& atom) const
+std::uint64_t Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHashSeed(const Atom& atom) const
 {
 	unsigned int config = getCIPConfiguration(atom);
 
@@ -177,9 +177,9 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHash
 
 //-----
 
-Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::operator()(const Bond& bond) const
+std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::operator()(const Bond& bond) const
 {
-	Base::uint64 seed = 1;
+	std::uint64_t seed = 1;
 	
 	if (flags & (BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY))
 		seed = getBondTypeHashSeed(bond);
@@ -193,7 +193,7 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::operator()(const 
 	return seed;
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTopologyHashSeed(const Bond& bond) const
+std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTopologyHashSeed(const Bond& bond) const
 {
 	if (getRingFlag(bond))
 		return boost::math::prime(BOND_RING_FLAG_IDX);
@@ -201,7 +201,7 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTopologyHa
 	return 1;
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTypeHashSeed(const Bond& bond) const
+std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTypeHashSeed(const Bond& bond) const
 {
 	if ((flags & BondPropertyFlag::AROMATICITY) && getAromaticityFlag(bond))
 		return boost::math::prime(BOND_AROM_FLAG_IDX);
@@ -211,7 +211,7 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTypeHashSe
 	return 1;
 }
 
-Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHashSeed(const Bond& bond) const
+std::uint64_t Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHashSeed(const Bond& bond) const
 {
 	unsigned int config = getCIPConfiguration(bond);
 
@@ -256,7 +256,7 @@ bool Chem::HashCodeCalculator::globalStereoFeaturesIncluded() const
 	return incGlobalStereoFeatures;
 }
 
-Base::uint64 Chem::HashCodeCalculator::calculate(const MolecularGraph& molgraph)
+std::uint64_t Chem::HashCodeCalculator::calculate(const MolecularGraph& molgraph)
 {
 	init(molgraph);
 
@@ -269,12 +269,12 @@ Base::uint64 Chem::HashCodeCalculator::calculate(const MolecularGraph& molgraph)
 	return getResult();
 }
 
-Base::uint64 Chem::HashCodeCalculator::getResult() const
+std::uint64_t Chem::HashCodeCalculator::getResult() const
 {
-	Base::uint64 hash_code = 0;
+	std::uint64_t hash_code = 0;
 
 	for (std::size_t i = 0; i < Internal::SHA1::HASH_SIZE; i++) 
-		hash_code = hash_code ^ (Base::uint64(shaHashCode[i]) << ((i % 8) * 8));
+		hash_code = hash_code ^ (std::uint64_t(shaHashCode[i]) << ((i % 8) * 8));
 
 	return hash_code;
 }
@@ -366,7 +366,7 @@ void Chem::HashCodeCalculator::calcAtomHashCodes()
 
 			std::sort(nbr_hash_beg, nbr_hash_end);
 
-			Base::uint64 new_hash_code = atomHashCodes[atom_idx];
+			std::uint64_t new_hash_code = atomHashCodes[atom_idx];
 
 			for (UInt64Array::const_iterator it2 = nbr_hash_beg; it2 != nbr_hash_end; ++it2) 
 				new_hash_code = (new_hash_code << 1) ^ *it2;
@@ -453,7 +453,7 @@ void Chem::HashCodeCalculator::calcBondHashCodes()
 
 			std::sort(bnd_hash_beg, bnd_hash_end);
 
-			Base::uint64 new_hash_code = bondHashCodes[bond_idx];
+			std::uint64_t new_hash_code = bondHashCodes[bond_idx];
 
 			for (UInt64Array::const_iterator it2 = bnd_hash_beg; it2 != bnd_hash_end; ++it2) 
 				new_hash_code = (new_hash_code << 1) ^ *it2;

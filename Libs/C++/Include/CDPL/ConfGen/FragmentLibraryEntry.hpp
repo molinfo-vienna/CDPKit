@@ -33,13 +33,13 @@
 
 #include <string>
 #include <cstddef>
+#include <cstdint>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -68,9 +68,9 @@ namespace CDPL
 			 */
 			FragmentLibraryEntry();
 
-			void setHashCode(Base::uint64 hash_code);
+			void setHashCode(std::uint64_t hash_code);
 
-			Base::uint64 getHashCode() const;
+			std::uint64_t getHashCode() const;
 
 			void setSMILES(const std::string& smiles);
 
@@ -99,7 +99,7 @@ namespace CDPL
 			const ConformerDataArray& getData() const;
 
 		  private:
-			Base::uint64       hashCode;
+			std::uint64_t      hashCode;
 			std::string        smiles;
 			ConformerDataArray conformers;
 		};

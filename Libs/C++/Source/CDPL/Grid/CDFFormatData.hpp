@@ -27,7 +27,8 @@
 #ifndef CDPL_GRID_CDFFORMATDATA_HPP
 #define CDPL_GRID_CDFFORMATDATA_HPP
 
-#include "CDPL/Base/IntegerTypes.hpp"
+#include <cstdint>
+
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 
@@ -42,13 +43,13 @@ namespace CDPL
 			
 			using namespace Internal::CDF;
 
-			typedef Base::uint32 UIntType;
-			typedef Base::uint8  BoolType;
+			typedef std::uint32_t UIntType;
+			typedef std::uint8_t  BoolType;
 
-			const Base::uint8 DREGULAR_GRID_RECORD_ID     = 4;
-			const Base::uint8 DREGULAR_GRID_SET_RECORD_ID = 5;
+			const std::uint8_t DREGULAR_GRID_RECORD_ID     = 4;
+			const std::uint8_t DREGULAR_GRID_SET_RECORD_ID = 5;
 
-			const Base::uint8 CURR_FORMAT_VERSION  = 1;
+			const std::uint8_t CURR_FORMAT_VERSION  = 1;
 
 			const unsigned int EXTENDED_PROP_LIST  = 31;
 

@@ -236,7 +236,7 @@ void ConfGen::CanonicalFragment::orderAtoms(const Chem::AtomCompareFunction& fun
 
 void ConfGen::CanonicalFragment::orderBonds(const Chem::BondCompareFunction& func) {}
 
-Base::uint64 ConfGen::CanonicalFragment::getHashCode() const
+std::uint64_t ConfGen::CanonicalFragment::getHashCode() const
 {
 	return hashCode;
 }
@@ -647,7 +647,7 @@ void ConfGen::CanonicalFragment::calcHashCode(bool stereo)
 	}
 
 	Internal::SHA1 sha;
-	Base::uint8 sha_hash[20];
+	std::uint8_t sha_hash[20];
 
 	sha.input(hashInputData.begin(), hashInputData.end());
 	sha.getResult(&sha_hash[0]);
@@ -655,7 +655,7 @@ void ConfGen::CanonicalFragment::calcHashCode(bool stereo)
 	hashCode = 0;
 
 	for (std::size_t i = 0; i < Internal::SHA1::HASH_SIZE; i++) 
-		hashCode = hashCode ^ (Base::uint64(sha_hash[i]) << ((i % 8) * 8));
+		hashCode = hashCode ^ (std::uint64_t(sha_hash[i]) << ((i % 8) * 8));
 }
 
 bool ConfGen::CanonicalFragment::compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const

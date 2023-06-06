@@ -27,7 +27,8 @@
 #ifndef CDPL_GRAIL_CDFFORMATDATA_HPP
 #define CDPL_GRAIL_CDFFORMATDATA_HPP
 
-#include "CDPL/Base/IntegerTypes.hpp"
+#include <cstdint>
+
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 
@@ -42,12 +43,12 @@ namespace CDPL
 			
 			using namespace Internal::CDF;
 
-			typedef Base::uint32 UIntType;
+			typedef std::uint32_t UIntType;
 
-			const Base::uint8 INTERACTION_SCORE_GRID_RECORD_ID     = 4;
-			const Base::uint8 INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
+			const std::uint8_t INTERACTION_SCORE_GRID_RECORD_ID     = 4;
+			const std::uint8_t INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
 
-			const Base::uint8 CURR_FORMAT_VERSION  = 1;
+			const std::uint8_t CURR_FORMAT_VERSION  = 1;
 
 			namespace AttributedGridProperty
 			{

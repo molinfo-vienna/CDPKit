@@ -56,7 +56,7 @@ namespace
 		builtinTable->loadDefaults();
 	}
  
-	Base::uint32 lookupKey(Base::uint32 atomic_no1, Base::uint32 atomic_no2)
+	std::uint32_t lookupKey(std::uint32_t atomic_no1, std::uint32_t atomic_no2)
 	{
 		if (atomic_no1 < atomic_no2)
 			return ((atomic_no1 << 8) + atomic_no2);

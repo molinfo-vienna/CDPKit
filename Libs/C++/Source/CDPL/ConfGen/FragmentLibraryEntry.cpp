@@ -36,12 +36,12 @@ using namespace CDPL;
 ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(): hashCode(0)
 {}
 
-void ConfGen::FragmentLibraryEntry::setHashCode(Base::uint64 hash_code)
+void ConfGen::FragmentLibraryEntry::setHashCode(std::uint64_t hash_code)
 {
 	hashCode = hash_code;
 }
 
-Base::uint64 ConfGen::FragmentLibraryEntry::getHashCode() const
+std::uint64_t ConfGen::FragmentLibraryEntry::getHashCode() const
 {
 	return hashCode;
 }

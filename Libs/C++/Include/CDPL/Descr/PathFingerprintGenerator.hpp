@@ -34,6 +34,7 @@
 #define CDPL_DESCR_PATHFINGERPRINTGENERATOR_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <vector>
 
 #include <boost/function.hpp>
@@ -42,7 +43,6 @@
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -114,7 +114,7 @@ namespace CDPL
 				 * \param atom The atom for which to generate the descriptor.
 				 * \return The generated atom descriptor.
 				 */
-				Base::uint64 operator()(const Chem::Atom& atom) const;
+				std::uint64_t operator()(const Chem::Atom& atom) const;
 
 			private:
 				unsigned int flags;
@@ -150,7 +150,7 @@ namespace CDPL
 				 * \param bond The bond for which to generate the descriptor.
 				 * \return The generated bond descriptor.
 				 */
-				Base::uint64 operator()(const Chem::Bond& bond) const;
+				std::uint64_t operator()(const Chem::Bond& bond) const;
 
 			private:
 				unsigned int flags;
@@ -162,9 +162,9 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of atom descriptors are required to take
 			 * the atom (as a \c const reference to Chem::Atom) as argument and return the descriptor as
-			 * an integer of type Base::uint64. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<Base::uint64, const Chem::Atom&> AtomDescriptorFunction;
+			typedef boost::function1<std::uint64_t, const Chem::Atom&> AtomDescriptorFunction;
 
 			/**
 			 * \brief Type of the generic functor class used to store user-defined functions or function objects
@@ -172,9 +172,9 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of bond descriptors are required to take
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the descriptor as
-			 * an integer of type Base::uint64. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<Base::uint64, const Chem::Bond&> BondDescriptorFunction;
+			typedef boost::function1<std::uint64_t, const Chem::Bond&> BondDescriptorFunction;
 
 			/**
 			 * \brief Constructs the \c %PathFingerprintGenerator instance.
@@ -267,7 +267,7 @@ namespace CDPL
 			std::size_t calcBitIndex();
 
 			typedef std::vector<std::size_t> IndexList;
-			typedef std::vector<Base::uint64> UInt64Array;
+			typedef std::vector<std::uint64_t> UInt64Array;
 
 			const Chem::MolecularGraph*  molGraph;
 			std::size_t                  numBits;

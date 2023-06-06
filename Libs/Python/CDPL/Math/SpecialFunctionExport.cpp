@@ -28,7 +28,6 @@
 #include <boost/math/special_functions/prime.hpp>
 
 #include "CDPL/Math/SpecialFunctions.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 #include "FunctionExports.hpp"
 
@@ -49,7 +48,7 @@ void CDPLPythonMath::exportSpecialFunctions()
 	using namespace CDPL;
 
 	python::def("prime", &prime, python::arg("i"));
-	python::def("factorial", &Math::factorial<Base::uint64>, python::arg("n"));
+	python::def("factorial", &Math::factorial<std::uint64_t>, python::arg("n"));
 	python::def("pythag", &Math::pythag<double>, (python::arg("a"), python::arg("b")));
 	python::def("sign", &Math::sign<double, double>, (python::arg("a"), python::arg("b")));
 	python::def("lnGamma", &Math::lnGamma<double>, python::arg("z"));

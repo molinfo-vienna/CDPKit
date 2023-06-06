@@ -30,6 +30,7 @@
 #define CDPL_MATH_MATRIX_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <algorithm>
 #include <vector>
 #include <limits>
@@ -48,7 +49,6 @@
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Math/SparseContainerElement.hpp"
 #include "CDPL/Math/LUDecomposition.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -406,8 +406,8 @@ namespace CDPL
 
 			SparseMatrix(SizeType m, SizeType n): 
 				size1(m), size2(n), data() {
-				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
-								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<std::uint32_t>::max() &&
+								n <= std::numeric_limits<std::uint32_t>::max(), "Maximum size exceeded", Base::SizeError);
 			}
 
 			SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
@@ -415,8 +415,8 @@ namespace CDPL
 			template <typename E>
 			SparseMatrix(const MatrixExpression<E>& e): 
 				size1(e().getSize1()), size2(e().getSize2()), data() {
-				CDPL_MATH_CHECK((size1 == 0 || size2 <= data.max_size() / size1) && size1 <= std::numeric_limits<Base::uint32>::max() &&
-								size2 <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((size1 == 0 || size2 <= data.max_size() / size1) && size1 <= std::numeric_limits<std::uint32_t>::max() &&
+								size2 <= std::numeric_limits<std::uint32_t>::max(), "Maximum size exceeded", Base::SizeError);
 				matrixAssignMatrix<ScalarAssignment>(*this, e);
 			}
 
@@ -559,8 +559,8 @@ namespace CDPL
 			}
 
 			void resize(SizeType m, SizeType n, bool preserve = true) {
-				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
-								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<std::uint32_t>::max() &&
+								n <= std::numeric_limits<std::uint32_t>::max(), "Maximum size exceeded", Base::SizeError);
 
 				for (typename ArrayType::iterator it = data.begin(); it != data.end(); ) {
 					const KeyType& key = it->first;
@@ -576,15 +576,15 @@ namespace CDPL
 			}
 
 		private:
-			static KeyType makeKey(Base::uint32 i, Base::uint32 j) {
+			static KeyType makeKey(std::uint32_t i, std::uint32_t j) {
 				return ((KeyType(i) << 32) + j);
 			}
 
-			static Base::uint32 getRowIdx(const KeyType& key) {
+			static std::uint32_t getRowIdx(const KeyType& key) {
 				return (key >> 32);
 			}
 	
-			static Base::uint32 getColIdx(const KeyType& key) {
+			static std::uint32_t getColIdx(const KeyType& key) {
 				return key;
 			}
 

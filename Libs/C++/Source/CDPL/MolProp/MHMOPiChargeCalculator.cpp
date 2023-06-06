@@ -51,7 +51,7 @@ using namespace CDPL;
 namespace
 {
 
-	typedef std::unordered_map<Base::uint64, double> ParameterMap;
+	typedef std::unordered_map<std::uint64_t, double> ParameterMap;
 
 	ParameterMap alphaParams;
 	ParameterMap betaParams;
@@ -482,7 +482,7 @@ double MolProp::MHMOPiChargeCalculator::getAlphaCorrection(const Chem::Atom& ato
 }
 
 double MolProp::MHMOPiChargeCalculator::getBeta(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
-													 const Chem::MolecularGraph& molgraph) const
+												const Chem::MolecularGraph& molgraph) const
 {
 	ParameterMap::const_iterator it = betaParams.find(getBondID(bond, pi_sys, molgraph));
 
@@ -492,8 +492,8 @@ double MolProp::MHMOPiChargeCalculator::getBeta(const Chem::Bond& bond, const Ch
 	return it->second;
 }
 
-Base::uint64 MolProp::MHMOPiChargeCalculator::getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
-															 const Chem::MolecularGraph& molgraph) const
+std::uint64_t MolProp::MHMOPiChargeCalculator::getAtomID(const Chem::Atom& atom, const Chem::ElectronSystem& pi_sys,
+														 const Chem::MolecularGraph& molgraph) const
 {
 	using namespace Chem;
 
@@ -507,11 +507,11 @@ Base::uint64 MolProp::MHMOPiChargeCalculator::getAtomID(const Chem::Atom& atom, 
 	return (atom_type * 1000 + num_pi_elec * 10 + specialAtomTypes.test(atom_idx));
 }
 
-Base::uint64 MolProp::MHMOPiChargeCalculator::getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
-															 const Chem::MolecularGraph& molgraph) const
+std::uint64_t MolProp::MHMOPiChargeCalculator::getBondID(const Chem::Bond& bond, const Chem::ElectronSystem& pi_sys,
+														 const Chem::MolecularGraph& molgraph) const
 {
-	Base::uint64 atom1_id = getAtomID(bond.getBegin(), pi_sys, molgraph);
-	Base::uint64 atom2_id = getAtomID(bond.getEnd(), pi_sys, molgraph);
+	std::uint64_t atom1_id = getAtomID(bond.getBegin(), pi_sys, molgraph);
+	std::uint64_t atom2_id = getAtomID(bond.getEnd(), pi_sys, molgraph);
 
 	if (atom1_id > atom2_id)
 		std::swap(atom1_id, atom2_id);

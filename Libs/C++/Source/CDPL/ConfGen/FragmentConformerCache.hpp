@@ -32,11 +32,11 @@
 #define CDPL_CONFGEN_FRAGMENTCONFORMERCACHE_HPP
 
 #include <cstddef>
+#include <cstdint>
 #include <unordered_map>
 #include <mutex>
 
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -49,9 +49,9 @@ namespace CDPL
 		{
 	    
 		public:
-			static const ConformerDataArray* getEntry(Base::uint64 frag_hash);
+			static const ConformerDataArray* getEntry(std::uint64_t frag_hash);
 
-			static void addEntry(Base::uint64 frag_hash, 
+			static void addEntry(std::uint64_t frag_hash, 
 								 const ConformerDataArray::const_iterator& confs_beg, 
 								 const ConformerDataArray::const_iterator& confs_end);
 
@@ -61,7 +61,7 @@ namespace CDPL
 			struct Entry
 			{
 
-				Base::uint64       fragHash;
+				std::uint64_t       fragHash;
 				ConformerDataArray conformers;
 				Entry*             previous;
 				Entry*             next;
@@ -77,7 +77,7 @@ namespace CDPL
 			static FragmentConformerCache& getInstance();
 			static void createInstance();
 	    
-			typedef std::unordered_map<Base::uint64, Entry*> HashToCacheEntryMap;
+			typedef std::unordered_map<std::uint64_t, Entry*> HashToCacheEntryMap;
 
 			static FragmentConformerCache* instance;
 			static std::once_flag          onceFlag;

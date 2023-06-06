@@ -32,7 +32,7 @@
 using namespace CDPL; 
 
 
-bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& header, Base::uint8 rec_type, bool seek_beg, ByteBuffer& bbuf) const
+bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& header, std::uint8_t rec_type, bool seek_beg, ByteBuffer& bbuf) const
 {
     while (true) {
 		std::istream::pos_type last_spos = is.tellg();
@@ -56,7 +56,7 @@ bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& he
 	return false;
 }
 
-bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, Base::uint8 rec_type, ByteBuffer& bbuf) const
+bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, std::uint8_t rec_type, ByteBuffer& bbuf) const
 {
 	CDF::Header header;
 

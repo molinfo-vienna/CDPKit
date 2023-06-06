@@ -28,8 +28,7 @@
 #define CDPL_INTERNAL_CDFFORMATDATA_HPP
 
 #include <cstddef>
-
-#include "CDPL/Base/IntegerTypes.hpp"
+#include <cstdint>
 
 
 namespace CDPL
@@ -41,20 +40,20 @@ namespace CDPL
 		namespace CDF
 		{
 			
-			typedef Base::uint32 SizeType;
-			typedef Base::uint8  PropertySpec;
+			typedef std::uint32_t SizeType;
+			typedef std::uint8_t  PropertySpec;
 
 			struct Header
 			{
 
-				Base::uint32 formatID;
-				Base::uint8  recordTypeID;
-				Base::uint8  recordFormatVersion;
-				Base::uint64 recordDataLength;
+				std::uint32_t formatID;
+				std::uint8_t  recordTypeID;
+				std::uint8_t  recordFormatVersion;
+				std::uint64_t recordDataLength;
 			};
 
-			const std::size_t  HEADER_SIZE                = 14;
-			const Base::uint32 FORMAT_ID                  = 0x4c504443;
+			const std::size_t   HEADER_SIZE                = 14;
+			const std::uint32_t FORMAT_ID                  = 0x4c504443;
 
 			const std::size_t  NUM_PROP_VALUE_LENGTH_BITS = 3; 
 			const PropertySpec PROP_VALUE_LENGTH_MASK     = 0x7; 

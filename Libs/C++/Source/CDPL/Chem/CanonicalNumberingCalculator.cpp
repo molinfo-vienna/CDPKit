@@ -140,7 +140,7 @@ void Chem::CanonicalNumberingCalculator::init(const MolecularGraph& molgraph, Ut
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
 		const Atom& atom = *it;
-		Base::uint64 atom_label = 0;
+		std::uint64_t atom_label = 0;
 
 		if (atomPropertyFlags & AtomPropertyFlag::TYPE)
 			atom_label = getType(atom);
@@ -195,7 +195,7 @@ void Chem::CanonicalNumberingCalculator::init(const MolecularGraph& molgraph, Ut
 		if (!molgraph.containsAtom(bond.getBegin()) || !molgraph.containsAtom(bond.getEnd()))
 			continue;
 
-		Base::uint64 bond_label = 0;
+		std::uint64_t bond_label = 0;
 
 		AtomNode* atom_node1 = allocNodes[molgraph.getAtomIndex(bond.getBegin())];
 		AtomNode* atom_node2 = allocNodes[molgraph.getAtomIndex(bond.getEnd())];
@@ -606,7 +606,7 @@ void Chem::CanonicalNumberingCalculator::restoreState()
 }
 
 Chem::CanonicalNumberingCalculator::AtomNode* 
-Chem::CanonicalNumberingCalculator::allocNode(Calculator* calculator, const Atom* atom, Base::uint64 label, std::size_t id)
+Chem::CanonicalNumberingCalculator::allocNode(Calculator* calculator, const Atom* atom, std::uint64_t label, std::size_t id)
 {
 	AtomNode* node = nodeCache.getRaw();
 
@@ -616,7 +616,7 @@ Chem::CanonicalNumberingCalculator::allocNode(Calculator* calculator, const Atom
 }
 
 Chem::CanonicalNumberingCalculator::Edge* 
-Chem::CanonicalNumberingCalculator::allocEdge(const Calculator* calculator, const Bond* bond, Base::uint64 label,
+Chem::CanonicalNumberingCalculator::allocEdge(const Calculator* calculator, const Bond* bond, std::uint64_t label,
 											 AtomNode* nbr_node, std::size_t id)
 {
 	Edge* edge = edgeCache.getRaw();
@@ -644,7 +644,7 @@ Chem::CanonicalNumberingCalculator::AtomNode::AtomNode():
 	stereoDescr(AtomConfiguration::NONE) 
 {}
 
-void Chem::CanonicalNumberingCalculator::AtomNode::init(Calculator* calculator, const Atom* atom, Base::uint64 label, std::size_t id)
+void Chem::CanonicalNumberingCalculator::AtomNode::init(Calculator* calculator, const Atom* atom, std::uint64_t label, std::size_t id)
 {
 	this->calculator = calculator;
 	this->atom = atom;
@@ -670,12 +670,12 @@ void Chem::CanonicalNumberingCalculator::AtomNode::addEdge(Edge* edge)
 	edges.push_back(edge);
 }
 
-void Chem::CanonicalNumberingCalculator::AtomNode::setLabel(Base::uint64 l)
+void Chem::CanonicalNumberingCalculator::AtomNode::setLabel(std::uint64_t l)
 {
 	label = l;
 }
 
-Base::uint64 Chem::CanonicalNumberingCalculator::AtomNode::getLabel() const
+std::uint64_t Chem::CanonicalNumberingCalculator::AtomNode::getLabel() const
 {
 	return label;
 }
@@ -865,7 +865,7 @@ Chem::CanonicalNumberingCalculator::Edge::Edge():
 	stereoDescr(BondConfiguration::NONE) 
 {}
 
-void Chem::CanonicalNumberingCalculator::Edge::init(const Calculator* calculator, const Bond* bond, Base::uint64 label, 
+void Chem::CanonicalNumberingCalculator::Edge::init(const Calculator* calculator, const Bond* bond, std::uint64_t label, 
 												   AtomNode* nbr_node, std::size_t id)
 {
 	this->calculator = calculator; 

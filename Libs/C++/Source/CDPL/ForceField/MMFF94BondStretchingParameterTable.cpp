@@ -56,7 +56,7 @@ namespace
 		builtinTable->loadDefaults();
 	}
 
-	Base::uint32 lookupKey(Base::uint32 bnd_type_idx, Base::uint32 atom1_type, Base::uint32 atom2_type)
+	std::uint32_t lookupKey(std::uint32_t bnd_type_idx, std::uint32_t atom1_type, std::uint32_t atom2_type)
 	{
 		if (atom1_type < atom2_type)
 			return ((atom1_type << 16) + (atom2_type << 8) + bnd_type_idx);

@@ -81,7 +81,7 @@ namespace CDPL
 	
 			std::size_t getNumGeneratedConformers() const;
 
-			Base::uint64 getLibraryEntryHashCode() const;
+			std::uint64_t getLibraryEntryHashCode() const;
 
 		  private:
 			FragmentLibraryGenerator(const FragmentLibraryGenerator&);

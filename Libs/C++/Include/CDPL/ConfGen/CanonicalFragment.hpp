@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <cstdint>
 
 #include <boost/shared_ptr.hpp>
 
@@ -41,7 +42,6 @@
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/Array.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 
@@ -131,7 +131,7 @@ namespace CDPL
 
 			void orderBonds(const Chem::BondCompareFunction& func);
 
-			Base::uint64 getHashCode() const;
+			std::uint64_t getHashCode() const;
 
 			Chem::MolecularGraph::SharedPointer clone() const;
 
@@ -154,11 +154,11 @@ namespace CDPL
 
 			bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
 		
-			typedef std::vector<Base::uint32> HashInputData;
+			typedef std::vector<std::uint32_t> HashInputData;
 			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 
 			Chem::BasicMolecule                molecule;
-			Base::uint64                       hashCode;
+			std::uint64_t                      hashCode;
 			Chem::CanonicalNumberingCalculator canonNumCalc;
 			SmallestSetOfSmallestRingsPtr      sssr;
 			Util::STArray                      canonNumbers;

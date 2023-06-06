@@ -58,7 +58,7 @@ void Internal::CDFDataWriterBase::putString(const std::string& str, ByteBuffer& 
 
 	bbuf.setIOPointer(last_pos + 1);
 
-	Base::uint8 num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
+	std::uint8_t num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
 
 	bbuf.setIOPointer(last_pos);
 	bbuf.putInt(num_bytes, false);

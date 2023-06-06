@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <map>
+#include <cstdint>
 
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -34,7 +35,6 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
 
@@ -45,10 +45,10 @@ namespace
 {
 
 #define MAKE_ATOM_DESCR(atom_num, sb_cnt, db_cnt, tb_cnt, fval_el) \
-    (Base::uint64(atom_num) << 32) + (Base::uint64(sb_cnt) << 24) + (Base::uint64(db_cnt) << 16) + \
-    (Base::uint64(tb_cnt) << 8) + Base::uint64(fval_el)
+    (std::uint64_t(atom_num) << 32) + (std::uint64_t(sb_cnt) << 24) + (std::uint64_t(db_cnt) << 16) + \
+    (std::uint64_t(tb_cnt) << 8) + std::uint64_t(fval_el)
 
-    typedef std::map<Base::uint64, unsigned int> HybridizationMap;
+    typedef std::map<std::uint64_t, unsigned int> HybridizationMap;
 
     HybridizationMap::value_type hybrMapEntries[] = {
 	HybridizationMap::value_type(MAKE_ATOM_DESCR(Chem::AtomType::C,  4, 0, 0, 0 ), Chem::HybridizationState::SP3  ),
@@ -136,9 +136,9 @@ unsigned int Chem::perceiveHybridizationState(const Atom& atom, const MolecularG
 
     long free_val_el_count = Internal::calcValenceElectronCount(atom) - Internal::calcExplicitValence(atom, molgraph) - impl_h_count;
 
-    Base::uint64 atom_descr = MAKE_ATOM_DESCR(getType(atom),
-											  bnd_order_counts[0], bnd_order_counts[1], bnd_order_counts[2],
-											  (free_val_el_count < 0 ? 0 : free_val_el_count));
+    std::uint64_t atom_descr = MAKE_ATOM_DESCR(getType(atom),
+											   bnd_order_counts[0], bnd_order_counts[1], bnd_order_counts[2],
+											   (free_val_el_count < 0 ? 0 : free_val_el_count));
 
     HybridizationMap::const_iterator it = atomHybridizations.find(atom_descr);
 

@@ -498,7 +498,7 @@ bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
 		}
 	}
 
-	Base::uint64 hash = calcTautomerHashCode(*mol);
+	std::uint64_t hash = calcTautomerHashCode(*mol);
 
 	if (tautHashCodes.insert(hash).second) {
 		if (customSetupFunc)
@@ -511,7 +511,7 @@ bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
 	return false;
 }
 
-Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule& tautomer)
+std::uint64_t Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule& tautomer)
 {
 	if (mode == TOPOLOGICALLY_UNIQUE)
 		return hashCalculator.calculate(tautomer);
@@ -557,15 +557,15 @@ Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule& 
 	}
 
 	Internal::SHA1 sha;
-	Base::uint8 sha_hash[Internal::SHA1::HASH_SIZE];
+	std::uint8_t sha_hash[Internal::SHA1::HASH_SIZE];
 
 	sha.input(shaInput.begin(), shaInput.end());
 	sha.getResult(&sha_hash[0]);
 
-	Base::uint64 hash_code = 0;
+	std::uint64_t hash_code = 0;
 
 	for (std::size_t i = 0; i < Internal::SHA1::HASH_SIZE; i++) 
-		hash_code = hash_code ^ (Base::uint64(sha_hash[i]) << ((i % 8) * 8));
+		hash_code = hash_code ^ (std::uint64_t(sha_hash[i]) << ((i % 8) * 8));
 
 	return hash_code;
 }

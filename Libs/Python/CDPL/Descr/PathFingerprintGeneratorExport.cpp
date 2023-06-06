@@ -40,14 +40,14 @@
 namespace
 {
 
-	CDPL::Base::uint64 defAtomDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor& func,
-												 CDPL::Chem::Atom& atom)
+	std::uint64_t defAtomDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefAtomDescriptorFunctor& func,
+											CDPL::Chem::Atom& atom)
 	{
 		return func(atom);
 	}
 
-	CDPL::Base::uint64 defBondDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefBondDescriptorFunctor& func, 
-												 CDPL::Chem::Bond& bond)
+	std::uint64_t defBondDescriptorFunction(const CDPL::Descr::PathFingerprintGenerator::DefBondDescriptorFunctor& func, 
+											CDPL::Chem::Bond& bond)
 	{
 		return func(bond);
 	}

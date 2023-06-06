@@ -128,11 +128,11 @@ const Base::ControlParameterContainer& Chem::CDFDataWriter::getCtrlParameters() 
     return ctrlParams;
 }
 
-void Chem::CDFDataWriter::outputHeader(Base::uint8 type_id, Internal::ByteBuffer& bbuf) const
+void Chem::CDFDataWriter::outputHeader(std::uint8_t type_id, Internal::ByteBuffer& bbuf) const
 {
 	CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<Base::uint64>(bbuf.getSize() - CDF::HEADER_SIZE);
+	cdf_header.recordDataLength = boost::numeric_cast<std::uint64_t>(bbuf.getSize() - CDF::HEADER_SIZE);
 	cdf_header.recordTypeID = type_id;
 	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
@@ -378,7 +378,7 @@ void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, un
 
 	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 
-	bbuf.putInt(boost::numeric_cast<Base::uint8>(num_ref_atoms), false);
+	bbuf.putInt(boost::numeric_cast<std::uint8_t>(num_ref_atoms), false);
 
 	for (std::size_t i = 0; i < num_ref_atoms; i++) {
 		std::size_t old_io_pos = bbuf.getIOPointer();
@@ -389,7 +389,7 @@ void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, un
 		std::size_t new_io_pos = bbuf.getIOPointer();
 
 		bbuf.setIOPointer(old_io_pos);
-		bbuf.putInt(boost::numeric_cast<Base::uint8>(num_bytes), false);
+		bbuf.putInt(boost::numeric_cast<std::uint8_t>(num_bytes), false);
 		bbuf.setIOPointer(new_io_pos);
 	}
 }

@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <cstdint>
 #include <unordered_set>
 #include <array>
 
@@ -43,7 +44,6 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/TautomerizationRule.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
-#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 
 
@@ -131,14 +131,14 @@ namespace CDPL
 
 			bool addNewTautomer(const MoleculePtr& mol);
 
-			Base::uint64 calcTautomerHashCode(const BasicMolecule& tautomer);
+			std::uint64_t calcTautomerHashCode(const BasicMolecule& tautomer);
 		
 			typedef std::array<std::size_t, 3> BondDescriptor;
 			typedef std::vector<MoleculePtr> MoleculeList;
 			typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
 			typedef std::vector<BondDescriptor> BondDescrArray;
 			typedef std::vector<std::size_t> SizeTArray;
-			typedef std::unordered_set<Base::uint64> HashCodeSet;
+			typedef std::unordered_set<std::uint64_t> HashCodeSet;
 			typedef std::array<std::size_t, 6> StereoCenter;
 			typedef std::vector<StereoCenter> StereoCenterList;
 

@@ -29,6 +29,7 @@
 
 #include <iosfwd>
 #include <cstddef>
+#include <cstdint>
 #include <string>
 
 #include "CDPL/Math/VectorArray.hpp"
@@ -52,9 +53,9 @@ namespace CDPL
 
 			virtual ~CDFDataReaderBase() {}
 
-			bool skipToRecord(std::istream& is, CDF::Header& header, Base::uint8 rec_type, bool seek_beg, ByteBuffer& bbuf) const;
+			bool skipToRecord(std::istream& is, CDF::Header& header, std::uint8_t rec_type, bool seek_beg, ByteBuffer& bbuf) const;
 
-			bool skipNextRecord(std::istream& is, Base::uint8 rec_type, ByteBuffer& bbuf) const;
+			bool skipNextRecord(std::istream& is, std::uint8_t rec_type, ByteBuffer& bbuf) const;
 
 			bool readHeader(std::istream& is, CDF::Header& header, ByteBuffer& bbuf) const;
 
@@ -254,7 +255,7 @@ void CDPL::Internal::CDFDataReaderBase::getCVectorArrayProperty(CDF::PropertySpe
 template <typename Mtx>
 void CDPL::Internal::CDFDataReaderBase::getCMatrix(Mtx& mtx, ByteBuffer& bbuf) const
 {
-	Base::uint8 len;
+	std::uint8_t len;
 	bbuf.getInt(len);
 
 	getCMatrix(mtx, bbuf, len);
@@ -287,7 +288,7 @@ void CDPL::Internal::CDFDataReaderBase::getCMatrix(Mtx& mtx, ByteBuffer& bbuf, s
 template <typename Grid>
 void CDPL::Internal::CDFDataReaderBase::getGrid(Grid& grid, ByteBuffer& bbuf) const
 {
-	Base::uint8 len;
+	std::uint8_t len;
 	bbuf.getInt(len);
 
 	getGrid(grid, bbuf, len);
