@@ -28,7 +28,6 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 SET(test-suite_SRCS
     Main.cpp
     SHA1Test.cpp
-    AddressOfTest.cpp
     PermutationTest.cpp
     RangeGeneratorTest.cpp
     )

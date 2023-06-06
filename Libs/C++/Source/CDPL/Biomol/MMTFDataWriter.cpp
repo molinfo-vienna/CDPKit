@@ -42,7 +42,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Math/VectorArray.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 #include "MMTFDataWriter.hpp"
 
@@ -86,7 +85,7 @@ void Biomol::MMTFDataWriter::init(const Chem::MolecularGraph& molgraph)
 	atoms.clear();
 
 	std::transform(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), std::back_inserter(atoms),
-				   Internal::AddressOf<const Chem::Atom>());
+				   [](const Chem::Atom& atom) { return &atom; });
 	std::sort(atoms.begin(), atoms.end(), AtomOrderingFunc());
 
 	atomIndices.assign(atoms.size(), std::numeric_limits<std::size_t>::max());

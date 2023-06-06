@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <cassert>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/ReactionSubstructureSearch.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -41,7 +39,6 @@
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 
 namespace
@@ -233,10 +230,10 @@ void Chem::ReactionSubstructureSearch::initQueryData()
 		queryABIndexOffsets.push_back(IndexOffsetPair(numQueryAtoms, numQueryBonds));
 
 		std::transform(query_comp.getAtomsBegin(), query_comp.getAtomsEnd(), std::back_inserter(queryAtoms),
-					   boost::bind(Internal::AddressOf<const Atom>(), _1));
+					   [](const Atom& atom) { return &atom; });
 
 		std::transform(query_comp.getBondsBegin(), query_comp.getBondsEnd(), std::back_inserter(queryBonds),
-					   boost::bind(Internal::AddressOf<const Bond>(), _1));
+					   [](const Bond& bond) { return &bond; });
 
 		numQueryAtoms += query_comp.getNumAtoms();
 		numQueryBonds += query_comp.getNumBonds();
@@ -292,10 +289,10 @@ void Chem::ReactionSubstructureSearch::initTargetData()
 		targetABIndexOffsets.push_back(IndexOffsetPair(numTargetAtoms, numTargetBonds));
 
 		std::transform(target_comp.getAtomsBegin(), target_comp.getAtomsEnd(), std::back_inserter(targetAtoms),
-					   boost::bind(Internal::AddressOf<const Atom>(), _1));
+					   [](const Atom& atom) { return &atom; });
 
 		std::transform(target_comp.getBondsBegin(), target_comp.getBondsEnd(), std::back_inserter(targetBonds),
-					   boost::bind(Internal::AddressOf<const Bond>(), _1));
+					   [](const Bond& bond) { return &bond; });
 
 		numTargetAtoms += target_comp.getNumAtoms();
 		numTargetBonds += target_comp.getNumBonds();

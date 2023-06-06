@@ -62,7 +62,6 @@
 #include "CDPL/Chem/BondStereoFlagCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 #include "StructureView2DParameters.hpp"
 

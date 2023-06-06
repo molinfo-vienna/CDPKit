@@ -37,7 +37,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL;
@@ -65,7 +64,7 @@ bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&,
 		const FragmentList& target_sub_comps = *getComponents(*comp_it);
 
 		std::transform(target_sub_comps.getElementsBegin(), target_sub_comps.getElementsEnd(), std::back_inserter(compList),
-					   boost::bind(Internal::AddressOf<const Fragment>(), _1));
+					  [](const Fragment& frag) { return &frag; });
 	}
 
 	const AtomMapping& atom_mapping = mapping.getAtomMapping();

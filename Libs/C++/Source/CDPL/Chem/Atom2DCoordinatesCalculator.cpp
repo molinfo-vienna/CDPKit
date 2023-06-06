@@ -48,7 +48,6 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL;
@@ -1250,7 +1249,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::init(const MolecularGraph* 
 	const Fragment& ring_frag = ring_info->getFragment();
 
 	std::transform(ring_frag.getBondsBegin(), ring_frag.getBondsEnd(), std::back_inserter(bondList),
-				   Internal::AddressOf<const Bond>());
+				   [](const Bond& bond) { return &bond; });
 }
 
 const Util::BitSet& Chem::Atom2DCoordinatesCalculator::RingSysNode::getAtomMask() const

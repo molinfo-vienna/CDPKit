@@ -50,8 +50,6 @@
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataReader.hpp"
 #include "CDPL/Util/Permutation.hpp"
-#include "CDPL/Util/AddressOf.hpp"
-#include "CDPL/Util/Dereferencer.hpp"
 
 
 BOOST_AUTO_TEST_CASE(HashCodeCalculatorTest)
@@ -423,9 +421,9 @@ BOOST_AUTO_TEST_CASE(HashCodeCalculatorTest)
 			bonds.clear();
 
 			std::transform(mol.getAtomsBegin(), mol.getAtomsEnd(), std::back_inserter(atoms),
-						   boost::bind(Util::AddressOf<const Atom>(), _1));
+						   [](const Atom& atom) { return &atom; });
 			std::transform(mol.getBondsBegin(), mol.getBondsEnd(), std::back_inserter(bonds),
-						   boost::bind(Util::AddressOf<const Bond>(), _1));
+						   [](const bond& bond) { return &bond; });
 
 			for (std::size_t k = 0; k < i + 10; k++) {
 				Util::nextPermutation(atoms.begin(), atoms.end());
@@ -435,11 +433,11 @@ BOOST_AUTO_TEST_CASE(HashCodeCalculatorTest)
 
 				std::for_each(atoms.begin(), atoms.end(), 
 							  boost::bind(&Fragment::addAtom, boost::ref(frag),
-										  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)));
+										  [](const Atom* atom) { return *atom; }));
 				
 				std::for_each(bonds.begin(), bonds.end(), 
 							  boost::bind(&Fragment::addBond, boost::ref(frag),
-										  boost::bind(Util::Dereferencer<const Bond*, const Bond&>(), _1)));
+										  [](const Bond* bond) { return *bond; }));
 
 				BOOST_CHECK(frag.getNumAtoms() == mol.getNumAtoms());
 				BOOST_CHECK(frag.getNumBonds() == mol.getNumBonds());

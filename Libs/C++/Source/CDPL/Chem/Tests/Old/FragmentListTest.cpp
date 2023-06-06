@@ -32,7 +32,6 @@
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Util/AddressOf.hpp"
 
 
 BOOST_AUTO_TEST_CASE(FragmentListTest)

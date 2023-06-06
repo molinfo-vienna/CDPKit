@@ -43,7 +43,6 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL; 
@@ -313,7 +312,7 @@ void Pharm::HydrophobicFeatureGenerator::genChainFeatures(Pharmacophore& pharm)
 		chainAtoms.clear();
 
 		std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
-					   std::back_inserter(chainAtoms), Internal::AddressOf<const Atom>());
+					   std::back_inserter(chainAtoms), [](const Atom& atom) { return &atom; });
 
 		processChain(pharm);
 	} 
@@ -455,7 +454,7 @@ bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment&
 	featureAtoms.clear();
 
 	std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
-				   std::back_inserter(featureAtoms), Internal::AddressOf<const Atom>());
+				   std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
 
 	buildAtomMask(featureAtoms, tmpAtomMask);
 

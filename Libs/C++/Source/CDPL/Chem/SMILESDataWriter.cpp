@@ -59,7 +59,6 @@
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 #include "CDPL/Internal/AtomFunctions.hpp"
 
 #include "SMILESDataWriter.hpp"
@@ -548,13 +547,13 @@ void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)
 	canonAtomList.clear();
 
 	std::transform(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), std::back_inserter(canonAtomList),
-				   boost::bind(Internal::AddressOf<const Atom>(), _1));
+				   [](const Atom& atom) { return &atom; });
 
 	std::sort(canonAtomList.begin(), canonAtomList.end(), CanonAtomCmpFunc(*this, molgraph));
 
 	std::for_each(canonAtomList.begin(), canonAtomList.end(),
 				  boost::bind(&Fragment::addAtom, canonMolGraph.get(),
-							  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)));
+							  boost::bind<const Atom&>([](const Atom* atom) -> const Atom& { return *atom; }, _1)));
 
 	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
  

@@ -39,7 +39,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Math/Vector.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL; 
@@ -139,7 +138,7 @@ void Pharm::AromaticFeatureGenerator::addNonPatternFeatures(const Chem::Molecula
 		featureAtoms.clear();
 
 		std::transform(ring.getAtomsBegin(), ring.getAtomsEnd(), 
-					   std::back_inserter(featureAtoms), Internal::AddressOf<const Atom>());
+					   std::back_inserter(featureAtoms), [](const Atom& atom) { return &atom; });
 
 		Feature& feature = pharm.addFeature();
 

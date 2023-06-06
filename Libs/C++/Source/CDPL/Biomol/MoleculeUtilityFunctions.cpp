@@ -44,7 +44,6 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"
 #include "CDPL/Math/VectorArray.hpp"
-#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL; 
