@@ -43,6 +43,6 @@ namespace CDPL
     }
 }
 
-#include "CDPL/Internal/BondFunctions.cpp"
+#include "BondFunctionsImpl.hpp"
 
 #endif // CDPL_INTERNAL_BONDFUNCTIONS_HPP

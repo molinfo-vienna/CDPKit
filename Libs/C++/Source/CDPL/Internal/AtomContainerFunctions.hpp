@@ -45,6 +45,6 @@ namespace CDPL
     }
 }
 
-#include "CDPL/Internal/AtomContainerFunctions.cpp"
+#include "AtomContainerFunctionsImpl.hpp"
 
 #endif // CDPL_INTERNAL_ATOMCONTAINERFUNCTIONS_HPP

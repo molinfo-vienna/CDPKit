@@ -78,6 +78,6 @@ namespace CDPL
     }
 }
 
-#include "CDPL/Internal/AtomFunctions.cpp"
+#include "AtomFunctionsImpl.hpp"
 
 #endif // CDPL_INTERNAL_ATOMFUNCTIONS_HPP

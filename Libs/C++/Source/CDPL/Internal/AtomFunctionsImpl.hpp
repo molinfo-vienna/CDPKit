@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomFunctions.cpp 
+ * AtomFunctionsImpl.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
