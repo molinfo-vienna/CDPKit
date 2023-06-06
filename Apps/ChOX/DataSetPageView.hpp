@@ -100,7 +100,7 @@ namespace ChOX
 
 	private slots:
 		void handleDataSetSizeChange(int);
-		void handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&);
+		void handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
 		void handleSelectionStatusChange(bool);
 
 	private:

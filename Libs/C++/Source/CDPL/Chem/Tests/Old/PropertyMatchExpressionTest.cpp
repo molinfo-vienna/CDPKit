@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 	mol1.setProperty(key1, std::string("test2"));
 
-	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Variant()) == false);
+	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Any()) == false);
 	BOOST_CHECK((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 10, AtomBondMapping(), 0) == false));
 
 //-----
@@ -90,12 +90,12 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 	mol1.setProperty(key1, std::string("test2"));
 
-	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Variant()) == false);
+	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Any()) == false);
 	BOOST_CHECK((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 10, AtomBondMapping(), 0) == false));
 
 	mol2.setProperty(key1, std::string("test2"));
 
-	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Variant()) == true);
+	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Any()) == true);
 	BOOST_CHECK((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 10, AtomBondMapping(), 0) == true));
 
 //-----
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 	mol1.setProperty(key1, std::string("test2"));
 	mol2.setProperty(key1, std::string("tet"));
 
-	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Variant()) == false);
+	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Any()) == false);
 	BOOST_CHECK((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 10, AtomBondMapping(), 0) == false));
 
 //-----
@@ -149,12 +149,12 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 	mol1.setProperty(key1, std::string("test2"));
 
-	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Variant()) == false);
+	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Any()) == false);
 	BOOST_CHECK((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 10, AtomBondMapping(), 0) == false));
 
 	mol2.setProperty(key1, std::string("test2"));
 
-	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Variant()) == true);
+	BOOST_CHECK(expr1(mol2, 0, mol1, 1, Any()) == true);
 	BOOST_CHECK((static_cast<const MatchExpression<Molecule, int>&>(expr1)(mol2, 0, mol1, 10, AtomBondMapping(), 0) == true));
 
 //-----------------------
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 	mol2.setProperty(key1, std::size_t(2));
 
 	BOOST_CHECK(expr2(mol2, mol1, 0) == false);
-	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Variant()) == false);
+	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Any()) == false);
 
 	mol1.setProperty(key1, std::size_t(4));
 	mol2.setProperty(key1, std::size_t(17));
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 	mol2.setProperty(key1, std::size_t(17));
 
 	BOOST_CHECK(expr2(mol2, mol1, 0) == false);
-	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Variant()) == false);
+	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Any()) == false);
 
 	mol1.setProperty(key1, std::size_t(4));
 	mol2.setProperty(key1, std::size_t(7));
@@ -215,12 +215,12 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 	mol1.setProperty(key1, std::size_t(5));
 
 	BOOST_CHECK(expr2(mol2, mol1, 0) == false);
-	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Variant()) == false);
+	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Any()) == false);
 
 	mol1.setProperty(key1, std::size_t(4));
 
 	BOOST_CHECK(expr2(mol2, mol1, 0) == true);
-	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Variant()) == true);
+	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Any()) == true);
 
 	mol1.setProperty(key1, std::size_t(6));
 
@@ -246,12 +246,12 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 	mol1.setProperty(key1, std::size_t(5));
 
 	BOOST_CHECK(expr2(mol2, mol1, 0) == true);
-	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Variant()) == true);
+	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Any()) == true);
 
 	mol1.setProperty(key1, std::size_t(4));
 
 	BOOST_CHECK(expr2(mol2, mol1, 0) == true);
-	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Variant()) == true);
+	BOOST_CHECK(static_cast<const MatchExpression<Molecule>&>(expr2)(mol2, mol1, AtomBondMapping(), Any()) == true);
 
 	mol1.setProperty(key1, std::size_t(7));
 

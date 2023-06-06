@@ -42,7 +42,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const Reaction& 
 
 	for (Reaction::ConstComponentIterator c_it = rxn.getComponentsBegin(); c_it != comps_end; ++c_it) {
 		const Molecule& comp = *c_it;
-		const Base::Variant& comp_comp_grps_prop = comp.getProperty(MolecularGraphProperty::COMPONENT_GROUPS);
+		const Base::Any& comp_comp_grps_prop = comp.getProperty(MolecularGraphProperty::COMPONENT_GROUPS);
 
 		if (comp_comp_grps_prop.isEmpty())
 			continue;
@@ -59,7 +59,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const Reaction& 
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(Reaction& rxn, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_groups = rxn.getProperty(ReactionProperty::COMPONENT_GROUPS, false);
+		Base::Any prev_groups = rxn.getProperty(ReactionProperty::COMPONENT_GROUPS, false);
 	
 		if (!prev_groups.isEmpty())
 			return prev_groups.getData<FragmentList::SharedPointer>();

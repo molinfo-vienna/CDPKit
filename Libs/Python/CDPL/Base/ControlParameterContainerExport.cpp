@@ -38,11 +38,11 @@
 namespace
 {
 
-	const CDPL::Base::Variant& getParameterOrDef(CDPL::Base::ControlParameterContainer& cntnr, 
+	const CDPL::Base::Any& getParameterOrDef(CDPL::Base::ControlParameterContainer& cntnr, 
 												 const CDPL::Base::LookupKey& key, 
-												 const CDPL::Base::Variant& def_val, bool local = false)
+												 const CDPL::Base::Any& def_val, bool local = false)
 	{
-		const CDPL::Base::Variant& val = cntnr.getParameter(key, false, local);
+		const CDPL::Base::Any& val = cntnr.getParameter(key, false, local);
 
 		if (val.isEmpty())
 			return def_val;
@@ -50,7 +50,7 @@ namespace
 		return val;
 	}
 
-	const CDPL::Base::Variant& getItem(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Base::LookupKey& key)
+	const CDPL::Base::Any& getItem(CDPL::Base::ControlParameterContainer& cntnr, const CDPL::Base::LookupKey& key)
 	{
 		return cntnr.getParameter(key, true);
 	}
@@ -76,7 +76,7 @@ namespace
 		python::list values;
 
 		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
-					  boost::bind(&python::list::append<Base::Variant>, boost::ref(values),
+					  boost::bind(&python::list::append<Base::Any>, boost::ref(values),
 								  boost::bind(&Base::ControlParameterContainer::ParameterEntry::second, _1)));
 		return values;
 	}
@@ -117,10 +117,10 @@ void CDPLPythonBase::exportControlParameterContainer()
 	using namespace boost;
 	using namespace CDPL;
 
-	void (Base::ControlParameterContainer::*setParameterFunc)(const Base::LookupKey&, const Base::Variant&) = 
+	void (Base::ControlParameterContainer::*setParameterFunc)(const Base::LookupKey&, const Base::Any&) = 
 		&Base::ControlParameterContainer::setParameter;
 
-	typedef const Base::Variant& (Base::ControlParameterContainer::*GetParameterFuncType)(const Base::LookupKey&, bool, bool) const;
+	typedef const Base::Any& (Base::ControlParameterContainer::*GetParameterFuncType)(const Base::LookupKey&, bool, bool) const;
 
 	python::class_<ControlParameterContainerWrapper, boost::noncopyable>("ControlParameterContainer", python::no_init)
 		.def(python::init<>(python::arg("self")))

@@ -51,7 +51,7 @@ namespace
 
 		bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 						const ObjType1& target_obj1, const ObjType2& target_obj2, 
-						const CDPL::Base::Variant& aux_data) const {
+						const CDPL::Base::Any& aux_data) const {
 
 			boost::python::override override = this->get_override("matches");
 			 
@@ -64,14 +64,14 @@ namespace
 		static bool matches(const typename CDPL::Chem::MatchExpression<ObjType1, ObjType2>& expr, 
 							ObjType1& query_obj1, ObjType2& query_obj2, 
 							ObjType1& target_obj1, ObjType2& target_obj2, 
-							const CDPL::Base::Variant& aux_data) {
+							const CDPL::Base::Any& aux_data) {
 
 			return expr(query_obj1, query_obj2, target_obj1, target_obj2, aux_data);
 		}
 
 		bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 						const ObjType1& target_obj1, const ObjType2& target_obj2, 
-						const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Variant& aux_data) const {
+						const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Any& aux_data) const {
 
 			boost::python::override override = this->get_override("mappingMatches");
 			 
@@ -85,7 +85,7 @@ namespace
 		static bool mappingMatches(const CDPL::Chem::MatchExpression<ObjType1, ObjType2>& expr, 
 								   ObjType1& query_obj1, ObjType2& query_obj2, 
 								   ObjType1& target_obj1, ObjType2& target_obj2, 
-								   const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Variant& aux_data)
+								   const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Any& aux_data)
 		{
 			return expr(query_obj1, query_obj2, target_obj1, target_obj2, mapping, aux_data);
 		}
@@ -108,7 +108,7 @@ namespace
 
 		typedef boost::shared_ptr<MatchExpressionWrapper> SharedPointer;
 
-		bool operator()(const ObjType& query_obj, const ObjType& target_obj, const CDPL::Base::Variant& aux_data) const {
+		bool operator()(const ObjType& query_obj, const ObjType& target_obj, const CDPL::Base::Any& aux_data) const {
 			boost::python::override override = this->get_override("matches");
 			 
 			if (override)
@@ -119,13 +119,13 @@ namespace
 
 
 		static bool matches(const CDPL::Chem::MatchExpression<ObjType, void>& expr, 
-							ObjType& query_obj, ObjType& target_obj, const CDPL::Base::Variant& aux_data) {
+							ObjType& query_obj, ObjType& target_obj, const CDPL::Base::Any& aux_data) {
 	
 			return expr(query_obj, target_obj, aux_data);
 		}
 
 		bool operator()(const ObjType& query_obj, const ObjType& target_obj, 
-						const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Variant& aux_data) const {
+						const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Any& aux_data) const {
 
 			boost::python::override override = this->get_override("mappingMatches");
 			 
@@ -137,7 +137,7 @@ namespace
 
 		static bool mappingMatches(const CDPL::Chem::MatchExpression<ObjType, void>& expr, 
 								   ObjType& query_obj, ObjType& target_obj,
-								   const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Variant& aux_data) {
+								   const CDPL::Chem::AtomBondMapping& mapping, const CDPL::Base::Any& aux_data) {
 
 			return expr(query_obj, target_obj, mapping, aux_data);
 		}

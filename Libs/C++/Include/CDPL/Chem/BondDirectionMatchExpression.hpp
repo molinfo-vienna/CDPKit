@@ -91,7 +91,7 @@ namespace CDPL
 			 */
 			bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 							const Bond& target_bond, const MolecularGraph& target_molgraph,
-							const AtomBondMapping& mapping, const Base::Variant& target_bond_dir) const;
+							const AtomBondMapping& mapping, const Base::Any& target_bond_dir) const;
 
 		private:
 			unsigned int dirFlags;

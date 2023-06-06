@@ -39,11 +39,11 @@
 namespace
 {
 
-	const CDPL::Base::Variant& getPropertyOrDef(CDPL::Base::PropertyContainer& cntnr, 
+	const CDPL::Base::Any& getPropertyOrDef(CDPL::Base::PropertyContainer& cntnr, 
 												const CDPL::Base::LookupKey& key, 
-												const CDPL::Base::Variant& def_val)
+												const CDPL::Base::Any& def_val)
 	{
-		const CDPL::Base::Variant& val = cntnr.getProperty(key, false);
+		const CDPL::Base::Any& val = cntnr.getProperty(key, false);
 
 		if (val.isEmpty())
 			return def_val;
@@ -73,7 +73,7 @@ namespace
 		python::list values;
 
 		std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
-					  boost::bind(&python::list::append<Base::Variant>, boost::ref(values),
+					  boost::bind(&python::list::append<Base::Any>, boost::ref(values),
 								  boost::bind(&Base::PropertyContainer::PropertyEntry::second, _1)));
 
 		return values;
@@ -115,7 +115,7 @@ void CDPLPythonBase::exportPropertyContainer()
 	using namespace boost;
 	using namespace CDPL;
 
-	const Base::Variant& (Base::PropertyContainer::*getPropertyFunc)(const Base::LookupKey&, bool) const
+	const Base::Any& (Base::PropertyContainer::*getPropertyFunc)(const Base::LookupKey&, bool) const
 		= &Base::PropertyContainer::getProperty;
 			
 	python::class_<PropertyContainerWrapper, boost::noncopyable>("PropertyContainer", python::no_init)

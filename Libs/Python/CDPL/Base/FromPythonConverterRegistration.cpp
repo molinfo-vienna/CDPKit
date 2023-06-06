@@ -31,23 +31,23 @@
 #include <boost/python.hpp>
 #include <boost/numeric/conversion/bounds.hpp>
 
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
 #include "ConverterRegistration.hpp"
-#include "GenericVariantFromPythonConverter.hpp"
+#include "GenericAnyFromPythonConverter.hpp"
 
 
 namespace
 {
 
-	struct VariantFromPyObjectConverter 
+	struct AnyFromPyObjectConverter 
 	{
 
-		VariantFromPyObjectConverter() {
+		AnyFromPyObjectConverter() {
 			using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Variant>());
+			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
 		}
 
 		static void* convertible(PyObject* obj_ptr) {
@@ -58,15 +58,15 @@ namespace
 			using namespace boost;
 			using namespace CDPL;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<Base::Variant>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
 
 			if (obj_ptr == Py_None) 
-				new (storage) Base::Variant();
+				new (storage) Base::Any();
 
 			else {
 				python::handle<> obj_handle(python::borrowed(obj_ptr));
 
-				new (storage) Base::Variant(obj_handle);
+				new (storage) Base::Any(obj_handle);
 			}
 
 			data->convertible = storage;
@@ -76,13 +76,13 @@ namespace
 	template <typename T> struct DefaultConversionPolicy;
 
 	template <typename T, typename ConversionPolicy = DefaultConversionPolicy<T> >
-	struct VariantFromPythonConverter 
+	struct AnyFromPythonConverter 
 	{
 
-		VariantFromPythonConverter() {
+		AnyFromPythonConverter() {
 			using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Variant>());
+			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
 		}
 
 		static void* convertible(PyObject* obj_ptr) {
@@ -96,9 +96,9 @@ namespace
 			using namespace boost;
 			using namespace CDPL;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<Base::Variant>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
 
-			new (storage) Base::Variant(python::extract<T>(obj_ptr)());
+			new (storage) Base::Any(python::extract<T>(obj_ptr)());
 
 			data->convertible = storage;
 		}
@@ -217,38 +217,38 @@ void CDPLPythonBase::registerFromPythonConverters()
 {
 	using namespace CDPL;
 
-	VariantFromPyObjectConverter();
+	AnyFromPyObjectConverter();
 
-	VariantFromPythonConverter<std::string>();
+	AnyFromPythonConverter<std::string>();
 
-	VariantFromPythonConverter<double>();
-//	VariantFromPythonConverter<double, PyFloatConversionPolicy<double> >();
-//	VariantFromPythonConverter<float, PyFloatConversionPolicy<float> >();
+	AnyFromPythonConverter<double>();
+//	AnyFromPythonConverter<double, PyFloatConversionPolicy<double> >();
+//	AnyFromPythonConverter<float, PyFloatConversionPolicy<float> >();
 
-	VariantFromPythonConverter<std::uint64_t, PyLongToUIntConversionPolicy<std::uint64_t> >();
-	VariantFromPythonConverter<std::int64_t, PyLongToIntConversionPolicy<std::int64_t> >();
+	AnyFromPythonConverter<std::uint64_t, PyLongToUIntConversionPolicy<std::uint64_t> >();
+	AnyFromPythonConverter<std::int64_t, PyLongToIntConversionPolicy<std::int64_t> >();
 
-	VariantFromPythonConverter<unsigned long, PyLongToUIntConversionPolicy<unsigned long> >();
-	VariantFromPythonConverter<signed long, PyLongToIntConversionPolicy<signed long> >();
+	AnyFromPythonConverter<unsigned long, PyLongToUIntConversionPolicy<unsigned long> >();
+	AnyFromPythonConverter<signed long, PyLongToIntConversionPolicy<signed long> >();
 
-	VariantFromPythonConverter<unsigned int, PyLongToUIntConversionPolicy<unsigned int> >();
-	VariantFromPythonConverter<signed int, PyLongToIntConversionPolicy<signed int> >();
+	AnyFromPythonConverter<unsigned int, PyLongToUIntConversionPolicy<unsigned int> >();
+	AnyFromPythonConverter<signed int, PyLongToIntConversionPolicy<signed int> >();
 
-	VariantFromPythonConverter<unsigned short, PyLongToUIntConversionPolicy<unsigned short> >();
-	VariantFromPythonConverter<signed short, PyLongToIntConversionPolicy<signed short> >();
+	AnyFromPythonConverter<unsigned short, PyLongToUIntConversionPolicy<unsigned short> >();
+	AnyFromPythonConverter<signed short, PyLongToIntConversionPolicy<signed short> >();
 
-	VariantFromPythonConverter<unsigned char, PyLongToUIntConversionPolicy<unsigned char> >();
-	VariantFromPythonConverter<signed char, PyLongToIntConversionPolicy<signed char> >();
+	AnyFromPythonConverter<unsigned char, PyLongToUIntConversionPolicy<unsigned char> >();
+	AnyFromPythonConverter<signed char, PyLongToIntConversionPolicy<signed char> >();
 
-//	VariantFromPythonConverter<unsigned long, PyIntToUIntConversionPolicy<unsigned long> >();
-	VariantFromPythonConverter<signed long, PyIntToIntConversionPolicy<signed long> >();
+//	AnyFromPythonConverter<unsigned long, PyIntToUIntConversionPolicy<unsigned long> >();
+	AnyFromPythonConverter<signed long, PyIntToIntConversionPolicy<signed long> >();
 
-	VariantFromPythonConverter<unsigned int, PyIntToUIntConversionPolicy<unsigned int> >();
-	VariantFromPythonConverter<signed int, PyIntToIntConversionPolicy<signed int> >();
+	AnyFromPythonConverter<unsigned int, PyIntToUIntConversionPolicy<unsigned int> >();
+	AnyFromPythonConverter<signed int, PyIntToIntConversionPolicy<signed int> >();
 
-	VariantFromPythonConverter<unsigned short, PyIntToUIntConversionPolicy<unsigned short> >();
-	VariantFromPythonConverter<signed short, PyIntToIntConversionPolicy<signed short> >();
+	AnyFromPythonConverter<unsigned short, PyIntToUIntConversionPolicy<unsigned short> >();
+	AnyFromPythonConverter<signed short, PyIntToIntConversionPolicy<signed short> >();
 
-	VariantFromPythonConverter<unsigned char, PyIntToUIntConversionPolicy<unsigned char> >();
-	VariantFromPythonConverter<signed char, PyIntToIntConversionPolicy<signed char> >();
+	AnyFromPythonConverter<unsigned char, PyIntToUIntConversionPolicy<unsigned char> >();
+	AnyFromPythonConverter<signed char, PyIntToIntConversionPolicy<signed char> >();
 }

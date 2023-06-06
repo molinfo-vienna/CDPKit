@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FromPythonToVariantConverterRegistration.cpp 
+ * FromPythonToAnyConverterRegistration.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -31,23 +31,23 @@
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
-#include "Base/GenericVariantFromPythonConverter.hpp"
+#include "Base/GenericAnyFromPythonConverter.hpp"
 
 #include "ConverterRegistration.hpp"
 
 
-void CDPLPythonMath::registerFromPythonToVariantConverters()
+void CDPLPythonMath::registerFromPythonToAnyConverters()
 {
 	using namespace CDPL;
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::DMatrix::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::LMatrix::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::ULMatrix::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::DMatrix::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::LMatrix::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::ULMatrix::SharedPointer&>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::DVector::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::LVector::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::ULVector::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::DVector::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::LVector::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::ULVector::SharedPointer&>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::Vector2DArray::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Math::Vector3DArray::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::Vector2DArray::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Math::Vector3DArray::SharedPointer&>();
 }

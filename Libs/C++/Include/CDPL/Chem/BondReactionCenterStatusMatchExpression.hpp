@@ -114,7 +114,7 @@ namespace CDPL
 			 * \note The reaction center status of \a target_bond is retrieved from the Chem::Bond property Chem::BondProperty::REACTION_CENTER_STATUS.
 			 */
 			bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, const Bond& target_bond, 
-							const MolecularGraph& target_molgraph, const Base::Variant& aux_data) const;
+							const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
 		private:
 			unsigned int rxnCtrStatus;

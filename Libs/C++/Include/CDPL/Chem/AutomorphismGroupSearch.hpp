@@ -210,11 +210,11 @@ namespace CDPL
 
 				bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
 								const Atom& target_atom, const MolecularGraph& target_molgraph,
-								const Base::Variant& aux_data) const;
+								const Base::Any& aux_data) const;
 
 				bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
 								const Atom& target_atom, const MolecularGraph& target_molgraph, 
-								const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+								const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 			private:
 				AutomorphismGroupSearch*       parent;
 				mutable unsigned int           type;
@@ -236,11 +236,11 @@ namespace CDPL
 
 				bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 								const Bond& target_bond, const MolecularGraph& target_molgraph, 
-								const Base::Variant& aux_data) const;
+								const Base::Any& aux_data) const;
 
 				bool operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 								const Bond& target_bond, const MolecularGraph& target_molgraph, 
-								const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+								const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 			private:
 				AutomorphismGroupSearch*       parent;
 				mutable std::size_t            order;
@@ -258,11 +258,11 @@ namespace CDPL
 
 				bool operator()(const MolecularGraph& query_molgraph, 
 								const MolecularGraph& target_molgraph, 
-								const Base::Variant& aux_data) const;
+								const Base::Any& aux_data) const;
 
 				bool operator()(const MolecularGraph& query_molgraph, 
 								const MolecularGraph& target_molgraph, 
-								const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+								const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
 			private:
 				const AutomorphismGroupSearch* parent;

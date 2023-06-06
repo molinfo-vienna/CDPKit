@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GenericVariantFromPythonConverter.hpp 
+ * GenericAnyFromPythonConverter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,25 +24,25 @@
  */
 
 
-#ifndef CDPL_PYTHON_BASE_GENERICVARIANTFROMPYTHONCONVERTER_HPP
-#define CDPL_PYTHON_BASE_GENERICVARIANTFROMPYTHONCONVERTER_HPP
+#ifndef CDPL_PYTHON_BASE_GENERICANYFROMPYTHONCONVERTER_HPP
+#define CDPL_PYTHON_BASE_GENERICANYFROMPYTHONCONVERTER_HPP
 
 #include <boost/python.hpp>
 
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 
 namespace CDPLPythonBase
 {
 
 	template <typename SourceType>
-	struct GenericVariantFromPythonConverter 
+	struct GenericAnyFromPythonConverter 
 	{
 
-		GenericVariantFromPythonConverter() {
+		GenericAnyFromPythonConverter() {
 			using namespace boost;
 
-			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Variant>());
+			python::converter::registry::insert(&convertible, &construct, python::type_id<CDPL::Base::Any>());
 		}
 
 		static void* convertible(PyObject* obj_ptr) {
@@ -61,13 +61,13 @@ namespace CDPLPythonBase
 			using namespace boost;
 			using namespace CDPL;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<Base::Variant>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<Base::Any>*)data)->storage.bytes;
 
-			new (storage) Base::Variant(python::extract<SourceType>(obj_ptr)());
+			new (storage) Base::Any(python::extract<SourceType>(obj_ptr)());
 
 			data->convertible = storage;
 		}
 	};
 }
 
-#endif // CDPL_PYTHON_BASE_GENERICVARIANTFROMPYTHONCONVERTER_HPP
+#endif // CDPL_PYTHON_BASE_GENERICANYFROMPYTHONCONVERTER_HPP

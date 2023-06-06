@@ -22,5 +22,5 @@
 ##
 # \brief 
 #
-class Variant(Boost.Python.instance):
+class Any(Boost.Python.instance):
     pass

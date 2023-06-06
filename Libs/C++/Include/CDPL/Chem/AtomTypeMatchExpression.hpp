@@ -131,7 +131,7 @@ namespace CDPL
 			 * \note The atom type of \a target_atom is taken from the Chem::Atom property Chem::AtomProperty::TYPE.
 			 */
 			bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom, 
-							const MolecularGraph& target_molgraph, const Base::Variant& aux_data) const;
+							const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
 		private:
 			unsigned int atomType;

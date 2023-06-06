@@ -28,7 +28,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 #include "ConverterRegistration.hpp"
 
@@ -36,10 +36,10 @@
 namespace CDPLPythonBase
 {
 
-	struct VariantToPythonConverter 
+	struct AnyToPythonConverter 
 	{
 
-		static PyObject* convert(const CDPL::Base::Variant& var) {
+		static PyObject* convert(const CDPL::Base::Any& var) {
 			using namespace boost;
 			using namespace CDPL;
 
@@ -122,7 +122,7 @@ void CDPLPythonBase::registerToPythonConverters()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::to_python_converter<Base::Variant, VariantToPythonConverter>();         // for Variant value to Python conversions
+	python::to_python_converter<Base::Any, AnyToPythonConverter>();         // for Any value to Python conversions
 
-	python::class_<Base::Variant, boost::noncopyable>("Variant", python::no_init);  // for holding a reference/pointer to Variant 
+	python::class_<Base::Any, boost::noncopyable>("Any", python::no_init);  // for holding a reference/pointer to Any 
 }

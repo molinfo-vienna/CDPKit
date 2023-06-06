@@ -306,7 +306,7 @@ void Vis::ReactionView2DParameters::parentChanged()
 	componentBoundsChangedFlag = true;
 }
 
-void Vis::ReactionView2DParameters::parameterChanged(const Base::LookupKey& key, Base::Variant val)
+void Vis::ReactionView2DParameters::parameterChanged(const Base::LookupKey& key, Base::Any val)
 {
 	using namespace ControlParameterDefault;
 

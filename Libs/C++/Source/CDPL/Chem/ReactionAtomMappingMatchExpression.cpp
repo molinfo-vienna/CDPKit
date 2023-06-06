@@ -45,7 +45,7 @@ Chem::ReactionAtomMappingMatchExpression::ReactionAtomMappingMatchExpression(con
 	atomMapping(atom_mapping) {}
 
 bool Chem::ReactionAtomMappingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, const AtomBondMapping& mapping, 
-														  const Base::Variant& matched_rxn_roles) const
+														  const Base::Any& matched_rxn_roles) const
 {
 	if (matched_rxn_roles.isEmpty())
 		return true;

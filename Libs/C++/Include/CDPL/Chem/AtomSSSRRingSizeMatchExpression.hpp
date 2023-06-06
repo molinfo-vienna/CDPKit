@@ -85,7 +85,7 @@ namespace CDPL
 			 * \note The SSSR of \a target_molgraph is retrieved by a call to Chem::getSSSR().
 			 */
 			bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom, 
-							const MolecularGraph& target_molgraph, const Base::Variant& aux_data) const;
+							const MolecularGraph& target_molgraph, const Base::Any& aux_data) const;
 
 		private:
 			std::size_t ringSize;
@@ -100,7 +100,7 @@ namespace CDPL
 template <typename MatchFunc>
 bool CDPL::Chem::AtomSSSRRingSizeMatchExpression<MatchFunc>::operator()(const Atom&, const MolecularGraph&, 
 																		const Atom& target_atom, const MolecularGraph& target_molgraph, 
-																		const Base::Variant&) const
+																		const Base::Any&) const
 {
 	const FragmentList& sssr = *getSSSR(target_molgraph);
 

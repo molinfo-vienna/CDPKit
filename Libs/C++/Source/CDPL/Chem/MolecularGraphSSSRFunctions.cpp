@@ -46,7 +46,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveSSSR(const MolecularGraph& molgr
 Chem::FragmentList::SharedPointer Chem::perceiveSSSR(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_sssr = molgraph.getProperty(MolecularGraphProperty::SSSR, false);
+		Base::Any prev_sssr = molgraph.getProperty(MolecularGraphProperty::SSSR, false);
 	
 		if (!prev_sssr.isEmpty())
 			return prev_sssr.getData<FragmentList::SharedPointer>();
@@ -75,7 +75,7 @@ Chem::FragmentList::SharedPointer Chem::extractSSSRSubset(const MolecularGraph& 
 Chem::FragmentList::SharedPointer Chem::extractSSSRSubset(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant tgt_sssr = tgt_molgraph.getProperty(MolecularGraphProperty::SSSR, false);
+		Base::Any tgt_sssr = tgt_molgraph.getProperty(MolecularGraphProperty::SSSR, false);
 	
 		if (!tgt_sssr.isEmpty())
 			return tgt_sssr.getData<FragmentList::SharedPointer>();

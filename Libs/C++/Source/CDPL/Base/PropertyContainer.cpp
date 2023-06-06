@@ -69,7 +69,7 @@ void Base::PropertyContainer::addProperties(const PropertyContainer& cntnr)
 	PropertyMap::const_iterator cntnr_props_end = cntnr.properties.end();
 
 	for (PropertyMap::const_iterator it = cntnr.properties.begin(); it != cntnr_props_end; ++it) {
-		const Variant& val = it->second;
+		const Any& val = it->second;
 		const LookupKey& key = it->first;
 
 		properties[key] = val;

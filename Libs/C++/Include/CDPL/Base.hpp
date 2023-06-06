@@ -32,7 +32,7 @@
 #define CDPL_BASE_HPP
 
 #include "CDPL/Base/Exceptions.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/LookupKeyDefinition.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"

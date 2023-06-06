@@ -46,7 +46,7 @@ Chem::AtomConfigurationMatchExpression::AtomConfigurationMatchExpression(const S
 
 bool Chem::AtomConfigurationMatchExpression::operator()(const Atom& query_atom, const MolecularGraph&, 
 														const Atom& target_atom, const MolecularGraph&, 
-														const AtomBondMapping& mapping, const Base::Variant&) const
+														const AtomBondMapping& mapping, const Base::Any&) const
 {
 	if (queryAtom != &query_atom || configFlags == 0)
 		return true;

@@ -40,7 +40,7 @@ namespace CDPL
 	{
 
 		class LookupKey;
-		class Variant;
+		class Any;
 	}
 
 	namespace Vis
@@ -103,7 +103,7 @@ namespace CDPL
 
 		private:
 			void parentChanged();
-			void parameterChanged(const Base::LookupKey&, Base::Variant);
+			void parameterChanged(const Base::LookupKey&, Base::Any);
 			void parameterRemoved(const Base::LookupKey&);
 
 			void setViewport(const Rectangle2D&);

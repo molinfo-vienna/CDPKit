@@ -121,7 +121,7 @@ SET(math_impl_MOD_SRCS
     ToPythonConverterRegistration.cpp
     
     FromPythonToExpressionPointerConverterRegistration.cpp
-    FromPythonToVariantConverterRegistration.cpp
+    FromPythonToAnyConverterRegistration.cpp
     FromPythonToVectorConverterRegistration.cpp
     FromPythonToCVectorConverterRegistration.cpp
     FromPythonToMatrixConverterRegistration.cpp	

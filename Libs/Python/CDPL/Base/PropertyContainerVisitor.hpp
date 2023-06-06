@@ -60,7 +60,7 @@ namespace CDPLPythonBase
 				cl.def("__len__", &Base::PropertyContainer::getNumProperties, python::arg("self"));
 		}
 
-		static const CDPL::Base::Variant& getItem(CDPL::Base::PropertyContainer& cntnr, const CDPL::Base::LookupKey& key) {
+		static const CDPL::Base::Any& getItem(CDPL::Base::PropertyContainer& cntnr, const CDPL::Base::LookupKey& key) {
 			return cntnr.getProperty(key, true);
 		}
 

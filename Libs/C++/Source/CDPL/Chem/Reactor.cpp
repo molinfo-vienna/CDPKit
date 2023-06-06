@@ -53,7 +53,7 @@ using namespace CDPL;
 namespace
 {
 
-	const Base::Variant NULL_PROPERTY;
+	const Base::Any NULL_PROPERTY;
 
 	typedef std::map<Base::LookupKey, unsigned int> PropertyToConstraintIDMap;
 
@@ -74,7 +74,7 @@ namespace
 		propertyToConstraintIDMap[BondProperty::STEREO_DESCRIPTOR] = BondMatchConstraint::CONFIGURATION;
 	}
 
-	const Base::Variant& extractConstraintValue(unsigned int constr_id, const Chem::MatchConstraintList& constr_list)
+	const Base::Any& extractConstraintValue(unsigned int constr_id, const Chem::MatchConstraintList& constr_list)
 	{
 		using namespace Chem;
 
@@ -96,7 +96,7 @@ namespace
 			if (constraint.getID() == AtomMatchConstraint::CONSTRAINT_LIST || 
 				constraint.getID() == BondMatchConstraint::CONSTRAINT_LIST) {
 				
-				const Base::Variant& value = 
+				const Base::Any& value = 
 					extractConstraintValue(constr_id, *constraint.getValue<MatchConstraintList::SharedPointer>());
 
 				if (!value.isEmpty())
@@ -546,7 +546,7 @@ void Chem::Reactor::editAtoms() const
 		copyProperty(ptn_prod_atom, tgt_prod_atom, AtomProperty::FORMAL_CHARGE);
 		copyProperty(ptn_prod_atom, tgt_prod_atom, AtomProperty::ISOTOPE);
 
-		const Base::Variant& ptn_prod_atom_type_val = getProperty(ptn_prod_atom, AtomProperty::TYPE);
+		const Base::Any& ptn_prod_atom_type_val = getProperty(ptn_prod_atom, AtomProperty::TYPE);
 
 		if (ptn_prod_atom_type_val.isEmpty())
 			continue;
@@ -644,7 +644,7 @@ void Chem::Reactor::editProdAtomStereoDescriptor(const Atom* ptn_prod_atom, Atom
 	if (num_tgt_nbrs < 3 || num_tgt_nbrs > 4)
 		return;
 
-	const Base::Variant& ptn_stereo_desc_val = getProperty(ptn_prod_atom, AtomProperty::STEREO_DESCRIPTOR);
+	const Base::Any& ptn_stereo_desc_val = getProperty(ptn_prod_atom, AtomProperty::STEREO_DESCRIPTOR);
 
 	if (ptn_stereo_desc_val.isEmpty())
 		return;
@@ -686,7 +686,7 @@ void Chem::Reactor::editProdBondStereoDescriptor(const Bond* ptn_prod_bond, Bond
 	if (getOrder(*tgt_prod_bond) != 2)
 		return;
 
-	const Base::Variant& ptn_stereo_desc_val = getProperty(ptn_prod_bond, BondProperty::STEREO_DESCRIPTOR);
+	const Base::Any& ptn_stereo_desc_val = getProperty(ptn_prod_bond, BondProperty::STEREO_DESCRIPTOR);
 
 	if (ptn_stereo_desc_val.isEmpty())
 		return;
@@ -735,9 +735,9 @@ Chem::Bond* Chem::Reactor::getMappedTgtProdBond(const Bond* ptn_bond) const
 	return 0;
 }
 
-const Base::Variant& Chem::Reactor::getProperty(const Atom* atom, const Base::LookupKey& key) const
+const Base::Any& Chem::Reactor::getProperty(const Atom* atom, const Base::LookupKey& key) const
 {
-	const Base::Variant& prop_val = atom->getProperty(key, false);
+	const Base::Any& prop_val = atom->getProperty(key, false);
 
 	if (!prop_val.isEmpty())
 		return prop_val;
@@ -750,9 +750,9 @@ const Base::Variant& Chem::Reactor::getProperty(const Atom* atom, const Base::Lo
 	return extractConstraintValue(it->second, *getMatchConstraints(*atom));
 }
 
-const Base::Variant& Chem::Reactor::getProperty(const Bond* bond, const Base::LookupKey& key) const
+const Base::Any& Chem::Reactor::getProperty(const Bond* bond, const Base::LookupKey& key) const
 {
-	const Base::Variant& prop_val = bond->getProperty(key, false);
+	const Base::Any& prop_val = bond->getProperty(key, false);
 
 	if (!prop_val.isEmpty())
 		return prop_val;
@@ -768,7 +768,7 @@ const Base::Variant& Chem::Reactor::getProperty(const Bond* bond, const Base::Lo
 template <typename T>
 void Chem::Reactor::copyProperty(const T* ptn_prod_obj, T* tgt_prod_obj, const Base::LookupKey& key) const
 {
-	const Base::Variant& prop_val = getProperty(ptn_prod_obj, key);
+	const Base::Any& prop_val = getProperty(ptn_prod_obj, key);
 
 	if (prop_val.isEmpty())
 		return;

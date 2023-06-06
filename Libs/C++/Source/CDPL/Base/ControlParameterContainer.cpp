@@ -55,7 +55,7 @@ std::size_t Base::ControlParameterContainer::getNumParameters() const
 	return parameters.size();
 }
 
-void Base::ControlParameterContainer::setParameter(const LookupKey& key, const Variant& val)
+void Base::ControlParameterContainer::setParameter(const LookupKey& key, const Any& val)
 {
 	if (val.isEmpty()) {
 		removeParameter(key);
@@ -91,9 +91,9 @@ void Base::ControlParameterContainer::clearParameters()
 	}
 }
 
-const Base::Variant& Base::ControlParameterContainer::getParameter(const LookupKey& key, bool throw_ex, bool local) const
+const Base::Any& Base::ControlParameterContainer::getParameter(const LookupKey& key, bool throw_ex, bool local) const
 {
-	static const Base::Variant NOT_FOUND;
+	static const Base::Any NOT_FOUND;
 	
 	ConstParameterIterator it = parameters.find(key);
 	
@@ -281,7 +281,7 @@ void Base::ControlParameterContainer::parameterRemoved(const LookupKey& key) con
 				  boost::bind(&ControlParameterContainer::parentParameterRemoved, _1, boost::ref(key)));
 }
 
-void Base::ControlParameterContainer::parameterChanged(const LookupKey& key, const Variant& val) const
+void Base::ControlParameterContainer::parameterChanged(const LookupKey& key, const Any& val) const
 {
 	std::for_each(paramChangedCallbacks.begin(), paramChangedCallbacks.end(), 
 				  boost::bind(&ParameterChangedCallbackFunction::operator(),
@@ -302,7 +302,7 @@ void Base::ControlParameterContainer::parentParameterRemoved(const LookupKey& ke
 	parameterRemoved(key);
 }
 
-void Base::ControlParameterContainer::parentParameterChanged(const LookupKey& key, const Variant& val) const
+void Base::ControlParameterContainer::parentParameterChanged(const LookupKey& key, const Any& val) const
 {
 	ConstParameterIterator it = parameters.find(key);
 	

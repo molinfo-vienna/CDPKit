@@ -92,7 +92,7 @@ namespace ChOX
 		void tileWindows();
 		void cascadeWindows();
 		void setWindowActive();
-		void handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& val);
+		void handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val);
 		void viewAlignmentChanged();
 		void viewSizeAdjustmentChanged();
 		void reactionArrowStyleChanged();

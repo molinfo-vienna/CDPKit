@@ -39,7 +39,7 @@
 namespace
 {
 
-	const CDPL::Base::Variant& getConstraintValue(const CDPL::Chem::MatchConstraint& constr) 
+	const CDPL::Base::Any& getConstraintValue(const CDPL::Chem::MatchConstraint& constr) 
 	{
 		return constr.getValue();
 	}
@@ -67,7 +67,7 @@ void CDPLPythonChem::exportMatchConstraintList()
 
 	void (Chem::MatchConstraintList::*addElementFunc1)(unsigned int, Chem::MatchConstraint::Relation) 
 		= &Chem::MatchConstraintList::addElement;
-	void (Chem::MatchConstraintList::*addElementFunc2)(unsigned int, Chem::MatchConstraint::Relation, const Base::Variant&) 
+	void (Chem::MatchConstraintList::*addElementFunc2)(unsigned int, Chem::MatchConstraint::Relation, const Base::Any&) 
 		= &Chem::MatchConstraintList::addElement;
 
 	{
@@ -89,7 +89,7 @@ void CDPLPythonChem::exportMatchConstraintList()
 			.def(python::init<unsigned int, Chem::MatchConstraint::Relation>((python::arg("self"), 
 																			  python::arg("id"), 
 																			  python::arg("relation"))))
-			.def(python::init<unsigned int, Chem::MatchConstraint::Relation, Base::Variant>((python::arg("self"), 
+			.def(python::init<unsigned int, Chem::MatchConstraint::Relation, Base::Any>((python::arg("self"), 
 																							 python::arg("id"), 
 																							 python::arg("relation"), 
 																							 python::arg("value"))))

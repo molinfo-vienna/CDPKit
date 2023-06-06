@@ -39,7 +39,7 @@ namespace CDPLPythonMath
 	void registerFromPythonToQuaternionConverters();
 	void registerFromPythonToVectorArrayConverters();
 	void registerFromPythonToExpressionPointerConverters();
-	void registerFromPythonToVariantConverters();
+	void registerFromPythonToAnyConverters();
 
 	void registerToPythonConverters();
 }

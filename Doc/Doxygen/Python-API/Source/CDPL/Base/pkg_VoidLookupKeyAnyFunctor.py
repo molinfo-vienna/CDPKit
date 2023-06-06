@@ -22,21 +22,21 @@
 ##
 # \brief 
 #
-class VoidLookupKeyVariantFunctor(Boost.Python.instance):
+class VoidLookupKeyAnyFunctor(Boost.Python.instance):
 
     ##
-    # \brief Initializes the \e %VoidLookupKeyVariantFunctor instance.
+    # \brief Initializes the \e %VoidLookupKeyAnyFunctor instance.
     #
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidLookupKeyVariantFunctor instance.
+    # \brief Initializes the \e %VoidLookupKeyAnyFunctor instance.
     # \param func 
     #
-    def __init__(func: VoidLookupKeyVariantFunctor) -> None: pass
+    def __init__(func: VoidLookupKeyAnyFunctor) -> None: pass
 
     ##
-    # \brief Initializes the \e %VoidLookupKeyVariantFunctor instance.
+    # \brief Initializes the \e %VoidLookupKeyAnyFunctor instance.
     # \param callable 
     #
     def __init__(callable: object) -> None: pass
@@ -46,7 +46,7 @@ class VoidLookupKeyVariantFunctor(Boost.Python.instance):
     # \param arg1 
     # \param arg2 
     #
-    def __call__(arg1: LookupKey, arg2: Variant) -> None: pass
+    def __call__(arg1: LookupKey, arg2: Any) -> None: pass
 
     ##
     # \brief 

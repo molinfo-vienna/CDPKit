@@ -83,7 +83,7 @@ class MatchConstraint(Boost.Python.instance):
     # \param relation 
     # \param value 
     #
-    def __init__(id: int, relation: Relation, value: CDPL.Base.Variant) -> None: pass
+    def __init__(id: int, relation: Relation, value: CDPL.Base.Any) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraint instance \a constr.
@@ -120,13 +120,13 @@ class MatchConstraint(Boost.Python.instance):
     # \brief 
     # \return 
     #
-    def getValue() -> CDPL.Base.Variant: pass
+    def getValue() -> CDPL.Base.Any: pass
 
     ##
     # \brief 
     # \param value 
     #
-    def setValue(value: CDPL.Base.Variant) -> None: pass
+    def setValue(value: CDPL.Base.Any) -> None: pass
 
     ##
     # \brief 

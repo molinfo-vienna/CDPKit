@@ -272,7 +272,7 @@ void Chem::MaxCommonAtomSubstructureSearch::initMatchExpressions()
 
 bool Chem::MaxCommonAtomSubstructureSearch::buildAssocGraph()
 {
-	if (!(*molGraphMatchExpr)(*query, *target, Base::Variant()))
+	if (!(*molGraphMatchExpr)(*query, *target, Base::Any()))
 		return false;
 
 	if (numQueryAtoms == 0)
@@ -302,7 +302,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::buildAssocGraph()
 		for (MolecularGraph::ConstAtomIterator ta_it = target_atoms_beg; ta_it != target_atoms_end; ++ta_it) {
 			const Atom& target_atom = *ta_it;
 
-			if (expr(query_atom, *query, target_atom, *target, Base::Variant())) {
+			if (expr(query_atom, *query, target_atom, *target, Base::Any())) {
 				AGNode* node = allocAGNode(&query_atom, &target_atom);
 
 				node_list.push_back(node);
@@ -356,7 +356,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::buildAssocGraph()
 						const Bond* target_bond = assoc_atom1->findBondToAtom(*assoc_atom2);
 					
 						if (target_bond && target->containsBond(*target_bond) && 
-							(*expr)(*query_bond, *query, *target_bond, *target, Base::Variant()))
+							(*expr)(*query_bond, *query, *target_bond, *target, Base::Any()))
 							edge = allocAGEdge(query_bond, target_bond);
 						else
 							edge = allocAGEdge(0, 0);
@@ -525,7 +525,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::hasPostMappingMatchExprs() const
 bool Chem::MaxCommonAtomSubstructureSearch::foundMappingMatches(const AtomBondMapping* mapping) const
 {
 	if (molGraphMatchExpr->requiresAtomBondMapping() && 
-		!((*molGraphMatchExpr)(*query, *target, *mapping, Base::Variant())))
+		!((*molGraphMatchExpr)(*query, *target, *mapping, Base::Any())))
 		return false;
 
 	const AtomMapping& atom_mapping = mapping->getAtomMapping();
@@ -540,7 +540,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::foundMappingMatches(const AtomBondMa
 			continue;
 
 		if (!(*atomMatchExprTable[query->getAtomIndex(*query_atom)])(*query_atom, *query, *target_atom, *target, 
-																	 *mapping, Base::Variant()))
+																	 *mapping, Base::Any()))
 			return false;
 	}
 
@@ -556,7 +556,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::foundMappingMatches(const AtomBondMa
 			continue;
 
 		if (!(*bondMatchExprTable[query->getBondIndex(*query_bond)])(*query_bond, *query, *target_bond, *target, 
-																	 *mapping, Base::Variant()))
+																	 *mapping, Base::Any()))
 			return false;
 	}
 

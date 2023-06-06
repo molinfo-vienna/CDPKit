@@ -149,7 +149,7 @@ Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpre
 Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_expr = molgraph.getProperty(MolecularGraphProperty::MATCH_EXPRESSION, false);
+		Base::Any prev_expr = molgraph.getProperty(MolecularGraphProperty::MATCH_EXPRESSION, false);
 	
 		if (!prev_expr.isEmpty())
 			return prev_expr.getData<MatchExpression<MolecularGraph>::SharedPointer>();

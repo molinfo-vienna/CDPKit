@@ -64,7 +64,7 @@ namespace ChOX
 		void save() const;
 
 	signals:
-		void controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&);
+		void controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
 
 	private:
 		void writeLineStyleParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
@@ -91,7 +91,7 @@ namespace ChOX
 		template <typename T>
 		void readParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const T&);
 
-		void parameterChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&);
+		void parameterChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&);
 
 		typedef std::map<std::string, SettingsContainer> IOControlParamMap;
 

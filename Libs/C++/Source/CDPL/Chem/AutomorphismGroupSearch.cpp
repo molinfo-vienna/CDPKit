@@ -187,7 +187,7 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::requiresAtomBondMapping
 
 bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
 																	const Atom& target_atom, const MolecularGraph& target_molgraph,
-																	const Base::Variant& aux_data) const
+																	const Base::Any& aux_data) const
 {
 	
 	if (parent->lastQueryAtom != &query_atom) {
@@ -241,7 +241,7 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 
 bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
 																	const Atom& target_atom, const MolecularGraph& target_molgraph, 
-																	const AtomBondMapping& mapping, const Base::Variant& aux_data) const
+																	const AtomBondMapping& mapping, const Base::Any& aux_data) const
 {
 	if ((parent->atomPropFlags & AtomPropertyFlag::CONFIGURATION) == 0)
 		return true;
@@ -258,7 +258,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::requiresAtomBondMapping
 
 bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 																	const Bond& target_bond, const MolecularGraph& target_molgraph, 
-																	const Base::Variant& aux_data) const
+																	const Base::Any& aux_data) const
 {
  	if (parent->lastQueryBond != &query_bond) {
 		if (parent->bondPropFlags & BondPropertyFlag::ORDER)
@@ -293,7 +293,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
 
 bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 																	const Bond& target_bond, const MolecularGraph& target_molgraph, 
-																	const AtomBondMapping& mapping, const Base::Variant& aux_data) const
+																	const AtomBondMapping& mapping, const Base::Any& aux_data) const
 {
  	if ((parent->bondPropFlags & BondPropertyFlag::CONFIGURATION) == 0)
 		return true;
@@ -310,14 +310,14 @@ bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::requiresAtomBondMap
 
 bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const MolecularGraph& query_molgraph, 
 																		const MolecularGraph& target_molgraph, 
-																		const Base::Variant& aux_data) const
+																		const Base::Any& aux_data) const
 {
 	return true;
 }
 
 bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const MolecularGraph& query_molgraph, 
 																		const MolecularGraph& target_molgraph, 
-																		const AtomBondMapping& mapping, const Base::Variant& aux_data) const
+																		const AtomBondMapping& mapping, const Base::Any& aux_data) const
 {
  	if (!parent->incIdentityMapping) {
 		const AtomMapping& am = mapping.getAtomMapping();

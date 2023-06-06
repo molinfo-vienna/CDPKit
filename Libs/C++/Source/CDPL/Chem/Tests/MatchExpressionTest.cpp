@@ -28,7 +28,7 @@
 
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 
 namespace
@@ -38,7 +38,7 @@ namespace
 	{
 
 	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
 		{
 			return false;
 		}
@@ -53,12 +53,12 @@ namespace
 	{
 
 	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
 		{
 			return false;
 		}
 
-		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
 		{
 			return true;
 		}
@@ -81,9 +81,9 @@ BOOST_AUTO_TEST_CASE(MatchExpressionTest)
 	BOOST_CHECK(expr1.requiresAtomBondMapping() == false);
 
 	BOOST_CHECK(expr1(1, 2, 0) == true);
-	BOOST_CHECK(expr1(3, 4, Base::Variant()) == true);
+	BOOST_CHECK(expr1(3, 4, Base::Any()) == true);
 	BOOST_CHECK(expr1(5, 6, AtomBondMapping(), 0) == true);
-	BOOST_CHECK(expr1(7, 8, AtomBondMapping(), Base::Variant()) == true);
+	BOOST_CHECK(expr1(7, 8, AtomBondMapping(), Base::Any()) == true);
 
 //-----
 
@@ -93,9 +93,9 @@ BOOST_AUTO_TEST_CASE(MatchExpressionTest)
 	BOOST_CHECK(expr2.requiresAtomBondMapping() == true);
 
 	BOOST_CHECK(expr2(0, 0, 0) == false);
-	BOOST_CHECK(expr2(0, 0, Base::Variant()) == false);
+	BOOST_CHECK(expr2(0, 0, Base::Any()) == false);
 	BOOST_CHECK(expr2(0, 0, AtomBondMapping(), 0) == false);
-	BOOST_CHECK(expr2(0, 0, AtomBondMapping(), Base::Variant()) == false);
+	BOOST_CHECK(expr2(0, 0, AtomBondMapping(), Base::Any()) == false);
 
 //-----
 
@@ -105,9 +105,9 @@ BOOST_AUTO_TEST_CASE(MatchExpressionTest)
 	BOOST_CHECK(expr3.requiresAtomBondMapping() == true);
 
 	BOOST_CHECK(expr3(1, 1, 0) == false);
-	BOOST_CHECK(expr3(0, 0, Base::Variant()) == false);
+	BOOST_CHECK(expr3(0, 0, Base::Any()) == false);
 	BOOST_CHECK(expr3(2, 3, AtomBondMapping(), 4) == true);
-	BOOST_CHECK(expr3(0, 1, AtomBondMapping(), Base::Variant()) == true);
+	BOOST_CHECK(expr3(0, 1, AtomBondMapping(), Base::Any()) == true);
 
 }
 

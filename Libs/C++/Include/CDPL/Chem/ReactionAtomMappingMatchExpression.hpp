@@ -90,7 +90,7 @@ namespace CDPL
 			 *       the expression will evaluate to \c true.
 			 */
 			bool operator()(const Reaction& query_rxn, const Reaction& target_rxn,
-							const AtomBondMapping& mapping, const Base::Variant& matched_rxn_roles) const;
+							const AtomBondMapping& mapping, const Base::Any& matched_rxn_roles) const;
 
 			/**
 			 * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.

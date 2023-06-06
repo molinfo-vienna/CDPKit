@@ -44,7 +44,7 @@ Chem::BondConfigurationMatchExpression::BondConfigurationMatchExpression(const S
 
 bool Chem::BondConfigurationMatchExpression::operator()(const Bond& query_bond, const MolecularGraph&, 
 														const Bond& target_bond, const MolecularGraph&, 
-														const AtomBondMapping& mapping, const Base::Variant&) const
+														const AtomBondMapping& mapping, const Base::Any&) const
 {
 	if (queryBond != &query_bond || configFlags == 0)
 		return true;

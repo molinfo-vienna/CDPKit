@@ -40,7 +40,7 @@
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 
 namespace CDPL 
@@ -64,7 +64,7 @@ namespace CDPL
 		 * value does not exist. \c %ControlParameterContainer guarantees that the complexity of these operations is never worse
 		 * than logarithmic. 
 		 *
-		 * Control-parameter values are stored in an associative map as Base::LookupKey / Base::Variant pairs of type
+		 * Control-parameter values are stored in an associative map as Base::LookupKey / Base::Any pairs of type
 		 * ControlParameterContainer::ParameterEntry. The current number of entries can be queried with the method getNumParameters(). Iterators
 		 * pointing to the beginning and end of the container are obtained via the methods getEntriesBegin() and getEntriesEnd(),
 		 * respectively.
@@ -95,11 +95,11 @@ namespace CDPL
 		class CDPL_BASE_API ControlParameterContainer
 		{
 
-			typedef std::unordered_map<LookupKey, Variant, LookupKey::HashFunc> ParameterMap;
+			typedef std::unordered_map<LookupKey, Any, LookupKey::HashFunc> ParameterMap;
 
 		public:
 			/**
-			 * \brief A Base::LookupKey / Base::Variant pair used to store the control-parameter
+			 * \brief A Base::LookupKey / Base::Any pair used to store the control-parameter
 			 *        values and associated keys.
 			 */
 			typedef ParameterMap::value_type ParameterEntry;
@@ -114,10 +114,10 @@ namespace CDPL
 			 *        control-parameter has changed.
 			 *
 			 * \c %ParameterChangedCallbackFunction allows to wrap any function pointer or function object compatible with
-			 * a return type of \c void and two arguments of type <tt>const Base::LookupKey&</tt> and <tt>Base::Variant</tt>.
+			 * a return type of \c void and two arguments of type <tt>const Base::LookupKey&</tt> and <tt>Base::Any</tt>.
 			 * For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<void, const LookupKey&, const Variant&> ParameterChangedCallbackFunction;
+			typedef boost::function2<void, const LookupKey&, const Any&> ParameterChangedCallbackFunction;
 
 			/**
 			 * \brief A functor class that wraps callback target functions which get invoked when a control-parameter entry
@@ -149,7 +149,7 @@ namespace CDPL
 			/**
 			 * \brief Sets the value of the control-parameter specified by \a key to \a value.
 			 *
-			 * If \a value is empty, i.e. the method Base::Variant::isEmpty() returns \c true, and a control-parameter
+			 * If \a value is empty, i.e. the method Base::Any::isEmpty() returns \c true, and a control-parameter
 			 * entry for \a key exists, the entry gets erased (equivalent to removeParameter() with \a key as argument).
 			 * Otherwise the control-parameter is assigned the specified value and any callback functions registered by
 			 * registerParameterChangedCallback() will be invoked with \a key and \a value provided as arguments.
@@ -159,7 +159,7 @@ namespace CDPL
 			 * \param key The key of the control-parameter value to assign.
 			 * \param value The value of the control-parameter.
 			 */
-			void setParameter(const LookupKey& key, const Variant& value);
+			void setParameter(const LookupKey& key, const Any& value);
 
 			/**
 			 * \brief Returns the value of the control-parameter specified by \a key.
@@ -169,7 +169,7 @@ namespace CDPL
 			 * \a throw_ and \a local:
 			 *
 			 * If a parent container has been set and the argument \a local is \c false, the request is forwarded to the parent
-			 * (which may also forward the request). Otherwise an empty Base::Variant object is returned if \a _throw is \c false,
+			 * (which may also forward the request). Otherwise an empty Base::Any object is returned if \a _throw is \c false,
 			 * and a Base::ItemNotFound exception will be thrown if \a _throw is \c true.
 			 *
 			 * \param key The key of the control-parameter value to return.
@@ -177,11 +177,11 @@ namespace CDPL
 			 *               for the control-parameter does not exist.
 			 * \param local Specifies whether or not the request shall be forwarded to the parent container if a local entry 
 			 *              for the control-parameter does not exist.
-			 * \return The stored control-parameter value or an empty Base::Variant object.
+			 * \return The stored control-parameter value or an empty Base::Any object.
 			 * \throw Base::ItemNotFound if an entry for the requested control-parameter value does not exist and \a _throw
 			 *        is \c true.
 			 */
-			const Variant& getParameter(const LookupKey& key, bool throw_ = false, bool local = false) const;
+			const Any& getParameter(const LookupKey& key, bool throw_ = false, bool local = false) const;
 
 			/**
 			 * \brief Returns the value of the control-parameter specified by \a key as a \c const reference
@@ -401,10 +401,10 @@ namespace CDPL
 
 		private:
 			void parameterRemoved(const LookupKey&) const;
-			void parameterChanged(const LookupKey&, const Variant&) const;
+			void parameterChanged(const LookupKey&, const Any&) const;
 
 			void parentParameterRemoved(const LookupKey&) const;
-			void parentParameterChanged(const LookupKey&, const Variant&) const;
+			void parentParameterChanged(const LookupKey&, const Any&) const;
 
 			void parentChanged() const;
 
@@ -438,7 +438,7 @@ const T& CDPL::Base::ControlParameterContainer::getParameter(const LookupKey& ke
 template <typename T> 
 const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const LookupKey& key, const T& def, bool local) const
 {
-	const Variant& val = getParameter(key, false, local);
+	const Any& val = getParameter(key, false, local);
 
 	return (val.isEmpty() ? def : val.template getData<T>());
 }

@@ -386,7 +386,7 @@ void Vis::StructureView2DParameters::parentChanged()
 	parameterChanged(ControlParameter::SHOW_STEREO_BONDS, view.getParameter(ControlParameter::SHOW_STEREO_BONDS));
 }
 
-void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key, Base::Variant val)
+void Vis::StructureView2DParameters::parameterChanged(const Base::LookupKey& key, Base::Any val)
 {
 	using namespace ControlParameterDefault;
 

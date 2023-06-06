@@ -132,7 +132,7 @@ class Chem::BondOrderCalculator::AtomMatchExpression : public Chem::MatchExpress
 
 public:
 	bool operator()(const Atom& qry_atom, const MolecularGraph& qry_molgraph, const Atom& tgt_atom, 
-					const MolecularGraph& tgt_molgraph, const Base::Variant&) const {
+					const MolecularGraph& tgt_molgraph, const Base::Any&) const {
 
 		unsigned int qry_atom_type = getType(qry_atom); 
 
@@ -158,7 +158,7 @@ public:
 	BondMatchExpression(const BondOrderCalculator& gen, const Util::STArray& ordrs): generator(gen), orders(ordrs) {}
 
 	bool operator()(const Bond& qry_bond, const MolecularGraph&, const Bond& tgt_bond, 
-					const MolecularGraph& tgt_molgraph, const Base::Variant&) const {
+					const MolecularGraph& tgt_molgraph, const Base::Any&) const {
 
 		if (hasAromaticityFlag(qry_bond)) 
 			return true;

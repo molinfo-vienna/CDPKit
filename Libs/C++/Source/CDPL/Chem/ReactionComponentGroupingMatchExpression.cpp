@@ -49,7 +49,7 @@ Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchEx
 	compGrouping(rhs.compGrouping) {}
 
 bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, 
-																const AtomBondMapping& mapping, const Base::Variant&) const
+																const AtomBondMapping& mapping, const Base::Any&) const
 {
 	if (!compGrouping || compGrouping->getSize() == 0)
 		return true;

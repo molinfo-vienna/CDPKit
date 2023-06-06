@@ -85,7 +85,7 @@ class FeatureSet(FeatureContainer):
     # \param key 
     # \return 
     #
-    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Variant: pass
+    def __getitem__(key: CDPL.Base.LookupKey) -> CDPL.Base.Any: pass
 
     ##
     # \brief 
@@ -113,7 +113,7 @@ class FeatureSet(FeatureContainer):
     # \param key 
     # \param value 
     #
-    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Variant) -> None: pass
+    def __setitem__(key: CDPL.Base.LookupKey, value: CDPL.Base.Any) -> None: pass
 
     ##
     # \brief 

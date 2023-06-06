@@ -137,5 +137,5 @@ BOOST_PYTHON_MODULE(_math)
 	registerFromPythonToQuaternionConverters();
 	registerFromPythonToVectorArrayConverters();
 	registerFromPythonToExpressionPointerConverters();
-	registerFromPythonToVariantConverters();
+	registerFromPythonToAnyConverters();
 }

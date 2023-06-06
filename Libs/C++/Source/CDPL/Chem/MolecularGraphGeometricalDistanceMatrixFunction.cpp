@@ -37,7 +37,7 @@ using namespace CDPL;
 Math::DMatrix::SharedPointer Chem::calcGeometricalDistanceMatrix(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant mtx_prop = molgraph.getProperty(MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX);
+		Base::Any mtx_prop = molgraph.getProperty(MolecularGraphProperty::GEOMETRICAL_DISTANCE_MATRIX);
 
 		if (!mtx_prop.isEmpty())
 			return mtx_prop.getData<Math::DMatrix::SharedPointer>();

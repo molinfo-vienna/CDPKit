@@ -5,6 +5,13 @@
 <table border="0">
 
 <tr>
+<td valign="top">\anchor ANY<i>[ANY]</i></td>
+<td valign="top">
+std::any documentation: https://en.cppreference.com/w/cpp/utility/any
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor ASPE<i>[ASPE]</i></td>
 <td valign="top">
 H. Xu, S. Izrailev, D. K. Agrafiotis, Conformational Sampling by Self-Organization,
@@ -46,13 +53,6 @@ Boost C++ Libraries homepage: http://www.boost.org/
 <td valign="top">
 R. Balducci, R. S. Pearlman, Efficient exact solution of the ring perception problem, 
 <i>J. Chem. Inf. Comput. Sci.</i> <b>1994</b>, 34, 822-831
-</td>
-</tr>
-
-<tr>
-<td valign="top">\anchor BANY<i>[BANY]</i></td>
-<td valign="top">
-Boost.Any documentation: http://www.boost.org/doc/html/any.html
 </td>
 </tr>
 

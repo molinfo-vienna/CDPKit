@@ -44,7 +44,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveRings(const MolecularGraph& molg
 Chem::FragmentList::SharedPointer Chem::perceiveRings(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_rings = molgraph.getProperty(MolecularGraphProperty::RINGS, false);
+		Base::Any prev_rings = molgraph.getProperty(MolecularGraphProperty::RINGS, false);
 	
 		if (!prev_rings.isEmpty())
 			return prev_rings.getData<FragmentList::SharedPointer>();

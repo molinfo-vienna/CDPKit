@@ -28,7 +28,7 @@
 
 #include "CDPL/Chem/ANDMatchExpressionList.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 
 namespace
@@ -38,12 +38,12 @@ namespace
 	{
 
 	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
 		{
 			return false;
 		}
 
-		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
 		{
 			return true;
 		}
@@ -58,12 +58,12 @@ namespace
 	{
 
 	public:
-		bool operator()(const int&, const int&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Base::Any&) const
 		{
 			return true;
 		}
 
-		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Variant&) const
+		bool operator()(const int&, const int&, const CDPL::Chem::AtomBondMapping&, const CDPL::Base::Any&) const
 		{
 			return false;
 		}

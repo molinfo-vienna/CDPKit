@@ -188,7 +188,7 @@ namespace
 Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant mtx_prop = molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
+		Base::Any mtx_prop = molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
 
 		if (!mtx_prop.isEmpty())
 			return mtx_prop.getData<Math::ULMatrix::SharedPointer>();
@@ -205,7 +205,7 @@ Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph
 Math::ULMatrix::SharedPointer Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant mtx_prop = tgt_molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
+		Base::Any mtx_prop = tgt_molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
 
 		if (!mtx_prop.isEmpty())
 			return mtx_prop.getData<Math::ULMatrix::SharedPointer>();

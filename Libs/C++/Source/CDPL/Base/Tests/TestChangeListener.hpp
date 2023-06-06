@@ -30,7 +30,7 @@
 #include <cstddef>
 
 #include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 
 namespace
@@ -53,10 +53,10 @@ namespace
 			changedParamKey = RESET_KEY;
 			removedParamKey = RESET_KEY;
 
-			changedParamValue = CDPL::Base::Variant();
+			changedParamValue = CDPL::Base::Any();
 		}
 
-		void parameterChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& var) {
+		void parameterChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& var) {
 			numParamChangedCalls++;
 			changedParamKey = key;
 			changedParamValue = var; 
@@ -76,7 +76,7 @@ namespace
 		std::size_t           numParentChangedCalls;
 		CDPL::Base::LookupKey changedParamKey;
 		CDPL::Base::LookupKey removedParamKey;
-		CDPL::Base::Variant   changedParamValue;
+		CDPL::Base::Any   changedParamValue;
 	};
 }
 

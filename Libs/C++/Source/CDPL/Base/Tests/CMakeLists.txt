@@ -28,7 +28,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
-    VariantTest.cpp
+    AnyTest.cpp
     LookupKeyTest.cpp
     ControlParameterContainerTest.cpp
     ControlParameterListTest.cpp

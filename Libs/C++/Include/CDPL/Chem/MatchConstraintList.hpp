@@ -34,7 +34,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -116,7 +116,7 @@ namespace CDPL
 			 * \param relation The relational constraint on the values of matching query/target attribute pairs.
 			 * \param value The value of the query attribute.
 			 */
-			MatchConstraint(unsigned int id, Relation relation, const Base::Variant& value): 
+			MatchConstraint(unsigned int id, Relation relation, const Base::Any& value): 
 				id(id), relation(relation), value(value) {}
 	
 			/**
@@ -147,12 +147,12 @@ namespace CDPL
 			 * \brief Returns the value of the query attribute.
 			 * \return The value of the query attribute.
 			 */
-			const Base::Variant& getValue() const;
+			const Base::Any& getValue() const;
 
 			/**
 			 * \brief Returns a \c const reference to the value of the query attribute of type \a T.
 			 * \return A \c const reference to the value of the stored query attribute.
-			 * \throw Base::BadCast if the stored \c %Variant instance is empty, or the stored
+			 * \throw Base::BadCast if the stored \c %Any instance is empty, or the stored
 			 *        value is not of the specified type \a T.
 			 */
 			template <typename T>
@@ -164,7 +164,7 @@ namespace CDPL
 			 * \brief Sets the value of the query attribute.
 			 * \param value The value of the query attribute.
 			 */
-			void setValue(const Base::Variant& value);
+			void setValue(const Base::Any& value);
 			
 			/**
 			 * \brief Tells wether a query attribute value has been set.
@@ -173,9 +173,9 @@ namespace CDPL
 			bool hasValue() const;
 
 		private:
-			unsigned int  id;
-			Relation      relation;
-			Base::Variant value;
+			unsigned int id;
+			Relation     relation;
+			Base::Any    value;
 		};
 
 		/**
@@ -252,7 +252,7 @@ namespace CDPL
 			 * \param relation The relational constraint on the values of matching query/target attribute pairs.
 			 * \param value The value of the query attribute.
 			 */
-			void addElement(unsigned int id, MatchConstraint::Relation relation, const Base::Variant& value);
+			void addElement(unsigned int id, MatchConstraint::Relation relation, const Base::Any& value);
 
 		private:
 			const char* getClassName() const;

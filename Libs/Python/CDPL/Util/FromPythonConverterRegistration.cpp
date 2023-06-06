@@ -28,7 +28,7 @@
 
 #include "CDPL/Util/Array.hpp"
 
-#include "Base/GenericVariantFromPythonConverter.hpp"
+#include "Base/GenericAnyFromPythonConverter.hpp"
 
 #include "ConverterRegistration.hpp"
 
@@ -95,8 +95,8 @@ void CDPLPythonUtil::registerFromPythonConverters()
 	ArrayFromPySequenceConverter<Util::DArray>();
 	ArrayFromPySequenceConverter<Util::SArray>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Util::UIArray::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Util::STArray::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Util::DArray::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Util::SArray::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::UIArray::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::STArray::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::DArray::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Util::SArray::SharedPointer&>();
 }

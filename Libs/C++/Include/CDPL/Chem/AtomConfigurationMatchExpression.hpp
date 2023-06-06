@@ -94,7 +94,7 @@ namespace CDPL
 			 *       the method will return \c true - irrespective of matching mode and actual target atom configuration!
 			 */
 			bool operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, const Atom& target_atom,
-							const MolecularGraph& target_molgraph, const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+							const MolecularGraph& target_molgraph, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
 			/**
 			 * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.

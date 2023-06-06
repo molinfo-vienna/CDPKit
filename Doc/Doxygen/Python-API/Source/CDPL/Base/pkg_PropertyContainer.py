@@ -53,7 +53,7 @@ class PropertyContainer(Boost.Python.instance):
     # \param def_value 
     # \return 
     #
-    def getPropertyOrDefault(key: LookupKey, def_value: Variant) -> Variant: pass
+    def getPropertyOrDefault(key: LookupKey, def_value: Any) -> Any: pass
 
     ##
     # \brief 
@@ -78,7 +78,7 @@ class PropertyContainer(Boost.Python.instance):
     # \param key 
     # \param value 
     #
-    def setProperty(key: LookupKey, value: Variant) -> None: pass
+    def setProperty(key: LookupKey, value: Any) -> None: pass
 
     ##
     # \brief 
@@ -93,7 +93,7 @@ class PropertyContainer(Boost.Python.instance):
     # \param throw_ 
     # \return 
     #
-    def getProperty(key: LookupKey, throw_: bool = False) -> Variant: pass
+    def getProperty(key: LookupKey, throw_: bool = False) -> Any: pass
 
     ##
     # \brief 
@@ -130,7 +130,7 @@ class PropertyContainer(Boost.Python.instance):
     # \param key 
     # \return 
     #
-    def __getitem__(key: LookupKey) -> Variant: pass
+    def __getitem__(key: LookupKey) -> Any: pass
 
     ##
     # \brief Returns the result of the membership test operation <tt>key in self</tt>.
@@ -144,7 +144,7 @@ class PropertyContainer(Boost.Python.instance):
     # \param key 
     # \param value 
     #
-    def __setitem__(key: LookupKey, value: Variant) -> None: pass
+    def __setitem__(key: LookupKey, value: Any) -> None: pass
 
     ##
     # \brief 

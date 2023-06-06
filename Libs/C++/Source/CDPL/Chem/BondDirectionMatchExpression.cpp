@@ -28,7 +28,7 @@
 
 #include "CDPL/Chem/BondDirectionMatchExpression.hpp"
 #include "CDPL/Chem/BondDirection.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 
 using namespace CDPL;
@@ -38,7 +38,7 @@ Chem::BondDirectionMatchExpression::BondDirectionMatchExpression(unsigned int di
 	dirFlags(dir_flags & (BondDirection::UP | BondDirection::DOWN | BondDirection::UNSPECIFIED)), notMatch(not_match) {}
 
 bool Chem::BondDirectionMatchExpression::operator()(const Bond&, const MolecularGraph&, const Bond&, const MolecularGraph&,
-													const AtomBondMapping&, const Base::Variant& target_bond_dir) const
+													const AtomBondMapping&, const Base::Any& target_bond_dir) const
 {
 	if (dirFlags == 0)
 		return true;

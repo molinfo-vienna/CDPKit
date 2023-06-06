@@ -39,7 +39,7 @@ Chem::AtomTypeMatchExpression::AtomTypeMatchExpression(unsigned int atom_type, b
 
 bool Chem::AtomTypeMatchExpression::operator()(const Atom&, const MolecularGraph&, 
 											   const Atom& target_atom, const MolecularGraph&, 
-											   const Base::Variant&) const
+											   const Base::Any&) const
 {
 	return (notMatch ? !atomTypesMatch(atomType, getType(target_atom)) : atomTypesMatch(atomType, getType(target_atom)));
 }

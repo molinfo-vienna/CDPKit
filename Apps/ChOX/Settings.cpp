@@ -1156,7 +1156,7 @@ void Settings::save() const
 	settings.endGroup();
 }
 
-void Settings::parameterChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& val)
+void Settings::parameterChanged(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val)
 {
 	emit controlParamChanged(key, val);
 }
@@ -1166,7 +1166,7 @@ void Settings::writeFontParameter(const SettingsContainer& params, QSettings& se
 {
 	using namespace CDPL;
 
-	Base::Variant val = params.getParameter(key);
+	Base::Any val = params.getParameter(key);
 
 	QString name = QString::fromStdString(key.getName());
 
@@ -1198,7 +1198,7 @@ void Settings::writeColorParameter(const SettingsContainer& params, QSettings& s
 {
 	using namespace CDPL;
 
-	Base::Variant val = params.getParameter(key);
+	Base::Any val = params.getParameter(key);
 
 	QString name = QString::fromStdString(key.getName());
 
@@ -1224,7 +1224,7 @@ void Settings::writeSizeSpecParameter(const SettingsContainer& params, QSettings
 {
 	using namespace CDPL;
 
-	Base::Variant val = params.getParameter(key);
+	Base::Any val = params.getParameter(key);
 
 	QString name = QString::fromStdString(key.getName());
 
@@ -1251,7 +1251,7 @@ void Settings::writeLineStyleParameter(const SettingsContainer& params, QSetting
 	using namespace CDPL;
 	using namespace Vis;
 
-	Base::Variant val = params.getParameter(key);
+	Base::Any val = params.getParameter(key);
 
 	QString name = QString::fromStdString(key.getName());
 
@@ -1296,7 +1296,7 @@ void Settings::writeAtomColorTableParam(QSettings& settings) const
 	using namespace CDPL;
 	using namespace Vis;
 
-	Base::Variant val = getParameter(ChOX::ControlParameter::ATOM_COLOR_TABLE);
+	Base::Any val = getParameter(ChOX::ControlParameter::ATOM_COLOR_TABLE);
 
 	if (val.isEmpty()) {
 		settings.remove("ATOM_COLOR_TABLE/entries");
@@ -1336,7 +1336,7 @@ void Settings::writeParameter(const SettingsContainer& params, QSettings& settin
 {
 	using namespace CDPL;
 
-	Base::Variant val = params.getParameter(key);
+	Base::Any val = params.getParameter(key);
 
 	QString name = QString::fromStdString(key.getName());
 

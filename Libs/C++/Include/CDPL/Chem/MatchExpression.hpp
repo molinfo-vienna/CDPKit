@@ -40,7 +40,7 @@ namespace CDPL
 	namespace Base
 	{
 
-		class Variant;
+		class Any;
 	}
 
 	namespace Chem
@@ -99,7 +99,7 @@ namespace CDPL
 			 * \note The default implementation returns \c true.
 			 */
 			virtual bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
-									const Base::Variant& aux_data) const;
+									const Base::Any& aux_data) const;
 
 			/**
 			 * Performs an evaluation of the expression for the given query and target objects under consideration of the provided candidate atom/bond mapping.
@@ -114,7 +114,7 @@ namespace CDPL
 			 * \note The default implementation returns the result of <tt>operator()(query_obj1, query_obj2, target_obj1, target_obj2, aux_data)</tt>.
 			 */
 			virtual bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
-									const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+									const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
 			/**
 			 * \brief Tells whether the expression must be reevaluated after a query to target atom/bond mapping candidate has been found.
@@ -171,7 +171,7 @@ namespace CDPL
 			 * \return The result of the expression evaluation for the specified query and target objects.
 			 * \note The default implementation returns \c true.
 			 */
-			virtual bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Variant& aux_data) const;
+			virtual bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
 			/**
 			 * Performs an evaluation of the expression for the given query and target objects under consideration of the provided candidate atom/bond mapping.
@@ -183,7 +183,7 @@ namespace CDPL
 			 * \return The result of the expression evaluation for the specified query and target objects.
 			 * \note The default implementation returns the result of <tt>operator()(query_obj, target_obj, aux_data)</tt>.
 			 */
-			virtual bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+			virtual bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
 			/**
 			 * \brief Tells whether the expression must be reevaluated after a query to target atom/bond mapping candidate has been found.
@@ -202,7 +202,7 @@ namespace CDPL
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1&, const ObjType2&, 
 																		const ObjType1&, const ObjType2&, 
-																		const Base::Variant&) const
+																		const Base::Any&) const
 {
 	return true;
 }
@@ -210,7 +210,7 @@ bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1&
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																		const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																		const AtomBondMapping&, const Base::Variant& data) const
+																		const AtomBondMapping&, const Base::Any& data) const
 {
 	return operator()(query_obj1, query_obj2, target_obj1, target_obj2, data);
 }
@@ -224,14 +224,14 @@ bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping() 
 
 template <typename ObjType>
 bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType&, const ObjType&, 
-																   const Base::Variant&) const
+																   const Base::Any&) const
 {
 	return true;
 }
 
 template <typename ObjType>
 bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																   const AtomBondMapping&, const Base::Variant& data) const
+																   const AtomBondMapping&, const Base::Any& data) const
 {
 	return operator()(query_obj, target_obj, data);
 }

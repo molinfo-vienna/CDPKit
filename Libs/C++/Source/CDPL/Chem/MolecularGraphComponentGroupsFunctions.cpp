@@ -81,7 +81,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const MolecularG
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_groups = molgraph.getProperty(MolecularGraphProperty::COMPONENT_GROUPS, false);
+		Base::Any prev_groups = molgraph.getProperty(MolecularGraphProperty::COMPONENT_GROUPS, false);
 	
 		if (!prev_groups.isEmpty())
 			return prev_groups.getData<FragmentList::SharedPointer>();

@@ -31,7 +31,7 @@
 
 #include "CDPL/Base/ControlParameterList.hpp"
 #include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "TestChangeListener.hpp"
@@ -291,7 +291,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cl1.reset();
 
-	cpl1.setParameter(key2, Variant());
+	cpl1.setParameter(key2, Any());
 
 	BOOST_CHECK(cpl1.getNumParameters() == 0);
 
@@ -762,7 +762,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	cl1.reset();
 	cl2.reset();
 
-	cpl2_ptr->setParameter(key1, Variant());
+	cpl2_ptr->setParameter(key1, Any());
 	
 	BOOST_CHECK(cl1.numParamChangedCalls == 0);
 	BOOST_CHECK(cl1.numParamRemovedCalls == 0);
@@ -1408,7 +1408,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	cpl1.unregisterParameterRemovedCallback(param_removed_cl1_id);
 	cpl1.unregisterParentChangedCallback(parent_changed_cl1_id);
 
-	cpl1.setParameter(key1, Variant());
+	cpl1.setParameter(key1, Any());
 
 	BOOST_CHECK(cl1.numParamChangedCalls == 0);
 	BOOST_CHECK(cl1.numParamRemovedCalls == 0);

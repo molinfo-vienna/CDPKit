@@ -188,7 +188,7 @@ bool Chem::ReactionSubstructureSearch::init(const Reaction& tgt)
 		queryChanged = false;
 	}
 
-	if ((*rxnMatchExpression)(*query, tgt, Base::Variant()) && findEquivAtoms() && findEquivBonds()) {
+	if ((*rxnMatchExpression)(*query, tgt, Base::Any()) && findEquivAtoms() && findEquivBonds()) {
 		if (initQueryMappingData) {
 			queryMappingMask.reset();
 
@@ -332,7 +332,7 @@ bool Chem::ReactionSubstructureSearch::findEquivAtoms()
 			if (target->getComponentRole(target_atom->getMolecule()) != query_atom_rxn_role)
 				continue;
 
-			if (expr(query_atom, query_atom.getMolecule(), *target_atom, target_atom->getMolecule(), Base::Variant())) {
+			if (expr(query_atom, query_atom.getMolecule(), *target_atom, target_atom->getMolecule(), Base::Any())) {
 				equiv_mask.set(i);
 				no_equiv_atoms = false;
 			}
@@ -378,7 +378,7 @@ bool Chem::ReactionSubstructureSearch::findEquivBonds()
 			if (target->getComponentRole(target_bond->getMolecule()) != query_bond_rxn_role)
 				continue;
 
-			if (expr(query_bond, query_bond.getMolecule(), *target_bond, target_bond->getMolecule(), Base::Variant())) {
+			if (expr(query_bond, query_bond.getMolecule(), *target_bond, target_bond->getMolecule(), Base::Any())) {
 				equiv_mask.set(i);
 				no_equiv_bonds = false;
 			}
@@ -624,7 +624,7 @@ bool Chem::ReactionSubstructureSearch::foundMappingMatches(const AtomBondMapping
 			continue;
 
 		if (!(*atomMatchExprTable[atom_idx])(query_atom, query_atom.getMolecule(), *queryAtomMapping[atom_idx], 
-											 queryAtomMapping[atom_idx]->getMolecule(), *mapping, Base::Variant()))
+											 queryAtomMapping[atom_idx]->getMolecule(), *mapping, Base::Any()))
 			return false;
 	}
 
@@ -638,7 +638,7 @@ bool Chem::ReactionSubstructureSearch::foundMappingMatches(const AtomBondMapping
 			continue;
 
 		if (!(*bondMatchExprTable[bond_idx])(query_bond, query_bond.getMolecule(), *targetBonds[queryBondMapping[bond_idx]],
-											 targetBonds[queryBondMapping[bond_idx]]->getMolecule(), *mapping, Base::Variant()))
+											 targetBonds[queryBondMapping[bond_idx]]->getMolecule(), *mapping, Base::Any()))
 			return false;
 	}
 

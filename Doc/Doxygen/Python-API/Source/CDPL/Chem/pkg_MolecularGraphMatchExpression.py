@@ -48,7 +48,7 @@ class MolecularGraphMatchExpression(Boost.Python.instance):
     # \param aux_data 
     # \return 
     #
-    def matches(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Variant) -> bool: pass
+    def matches(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Any) -> bool: pass
 
     ##
     # \brief 
@@ -58,7 +58,7 @@ class MolecularGraphMatchExpression(Boost.Python.instance):
     # \param aux_data 
     # \return 
     #
-    def mappingMatches(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Variant) -> bool: pass
+    def mappingMatches(query_molgraph: MolecularGraph, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Any) -> bool: pass
 
     ##
     # \brief 

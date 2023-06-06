@@ -36,7 +36,7 @@
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -53,7 +53,7 @@ namespace CDPL
 		 * dynamic object properties to subclasses and their clients.
 		 *
 		 * \c %PropertyContainer stores the properties in a map that associates unique property keys of type
-		 * Base::LookupKey with corresponding property values of type Base::Variant. Iterators pointing to
+		 * Base::LookupKey with corresponding property values of type Base::Any. Iterators pointing to
 		 * the beginning and end of the property key/value pairs (see PropertyContainer::PropertyEntry) can be
 		 * retrieved by the methods getPropertiesBegin() and getPropertiesEnd(), respectively. The
 		 * number of currently stored property value entries is accessible via the method getNumProperties(). 
@@ -70,17 +70,17 @@ namespace CDPL
 		 * expect the key of the property as the first argument. The templated versions return the stored property
 		 * value (or the specified default if not available) as a reference to an object of the specified template
 		 * argument type. The non-template method returns the requested property value indirectly as a reference to the
-		 * Base::Variant instance storing the actual value. If the requested property value does not exist, an additional
-		 * argument decides whether to throw an exception or to return an empty Base::Variant instance.
+		 * Base::Any instance storing the actual value. If the requested property value does not exist, an additional
+		 * argument decides whether to throw an exception or to return an empty Base::Any instance.
 		 */
 		class CDPL_BASE_API PropertyContainer
 		{
 
-			typedef std::unordered_map<LookupKey, Variant, LookupKey::HashFunc> PropertyMap;
+			typedef std::unordered_map<LookupKey, Any, LookupKey::HashFunc> PropertyMap;
 
 		public:
 			/**	
-			 * \brief A Base::LookupKey / Base::Variant pair that stores the property value for a given property key.
+			 * \brief A Base::LookupKey / Base::Any pair that stores the property value for a given property key.
 			 */
 			typedef PropertyMap::value_type PropertyEntry;
 
@@ -98,13 +98,13 @@ namespace CDPL
 			/**
 			 * \brief Sets the value of the property specified by \a key to \a value.
 			 *
-			 * If \a value is empty, i.e. the method Base::Variant::isEmpty() returns \c true, and a property
+			 * If \a value is empty, i.e. the method Base::Any::isEmpty() returns \c true, and a property
 			 * entry for \a key exists, the entry gets erased (equivalent to removeProperty() with \a key as argument).
 			 *
 			 * \param key The key of the property value to assign.
 			 * \param value The value of the property.
 			 */
-			inline void setProperty(const LookupKey& key, const Variant& value);
+			inline void setProperty(const LookupKey& key, const Any& value);
 
 			/**
 			 * \brief Returns the value of the property specified by \a key as a \c const reference to an object of type \a T.
@@ -139,16 +139,16 @@ namespace CDPL
 			/**
 			 * \brief Returns the value of the property specified by \a key.
 			 *
-			 * If an entry for the specified property exists, the stored value will be returned. Otherwise an empty Base::Variant
+			 * If an entry for the specified property exists, the stored value will be returned. Otherwise an empty Base::Any
 			 * object gets returned if \a _throw is \c false, and a Base::ItemNotFound exception will be thrown if \a _throw is \c true.
 			 *
 			 * \param key The key of the property value to return.
-			 * \param throw_ Specifies whether to throw a Base::ItemNotFound exception or to return an empty Base::Variant object
+			 * \param throw_ Specifies whether to throw a Base::ItemNotFound exception or to return an empty Base::Any object
 			 *               if the requested property value does not exist.
-			 * \return The stored property value or and empty Base::Variant object.
+			 * \return The stored property value or and empty Base::Any object.
 			 * \throw Base::ItemNotFound if an entry for the requested property value does not exist and \a throw_ is \c true.
 			 */
-			inline const Variant& getProperty(const LookupKey& key, bool throw_ = false) const;
+			inline const Any& getProperty(const LookupKey& key, bool throw_ = false) const;
 
 			/**
 			 * \brief Tells whether or not a value has been assigned to the property specified by \a key.
@@ -248,14 +248,14 @@ const T& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key) const
 template <typename T> 
 const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& key, const T& def) const
 {
-	const Variant& val = getProperty(key, false);
+	const Any& val = getProperty(key, false);
 
 	return (val.isEmpty() ? def : val.template getData<T>());
 }
 
-const CDPL::Base::Variant& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key, bool throw_ex) const
+const CDPL::Base::Any& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key, bool throw_ex) const
 {
-	static const Variant NOT_FOUND;
+	static const Any NOT_FOUND;
 	
 	ConstPropertyIterator it = properties.find(key);
 	
@@ -268,7 +268,7 @@ const CDPL::Base::Variant& CDPL::Base::PropertyContainer::getProperty(const Look
 	return NOT_FOUND;
 }
 
-void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, const Variant& val)
+void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, const Any& val)
 {
 	if (val.isEmpty()) { 
 		removeProperty(key);

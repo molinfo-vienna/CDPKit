@@ -70,7 +70,7 @@ namespace CDPL
 			 * \note If the list is empty, the expression list evaluates to \c true.
 			 */
 			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
-							const Base::Variant& aux_data) const;
+							const Base::Any& aux_data) const;
 
 			/**
 			 * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
@@ -86,7 +86,7 @@ namespace CDPL
 			 * \note If the list is empty, the expression list evaluates to \c true.
 			 */
 			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2,
-							const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+							const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
 		private:
 			const char* getClassName() const {
@@ -117,7 +117,7 @@ namespace CDPL
 			 * \return \c true if all expression list elements evaluate to \c true, and \c false otherwise.
 			 * \note If the list is empty, the expression list evaluates to \c true.
 			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Variant& aux_data) const;
+			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
 			/**
 			 * Performs an evaluation of the conjunctive expression list for the given query and target objects under consideration of the
@@ -131,7 +131,7 @@ namespace CDPL
 			 * \note If the list is empty, the expression list evaluates to \c true.
 			 */
 			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping,
-							const Base::Variant& aux_data) const;
+							const Base::Any& aux_data) const;
 
 		private:
 			const char* getClassName() const {
@@ -147,7 +147,7 @@ namespace CDPL
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																			   const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																			   const Base::Variant& data) const
+																			   const Base::Any& data) const
 {
 	typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
 
@@ -161,7 +161,7 @@ bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const Ob
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																			  const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																			  const AtomBondMapping& mapping, const Base::Variant& data) const
+																			  const AtomBondMapping& mapping, const Base::Any& data) const
 {
 	typename MatchExpressionList<ObjType1, ObjType2>::ConstElementIterator exprs_end = this->getElementsEnd();
 
@@ -175,7 +175,7 @@ bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const Ob
 
 template <typename ObjType>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																		  const Base::Variant& data) const
+																		  const Base::Any& data) const
 {
 	typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
 
@@ -188,7 +188,7 @@ bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType
 
 template <typename ObjType>
 bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																		  const AtomBondMapping& mapping, const Base::Variant& data) const
+																		  const AtomBondMapping& mapping, const Base::Any& data) const
 {
 	typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
 

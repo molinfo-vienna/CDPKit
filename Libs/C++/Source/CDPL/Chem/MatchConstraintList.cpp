@@ -52,12 +52,12 @@ void Chem::MatchConstraint::setRelation(Relation r)
 	relation = r;
 }
 
-const Base::Variant& Chem::MatchConstraint::getValue() const
+const Base::Any& Chem::MatchConstraint::getValue() const
 {
  	return value;
 }
 
-void Chem::MatchConstraint::setValue(const Base::Variant& v)
+void Chem::MatchConstraint::setValue(const Base::Any& v)
 {
 	value = v;
 }
@@ -83,7 +83,7 @@ void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Rel
 	addElement(MatchConstraint(id, relation));
 }
 
-void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Relation relation, const Base::Variant& value)
+void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Relation relation, const Base::Any& value)
 {
 	addElement(MatchConstraint(id, relation, value));
 }

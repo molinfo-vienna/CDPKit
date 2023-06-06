@@ -45,7 +45,7 @@ using namespace CDPL;
 
 bool Chem::BondSubstituentDirectionMatchExpression::operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 															   const Bond& target_bond, const MolecularGraph& target_molgraph,
-															   const AtomBondMapping& mapping, const Base::Variant& aux_data) const
+															   const AtomBondMapping& mapping, const Base::Any& aux_data) const
 {
 	typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondExprPointer;
 
@@ -186,7 +186,7 @@ bool Chem::BondSubstituentDirectionMatchExpression::operator()(const Bond& query
 	}
 
 	//	if (target_config == BondConfiguration::EITHER) {
-	const Base::Variant unspec_dir(BondDirection::UNSPECIFIED);
+	const Base::Any unspec_dir(BondDirection::UNSPECIFIED);
 
 	for (std::size_t i = 0; i < 2; i++) 
 		for (std::size_t j = 0; j < 2 && query_nbr_bonds[i][j]; j++) 

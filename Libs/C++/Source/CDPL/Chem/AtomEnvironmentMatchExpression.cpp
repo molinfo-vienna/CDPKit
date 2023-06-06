@@ -42,7 +42,7 @@ Chem::AtomEnvironmentMatchExpression::AtomEnvironmentMatchExpression(const Molec
 
 bool Chem::AtomEnvironmentMatchExpression::operator()(const Atom&, const MolecularGraph&, 
 													  const Atom& target_atom, const MolecularGraph& target_molgraph, 
-													  const Base::Variant&) const
+													  const Base::Any&) const
 {
 	if (!envPattern || envPattern->getNumAtoms() == 0)
 		return true;

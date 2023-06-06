@@ -50,7 +50,7 @@ class BondMatchExpression(Boost.Python.instance):
     # \param aux_data 
     # \return 
     #
-    def matches(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Variant) -> bool: pass
+    def matches(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, aux_data: CDPL.Base.Any) -> bool: pass
 
     ##
     # \brief 
@@ -62,7 +62,7 @@ class BondMatchExpression(Boost.Python.instance):
     # \param aux_data 
     # \return 
     #
-    def mappingMatches(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Variant) -> bool: pass
+    def mappingMatches(query_bond: Bond, query_molgraph: MolecularGraph, target_bond: Bond, target_molgraph: MolecularGraph, mapping: AtomBondMapping, aux_data: CDPL.Base.Any) -> bool: pass
 
     ##
     # \brief 

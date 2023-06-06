@@ -38,7 +38,7 @@
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"
 
-#include "Base/GenericVariantFromPythonConverter.hpp"
+#include "Base/GenericAnyFromPythonConverter.hpp"
 #include "Base/GenericFromPythonConverter.hpp"
 
 #include "ConverterRegistration.hpp"
@@ -106,23 +106,23 @@ void CDPLPythonChem::registerFromPythonConverters()
 {
 	using namespace CDPL;
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MatchConstraintList::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchConstraintList::SharedPointer&>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MolecularGraph::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MolecularGraph::SharedPointer&>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::FragmentList::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::Fragment::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::AtomMapping::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::FragmentList::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Fragment::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::AtomMapping::SharedPointer&>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::Molecule::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::Reaction::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Molecule::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::Reaction::SharedPointer&>();
 
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MatchExpression<Chem::Atom>::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MatchExpression<Chem::Bond>::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MatchExpression<Chem::Molecule>::SharedPointer&>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::MatchExpression<Chem::Reaction>::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Atom>::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Bond>::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Molecule>::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::MatchExpression<Chem::Reaction>::SharedPointer&>();
 	
-	CDPLPythonBase::GenericVariantFromPythonConverter<const Chem::StringDataBlock::SharedPointer&>();
+	CDPLPythonBase::GenericAnyFromPythonConverter<const Chem::StringDataBlock::SharedPointer&>();
 
 	CDPLPythonBase::GenericFromPythonConverter<const Chem::Atom3DCoordinatesFunctor&,
 											   Chem::Atom3DCoordinatesFunction>();

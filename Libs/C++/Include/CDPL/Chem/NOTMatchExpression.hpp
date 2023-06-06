@@ -76,7 +76,7 @@ namespace CDPL
 			 * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
 			 */
 			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
-							const Base::Variant& aux_data) const;
+							const Base::Any& aux_data) const;
 
 			/**
 			 * Performs an evaluation of the wrapped match expression for the given query and target objects under consideration of the
@@ -91,7 +91,7 @@ namespace CDPL
 			 * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
 			 */
 			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, const ObjType2& target_obj2, 
-							const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+							const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 		
 			/**
 			 * \brief Tells whether the wrapped match expression requires a reevaluation after a query to target atom/bond mapping
@@ -134,7 +134,7 @@ namespace CDPL
 			 * \param aux_data Provides auxiliary information for the evaluation of the wrapped expression.
 			 * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
 			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Variant& aux_data) const;
+			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
 			/**
 			 * Performs an evaluation of the wrapped match expression for the given query and target objects under consideration of the
@@ -146,7 +146,7 @@ namespace CDPL
 			 * \param aux_data Provides auxiliary information for the evaluation of the wrapped expression.
 			 * \return \c true if the wrapped match expression evaluates to \c false, and vice versa.
 			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 		
 			/**
 			 * \brief Tells whether the wrapped match expression requires a reevaluation after a query to target atom/bond mapping
@@ -168,7 +168,7 @@ namespace CDPL
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																		   const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																		   const Base::Variant& data) const
+																		   const Base::Any& data) const
 {
 	return !this->expression->operator()(query_obj1, query_obj2, target_obj1, target_obj2, data);
 }
@@ -176,7 +176,7 @@ bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjTyp
 template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																		   const ObjType1& target_obj1, const ObjType2& target_obj2, 
-																		   const AtomBondMapping& mapping, const Base::Variant& data) const
+																		   const AtomBondMapping& mapping, const Base::Any& data) const
 {
 	return !this->expression->operator()(query_obj1, query_obj2, target_obj1, target_obj2, mapping, data);
 }
@@ -190,14 +190,14 @@ bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping
 
 template <typename ObjType>
 bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																	  const Base::Variant& data) const
+																	  const Base::Any& data) const
 {
 	return !this->expression->operator()(query_obj, target_obj, data);
 }
 
 template <typename ObjType>
 bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
-																	  const AtomBondMapping& mapping, const Base::Variant& data) const
+																	  const AtomBondMapping& mapping, const Base::Any& data) const
 {
 	return !this->expression->operator()(query_obj, target_obj, mapping, data);
 }

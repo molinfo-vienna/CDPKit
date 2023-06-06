@@ -163,7 +163,7 @@ Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(
 Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(Reaction& rxn, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_expr = rxn.getProperty(ReactionProperty::MATCH_EXPRESSION, false);
+		Base::Any prev_expr = rxn.getProperty(ReactionProperty::MATCH_EXPRESSION, false);
 	
 		if (!prev_expr.isEmpty())
 			return prev_expr.getData<MatchExpression<Reaction>::SharedPointer>();

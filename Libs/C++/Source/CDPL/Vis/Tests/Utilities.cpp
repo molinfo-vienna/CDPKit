@@ -72,7 +72,7 @@ void Vis::dumpImage(View2D& view, const std::string& prefix, std::size_t& img_id
 
 	renderer.setBrush(Brush());
 	
-	Base::Variant vp_var = view.getParameter(ControlParameter::VIEWPORT);
+	Base::Any vp_var = view.getParameter(ControlParameter::VIEWPORT);
 
 	if (!vp_var.isEmpty()) {
 		const Rectangle2D& vp = vp_var.getData<Rectangle2D>();

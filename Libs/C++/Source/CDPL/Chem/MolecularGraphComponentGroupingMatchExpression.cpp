@@ -47,7 +47,7 @@ Chem::MolecularGraphComponentGroupingMatchExpression::MolecularGraphComponentGro
 	compGrouping(rhs.compGrouping) {}
 
 bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const MolecularGraph&, const MolecularGraph& target_molgraph, 
-																	  const AtomBondMapping& mapping, const Base::Variant&) const
+																	  const AtomBondMapping& mapping, const Base::Any&) const
 {
 	if (!compGrouping || compGrouping->getSize() == 0)
 		return true;

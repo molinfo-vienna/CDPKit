@@ -198,8 +198,8 @@ namespace CDPL
 			template <typename T>
 			void copyProperty(const T*, T*, const Base::LookupKey&) const;
 
-			const Base::Variant& getProperty(const Atom*, const Base::LookupKey&) const;
-			const Base::Variant& getProperty(const Bond*, const Base::LookupKey&) const;
+			const Base::Any& getProperty(const Atom*, const Base::LookupKey&) const;
+			const Base::Any& getProperty(const Bond*, const Base::LookupKey&) const;
 
 			Molecule* copyReactants(const ReactionSite&);
 

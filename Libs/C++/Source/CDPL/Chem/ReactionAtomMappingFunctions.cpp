@@ -102,7 +102,7 @@ Chem::AtomMapping::SharedPointer Chem::perceiveAtomMapping(const Reaction& rxn)
 Chem::AtomMapping::SharedPointer Chem::perceiveAtomMapping(Reaction& rxn, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_mapping = rxn.getProperty(ReactionProperty::ATOM_MAPPING, false);
+		Base::Any prev_mapping = rxn.getProperty(ReactionProperty::ATOM_MAPPING, false);
 	
 		if (!prev_mapping.isEmpty())
 			return prev_mapping.getData<AtomMapping::SharedPointer>();

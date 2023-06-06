@@ -41,7 +41,7 @@ Chem::BondReactionCenterStatusMatchExpression::BondReactionCenterStatusMatchExpr
 
 bool Chem::BondReactionCenterStatusMatchExpression::operator()(const Bond&, const MolecularGraph&, 
 															   const Bond& target_bond, const MolecularGraph&, 
-															   const Base::Variant&) const
+															   const Base::Any&) const
 {
 	unsigned int target_rxn_ctr_status = getReactionCenterStatus(target_bond);
 

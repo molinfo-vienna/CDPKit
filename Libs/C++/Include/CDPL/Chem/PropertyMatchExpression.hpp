@@ -105,7 +105,7 @@ namespace CDPL
 			 *         and \c false otherwise.
 			 */
 			bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, const ObjType1& target_obj1, 
-							const ObjType2& target_obj2, const Base::Variant& aux_data) const;
+							const ObjType2& target_obj2, const Base::Any& aux_data) const;
 
 		private:
 			ValueType         value;
@@ -171,7 +171,7 @@ namespace CDPL
 			 * \return \c true if the target property value matches the query property value under the conditions defined by \a MatchFunc,
 			 *         and \c false otherwise.
 			 */
-			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Variant& aux_data) const;
+			bool operator()(const ObjType& query_obj, const ObjType& target_obj, const Base::Any& aux_data) const;
 
 		private:
 			ValueType         value;
@@ -188,7 +188,7 @@ namespace CDPL
 template <typename ValueType, typename MatchFunc, typename ObjType1, typename ObjType2>
 bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
 																									  const ObjType1& target_obj1, const ObjType2& target_obj2,
-																									  const Base::Variant&) const
+																									  const Base::Any&) const
 {
 	if (fixed)
 		return matchFunc(propertyFunc(target_obj1, target_obj2), value);
@@ -199,7 +199,7 @@ bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType
 
 template <typename ValueType, typename MatchFunc, typename ObjType>
 bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
-																								 const Base::Variant&) const
+																								 const Base::Any&) const
 {
 	if (fixed)
 		return matchFunc(propertyFunc(target_obj), value);

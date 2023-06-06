@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Variant.hpp 
+ * Any.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Base::Variant.
+ * \brief Definition of the class CDPL::Base::Any.
  */
 
-#ifndef CDPL_BASE_VARIANT_HPP
-#define CDPL_BASE_VARIANT_HPP
+#ifndef CDPL_BASE_ANY_HPP
+#define CDPL_BASE_ANY_HPP
 
 #ifdef _MSC_VER
 #  pragma warning (disable : 4244) // disable possible loss of data warning
@@ -51,69 +51,69 @@ namespace CDPL
 		/**
 		 * \brief A safe, type checked container for arbitrary data of variable type.
 		 *
-		 * \c %Variant implements a safe, type checked container for data of variable type. Instances of \c %Variant
+		 * \c %Any implements a safe, type checked container for data of variable type. Instances of \c %Any
 		 * are similar to variables in dynamic programming languages like \e Python where the type of the stored
-		 * values may change at runtime. \c %Variant was inspired by <em>Boost.Any</em> [\ref BANY] which serves the
+		 * values may change at runtime. \c %Any was inspired by <em>Boost.Any</em> [\ref BANY] which serves the
 		 * same purpose and provides similar functionality.
 		 *
-		 * \c %Variant allows to store any data whose type fulfills the following requirements:
+		 * \c %Any allows to store any data whose type fulfills the following requirements:
 		 * - The type is copy constructible
 		 * - The destructor of the value type upholds the no-throw exception-safety guarantee
 		 *
-		 * \c %Variant provides three kinds of contructors: A default constructor, a copy constructor and
+		 * \c %Any provides three kinds of contructors: A default constructor, a copy constructor and
 		 * a constructor that accepts a reference to data of any type. 
 		 *
-		 * If a \c %Variant instance is created using the latter type of constructor, the instance will
+		 * If a \c %Any instance is created using the latter type of constructor, the instance will
 		 * store a copy of the passed data (hence the requirement for copy constructibility of the data type).
-		 * A default constructed \c %Variant does not contain any data and is \e empty. To check whether
-		 * a \c %Variant object is currently empty, \c %Variant provides the method isEmpty().
+		 * A default constructed \c %Any does not contain any data and is \e empty. To check whether
+		 * a \c %Any object is currently empty, \c %Any provides the method isEmpty().
 		 *
-		 * Data objects held by \c %Variant instances are reference counted and a given data object may be referenced
-		 * by more than one \c %Variant instance (as a result of copy construction and assignment) at the same time.
-		 * When the reference count of a data object reaches zero, i.e. the last \c %Variant instance referencing the
+		 * Data objects held by \c %Any instances are reference counted and a given data object may be referenced
+		 * by more than one \c %Any instance (as a result of copy construction and assignment) at the same time.
+		 * When the reference count of a data object reaches zero, i.e. the last \c %Any instance referencing the
 		 * data gets destroyed, the data object is released. Since only object pointers need to be passed, copying of
-		 * \c %Variant instances is computationally inexpensive.
+		 * \c %Any instances is computationally inexpensive.
 		 * 
-		 * For direct access to the stored data, \c %Variant provides the member function template getData().
+		 * For direct access to the stored data, \c %Any provides the member function template getData().
 		 * The template argument specifies the type of the contained data that will be returned to the caller by
-		 * reference. If the \c %Variant instance is empty, or the stored data are not of the specified
+		 * reference. If the \c %Any instance is empty, or the stored data are not of the specified
 		 * type, getData() will throw a Base::BadCast exception. 
 		 * Runtime information regarding the type of the held data can be obtained by the method getTypeID() which
 		 * returns a reference to a corresponding <tt>std::type_info</tt> object.
 		 */
-		class Variant 
+		class Any 
 		{			
 
 		public:
 			/**
-			 * \brief Constructs an empty \c %Variant instance.
+			 * \brief Constructs an empty \c %Any instance.
 			 */
-			Variant() throw(): data(0) {}
+			Any() throw(): data(0) {}
 
 			/**
-			 * \brief Constructs a \c %Variant instance that references the same data as \a var.
-			 * \param var The other \c %Variant instance.
+			 * \brief Constructs a \c %Any instance that references the same data as \a var.
+			 * \param var The other \c %Any instance.
 			 * \throw None.
 			 */
-			Variant(const Variant& var) throw(): data(var.data) {
+			Any(const Any& var) throw(): data(var.data) {
 				if (data)
 					data->addRef();
 			}
 
 			/**
-			 * \brief Constructs a \c %Variant instance that contains a copy of \a data.
-			 * \param data The data to store in the created \c %Variant instance.
+			 * \brief Constructs a \c %Any instance that contains a copy of \a data.
+			 * \param data The data to store in the created \c %Any instance.
 			 * \throw Throws <tt>std::bad_alloc</tt> or any exceptions arising from the copy constructor of the type \a T.
 			 */
 			template <typename T>
-			Variant(const T& data): data(new DataHolder<T>(data)) {
+			Any(const T& data): data(new DataHolder<T>(data)) {
 				this->data->addRef();
 			}
 
 			/**
-			 * \brief Destroys the \c %Variant instance.
+			 * \brief Destroys the \c %Any instance.
 			 */
-			~Variant() {
+			~Any() {
 				if (data)
 					data->release(); 
 			}
@@ -128,8 +128,8 @@ namespace CDPL
 			}
 	
 			/**
-			 * \brief Tells whether the \c %Variant instance stores any data.
-			 * \return \c false if the \c %Variant instance is not empty, and \c true otherwise.
+			 * \brief Tells whether the \c %Any instance stores any data.
+			 * \return \c false if the \c %Any instance is not empty, and \c true otherwise.
 			 * \throw None.
 			 */
 			bool isEmpty() const throw() {
@@ -142,12 +142,12 @@ namespace CDPL
 			 * The currently stored data object gets replaced by the data contained in \a var. 
 			 * A self assignment has no effect.
 			 *
-			 * \param var The other \c %Variant instance.
+			 * \param var The other \c %Any instance.
 			 * \return A reference to itself.
 			 * \throw None.
 			 */
-			Variant& operator=(const Variant& var) throw() {
-				Variant(var).swap(*this);
+			Any& operator=(const Any& var) throw() {
+				Any(var).swap(*this);
 				return* this;
 			}  
 			
@@ -161,8 +161,8 @@ namespace CDPL
 			 * \throw Throws <tt>std::bad_alloc</tt> or any exceptions arising from the copy constructor of the type \a T.
 			 */
 			template <typename T>
-			Variant& operator=(const T& data) {
-				Variant(data).swap(*this);
+			Any& operator=(const T& data) {
+				Any(data).swap(*this);
 				return* this;
 			}
 
@@ -171,7 +171,7 @@ namespace CDPL
 			 * \post \a var contains the data previously stored in <tt>*this</tt> and vice versa.
 			 * \throw None.
 			 */
-			void swap(Variant& var) throw() {
+			void swap(Any& var) throw() {
 				Data* tmp = data;
 				data = var.data;
 				var.data = tmp;
@@ -180,7 +180,7 @@ namespace CDPL
 			/**
 			 * \brief Returns a raw pointer to the memory occupied by the stored data.
 			 * \return A \c void pointer to the storage occupied by the held data, or \e null if the
-			 *         \c %Variant instance is empty.
+			 *         \c %Any instance is empty.
 			 */
 			const void* getDataPointer() const {
 				if (!data)
@@ -190,9 +190,9 @@ namespace CDPL
 			}
 				  
 			/**
-			 * \brief Returns a \c const reference to the stored data of type \a T, or <tt>*this</tt> if \a T is \c %Variant.
-			 * \return A \c const reference to the contained data of type \a T, or <tt>*this</tt> if \a T is \c %Variant.
-			 * \throw Base::BadCast if the \c %Variant instance is empty, or the stored
+			 * \brief Returns a \c const reference to the stored data of type \a T, or <tt>*this</tt> if \a T is \c %Any.
+			 * \return A \c const reference to the contained data of type \a T, or <tt>*this</tt> if \a T is \c %Any.
+			 * \throw Base::BadCast if the \c %Any instance is empty, or the stored
 			 *        data object is not of the specified type \a T.
 			 */
 			template <typename T>
@@ -263,13 +263,13 @@ namespace CDPL
 			struct DataGetter
 			{ 
 
-				static const T& getData(const Variant* var) { 
+				static const T& getData(const Any* var) { 
 					if (var->data->getTypeID() == typeid(T)) {
-						const Variant::DataHolderBase<T>* dh = static_cast<const DataHolderBase<T>*>(var->data);
+						const Any::DataHolderBase<T>* dh = static_cast<const DataHolderBase<T>*>(var->data);
 						return dh->getData();
 					}
 
-					throw BadCast(std::string("Variant: extraction of held data of type '") + var->data->getTypeID().name() + 
+					throw BadCast(std::string("Any: extraction of held data of type '") + var->data->getTypeID().name() + 
 								  std::string("' as data of type '") + typeid(T).name() + "' not possible");
 				}
 			};
@@ -280,7 +280,7 @@ namespace CDPL
 
 				static void checkData(const Data* data) { 
 					if (!data)
-						throw BadCast("Variant: no data set");
+						throw BadCast("Any: no data set");
 				}
 			};
 
@@ -288,21 +288,21 @@ namespace CDPL
 		};
 
 		template <>
-		struct Variant::DataGetter<Variant>
+		struct Any::DataGetter<Any>
 		{ 
 
-			static const Variant& getData(const Variant* var) {
+			static const Any& getData(const Any* var) {
 				return *var;
 			}
 		};
 
 		template <>
-		struct Variant::DataChecker<Variant>
+		struct Any::DataChecker<Any>
 		{ 
 
-			static void checkData(const Variant::Data*) {}
+			static void checkData(const Any::Data*) {}
 		};
 	}
 }
 
-#endif // CDPL_BASE_VARIANT_HPP
+#endif // CDPL_BASE_ANY_HPP

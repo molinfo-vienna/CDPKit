@@ -44,7 +44,7 @@ namespace CDPL
 		class PropertyContainer;
 		class ControlParameterContainer;
 		class LookupKey;
-		class Variant;
+		class Any;
 		class Exception;
 		class DataFormat;
 	}

@@ -46,7 +46,7 @@ Chem::Fragment::SharedPointer Chem::perceiveCyclicSubstructure(const MolecularGr
 Chem::Fragment::SharedPointer Chem::perceiveCyclicSubstructure(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_substruct = molgraph.getProperty(MolecularGraphProperty::CYCLIC_SUBSTRUCTURE, false);
+		Base::Any prev_substruct = molgraph.getProperty(MolecularGraphProperty::CYCLIC_SUBSTRUCTURE, false);
 	
 		if (!prev_substruct.isEmpty())
 			return prev_substruct.getData<Fragment::SharedPointer>();

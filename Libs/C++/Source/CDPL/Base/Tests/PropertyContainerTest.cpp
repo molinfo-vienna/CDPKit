@@ -34,7 +34,7 @@
 
 #include "CDPL/Base/PropertyContainer.hpp"
 #include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 

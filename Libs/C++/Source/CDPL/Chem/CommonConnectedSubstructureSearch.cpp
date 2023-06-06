@@ -204,7 +204,7 @@ bool Chem::CommonConnectedSubstructureSearch::init(const MolecularGraph& tgt)
 		queryChanged = false;
 	}
 
-	if ((*molGraphMatchExpr)(*query, tgt, Base::Variant()) && findEquivAtoms() && findEquivBonds()) {
+	if ((*molGraphMatchExpr)(*query, tgt, Base::Any()) && findEquivAtoms() && findEquivBonds()) {
 		if (initQueryData) {
 			hiddenQueryAtomMask.reset();
 			termQueryAtomMask.reset();
@@ -308,7 +308,7 @@ bool Chem::CommonConnectedSubstructureSearch::findEquivAtoms()
 		for (MolecularGraph::ConstAtomIterator ta_it = target_atoms_beg; ta_it != target_atoms_end; ++ta_it) {
 			const Atom& target_atom = *ta_it;
 
-			if (expr(query_atom, *query, target_atom, *target, Base::Variant())) {
+			if (expr(query_atom, *query, target_atom, *target, Base::Any())) {
 				equiv_mask.set(target->getAtomIndex(target_atom));
 				equiv_atoms_found = true;
 			}
@@ -352,7 +352,7 @@ bool Chem::CommonConnectedSubstructureSearch::findEquivBonds()
 		for (MolecularGraph::ConstBondIterator tb_it = target_bonds_beg; tb_it != target_bonds_end; ++tb_it) {
 			const Bond& target_bond = *tb_it;
 
-			if (expr(query_bond, *query, target_bond, *target, Base::Variant())) {
+			if (expr(query_bond, *query, target_bond, *target, Base::Any())) {
 				equiv_mask.set(target->getBondIndex(target_bond));
 				equiv_bonds_found = true;
 			}
@@ -691,7 +691,7 @@ bool Chem::CommonConnectedSubstructureSearch::hasPostMappingMatchExprs() const
 bool Chem::CommonConnectedSubstructureSearch::foundMappingMatches(const AtomBondMapping* mapping) const
 {
 	if (molGraphMatchExpr->requiresAtomBondMapping() && 
-		!((*molGraphMatchExpr)(*query, *target, *mapping, Base::Variant())))
+		!((*molGraphMatchExpr)(*query, *target, *mapping, Base::Any())))
 		return false;
 
 	AtomList::const_iterator post_map_atoms_end = postMappingMatchAtoms.end();
@@ -706,7 +706,7 @@ bool Chem::CommonConnectedSubstructureSearch::foundMappingMatches(const AtomBond
 			continue;
 
 		if (!(*atomMatchExprTable[query_atom_idx])(query_atom, *query, *target_atom, 
-												   *target, *mapping, Base::Variant()))
+												   *target, *mapping, Base::Any()))
 			return false;
 	}
 
@@ -722,7 +722,7 @@ bool Chem::CommonConnectedSubstructureSearch::foundMappingMatches(const AtomBond
 			continue;
 
 		if (!(*bondMatchExprTable[query->getBondIndex(*query_bond)])(*query_bond, *query, *target_bond, 
-																	 *target, *mapping, Base::Variant()))
+																	 *target, *mapping, Base::Any()))
 			return false;
 	}
 

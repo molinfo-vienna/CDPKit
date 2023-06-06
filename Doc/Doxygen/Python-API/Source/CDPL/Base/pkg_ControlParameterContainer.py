@@ -34,7 +34,7 @@ class ControlParameterContainer(Boost.Python.instance):
     # \param key 
     # \param value 
     #
-    def setParameter(key: LookupKey, value: Variant) -> None: pass
+    def setParameter(key: LookupKey, value: Any) -> None: pass
 
     ##
     # \brief 
@@ -50,7 +50,7 @@ class ControlParameterContainer(Boost.Python.instance):
     # \param local 
     # \return 
     #
-    def getParameter(key: LookupKey, throw_: bool = False, local: bool = False) -> Variant: pass
+    def getParameter(key: LookupKey, throw_: bool = False, local: bool = False) -> Any: pass
 
     ##
     # \brief 
@@ -59,7 +59,7 @@ class ControlParameterContainer(Boost.Python.instance):
     # \param local 
     # \return 
     #
-    def getParameterOrDefault(key: LookupKey, def_value: Variant, local: bool = False) -> Variant: pass
+    def getParameterOrDefault(key: LookupKey, def_value: Any, local: bool = False) -> Any: pass
 
     ##
     # \brief 
@@ -97,7 +97,7 @@ class ControlParameterContainer(Boost.Python.instance):
     # \param func 
     # \return 
     #
-    def registerParameterChangedCallback(func: VoidLookupKeyVariantFunctor) -> int: pass
+    def registerParameterChangedCallback(func: VoidLookupKeyAnyFunctor) -> int: pass
 
     ##
     # \brief 
@@ -178,14 +178,14 @@ class ControlParameterContainer(Boost.Python.instance):
     # \param key 
     # \return 
     #
-    def __getitem__(key: LookupKey) -> Variant: pass
+    def __getitem__(key: LookupKey) -> Any: pass
 
     ##
     # \brief 
     # \param key 
     # \param value 
     #
-    def __setitem__(key: LookupKey, value: Variant) -> None: pass
+    def __setitem__(key: LookupKey, value: Any) -> None: pass
 
     ##
     # \brief 

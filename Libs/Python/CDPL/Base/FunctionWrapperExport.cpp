@@ -28,7 +28,7 @@
 
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/LookupKey.hpp"
-#include "CDPL/Base/Variant.hpp"
+#include "CDPL/Base/Any.hpp"
 
 #include "FunctionWrapperExport.hpp"
 #include "ClassExports.hpp"
@@ -45,5 +45,5 @@ void CDPLPythonBase::exportFunctionWrappers()
     Function2Export<boost::function2<void, const DataIOBase&, double>, DataIOBase&, double, python::return_value_policy<python::return_by_value> >("VoidDataIOBaseFunctor");
     Function1Export<boost::function1<void, const LookupKey&> >("VoidLookupKeyFunctor");
 
-    Function2Export<boost::function2<void, const LookupKey&, const Variant&> >("VoidLookupKeyVariantFunctor");
+    Function2Export<boost::function2<void, const LookupKey&, const Any&> >("VoidLookupKeyAnyFunctor");
 }

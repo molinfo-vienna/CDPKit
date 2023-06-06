@@ -44,7 +44,7 @@ Chem::FragmentList::SharedPointer Chem::perceiveComponents(const MolecularGraph&
 Chem::FragmentList::SharedPointer Chem::perceiveComponents(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {
-		Base::Variant prev_comps = molgraph.getProperty(MolecularGraphProperty::COMPONENTS, false);
+		Base::Any prev_comps = molgraph.getProperty(MolecularGraphProperty::COMPONENTS, false);
 	
 		if (!prev_comps.isEmpty())
 			return prev_comps.getData<FragmentList::SharedPointer>();

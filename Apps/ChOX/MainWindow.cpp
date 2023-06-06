@@ -180,8 +180,8 @@ void ChOX::MainWindow::init()
 
 // +++
 
-	connect(settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&)), 
-			this, SLOT(handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&)));
+	connect(settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)), 
+			this, SLOT(handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)));
 
 // +++
 
@@ -992,7 +992,7 @@ void ChOX::MainWindow::handleAgentLayoutDirChange()
 	uiMainWindow.viewAgentLayoutDirActionGroup->blockSignals(false);
 }
 
-void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& val)
+void ChOX::MainWindow::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val)
 {
 	using namespace CDPL;
 	using namespace Vis;

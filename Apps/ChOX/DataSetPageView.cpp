@@ -231,7 +231,7 @@ void DataSetPageView::handleDataSetSizeChange(int new_size)
 	update();
 }
 
-void DataSetPageView::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& val)
+void DataSetPageView::handleControlParamChange(const CDPL::Base::LookupKey& key, const CDPL::Base::Any& val)
 {
 	if (key == ControlParameter::SHOW_GRID) {
 		showGrid(getShowGridParameter(settings));
@@ -270,8 +270,8 @@ void DataSetPageView::init()
 {
 	connect(&dataSet, SIGNAL(selectionStatusChanged(bool)), this, SLOT(handleSelectionStatusChange(bool)));
 	connect(&dataSet, SIGNAL(sizeChanged(int)), this, SLOT(handleDataSetSizeChange(int)));
-	connect(&settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&)), 
-			this, SLOT(handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&)));
+	connect(&settings, SIGNAL(controlParamChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)), 
+			this, SLOT(handleControlParamChange(const CDPL::Base::LookupKey&, const CDPL::Base::Any&)));
 
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAutoFillBackground(false);

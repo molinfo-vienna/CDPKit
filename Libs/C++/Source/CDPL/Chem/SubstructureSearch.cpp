@@ -224,7 +224,7 @@ bool Chem::SubstructureSearch::init(const MolecularGraph& tgt)
 		queryChanged = false;
 	}
 
-	if ((*molGraphMatchExpr)(*query, tgt, Base::Variant()) && findEquivAtoms() && findEquivBonds()) {
+	if ((*molGraphMatchExpr)(*query, tgt, Base::Any()) && findEquivAtoms() && findEquivBonds()) {
 		if (initQueryData) {
 			queryMappingMask.reset();
 
@@ -313,7 +313,7 @@ bool Chem::SubstructureSearch::findEquivAtoms()
 				continue;
 			const Atom& target_atom = target->getAtom(j);
 
-			if (expr(query_atom, *query, target_atom, *target, Base::Variant())) {
+			if (expr(query_atom, *query, target_atom, *target, Base::Any())) {
 				equiv_mask.set(j);
 				no_equiv_atoms = false;
 			}
@@ -356,7 +356,7 @@ bool Chem::SubstructureSearch::findEquivBonds()
 			if (!target->containsAtom(target_bond.getBegin()) || !target->containsAtom(target_bond.getEnd()))
 				continue;
 
-			if (expr(query_bond, *query, target_bond, *target, Base::Variant())) {
+			if (expr(query_bond, *query, target_bond, *target, Base::Any())) {
 				equiv_mask.set(j);
 				no_equiv_bonds = false;
 			}
@@ -652,7 +652,7 @@ bool Chem::SubstructureSearch::hasPostMappingMatchExprs() const
 bool Chem::SubstructureSearch::foundMappingMatches(const AtomBondMapping* mapping) const
 {
 	if (molGraphMatchExpr->requiresAtomBondMapping() && 
-		!((*molGraphMatchExpr)(*query, *target, *mapping, Base::Variant())))
+		!((*molGraphMatchExpr)(*query, *target, *mapping, Base::Any())))
 		return false;
 
 	AtomList::const_iterator post_map_atoms_end = postMappingMatchAtoms.end();
@@ -662,7 +662,7 @@ bool Chem::SubstructureSearch::foundMappingMatches(const AtomBondMapping* mappin
 		std::size_t atom_idx = query->getAtomIndex(atom);
 
 		if (!(*atomMatchExprTable[atom_idx])(atom, *query, *queryAtomMapping[atom_idx], 
-											 *target, *mapping, Base::Variant()))
+											 *target, *mapping, Base::Any()))
 			return false;
 	}
 
@@ -673,7 +673,7 @@ bool Chem::SubstructureSearch::foundMappingMatches(const AtomBondMapping* mappin
 		std::size_t bond_idx = query->getBondIndex(bond);
 
 		if (!(*bondMatchExprTable[bond_idx])(bond, *query, *queryBondMapping[bond_idx], 
-											 *target, *mapping, Base::Variant()))
+											 *target, *mapping, Base::Any()))
 			return false;
 	}
 

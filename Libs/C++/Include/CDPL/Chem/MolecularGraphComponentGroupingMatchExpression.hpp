@@ -91,7 +91,7 @@ namespace CDPL
 			 *       evaluate to \c true.
 			 */
 			bool operator()(const MolecularGraph& query_molgraph, const MolecularGraph& target_molgraph, 
-							const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
+							const AtomBondMapping& mapping, const Base::Any& aux_data) const;
 
 			/**
 			 * \brief Returns \c true to indicate that the expression requires a query to target atom/bond mapping candidate for its evaluation.
