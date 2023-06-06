@@ -33,7 +33,6 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
-#include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -609,13 +608,13 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(
 
 	for (std::size_t i = 0; max_ref_iters == 0 || i < max_ref_iters; i++) {
 		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
-			if ((boost::math::isnan)(energy)) 
+			if (std::isnan(energy)) 
 				return false;
 
 			break;
 		}
 	
-		if ((boost::math::isnan)(energy)) 
+		if (std::isnan(energy)) 
 			return false;
 
 		if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)

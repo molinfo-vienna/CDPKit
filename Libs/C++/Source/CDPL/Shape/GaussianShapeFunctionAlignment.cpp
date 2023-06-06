@@ -26,7 +26,8 @@
  
 #include "StaticInit.hpp"
 
-#include <boost/math/special_functions/fpclassify.hpp>
+#include <cmath>
+
 #include <boost/bind.hpp>
 
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
@@ -294,7 +295,7 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 			minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
 			minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
 		
-			if (!boost::math::isfinite(minimizer.getFunctionValue())) // sanity check 
+			if (!std::isfinite(minimizer.getFunctionValue())) // sanity check 
 				continue;
 
 			normalize(opt_xform);
@@ -323,7 +324,7 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 				minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
 				minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
 		
-				if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
+				if (!std::isfinite(minimizer.getFunctionValue()))  // sanity check
 					continue;
 
 				normalize(opt_xform);

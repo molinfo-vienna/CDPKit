@@ -26,7 +26,7 @@
  
 #include "StaticInit.hpp"
 
-#include <boost/math/special_functions/fpclassify.hpp>
+#include <cmath>
 
 #include "CDPL/Shape/ScreeningProcessor.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -130,7 +130,7 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 	if (shapes.isEmpty())
 		return false;
 
-	bool have_cutoff = boost::math::isfinite(settings.getScoreCutoff());
+	bool have_cutoff = std::isfinite(settings.getScoreCutoff());
 
 	if (settings.singleConformerSearch()) {
 		bool success = false;

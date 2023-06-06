@@ -37,7 +37,6 @@
 #include <cassert>
 #include <ctime>
 
-#include <boost/math/special_functions.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
@@ -410,7 +409,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
 	writeFloatNumber(os, 10, 5, scaling_fac2, "MDLDataWriter: error while writing scaling factor2 to molfile header block");
 
-	double energy = (writeConfEnergyField && multiConfExport ? (boost::math::isnan(confEnergy) ? 0.0 : confEnergy) : getMDLEnergy(molgraph));
+	double energy = (writeConfEnergyField && multiConfExport ? (std::isnan(confEnergy) ? 0.0 : confEnergy) : getMDLEnergy(molgraph));
 
 	writeFloatNumber(os, 12, 5, energy, "MDLDataWriter: error while writing energy to molfile header block");
 
@@ -428,7 +427,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 	// Header line 3
 
 	if (writeConfEnergyComment && multiConfExport) {
-		if (!boost::math::isnan(confEnergy))
+		if (!std::isnan(confEnergy))
 			os << confEnergy;
 
 		writeMDLEOL(os);
@@ -1629,7 +1628,7 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 
 	std::size_t prefix_length = SDFile::DATA_HEADER_PREFIX.length();
 
-	if (writeConfEnergySDEntry && multiConfExport && !boost::math::isnan(confEnergy)) {
+	if (writeConfEnergySDEntry && multiConfExport && !std::isnan(confEnergy)) {
 		writeString(os, prefix_length + 1, SDFile::DATA_HEADER_PREFIX, 
 					"MDLDataWriter: error while writing structure data header prefix"); 
 		writeMDLLine(os, confEnergySDTag, "MDLDataWriter: error while writing header for conformer energy structure data item", 

@@ -33,7 +33,6 @@
 #include <algorithm>
 
 #include <boost/random/uniform_real.hpp>
-#include <boost/math/special_functions/fpclassify.hpp>
 #include <boost/bind.hpp>
 
 #include "FastExp/fastexp.h"
@@ -525,7 +524,7 @@ void Shape::FastGaussianShapeAlignment::alignAndProcessResults(std::size_t ref_i
 			minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
 			minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
 		
-			if (!boost::math::isfinite(minimizer.getFunctionValue())) // sanity check 
+			if (!std::isfinite(minimizer.getFunctionValue())) // sanity check 
 				continue;
 
 			normalize(opt_xform);
@@ -551,7 +550,7 @@ void Shape::FastGaussianShapeAlignment::alignAndProcessResults(std::size_t ref_i
 				minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
 				minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
 		
-				if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
+				if (!std::isfinite(minimizer.getFunctionValue()))  // sanity check
 					continue;
 
 				normalize(opt_xform);

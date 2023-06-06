@@ -26,13 +26,13 @@
 
 #include "StaticInit.hpp"
 
+#include <cmath>
 #include <algorithm>
 #include <iterator>
 
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -689,13 +689,13 @@ bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(Conforme
 
 	for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
 		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
-			if ((boost::math::isnan)(energy)) 
+			if (std::isnan(energy)) 
 				return false;
 
 			break;
 		}
 
-		if ((boost::math::isnan)(energy)) 
+		if (std::isnan(energy)) 
 			return false;
 		
 		if (energyMinimizer.getFunctionDelta() < ref_tol)
