@@ -203,6 +203,7 @@ Chem::MolecularGraph::SharedPointer ConfGen::TorsionLibraryDataReader::parseSMAR
 	using namespace Chem;
 
     boost::iostreams::stream<boost::iostreams::array_source> is(str, std::strlen(str));
+	
 	BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
 	SMARTSMoleculeReader reader(is);
 
