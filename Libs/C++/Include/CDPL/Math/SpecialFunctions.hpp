@@ -102,7 +102,7 @@ namespace CDPL
 
 
 // Implementation 
-// \cond UNHIDE_DETAILS
+// \cond DOC_IMPL_DETAILS
 
 namespace CDPL
 {

@@ -109,7 +109,7 @@ namespace CDPL
 
 
 // Implementation
-// \cond UNHIDE_DETAILS
+// \cond DOC_IMPL_DETAILS
 
 template <typename ValueType>
 CDPL::ForceField::MMFF94GradientCalculator<ValueType>::MMFF94GradientCalculator():

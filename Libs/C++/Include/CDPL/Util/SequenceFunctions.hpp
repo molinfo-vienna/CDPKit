@@ -50,7 +50,7 @@ namespace CDPL
 
 
 // Implementation
-// \cond UNHIDE_DETAILS
+// \cond DOC_IMPL_DETAILS
 
 template <typename InputIt1, typename InputIt2, typename BinaryFunc>
 void CDPL::Util::forEachPair(InputIt1 it1, InputIt1 end1, InputIt2 it2, BinaryFunc func)

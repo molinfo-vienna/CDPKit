@@ -225,7 +225,7 @@ CDPL::Base::DataReader<T>& CDPL::Base::DataReader<T>::operator=(const DataReader
 	return *this;
 }
 
-// \cond UNHIDE_DETAILS
+// \cond DOC_IMPL_DETAILS
 
 template <typename T>
 CDPL::Base::DataReader<T>& CDPL::Base::operator>>(DataReader<T>& reader, T& obj)

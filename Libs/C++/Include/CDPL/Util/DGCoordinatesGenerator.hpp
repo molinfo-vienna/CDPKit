@@ -299,7 +299,7 @@ namespace CDPL
 }
 
 
-// \cond UNHIDE_DETAILS
+// \cond DOC_IMPL_DETAILS
 // DGCoordinatesGeneratorBase<Dim, T>::DistanceConstraint implementation
 
 template <std::size_t Dim, typename T, typename Derived>

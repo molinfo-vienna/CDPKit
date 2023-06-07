@@ -339,7 +339,7 @@ namespace CDPL
 			OutputHandlerList outputHandlers;
 		};
 
-		// \cond UNHIDE_DETAILS
+		// \cond DOC_IMPL_DETAILS
 
 		extern template
 		class CDPL_BASE_API DataIOManager<Chem::Molecule>;

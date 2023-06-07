@@ -154,7 +154,7 @@ CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const DataWriter
 	return *this;
 }
 
-// \cond UNHIDE_DETAILS
+// \cond DOC_IMPL_DETAILS
 
 template <typename T>
 CDPL::Base::DataWriter<T>& CDPL::Base::operator<<(DataWriter<T>& writer, const T& obj)
