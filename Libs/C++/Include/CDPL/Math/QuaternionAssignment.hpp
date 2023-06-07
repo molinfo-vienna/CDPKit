@@ -29,7 +29,7 @@
 #ifndef CDPL_MATH_QUATERNIONASSIGNMENT_HPP
 #define CDPL_MATH_QUATERNIONASSIGNMENT_HPP
 
-#include <boost/swap.hpp>
+#include <utility>
 
 
 namespace CDPL
@@ -65,10 +65,10 @@ namespace CDPL
 		template <typename Q, typename E>
 		void quaternionSwap(Q& q, QuaternionExpression<E>& e)
 		{
-			boost::swap(q.getC1(), e().getC1());
-			boost::swap(q.getC2(), e().getC2());
-			boost::swap(q.getC3(), e().getC3());
-			boost::swap(q.getC4(), e().getC4());
+			std::swap(q.getC1(), e().getC1());
+			std::swap(q.getC2(), e().getC2());
+			std::swap(q.getC3(), e().getC3());
+			std::swap(q.getC4(), e().getC4());
 		}
 	}
 }

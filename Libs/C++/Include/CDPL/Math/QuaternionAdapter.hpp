@@ -30,10 +30,7 @@
 #define CDPL_MATH_QUATERNIONADAPTER_HPP
 
 #include <cstddef>
-
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
+#include <type_traits>
 
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
@@ -60,10 +57,10 @@ namespace CDPL
 			typedef typename std::ptrdiff_t DifferenceType;
 			typedef typename Q::ValueType ValueType;
 			typedef typename Q::ConstReference ConstReference;
-			typedef typename boost::mpl::if_<boost::is_const<Q>,
+			typedef typename std::conditional<std::is_const<Q>::value,
 											 typename Q::ConstReference,
 											 typename Q::Reference>::type Reference;
-			typedef typename boost::mpl::if_<boost::is_const<Q>,
+			typedef typename std::conditional<std::is_const<Q>::value,
 											 typename Q::ConstClosureType,
 											 typename Q::ClosureType>::type QuaternionClosureType;
 			typedef const SelfType ConstClosureType;
@@ -159,13 +156,13 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionVectorAdapter>::type& operator*=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, QuaternionVectorAdapter>::type& operator*=(const T& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionVectorAdapter>::type& operator/=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, QuaternionVectorAdapter>::type& operator/=(const T& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}

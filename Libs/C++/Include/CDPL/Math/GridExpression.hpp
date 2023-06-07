@@ -29,10 +29,7 @@
 #ifndef CDPL_MATH_GRIDEXPRESSION_HPP
 #define CDPL_MATH_GRIDEXPRESSION_HPP
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/type_traits/is_arithmetic.hpp>
-#include <boost/utility.hpp>
+#include <type_traits>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/Expression.hpp"
@@ -289,7 +286,7 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar2GridBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2GridBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
 		operator*(const GridExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2GridBinaryTraits<E, T,
@@ -299,7 +296,7 @@ namespace CDPL
 		}
 
 		template <typename T, typename E>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar1GridBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type 
+		typename std::enable_if<IsScalar<T>::value, typename Scalar1GridBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type 
 		operator*(const T& t, const GridExpression<E>& e)
 		{
 			typedef typename Scalar1GridBinaryTraits<T, E,
@@ -309,7 +306,7 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar2GridBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2GridBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
 		operator/(const GridExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2GridBinaryTraits<E, T,
@@ -333,7 +330,7 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename T>		
-		typename boost::enable_if<boost::is_arithmetic<T>, typename GridToleranceEquality<E1, E2, T>::ResultType>::type
+		typename std::enable_if<std::is_arithmetic<T>::value, typename GridToleranceEquality<E1, E2, T>::ResultType>::type
 		equals(const GridExpression<E1>& e1, const GridExpression<E2>& e2, const T& eps)
 		{
 			return GridToleranceEquality<E1, E2, T>::apply(e1, e2, eps);

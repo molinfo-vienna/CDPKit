@@ -29,7 +29,7 @@
 #ifndef CDPL_MATH_VECTORASSIGNMENT_HPP
 #define CDPL_MATH_VECTORASSIGNMENT_HPP
 
-#include <boost/swap.hpp>
+#include <utility>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -77,7 +77,7 @@ namespace CDPL
 			SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(v.getSize()), SizeType(e().getSize()), Base::SizeError);
 
 			for (SizeType i = 0; i < size; i++)
-				boost::swap(v(i), e()(i));
+				std::swap(v(i), e()(i));
 		}
 	}
 }

@@ -29,8 +29,7 @@
 #ifndef CDPL_MATH_MATRIXADAPTER_HPP
 #define CDPL_MATH_MATRIXADAPTER_HPP
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
+#include <type_traits>
 
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
@@ -116,10 +115,10 @@ namespace CDPL
 			typedef typename M::DifferenceType DifferenceType;
 			typedef typename M::ValueType ValueType;
 			typedef typename M::ConstReference ConstReference;
-			typedef typename boost::mpl::if_<boost::is_const<M>,
+			typedef typename std::conditional<std::is_const<M>::value,
 											 typename M::ConstReference,
 											 typename M::Reference>::type Reference;
-			typedef typename boost::mpl::if_<boost::is_const<M>,
+			typedef typename std::conditional<std::is_const<M>::value,
 											 typename M::ConstClosureType,
 											 typename M::ClosureType>::type MatrixClosureType;
 			typedef const SelfType ConstClosureType;

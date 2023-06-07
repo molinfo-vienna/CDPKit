@@ -29,8 +29,7 @@
 #ifndef CDPL_MATH_QUATERNIONEXPRESSION_HPP
 #define CDPL_MATH_QUATERNIONEXPRESSION_HPP
 
-#include <boost/utility.hpp>
-#include <boost/type_traits/is_arithmetic.hpp>
+#include <type_traits>
 
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -563,7 +562,7 @@ namespace CDPL
 		}
 	
 		template <typename E, typename T>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionAddition<E, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionAddition<E, T> >::ResultType>::type
 		operator+(const QuaternionExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionAddition<E, T> >::ExpressionType ExpressionType;
@@ -572,7 +571,7 @@ namespace CDPL
 		}
 
 		template <typename T, typename E>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionAddition<T, E> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionAddition<T, E> >::ResultType>::type
 		operator+(const T& t, const QuaternionExpression<E>& e)
 		{
 			typedef typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionAddition<T, E> >::ExpressionType ExpressionType;
@@ -591,7 +590,7 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionSubtraction<E, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionSubtraction<E, T> >::ResultType>::type
 		operator-(const QuaternionExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionSubtraction<E, T> >::ExpressionType ExpressionType;
@@ -600,7 +599,7 @@ namespace CDPL
 		}
 
 		template <typename T, typename E>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionSubtraction<T, E> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionSubtraction<T, E> >::ResultType>::type
 		operator-(const T& t, const QuaternionExpression<E>& e)
 		{
 			typedef typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionSubtraction<T, E> >::ExpressionType ExpressionType;
@@ -618,7 +617,7 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary1Traits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary1Traits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
 		operator*(const QuaternionExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2QuaternionBinary1Traits<E, T,
@@ -628,7 +627,7 @@ namespace CDPL
 		}
 
 		template <typename T, typename E>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar1QuaternionBinary1Traits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type 
+		typename std::enable_if<IsScalar<T>::value, typename Scalar1QuaternionBinary1Traits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type 
 		operator*(const T& t, const QuaternionExpression<E>& e)
 		{
 			typedef typename Scalar1QuaternionBinary1Traits<T, E,
@@ -649,7 +648,7 @@ namespace CDPL
 		}
 		
 		template <typename E, typename T>		
-		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary1Traits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2QuaternionBinary1Traits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
 		operator/(const QuaternionExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2QuaternionBinary1Traits<E, T,
@@ -659,7 +658,7 @@ namespace CDPL
 		}
 		
 		template <typename T, typename E>		
-		typename boost::enable_if<IsScalar<T>, 
+		typename std::enable_if<IsScalar<T>::value, 
 								  typename Scalar13QuaternionTernaryTraits<T, E, typename QuaternionNorm2<E>::ResultType, 
 																		   ScalarQuaternionDivision<T, E, typename QuaternionNorm2<E>::ResultType> >::ResultType>::type
 		operator/(const T& t, const QuaternionExpression<E>& e)
@@ -685,7 +684,7 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename T>		
-		typename boost::enable_if<boost::is_arithmetic<T>, typename QuaternionToleranceEquality<E1, E2, T>::ResultType>::type
+		typename std::enable_if<std::is_arithmetic<T>::value, typename QuaternionToleranceEquality<E1, E2, T>::ResultType>::type
 		equals(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, const T& eps)
 		{
 			return QuaternionToleranceEquality<E1, E2, T>::apply(e1, e2, eps);

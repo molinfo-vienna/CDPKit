@@ -30,8 +30,7 @@
 #define CDPL_MATH_SLICE_HPP
 
 #include <cstddef>
-
-#include <boost/swap.hpp>
+#include <utility>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -92,9 +91,9 @@ namespace CDPL
 				if (this == &s)
 					return ;
 
-				boost::swap(start, s.start);
-				boost::swap(stride, s.stride);
-				boost::swap(size, s.size);
+				std::swap(start, s.start);
+				std::swap(stride, s.stride);
+				std::swap(size, s.size);
 			}
 	
 			friend void swap(Slice& s1, Slice& s2) {

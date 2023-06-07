@@ -29,7 +29,7 @@
 #ifndef CDPL_MATH_VECTORITERATOR_HPP
 #define CDPL_MATH_VECTORITERATOR_HPP
 
-#include <boost/ref.hpp>
+#include <functional>
 
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
@@ -57,11 +57,11 @@ namespace CDPL
 			}
 
 			bool operator==(const VectorElementAccessor& accessor) const {
-				return (vec.get_pointer() == accessor.vec.get_pointer());
+				return (&vec.get() == &accessor.vec.get());
 			}
 
 		private:
-			boost::reference_wrapper<VectorType> vec;
+			std::reference_wrapper<VectorType> vec;
 		};
 
 		template <typename E>
@@ -82,16 +82,16 @@ namespace CDPL
 			}
 
 			bool operator==(const VectorElementAccessor& accessor) const {
-				return (vec.get_pointer() == accessor.vec.get_pointer());
+				return (&vec.get() == &accessor.vec.get());
 			}
 
 			VectorElementAccessor& operator=(const VectorElementAccessor<E>& accessor) {
-				vec = boost::reference_wrapper<const VectorType>(accessor.vec);
+				vec = std::reference_wrapper<const VectorType>(accessor.vec);
 				return *this;
 			}
 
 		private:
-			boost::reference_wrapper<const VectorType> vec;
+			std::reference_wrapper<const VectorType> vec;
 		};
 	
 		template <typename E>

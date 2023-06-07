@@ -30,8 +30,7 @@
 #define CDPL_MATH_RANGE_HPP
 
 #include <cstddef>
-
-#include <boost/swap.hpp>
+#include <utility>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -91,8 +90,8 @@ namespace CDPL
 				if (this == &r)
 					return;
 
-				boost::swap(start, r.start);
-				boost::swap(stop, r.stop);
+				std::swap(start, r.start);
+				std::swap(stop, r.stop);
 			}
 	
 			friend void swap(Range& r1, Range& r2) {

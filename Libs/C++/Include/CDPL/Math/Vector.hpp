@@ -34,11 +34,8 @@
 #include <vector>
 #include <limits>
 #include <unordered_map>
+#include <type_traits>
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
-#include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Math/Check.hpp"
@@ -66,7 +63,7 @@ namespace CDPL
 		public:
 			typedef V VectorType;
 			typedef typename V::ValueType ValueType;
-			typedef typename boost::mpl::if_<boost::is_const<V>,
+			typedef typename std::conditional<std::is_const<V>::value,
 											 typename V::ConstReference,
 											 typename V::Reference>::type Reference;
 			typedef typename V::ConstReference ConstReference;
@@ -137,13 +134,13 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, VectorReference>::type& operator*=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, VectorReference>::type& operator*=(const T& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, VectorReference>::type& operator/=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, VectorReference>::type& operator/=(const T& t) {
 				data.operator/=(t);
 				return *this;
 			}
@@ -296,13 +293,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Vector>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, Vector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Vector>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, Vector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -328,7 +325,7 @@ namespace CDPL
 
 			void swap(Vector& v) {
 				if (this != &v)
-					boost::swap(data, v.data);
+					std::swap(data, v.data);
 			}
 	
 			friend void swap(Vector& v1, Vector& v2) {
@@ -478,13 +475,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, SparseVector>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, SparseVector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, SparseVector>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, SparseVector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -510,8 +507,8 @@ namespace CDPL
 
 			void swap(SparseVector& v) {
 				if (this != &v) {
-					boost::swap(data, v.data);
-					boost::swap(size, v.size);
+					std::swap(data, v.data);
+					std::swap(size, v.size);
 				}
 			}
 	
@@ -675,13 +672,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, BoundedVector>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, BoundedVector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, BoundedVector>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, BoundedVector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -708,7 +705,7 @@ namespace CDPL
 			void swap(BoundedVector& v) {
 				if (this != &v) {
 					std::swap_ranges(data, data + std::max(size, v.size), v.data);
-					boost::swap(size, v.size);
+					std::swap(size, v.size);
 				}
 			}
 	
@@ -862,13 +859,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, CVector>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, CVector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, CVector>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, CVector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -964,7 +961,7 @@ namespace CDPL
 
 			void swap(ZeroVector& v) {
 				if (this != &v)
-					boost::swap(size, v.size);
+					std::swap(size, v.size);
 			}
 	
 			friend void swap(ZeroVector& v1, ZeroVector& v2) {
@@ -1041,8 +1038,8 @@ namespace CDPL
 
 			void swap(UnitVector& v) {
 				if (this != &v) {
-					boost::swap(size, v.size);
-					boost::swap(index, v.index);
+					std::swap(size, v.size);
+					std::swap(index, v.index);
 				}
 			}
 	
@@ -1118,8 +1115,8 @@ namespace CDPL
 
 			void swap(ScalarVector& v) {
 				if (this != &v) {
-					boost::swap(size, v.size);
-					boost::swap(value, v.value);
+					std::swap(size, v.size);
+					std::swap(value, v.value);
 				}
 			}
 	

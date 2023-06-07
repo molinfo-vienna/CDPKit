@@ -33,8 +33,7 @@
 #include <complex>
 #include <algorithm>
 #include <limits>
-
-#include <boost/type_traits/is_arithmetic.hpp>
+#include <type_traits>
 
 
 namespace CDPL
@@ -185,10 +184,10 @@ namespace CDPL
 		};
 
 		template <typename T>
-		struct IsScalar : public boost::is_arithmetic<T> {};
+		struct IsScalar : public std::is_arithmetic<T> {};
 
 		template <typename T>
-		struct IsScalar<std::complex<T> > : public boost::is_arithmetic<T> {};
+		struct IsScalar<std::complex<T> > : public std::is_arithmetic<T> {};
 
 	}
 }

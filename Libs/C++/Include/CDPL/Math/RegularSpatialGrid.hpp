@@ -29,10 +29,9 @@
 #ifndef CDPL_MATH_REGULARSPATIALGRID_HPP
 #define CDPL_MATH_REGULARSPATIALGRID_HPP
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
-#include <boost/swap.hpp>
+#include <type_traits>
+#include <utility>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Math/GridExpression.hpp"
@@ -97,7 +96,7 @@ namespace CDPL
 			typedef GD GridDataType;
 			typedef XF CoordinatesTransformType;
 			typedef typename CoordinatesTransformType::MatrixTemporaryType InvCoordinatesTransformType;
-			typedef typename boost::mpl::if_<boost::is_const<GD>,
+			typedef typename std::conditional<std::is_const<GD>::value,
 											 typename GD::ConstReference,
 											 typename GD::Reference>::type Reference;
 			typedef typename GD::ConstReference ConstReference;
@@ -393,13 +392,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T>, RegularSpatialGrid>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T>::value, RegularSpatialGrid>::type& operator*=(const T1& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T>, RegularSpatialGrid>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T>::value, RegularSpatialGrid>::type& operator/=(const T1& t) {
 				data.operator/=(t);
 				return *this;
 			}
@@ -426,10 +425,10 @@ namespace CDPL
 				data.swap(usg.data);
 				xform.swap(usg.xform);
 				invXform.swap(usg.invXform);
-				boost::swap(xStep, usg.xStep);
-				boost::swap(yStep, usg.yStep);
-				boost::swap(zStep, usg.zStep);
-				boost::swap(dataMode, dataMode);
+				std::swap(xStep, usg.xStep);
+				std::swap(yStep, usg.yStep);
+				std::swap(zStep, usg.zStep);
+				std::swap(dataMode, dataMode);
 			}
 	
 			friend void swap(RegularSpatialGrid& usg1, RegularSpatialGrid& usg2) {

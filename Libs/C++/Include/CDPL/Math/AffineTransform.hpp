@@ -34,8 +34,7 @@
 #include <limits>
 #include <cstddef>
 #include <vector>
-
-#include <boost/swap.hpp>
+#include <utility>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/Expression.hpp"
@@ -201,7 +200,7 @@ namespace CDPL
 			void swap(RotationMatrix& m) {
 				if (this != &m) {
 					std::swap_ranges(data, data + 4, m.data);
-					boost::swap(size, m.size);
+					std::swap(size, m.size);
 				}
 			}
 	
@@ -297,7 +296,7 @@ namespace CDPL
 			void swap(ScalingMatrix& m) {
 				if (this != &m) {
 					std::swap_ranges(data, data + 3, m.data);
-					boost::swap(size, m.size);
+					std::swap(size, m.size);
 				}
 			}
 	
@@ -393,7 +392,7 @@ namespace CDPL
 			void swap(TranslationMatrix& m) {
 				if (this != &m) {
 					std::swap_ranges(data, data + 3, m.data);
-					boost::swap(size, m.size);
+					std::swap(size, m.size);
 				}
 			}
 	

@@ -29,8 +29,7 @@
 #ifndef CDPL_MATH_VECTOREXPRESSION_HPP
 #define CDPL_MATH_VECTOREXPRESSION_HPP
 
-#include <boost/utility.hpp>
-#include <boost/type_traits/is_arithmetic.hpp>
+#include <type_traits>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/Expression.hpp"
@@ -362,7 +361,7 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>
-		typename boost::enable_if<IsScalar<T>, typename Scalar2VectorBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2VectorBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
 		operator*(const VectorExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2VectorBinaryTraits<E, T,
@@ -372,7 +371,7 @@ namespace CDPL
 		}
 
 		template <typename T, typename E>
-		typename boost::enable_if<IsScalar<T>, typename Scalar1VectorBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar1VectorBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
 		operator*(const T& t, const VectorExpression<E>& e)
 		{
 			typedef typename Scalar1VectorBinaryTraits<T, E,
@@ -382,7 +381,7 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>
-		typename boost::enable_if<IsScalar<T>, typename Scalar2VectorBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
+		typename std::enable_if<IsScalar<T>::value, typename Scalar2VectorBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
 		operator/(const VectorExpression<E>& e, const T& t)
 		{
 			typedef typename Scalar2VectorBinaryTraits<E, T,
@@ -406,7 +405,7 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename T>
-		typename boost::enable_if<boost::is_arithmetic<T>, typename VectorToleranceEquality<E1, E2, T>::ResultType>::type
+		typename std::enable_if<std::is_arithmetic<T>::value, typename VectorToleranceEquality<E1, E2, T>::ResultType>::type
 		equals(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& eps)
 		{
 			return VectorToleranceEquality<E1, E2, T>::apply(e1, e2, eps);

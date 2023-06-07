@@ -29,7 +29,7 @@
 #ifndef CDPL_MATH_MATRIXASSIGNMENT_HPP
 #define CDPL_MATH_MATRIXASSIGNMENT_HPP
 
-#include <boost/swap.hpp>
+#include <utility>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -83,7 +83,7 @@ namespace CDPL
 
 			for (SizeType i = 0; i < size1; i++)
 				for (SizeType j = 0; j < size2; j++)
-					boost::swap(m(i, j), e()(i, j));
+					std::swap(m(i, j), e()(i, j));
 		}
 	}
 }

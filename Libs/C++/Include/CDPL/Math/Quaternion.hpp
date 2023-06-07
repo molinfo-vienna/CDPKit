@@ -30,11 +30,8 @@
 #define CDPL_MATH_QUATERNION_HPP
 
 #include <algorithm>
-
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
-#include <boost/swap.hpp>
+#include <utility>
+#include <type_traits>
 
 #include "CDPL/Math/QuaternionExpression.hpp"
 #include "CDPL/Math/QuaternionAssignment.hpp"
@@ -57,7 +54,7 @@ namespace CDPL
 		public:
 			typedef Q QuaternionType;
 			typedef typename Q::ValueType ValueType;
-			typedef typename boost::mpl::if_<boost::is_const<Q>,
+			typedef typename std::conditional<std::is_const<Q>::value,
 											 typename Q::ConstReference,
 											 typename Q::Reference>::type Reference;
 			typedef typename Q::ConstReference ConstReference;
@@ -118,7 +115,7 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
+			typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type& 
 			operator=(const T& t) {
 				data.operator=(t);
 				return *this;
@@ -131,7 +128,7 @@ namespace CDPL
 			}	
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
+			typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type& 
 			operator+=(const T& t) {
 				data.operator+=(t);
 				return *this;
@@ -144,7 +141,7 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
+			typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type& 
 			operator-=(const T& t) {
 				data.operator-=(t);
 				return *this;
@@ -157,7 +154,7 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
+			typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type& 
 			operator*=(const T& t) {
 				data.operator*=(t);
 				return *this;
@@ -170,7 +167,7 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
+			typename std::enable_if<IsScalar<T>::value, QuaternionReference>::type& 
 			operator/=(const T& t) {
 				data.operator/=(t);
 				return *this;
@@ -315,7 +312,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Quaternion>::type& 
+			typename std::enable_if<IsScalar<T1>::value, Quaternion>::type& 
 			operator=(const T1& t) {
 				data[0] = t;
 				data[1] = ValueType();
@@ -326,7 +323,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
 			operator+=(const T1& t) {
 				data[0] += t;
 				return *this;
@@ -345,7 +342,7 @@ namespace CDPL
 			}	
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
 			operator-=(const T1& t) {
 				data[0] -= t;
 				return *this;
@@ -364,7 +361,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
 			operator*=(const T1& t) {
 				quaternionAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
@@ -378,7 +375,7 @@ namespace CDPL
 			}	
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, Quaternion>::type&
 			operator/=(const T1& t) {
 				quaternionAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
@@ -475,7 +472,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
 			operator=(const T1& t) {
 				value = t;
 				return *this;
@@ -488,7 +485,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
 			operator+=(const T1& t) {
 				value += t;
 				return *this;
@@ -501,7 +498,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
 			operator-=(const T1& t) {
 				value -= t;
 				return *this;
@@ -514,7 +511,7 @@ namespace CDPL
 			}	
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
 			operator*=(const T1& t) {
 				value *= t;
 				return *this;
@@ -527,7 +524,7 @@ namespace CDPL
 			}	
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
+			typename std::enable_if<IsScalar<T1>::value, RealQuaternion>::type&
 			operator/=(const T1& t) {
 				value /= t;
 				return *this;
@@ -553,7 +550,7 @@ namespace CDPL
 
 			void swap(RealQuaternion& q) {
 				if (this != &q)
-					boost::swap(value, q.value);
+					std::swap(value, q.value);
 			}
 	
 			friend void swap(RealQuaternion& q1, RealQuaternion& q2) {
@@ -574,7 +571,7 @@ namespace CDPL
 		struct QuaternionTemporaryTraits<QuaternionReference<Q> > : public QuaternionTemporaryTraits<Q> {};
 	
 		template <typename T>
-		typename boost::enable_if<IsScalar<T>, RealQuaternion<T> >::type 
+		typename std::enable_if<IsScalar<T>::value, RealQuaternion<T> >::type 
 		quat(const T& t)
 		{
 			return RealQuaternion<T>(t);

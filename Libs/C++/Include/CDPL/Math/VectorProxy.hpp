@@ -29,9 +29,7 @@
 #ifndef CDPL_MATH_VECTORPROXY_HPP
 #define CDPL_MATH_VECTORPROXY_HPP
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
+#include <type_traits>
 
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
@@ -59,10 +57,10 @@ namespace CDPL
 			typedef typename V::DifferenceType DifferenceType;
 			typedef typename V::ValueType ValueType;
 			typedef typename V::ConstReference ConstReference;
-			typedef typename boost::mpl::if_<boost::is_const<V>,
+			typedef typename std::conditional<std::is_const<V>::value,
 											 typename V::ConstReference,
 											 typename V::Reference>::type Reference;
-			typedef typename boost::mpl::if_<boost::is_const<V>,
+			typedef typename std::conditional<std::is_const<V>::value,
 											 typename V::ConstClosureType,
 											 typename V::ClosureType>::type VectorClosureType;
 			typedef const SelfType ConstClosureType;
@@ -131,13 +129,13 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, VectorRange>::type& operator*=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, VectorRange>::type& operator*=(const T& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, VectorRange>::type& operator/=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, VectorRange>::type& operator/=(const T& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -186,10 +184,10 @@ namespace CDPL
 			typedef typename V::DifferenceType DifferenceType;
 			typedef typename V::ValueType ValueType;
 			typedef typename V::ConstReference ConstReference;
-			typedef typename boost::mpl::if_<boost::is_const<V>,
+			typedef typename std::conditional<std::is_const<V>::value,
 											 typename V::ConstReference,
 											 typename V::Reference>::type Reference;
-			typedef typename boost::mpl::if_<boost::is_const<V>,
+			typedef typename std::conditional<std::is_const<V>::value,
 											 typename V::ConstClosureType,
 											 typename V::ClosureType>::type VectorClosureType;
 			typedef const SelfType ConstClosureType;
@@ -262,13 +260,13 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, VectorSlice>::type& operator*=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, VectorSlice>::type& operator*=(const T& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, VectorSlice>::type& operator/=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, VectorSlice>::type& operator/=(const T& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}

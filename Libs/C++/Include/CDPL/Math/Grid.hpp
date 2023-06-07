@@ -33,11 +33,9 @@
 #include <algorithm>
 #include <vector>
 #include <limits>
+#include <type_traits>
+#include <utility>
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
-#include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Math/Check.hpp"
@@ -63,7 +61,7 @@ namespace CDPL
 		public:
 			typedef G GridType;
 			typedef typename G::ValueType ValueType;
-			typedef typename boost::mpl::if_<boost::is_const<G>,
+			typedef typename std::conditional<std::is_const<G>::value,
 											 typename G::ConstReference,
 											 typename G::Reference>::type Reference;
 			typedef typename G::ConstReference ConstReference;
@@ -158,13 +156,13 @@ namespace CDPL
 			}
 
 			template <typename T>			
-			typename boost::enable_if<IsScalar<T>, GridReference>::type& operator*=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, GridReference>::type& operator*=(const T& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
 			template <typename T>			
-			typename boost::enable_if<IsScalar<T>, GridReference>::type& operator/=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, GridReference>::type& operator/=(const T& t) {
 				data.operator/=(t);
 				return *this;
 			}
@@ -335,13 +333,13 @@ namespace CDPL
 			}
 
 			template <typename T1>			
-			typename boost::enable_if<IsScalar<T1>, Grid>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, Grid>::type& operator*=(const T1& t) {
 				gridAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>			
-			typename boost::enable_if<IsScalar<T1>, Grid>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, Grid>::type& operator/=(const T1& t) {
 				gridAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -367,10 +365,10 @@ namespace CDPL
 
 			void swap(Grid& g) {
 				if (this != &g) {
-					boost::swap(data, g.data);
-					boost::swap(size1, g.size1);
-					boost::swap(size2, g.size2);
-					boost::swap(size3, g.size3);
+					std::swap(data, g.data);
+					std::swap(size1, g.size1);
+					std::swap(size2, g.size2);
+					std::swap(size3, g.size3);
 				}
 			}
 	
@@ -494,9 +492,9 @@ namespace CDPL
 
 			void swap(ZeroGrid& g) {
 				if (this != &g) {
-					boost::swap(size1, g.size1);
-					boost::swap(size2, g.size2);
-					boost::swap(size3, g.size3);
+					std::swap(size1, g.size1);
+					std::swap(size2, g.size2);
+					std::swap(size3, g.size3);
 				}
 			}
 	
@@ -596,10 +594,10 @@ namespace CDPL
 
 			void swap(ScalarGrid& g) {
 				if (this != &g) {
-					boost::swap(size1, g.size1);
-					boost::swap(size2, g.size2);
-					boost::swap(size3, g.size3);
-					boost::swap(value, g.value);
+					std::swap(size1, g.size1);
+					std::swap(size2, g.size2);
+					std::swap(size3, g.size3);
+					std::swap(value, g.value);
 				}
 			}
 	

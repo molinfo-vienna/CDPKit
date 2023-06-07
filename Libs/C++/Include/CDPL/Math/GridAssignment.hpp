@@ -29,7 +29,7 @@
 #ifndef CDPL_MATH_GRIDASSIGNMENT_HPP
 #define CDPL_MATH_GRIDASSIGNMENT_HPP
 
-#include <boost/swap.hpp>
+#include <utility>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -88,7 +88,7 @@ namespace CDPL
 			for (SizeType i = 0; i < size1; i++)
 				for (SizeType j = 0; j < size2; j++)
 					for (SizeType k = 0; k < size3; k++)
-						boost::swap(g(i, j, k), e()(i, j, k));
+						std::swap(g(i, j, k), e()(i, j, k));
 		}
 	}
 }

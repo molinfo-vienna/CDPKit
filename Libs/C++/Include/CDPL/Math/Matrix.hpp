@@ -35,10 +35,9 @@
 #include <vector>
 #include <limits>
 #include <unordered_map>
+#include <type_traits>
+#include <utility>
 
-#include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_const.hpp>
-#include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Math/Check.hpp"
@@ -67,7 +66,7 @@ namespace CDPL
 		public:
 			typedef M MatrixType;
 			typedef typename M::ValueType ValueType;
-			typedef typename boost::mpl::if_<boost::is_const<M>,
+			typedef typename std::conditional<std::is_const<M>::value,
 											 typename M::ConstReference,
 											 typename M::Reference>::type Reference;
 			typedef typename M::ConstReference ConstReference;
@@ -142,13 +141,13 @@ namespace CDPL
 			}
 
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, MatrixReference>::type& operator*=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, MatrixReference>::type& operator*=(const T& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
 			template <typename T>
-			typename boost::enable_if<IsScalar<T>, MatrixReference>::type& operator/=(const T& t) {
+			typename std::enable_if<IsScalar<T>::value, MatrixReference>::type& operator/=(const T& t) {
 				data.operator/=(t);
 				return *this;
 			}
@@ -303,13 +302,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Matrix>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, Matrix>::type& operator*=(const T1& t) {
 				matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, Matrix>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, Matrix>::type& operator/=(const T1& t) {
 				matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -335,9 +334,9 @@ namespace CDPL
 
 			void swap(Matrix& m) {
 				if (this != &m) {
-					boost::swap(data, m.data);
-					boost::swap(size1, m.size1);
-					boost::swap(size2, m.size2);
+					std::swap(data, m.data);
+					std::swap(size1, m.size1);
+					std::swap(size2, m.size2);
 				}
 			}
 	
@@ -512,13 +511,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, SparseMatrix>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, SparseMatrix>::type& operator*=(const T1& t) {
 				matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, SparseMatrix>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, SparseMatrix>::type& operator/=(const T1& t) {
 				matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -544,9 +543,9 @@ namespace CDPL
 
 			void swap(SparseMatrix& m) {
 				if (this != &m) {
-					boost::swap(data, m.data);
-					boost::swap(size1, m.size1);
-					boost::swap(size2, m.size2);
+					std::swap(data, m.data);
+					std::swap(size1, m.size1);
+					std::swap(size2, m.size2);
 				}
 			}
 	
@@ -732,13 +731,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, BoundedMatrix>::type& operator*=(const T1& v) {
+			typename std::enable_if<IsScalar<T1>::value, BoundedMatrix>::type& operator*=(const T1& v) {
 				matrixAssignScalar<ScalarMultiplicationAssignment>(*this, v);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, BoundedMatrix>::type& operator/=(const T1& v) {
+			typename std::enable_if<IsScalar<T1>::value, BoundedMatrix>::type& operator/=(const T1& v) {
 				matrixAssignScalar<ScalarDivisionAssignment>(*this, v);
 				return *this;
 			}
@@ -770,8 +769,8 @@ namespace CDPL
 					for (SizeType i = 0; i < max_size1; i++)
 						std::swap_ranges(data[i], data[i] + max_size2, m.data[i]);
 
-					boost::swap(size1, m.size1);
-					boost::swap(size2, m.size2);
+					std::swap(size1, m.size1);
+					std::swap(size2, m.size2);
 				}
 			}
 	
@@ -947,13 +946,13 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, CMatrix>::type& operator*=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, CMatrix>::type& operator*=(const T1& t) {
 				matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			typename boost::enable_if<IsScalar<T1>, CMatrix>::type& operator/=(const T1& t) {
+			typename std::enable_if<IsScalar<T1>::value, CMatrix>::type& operator/=(const T1& t) {
 				matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
@@ -1058,8 +1057,8 @@ namespace CDPL
 
 			void swap(ZeroMatrix& m) {
 				if (this != &m) {
-					boost::swap(size1, m.size1);
-					boost::swap(size2, m.size2);
+					std::swap(size1, m.size1);
+					std::swap(size2, m.size2);
 				}
 			}
 	
@@ -1140,9 +1139,9 @@ namespace CDPL
 
 			void swap(ScalarMatrix& m) {
 				if (this != &m) {
-					boost::swap(size1, m.size1);
-					boost::swap(size2, m.size2);
-					boost::swap(value, m.value);
+					std::swap(size1, m.size1);
+					std::swap(size2, m.size2);
+					std::swap(value, m.value);
 				}
 			}
 	
@@ -1220,8 +1219,8 @@ namespace CDPL
 
 			void swap(IdentityMatrix& m) {
 				if (this != &m) {
-					boost::swap(size1, m.size1);
-					boost::swap(size2, m.size2);
+					std::swap(size1, m.size1);
+					std::swap(size2, m.size2);
 				}
 			}
 	

@@ -29,8 +29,7 @@
 #ifndef CDPL_MATH_COMMONTYPE_HPP
 #define CDPL_MATH_COMMONTYPE_HPP
 
-#include <boost/typeof/typeof.hpp>
-#include <boost/typeof/std/complex.hpp>
+#include <type_traits>
 
 
 namespace CDPL
@@ -43,10 +42,7 @@ namespace CDPL
 		struct CommonType
 		{
 
-			static T1 type1Result();
-			static T2 type2Result();
-		
-			typedef BOOST_TYPEOF_TPL(type1Result() + type2Result()) Type;
+			typedef typename std::common_type<T1, T2>::type Type;
 		};
 	}
 }

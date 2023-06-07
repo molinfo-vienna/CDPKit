@@ -31,8 +31,6 @@
 
 #include <algorithm>
 
-#include <boost/swap.hpp>
-
 #include "CDPL/Math/VectorProxy.hpp"
 #include "CDPL/Math/MatrixProxy.hpp"
 #include "CDPL/Math/LinearSolve.hpp"

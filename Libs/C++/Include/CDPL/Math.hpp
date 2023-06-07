@@ -37,9 +37,7 @@
 #include "CDPL/Math/BFGSMinimizer.hpp"                                          
 #include "CDPL/Math/KabschAlgorithm.hpp"
 #include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
-#include "CDPL/Math/Check.hpp"                                                  
 #include "CDPL/Math/CommonType.hpp"                                             
-#include "CDPL/Math/Config.hpp"                                                 
 #include "CDPL/Math/DirectAssignmentProxy.hpp"                                  
 #include "CDPL/Math/Expression.hpp"                                             
 #include "CDPL/Math/Functional.hpp"                                             
@@ -74,5 +72,6 @@
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorIterator.hpp"
 #include "CDPL/Math/VectorProxy.hpp"
+#include "CDPL/Math/Check.hpp"
 
 #endif // CDPL_MATH_HPP
