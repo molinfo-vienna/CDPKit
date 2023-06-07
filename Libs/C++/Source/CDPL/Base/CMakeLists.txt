@@ -41,7 +41,7 @@ ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-base-static PROPERTIES 
                       OUTPUT_NAME cdpl-base
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS CDPL_BASE_STATIC_LINK
+                      COMPILE_DEFINITIONS "CDPL_BASE_STATIC_LINK"
                      )
 
 INSTALL(TARGETS cdpl-base-static

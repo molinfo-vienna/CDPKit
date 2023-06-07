@@ -133,7 +133,7 @@ TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-molprop-static cdpl-
 SET_TARGET_PROPERTIES(cdpl-vis-static PROPERTIES 
                       OUTPUT_NAME cdpl-vis
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_VIS_STATIC_LINK"
                      )
 
 INSTALL(TARGETS cdpl-vis-static

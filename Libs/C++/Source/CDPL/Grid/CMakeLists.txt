@@ -55,7 +55,7 @@ TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static)
 SET_TARGET_PROPERTIES(cdpl-grid-static PROPERTIES 
                       OUTPUT_NAME cdpl-grid
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_GRID_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_GRID_STATIC_LINK"
                      )
 
 INSTALL(TARGETS cdpl-grid-static

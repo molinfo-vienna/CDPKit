@@ -52,7 +52,7 @@ ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdp
 SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES 
                       OUTPUT_NAME cdpl-grail
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_GRAIL_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_PHARM_STATIC_LINK;CDPL_BIOMOL_STATIC_LINK;CDPL_GRID_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_FORCEFIELD_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_GRAIL_STATIC_LINK"
                      )
 
 TARGET_LINK_LIBRARIES(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)

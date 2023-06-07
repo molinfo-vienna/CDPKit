@@ -36,7 +36,7 @@ TARGET_LINK_LIBRARIES(cdpl-math-static cdpl-base-static)
 SET_TARGET_PROPERTIES(cdpl-math-static PROPERTIES 
                       OUTPUT_NAME cdpl-math
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_MATH_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_MATH_STATIC_LINK"
                      )
 
 INSTALL(TARGETS cdpl-math-static

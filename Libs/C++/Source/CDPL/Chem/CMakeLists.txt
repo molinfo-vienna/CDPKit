@@ -319,7 +319,7 @@ ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi
 SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES 
                       OUTPUT_NAME cdpl-chem
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK"
                      )
 
 TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)

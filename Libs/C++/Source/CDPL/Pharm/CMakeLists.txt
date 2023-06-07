@@ -153,7 +153,7 @@ ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS} $<TARGET_OBJECTS:cdp
 SET_TARGET_PROPERTIES(cdpl-pharm-static PROPERTIES 
                       OUTPUT_NAME cdpl-pharm
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_BIOMOL_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK"
                      )
 
 TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-molprop-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static)
