@@ -47,7 +47,7 @@ SET(cdpl-grail_LIB_SRCS
     FeatureExtendedTypeFunction.cpp
    )
 
-ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS})
+ADD_LIBRARY(cdpl-grail-static STATIC ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES 
                       OUTPUT_NAME cdpl-grail
@@ -55,15 +55,15 @@ SET_TARGET_PROPERTIES(cdpl-grail-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_GRAIL_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_PHARM_STATIC_LINK;CDPL_BIOMOL_STATIC_LINK;CDPL_GRID_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_FORCEFIELD_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-grail-static cdpl-chem-static cdpl-pharm-static cdpl-molprop-static cdpl-grid-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-forcefield-static)
 
 INSTALL(TARGETS cdpl-grail-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-ADD_LIBRARY(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS})
+ADD_LIBRARY(cdpl-grail-shared SHARED ${cdpl-grail_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-grail-shared cdpl-chem-shared cdpl-pharm-shared cdpl-molprop-shared cdpl-grid-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
 
 SET_TARGET_PROPERTIES(cdpl-grail-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-grail

@@ -48,9 +48,9 @@ SET(cdpl-grid_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
-ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS})
+ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static)
 
 SET_TARGET_PROPERTIES(cdpl-grid-static PROPERTIES 
                       OUTPUT_NAME cdpl-grid
@@ -62,9 +62,9 @@ INSTALL(TARGETS cdpl-grid-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-ADD_LIBRARY(cdpl-grid-shared SHARED ${cdpl-grid_LIB_SRCS})
+ADD_LIBRARY(cdpl-grid-shared SHARED ${cdpl-grid_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-grid-shared cdpl-base-shared cdpl-util-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-grid-shared cdpl-base-shared cdpl-util-shared)
 
 SET_TARGET_PROPERTIES(cdpl-grid-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-grid

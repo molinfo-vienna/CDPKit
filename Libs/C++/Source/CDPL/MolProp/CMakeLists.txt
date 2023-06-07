@@ -84,7 +84,7 @@ SET(cdpl-molprop_LIB_SRCS
     HBondAcceptorAtomTyper.cpp
    )
 
-ADD_LIBRARY(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS})
+ADD_LIBRARY(cdpl-molprop-static STATIC ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-molprop-static PROPERTIES 
                       OUTPUT_NAME cdpl-molprop
@@ -96,11 +96,11 @@ INSTALL(TARGETS cdpl-molprop-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-molprop-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
 
-ADD_LIBRARY(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS})
+ADD_LIBRARY(cdpl-molprop-shared SHARED ${cdpl-molprop_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-molprop-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-base-shared)
 
 SET_TARGET_PROPERTIES(cdpl-molprop-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-molprop

@@ -122,7 +122,7 @@ SET(cdpl-forcefield_LIB_SRCS
 
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS})
+ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-forcefield-static PROPERTIES 
                       OUTPUT_NAME cdpl-forcefield
@@ -130,15 +130,15 @@ SET_TARGET_PROPERTIES(cdpl-forcefield-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_FORCEFIELD_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MOLPROP_STATIC_LINK;CDPL_MATH_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-forcefield-static cdpl-base-static cdpl-chem-static cdpl-molprop-static cdpl-math-static)
 
 INSTALL(TARGETS cdpl-forcefield-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-ADD_LIBRARY(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS})
+ADD_LIBRARY(cdpl-forcefield-shared SHARED ${cdpl-forcefield_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-forcefield-shared cdpl-base-shared cdpl-chem-shared cdpl-molprop-shared cdpl-math-shared)
 
 SET_TARGET_PROPERTIES(cdpl-forcefield-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-forcefield

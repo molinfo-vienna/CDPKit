@@ -44,7 +44,7 @@
 #endif
 
  
-#if (CDPL_MATH_CHECKS_DISABLE == 0)
+#ifndef CDPL_MATH_CHECKS_DISABLE
 # define CHECK_GRID_INDICES(g, i, j, k)
 #else
 # define CHECK_GRID_INDICES(g, i, j, k)									\

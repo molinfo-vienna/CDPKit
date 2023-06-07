@@ -46,7 +46,7 @@
 #endif
 
 
-#if (CDPL_MATH_CHECKS_DISABLE == 0)
+#ifndef CDPL_MATH_CHECKS_DISABLE
 # define CHECK_VECTOR_INDEX(v, i)
 #else
 # define CHECK_VECTOR_INDEX(v, i) \

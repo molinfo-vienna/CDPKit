@@ -39,12 +39,9 @@ SET(cdpl-internal_LIB_SRCS
     Time.cpp
    )
 
-ADD_LIBRARY(cdpl-internal-static STATIC ${cdpl-internal_LIB_SRCS})
+ADD_LIBRARY(cdpl-internal OBJECT ${cdpl-internal_LIB_SRCS})
 
-SET_TARGET_PROPERTIES(cdpl-internal-static PROPERTIES 
-                      OUTPUT_NAME cdpl-internal
-                      CLEAN_DIRECT_OUTPUT 1
-                     )
+SET_TARGET_PROPERTIES(cdpl-internal PROPERTIES OUTPUT_NAME cdpl-internal CLEAN_DIRECT_OUTPUT 1)
 
 IF(CDPL_CXX_UNIT_TESTS_ENABLED)
   ADD_SUBDIRECTORY(Tests)

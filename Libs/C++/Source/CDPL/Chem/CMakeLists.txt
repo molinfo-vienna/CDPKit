@@ -314,7 +314,7 @@ SET(cdpl-chem_LIB_SRCS
 
 LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
-ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})
+ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES 
                       OUTPUT_NAME cdpl-chem
@@ -322,15 +322,15 @@ SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static inchi-static)
+TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
 
 INSTALL(TARGETS cdpl-chem-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
        )
 
-ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS})
+ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS} $<TARGET_OBJECTS:inchi> $<TARGET_OBJECTS:cdpl-internal>)
 
-TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static inchi-static)
+TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
 
 SET_TARGET_PROPERTIES(cdpl-chem-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                       OUTPUT_NAME cdpl-chem

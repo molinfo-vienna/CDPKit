@@ -35,6 +35,6 @@ IF(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleCl
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-comment -Wno-parentheses -Wno-unused-value -Wno-pointer-bool-conversion -Wno-unsequenced -Wno-constant-logical-operand")
 ENDIF()
 
-ADD_LIBRARY(inchi-static STATIC ${inchi_LIB_SRCS})
-SET_TARGET_PROPERTIES(inchi-static PROPERTIES COMPILE_DEFINITIONS "TARGET_API_LIB")
+ADD_LIBRARY(inchi OBJECT ${inchi_LIB_SRCS})
+SET_TARGET_PROPERTIES(inchi PROPERTIES COMPILE_DEFINITIONS "TARGET_API_LIB")
 

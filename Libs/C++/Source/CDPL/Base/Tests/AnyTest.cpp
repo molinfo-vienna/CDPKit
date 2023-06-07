@@ -32,7 +32,6 @@
 #include <boost/test/auto_unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/Exceptions.hpp"

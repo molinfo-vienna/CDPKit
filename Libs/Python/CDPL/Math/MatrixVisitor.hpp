@@ -46,7 +46,7 @@
 #endif
 
 
-#if (CDPL_MATH_CHECKS_DISABLE == 0)
+#ifndef CDPL_MATH_CHECKS_DISABLE
 # define CHECK_MATRIX_INDICES(m, i, j)
 #else
 # define CHECK_MATRIX_INDICES(m, i, j) \

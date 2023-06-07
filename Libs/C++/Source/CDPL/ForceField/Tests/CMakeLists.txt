@@ -51,7 +51,7 @@ SET(CMAKE_BUILD_TYPE "Debug")
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
-ADD_EXECUTABLE(forcefield-test-suite ${test-suite_SRCS})
+ADD_EXECUTABLE(forcefield-test-suite ${test-suite_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 TARGET_LINK_LIBRARIES(forcefield-test-suite cdpl-forcefield-shared cdpl-chem-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 
