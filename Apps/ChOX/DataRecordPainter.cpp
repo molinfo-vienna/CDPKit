@@ -26,8 +26,6 @@
 
 #include <string>
 
-#include <boost/lexical_cast.hpp>
-
 #include <QPainter>
 #include <QFont>
 #include <QColor>
@@ -226,7 +224,7 @@ void DataRecordPainter::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mo
 		std::size_t num_confs = getNumConformations(*mol_ptr);
 
 		if (num_confs > 0) {
-			recordName = QString::fromStdString(getName(*mol_ptr) + " (" + boost::lexical_cast<std::string>(num_confs) + " Confs.)");
+			recordName = QString::fromStdString(getName(*mol_ptr) + " (" + std::to_string(num_confs) + " Confs.)");
 
 		} else
 			recordName = QString::fromStdString(getName(*mol_ptr));

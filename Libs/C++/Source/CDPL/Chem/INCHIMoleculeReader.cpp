@@ -31,7 +31,6 @@
 #include <cassert>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "LibInChI/inchi_api.h"
 
@@ -129,7 +128,7 @@ bool Chem::INCHIMoleculeReader::readData(std::istream& is, Molecule& mol, bool o
 
 	} catch (const std::exception& e) {
 		throw Base::IOError("INCHIMoleculeReader: while reading record " + 
-							boost::lexical_cast<std::string>(getRecordIndex()) + ": " + e.what());
+							std::to_string(getRecordIndex()) + ": " + e.what());
 	}
 }
 
@@ -140,7 +139,7 @@ bool Chem::INCHIMoleculeReader::skipData(std::istream& is)
 
 	} catch (const std::exception& e) {
 		throw Base::IOError("INCHIMoleculeReader: while skipping record " + 
-							boost::lexical_cast<std::string>(getRecordIndex()) + ": " + e.what());
+							std::to_string(getRecordIndex()) + ": " + e.what());
 	}
 }
 

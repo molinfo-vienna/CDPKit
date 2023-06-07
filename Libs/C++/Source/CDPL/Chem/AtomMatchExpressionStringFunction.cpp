@@ -30,7 +30,6 @@
 #include <locale>
 #include <sstream>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -168,7 +167,7 @@ namespace
 		else
 			prop_value = constraint.getValue<std::size_t>();
 
-		expr_str.append(boost::lexical_cast<std::string>(prop_value));
+		expr_str.append(std::to_string(prop_value));
 	}
 
 	template <typename PropFunc>
@@ -209,7 +208,7 @@ namespace
 			str.append(NOT_OPERATOR);
 
 		str.append(ATOMIC_NUMBER_PREFIX);
-		str.append(boost::lexical_cast<std::string>(atomic_no));
+		str.append(std::to_string(atomic_no));
 	}
 	
 	void createExpressionString(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,
@@ -612,7 +611,7 @@ namespace
 			charge_expr_str.push_back('+');
 
 			if (charge > 1)
-				charge_expr_str.append(boost::lexical_cast<std::string>(charge));
+				charge_expr_str.append(std::to_string(charge));
 
 			return;
 		}
@@ -620,7 +619,7 @@ namespace
 		charge_expr_str.push_back('-');
 
 		if (charge < -1)
-			charge_expr_str.append(boost::lexical_cast<std::string>(-charge));
+			charge_expr_str.append(std::to_string(-charge));
 	}
 
 	void createSSSRRingSizeExpressionString(const Chem::MatchConstraint& constraint, std::string& expr_str)
@@ -631,7 +630,7 @@ namespace
 
 		std::size_t rsize = constraint.getValue<std::size_t>();
 
-		expr_str.append(boost::lexical_cast<std::string>(rsize));
+		expr_str.append(std::to_string(rsize));
 	}
 
 	void createExpressionString(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph,

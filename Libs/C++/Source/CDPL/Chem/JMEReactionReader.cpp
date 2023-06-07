@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Chem/JMEReactionReader.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -52,7 +50,7 @@ bool Chem::JMEReactionReader::readData(std::istream& is, Reaction& rxn, bool ove
 		return reader->readReaction(is, rxn);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("JMEReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("JMEReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Chem::JMEReactionReader::skipData(std::istream& is)
 		return reader->skipReaction(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("JMEReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("JMEReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

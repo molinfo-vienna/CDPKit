@@ -26,11 +26,9 @@
  
 #include "StaticInit.hpp"
 
-#include <string>
 #include <algorithm>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ForceField/MMFF94ChargeCalculator.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
@@ -288,7 +286,7 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 
 		if (!(*pbci_entry))
 			throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
-										 boost::lexical_cast<std::string>(i));
+										 std::to_string(i));
 	
 		const TypePropertyEntry* prop_entry = &atomTypePropTable->getEntry(atom_type);
 
@@ -297,7 +295,7 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 
 		if (!(*prop_entry))
 			throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(i));
+										 std::to_string(i));
 
         double form_chg_adj_factor = pbci_entry->getFormalChargeAdjustmentFactor(); // uI
         double form_chg = formCharges[i];                                           // q0I
@@ -331,7 +329,7 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 
 			if (!(*nbr_pbci_entry))
 				throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
-											 boost::lexical_cast<std::string>(nbr_atom_idx));
+											 std::to_string(nbr_atom_idx));
 	
 			const TypePropertyEntry* nbr_prop_entry = &atomTypePropTable->getEntry(nbr_atom_type);
 
@@ -340,7 +338,7 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 
 			if (!(*nbr_prop_entry))
 				throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
-											 boost::lexical_cast<std::string>(nbr_atom_idx));
+											 std::to_string(nbr_atom_idx));
 
 			double nbr_form_chg = formCharges[nbr_atom_idx];                                    // q0K
 			double nbr_form_chg_adj_factor = nbr_pbci_entry->getFormalChargeAdjustmentFactor(); // uK

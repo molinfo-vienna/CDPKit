@@ -30,8 +30,6 @@
 #include <functional>
 #include <algorithm>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/MoleculeFunctions.hpp"
@@ -155,7 +153,7 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol)
 	}
 
 	pdb_data->setRecord(PDBData::TITLE, structData.title);
-	pdb_data->setRecord(PDBData::RESOLUTION, boost::lexical_cast<std::string>(structData.resolution));
+	pdb_data->setRecord(PDBData::RESOLUTION, std::to_string(structData.resolution));
 	pdb_data->setRecord(PDBData::DEPOSITION_DATE, structData.depositionDate);
 	pdb_data->setRecord(PDBData::STRUCTURE_ID, structData.structureId);
 

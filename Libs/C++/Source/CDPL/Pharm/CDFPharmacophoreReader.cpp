@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -52,7 +50,7 @@ bool Pharm::CDFPharmacophoreReader::readData(std::istream& is, Pharmacophore& ph
 		return reader->readPharmacophore(is, pharm);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("CDFPharmacophoreReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("CDFPharmacophoreReader: while reading record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Pharm::CDFPharmacophoreReader::skipData(std::istream& is)
 		return reader->skipPharmacophore(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("CDFPharmacophoreReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("CDFPharmacophoreReader: while skipping record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

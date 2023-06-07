@@ -26,10 +26,6 @@
  
 #include "StaticInit.hpp"
 
-#include <string>
-
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -104,7 +100,7 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 
 		if (!(*param_entry1))
 			throw ParameterizationFailed("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
-										 boost::lexical_cast<std::string>(i));
+										 std::to_string(i));
 
 		for (std::size_t j = i + 1; j < num_atoms; j++) {
 			const Atom& atom2 = molgraph.getAtom(j);
@@ -128,7 +124,7 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 
 			if (!(*param_entry2))
 				throw ParameterizationFailed("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
-											 boost::lexical_cast<std::string>(j));
+											 std::to_string(j));
 
 			ia_data.addElement(MMFF94VanDerWaalsInteraction(i, j, param_entry1->getAtomicPolarizability(), param_entry1->getEffectiveElectronNumber(),
 															param_entry1->getFactorA(), param_entry1->getFactorG(), param_entry1->getHDonorAcceptorType(),

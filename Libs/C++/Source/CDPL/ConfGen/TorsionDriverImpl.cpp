@@ -30,8 +30,6 @@
 #include <cmath>
 #include <mutex>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -410,7 +408,7 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	}
 		
 	if (logCallback) {
-		logCallback("Torsion angle assignment for bond #" + boost::lexical_cast<std::string>(fragTree.getMolecularGraph()->getBondIndex(*bond)) + ":\n");
+		logCallback("Torsion angle assignment for bond #" + std::to_string(fragTree.getMolecularGraph()->getBondIndex(*bond)) + ":\n");
 
 		if (match)
 			logCallback(" Matching rule: " + match->getRule().getMatchPatternString() + '\n');
@@ -434,11 +432,11 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 		node->removeDuplicateTorsionAngles();
 
 	if (logCallback) {
-		logCallback(" Symmetry: C" + boost::lexical_cast<std::string>(rot_sym) + '\n');
+		logCallback(" Symmetry: C" + std::to_string(rot_sym) + '\n');
 		logCallback(" Angles: ");
 
 		for (FragmentTreeNode::DoubleArray::const_iterator it = node->getTorsionAngles().begin(), end = node->getTorsionAngles().end(); it != end; ++it)
-			logCallback(boost::lexical_cast<std::string>(*it) + ' ');
+			logCallback(std::to_string(*it) + ' ');
 
 		logCallback("\n");
 	}

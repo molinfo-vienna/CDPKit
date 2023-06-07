@@ -26,11 +26,8 @@
  
 #include "StaticInit.hpp"
 
-#include <string>
 #include <cstddef>
 #include <cmath>
-
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
@@ -311,20 +308,20 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::getParameters(con
 	
 	if (!type1_prop_entry)
 		throw ParameterizationFailed("MMFF94BondStretchingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
+									 std::to_string(molgraph.getAtomIndex(bond.getBegin())));
 
 	const AtomTypePropEntry& type2_prop_entry = typePropTable->getEntry(atom2_type);
 	
 	if (!type2_prop_entry)
 		throw ParameterizationFailed("MMFF94BondStretchingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+									 std::to_string(molgraph.getAtomIndex(bond.getEnd())));
 
 	const RuleParamEntry& rule_param_entry = ruleParamTable->getEntry(type1_prop_entry.getAtomicNumber(), type2_prop_entry.getAtomicNumber());
 
 	if (!rule_param_entry)
 		throw ParameterizationFailed("MMMFF94BondStretchingInteractionParameterizer: could not find MMFF94 bond stretching rule parameters for interaction #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())) + "-#" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+									 std::to_string(molgraph.getAtomIndex(bond.getBegin())) + "-#" + 
+									 std::to_string(molgraph.getAtomIndex(bond.getEnd())));
 
 	ref_length = calcReferenceBondLength(molgraph, bond, type1_prop_entry, type2_prop_entry);	
 	force_const = rule_param_entry.getForceConstant() * std::pow(rule_param_entry.getReferenceLength() / ref_length, 6.0);

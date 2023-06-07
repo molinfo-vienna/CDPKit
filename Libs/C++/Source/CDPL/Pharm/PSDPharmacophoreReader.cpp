@@ -28,7 +28,6 @@
 
 #include <fstream>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/iostreams/copy.hpp>
 
 #include "CDPL/Pharm/PSDPharmacophoreReader.hpp"
@@ -98,7 +97,7 @@ Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore
 		accessor.getPharmacophore(recordIndex, pharm, overwrite);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("PSDPharmacophoreReader: while reading record " + boost::lexical_cast<std::string>(recordIndex) + 
+		throw Base::IOError("PSDPharmacophoreReader: while reading record " + std::to_string(recordIndex) + 
 							": " + e.what());
 	}
 

@@ -76,6 +76,8 @@ namespace ChOX
 
 		void writeDBCreationModeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
+		void writeStrParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+
 		template <typename T>
 		void writeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 

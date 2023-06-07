@@ -26,8 +26,6 @@ x1 * along with this library; see the file COPYING. If not, write to
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Chem/SMILESMoleculeReader.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -52,7 +50,7 @@ bool Chem::SMILESMoleculeReader::readData(std::istream& is, Molecule& mol, bool 
 		return reader->readMolecule(is, mol);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("SMILESMoleculeReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("SMILESMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Chem::SMILESMoleculeReader::skipData(std::istream& is)
 		return reader->skipMolecule(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("SMILESMoleculeReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("SMILESMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

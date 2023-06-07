@@ -802,8 +802,8 @@ void Settings::save() const
 
 	settings.beginGroup("FileIO");
 
-	writeParameter<std::string>(*this, settings, ControlParameter::DEFAULT_MOL_OUTPUT_FORMAT);
-	writeParameter<std::string>(*this, settings, ControlParameter::DEFAULT_RXN_OUTPUT_FORMAT);
+	writeStrParameter(*this, settings, ControlParameter::DEFAULT_MOL_OUTPUT_FORMAT);
+	writeStrParameter(*this, settings, ControlParameter::DEFAULT_RXN_OUTPUT_FORMAT);
 
 	// ------
 
@@ -824,7 +824,7 @@ void Settings::save() const
 	writeParameter<bool>(jme_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(jme_wparams, settings, Chem::ControlParameter::JME_SEPARATE_COMPONENTS);
 	writeParameter<bool>(jme_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
-	writeParameter<std::string>(jme_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
+	writeStrParameter(jme_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
 
 	settings.endGroup();
 
@@ -835,7 +835,7 @@ void Settings::save() const
 	const SettingsContainer& smiles_rparams = getReaderControlParameters(Chem::DataFormat::SMILES.getName());
 
 	writeParameter<bool>(smiles_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
-	writeParameter<std::string>(smiles_rparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT);
+	writeStrParameter(smiles_rparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT);
 
 	settings.endGroup();
 
@@ -860,7 +860,7 @@ void Settings::save() const
 	writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::SMILES_NO_ORGANIC_SUBSET);
 	writeParameter<std::size_t>(smiles_wparams, settings, Chem::ControlParameter::SMILES_MIN_STEREO_BOND_RING_SIZE);
 	writeParameter<bool>(smiles_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
-	writeParameter<std::string>(smiles_wparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT);
+	writeStrParameter(smiles_wparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT);
 
 	settings.endGroup();
 
@@ -882,7 +882,7 @@ void Settings::save() const
 
 	writeParameter<bool>(smarts_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(smarts_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
-	writeParameter<std::string>(smarts_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
+	writeStrParameter(smarts_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
 
 	settings.endGroup();
 
@@ -893,7 +893,7 @@ void Settings::save() const
 	const SettingsContainer& inchi_rparams = getReaderControlParameters(Chem::DataFormat::INCHI.getName());
 
 	writeParameter<bool>(inchi_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
-	writeParameter<std::string>(inchi_rparams, settings, Chem::ControlParameter::INCHI_INPUT_OPTIONS);
+	writeStrParameter(inchi_rparams, settings, Chem::ControlParameter::INCHI_INPUT_OPTIONS);
 
 	settings.endGroup();
 
@@ -904,9 +904,9 @@ void Settings::save() const
 	const SettingsContainer& inchi_wparams = getWriterControlParameters(Chem::DataFormat::INCHI.getName());
 
 	writeParameter<bool>(inchi_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
-	writeParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
+	writeStrParameter(inchi_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
 	writeParameter<bool>(inchi_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
-	writeParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::INCHI_OUTPUT_OPTIONS);
+	writeStrParameter(inchi_wparams, settings, Chem::ControlParameter::INCHI_OUTPUT_OPTIONS);
 
 	settings.endGroup();
 
@@ -1345,7 +1345,24 @@ void Settings::writeParameter(const SettingsContainer& params, QSettings& settin
 		return;
 	}
 
-	settings.setValue(name, QString::fromStdString(boost::lexical_cast<std::string>(val.template getData<T>())));
+	settings.setValue(name, QString::fromStdString(std::to_string(val.template getData<T>())));
+}
+
+void Settings::writeStrParameter(const SettingsContainer& params, QSettings& settings, 
+								 const CDPL::Base::LookupKey& key) const
+{
+	using namespace CDPL;
+
+	Base::Any val = params.getParameter(key);
+
+	QString name = QString::fromStdString(key.getName());
+
+	if (val.isEmpty()) {
+		settings.remove(name);
+		return;
+	}
+
+	settings.setValue(name, QString::fromStdString(val.template getData<std::string>()));
 }
 
 void Settings::readFontParameter(SettingsContainer& params, QSettings& settings, 
@@ -1478,11 +1495,11 @@ void Settings::readAtomColorTableParam(QSettings& settings)
 			color.setAlpha(settings.value("ATOM_COLOR_TABLE/" + atom_id + "/alpha", def_color.getAlpha()).toDouble());
 
 			try {
-				std::size_t atom_id_val = boost::lexical_cast<std::size_t>(atom_id.toStdString());
+				std::size_t atom_id_val = std::stoul(atom_id.toStdString());
 
 				color_tab_ptr->setEntry(atom_id_val, color);
 
-			} catch (const boost::bad_lexical_cast&) {}
+			} catch (const std::logic_error&) {}
 		}
 	}
 

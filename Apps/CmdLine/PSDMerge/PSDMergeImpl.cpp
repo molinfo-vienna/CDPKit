@@ -29,7 +29,6 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
@@ -149,8 +148,8 @@ int PSDMergeImpl::mergeDatabases()
 	if (termSignalCaught())
 		return EXIT_FAILURE;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(num_mols) + " molecules/" +
-				 boost::lexical_cast<std::string>(num_pharms) + " pharmacophores");
+	printMessage(INFO, " - Found " + std::to_string(num_mols) + " molecules/" +
+				 std::to_string(num_pharms) + " pharmacophores");
 	printMessage(INFO, "");
 
 	Pharm::PSDScreeningDBCreator db_creator(outputDatabase, creationMode, !dropDuplicates);
@@ -187,10 +186,10 @@ void PSDMergeImpl::printStatistics(std::size_t num_proc, std::size_t num_rej,
 								   std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules: " + boost::lexical_cast<std::string>(num_proc));
-	printMessage(INFO, " Rejected  Molecules: " + boost::lexical_cast<std::string>(num_rej));
-	printMessage(INFO, " Deleted Molecules:   " + boost::lexical_cast<std::string>(num_del));
-	printMessage(INFO, " Inserted Molecules:  " + boost::lexical_cast<std::string>(num_ins));
+	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc));
+	printMessage(INFO, " Rejected  Molecules: " + std::to_string(num_rej));
+	printMessage(INFO, " Deleted Molecules:   " + std::to_string(num_del));
+	printMessage(INFO, " Inserted Molecules:  " + std::to_string(num_ins));
 	printMessage(INFO, " Processing Time:     " + CmdLineLib::formatTimeDuration(proc_time));
 }
 

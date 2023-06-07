@@ -34,7 +34,6 @@
 #include <cassert>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -1220,7 +1219,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeAtomicNumber(unsigned int atomic_
 		str.push_back(NOT_OPERATOR);
 
 	str.push_back(AtomExpression::ATOMIC_NUMBER_PREFIX);
-	str.append(boost::lexical_cast<std::string>(atomic_no));
+	str.append(std::to_string(atomic_no));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeExpressionList(const MatchConstraint& constraint,
@@ -1337,7 +1336,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeImplicitHCountExpression(const Ma
 	expr_str.push_back(AtomExpression::IMPLICIT_H_COUNT_PREFIX);
 
 	if (h_count != 1) 
-		expr_str.append(boost::lexical_cast<std::string>(h_count));
+		expr_str.append(std::to_string(h_count));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeTotalHCountExpression(const MatchConstraint& constraint,
@@ -1355,7 +1354,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeTotalHCountExpression(const Match
 		expr_str.push_back(NOT_OPERATOR);
 
 	expr_str.push_back(AtomExpression::TOTAL_H_COUNT_PREFIX);
-	expr_str.append(boost::lexical_cast<std::string>(h_count));
+	expr_str.append(std::to_string(h_count));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeRingSizeExpression(const MatchConstraint& constraint,
@@ -1373,7 +1372,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingSizeExpression(const MatchCon
 		expr_str.push_back(NOT_OPERATOR);
 
 	expr_str.push_back(AtomExpression::RING_SIZE_PREFIX);
-	expr_str.append(boost::lexical_cast<std::string>(rsize));
+	expr_str.append(std::to_string(rsize));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeRingTopologyExpression(const MatchConstraint& constraint,
@@ -1431,7 +1430,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingMembershipExpression(const Ma
 		expr_str.push_back(NOT_OPERATOR);
 
 	expr_str.push_back(AtomExpression::RING_MEMBERSHIP_PREFIX);
-	expr_str.append(boost::lexical_cast<std::string>(num_sssr_rings));
+	expr_str.append(std::to_string(num_sssr_rings));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeHybridizationStateExpression(const MatchConstraint& constraint,
@@ -1468,7 +1467,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeHybridizationStateExpression(cons
 		expr_str.push_back(NOT_OPERATOR);
 
 	expr_str.push_back(AtomExpression::HYBRIDIZATION_PREFIX);
-	expr_str.append(boost::lexical_cast<std::string>(hyb_id));
+	expr_str.append(std::to_string(hyb_id));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeValenceExpression(const MatchConstraint& constraint,
@@ -1488,7 +1487,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeValenceExpression(const MatchCons
 	expr_str.push_back(AtomExpression::VALENCE_PREFIX);
 
 	if (valence != 1)
-		expr_str.append(boost::lexical_cast<std::string>(valence));
+		expr_str.append(std::to_string(valence));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeExplicitDegreeExpression(const MatchConstraint& constraint,
@@ -1508,7 +1507,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeExplicitDegreeExpression(const Ma
 	expr_str.push_back(AtomExpression::EXPLICIT_DEGREE_PREFIX);
 
 	if (expl_bond_count != 1)
-		expr_str.append(boost::lexical_cast<std::string>(expl_bond_count));
+		expr_str.append(std::to_string(expl_bond_count));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeConnectivityExpression(const MatchConstraint& constraint,
@@ -1528,7 +1527,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeConnectivityExpression(const Matc
 	expr_str.push_back(AtomExpression::CONNECTIVITY_PREFIX);
 
 	if (bond_count != 1)
-		expr_str.append(boost::lexical_cast<std::string>(bond_count));
+		expr_str.append(std::to_string(bond_count));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeRingConnectivityExpression(const MatchConstraint& constraint,
@@ -1548,7 +1547,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingConnectivityExpression(const 
 	expr_str.push_back(AtomExpression::RING_CONNECTIVITY_PREFIX);
 
 	if (ring_bond_count != 1)
-		expr_str.append(boost::lexical_cast<std::string>(ring_bond_count));
+		expr_str.append(std::to_string(ring_bond_count));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeChargeExpression(const MatchConstraint& constraint,
@@ -1574,7 +1573,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeChargeExpression(const MatchConst
 	expr_str.push_back(charge < 0 ? AtomExpression::NEGATIVE_CHARGE_PREFIX : AtomExpression::POSITIVE_CHARGE_PREFIX); 
 
 	if (std::abs(charge) > 1)
-		expr_str.append(boost::lexical_cast<std::string>(std::abs(charge)));
+		expr_str.append(std::to_string(std::abs(charge)));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeChiralityExpression(const MatchConstraint& constraint,
@@ -1627,7 +1626,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeIsotopeExpression(const MatchCons
 	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
 		expr_str.push_back(NOT_OPERATOR);
 
-	expr_str.append(boost::lexical_cast<std::string>(isotope));
+	expr_str.append(std::to_string(isotope));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeReactionAtomMappingID(std::ostream& os, std::size_t aam_id) const

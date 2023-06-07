@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/filesystem.hpp>
 
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
@@ -151,7 +150,7 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 
 	if (outputScore)
 		struc_data->addEntry(SCORE_PROPERTY_NAME, 
-							 boost::lexical_cast<std::string>(score));
+							 std::to_string(score));
 
 	if (outputDBName)
 		struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
@@ -159,12 +158,12 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 
 	if (outputMolIndex) {
 		struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
-							 boost::lexical_cast<std::string>(hit.getHitMoleculeIndex()));
+							 std::to_string(hit.getHitMoleculeIndex()));
 	}
 
 	if (outputConfIndex)
 		struc_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
-							 boost::lexical_cast<std::string>(hit.getHitConformationIndex()));
+							 std::to_string(hit.getHitConformationIndex()));
 
 	setStructureData(molecule, struc_data);
 	dataWriter->write(molecule);

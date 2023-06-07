@@ -34,7 +34,6 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
@@ -121,7 +120,7 @@ struct PSDScreenImpl::ScreeningWorker
 
 			if (parent->outputPharmIndex)
 				struc_data->addEntry(PHARM_IDX_PROPERTY_NAME, 
-									 boost::lexical_cast<std::string>(queryIndex));
+									 std::to_string(queryIndex));
 			if (parent->outputPharmName)
 				struc_data->addEntry(PHARM_NAME_PROPERTY_NAME, 
 									 getName(hit.getHitPharmacophore()));
@@ -200,7 +199,7 @@ PSDScreenImpl::PSDScreenImpl():
 	addOption("output-pharm-index,P", "Output query pharmacophore index property for hit molecule (default: false).", 
 			  value<bool>(&outputPharmIndex)->implicit_value(true));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
@@ -429,9 +428,9 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
 
 		printMessage(VERBOSE, "Found matching molecule '" + getName(hit.getHitMolecule()) + 
 					 "' - DB: '" + hit.getHitProvider().getDBAccessor().getDatabaseName() + 
-					 "', Mol. Index: " + boost::lexical_cast<std::string>(hit.getHitMoleculeIndex()) + 
-					 ", Conf. Index: " + boost::lexical_cast<std::string>(hit.getHitConformationIndex()) +
-					 ", Score: " + boost::lexical_cast<std::string>(score));
+					 "', Mol. Index: " + std::to_string(hit.getHitMoleculeIndex()) + 
+					 ", Conf. Index: " + std::to_string(hit.getHitConformationIndex()) +
+					 ", Score: " + std::to_string(score));
 
 		return (*hitCollector)(hit, score);
 
@@ -504,7 +503,7 @@ bool PSDScreenImpl::doPrintProgress(std::size_t worker_idx, double progress)
 
 		lastProgValue = new_prog_val;
 
-		std::string prog_prefix = "Screening Database (" + boost::lexical_cast<std::string>(numHits) + 
+		std::string prog_prefix = "Screening Database (" + std::to_string(numHits) + 
 			" Hit" + (numHits != 1 ? "s" : "") + ")...";
 
 		if (prog_prefix.size() < 35)
@@ -555,8 +554,8 @@ void PSDScreenImpl::printStatistics()
 	std::size_t proc_time = std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
 
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Num. Screened Molecules: " + boost::lexical_cast<std::string>(endMolIndex - startMolIndex));
-	printMessage(INFO, " Num. Reported Hits:      " + boost::lexical_cast<std::string>(numHits));
+	printMessage(INFO, " Num. Screened Molecules: " + std::to_string(endMolIndex - startMolIndex));
+	printMessage(INFO, " Num. Reported Hits:      " + std::to_string(numHits));
 
 	if (matchingMode == ScreeningProcessor::FIRST_MATCHING_CONF || 
 		matchingMode == ScreeningProcessor::BEST_MATCHING_CONF || 
@@ -598,10 +597,10 @@ void PSDScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Screening Database:           " + screeningDB);
 	printMessage(VERBOSE, " Hit Output File:              " + hitOutputFile);
  	printMessage(VERBOSE, " Conformation Matching Mode:   " + getMatchingModeString());
-	printMessage(VERBOSE, " Max. Num. Omitted Features:   " + boost::lexical_cast<std::string>(maxOmittedFtrs));
- 	printMessage(VERBOSE, " Screening Start Molecule:     " + boost::lexical_cast<std::string>(startMolIndex));
- 	printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? boost::lexical_cast<std::string>(startMolIndex) : std::string("Last")));
- 	printMessage(VERBOSE, " Maximum Number of Hits:       " + (maxNumHits != 0 ? boost::lexical_cast<std::string>(maxNumHits) : std::string("No Limit")));
+	printMessage(VERBOSE, " Max. Num. Omitted Features:   " + std::to_string(maxOmittedFtrs));
+ 	printMessage(VERBOSE, " Screening Start Molecule:     " + std::to_string(startMolIndex));
+ 	printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? std::to_string(startMolIndex) : std::string("Last")));
+ 	printMessage(VERBOSE, " Maximum Number of Hits:       " + (maxNumHits != 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
  	printMessage(VERBOSE, " Check X-Volume Clashes:       " + std::string(checkXVols ? "Yes" : "No"));
  	printMessage(VERBOSE, " Align Hit Molecules:          " + std::string(alignConfs ? "Yes" : "No"));
  	printMessage(VERBOSE, " Seek Best Alignments:         " + std::string(bestAlignments ? "Yes" : "No"));
@@ -614,7 +613,7 @@ void PSDScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Multithreading:               " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:            " + std::to_string(numThreads));
 
 	printMessage(VERBOSE, " Hit Output File Format:       " + (hitOutputHandler ? hitOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Query Input File Format:      " + (queryInputHandler ? queryInputHandler->getDataFormat().getName() : std::string("Auto-detect")));
@@ -674,13 +673,13 @@ void PSDScreenImpl::analyzeInputFiles()
 
 	startMolIndex = std::min(startMolIndex, numDBMolecules);
 
-	printMessage(INFO, "- " + boost::lexical_cast<std::string>(numQueryPharms) + " Query pharmacophore" + (numQueryPharms != 1 ? "s" : ""));
-	printMessage(INFO, "- " + boost::lexical_cast<std::string>(numDBMolecules) + " Molecule" + (numDBMolecules != 1 ? "s/" : "/") + 
-				 boost::lexical_cast<std::string>(numDBPharms) + " pharmacophore" + (numDBPharms != 1 ? "s" : "")+ " in database");
+	printMessage(INFO, "- " + std::to_string(numQueryPharms) + " Query pharmacophore" + (numQueryPharms != 1 ? "s" : ""));
+	printMessage(INFO, "- " + std::to_string(numDBMolecules) + " Molecule" + (numDBMolecules != 1 ? "s/" : "/") + 
+				 std::to_string(numDBPharms) + " pharmacophore" + (numDBPharms != 1 ? "s" : "")+ " in database");
 
 	std::size_t num_screened = endMolIndex - startMolIndex;
 
-	printMessage(VERBOSE, "-> Screening " + boost::lexical_cast<std::string>(num_screened) + " molecule" + (num_screened != 1 ? "s" : ""));
+	printMessage(VERBOSE, "-> Screening " + std::to_string(num_screened) + " molecule" + (num_screened != 1 ? "s" : ""));
 	printMessage(INFO, "");
 }
 

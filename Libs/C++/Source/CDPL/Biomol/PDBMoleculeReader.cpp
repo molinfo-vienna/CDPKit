@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -52,7 +50,7 @@ bool Biomol::PDBMoleculeReader::readData(std::istream& is, Chem::Molecule& mol, 
 		return reader->readPDBFile(is, mol);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("PDBMoleculeReader: while reading entry " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("PDBMoleculeReader: while reading entry " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Biomol::PDBMoleculeReader::skipData(std::istream& is)
 		return reader->skipPDBFile(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("PDBMoleculeReader: while skipping entry " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("PDBMoleculeReader: while skipping entry " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

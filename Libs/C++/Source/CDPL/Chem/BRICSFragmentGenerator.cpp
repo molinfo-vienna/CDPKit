@@ -28,8 +28,6 @@
 
 #include <mutex>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Chem/BRICSFragmentGenerator.hpp"
 #include "CDPL/Chem/BRICSRuleID.hpp"
 #include "CDPL/Chem/BRICSAtomLabel.hpp"
@@ -100,7 +98,7 @@ namespace
 
 	inline std::string str(unsigned int label)
 	{
-		return boost::lexical_cast<std::string>(label);
+		return std::to_string(label);
 	}
 	
 	void initPatterns() 

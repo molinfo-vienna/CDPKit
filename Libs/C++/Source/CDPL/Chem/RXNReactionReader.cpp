@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Chem/RXNReactionReader.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -52,7 +50,7 @@ bool Chem::RXNReactionReader::readData(std::istream& is, Reaction& rxn, bool ove
 		return reader->readRXNFile(is, rxn);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("RXNReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("RXNReactionReader: while reading record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Chem::RXNReactionReader::skipData(std::istream& is)
 		return reader->skipRXNFile(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("RXNReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("RXNReactionReader: while skipping record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

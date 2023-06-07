@@ -34,7 +34,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -308,7 +307,7 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("mode,m", "Processing mode (CREATE, UPDATE, MERGE default: CREATE).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setMode, this, _1)));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
@@ -319,15 +318,15 @@ GenFragLibImpl::GenFragLibImpl():
 			  (boost::format("%.4f") % settings.getSmallRingSystemSettings().getMinRMSD()).str() + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setRMSD, this, _1)));
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
-			  boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
+			  std::to_string(settings.getMacrocycleSettings().getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setTimeout, this, _1)));
 	addOption("max-lib-size,n", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
 			  value<std::size_t>(&maxLibSize));
 	addOption("e-window,e", "Output energy window for small ring system conformers (default: " + 
-			  boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()) + ", must be >= 0).",
+			  std::to_string(settings.getSmallRingSystemSettings().getEnergyWindow()) + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setEnergyWindow, this, _1)));
 	addOption("small-rsys-sampling-factor,g", "Small ring system conformer sampling factor (default: " + 
-			  boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()) + ", must be > 1).",
+			  std::to_string(settings.getSmallRingSystemSamplingFactor()) + ", must be > 1).",
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
 	addOption("force-field,f", "Build force field (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, "
 			  "MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " + ConfGen::getForceFieldTypeString(settings.getForceFieldType()) + ").", 
@@ -552,7 +551,7 @@ void GenFragLibImpl::mergeFragmentLibraries()
 
 		fragmentLibPtr->addEntries(input_lib);
 
-		printMessage(INFO, " - Added " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries() - old_num_frags) + " fragment(s)");
+		printMessage(INFO, " - Added " + std::to_string(fragmentLibPtr->getNumEntries() - old_num_frags) + " fragment(s)");
 		printMessage(INFO, "");
 	}
 }
@@ -667,7 +666,7 @@ void GenFragLibImpl::loadFragmentLibrary(const std::string& fname, FragmentLibra
 	if (!is)
 		throw Base::IOError("loading fragments from library '" + fname + "' failed");
 
-	printMessage(INFO, " - Loaded " + boost::lexical_cast<std::string>(lib.getNumEntries()) + " fragments");
+	printMessage(INFO, " - Loaded " + std::to_string(lib.getNumEntries()) + " fragments");
 	printMessage(INFO, "");
 }
 
@@ -718,7 +717,7 @@ int GenFragLibImpl::saveFragmentLibrary()
 	if (!os)
 		throw Base::IOError("saving fragments to library '" + outputFile + "' failed");
 
-	printMessage(INFO, " - Saved " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries()) + " fragments", false);
+	printMessage(INFO, " - Saved " + std::to_string(fragmentLibPtr->getNumEntries()) + " fragments", false);
 
 	return EXIT_SUCCESS;
 }
@@ -751,11 +750,11 @@ void GenFragLibImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_
 									 std::size_t num_added_frags, std::size_t num_gen_confs, std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules:       " + boost::lexical_cast<std::string>(num_proc_mols));
-	printMessage(INFO, " Succ. Processed Fragments: " + boost::lexical_cast<std::string>(num_proc_frags));
-	printMessage(INFO, " Fragments With Errors:     " + boost::lexical_cast<std::string>(num_error_frags));
-	printMessage(INFO, " Unique Output Fragments:   " + boost::lexical_cast<std::string>(num_added_frags));
-	printMessage(INFO, " Generated Conformers:      " + boost::lexical_cast<std::string>(num_gen_confs));
+	printMessage(INFO, " Processed Molecules:       " + std::to_string(num_proc_mols));
+	printMessage(INFO, " Succ. Processed Fragments: " + std::to_string(num_proc_frags));
+	printMessage(INFO, " Fragments With Errors:     " + std::to_string(num_error_frags));
+	printMessage(INFO, " Unique Output Fragments:   " + std::to_string(num_added_frags));
+	printMessage(INFO, " Generated Conformers:      " + std::to_string(num_gen_confs));
 	printMessage(INFO, " Processing Time:           " + CmdLineLib::formatTimeDuration(proc_time));
 	printMessage(INFO, "");
 }
@@ -850,18 +849,18 @@ void GenFragLibImpl::printOptionSummary()
 		printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 		if (numThreads > 0)
-			printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+			printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
 		printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-		printMessage(VERBOSE, " Max. Output Library Size:            " + boost::lexical_cast<std::string>(maxLibSize));
-		printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout() / 1000) + "s");
+		printMessage(VERBOSE, " Max. Output Library Size:            " + std::to_string(maxLibSize));
+		printMessage(VERBOSE, " Timeout:                             " + std::to_string(settings.getMacrocycleSettings().getTimeout() / 1000) + "s");
 		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % settings.getMacrocycleSettings().getMinRMSD()).str());
-		printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()));
+		printMessage(VERBOSE, " Energy Window:                       " + std::to_string(settings.getSmallRingSystemSettings().getEnergyWindow()));
 		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 		printMessage(VERBOSE, " Build Force Field:                   " + ConfGen::getForceFieldTypeString(settings.getForceFieldType()));
 		printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
 		printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
-		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()));
+		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + std::to_string(settings.getSmallRingSystemSamplingFactor()));
 		printMessage(VERBOSE, " Preserve Input Bonding Geometries:   " + std::string(settings.preserveInputBondingGeometries() ? "Yes" : "No"));
 	}
 
@@ -913,7 +912,7 @@ void GenFragLibImpl::initInputReader()
 	if (GenFragLibImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
+	printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
@@ -951,5 +950,5 @@ std::string GenFragLibImpl::createMoleculeIdentifier(std::size_t rec_idx, const 
 
 std::string GenFragLibImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+	return (std::to_string(rec_idx) + '/' + std::to_string(inputReader.getNumRecords()));
 }

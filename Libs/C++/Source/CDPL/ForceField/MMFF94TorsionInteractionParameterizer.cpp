@@ -31,8 +31,6 @@
 #include <cmath>
 #include <algorithm>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/ForceField/MMFF94TorsionInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
@@ -186,7 +184,7 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 
 		if (!(*ctr_atom1_prop_entry)) 
 			throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(ctr_atom1_idx));
+										 std::to_string(ctr_atom1_idx));
 
 		if (ctr_atom1_prop_entry->formsLinearBondAngle()) // Empirical rule a)
 			continue;
@@ -206,7 +204,7 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 
 		if (!(*ctr_atom2_prop_entry))
 			throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(ctr_atom2_idx));
+										 std::to_string(ctr_atom2_idx));
 
 		if (ctr_atom2_prop_entry->formsLinearBondAngle()) // Empirical rule a)
 			continue;
@@ -303,13 +301,13 @@ bool ForceField::MMFF94TorsionInteractionParameterizer::getParameters(const Chem
 
 	if (!term_atom1_param_types)
 		throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
+									 std::to_string(molgraph.getAtomIndex(term_atom1)));
 
 	const unsigned int* term_atom2_param_types = paramTypeMap->getEntry(term_atom2_type).getParameterTypes();
 
 	if (!term_atom2_param_types)
 		throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
+									 std::to_string(molgraph.getAtomIndex(term_atom2)));
 
 	const ParamEntry* param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[0], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[0]);
 

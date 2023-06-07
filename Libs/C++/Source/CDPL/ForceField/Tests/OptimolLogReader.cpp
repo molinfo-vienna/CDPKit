@@ -25,8 +25,7 @@
 
 
 #include <sstream>
-
-#include <boost/lexical_cast.hpp>
+#include <cstring>
 
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -230,7 +229,7 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.atom1Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.atom1Idx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 	
 		if (!skipTokens(iss, 1))
 			break;
@@ -238,7 +237,7 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.atom2Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.atom2Idx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 	
 		if (!skipTokens(iss, 2))
 			break;
@@ -309,7 +308,7 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.ctrAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.ctrAtomIdx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 
 		if (!(iss >> iaction.termAtom2Name))
 			break;
@@ -383,7 +382,7 @@ bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, S
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.ctrAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.ctrAtomIdx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 
 		if (!(iss >> iaction.termAtom2Name))
 			break;
@@ -457,7 +456,7 @@ bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_n
 		if (!(iss >> atom_idx))
 			break;
 
-		iaction.oopAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.oopAtomIdx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 
 		if (!skipTokens(iss, 5))
 			break;
@@ -516,7 +515,7 @@ bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, Torsi
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.ctrAtom1Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.ctrAtom1Idx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 
 		if (!skipTokens(iss, 1))
 			break;
@@ -524,7 +523,7 @@ bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, Torsi
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.ctrAtom2Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.ctrAtom2Idx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 	
 		if (!(iss >> iaction.termAtom2Name))
 			break;
@@ -601,7 +600,7 @@ bool OptimolLogReader::getVanDerWaalsInteractions(const std::string& mol_name, V
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.atom1Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.atom1Idx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 	
 		if (!skipTokens(iss, 1))
 			break;
@@ -609,7 +608,7 @@ bool OptimolLogReader::getVanDerWaalsInteractions(const std::string& mol_name, V
 		if (!(iss >> atom_idx))
 			break;
 	    
-		iaction.atom2Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.atom2Idx = std::stoul(atom_idx.substr(1, std::string::npos)) - 1;
 	
 		if (!skipTokens(iss, 1))
 			break;
@@ -639,7 +638,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Total ENERGY (Kcal)") == std::string::npos)
 		return false;
 
-	energies.total = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen(" Total ENERGY (Kcal)"), std::string::npos)));
+	energies.total = std::stod(Internal::trimStringCopy(line.substr(std::strlen(" Total ENERGY (Kcal)"), std::string::npos)));
 
 	if (!readLine(line))
 		return false;
@@ -647,7 +646,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Bond Stretching") == std::string::npos)
 		return false;
 
-	energies.bondStretching = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen(" Bond Stretching"), std::string::npos)));
+	energies.bondStretching = std::stod(Internal::trimStringCopy(line.substr(std::strlen(" Bond Stretching"), std::string::npos)));
 
 	if (!readLine(line))
 		return false;
@@ -655,7 +654,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Angle Bending") == std::string::npos)
 		return false;
 
-	energies.angleBending = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen(" Angle Bending"), std::string::npos)));
+	energies.angleBending = std::stod(Internal::trimStringCopy(line.substr(std::strlen(" Angle Bending"), std::string::npos)));
 
 	if (!readLine(line))
 		return false;
@@ -663,7 +662,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Out-of-Plane Bending") == std::string::npos)
 		return false;
 
-	energies.outOfPlaneBending = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen(" Out-of-Plane Bending"), std::string::npos)));
+	energies.outOfPlaneBending = std::stod(Internal::trimStringCopy(line.substr(std::strlen(" Out-of-Plane Bending"), std::string::npos)));
 	
 	if (!readLine(line))
 		return false;
@@ -671,7 +670,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Stretch-Bend") == std::string::npos)
 		return false;
 
-	energies.stretchBend = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen(" Stretch-Bend"), std::string::npos)));
+	energies.stretchBend = std::stod(Internal::trimStringCopy(line.substr(std::strlen(" Stretch-Bend"), std::string::npos)));
 
 	if (!skipLines(3))
 		return false;
@@ -682,7 +681,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Total Torsion") == std::string::npos)
 		return false;
 
-	energies.torsion = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen("     Total Torsion"), std::string::npos)));
+	energies.torsion = std::stod(Internal::trimStringCopy(line.substr(std::strlen("     Total Torsion"), std::string::npos)));
 
 	if (!skipLines(3))
 		return false;
@@ -693,7 +692,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Net vdW") == std::string::npos)
 		return false;
 
-	energies.vanDerWaals = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen("     Net vdW"), std::string::npos)));
+	energies.vanDerWaals = std::stod(Internal::trimStringCopy(line.substr(std::strlen("     Net vdW"), std::string::npos)));
 
 	if (!readLine(line))
 		return false;
@@ -701,7 +700,7 @@ bool OptimolLogReader::getEnergies(const std::string& mol_name, EnergyData& ener
 	if (line.find("Electrostatic") == std::string::npos)
 		return false;
 
-	energies.electrostatic = boost::lexical_cast<double>(Internal::trimStringCopy(line.substr(strlen(" Electrostatic"), std::string::npos)));
+	energies.electrostatic = std::stod(Internal::trimStringCopy(line.substr(std::strlen(" Electrostatic"), std::string::npos)));
 
 	return true;
 }

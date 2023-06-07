@@ -28,7 +28,6 @@
 
 #include <fstream>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/iostreams/copy.hpp>
 
 #include "CDPL/Pharm/PSDMoleculeReader.hpp"
@@ -98,7 +97,7 @@ Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol, bo
 		accessor.getMolecule(recordIndex, mol, overwrite);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("PSDMoleculeReader: while reading record " + boost::lexical_cast<std::string>(recordIndex) + 
+		throw Base::IOError("PSDMoleculeReader: while reading record " + std::to_string(recordIndex) + 
 							": " + e.what());
 	}
 

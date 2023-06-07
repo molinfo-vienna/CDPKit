@@ -22,6 +22,8 @@
  */
 
 
+#include <complex>
+
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Math/CommonType.hpp"
@@ -32,13 +34,13 @@ BOOST_AUTO_TEST_CASE(CommonTypeTest)
 	using namespace CDPL;
 	using namespace Math;
 
-	BOOST_CHECK(typeid(CommonType<short int, short int>::Type) == typeid(int));
+	BOOST_CHECK(typeid(CommonType<short int, short int>::Type) == typeid(short int));
 
-	BOOST_CHECK(typeid(CommonType<unsigned short int, unsigned short int>::Type) == typeid(int));
+	BOOST_CHECK(typeid(CommonType<unsigned short int, unsigned short int>::Type) == typeid(unsigned short int));
 
 	BOOST_CHECK(typeid(CommonType<unsigned int, unsigned int>::Type) == typeid(unsigned int));
 
-	BOOST_CHECK(typeid(CommonType<char, char>::Type) == typeid(int));
+	BOOST_CHECK(typeid(CommonType<char, char>::Type) == typeid(char));
 
 	BOOST_CHECK(typeid(CommonType<float, float>::Type) == typeid(float));
 

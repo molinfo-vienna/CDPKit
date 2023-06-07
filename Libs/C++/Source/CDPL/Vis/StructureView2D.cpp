@@ -32,7 +32,6 @@
 #include <iterator>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
@@ -490,7 +489,7 @@ void Vis::StructureView2D::createAtomIsotopeLabelPrimitive(const Chem::Atom& ato
 {
 	fontMetrics->setFont(activeSecondaryLabelFont);
 
-	std::string iso_str = boost::lexical_cast<std::string>(isotope);
+	std::string iso_str = std::to_string(isotope);
 
 	std::size_t atom_idx = structure->getAtomIndex(atom);
 	const Rectangle2D& sym_brect = atomLabelBounds[atom_idx][0];
@@ -520,20 +519,20 @@ void Vis::StructureView2D::createAtomChargeLabelPrimitive(const Chem::Atom& atom
 	if (charge != 0) {
 		if (charge > 0) {
 			if (charge > 1)
-				charge_str.append(boost::lexical_cast<std::string>(charge));
+				charge_str.append(std::to_string(charge));
 
 			charge_str.push_back('+');
 
 		} else {
 			if (charge < -1)
-				charge_str.append(boost::lexical_cast<std::string>(-charge));
+				charge_str.append(std::to_string(-charge));
 
 			charge_str.push_back('-');
 		}
 	}
 
 	if (rad_elec_count > 8) {
-		charge_str.append(boost::lexical_cast<std::string>(rad_elec_count));
+		charge_str.append(std::to_string(rad_elec_count));
 		charge_str.push_back(RADICAL_ELECTRON_SYMBOL);
 	}
 
@@ -572,7 +571,7 @@ void Vis::StructureView2D::createAtomHCountLabelPrimitives(const Chem::Atom& ato
 	Rectangle2D union_brect = h_label_brect;
 
 	if (h_count > 1) {
-		h_count_str = boost::lexical_cast<std::string>(h_count);
+		h_count_str = std::to_string(h_count);
 	
 		fontMetrics->setFont(activeSecondaryLabelFont);
 		fontMetrics->getBounds(h_count_str, count_label_brect);
@@ -779,7 +778,7 @@ void Vis::StructureView2D::createAtomMappingLabelPrimitive(const Chem::Atom& ato
 	std::string id_str;
 
 	id_str.push_back(LEFT_AAM_ID_LABEL_DELIMEITER);
-	id_str.append(boost::lexical_cast<std::string>(aam_id));
+	id_str.append(std::to_string(aam_id));
 	id_str.push_back(RIGHT_AAM_ID_LABEL_DELIMEITER);
 
 	Rectangle2D label_brect;

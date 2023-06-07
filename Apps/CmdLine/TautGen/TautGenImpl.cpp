@@ -31,7 +31,6 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -261,7 +260,7 @@ private:
 			}
 
 			parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " +
-								 boost::lexical_cast<std::string>(numGenMolTauts) + (numGenMolTauts == 1 ? " tautomer" : " tautomers"));
+								 std::to_string(numGenMolTauts) + (numGenMolTauts == 1 ? " tautomer" : " tautomers"));
 			numProcMols++;
 
 			return true;
@@ -331,8 +330,8 @@ private:
 
 		StringDataBlock::SharedPointer sd(new StringDataBlock());
 
-		sd->addEntry("<Tautomer Score>", boost::lexical_cast<std::string>(score));
-		sd->addEntry("<Tautomer ID>", boost::lexical_cast<std::string>(hash));
+		sd->addEntry("<Tautomer Score>", std::to_string(score));
+		sd->addEntry("<Tautomer ID>", std::to_string(hash));
 
 		setStructureData(molgraph, sd);
 
@@ -372,7 +371,7 @@ TautGenImpl::TautGenImpl():
 	addOption("mode,m", "Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: TOP_UNIQUE).", 
 			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setMode, this, _1)));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
@@ -666,9 +665,9 @@ bool TautGenImpl::haveErrorMessage()
 void TautGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_gen_tauts, std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules: " + boost::lexical_cast<std::string>(num_proc_mols));
-	printMessage(INFO, " Generated Tautomers: " + boost::lexical_cast<std::string>(num_gen_tauts));
-	printMessage(INFO, " Output Tautomers:    " + boost::lexical_cast<std::string>(numOutTautomers));
+	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc_mols));
+	printMessage(INFO, " Generated Tautomers: " + std::to_string(num_gen_tauts));
+	printMessage(INFO, " Output Tautomers:    " + std::to_string(numOutTautomers));
 	printMessage(INFO, " Processing Time:     " + CmdLineLib::formatTimeDuration(proc_time));
 	printMessage(INFO, "");
 }
@@ -781,14 +780,14 @@ void TautGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Multithreading:                    " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:                 " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:                 " + std::to_string(numThreads));
 
 	printMessage(VERBOSE, " Input File Format:                 " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Output File Format:                " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Stereochemistry Aware:             " + std::string(regardStereo ? "Yes" : "No"));
 	printMessage(VERBOSE, " Isotope Aware:                     " + std::string(regardIsotopes ? "Yes" : "No"));
 	printMessage(VERBOSE, " Neutralize Charges:                " + std::string(neutralize ? "Yes" : "No"));
-	printMessage(VERBOSE, " Max. Num. Tautomers:               " + boost::lexical_cast<std::string>(maxNumTautomers));
+	printMessage(VERBOSE, " Max. Num. Tautomers:               " + std::to_string(maxNumTautomers));
 	printMessage(VERBOSE, " Keto-Enol Tautomerization:         " + std::string(ketoEnol ? "Yes" : "No"));
 	printMessage(VERBOSE, " Imine-Enamine Tautomerization:     " + std::string(imineEnamine ? "Yes" : "No"));
 	printMessage(VERBOSE, " Nitroso-Oxime Tautomerization:     " + std::string(nitrosoOxime ? "Yes" : "No"));
@@ -848,7 +847,7 @@ void TautGenImpl::initInputReader()
 	if (TautGenImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
+	printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
@@ -913,5 +912,5 @@ std::string TautGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDP
 
 std::string TautGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+	return (std::to_string(rec_idx) + '/' + std::to_string(inputReader.getNumRecords()));
 }

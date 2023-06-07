@@ -29,7 +29,6 @@
 #include <algorithm>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/ControlParameterFunctions.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
@@ -81,9 +80,9 @@ bool ConfGen::CFLDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 		return true;
 	
 	if (prev_num_atoms == 0)
-		setName(mol, boost::lexical_cast<std::string>(entry.getHashCode()));
+		setName(mol, std::to_string(entry.getHashCode()));
 	else
-		setName(mol, getName(mol) + '.' + boost::lexical_cast<std::string>(entry.getHashCode()));
+		setName(mol, getName(mol) + '.' + std::to_string(entry.getHashCode()));
 	
 	MolecularGraph* molgraph = 0;
 

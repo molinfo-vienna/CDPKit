@@ -30,8 +30,6 @@
 #include <string>
 #include <cstddef>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -110,7 +108,7 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
 				continue;
 
 			throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(i));
+										 std::to_string(i));
 		}
 		
 		if (ctr_prop_entry.getNumNeighbors() != 3) // only 3-valent atoms are considered
@@ -176,7 +174,7 @@ double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceCons
 
 		if (!nbr_atom_param_types[i])
 			throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-										 boost::lexical_cast<std::string>(molgraph.getAtomIndex(*nbr_atoms[i])));
+										 std::to_string(molgraph.getAtomIndex(*nbr_atoms[i])));
 	}
 
 	for (std::size_t i = 0; i < MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES; i++) {
@@ -189,6 +187,6 @@ double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceCons
 	}
 
 	throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameters for out-of-plane bending interaction centered at atom #" + 
-								 boost::lexical_cast<std::string>(ctr_atom_idx));
+								 std::to_string(ctr_atom_idx));
 	return 0.0;
 }

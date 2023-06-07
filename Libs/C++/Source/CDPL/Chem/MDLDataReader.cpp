@@ -34,7 +34,6 @@
 #include <limits>
 #include <istream>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
 
@@ -2002,7 +2001,8 @@ void Chem::MDLDataReader::readCTabV2000RegistryNumberProperty(std::istream& is, 
 				MDL::MAX_LINE_LENGTH - PropertyBlock::REGISTRY_NO_PREFIX.length());
 
 	try {
-		setMDLRegistryNumber(mol, boost::lexical_cast<unsigned int>(line));
+		if (!line.empty())
+			setMDLRegistryNumber(mol, std::stoul(line));
 
 	} catch (...) {
 		if (strictErrorChecking)

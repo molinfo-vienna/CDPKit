@@ -32,7 +32,6 @@
 
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -232,7 +231,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
 
 		if (!struct_gen_only && !outputConfs.empty()) {
-			logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
+			logCallback("Num. output conformers: " + std::to_string(outputConfs.size()) + '\n');
 			logCallback("Min. energy: " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
 			logCallback("Max. energy: " + (boost::format("%.4f") % outputConfs.back()->getEnergy()).str() + '\n');
 		}
@@ -271,7 +270,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	using namespace Chem;
 
 	if (logCallback)
-		logCallback("Found " + boost::lexical_cast<std::string>(comps.getSize()) + " molecular graph components\n");
+		logCallback("Found " + std::to_string(comps.getSize()) + " molecular graph components\n");
 
 	bool have_full_ipt_coords = true;
 	bool too_much_sym = false;
@@ -283,7 +282,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 			continue;
 
 		if (logCallback)
-			logCallback("Generating conformers for component " + boost::lexical_cast<std::string>(i) + "...\n");
+			logCallback("Generating conformers for component " + std::to_string(i) + "...\n");
 
 		unsigned int ret_code = generateConformers(*comp, struct_gen_only, i == 0);
 
@@ -556,7 +555,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		if (j == MAX_NUM_STRUCTURE_GEN_TRIALS) {
 			if (++num_struct_gen_fails == MAX_NUM_STRUCTURE_GEN_FAILS) {
 				if (logCallback) 
-					logCallback("Could not generate any valid structure after " + boost::lexical_cast<std::string>(num_struct_gen_fails) + 
+					logCallback("Could not generate any valid structure after " + std::to_string(num_struct_gen_fails) + 
 								" consecutive trials - giving up!\n");
 				break;
 			}
@@ -602,10 +601,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 				
 	if (logCallback) {
 		logCallback((struct_gen_only ? "Distance geometry based structure generation terminated after " : "Stochastic conformer sampling terminated after ") +
-					boost::lexical_cast<std::string>(i) + " iteration(s)\n");
+					std::to_string(i) + " iteration(s)\n");
 
 		if (!struct_gen_only) {
-			logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + " conformer(s) within energy window\n");
+			logCallback("Generated " + std::to_string(workingConfs.size()) + " conformer(s) within energy window\n");
 			logCallback((boost::format("%.1f") % (100.0 * double(conv_cycle_size - num_new_unique_confs) / conv_cycle_size)).str() + "% convergence reached\n");
 		}
 
@@ -802,7 +801,7 @@ void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
 	}
 
 	if (logCallback)
-		logCallback("Structure decomposed into " + boost::lexical_cast<std::string>(torFragConfData.size()) + " torsion fragment(s)\n");
+		logCallback("Structure decomposed into " + std::to_string(torFragConfData.size()) + " torsion fragment(s)\n");
 }
 
 bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters(unsigned int ff_type)
@@ -880,7 +879,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
 			Chem::splitIntoFragments(frag, fragments, tmpBitSet, false);
 
 		if (logCallback && !fragSplitBonds.empty())
-			logCallback("Found " + boost::lexical_cast<std::string>(fragSplitBonds.size()) + " rotatable fragment bond(s), performing torsion driving...\n");
+			logCallback("Found " + std::to_string(fragSplitBonds.size()) + " rotatable fragment bond(s), performing torsion driving...\n");
 
 		torDriver.setup(fragments, *molGraph, fragSplitBonds.begin(), fragSplitBonds.end());
 		torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
@@ -980,7 +979,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
 		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 
 		if (logCallback)
-			logCallback("Generated " + boost::lexical_cast<std::string>(frag_conf_data.lastConfIdx) + " torsion fragment conformer(s)\n");
+			logCallback("Generated " + std::to_string(frag_conf_data.lastConfIdx) + " torsion fragment conformer(s)\n");
 	}
 
 	std::sort(torFragConfData.begin(), torFragConfData.end(), &compareFragmentConfCount);
@@ -1002,7 +1001,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 		return ret_code;
 
 	if (logCallback) {
-		logCallback("Generated " + boost::lexical_cast<std::string>(torFragConfCombData.size()) + 
+		logCallback("Generated " + std::to_string(torFragConfCombData.size()) + 
 					" fragment conformer combination(s) (min. energy: " + 
 					(boost::format("%.4f") % torFragConfCombData.front()->energy).str() + 
 					", max. energy: " + (boost::format("%.4f") % torFragConfCombData.back()->energy).str() + ")\n");
@@ -1065,7 +1064,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 
 		if (!workingConfs.empty() && comb.energy > (min_comb_energy + e_window)) {
 			if (logCallback) 
-				logCallback("Generation finished after " + boost::lexical_cast<std::string>(comb_it - torFragConfCombData.begin()) + " processed fragment confomer combination(s)\n");
+				logCallback("Generation finished after " + std::to_string(comb_it - torFragConfCombData.begin()) + " processed fragment confomer combination(s)\n");
 
 			break;
 		}
@@ -1138,7 +1137,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 		return ReturnCode::CONF_GEN_FAILED;
 
 	if (logCallback) 
-		logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + (struct_gen_only ? " output structure candidate(s)\n" : " output conformer candidate(s)\n"));
+		logCallback("Generated " + std::to_string(workingConfs.size()) + (struct_gen_only ? " output structure candidate(s)\n" : " output conformer candidate(s)\n"));
 
 	return ReturnCode::SUCCESS;
 }
@@ -1293,9 +1292,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 	if (logCallback) {
 		if (perf_rmsd_check)
 			logCallback("Performing RMSD-based output conformer selection (min. RMSD: " + (boost::format("%.4f") % settings.getMinRMSD()).str() + 
-						", num. top. sym. mappings: " + boost::lexical_cast<std::string>(confSelector.getNumSymmetryMappings()) + ")...\n");
+						", num. top. sym. mappings: " + std::to_string(confSelector.getNumSymmetryMappings()) + ")...\n");
 		
-		logCallback("Selected " +  boost::lexical_cast<std::string>(outputConfs.size()) + " conformer(s)\n");
+		logCallback("Selected " +  std::to_string(outputConfs.size()) + " conformer(s)\n");
 		logCallback("Warning: max. number of top. symmetry mappings exceeded\n");
 	}
 

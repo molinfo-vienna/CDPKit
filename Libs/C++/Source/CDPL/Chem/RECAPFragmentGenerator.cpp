@@ -28,8 +28,6 @@
 
 #include <mutex>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Chem/RECAPFragmentGenerator.hpp"
 #include "CDPL/Chem/RECAPRuleID.hpp"
 #include "CDPL/Chem/RECAPAtomLabel.hpp"
@@ -63,7 +61,7 @@ namespace
 
 	inline std::string str(unsigned int label)
 	{
-		return boost::lexical_cast<std::string>(label);
+		return std::to_string(label);
 	}
 
 	void initPatterns() 

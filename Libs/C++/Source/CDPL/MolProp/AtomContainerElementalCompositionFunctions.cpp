@@ -29,8 +29,6 @@
 #include <map>
 #include <sstream>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
@@ -88,13 +86,13 @@ void MolProp::buildExplicitMolecularFormula(const Chem::AtomContainer& cntnr, st
 		formula_os << it->first;
 
 		if (it->second > 1)
-			formula_os << boost::lexical_cast<std::string>(it->second);
+			formula_os << std::to_string(it->second);
 	}
 
 	if (unknown_count > 0)
 		formula_os << '?';
 	if (unknown_count > 1)
-		formula_os << boost::lexical_cast<std::string>(unknown_count);
+		formula_os << std::to_string(unknown_count);
 	
 	formula = formula_os.str();
 }

@@ -30,8 +30,6 @@
 #include <iomanip>
 #include <map>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
@@ -144,7 +142,7 @@ void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const Feature
 	writeStartTag(os, PML::ALIGNMENT_ELEM_TAG, false);
 
 	writeAttribute(os, PML::NAME_ATTRIBUTE, getName(cntnr), false);
-	writeAttribute(os, PML::ID_ATTRIBUTE, PML::ALIGNMENT_ELEM_TAG + boost::lexical_cast<std::string>(alignElemID++), false);
+	writeAttribute(os, PML::ID_ATTRIBUTE, PML::ALIGNMENT_ELEM_TAG + std::to_string(alignElemID++), false);
 	writeAttribute(os, PML::FLAG_CODE_ATTRIBUTE, PML::DEFAULT_FLAG_CODE, true);
 }
 
@@ -219,7 +217,7 @@ void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const
 	writeAttribute(os, PML::OPTIONAL_ATTRIBUTE, getOptionalFlag(ftr), false);
 	writeAttribute(os, PML::DISABLED_ATTRIBUTE, getDisabledFlag(ftr), false);
 	writeAttribute(os, PML::WEIGHT_ATTRIBUTE, getWeight(ftr), false);
-	writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + boost::lexical_cast<std::string>(id), close);
+	writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + std::to_string(id), close);
 }
 
 void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id)
@@ -231,7 +229,7 @@ void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, st
 	writeAttribute(os, PML::OPTIONAL_ATTRIBUTE, getOptionalFlag(ftr), false);
 	writeAttribute(os, PML::DISABLED_ATTRIBUTE, getDisabledFlag(ftr), false);
 	writeAttribute(os, PML::WEIGHT_ATTRIBUTE, getWeight(ftr), false);
-	writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + boost::lexical_cast<std::string>(id), true);
+	writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + std::to_string(id), true);
 
 	writePositionAndTolerance(os, PML::FEATURE_POSITION_TAG, get3DCoordinates(ftr), getTolerance(ftr));
 

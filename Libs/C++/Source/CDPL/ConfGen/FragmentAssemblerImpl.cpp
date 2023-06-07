@@ -28,11 +28,9 @@
 
 #include <algorithm>
 #include <cmath>
-#include <string>
 #include <mutex>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -297,7 +295,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 
 			logCallback("Build fragment " + getSMILES(canonFrag) + ":\n");
 			logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
-			logCallback(" Hash Code: " + boost::lexical_cast<std::string>(canonFrag.getHashCode()) + "\n");
+			logCallback(" Hash Code: " + std::to_string(canonFrag.getHashCode()) + "\n");
 		}
 
 		if (!(!settings.generateCoordinatesFromScratch() && 
@@ -328,7 +326,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 		}
 
 		if (logCallback) 
-			logCallback(" Num. conformers: " + boost::lexical_cast<std::string>(frag_node->getNumConformers()) + '\n');
+			logCallback(" Num. conformers: " + std::to_string(frag_node->getNumConformers()) + '\n');
 	}
 
 	return ReturnCode::SUCCESS;
@@ -1045,7 +1043,7 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 	}
 
 	if (logCallback)
-		logCallback(" Num. inv. nitrogens: " + boost::lexical_cast<std::string>(inv_n_cnt) + '\n');
+		logCallback(" Num. inv. nitrogens: " + std::to_string(inv_n_cnt) + '\n');
 
 	return inv_n_cnt;
 }

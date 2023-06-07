@@ -26,10 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <string>
 #include <exception>
-
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -130,7 +127,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 
 		if (getLogMessageCallback()) {
 			getLogMessageCallback()("Canon. Fragment: " + fl_entry->getSMILES() + "\n");
-			getLogMessageCallback()("Hash Code: " + boost::lexical_cast<std::string>(fl_entry->getHashCode()) + "\n");
+			getLogMessageCallback()("Hash Code: " + std::to_string(fl_entry->getHashCode()) + "\n");
 		}
 
 		unsigned int ret_code = fragConfGen.generate(canonFrag);

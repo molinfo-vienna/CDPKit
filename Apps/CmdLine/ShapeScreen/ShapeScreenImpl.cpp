@@ -32,7 +32,6 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -141,7 +140,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  "default: " + scoringFunc + ")",
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setScoringFunction, this, _1)));
 	addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
-			  boost::lexical_cast<std::string>(numBestHits) + ").",
+			  std::to_string(numBestHits) + ").",
 			  value<std::size_t>(&numBestHits));
 	addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the 'best-hits' option, default: 0 - no limit).",
 			  value<std::size_t>(&maxNumHits));
@@ -201,7 +200,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  "and @i@ = database molecule index, default: " + hitNamePattern + ").",
 			  value<std::string>(&hitNamePattern));
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("query-format,Q", "Query molecule input file format (default: auto-detect from file extension).", 
@@ -628,7 +627,7 @@ void ShapeScreenImpl::readQueryMolecules()
 	if (termSignalCaught())
 		return;
 
-    printMessage(INFO, " - Read " + boost::lexical_cast<std::string>(queryMolecules.size()) + " query molecule(s)");
+    printMessage(INFO, " - Read " + std::to_string(queryMolecules.size()) + " query molecule(s)");
     printMessage(INFO, "");
 }
 
@@ -902,10 +901,10 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 
 		boost::replace_all(name, "@Q@", getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]));
 		boost::replace_all(name, "@D@", hit_data.dbMolName);
-		boost::replace_all(name, "@C@", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeIndex() + 1));
-		boost::replace_all(name, "@c@", boost::lexical_cast<std::string>(hit_data.almntResult.getAlignedShapeIndex() + 1));
-		boost::replace_all(name, "@I@", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeSetIndex() + 1));
-		boost::replace_all(name, "@i@", boost::lexical_cast<std::string>(hit_data.dbMolIndex + 1));
+		boost::replace_all(name, "@C@", std::to_string(hit_data.almntResult.getReferenceShapeIndex() + 1));
+		boost::replace_all(name, "@c@", std::to_string(hit_data.almntResult.getAlignedShapeIndex() + 1));
+		boost::replace_all(name, "@I@", std::to_string(hit_data.almntResult.getReferenceShapeSetIndex() + 1));
+		boost::replace_all(name, "@i@", std::to_string(hit_data.dbMolIndex + 1));
 
 		setName(*hit_data.dbMolecule, name);
 		applyConformation(*hit_data.dbMolecule, hit_data.almntResult.getAlignedShapeIndex());
@@ -925,16 +924,16 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 				new_sd_block.reset(new Chem::StringDataBlock());
 
 			if (dbConfIdxSDTags)
-				new_sd_block->addEntry("<Conf. Index>", boost::lexical_cast<std::string>(hit_data.almntResult.getAlignedShapeIndex() + 1));
+				new_sd_block->addEntry("<Conf. Index>", std::to_string(hit_data.almntResult.getAlignedShapeIndex() + 1));
 
 			if (dbMolIdxSDTags)
-				new_sd_block->addEntry("<Mol. Index>", boost::lexical_cast<std::string>(hit_data.dbMolIndex + 1));
+				new_sd_block->addEntry("<Mol. Index>", std::to_string(hit_data.dbMolIndex + 1));
 
 			if (queryConfIdxSDTags)
-				new_sd_block->addEntry("<Query Conf. Index>", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeIndex() + 1));
+				new_sd_block->addEntry("<Query Conf. Index>", std::to_string(hit_data.almntResult.getReferenceShapeIndex() + 1));
 
 			if (queryMolIdxSDTags)
-				new_sd_block->addEntry("<Query Mol. Index>", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeSetIndex() + 1));
+				new_sd_block->addEntry("<Query Mol. Index>", std::to_string(hit_data.almntResult.getReferenceShapeSetIndex() + 1));
 
 			if (queryNameSDTags)
 				new_sd_block->addEntry("<Query Name>", getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]));
@@ -1019,12 +1018,12 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
     while (true) {
 		try {
 			if (!databaseReader->read(mol)) {
-				printInfiniteProgress("Screening Molecules (" + boost::lexical_cast<std::string>(numProcMols) + " passed)", true);
+				printInfiniteProgress("Screening Molecules (" + std::to_string(numProcMols) + " passed)", true);
 				return 0;
 			}
 
 			numProcMols++;
-			printInfiniteProgress("Screening Molecules (" + boost::lexical_cast<std::string>(numProcMols) + " passed)");
+			printInfiniteProgress("Screening Molecules (" + std::to_string(numProcMols) + " passed)");
 
 			return databaseReader->getRecordIndex();
 
@@ -1059,9 +1058,9 @@ void ShapeScreenImpl::printStatistics()
 	
 	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
-    printMessage(INFO, " Num. processed Molecules: " + boost::lexical_cast<std::string>(numProcMols));
-    printMessage(INFO, " Num. Hit Molecules:       " + boost::lexical_cast<std::string>(numHits));
-    printMessage(INFO, " Num. saved Hits:          " + boost::lexical_cast<std::string>(numSavedHits));
+    printMessage(INFO, " Num. processed Molecules: " + std::to_string(numProcMols));
+    printMessage(INFO, " Num. Hit Molecules:       " + std::to_string(numHits));
+    printMessage(INFO, " Num. saved Hits:          " + std::to_string(numSavedHits));
     printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time / 1000000000) + 
 				 " (" + (boost::format("%.3f") % (double(numProcMols) * 1000000000 / proc_time)).str() + " Mols./s)");
 }
@@ -1118,8 +1117,8 @@ void ShapeScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Report Output File:                  " + (reportFile.empty() ? std::string("None") : reportFile));
 	printMessage(VERBOSE, " Screening Mode:                      " + screeningModeToString(settings.getScreeningMode()));
 	printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc);
-	printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? boost::lexical_cast<std::string>(numBestHits) : std::string("All Hits")));
-	printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? boost::lexical_cast<std::string>(maxNumHits) : std::string("No Limit")));
+	printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? std::to_string(numBestHits) : std::string("All Hits")));
+	printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? std::to_string(maxNumHits) : std::string("No Limit")));
 	printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ? std::string("None") : (boost::format("%.4f") % settings.getScoreCutoff()).str()));
 	printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? (boost::format("%.4f") % shapeScoreCutoff).str() : std::string("None")));
 	printMessage(VERBOSE, " Merge Hit Lists:                     " + std::string(mergeHitLists ? "Yes" : "No"));
@@ -1134,7 +1133,7 @@ void ShapeScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Gen. Shape Center Starts:            " + std::string(shapeCenterStarts ? "Yes" : "No"));
 	printMessage(VERBOSE, " Gen. Atom Center Starts:             " + std::string(atomCenterStarts ? "Yes" : "No"));
 	printMessage(VERBOSE, " Gen. Color Feature Center Starts:    " + std::string(colorCenterStarts ? "Yes" : "No"));
-	printMessage(VERBOSE, " Num gen. Random Starts:              " + boost::lexical_cast<std::string>(settings.getNumRandomStarts()));
+	printMessage(VERBOSE, " Num gen. Random Starts:              " + std::to_string(settings.getNumRandomStarts()));
 	printMessage(VERBOSE, " Output Score SD-Tags:                " + std::string(scoreSDTags ? "Yes" : "No"));
 	printMessage(VERBOSE, " Output Query Mol. Name SD-Tags:      " + std::string(queryNameSDTags ? "Yes" : "No"));
 	printMessage(VERBOSE, " Output Query Mol. Index SD-Tags:     " + std::string(queryMolIdxSDTags ? "Yes" : "No"));
@@ -1145,7 +1144,7 @@ void ShapeScreenImpl::printOptionSummary()
     printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
 	printMessage(VERBOSE, " Query File Format:                   " + (queryHandler ? queryHandler->getDataFormat().getName() : std::string("Auto-detect")));
     printMessage(VERBOSE, " Database File Format:                " + (databaseHandler ? databaseHandler->getDataFormat().getName() : std::string("Auto-detect")));
@@ -1299,7 +1298,7 @@ std::string ShapeScreenImpl::createMoleculeIdentifier(std::size_t rec_idx, const
 
 std::string ShapeScreenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-    return boost::lexical_cast<std::string>(rec_idx);
+    return std::to_string(rec_idx);
 }
 
 std::string ShapeScreenImpl::getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const
@@ -1308,7 +1307,7 @@ std::string ShapeScreenImpl::getOutputFileName(const std::string& file_name_tmpl
 	std::string file_name = file_name_tmplt;
 		
 	if (suffix_pos != std::string::npos)
-		return file_name.insert(suffix_pos, "_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
+		return file_name.insert(suffix_pos, "_" + std::to_string(query_mol_idx + 1));
 
-	return file_name.append("_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
+	return file_name.append("_" + std::to_string(query_mol_idx + 1));
 }

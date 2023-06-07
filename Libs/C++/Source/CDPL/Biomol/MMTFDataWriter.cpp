@@ -29,8 +29,7 @@
 #include <algorithm>
 #include <iterator>
 #include <limits>
-
-#include <boost/lexical_cast.hpp>
+#include <string>
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
@@ -316,9 +315,12 @@ void Biomol::MMTFDataWriter::setStructureMetaData(const Chem::MolecularGraph& mo
 	if (pdb_data->containsRecord(PDBData::TITLE))
 		structData.title = pdb_data->getData(PDBData::TITLE);
 
-	if (pdb_data->containsRecord(PDBData::RESOLUTION))
-		structData.resolution = boost::lexical_cast<float>(pdb_data->getData(PDBData::RESOLUTION));
-
+	if (pdb_data->containsRecord(PDBData::RESOLUTION)) {
+		try {
+			structData.resolution = std::stod(pdb_data->getData(PDBData::RESOLUTION));
+		} catch (const std::logic_error&) {}
+	}
+	
 	if (pdb_data->containsRecord(PDBData::DEPOSITION_DATE))
 		structData.depositionDate = pdb_data->getData(PDBData::DEPOSITION_DATE);
 

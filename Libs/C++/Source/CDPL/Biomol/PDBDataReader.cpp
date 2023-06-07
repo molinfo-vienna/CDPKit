@@ -32,7 +32,6 @@
 #include <cmath>
 #include <set>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
@@ -349,7 +348,7 @@ bool Biomol::PDBDataReader::skipPDBFile(std::istream& is)
 		readPDBString(is, PDB::RECORD_NAME_LENGTH, stringData, true, "PDBDataReader: error while reading record name", false);
 		
 		if (strictErrorChecking && stringData.length() < PDB::RECORD_NAME_LENGTH)
-			throw Base::IOError("PDBDataReader: PDB record name length < " + boost::lexical_cast<std::string>(PDB::RECORD_NAME_LENGTH));
+			throw Base::IOError("PDBDataReader: PDB record name length < " + std::to_string(PDB::RECORD_NAME_LENGTH));
 
 		Internal::trimString(stringData, false, true);
 
@@ -454,7 +453,7 @@ std::size_t Biomol::PDBDataReader::readTERRecord(std::istream& is, Chem::Molecul
 
 		if (term_atom_it == serialToAtomMap[currModelID].end())
 			throw Base::IOError("PDBDataReader: error while processing TER record: no preceeding terminal atom with serial number " + 
-								boost::lexical_cast<std::string>(serial - 1) + " found");
+								std::to_string(serial - 1) + " found");
  
 		const Chem::Atom& term_atom = *term_atom_it->second;
 
@@ -558,7 +557,7 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
 			if (a_it == map_it->second.end()) {
 				if (strictErrorChecking || i == 0)
 					throw Base::IOError("PDBDataReader: error while reading CONECT record: atom with serial number " + 
-										boost::lexical_cast<std::string>(serials[i]) + " not found");
+										std::to_string(serials[i]) + " not found");
 
 				continue;
 			}
@@ -802,7 +801,7 @@ std::size_t Biomol::PDBDataReader::startNextRecord(std::istream& is, std::string
 
 	if (strictErrorChecking && rec_name.length() < PDB::RECORD_NAME_LENGTH)
 		throw Base::IOError("PDBDataReader: record name length < " +
-							boost::lexical_cast<std::string>(PDB::RECORD_NAME_LENGTH));
+							std::to_string(PDB::RECORD_NAME_LENGTH));
 
 	Internal::trimString(rec_name, false, true);
 

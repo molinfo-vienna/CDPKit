@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Grid/CDFDRegularGridSetReader.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -52,7 +50,7 @@ bool Grid::CDFDRegularGridSetReader::readData(std::istream& is, DRegularGridSet&
 		return reader->readGridSet(is, grid_set);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("CDFDRegularGridSetReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("CDFDRegularGridSetReader: while reading record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Grid::CDFDRegularGridSetReader::skipData(std::istream& is)
 		return reader->skipGridSet(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("CDFDRegularGridSetReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("CDFDRegularGridSetReader: while skipping record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

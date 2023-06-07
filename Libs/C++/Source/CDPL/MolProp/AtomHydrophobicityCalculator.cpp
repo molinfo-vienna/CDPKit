@@ -31,8 +31,6 @@
 #include <unordered_map>
 #include <mutex>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -283,9 +281,9 @@ double MolProp::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const 
 
 	appendAtomSymbol(atomDescr, atom);
 
-	atomDescr.append(boost::lexical_cast<std::string>(atomEnvData.size()));
+	atomDescr.append(std::to_string(atomEnvData.size()));
 	atomDescr.push_back('.');
-	atomDescr.append(boost::lexical_cast<std::string>(std::count(atomEnvData.begin(), atomEnvData.end(), "H")));
+	atomDescr.append(std::to_string(std::count(atomEnvData.begin(), atomEnvData.end(), "H")));
 
 	it = atomSurfAccTable.find(atomDescr);
 

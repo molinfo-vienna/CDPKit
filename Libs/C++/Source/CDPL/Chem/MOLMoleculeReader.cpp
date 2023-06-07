@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/Chem/MOLMoleculeReader.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -52,7 +50,7 @@ bool Chem::MOLMoleculeReader::readData(std::istream& is, Molecule& mol, bool ove
 		return reader->readMOLFile(is, mol);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("MOLMoleculeReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("MOLMoleculeReader: while reading record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }
@@ -63,7 +61,7 @@ bool Chem::MOLMoleculeReader::skipData(std::istream& is)
 		return reader->skipMOLFile(is);
 
 	} catch (const std::exception& e) {
-		throw Base::IOError("MOLMoleculeReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+		throw Base::IOError("MOLMoleculeReader: while skipping record " + std::to_string(getRecordIndex()) + 
 							": " + e.what());
 	}
 }

@@ -33,7 +33,6 @@
 #include <algorithm>
 #include <cassert>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
@@ -701,7 +700,7 @@ bool Chem::JMEDataWriter::writeAtomType(std::ostream& os, unsigned int atom_type
 			aromaticity = false;
 
 			symbol.push_back(AtomString::ATOMIC_NUMBER_PREFIX);
-			symbol.append(boost::lexical_cast<std::string>(atom_type));
+			symbol.append(std::to_string(atom_type));
 			break;
 	}
 
@@ -798,7 +797,7 @@ bool Chem::JMEDataWriter::writeQueryFlags(std::ostream& os, const MolecularGraph
 					heavy_bnd_count = constraint.getValue<std::size_t>();
 
 				os << AtomString::QUERY_FLAGS_SEPARATOR 
-				   << AtomString::HEAVY_BOND_COUNT_PREFIX << boost::lexical_cast<std::string>(heavy_bnd_count);
+				   << AtomString::HEAVY_BOND_COUNT_PREFIX << std::to_string(heavy_bnd_count);
 
 				break;
 			}
@@ -815,7 +814,7 @@ bool Chem::JMEDataWriter::writeQueryFlags(std::ostream& os, const MolecularGraph
 					h_count = constraint.getValue<std::size_t>();
 
 				os << AtomString::QUERY_FLAGS_SEPARATOR 
-				   << AtomString::H_COUNT_PREFIX << boost::lexical_cast<std::string>(h_count);
+				   << AtomString::H_COUNT_PREFIX << std::to_string(h_count);
 
 				break;
 			}

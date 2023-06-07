@@ -26,10 +26,6 @@
  
 #include "StaticInit.hpp"
 
-#include <string>
-
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
@@ -88,7 +84,7 @@ void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 			if (!atom1_props) {
 				if (strict)
 					throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" +
-												 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
+												 std::to_string(molgraph.getAtomIndex(bond.getBegin())));
 				types[i] = 0;
 				continue;
 			}
@@ -98,7 +94,7 @@ void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 			if (!atom2_props) {
 				if (strict)
 					throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" +
-												 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+												 std::to_string(molgraph.getAtomIndex(bond.getEnd())));
 				types[i] = 0;
 				continue;
 			}

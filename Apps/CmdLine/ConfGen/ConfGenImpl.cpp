@@ -33,7 +33,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/timer/timer.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -298,7 +297,7 @@ private:
 				break;
 
 			default:
-				err_msg = "unspecified error: " + boost::lexical_cast<std::string>(ret_code);
+				err_msg = "unspecified error: " + std::to_string(ret_code);
 				break;
 		}
 
@@ -344,7 +343,7 @@ ConfGenImpl::ConfGenImpl():
 	addOption("failed,f", "Failed molecule output file.",
 			  value<std::string>(&failedFile));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("conf-gen-preset,C", "Conformer generation preset to use (SMALL_SET_DIVERSE, MEDIUM_SET_DIVERSE, " 
@@ -353,13 +352,13 @@ ConfGenImpl::ConfGenImpl():
 	addOption("mode,m", "Conformer sampling mode (AUTO, STOCHASTIC, SYSTEMATIC, default: " + getSamplingModeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSamplingMode, this, _1)));
 	addOption("e-window,e", "Output energy window for generated conformers (default: " + 
-			  boost::lexical_cast<std::string>(settings.getEnergyWindow()) + ", must be >= 0).",
+			  std::to_string(settings.getEnergyWindow()) + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
 	addOption("rmsd,r", "Minimum RMSD for output conformer selection (default: " + 
 			  (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0, 0 disables RMSD checking).",
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRMSD, this, _1)));
 	addOption("max-num-out-confs,n", "Maximum number of output conformers per molecule (default: " + 
-			  boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
+			  std::to_string(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
 	addOption("nitrogen-enum-mode,N", "Invertible nitrogen enumeration mode (NONE, ALL, UNSPECIFIED, default: " + 
 			  getNitrogenEnumModeString() + ").", value<std::string>()->notifier(boost::bind(&ConfGenImpl::setNitrogenEnumMode, this, _1)));
@@ -391,30 +390,30 @@ ConfGenImpl::ConfGenImpl():
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setDistExponent, this, _1)));
 	addOption("timeout,T", "Time in seconds after which molecule conformer generation will be stopped (default: " + 
-			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
+			  std::to_string(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setTimeout, this, _1)));
 	addOption("max-num-rot-bonds,X", "Maximum number of allowed rotatable bonds, exceeding this limit causes molecule conf. generation to fail (default: " +
-			  boost::lexical_cast<std::string>(maxNumRotorBonds) + ", negative values disable limit).", 
+			  std::to_string(maxNumRotorBonds) + ", negative values disable limit).", 
 			  value<long>(&maxNumRotorBonds));
 	addOption("max-pool-size,L", "Puts an upper limit on the number of generated output conformer candidates (only effective in systematic sampling mode, default: " +
-			  boost::lexical_cast<std::string>(settings.getMaxPoolSize()) + ", must be >= 0, 0 disables limit).", 
+			  std::to_string(settings.getMaxPoolSize()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxPoolSize, this, _1)));
 	addOption("max-num-sampled-confs,x", "Maximum number of sampled conformers (only effective in stochastic sampling mode, default: " +
-			  boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()) + ", must be >= 0, 0 disables limit).", 
+			  std::to_string(settings.getMaxNumSampledConformers()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumSampledConfs, this, _1)));
 	addOption("conv-check-cycle-size,y", "Minimum number of duplicate conformers that have to be generated in succession to "
 			  " consider convergence to be reached (only effective in stochastic sampling mode, default: " +
-			  boost::lexical_cast<std::string>(settings.getConvergenceCheckCycleSize()) + ", must be > 0).", 
+			  std::to_string(settings.getConvergenceCheckCycleSize()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setConvergenceCheckCycleSize, this, _1)));
 	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which stochastic sampling will be performed"
 			  "(only effective in sampling mode AUTO, default: " +
-			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
+			  std::to_string(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in stochastic sampling mode, default: " +
 			  (boost::format("%.4f") % settings.getRefinementTolerance()).str() + ", must be >= 0, 0 results in refinement until convergence).", 
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRefTolerance, this, _1)));
 	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in stochastic sampling mode, default: " +
-			  boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
+			  std::to_string(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumRefIterations, this, _1)));
 	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in systematic sampling mode).",
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addTorsionLib, this, _1)));
@@ -947,14 +946,14 @@ bool ConfGenImpl::haveErrorMessage()
 void ConfGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs, std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules:  " + boost::lexical_cast<std::string>(num_proc_mols));
-	printMessage(INFO, " Molecules Failed:     " + boost::lexical_cast<std::string>(num_failed_mols));
+	printMessage(INFO, " Processed Molecules:  " + std::to_string(num_proc_mols));
+	printMessage(INFO, " Molecules Failed:     " + std::to_string(num_failed_mols));
 
 	if ((num_proc_mols - num_failed_mols) > 0) 
-		printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs) + 
+		printMessage(INFO, " Generated Conformers: " + std::to_string(num_gen_confs) + 
 					 " (" + (boost::format("%.2f") % (double(num_gen_confs) / (num_proc_mols - num_failed_mols))).str() + " Confs./Mol.)");
 	else
-		printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs));
+		printMessage(INFO, " Generated Conformers: " + std::to_string(num_gen_confs));
 
 	if (num_proc_mols > 0) 
 		printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time) + 
@@ -1089,7 +1088,7 @@ void ConfGenImpl::printOptionSummary()
  	printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
  	printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
  	printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
-	printMessage(VERBOSE, " Max. Num. Output Conformers:         " + boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()));
+	printMessage(VERBOSE, " Max. Num. Output Conformers:         " + std::to_string(settings.getMaxNumOutputConformers()));
 
 	if (settings.getMinRMSD() > 0.0)
 		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.3f") % settings.getMinRMSD()).str());
@@ -1109,18 +1108,18 @@ void ConfGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.3f") % settings.getDielectricConstant()).str());
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.3f") % settings.getDistanceExponent()).str());
-	printMessage(VERBOSE, " Max. Pool Size:                      " + boost::lexical_cast<std::string>(settings.getMaxPoolSize()));
-	printMessage(VERBOSE, " Max. Num. Sampled Conformers:        " + boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()));
-	printMessage(VERBOSE, " Convergence Check Cycle Size:        " + boost::lexical_cast<std::string>(settings.getConvergenceCheckCycleSize()));
-	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()));
+	printMessage(VERBOSE, " Max. Pool Size:                      " + std::to_string(settings.getMaxPoolSize()));
+	printMessage(VERBOSE, " Max. Num. Sampled Conformers:        " + std::to_string(settings.getMaxNumSampledConformers()));
+	printMessage(VERBOSE, " Convergence Check Cycle Size:        " + std::to_string(settings.getConvergenceCheckCycleSize()));
+	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + std::to_string(settings.getMacrocycleRotorBondCountThreshold()));
 	printMessage(VERBOSE, " Refinement Energy Tolerance:         " + (boost::format("%.4f") % settings.getRefinementTolerance()).str());
-	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()));
-	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");
-	printMessage(VERBOSE, " Max. Num. Allowed Rotatable Bonds:   " + (maxNumRotorBonds < 0 ? std::string("No Limit") : boost::lexical_cast<std::string>(maxNumRotorBonds)));
+	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + std::to_string(settings.getMaxNumRefinementIterations()));
+	printMessage(VERBOSE, " Timeout:                             " + std::to_string(settings.getTimeout() / 1000) + "s");
+	printMessage(VERBOSE, " Max. Num. Allowed Rotatable Bonds:   " + (maxNumRotorBonds < 0 ? std::string("No Limit") : std::to_string(maxNumRotorBonds)));
 	printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
 	printMessage(VERBOSE, " Torsion Library:                     " + (torsionLibName.empty() ? std::string("Built-in") : replaceBuiltinTorLib ? torsionLibName : torsionLibName + " + Built-in"));
 	printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") : replaceBuiltinFragLib ? fragmentLibName : fragmentLibName + " + Built-in"));
@@ -1158,8 +1157,8 @@ void ConfGenImpl::loadTorsionLibrary()
 	if (!is)
 		throw Base::IOError("loading torsion library '" + torsionLibName + "' failed");
 
-	printMessage(INFO, " - Loaded " + boost::lexical_cast<std::string>(torsionLib->getNumRules(true)) + " torsion rules in " +
-				 boost::lexical_cast<std::string>(torsionLib->getNumCategories(true)) + " categories");
+	printMessage(INFO, " - Loaded " + std::to_string(torsionLib->getNumRules(true)) + " torsion rules in " +
+				 std::to_string(torsionLib->getNumCategories(true)) + " categories");
 	printMessage(INFO, "");
 }
 
@@ -1187,7 +1186,7 @@ void ConfGenImpl::loadFragmentLibrary()
 	if (!is)
 		throw Base::IOError("loading fragment library '" + fragmentLibName + "' failed");
 
-	printMessage(INFO, " - Loaded " + boost::lexical_cast<std::string>(fragmentLib->getNumEntries()) + " fragments");
+	printMessage(INFO, " - Loaded " + std::to_string(fragmentLib->getNumEntries()) + " fragments");
 	printMessage(INFO, "");
 }
 
@@ -1236,7 +1235,7 @@ void ConfGenImpl::initInputReader()
 	if (termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
+	printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
@@ -1342,5 +1341,5 @@ std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDP
 
 std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+	return (std::to_string(rec_idx) + '/' + std::to_string(inputReader.getNumRecords()));
 }

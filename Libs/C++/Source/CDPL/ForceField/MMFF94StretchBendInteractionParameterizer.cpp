@@ -28,8 +28,6 @@
 
 #include <algorithm>
 
-#include <boost/lexical_cast.hpp>
-
 #include "CDPL/ForceField/MMFF94StretchBendInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -170,7 +168,7 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::getBondStretchingPar
 
 	if (it == bsParamTable.end())
 		throw ParameterizationFailed("MMFF94StretchBendInteractionParameterizer: could not find MMFF94 bond stretching parameters for bond #" + 
-									 boost::lexical_cast<std::string>(atom1_idx) + "-#" + boost::lexical_cast<std::string>(atom2_idx));
+									 std::to_string(atom1_idx) + "-#" + std::to_string(atom2_idx));
 
 	bond_type_idx = it->second->getBondTypeIndex();
 	ref_length = it->second->getReferenceLength();
@@ -234,9 +232,9 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::getStretchBendParame
 
 	if (!def_param_entry) 
 		throw ParameterizationFailed("MMFF94StretchBendInteractionParameterizer: could not find MMFF94 default stretch-bend parameters for interaction #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)) + "-#" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(ctr_atom)) + "-#" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
+									 std::to_string(molgraph.getAtomIndex(term_atom1)) + "-#" + 
+									 std::to_string(molgraph.getAtomIndex(ctr_atom)) + "-#" + 
+									 std::to_string(molgraph.getAtomIndex(term_atom2)));
 
 	ijk_force_const = def_param_entry.getIJKForceConstant();
 	kji_force_const = def_param_entry.getKJIForceConstant();
@@ -292,7 +290,7 @@ unsigned int ForceField::MMFF94StretchBendInteractionParameterizer::getPTERow(co
 
 	if (!prop_entry)
 		throw ParameterizationFailed("MMFF94StretchBendInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
+									 std::to_string(molgraph.getAtomIndex(atom)));
 
 	unsigned int atomic_no = prop_entry.getAtomicNumber();
 
@@ -315,6 +313,6 @@ unsigned int ForceField::MMFF94StretchBendInteractionParameterizer::getPTERow(co
 		return 5;
 
 	throw ParameterizationFailed("MMFF94StretchBendInteractionParameterizer: could not deduce PTE row for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
+								 std::to_string(molgraph.getAtomIndex(atom)));
 	return 0;
 }

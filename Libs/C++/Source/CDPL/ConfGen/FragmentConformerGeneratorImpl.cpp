@@ -31,7 +31,6 @@
 #include <limits>
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -172,7 +171,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
 	if (logCallback) {
 		logCallback("Conformer generation finished with return code " + returnCodeToString(ret_code) + '\n');
 		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
-		logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
+		logCallback("Num. output conformers: " + std::to_string(outputConfs.size()) + '\n');
 
 		if (outputConfs.size() > 1) {
 			double min_e = std::numeric_limits<double>::max(), max_e = -std::numeric_limits<double>::max();
@@ -379,7 +378,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 									std::min(chain_settings.getMaxNumSampledConformers(), num_conf_samples));
 
 	if (logCallback)
-		logCallback("Max. num. sampled conformers: " + boost::lexical_cast<std::string>(num_conf_samples) + '\n');
+		logCallback("Max. num. sampled conformers: " + std::to_string(num_conf_samples) + '\n');
 
 	std::size_t timeout = chain_settings.getTimeout();
 	double min_energy = 0.0;
@@ -458,7 +457,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 								std::min(rsys_settings->getMaxNumSampledConformers(), num_conf_samples));
 
 	if (logCallback)
-		logCallback("Max. num. sampled conformers: " + boost::lexical_cast<std::string>(num_conf_samples) + '\n');
+		logCallback("Max. num. sampled conformers: " + std::to_string(num_conf_samples) + '\n');
 
 	std::size_t timeout = rsys_settings->getTimeout();
 	double e_window = rsys_settings->getEnergyWindow();
@@ -516,7 +515,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 	if (logCallback) 
 		logCallback("Performing output conformer selection (min. RMSD: " + (boost::format("%.4f") % rmsd).str() + 
-					", num. top. sym. mappings: " + boost::lexical_cast<std::string>(symMappings.size() / numAtoms) + ")...\n");
+					", num. top. sym. mappings: " + std::to_string(symMappings.size() / numAtoms) + ")...\n");
 	
 	for (ConformerDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); 
 		 it != end && outputConfs.size() < max_num_out_confs; ++it) {

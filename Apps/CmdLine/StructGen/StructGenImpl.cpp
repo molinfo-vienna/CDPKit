@@ -33,7 +33,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/timer/timer.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -271,7 +270,7 @@ private:
 				break;
 
 			default:
-				err_msg = "unspecified error: " + boost::lexical_cast<std::string>(ret_code);
+				err_msg = "unspecified error: " + std::to_string(ret_code);
 				break;
 		}
 
@@ -317,7 +316,7 @@ StructGenImpl::StructGenImpl():
 	addOption("failed,f", "Failed molecule output file.", 
 			  value<std::string>(&failedFile));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("mode,m", "Structure generation method to use (AUTO, DG, FRAGMENT, default: " + getGenerationModeString() + ").", 
@@ -344,17 +343,17 @@ StructGenImpl::StructGenImpl():
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
 			  value<double>()->notifier(boost::bind(&StructGenImpl::setDistExponent, this, _1)));
 	addOption("timeout,T", "Time in seconds after which structure generation will be stopped (default: " + 
-			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
+			  std::to_string(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setTimeout, this, _1)));
 	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which DG-based structure generation will be performed"
 			  "(only effective in generation mode AUTO, default: " +
-			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
+			  std::to_string(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in DG-based structure generation, default: " +
 			  (boost::format("%.4f") % settings.getRefinementTolerance()).str() + ", must be >= 0, 0 results in refinement until convergence).",
 			  value<double>()->notifier(boost::bind(&StructGenImpl::setRefTolerance, this, _1)));
 	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in DG-based structure generation, default: " +
-			  boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
+			  std::to_string(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMaxNumRefIterations, this, _1)));
 	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective for fragment-based structure generation).",
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addTorsionLib, this, _1)));
@@ -781,8 +780,8 @@ bool StructGenImpl::haveErrorMessage()
 void StructGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules:  " + boost::lexical_cast<std::string>(num_proc_mols));
-	printMessage(INFO, " Molecules Failed:     " + boost::lexical_cast<std::string>(num_failed_mols));
+	printMessage(INFO, " Processed Molecules:  " + std::to_string(num_proc_mols));
+	printMessage(INFO, " Molecules Failed:     " + std::to_string(num_failed_mols));
 
 	if (num_proc_mols > 0)
 		printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time) + 
@@ -923,15 +922,15 @@ void StructGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
-	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()));
+	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + std::to_string(settings.getMacrocycleRotorBondCountThreshold()));
 	printMessage(VERBOSE, " Refinement Energy Tolerance:         " + (boost::format("%.4f") % settings.getRefinementTolerance()).str());
-	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()));
-	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");
+	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + std::to_string(settings.getMaxNumRefinementIterations()));
+	printMessage(VERBOSE, " Timeout:                             " + std::to_string(settings.getTimeout() / 1000) + "s");
  	printMessage(VERBOSE, " Hard Timeout:                        " + std::string(hardTimeout ? "Yes" : "No"));
 	printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:                   " + std::to_string(numThreads));
 
 	printMessage(VERBOSE, " Torsion Library:                     " + (torsionLibName.empty() ? std::string("Built-in") : replaceBuiltinTorLib ? torsionLibName : torsionLibName + " + Built-in"));
 	printMessage(VERBOSE, " Fragment Library:                    " + (fragmentLibName.empty() ? std::string("Built-in") : replaceBuiltinFragLib ? fragmentLibName : fragmentLibName + " + Built-in"));
@@ -966,8 +965,8 @@ void StructGenImpl::loadTorsionLibrary()
 	if (!is)
 		throw Base::IOError("loading torsion library '" + torsionLibName + "' failed");
 
-	printMessage(INFO, " - Loaded " + boost::lexical_cast<std::string>(torsionLib->getNumRules(true)) + " torsion rules in " +
-				 boost::lexical_cast<std::string>(torsionLib->getNumCategories(true)) + " categories");
+	printMessage(INFO, " - Loaded " + std::to_string(torsionLib->getNumRules(true)) + " torsion rules in " +
+				 std::to_string(torsionLib->getNumCategories(true)) + " categories");
 	printMessage(INFO, "");
 }
 
@@ -995,7 +994,7 @@ void StructGenImpl::loadFragmentLibrary()
 	if (!is)
 		throw Base::IOError("loading fragment library '" + fragmentLibName + "' failed");
 
-	printMessage(INFO, " - Loaded " + boost::lexical_cast<std::string>(fragmentLib->getNumEntries()) + " fragments");
+	printMessage(INFO, " - Loaded " + std::to_string(fragmentLib->getNumEntries()) + " fragments");
 	printMessage(INFO, "");
 }
 
@@ -1044,7 +1043,7 @@ void StructGenImpl::initInputReader()
 	if (StructGenImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
+	printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
@@ -1127,5 +1126,5 @@ std::string StructGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const C
 
 std::string StructGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+	return (std::to_string(rec_idx) + '/' + std::to_string(inputReader.getNumRecords()));
 }

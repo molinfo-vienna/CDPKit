@@ -30,7 +30,6 @@
 #include <thread>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -167,7 +166,7 @@ PSDCreateImpl::PSDCreateImpl():
 	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
 			  value<bool>(&dropDuplicates)->implicit_value(true));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
-			  boost::lexical_cast<std::string>(std::thread::hardware_concurrency()) + 
+			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
@@ -451,10 +450,10 @@ void PSDCreateImpl::printStatistics(std::size_t num_proc, std::size_t num_rej,
 									std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules: " + boost::lexical_cast<std::string>(num_proc));
-	printMessage(INFO, " Rejected  Molecules: " + boost::lexical_cast<std::string>(num_rej));
-	printMessage(INFO, " Deleted Molecules:   " + boost::lexical_cast<std::string>(num_del));
-	printMessage(INFO, " Inserted Molecules:  " + boost::lexical_cast<std::string>(num_ins));
+	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc));
+	printMessage(INFO, " Rejected  Molecules: " + std::to_string(num_rej));
+	printMessage(INFO, " Deleted Molecules:   " + std::to_string(num_del));
+	printMessage(INFO, " Inserted Molecules:  " + std::to_string(num_ins));
 	printMessage(INFO, " Processing Time:     " + CmdLineLib::formatTimeDuration(proc_time));
 }
 
@@ -554,7 +553,7 @@ void PSDCreateImpl::printOptionSummary()
 	printMessage(VERBOSE, " Multithreading:           " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:        " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:        " + std::to_string(numThreads));
 
 	printMessage(VERBOSE, " Input File Format:        " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
  	printMessage(VERBOSE, " Add Source-File Property: " + std::string(addSourceFileProp ? "Yes" : "No"));
@@ -606,7 +605,7 @@ void PSDCreateImpl::initInputReader()
 	if (PSDCreateImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
+	printMessage(INFO, " - Found " + std::to_string(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
@@ -644,5 +643,5 @@ std::string PSDCreateImpl::createMoleculeIdentifier(std::size_t rec_idx, const C
 
 std::string PSDCreateImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+	return (std::to_string(rec_idx) + '/' + std::to_string(inputReader.getNumRecords()));
 }

@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -388,7 +387,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomTypes(bool strict)
 			symAtomTypes[i] = getMMFF94SymbolicType(atom);
 
 			if (strict && numAtomTypes[i] == 0)
-				throw ParameterizationFailed("MMFF94InteractionParameterizer: encountered invalid MMFF94 type for atom #" + boost::lexical_cast<std::string>(i));
+				throw ParameterizationFailed("MMFF94InteractionParameterizer: encountered invalid MMFF94 type for atom #" + std::to_string(i));
 
 		} else {
 			atomTyper.perceiveTypes(*molGraph, symAtomTypes, numAtomTypes, strict);
@@ -396,7 +395,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomTypes(bool strict)
 			if (strict) {
 				for (std::size_t j = 0; j < num_atoms; j++) 
 					if (numAtomTypes[j] == 0) 
-						throw ParameterizationFailed("MMFF94InteractionParameterizer: could not determine MMFF94 type of atom #" + boost::lexical_cast<std::string>(j));
+						throw ParameterizationFailed("MMFF94InteractionParameterizer: could not determine MMFF94 type of atom #" + std::to_string(j));
 			}
 
 			return;

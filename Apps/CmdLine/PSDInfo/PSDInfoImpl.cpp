@@ -31,7 +31,6 @@
 #include <sstream>
 #include <iomanip>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/bind.hpp>
 
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
@@ -109,8 +108,8 @@ void PSDInfoImpl::printStatistics(const std::string& db_name)
 	std::size_t num_pharms = db_acc.getNumPharmacophores();
 
 	printMessage(INFO, "Database '" + db_name + "':");
-	printMessage(INFO, " Num. Molecules:         " + boost::lexical_cast<std::string>(num_mols));
-	printMessage(INFO, " Num. Pharmacophores:    " + boost::lexical_cast<std::string>(num_pharms));
+	printMessage(INFO, " Num. Molecules:         " + std::to_string(num_mols));
+	printMessage(INFO, " Num. Pharmacophores:    " + std::to_string(num_pharms));
 
 	if ((printConfStats || printPharmStats || printFeatureStats) && num_mols > 0 && num_pharms > 0) {
 		printMessage(INFO, "");
