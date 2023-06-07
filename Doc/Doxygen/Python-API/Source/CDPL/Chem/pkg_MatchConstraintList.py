@@ -132,17 +132,17 @@ class MatchConstraintList(Boost.Python.instance):
     ##
     # \brief 
     # \param id 
-    # \param relation 
+    # \param rel 
     #
-    def addElement(id: int, relation: Relation) -> None: pass
+    def addElement(id: int, rel: Relation) -> None: pass
 
     ##
     # \brief 
     # \param id 
-    # \param relation 
-    # \param value 
+    # \param rel 
+    # \param val 
     #
-    def addElement(id: int, relation: Relation, value: CDPL.Base.Any) -> None: pass
+    def addElement(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
 
     ##
     # \brief 

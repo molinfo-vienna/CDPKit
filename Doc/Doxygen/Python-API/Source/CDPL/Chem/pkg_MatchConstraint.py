@@ -73,17 +73,17 @@ class MatchConstraint(Boost.Python.instance):
     ##
     # \brief Initializes the \e %MatchConstraint instance.
     # \param id 
-    # \param relation 
+    # \param rel 
     #
-    def __init__(id: int, relation: Relation) -> None: pass
+    def __init__(id: int, rel: Relation) -> None: pass
 
     ##
     # \brief Initializes the \e %MatchConstraint instance.
     # \param id 
-    # \param relation 
-    # \param value 
+    # \param rel 
+    # \param val 
     #
-    def __init__(id: int, relation: Relation, value: CDPL.Base.Any) -> None: pass
+    def __init__(id: int, rel: Relation, val: CDPL.Base.Any) -> None: pass
 
     ##
     # \brief Replaces the current state of \a self with a copy of the state of the \e %MatchConstraint instance \a constr.
@@ -112,9 +112,9 @@ class MatchConstraint(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param relation 
+    # \param rel 
     #
-    def setRelation(relation: Relation) -> None: pass
+    def setRelation(rel: Relation) -> None: pass
 
     ##
     # \brief 
@@ -124,9 +124,9 @@ class MatchConstraint(Boost.Python.instance):
 
     ##
     # \brief 
-    # \param value 
+    # \param val 
     #
-    def setValue(value: CDPL.Base.Any) -> None: pass
+    def setValue(val: CDPL.Base.Any) -> None: pass
 
     ##
     # \brief 
@@ -140,11 +140,11 @@ class MatchConstraint(Boost.Python.instance):
     ID = property(getID, setID)
 
     ##
-    # \brief 
+    # \brief FIXME!
     #
-    relation = property(getRelation, setRelation)
+    rel = property(getRel, setRel)
 
     ##
-    # \brief 
+    # \brief FIXME!
     #
-    value = property(getValue, setValue)
+    val = property(getVal, setVal)
