@@ -128,7 +128,7 @@ void CDPLPythonBase::exportPropertyContainer()
 		.def("getPropertyKeys", &getPropertyKeys, python::arg("self"))
 		.def("getPropertyValues", &getPropertyValues, python::arg("self"))
 		.def("getProperties", &getProperties, python::arg("self"))
-		.def("setProperty", &Base::PropertyContainer::setProperty,
+		.def("setProperty", &Base::PropertyContainer::setProperty<const Base::Any&>,
 			 (python::arg("self"), python::arg("key"), python::arg("value")))
 		.def("removeProperty", &Base::PropertyContainer::removeProperty,
 			 (python::arg("self"), python::arg("key")))

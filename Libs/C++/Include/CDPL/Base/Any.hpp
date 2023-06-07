@@ -31,13 +31,12 @@
 #ifndef CDPL_BASE_ANY_HPP
 #define CDPL_BASE_ANY_HPP
 
-#ifdef _MSC_VER
-#  pragma warning (disable : 4244) // disable possible loss of data warning
-#endif // _MSC_VER
-
-#include <cstddef>
+#include <string>
 #include <typeinfo>
-#include <atomic>
+#include <type_traits>
+#include <stdexcept>
+#include <utility>
+#include <new>
 
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -51,258 +50,397 @@ namespace CDPL
 		/**
 		 * \brief A safe, type checked container for arbitrary data of variable type.
 		 *
-		 * \c %Any implements a safe, type checked container for data of variable type. Instances of \c %Any
-		 * are similar to variables in dynamic programming languages like \e Python where the type of the stored
-		 * values may change at runtime. \c %Any was inspired by <em>Boost.Any</em> [\ref BANY] which serves the
-		 * same purpose and provides similar functionality.
+		 * The code is based on the std::experimental::any (N4562, merged into C++17) implementation for C++11 compilers
+		 * by <a href="https://github.com/thelink2012">Denilson das Mercês Amorim</a>. 
+		 * \c %Any provides an optimization for small objects objects with a size of up to 2 words such as <tt>int<tt>, <tt>float</tt> 
+		 * and <tt>std::shared_ptr</tt>. Storing those objects in the container will not trigger a dynamic allocation.
 		 *
-		 * \c %Any allows to store any data whose type fulfills the following requirements:
-		 * - The type is copy constructible
-		 * - The destructor of the value type upholds the no-throw exception-safety guarantee
-		 *
-		 * \c %Any provides three kinds of contructors: A default constructor, a copy constructor and
-		 * a constructor that accepts a reference to data of any type. 
-		 *
-		 * If a \c %Any instance is created using the latter type of constructor, the instance will
-		 * store a copy of the passed data (hence the requirement for copy constructibility of the data type).
-		 * A default constructed \c %Any does not contain any data and is \e empty. To check whether
-		 * a \c %Any object is currently empty, \c %Any provides the method isEmpty().
-		 *
-		 * Data objects held by \c %Any instances are reference counted and a given data object may be referenced
-		 * by more than one \c %Any instance (as a result of copy construction and assignment) at the same time.
-		 * When the reference count of a data object reaches zero, i.e. the last \c %Any instance referencing the
-		 * data gets destroyed, the data object is released. Since only object pointers need to be passed, copying of
-		 * \c %Any instances is computationally inexpensive.
-		 * 
-		 * For direct access to the stored data, \c %Any provides the member function template getData().
-		 * The template argument specifies the type of the contained data that will be returned to the caller by
-		 * reference. If the \c %Any instance is empty, or the stored data are not of the specified
-		 * type, getData() will throw a Base::BadCast exception. 
-		 * Runtime information regarding the type of the held data can be obtained by the method getTypeID() which
-		 * returns a reference to a corresponding <tt>std::type_info</tt> object.
+		 * For more documentation, see [\ref ANY].
 		 */
-		class Any 
+		class Any final
 		{			
 
 		public:
 			/**
-			 * \brief Constructs an empty \c %Any instance.
-			 */
-			Any() throw(): data(0) {}
-
-			/**
-			 * \brief Constructs a \c %Any instance that references the same data as \a var.
-			 * \param var The other \c %Any instance.
+			 * \brief Constructs an object of type \c %Any with an empty state.
 			 * \throw None.
 			 */
-			Any(const Any& var) throw(): data(var.data) {
-				if (data)
-					data->addRef();
-			}
+			Any() noexcept: vtable(nullptr) {}
 
 			/**
-			 * \brief Constructs a \c %Any instance that contains a copy of \a data.
-			 * \param data The data to store in the created \c %Any instance.
-			 * \throw Throws <tt>std::bad_alloc</tt> or any exceptions arising from the copy constructor of the type \a T.
+			 * \brief Constructs an object of type \c %Any with an equivalent state as \a rhs.
+			 * \param rhs The other \c %Any instance.
 			 */
-			template <typename T>
-			Any(const T& data): data(new DataHolder<T>(data)) {
-				this->data->addRef();
+			Any(const Any& rhs): vtable(rhs.vtable) {
+				if (!rhs.isEmpty())
+					rhs.vtable->copy(rhs.storage, this->storage);
 			}
 
 			/**
-			 * \brief Destroys the \c %Any instance.
+			 * \brief Constructs an object of type \c %Any with a state equivalent to the original state of \a rhs.
+			 * \param rhs The other \c %Any instance.
+			 * \post The state of <tt>*this</tt> is equivalent to the original state of \a rhs and \a rhs is left in a valid
+			 *       but otherwise unspecified state.
+			 * \throw None.
+			 */
+			Any(Any&& rhs) noexcept: vtable(rhs.vtable) {
+				if (!rhs.isEmpty()) {
+					rhs.vtable->move(rhs.storage, this->storage);
+					rhs.vtable = nullptr;
+				}
+			}
+
+			/**
+			 * \brief Destructor.
+			 *
+			 * Has the same effect as <tt>this->clear()</tt>.
 			 */
 			~Any() {
-				if (data)
-					data->release(); 
+				this->clear();
 			}
 
 			/**
-			 * \brief Returns information about the type of the stored data.
-			 * \return If non-empty, a reference to the <tt>std::type_info</tt> object describing the type of the
-			 *         stored data, and \c typeid(void) otherwise.
+			 * \brief Constructs an object of type \c %Any that contains an object of type \c ValueType direct-initialized with <tt>std::forward<ValueType>(val)</tt>.
+			 *
+			 * \c ValueType shall satisfy the CopyConstructible requirements, otherwise the program is ill-formed.
+			 * This is because an \c %Any may be copy constructed into another \c %Any at any time, so a copy should always be allowed.
+			 *
+			 * \param val The value to store.
 			 */
-			const std::type_info& getTypeID() const {
-				return (data ? data->getTypeID() : typeid(void));
+			template <typename ValueType, typename = typename std::enable_if<!std::is_same<typename std::decay<ValueType>::type, Any>::value>::type>
+			Any(ValueType&& val) {
+				static_assert(std::is_copy_constructible<typename std::decay<ValueType>::type>::value,
+							  "ValueType shall satisfy CopyConstructible requirements.");
+				
+				this->construct(std::forward<ValueType>(val));
 			}
-	
+
+			/**
+			 * \brief Has the same effect as <tt>Any(rhs).swap(*this)</tt>. No effects if an exception is thrown.
+			 * \param rhs The other \c %Any instance.
+			 * \return A reference to itself.
+			 */
+			Any& operator=(const Any& rhs) {
+				Any(rhs).swap(*this);
+				return *this;
+			}
+
+			/**
+			 * \brief Has the same effect as <tt>Any(std::move(rhs)).swap(*this)</tt>.
+			 * \param rhs The other \c %Any instance.
+			 * \return A reference to itself.
+			 * \post The state of <tt>*this</tt> is equivalent to the original state of \a rhs and \a rhs is left in a valid
+			 *       but otherwise unspecified state.
+			 * \throw None.
+			 */
+			Any& operator=(Any&& rhs) noexcept {
+				Any(std::move(rhs)).swap(*this);
+				return *this;
+			}
+
+			/**
+			 * \brief Has the same effect as <tt>Any(std::forward<ValueType>(val)).swap(*this)</tt>. No effect if a exception is thrown.
+			 *
+			 * \c ValueType shall satisfy the CopyConstructible requirements, otherwise the program is ill-formed.
+			 * This is because an \c %Any may be copy constructed into another \c %Any at any time, so a copy should always be allowed.
+			 *
+			 * \param val The value to store.
+			 * \return A reference to itself.
+			 */
+			template<typename ValueType, typename = typename std::enable_if<!std::is_same<typename std::decay<ValueType>::type, Any>::value>::type>
+			Any& operator=(ValueType&& val) {
+				static_assert(std::is_copy_constructible<typename std::decay<ValueType>::type>::value,
+							  "T shall satisfy CopyConstructible requirements.");
+
+				Any(std::forward<ValueType>(val)).swap(*this);
+				return *this;
+			}
+			
+			/**
+			 * \brief If not empty, destroys the contained object.
+			 * \throw None.
+			 */
+			void clear() noexcept {
+				if (!isEmpty()) {
+					this->vtable->destroy(storage);
+					this->vtable = nullptr;
+				}
+			}
+
 			/**
 			 * \brief Tells whether the \c %Any instance stores any data.
 			 * \return \c false if the \c %Any instance is not empty, and \c true otherwise.
 			 * \throw None.
 			 */
-			bool isEmpty() const throw() {
-				return (!data);
+			bool isEmpty() const noexcept {
+				return (this->vtable == nullptr);
 			}
 
 			/**
-			 * \brief Assignment operator.
-			 *
-			 * The currently stored data object gets replaced by the data contained in \a var. 
-			 * A self assignment has no effect.
-			 *
-			 * \param var The other \c %Any instance.
-			 * \return A reference to itself.
+			 * \brief Returns information about the type of the stored object.
+			 * \return If non-empty, a reference to the <tt>std::type_info</tt> object describing the type of the
+			 *         stored object, and \c typeid(void) otherwise.
 			 * \throw None.
 			 */
-			Any& operator=(const Any& var) throw() {
-				Any(var).swap(*this);
-				return* this;
-			}  
-			
-			/**
-			 * \brief Assignment operator.
-			 *
-			 * The currently stored data object gets replaced by a copy of \a data. 
-			 *
-			 * \param data The new data.
-			 * \return A reference to itself.
-			 * \throw Throws <tt>std::bad_alloc</tt> or any exceptions arising from the copy constructor of the type \a T.
-			 */
-			template <typename T>
-			Any& operator=(const T& data) {
-				Any(data).swap(*this);
-				return* this;
+			const std::type_info& getTypeID() const noexcept {
+				return (isEmpty() ? typeid(void) : this->vtable->type());
 			}
 
 			/**
-			 * \brief Swaps the data contained in <tt>*this</tt> and \a var.
-			 * \post \a var contains the data previously stored in <tt>*this</tt> and vice versa.
+			 * \brief Exchange the states of <tt>*this</tt> and \a rhs.
+			 * \param rhs The other \c %Any instance.
 			 * \throw None.
 			 */
-			void swap(Any& var) throw() {
-				Data* tmp = data;
-				data = var.data;
-				var.data = tmp;
+			void swap(Any& rhs) noexcept {
+				if (this->vtable != rhs.vtable) {
+					Any tmp(std::move(rhs));
+
+					// move from *this to rhs.
+					rhs.vtable = this->vtable;
+
+					if (this->vtable != nullptr) {
+						this->vtable->move(this->storage, rhs.storage);
+						//this->vtable = nullptr; -- unneeded, see below
+					}
+
+					// move from tmp (previously rhs) to *this.
+					this->vtable = tmp.vtable;
+
+					if (tmp.vtable != nullptr) {
+						tmp.vtable->move(tmp.storage, this->storage);
+						tmp.vtable = nullptr;
+					}
+					
+				} else { // same types
+					if (this->vtable != nullptr)
+						this->vtable->swap(this->storage, rhs.storage);
+				}
+			}
+
+			/**
+			 * \brief Returns a \c const reference to the stored object of type \a ValueType, or <tt>*this</tt> if \a ValueType is \c %Any.
+			 * \return A \c const reference to the contained object of type \a ValueType, or <tt>*this</tt> if \a ValueType is \c %Any.
+			 * \throw Base::BadCast if the \c %Any instance is empty, or the stored
+			 *        object is not of type \a ValueType.
+			 */
+			template <typename ValueType>
+			const ValueType& getData() const {
+				if (this->isEmpty())
+					throw BadCast("Any: empty");
+				
+				using T = typename std::decay<ValueType>::type;
+
+				if (this->isTyped(typeid(T)))
+					return *this->cast<T>();
+
+				throw BadCast(std::string("Any: extraction of stored value of type '") + this->getTypeID().name() + 
+							  std::string("' as type '") + typeid(T).name() + "' not possible");
 			}
 
 			/**
 			 * \brief Returns a raw pointer to the memory occupied by the stored data.
-			 * \return A \c void pointer to the storage occupied by the held data, or \e null if the
+			 * \return A \c void pointer to the storage occupied by the held data, or \e nullptr if the
 			 *         \c %Any instance is empty.
+			 * \throw None.
 			 */
-			const void* getDataPointer() const {
-				if (!data)
-					return 0;
+			const void* getDataPointer() const noexcept {
+				if (isEmpty())
+					return nullptr;
 
-				return data->getDataPointer();
+				return this->vtable->data(this->storage);
 			}
-				  
-			/**
-			 * \brief Returns a \c const reference to the stored data of type \a T, or <tt>*this</tt> if \a T is \c %Any.
-			 * \return A \c const reference to the contained data of type \a T, or <tt>*this</tt> if \a T is \c %Any.
-			 * \throw Base::BadCast if the \c %Any instance is empty, or the stored
-			 *        data object is not of the specified type \a T.
-			 */
-			template <typename T>
-			const T& getData() const {
-				DataChecker<T>::checkData(data);
-				return DataGetter<T>::getData(this);
-			}
-
+			
 		private:
-			class Data 
+			// Storage and Virtual Method Table
+			union Storage
 			{
+				using StackStorageT = typename std::aligned_storage<2 * sizeof(void*), std::alignment_of<void*>::value>::type;
 
-			public:
-				Data(): refCount(0) {}
-				
-				virtual ~Data() {}
-					
-				virtual const std::type_info& getTypeID() const = 0;
-
-				virtual const void* getDataPointer() const = 0;
-
-				void addRef() throw() {
-					refCount.fetch_add(1, std::memory_order_relaxed);
-				}
-
-				void release() {
-					if (refCount.fetch_sub(1, std::memory_order_release) == 1) {
-						std::atomic_thread_fence(std::memory_order_acquire);
-						delete this;
-					}
-				}
-
-			private:
-				std::atomic<std::size_t> refCount;
+				void*         dynamic;
+				StackStorageT stack;      // 2 words for e.g. shared_ptr
 			};
 
-			template <typename T>
-			struct DataHolderBase : public Data
-			{ 
+			// Base VTable specification.
+			struct VTable
+			{
+				// Note: The caller is responssible for doing .vtable = nullptr after destructful operations
+				// such as destroy() and/or move().
 
-				const std::type_info& getTypeID() const {
+				// The type of the object this vtable is for.
+				const std::type_info& (*type)() noexcept;
+
+				// Destroys the object in the union.
+				// The state of the union after this call is unspecified, caller must ensure not to use src anymore.
+				void (*destroy)(Storage&) noexcept;
+
+				// Copies the **inner** content of the src union into the yet unitialized dest union.
+				// As such, both inner objects will have the same state, but on separate memory locations.
+				void (*copy)(const Storage& src, Storage& dest);
+
+				// Moves the storage from src to the yet unitialized dest union.
+				// The state of src after this call is unspecified, caller must ensure not to use src anymore.
+				void (*move)(Storage& src, Storage& dest) noexcept;
+
+				// Exchanges the storage between lhs and rhs.
+				void (*swap)(Storage& lhs, Storage& rhs) noexcept;
+
+				const void* (*data)(const Storage& storage) noexcept;
+			};
+
+			// VTable for dynamically allocated storage.
+			template<typename T>
+			struct VTableDynamic
+			{
+
+				static const std::type_info& type() noexcept {
 					return typeid(T);
 				}
 
-				const void* getDataPointer() const {
-					return &getData();
+				static void destroy(Storage& storage) noexcept {
+					//assert(reinterpret_cast<T*>(storage.dynamic));
+					delete reinterpret_cast<T*>(storage.dynamic);
 				}
 
-				virtual const T& getData() const = 0;
-			};
-
-			template <typename T>
-			class DataHolder : public DataHolderBase<T>
-			{ 
-
-			public:
-				DataHolder(const T& d): data(d) {}
-
-				const T& getData() const {
-					return data;
+				static void copy(const Storage& src, Storage& dest) {
+					dest.dynamic = new T(*reinterpret_cast<const T*>(src.dynamic));
 				}
 
-			private:
-				const T data;
-			};
+				static void move(Storage& src, Storage& dest) noexcept {
+					dest.dynamic = src.dynamic;
+					src.dynamic = nullptr;
+				}
 
-			template <typename T>
-			struct DataGetter
-			{ 
+				static void swap(Storage& lhs, Storage& rhs) noexcept {
+					// just exchage the storage pointers.
+					std::swap(lhs.dynamic, rhs.dynamic);
+				}
 
-				static const T& getData(const Any* var) { 
-					if (var->data->getTypeID() == typeid(T)) {
-						const Any::DataHolderBase<T>* dh = static_cast<const DataHolderBase<T>*>(var->data);
-						return dh->getData();
-					}
-
-					throw BadCast(std::string("Any: extraction of held data of type '") + var->data->getTypeID().name() + 
-								  std::string("' as data of type '") + typeid(T).name() + "' not possible");
+				static const void* data(const Storage& storage) noexcept {
+					return storage.dynamic;
 				}
 			};
 
-			template <typename T>
-			struct DataChecker
-			{ 
+			// VTable for stack allocated storage.
+			template<typename T>
+			struct VTableStack
+			{
 
-				static void checkData(const Data* data) { 
-					if (!data)
-						throw BadCast("Any: no data set");
+				static const std::type_info& type() noexcept {
+					return typeid(T);
+				}
+
+				static void destroy(Storage& storage) noexcept {
+					reinterpret_cast<T*>(&storage.stack)->~T();
+				}
+
+				static void copy(const Storage& src, Storage& dest) {
+					new (&dest.stack) T(reinterpret_cast<const T&>(src.stack));
+				}
+
+				static void move(Storage& src, Storage& dest) noexcept {
+					// one of the conditions for using VTableStack is a nothrow move constructor,
+					// so this move constructor will never throw a exception.
+					new (&dest.stack) T(std::move(reinterpret_cast<T&>(src.stack)));
+					destroy(src);
+				}
+
+				static void swap(Storage& lhs, Storage& rhs) noexcept {
+					Storage tmp_storage;
+					
+					move(rhs, tmp_storage);
+					move(lhs, rhs);
+					move(tmp_storage, lhs);
+				}
+
+				static const void* data(const Storage& storage) noexcept {
+					return &storage.stack;
 				}
 			};
 
-			Data* data;
-		};
+			// Whether the type T must be dynamically allocated or can be stored on the stack.
+			template<typename T>
+			struct RequiresAlloc :
+				std::integral_constant<bool,
+									   !(std::is_nothrow_move_constructible<T>::value      // N4562 §6.3/3 [any.class]
+										 && sizeof(T) <= sizeof(Storage::stack)
+										 && std::alignment_of<T>::value <= std::alignment_of<Storage::StackStorageT>::value)> {};
 
-		template <>
-		struct Any::DataGetter<Any>
-		{ 
+			// Returns the pointer to the vtable of the type T.
+			template<typename T>
+			static VTable* getVTableForType()
+			{
 
-			static const Any& getData(const Any* var) {
-				return *var;
+				using VTableType = typename std::conditional<RequiresAlloc<T>::value, VTableDynamic<T>, VTableStack<T>>::type;
+
+				static VTable table = {
+				    VTableType::type,
+					VTableType::destroy,
+					VTableType::copy, VTableType::move,
+					VTableType::swap,
+					VTableType::data,
+				};
+				
+				return &table;
 			}
+
+			// Same effect as is_same(this->getTypeID(), t);
+			bool isTyped(const std::type_info& t) const {
+				return (this->getTypeID() == t);
+			}
+
+			// Casts (with no type_info checks) the storage pointer as const T*.
+			template<typename T>
+			const T* cast() const noexcept {
+				return RequiresAlloc<T>::value ? reinterpret_cast<const T*>(storage.dynamic) :
+					reinterpret_cast<const T*>(&storage.stack);
+			}
+
+			template<typename ValueType, typename T>
+			typename std::enable_if<RequiresAlloc<T>::value>::type
+			doConstruct(ValueType&& value) {
+				storage.dynamic = new T(std::forward<ValueType>(value));
+			}
+
+			template<typename ValueType, typename T>
+			typename std::enable_if<!RequiresAlloc<T>::value>::type
+			doConstruct(ValueType&& value) {
+				new (&storage.stack) T(std::forward<ValueType>(value));
+			}
+
+			// Chooses between stack and dynamic allocation for the type decay_t<ValueType>,
+			// assigns the correct vtable, and constructs the object on our storage.
+			template<typename ValueType>
+			void construct(ValueType&& value) {
+				using T = typename std::decay<ValueType>::type;
+
+				this->vtable = getVTableForType<T>();
+
+				doConstruct<ValueType, T>(std::forward<ValueType>(value));
+			}
+			
+			Storage storage; // on offset(0) so no padding for align
+			VTable* vtable;
 		};
 
 		template <>
-		struct Any::DataChecker<Any>
-		{ 
-
-			static void checkData(const Any::Data*) {}
-		};
+		inline const Any& Any::getData<Any>() const {
+			return *this;
+		}
 	}
 }
+
+
+// \cond DOC_IMPL_DETAILS
+
+namespace std
+{
+	
+    inline void swap(CDPL::Base::Any& lhs, CDPL::Base::Any& rhs) noexcept
+    {
+        lhs.swap(rhs);
+    }
+}
+
+// \endcond
 
 #endif // CDPL_BASE_ANY_HPP

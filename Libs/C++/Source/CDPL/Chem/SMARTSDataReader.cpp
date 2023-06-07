@@ -411,7 +411,7 @@ Chem::SMARTSDataReader::combineBondMatchConstraints(const MatchConstraintList::S
 	if (constr_list1->getType() == MatchConstraintList::AND_LIST) {
 		if (constr_list2->getType() == MatchConstraintList::AND_LIST) {
 			std::for_each(constr_list2->getElementsBegin(), constr_list2->getElementsEnd(),
-						  boost::bind(&MatchConstraintList::addElement, constr_list1, _1));
+						  boost::bind(&Util::Array<MatchConstraint>::addElement, constr_list1, _1));
 
 			return constr_list1;
 		}

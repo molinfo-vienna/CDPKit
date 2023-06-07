@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_MATCHCONSTRAINTLIST_HPP
 #define CDPL_CHEM_MATCHCONSTRAINTLIST_HPP
 
+#include <utility>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -113,11 +115,12 @@ namespace CDPL
 			 * \brief Constructs a \c %MatchConstraint object with the given identifier, relational constraint on the values of matching query/target
 			 *        attribute pairs and value of the query attribute.
 			 * \param id The identifier of the match constraint.
-			 * \param relation The relational constraint on the values of matching query/target attribute pairs.
-			 * \param value The value of the query attribute.
+			 * \param rel The relational constraint on the values of matching query/target attribute pairs.
+			 * \param val The value of the query attribute.
 			 */
-			MatchConstraint(unsigned int id, Relation relation, const Base::Any& value): 
-				id(id), relation(relation), value(value) {}
+		    template <typename T>
+			MatchConstraint(unsigned int id, Relation rel, T&& val): 
+		    id(id), relation(rel), value(std::forward<T>(val)) {}
 	
 			/**
 			 * \brief Returns the identifier of the match constraint.
@@ -139,9 +142,9 @@ namespace CDPL
 
 			/**
 			 * \brief Sets the relational constraint that must be fulfilled by the values of matching query/target attribute pairs.
-			 * \param relation The relational constraint on the values of matching query/target attribute pairs.
+			 * \param rel The relational constraint on the values of matching query/target attribute pairs.
 			 */
-			void setRelation(Relation relation);
+			void setRelation(Relation rel);
 
 			/**
 			 * \brief Returns the value of the query attribute.
@@ -162,9 +165,12 @@ namespace CDPL
 
 			/**
 			 * \brief Sets the value of the query attribute.
-			 * \param value The value of the query attribute.
+			 * \param val The value of the query attribute.
 			 */
-			void setValue(const Base::Any& value);
+		    template <typename T>
+		    void setValue(T&& val) {
+				value = std::forward<T>(val);
+			}
 			
 			/**
 			 * \brief Tells wether a query attribute value has been set.
@@ -241,18 +247,21 @@ namespace CDPL
 			 * \brief Appends a new Chem::MatchConstraint element with the given identifier and relational constraint on the values of matching query/target
 			 *        attribute pairs.
 			 * \param id The identifier of the match constraint.
-			 * \param relation The relational constraint on the values of matching query/target attribute pairs.
+			 * \param rel The relational constraint on the values of matching query/target attribute pairs.
 			 */
-			void addElement(unsigned int id, MatchConstraint::Relation relation);
+			void addElement(unsigned int id, MatchConstraint::Relation rel);
 
 			/**
 			 * \brief Appends a new Chem::MatchConstraint element with the given identifier, relational constraint on the values of matching query/target
 			 *        attribute pairs and value of the query attribute.
 			 * \param id The identifier of the match constraint.
-			 * \param relation The relational constraint on the values of matching query/target attribute pairs.
-			 * \param value The value of the query attribute.
+			 * \param rel The relational constraint on the values of matching query/target attribute pairs.
+			 * \param val The value of the query attribute.
 			 */
-			void addElement(unsigned int id, MatchConstraint::Relation relation, const Base::Any& value);
+			template <typename T>
+			void addElement(unsigned int id, MatchConstraint::Relation rel, T&& val) {
+				addElement(MatchConstraint(id, rel, std::forward<T>(val)));
+			}
 
 		private:
 			const char* getClassName() const;

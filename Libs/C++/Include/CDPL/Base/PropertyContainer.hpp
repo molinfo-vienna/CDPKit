@@ -97,14 +97,11 @@ namespace CDPL
 		
 			/**
 			 * \brief Sets the value of the property specified by \a key to \a value.
-			 *
-			 * If \a value is empty, i.e. the method Base::Any::isEmpty() returns \c true, and a property
-			 * entry for \a key exists, the entry gets erased (equivalent to removeProperty() with \a key as argument).
-			 *
 			 * \param key The key of the property value to assign.
 			 * \param value The value of the property.
 			 */
-			inline void setProperty(const LookupKey& key, const Any& value);
+			 template <typename T>
+			 void setProperty(const LookupKey& key, T&& value);
 
 			/**
 			 * \brief Returns the value of the property specified by \a key as a \c const reference to an object of type \a T.
@@ -268,14 +265,10 @@ const CDPL::Base::Any& CDPL::Base::PropertyContainer::getProperty(const LookupKe
 	return NOT_FOUND;
 }
 
-void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, const Any& val)
+template <typename T>
+void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, T&& val)
 {
-	if (val.isEmpty()) { 
-		removeProperty(key);
-		return;
-	}
-
-	properties[key] = val;
+	properties[key] = std::forward<T>(val);
 }
 
 bool CDPL::Base::PropertyContainer::isPropertySet(const LookupKey& key) const

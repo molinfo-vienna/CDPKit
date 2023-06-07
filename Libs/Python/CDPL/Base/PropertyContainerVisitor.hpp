@@ -53,7 +53,7 @@ namespace CDPLPythonBase
 				.def("__getitem__", &getItem, (python::arg("self"), python::arg("key")), 
 					 python::return_value_policy<python::copy_const_reference>())
 				.def("__contains__", &Base::PropertyContainer::isPropertySet, (python::arg("self"), python::arg("key")))
-				.def("__setitem__", &Base::PropertyContainer::setProperty, (python::arg("self"), python::arg("key"), python::arg("value")))
+				.def("__setitem__", &Base::PropertyContainer::setProperty<const Base::Any&>, (python::arg("self"), python::arg("key"), python::arg("value")))
 				.def("__delitem__", &Base::PropertyContainer::removeProperty, (python::arg("self"), python::arg("key")));
 
 			if (!noLen)

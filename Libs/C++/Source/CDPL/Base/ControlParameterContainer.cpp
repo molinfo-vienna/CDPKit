@@ -55,17 +55,6 @@ std::size_t Base::ControlParameterContainer::getNumParameters() const
 	return parameters.size();
 }
 
-void Base::ControlParameterContainer::setParameter(const LookupKey& key, const Any& val)
-{
-	if (val.isEmpty()) {
-		removeParameter(key);
-		return;
-	}
-
-	parameters[key] = val;
-	parameterChanged(key, val);
-}
-
 bool Base::ControlParameterContainer::removeParameter(const LookupKey& key)
 {
 	ParameterMap::iterator it = parameters.find(key);

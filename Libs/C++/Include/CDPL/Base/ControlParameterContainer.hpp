@@ -149,17 +149,15 @@ namespace CDPL
 			/**
 			 * \brief Sets the value of the control-parameter specified by \a key to \a value.
 			 *
-			 * If \a value is empty, i.e. the method Base::Any::isEmpty() returns \c true, and a control-parameter
-			 * entry for \a key exists, the entry gets erased (equivalent to removeParameter() with \a key as argument).
-			 * Otherwise the control-parameter is assigned the specified value and any callback functions registered by
-			 * registerParameterChangedCallback() will be invoked with \a key and \a value provided as arguments.
+			 * Any callback functions registered by registerParameterChangedCallback() will be invoked with \a key and \a value provided as arguments.
 			 * Callbacks of affected direct and indirect children which do not have an entry for the specified control-parameter also get
 			 * invoked.    
 			 *
 			 * \param key The key of the control-parameter value to assign.
 			 * \param value The value of the control-parameter.
 			 */
-			void setParameter(const LookupKey& key, const Any& value);
+			template <typename T>
+			void setParameter(const LookupKey& key, T&& value);
 
 			/**
 			 * \brief Returns the value of the control-parameter specified by \a key.
@@ -441,6 +439,14 @@ const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const Look
 	const Any& val = getParameter(key, false, local);
 
 	return (val.isEmpty() ? def : val.template getData<T>());
+}
+
+template <typename T> 
+void CDPL::Base::ControlParameterContainer::setParameter(const LookupKey& key, T&& val)
+{
+	const Any& any_val = (parameters[key] = std::forward<T>(val));
+	
+	parameterChanged(key, any_val);
 }
 
 #endif // CDPL_BASE_CONTROLPARAMETERCONTAINER_HPP

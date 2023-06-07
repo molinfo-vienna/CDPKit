@@ -37,9 +37,9 @@ unsigned int Chem::MatchConstraint::getID() const
 	return id;
 }
 
-void Chem::MatchConstraint::setID(unsigned int i)
+void Chem::MatchConstraint::setID(unsigned int id)
 {
-	id = i;
+	this->id = id;
 }
 
 Chem::MatchConstraint::Relation Chem::MatchConstraint::getRelation() const
@@ -47,19 +47,14 @@ Chem::MatchConstraint::Relation Chem::MatchConstraint::getRelation() const
 	return relation;
 }
 
-void Chem::MatchConstraint::setRelation(Relation r)
+void Chem::MatchConstraint::setRelation(Relation rel)
 {
-	relation = r;
+	relation = rel;
 }
 
 const Base::Any& Chem::MatchConstraint::getValue() const
 {
  	return value;
-}
-
-void Chem::MatchConstraint::setValue(const Base::Any& v)
-{
-	value = v;
 }
 
 bool Chem::MatchConstraint::hasValue() const
@@ -73,19 +68,14 @@ Chem::MatchConstraintList::Type Chem::MatchConstraintList::getType() const
 	return type;
 }
 
-void Chem::MatchConstraintList::setType(Type t)
+void Chem::MatchConstraintList::setType(Type type)
 {
-	type = t;
+	this->type = type;
 }
 
-void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Relation relation)
+void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Relation rel)
 {
-	addElement(MatchConstraint(id, relation));
-}
-
-void Chem::MatchConstraintList::addElement(unsigned int id, MatchConstraint::Relation relation, const Base::Any& value)
-{
-	addElement(MatchConstraint(id, relation, value));
+	addElement(MatchConstraint(id, rel));
 }
 
 const char* Chem::MatchConstraintList::getClassName() const
