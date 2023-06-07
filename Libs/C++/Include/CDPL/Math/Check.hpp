@@ -52,8 +52,17 @@ namespace
 		CDPL_MATH_CHECK(size1 == size2, "Size mismatch", E);
 		return std::min(size1, size2);
 	}
+
+	template <typename E, typename T>
+	T checkMaxSize(const T& size, const T& max_size)
+	{
+		CDPL_MATH_CHECK(size <= max_size, "Max. size exceeded", E);
+		return max_size;
+	}
 }
 
 #define CDPL_MATH_CHECK_SIZE_EQUALITY(size1, size2, e) checkSizeEquality<e>(size1, size2)
+
+#define CDPL_MATH_CHECK_MAX_SIZE(size, max_size, e) checkMaxSize<e>(size, max_size)
 
 #endif // CDPL_MATH_CHECK_HPP

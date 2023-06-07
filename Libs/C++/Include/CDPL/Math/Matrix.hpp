@@ -215,6 +215,8 @@ namespace CDPL
 
 			Matrix(const Matrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
 
+			Matrix(Matrix&& m): size1(m.size1), size2(m.size2), data(std::move(m.data)) {}
+			
 			template <typename E>
 			Matrix(const MatrixExpression<E>& e): 
 				size1(e().getSize1()), size2(e().getSize2()), data(storageSize(e().getSize1(), e().getSize2())) {
@@ -257,6 +259,13 @@ namespace CDPL
 
 			Matrix& operator=(const Matrix& m) {
 				data = m.data;
+				size1 = m.size1;
+				size2 = m.size2;
+				return *this;
+			}
+
+			Matrix& operator=(Matrix&& m) {
+				data = std::move(m.data);
 				size1 = m.size1;
 				size2 = m.size2;
 				return *this;
@@ -411,6 +420,8 @@ namespace CDPL
 
 			SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
 
+			SparseMatrix(SparseMatrix&& m): size1(m.size1), size2(m.size2), data(std::move(m.data)) {}
+
 			template <typename E>
 			SparseMatrix(const MatrixExpression<E>& e): 
 				size1(e().getSize1()), size2(e().getSize2()), data() {
@@ -466,6 +477,13 @@ namespace CDPL
 
 			SparseMatrix& operator=(const SparseMatrix& m) {
 				data = m.data;
+				size1 = m.size1;
+				size2 = m.size2;
+				return *this;
+			}
+
+			SparseMatrix& operator=(SparseMatrix&& m) {
+				data = std::move(m.data);
 				size1 = m.size1;
 				size2 = m.size2;
 				return *this;
@@ -784,13 +802,13 @@ namespace CDPL
 			}
 
 			void resize(SizeType m, SizeType n) {
-				CDPL_MATH_CHECK(m <= getMaxSize1() && n <= getMaxSize2(), "Maximum size exceeded", Base::RangeError);
-				size1 = m;
-				size2 = n;
+				size1 = CDPL_MATH_CHECK_MAX_SIZE(m, getMaxSize1(), Base::SizeError);
+				size2 = CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize2(), Base::SizeError);
 			}
 
 			void resize(SizeType m, SizeType n, const ValueType& v) {
-				CDPL_MATH_CHECK(m <= getMaxSize1() && n <= getMaxSize2(), "Maximum size exceeded", Base::RangeError);
+				m = CDPL_MATH_CHECK_MAX_SIZE(m, getMaxSize1(), Base::SizeError);
+				n = CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize2(), Base::SizeError);
 				
 				if (n > size2) {
 					SizeType min_size1 = std::min(size1, m);

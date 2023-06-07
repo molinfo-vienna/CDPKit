@@ -33,6 +33,7 @@
 #include <algorithm>
 #include <vector>
 #include <limits>
+#include <utility>
 #include <unordered_map>
 #include <type_traits>
 
@@ -205,6 +206,8 @@ namespace CDPL
 
 			Vector(const Vector& v): data(v.data) {}
 
+			Vector(Vector&& v): data(std::move(v.data)) {}
+
 			template <typename E>
 			Vector(const VectorExpression<E>& e): data(storageSize(e().getSize())) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
@@ -250,6 +253,11 @@ namespace CDPL
 
 			Vector& operator=(const Vector& v) {
 				data = v.data;
+				return *this;
+			}
+			
+			Vector& operator=(Vector&& v) {
+				data = std::move(v.data);
 				return *this;
 			}
 
@@ -376,6 +384,8 @@ namespace CDPL
 	
 			SparseVector(const SparseVector& v): data(v.data), size(v.size) {}
 
+			SparseVector(SparseVector&& v): data(std::move(v.data)), size(v.size) {}
+
 			template <typename E>
 			SparseVector(const VectorExpression<E>& e): data(), size(storageSize(e().getSize())) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
@@ -431,6 +441,12 @@ namespace CDPL
 
 			SparseVector& operator=(const SparseVector& v) {
 				data = v.data;
+				size = v.size;
+				return *this;
+			}
+
+			SparseVector& operator=(SparseVector&& v) {
+				data = std::move(v.data);
 				size = v.size;
 				return *this;
 			}
@@ -718,12 +734,11 @@ namespace CDPL
 			}
 
 			void resize(SizeType n) {
-				CDPL_MATH_CHECK(n <= getMaxSize(), "Maximum size exceeded", Base::RangeError);
-				size = n;
+				size = CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize(), Base::SizeError);
 			}
 
 			void resize(SizeType n, const ValueType& v) {
-				CDPL_MATH_CHECK(n <= getMaxSize(), "Maximum size exceeded", Base::RangeError);
+				n = CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize(), Base::SizeError);
 
 				if (n > size)
 					std::fill(data + size, data + n, v);

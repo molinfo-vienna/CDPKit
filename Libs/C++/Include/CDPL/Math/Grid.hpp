@@ -227,6 +227,8 @@ namespace CDPL
 
 			Grid(const Grid& m): data(m.data), size1(m.size1), size2(m.size2), size3(m.size3) {}
 
+			Grid(Grid&& m): data(std::move(m.data)), size1(m.size1), size2(m.size2), size3(m.size3) {}
+
 			template <typename E>
 			Grid(const GridExpression<E>& e): 
 				data(storageSize(e().getSize1(), e().getSize2(), e().getSize3())), size1(e().getSize1()), size2(e().getSize2()), size3(e().getSize3()) {
@@ -287,6 +289,14 @@ namespace CDPL
 
 			Grid& operator=(const Grid& g) {
 				data = g.data;
+				size1 = g.size1;
+				size2 = g.size2;
+				size3 = g.size3;
+				return *this;
+			}
+
+			Grid& operator=(Grid&& g) {
+				data = std::move(g.data);
 				size1 = g.size1;
 				size2 = g.size2;
 				size3 = g.size3;
