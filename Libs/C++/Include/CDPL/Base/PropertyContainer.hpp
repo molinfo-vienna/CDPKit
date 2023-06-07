@@ -96,12 +96,16 @@ namespace CDPL
 			std::size_t getNumProperties() const;
 		
 			/**
-			 * \brief Sets the value of the property specified by \a key to \a value.
-			 * \param key The key of the property value to assign.
-			 * \param value The value of the property.
+			 * \brief Sets the value of the property specified by \a key to \a val.
+			 *
+			 * If \a val is of type Base::Any and empty, i.e. the method Base::Any::isEmpty() returns \c true, and a property
+			 * entry for \a key exists, the entry gets erased (equivalent to removeProperty() with \a key as argument).
+			 *
+			 * \param key The key of the property value to assign or remove.
+			 * \param val The value of the property.
 			 */
 			 template <typename T>
-			 void setProperty(const LookupKey& key, T&& value);
+			 void setProperty(const LookupKey& key, T&& val);
 
 			/**
 			 * \brief Returns the value of the property specified by \a key as a \c const reference to an object of type \a T.
@@ -119,19 +123,19 @@ namespace CDPL
 	
 			/**
 			 * \brief Returns the value of the property specified by \a key as a \c const reference
-			 *        to an object of type \a T, or the default value \a def_value if a stored value does not exist.
+			 *        to an object of type \a T, or the default value \a def_val if a stored value does not exist.
 			 *
 			 * If a value has been assigned to the specified property, the stored value will be returned.
-			 * Otherwise the default value specified by \a def_value gets returned.
+			 * Otherwise the default value specified by \a def_val gets returned.
 			 *
 			 * \param key The key of the property for which to return the stored (or specified default) value.
-			 * \param def_value The default value that shall be returned if an entry for the specified property
+			 * \param def_val The default value that shall be returned if an entry for the specified property
 			 *                  does not exist.
-			 * \return The stored property value or the default specified by \a def_value.
+			 * \return The stored property value or the default specified by \a def_val.
 			 * \throw Base::BadCast if the stored property value cannot be casted to the target type \a T.
 			 */
 			template <typename T>
-			const T& getPropertyOrDefault(const LookupKey& key, const T& def_value) const;
+			const T& getPropertyOrDefault(const LookupKey& key, const T& def_val) const;
 
 			/**
 			 * \brief Returns the value of the property specified by \a key.
@@ -226,8 +230,13 @@ namespace CDPL
 			 * \return A reference to itself.
 			 */
 			PropertyContainer& operator=(const PropertyContainer& cntnr);
+		  
+		private:
+			inline bool isEmptyAny(const Any& val) const;
 
-		private:	
+			template <typename T>
+			bool isEmptyAny(const T& val) const;
+
 			PropertyMap properties;
 		};
 	}
@@ -243,11 +252,11 @@ const T& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key) const
 }
 
 template <typename T> 
-const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& key, const T& def) const
+const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& key, const T& def_val) const
 {
 	const Any& val = getProperty(key, false);
 
-	return (val.isEmpty() ? def : val.template getData<T>());
+	return (val.isEmpty() ? def_val : val.template getData<T>());
 }
 
 const CDPL::Base::Any& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key, bool throw_ex) const
@@ -268,12 +277,28 @@ const CDPL::Base::Any& CDPL::Base::PropertyContainer::getProperty(const LookupKe
 template <typename T>
 void CDPL::Base::PropertyContainer::setProperty(const LookupKey& key, T&& val)
 {
+	if (isEmptyAny(val)) {
+		properties.erase(key);
+		return;
+	}
+	
 	properties[key] = std::forward<T>(val);
 }
 
 bool CDPL::Base::PropertyContainer::isPropertySet(const LookupKey& key) const
 {
 	return (properties.find(key) != properties.end());
+}
+
+bool CDPL::Base::PropertyContainer::isEmptyAny(const Any& val) const
+{
+	return val.isEmpty();
+}
+
+template <typename T>
+bool CDPL::Base::PropertyContainer::isEmptyAny(const T&) const
+{
+	return false;
 }
 
 #endif // CDPL_BASE_PROPERTYCONTAINER_HPP

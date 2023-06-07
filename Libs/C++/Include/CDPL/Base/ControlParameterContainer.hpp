@@ -147,17 +147,20 @@ namespace CDPL
 			std::size_t getNumParameters() const;
 
 			/**
-			 * \brief Sets the value of the control-parameter specified by \a key to \a value.
+			 * \brief Sets the value of the control-parameter specified by \a key to \a val.
 			 *
-			 * Any callback functions registered by registerParameterChangedCallback() will be invoked with \a key and \a value provided as arguments.
+			 * If \a val is of type Base::Any and empty, i.e. the method Base::Any::isEmpty() returns \c true, and a control-parameter
+			 * entry for \a key exists, the entry gets erased (equivalent to removeParameter() with \a key as argument).
+			 * Otherwise the control-parameter is assigned the specified value and any callback functions registered by
+			 * registerParameterChangedCallback() will be invoked with \a key and \a val provided as arguments.
 			 * Callbacks of affected direct and indirect children which do not have an entry for the specified control-parameter also get
 			 * invoked.    
 			 *
-			 * \param key The key of the control-parameter value to assign.
-			 * \param value The value of the control-parameter.
+			 * \param key The key of the control-parameter value to assign or remove.
+			 * \param val The value of the control-parameter.
 			 */
 			template <typename T>
-			void setParameter(const LookupKey& key, T&& value);
+			void setParameter(const LookupKey& key, T&& val);
 
 			/**
 			 * \brief Returns the value of the control-parameter specified by \a key.
@@ -202,23 +205,23 @@ namespace CDPL
 
 			/**
 			 * \brief Returns the value of the control-parameter specified by \a key as a \c const reference
-			 *        to an object of type \a T, or the default value \a def_value if a stored value does not exist.
+			 *        to an object of type \a T, or the default value \a def_val if a stored value does not exist.
 			 *
 			 * If the container contains an entry for the specified control-parameter, the stored value will be returned.
 			 * If an entry for the control-parameter does not exist, a parent container has been set and the argument \a local
 			 * is \c false, the call is forwarded to the parent (which may also forward the request). Otherwise the default
-			 * value specified by \a def_value is returned.
+			 * value specified by \a def_val is returned.
 			 *
 			 * \param key The key of the control-parameter for which to return the stored (or specified default) value.
-			 * \param def_value The default value that shall be returned if an entry for the specified control-parameter
+			 * \param def_val The default value that shall be returned if an entry for the specified control-parameter
 			 *                  does not exist.
 			 * \param local Specifies whether or not the request shall be forwarded to the parent container if a local entry 
 			 *              for the control-parameter does not exist.
-			 * \return The stored control-parameter value or the default specified by \a def_value.
+			 * \return The stored control-parameter value or the default specified by \a def_val.
 			 * \throw Base::BadCast if the stored control-parameter value cannot be casted to the target type \a T.
 			 */
 			template <typename T>
-			const T& getParameterOrDefault(const LookupKey& key, const T& def_value, bool local = false) const;
+			const T& getParameterOrDefault(const LookupKey& key, const T& def_val, bool local = false) const;
 
 			/**
 			 * \brief Removes the entry for the control-parameter specified by \a key.
@@ -406,6 +409,11 @@ namespace CDPL
 
 			void parentChanged() const;
 
+			inline bool isEmptyAny(const Any& val) const;
+
+			template <typename T>
+			bool isEmptyAny(const T& val) const;
+
 			typedef std::vector<ControlParameterContainer*> ChildContainer;
 			typedef std::pair<std::size_t, ParameterChangedCallbackFunction> ParamChangedCallbackContainerEntry;
 			typedef std::vector<ParamChangedCallbackContainerEntry> ParamChangedCallbackContainer;
@@ -434,19 +442,35 @@ const T& CDPL::Base::ControlParameterContainer::getParameter(const LookupKey& ke
 }
 
 template <typename T> 
-const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const LookupKey& key, const T& def, bool local) const
+const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const LookupKey& key, const T& def_val, bool local) const
 {
 	const Any& val = getParameter(key, false, local);
 
-	return (val.isEmpty() ? def : val.template getData<T>());
+	return (val.isEmpty() ? def_val : val.template getData<T>());
 }
 
 template <typename T> 
 void CDPL::Base::ControlParameterContainer::setParameter(const LookupKey& key, T&& val)
 {
+	if (isEmptyAny(val)) {
+		removeParameter(key);
+		return;
+	}
+
 	const Any& any_val = (parameters[key] = std::forward<T>(val));
 	
 	parameterChanged(key, any_val);
+}
+
+bool CDPL::Base::ControlParameterContainer::isEmptyAny(const Any& val) const
+{
+	return val.isEmpty();
+}
+
+template <typename T>
+bool CDPL::Base::ControlParameterContainer::isEmptyAny(const T&) const
+{
+	return false;
 }
 
 #endif // CDPL_BASE_CONTROLPARAMETERCONTAINER_HPP
