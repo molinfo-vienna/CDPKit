@@ -32,5 +32,5 @@
 using namespace CDPL;
 
 
-const double Pharm::IonicInteractionScore::DEF_MIN_DISTANCE = 1.5;
-const double Pharm::IonicInteractionScore::DEF_MAX_DISTANCE = 5.5;
+constexpr double Pharm::IonicInteractionScore::DEF_MIN_DISTANCE;
+constexpr double Pharm::IonicInteractionScore::DEF_MAX_DISTANCE;

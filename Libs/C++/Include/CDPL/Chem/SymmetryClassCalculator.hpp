@@ -61,7 +61,7 @@ namespace CDPL
 			 * \brief Specifies the default set of atomic properties considered in the perception
 			 *        of topological symmetry classes.
 			 */
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT |
 				AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::FORMAL_CHARGE;
 
@@ -69,7 +69,7 @@ namespace CDPL
 			 * \brief Specifies the default set of bond properties considered in the perception
 			 *        of topological symmetry classes.
 			 */
-			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY;
 
 			/**

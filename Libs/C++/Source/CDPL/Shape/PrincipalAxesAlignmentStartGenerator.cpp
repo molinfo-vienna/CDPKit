@@ -84,9 +84,9 @@ namespace
 }
 
 
-const double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD = 0.15;
-const std::size_t Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS;
-const double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION = 2.0;
+constexpr double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD;
+constexpr std::size_t Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS;
+constexpr double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION;
 
 
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():

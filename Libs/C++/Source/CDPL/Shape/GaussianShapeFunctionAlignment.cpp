@@ -52,8 +52,8 @@ namespace
 }
 
 
-const double      Shape::GaussianShapeFunctionAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
-const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
+constexpr double      Shape::GaussianShapeFunctionAlignment::DEF_OPTIMIZATION_STOP_GRADIENT;
+constexpr std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
 
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():

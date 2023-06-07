@@ -50,7 +50,7 @@
 using namespace CDPL;
 
 
-const double Shape::FastGaussianShapeOverlapFunction::DEF_RADIUS_SCALING_FACTOR = 1.4;
+constexpr double Shape::FastGaussianShapeOverlapFunction::DEF_RADIUS_SCALING_FACTOR;
 
 
 Shape::FastGaussianShapeOverlapFunction::FastGaussianShapeOverlapFunction():

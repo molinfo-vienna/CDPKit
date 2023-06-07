@@ -52,12 +52,12 @@ namespace CDPL
 		{
 
 		  public:
-		    static const double DEF_MAX_HBA_INTERACTION_DIR_ANGLE;
-		    static const double DEF_MAX_HBA_ORIENTATION_DEVIATION;
-		    static const double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION;
-			static const double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION;
-			static const double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION;
-		    static const double DEF_MAX_AR_ORIENTATION_DEVIATION;
+		    static constexpr double DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
+		    static constexpr double DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
+		    static constexpr double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
+			static constexpr double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
+			static constexpr double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
+		    static constexpr double DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
 
 			FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
 										double max_hba_orient_dev = DEF_MAX_HBA_ORIENTATION_DEVIATION,

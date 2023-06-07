@@ -54,8 +54,8 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_PROBE_RADIUS;
-			static const double DEF_RADIUS_SCALING_FACTOR;
+			static constexpr double DEF_PROBE_RADIUS          = 0.0;
+			static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.0;
 
 			GeneralizedBellAtomDensity(double probe_radius = DEF_PROBE_RADIUS, double rad_scaling_factor = DEF_RADIUS_SCALING_FACTOR): 
 				probeRadius(probe_radius), radiusScalingFactor(rad_scaling_factor) {}

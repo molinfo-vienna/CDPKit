@@ -45,10 +45,10 @@ namespace
 }
 
 
-const double Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE = 1.6;
-const double Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE = 3.75;
-const double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE   = 135.0;
-const double Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE   = 45.0;
+constexpr double Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE;
+constexpr double Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE;
+constexpr double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE;
+constexpr double Pharm::XBondingInteractionConstraint::DEF_MAX_ACC_ANGLE;
 
 
 double Pharm::XBondingInteractionConstraint::getMinAXDistance() const

@@ -49,10 +49,10 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_AX_DISTANCE;
-			static const double DEF_MAX_AX_DISTANCE;
-			static const double DEF_MIN_AXB_ANGLE;
-			static const double DEF_MAX_ACC_ANGLE;
+			static constexpr double DEF_MIN_AX_DISTANCE = 1.6;
+			static constexpr double DEF_MAX_AX_DISTANCE = 3.75;
+			static constexpr double DEF_MIN_AXB_ANGLE   = 135.0;
+			static constexpr double DEF_MAX_ACC_ANGLE   = 45.0;
 
 			/**
 			 * \brief Constructs a \c %XBondingInteractionConstraint functor with the specified constraints.

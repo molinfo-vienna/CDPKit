@@ -52,9 +52,9 @@ namespace CDPL
 		{
 
 		  public:
-			static const double       DEF_FEATURE_TOL;
-			static const unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
-			static const unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
+			static constexpr double       DEF_FEATURE_TOL   = 0.9;
+			static constexpr unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
+			static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
 
 			/**
 			 * \brief Constructs the \c %AromaticFeatureGenerator instance.

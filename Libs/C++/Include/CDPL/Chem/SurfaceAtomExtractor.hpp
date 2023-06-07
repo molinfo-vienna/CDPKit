@@ -59,11 +59,11 @@ namespace CDPL
 		{
 
 		  public:
-			static const double       DEF_PROBE_RADIUS;
-			static const double       DEF_GRID_OVERSIZE;
-			static const double       DEF_GRID_STEP_SIZE;
-			static const double       DEF_MIN_SURFACE_ACC;
-			static const std::size_t  DEF_NUM_TEST_POINTS;
+			static constexpr double       DEF_PROBE_RADIUS    = 1.2;
+			static constexpr double       DEF_GRID_OVERSIZE   = 5.0;
+			static constexpr double       DEF_GRID_STEP_SIZE  = 0.75;
+			static constexpr double       DEF_MIN_SURFACE_ACC = 0.01;
+			static constexpr std::size_t  DEF_NUM_TEST_POINTS = 250;
 
 			/**
 			 * \brief Constructs the \c %SurfaceAtomExtractor instance.

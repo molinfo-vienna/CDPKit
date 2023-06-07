@@ -26,8 +26,6 @@
  
 #include "StaticInit.hpp"
 
-#include <limits>
-
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
 
@@ -36,7 +34,7 @@ using namespace CDPL;
 
 
 const Shape::ScreeningSettings Shape::ScreeningSettings::DEFAULT;
-const double                   Shape::ScreeningSettings::NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
+constexpr double               Shape::ScreeningSettings::NO_CUTOFF;
 
 
 Shape::ScreeningSettings::ScreeningSettings():

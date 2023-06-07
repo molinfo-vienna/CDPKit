@@ -50,10 +50,10 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_HB_LENGTH;
-			static const double DEF_MAX_HB_LENGTH;
-			static const double DEF_MIN_AHD_ANGLE;
-			static const double DEF_MAX_ACC_ANGLE;
+			static constexpr double DEF_MIN_HB_LENGTH = 1.2;
+			static constexpr double DEF_MAX_HB_LENGTH = 2.8;
+			static constexpr double DEF_MIN_AHD_ANGLE = 150.0;
+			static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
 
 			/**	
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %HBondingInteractionScore instances.

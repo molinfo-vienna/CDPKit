@@ -55,11 +55,10 @@ namespace CDPL
 		{
 
 		  public:
-            static const double       DEF_HYD_THRESHOLD;
-		
-            static const double       DEF_FEATURE_TOL;
-			static const unsigned int DEF_FEATURE_TYPE = FeatureType::HYDROPHOBIC;
-			static const unsigned int DEF_FEATURE_GEOM = FeatureGeometry::SPHERE;
+            static constexpr double       DEF_HYD_THRESHOLD = 0.5;
+            static constexpr double       DEF_FEATURE_TOL   = 1.5;
+			static constexpr unsigned int DEF_FEATURE_TYPE  = FeatureType::HYDROPHOBIC;
+			static constexpr unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::SPHERE;
 
 			typedef boost::shared_ptr<HydrophobicAtomFeatureGenerator> SharedPointer;
 						

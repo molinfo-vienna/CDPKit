@@ -57,8 +57,8 @@ namespace CDPL
 		{
 			
 		  public:
-			static const std::size_t DEF_MAX_PRODUCT_ORDER = 6;
-			static const double      DEF_DISTANCE_CUTOFF;
+			static constexpr std::size_t DEF_MAX_PRODUCT_ORDER = 6;
+			static constexpr double      DEF_DISTANCE_CUTOFF   = 0.0;
 			
 			typedef boost::shared_ptr<GaussianShapeFunction> SharedPointer;
 

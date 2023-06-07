@@ -65,8 +65,8 @@ namespace CDPL
 		{
 
 		  public:
-			static const std::size_t TOTAL_DESCRIPTOR_SIZE  = 173;
-			static const std::size_t LIGAND_DESCRIPTOR_SIZE = 28;
+			static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 173;
+			static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 28;
 			
 			typedef boost::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
 

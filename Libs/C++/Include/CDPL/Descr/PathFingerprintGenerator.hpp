@@ -72,7 +72,7 @@ namespace CDPL
 			 * \brief Specifies the default set of atomic properties considered in the generation
 			 *        of atom descriptors by PathFingerprintGenerator::DefAtomDescriptorFunction.
 			 */
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				Chem::AtomPropertyFlag::TYPE | Chem::AtomPropertyFlag::ISOTOPE | Chem::AtomPropertyFlag::FORMAL_CHARGE |
 				Chem::AtomPropertyFlag::AROMATICITY;
 
@@ -80,7 +80,7 @@ namespace CDPL
 			 * \brief Specifies the default set of bond properties considered in the generation
 			 *        of bond descriptors by PathFingerprintGenerator::DefBondDescriptorFunction.
 			 */
-			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY | Chem::BondPropertyFlag::TOPOLOGY;
 
 			/**

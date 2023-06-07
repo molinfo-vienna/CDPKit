@@ -59,9 +59,9 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_PROBE_RADIUS;
-			static const double DEF_MIN_VDW_SURFACE_DISTANCE;
-			static const std::size_t DEF_NUM_TEST_RAYS;
+			static constexpr double DEF_PROBE_RADIUS             = 8.0;
+			static constexpr double DEF_MIN_VDW_SURFACE_DISTANCE = 1.0;
+			static constexpr std::size_t DEF_NUM_TEST_RAYS       = 200;
 
 			BuriednessScore(double probe_radius = DEF_PROBE_RADIUS, double min_vdw_surf_dist = DEF_MIN_VDW_SURFACE_DISTANCE,
 							std::size_t num_test_rays = DEF_NUM_TEST_RAYS);

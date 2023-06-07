@@ -64,7 +64,7 @@ namespace CDPL
 			{
 
 			  public:
-				static const std::size_t NUM_TYPES = 4;
+				static constexpr std::size_t NUM_TYPES = 4;
 
 				Entry();
  

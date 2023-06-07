@@ -69,7 +69,7 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_DISTANCE_CUTOFF;
+			static constexpr double DEF_DISTANCE_CUTOFF = 4.5;
 
 			typedef boost::shared_ptr<AtomDensityGridCalculator> SharedPointer;
 

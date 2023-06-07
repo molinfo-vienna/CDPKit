@@ -48,8 +48,8 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_DISTANCE;
-			static const double DEF_MAX_DISTANCE;
+			static constexpr double DEF_MIN_DISTANCE = 1.5;
+			static constexpr double DEF_MAX_DISTANCE = 5.5;
 
 			/**	
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %IonicInteractionScore instances.

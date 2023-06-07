@@ -61,8 +61,8 @@ namespace CDPL
 			typedef std::vector<Result> ResultList;
 			
 		  public:
-			static const double      DEF_OPTIMIZATION_STOP_GRADIENT;
-			static const std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+			static constexpr double      DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+			static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
 			typedef boost::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 

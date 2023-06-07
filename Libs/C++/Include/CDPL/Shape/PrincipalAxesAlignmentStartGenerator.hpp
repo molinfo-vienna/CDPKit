@@ -51,9 +51,9 @@ namespace CDPL
 		{
 			
 		  public:
-			static const double      DEF_SYMMETRY_THRESHOLD;
-			static const std::size_t DEF_NUM_RANDOM_STARTS = 4;
-			static const double      DEF_MAX_RANDOM_TRANSLATION;
+			static constexpr double      DEF_SYMMETRY_THRESHOLD     = 0.15;
+			static constexpr std::size_t DEF_NUM_RANDOM_STARTS      = 4;
+			static constexpr double      DEF_MAX_RANDOM_TRANSLATION = 2.0;
 			
 			PrincipalAxesAlignmentStartGenerator();
 				

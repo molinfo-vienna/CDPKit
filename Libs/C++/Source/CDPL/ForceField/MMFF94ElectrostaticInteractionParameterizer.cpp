@@ -35,9 +35,9 @@
 using namespace CDPL; 
 
 
-const double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT     = 1.0;
-const double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT   = 1.0;
-const double ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER = 80.0;
+constexpr double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT;
+constexpr double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT;
+constexpr double ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER;
 
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 

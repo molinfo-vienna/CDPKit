@@ -66,11 +66,11 @@ namespace CDPL
 			typedef typename DistanceConstraintList::const_iterator ConstDistanceConstraintIterator;
 			typedef T ValueType;
 
-			static const std::size_t COORDS_DIM                  = Dim;
-			static const std::size_t DEF_NUM_CYCLES              = 50;
-			static const double      DEF_CYCLE_STEP_COUNT_FACTOR;
-			static const ValueType   DEF_START_LEARNING_RATE;
-			static const ValueType   DEF_LEARNING_RATE_DECREMENT;
+			static constexpr std::size_t COORDS_DIM                  = Dim;
+			static constexpr std::size_t DEF_NUM_CYCLES              = 50;
+			static constexpr double      DEF_CYCLE_STEP_COUNT_FACTOR = 1.0;
+			static constexpr ValueType   DEF_START_LEARNING_RATE     = 1;
+			static constexpr ValueType   DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
 
 			class DistanceConstraint
 			{
@@ -181,21 +181,21 @@ namespace CDPL
 		};
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::COORDS_DIM;
+		constexpr std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::COORDS_DIM;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_NUM_CYCLES;
+		constexpr std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_NUM_CYCLES;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const double DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR = 1.0;
+		constexpr double DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
-		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_START_LEARNING_RATE = 1;
+		constexpr typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
+		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_START_LEARNING_RATE;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
-		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
+		constexpr typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
+		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT;
 
 
 		/**

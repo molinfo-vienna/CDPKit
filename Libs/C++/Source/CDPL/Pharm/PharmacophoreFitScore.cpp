@@ -71,9 +71,9 @@ namespace
 }
 
 
-const double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT   = 1.0;
-const double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT     = 0.5;
-const double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT    = 0.4;
+constexpr double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_WEIGHT;
+constexpr double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_WEIGHT;
+constexpr double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_WEIGHT;
 
 
 Pharm::PharmacophoreFitScore::PharmacophoreFitScore(double match_cnt_weight, double pos_match_weight, 

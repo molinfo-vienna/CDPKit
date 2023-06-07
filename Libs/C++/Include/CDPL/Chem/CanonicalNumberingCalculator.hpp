@@ -74,7 +74,7 @@ namespace CDPL
 			 * \brief Specifies the default set of atomic properties considered by the canonical
 			 *        numbering algorithm.
 			 */
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE |
 				AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::H_COUNT;
 
@@ -82,7 +82,7 @@ namespace CDPL
 			 * \brief Specifies the default set of bond properties considered by the canonical
 			 *        numbering algorithm.
 			 */
-			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
 			typedef boost::function2<std::size_t, const Atom&, const MolecularGraph&> HydrogenCountFunction;

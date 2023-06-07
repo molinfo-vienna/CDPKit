@@ -42,10 +42,10 @@
 using namespace CDPL; 
 
 
-const double       Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TOL         = 1.5;
-const double       Pharm::HydrophobicAtomFeatureGenerator::DEF_HYD_THRESHOLD       = 0.5;
-const unsigned int Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TYPE;
-const unsigned int Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_GEOM;
+constexpr double       Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TOL;
+constexpr double       Pharm::HydrophobicAtomFeatureGenerator::DEF_HYD_THRESHOLD;
+constexpr unsigned int Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_TYPE;
+constexpr unsigned int Pharm::HydrophobicAtomFeatureGenerator::DEF_FEATURE_GEOM;
 
 
 Pharm::HydrophobicAtomFeatureGenerator::HydrophobicAtomFeatureGenerator():

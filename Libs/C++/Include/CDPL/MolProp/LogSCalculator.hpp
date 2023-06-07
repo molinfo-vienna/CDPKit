@@ -64,7 +64,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the number of different features used by the \f$ \log S \f$ model.
 			 */
-			static const std::size_t FEATURE_VECTOR_SIZE = 79;
+			static constexpr std::size_t FEATURE_VECTOR_SIZE = 79;
 
 			/**
 			 * \brief Constructs the \c %LogSCalculator instance.

@@ -40,7 +40,7 @@
 using namespace CDPL;
 
 
-const double GRAIL::FeatureInteractionScoreGridCalculator::DEF_DISTANCE_CUTOFF = 10.0;
+constexpr double GRAIL::FeatureInteractionScoreGridCalculator::DEF_DISTANCE_CUTOFF;
 
 
 GRAIL::FeatureInteractionScoreGridCalculator::FeatureInteractionScoreGridCalculator(): 

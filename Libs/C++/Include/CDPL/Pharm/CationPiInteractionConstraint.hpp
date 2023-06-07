@@ -49,9 +49,9 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_DISTANCE;
-			static const double DEF_MAX_DISTANCE;
-			static const double DEF_MAX_ANGLE;
+			static constexpr double DEF_MIN_DISTANCE = 3.5;
+			static constexpr double DEF_MAX_DISTANCE = 5.5;
+			static constexpr double DEF_MAX_ANGLE    = 45.0;
 	
 			/**
 			 * \brief Constructs a \c %CationPiInteractionConstraint functor with the specified constraints.

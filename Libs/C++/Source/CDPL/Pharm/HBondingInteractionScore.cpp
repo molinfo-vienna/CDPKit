@@ -49,10 +49,10 @@ namespace
 }
 
 
-const double Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH = 1.2;
-const double Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH = 2.8;
-const double Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE = 150.0;
-const double Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE = 75.0;
+constexpr double Pharm::HBondingInteractionScore::DEF_MIN_HB_LENGTH;
+constexpr double Pharm::HBondingInteractionScore::DEF_MAX_HB_LENGTH;
+constexpr double Pharm::HBondingInteractionScore::DEF_MIN_AHD_ANGLE;
+constexpr double Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE;
 
 
 Pharm::HBondingInteractionScore::HBondingInteractionScore(bool don_acc, double min_len, double max_len, double min_ahd_ang, double max_acc_ang): 

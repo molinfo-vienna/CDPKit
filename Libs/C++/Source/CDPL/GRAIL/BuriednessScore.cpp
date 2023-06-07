@@ -38,9 +38,9 @@
 using namespace CDPL; 
 
 
-const double GRAIL::BuriednessScore::DEF_PROBE_RADIUS             = 8.0;
-const double GRAIL::BuriednessScore::DEF_MIN_VDW_SURFACE_DISTANCE = 1.0;
-const std::size_t GRAIL::BuriednessScore::DEF_NUM_TEST_RAYS       = 200;
+constexpr double GRAIL::BuriednessScore::DEF_PROBE_RADIUS;
+constexpr double GRAIL::BuriednessScore::DEF_MIN_VDW_SURFACE_DISTANCE;
+constexpr std::size_t GRAIL::BuriednessScore::DEF_NUM_TEST_RAYS;
 
 
 GRAIL::BuriednessScore::BuriednessScore(double probe_radius, double min_vdw_surf_dist, std::size_t num_test_rays): 

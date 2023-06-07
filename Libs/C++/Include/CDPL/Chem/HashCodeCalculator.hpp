@@ -64,7 +64,7 @@ namespace CDPL
 			 * \brief Specifies the default set of atomic properties considered in the generation
 			 *        of initial atom hash codes by HashCodeCalculator::DefAtomHashSeedFunction.
 			 */
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 				AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
 				AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY;
@@ -73,7 +73,7 @@ namespace CDPL
 			 * \brief Specifies the default set of bond properties considered in the generation
 			 *        of initial bond hash codes by HashCodeCalculator::DefBondHashSeedFunction.
 			 */
-			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
 				BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION;
 

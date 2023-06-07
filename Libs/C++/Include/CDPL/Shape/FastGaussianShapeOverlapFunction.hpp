@@ -49,7 +49,7 @@ namespace CDPL
 		{
 			
 		  public:
-			static const double DEF_RADIUS_SCALING_FACTOR;
+			static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.4;
 			
 			typedef boost::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
 

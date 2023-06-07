@@ -50,7 +50,7 @@ namespace
 }
  
 
-const double GRAIL::AtomDensityGridCalculator::DEF_DISTANCE_CUTOFF = 4.5;
+constexpr double GRAIL::AtomDensityGridCalculator::DEF_DISTANCE_CUTOFF;
 
 
 GRAIL::AtomDensityGridCalculator::AtomDensityGridCalculator(): 

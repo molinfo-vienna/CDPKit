@@ -50,10 +50,10 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MAX_V_DISTANCE;
-			static const double DEF_MIN_H_DISTANCE;
-			static const double DEF_MAX_H_DISTANCE;
-			static const double DEF_MAX_ANGLE;
+			static constexpr double DEF_MAX_V_DISTANCE  = 1.4;
+			static constexpr double DEF_MIN_H_DISTANCE  = 4.0;
+			static constexpr double DEF_MAX_H_DISTANCE  = 6.0;
+			static constexpr double DEF_MAX_ANGLE       = 30.0;
 	
 			/**
 			 * \brief Constructs a \c %OrthogonalPiPiInteractionConstraint functor with the specified constraints.

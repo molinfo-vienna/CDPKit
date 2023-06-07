@@ -48,8 +48,8 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_DISTANCE;
-			static const double DEF_MAX_DISTANCE;
+			static constexpr double DEF_MIN_DISTANCE = 2.0;
+			static constexpr double DEF_MAX_DISTANCE = 6.0;
 
 			/**
 			 * \brief Constructs a \c %HydrophobicInteractionConstraint functor with a 

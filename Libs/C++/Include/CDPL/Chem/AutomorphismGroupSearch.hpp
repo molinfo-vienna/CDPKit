@@ -56,7 +56,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the default set of atomic properties considered for atom matching.
 			 */
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 				AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
 				AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
@@ -65,7 +65,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the default set of bond properties considered for bond matching.
 			 */
-			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
 				BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 

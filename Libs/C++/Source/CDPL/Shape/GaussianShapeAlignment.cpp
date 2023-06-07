@@ -52,11 +52,11 @@ namespace
 }
 
 
-const double       Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
-const double       Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
-const unsigned int Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
-const std::size_t  Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
-const std::size_t  Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
+constexpr double       Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT;
+constexpr double       Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF;
+constexpr unsigned int Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
+constexpr std::size_t  Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
+constexpr std::size_t  Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():

@@ -34,8 +34,8 @@
 using namespace CDPL; 
 
 
-const double GRAIL::GeneralizedBellAtomDensity::DEF_PROBE_RADIUS          = 0.0;
-const double GRAIL::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR = 1.0;
+constexpr double GRAIL::GeneralizedBellAtomDensity::DEF_PROBE_RADIUS;
+constexpr double GRAIL::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR;
 
 
 double GRAIL::GeneralizedBellAtomDensity::getProbeRadius() const

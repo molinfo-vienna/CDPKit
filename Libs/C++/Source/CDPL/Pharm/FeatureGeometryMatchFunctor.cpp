@@ -48,12 +48,12 @@ namespace
 }
 
 
-const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
+constexpr double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_INTERACTION_DIR_ANGLE;
+constexpr double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_ORIENTATION_DEVIATION;
+constexpr double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBD_INTERACTION_DIR_DEVIATION;
+constexpr double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBA_INTERACTION_DIR_DEVIATION;
+constexpr double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBD_INTERACTION_DIR_DEVIATION;
+constexpr double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_AR_ORIENTATION_DEVIATION;
 
 
 Pharm::FeatureGeometryMatchFunctor::FeatureGeometryMatchFunctor(double max_hba_int_dir_angle,

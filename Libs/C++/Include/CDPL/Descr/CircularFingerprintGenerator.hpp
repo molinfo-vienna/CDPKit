@@ -75,7 +75,7 @@ namespace CDPL
 			 * \brief Specifies the default set of atomic properties considered in the generation
 			 *        of atom identifiers by CircularFingerprintGenerator::DefAtomIdentifierFunction.
 			 */
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 			  Chem::AtomPropertyFlag::HEAVY_BOND_COUNT | Chem::AtomPropertyFlag::VALENCE | Chem::AtomPropertyFlag::TYPE |
 			  Chem::AtomPropertyFlag::FORMAL_CHARGE |Chem::AtomPropertyFlag::H_COUNT | Chem::AtomPropertyFlag::TOPOLOGY |
 			  Chem::AtomPropertyFlag::ISOTOPE;
@@ -84,7 +84,7 @@ namespace CDPL
 			 * \brief Specifies the default set of bond properties considered in the generation
 			 *        of bond identifiers by CircularFingerprintGenerator::DefBondIdentifierFunction.
 			 */
-			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 			  Chem::BondPropertyFlag::ORDER | Chem::BondPropertyFlag::AROMATICITY;
 
 			/**

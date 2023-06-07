@@ -32,6 +32,7 @@
 #define CDPL_SHAPE_SCREENINGSETTINGS_HPP
 
 #include <cstddef>
+#include <limits>
 
 #include <boost/function.hpp>
 
@@ -51,7 +52,7 @@ namespace CDPL
 
 		  public:
 			static const ScreeningSettings DEFAULT;
-			static const double            NO_CUTOFF;
+			static constexpr double        NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
 
 			typedef boost::function1<double, const AlignmentResult&> ScoringFunction;
 

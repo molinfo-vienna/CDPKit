@@ -66,11 +66,11 @@ namespace CDPL
 			typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
 		  public:
-			static const double       DEF_OPTIMIZATION_STOP_GRADIENT;
-			static const std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-			static const std::size_t  DEF_MAX_PRODUCT_ORDER           = 1;
-			static const unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
-			static const double       DEF_DISTANCE_CUTOFF;
+			static constexpr double       DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
+			static constexpr std::size_t  DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+			static constexpr std::size_t  DEF_MAX_PRODUCT_ORDER           = 1;
+			static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
+			static constexpr double       DEF_DISTANCE_CUTOFF             = 0.0;
 
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
 

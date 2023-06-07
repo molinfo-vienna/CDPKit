@@ -52,11 +52,11 @@ namespace CDPL
 		public:
 			typedef boost::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
 			
-			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
+			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 				AtomPropertyFlag::FORMAL_CHARGE;
 
-            static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
+            static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER;
 
 			DefaultMultiConfMoleculeInputProcessor(bool comp_names = false, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);

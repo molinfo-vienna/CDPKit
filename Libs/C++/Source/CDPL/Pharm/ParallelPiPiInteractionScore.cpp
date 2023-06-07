@@ -44,10 +44,10 @@
 using namespace CDPL;
 
 
-const double Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE  = 2.8;
-const double Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE  = 3.0;
-const double Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE  = 5.5;
-const double Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE       = 20.0;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_H_DISTANCE ;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MIN_V_DISTANCE ;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_V_DISTANCE ;
+constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE;
 
 
 Pharm::ParallelPiPiInteractionScore::ParallelPiPiInteractionScore(double min_v_dist, double max_v_dist,

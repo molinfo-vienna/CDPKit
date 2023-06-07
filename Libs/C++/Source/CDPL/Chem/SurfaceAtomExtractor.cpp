@@ -44,11 +44,11 @@
 using namespace CDPL; 
 
 
-const double       Chem::SurfaceAtomExtractor::DEF_PROBE_RADIUS    = 1.2;
-const double       Chem::SurfaceAtomExtractor::DEF_GRID_OVERSIZE   = 5.0;
-const double       Chem::SurfaceAtomExtractor::DEF_GRID_STEP_SIZE  = 0.75;
-const double       Chem::SurfaceAtomExtractor::DEF_MIN_SURFACE_ACC = 0.01;
-const std::size_t  Chem::SurfaceAtomExtractor::DEF_NUM_TEST_POINTS = 250;
+constexpr double       Chem::SurfaceAtomExtractor::DEF_PROBE_RADIUS;
+constexpr double       Chem::SurfaceAtomExtractor::DEF_GRID_OVERSIZE;
+constexpr double       Chem::SurfaceAtomExtractor::DEF_GRID_STEP_SIZE;
+constexpr double       Chem::SurfaceAtomExtractor::DEF_MIN_SURFACE_ACC;
+constexpr std::size_t  Chem::SurfaceAtomExtractor::DEF_NUM_TEST_POINTS;
 
 
 Chem::SurfaceAtomExtractor::SurfaceAtomExtractor(): 

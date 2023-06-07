@@ -217,8 +217,8 @@ namespace
 }
 
 
-const std::size_t GRAIL::GRAILDescriptorCalculator::TOTAL_DESCRIPTOR_SIZE;
-const std::size_t GRAIL::GRAILDescriptorCalculator::LIGAND_DESCRIPTOR_SIZE;
+constexpr std::size_t GRAIL::GRAILDescriptorCalculator::TOTAL_DESCRIPTOR_SIZE;
+constexpr std::size_t GRAIL::GRAILDescriptorCalculator::LIGAND_DESCRIPTOR_SIZE;
 
 
 GRAIL::GRAILDescriptorCalculator::GRAILDescriptorCalculator():

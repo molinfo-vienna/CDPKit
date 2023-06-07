@@ -111,12 +111,12 @@ namespace
 }
 
 
-const double       Shape::FastGaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
-const unsigned int Shape::FastGaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
-const std::size_t  Shape::FastGaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
-const double       Shape::FastGaussianShapeAlignment::DEF_SYMMETRY_THRESHOLD = 0.15;
-const std::size_t  Shape::FastGaussianShapeAlignment::DEF_NUM_RANDOM_STARTS;
-const double       Shape::FastGaussianShapeAlignment::DEF_MAX_RANDOM_TRANSLATION = 2.0;
+constexpr double       Shape::FastGaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT;
+constexpr unsigned int Shape::FastGaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
+constexpr std::size_t  Shape::FastGaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
+constexpr double       Shape::FastGaussianShapeAlignment::DEF_SYMMETRY_THRESHOLD;
+constexpr std::size_t  Shape::FastGaussianShapeAlignment::DEF_NUM_RANDOM_STARTS;
+constexpr double       Shape::FastGaussianShapeAlignment::DEF_MAX_RANDOM_TRANSLATION;
 
 
 Shape::FastGaussianShapeAlignment::FastGaussianShapeAlignment():

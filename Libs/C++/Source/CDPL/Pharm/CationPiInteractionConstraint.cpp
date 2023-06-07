@@ -38,9 +38,9 @@
 using namespace CDPL;
 
 
-const double Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE = 3.5;
-const double Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE = 5.5;
-const double Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE    = 45.0;
+constexpr double Pharm::CationPiInteractionConstraint::DEF_MIN_DISTANCE;
+constexpr double Pharm::CationPiInteractionConstraint::DEF_MAX_DISTANCE;
+constexpr double Pharm::CationPiInteractionConstraint::DEF_MAX_ANGLE;
 
 
 double Pharm::CationPiInteractionConstraint::getMinDistance() const

@@ -65,7 +65,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the number of different structural features used by the \f$ \log P \f$ model.
 			 */
-			static const std::size_t FEATURE_VECTOR_SIZE = 101;
+			static constexpr std::size_t FEATURE_VECTOR_SIZE = 101;
 
 			/**
 			 * \brief Constructs the \c %XLogPCalculator instance.

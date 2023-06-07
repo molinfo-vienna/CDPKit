@@ -41,9 +41,9 @@
 using namespace CDPL;
 
 
-const double Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE = 3.5;
-const double Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE = 5.5;
-const double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE    = 30.0;
+constexpr double Pharm::CationPiInteractionScore::DEF_MIN_DISTANCE;
+constexpr double Pharm::CationPiInteractionScore::DEF_MAX_DISTANCE;
+constexpr double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE;
 
 
 Pharm::CationPiInteractionScore::CationPiInteractionScore(bool aro_cat, double min_dist, double max_dist,

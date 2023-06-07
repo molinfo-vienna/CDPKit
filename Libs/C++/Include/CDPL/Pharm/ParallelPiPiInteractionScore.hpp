@@ -50,10 +50,10 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MAX_H_DISTANCE;
-			static const double DEF_MIN_V_DISTANCE;
-			static const double DEF_MAX_V_DISTANCE;
-			static const double DEF_MAX_ANGLE;
+			static constexpr double DEF_MAX_H_DISTANCE = 2.8;
+			static constexpr double DEF_MIN_V_DISTANCE = 3.0;
+			static constexpr double DEF_MAX_V_DISTANCE = 5.5;
+			static constexpr double DEF_MAX_ANGLE      = 20.0;
 	
 			/**	
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ParallelPiPiInteractionScore instances.

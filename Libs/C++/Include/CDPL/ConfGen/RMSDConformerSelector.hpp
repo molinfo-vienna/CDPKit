@@ -57,7 +57,7 @@ namespace CDPL
 		{
 
 		  public:
-		    static const std::size_t DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768;
+		    static constexpr std::size_t DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768;
 		  
 		    RMSDConformerSelector();
 	

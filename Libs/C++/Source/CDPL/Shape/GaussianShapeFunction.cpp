@@ -98,8 +98,8 @@ namespace
 }
 
 
-const std::size_t Shape::GaussianShapeFunction::DEF_MAX_PRODUCT_ORDER;
-const double      Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF = 0.0;
+constexpr std::size_t Shape::GaussianShapeFunction::DEF_MAX_PRODUCT_ORDER;
+constexpr double      Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF;
 
 
 Shape::GaussianShapeFunction::GaussianShapeFunction():
