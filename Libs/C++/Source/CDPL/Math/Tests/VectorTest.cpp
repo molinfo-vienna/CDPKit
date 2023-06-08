@@ -1187,9 +1187,9 @@ BOOST_AUTO_TEST_CASE(BoundedVectorTest)
 
 	// ---------
 
-	BOOST_CHECK_THROW((BoundedVector<double, 6>(7)), Base::RangeError);
-	BOOST_CHECK_THROW((BoundedVector<double, 6>(8, 1.2)), Base::RangeError);
-	BOOST_CHECK_THROW((BoundedVector<double, 3>(v1)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedVector<double, 6>(7)), Base::SizeError);
+	BOOST_CHECK_THROW((BoundedVector<double, 6>(8, 1.2)), Base::SizeError);
+	BOOST_CHECK_THROW((BoundedVector<double, 3>(v1)), Base::SizeError);
 
 	// ---------
 
@@ -1250,11 +1250,11 @@ BOOST_AUTO_TEST_CASE(BoundedVectorTest)
 
 	checkValues2(6, v6, values2);
 
-	BOOST_CHECK_THROW(v6.resize(7), Base::RangeError);
+	BOOST_CHECK_THROW(v6.resize(7), Base::SizeError);
 
 	checkValues2(6, v6, values2);
 
-	BOOST_CHECK_THROW(v1.resize(8, 2.37), Base::RangeError);
+	BOOST_CHECK_THROW(v1.resize(8, 2.37), Base::SizeError);
 
 	checkValues2(4, v1, values1);
 
@@ -1494,7 +1494,7 @@ BOOST_AUTO_TEST_CASE(BoundedVectorTest)
 
 	checkValues2(4, v1, values1);
 
-	BOOST_CHECK_THROW((v1 = static_cast<const VectorExpression<Vector<float> >&>(Vector<float>(7))), Base::RangeError);
+	BOOST_CHECK_THROW((v1 = static_cast<const VectorExpression<Vector<float> >&>(Vector<float>(7))), Base::SizeError);
 
 	checkValues2(4, v1, values1);
 
@@ -1532,7 +1532,7 @@ BOOST_AUTO_TEST_CASE(BoundedVectorTest)
 
 	checkValues2(6, v1, values2);
 
-	BOOST_CHECK_THROW((v1 = static_cast<const VectorContainer<Vector<int> >&>(Vector<int>(30))), Base::RangeError);
+	BOOST_CHECK_THROW((v1 = static_cast<const VectorContainer<Vector<int> >&>(Vector<int>(30))), Base::SizeError);
 
 	checkValues2(6, v1, values2);
 
@@ -1566,7 +1566,7 @@ BOOST_AUTO_TEST_CASE(BoundedVectorTest)
 
 	checkValues2(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1.assign(BoundedVector<double, 7>(7)), Base::RangeError);
+	BOOST_CHECK_THROW(v1.assign(BoundedVector<double, 7>(7)), Base::SizeError);
 
 	checkValues2(4, v1, values1);
 

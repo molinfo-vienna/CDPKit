@@ -57,7 +57,7 @@ namespace
 	T checkMaxSize(const T& size, const T& max_size)
 	{
 		CDPL_MATH_CHECK(size <= max_size, "Max. size exceeded", E);
-		return max_size;
+		return std::min(size, max_size);
 	}
 }
 

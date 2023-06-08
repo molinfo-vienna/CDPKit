@@ -802,8 +802,11 @@ namespace CDPL
 			}
 
 			void resize(SizeType m, SizeType n) {
-				size1 = CDPL_MATH_CHECK_MAX_SIZE(m, getMaxSize1(), Base::SizeError);
-				size2 = CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize2(), Base::SizeError);
+				m = CDPL_MATH_CHECK_MAX_SIZE(m, getMaxSize1(), Base::SizeError);
+				n = CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize2(), Base::SizeError);
+
+				size1 = m;
+				size2 = n;
 			}
 
 			void resize(SizeType m, SizeType n, const ValueType& v) {

@@ -1485,23 +1485,23 @@ BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 
 	// ---------
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(m1)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(m1)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(Matrix<double>(5, 3))), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(Matrix<double>(5, 3))), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(m6)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(m6)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(4, 4)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(4, 4)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 3)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 3)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 4)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 4)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(4, 4, 1.0)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(4, 4, 1.0)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 3, 0.0)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 3, 0.0)), Base::SizeError);
 
-	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 4, 2.2)), Base::RangeError);
+	BOOST_CHECK_THROW((BoundedMatrix<double, 4, 3>(5, 4, 2.2)), Base::SizeError);
 
 	// ---------
 
@@ -1584,27 +1584,27 @@ BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 	
 	checkValues4(2, 6, m7, values2);
 
-	BOOST_CHECK_THROW(m7.resize(3, 7), Base::RangeError);
+	BOOST_CHECK_THROW(m7.resize(3, 7), Base::SizeError);
 
 	checkValues4(2, 6, m7, values2);
 
-	BOOST_CHECK_THROW(m7.resize(4, 6), Base::RangeError);
+	BOOST_CHECK_THROW(m7.resize(4, 6), Base::SizeError);
 
 	checkValues4(2, 6, m7, values2);
 
-	BOOST_CHECK_THROW(m7.resize(4, 7), Base::RangeError);
+	BOOST_CHECK_THROW(m7.resize(4, 7), Base::SizeError);
 
 	checkValues4(2, 6, m7, values2);
 
-	BOOST_CHECK_THROW(m7.resize(3, 7, 1.0), Base::RangeError);
+	BOOST_CHECK_THROW(m7.resize(3, 7, 1.0), Base::SizeError);
 
 	checkValues4(2, 6, m7, values2);
 
-	BOOST_CHECK_THROW(m7.resize(4, 6, 0.0), Base::RangeError);
+	BOOST_CHECK_THROW(m7.resize(4, 6, 0.0), Base::SizeError);
 
 	checkValues4(2, 6, m7, values2);
 
-	BOOST_CHECK_THROW(m7.resize(4, 7, -2.3), Base::RangeError);
+	BOOST_CHECK_THROW(m7.resize(4, 7, -2.3), Base::SizeError);
 
 	checkValues4(2, 6, m7, values2);
 
@@ -1857,15 +1857,15 @@ BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 
 	checkValues4(4, 5, m1, values1);
 
-	BOOST_CHECK_THROW((m1 = static_cast<const MatrixExpression<Matrix<double> >&>(Matrix<double>(8, 8))), Base::RangeError);
+	BOOST_CHECK_THROW((m1 = static_cast<const MatrixExpression<Matrix<double> >&>(Matrix<double>(8, 8))), Base::SizeError);
 
 	checkValues4(4, 5, m1, values1);
 
-	BOOST_CHECK_THROW((m1 = static_cast<const MatrixExpression<Matrix<double> >&>(Matrix<double>(4, 8))), Base::RangeError);
+	BOOST_CHECK_THROW((m1 = static_cast<const MatrixExpression<Matrix<double> >&>(Matrix<double>(4, 8))), Base::SizeError);
 
 	checkValues4(4, 5, m1, values1);
 
-	BOOST_CHECK_THROW((m1 = static_cast<const MatrixExpression<Matrix<double> >&>(Matrix<double>(5, 7))), Base::RangeError);
+	BOOST_CHECK_THROW((m1 = static_cast<const MatrixExpression<Matrix<double> >&>(Matrix<double>(5, 7))), Base::SizeError);
 
 	checkValues4(4, 5, m1, values1);
 
@@ -1903,15 +1903,15 @@ BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 
 	checkValues4(2, 6, m1, values2);
 
-	BOOST_CHECK_THROW((m1 = static_cast<const MatrixContainer<Matrix<double> >&>(Matrix<double>(8, 8))), Base::RangeError);
+	BOOST_CHECK_THROW((m1 = static_cast<const MatrixContainer<Matrix<double> >&>(Matrix<double>(8, 8))), Base::SizeError);
 
 	checkValues4(2, 6, m1, values2);
 
-	BOOST_CHECK_THROW((m1 = static_cast<const MatrixContainer<Matrix<double> >&>(Matrix<double>(4, 8))), Base::RangeError);
+	BOOST_CHECK_THROW((m1 = static_cast<const MatrixContainer<Matrix<double> >&>(Matrix<double>(4, 8))), Base::SizeError);
 
 	checkValues4(2, 6, m1, values2);
 
-	BOOST_CHECK_THROW((m1 = static_cast<const MatrixContainer<Matrix<double> >&>(Matrix<double>(5, 7))), Base::RangeError);
+	BOOST_CHECK_THROW((m1 = static_cast<const MatrixContainer<Matrix<double> >&>(Matrix<double>(5, 7))), Base::SizeError);
 
 	checkValues4(2, 6, m1, values2);
 
@@ -1945,15 +1945,15 @@ BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 
 	checkValues4(4, 5, m1, values1);
 
-	BOOST_CHECK_THROW(m1.assign(Matrix<double>(8, 8)), Base::RangeError);
+	BOOST_CHECK_THROW(m1.assign(Matrix<double>(8, 8)), Base::SizeError);
 
 	checkValues4(4, 5, m1, values1);
 
-	BOOST_CHECK_THROW(m1.assign(Matrix<double>(4, 8)), Base::RangeError);
+	BOOST_CHECK_THROW(m1.assign(Matrix<double>(4, 8)), Base::SizeError);
 
 	checkValues4(4, 5, m1, values1);
 
-	BOOST_CHECK_THROW(m1.assign(Matrix<double>(5, 7)), Base::RangeError);
+	BOOST_CHECK_THROW(m1.assign(Matrix<double>(5, 7)), Base::SizeError);
 
 	checkValues4(4, 5, m1, values1);
 
