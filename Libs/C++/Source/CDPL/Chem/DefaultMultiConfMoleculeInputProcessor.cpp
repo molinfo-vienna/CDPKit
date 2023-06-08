@@ -40,8 +40,8 @@
 using namespace CDPL;
 
 
-const unsigned int Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS;
-const unsigned int Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS;
+constexpr unsigned int Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS;
+constexpr unsigned int Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS;
 
 
 Chem::DefaultMultiConfMoleculeInputProcessor::DefaultMultiConfMoleculeInputProcessor(bool comp_names, unsigned int atom_flags, unsigned int bond_flags):
