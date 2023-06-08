@@ -225,9 +225,11 @@ namespace CDPL
 			Grid(SizeType m, SizeType n, SizeType o, const ValueType& v):  
 				data(storageSize(m, n, o), v), size1(m), size2(n), size3(o) {}
 
-			Grid(const Grid& m): data(m.data), size1(m.size1), size2(m.size2), size3(m.size3) {}
+			Grid(const Grid& g): data(g.data), size1(g.size1), size2(g.size2), size3(g.size3) {}
 
-			Grid(Grid&& m): data(std::move(m.data)), size1(m.size1), size2(m.size2), size3(m.size3) {}
+			Grid(Grid&& g): data(), size1(0), size2(0), size3(0) {
+				swap(g);
+			}
 
 			template <typename E>
 			Grid(const GridExpression<E>& e): 
@@ -296,10 +298,7 @@ namespace CDPL
 			}
 
 			Grid& operator=(Grid&& g) {
-				data = std::move(g.data);
-				size1 = g.size1;
-				size2 = g.size2;
-				size3 = g.size3;
+				swap(g);
 				return *this;
 			}
 

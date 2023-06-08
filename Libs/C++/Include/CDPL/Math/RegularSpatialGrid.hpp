@@ -135,6 +135,14 @@ namespace CDPL
 				GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
 			}
 
+			RegularSpatialGrid(const RegularSpatialGrid& usg):
+				dataMode(usg.dataMode), data(usg.data), xform(usg.xform), invXform(usg.invXform),
+				xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep) {}
+
+			RegularSpatialGrid(RegularSpatialGrid&& usg):
+				dataMode(usg.dataMode), data(std::move(usg.data)), xform(usg.xform), invXform(usg.invXform),
+				xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep) {}
+			
 			virtual ~RegularSpatialGrid() {}
 
 			void setDataMode(DataMode mode) {
@@ -365,6 +373,17 @@ namespace CDPL
 			RegularSpatialGrid& operator=(const RegularSpatialGrid& usg) {
 				dataMode = usg.dataMode;
 				data = usg.data;
+				xform = usg.xform;
+				invXform = usg.invXform;
+				xStep = usg.xStep;
+				yStep = usg.yStep;
+				zStep = usg.zStep;
+				return *this;
+			}
+
+			RegularSpatialGrid& operator=(RegularSpatialGrid&& usg) {
+				dataMode = usg.dataMode;
+				data = std::move(usg.data);
 				xform = usg.xform;
 				invXform = usg.invXform;
 				xStep = usg.xStep;

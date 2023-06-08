@@ -384,7 +384,9 @@ namespace CDPL
 	
 			SparseVector(const SparseVector& v): data(v.data), size(v.size) {}
 
-			SparseVector(SparseVector&& v): data(std::move(v.data)), size(v.size) {}
+			SparseVector(SparseVector&& v): data(), size(0) {
+				swap(v);
+			}
 
 			template <typename E>
 			SparseVector(const VectorExpression<E>& e): data(), size(storageSize(e().getSize())) {
@@ -446,8 +448,7 @@ namespace CDPL
 			}
 
 			SparseVector& operator=(SparseVector&& v) {
-				data = std::move(v.data);
-				size = v.size;
+				swap(v);
 				return *this;
 			}
 

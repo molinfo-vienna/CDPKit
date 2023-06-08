@@ -215,7 +215,9 @@ namespace CDPL
 
 			Matrix(const Matrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
 
-			Matrix(Matrix&& m): size1(m.size1), size2(m.size2), data(std::move(m.data)) {}
+			Matrix(Matrix&& m): size1(0), size2(0), data() {
+				swap(m);
+			}
 			
 			template <typename E>
 			Matrix(const MatrixExpression<E>& e): 
@@ -265,9 +267,7 @@ namespace CDPL
 			}
 
 			Matrix& operator=(Matrix&& m) {
-				data = std::move(m.data);
-				size1 = m.size1;
-				size2 = m.size2;
+				swap(m);
 				return *this;
 			}
 
@@ -420,7 +420,9 @@ namespace CDPL
 
 			SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
 
-			SparseMatrix(SparseMatrix&& m): size1(m.size1), size2(m.size2), data(std::move(m.data)) {}
+			SparseMatrix(SparseMatrix&& m): size1(0), size2(0), data() {
+				swap(m);
+			}
 
 			template <typename E>
 			SparseMatrix(const MatrixExpression<E>& e): 
@@ -483,9 +485,7 @@ namespace CDPL
 			}
 
 			SparseMatrix& operator=(SparseMatrix&& m) {
-				data = std::move(m.data);
-				size1 = m.size1;
-				size2 = m.size2;
+				swap(m);
 				return *this;
 			}
 
