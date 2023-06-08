@@ -44,8 +44,8 @@
 using namespace CDPL;
 
 
-const unsigned int Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS;
-const unsigned int Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
+constexpr unsigned int Descr::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS;
+constexpr unsigned int Descr::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 //-----
 

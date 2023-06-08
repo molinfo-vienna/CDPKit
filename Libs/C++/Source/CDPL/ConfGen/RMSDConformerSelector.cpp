@@ -59,7 +59,7 @@ namespace
 using namespace CDPL;
 
 
-const std::size_t ConfGen::RMSDConformerSelector::DEF_MAX_NUM_SYMMETRY_MAPPINGS;
+constexpr std::size_t ConfGen::RMSDConformerSelector::DEF_MAX_NUM_SYMMETRY_MAPPINGS;
 
 
 ConfGen::RMSDConformerSelector::RMSDConformerSelector(): 

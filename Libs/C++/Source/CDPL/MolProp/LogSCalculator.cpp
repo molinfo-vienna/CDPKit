@@ -250,7 +250,7 @@ namespace
 }
 
 
-const std::size_t MolProp::LogSCalculator::FEATURE_VECTOR_SIZE;
+constexpr std::size_t MolProp::LogSCalculator::FEATURE_VECTOR_SIZE;
 
 
 MolProp::LogSCalculator::LogSCalculator(): featureVector(FEATURE_VECTOR_SIZE), logS(0.0) {}

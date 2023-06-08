@@ -327,7 +327,7 @@ namespace
 }
 
 
-const std::size_t MolProp::XLogPCalculator::FEATURE_VECTOR_SIZE;
+constexpr std::size_t MolProp::XLogPCalculator::FEATURE_VECTOR_SIZE;
 
 
 MolProp::XLogPCalculator::XLogPCalculator(): featureVector(FEATURE_VECTOR_SIZE), logP(0.0) {}

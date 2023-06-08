@@ -63,7 +63,7 @@ namespace
 ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer ForceField::MMFF94PrimaryToParameterAtomTypeMap::defaultMap = builtinMap;
 
 
-const std::size_t ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES;
+constexpr std::size_t ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES;
 
 
 ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::Entry(unsigned int atom_type, unsigned int param_types[]): 

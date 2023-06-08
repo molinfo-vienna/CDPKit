@@ -52,8 +52,8 @@ namespace
 using namespace CDPL;
 
 
-const unsigned int Chem::SymmetryClassCalculator::DEF_ATOM_PROPERTY_FLAGS;
-const unsigned int Chem::SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS;
+constexpr unsigned int Chem::SymmetryClassCalculator::DEF_ATOM_PROPERTY_FLAGS;
+constexpr unsigned int Chem::SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS;
 
 
 Chem::SymmetryClassCalculator::SymmetryClassCalculator(): 
