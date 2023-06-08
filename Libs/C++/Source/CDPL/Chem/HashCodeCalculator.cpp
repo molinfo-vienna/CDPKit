@@ -95,8 +95,8 @@ namespace
 }
 
 
-const unsigned int Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS;
-const unsigned int Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS;
+constexpr unsigned int Chem::HashCodeCalculator::DEF_ATOM_PROPERTY_FLAGS;
+constexpr unsigned int Chem::HashCodeCalculator::DEF_BOND_PROPERTY_FLAGS;
 
 //-----
 
