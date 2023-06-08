@@ -86,7 +86,7 @@ bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const C
 		double tol = getTolerance(ftr);
 
 		for (std::size_t i = 0; i < num_atoms; i++) {
-			tmp.assign(ftr_pos);
+			tmp = ftr_pos;
 			tmp.minusAssign(atom_coords[i]);
 
 			double dist = length(tmp);

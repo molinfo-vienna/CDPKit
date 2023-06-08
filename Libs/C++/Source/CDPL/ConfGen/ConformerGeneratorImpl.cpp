@@ -366,7 +366,7 @@ void ConfGen::ConformerGeneratorImpl::combineComponentConformers(const Chem::Mol
 
 			if (have_full_ipt_coords && i == 0) {
 				for (std::size_t k = 0, num_comp_atoms = comp_conf_data.fragment->getNumAtoms(); k < num_comp_atoms; k++, l++) 
-					opt_conf_coords_data[parentAtomInds[l]].assign(conf_coords_data[k]);
+					opt_conf_coords_data[parentAtomInds[l]] = conf_coords_data[k];
 
 				continue;
 			}
@@ -725,7 +725,7 @@ ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputC
 		const Atom& atom = molGraph->getAtom(i);
 
 		try {
-			ipt_coords_data[i].assign(get3DCoordinates(atom));
+			ipt_coords_data[i] = get3DCoordinates(atom);
 
 		} catch (const Base::ItemNotFound&) {
 			if (getType(atom) != AtomType::H)

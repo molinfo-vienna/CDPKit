@@ -62,7 +62,7 @@ bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::
 			const Chem::Atom& atom = *it;
 			const Math::Vector3D& atom_pos = coords_func(atom);
 
-			tmp.assign(xvol_pos);
+			tmp = xvol_pos;
 			tmp.minusAssign(atom_pos);
 
 			if ((length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact) < 0.0) {
@@ -105,7 +105,7 @@ bool Pharm::resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::
 			const Chem::Atom& atom = *it;
 			const Math::Vector3D& atom_pos = coords_func(atom);
 
-			tmp.assign(xvol_pos);
+			tmp = xvol_pos;
 			tmp.minusAssign(atom_pos);
 
 			double inters = (length(tmp) - xvol_tol - MolProp::getVdWRadius(atom) * vdw_scaling_fact);

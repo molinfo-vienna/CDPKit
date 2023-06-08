@@ -340,7 +340,7 @@ void Chem::Hydrogen3DCoordinatesCalculator::assignDiatomicMolCoords(
 	double b_length = getHydrogenBondLength(atom);
 	std::size_t h_index = conctdAtoms[0];
 
-	coords[h_index].assign(coords[atom_idx]);
+	coords[h_index] = coords[atom_idx];
 	coords[h_index](0) += b_length;
 	defCoordsMask.set(h_index);
 }
@@ -357,7 +357,7 @@ void Chem::Hydrogen3DCoordinatesCalculator::assignLinearCoords(
 		for (std::size_t i = 0; i < 2; i++) {
 			std::size_t h_index = conctdAtoms[i];
 
-			coords[h_index].assign(coords[atom_idx]);
+			coords[h_index] = coords[atom_idx];
 			coords[h_index](0) += b_length * (i == 0 ? 1.0 : -1.0);
 			defCoordsMask.set(h_index);
 		}
@@ -499,7 +499,7 @@ void Chem::Hydrogen3DCoordinatesCalculator::assignEvenlyDistributedCoords(
 
 	for (std::size_t i = 1; i < num_points; i++) {
 		b_vec1.assign(prod(tmplt_xform, genPoints[i]));
-		genPoints[i].assign(b_vec1);
+		genPoints[i] = b_vec1;
 	}
 
 	for (std::size_t i = 2; i < num_def_atoms; i++) {
@@ -614,7 +614,7 @@ void Chem::Hydrogen3DCoordinatesCalculator::assignTemplateCoords(
 					rmsd = std::sqrt(rmsd / num_def_atoms);
 
 					if (rmsd < best_rmsd) {
-						best_tmplt_xform.assign(tmplt_xform);
+						best_tmplt_xform = tmplt_xform;
 						std::copy(curr_tmplt_perm, curr_tmplt_perm + tmplt_size, best_tmplt_perm);
 						best_rmsd = rmsd;
 					}

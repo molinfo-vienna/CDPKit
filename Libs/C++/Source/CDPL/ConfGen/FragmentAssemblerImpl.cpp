@@ -365,7 +365,7 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 
 	for (std::size_t i = 0, num_atoms = atom_inds.size(); i < num_atoms; i++) {
 		try {
-			coords_data[atom_inds[i]].assign(get3DCoordinates(frag.getAtom(i)));
+			coords_data[atom_inds[i]] = get3DCoordinates(frag.getAtom(i));
 
 		} catch (const Base::ItemNotFound& e) { 
 			// see if at least heavy atom coordinates are available and then generate missing hydrogens
@@ -382,7 +382,7 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 			for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
 				const IndexPair& idx_mapping = *it;
 			
-				coords_data[idx_mapping.second].assign(entry_coords_data[idx_mapping.first]);
+				coords_data[idx_mapping.second] = entry_coords_data[idx_mapping.first];
 			}
 
 			fix_bond_lens = true;
@@ -481,7 +481,7 @@ bool ConfGen::FragmentAssemblerImpl::setNodeConformers(unsigned int frag_type, c
 		for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
 			const IndexPair& idx_mapping = *it;
 
-			conf_coords_data[idx_mapping.second].assign(cache_conf_coords_data[idx_mapping.first]);
+			conf_coords_data[idx_mapping.second] = cache_conf_coords_data[idx_mapping.first];
 		}
 
 		node->addConformer(conf_data);
@@ -529,7 +529,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 		for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
 			const IndexPair& idx_mapping = *it;
 
-			conf_coords_data[idx_mapping.second].assign(gen_conf_coords_data[idx_mapping.first]);
+			conf_coords_data[idx_mapping.second] = gen_conf_coords_data[idx_mapping.first];
 		}
 
 		node->addConformer(conf_data);
@@ -878,7 +878,7 @@ void ConfGen::FragmentAssemblerImpl::invertConfiguration(const Chem::Atom& ctr_a
 				atom_idx = atom_inds[j];
 
 				if (!tmpBitSet.test(j)) {
-					inv_conf_coords_data[atom_idx].assign(conf_coords_data[atom_idx]);
+					inv_conf_coords_data[atom_idx] = conf_coords_data[atom_idx];
 					continue;
 				}
 

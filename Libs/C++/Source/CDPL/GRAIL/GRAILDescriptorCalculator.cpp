@@ -292,7 +292,7 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		const Chem::Atom& atom = tgt_env.getAtom(i);
 		
-		tgtAtomCoords[i].assign(coords_func(atom));
+		tgtAtomCoords[i] = coords_func(atom);
 
 		if (tgt_env_changed) {
 			tgtAtomCharges[i] = ForceField::getMMFF94Charge(atom);
@@ -327,7 +327,7 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 		ftr_ss.ftrCoords.resize(num_ftrs);
 
 		for (std::size_t i = 0; i < num_ftrs; i++) 
-			ftr_ss.ftrCoords[i].assign(get3DCoordinates(*ftr_ss.features[i]));
+			ftr_ss.ftrCoords[i] = get3DCoordinates(*ftr_ss.features[i]);
 
 		if (!ftr_ss.octree)
 			ftr_ss.octree.reset(new Octree());
@@ -466,7 +466,7 @@ void GRAIL::GRAILDescriptorCalculator::calcLigFtrCoordinates(const Math::Vector3
 			continue;
 		
 		if (num_atoms == 1) {
-			ftr_pos.assign(atom_coords[ftr_atoms[0]]);
+			ftr_pos = atom_coords[ftr_atoms[0]];
 			continue;
 		}
 

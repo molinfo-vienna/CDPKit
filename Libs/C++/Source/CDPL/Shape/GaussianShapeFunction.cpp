@@ -211,7 +211,7 @@ void Shape::GaussianShapeFunction::getElementPositions(Math::Vector3DArray& coor
 
 		std::size_t elem_idx = prod->getIndex();
 
-		coords[elem_idx].assign(prod->getCenter());
+		coords[elem_idx] = prod->getCenter();
 	}
 }
 

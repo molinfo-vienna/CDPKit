@@ -108,7 +108,7 @@ unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReference(Gaussia
 
 	func.transform(to_ctr_xform);
 		
-	xform.assign(from_ctr_xform);
+	xform = from_ctr_xform;
 	
 	return sym_class;
 }
@@ -124,7 +124,7 @@ unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAligned(GaussianS
 
 	func.transform(to_ctr_xform);
 		
-	xform.assign(to_ctr_xform);
+	xform = to_ctr_xform;
 	
 	return sym_class;
 }

@@ -52,7 +52,7 @@ double GRAIL::GeneralizedBellAtomDensity::operator()(const Math::Vector3D& pos, 
 {
     Math::Vector3D tmp;
 
-	tmp.assign(atom_pos);
+	tmp = atom_pos;
 	tmp.minusAssign(pos);
 
 	double dist = length(tmp);

@@ -154,7 +154,7 @@ namespace
 	    if (has3DCoordinatesArray(*atom) && get3DCoordinatesArray(*atom)->getSize() > 1)
 		return false;
 
-	    coords[i].assign(get3DCoordinates(*atom));
+	    coords[i] = get3DCoordinates(*atom);
 	}
 
 	return true;

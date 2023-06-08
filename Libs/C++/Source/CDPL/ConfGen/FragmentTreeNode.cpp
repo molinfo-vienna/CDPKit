@@ -426,12 +426,12 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 			const Math::Vector3DArray::StorageType& conf_data = conf.getData();
 			bool check_ref_vec_angle = true;
 
-			bond_vec.assign(conf_data[right_atom_idx]);
+			bond_vec = conf_data[right_atom_idx];
 			bond_vec.minusAssign(conf_data[left_atom_idx]);
 			bond_vec /= length(bond_vec);
 
 			if (torsionRefAtoms[0]) {
-				tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
+				tor_ref_vec = conf_data[tor_ref_atom_idx];
 				tor_ref_vec.minusAssign(conf_data[left_atom_idx]);
 				tor_ref_vec /= length(tor_ref_vec);
 		
@@ -456,7 +456,7 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 			const Math::Vector3DArray::StorageType& conf_data = conf.getData();
 			bool check_ref_vec_angle = true;
 
-			bond_vec.assign(conf_data[right_atom_idx]);
+			bond_vec = conf_data[right_atom_idx];
 			bond_vec.minusAssign(conf_data[left_atom_idx]);
 
 			double bond_len = length(bond_vec);
@@ -464,7 +464,7 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 			bond_vec /= bond_len;
 
 			if (torsionRefAtoms[1]) {
-				tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
+				tor_ref_vec = conf_data[tor_ref_atom_idx];
 				tor_ref_vec.minusAssign(conf_data[right_atom_idx]);
 				tor_ref_vec /= length(tor_ref_vec);
 

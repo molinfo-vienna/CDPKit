@@ -164,7 +164,7 @@ bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_co
 				if (!alignmentCalc.calculate(sel_conf_algn_coords, *confAlignCoords[i], false)) 
 					return false;
 
-				conf_xform.assign(alignmentCalc.getTransform());
+				conf_xform = alignmentCalc.getTransform();
 
 				double rmsd = calcRMSD(sel_conf_algn_coords, *confAlignCoords[i], conf_xform);
 
@@ -369,7 +369,7 @@ ConfGen::RMSDConformerSelector::buildCoordsArrayForMapping(const IndexArray& map
 		const Math::Vector3D& pos = conf_coords[mapping[i]];
 
 		ctr.plusAssign(pos);
-		coords_data[i].assign(pos);
+		coords_data[i] = pos;
 	}
 
 	ctr /= arr_size;

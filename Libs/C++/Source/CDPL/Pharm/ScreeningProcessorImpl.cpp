@@ -498,7 +498,7 @@ bool Pharm::ScreeningProcessorImpl::checkGeomAlignment()
 			const Feature& db_ftr = **db_ftr_it;
 			std::size_t db_ftr_idx = db_ftr.getIndex();
 
-			tmp.assign(alignedDBFeaturePositions[db_ftr_idx]);
+			tmp = alignedDBFeaturePositions[db_ftr_idx];
 			tmp.minusAssign(query_pos);
 
 			if (length(tmp) > query_tol)

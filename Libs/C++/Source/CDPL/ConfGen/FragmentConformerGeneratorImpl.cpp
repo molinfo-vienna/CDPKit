@@ -253,7 +253,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 		const Atom& atom = molGraph->getAtom(i);
 
 		try {
-			ipt_coords_data[i].assign(get3DCoordinates(atom));
+			ipt_coords_data[i] = get3DCoordinates(atom);
 
 		} catch (const Base::ItemNotFound&) {
 			if (getType(atom) != AtomType::H)
@@ -554,7 +554,7 @@ void ConfGen::FragmentConformerGeneratorImpl::addSymmetryMappedConformers(const 
 		mpd_conf_data->resize(numAtoms);
 
 		for (std::size_t i = 0; i < numAtoms; i++)
-			mpd_conf_coords_data[symMappings[mapping_offs + i]].assign(conf_coords_data[i]);
+			mpd_conf_coords_data[symMappings[mapping_offs + i]] = conf_coords_data[i];
 
 		if (checkRMSD(*mpd_conf_data, rmsd)) {
 			mpd_conf_data->setEnergy(conf_data.getEnergy());
@@ -658,7 +658,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::checkRMSD(const Math::Vector3DArra
 		if (!alignmentCalc.calculate(prev_conf_ra_coords, conf_ra_coords, false))
 			return false;
 
-		conf_xform.assign(alignmentCalc.getTransform());
+		conf_xform = alignmentCalc.getTransform();
 
 		double rmsd = calcRMSD(prev_conf_ra_coords, conf_ra_coords, conf_xform);
 
@@ -690,7 +690,7 @@ ConfGen::FragmentConformerGeneratorImpl::getRingAtomCoordinates(const Math::Vect
 		const Math::Vector3D& pos = conf_coords[ringAtomIndices[i]];
 
 		ctr.plusAssign(pos);
-		ra_coords_data[i].assign(pos);
+		ra_coords_data[i] = pos;
 	}
 
 	ctr /= num_ring_atoms;

@@ -793,7 +793,7 @@ void Shape::FastGaussianShapeAlignment::setupShapeData(const GaussianShape& shap
 
 		transform(tmp_vec_data, xform_data, elem.center.getData());
 
-		elem.center.assign(tmp_vec);
+		elem.center = tmp_vec;
 	}
 	
 	if (ref) {
@@ -824,7 +824,7 @@ void Shape::FastGaussianShapeAlignment::setupShapeData(const GaussianShape& shap
 
 void Shape::FastGaussianShapeAlignment::setupShapeDataElement(const GaussianShape::Element& gs_elem, ShapeData::Element& sd_elem) const
 {
-	sd_elem.center.assign(gs_elem.getPosition());
+	sd_elem.center = gs_elem.getPosition();
 	sd_elem.color = gs_elem.getColor();
 	sd_elem.weightFactor = gs_elem.getHardness();
 	sd_elem.radius = gs_elem.getRadius();
@@ -844,7 +844,7 @@ void Shape::FastGaussianShapeAlignment::prepareForAlignment()
 	optPoseCoordsGrad.resize(startPoseCoords.getSize());
 
 	for (std::size_t i = 0, num_algd_elem = startPoseCoords.size(); i < num_algd_elem; i++)
-		startPoseCoords[i].assign(algdShapeData.elements[i].center);
+		startPoseCoords[i] = algdShapeData.elements[i].center;
 }
 
 bool Shape::FastGaussianShapeAlignment::generateStartTransforms(const ShapeData& ref_data)
