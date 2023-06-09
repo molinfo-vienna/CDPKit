@@ -265,7 +265,7 @@ void Chem::ElectronSystem::setElectronContrib(const Atom& atom, std::size_t elec
     if (it == atomIndsAndElecContribs.end())
 		throw Base::ItemNotFound("ElectronSystem: argument atom not part of the electron system");
 	
-	assert(numElectrons >= idx_it->second.second);
+	assert(numElectrons >= it->second.second);
 
 	numElectrons -= it->second.second;
 	numElectrons += elec_contrib;
@@ -278,7 +278,7 @@ void Chem::ElectronSystem::setElectronContrib(std::size_t idx, std::size_t elec_
 	AtomIdxAndElecContribMap::iterator it = atomIndsAndElecContribs.find(&getAtom(idx));
 
     assert(it != atomIndsAndElecContribs.end());
-	assert(numElectrons >= idx_it->second.second);
+	assert(numElectrons >= it->second.second);
 
 	numElectrons -= it->second.second;
 	numElectrons += elec_contrib;
