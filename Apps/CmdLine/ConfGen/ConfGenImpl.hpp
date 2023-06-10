@@ -30,7 +30,6 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <chrono>
 #include <mutex>
 
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -40,6 +39,7 @@
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -124,7 +124,7 @@ namespace ConfGen
 
 		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-		void printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs, std::size_t proc_time);
+		void printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
@@ -152,7 +152,7 @@ namespace ConfGen
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-		typedef std::chrono::system_clock Clock;
+		typedef CDPL::Internal::Timer Timer;
 		typedef CDPL::ConfGen::ConformerGeneratorSettings ConformerGeneratorSettings;
 		typedef CDPL::ConfGen::FragmentConformerGeneratorSettings FragmentConformerGeneratorSettings;
 		typedef CDPL::ConfGen::TorsionLibrary::SharedPointer TorsionLibraryPtr;
@@ -186,7 +186,7 @@ namespace ConfGen
 		std::mutex                     readMolMutex;
 		std::mutex                     writeMolMutex;
 		std::string                    errorMessage;
-		Clock::time_point              startTime;
+		Timer                          timer;
     };
 }
 

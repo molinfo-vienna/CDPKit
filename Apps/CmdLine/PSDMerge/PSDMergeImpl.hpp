@@ -30,9 +30,9 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <chrono>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -59,9 +59,8 @@ namespace PSDMerge
 		void checkInputFiles() const;
 		void printOptionSummary();
 		
-		void printStatistics(std::size_t num_proc, std::size_t num_rej, 
-							 std::size_t num_del, std::size_t num_ins,
-							 std::size_t proc_time);
+		void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
+							 std::size_t num_ins);
 
 		std::string getModeString() const;
 
@@ -69,13 +68,13 @@ namespace PSDMerge
 
 		typedef std::vector<std::string> StringList;
 		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
-		typedef std::chrono::system_clock Clock;
+		typedef CDPL::Internal::Timer Timer;
 
 		StringList         inputDatabases;
 		std::string        outputDatabase;
 		bool               dropDuplicates;
 		CreationMode       creationMode;
-		Clock::time_point  startTime;
+		Timer              timer;
     };
 }
 

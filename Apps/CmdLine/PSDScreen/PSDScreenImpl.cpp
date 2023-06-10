@@ -31,6 +31,7 @@
 #include <sstream>
 #include <iomanip>
 #include <thread>
+#include <chrono>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -311,7 +312,7 @@ void PSDScreenImpl::setMatchingMode(const std::string& mode)
 
 int PSDScreenImpl::process()
 {
-	startTime = Clock::now();
+	timer.reset();
 
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
@@ -551,7 +552,7 @@ void PSDScreenImpl::printStatistics()
 	using namespace CDPL;
 	using namespace Pharm;
 
-	std::size_t proc_time = std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
 
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Num. Screened Molecules: " + std::to_string(endMolIndex - startMolIndex));

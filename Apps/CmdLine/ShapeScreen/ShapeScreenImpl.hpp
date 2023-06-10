@@ -34,7 +34,6 @@
 #include <iosfwd>
 #include <mutex>
 
-#include <boost/timer/timer.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
@@ -44,6 +43,7 @@
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/AlignmentResult.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -180,7 +180,8 @@ namespace ShapeScreen
 		typedef std::vector<HitList> HitListArray;
 		typedef std::vector<OStreamPtr> OStreamArray;
 		typedef std::vector<MoleculeWriterPtr> MoleculeWriterArray;
-
+		typedef CDPL::Internal::Timer Timer;
+		
 		std::string                    queryFile;
 		std::string                    databaseFile;
 		std::string                    hitOutputFile;
@@ -214,6 +215,7 @@ namespace ShapeScreen
 		HitListArray                   hitLists;
 		OStreamArray                   reportOStreams;
 		MoleculeWriterArray            hitMolWriters;
+		Timer                          timer;
 		std::size_t                    numProcMols;
 		std::size_t                    numHits;
 		std::size_t                    numSavedHits;
@@ -221,7 +223,6 @@ namespace ShapeScreen
 		std::mutex                     molReadMutex;
 		std::mutex                     hitProcMutex;
 		std::string                    errorMessage;
-		boost::timer::cpu_timer        timer;
     };
 }
 

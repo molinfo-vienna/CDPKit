@@ -35,8 +35,6 @@
 #include <cstddef>
 #include <utility>
 
-#include <boost/timer/timer.hpp>
-
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
@@ -51,6 +49,7 @@
 #include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "TorsionDriverImpl.hpp"
 #include "FragmentAssemblerImpl.hpp"
@@ -214,7 +213,7 @@ namespace CDPL
 			CallbackFunction                      abortCallback;
 			CallbackFunction                      timeoutCallback;
 			LogMessageCallbackFunction            logCallback;
-			boost::timer::cpu_timer               timer;
+			Internal::Timer                       timer;
 			RMSDConformerSelector                 confSelector;
 			TorsionDriverImpl                     torDriver;
 			FragmentAssemblerImpl                 fragAssembler;

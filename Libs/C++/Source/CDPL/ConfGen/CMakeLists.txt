@@ -106,7 +106,7 @@ SET(cdpl-confgen_LIB_SRCS
     FragmentAssemblerImpl.cpp
    )
 
-LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
 
 ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 

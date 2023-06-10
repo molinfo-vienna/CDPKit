@@ -30,6 +30,7 @@
 #include <fstream>
 #include <sstream>
 #include <thread>
+#include <chrono>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -486,7 +487,7 @@ void GenFragLibImpl::setInputFormat(const std::string& file_ext)
 
 int GenFragLibImpl::process()
 {
-	startTime = Clock::now();
+	timer.reset();
 
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
@@ -573,8 +574,7 @@ void GenFragLibImpl::processSingleThreaded()
 		return;
 
 	printStatistics(worker.getNumProcMolecules(), worker.getNumProcFragments(), worker.getNumErrorFragments(),
-					worker.getNumAddedFragments(), worker.getNumGeneratedConfs(),
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					worker.getNumAddedFragments(), worker.getNumGeneratedConfs());
 }
 
 void GenFragLibImpl::processMultiThreaded()
@@ -641,8 +641,7 @@ void GenFragLibImpl::processMultiThreaded()
 		num_gen_confs += worker.getNumGeneratedConfs();
 	}
 
-	printStatistics(num_proc_mols, num_proc_frags, num_error_frags, num_added_frags, num_gen_confs,
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	printStatistics(num_proc_mols, num_proc_frags, num_error_frags, num_added_frags, num_gen_confs);
 
 }
 
@@ -747,8 +746,10 @@ bool GenFragLibImpl::haveErrorMessage()
 }
 
 void GenFragLibImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags,  std::size_t num_error_frags, 
-									 std::size_t num_added_frags, std::size_t num_gen_confs, std::size_t proc_time)
+									 std::size_t num_added_frags, std::size_t num_gen_confs)
 {
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
+						
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules:       " + std::to_string(num_proc_mols));
 	printMessage(INFO, " Succ. Processed Fragments: " + std::to_string(num_proc_frags));

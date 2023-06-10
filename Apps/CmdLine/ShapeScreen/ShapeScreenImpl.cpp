@@ -29,6 +29,7 @@
 #include <fstream>
 #include <iomanip>
 #include <thread>
+#include <chrono>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -449,8 +450,8 @@ void ShapeScreenImpl::setAlignmentMode()
 
 int ShapeScreenImpl::process()
 {
-    timer.start();
-
+	timer.reset();
+	
     printMessage(INFO, getProgTitleString());
     printMessage(INFO, "");
 
@@ -489,8 +490,6 @@ int ShapeScreenImpl::process()
 
     if (termSignalCaught())
 		return EXIT_FAILURE;
-
-	timer.stop();
 
 	outputHitLists();
 
@@ -1054,15 +1053,14 @@ bool ShapeScreenImpl::haveErrorMessage()
 
 void ShapeScreenImpl::printStatistics()
 {
-	boost::timer::nanosecond_type proc_time = timer.elapsed().wall;
-	
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
+
 	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
     printMessage(INFO, " Num. processed Molecules: " + std::to_string(numProcMols));
     printMessage(INFO, " Num. Hit Molecules:       " + std::to_string(numHits));
     printMessage(INFO, " Num. saved Hits:          " + std::to_string(numSavedHits));
-    printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time / 1000000000) + 
-				 " (" + (boost::format("%.3f") % (double(numProcMols) * 1000000000 / proc_time)).str() + " Mols./s)");
+    printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time));
 }
 
 void ShapeScreenImpl::checkOutputFileOptions() const

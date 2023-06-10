@@ -228,7 +228,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 
 	if (logCallback) {
 		logCallback(std::string(struct_gen_only ? "Structure" : "Conformer") + " generation finished with return code " + returnCodeToString(ret_code) + '\n');
-		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
+		logCallback("Processing time: " + timer.format<3>() + "s\n");
 
 		if (!struct_gen_only && !outputConfs.empty()) {
 			logCallback("Num. output conformers: " + std::to_string(outputConfs.size()) + '\n');
@@ -672,7 +672,7 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph,
 	invertibleNMask.reset();
 
 	if (start_timer)
-		timer.start();
+		timer.reset();
 }
 
 bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(ConformerData& conf_data)
@@ -1369,7 +1369,7 @@ bool ConfGen::ConformerGeneratorImpl::timedout() const
 	if (timeout == 0)
 		return false;
 
-	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
+	return (std::chrono::duration_cast<std::chrono::milliseconds>(timer.elapsed()) > std::chrono::milliseconds(timeout));
 }
 
 bool ConfGen::ConformerGeneratorImpl::rmsdConfSelectorAbortCallback() const

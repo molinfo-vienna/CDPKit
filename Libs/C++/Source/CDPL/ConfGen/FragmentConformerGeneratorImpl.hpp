@@ -34,8 +34,6 @@
 #include <vector>
 #include <cstddef>
 
-#include <boost/timer/timer.hpp>
-
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
@@ -51,6 +49,7 @@
 #include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 
 namespace CDPL 
@@ -154,7 +153,7 @@ namespace CDPL
 			CallbackFunction                       abortCallback;
 			CallbackFunction                       timeoutCallback;
 			LogMessageCallbackFunction             logCallback;
-			boost::timer::cpu_timer                timer;
+			Internal::Timer                        timer;
 			const Chem::MolecularGraph*            molGraph;
 			std::size_t                            numAtoms;
 			MMFF94InteractionParameterizer         mmff94Parameterizer;

@@ -29,11 +29,12 @@
 #include <fstream>
 #include <sstream>
 #include <thread>
+#include <chrono>
+#include <ratio>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
-#include <boost/timer/timer.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -134,7 +135,7 @@ private:
 	bool processNextMolecule() {
 		using namespace CDPL::ConfGen;
 
-		timer.start();
+		timer.reset();
 
 		std::size_t rec_idx = parent->readNextMolecule(molecule);
 
@@ -202,7 +203,7 @@ private:
 
 		if (verbLevel == VERBOSE || (verbLevel == INFO && ret_code == ReturnCode::TIMEOUT)) {
 			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": Success, " << 
-				timer.format(3, "%w") << 's';
+				timer.format<3>() << 's';
 
 			if (ret_code == ReturnCode::TIMEOUT)
 				logRecordStream << " (time limit exceeded)";
@@ -288,15 +289,13 @@ private:
 		return false;
 	}
 
-	typedef std::chrono::system_clock Clock;
-
 	StructGenImpl*                       parent;
 	CDPL::ConfGen::StructureGenerator    structGen;
 	CDPL::Chem::BasicMolecule            molecule;
 	CDPL::Chem::Fragment                 origMolecule;
 	std::stringstream                    logRecordStream;
 	VerbosityLevel                       verbLevel;
-	boost::timer::cpu_timer              timer;
+	CDPL::Internal::Timer                timer;
 	std::size_t                          numProcMols;
 	std::size_t                          numFailedMols;
 };
@@ -627,7 +626,7 @@ void StructGenImpl::setFragmentLib(const std::string& lib_file)
 
 int StructGenImpl::process()
 {
-	startTime = Clock::now();
+	timer.reset();
 
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
@@ -686,8 +685,7 @@ void StructGenImpl::processSingleThreaded()
 	if (termSignalCaught())
 		return;
 
-	printStatistics(worker.getNumProcMolecules(), worker.getNumFailedMolecules(),
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	printStatistics(worker.getNumProcMolecules(), worker.getNumFailedMolecules());
 }
 
 void StructGenImpl::processMultiThreaded()
@@ -748,8 +746,7 @@ void StructGenImpl::processMultiThreaded()
 		num_failed_mols += worker.getNumFailedMolecules();
 	}
 
-	printStatistics(num_proc_mols, num_failed_mols,
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	printStatistics(num_proc_mols, num_failed_mols);
 
 }
 
@@ -777,15 +774,17 @@ bool StructGenImpl::haveErrorMessage()
 	return !errorMessage.empty();
 }
 
-void StructGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t proc_time)
+void StructGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols)
 {
+	double proc_time = std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1> > >(timer.elapsed()).count();
+	
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules:  " + std::to_string(num_proc_mols));
 	printMessage(INFO, " Molecules Failed:     " + std::to_string(num_failed_mols));
 
 	if (num_proc_mols > 0)
 		printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time) + 
-					 " (" + (boost::format("%.3f") % (double(proc_time) / num_proc_mols)).str() + " s/Mol.)");
+					 " (" + (boost::format("%.3f") % (proc_time / num_proc_mols)).str() + " s/Mol.)");
 	else
 		printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time));
 

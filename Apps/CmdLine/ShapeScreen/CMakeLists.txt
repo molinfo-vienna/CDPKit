@@ -23,14 +23,14 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
 
 SET(shapescreen_SRCS
     Main.cpp
     ShapeScreenImpl.cpp
    )
 
-ADD_EXECUTABLE(shapescreen ${shapescreen_SRCS})
+ADD_EXECUTABLE(shapescreen ${shapescreen_SRCS} $<TARGET_OBJECTS:cdpl-internal>)
 
 SET_TARGET_PROPERTIES(shapescreen PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
@@ -46,7 +46,7 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 	       )
 
 TARGET_LINK_LIBRARIES(shapescreen cmdline-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared cdpl-pharm-shared 
-		      cdpl-shape-shared ${Boost_CHRONO_LIBRARY} ${Boost_TIMER_LIBRARY} Threads::Threads)
+		      cdpl-shape-shared Threads::Threads)
 
 INSTALL(TARGETS shapescreen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)

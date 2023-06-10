@@ -170,7 +170,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
 
 	if (logCallback) {
 		logCallback("Conformer generation finished with return code " + returnCodeToString(ret_code) + '\n');
-		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
+		logCallback("Processing time: " + timer.format<3>() + "s\n");
 		logCallback("Num. output conformers: " + std::to_string(outputConfs.size()) + '\n');
 
 		if (outputConfs.size() > 1) {
@@ -225,7 +225,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 
 void ConfGen::FragmentConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 {
-	timer.start();
+	timer.reset();
 
 	molGraph = &molgraph;
 	numAtoms = molgraph.getNumAtoms();
@@ -871,7 +871,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::timedout(std::size_t timeout) cons
 	if (timeout == 0)
 		return false;
 
-	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
+	return (std::chrono::duration_cast<std::chrono::milliseconds>(timer.elapsed()) > std::chrono::milliseconds(timeout));
 }
 
 ConfGen::ConformerData::SharedPointer ConfGen::FragmentConformerGeneratorImpl::allocConformerData()

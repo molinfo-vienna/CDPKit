@@ -30,12 +30,12 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <chrono>
 #include <mutex>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -83,9 +83,8 @@ namespace PSDCreate
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
-		void printStatistics(std::size_t num_proc, std::size_t num_rej, 
-							 std::size_t num_del, std::size_t num_ins,
-							 std::size_t proc_time);
+		void printStatistics(std::size_t num_proc, std::size_t num_rej, std::size_t num_del,
+							 std::size_t num_ins);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
@@ -108,7 +107,7 @@ namespace PSDCreate
 		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-		typedef std::chrono::system_clock Clock;
+		typedef CDPL::Internal::Timer Timer;
 
 		StringList             inputFiles;
 		std::string            outputDatabase;
@@ -121,7 +120,7 @@ namespace PSDCreate
 		std::mutex             molReadMutex;
 		std::string            errorMessage;
 		bool                   addSourceFileProp;
-		Clock::time_point      startTime;
+		Timer                  timer;
     };
 }
 

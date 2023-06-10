@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <iterator>
 #include <thread>
+#include <chrono>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -270,7 +271,7 @@ void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
 
 int PSDCreateImpl::process()
 {
-	startTime = Clock::now();
+	timer.reset();
 
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
@@ -322,8 +323,7 @@ void PSDCreateImpl::processSingleThreaded()
 		return;
 
 	printStatistics(db_creator->getNumProcessed(), db_creator->getNumRejected(),
-					db_creator->getNumDeleted(), db_creator->getNumInserted(),
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					db_creator->getNumDeleted(), db_creator->getNumInserted());
 }
 
 void PSDCreateImpl::processMultiThreaded()
@@ -417,8 +417,7 @@ void PSDCreateImpl::processMultiThreaded()
 
 	num_rej += main_db_creator->getNumRejected();
 
-	printStatistics(num_proc, num_rej, num_del, num_ins,
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	printStatistics(num_proc, num_rej, num_del, num_ins);
 }
 
 void PSDCreateImpl::setErrorMessage(const std::string& msg)
@@ -446,9 +445,10 @@ bool PSDCreateImpl::haveErrorMessage()
 }
 
 void PSDCreateImpl::printStatistics(std::size_t num_proc, std::size_t num_rej, 
-									std::size_t num_del, std::size_t num_ins,
-									std::size_t proc_time)
+									std::size_t num_del, std::size_t num_ins)
 {
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
+						
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc));
 	printMessage(INFO, " Rejected  Molecules: " + std::to_string(num_rej));

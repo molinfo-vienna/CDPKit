@@ -28,6 +28,7 @@
 #include <iterator>
 #include <thread>
 #include <cstdint>
+#include <chrono>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -519,7 +520,7 @@ void TautGenImpl::setOutputFormat(const std::string& file_ext)
 
 int TautGenImpl::process()
 {
-	startTime = Clock::now();
+	timer.reset();
 
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
@@ -571,8 +572,7 @@ void TautGenImpl::processSingleThreaded()
 	if (termSignalCaught())
 		return;
 
-	printStatistics(worker.getNumProcMolecules(), worker.getNumGenTautomers(),
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	printStatistics(worker.getNumProcMolecules(), worker.getNumGenTautomers());
 }
 
 void TautGenImpl::processMultiThreaded()
@@ -633,9 +633,7 @@ void TautGenImpl::processMultiThreaded()
 		num_gen_tauts += worker.getNumGenTautomers();
 	}
 
-	printStatistics(num_proc_mols, num_gen_tauts,
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
-
+	printStatistics(num_proc_mols, num_gen_tauts);
 }
 
 void TautGenImpl::setErrorMessage(const std::string& msg)
@@ -662,8 +660,10 @@ bool TautGenImpl::haveErrorMessage()
 	return !errorMessage.empty();
 }
 
-void TautGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_gen_tauts, std::size_t proc_time)
+void TautGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_gen_tauts)
 {
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
+	
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc_mols));
 	printMessage(INFO, " Generated Tautomers: " + std::to_string(num_gen_tauts));

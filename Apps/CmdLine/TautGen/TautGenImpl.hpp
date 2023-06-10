@@ -30,7 +30,6 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <chrono>
 #include <mutex>
 
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -38,6 +37,7 @@
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/Chem/ProtonationStateStandardizer.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -102,7 +102,7 @@ namespace TautGen
 
 		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-		void printStatistics(std::size_t num_proc_mols, std::size_t num_gen_taut, std::size_t proc_time);
+		void printStatistics(std::size_t num_proc_mols, std::size_t num_gen_taut);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
@@ -126,8 +126,8 @@ namespace TautGen
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-		typedef std::chrono::system_clock Clock;
 		typedef CDPL::Chem::ProtonationStateStandardizer ChargeNeutralizer;
+		typedef CDPL::Internal::Timer Timer;
 		
 		StringList         inputFiles;
 		std::string        outputFile;
@@ -156,7 +156,7 @@ namespace TautGen
 		std::mutex         readMolMutex;
 		std::mutex         writeMolMutex;
 		std::string        errorMessage;
-		Clock::time_point  startTime;
+		Timer              timer;
 		std::size_t        numOutTautomers;
 		ChargeNeutralizer  neutralizer;
     };

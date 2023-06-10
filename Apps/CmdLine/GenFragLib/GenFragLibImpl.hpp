@@ -32,13 +32,13 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
-#include <chrono>
 #include <mutex>
 
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -114,7 +114,7 @@ namespace GenFragLib
 		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
 		void printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, std::size_t num_error_frags, 
-							 std::size_t num_added_frags, std::size_t num_gen_confs, std::size_t proc_time);
+							 std::size_t num_added_frags, std::size_t num_gen_confs);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
@@ -136,7 +136,7 @@ namespace GenFragLib
 		typedef std::unordered_map<std::uint64_t, std::size_t> FragmentFrequencyMap;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
-		typedef std::chrono::system_clock Clock;
+		typedef CDPL::Internal::Timer Timer;
 		typedef CDPL::ConfGen::FragmentConformerGeneratorSettings ConformerGeneratorSettings;
 
 		StringList                     inputFiles;
@@ -153,7 +153,7 @@ namespace GenFragLib
 		std::mutex                     mutex;
 		std::mutex                     molReadMutex;
 		std::string                    errorMessage;
-		Clock::time_point              startTime;
+		Timer                          timer;
     };
 }
 

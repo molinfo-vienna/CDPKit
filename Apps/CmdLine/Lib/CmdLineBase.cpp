@@ -32,6 +32,7 @@
 #include <csignal>
 #include <iostream>
 #include <atomic>
+#include <chrono>
 
 #include <boost/program_options/parsers.hpp>
 #include <boost/shared_ptr.hpp>
@@ -98,7 +99,7 @@ namespace
 
 CmdLineBase::CmdLineBase(): 
 	optOptions("Other Options"), mandOptions("Mandatory Options"), verbLevel(INFO), 
-	logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1), progressStartTime(Clock::now()),
+	logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1),
 	inProgressLine(false), inNewLine(true)
 {
 	addOption("help,h", "Print help message and exit (ABOUT, USAGE, SHORT, ALL or 'name of option', default: SHORT).", 
@@ -296,7 +297,7 @@ void CmdLineBase::initProgress(std::size_t prog_bar_len)
 {
 	progressBarLen = prog_bar_len;
 	lastProgressValue = -1;
-	progressStartTime = Clock::now();
+	progTimer.reset();
 }
 
 void CmdLineBase::printProgress(const std::string& prefix, double progress)
@@ -325,9 +326,7 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 			  << "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
 			  << std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
 
-	Clock::duration elapsed = Clock::now() - progressStartTime;
-	std::size_t tot_eta_secs = std::chrono::duration_cast<std::chrono::duration<std::size_t> >(
-		elapsed / progress * (1.0 - progress)).count();
+	std::size_t tot_eta_secs = (std::chrono::duration_cast<std::chrono::seconds>(progTimer.elapsed()).count() + 1) / progress * (1.0 - progress);
 
 	std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) 
 			  << std::setw(10) << "\r";
@@ -342,9 +341,7 @@ void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
 		return;
 
 	if (!force) {
-		Clock::duration elapsed = Clock::now() - progressStartTime;
-
-		if (std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count() < boost::int_least64_t(progressUpdateInterv))
+		if (std::chrono::duration_cast<std::chrono::milliseconds>(progTimer.elapsed()) < std::chrono::milliseconds(progressUpdateInterv))
 			return;
 	}
 
@@ -357,7 +354,7 @@ void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
 	if (++lastProgressDotCount > maxProgressDotCount)
 		lastProgressDotCount = 1;
 
-	progressStartTime = Clock::now();
+	progTimer.reset();
 	inProgressLine = true;
 	inNewLine = false;
 }
@@ -367,7 +364,6 @@ void CmdLineBase::initInfiniteProgress(std::size_t prog_update_interv, std::size
 	progressUpdateInterv = prog_update_interv;
 	lastProgressDotCount = 1;
 	maxProgressDotCount = max_num_dots;
-	progressStartTime = Clock::now() - std::chrono::milliseconds(prog_update_interv);
 }
 
 void CmdLineBase::throwValidationError(const std::string& opt_name) const

@@ -26,6 +26,7 @@
 
 #include <cstdlib>
 #include <algorithm>
+#include <chrono>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -110,7 +111,7 @@ void PSDMergeImpl::setCreationMode(const std::string& mode)
 
 int PSDMergeImpl::process()
 {
-	startTime = Clock::now();
+	timer.reset();
 
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
@@ -175,16 +176,16 @@ int PSDMergeImpl::mergeDatabases()
 		return EXIT_FAILURE;
 
 	printStatistics(db_creator.getNumProcessed(), db_creator.getNumRejected(),
-					db_creator.getNumDeleted(), db_creator.getNumInserted(),
-					std::chrono::duration_cast<std::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+					db_creator.getNumDeleted(), db_creator.getNumInserted());
 
 	return EXIT_SUCCESS;
 }
 
 void PSDMergeImpl::printStatistics(std::size_t num_proc, std::size_t num_rej, 
-								   std::size_t num_del, std::size_t num_ins,
-								   std::size_t proc_time)
+								   std::size_t num_del, std::size_t num_ins)
 {
+	std::size_t proc_time = std::chrono::duration_cast<std::chrono::seconds>(timer.elapsed()).count();
+	
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules: " + std::to_string(num_proc));
 	printMessage(INFO, " Rejected  Molecules: " + std::to_string(num_rej));

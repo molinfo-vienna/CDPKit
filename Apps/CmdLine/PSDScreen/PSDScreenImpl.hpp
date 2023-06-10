@@ -30,7 +30,6 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <chrono>
 #include <mutex>
 
 #include <boost/shared_ptr.hpp>
@@ -40,6 +39,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Internal/Timer.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
 
@@ -121,10 +121,10 @@ namespace PSDScreen
 		void addOptionLongDescriptions();
 	
 		typedef CDPL::Pharm::ScreeningProcessor::HitReportMode MatchingMode;
-		typedef std::chrono::system_clock Clock;
 		typedef boost::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer HitWriterPtr;
 		typedef CDPL::Base::DataReader<CDPL::Pharm::Pharmacophore>::SharedPointer QueryReaderPtr;
+		typedef CDPL::Internal::Timer Timer;
 		typedef std::vector<double> WorkerProgressArray;
 
 		std::string              queryPharmFile;
@@ -152,7 +152,7 @@ namespace PSDScreen
 		std::mutex               mutex;
 		std::mutex               collHitMutex;
 		std::string              errorMessage;
-		Clock::time_point        startTime;
+		Timer                    timer;
 		std::size_t              numQueryPharms;
 		std::size_t              numDBMolecules;
 		std::size_t              numDBPharms;

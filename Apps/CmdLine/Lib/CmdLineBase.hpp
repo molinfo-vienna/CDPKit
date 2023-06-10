@@ -33,6 +33,8 @@
 #include <map>
 #include <chrono>
 
+#include "CDPL/Internal/Timer.hpp"
+
 #include <boost/program_options/options_description.hpp>
 #include <boost/program_options/variables_map.hpp>
 
@@ -135,7 +137,7 @@ namespace CmdLineLib
 		typedef boost::program_options::options_description OptionsDescription;
 		typedef boost::program_options::variables_map VariablesMap;
 		typedef std::map<std::string, std::string> StringMap;
-		typedef std::chrono::system_clock Clock;
+		typedef CDPL::Internal::Timer Timer;
 
 		OptionsDescription optOptions;
 		OptionsDescription mandOptions;
@@ -150,9 +152,9 @@ namespace CmdLineLib
 		std::size_t        progressUpdateInterv;
 		std::size_t        lastProgressDotCount;
 		std::size_t        maxProgressDotCount;
-		Clock::time_point  progressStartTime;
 		bool               inProgressLine;
 		bool               inNewLine;
+		Timer              progTimer;
     };
 
 
