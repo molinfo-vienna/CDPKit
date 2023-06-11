@@ -136,12 +136,12 @@ namespace CDPL
 			}
 
 			RegularSpatialGrid(const RegularSpatialGrid& usg):
-				dataMode(usg.dataMode), data(usg.data), xform(usg.xform), invXform(usg.invXform),
-				xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep) {}
+				dataMode(usg.dataMode), data(usg.data), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
+				xform(usg.xform), invXform(usg.invXform) {}
 
 			RegularSpatialGrid(RegularSpatialGrid&& usg):
-				dataMode(usg.dataMode), data(std::move(usg.data)), xform(usg.xform), invXform(usg.invXform),
-				xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep) {}
+				dataMode(usg.dataMode), data(std::move(usg.data)), xStep(usg.xStep), yStep(usg.yStep), zStep(usg.zStep),
+				xform(usg.xform), invXform(usg.invXform) {}
 			
 			virtual ~RegularSpatialGrid() {}
 
