@@ -74,6 +74,13 @@ class SparseFMatrix(Boost.Python.instance):
 
     ##
     # \brief 
+    # \param m 
+    # \param n 
+    #
+    def resize(m: int, n: int) -> None: pass
+
+    ##
+    # \brief 
     #
     def clear() -> None: pass
 

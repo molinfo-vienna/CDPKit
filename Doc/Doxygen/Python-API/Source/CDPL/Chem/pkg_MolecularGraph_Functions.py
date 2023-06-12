@@ -1272,18 +1272,10 @@ def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgra
 
 ##
 # \brief 
-# \param src_molgraph 
-# \param tgt_molgraph 
-# \param mtx 
-#
-def extractTopologicalDistanceSubMatrix(src_molgraph: MolecularGraph, tgt_molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
-
-##
-# \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildBondMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def buildBondMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1299,13 +1291,6 @@ def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, overwrite: bool) -> 
 # \param mtx 
 #
 def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
-
-##
-# \brief 
-# \param molgraph 
-# \param mtx 
-#
-def calcTopologicalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
@@ -1374,28 +1359,28 @@ def setGeometricalDistanceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.DMatri
 # \param molgraph 
 # \param mtx 
 #
-def buildIncidenceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def buildIncidenceMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def buildBondAtomTypeMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildBondElectronMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def buildBondElectronMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
 # \param molgraph 
 # \param mtx 
 #
-def buildAdjacencyMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.ULMatrix) -> None: pass
+def buildAdjacencyMatrix(molgraph: MolecularGraph, mtx: CDPL.Math.SparseULMatrix) -> None: pass
 
 ##
 # \brief 
