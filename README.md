@@ -3,7 +3,7 @@
 The CDPkit is an open-source software toolkit for cheminformatics, which stands for chemical informatics. 
 It is widely used in the field of computational chemistry and drug discovery. 
 CDPkit provides a wide range of functionality for handling and analyzing chemical structures, 
-including molecule representation, substructure searching, molecular fingerprinting, molecular visualization, and property prediction.
+including molecule representation, pharmacophore generation, substructure searching, molecular fingerprinting, molecular visualization, molecular conformation generation, and property prediction.
 
 At its core, CDPkit allows scientists to manipulate and analyze molecules and chemical reactions using computer algorithms. 
 It provides a set of programming tools and libraries that enable researchers to work with molecular data in a systematic and efficient manner. 
@@ -103,24 +103,30 @@ Once CDPKit is installed, you can start using it in your Python code. Here's an 
 ```python
 # Import the necessary CDPKit modules
 from CDPKit import Chem
-from CDPKit.Chem import Draw
 
-# Create a molecule from a SMILES string
-smiles = 'CCO'
-mol = Chem.MolFromSmiles(smiles)
+# if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
+# reader = Chem.FileSDFMoleculeReader(molecule.sdf)
+# here we provide the reader with a string (path) to the molecule.sdf 
+reader = getReaderByFileExt(molecule.sdf) 
 
-# Compute the molecular weight of the molecule
-mol_weight = Chem.rdMolDescriptors.CalcExactMolWt(mol)
+# create an instance of the default implementation of the Chem.Molecule interface
+mol = Chem.BasicMolecule()
 
-# Generate a 2D depiction of the molecule
-img = Draw.MolToImage(mol)
+# reads the molecule
+reader.read(mol)
 
-# Display the molecule and its properties
-img.show()
-print('Molecular Weight:', mol_weight)
+# print the number of atoms and bonds for the molecule
+print('Processing molecule with {!s} atoms and {!s} bonds'.format(mol.numAtoms, mol.numBonds))
+
+# generate the ligand based pharmacophore model for it
+ph4 = genPharmacophore(mol) # generate pharmacophore
+
+# print some stats about it
+print(' -> Generated %s features: %s' % (str(ph4.numFeatures), createFeatureCompositionStr(ph4)))
+
 ```
 
-In the above code, we import the required CDPKit modules, create a molecule from a SMILES string, compute the molecular weight using CDPKit's built-in functions, generate a 2D depiction of the molecule, display it, and print its molecular weight.
+In the above code, we import the required CDPKit modules, create a molecule from an SDF string, compute the ligand based pharmacophore model using CDPKit's built-in functions and print some of its molecular features.
 
 ### Further Exploration
 
