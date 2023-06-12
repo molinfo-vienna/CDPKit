@@ -44,58 +44,6 @@ using namespace CDPL;
 namespace
 {
 
-/*
-	// Floyd-Warshall Algorithm
-	// appears to be rather slow for macromolecules with mainly chains
-
-	template <typename Mtx>
-	void calcTopologicalDistancesFW(const Chem::MolecularGraph& molgraph, Mtx& mtx)
-	{
-		using namespace Chem;
-
-		std::size_t num_atoms = molgraph.getNumAtoms();
-
-        mtx.resize(num_atoms, num_atoms, false);
-        mtx.clear();
-
-		for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
-			const Bond& bond = *it;
-
-			try {
-				std::size_t i = molgraph.getAtomIndex(bond.getBegin());
-				std::size_t j = molgraph.getAtomIndex(bond.getEnd());
-
-				mtx(i, j) = 1;
-				mtx(j, i) = 1;
-
-			} catch (const Base::ItemNotFound& e) {}
-		}
-
-		for (std::size_t k = 0; k < num_atoms; k++) {
-			for (std::size_t i = 0; i < num_atoms; i++) {
-				for (std::size_t j = i + 1; j < num_atoms; j++) {
-					typename Mtx::ValueType dist_ik =  mtx(i, k);
-
-					if (dist_ik == 0)
-						continue;
-
-					typename Mtx::ValueType dist_kj =  mtx(k, j);
-
-					if (dist_kj == 0)
-						continue;
-
-					typename Mtx::ValueType dist_ij = mtx(i, j);
-					typename Mtx::ValueType dist_ikj = dist_ik + dist_kj;
-
-					if (dist_ij == 0 || dist_ij > dist_ikj) {
-						mtx(i, j) = dist_ikj;
-						mtx(j, i) = dist_ikj;
-					}
-				}
-			}
-		}
-	}
-*/
 	template <typename Mtx>
 	void calcTopologicalDistances(const Chem::MolecularGraph& molgraph, Mtx& mtx)
 	{
@@ -103,7 +51,7 @@ namespace
 
 		std::size_t num_atoms = molgraph.getNumAtoms();
 
-        mtx.resize(num_atoms, num_atoms, false);
+        mtx.resize(num_atoms, num_atoms);
         mtx.clear();
 
 		Util::BitSet vis_atoms(molgraph.getNumAtoms());
@@ -168,7 +116,7 @@ namespace
 		const Math::ULMatrix& src_mtx = *getTopologicalDistanceMatrix(src_molgraph);
 		std::size_t num_atoms = tgt_molgraph.getNumAtoms();
 
-        mtx.resize(num_atoms, num_atoms, false);
+        mtx.resize(num_atoms, num_atoms);
         mtx.clear();
 
 		for (std::size_t i = 0; i < num_atoms; i++) {
@@ -225,16 +173,6 @@ void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::U
 }
 
 void Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx)
-{
-	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
-}
-
-void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
-{
-	calcTopologicalDistances(molgraph, mtx);
-}
-
-void Chem::extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::SparseULMatrix& mtx)
 {
 	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
 }

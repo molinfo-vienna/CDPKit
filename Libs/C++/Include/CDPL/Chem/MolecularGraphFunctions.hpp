@@ -336,15 +336,15 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMOL2ChargeType(const MolecularGraph& molgraph);
 
 
-		CDPL_CHEM_API void buildAdjacencyMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+		CDPL_CHEM_API void buildAdjacencyMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-		CDPL_CHEM_API void buildIncidenceMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+		CDPL_CHEM_API void buildIncidenceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-		CDPL_CHEM_API void buildBondMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+		CDPL_CHEM_API void buildBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-		CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+		CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
-		CDPL_CHEM_API void buildBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+		CDPL_CHEM_API void buildBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
 	
 		CDPL_CHEM_API const Math::ULMatrix::SharedPointer& getTopologicalDistanceMatrix(const MolecularGraph& molgraph);
@@ -359,13 +359,9 @@ namespace CDPL
 
 		CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
 
-		CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
-
 		CDPL_CHEM_API Math::ULMatrix::SharedPointer extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite);
 
 		CDPL_CHEM_API void extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx);
-
-		CDPL_CHEM_API void extractTopologicalDistanceSubMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::SparseULMatrix& mtx);
 
 
 		CDPL_CHEM_API const Math::DMatrix::SharedPointer& getGeometricalDistanceMatrix(const MolecularGraph& molgraph);

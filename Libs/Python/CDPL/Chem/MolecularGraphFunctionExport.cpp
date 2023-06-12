@@ -230,9 +230,13 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("calcTopologicalDistanceMatrix", 
 				static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
 				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
+				(python::arg("molgraph"), python::arg("mtx")));
     python::def("extractTopologicalDistanceSubMatrix", 
 				static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceSubMatrix),
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")));
+	python::def("extractTopologicalDistanceSubMatrix", static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::extractTopologicalDistanceSubMatrix), 
+				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
  	python::def("extractReactionCenter", &Chem::extractReactionCenter, 
 				(python::arg("molgraph"), python::arg("rxn_center")),
 				python::with_custodian_and_ward<2, 1>());
@@ -246,20 +250,12 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("buildBondElectronMatrix", &Chem::buildBondElectronMatrix, 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
-				(python::arg("molgraph"), python::arg("mtx")));
-	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
-				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("extractTopologicalDistanceSubMatrix", static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::extractTopologicalDistanceSubMatrix), 
-				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
-	python::def("extractTopologicalDistanceSubMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceSubMatrix), 
-				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
+
 	python::def("perceivePiElectronSystems", static_cast<Chem::ElectronSystemList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceivePiElectronSystems),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceivePiElectronSystems",
 				static_cast<Chem::ElectronSystemList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceivePiElectronSystems),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-	
 	python::def("getCompleteBondCount", &Chem::getCompleteBondCount, python::arg("molgraph"));
 		
 	python::def("generateINCHI", &generateINCHIWrapper, 

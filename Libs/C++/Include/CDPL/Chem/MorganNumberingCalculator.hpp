@@ -101,7 +101,7 @@ namespace CDPL
 
 			public:
 				NumberingState(STPairArray* sym_class_ids, SArray* symbols, 
-							   LArray* charges, STArray* isotopes, Math::ULMatrix* bond_mtx): 
+							   LArray* charges, STArray* isotopes, Math::SparseULMatrix* bond_mtx): 
 					symClassIDs(sym_class_ids), atomSymbols(symbols), 
 					atomCharges(charges), atomIsotopes(isotopes), bondMatrix(bond_mtx) {}
 
@@ -129,7 +129,7 @@ namespace CDPL
 				SArray*                  atomSymbols;
 				LArray*                  atomCharges;
 				STArray*                 atomIsotopes;
-				Math::ULMatrix*          bondMatrix;
+				Math::SparseULMatrix*    bondMatrix;
 				const MolecularGraph*    molGraph;
 				STPairArray              atomNumbering;
 				STArray                  indexLookupTable;
@@ -144,12 +144,12 @@ namespace CDPL
 				bool                     sortRCList;
 			};	
 
-			STPairArray    symClassIDs;
-			SArray         atomSymbols;
-			LArray         atomCharges;
-			STArray        atomIsotopes;
-			Math::ULMatrix bondMatrix;
-			NumberingState numbering;
+			STPairArray          symClassIDs;
+			SArray               atomSymbols;
+			LArray               atomCharges;
+			STArray              atomIsotopes;
+			Math::SparseULMatrix bondMatrix;
+			NumberingState       numbering;
 		};
 	}
 }

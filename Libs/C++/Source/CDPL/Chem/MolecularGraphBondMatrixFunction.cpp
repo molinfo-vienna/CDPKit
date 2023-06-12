@@ -34,11 +34,11 @@
 using namespace CDPL; 
 
 
-void Chem::buildBondMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx)
+void Chem::buildBondMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
-	mtx.resize(num_atoms, num_atoms, false);
+	mtx.resize(num_atoms, num_atoms);
 	mtx.clear();
 
 	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
