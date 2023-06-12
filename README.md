@@ -28,8 +28,6 @@ and other properties of potential drug candidates.
 In summary, CDPkit is a powerful and versatile toolkit for cheminformatics, offering a comprehensive set of tools and libraries for molecular manipulation, analysis, 
 and property prediction. Its wide range of functionality makes it an indispensable resource for scientists working in the field of computational chemistry and drug discovery.
 
-Certainly! Here's a markdown for getting started with CDPKit:
-
 ## Getting Started with CDPKit
 
 CDPKit is an open-source cheminformatics toolkit that provides a wide range of functionality for working with chemical structures. This guide will help you get started with CDPKit and introduce you to some of its key features.
@@ -53,9 +51,7 @@ To install CDPKit, you can use the following steps:
 
 **Python Environment**: Ensure you have a Python environment set up. CDPKit is primarily used with Python, so make sure you have Python installed on your system.
 
-2. **Install CDPKit**: 
-Installation Instructions
-*************************
+2. **Install CDPKit**
 
 build makefiles. The makefiles are generated as follows
 (assuming a Linux build):
