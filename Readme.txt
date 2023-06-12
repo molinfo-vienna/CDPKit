@@ -51,11 +51,9 @@ To install CDPKit, you can use the following steps:
 
 **Python Environment**: Ensure you have a Python environment set up. CDPKit is primarily used with Python, so make sure you have Python installed on your system.
 
-2. **Install CDPKit**: 
-Installation Instructions
-*************************
+2. **Install CDPKit**
 
-build makefiles. The makefiles are generated as follows
+Build makefiles. The makefiles are generated as follows
 (assuming a Linux build):
 
 ```
