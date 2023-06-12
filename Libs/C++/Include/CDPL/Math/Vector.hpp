@@ -377,6 +377,7 @@ namespace CDPL
 			
 			template <typename E>
 			Vector& assign(const VectorExpression<E>& e) {
+				resize(e().getSize());
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
