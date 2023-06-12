@@ -311,7 +311,6 @@ namespace CDPL
 			Grid& operator=(const GridExpression<E>& e) {
 				Grid tmp(e);
 				swap(tmp);
-
 				return *this;
 			}
 
@@ -324,7 +323,6 @@ namespace CDPL
 			Grid& operator+=(const GridExpression<E>& e) {
 				Grid tmp(*this + e);
 				swap(tmp);
-
 				return *this;
 			}	
 
@@ -337,7 +335,6 @@ namespace CDPL
 			Grid& operator-=(const GridExpression<E>& e) {
 				Grid tmp(*this - e);
 				swap(tmp);
-
 				return *this;
 			}
 
@@ -355,7 +352,7 @@ namespace CDPL
 			
 			template <typename E>
 			Grid& assign(const GridExpression<E>& e) {
-				resize(e().getSize1(), e().getSize2());
+				resize(e().getSize1(), e().getSize2(), false);
 				gridAssignGrid<ScalarAssignment>(*this, e);
 				return *this;
 			}
