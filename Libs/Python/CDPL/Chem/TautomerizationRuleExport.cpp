@@ -40,7 +40,7 @@ namespace
     struct TautomerizationRuleWrapper : CDPL::Chem::TautomerizationRule, boost::python::wrapper<CDPL::Chem::TautomerizationRule> 
     {
 
-		typedef boost::shared_ptr<TautomerizationRuleWrapper> SharedPointer;
+		typedef std::shared_ptr<TautomerizationRuleWrapper> SharedPointer;
 
 		unsigned int getID() const {
 			return this->get_override("getID")();

@@ -24,7 +24,8 @@
  */
 
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
+
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Util/Dereferencer.hpp"
@@ -39,7 +40,7 @@ BOOST_AUTO_TEST_CASE(DereferencerTest)
 	int data = 5;
 	int* data_ptr = &data;
 
-	boost::shared_ptr<int> shared_ptr(new int(6));
+	std::shared_ptr<int> shared_ptr(new int(6));
 
 //------
 
@@ -60,13 +61,13 @@ BOOST_AUTO_TEST_CASE(DereferencerTest)
 
 //------
 
-	Dereferencer<boost::shared_ptr<int>, int> deref3;
+	Dereferencer<std::shared_ptr<int>, int> deref3;
 
 	BOOST_CHECK(*shared_ptr == deref3(shared_ptr));
 
 //------
 
-	Dereferencer<boost::shared_ptr<int>, int&> deref4;
+	Dereferencer<std::shared_ptr<int>, int&> deref4;
 
 	BOOST_CHECK(&deref4(shared_ptr) == shared_ptr.get());
 	BOOST_CHECK(*shared_ptr == deref4(shared_ptr));
@@ -98,17 +99,17 @@ BOOST_AUTO_TEST_CASE(DereferencerTest)
 
 //------
 
-	NullCheckDereferencer<boost::shared_ptr<int>, int> deref7;
+	NullCheckDereferencer<std::shared_ptr<int>, int> deref7;
 
-	BOOST_CHECK_THROW(deref7(boost::shared_ptr<int>()), Base::NullPointerException);
+	BOOST_CHECK_THROW(deref7(std::shared_ptr<int>()), Base::NullPointerException);
 
 	BOOST_CHECK(*shared_ptr == deref7(shared_ptr));
 
 //------
 
-	NullCheckDereferencer<boost::shared_ptr<int>, int&> deref8;
+	NullCheckDereferencer<std::shared_ptr<int>, int&> deref8;
 
-	BOOST_CHECK_THROW(deref8(boost::shared_ptr<int>()), Base::NullPointerException);
+	BOOST_CHECK_THROW(deref8(std::shared_ptr<int>()), Base::NullPointerException);
 
 	BOOST_CHECK(&deref8(shared_ptr) == shared_ptr.get());
 	BOOST_CHECK(*shared_ptr == deref8(shared_ptr));

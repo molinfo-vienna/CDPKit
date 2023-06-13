@@ -35,8 +35,7 @@
 #include <iosfwd>
 #include <cstddef>
 #include <unordered_map>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 
@@ -53,7 +52,7 @@ namespace CDPL
 	    typedef std::unordered_map<std::string, unsigned int> DataStorage;
 
 	  public:
-	    typedef boost::shared_ptr<MMFF94SymbolicToNumericAtomTypeMap> SharedPointer;
+	    typedef std::shared_ptr<MMFF94SymbolicToNumericAtomTypeMap> SharedPointer;
 
 	    typedef DataStorage::const_iterator ConstEntryIterator;
 	    typedef DataStorage::iterator EntryIterator;

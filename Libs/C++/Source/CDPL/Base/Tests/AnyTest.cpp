@@ -28,10 +28,10 @@
 #include <typeinfo>
 #include <limits>
 #include <locale>
+#include <memory>
 
 #include <boost/test/auto_unit_test.hpp>
 #include <boost/test/floating_point_comparison.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/Any.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -264,18 +264,18 @@ BOOST_AUTO_TEST_CASE(AnyTest)
 
 //-----
 
-	boost::shared_ptr<std::string> string_ptr(new std::string("Test"));
+	std::shared_ptr<std::string> string_ptr(new std::string("Test"));
 
 	v1 = string_ptr;
 
 	BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(boost::shared_ptr<std::string>));
+	BOOST_CHECK(v1.getTypeID() == typeid(std::shared_ptr<std::string>));
 
 	BOOST_CHECK(v1.getDataPointer() != 0);
 
 	BOOST_CHECK(&v1.getData<Any>() == &v1);
-	BOOST_CHECK(v1.getData<boost::shared_ptr<std::string> >().get() == string_ptr.get());
+	BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
 
 	BOOST_CHECK_THROW(v1.getData<std::string>(), BadCast);
 
@@ -300,12 +300,12 @@ BOOST_AUTO_TEST_CASE(AnyTest)
 
 	BOOST_CHECK(!v3.isEmpty());
 
-	BOOST_CHECK(v3.getTypeID() == typeid(boost::shared_ptr<std::string>));
+	BOOST_CHECK(v3.getTypeID() == typeid(std::shared_ptr<std::string>));
 
 	BOOST_CHECK(v3.getDataPointer() != 0);
 
 	BOOST_CHECK(&v3.getData<Any>() == &v3);
-	BOOST_CHECK(v3.getData<boost::shared_ptr<std::string> >().get() == string_ptr.get());
+	BOOST_CHECK(v3.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
 
 	BOOST_CHECK_THROW(v3.getData<std::string>(), BadCast);
 
@@ -322,7 +322,7 @@ BOOST_AUTO_TEST_CASE(AnyTest)
 	BOOST_CHECK(v1.getData<unsigned short>() == static_cast<unsigned short>(30000));
 
 	BOOST_CHECK_THROW(v1.getData<short>(), BadCast);
-	BOOST_CHECK_THROW(v1.getData<boost::shared_ptr<unsigned short> >(), BadCast);
+	BOOST_CHECK_THROW(v1.getData<std::shared_ptr<unsigned short> >(), BadCast);
 
 //-----
 
@@ -336,18 +336,18 @@ BOOST_AUTO_TEST_CASE(AnyTest)
 
 	BOOST_CHECK(v3.getData<unsigned short>() == static_cast<unsigned short>(30000));
 
-	BOOST_CHECK_THROW(v3.getData<boost::shared_ptr<unsigned short> >(), BadCast);
+	BOOST_CHECK_THROW(v3.getData<std::shared_ptr<unsigned short> >(), BadCast);
 
 
 	BOOST_CHECK(!v1.isEmpty());
 
-	BOOST_CHECK(v1.getTypeID() == typeid(boost::shared_ptr<std::string>));
+	BOOST_CHECK(v1.getTypeID() == typeid(std::shared_ptr<std::string>));
 
 	BOOST_CHECK(v1.getDataPointer() != 0);
 
-	BOOST_CHECK(v1.getData<boost::shared_ptr<std::string> >().get() == string_ptr.get());
+	BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
 
-	BOOST_CHECK(v1.getData<boost::shared_ptr<std::string> >().get() == string_ptr.get());
+	BOOST_CHECK(v1.getData<std::shared_ptr<std::string> >().get() == string_ptr.get());
 
 //-----
 

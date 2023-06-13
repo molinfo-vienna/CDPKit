@@ -35,13 +35,9 @@
 #include <cstddef>
 #include <algorithm>
 #include <new>
-
-#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
-# define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#endif
+#include <memory>
 
 #include <boost/bind.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Util/Dereferencer.hpp"
@@ -62,7 +58,7 @@ namespace CDPL
 
 		public:
 			typedef T ObjectType;
-			typedef boost::shared_ptr<ObjectType> SharedObjectPointer;
+			typedef std::shared_ptr<ObjectType> SharedObjectPointer;
 			typedef boost::function0<ObjectType*> ConstructorFunction;
 			typedef boost::function1<void, ObjectType*> DestructorFunction;
 			typedef boost::function1<void, ObjectType&> ObjectFunction;

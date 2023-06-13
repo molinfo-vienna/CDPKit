@@ -31,7 +31,7 @@
 #ifndef CDPL_BASE_CONTROLPARAMETERLIST_HPP
 #define CDPL_BASE_CONTROLPARAMETERLIST_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
@@ -52,9 +52,9 @@ namespace CDPL
 		
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ControlParameterList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ControlParameterList instances.
 			 */
-			typedef boost::shared_ptr<ControlParameterList> SharedPointer;
+			typedef std::shared_ptr<ControlParameterList> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty \c %ControlParameterList instance.

@@ -27,8 +27,9 @@
 #ifndef CDPL_PYTHON_BASE_DATAREADEREXPORT_HPP
 #define CDPL_PYTHON_BASE_DATAREADEREXPORT_HPP
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/DataReader.hpp"
 
@@ -40,7 +41,7 @@ namespace CDPLPythonBase
 	struct DataReaderWrapper : CDPL::Base::DataReader<T>, boost::python::wrapper<CDPL::Base::DataReader<T> >
 	{
 
-		typedef boost::shared_ptr<DataReaderWrapper<T> > SharedPointer;
+		typedef std::shared_ptr<DataReaderWrapper<T> > SharedPointer;
 
 		CDPL::Base::DataReader<T>& read(T& obj, bool overwrite) {
 			this->get_override("read")(boost::ref(obj), overwrite);

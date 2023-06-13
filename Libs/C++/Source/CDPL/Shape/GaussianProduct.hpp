@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <vector>
 #include <cmath>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/GaussianShape.hpp"
 
@@ -54,7 +53,7 @@ namespace CDPL
 			typedef std::vector<const GaussianProduct*> FactorList;
 				
 		  public:
-			typedef boost::shared_ptr<GaussianProduct> SharedPointer;
+			typedef std::shared_ptr<GaussianProduct> SharedPointer;
 			typedef FactorList::const_iterator ConstFactorIterator;
 
 			GaussianProduct();

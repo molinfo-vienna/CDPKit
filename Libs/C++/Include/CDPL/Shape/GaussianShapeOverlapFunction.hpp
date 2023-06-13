@@ -32,8 +32,8 @@
 #define CDPL_SHAPE_GAUSSIANSHAPEOVERLAPFUNCTION_HPP
 
 #include <cstddef>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
@@ -52,7 +52,7 @@ namespace CDPL
 		{
 			
 		  public:
-			typedef boost::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
+			typedef std::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
 
 			typedef boost::function1<bool, std::size_t> ColorFilterFunction;
 			typedef boost::function2<bool, std::size_t, std::size_t> ColorMatchFunction;

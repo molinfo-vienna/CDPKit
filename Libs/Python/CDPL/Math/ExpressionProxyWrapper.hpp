@@ -27,8 +27,9 @@
 #ifndef CDPL_PYTHON_MATH_EXPRESSIONPROXYWRAPPER_HPP
 #define CDPL_PYTHON_MATH_EXPRESSIONPROXYWRAPPER_HPP
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 
 namespace CDPLPythonMath
@@ -39,7 +40,7 @@ namespace CDPLPythonMath
 	{
 
 		typedef typename ExpressionType::SharedPointer ExpressionPointerType;
-		typedef boost::shared_ptr<VectorExpressionProxyWrapper> SharedPointer;
+		typedef std::shared_ptr<VectorExpressionProxyWrapper> SharedPointer;
 
 		VectorExpressionProxyWrapper(const VectorExpressionProxyWrapper& ph): ProxyType(ph), exprPointer(ph.exprPointer) {}
 
@@ -58,7 +59,7 @@ namespace CDPLPythonMath
 	{
 
 		typedef typename ExpressionType::SharedPointer ExpressionPointerType;
-		typedef boost::shared_ptr<MatrixExpressionProxyWrapper> SharedPointer;
+		typedef std::shared_ptr<MatrixExpressionProxyWrapper> SharedPointer;
 
 		MatrixExpressionProxyWrapper(const MatrixExpressionProxyWrapper& ph): ProxyType(ph), exprPointer(ph.exprPointer) {}
 

@@ -32,8 +32,7 @@
 #define CDPL_CHEM_PIELECTRONSYSTEMLIST_HPP
 
 #include <list>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/ElectronSystemList.hpp"
@@ -55,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %PiElectronSystemList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PiElectronSystemList instances.
 			 */
-			typedef boost::shared_ptr<PiElectronSystemList> SharedPointer;
+			typedef std::shared_ptr<PiElectronSystemList> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty \c %PiElectronSystemList instance.

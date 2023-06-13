@@ -32,8 +32,7 @@
 #define CDPL_PHARM_PATTERNBASEDFEATUREGENERATOR_HPP
 
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureGenerator.hpp"
@@ -61,7 +60,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
+			typedef std::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
 
 			enum PatternAtomLabelFlag 
 			{

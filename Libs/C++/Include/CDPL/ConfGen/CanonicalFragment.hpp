@@ -34,8 +34,7 @@
 #include <vector>
 #include <cstddef>
 #include <cstdint>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -58,9 +57,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %CanonicalFragment instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CanonicalFragment instances.
 			 */
-			typedef boost::shared_ptr<CanonicalFragment> SharedPointer;
+			typedef std::shared_ptr<CanonicalFragment> SharedPointer;
 		
 			typedef Chem::BasicMolecule::AtomIterator AtomIterator;
 			typedef Chem::BasicMolecule::ConstAtomIterator ConstAtomIterator;

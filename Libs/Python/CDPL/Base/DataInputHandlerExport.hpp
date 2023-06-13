@@ -27,8 +27,9 @@
 #ifndef CDPL_PYTHON_BASE_DATAINPUTHANDLEREXPORT_HPP
 #define CDPL_PYTHON_BASE_DATAINPUTHANDLEREXPORT_HPP
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataFormat.hpp"
@@ -46,7 +47,7 @@ namespace CDPLPythonBase
 	{
 
 		typedef typename CDPL::Base::DataInputHandler<T>::ReaderType ReaderType;
-		typedef boost::shared_ptr<DataInputHandlerWrapper> SharedPointer;
+		typedef std::shared_ptr<DataInputHandlerWrapper> SharedPointer;
 
 		const CDPL::Base::DataFormat& getDataFormat() const {
 			return this->get_override("getDataFormat")();

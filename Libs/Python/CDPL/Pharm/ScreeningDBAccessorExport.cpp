@@ -42,7 +42,7 @@ namespace
 	struct ScreeningDBAccessorWrapper : CDPL::Pharm::ScreeningDBAccessor, boost::python::wrapper<CDPL::Pharm::ScreeningDBAccessor> 
 	{
 
-		typedef boost::shared_ptr<ScreeningDBAccessorWrapper> SharedPointer;
+		typedef std::shared_ptr<ScreeningDBAccessorWrapper> SharedPointer;
 
 		void open(const std::string& name) {
 			this->get_override("open")(name);

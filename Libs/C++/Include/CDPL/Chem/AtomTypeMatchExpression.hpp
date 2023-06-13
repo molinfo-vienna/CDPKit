@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ATOMTYPEMATCHEXPRESSION_HPP
 #define CDPL_CHEM_ATOMTYPEMATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -54,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %AtomTypeMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomTypeMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<AtomTypeMatchExpression> SharedPointer;
+			typedef std::shared_ptr<AtomTypeMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs an \c %AtomTypeMatchExpression instance for the specified query atom type and matching mode.

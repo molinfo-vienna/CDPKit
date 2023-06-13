@@ -31,8 +31,7 @@
 #include <vector>
 #include <string>
 #include <mutex>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Base/DataReader.hpp"
@@ -121,7 +120,7 @@ namespace PSDScreen
 		void addOptionLongDescriptions();
 	
 		typedef CDPL::Pharm::ScreeningProcessor::HitReportMode MatchingMode;
-		typedef boost::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
+		typedef std::shared_ptr<CDPL::Pharm::FileScreeningHitCollector> HitCollectorPtr;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer HitWriterPtr;
 		typedef CDPL::Base::DataReader<CDPL::Pharm::Pharmacophore>::SharedPointer QueryReaderPtr;
 		typedef CDPL::Internal::Timer Timer;

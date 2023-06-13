@@ -514,7 +514,7 @@ void ShapeScreenImpl::processMultiThreaded()
 {
     using namespace CDPL;
 
-    typedef boost::shared_ptr<ScreeningWorker> ScreeningWorkerPtr;
+    typedef std::shared_ptr<ScreeningWorker> ScreeningWorkerPtr;
     typedef std::vector<ScreeningWorkerPtr> ScreeningWorkerList;
 	typedef std::vector<std::thread> ThreadGroup;
 	

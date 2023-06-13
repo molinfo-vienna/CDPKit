@@ -34,8 +34,8 @@
 #include <vector>
 #include <utility>
 #include <unordered_map>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -60,9 +60,9 @@ namespace CDPL
 			
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ElectronSystem instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ElectronSystem instances.
 			 */
-			typedef boost::shared_ptr<ElectronSystem> SharedPointer;
+			typedef std::shared_ptr<ElectronSystem> SharedPointer;
 
 			/**
 			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.

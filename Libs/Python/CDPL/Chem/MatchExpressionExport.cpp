@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
@@ -47,7 +48,7 @@ namespace
 		CDPL::Chem::MatchExpression<ObjType1, ObjType2>, boost::python::wrapper<CDPL::Chem::MatchExpression<ObjType1, ObjType2> >
 	{
 
-		typedef boost::shared_ptr<MatchExpressionWrapper> SharedPointer;
+		typedef std::shared_ptr<MatchExpressionWrapper> SharedPointer;
 
 		bool operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 						const ObjType1& target_obj1, const ObjType2& target_obj2, 
@@ -106,7 +107,7 @@ namespace
 		CDPL::Chem::MatchExpression<ObjType, void>, boost::python::wrapper<CDPL::Chem::MatchExpression<ObjType, void> >
 	{
 
-		typedef boost::shared_ptr<MatchExpressionWrapper> SharedPointer;
+		typedef std::shared_ptr<MatchExpressionWrapper> SharedPointer;
 
 		bool operator()(const ObjType& query_obj, const ObjType& target_obj, const CDPL::Base::Any& aux_data) const {
 			boost::python::override override = this->get_override("matches");

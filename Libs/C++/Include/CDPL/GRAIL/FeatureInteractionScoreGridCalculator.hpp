@@ -33,9 +33,9 @@
 
 #include <vector>
 #include <cstddef>
+#include <memory>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -71,7 +71,7 @@ namespace CDPL
 		  public:
 			static constexpr double DEF_DISTANCE_CUTOFF = 10.0;
 			
-			typedef boost::shared_ptr<FeatureInteractionScoreGridCalculator> SharedPointer;
+			typedef std::shared_ptr<FeatureInteractionScoreGridCalculator> SharedPointer;
 
 			typedef boost::function1<bool, const Pharm::Feature&> FeaturePredicate;
 			typedef boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> ScoringFunction;
@@ -128,7 +128,7 @@ namespace CDPL
 		  private:
 			typedef std::vector<const Pharm::Feature*> FeatureList;
 			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::shared_ptr<Octree> OctreePtr;
 			typedef std::vector<std::size_t> FeatureIndexList;
 
 			FeatureList              tgtFeatures;

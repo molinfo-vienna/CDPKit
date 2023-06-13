@@ -52,9 +52,9 @@ namespace CDPL
 			static constexpr double DEF_MAX_DISTANCE = 5.5;
 
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %IonicInteractionScore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %IonicInteractionScore instances.
 			 */
-			typedef boost::shared_ptr<IonicInteractionScore> SharedPointer;
+			typedef std::shared_ptr<IonicInteractionScore> SharedPointer;
 
 			/**
 			 * \brief Constructs a \c %IonicInteractionScore functor with a 

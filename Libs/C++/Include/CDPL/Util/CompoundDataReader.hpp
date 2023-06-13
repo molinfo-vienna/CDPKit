@@ -34,10 +34,6 @@
 #include <vector>
 #include <algorithm>
 
-#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
-# define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#endif
-
 #include <boost/bind.hpp>
 
 #include "CDPL/Base/DataReader.hpp"
@@ -58,7 +54,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::shared_ptr<CompoundDataReader> SharedPointer;
+			typedef std::shared_ptr<CompoundDataReader> SharedPointer;
 
 			typedef Base::DataReader<DataType> ReaderType;
 			typedef typename ReaderType::SharedPointer ReaderPointer;

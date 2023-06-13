@@ -52,7 +52,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
+			typedef std::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
 
 			PSDScreeningDBAccessor();
 

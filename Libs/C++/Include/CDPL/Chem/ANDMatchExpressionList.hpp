@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ANDMATCHEXPRESSIONLIST_HPP
 #define CDPL_CHEM_ANDMATCHEXPRESSIONLIST_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/MatchExpressionList.hpp"
 
@@ -54,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
 			 */
-			typedef boost::shared_ptr<ANDMatchExpressionList> SharedPointer;
+			typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
 
 			/**
 			 * Performs an evaluation of the conjunctive expression list for the given query and target objects.
@@ -104,9 +104,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ANDMatchExpressionList instances.
 			 */
-			typedef boost::shared_ptr<ANDMatchExpressionList> SharedPointer;
+			typedef std::shared_ptr<ANDMatchExpressionList> SharedPointer;
 
 			/**
 			 * Performs an evaluation of the conjunctive expression list for the given query and target objects.

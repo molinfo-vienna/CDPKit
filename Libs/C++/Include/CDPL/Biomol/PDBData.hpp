@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <string>
 #include <map>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 
@@ -53,7 +52,7 @@ namespace CDPL
 	    {
 		
 		public:
-			typedef boost::shared_ptr<PDBData> SharedPointer;
+			typedef std::shared_ptr<PDBData> SharedPointer;
 
 			enum RecordType 
 			{

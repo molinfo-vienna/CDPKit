@@ -32,8 +32,7 @@
 #define CDPL_CHEM_MATCHCONSTRAINTLIST_HPP
 
 #include <utility>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/Any.hpp"
@@ -192,9 +191,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MatchConstraintList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchConstraintList instances.
 			 */
-			typedef boost::shared_ptr<MatchConstraintList> SharedPointer;
+			typedef std::shared_ptr<MatchConstraintList> SharedPointer;
 
 			/**
 			 * \brief Defines constants that describe the logical type of the match constraint list.

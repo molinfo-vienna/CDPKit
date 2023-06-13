@@ -59,9 +59,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %BasicPharmacophore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BasicPharmacophore instances.
 			 */
-			typedef boost::shared_ptr<BasicPharmacophore> SharedPointer;
+			typedef std::shared_ptr<BasicPharmacophore> SharedPointer;
 		
 			typedef boost::indirect_iterator<FeatureList::iterator, BasicFeature> FeatureIterator;
 			typedef boost::indirect_iterator<FeatureList::const_iterator, const BasicFeature> ConstFeatureIterator;

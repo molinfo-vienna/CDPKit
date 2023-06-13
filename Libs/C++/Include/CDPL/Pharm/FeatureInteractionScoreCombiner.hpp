@@ -51,9 +51,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FeatureInteractionScoreCombiner instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScoreCombiner instances.
 			 */
-			typedef boost::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
+			typedef std::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
 
 			typedef boost::function2<double, double, double> CombinationFunction;
 

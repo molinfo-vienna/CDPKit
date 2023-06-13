@@ -33,8 +33,7 @@
 
 #include <vector>
 #include <mutex>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -56,10 +55,10 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MolecularGraphComponentGroupingMatchExpression
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MolecularGraphComponentGroupingMatchExpression
 			 *        instances.
 			 */
-			typedef boost::shared_ptr<MolecularGraphComponentGroupingMatchExpression> SharedPointer;
+			typedef std::shared_ptr<MolecularGraphComponentGroupingMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs a \c %MolecularGraphComponentGroupingMatchExpression instance for the specified component-level grouping.

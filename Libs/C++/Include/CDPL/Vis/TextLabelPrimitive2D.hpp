@@ -32,8 +32,7 @@
 #define CDPL_VIS_TEXTLABELPRIMITIVE2D_HPP
 
 #include <string>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Vis/GraphicsPrimitive2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
@@ -55,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %TextLabelPrimitive2D instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %TextLabelPrimitive2D instances.
 			 */
-			typedef boost::shared_ptr<TextLabelPrimitive2D> SharedPointer;
+			typedef std::shared_ptr<TextLabelPrimitive2D> SharedPointer;
 
 			/**
 			 * \brief Construct an empty text label primitive at position <em>(0, 0)</em>.

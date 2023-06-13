@@ -35,8 +35,8 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -59,7 +59,7 @@ namespace CDPL
 
 			friend class HierarchyView;
 
-			typedef boost::shared_ptr<HierarchyViewChain> ChainPtr;
+			typedef std::shared_ptr<HierarchyViewChain> ChainPtr;
 			typedef std::vector<ChainPtr> ChainList;
 
 		  public:

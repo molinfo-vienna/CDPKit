@@ -33,9 +33,9 @@
 
 #include <vector>
 #include <unordered_map>
+#include <memory>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -58,9 +58,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %Fragment instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Fragment instances.
 			 */
-			typedef boost::shared_ptr<Fragment> SharedPointer;
+			typedef std::shared_ptr<Fragment> SharedPointer;
 
 			/**
 			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.

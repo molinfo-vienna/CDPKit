@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_BONDCONFIGURATIONMATCHEXPRESSION_HPP
 #define CDPL_CHEM_BONDCONFIGURATIONMATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -55,9 +55,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %BondConfigurationMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondConfigurationMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<BondConfigurationMatchExpression> SharedPointer;
+			typedef std::shared_ptr<BondConfigurationMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs an \c %BondConfigurationMatchExpression instance for the specified matching mode, cis/trans bond configuration constraints.

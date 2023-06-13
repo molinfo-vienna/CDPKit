@@ -33,8 +33,8 @@
 
 #include <cstddef>
 #include <vector>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 #include <boost/function.hpp>
 
@@ -65,7 +65,7 @@ namespace CDPL
 			typedef std::vector<const Chem::MolecularGraph*> MolecularGraphList;
 
 		  public:
-			typedef boost::shared_ptr<ScreeningProcessor> SharedPointer;
+			typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 			typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph> ConstMolecularGraphIterator;
 			typedef boost::function3<void, const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&> HitCallbackFunction;
 

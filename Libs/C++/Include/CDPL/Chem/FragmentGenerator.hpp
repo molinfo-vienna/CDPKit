@@ -33,8 +33,8 @@
 
 #include <cstddef>
 #include <vector>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -57,7 +57,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<FragmentGenerator> SharedPointer;
+			typedef std::shared_ptr<FragmentGenerator> SharedPointer;
 
 			typedef boost::function1<bool, const MolecularGraph&> FragmentFilterFunction;
 			

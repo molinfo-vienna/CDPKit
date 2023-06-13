@@ -35,8 +35,7 @@
 #include <limits>
 #include <type_traits>
 #include <utility>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/GridExpression.hpp"
@@ -215,7 +214,7 @@ namespace CDPL
 			typedef GridReference<SelfType> ClosureType;
 			typedef const GridReference<const SelfType> ConstClosureType;
 			typedef SelfType GridTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			Grid(): data(), size1(0), size2(0), size3(0) {}
 

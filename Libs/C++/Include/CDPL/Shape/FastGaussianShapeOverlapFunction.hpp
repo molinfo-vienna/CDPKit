@@ -31,7 +31,7 @@
 #ifndef CDPL_SHAPE_FASTGAUSSIANSHAPEOVERLAPFUNCTION_HPP
 #define CDPL_SHAPE_FASTGAUSSIANSHAPEOVERLAPFUNCTION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
@@ -51,7 +51,7 @@ namespace CDPL
 		  public:
 			static constexpr double DEF_RADIUS_SCALING_FACTOR = 1.4;
 			
-			typedef boost::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
+			typedef std::shared_ptr<FastGaussianShapeOverlapFunction> SharedPointer;
 
 			FastGaussianShapeOverlapFunction();
 

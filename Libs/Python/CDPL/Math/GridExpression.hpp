@@ -28,8 +28,7 @@
 #define CDPL_PYTHON_MATH_GRIDEXPRESSION_HPP
 
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Grid.hpp"
 #include "CDPL/Math/GridExpression.hpp"
@@ -53,7 +52,7 @@ namespace CDPLPythonMath
 		typedef const SelfType& ClosureType;
 		typedef const SelfType& ConstClosureType;
 		typedef CDPL::Math::Grid<ValueType> GridTemporaryType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 
 		virtual ~ConstGridExpression() {} 
 
@@ -87,7 +86,7 @@ namespace CDPLPythonMath
 		typedef SelfType& ClosureType;
 		typedef const SelfType& ConstClosureType;
 		typedef CDPL::Math::Grid<ValueType> GridTemporaryType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 		typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
 
 		virtual ~GridExpression() {} 

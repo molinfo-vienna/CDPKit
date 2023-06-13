@@ -35,8 +35,8 @@
 #include <cstddef>
 #include <utility>
 #include <unordered_map>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/functional/hash.hpp>
 #include <boost/iterator/transform_iterator.hpp>
@@ -72,7 +72,7 @@ namespace CDPL
 			static constexpr unsigned int DEF_RESULT_SELECTION_MODE       = AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET;
 			static constexpr double       DEF_DISTANCE_CUTOFF             = 0.0;
 
-			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
+			typedef std::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
 			typedef ResultList::const_iterator ConstResultIterator;
 			typedef ResultList::iterator ResultIterator;

@@ -35,9 +35,9 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <memory>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/TautomerizationRule.hpp"
@@ -60,7 +60,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<PatternBasedTautomerizationRule> SharedPointer;
+			typedef std::shared_ptr<PatternBasedTautomerizationRule> SharedPointer;
 
 			struct BondOrderChange
 			{

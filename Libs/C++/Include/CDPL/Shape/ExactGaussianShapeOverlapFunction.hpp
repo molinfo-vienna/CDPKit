@@ -31,7 +31,7 @@
 #ifndef CDPL_SHAPE_EXACTGAUSSIANSHAPEOVERLAPFUNCTION_HPP
 #define CDPL_SHAPE_EXACTGAUSSIANSHAPEOVERLAPFUNCTION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
@@ -49,7 +49,7 @@ namespace CDPL
 		{
 			
 		  public:
-			typedef boost::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
+			typedef std::shared_ptr<ExactGaussianShapeOverlapFunction> SharedPointer;
 
 			ExactGaussianShapeOverlapFunction();
 

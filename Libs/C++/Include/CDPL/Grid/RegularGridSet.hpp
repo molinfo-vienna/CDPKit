@@ -49,7 +49,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<RegularGridSet> SharedPointer;
+			typedef std::shared_ptr<RegularGridSet> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

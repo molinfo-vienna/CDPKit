@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Grid/SpatialGrid.hpp"
 
@@ -43,7 +44,7 @@ namespace
     struct SpatialGridWrapper : GridType, boost::python::wrapper<GridType> 
     {
 	
-		typedef boost::shared_ptr<SpatialGridWrapper> SharedPointer;
+		typedef std::shared_ptr<SpatialGridWrapper> SharedPointer;
 		typedef typename GridType::ValueType ValueType;
 		typedef typename GridType::CoordinatesType CoordinatesType;
 

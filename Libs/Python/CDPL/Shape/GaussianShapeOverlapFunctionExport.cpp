@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
@@ -41,7 +42,7 @@ namespace
 	struct GaussianShapeOverlapFunctionWrapper : CDPL::Shape::GaussianShapeOverlapFunction, boost::python::wrapper<CDPL::Shape::GaussianShapeOverlapFunction> 
 	{
 
-		typedef boost::shared_ptr<GaussianShapeOverlapFunctionWrapper> SharedPointer;
+		typedef std::shared_ptr<GaussianShapeOverlapFunctionWrapper> SharedPointer;
 
 		void setShapeFunction(const CDPL::Shape::GaussianShapeFunction& func, bool is_ref) {
 			this->get_override("setShapeFunction")(boost::ref(func), is_ref);

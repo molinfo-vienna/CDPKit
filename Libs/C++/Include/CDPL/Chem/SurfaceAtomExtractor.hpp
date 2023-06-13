@@ -33,8 +33,7 @@
 
 #include <vector>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
@@ -171,7 +170,7 @@ namespace CDPL
 		  private:
 			typedef std::vector<double> AtomRadiusTable;
 			typedef std::vector<std::size_t> AtomIndexList;
-			typedef boost::shared_ptr<AtomIndexList> AtomIndexListPtr;
+			typedef std::shared_ptr<AtomIndexList> AtomIndexListPtr;
 			typedef std::vector<AtomIndexListPtr> GridAtomLookupTable;
 			typedef std::vector<Math::Vector3D> Vector3DArray;
 

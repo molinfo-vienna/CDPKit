@@ -65,7 +65,7 @@ namespace CDPL
 			static constexpr unsigned int DEF_FEATURE_TYPE = FeatureType::HYDROPHOBIC;
 			static constexpr unsigned int DEF_FEATURE_GEOM = FeatureGeometry::SPHERE;
 
-			typedef boost::shared_ptr<HydrophobicFeatureGenerator> SharedPointer;
+			typedef std::shared_ptr<HydrophobicFeatureGenerator> SharedPointer;
 
 			/**
 			 * \brief Constructs the \c %HydrophobicFeatureGenerator instance.

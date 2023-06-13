@@ -36,8 +36,6 @@
 #include <memory>
 #include <cstddef>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/View2D.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
@@ -595,9 +593,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ReactionView2D instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionView2D instances.
 			 */
-			typedef boost::shared_ptr<ReactionView2D> SharedPointer;
+			typedef std::shared_ptr<ReactionView2D> SharedPointer;
 
 			/**
 			 * \brief Constructs and initializes a \c %ReactionView2D instance for the visualization of the chemical

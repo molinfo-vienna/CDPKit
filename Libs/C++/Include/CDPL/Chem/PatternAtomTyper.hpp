@@ -33,8 +33,7 @@
 
 #include <cstddef>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -62,7 +61,7 @@ namespace CDPL
 			typedef std::vector<std::size_t> SizeTypeArray;
 
 		  public:
-			typedef boost::shared_ptr<PatternAtomTyper> SharedPointer;
+			typedef std::shared_ptr<PatternAtomTyper> SharedPointer;
 
 			typedef PatternList::const_iterator ConstPatternIterator;
 			typedef PatternList::iterator PatternIterator;

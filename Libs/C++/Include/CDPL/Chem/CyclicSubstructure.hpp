@@ -32,8 +32,7 @@
 #define CDPL_CHEM_CYCLICSUBSTRUCTURE_HPP
 
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -54,9 +53,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %CyclicSubstructure instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %CyclicSubstructure instances.
 			 */
-			typedef boost::shared_ptr<CyclicSubstructure> SharedPointer;
+			typedef std::shared_ptr<CyclicSubstructure> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty \c %CyclicSubstructure instance.

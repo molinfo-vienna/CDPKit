@@ -34,8 +34,7 @@
 #include <vector>
 #include <string>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94SymbolicAtomTypePatternTable.hpp"
@@ -64,7 +63,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94AtomTyper> SharedPointer;
+			typedef std::shared_ptr<MMFF94AtomTyper> SharedPointer;
 
 			MMFF94AtomTyper();
 

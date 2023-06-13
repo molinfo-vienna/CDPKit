@@ -32,8 +32,7 @@
 #define CDPL_SHAPE_GAUSSIANSHAPEGENERATOR_HPP
 
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
@@ -58,7 +57,7 @@ namespace CDPL
 		{
 			
 		  public:
-		    typedef boost::shared_ptr<GaussianShapeGenerator> SharedPointer;
+		    typedef std::shared_ptr<GaussianShapeGenerator> SharedPointer;
 
 			GaussianShapeGenerator();
 

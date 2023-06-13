@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/GaussianShape.hpp"
 
@@ -42,7 +43,7 @@ namespace
 	struct GaussianShapeWrapper : CDPL::Shape::GaussianShape, boost::python::wrapper<CDPL::Shape::GaussianShape> 
 	{
 	
-		typedef boost::shared_ptr<GaussianShapeWrapper> SharedPointer;
+		typedef std::shared_ptr<GaussianShapeWrapper> SharedPointer;
 
 		GaussianShapeWrapper(): 
 			CDPL::Shape::GaussianShape() {}

@@ -27,8 +27,8 @@
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
@@ -45,7 +45,7 @@ namespace
 	{
 
 	public:
-		typedef boost::shared_ptr<TestPropertyContainer> SharedPointer;
+		typedef std::shared_ptr<TestPropertyContainer> SharedPointer;
 
 		~TestPropertyContainer() {}
 

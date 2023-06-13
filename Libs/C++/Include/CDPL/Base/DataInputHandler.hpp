@@ -33,8 +33,7 @@
 
 #include <ios>
 #include <string>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/DataReader.hpp"
 
@@ -59,7 +58,7 @@ namespace CDPL
 		public:
 			typedef DataReader<T> ReaderType;
 
-			typedef boost::shared_ptr<DataInputHandler> SharedPointer;
+			typedef std::shared_ptr<DataInputHandler> SharedPointer;
 
 			/**
 			 * \brief Virtual destructor.

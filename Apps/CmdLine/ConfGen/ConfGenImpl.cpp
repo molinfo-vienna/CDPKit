@@ -856,7 +856,7 @@ void ConfGenImpl::processMultiThreaded()
 {
 	using namespace CDPL;
 
-	typedef boost::shared_ptr<ConformerGenerationWorker> ConformerGenerationWorkerPtr;
+	typedef std::shared_ptr<ConformerGenerationWorker> ConformerGenerationWorkerPtr;
 	typedef std::vector<ConformerGenerationWorkerPtr> ConformerGenerationWorkerList;
 	typedef std::vector<std::thread> ThreadGroup;
 	

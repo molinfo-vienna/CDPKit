@@ -33,8 +33,7 @@
 
 #include <string>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 
@@ -61,7 +60,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<ScreeningDBAccessor> SharedPointer;
+			typedef std::shared_ptr<ScreeningDBAccessor> SharedPointer;
 
 			/**
 			 * \brief Virtual destructor.

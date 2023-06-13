@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_PHARMACOPHORE_HPP
 #define CDPL_PHARM_PHARMACOPHORE_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -51,9 +51,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %Pharmacophore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Pharmacophore instances.
 			 */
-			typedef boost::shared_ptr<Pharmacophore> SharedPointer;
+			typedef std::shared_ptr<Pharmacophore> SharedPointer;
 
 			/**
 			 * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.

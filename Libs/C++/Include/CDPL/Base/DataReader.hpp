@@ -32,8 +32,7 @@
 #define CDPL_BASE_DATAREADER_HPP
 
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/DataIOBase.hpp"
 
@@ -82,9 +81,9 @@ namespace CDPL
 			typedef T DataType;
 
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %DataReader instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataReader instances.
 			 */
-			typedef boost::shared_ptr<DataReader> SharedPointer;
+			typedef std::shared_ptr<DataReader> SharedPointer;
 
 			/**
 			 * \brief Reads the data record at the current record index and stores the read data in \a obj.

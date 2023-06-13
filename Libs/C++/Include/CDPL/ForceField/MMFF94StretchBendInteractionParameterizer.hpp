@@ -34,8 +34,8 @@
 #include <utility>
 #include <cstddef>
 #include <unordered_map>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/functional/hash.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
@@ -66,7 +66,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94StretchBendInteractionParameterizer> SharedPointer;
+			typedef std::shared_ptr<MMFF94StretchBendInteractionParameterizer> SharedPointer;
 
 			MMFF94StretchBendInteractionParameterizer();
 

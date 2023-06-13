@@ -32,8 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONPARAMETERIZER_HPP
 
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
@@ -62,7 +61,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94TorsionInteractionParameterizer> SharedPointer;
+			typedef std::shared_ptr<MMFF94TorsionInteractionParameterizer> SharedPointer;
 
 			MMFF94TorsionInteractionParameterizer();
 

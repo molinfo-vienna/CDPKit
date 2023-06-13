@@ -31,7 +31,7 @@
 #ifndef CDPL_SHAPE_GAUSSIANSHAPESET_HPP
 #define CDPL_SHAPE_GAUSSIANSHAPESET_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
@@ -48,7 +48,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<GaussianShapeSet> SharedPointer;
+			typedef std::shared_ptr<GaussianShapeSet> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

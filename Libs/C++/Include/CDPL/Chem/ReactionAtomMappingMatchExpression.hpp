@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_REACTIONATOMMAPPINGMATCHEXPRESSION_HPP
 #define CDPL_CHEM_REACTIONATOMMAPPINGMATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -54,10 +54,10 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ReactionAtomMappingMatchExpression
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionAtomMappingMatchExpression
 			 *        instances.
 			 */
-			typedef boost::shared_ptr<ReactionAtomMappingMatchExpression> SharedPointer;
+			typedef std::shared_ptr<ReactionAtomMappingMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs a \c %ReactionAtomMappingMatchExpression instance for the specified reactant to product atom mapping.

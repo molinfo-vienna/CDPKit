@@ -34,8 +34,6 @@
 #include <cstddef>
 #include <memory>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -60,7 +58,7 @@ namespace CDPL
 			static constexpr std::size_t DEF_MAX_PRODUCT_ORDER = 6;
 			static constexpr double      DEF_DISTANCE_CUTOFF   = 0.0;
 			
-			typedef boost::shared_ptr<GaussianShapeFunction> SharedPointer;
+			typedef std::shared_ptr<GaussianShapeFunction> SharedPointer;
 
 			GaussianShapeFunction();
 

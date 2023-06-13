@@ -60,9 +60,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<PropertyMatchExpression> SharedPointer;
+			typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Type of the generic functor class used to store user-defined property accessor functions.
@@ -130,9 +130,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PropertyMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<PropertyMatchExpression> SharedPointer;
+			typedef std::shared_ptr<PropertyMatchExpression> SharedPointer;
 	
 			/**
 			 * \brief Type of the generic functor class used to store user-defined property accessor functions.

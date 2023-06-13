@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <vector>
 #include <utility>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -112,8 +111,8 @@ namespace CDPL
 			  TETRAHEDRAL
 			};
 
-			typedef boost::shared_ptr<MolecularGraph> MolecularGraphPtr;
-			typedef boost::shared_ptr<SubstructureSearch> SubstructureSearchPtr;
+			typedef std::shared_ptr<MolecularGraph> MolecularGraphPtr;
+			typedef std::shared_ptr<SubstructureSearch> SubstructureSearchPtr;
 			typedef std::vector<const Bond*> BondList;
 			typedef std::vector<const Atom*> AtomList;
 			typedef std::vector<std::size_t> UIntTable;

@@ -52,9 +52,9 @@ namespace CDPL
 			static constexpr double DEF_MAX_DISTANCE = 6.0;
 
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %HydrophobicInteractionScore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HydrophobicInteractionScore instances.
 			 */
-			typedef boost::shared_ptr<HydrophobicInteractionScore> SharedPointer;
+			typedef std::shared_ptr<HydrophobicInteractionScore> SharedPointer;
 			
 			/**
 			 * \brief Constructs a \c %HydrophobicInteractionScore functor with a 

@@ -27,8 +27,9 @@
 #ifndef CDPL_PYTHON_MATH_EXPRESSIONADAPTERWRAPPER_HPP
 #define CDPL_PYTHON_MATH_EXPRESSIONADAPTERWRAPPER_HPP
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 
 namespace CDPLPythonMath
@@ -39,7 +40,7 @@ namespace CDPLPythonMath
 	{
 
 		typedef typename ExpressionType::SharedPointer ExpressionPointerType;
-		typedef boost::shared_ptr<ExpressionAdapterWrapper> SharedPointer;
+		typedef std::shared_ptr<ExpressionAdapterWrapper> SharedPointer;
 
 		ExpressionAdapterWrapper(const ExpressionAdapterWrapper& ph): AdapterType(ph), exprPointer(ph.exprPointer) {}
 

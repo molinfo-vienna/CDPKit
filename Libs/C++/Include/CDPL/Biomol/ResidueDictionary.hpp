@@ -33,9 +33,9 @@
 
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -95,7 +95,7 @@ namespace CDPL
 			typedef std::unordered_map<std::string, Entry> EntryLookupTable;
 
 		  public:
-			typedef boost::shared_ptr<ResidueDictionary> SharedPointer;
+			typedef std::shared_ptr<ResidueDictionary> SharedPointer;
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
 											  EntryLookupTable::const_iterator> ConstEntryIterator;

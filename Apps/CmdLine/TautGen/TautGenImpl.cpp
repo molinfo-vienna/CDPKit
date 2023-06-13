@@ -579,7 +579,7 @@ void TautGenImpl::processMultiThreaded()
 {
 	using namespace CDPL;
 
-	typedef boost::shared_ptr<TautGenerationWorker> TautGenerationWorkerPtr;
+	typedef std::shared_ptr<TautGenerationWorker> TautGenerationWorkerPtr;
 	typedef std::vector<TautGenerationWorkerPtr> TautGenerationWorkerList;
 	typedef std::vector<std::thread> ThreadGroup;
 	

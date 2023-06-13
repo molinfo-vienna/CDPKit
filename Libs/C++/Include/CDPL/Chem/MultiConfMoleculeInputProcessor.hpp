@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_MULTICONFMOLECULEINPUTPROCESSOR_HPP
 #define CDPL_CHEM_MULTICONFMOLECULEINPUTPROCESSOR_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 
@@ -52,10 +52,10 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated 
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated 
 			 *        \c %MultiConfMoleculeInputProcessor implementations.
 			 */
-			typedef boost::shared_ptr<MultiConfMoleculeInputProcessor> SharedPointer;
+			typedef std::shared_ptr<MultiConfMoleculeInputProcessor> SharedPointer;
 
 			/**
 			 * \brief Virtual destructor.

@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_MOLECULARGRAPH_HPP
 #define CDPL_CHEM_MOLECULARGRAPH_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
@@ -54,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MolecularGraph instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MolecularGraph instances.
 			 */
-			typedef boost::shared_ptr<MolecularGraph> SharedPointer;
+			typedef std::shared_ptr<MolecularGraph> SharedPointer;
 
 			/**
 			 * \brief Virtual destructor.

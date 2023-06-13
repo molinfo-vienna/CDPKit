@@ -42,7 +42,7 @@ namespace
 	struct FeatureGeneratorWrapper : CDPL::Pharm::FeatureGenerator, boost::python::wrapper<CDPL::Pharm::FeatureGenerator> 
 	{
 
-		typedef boost::shared_ptr<FeatureGeneratorWrapper> SharedPointer;
+		typedef std::shared_ptr<FeatureGeneratorWrapper> SharedPointer;
 
 		void generate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Pharm::Pharmacophore& pharm) {	
 			this->get_override("generate")(boost::ref(molgraph), boost::ref(pharm));

@@ -28,15 +28,11 @@
 #define CDPL_PYTHON_UTIL_MAPVISITOR_HPP
 
 #include <algorithm>
-
-#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
-# define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#endif
+#include <type_traits>
 
 #include <boost/bind.hpp>
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
-#include <boost/mpl/if.hpp>
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
@@ -117,7 +113,7 @@ namespace CDPLPythonUtil
 
 			typename MapType::ValueType& (MapType::*getValueFunc)(const typename MapType::KeyType&) = &MapType::getValue;
  
-			typedef typename mpl::if_c<GetValueOrDefaultWithLValue, 
+			typedef typename std::conditional<GetValueOrDefaultWithLValue, 
 				ValueOrDefaultLValueGetter, 
 				ValueOrDefaultRValueGetter>::type ValueOrDefaultGetter; 	
 
@@ -165,7 +161,7 @@ namespace CDPLPythonUtil
 			typename MapType::EntryIterator entries_end = map.getEntriesEnd();
 
 			for (typename MapType::EntryIterator it = map.getEntriesBegin(); it != entries_end; ++it)  
-				keys.append(mpl::if_c<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first));
+				keys.append(std::conditional<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first));
 
 			return std::move(keys);
 		}
@@ -178,7 +174,7 @@ namespace CDPLPythonUtil
 			typename MapType::EntryIterator entries_end = map.getEntriesEnd();
 
 			for (typename MapType::EntryIterator it = map.getEntriesBegin(); it != entries_end; ++it)  
-				values.append(mpl::if_c<GetValueOrDefaultWithLValue, LValueGetter<MapType>, 
+				values.append(std::conditional<GetValueOrDefaultWithLValue, LValueGetter<MapType>, 
 							  RValueGetter<MapType> >::type::getValue((*it).second));
 
 			return std::move(values);
@@ -193,8 +189,8 @@ namespace CDPLPythonUtil
 			typename MapType::EntryIterator entries_end = map.getEntriesEnd();
 
 			for (typename MapType::EntryIterator it = map.getEntriesBegin(); it != entries_end; ++it)  
-				entries.append(python::make_tuple(mpl::if_c<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first), 
-												  mpl::if_c<GetValueOrDefaultWithLValue, 
+				entries.append(python::make_tuple(std::conditional<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first), 
+												  std::conditional<GetValueOrDefaultWithLValue, 
 												  LValueGetter<MapType>, RValueGetter<MapType> >::type::getValue((*it).second)));
 			return std::move(entries);
 		}
@@ -267,7 +263,7 @@ namespace CDPLPythonUtil
 			typename MapType::EntryIteratorRange entry_range = map.getEntries(key);
 
 			for ( ; entry_range.first != entry_range.second; ++entry_range.first)
-				values.append(mpl::if_c<GetValueOrDefaultWithLValue, LValueGetter<MapType>,
+				values.append(std::conditional<GetValueOrDefaultWithLValue, LValueGetter<MapType>,
 							  RValueGetter<MapType> >::type::getValue((*entry_range.first).second));
 
 			return std::move(values);

@@ -34,8 +34,8 @@
 #include <vector>
 #include <cstddef>
 #include <unordered_set>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -68,7 +68,7 @@ namespace CDPL
 			typedef std::vector<StructureDataPtr> StructureDataList;
 
 		  public:
-			typedef boost::shared_ptr<ResonanceStructureGenerator> SharedPointer;
+			typedef std::shared_ptr<ResonanceStructureGenerator> SharedPointer;
 			typedef boost::indirect_iterator<StructureDataList::const_iterator, const StructureData> ConstStructureDataIterator;
 
 			class CDPL_CHEM_API StructureData

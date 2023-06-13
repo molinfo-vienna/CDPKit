@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_MOLECULE_HPP
 #define CDPL_CHEM_MOLECULE_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -51,9 +51,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %Molecule instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Molecule instances.
 			 */
-			typedef boost::shared_ptr<Molecule> SharedPointer;
+			typedef std::shared_ptr<Molecule> SharedPointer;
 
 			/**
 			 * \brief A constant random access iterator used to iterate over the atoms of the molecule.

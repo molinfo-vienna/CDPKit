@@ -56,9 +56,9 @@ namespace CDPL
 			static constexpr double DEF_MAX_ACC_ANGLE = 75.0;
 
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %HBondingInteractionScore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HBondingInteractionScore instances.
 			 */
-			typedef boost::shared_ptr<HBondingInteractionScore> SharedPointer;
+			typedef std::shared_ptr<HBondingInteractionScore> SharedPointer;
 
 			typedef boost::function1<double, double> DistanceScoringFunction;
 			typedef boost::function1<double, double> AngleScoringFunction;

@@ -33,8 +33,7 @@
 #include <set>
 #include <iosfwd>
 #include <mutex>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -173,7 +172,7 @@ namespace ShapeScreen
 
 		std::string getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const;
 
-		typedef boost::shared_ptr<std::ostream> OStreamPtr;
+		typedef std::shared_ptr<std::ostream> OStreamPtr;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>::SharedPointer MoleculeReaderPtr;
 		typedef std::vector<MoleculePtr> QueryMoleculeList;
 		typedef std::multiset<HitMoleculeData> HitList;

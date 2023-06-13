@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -91,7 +92,7 @@ namespace
 	struct ReactionWrapper : CDPL::Chem::Reaction, boost::python::wrapper<CDPL::Chem::Reaction> 
 	{
 
-		typedef boost::shared_ptr<ReactionWrapper> SharedPointer;
+		typedef std::shared_ptr<ReactionWrapper> SharedPointer;
 
 		unsigned int getComponentRole(const CDPL::Chem::Molecule& mol) const {
 			return this->get_override("getComponentRole")(boost::ref(mol));

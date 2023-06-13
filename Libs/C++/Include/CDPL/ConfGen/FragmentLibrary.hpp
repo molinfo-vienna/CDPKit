@@ -35,8 +35,7 @@
 #include <cstddef>
 #include <unordered_map>
 #include <mutex>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
@@ -54,7 +53,7 @@ namespace CDPL
 			typedef std::unordered_map<std::uint64_t, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
 
 		  public:
-			typedef boost::shared_ptr<FragmentLibrary> SharedPointer;
+			typedef std::shared_ptr<FragmentLibrary> SharedPointer;
 	
 			typedef HashToEntryMap::value_type Entry;
 			typedef HashToEntryMap::const_iterator ConstEntryIterator;

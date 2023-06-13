@@ -32,8 +32,7 @@
 #define CDPL_CHEM_ATOMENVIRONMENTMATCHEXPRESSION_HPP
 
 #include <mutex>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -55,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %AtomEnvironmentMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomEnvironmentMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<AtomEnvironmentMatchExpression> SharedPointer;
+			typedef std::shared_ptr<AtomEnvironmentMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs an \c %AtomEnvironmentMatchExpression instance for the specified atom environment pattern and matching mode.

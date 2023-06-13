@@ -34,8 +34,7 @@
 #include <vector>
 #include <utility>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
@@ -68,7 +67,7 @@ namespace CDPL
 			static constexpr std::size_t TOTAL_DESCRIPTOR_SIZE  = 173;
 			static constexpr std::size_t LIGAND_DESCRIPTOR_SIZE = 28;
 			
-			typedef boost::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
+			typedef std::shared_ptr<GRAILDescriptorCalculator> SharedPointer;
 
 			enum ElementIndex
 		    {
@@ -284,7 +283,7 @@ namespace CDPL
 			typedef std::vector<IndexList> IndexListArray;
 			typedef std::vector<Math::Vector3D> FastVector3DArray;
 			typedef Internal::Octree<Math::Vector3D, FastVector3DArray, double> Octree;
-			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::shared_ptr<Octree> OctreePtr;
 
 			struct FeatureSubset
 			{

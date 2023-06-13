@@ -31,7 +31,7 @@
 #ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP
 #define CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
@@ -59,7 +59,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
+			typedef std::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
 
 			 MMFF94BondStretchingInteractionParameterizer();
 

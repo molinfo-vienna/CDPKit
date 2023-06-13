@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -42,7 +43,7 @@ namespace
 	struct PharmacophoreWrapper : CDPL::Pharm::Pharmacophore, boost::python::wrapper<CDPL::Pharm::Pharmacophore> 
 	{
 
-		typedef boost::shared_ptr<PharmacophoreWrapper> SharedPointer;
+		typedef std::shared_ptr<PharmacophoreWrapper> SharedPointer;
 
 		FEATURECONTAINER_IMPL() 
 

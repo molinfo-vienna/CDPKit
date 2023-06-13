@@ -32,8 +32,8 @@
 #define CDPL_CHEM_BASICREACTION_HPP
 
 #include <vector>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -60,9 +60,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %BasicReaction instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BasicReaction instances.
 			 */
-			typedef boost::shared_ptr<BasicReaction> SharedPointer;
+			typedef std::shared_ptr<BasicReaction> SharedPointer;
 
 	
 			typedef boost::indirect_iterator<ComponentList::iterator, BasicMolecule> ComponentIterator;

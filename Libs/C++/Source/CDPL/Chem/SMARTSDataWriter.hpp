@@ -31,8 +31,7 @@
 #include <vector>
 #include <string>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Util/ObjectStack.hpp"
 
@@ -99,7 +98,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<DFSTreeEdge> SharedPointer;
+				typedef std::shared_ptr<DFSTreeEdge> SharedPointer;
 
 				DFSTreeEdge(SMARTSDataWriter&);
 
@@ -145,7 +144,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<DFSTreeNode> SharedPointer;
+				typedef std::shared_ptr<DFSTreeNode> SharedPointer;
 
 				DFSTreeNode(SMARTSDataWriter&);
 
@@ -223,7 +222,7 @@ namespace CDPL
 				std::size_t                lexicalOrder;
 			};
 
-			typedef boost::shared_ptr<SMARTSDataWriter> SharedPointer;
+			typedef std::shared_ptr<SMARTSDataWriter> SharedPointer;
 
 			typedef std::vector<DFSTreeNode*> NodeList;
 			typedef std::vector<std::size_t> RingClosureNumberStack;

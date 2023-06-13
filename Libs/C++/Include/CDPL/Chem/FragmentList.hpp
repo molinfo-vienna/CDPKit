@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_FRAGMENTLIST_HPP
 #define CDPL_CHEM_FRAGMENTLIST_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -51,7 +51,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<FragmentList> SharedPointer;
+			typedef std::shared_ptr<FragmentList> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

@@ -28,8 +28,7 @@
 #define CDPL_PYTHON_MATH_MATRIXEXPRESSION_HPP
 
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -55,7 +54,7 @@ namespace CDPLPythonMath
 		typedef const SelfType& ConstClosureType;
 		typedef CDPL::Math::Matrix<ValueType> MatrixTemporaryType;
 		typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 
 		virtual ~ConstMatrixExpression() {} 
 
@@ -89,7 +88,7 @@ namespace CDPLPythonMath
 		typedef const SelfType& ConstClosureType;
 		typedef CDPL::Math::Matrix<ValueType> MatrixTemporaryType;
 		typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 		typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
 
 		virtual ~MatrixExpression() {} 

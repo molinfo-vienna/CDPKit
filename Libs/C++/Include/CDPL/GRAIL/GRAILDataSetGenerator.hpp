@@ -35,8 +35,8 @@
 #include <set>
 #include <utility>
 #include <string>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
@@ -64,7 +64,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<GRAILDataSetGenerator> SharedPointer;
+			typedef std::shared_ptr<GRAILDataSetGenerator> SharedPointer;
 
 			typedef FeatureInteractionScoreGridCalculator::ScoringFunction ScoringFunction;
 			typedef FeatureInteractionScoreGridCalculator::ScoreCombinationFunction ScoreCombinationFunction;

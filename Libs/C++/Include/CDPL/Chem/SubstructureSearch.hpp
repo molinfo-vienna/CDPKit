@@ -36,9 +36,9 @@
 #include <set>
 #include <cstddef>
 #include <unordered_map>
+#include <memory>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -72,7 +72,7 @@ namespace CDPL
 			typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
 
 		  public:
-			typedef boost::shared_ptr<SubstructureSearch> SharedPointer;
+			typedef std::shared_ptr<SubstructureSearch> SharedPointer;
 
 			/**
 			 * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.

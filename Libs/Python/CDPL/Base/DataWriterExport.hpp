@@ -27,8 +27,9 @@
 #ifndef CDPL_PYTHON_BASE_DATAWRITEREXPORT_HPP
 #define CDPL_PYTHON_BASE_DATAWRITEREXPORT_HPP
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/DataWriter.hpp"
 
@@ -40,7 +41,7 @@ namespace CDPLPythonBase
 	struct DataWriterWrapper : CDPL::Base::DataWriter<T>, boost::python::wrapper<CDPL::Base::DataWriter<T> >
 	{
 
-		typedef boost::shared_ptr<DataWriterWrapper<T> > SharedPointer;
+		typedef std::shared_ptr<DataWriterWrapper<T> > SharedPointer;
 
 		CDPL::Base::DataWriter<T>& write(const T& obj) {
 			this->get_override("write")(boost::ref(obj));

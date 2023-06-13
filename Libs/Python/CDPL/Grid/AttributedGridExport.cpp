@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Grid/AttributedGrid.hpp"
 
@@ -41,7 +42,7 @@ namespace
     struct AttributedGridWrapper : CDPL::Grid::AttributedGrid, boost::python::wrapper<CDPL::Grid::AttributedGrid> 
     {
 	
-		typedef boost::shared_ptr<AttributedGridWrapper> SharedPointer;
+		typedef std::shared_ptr<AttributedGridWrapper> SharedPointer;
 
 		ATTRIBUTEDGRID_IMPL()
     };

@@ -35,8 +35,8 @@
 #include <vector>
 #include <unordered_map>
 #include <mutex>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -56,14 +56,14 @@ namespace CDPL
 		class CDPL_BIOMOL_API HierarchyView
 		{
 
-			typedef boost::shared_ptr<HierarchyViewModel> ModelPtr;
+			typedef std::shared_ptr<HierarchyViewModel> ModelPtr;
 			typedef std::vector<ModelPtr> ModelList;
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %HierarchyView instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %HierarchyView instances.
 			 */
-			typedef boost::shared_ptr<HierarchyView> SharedPointer;
+			typedef std::shared_ptr<HierarchyView> SharedPointer;
 
 			typedef boost::indirect_iterator<ModelList::const_iterator, const HierarchyViewModel> ConstModelIterator;
 

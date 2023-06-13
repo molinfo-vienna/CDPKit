@@ -38,8 +38,7 @@
 #include <type_traits>
 #include <utility>
 #include <initializer_list>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/MatrixExpression.hpp"
@@ -266,7 +265,7 @@ namespace CDPL
 			typedef const MatrixReference<const SelfType> ConstClosureType;
 			typedef SelfType MatrixTemporaryType;
 			typedef Vector<T, A> VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			template <typename T1>
 			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
@@ -511,7 +510,7 @@ namespace CDPL
 			typedef const MatrixReference<const SelfType> ConstClosureType;
 			typedef SelfType MatrixTemporaryType;
 			typedef Vector<T, std::vector<T> > VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 		
 			template <typename T1>
 			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
@@ -776,7 +775,7 @@ namespace CDPL
 			typedef const MatrixReference<const SelfType> ConstClosureType;
 			typedef SelfType MatrixTemporaryType;
 			typedef BoundedVector<T, M * N> VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			template <typename T1>
 			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
@@ -1038,7 +1037,7 @@ namespace CDPL
 			typedef const MatrixReference<const SelfType> ConstClosureType;
 			typedef BoundedMatrix<T, M, N> MatrixTemporaryType;
 			typedef BoundedVector<T, M * N> VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			template <typename T1>
 			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;

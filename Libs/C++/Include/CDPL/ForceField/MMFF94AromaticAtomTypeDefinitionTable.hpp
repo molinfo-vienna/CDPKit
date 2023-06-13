@@ -35,8 +35,7 @@
 #include <vector>
 #include <string>
 #include <iosfwd>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 
@@ -57,7 +56,7 @@ namespace CDPL
 			typedef std::vector<Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
+			typedef std::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
 
 			typedef DataStorage::const_iterator ConstEntryIterator;
 			typedef DataStorage::iterator EntryIterator;

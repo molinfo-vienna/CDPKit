@@ -32,13 +32,9 @@
 #define CDPL_CHEM_MATCHEXPRESSIONLIST_HPP
 
 #include <algorithm>
-
-#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
-# define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#endif
+#include <memory>
 
 #include <boost/bind.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Util/IndirectArray.hpp"
@@ -69,9 +65,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MatchExpressionList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpressionList instances.
 			 */
-			typedef boost::shared_ptr<MatchExpressionList> SharedPointer;
+			typedef std::shared_ptr<MatchExpressionList> SharedPointer;
 
 			/**
 			 * \brief Tells whether the expression list requires a reevaluation after a query to target object mapping

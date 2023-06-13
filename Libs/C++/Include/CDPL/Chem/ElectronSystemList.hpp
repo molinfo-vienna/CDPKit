@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ELECTRONSYSTEMLIST_HPP
 #define CDPL_CHEM_ELECTRONSYSTEMLIST_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/ElectronSystem.hpp"
@@ -51,7 +51,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<ElectronSystemList> SharedPointer;
+			typedef std::shared_ptr<ElectronSystemList> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

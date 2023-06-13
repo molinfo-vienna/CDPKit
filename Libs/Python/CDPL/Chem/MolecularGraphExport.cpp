@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -46,7 +47,7 @@ namespace
 	struct MolecularGraphWrapper : CDPL::Chem::MolecularGraph, boost::python::wrapper<CDPL::Chem::MolecularGraph> 
 	{
 	
-		typedef boost::shared_ptr<MolecularGraphWrapper> SharedPointer;
+		typedef std::shared_ptr<MolecularGraphWrapper> SharedPointer;
 
 		ATOMCONTAINER_IMPL()
 		BONDCONTAINER_IMPL()

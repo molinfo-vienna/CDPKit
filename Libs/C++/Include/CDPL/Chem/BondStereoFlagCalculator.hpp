@@ -34,8 +34,8 @@
 #include <cstddef>
 #include <vector>
 #include <utility>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -124,7 +124,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<StereoAtomInfo> SharedPointer;
+				typedef std::shared_ptr<StereoAtomInfo> SharedPointer;
 
 				StereoAtomInfo(const MolecularGraph*, const Atom2DCoordinatesFunction& coords_func,
 							   const Atom*, unsigned int, std::size_t, const Atom**, const Bond**);

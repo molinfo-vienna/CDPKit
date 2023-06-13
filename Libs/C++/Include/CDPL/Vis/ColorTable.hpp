@@ -50,7 +50,7 @@ namespace CDPL
 		{
 	 
 		  public:
-			typedef boost::shared_ptr<ColorTable> SharedPointer;
+			typedef std::shared_ptr<ColorTable> SharedPointer;
 
 			ColorTable(): Map<std::size_t, Color>() {}
 

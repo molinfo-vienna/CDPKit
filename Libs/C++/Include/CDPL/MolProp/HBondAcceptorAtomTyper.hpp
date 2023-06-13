@@ -31,7 +31,7 @@
 #ifndef CDPL_MOLPROP_HBONDACCEPTORATOMTYPER_HPP
 #define CDPL_MOLPROP_HBONDACCEPTORATOMTYPER_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
@@ -48,7 +48,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<HBondAcceptorAtomTyper> SharedPointer;
+			typedef std::shared_ptr<HBondAcceptorAtomTyper> SharedPointer;
 
 			HBondAcceptorAtomTyper();
 

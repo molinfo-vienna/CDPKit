@@ -27,7 +27,7 @@
 #ifndef CDPL_PYTHON_MATH_QUATERNIONEXPRESSION_HPP
 #define CDPL_PYTHON_MATH_QUATERNIONEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/QuaternionAssignment.hpp"
 #include "CDPL/Math/QuaternionExpression.hpp"
@@ -47,7 +47,7 @@ namespace CDPLPythonMath
 		typedef const T ConstReference;
 		typedef const SelfType& ClosureType;
 		typedef const SelfType& ConstClosureType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 
 		virtual ~ConstQuaternionExpression() {} 
 
@@ -73,7 +73,7 @@ namespace CDPLPythonMath
 		typedef const T ConstReference;
 		typedef SelfType& ClosureType;
 		typedef const SelfType& ConstClosureType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 		typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
 
 		virtual ~QuaternionExpression() {} 

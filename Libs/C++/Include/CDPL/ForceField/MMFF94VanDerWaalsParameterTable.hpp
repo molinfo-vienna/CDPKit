@@ -34,8 +34,8 @@
 #include <iosfwd>
 #include <cstddef>
 #include <unordered_map>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
@@ -59,7 +59,7 @@ namespace CDPL
 			typedef std::unordered_map<unsigned int, Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94VanDerWaalsParameterTable> SharedPointer;
+			typedef std::shared_ptr<MMFF94VanDerWaalsParameterTable> SharedPointer;
 			typedef MMFF94VanDerWaalsInteraction::HDonorAcceptorType HDonorAcceptorType;
 	
 			class CDPL_FORCEFIELD_API Entry

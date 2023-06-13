@@ -36,9 +36,9 @@
 #include <cstdint>
 #include <unordered_set>
 #include <array>
+#include <memory>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -68,7 +68,7 @@ namespace CDPL
 				EXHAUSTIVE
 			};
 
-			typedef boost::shared_ptr<TautomerGenerator> SharedPointer;
+			typedef std::shared_ptr<TautomerGenerator> SharedPointer;
 
 			typedef boost::function1<bool, MolecularGraph&> CallbackFunction;
 			typedef boost::function1<void, MolecularGraph&> CustomSetupFunction;

@@ -30,8 +30,7 @@
 #define CDPL_GRID_ATTRIBUTEDGRID_HPP
 
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/PropertyContainer.hpp"
 
@@ -49,7 +48,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::shared_ptr<AttributedGrid> SharedPointer;
+			typedef std::shared_ptr<AttributedGrid> SharedPointer;
 		
 			virtual ~AttributedGrid() {}
 

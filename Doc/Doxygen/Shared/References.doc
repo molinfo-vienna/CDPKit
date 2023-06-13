@@ -87,20 +87,6 @@ J. Degen, C. Wegscheid-Gerlach, A. Zaliani, M. Rarey, On the art of compiling an
 </tr>
 
 <tr>
-<td valign="top">\anchor BSHPTR<i>[BSHPTR]</i></td>
-<td valign="top">
-Boost \c shared_ptr documentation: http://www.boost.org/libs/smart_ptr/shared_ptr.htm
-</td>
-</tr>
-
-<tr>
-<td valign="top">\anchor BUBLAS<i>[BUBLAS]</i></td>
-<td valign="top">
-Boost.uBLAS documentation: http://www.boost.org/libs/numeric/ublas/doc/index.htm
-</td>
-</tr>
-
-<tr>
 <td valign="top">\anchor BURMA<i>[BURMA]</i></td>
 <td valign="top">
 F. R. Burden, Molecular identification number for substructure searches, 
@@ -340,6 +326,13 @@ X. Q. Lewell, D. B. Judd, S. P. Watson, M. M. Hann, RECAP - Retrosynthetic Combi
 <td valign="top">\anchor QTDOC<i>[QTDOC]</i></td>
 <td valign="top">
 Qt Online Reference Documentation: https://doc.qt.io/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor SHPTR<i>[SHPTR]</i></td>
+<td valign="top">
+<i>std::shared_ptr</i> documentation: https://en.cppreference.com/w/cpp/memory/shared_ptr
 </td>
 </tr>
 

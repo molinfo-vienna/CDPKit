@@ -36,8 +36,7 @@
 #include <utility>
 #include <string>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -100,9 +99,9 @@ namespace CDPL
 		
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MultiMap instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MultiMap instances.
 			 */
-			typedef boost::shared_ptr<MultiMap> SharedPointer;
+			typedef std::shared_ptr<MultiMap> SharedPointer;
 
 			/**
 			 * \brief The type of the map's keys.

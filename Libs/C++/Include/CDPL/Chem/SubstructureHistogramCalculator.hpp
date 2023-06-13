@@ -35,8 +35,8 @@
 #include <vector>
 #include <map>
 #include <utility>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -64,7 +64,7 @@ namespace CDPL
 			typedef std::vector<Pattern> PatternList;
 
 		  public:
-			typedef boost::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
+			typedef std::shared_ptr<SubstructureHistogramCalculator> SharedPointer;
 
 			typedef PatternList::const_iterator ConstPatternIterator;
 			typedef PatternList::iterator PatternIterator;

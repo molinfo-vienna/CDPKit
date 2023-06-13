@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_NOTMATCHEXPRESSION_HPP
 #define CDPL_CHEM_NOTMATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 
@@ -54,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %NOTMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %NOTMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<NOTMatchExpression> SharedPointer;
+			typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
 		
 			/**
 			 * \brief Constructs a \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.
@@ -115,9 +115,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %NOTMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %NOTMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<NOTMatchExpression> SharedPointer;
+			typedef std::shared_ptr<NOTMatchExpression> SharedPointer;
 		
 			/**
 			 * \brief Constructs a \c %NOTMatchExpressionBase object that wraps the match expression instance specified by \a expr_ptr.

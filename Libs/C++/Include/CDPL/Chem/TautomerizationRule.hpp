@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_TAUTOMERIZATIONRULE_HPP
 #define CDPL_CHEM_TAUTOMERIZATIONRULE_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 
@@ -52,7 +52,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<TautomerizationRule> SharedPointer;
+			typedef std::shared_ptr<TautomerizationRule> SharedPointer;
 
 			virtual ~TautomerizationRule() {}
 

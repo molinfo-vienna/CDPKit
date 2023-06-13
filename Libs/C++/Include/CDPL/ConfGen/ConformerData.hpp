@@ -47,7 +47,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<ConformerData> SharedPointer;
+			typedef std::shared_ptr<ConformerData> SharedPointer;
 
 			ConformerData(): energy(0.0) {}
 

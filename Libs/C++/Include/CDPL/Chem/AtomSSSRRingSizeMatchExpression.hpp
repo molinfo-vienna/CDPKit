@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ATOMSSSRRINGSIZEMATCHEXPRESSION_HPP
 #define CDPL_CHEM_ATOMSSSRRINGSIZEMATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -57,9 +57,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %AtomSSSRRingSizeMatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomSSSRRingSizeMatchExpression instances.
 			 */
-			typedef boost::shared_ptr<AtomSSSRRingSizeMatchExpression> SharedPointer;
+			typedef std::shared_ptr<AtomSSSRRingSizeMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs an \c %AtomSSSRRingSizeMatchExpression instance for the specified query ring size.

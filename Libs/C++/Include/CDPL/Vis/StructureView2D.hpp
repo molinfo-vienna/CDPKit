@@ -35,8 +35,7 @@
 #include <memory>
 #include <string>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/View2D.hpp"
@@ -441,9 +440,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %StructureView2D instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %StructureView2D instances.
 			 */
-			typedef boost::shared_ptr<StructureView2D> SharedPointer;
+			typedef std::shared_ptr<StructureView2D> SharedPointer;
 			
 			/**
 			 * \brief Constructs and initializes a \c %StructureView2D instance for the visualization of the chemical
@@ -494,7 +493,7 @@ namespace CDPL
 			class CustomGraphicsData;
 			friend class ReactionView2D;
 
-			typedef boost::shared_ptr<CustomGraphicsData> CustomGraphicsDataPtr;
+			typedef std::shared_ptr<CustomGraphicsData> CustomGraphicsDataPtr;
 			typedef std::vector<CustomGraphicsDataPtr> CustomGraphicsDataList;
 
 			StructureView2D(const StructureView2D&);

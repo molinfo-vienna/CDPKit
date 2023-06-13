@@ -34,8 +34,7 @@
 #include <vector>
 #include <set>
 #include <utility>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -56,9 +55,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %AromaticSubstructure instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticSubstructure instances.
 			 */
-			typedef boost::shared_ptr<AromaticSubstructure> SharedPointer;
+			typedef std::shared_ptr<AromaticSubstructure> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty \c %AromaticSubstructure instance.
@@ -84,7 +83,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<RingDescriptor> SharedPointer;
+				typedef std::shared_ptr<RingDescriptor> SharedPointer;
 
 				RingDescriptor(const Fragment::SharedPointer&, const MolecularGraph&);
 				RingDescriptor(const Fragment::SharedPointer&, Util::BitSet&, const RingDescriptor&, const RingDescriptor&);

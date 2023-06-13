@@ -35,8 +35,8 @@
 #include <cstddef>
 #include <utility>
 #include <unordered_map>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 #include <boost/functional/hash.hpp>
 #include <boost/random/mersenne_twister.hpp>
@@ -71,7 +71,7 @@ namespace CDPL
 			static constexpr std::size_t  DEF_NUM_RANDOM_STARTS           = 4;
 			static constexpr double       DEF_MAX_RANDOM_TRANSLATION      = 2.0;
 
-			typedef boost::shared_ptr<FastGaussianShapeAlignment> SharedPointer;
+			typedef std::shared_ptr<FastGaussianShapeAlignment> SharedPointer;
 
 			typedef ResultList::const_iterator ConstResultIterator;
 			typedef ResultList::iterator ResultIterator;

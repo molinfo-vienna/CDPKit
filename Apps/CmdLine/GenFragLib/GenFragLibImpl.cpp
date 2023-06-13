@@ -581,7 +581,7 @@ void GenFragLibImpl::processMultiThreaded()
 {
 	using namespace CDPL;
 
-	typedef boost::shared_ptr<FragLibGenerationWorker> FragLibGenerationWorkerPtr;
+	typedef std::shared_ptr<FragLibGenerationWorker> FragLibGenerationWorkerPtr;
 	typedef std::vector<FragLibGenerationWorkerPtr> FragLibGenerationWorkerList;
 	typedef std::vector<std::thread> ThreadGroup;
 	

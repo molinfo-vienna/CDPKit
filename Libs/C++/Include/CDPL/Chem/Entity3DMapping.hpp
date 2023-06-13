@@ -56,7 +56,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<Entity3DMapping> SharedPointer;
+			typedef std::shared_ptr<Entity3DMapping> SharedPointer;
 
 			Entity3DMapping();
 			

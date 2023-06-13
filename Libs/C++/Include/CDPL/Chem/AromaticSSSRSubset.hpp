@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_AROMATICSSSRSUBSET_HPP
 #define CDPL_CHEM_AROMATICSSSRSUBSET_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -54,9 +54,9 @@ namespace CDPL
 
 	  public:
 	    /**	
-	     * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %AromaticSSSRSubset instances.
+	     * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AromaticSSSRSubset instances.
 	     */
-	    typedef boost::shared_ptr<AromaticSSSRSubset> SharedPointer;
+	    typedef std::shared_ptr<AromaticSSSRSubset> SharedPointer;
 
 	    /**
 	     * \brief Constructs an empty \c %AromaticSSSRSubset instance.

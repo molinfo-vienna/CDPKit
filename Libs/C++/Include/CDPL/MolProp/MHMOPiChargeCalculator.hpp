@@ -39,8 +39,6 @@
 #include <cstdint>
 #include <memory>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/MolProp/APIPrefix.hpp"
 #include "CDPL/Chem/ElectronSystemList.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -71,7 +69,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
+			typedef std::shared_ptr<MHMOPiChargeCalculator> SharedPointer;
 
 			MHMOPiChargeCalculator();
 

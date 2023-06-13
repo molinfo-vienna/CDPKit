@@ -221,7 +221,7 @@ namespace CDPL
 				Octant*     child[8];
 			};
 
-			typedef boost::shared_ptr<Octant> OctantPtr;
+			typedef std::shared_ptr<Octant> OctantPtr;
 
 			// not copyable, not assignable ...
 			Octree(Octree& oct);

@@ -33,8 +33,8 @@
 
 #include <cstddef>
 #include <vector>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -58,7 +58,7 @@ namespace CDPL
 
 			friend class HierarchyViewModel;
 
-			typedef boost::shared_ptr<HierarchyViewFragment> FragmentPtr;
+			typedef std::shared_ptr<HierarchyViewFragment> FragmentPtr;
 			typedef std::vector<FragmentPtr> FragmentList;
 
 		  public:

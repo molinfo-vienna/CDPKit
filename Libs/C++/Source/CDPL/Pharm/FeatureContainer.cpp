@@ -35,28 +35,28 @@ using namespace CDPL;
 
 Pharm::FeatureContainer::ConstFeatureIterator Pharm::FeatureContainer::getFeaturesBegin() const
 {
-    return ConstFeatureIterator(*this, 0);
+    return ConstFeatureIterator(this, 0);
 }
 
 Pharm::FeatureContainer::ConstFeatureIterator Pharm::FeatureContainer::getFeaturesEnd() const
 {
-    return ConstFeatureIterator(*this, getNumFeatures());
+    return ConstFeatureIterator(this, getNumFeatures());
 }
 
 Pharm::FeatureContainer::FeatureIterator Pharm::FeatureContainer::getFeaturesBegin()
 {
-    return FeatureIterator(*this, 0);
+    return FeatureIterator(this, 0);
 }
 
 Pharm::FeatureContainer::FeatureIterator Pharm::FeatureContainer::getFeaturesEnd()
 {
-    return FeatureIterator(*this, getNumFeatures());
+    return FeatureIterator(this, getNumFeatures());
 }
 
 Pharm::FeatureContainer& Pharm::FeatureContainer::operator=(const FeatureContainer& cntnr) 
 {
     if (this == &cntnr)
-	return *this;
+		return *this;
 
     Base::PropertyContainer::operator=(cntnr);
     Chem::Entity3DContainer::operator=(cntnr);
@@ -82,27 +82,27 @@ Chem::Entity3D& Pharm::FeatureContainer::getEntity(std::size_t idx)
 
 const Pharm::Feature& Pharm::FeatureContainer::ConstFeatureAccessor::operator()(std::size_t idx) const
 {
-    return container.get().getFeature(idx);
+    return container->getFeature(idx);
 }
 
 bool Pharm::FeatureContainer::ConstFeatureAccessor::operator==(const ConstFeatureAccessor& accessor) const 
 {
-    return (container.get_pointer() == accessor.container.get_pointer());
+    return (container == accessor.container);
 }
 
 Pharm::FeatureContainer::ConstFeatureAccessor& Pharm::FeatureContainer::ConstFeatureAccessor::operator=(const FeatureAccessor& accessor) 
 {
-    container = boost::reference_wrapper<const FeatureContainer>(accessor.container);
+    container = accessor.container;
     return *this;
 }
 
 
 Pharm::Feature& Pharm::FeatureContainer::FeatureAccessor::operator()(std::size_t idx) const
 {
-    return container.get().getFeature(idx);
+    return container->getFeature(idx);
 }
 
 bool Pharm::FeatureContainer::FeatureAccessor::operator==(const FeatureAccessor& accessor) const 
 {
-    return (container.get_pointer() == accessor.container.get_pointer());
+    return (container == accessor.container);
 }

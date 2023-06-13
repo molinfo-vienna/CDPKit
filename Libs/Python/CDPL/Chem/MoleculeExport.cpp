@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -46,7 +47,7 @@ namespace
 	struct MoleculeWrapper : CDPL::Chem::Molecule, boost::python::wrapper<CDPL::Chem::Molecule> 
 	{
 
-		typedef boost::shared_ptr<MoleculeWrapper> SharedPointer;
+		typedef std::shared_ptr<MoleculeWrapper> SharedPointer;
 
 		ATOMCONTAINER_IMPL()
 		BONDCONTAINER_IMPL()

@@ -33,8 +33,7 @@
 
 #include <vector>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/GRAIL/BuriednessScore.hpp"
@@ -63,7 +62,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<BuriednessGridCalculator> SharedPointer;
+			typedef std::shared_ptr<BuriednessGridCalculator> SharedPointer;
 
 			BuriednessGridCalculator();
 
@@ -95,7 +94,7 @@ namespace CDPL
 
 		  private:
 			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
-			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::shared_ptr<Octree> OctreePtr;
 			typedef std::vector<std::size_t> AtomIndexList;
 
 			BuriednessScore      buriednessScore; 

@@ -34,7 +34,6 @@
 #include <memory>
 #include <cstddef>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
@@ -108,7 +107,7 @@ namespace CDPL
 				std::size_t                   confIndex;
 			};
 
-			typedef boost::shared_ptr<ScreeningProcessor> SharedPointer;
+			typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 
 			typedef boost::function2<bool, const SearchHit&, double> HitCallbackFunction;
 			typedef boost::function1<double, const SearchHit&> ScoringFunction;

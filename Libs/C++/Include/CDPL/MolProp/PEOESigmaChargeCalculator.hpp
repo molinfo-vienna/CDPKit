@@ -36,8 +36,7 @@
 
 #include <cstddef>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/MolProp/APIPrefix.hpp"
 
@@ -65,7 +64,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<PEOESigmaChargeCalculator> SharedPointer;
+			typedef std::shared_ptr<PEOESigmaChargeCalculator> SharedPointer;
 
 			static constexpr std::size_t DEF_NUM_ITERATIONS = 20;
 			static constexpr double      DEF_DAMPING_FACTOR = 0.48;
@@ -146,7 +145,7 @@ namespace CDPL
 		    {
 
 			  public:
-				typedef boost::shared_ptr<AtomState> SharedPointer;
+				typedef std::shared_ptr<AtomState> SharedPointer;
 
 				AtomState();
 				AtomState(const Chem::Atom&, const Chem::MolecularGraph&);

@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ATOMBONDMAPPING_HPP
 #define CDPL_CHEM_ATOMBONDMAPPING_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
@@ -58,9 +58,9 @@ namespace CDPL
 
 		public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %AtomBondMapping instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %AtomBondMapping instances.
 			 */
-			typedef boost::shared_ptr<AtomBondMapping> SharedPointer;
+			typedef std::shared_ptr<AtomBondMapping> SharedPointer;
 
 			/**
 			 * \brief Returns a \c const reference to the Chem::AtomMapping data member storing the atom

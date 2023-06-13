@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <string>
 #include <unordered_map>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
@@ -56,9 +55,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ResidueList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ResidueList instances.
 			 */
-			typedef boost::shared_ptr<ResidueList> SharedPointer;
+			typedef std::shared_ptr<ResidueList> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty \c %ResidueList instance.

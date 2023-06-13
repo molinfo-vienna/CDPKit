@@ -51,7 +51,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<PharmacophoreGenerator> SharedPointer;
+			typedef std::shared_ptr<PharmacophoreGenerator> SharedPointer;
 
 			/**
 			 * \brief Constructs the \c %PharmacophoreGenerator instance.

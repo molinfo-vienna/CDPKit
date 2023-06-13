@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_MATCHEXPRESSION_HPP
 #define CDPL_CHEM_MATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 namespace CDPL 
@@ -78,9 +78,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpression instances.
 			 */
-			typedef boost::shared_ptr<MatchExpression> SharedPointer;
+			typedef std::shared_ptr<MatchExpression> SharedPointer;
 
 			/**
 			 * \brief Virtual Destructor.
@@ -153,9 +153,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MatchExpression instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MatchExpression instances.
 			 */
-			typedef boost::shared_ptr<MatchExpression> SharedPointer;
+			typedef std::shared_ptr<MatchExpression> SharedPointer;
 
 			/**
 			 * \brief Virtual Destructor.

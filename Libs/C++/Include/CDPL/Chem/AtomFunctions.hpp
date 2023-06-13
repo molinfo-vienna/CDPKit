@@ -33,9 +33,7 @@
 
 #include <cstddef>
 #include <string>
-
-#include <boost/type_traits/is_const.hpp> 
-#include <boost/mpl/if.hpp>
+#include <type_traits>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -431,7 +429,7 @@ namespace CDPL
 		template <typename AtomType, typename OutputIterator>
 		std::size_t getConnectedAtoms(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it, AtomType* excl_atom = 0)
 		{
-			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
+			typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
 
 			AtomIterator atoms_end = atom.getAtomsEnd();
 			typename AtomType::ConstBondIterator b_it = atom.getBondsBegin();
@@ -454,7 +452,7 @@ namespace CDPL
 		template <typename AtomType, typename OutputIterator>
 		std::size_t getIncidentBonds(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it, AtomType* excl_atom = 0)
 		{
-			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
+			typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
 
 			BondIterator bonds_end = atom.getBondsEnd();
 			typename AtomType::ConstAtomIterator a_it = atom.getAtomsBegin();
@@ -477,8 +475,8 @@ namespace CDPL
 		template <typename AtomType, typename AtomOutputIterator, typename BondOutputIterator>
 		std::size_t getConnectedAtomsAndBonds(AtomType& atom, const MolecularGraph& molgraph, AtomOutputIterator ao_it, BondOutputIterator bo_it, AtomType* excl_atom = 0)
 		{
-			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
-			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
+			typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
+			typedef typename std::conditional<std::is_const<AtomType>::value, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
 
 			BondIterator bonds_end = atom.getBondsEnd();
 			AtomIterator a_it = atom.getAtomsBegin();

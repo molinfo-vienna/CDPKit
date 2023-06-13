@@ -41,7 +41,7 @@ namespace
     struct ScreeningDBCreatorWrapper : CDPL::Pharm::ScreeningDBCreator, boost::python::wrapper<CDPL::Pharm::ScreeningDBCreator> 
     {
 
-		typedef boost::shared_ptr<ScreeningDBCreatorWrapper> SharedPointer;
+		typedef std::shared_ptr<ScreeningDBCreatorWrapper> SharedPointer;
 
 		void open(const std::string& name, Mode mode, bool allow_dup_entries) {
 			this->get_override("open")(name, mode, allow_dup_entries);

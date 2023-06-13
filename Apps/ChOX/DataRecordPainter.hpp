@@ -27,7 +27,7 @@
 #ifndef CHOX_DATARECORDPAINTER_HPP
 #define CHOX_DATARECORDPAINTER_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <QString>
 
@@ -46,7 +46,7 @@ namespace ChOX
 	{
 
 	public:
-		typedef boost::shared_ptr<DataRecordPainter> SharedPointer;
+		typedef std::shared_ptr<DataRecordPainter> SharedPointer;
 
 		DataRecordPainter(CDPL::Vis::QtFontMetrics&, QPainter&, const Settings&, const DataRecord&);
 
@@ -63,8 +63,8 @@ namespace ChOX
 		void visit(const ConcreteDataRecord<CDPL::Chem::Reaction>&);
 		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
-		typedef boost::shared_ptr<CDPL::Vis::View2D> DataViewPointer;
-		typedef boost::shared_ptr<CDPL::Base::PropertyContainer> PropertyContainerPointer;
+		typedef std::shared_ptr<CDPL::Vis::View2D> DataViewPointer;
+		typedef std::shared_ptr<CDPL::Base::PropertyContainer> PropertyContainerPointer;
 
 		QPainter&                 painter;
 		const Settings&           settings;

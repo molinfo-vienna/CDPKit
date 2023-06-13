@@ -27,7 +27,7 @@
 #ifndef CHOX_DATARECORD_HPP
 #define CHOX_DATARECORD_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 
 namespace ChOX
@@ -39,7 +39,7 @@ namespace ChOX
 	{
 
 	public:
-		typedef boost::shared_ptr<DataRecord> SharedPointer;
+		typedef std::shared_ptr<DataRecord> SharedPointer;
 
 		virtual ~DataRecord() {}
 

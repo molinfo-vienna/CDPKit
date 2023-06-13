@@ -31,8 +31,9 @@
 #ifndef CDPL_UTIL_INDIRECTARRAY_HPP
 #define CDPL_UTIL_INDIRECTARRAY_HPP
 
+#include <type_traits>
+
 #include <boost/iterator/transform_iterator.hpp>
-#include <boost/mpl/if.hpp>
 
 #include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -68,7 +69,7 @@ namespace CDPL
 		class IndirectArray : public Array<PointerType>
 		{
 
-			typedef typename boost::mpl::if_c<NullPointerCheck, 
+			typedef typename std::conditional<NullPointerCheck, 
 											  NullCheckDereferencer<PointerType, ValueType&>, 
 											  Dereferencer<PointerType, ValueType&> >::type DerefFunc;	
 
@@ -86,9 +87,9 @@ namespace CDPL
 			typedef ValueType ElementType;
 
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %IndirectArray instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %IndirectArray instances.
 			 */
-			typedef boost::shared_ptr<IndirectArray> SharedPointer;
+			typedef std::shared_ptr<IndirectArray> SharedPointer;
  
 			/**
 			 * \brief A constant random access iterator used to iterate

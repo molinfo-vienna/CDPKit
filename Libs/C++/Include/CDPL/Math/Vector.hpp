@@ -37,8 +37,7 @@
 #include <unordered_map>
 #include <type_traits>
 #include <initializer_list>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
@@ -245,7 +244,7 @@ namespace CDPL
 			typedef VectorReference<SelfType> ClosureType;
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef SelfType VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			Vector(): data() {}
 
@@ -460,7 +459,7 @@ namespace CDPL
 			typedef VectorReference<SelfType> ClosureType;
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef SelfType VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			SparseVector(): data(), size(0) {}
 
@@ -700,7 +699,7 @@ namespace CDPL
 			typedef VectorReference<SelfType> ClosureType;
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef BoundedVector<T, N + 1> VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			static const SizeType MaxSize = N;
 
@@ -930,7 +929,7 @@ namespace CDPL
 			typedef VectorReference<SelfType> ClosureType;
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef BoundedVector<T, N + 1> VectorTemporaryType;
-			typedef boost::shared_ptr<SelfType> SharedPointer;
+			typedef std::shared_ptr<SelfType> SharedPointer;
 
 			static const SizeType Size = N;
 

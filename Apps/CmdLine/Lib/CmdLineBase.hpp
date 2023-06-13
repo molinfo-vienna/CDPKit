@@ -31,7 +31,6 @@
 #include <fstream>
 #include <cstddef>
 #include <map>
-#include <chrono>
 
 #include "CDPL/Internal/Timer.hpp"
 

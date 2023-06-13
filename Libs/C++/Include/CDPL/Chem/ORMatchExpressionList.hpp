@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ORMATCHEXPRESSIONLIST_HPP
 #define CDPL_CHEM_ORMATCHEXPRESSIONLIST_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/MatchExpressionList.hpp"
 
@@ -54,9 +54,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ORMatchExpressionList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ORMatchExpressionList instances.
 			 */
-			typedef boost::shared_ptr<ORMatchExpressionList> SharedPointer;
+			typedef std::shared_ptr<ORMatchExpressionList> SharedPointer;
 
 			/**
 			 * Performs an evaluation of the disjunctive expression list for the given query and target objects.
@@ -104,9 +104,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ORMatchExpressionList instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ORMatchExpressionList instances.
 			 */
-			typedef boost::shared_ptr<ORMatchExpressionList> SharedPointer;
+			typedef std::shared_ptr<ORMatchExpressionList> SharedPointer;
 
 			/**
 			 * Performs an evaluation of the disjunctive expression list for the given query and target objects.

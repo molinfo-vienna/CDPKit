@@ -28,8 +28,7 @@
 #define CDPL_PHARM_SQLiteDATAIOBASE_HPP
 
 #include <string>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <sqlite3.h>
 
@@ -44,8 +43,8 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::shared_ptr<sqlite3> SQLite3DBPointer;
-			typedef boost::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
+			typedef std::shared_ptr<sqlite3> SQLite3DBPointer;
+			typedef std::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
 
 			SQLiteDataIOBase() {}
 

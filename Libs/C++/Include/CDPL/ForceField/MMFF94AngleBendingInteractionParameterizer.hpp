@@ -33,8 +33,7 @@
 
 #include <vector>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
@@ -66,7 +65,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94AngleBendingInteractionParameterizer> SharedPointer;
+			typedef std::shared_ptr<MMFF94AngleBendingInteractionParameterizer> SharedPointer;
 
 			MMFF94AngleBendingInteractionParameterizer();
 

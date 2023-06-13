@@ -692,7 +692,7 @@ void StructGenImpl::processMultiThreaded()
 {
 	using namespace CDPL;
 
-	typedef boost::shared_ptr<StructureGenerationWorker> StructureGenerationWorkerPtr;
+	typedef std::shared_ptr<StructureGenerationWorker> StructureGenerationWorkerPtr;
 	typedef std::vector<StructureGenerationWorkerPtr> StructureGenerationWorkerList;
 	typedef std::vector<std::thread> ThreadGroup;
 	

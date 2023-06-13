@@ -31,7 +31,7 @@
 #ifndef CDPL_VIS_POLYLINEPRIMITIVE2D_HPP
 #define CDPL_VIS_POLYLINEPRIMITIVE2D_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/PointArray2D.hpp"
@@ -53,9 +53,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %PolylinePrimitive2D instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %PolylinePrimitive2D instances.
 			 */
-			typedef boost::shared_ptr<PolylinePrimitive2D> SharedPointer;
+			typedef std::shared_ptr<PolylinePrimitive2D> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty polyline primitive.

@@ -31,7 +31,7 @@
 #ifndef CDPL_MATH_VECTORARRAY_HPP
 #define CDPL_MATH_VECTORARRAY_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -54,9 +54,9 @@ namespace CDPL
 			typedef V ValueType;
 
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %VectorArray instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %VectorArray instances.
 			 */
-			typedef boost::shared_ptr<VectorArray> SharedPointer;
+			typedef std::shared_ptr<VectorArray> SharedPointer;
 
 		private:
 			const char* getClassName() const {

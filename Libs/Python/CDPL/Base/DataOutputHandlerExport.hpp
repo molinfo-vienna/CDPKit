@@ -27,8 +27,9 @@
 #ifndef CDPL_PYTHON_BASE_DATAOUTPUTHANDLEREXPORT_HPP
 #define CDPL_PYTHON_BASE_DATAOUTPUTHANDLEREXPORT_HPP
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/Base/DataFormat.hpp"
@@ -46,7 +47,7 @@ namespace CDPLPythonBase
 	{
 
 		typedef typename CDPL::Base::DataOutputHandler<T>::WriterType WriterType;
-		typedef boost::shared_ptr<DataOutputHandlerWrapper> SharedPointer;
+		typedef std::shared_ptr<DataOutputHandlerWrapper> SharedPointer;
 
 		const CDPL::Base::DataFormat& getDataFormat() const {
 			return this->get_override("getDataFormat")();

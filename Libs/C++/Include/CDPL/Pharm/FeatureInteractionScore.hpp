@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_FEATUREINTERACTIONSCORE_HPP
 #define CDPL_PHARM_FEATUREINTERACTIONSCORE_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -53,9 +53,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FeatureInteractionScore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureInteractionScore instances.
 			 */
-			typedef boost::shared_ptr<FeatureInteractionScore> SharedPointer;
+			typedef std::shared_ptr<FeatureInteractionScore> SharedPointer;
 
 			/**
 			 * \brief Virtual destructor.

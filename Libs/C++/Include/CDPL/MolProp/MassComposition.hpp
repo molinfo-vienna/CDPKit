@@ -53,7 +53,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MassComposition> SharedPointer;
+			typedef std::shared_ptr<MassComposition> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

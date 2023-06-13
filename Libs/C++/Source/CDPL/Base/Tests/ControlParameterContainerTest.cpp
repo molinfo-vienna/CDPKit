@@ -25,10 +25,10 @@
 
 
 #include <string>
+#include <memory>
 
 #include <boost/test/auto_unit_test.hpp>
 #include <boost/bind.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 #include "CDPL/Base/LookupKey.hpp"
@@ -47,7 +47,7 @@ namespace
 	struct TestControlParameterContainer : public Base::ControlParameterContainer 
 	{
 
-		typedef boost::shared_ptr<TestControlParameterContainer> SharedPointer;
+		typedef std::shared_ptr<TestControlParameterContainer> SharedPointer;
 
 	};
 }

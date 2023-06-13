@@ -32,8 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONPARAMETERIZER_HPP
 
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
@@ -61,7 +60,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
+			typedef std::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
 
 			MMFF94OutOfPlaneBendingInteractionParameterizer();
 

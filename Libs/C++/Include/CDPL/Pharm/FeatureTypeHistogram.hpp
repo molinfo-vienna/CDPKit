@@ -52,7 +52,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<FeatureTypeHistogram> SharedPointer;
+			typedef std::shared_ptr<FeatureTypeHistogram> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

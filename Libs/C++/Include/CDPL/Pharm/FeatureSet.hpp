@@ -33,9 +33,9 @@
 
 #include <vector>
 #include <unordered_map>
+#include <memory>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -57,9 +57,9 @@ namespace CDPL
 
 	  public:
 	    /**	
-	     * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FeatureSet instances.
+	     * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureSet instances.
 	     */
-	    typedef boost::shared_ptr<FeatureSet> SharedPointer;
+	    typedef std::shared_ptr<FeatureSet> SharedPointer;
 
 	    /**
 	     * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.

@@ -29,7 +29,7 @@
 #ifndef CDPL_GRID_SPATIALGRID_HPP
 #define CDPL_GRID_SPATIALGRID_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Grid/AttributedGrid.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -49,7 +49,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::shared_ptr<SpatialGrid> SharedPointer;
+			typedef std::shared_ptr<SpatialGrid> SharedPointer;
 			typedef T ValueType;
 			typedef CVT CoordinatesValueType;
 			typedef Math::CVector<CVT, 3> CoordinatesType;

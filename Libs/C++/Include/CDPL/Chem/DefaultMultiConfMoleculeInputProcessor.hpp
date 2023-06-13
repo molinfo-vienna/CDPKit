@@ -50,7 +50,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
+			typedef std::shared_ptr<DefaultMultiConfMoleculeInputProcessor> SharedPointer;
 			
 			static constexpr unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |

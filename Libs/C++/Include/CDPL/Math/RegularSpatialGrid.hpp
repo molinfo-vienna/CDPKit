@@ -31,8 +31,7 @@
 
 #include <type_traits>
 #include <utility>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/GridExpression.hpp"
 #include "CDPL/Math/Grid.hpp"
@@ -105,7 +104,7 @@ namespace CDPL
 			typedef typename GD::DifferenceType DifferenceType;
 			typedef SelfType ClosureType;
 			typedef const SelfType ConstClosureType;
-            typedef boost::shared_ptr<SelfType> SharedPointer;
+            typedef std::shared_ptr<SelfType> SharedPointer;
 
 			RegularSpatialGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): 
 				dataMode(POINT), xStep(xs), yStep(ys), zStep(zs) {

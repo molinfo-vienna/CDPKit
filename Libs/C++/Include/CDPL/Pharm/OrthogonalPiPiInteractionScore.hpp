@@ -56,9 +56,9 @@ namespace CDPL
 			static constexpr double DEF_MAX_ANGLE      = 20.0;
 
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %OrthogonalPiPiInteractionScore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %OrthogonalPiPiInteractionScore instances.
 			 */
-			typedef boost::shared_ptr<OrthogonalPiPiInteractionScore> SharedPointer;
+			typedef std::shared_ptr<OrthogonalPiPiInteractionScore> SharedPointer;
 
 			typedef boost::function1<double, double> DistanceScoringFunction;
 			typedef boost::function1<double, double> AngleScoringFunction;

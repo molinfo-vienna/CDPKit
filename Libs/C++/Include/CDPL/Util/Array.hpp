@@ -35,34 +35,26 @@
 #include <string>
 #include <cstddef>
 #include <utility>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
-
-#ifndef CDPL_UTIL_ARRAY_CHECKS_DISABLE
-#  define CDPL_UTIL_ARRAY_CHECKS_DISABLE 0
-#endif // CDPL_UTIL_ARRAY_CHECKS_DISABLE
-
 #ifndef CDPL_UTIL_ARRAY_CHECK_INDEX
-#  if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
-#    define CDPL_UTIL_ARRAY_CHECK_INDEX(idx, allow_end) \
-	   checkIndex(idx, allow_end)
-#  else // CDPL_UTIL_ARRAY_CHECKS_DISABLE != 0
+#  ifdef CDPL_UTIL_ARRAY_CHECKS_DISABLE
 #    define CDPL_UTIL_ARRAY_CHECK_INDEX(idx, allow_end)
+#  else // !CDPL_UTIL_ARRAY_CHECKS_DISABLE
+#    define CDPL_UTIL_ARRAY_CHECK_INDEX(idx, allow_end) checkIndex(idx, allow_end)
 #  endif // CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0
-#endif // CDPL_UTIL_ARRAY_CHECK_INDEX
+#endif // !CDPL_UTIL_ARRAY_CHECK_INDEX
 
 #ifndef CDPL_UTIL_ARRAY_CHECK_ITER
-#  if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
-#    define CDPL_UTIL_ARRAY_CHECK_ITER(it, allow_end) \
-	   checkIterator(it, allow_end)
-#  else // CDPL_UTIL_ARRAY_CHECKS_DISABLE != 0
+#  ifdef CDPL_UTIL_ARRAY_CHECKS_DISABLE
 #    define CDPL_UTIL_ARRAY_CHECK_ITER(it, allow_end)
-#  endif // CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0
-#endif // CDPL_UTIL_ARRAY_CHECK_INDEX
+#  else // !CDPL_UTIL_ARRAY_CHECKS_DISABLE
+#    define CDPL_UTIL_ARRAY_CHECK_ITER(it, allow_end) checkIterator(it, allow_end)
+#  endif // CDPL_UTIL_ARRAY_CHECKS_DISABLE
+#endif // !CDPL_UTIL_ARRAY_CHECK_INDEX
 
 
 namespace CDPL
@@ -105,9 +97,9 @@ namespace CDPL
 			typedef std::vector<ValueType> StorageType;
 
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %Array instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %Array instances.
 			 */
-			typedef boost::shared_ptr<Array> SharedPointer;
+			typedef std::shared_ptr<Array> SharedPointer;
 
 			/**
 			 * \brief The type of objects stored by the array. 

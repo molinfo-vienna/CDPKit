@@ -34,8 +34,8 @@
 #include <string>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
@@ -56,9 +56,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FragmentLibraryEntry instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FragmentLibraryEntry instances.
 			 */
-			typedef boost::shared_ptr<FragmentLibraryEntry> SharedPointer;
+			typedef std::shared_ptr<FragmentLibraryEntry> SharedPointer;
 
 			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
 			typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData> ConformerIterator;

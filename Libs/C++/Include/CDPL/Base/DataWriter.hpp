@@ -31,7 +31,7 @@
 #ifndef CDPL_BASE_DATAWRITER_HPP
 #define CDPL_BASE_DATAWRITER_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Base/DataIOBase.hpp"
 
@@ -66,9 +66,9 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %DataWriter instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %DataWriter instances.
 			 */
-			typedef boost::shared_ptr<DataWriter> SharedPointer;
+			typedef std::shared_ptr<DataWriter> SharedPointer;
 
 			/**
 			 * \brief The type of the written data objects.

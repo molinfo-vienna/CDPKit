@@ -34,7 +34,7 @@
 #ifndef CDPL_MATH_CHECK
 #  ifdef CDPL_MATH_CHECKS_DISABLE
 #    define CDPL_MATH_CHECK(expr, msg, e)
-#  else // CDPL_MATH_CHECKS_DISABLE
+#  else // !CDPL_MATH_CHECKS_DISABLE
 #    define CDPL_MATH_CHECK(expr, msg, e)	 \
 	   if (!(expr)) {						 \
 		   throw e(msg);					 \

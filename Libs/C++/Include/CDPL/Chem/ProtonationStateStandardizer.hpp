@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <vector>
 #include <unordered_set>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -60,7 +59,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<ProtonationStateStandardizer> SharedPointer;
+			typedef std::shared_ptr<ProtonationStateStandardizer> SharedPointer;
 
 			enum Flavor {
 			

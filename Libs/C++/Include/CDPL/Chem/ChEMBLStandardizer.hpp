@@ -38,8 +38,8 @@
 #include <cstdint>
 #include <utility>
 #include <unordered_set>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -67,7 +67,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<ChEMBLStandardizer> SharedPointer;
+			typedef std::shared_ptr<ChEMBLStandardizer> SharedPointer;
 
 			enum ChangeFlags {
 			

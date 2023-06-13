@@ -28,8 +28,7 @@
 #define CDPL_PYTHON_MATH_VECTOREXPRESSION_HPP
 
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
@@ -53,7 +52,7 @@ namespace CDPLPythonMath
 		typedef const SelfType& ClosureType;
 		typedef const SelfType& ConstClosureType;
 		typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 
 		virtual ~ConstVectorExpression() {} 
 
@@ -86,7 +85,7 @@ namespace CDPLPythonMath
 		typedef SelfType& ClosureType;
 		typedef const SelfType& ConstClosureType;
 		typedef CDPL::Math::Vector<ValueType> VectorTemporaryType;
-		typedef boost::shared_ptr<SelfType> SharedPointer;
+		typedef std::shared_ptr<SelfType> SharedPointer;
 		typedef typename ConstExpressionType::SharedPointer ConstExpressionPointer;
 
 		virtual ~VectorExpression() {} 

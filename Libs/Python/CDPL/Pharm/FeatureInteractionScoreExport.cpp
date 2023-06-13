@@ -24,8 +24,9 @@
  */
 
 
+#include <memory>
+
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -41,7 +42,7 @@ namespace
 	struct FeatureInteractionScoreWrapper : CDPL::Pharm::FeatureInteractionScore, boost::python::wrapper<CDPL::Pharm::FeatureInteractionScore> 
 	{
 	
-		typedef boost::shared_ptr<FeatureInteractionScoreWrapper> SharedPointer;
+		typedef std::shared_ptr<FeatureInteractionScoreWrapper> SharedPointer;
 
 		double operator()(const CDPL::Pharm::Feature& ftr1, const CDPL::Pharm::Feature& ftr2) const {
 			return this->get_override("__call__")(boost::ref(ftr1), boost::ref(ftr2));

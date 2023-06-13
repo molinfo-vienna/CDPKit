@@ -32,8 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94CHARGECALCULATOR_HPP
 
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
@@ -62,7 +61,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<MMFF94ChargeCalculator> SharedPointer;
+			typedef std::shared_ptr<MMFF94ChargeCalculator> SharedPointer;
 
 			MMFF94ChargeCalculator();
 

@@ -41,7 +41,7 @@ namespace
 		CDPL::Chem::MultiConfMoleculeInputProcessor, boost::python::wrapper<CDPL::Chem::MultiConfMoleculeInputProcessor> 
     {
 	
-		typedef boost::shared_ptr<MultiConfMoleculeInputProcessorWrapper> SharedPointer;
+		typedef std::shared_ptr<MultiConfMoleculeInputProcessorWrapper> SharedPointer;
 
 		bool init(CDPL::Chem::MolecularGraph& tgt_molgraph) const {
 			return this->get_override("init")(boost::ref(tgt_molgraph));

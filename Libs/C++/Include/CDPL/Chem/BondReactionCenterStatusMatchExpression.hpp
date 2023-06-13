@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_BONDREACTIONCENTERSTATUSMATCHEXPRESSION_HPP
 #define CDPL_CHEM_BONDREACTIONCENTERSTATUSMATCHEXPRESSION_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -54,10 +54,10 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %BondReactionCenterStatusMatchExpression
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %BondReactionCenterStatusMatchExpression
 			 *        instances.
 			 */
-			typedef boost::shared_ptr<BondReactionCenterStatusMatchExpression> SharedPointer;
+			typedef std::shared_ptr<BondReactionCenterStatusMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs a \c %BondReactionCenterStatusMatchExpression instance for the specified query reaction center status.

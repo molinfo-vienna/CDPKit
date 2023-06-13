@@ -33,8 +33,7 @@
 #include <string>
 #include <iosfwd>
 #include <cstddef>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
@@ -159,7 +158,7 @@ namespace CDPL
 				MatchConstraintList::SharedPointer matchConstraints;
 			};
 
-			typedef boost::shared_ptr<SMARTSDataReader> SharedPointer;
+			typedef std::shared_ptr<SMARTSDataReader> SharedPointer;
 
 			typedef std::map<std::size_t, ClosureBond> ClosureBondMap;
 			typedef std::vector<const Bond*> BondTable;

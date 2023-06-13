@@ -76,7 +76,7 @@ void Pharm::SQLiteDataIOBase::execStatements(const std::string& sql_stmts) const
 {
 	char* err_msg = 0;
 	int res = sqlite3_exec(database.get(), sql_stmts.c_str(), NULL, NULL, &err_msg);
-	boost::shared_ptr<char> err_msg_ptr(err_msg, sqlite3_free);
+	std::shared_ptr<char> err_msg_ptr(err_msg, sqlite3_free);
 
 	if (res != SQLITE_OK && res != SQLITE_DONE && res != SQLITE_ROW) {
 		std::string ex_msg;

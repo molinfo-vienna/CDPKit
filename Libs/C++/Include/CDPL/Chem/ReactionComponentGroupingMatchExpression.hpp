@@ -33,8 +33,7 @@
 
 #include <vector>
 #include <mutex>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -58,10 +57,10 @@ namespace CDPL
 
 		public:
 			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %ReactionComponentGroupingMatchExpression
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %ReactionComponentGroupingMatchExpression
 			 *        instances.
 			 */
-			typedef boost::shared_ptr<ReactionComponentGroupingMatchExpression> SharedPointer;
+			typedef std::shared_ptr<ReactionComponentGroupingMatchExpression> SharedPointer;
 
 			/**
 			 * \brief Constructs a \c %ReactionComponentGroupingMatchExpression instance for the specified component-level grouping.

@@ -33,8 +33,7 @@
 
 #include <cstddef>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
@@ -104,7 +103,7 @@ namespace CDPL
 			typedef std::vector<Element> ElementList;
 
 		  public:
-			typedef boost::shared_ptr<GaussianShape> SharedPointer;
+			typedef std::shared_ptr<GaussianShape> SharedPointer;
 
 			typedef ElementList::const_iterator ConstElementIterator;
 			typedef ElementList::iterator ElementIterator;

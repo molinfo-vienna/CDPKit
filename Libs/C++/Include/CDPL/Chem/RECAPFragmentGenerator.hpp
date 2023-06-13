@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_RECAPFRAGMENTGENERATOR_HPP
 #define CDPL_CHEM_RECAPFRAGMENTGENERATOR_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentGenerator.hpp"
@@ -51,7 +51,7 @@ namespace CDPL
 	{
 
 	  public:
-	    typedef boost::shared_ptr<RECAPFragmentGenerator> SharedPointer;
+	    typedef std::shared_ptr<RECAPFragmentGenerator> SharedPointer;
 		
 	    /**
 	     * \brief Constructs the \c %RECAPFragmentGenerator instance.

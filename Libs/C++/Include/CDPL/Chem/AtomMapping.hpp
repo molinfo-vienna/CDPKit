@@ -56,7 +56,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<AtomMapping> SharedPointer;
+			typedef std::shared_ptr<AtomMapping> SharedPointer;
 
 		  private:
 			const char* getClassName() const {

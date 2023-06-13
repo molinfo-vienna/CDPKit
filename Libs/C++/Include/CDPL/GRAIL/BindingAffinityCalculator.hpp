@@ -31,7 +31,7 @@
 #ifndef CDPL_GRAIL_BINDINGAFFINITYCALCULATOR_HPP
 #define CDPL_GRAIL_BINDINGAFFINITYCALCULATOR_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -50,7 +50,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::shared_ptr<BindingAffinityCalculator> SharedPointer;
+			typedef std::shared_ptr<BindingAffinityCalculator> SharedPointer;
 
 			enum AffinityMeasure
 		    {

@@ -31,8 +31,7 @@
 #ifndef CDPL_PHARM_FEATURECONTAINER_HPP
 #define CDPL_PHARM_FEATURECONTAINER_HPP
 
-#include <boost/ref.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
@@ -59,9 +58,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FeatureContainer instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureContainer instances.
 			 */
-			typedef boost::shared_ptr<FeatureContainer> SharedPointer;
+			typedef std::shared_ptr<FeatureContainer> SharedPointer;
 
 			/**
 			 * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.
@@ -161,7 +160,7 @@ namespace CDPL
 			  public:
 				ConstFeatureAccessor(const FeatureAccessor& accessor): container(accessor.container) {}
 
-				ConstFeatureAccessor(const FeatureContainer& cntnr): container(cntnr) {}
+				ConstFeatureAccessor(const FeatureContainer* cntnr): container(cntnr) {}
 
 				const Feature& operator()(std::size_t idx) const;
 
@@ -170,7 +169,7 @@ namespace CDPL
 				ConstFeatureAccessor& operator=(const FeatureAccessor& accessor);
 
 			  private:
-				boost::reference_wrapper<const FeatureContainer> container;
+				const FeatureContainer* container;
 			};
 
 			class CDPL_PHARM_API FeatureAccessor
@@ -179,14 +178,14 @@ namespace CDPL
 				friend class ConstFeatureAccessor;
 
 			  public:
-				FeatureAccessor(FeatureContainer& cntnr): container(cntnr) {}
+				FeatureAccessor(FeatureContainer* cntnr): container(cntnr) {}
 
 				Feature& operator()(std::size_t idx) const;
 
 				bool operator==(const FeatureAccessor& accessor) const;
 
 			  private:
-				boost::reference_wrapper<FeatureContainer> container;
+				FeatureContainer* container;
 			};
 		};
     }

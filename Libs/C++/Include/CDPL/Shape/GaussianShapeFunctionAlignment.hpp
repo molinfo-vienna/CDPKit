@@ -33,8 +33,7 @@
 
 #include <cstddef>
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
@@ -64,7 +63,7 @@ namespace CDPL
 			static constexpr double      DEF_OPTIMIZATION_STOP_GRADIENT  = 1.0;
 			static constexpr std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
-			typedef boost::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
+			typedef std::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 
 			typedef ResultList::const_iterator ConstResultIterator;
 

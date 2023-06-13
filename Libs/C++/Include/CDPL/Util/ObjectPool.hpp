@@ -35,8 +35,8 @@
 #include <cstddef>
 #include <algorithm>
 #include <new>
+#include <memory>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 
@@ -63,7 +63,7 @@ namespace CDPL
 
 		public:
 			typedef T ObjectType;
-			typedef boost::shared_ptr<ObjectType> SharedObjectPointer;
+			typedef std::shared_ptr<ObjectType> SharedObjectPointer;
 			typedef boost::function0<ObjectType*> ConstructorFunction;
 			typedef boost::function1<void, ObjectType*> DestructorFunction;
 			typedef boost::function1<void, ObjectType&> ObjectFunction;

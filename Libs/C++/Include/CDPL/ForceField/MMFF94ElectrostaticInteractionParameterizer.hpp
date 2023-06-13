@@ -31,7 +31,7 @@
 #ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP
 #define CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
@@ -60,7 +60,7 @@ namespace CDPL
 			static constexpr double DEF_DIELECTRIC_CONSTANT   = 1.0;
 			static constexpr double DIELECTRIC_CONSTANT_WATER = 80.0;
 
-			typedef boost::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
+			typedef std::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
 
 			MMFF94ElectrostaticInteractionParameterizer();
 

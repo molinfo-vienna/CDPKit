@@ -32,8 +32,7 @@
 #define CDPL_FORCEFIELD_AROMATICSSSRSUBSET_HPP
 
 #include <vector>
-
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -62,9 +61,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MMFF94AromaticSSSRSubset instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %MMFF94AromaticSSSRSubset instances.
 			 */
-			typedef boost::shared_ptr<MMFF94AromaticSSSRSubset> SharedPointer;
+			typedef std::shared_ptr<MMFF94AromaticSSSRSubset> SharedPointer;
 
 			/**
 			 * \brief Constructs an empty \c %MMFF94AromaticSSSRSubset instance.

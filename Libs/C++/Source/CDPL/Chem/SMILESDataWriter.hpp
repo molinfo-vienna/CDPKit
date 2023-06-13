@@ -33,8 +33,6 @@
 #include <memory>
 #include <cstddef>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 
@@ -149,7 +147,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<DFSTreeEdge> SharedPointer;
+				typedef std::shared_ptr<DFSTreeEdge> SharedPointer;
 
 				DFSTreeEdge(SMILESDataWriter&);
 
@@ -180,7 +178,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<DFSTreeNode> SharedPointer;
+				typedef std::shared_ptr<DFSTreeNode> SharedPointer;
 
 				DFSTreeNode(SMILESDataWriter&);
 

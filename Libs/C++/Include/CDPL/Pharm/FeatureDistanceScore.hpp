@@ -53,9 +53,9 @@ namespace CDPL
 
 		  public:
 			/**	
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %FeatureDistanceScore instances.
+			 * \brief A reference-counted smart pointer [\ref SHPTR] for dynamically allocated \c %FeatureDistanceScore instances.
 			 */
-			typedef boost::shared_ptr<FeatureDistanceScore> SharedPointer;
+			typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
 
 			typedef boost::function1<double, double> DistanceScoringFunction;
 

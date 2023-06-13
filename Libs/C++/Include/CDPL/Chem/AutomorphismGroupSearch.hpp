@@ -31,7 +31,8 @@
 #ifndef CDPL_CHEM_AUTOMORPHISMGROUPSEARCH_HPP
 #define CDPL_CHEM_AUTOMORPHISMGROUPSEARCH_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
+
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -69,7 +70,7 @@ namespace CDPL
 				BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
 				BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
-			typedef boost::shared_ptr<AutomorphismGroupSearch> SharedPointer;
+			typedef std::shared_ptr<AutomorphismGroupSearch> SharedPointer;
 
 			/**
 			 * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
