@@ -121,12 +121,12 @@ print('Processing molecule with {!s} atoms and {!s} bonds'.format(mol.numAtoms, 
 # generate the ligand based pharmacophore model for it
 ph4 = genPharmacophore(mol) # generate pharmacophore
 
-# print some stats about it
+# print the number of features and feature composition
 print(' -> Generated %s features: %s' % (str(ph4.numFeatures), createFeatureCompositionStr(ph4)))
 
 ```
 
-In the above code, we import the required CDPKit modules, create a molecule from an SDF string, compute the ligand based pharmacophore model using CDPKit's built-in functions and print some of its molecular features.
+In the above code, we import the required CDPKit modules, create a molecule from an SDF file, compute the ligand based pharmacophore model using CDPKit's built-in functions and print some of its molecular and pharmacophoric features.
 
 ### Further Exploration
 
