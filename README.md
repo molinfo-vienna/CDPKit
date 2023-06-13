@@ -132,13 +132,13 @@ In the above code, we import the required CDPKit modules, create a molecule from
 
 CDPKit offers a vast range of functionality beyond the basic usage shown above. Some areas to explore include:
 
-- **Substructure Searching**: CDPKit provides powerful methods to search for substructures within molecules. You can use functions like `Chem.MolFromSmarts()` to create a query substructure and `Chem.GetSubstructMatches()` to find matching substructures in a molecule.
+- **Substructure Searching**: CDPKit provides powerful methods to search for substructures within molecules. You can use functions like `...` to create a query substructure and `...` to find matching substructures in a molecule.
 
 - **Descriptor Calculation**: CDPKit allows you to calculate various molecular descriptors, such as Lipinski's Rule of Five properties, topological fingerprints, and more. These descriptors can be used to assess molecular properties and predict biological activities.
 
-- **Chemical Reactions**: CDPKit supports handling and manipulation of chemical reactions. You can create reaction objects, apply transformations, and generate reaction fingerprints for similarity searching.
+- **Chemical Reactions**: 
 
-- **Machine Learning Integration**: CDPKit integrates well with machine learning libraries like scikit-learn and TensorFlow. You can use CDPKit to preprocess molecular data, extract features, and build predictive models for various chemical properties.
+- **Machine Learning Integration**: CDPKit integrates well with machine learning libraries like scikit-learn, PyTorch, and TensorFlow. You can use CDPKit to preprocess molecular data, extract features, and build predictive models for various chemical properties.
 
 ### Documentation and Resources
 
