@@ -177,6 +177,8 @@ namespace CDPL
 			VectorType& data;
 		};
 
+		template <typename T, typename A> class Vector;
+	
 		template <typename T>
 		class InitListVector : public VectorContainer<InitListVector<T> >
 		{
@@ -191,7 +193,8 @@ namespace CDPL
 			typedef typename std::ptrdiff_t DifferenceType;
 			typedef SelfType ClosureType;
 			typedef const SelfType ConstClosureType;
-			
+			typedef Vector<T, std::vector<T> > VectorTemporaryType;
+				
 			InitListVector(InitializerListType l): list(l) {}
 
 			Reference operator[](SizeType i) {
@@ -516,7 +519,7 @@ namespace CDPL
 			}
 
 			SizeType getMaxSize() const {
-				return data.max_size();
+				return std::min(SizeType(data.max_size()), std::numeric_limits<SizeType>::max());
 			}
 
 			ArrayType& getData() {
@@ -669,7 +672,7 @@ namespace CDPL
 
 		private:
 			SizeType storageSize(SizeType n) {
-				return CDPL_MATH_CHECK_MAX_SIZE(n, data.max_size(), Base::SizeError);
+				return CDPL_MATH_CHECK_MAX_SIZE(n, getMaxSize(), Base::SizeError);
 			}
 
 			ArrayType              data;

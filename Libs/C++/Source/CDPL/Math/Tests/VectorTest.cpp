@@ -226,6 +226,48 @@ namespace
 }
 
 
+BOOST_AUTO_TEST_CASE(InitListVectorTest)
+{
+	using namespace CDPL;
+	using namespace Math;
+	
+	InitListVector<double> v1{};
+
+	checkEmpty2(v1);
+
+	// ---------
+
+	InitListVector<double> v11{ {} };
+
+	checkValues3(1, v11, 0.0);
+
+	// ---------
+
+	double values2[] = { 1, 2, 3 };
+	
+	InitListVector<double> v2{ { 1, 2, 3 } };
+
+	checkValues3(3, v2, values2);
+
+	// ---------
+	
+	InitListVector<double> v3{ 1, 2, 3 };
+
+	checkValues3(3, v3, values2);
+
+	// ---------
+
+	InitListVector<double> v4({ 1, 2, 3 });
+
+	checkValues3(3, v4, values2);
+
+	// ---------
+
+	InitListVector<double> v5(v4);
+
+	checkValues3(3, v5, values2);
+}
+
 BOOST_AUTO_TEST_CASE(VectorTest)
 {
 	using namespace CDPL;
@@ -280,6 +322,7 @@ BOOST_AUTO_TEST_CASE(VectorTest)
 	Vector<double> v5(4, 2.2);
 
 	checkValues1(4, v5, 2.2);
+
 
 	// ---------
 
@@ -705,6 +748,38 @@ BOOST_AUTO_TEST_CASE(VectorTest)
 	v1.swap(v1);
 
 	checkValues1(6, v1, values2);
+
+	// ---------
+
+	double values9[] = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+	
+	Vector<long double> v9{ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(6, v9, values9);
+
+	v9.resize(0);
+
+	checkEmpty2(v9);
+
+	v9 = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(6, v9, values9);
+
+	v9.clear();
+
+	checkValues3(6, v9, 0.0);
+
+	v9 += { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(6, v9, values9);
+
+	v9 -= { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues3(6, v9, 0.0);
+			
+	BOOST_CHECK_THROW(v9.plusAssign({ 0.0 }), Base::SizeError);
+
+	BOOST_CHECK_THROW(v9.minusAssign({ -2.2, 3.0, -4.0, 5.5, 7.0, 0.0, 1.0 }), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(SparseVectorTest)
@@ -1126,6 +1201,38 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	v1.swap(v1);
 
 	checkValues3(6, v1, values2);
+	
+	// ---------
+
+	double values9[] = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+	
+	SparseVector<long double> v9{ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues3(6, v9, values9);
+
+	v9.resize(0);
+
+	checkEmpty2(v9);
+
+	v9 = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues3(6, v9, values9);
+
+	v9.clear();
+
+	checkValues3(6, v9, 0.0);
+
+	v9 += { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues3(6, v9, values9);
+
+	v9 -= { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues3(6, v9, 0.0);
+		
+	BOOST_CHECK_THROW(v9.plusAssign({ 2.0 }), Base::SizeError);
+
+	BOOST_CHECK_THROW(v9.minusAssign({ 1, 0, 1, 2, 3, 5, -7 }), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(BoundedVectorTest)
@@ -1636,6 +1743,40 @@ BOOST_AUTO_TEST_CASE(BoundedVectorTest)
 	v1.swap(v1);
 
 	checkValues2(6, v1, values2);
+
+    // ---------
+
+	BOOST_CHECK_THROW((BoundedVector<long double, 5>({ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 })), Base::SizeError);
+	
+	double values9[] = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+	
+	BoundedVector<long double, 6> v9{ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(6, v9, values9);
+
+	v9.resize(0);
+
+	checkEmpty2(v9);
+
+	v9 = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(6, v9, values9);
+
+	v9.clear();
+
+	checkValues3(6, v9, 0.0);
+
+	v9 += { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(6, v9, values9);
+
+	v9 -= { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues3(6, v9, 0.0);
+	
+	BOOST_CHECK_THROW(v9.plusAssign({ 2.2 }), Base::SizeError);
+
+	BOOST_CHECK_THROW(v9.minusAssign({ 1, 2, 3, 4, 5, 7, 8 }), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(CVectorTest)
@@ -1953,6 +2094,40 @@ BOOST_AUTO_TEST_CASE(CVectorTest)
 	swap(v1, v1);
 
 	checkValues2(4, v1, 7.0);
+	
+    // ---------
+
+	BOOST_CHECK_THROW((CVector<long double, 5>({ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 })), Base::SizeError);
+	
+	double values9[] = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0, 0.0 };
+	
+	CVector<long double, 7> v9{ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(7, v9, values9);
+
+	CVector<long double, 7> v10;
+	
+	checkValues3(7, v10, 0.0);
+	
+	v10 = { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 };
+
+	checkValues2(7, v10, values9);
+
+	v9.clear();
+
+	checkValues3(7, v9, 0.0);
+
+	BOOST_CHECK_THROW((v9.plusAssign({ 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 })), Base::SizeError);
+	
+	v9 += { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0, 0.0 };
+
+	checkValues2(7, v9, values9);
+
+	BOOST_CHECK_THROW((v9.minusAssign({ 2.0, -1.2, 5.0, 1.0 })), Base::SizeError);
+	
+	v9 -= { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0, 0.0 };
+
+	checkValues3(7, v9, 0.0);
 }
 
 BOOST_AUTO_TEST_CASE(ZeroVectorTest)

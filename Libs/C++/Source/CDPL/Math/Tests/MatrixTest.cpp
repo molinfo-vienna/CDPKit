@@ -370,6 +370,46 @@ namespace
 }
 
 
+BOOST_AUTO_TEST_CASE(InitListMatrixTest)
+{
+	using namespace CDPL;
+	using namespace Math;
+
+	InitListMatrix<double> m1{};
+
+	checkEmpty2(0, 0, m1);
+
+	InitListMatrix<double> m11{ {} };
+
+	checkEmpty2(1, 0, m11);
+
+	// ---------
+
+	double values2[][3] = { { 0 }, { 1, 2, 3 } };
+	
+	InitListMatrix<double> m2{ { {}, { 1, 2, 3 } } };
+
+	checkValues2(2, 3, m2, values2);
+
+	// ---------
+	
+	InitListMatrix<double> m3{ {}, { 1, 2, 3 } };
+
+	checkValues2(2, 3, m3, values2);
+
+	// ---------
+
+	InitListMatrix<double> m4({ {}, { 1, 2, 3 } });
+
+	checkValues2(2, 3, m4, values2);
+
+	// ---------
+
+	InitListMatrix<double> m5(m4);
+
+	checkValues2(2, 3, m5, values2);
+}
+
 BOOST_AUTO_TEST_CASE(MatrixTest)
 {
 	using namespace CDPL;
@@ -898,6 +938,53 @@ BOOST_AUTO_TEST_CASE(MatrixTest)
 	m1.swap(m1);
 
 	checkValues1(2, 6, m1, values2);
+
+	// ---------
+	
+	double values9[][4] = {
+	  { 2.0, -1.2, 5.0, 0.0 },
+	  { 1.1,  0.0, 1.0, 2.0 },
+	  { 3.1, -4.5, 0.0, 0.0 }
+	};
+	
+	Matrix<long double> m9{ { 2.0, -1.2, 5.0 },
+							{ 1.1,  0.0, 1.0, 2.0 },
+							{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9.resize(0, 0);
+
+	checkEmpty2(0, 0, m9);
+
+	m9 = { { 2.0, -1.2, 5.0 },
+		   { 1.1,  0.0, 1.0, 2.0 },
+		   { 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9.clear();
+
+	checkValues2(3, 4, m9, 0.0);
+
+	m9 += { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9 -= { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, 0.0);
+
+	BOOST_CHECK_THROW((m9.minusAssign({ { 2.0, -1.2, 5.0 },
+										{ 1.1,  0.0, 1.0 },
+										{ 3.1, -4.5 } })), Base::SizeError);
+
+	BOOST_CHECK_THROW((m9.plusAssign({ { 1.1,  0.0, 1.0, 0.0 },
+									   { 3.1, -4.5 } })), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(SparseMatrixTest)
@@ -992,7 +1079,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	BOOST_CHECK(m7.getNumElements() == 4);
 
-	m7.resize(1, 6, false);
+	m7.resize(1, 6);
 	
 	checkValues2(1, 6, m7, values2);
 
@@ -1252,7 +1339,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	// ---------
 
-	m1.resize(3, 4, true);
+	m1.resize(3, 4);
 
 	checkValues2(3, 4, m1, values1);
 
@@ -1401,6 +1488,53 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 	m1.swap(m1);
 
 	checkValues2(2, 6, m1, values2);
+	
+	// ---------
+	
+	double values9[][4] = {
+	  { 2.0, -1.2, 5.0, 0.0 },
+	  { 1.1,  0.0, 1.0, 2.0 },
+	  { 3.1, -4.5, 0.0, 0.0 }
+	};
+	
+	SparseMatrix<long double> m9{ { 2.0, -1.2, 5.0 },
+								  { 1.1,  0.0, 1.0, 2.0 },
+								  { 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9.resize(0, 0);
+
+	checkEmpty2(0, 0, m9);
+
+	m9 = { { 2.0, -1.2, 5.0 },
+		   { 1.1,  0.0, 1.0, 2.0 },
+		   { 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9.clear();
+
+	checkValues2(3, 4, m9, 0.0);
+
+	m9 += { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9 -= { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, 0.0);
+	
+	BOOST_CHECK_THROW((m9.minusAssign({ { 2.0, -1.2, 5.0 },
+										{ 1.1,  0.0, 1.0 },
+										{ 3.1, -4.5 } })), Base::SizeError);
+
+	BOOST_CHECK_THROW((m9.plusAssign({ { 1.1,  0.0, 1.0, 0.0 },
+									   { 3.1, -4.5 } })), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
@@ -2025,6 +2159,62 @@ BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 	m1.swap(m1);
 
 	checkValues4(2, 6, m1, values2);
+		
+	// ---------
+	
+	double values9[][4] = {
+	  { 2.0, -1.2, 5.0, 0.0 },
+	  { 1.1,  0.0, 1.0, 2.0 },
+	  { 3.1, -4.5, 0.0, 0.0 }
+	};
+
+	BOOST_CHECK_THROW((BoundedMatrix<long double, 4, 5>({ { 2.0, -1.2, 5.0 },
+														  { 1.1,  0.0, 1.0, 2.0, 1.0, 2.0 },
+														  { 3.1, -4.5 } })), Base::SizeError);
+
+	BOOST_CHECK_THROW((BoundedMatrix<long double, 3, 6>({ { 0.2 },
+														  { 2.0, -1.2, 5.0 },
+														  { 1.1,  0.0, 1.0, 2.0, 1.0, 2.0 },
+														  { 3.1, -4.5 } })), Base::SizeError);
+		
+	BoundedMatrix<long double, 4, 5> m9{ { 2.0, -1.2, 5.0 },
+										 { 1.1,  0.0, 1.0, 2.0 },
+										 { 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9.resize(0, 0);
+
+	checkEmpty2(0, 0, m9);
+
+	m9 = { { 2.0, -1.2, 5.0 },
+		   { 1.1,  0.0, 1.0, 2.0 },
+		   { 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9.clear();
+
+	checkValues2(3, 4, m9, 0.0);
+
+	m9 += { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, values9);
+
+	m9 -= { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(3, 4, m9, 0.0);
+
+	BOOST_CHECK_THROW((m9.minusAssign({ { 2.0, -1.2, 5.0 },
+										{ 1.1,  0.0, 1.0 },
+										{ 3.1, -4.5 } })), Base::SizeError);
+
+	BOOST_CHECK_THROW((m9.plusAssign({ { 1.1,  0.0, 1.0, 0.0 },
+									   { 3.1, -4.5 } })), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(CMatrixTest)
@@ -2389,6 +2579,67 @@ BOOST_AUTO_TEST_CASE(CMatrixTest)
 	m1.swap(m1);
 
 	checkValues4(4, 5, m1, values1);
+		
+	// ---------
+	
+	double values9[][5] = {
+	  { 2.0, -1.2, 5.0, 0.0, 0.0 },
+	  { 1.1,  0.0, 1.0, 2.0, 0.0 },
+	  { 3.1, -4.5, 0.0, 0.0, 0.0 },
+	  { 0.0,  0.0, 0.0, 0.0, 0.0 },
+	};
+
+	BOOST_CHECK_THROW((CMatrix<long double, 4, 5>({ { 2.0, -1.2, 5.0 },
+													{ 1.1,  0.0, 1.0, 2.0, 1.0, 2.0 },
+													{ 3.1, -4.5 } })), Base::SizeError);
+
+	BOOST_CHECK_THROW((CMatrix<long double, 3, 6>({ { 0.2 },
+													{ 2.0, -1.2, 5.0 },
+													{ 1.1,  0.0, 1.0, 2.0, 1.0, 2.0 },
+													{ 3.1, -4.5 } })), Base::SizeError);
+		
+	CMatrix<long double, 4, 5> m9{ { 2.0, -1.2, 5.0 },
+								   { 1.1,  0.0, 1.0, 2.0 },
+								   { 3.1, -4.5 } };
+
+	checkValues2(4, 5, m9, values9);
+
+	CMatrix<long double, 4, 5> m10;
+
+	checkValues2(4, 5, m10, 0.0);
+		
+	m10 = { { 2.0, -1.2, 5.0 },
+			{ 1.1,  0.0, 1.0, 2.0 },
+			{ 3.1, -4.5 } };
+
+	checkValues2(4, 5, m10, values9);
+
+	m10.clear();
+
+	checkValues2(4, 5, m10, 0.0);
+
+	m10 += { { 2.0, -1.2, 5.0 },
+			 { 1.1,  0.0, 1.0, 2.0, 0.0 },
+			 { 3.1, -4.5 },
+			 { 0.0 } };
+
+	checkValues2(4, 5, m10, values9);
+
+	m10 -= { { 2.0, -1.2, 5.0 },
+			 { 1.1,  0.0, 1.0, 2.0, 0.0 },
+			 { 3.1, -4.5 },
+			 { } };
+
+	checkValues2(4, 5, m10, 0.0);
+
+	BOOST_CHECK_THROW((m10.minusAssign({ { 2.0, -1.2, 5.0 },
+										 { 2.0, -1.2, 5.0 },
+										 { 1.1,  0.0, 1.0 },
+										 { 3.1, -4.5 } })), Base::SizeError);
+
+	BOOST_CHECK_THROW((m10.plusAssign({ { 2.0, -1.2, 5.0 },
+										{ 1.1,  0.0, 1.0, 0.0, 2.0 },
+										{ 3.1, -4.5 } })), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(ZeroMatrixTest)
