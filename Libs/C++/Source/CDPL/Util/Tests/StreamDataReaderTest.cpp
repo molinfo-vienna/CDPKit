@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
 	TestStringReader reader1(is1);
 	TestProgressCallback callback;
 
-	reader1.registerIOCallback(boost::ref(callback));
+	reader1.registerIOCallback(std::ref(callback));
 
 	BOOST_CHECK(reader1.getNumRecords() == 4);
 	

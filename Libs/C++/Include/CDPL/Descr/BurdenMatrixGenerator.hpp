@@ -63,8 +63,7 @@ namespace CDPL
 			 *
 			 * The provided atom weight function (or function object) is required to take the atom (as a
 			 * \c const reference to Chem::Atom) as argument and return the weight of the atom as
-			 * a floating-point value of type \c double. For details refer to the <em>Boost.Function</em>
-			 * documentation [\ref BFUN]. 
+			 * a floating-point value of type \c double (see [\ref FUNWRP]).
 			 */
 			typedef std::function<double(const Chem::Atom&)> AtomWeightFunction;
 

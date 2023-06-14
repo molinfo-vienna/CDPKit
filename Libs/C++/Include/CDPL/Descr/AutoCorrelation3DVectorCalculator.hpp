@@ -61,8 +61,7 @@ namespace CDPL
 			 *
 			 * The specified function (or function object) is required to take the two entitys (as a
 			 * \c const reference to \c EntityType) as its arguments and return the weight of the entity pair as
-			 * a floating-point value of type \c double. For details refer to the <em>Boost.Function</em>
-			 * documentation [\ref BFUN]. 
+			 * a floating-point value of type \c double (see [\ref FUNWRP]). 
 			 */
 			typedef std::function<double(const EntityType&, const EntityType&)> EntityPairWeightFunction;
 
@@ -71,8 +70,7 @@ namespace CDPL
 			 *
 			 * The provided specified function (or function object) is required to take the entity (as a
 			 * \c const reference to \c EntityType) as its argument and return the coordinates of the entity as
-			 * a \c const reference to Math::Vector3D. For details refer to the <em>Boost.Function</em>
-			 * documentation [\ref BFUN]. 
+			 * a \c const reference to Math::Vector3D (see [\ref FUNWRP]).
 			 */
 			typedef std::function<const Math::Vector3D&(const EntityType&)> Entity3DCoordinatesFunction;
 

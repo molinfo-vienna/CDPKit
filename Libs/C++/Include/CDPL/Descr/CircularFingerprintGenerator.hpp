@@ -174,7 +174,7 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of atom identifiers are required to take
 			 * the atom (as a \c const reference to Chem::Atom) and containing molecular graph (as a \c const reference to Chem::MolecularGraph) as
-			 * argument and return the identifier as an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * argument and return the identifier as an integer of type \c std::uint64_t (see [\ref FUNWRP]).
 			 */
 			typedef std::function<std::uint64_t(const Chem::Atom&, const Chem::MolecularGraph&)> AtomIdentifierFunction;
 
@@ -184,7 +184,7 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of bond identifiers are required to take
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the identifier as
-			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type \c std::uint64_t (see [\ref FUNWRP]).
 			 */
 			typedef std::function<std::uint64_t(const Chem::Bond&)> BondIdentifierFunction;
 

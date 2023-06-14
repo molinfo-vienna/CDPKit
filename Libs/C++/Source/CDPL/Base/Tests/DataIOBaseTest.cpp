@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(DataIOBaseTest)
 
 	test_iob.unregisterIOCallback(0);
 
-	BOOST_CHECK(test_iob.registerIOCallback(boost::ref(test_cb1)) == 0);
+	BOOST_CHECK(test_iob.registerIOCallback(std::ref(test_cb1)) == 0);
 
 	test_iob.invokeIOCallbacks(1.0);
 
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(DataIOBaseTest)
 	BOOST_CHECK(test_cb1.calls == 2);
 	BOOST_CHECK(test_cb2.calls == 0);
 
-	BOOST_CHECK(test_iob.registerIOCallback(boost::ref(test_cb2)) == 3);
+	BOOST_CHECK(test_iob.registerIOCallback(std::ref(test_cb2)) == 3);
 
 	BOOST_CHECK(test_cb1.calls == 2);
 	BOOST_CHECK(test_cb2.calls == 0);

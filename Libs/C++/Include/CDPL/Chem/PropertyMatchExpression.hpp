@@ -68,8 +68,7 @@ namespace CDPL
 			 * \brief Type of the generic functor class used to store user-defined property accessor functions.
 			 *
 			 * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
-			 * two arguments of type <tt>const ObjType1&</tt> and <tt>const ObjType2&</tt>. For details refer to the <em>Boost.Function</em>
-			 * documentation [\ref BFUN]. 
+			 * two arguments of type <tt>const ObjType1&</tt> and <tt>const ObjType2&</tt> (see [\ref FUNWRP]).
 			 */
 			typedef std::function<ValueType(const ObjType1&, const ObjType2&)> PropertyFunction;
 	
@@ -138,7 +137,7 @@ namespace CDPL
 			 * \brief Type of the generic functor class used to store user-defined property accessor functions.
 			 *
 			 * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
-			 * an argument of type <tt>const ObjType&</tt>. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an argument of type <tt>const ObjType&</tt> (see [\ref FUNWRP]).
 			 */
 			typedef std::function<ValueType(const ObjType&)> PropertyFunction;
 		

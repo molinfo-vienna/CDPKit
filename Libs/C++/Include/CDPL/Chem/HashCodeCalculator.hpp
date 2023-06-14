@@ -170,7 +170,7 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of atom hash seeds are required to take
 			 * the atom (as a \c const reference to Chem::Atom) as argument and return the hash seed as
-			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type \c std::uint64_t (see [\ref FUNWRP]).
 			 */
 			typedef std::function<std::uint64_t(const Atom&)> AtomHashSeedFunction;
 
@@ -180,7 +180,7 @@ namespace CDPL
 			 *
 			 * Functions or function objects for the generation of bond hash seeds are required to take
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the hash seed as
-			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * an integer of type \c std::uint64_t (see [\ref FUNWRP]).
 			 */
 			typedef std::function<std::uint64_t(const Bond&)> BondHashSeedFunction;
 

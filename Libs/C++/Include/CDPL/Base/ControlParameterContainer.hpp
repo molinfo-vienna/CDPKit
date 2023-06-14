@@ -113,7 +113,7 @@ namespace CDPL
 			 *        control-parameter has changed.
 			 *
 			 * \c %ParameterChangedCallbackFunction allows to wrap any function pointer or function object compatible with
-			 * a return type of \c void and two arguments of type <tt>const Base::LookupKey&</tt> and <tt>Base::Any</tt> (see [\ref BFUN]). 
+			 * a return type of \c void and two arguments of type <tt>const Base::LookupKey&</tt> and <tt>Base::Any</tt> (see [\ref FUNWRP]). 
 			 */
 			typedef std::function<void(const LookupKey&, const Any&)> ParameterChangedCallbackFunction;
 
@@ -122,7 +122,7 @@ namespace CDPL
 			 *        has been removed.
 			 *
 			 * \c %ParameterRemovedCallbackFunction allows to wrap any function pointer or function object compatible with a
-			 * return type of \c void and an argument of type <tt>const Base::LookupKey&</tt> (see [\ref BFUN]). 
+			 * return type of \c void and an argument of type <tt>const Base::LookupKey&</tt> (see [\ref FUNWRP]). 
 			 */
 			typedef std::function<void(const LookupKey&)> ParameterRemovedCallbackFunction;
 
@@ -131,7 +131,7 @@ namespace CDPL
 			 *        container has been changed or was detached.
 			 *
 			 * \c %ParentChangedCallbackFunction allows to wrap any function pointer or function object compatible with a return type
-			 * of \c void and no arguments (see [\ref BFUN]). 
+			 * of \c void and no arguments (see [\ref FUNWRP]). 
 			 *
 			 * \see setParent()
 			 */

@@ -42,13 +42,6 @@ C. Bron, J. Kerbosch, Algorithm 457: finding all cliques of an undirected graph,
 </tr>
 
 <tr>
-<td valign="top">\anchor BOOST<i>[BOOST]</i></td>
-<td valign="top">
-Boost C++ Libraries homepage: http://www.boost.org/
-</td>
-</tr>
-
-<tr>
 <td valign="top">\anchor BALD<i>[BALD]</i></td>
 <td valign="top">
 R. Balducci, R. S. Pearlman, Efficient exact solution of the ring perception problem, 
@@ -67,14 +60,7 @@ R. S. Pearlman, K. M. SMith, Novel Software Tools for Chemical Diversity,
 <tr>
 <td valign="top">\anchor BDBS<i>[BDBS]</i></td>
 <td valign="top">
-Boost \c dynamic_bitset documentation: http://www.boost.org/libs/dynamic_bitset/dynamic_bitset.html
-</td>
-</tr>
-
-<tr>
-<td valign="top">\anchor BFUN<i>[BFUN]</i></td>
-<td valign="top">
-Boost.Function documentation: http://www.boost.org/doc/html/function.html
+\c boost::dynamic_bitset documentation: http://www.boost.org/libs/dynamic_bitset/dynamic_bitset.html
 </td>
 </tr>
 
@@ -143,6 +129,13 @@ An open source chemical structure curation pipeline using RDKit,
 <td valign="top">\anchor DTPFP<i>[DTPFP]</i></td>
 <td valign="top">
 Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.finger.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor FUNWRP<i>[FUNWRP]</i></td>
+<td valign="top">
+\c std::function documentation: https://en.cppreference.com/w/cpp/utility/functional/function
 </td>
 </tr>
 
@@ -332,7 +325,7 @@ Qt Online Reference Documentation: https://doc.qt.io/
 <tr>
 <td valign="top">\anchor SHPTR<i>[SHPTR]</i></td>
 <td valign="top">
-<i>std::shared_ptr</i> documentation: https://en.cppreference.com/w/cpp/memory/shared_ptr
+\c std::shared_ptr documentation: https://en.cppreference.com/w/cpp/memory/shared_ptr
 </td>
 </tr>
 
