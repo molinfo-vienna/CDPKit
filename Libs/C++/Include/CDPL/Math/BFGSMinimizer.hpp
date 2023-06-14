@@ -31,8 +31,7 @@
 
 #include <cstddef>
 #include <limits>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Math/MinimizerVariableArrayTraits.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
@@ -61,8 +60,8 @@ namespace CDPL
 			typedef VT ValueType;
 			typedef FVT FunctionValueType;
 
-			typedef typename boost::function2<FVT, const VA&, VA&> GradientFunction;
-			typedef typename boost::function1<FVT, const VA&> ObjectiveFunction;
+			typedef typename std::function<FVT(const VA&, VA&)> GradientFunction;
+			typedef typename std::function<FVT(const VA&)> ObjectiveFunction;
 
 			enum Status { 
 

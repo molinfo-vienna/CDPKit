@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_FEATUREINTERACTIONSCORECOMBINER_HPP
 #define CDPL_PHARM_FEATUREINTERACTIONSCORECOMBINER_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
@@ -55,7 +55,7 @@ namespace CDPL
 			 */
 			typedef std::shared_ptr<FeatureInteractionScoreCombiner> SharedPointer;
 
-			typedef boost::function2<double, double, double> CombinationFunction;
+			typedef std::function<double(double, double)> CombinationFunction;
 
 			typedef FeatureInteractionScore::SharedPointer InteractionScore;
 			

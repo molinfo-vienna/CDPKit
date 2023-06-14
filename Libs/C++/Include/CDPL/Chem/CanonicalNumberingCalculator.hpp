@@ -39,8 +39,7 @@
 #include <cstdint>
 #include <vector>
 #include <utility>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -85,7 +84,7 @@ namespace CDPL
 			static constexpr unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
-			typedef boost::function2<std::size_t, const Atom&, const MolecularGraph&> HydrogenCountFunction;
+			typedef std::function<std::size_t(const Atom&, const MolecularGraph&)> HydrogenCountFunction;
 
 			/**
 			 * \brief Constructs the \c %CanonicalNumberingCalculator instance.

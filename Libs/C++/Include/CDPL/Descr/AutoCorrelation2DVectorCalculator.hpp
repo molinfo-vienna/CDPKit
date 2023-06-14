@@ -32,8 +32,7 @@
 #define CDPL_DESCR_AUTOCORRELATION2DVECTORCALCULATOR_HPP
 
 #include <cstddef>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -69,7 +68,7 @@ namespace CDPL
 			 * a floating-point value of type \c double. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<double, const Chem::Atom&, const Chem::Atom&> AtomPairWeightFunction;
+			typedef std::function<double(const Chem::Atom&, const Chem::Atom&)> AtomPairWeightFunction;
 
 			/**
 			 * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance.

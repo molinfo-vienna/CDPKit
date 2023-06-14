@@ -37,8 +37,7 @@
 #include <unordered_set>
 #include <array>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -70,8 +69,8 @@ namespace CDPL
 
 			typedef std::shared_ptr<TautomerGenerator> SharedPointer;
 
-			typedef boost::function1<bool, MolecularGraph&> CallbackFunction;
-			typedef boost::function1<void, MolecularGraph&> CustomSetupFunction;
+			typedef std::function<bool(MolecularGraph&)> CallbackFunction;
+			typedef std::function<void(MolecularGraph&)> CustomSetupFunction;
 
 			/**
 			 * \brief Constructs the \c %TautomerGenerator instance.

@@ -390,7 +390,7 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 		Feature& feature = emitFeature(featureAtoms, pharm, makeFragment(featureAtoms), false);
 		const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-		if (coords_func.empty())
+		if (!coords_func)
 			return;
 
 		try {
@@ -496,7 +496,7 @@ bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment&
 
 	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (coords_func.empty())
+	if (!coords_func)
 		return true;
 
 	// check if all substituents are on one side of the plane of the ring
@@ -593,7 +593,7 @@ double Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomLis
 {
 	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (coords_func.empty())
+	if (!coords_func)
 		return false;
 
 	double total_hyd = 0.0;
@@ -603,7 +603,7 @@ double Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomLis
 		const Chem::Atom& atom = **it;
 		double atom_hyd = atomHydTable[molGraph->getAtomIndex(atom)];
 
-		if (!no_coords && !coords_func.empty()) {
+		if (!no_coords && coords_func) {
 			try {
 				centroid.plusAssign(coords_func(atom) * atom_hyd);
 			} catch (const Base::ItemNotFound& e) {

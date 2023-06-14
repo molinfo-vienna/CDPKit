@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP
 #define CDPL_PHARM_INTERACTIONCONSTRAINTCONNECTOR_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 
@@ -54,7 +54,7 @@ namespace CDPL
 			/**
 			 * \brief A generic wrapper class used to store feature interaction constraint test functions.
 			 */
-			typedef boost::function2<bool, const Feature&, const Feature&> ConstraintFunction;
+			typedef std::function<bool(const Feature&, const Feature&)> ConstraintFunction;
 
 			/**
 			 * \brief Constructs a \c %InteractionConstraintConnector that serves as a logical connective for the two specified constraint functions.

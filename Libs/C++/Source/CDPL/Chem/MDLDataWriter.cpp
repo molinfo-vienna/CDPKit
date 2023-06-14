@@ -178,7 +178,7 @@ namespace
 	{
 
 	public:
-		typedef boost::function2<ValueType, const ObjectType&, const Chem::MolecularGraph&> PropertyFunc;
+		typedef std::function<ValueType(const ObjectType&, const Chem::MolecularGraph&)> PropertyFunc;
 
 		CalcOrSetConstraintValueMatches(const ValueType& value, 
 										const ObjectType& obj,

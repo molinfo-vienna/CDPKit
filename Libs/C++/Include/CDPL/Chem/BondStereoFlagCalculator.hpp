@@ -35,8 +35,7 @@
 #include <vector>
 #include <utility>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -61,7 +60,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::function1<const Math::Vector2D&, const Atom&> Atom2DCoordinatesFunction;
+			typedef std::function<const Math::Vector2D&(const Atom&)> Atom2DCoordinatesFunction;
 
 			/**
 			 * \brief Constructs the \c %BondStereoFlagCalculator instance.

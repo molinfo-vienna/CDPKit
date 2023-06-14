@@ -24,8 +24,6 @@
  */
 
 
-#include <boost/function.hpp>
-
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -39,21 +37,17 @@ void CDPLPythonMath::exportFunctionWrappers()
 	using namespace CDPL;
 	using namespace Math;
 
-	CDPLPythonBase::Function1Export<boost::function1<float, const FVector&> >("FloatFVectorFunctor");
-	CDPLPythonBase::Function2Export<boost::function2<float, const FVector&, const FVector&> >("FloatFVector2Functor");
+	CDPLPythonBase::Function1Export<float(const FVector&)>("FloatFVectorFunctor");
+	CDPLPythonBase::Function1Export<float(const Vector2FArray&)>("FloatVector2FArrayFunctor");
+	CDPLPythonBase::Function1Export<float(const Vector3FArray&)>("FloatVector3FArrayFunctor");
+	CDPLPythonBase::Function1Export<double(const DVector&)>("DoubleDVectorFunctor");
+	CDPLPythonBase::Function1Export<double(const Vector2DArray&)>("DoubleVector2DArrayFunctor");
+	CDPLPythonBase::Function1Export<double(const Vector3DArray&)>("DoubleVector3DArrayFunctor");
 
-	CDPLPythonBase::Function1Export<boost::function1<float, const Vector2FArray&> >("FloatVector2FArrayFunctor");
-	CDPLPythonBase::Function2Export<boost::function2<float, const Vector2FArray&, const Vector2FArray&> >("FloatVector2FArray2Functor");
-
-	CDPLPythonBase::Function1Export<boost::function1<float, const Vector3FArray&> >("FloatVector3FArrayFunctor");
-	CDPLPythonBase::Function2Export<boost::function2<float, const Vector3FArray&, const Vector3FArray&> >("FloatVector3FArray2Functor");
-
-	CDPLPythonBase::Function1Export<boost::function1<double, const DVector&> >("DoubleDVectorFunctor");
-	CDPLPythonBase::Function2Export<boost::function2<double, const DVector&, const DVector&> >("DoubleDVector2Functor");
-
-	CDPLPythonBase::Function1Export<boost::function1<double, const Vector2DArray&> >("DoubleVector2DArrayFunctor");
-	CDPLPythonBase::Function2Export<boost::function2<double, const Vector2DArray&, const Vector2DArray&> >("DoubleVector2DArray2Functor");
-
-	CDPLPythonBase::Function1Export<boost::function1<double, const Vector3DArray&> >("DoubleVector3DArrayFunctor");
-	CDPLPythonBase::Function2Export<boost::function2<double, const Vector3DArray&, const Vector3DArray&> >("DoubleVector3DArray2Functor");
+	CDPLPythonBase::Function2Export<float(const FVector&, const FVector&)>("FloatFVector2Functor");
+	CDPLPythonBase::Function2Export<float(const Vector2FArray&, const Vector2FArray&)>("FloatVector2FArray2Functor");
+	CDPLPythonBase::Function2Export<float(const Vector3FArray&, const Vector3FArray&)>("FloatVector3FArray2Functor");
+	CDPLPythonBase::Function2Export<double(const DVector&, const DVector&)>("DoubleDVector2Functor");
+	CDPLPythonBase::Function2Export<double(const Vector2DArray&, const Vector2DArray&)>("DoubleVector2DArray2Functor");
+	CDPLPythonBase::Function2Export<double(const Vector3DArray&, const Vector3DArray&)>("DoubleVector3DArray2Functor");
 }

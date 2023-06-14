@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <vector>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -173,7 +172,7 @@ namespace CDPL
 			 * the atom (as a \c const reference to Chem::Atom) as argument and return the hash seed as
 			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<std::uint64_t, const Atom&> AtomHashSeedFunction;
+			typedef std::function<std::uint64_t(const Atom&)> AtomHashSeedFunction;
 
 			/**
 			 * \brief Type of the generic functor class used to store user-defined functions or function objects
@@ -183,7 +182,7 @@ namespace CDPL
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the hash seed as
 			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<std::uint64_t, const Bond&> BondHashSeedFunction;
+			typedef std::function<std::uint64_t(const Bond&)> BondHashSeedFunction;
 
 			/**
 			 * \brief Constructs the \c %HashCodeCalculator instance.

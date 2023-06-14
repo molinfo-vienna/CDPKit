@@ -34,8 +34,7 @@
 #include <cstddef>
 #include <iterator>
 #include <cmath>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -66,7 +65,7 @@ namespace CDPL
 			 * a floating-point value of type \c double. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<double, const EntityType&, const EntityType&> EntityPairWeightFunction;
+			typedef std::function<double(const EntityType&, const EntityType&)> EntityPairWeightFunction;
 
 			/**
 			 * \brief Type of the generic functor class used to store a user-defined entity 3D coordinates function.
@@ -76,7 +75,7 @@ namespace CDPL
 			 * a \c const reference to Math::Vector3D. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<const Math::Vector3D&, const EntityType&> Entity3DCoordinatesFunction;
+			typedef std::function<const Math::Vector3D&(const EntityType&)> Entity3DCoordinatesFunction;
 
 			/**
 			 * \brief Constructs the \c %RDFCodeCalculator instance.

@@ -26,8 +26,6 @@
 
 #include <string>
 
-#include <boost/function.hpp>
-
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/FunctionWrapperExport.hpp"
@@ -39,5 +37,5 @@ void CDPLPythonBiomol::exportFunctionWrappers()
 {
     using namespace CDPL;
 
-    CDPLPythonBase::Function1Export<boost::function1<Chem::MolecularGraph::SharedPointer, const std::string&> >("MolecularGraphPointerStringFunctor");
+    CDPLPythonBase::Function1Export<Chem::MolecularGraph::SharedPointer(const std::string&)>("MolecularGraphPointerStringFunctor");
 }

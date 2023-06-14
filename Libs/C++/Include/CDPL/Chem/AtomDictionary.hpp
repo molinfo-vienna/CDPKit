@@ -36,8 +36,8 @@
 #include <utility>
 #include <unordered_map>
 #include <memory>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 #include <boost/functional/hash.hpp>
 
@@ -128,7 +128,7 @@ namespace CDPL
 		  public:
 			typedef std::shared_ptr<AtomDictionary> SharedPointer;
 
-			typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
+			typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>, 
 											  EntryLookupTable::const_iterator> ConstEntryIterator;
 			
 			void addEntry(const Entry& entry);

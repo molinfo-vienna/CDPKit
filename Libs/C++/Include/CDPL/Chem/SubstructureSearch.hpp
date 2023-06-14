@@ -37,9 +37,9 @@
 #include <cstddef>
 #include <unordered_map>
 #include <memory>
+#include <functional>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
@@ -84,9 +84,9 @@ namespace CDPL
 			 */
 			typedef boost::indirect_iterator<ABMappingList::const_iterator, const AtomBondMapping> ConstMappingIterator;
 
-			typedef boost::function1<const AtomMatchExprPtr&, const Atom&> AtomMatchExpressionFunction;
-			typedef boost::function1<const BondMatchExprPtr&, const Bond&> BondMatchExpressionFunction;
-			typedef boost::function1<const MolGraphMatchExprPtr&, const MolecularGraph&> MolecularGraphMatchExpressionFunction;
+			typedef std::function<const AtomMatchExprPtr&(const Atom&)> AtomMatchExpressionFunction;
+			typedef std::function<const BondMatchExprPtr&(const Bond&)> BondMatchExpressionFunction;
+			typedef std::function<const MolGraphMatchExprPtr&(const MolecularGraph&)> MolecularGraphMatchExpressionFunction;
 
 			/**
 			 * \brief Constructs and initializes a \c %SubstructureSearch instance.

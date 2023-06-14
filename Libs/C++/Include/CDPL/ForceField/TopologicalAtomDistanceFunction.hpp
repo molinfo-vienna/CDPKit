@@ -33,8 +33,7 @@
 #define CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTION_HPP
 
 #include <cstddef>
-
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -53,7 +52,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
 		 */
-		typedef boost::function3<std::size_t, const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&> TopologicalAtomDistanceFunction;
+		typedef std::function<std::size_t(const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&)> TopologicalAtomDistanceFunction;
     }
 }
 

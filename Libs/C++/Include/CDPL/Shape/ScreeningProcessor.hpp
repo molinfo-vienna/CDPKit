@@ -34,9 +34,9 @@
 #include <cstddef>
 #include <vector>
 #include <memory>
+#include <functional>
 
 #include <boost/iterator/indirect_iterator.hpp>
-#include <boost/function.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/FastGaussianShapeAlignment.hpp"
@@ -67,7 +67,7 @@ namespace CDPL
 		  public:
 			typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 			typedef boost::indirect_iterator<MolecularGraphList::const_iterator, const Chem::MolecularGraph> ConstMolecularGraphIterator;
-			typedef boost::function3<void, const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&> HitCallbackFunction;
+			typedef std::function<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const AlignmentResult&)> HitCallbackFunction;
 
 			ScreeningProcessor();
 

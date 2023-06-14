@@ -287,7 +287,7 @@ bool Pharm::PatternBasedFeatureGenerator::calcCentroid(const AtomList& alist, Ma
 
 	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (coords_func.empty())
+	if (!coords_func)
 		return false;
 
 	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {

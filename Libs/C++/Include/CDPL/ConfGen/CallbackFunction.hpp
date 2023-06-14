@@ -31,7 +31,7 @@
 #ifndef CDPL_CONFGEN_CALLBACKFUNCTION_HPP
 #define CDPL_CONFGEN_CALLBACKFUNCTION_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -41,9 +41,9 @@ namespace CDPL
     {
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined callback functions.
+		 * \brief A generic wrapper class used to store a user-defined callback functions (see [\ref BFUN]).
 		 */
-		typedef boost::function0<bool> CallbackFunction;
+		typedef std::function<bool()> CallbackFunction;
     }
 }
 

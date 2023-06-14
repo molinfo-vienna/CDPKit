@@ -31,7 +31,7 @@
 #ifndef CDPL_DESCR_BURDENMATRIXGENERATOR_HPP
 #define CDPL_DESCR_BURDENMATRIXGENERATOR_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -66,7 +66,7 @@ namespace CDPL
 			 * a floating-point value of type \c double. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<double, const Chem::Atom&> AtomWeightFunction;
+			typedef std::function<double(const Chem::Atom&)> AtomWeightFunction;
 
 			/**
 			 * \brief Constructs the \c %BurdenMatrixGenerator instance.

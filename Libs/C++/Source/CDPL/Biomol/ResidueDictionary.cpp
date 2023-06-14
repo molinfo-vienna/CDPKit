@@ -212,7 +212,7 @@ unsigned int Biomol::ResidueDictionary::Entry::getType() const
 
 Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::Entry::getStructure() const
 {
-	if (structRetrievalFunc.empty())
+	if (!structRetrievalFunc)
 		return Chem::MolecularGraph::SharedPointer();
 
 	return structRetrievalFunc(code);

@@ -32,8 +32,7 @@
 #define CDPL_CHEM_AUTOMORPHISMGROUPSEARCH_HPP
 
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -82,7 +81,7 @@ namespace CDPL
 			 */
 			typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
 
-			typedef boost::function2<bool, const MolecularGraph&, const AtomBondMapping&> MappingCallbackFunction;
+			typedef std::function<bool(const MolecularGraph&, const AtomBondMapping&)> MappingCallbackFunction;
 
 			/**
 			 * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.

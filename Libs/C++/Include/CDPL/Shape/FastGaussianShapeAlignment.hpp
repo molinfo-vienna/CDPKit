@@ -36,8 +36,8 @@
 #include <utility>
 #include <unordered_map>
 #include <memory>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/functional/hash.hpp>
 #include <boost/random/mersenne_twister.hpp>
 
@@ -76,8 +76,8 @@ namespace CDPL
 			typedef ResultList::const_iterator ConstResultIterator;
 			typedef ResultList::iterator ResultIterator;
 		
-			typedef boost::function1<double, const AlignmentResult&> ScoringFunction;
-			typedef boost::function2<bool, const AlignmentResult&, const AlignmentResult&> ResultCompareFunction;
+			typedef std::function<double(const AlignmentResult&)> ScoringFunction;
+			typedef std::function<bool(const AlignmentResult&, const AlignmentResult&)> ResultCompareFunction;
 
 			FastGaussianShapeAlignment();
 

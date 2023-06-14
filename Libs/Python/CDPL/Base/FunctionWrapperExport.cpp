@@ -24,8 +24,6 @@
  */
 
 
-#include <boost/function.hpp>
-
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/Any.hpp"
@@ -40,10 +38,10 @@ void CDPLPythonBase::exportFunctionWrappers()
     using namespace CDPL;
     using namespace Base;
 
-    Function0Export<boost::function0<void> >("VoidFunctor");
+    Function0Export<void()>("VoidFunctor");
 
-    Function2Export<boost::function2<void, const DataIOBase&, double>, DataIOBase&, double, python::return_value_policy<python::return_by_value> >("VoidDataIOBaseFunctor");
-    Function1Export<boost::function1<void, const LookupKey&> >("VoidLookupKeyFunctor");
+    Function1Export<void(const LookupKey&)>("VoidLookupKeyFunctor");
 
-    Function2Export<boost::function2<void, const LookupKey&, const Any&> >("VoidLookupKeyAnyFunctor");
+    Function2Export<void(const DataIOBase&, double), DataIOBase&, double, python::return_value_policy<python::return_by_value> >("VoidDataIOBaseFunctor");
+    Function2Export<void(const LookupKey&, const Any&)>("VoidLookupKeyAnyFunctor");
 }

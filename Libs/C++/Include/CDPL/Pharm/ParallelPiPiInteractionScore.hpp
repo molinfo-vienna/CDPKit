@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_PARALLELPIPIINTERACTIONSCORE_HPP
 #define CDPL_PHARM_PARALLELPIPIINTERACTIONSCORE_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
@@ -60,8 +60,8 @@ namespace CDPL
 			 */
 			typedef std::shared_ptr<ParallelPiPiInteractionScore> SharedPointer;
 
-			typedef boost::function1<double, double> DistanceScoringFunction;
-			typedef boost::function1<double, double> AngleScoringFunction;			
+			typedef std::function<double(double)> DistanceScoringFunction;
+			typedef std::function<double(double)> AngleScoringFunction;			
 
 			/**
 			 * \brief Constructs a \c %ParallelPiPiInteractionScore functor with the specified constraints.

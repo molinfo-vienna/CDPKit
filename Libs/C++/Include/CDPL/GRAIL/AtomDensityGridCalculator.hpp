@@ -34,8 +34,7 @@
 #include <vector>
 #include <cstddef>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -73,8 +72,8 @@ namespace CDPL
 
 			typedef std::shared_ptr<AtomDensityGridCalculator> SharedPointer;
 
-			typedef boost::function3<double, const Math::Vector3D&, const Math::Vector3D&, const Chem::Atom&> DensityFunction;
-			typedef boost::function1<double, const Math::DVector&> DensityCombinationFunction;
+			typedef std::function<double(const Math::Vector3D&, const Math::Vector3D&, const Chem::Atom&)> DensityFunction;
+			typedef std::function<double(const Math::DVector&)> DensityCombinationFunction;
 
 			AtomDensityGridCalculator();
 

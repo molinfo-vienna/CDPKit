@@ -26,8 +26,6 @@
 
 #include <cstddef>
 
-#include <boost/function.hpp>
-
 #include "CDPL/Shape/AlignmentResult.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
@@ -41,11 +39,11 @@ void CDPLPythonShape::exportFunctionWrappers()
 	using namespace boost;
 	using namespace CDPL;
 
-	CDPLPythonBase::Function1Export<boost::function1<double, const Shape::AlignmentResult&> >("DoubleAlignmentResultFunctor");
-	CDPLPythonBase::Function1Export<boost::function1<bool, std::size_t> >("BoolSizeTypeFunctor");
+	CDPLPythonBase::Function1Export<double(const Shape::AlignmentResult&)>("DoubleAlignmentResultFunctor");
+	CDPLPythonBase::Function1Export<bool(std::size_t)>("BoolSizeTypeFunctor");
 
-	CDPLPythonBase::Function2Export<boost::function2<bool, const Shape::AlignmentResult&, const Shape::AlignmentResult&> >("BoolAlignmentResult2Functor");
-	CDPLPythonBase::Function2Export<boost::function2<bool, std::size_t, std::size_t> >("BoolSizeType2Functor");
+	CDPLPythonBase::Function2Export<bool(const Shape::AlignmentResult&, const Shape::AlignmentResult&)>("BoolAlignmentResult2Functor");
+	CDPLPythonBase::Function2Export<bool(std::size_t, std::size_t)>("BoolSizeType2Functor");
 
-	CDPLPythonBase::Function3Export<boost::function3<void, const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Shape::AlignmentResult&> >("VoidMolecularGraph2AlignmentResultFunctor");
+	CDPLPythonBase::Function3Export<void(const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Shape::AlignmentResult&)>("VoidMolecularGraph2AlignmentResultFunctor");
 }

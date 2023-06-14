@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ATOMPREDICATE_HPP
 #define CDPL_CHEM_ATOMPREDICATE_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -45,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined atom predicate.
 		 */
-		typedef boost::function1<bool, const Chem::Atom&> AtomPredicate;
+		typedef std::function<bool(const Chem::Atom&)> AtomPredicate;
     }
 }
 

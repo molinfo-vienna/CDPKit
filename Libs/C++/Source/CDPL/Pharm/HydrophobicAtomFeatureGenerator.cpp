@@ -156,7 +156,7 @@ void Pharm::HydrophobicAtomFeatureGenerator::emitFeature(const Chem::Atom& atom,
 
 	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (coords_func.empty())
+	if (!coords_func)
 		return;
 
 	try {

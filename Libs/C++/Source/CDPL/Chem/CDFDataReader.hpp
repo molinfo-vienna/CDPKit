@@ -30,8 +30,7 @@
 #include <cstddef>
 #include <iosfwd>
 #include <vector>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/CDFFormatData.hpp"
@@ -63,9 +62,9 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::function4<bool, unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&> AtomPropertyHandler;
-			typedef boost::function4<bool, unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&> BondPropertyHandler;
-			typedef boost::function4<bool, unsigned int, CDFDataReader&, Molecule&, Internal::ByteBuffer&> MoleculePropertyHandler;
+			typedef std::function<bool(unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&)> AtomPropertyHandler;
+			typedef std::function<bool(unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&)> BondPropertyHandler;
+			typedef std::function<bool(unsigned int, CDFDataReader&, Molecule&, Internal::ByteBuffer&)> MoleculePropertyHandler;
 
 			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 

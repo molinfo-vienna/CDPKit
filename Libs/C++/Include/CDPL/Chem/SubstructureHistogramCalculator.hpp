@@ -36,8 +36,7 @@
 #include <map>
 #include <utility>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -126,7 +125,7 @@ namespace CDPL
 			SubstructureHistogramCalculator& operator=(const SubstructureHistogramCalculator& gen);
 
 		  private:
-			typedef boost::function1<void, std::size_t> HistoUpdateFunction;
+			typedef std::function<void(std::size_t)> HistoUpdateFunction;
 
 			template <typename T>
 			class HistoUpdateFunctor

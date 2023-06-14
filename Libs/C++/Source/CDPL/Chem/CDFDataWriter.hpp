@@ -29,8 +29,7 @@
 
 #include <iosfwd>
 #include <vector>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
@@ -62,9 +61,9 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::function3<unsigned int, CDFDataWriter&, const Atom&, Internal::ByteBuffer&> AtomPropertyHandler;
-			typedef boost::function3<unsigned int, CDFDataWriter&, const Bond&, Internal::ByteBuffer&> BondPropertyHandler;
-			typedef boost::function3<unsigned int, CDFDataWriter&, const MolecularGraph&, Internal::ByteBuffer&> MolGraphPropertyHandler;
+			typedef std::function<unsigned int(CDFDataWriter&, const Atom&, Internal::ByteBuffer&)> AtomPropertyHandler;
+			typedef std::function<unsigned int(CDFDataWriter&, const Bond&, Internal::ByteBuffer&)> BondPropertyHandler;
+			typedef std::function<unsigned int(CDFDataWriter&, const MolecularGraph&, Internal::ByteBuffer&)> MolGraphPropertyHandler;
 
 			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 

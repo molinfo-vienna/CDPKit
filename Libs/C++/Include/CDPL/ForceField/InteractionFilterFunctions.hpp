@@ -32,7 +32,7 @@
 #ifndef CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP
 #define CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -47,11 +47,11 @@ namespace CDPL
     namespace ForceField 
     {
 
-		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction2;
+		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction2;
 
-		typedef boost::function3<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction3;
+		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction3;
 
-		typedef boost::function4<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction4;
+		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&)> InteractionFilterFunction4;
     }
 }
 

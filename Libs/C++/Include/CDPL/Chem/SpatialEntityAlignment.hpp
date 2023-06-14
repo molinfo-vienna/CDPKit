@@ -36,9 +36,9 @@
 #include <vector>
 #include <set>
 #include <unordered_set>
+#include <functional>
 
 #include <boost/functional/hash.hpp>
-#include <boost/function.hpp>
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Math/KabschAlgorithm.hpp"
@@ -76,17 +76,17 @@ namespace CDPL
 			/**
 			 * \brief A generic wrapper class used to store a user-defined predicate to restrict allowed topological entity alignments.
 			 */
-			typedef boost::function1<bool, const Util::STPairArray&> TopologicalAlignmentConstraintFunction;
+			typedef std::function<bool(const Util::STPairArray&)> TopologicalAlignmentConstraintFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined entity 3D-coordinates function.
 			 */
-			typedef boost::function1<const Math::Vector3D&, const EntityType&> Entity3DCoordinatesFunction;
+			typedef std::function<const Math::Vector3D&(const EntityType&)> Entity3DCoordinatesFunction;
 	
 			/**
 			 * \brief A generic wrapper class used to store a user-defined entity alignment weight function.
 			 */
-			typedef boost::function1<double, const EntityType&> EntityWeightFunction;
+			typedef std::function<double(const EntityType&)> EntityWeightFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined topological entity match constraint function.

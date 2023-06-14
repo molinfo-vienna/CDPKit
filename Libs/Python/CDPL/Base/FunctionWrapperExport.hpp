@@ -27,7 +27,10 @@
 #ifndef CDPL_PYTHON_BASE_FUNCTIONWRAPPEREXPORT_HPP
 #define CDPL_PYTHON_BASE_FUNCTIONWRAPPEREXPORT_HPP
 
+#include <functional>
+
 #include <boost/python.hpp>
+#include <boost/type_traits.hpp>
 
 #include "CallableObjectAdapter.hpp"
 
@@ -39,30 +42,34 @@ namespace CDPLPythonBase
     struct FunctionExportBase
 	{
 
+		typedef std::function<FunctionType> FunctionWrapperType;
+
 		static void* convertible(PyObject* obj_ptr) {
 			return obj_ptr;
 		}
 
-		static bool nonZero(FunctionType& func) {
-			return !func.empty();
+		static bool nonZero(FunctionWrapperType& func) {
+			return func.operator bool();
 		}
 	};
 
     template <typename FunctionType, 
-			  typename Arg1Type = typename FunctionType::arg1_type, 
-			  typename Arg2Type = typename FunctionType::arg2_type, 
-			  typename Arg3Type = typename FunctionType::arg3_type, 
-			  typename Arg4Type = typename FunctionType::arg4_type,
+			  typename Arg1Type = typename boost::function_traits<FunctionType>::arg1_type, 
+			  typename Arg2Type = typename boost::function_traits<FunctionType>::arg2_type, 
+			  typename Arg3Type = typename boost::function_traits<FunctionType>::arg3_type, 
+			  typename Arg4Type = typename boost::function_traits<FunctionType>::arg4_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> >
     struct Function4Export : private FunctionExportBase<FunctionType>
     {
 
+		typedef std::function<FunctionType> FunctionWrapperType;
+
 		Function4Export(const char* name) {
 			using namespace boost;
 
-			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
+			python::class_<FunctionWrapperType, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
-				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
+				.def(python::init<const FunctionWrapperType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
 														  (python::arg("callable"))))
 				.def("__call__", &callOperator, 
@@ -71,53 +78,55 @@ namespace CDPLPythonBase
 				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
-			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
+			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionWrapperType>());
 		}
 
-		static typename FunctionType::result_type callOperator(FunctionType& func, Arg1Type& a1, Arg2Type& a2, Arg3Type& a3, Arg4Type& a4) {
+		static typename boost::function_traits<FunctionType>::result_type callOperator(FunctionWrapperType& func, Arg1Type& a1, Arg2Type& a2, Arg3Type& a3, Arg4Type& a4) {
 			return func(a1, a2, a3, a4);
 		}
 
-		static FunctionType* construct(const boost::python::object& callable) {
+		static FunctionWrapperType* construct(const boost::python::object& callable) {
 			if (callable.ptr() == Py_None)
-				return new FunctionType();
+				return new FunctionWrapperType();
 
-			return new FunctionType(QuarternaryFunctionAdapter<typename FunctionType::result_type, 
-									typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-									typename FunctionType::arg3_type, typename FunctionType::arg4_type>(callable));
+			return new FunctionWrapperType(QuarternaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+										   typename boost::function_traits<FunctionType>::arg1_type, typename boost::function_traits<FunctionType>::arg2_type, 
+										   typename boost::function_traits<FunctionType>::arg3_type, typename boost::function_traits<FunctionType>::arg4_type>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<FunctionWrapperType>*)data)->storage.bytes;
 
 			if (obj_ptr == Py_None)
-				new (storage) FunctionType();
+				new (storage) FunctionWrapperType();
 			else
-				new (storage) FunctionType(QuarternaryFunctionAdapter<typename FunctionType::result_type, 
-										   typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-										   typename FunctionType::arg3_type, typename FunctionType::arg4_type
-										   >(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
+				new (storage) FunctionWrapperType(QuarternaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+												  typename boost::function_traits<FunctionType>::arg1_type, typename boost::function_traits<FunctionType>::arg2_type, 
+												  typename boost::function_traits<FunctionType>::arg3_type, typename boost::function_traits<FunctionType>::arg4_type
+												  >(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
     };
 
     template <typename FunctionType, 
-			  typename Arg1Type = typename FunctionType::arg1_type, 
-			  typename Arg2Type = typename FunctionType::arg2_type, 
-			  typename Arg3Type = typename FunctionType::arg3_type,
+			  typename Arg1Type = typename boost::function_traits<FunctionType>::arg1_type, 
+			  typename Arg2Type = typename boost::function_traits<FunctionType>::arg2_type, 
+			  typename Arg3Type = typename boost::function_traits<FunctionType>::arg3_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
     struct Function3Export : private FunctionExportBase<FunctionType>
     {
 
+		typedef std::function<FunctionType> FunctionWrapperType;
+
 		Function3Export(const char* name) {
 			using namespace boost;
 
-			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
+			python::class_<FunctionWrapperType, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
-				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
+				.def(python::init<const FunctionWrapperType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
 														  (python::arg("callable"))))
 				.def("__call__", &callOperator, 
@@ -126,51 +135,53 @@ namespace CDPLPythonBase
 				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
-			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
+			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionWrapperType>());
 		}
 
-		static typename FunctionType::result_type callOperator(FunctionType& func, Arg1Type& a1, Arg2Type& a2, Arg3Type& a3) {
+		static typename boost::function_traits<FunctionType>::result_type callOperator(FunctionWrapperType& func, Arg1Type& a1, Arg2Type& a2, Arg3Type& a3) {
 			return func(a1, a2, a3);
 		}
 
-		static FunctionType* construct(const boost::python::object& callable) {
+		static FunctionWrapperType* construct(const boost::python::object& callable) {
 			if (callable.ptr() == Py_None)
-				return new FunctionType();
+				return new FunctionWrapperType();
 
-			return new FunctionType(TernaryFunctionAdapter<typename FunctionType::result_type, 
-									typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-									typename FunctionType::arg3_type>(callable));
+			return new FunctionWrapperType(TernaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+										   typename boost::function_traits<FunctionType>::arg1_type, typename boost::function_traits<FunctionType>::arg2_type, 
+										   typename boost::function_traits<FunctionType>::arg3_type>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<FunctionWrapperType>*)data)->storage.bytes;
 
 			if (obj_ptr == Py_None)
-				new (storage) FunctionType();
+				new (storage) FunctionWrapperType();
 			else
-				new (storage) FunctionType(TernaryFunctionAdapter<typename FunctionType::result_type, 
-										   typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-										   typename FunctionType::arg3_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
+				new (storage) FunctionWrapperType(TernaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+												  typename boost::function_traits<FunctionType>::arg1_type, typename boost::function_traits<FunctionType>::arg2_type, 
+												  typename boost::function_traits<FunctionType>::arg3_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
     };
 
     template <typename FunctionType, 
-			  typename Arg1Type = typename FunctionType::arg1_type, 
-			  typename Arg2Type = typename FunctionType::arg2_type,
+			  typename Arg1Type = typename boost::function_traits<FunctionType>::arg1_type, 
+			  typename Arg2Type = typename boost::function_traits<FunctionType>::arg2_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> >
     struct Function2Export : private FunctionExportBase<FunctionType>
     {
 
+		typedef std::function<FunctionType> FunctionWrapperType;
+
 		Function2Export(const char* name) {
 			using namespace boost;
 
-			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
+			python::class_<FunctionWrapperType, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
-				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
+				.def(python::init<const FunctionWrapperType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
 														  (python::arg("callable"))))
 				.def("__call__", &callOperator, 
@@ -179,49 +190,51 @@ namespace CDPLPythonBase
 				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
-			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
+			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionWrapperType>());
 		}
 
-		static typename FunctionType::result_type callOperator(FunctionType& func, Arg1Type& a1, Arg2Type& a2) {
+		static typename boost::function_traits<FunctionType>::result_type callOperator(FunctionWrapperType& func, Arg1Type& a1, Arg2Type& a2) {
 			return func(a1, a2);
 		}
 
-		static FunctionType* construct(const boost::python::object& callable) {
+		static FunctionWrapperType* construct(const boost::python::object& callable) {
 			if (callable.ptr() == Py_None)
-				return new FunctionType();
+				return new FunctionWrapperType();
 
-			return new FunctionType(BinaryFunctionAdapter<typename FunctionType::result_type, 
-									typename FunctionType::arg1_type, 
-									typename FunctionType::arg2_type>(callable));
+			return new FunctionWrapperType(BinaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+										   typename boost::function_traits<FunctionType>::arg1_type, 
+										   typename boost::function_traits<FunctionType>::arg2_type>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<FunctionWrapperType>*)data)->storage.bytes;
 
 			if (obj_ptr == Py_None)
-				new (storage) FunctionType();
+				new (storage) FunctionWrapperType();
 			else
-				new (storage) FunctionType(BinaryFunctionAdapter<typename FunctionType::result_type, 
-										   typename FunctionType::arg1_type, typename FunctionType::arg2_type
-										   >(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
+				new (storage) FunctionWrapperType(BinaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+												  typename boost::function_traits<FunctionType>::arg1_type, typename boost::function_traits<FunctionType>::arg2_type
+												  >(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
     };
 
-    template <typename FunctionType, typename Arg1Type = typename FunctionType::arg1_type,
+    template <typename FunctionType, typename Arg1Type = typename boost::function_traits<FunctionType>::arg1_type,
 			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
     struct Function1Export : private FunctionExportBase<FunctionType>
     {
 
+		typedef std::function<FunctionType> FunctionWrapperType;
+
 		Function1Export(const char* name) {
 			using namespace boost;
 
-			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
+			python::class_<FunctionWrapperType, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
-				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
+				.def(python::init<const FunctionWrapperType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
 														  (python::arg("callable"))))
 				.def("__call__", &callOperator, (python::arg("self"), python::arg("arg1")),
@@ -229,31 +242,31 @@ namespace CDPLPythonBase
 				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
-			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
+			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionWrapperType>());
 		}
 
-		static typename FunctionType::result_type callOperator(FunctionType& func, Arg1Type& a1) {
+		static typename boost::function_traits<FunctionType>::result_type callOperator(FunctionWrapperType& func, Arg1Type& a1) {
 			return func(a1);
 		}
 
-		static FunctionType* construct(const boost::python::object& callable) {
+		static FunctionWrapperType* construct(const boost::python::object& callable) {
 			if (callable.ptr() == Py_None)
-				return new FunctionType();
+				return new FunctionWrapperType();
 
-			return new FunctionType(UnaryFunctionAdapter<typename FunctionType::result_type, 
-									typename FunctionType::arg1_type>(callable));
+			return new FunctionWrapperType(UnaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+										   typename boost::function_traits<FunctionType>::arg1_type>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<FunctionWrapperType>*)data)->storage.bytes;
 
 			if (obj_ptr == Py_None) 
-				new (storage) FunctionType();
-			 else
-				new (storage) FunctionType(UnaryFunctionAdapter<typename FunctionType::result_type, 
-										   typename FunctionType::arg1_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
+				new (storage) FunctionWrapperType();
+			else
+				new (storage) FunctionWrapperType(UnaryFunctionAdapter<typename boost::function_traits<FunctionType>::result_type, 
+												  typename boost::function_traits<FunctionType>::arg1_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
@@ -264,41 +277,43 @@ namespace CDPLPythonBase
     struct Function0Export : private FunctionExportBase<FunctionType>
     {
 
+		typedef std::function<FunctionType> FunctionWrapperType;
+
 		Function0Export(const char* name) {
 			using namespace boost;
 
-			python::class_<FunctionType, boost::noncopyable>(name, python::no_init)
+			python::class_<FunctionWrapperType, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
-				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
+				.def(python::init<const FunctionWrapperType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
 														  (python::arg("callable"))))
 				.def("__call__", &callOperator, python::arg("self"), RetValPolicy())
 				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
-			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
+			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionWrapperType>());
 		}
 
-		static typename FunctionType::result_type callOperator(FunctionType& func) {
+		static typename boost::function_traits<FunctionType>::result_type callOperator(FunctionWrapperType& func) {
 			return func();
 		}
 
-		static FunctionType* construct(const boost::python::object& callable) {
+		static FunctionWrapperType* construct(const boost::python::object& callable) {
 			if (callable.ptr() == Py_None)
-				return new FunctionType();
+				return new FunctionWrapperType();
 
-			return new FunctionType(NoArgFunctionAdapter<typename FunctionType::result_type>(callable));
+			return new FunctionWrapperType(NoArgFunctionAdapter<typename boost::function_traits<FunctionType>::result_type>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
 
-			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
+			void* storage = ((python::converter::rvalue_from_python_storage<FunctionWrapperType>*)data)->storage.bytes;
 
 			if (obj_ptr == Py_None)
-				new (storage) FunctionType();
+				new (storage) FunctionWrapperType();
 			else
-				new (storage) FunctionType(NoArgFunctionAdapter<typename FunctionType::result_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
+				new (storage) FunctionWrapperType(NoArgFunctionAdapter<typename boost::function_traits<FunctionType>::result_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 			
 			data->convertible = storage;
 		}

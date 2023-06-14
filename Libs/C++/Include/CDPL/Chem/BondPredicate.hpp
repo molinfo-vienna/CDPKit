@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_BONDPREDICATE_HPP
 #define CDPL_CHEM_BONDPREDICATE_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -45,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined bond predicate.
 		 */
-		typedef boost::function1<bool, const Chem::Bond&> BondPredicate;
+		typedef std::function<bool(const Chem::Bond&)> BondPredicate;
     }
 }
 

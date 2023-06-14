@@ -28,8 +28,7 @@
 #define CDPL_GRID_CDFDATAWRITER_HPP
 
 #include <vector>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Grid/APIPrefix.hpp"
 
@@ -49,7 +48,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::function3<unsigned int, const CDFDataWriter&, const AttributedGrid&, Internal::ByteBuffer&> PropertyHandler;
+			typedef std::function<unsigned int(const CDFDataWriter&, const AttributedGrid&, Internal::ByteBuffer&)> PropertyHandler;
 
 			static void registerExternalPropertyHandler(const PropertyHandler& handler);
 

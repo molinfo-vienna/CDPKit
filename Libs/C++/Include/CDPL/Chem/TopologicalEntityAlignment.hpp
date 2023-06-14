@@ -33,8 +33,8 @@
 
 #include <cstddef>
 #include <vector>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
@@ -74,12 +74,12 @@ namespace CDPL
 			/**
 			 * \brief A generic wrapper class used to store a user-defined entity match constraint function.
 			 */
-			typedef boost::function2<bool, const EntityType&, const EntityType&> EntityMatchFunction;
+			typedef std::function<bool(const EntityType&, const EntityType&)> EntityMatchFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined entity-pair match constraint function.
 			 */
-			typedef boost::function4<bool, const EntityType&, const EntityType&, const EntityType&, const EntityType&> EntityPairMatchFunction;
+			typedef std::function<bool(const EntityType&, const EntityType&, const EntityType&, const EntityType&)> EntityPairMatchFunction;
 
 			/**
 			 * \brief Constructs the \c %TopologicalEntityAlignment instance.

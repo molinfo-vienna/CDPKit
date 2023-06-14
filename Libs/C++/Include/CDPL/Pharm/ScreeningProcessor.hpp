@@ -33,8 +33,7 @@
 
 #include <memory>
 #include <cstddef>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -109,9 +108,9 @@ namespace CDPL
 
 			typedef std::shared_ptr<ScreeningProcessor> SharedPointer;
 
-			typedef boost::function2<bool, const SearchHit&, double> HitCallbackFunction;
-			typedef boost::function1<double, const SearchHit&> ScoringFunction;
-			typedef boost::function2<bool, std::size_t, std::size_t> ProgressCallbackFunction;
+			typedef std::function<bool(const SearchHit&, double)> HitCallbackFunction;
+			typedef std::function<double(const SearchHit&)> ScoringFunction;
+			typedef std::function<bool(std::size_t, std::size_t)> ProgressCallbackFunction;
 
 			/**
 			 * \brief Constructs the \c %ScreeningProcessor instance for the given

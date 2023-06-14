@@ -34,8 +34,8 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
@@ -60,7 +60,7 @@ namespace CDPL
 			{
 
 			  public:
-				typedef boost::function1<Chem::MolecularGraph::SharedPointer, const std::string&> StructureRetrievalFunction;
+				typedef std::function<Chem::MolecularGraph::SharedPointer(const std::string&)> StructureRetrievalFunction;
 
 				Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
 					  const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
@@ -97,7 +97,7 @@ namespace CDPL
 		  public:
 			typedef std::shared_ptr<ResidueDictionary> SharedPointer;
 
-			typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
+			typedef boost::transform_iterator<std::function<const Entry&(const EntryLookupTable::value_type&)>, 
 											  EntryLookupTable::const_iterator> ConstEntryIterator;
 			
 			void addEntry(const Entry& entry);

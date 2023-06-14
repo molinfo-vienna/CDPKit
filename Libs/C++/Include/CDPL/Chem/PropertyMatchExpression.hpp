@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_PROPERTYMATCHEXPRESSION_HPP
 #define CDPL_CHEM_PROPERTYMATCHEXPRESSION_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 
@@ -71,7 +71,7 @@ namespace CDPL
 			 * two arguments of type <tt>const ObjType1&</tt> and <tt>const ObjType2&</tt>. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<ValueType, const ObjType1&, const ObjType2&> PropertyFunction;
+			typedef std::function<ValueType(const ObjType1&, const ObjType2&)> PropertyFunction;
 	
 			/**
 			 * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 
@@ -140,7 +140,7 @@ namespace CDPL
 			 * \c %PropertyFunction allows to wrap any function pointer or function object compatible with a return type of \c ValueType and 
 			 * an argument of type <tt>const ObjType&</tt>. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<ValueType, const ObjType&> PropertyFunction;
+			typedef std::function<ValueType(const ObjType&)> PropertyFunction;
 		
 			/**
 			 * \brief Constructs a \c %PropertyMatchExpression instance that performs query/target object equivalence tests based on the 

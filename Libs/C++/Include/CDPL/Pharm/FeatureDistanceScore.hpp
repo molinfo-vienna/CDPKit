@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_FEATUREDISTANCESCORE_HPP
 #define CDPL_PHARM_FEATUREDISTANCESCORE_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureInteractionScore.hpp"
@@ -57,7 +57,7 @@ namespace CDPL
 			 */
 			typedef std::shared_ptr<FeatureDistanceScore> SharedPointer;
 
-			typedef boost::function1<double, double> DistanceScoringFunction;
+			typedef std::function<double(double)> DistanceScoringFunction;
 
 			/**
 			 * \brief Constructs a \c %FeatureDistanceScore functor with a 

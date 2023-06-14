@@ -27,6 +27,7 @@
 #include <vector>
 #include <cstddef>
 #include <iostream>
+#include <functional>
 
 #include <QFileInfo>
 #include <QDir>
@@ -68,7 +69,7 @@ namespace
 			progressDlg.setAutoReset(true);
             progressDlg.setWindowModality(Qt::ApplicationModal);
 
-			callbackID = reader->registerIOCallback(boost::ref(*this));
+			callbackID = reader->registerIOCallback(std::ref(*this));
 		}
 
 		~IndexingProgressCallback() {

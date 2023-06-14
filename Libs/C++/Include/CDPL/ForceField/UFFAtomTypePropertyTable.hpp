@@ -35,8 +35,8 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
@@ -102,10 +102,10 @@ namespace CDPL
 				bool         initialized;
 			};			
 
-			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
+			typedef boost::transform_iterator<std::function<const Entry&(const DataStorage::value_type&)>, 
 											  DataStorage::const_iterator> ConstEntryIterator;
 
-			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
+			typedef boost::transform_iterator<std::function<Entry&(DataStorage::value_type&)>, 
 											  DataStorage::iterator> EntryIterator;
 	
 			UFFAtomTypePropertyTable();

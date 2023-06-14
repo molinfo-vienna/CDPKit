@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_ATOMCOMPAREFUNCTION_HPP
 #define CDPL_CHEM_ATOMCOMPAREFUNCTION_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -45,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined atom compare function.
 		 */
-		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> AtomCompareFunction;
+		typedef std::function<bool(const Chem::Atom&, const Chem::Atom&)> AtomCompareFunction;
     }
 }
 

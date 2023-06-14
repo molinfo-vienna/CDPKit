@@ -33,8 +33,8 @@
 
 #include <utility>
 #include <unordered_map>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/functional/hash.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
@@ -60,17 +60,17 @@ namespace CDPL
 			/**
 			 * \brief A generic wrapper class used to store a user-defined feature type match function.
 			 */
-			typedef boost::function2<bool, const Feature&, const Feature&> TypeMatchFunction;
+			typedef std::function<bool(const Feature&, const Feature&)> TypeMatchFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined feature position match function.
 			 */
-			typedef boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&> PositionMatchFunction;
+			typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> PositionMatchFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined feature geometry match function.
 			 */
-			typedef boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&> GeometryMatchFunction;
+			typedef std::function<double(const Feature&, const Feature&, const Math::Matrix4D&)> GeometryMatchFunction;
 
 			/**
 			 * \brief Constructs a \c %SpatialFeatureMapping instance.

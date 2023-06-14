@@ -33,8 +33,7 @@
 #define CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
 
 #include <string>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/FragmentList.hpp"
 
@@ -56,27 +55,27 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
 		 */
-		typedef boost::function1<unsigned int, const Chem::Atom&> MMFF94NumericAtomTypeFunction;
+		typedef std::function<unsigned int(const Chem::Atom&)> MMFF94NumericAtomTypeFunction;
 
 		/**
 		 * \brief A generic wrapper class used to store a user-defined symbolic MMFF94 atom type function.
 		 */
-		typedef boost::function1<const std::string&, const Chem::Atom&> MMFF94SymbolicAtomTypeFunction;
+		typedef std::function<const std::string&(const Chem::Atom&)> MMFF94SymbolicAtomTypeFunction;
 
 		/**
 		 * \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
 		 */
-		typedef boost::function1<double, const Chem::Atom&> MMFF94AtomChargeFunction;
+		typedef std::function<double(const Chem::Atom&)> MMFF94AtomChargeFunction;
 
 		/**
 		 * \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
 		 */
-		typedef boost::function1<unsigned int, const Chem::Bond&> MMFF94BondTypeIndexFunction;
+		typedef std::function<unsigned int(const Chem::Bond&)> MMFF94BondTypeIndexFunction;
 
 		/**
 		 * \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
 		 */
-		typedef boost::function1<const Chem::FragmentList::SharedPointer&, const Chem::MolecularGraph&> MMFF94RingSetFunction;
+		typedef std::function<const Chem::FragmentList::SharedPointer&(const Chem::MolecularGraph&)> MMFF94RingSetFunction;
     }
 }
 

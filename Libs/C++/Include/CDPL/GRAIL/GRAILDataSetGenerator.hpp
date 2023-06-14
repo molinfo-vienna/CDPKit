@@ -36,8 +36,7 @@
 #include <utility>
 #include <string>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/GRAIL/FeatureInteractionScoreGridCalculator.hpp"
@@ -69,7 +68,7 @@ namespace CDPL
 			typedef FeatureInteractionScoreGridCalculator::ScoringFunction ScoringFunction;
 			typedef FeatureInteractionScoreGridCalculator::ScoreCombinationFunction ScoreCombinationFunction;
 
-			typedef boost::function1<void, CDPL::Pharm::Pharmacophore&> PharmacophoreProcessingFunction;
+			typedef std::function<void(CDPL::Pharm::Pharmacophore&)> PharmacophoreProcessingFunction;
 			
 			static constexpr double DEF_GRID_STEP_SIZE = 0.5;
 			

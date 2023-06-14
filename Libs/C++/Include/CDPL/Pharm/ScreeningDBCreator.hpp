@@ -34,8 +34,7 @@
 #include <string>
 #include <cstddef>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 
@@ -63,7 +62,7 @@ namespace CDPL
 		  public:
 			typedef std::shared_ptr<ScreeningDBCreator> SharedPointer;
 
-			typedef boost::function1<bool, double> ProgressCallbackFunction;
+			typedef std::function<bool(double)> ProgressCallbackFunction;
 
 			enum Mode
 			{

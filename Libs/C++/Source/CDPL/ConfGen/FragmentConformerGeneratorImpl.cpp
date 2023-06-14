@@ -29,6 +29,7 @@
 #include <cmath>
 #include <algorithm>
 #include <limits>
+#include <functional>
 
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
@@ -74,7 +75,7 @@ namespace
 
 ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl(): 
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE),
-	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc)),
+	energyMinimizer(std::ref(mmff94GradientCalc), std::ref(mmff94GradientCalc)),
 	settings(FragmentConformerGeneratorSettings::DEFAULT)
 {
 	using namespace Chem;

@@ -33,8 +33,7 @@
 
 #include <utility>
 #include <map>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
@@ -59,7 +58,7 @@ namespace CDPL
 			/**
 			 * \brief A generic wrapper class used to store feature interaction constraint test functions.
 			 */
-			typedef boost::function2<bool, const Feature&, const Feature&> ConstraintFunction;
+			typedef std::function<bool(const Feature&, const Feature&)> ConstraintFunction;
 
 			/**
 			 * \brief Constructs the \c %InteractionAnalyzer instance.

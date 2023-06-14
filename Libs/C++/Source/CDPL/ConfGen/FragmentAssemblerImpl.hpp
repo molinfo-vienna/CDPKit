@@ -35,8 +35,7 @@
 #include <utility>
 #include <vector>
 #include <cstddef>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
@@ -66,7 +65,7 @@ namespace CDPL
 		public:
 			typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
-			typedef boost::function2<double, std::size_t, std::size_t> BondLengthFunction;
+			typedef std::function<double(std::size_t, std::size_t)> BondLengthFunction;
 
 			FragmentAssemblerImpl();
 

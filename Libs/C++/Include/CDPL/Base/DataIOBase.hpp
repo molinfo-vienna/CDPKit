@@ -34,8 +34,7 @@
 #include <vector>
 #include <utility>
 #include <cstddef>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
@@ -69,7 +68,7 @@ namespace CDPL
 			 * of \c void and two arguments of type <tt>const %DataIOBase&</tt> and <tt>double</tt>. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<void, const DataIOBase&, double> IOCallbackFunction;
+			typedef std::function<void(const DataIOBase&, double)> IOCallbackFunction;
 	
 			/**
 			 * \brief Registers an I/O callback target function.

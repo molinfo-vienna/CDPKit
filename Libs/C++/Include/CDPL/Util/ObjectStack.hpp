@@ -36,9 +36,9 @@
 #include <algorithm>
 #include <new>
 #include <memory>
+#include <functional>
 
 #include <boost/bind.hpp>
-#include <boost/function.hpp>
 
 #include "CDPL/Util/Dereferencer.hpp"
 
@@ -58,10 +58,12 @@ namespace CDPL
 
 		public:
 			typedef T ObjectType;
+
 			typedef std::shared_ptr<ObjectType> SharedObjectPointer;
-			typedef boost::function0<ObjectType*> ConstructorFunction;
-			typedef boost::function1<void, ObjectType*> DestructorFunction;
-			typedef boost::function1<void, ObjectType&> ObjectFunction;
+
+			typedef std::function<ObjectType*()> ConstructorFunction;
+			typedef std::function<void(ObjectType*)> DestructorFunction;
+			typedef std::function<void(ObjectType&)> ObjectFunction;
 
 			struct DefaultConstructor
 			{

@@ -31,7 +31,7 @@
 #ifndef CDPL_DESCR_MOLECULEAUTOCORR2DDESCRIPTORCALCULATOR_HPP
 #define CDPL_DESCR_MOLECULEAUTOCORR2DDESCRIPTORCALCULATOR_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Descr/APIPrefix.hpp"
 #include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
@@ -58,7 +58,7 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::function4<double, const Chem::Atom&, const Chem::Atom&, unsigned int, unsigned int> AtomPairWeightFunction;
+			typedef std::function<double(const Chem::Atom&, const Chem::Atom&, unsigned int, unsigned int)> AtomPairWeightFunction;
 
 			enum Mode 
 			{

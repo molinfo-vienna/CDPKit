@@ -37,8 +37,8 @@
 #include <cstdint>
 #include <vector>
 #include <utility>
+#include <functional>
 
-#include <boost/function.hpp>
 #include <boost/random/linear_congruential.hpp>
 
 #include "CDPL/Descr/APIPrefix.hpp"
@@ -176,7 +176,7 @@ namespace CDPL
 			 * the atom (as a \c const reference to Chem::Atom) and containing molecular graph (as a \c const reference to Chem::MolecularGraph) as
 			 * argument and return the identifier as an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<std::uint64_t, const Chem::Atom&, const Chem::MolecularGraph&> AtomIdentifierFunction;
+			typedef std::function<std::uint64_t(const Chem::Atom&, const Chem::MolecularGraph&)> AtomIdentifierFunction;
 
 			/**
 			 * \brief Type of the generic functor class used to store user-defined functions or function objects
@@ -186,7 +186,7 @@ namespace CDPL
 			 * the bond (as a \c const reference to Chem::Bond) as argument and return the identifier as
 			 * an integer of type std::uint64_t. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<std::uint64_t, const Chem::Bond&> BondIdentifierFunction;
+			typedef std::function<std::uint64_t(const Chem::Bond&)> BondIdentifierFunction;
 
 			/**
 			 * \brief Constructs the \c %CircularFingerprintGenerator instance.

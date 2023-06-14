@@ -31,7 +31,7 @@
 #ifndef CDPL_CHEM_BONDCOMPAREFUNCTION_HPP
 #define CDPL_CHEM_BONDCOMPAREFUNCTION_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -45,7 +45,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined bond compare function.
 		 */
-		typedef boost::function2<bool, const Chem::Bond&, const Chem::Bond&> BondCompareFunction;
+		typedef std::function<bool(const Chem::Bond&, const Chem::Bond&)> BondCompareFunction;
     }
 }
 

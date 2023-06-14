@@ -32,8 +32,7 @@
 #define CDPL_CHEM_ATOMPRIORITYFUNCTION_HPP
 
 #include <cstddef>
-
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -47,7 +46,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined atom priority function.
 		 */
-		typedef boost::function1<std::size_t, const Chem::Atom&> AtomPriorityFunction;
+		typedef std::function<std::size_t(const Chem::Atom&)> AtomPriorityFunction;
     }
 }
 

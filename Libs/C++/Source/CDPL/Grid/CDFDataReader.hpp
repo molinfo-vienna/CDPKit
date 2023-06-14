@@ -28,8 +28,7 @@
 #define CDPL_GRID_CDFDATAREADER_HPP
 
 #include <vector>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Grid/APIPrefix.hpp"
 #include "CDPL/Grid/CDFFormatData.hpp"
@@ -49,7 +48,7 @@ namespace CDPL
 	{
 
 	  public:
-	    typedef boost::function4<bool, unsigned int, const CDFDataReader&, AttributedGrid&, Internal::ByteBuffer&> PropertyHandler;
+	    typedef std::function<bool(unsigned int, const CDFDataReader&, AttributedGrid&, Internal::ByteBuffer&)> PropertyHandler;
 
 	    static void registerExternalPropertyHandler(const PropertyHandler& handler);
 	

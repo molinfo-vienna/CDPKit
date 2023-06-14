@@ -35,8 +35,7 @@
 #include <utility>
 #include <cstddef>
 #include <unordered_map>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/LookupKey.hpp"
@@ -114,31 +113,29 @@ namespace CDPL
 			 *        control-parameter has changed.
 			 *
 			 * \c %ParameterChangedCallbackFunction allows to wrap any function pointer or function object compatible with
-			 * a return type of \c void and two arguments of type <tt>const Base::LookupKey&</tt> and <tt>Base::Any</tt>.
-			 * For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * a return type of \c void and two arguments of type <tt>const Base::LookupKey&</tt> and <tt>Base::Any</tt> (see [\ref BFUN]). 
 			 */
-			typedef boost::function2<void, const LookupKey&, const Any&> ParameterChangedCallbackFunction;
+			typedef std::function<void(const LookupKey&, const Any&)> ParameterChangedCallbackFunction;
 
 			/**
 			 * \brief A functor class that wraps callback target functions which get invoked when a control-parameter entry
 			 *        has been removed.
 			 *
 			 * \c %ParameterRemovedCallbackFunction allows to wrap any function pointer or function object compatible with a
-			 * return type of \c void and an argument of type <tt>const Base::LookupKey&</tt>. For details refer to
-			 * the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * return type of \c void and an argument of type <tt>const Base::LookupKey&</tt> (see [\ref BFUN]). 
 			 */
-			typedef boost::function1<void, const LookupKey&> ParameterRemovedCallbackFunction;
+			typedef std::function<void(const LookupKey&)> ParameterRemovedCallbackFunction;
 
 			/**
 			 * \brief A functor class that wraps callback target functions which get invoked when the parent 
 			 *        container has been changed or was detached.
 			 *
 			 * \c %ParentChangedCallbackFunction allows to wrap any function pointer or function object compatible with a return type
-			 * of \c void and no arguments. For details refer to the <em>Boost.Function</em> documentation [\ref BFUN]. 
+			 * of \c void and no arguments (see [\ref BFUN]). 
 			 *
 			 * \see setParent()
 			 */
-			typedef boost::function0<void> ParentChangedCallbackFunction;
+			typedef std::function<void()> ParentChangedCallbackFunction;
 
 			/**
 			 * \brief Returns the number of container entries.

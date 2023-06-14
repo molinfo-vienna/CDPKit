@@ -32,8 +32,7 @@
 #define CDPL_CONFGEN_LOGMESSAGECALLBACKFUNCTION_HPP
 
 #include <string>
-
-#include <boost/function.hpp>
+#include <functional>
 
 
 namespace CDPL 
@@ -45,7 +44,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined callback functions.
 		 */
-		typedef boost::function1<void, const std::string&> LogMessageCallbackFunction;
+		typedef std::function<void(const std::string&)> LogMessageCallbackFunction;
     }
 }
 

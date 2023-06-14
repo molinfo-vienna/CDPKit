@@ -34,8 +34,7 @@
 #include <vector>
 #include <cstddef>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -73,9 +72,9 @@ namespace CDPL
 			
 			typedef std::shared_ptr<FeatureInteractionScoreGridCalculator> SharedPointer;
 
-			typedef boost::function1<bool, const Pharm::Feature&> FeaturePredicate;
-			typedef boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> ScoringFunction;
-			typedef boost::function1<double, const Math::DVector&> ScoreCombinationFunction;
+			typedef std::function<bool(const Pharm::Feature&)> FeaturePredicate;
+			typedef std::function<double(const Math::Vector3D&, const Pharm::Feature&)> ScoringFunction;
+			typedef std::function<double(const Math::DVector&)> ScoreCombinationFunction;
 
 			struct MaxScoreFunctor {
 

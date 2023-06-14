@@ -33,8 +33,7 @@
 
 #include <cstddef>
 #include <vector>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -58,7 +57,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef boost::function1<std::size_t, const Atom&> ImplicitHydrogenCountFunction;
+			typedef std::function<std::size_t(const Atom&)> ImplicitHydrogenCountFunction;
 
 			/**
 			 * \brief Constructs the \c %CIPPriorityCalculator instance.

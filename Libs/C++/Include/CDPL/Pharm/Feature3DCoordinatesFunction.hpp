@@ -31,7 +31,7 @@
 #ifndef CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
 #define CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Math/Vector.hpp"
 
@@ -47,7 +47,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
 		 */
-		typedef boost::function1<const Math::Vector3D&, const Pharm::Feature&> Feature3DCoordinatesFunction;
+		typedef std::function<const Math::Vector3D&(const Pharm::Feature&)> Feature3DCoordinatesFunction;
     }
 }
 

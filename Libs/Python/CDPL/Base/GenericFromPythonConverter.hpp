@@ -95,7 +95,7 @@ namespace CDPLPythonBase
 
 			void* storage = ((python::converter::rvalue_from_python_storage<TargetType>*)data)->storage.bytes;
 
-			new (storage) TargetType(boost::ref(python::extract<SourceType>(obj_ptr)()));
+			new (storage) TargetType(std::ref(python::extract<SourceType>(obj_ptr)()));
 
 			data->convertible = storage;
 		}

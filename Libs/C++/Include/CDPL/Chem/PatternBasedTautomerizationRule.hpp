@@ -36,8 +36,7 @@
 #include <algorithm>
 #include <iterator>
 #include <memory>
-
-#include <boost/function.hpp>
+#include <functional>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/TautomerizationRule.hpp"
