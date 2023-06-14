@@ -15,7 +15,7 @@ understanding the structure-activity relationships and rationalizing the behavio
 
 Furthermore, CDPkit integrates with various machine learning and data mining libraries, enabling scientists to build predictive models for molecular 
 properties. This makes it a valuable tool in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
-and other properties of potential drug candidates.
+and other properties of potential drug candidates. An example of the integration can be found in the source code of this [publication](https://www.mdpi.com/1420-3049/26/20/6185).
 
 In summary, CDPkit is a powerful and versatile toolkit for cheminformatics, offering a comprehensive set of tools and libraries for molecular manipulation, analysis, 
 and property prediction. Its wide range of functionality makes it an indispensable resource for scientists working in the field of computational chemistry and drug discovery.
@@ -140,6 +140,8 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit GitHub Repository**: Check out the [CDPKit GitHub repository](https://github.com/molinfo-vienna/CDPKit) for source code, issue tracking, and community support.
 
-- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](http://a7srv2.pch.univie.ac.at/cdpkit/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities.
+- **CDPKit Cookbook**: Explore the [CDPKit Cookbook](http://a7srv2.pch.univie.ac.at/cdpkit/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
 - **CDPKit Conformer Generator**: Visit [CONFORT](https://www.researchsquare.com/article/rs-1597257/v1), the high-quality CDPKit conformer generator intigrated in the toolkit.
+
+- **CDPKit ML integration example**: Check out the [github](https://github.com/spudlig/graph_networks) page of the "Improved Lipophilicity and Aqueous Solubility Prediction with Composite Graph Neural Networks" publication for exploring the ML integration possibilities of the CDPKit.
