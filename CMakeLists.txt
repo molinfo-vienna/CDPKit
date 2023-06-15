@@ -168,7 +168,7 @@ CONFIGURE_FILE("${RUN_PYTHON_TESTS_IN}" "${RUN_PYTHON_TESTS}" @ONLY)
 SET(Boost_USE_MULTITHREAD ON)
 SET(Boost_USE_STATIC_LIBS OFF)
 
-FIND_PACKAGE(Boost 1.52.0 REQUIRED iostreams filesystem system OPTIONAL_COMPONENTS program_options unit_test_framework python python3)
+FIND_PACKAGE(Boost 1.63.0 REQUIRED iostreams filesystem system OPTIONAL_COMPONENTS program_options unit_test_framework python python3)
 
 IF(NOT Boost_PROGRAM_OPTIONS_FOUND)
   MESSAGE("!! Warning: Boost program_options library not found -> commandline applications won't be built.")
