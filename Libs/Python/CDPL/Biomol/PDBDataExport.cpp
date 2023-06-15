@@ -26,9 +26,9 @@
 
 #include <algorithm>
 #include <utility>
+#include <functional>
 
 #include <boost/python.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Biomol/PDBData.hpp"
 
@@ -46,8 +46,8 @@ namespace
 		python::list types;
 			
 		std::for_each(pdb_data.getRecordsBegin(), pdb_data.getRecordsEnd(),
-					  boost::bind(&python::list::append<CDPL::Biomol::PDBData::RecordType>, boost::ref(types),
-								  boost::bind(&CDPL::Biomol::PDBData::Record::first, _1)));
+					  std::bind(&python::list::append<CDPL::Biomol::PDBData::RecordType>, std::ref(types),
+								std::bind(&CDPL::Biomol::PDBData::Record::first, std::placeholders::_1)));
 
 		return std::move(types);
 	}
@@ -58,8 +58,8 @@ namespace
 		python::list values;
 
 		std::for_each(pdb_data.getRecordsBegin(), pdb_data.getRecordsEnd(),
-					  boost::bind(&python::list::append<std::string>, boost::ref(values),
-								  boost::bind(&CDPL::Biomol::PDBData::Record::second, _1)));
+					  std::bind(&python::list::append<std::string>, std::ref(values),
+								std::bind(&CDPL::Biomol::PDBData::Record::second, std::placeholders::_1)));
 
 		return std::move(values);
 	}

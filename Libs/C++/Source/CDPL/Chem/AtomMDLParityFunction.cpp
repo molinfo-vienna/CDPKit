@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -48,7 +46,9 @@ using namespace CDPL;
 
 unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgraph)
 {
-    std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
+	using namespace std::placeholders;
+
+	std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
 		return MDLParity::NONE;
@@ -94,11 +94,11 @@ unsigned int Chem::calcMDLParity(const Atom& atom, const MolecularGraph& molgrap
     }
 
     std::sort(ordered_nbrs, ordered_nbrs + i,
-			  boost::bind(std::less<std::size_t>(),
-						  boost::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-									  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
-						  boost::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-									  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
+			  std::bind(std::less<std::size_t>(),
+						std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
+								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
+						std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
+								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
 
     const StereoDescriptor stereo_desc = getStereoDescriptor(atom);
     unsigned int perm_parity = (num_bonds == 3 ? stereo_desc.getPermutationParity(*ordered_nbrs[0], *ordered_nbrs[1], *ordered_nbrs[2]) :

@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Grid/AttributedGridFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -90,6 +89,7 @@ void Grid::CDFDataReader::readExternalProperties(CDF::PropertySpec prop_spec, At
 bool Grid::CDFDataReader::readExternalProperties(unsigned int handler_id, AttributedGrid& grid, Internal::ByteBuffer& bbuf) const
 {
 	return (std::find_if(extPropertyHandlers.begin(), extPropertyHandlers.end(),
-						 boost::bind(&PropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(grid), boost::ref(bbuf)))
+						 std::bind(&PropertyHandler::operator(), std::placeholders::_1, handler_id,
+								   std::ref(*this), std::ref(grid), std::ref(bbuf)))
 			!= extPropertyHandlers.end());
 }

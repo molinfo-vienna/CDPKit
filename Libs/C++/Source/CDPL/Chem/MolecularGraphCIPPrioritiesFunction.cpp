@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -44,8 +42,8 @@ using namespace CDPL;
 void Chem::calcCIPPriorities(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasCIPPriority, _1))) == molgraph.getAtomsEnd())
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&hasCIPPriority, std::placeholders::_1))) == molgraph.getAtomsEnd())
 		return;
 
 	Util::STArray priorities;

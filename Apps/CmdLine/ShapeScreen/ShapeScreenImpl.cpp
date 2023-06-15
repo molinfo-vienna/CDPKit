@@ -30,9 +30,9 @@
 #include <iomanip>
 #include <thread>
 #include <chrono>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -62,9 +62,10 @@ class ShapeScreenImpl::ScreeningWorker
 public:
     ScreeningWorker(ShapeScreenImpl* parent): 
 		parent(parent), molecule(new CDPL::Chem::BasicMolecule()), terminate(false) {
-
+		using namespace std::placeholders;
+		
 		screeningProc.getSettings() = parent->settings;
-		screeningProc.setHitCallback(boost::bind(&ScreeningWorker::hitCallback, this, _1, _2, _3));
+		screeningProc.setHitCallback(std::bind(&ScreeningWorker::hitCallback, this, _1, _2, _3));
 
 		for (QueryMoleculeList::const_iterator it = parent->queryMolecules.begin(), end = parent->queryMolecules.end(); it != end; ++it)
 			screeningProc.addQuery(**it);
@@ -123,6 +124,8 @@ ShapeScreenImpl::ShapeScreenImpl():
 	hitNamePattern("@D@_@c@_@Q@_@C@"), numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0), 
 	numProcMols(0), numHits(0), numSavedHits(0)
 {
+	using namespace std::placeholders;
+	
    	addOption("query,q", "Query molecule file.", 
 			  value<std::string>(&queryFile)->required());
 	addOption("database,d", "Screened database file(s).", 
@@ -133,20 +136,20 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<std::string>(&reportFile));
 	addOption("mode,m", "Screening mode specifying which of the obtained results for the query molecule are of interest "
 			  "(BEST_OVERALL, BEST_PER_QUERY, BEST_PER_QUERY_CONF, default: BEST_PER_QUERY).",
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setScreeningMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setScreeningMode, this, _1)));
 	addOption("score,s", "Primary scoring function that will be in effect for hit identification and ranking operations "
 			  "(TOTAL_OVERLAP_TANIMOTO, SHAPE_TANIMOTO, COLOR_TANIMOTO, TANIMOTO_COMBO, TOTAL_OVERLAP_TVERSKY, SHAPE_TVERSKY, "
 			  "COLOR_TVERSKY, TVERSKY_COMBO, QUERY_TOTAL_OVERLAP_TVERSKY, QUERY_SHAPE_TVERSKY, QUERY_COLOR_TVERSKY, "
 			  "QUERY_TVERSKY_COMBO, DB_TOTAL_OVERLAP_TVERSKY, DB_SHAPE_TVERSKY, DB_COLOR_TVERSKY, DB_TVERSKY_COMBO, "
 			  "default: " + scoringFunc + ")",
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setScoringFunction, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setScoringFunction, this, _1)));
 	addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
 			  std::to_string(numBestHits) + ").",
 			  value<std::size_t>(&numBestHits));
 	addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the 'best-hits' option, default: 0 - no limit).",
 			  value<std::size_t>(&maxNumHits));
 	addOption("cutoff,x", "Score cutoff value which determines whether a database molecule is considered as a hit (default: 0.0 - no cutoff).",
-			  value<double>()->notifier(boost::bind(&ShapeScreenImpl::setScoreCutoff, this, _1)));
+			  value<double>()->notifier(std::bind(&ShapeScreenImpl::setScoreCutoff, this, _1)));
 	addOption("shape-tanimoto-cutoff,X", "Shape tanimoto score cutoff that will be used for hit identifiaction in addition to the value specified by the 'cutoff' "
 			  "option (default: 0.0 - no cutoff).",
 			  value<double>(&shapeScoreCutoff));
@@ -160,19 +163,19 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<bool>(&scoringOnly)->implicit_value(true));
 	addOption("opt-overlay,a", "Specifies whether or not to perform an overlay optimization of the generated starting poses "
 			  "(only in effect if option 'score-only' is false, default: true).",
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::performOverlayOptimization, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ShapeScreenImpl::performOverlayOptimization, this, _1)));
 	addOption("thorough-overlay-opt,z", "Specifies whether or not to perform a thorough overlay optimization of the generated starting poses "
 			  "(note: the screening time will increase significantly, default: false).",
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::performThoroughOverlayOptimization, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ShapeScreenImpl::performThoroughOverlayOptimization, this, _1)));
 	addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit molecule output file (default: true).",
 			  value<bool>(&outputQuery)->implicit_value(true));
 	addOption("single-conf-db,g", "If specified, conformers of the database molecules are treated as individual single conformer molecules (default: false).",
-			  value<bool>()->notifier(boost::bind(&ShapeScreenImpl::performSingleConformerSearch, this, _1)));
+			  value<bool>()->notifier(std::bind(&ShapeScreenImpl::performSingleConformerSearch, this, _1)));
 	addOption("color-ftr-type,f", "Specifies which type of color features to generate and score "
 			  "(NONE, EXP_PHARM, IMP_PHARM, default: IMP_PHARM).",
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setColorFeatureType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setColorFeatureType, this, _1)));
 	addOption("all-carbon,W", "If specified, every heavy atom is interpreted as carbon (default: true).",
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::enableAllCarbonMode, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ShapeScreenImpl::enableAllCarbonMode, this, _1)));
 	addOption("shape-center-starts,S", "If specified, principal axes aligned starting poses will be generated where both shape centers are located at"
 			  "origin the coordinates system (default: true).",
 			  value<bool>(&shapeCenterStarts)->implicit_value(true));
@@ -183,7 +186,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  "shape is located at the color feature centers of the larger shape (default: false).",
 			  value<bool>(&colorCenterStarts)->implicit_value(true));
 	addOption("random-starts,R", "Generates the specified number of principal axes aligned starting poses with randomized shape center displacements (default: 0).",
-			  value<std::size_t>()->notifier(boost::bind(&ShapeScreenImpl::setNumRandomStarts, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ShapeScreenImpl::setNumRandomStarts, this, _1)));
 	addOption("score-sd-tags,E", "If true, score values will be appended as SD-block entries of the output hit molecules (default: true).",
 			  value<bool>(&scoreSDTags)->implicit_value(true));
 	addOption("query-name-sd-tags,N", "If true, the query molecule name will be appended to the SD-block of the output hit molecules (default: false).",
@@ -205,11 +208,11 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("query-format,Q", "Query molecule input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setQueryFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setQueryFormat, this, _1)));
 	addOption("database-format,D", "Screening database input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setDatabaseFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setDatabaseFormat, this, _1)));
     addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setHitOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ShapeScreenImpl::setHitOutputFormat, this, _1)));
  
     addOptionLongDescriptions();
 }
@@ -528,7 +531,7 @@ void ShapeScreenImpl::processMultiThreaded()
 
 			ScreeningWorkerPtr worker_ptr(new ScreeningWorker(this));
 
-			thread_grp.emplace_back(boost::bind(&ScreeningWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(std::bind(&ScreeningWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 

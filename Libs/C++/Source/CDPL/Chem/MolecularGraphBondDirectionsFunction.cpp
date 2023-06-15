@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -45,8 +43,8 @@ void Chem::calcBondDirections(MolecularGraph& molgraph, bool overwrite, bool rin
 							  std::size_t min_ring_size)
 {
 	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasDirection, _1))) == molgraph.getBondsEnd())
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&hasDirection, std::placeholders::_1))) == molgraph.getBondsEnd())
 		return;
 
 	BondDirectionCalculator calculator;

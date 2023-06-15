@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Descr/MoleculeRDFDescriptorCalculator.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
@@ -157,6 +157,8 @@ bool CDPL::Descr::MoleculeRDFDescriptorCalculator::distanceToIntervalsCenterRoun
 
 void CDPL::Descr::MoleculeRDFDescriptorCalculator::calculate(const Chem::AtomContainer& cntnr, Math::DVector& descr)
 {
+	using namespace std::placeholders;
+	
     std::size_t sub_descr_size = rdfCalculator.getNumSteps() + 1;
     std::size_t num_atom_types = sizeof(ATOM_TYPES) / sizeof(unsigned int);
 
@@ -164,9 +166,9 @@ void CDPL::Descr::MoleculeRDFDescriptorCalculator::calculate(const Chem::AtomCon
 
     for (std::size_t i = 0; i < num_atom_types; i++) {
 		if (weightFunc)
-			rdfCalculator.setEntityPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i]));
+			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i]));
 		else
-			rdfCalculator.setEntityPairWeightFunction(boost::bind<double>(AtomPairWeightFunc(), _1, _2, ATOM_TYPES[i]));
+			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(AtomPairWeightFunc(), _1, _2, ATOM_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

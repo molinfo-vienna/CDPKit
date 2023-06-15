@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cstdint>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -586,6 +585,8 @@ void Chem::CDFDataReader::readReactionProperties(Reaction& rxn, Internal::ByteBu
 template <typename T>
 void Chem::CDFDataReader::readExternalProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& bbuf)
 {
+	using namespace std::placeholders;
+	
 	CDF::SizeType size_val;
 
 	getIntProperty(prop_spec, size_val, bbuf);
@@ -599,21 +600,24 @@ void Chem::CDFDataReader::readExternalProperties(CDF::PropertySpec prop_spec, T&
 bool Chem::CDFDataReader::readExternalProperties(unsigned int handler_id, Atom& atom, Internal::ByteBuffer& bbuf)
 {
 	return (std::find_if(extAtomPropertyHandlers.begin(), extAtomPropertyHandlers.end(),
-						 boost::bind(&AtomPropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(atom), boost::ref(bbuf)))
+						 std::bind(&AtomPropertyHandler::operator(), std::placeholders::_1,
+								   handler_id, std::ref(*this), std::ref(atom), std::ref(bbuf)))
 			!= extAtomPropertyHandlers.end());
 }
 
 bool Chem::CDFDataReader::readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& bbuf)
 {
 	return (std::find_if(extBondPropertyHandlers.begin(), extBondPropertyHandlers.end(),
-						 boost::bind(&BondPropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(bond), boost::ref(bbuf)))
+						 std::bind(&BondPropertyHandler::operator(), std::placeholders::_1,
+								   handler_id, std::ref(*this), std::ref(bond), std::ref(bbuf)))
 			!= extBondPropertyHandlers.end());
 }
 
 bool Chem::CDFDataReader::readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& bbuf)
 {
 	return (std::find_if(extMoleculePropertyHandlers.begin(), extMoleculePropertyHandlers.end(),
-						 boost::bind(&MoleculePropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(mol), boost::ref(bbuf)))
+						 std::bind(&MoleculePropertyHandler::operator(), std::placeholders::_1,
+								   handler_id, std::ref(*this), std::ref(mol), std::ref(bbuf)))
 			!= extMoleculePropertyHandlers.end());
 }
 

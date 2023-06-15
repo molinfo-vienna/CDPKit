@@ -35,7 +35,6 @@
 #include <cassert>
 
 #include <boost/random/linear_congruential.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Atom2DCoordinatesCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -203,12 +202,14 @@ public:
 		origin(org), lhsList(lhs_list) {}
 
 	bool operator()(const NodeLayoutInfoList& rhs_list) const {
+		using namespace std::placeholders;
+
 		assert(rhs_list.size() == lhsList.size());
 
 		return std::equal(lhsList.begin(), lhsList.end(), rhs_list.begin(),
-						  boost::bind(LinkedNodePriorityEqualCmpFunc(origin), 
-									  boost::bind(&NodeLayoutInfo::edge, _1),
-									  boost::bind(&NodeLayoutInfo::edge, _2)));
+						  std::bind(LinkedNodePriorityEqualCmpFunc(origin), 
+									std::bind(&NodeLayoutInfo::edge, _1),
+									std::bind(&NodeLayoutInfo::edge, _2)));
 	}
 		 
 private:
@@ -348,7 +349,8 @@ void Chem::Atom2DCoordinatesCalculator::layoutComponents(Math::Vector2DArray& co
 	const FragmentList& components = *getComponents(*molGraph);
 
 	std::for_each(components.getElementsBegin(), components.getElementsEnd(), 
-				  boost::bind(&Atom2DCoordinatesCalculator::layoutComponent, this, _1, boost::ref(coords)));
+				  std::bind(&Atom2DCoordinatesCalculator::layoutComponent, this,
+							std::placeholders::_1, std::ref(coords)));
 }
 
 void Chem::Atom2DCoordinatesCalculator::alignComponents(Math::Vector2DArray& coords)
@@ -453,8 +455,8 @@ void Chem::Atom2DCoordinatesCalculator::createRingSysNodes(const Fragment& comp,
 	tmpRingList.clear();
 
 	std::for_each(comp.getAtomsBegin(), comp.getAtomsEnd(), 
-				  boost::bind(&Util::BitSet::set, &atomMask, 
-							  boost::bind(&MolecularGraph::getAtomIndex, molGraph, _1), true));
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), &atomMask, 
+							std::bind(&MolecularGraph::getAtomIndex, molGraph, std::placeholders::_1), true));
 
 	RingInfoList::iterator rings_end = ringList.end();
 
@@ -520,6 +522,8 @@ void Chem::Atom2DCoordinatesCalculator::createAtomNodes(const Fragment& comp, Ma
 
 void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 {
+	using namespace std::placeholders;
+
 	std::size_t num_mol_atoms = molGraph->getNumAtoms();
 
 	if (tmpBitMask.size() < num_mol_atoms * num_mol_atoms)
@@ -558,7 +562,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 
 			} else {
 				RingSysNodeList::iterator rsys_it = std::find_if(rsys_list_beg, rsys_list_end, 
-																	boost::bind(&RingSysNode::containsAtom, _1, atom2_idx));
+																 std::bind(&RingSysNode::containsAtom, _1, atom2_idx));
 				if (rsys_it == rsys_list_end)
 					continue;
 
@@ -569,7 +573,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 				atomNodeTable[atom1_idx]->addEdge(atom1, edge);
 	
 				while ((rsys_it = std::find_if(++rsys_it, rsys_list_end, 
-											   boost::bind(&RingSysNode::containsAtom, _1, atom2_idx))) != rsys_list_end) {
+											   std::bind(&RingSysNode::containsAtom, _1, atom2_idx))) != rsys_list_end) {
 					rsys = *rsys_it;
 					edge = allocEdge(bond, atomNodeTable[atom1_idx], rsys);
 
@@ -579,7 +583,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 
 		} else if (atomNodeTable[atom2_idx]) {
 			RingSysNodeList::iterator rsys_it = std::find_if(rsys_list_beg, rsys_list_end, 
-																boost::bind(&RingSysNode::containsAtom, _1, atom1_idx));
+															 std::bind(&RingSysNode::containsAtom, _1, atom1_idx));
 			if (rsys_it == rsys_list_end)
 				continue;
 
@@ -590,7 +594,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 			atomNodeTable[atom2_idx]->addEdge(atom2, edge);
 
 			while ((rsys_it = std::find_if(++rsys_it, rsys_list_end, 
-										   boost::bind(&RingSysNode::containsAtom, _1, atom1_idx))) != rsys_list_end) {
+										   std::bind(&RingSysNode::containsAtom, _1, atom1_idx))) != rsys_list_end) {
 				rsys = *rsys_it;
 				edge = allocEdge(bond, atomNodeTable[atom2_idx], rsys);
 
@@ -599,12 +603,12 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 
 		} else if (!getRingFlag(*bond)) {
 			RingSysNodeList::iterator rsys_it1 = std::find_if(rsys_list_beg, rsys_list_end, 
-																 boost::bind(&RingSysNode::containsAtom, _1, atom1_idx));
+															  std::bind(&RingSysNode::containsAtom, _1, atom1_idx));
 			if (rsys_it1 == rsys_list_end)
 				continue;
 
 			RingSysNodeList::iterator rsys_it2 = std::find_if(rsys_list_beg, rsys_list_end, 
-																 boost::bind(&RingSysNode::containsAtom, _1, atom2_idx));
+															  std::bind(&RingSysNode::containsAtom, _1, atom2_idx));
 			if (rsys_it2 == rsys_list_end)
 				continue;
 
@@ -617,7 +621,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 			rsys2->addEdge(atom2, edge);
 
 			while ((rsys_it1 = std::find_if(++rsys_it1, rsys_list_end, 
-											boost::bind(&RingSysNode::containsAtom, _1, atom1_idx))) != rsys_list_end) {
+											std::bind(&RingSysNode::containsAtom, _1, atom1_idx))) != rsys_list_end) {
 				RingSysNode* rsys = *rsys_it1;
 				edge = allocEdge(bond, rsys, rsys2);
 
@@ -625,7 +629,7 @@ void Chem::Atom2DCoordinatesCalculator::createBondEdges(const Fragment& comp)
 			} 
 
 			while ((rsys_it2 = std::find_if(++rsys_it2, rsys_list_end, 
-											boost::bind(&RingSysNode::containsAtom, _1, atom2_idx))) != rsys_list_end) {
+											std::bind(&RingSysNode::containsAtom, _1, atom2_idx))) != rsys_list_end) {
 				RingSysNode* rsys = *rsys_it2;
 				edge = allocEdge(bond, rsys1, rsys);
 
@@ -698,6 +702,8 @@ void Chem::Atom2DCoordinatesCalculator::setAtomNodeChainIDs()
 
 void Chem::Atom2DCoordinatesCalculator::findLongestNodePath(AtomNode* node, const AtomNode* parent_node)
 {
+	using namespace std::placeholders;
+	
 	if (!atomNodeTable[node->getAtomIndex()])
 		return;
 
@@ -728,12 +734,12 @@ void Chem::Atom2DCoordinatesCalculator::findLongestNodePath(AtomNode* node, cons
 
 	else if (currAtomNodePath.size() == longestAtomNodePath.size()) {
 		if (std::accumulate(currAtomNodePath.begin(), currAtomNodePath.end(), double(0),
-							boost::bind(std::plus<double>(), _1,
-										boost::bind(&LGNode::getPriority, _2))) 
+							std::bind(std::plus<double>(), _1,
+									  std::bind(&LGNode::getPriority, _2))) 
 			>
 			std::accumulate(longestAtomNodePath.begin(), longestAtomNodePath.end(), double(0),
-							boost::bind(std::plus<double>(), _1,
-										boost::bind(&LGNode::getPriority, _2))))
+							std::bind(std::plus<double>(), _1,
+									  std::bind(&LGNode::getPriority, _2))))
 
 			longestAtomNodePath = currAtomNodePath;
 	}
@@ -743,18 +749,20 @@ void Chem::Atom2DCoordinatesCalculator::findLongestNodePath(AtomNode* node, cons
 
 void Chem::Atom2DCoordinatesCalculator::createBFSNodeList()
 {
+	using namespace std::placeholders;
+		
 	bfsNodeList.clear();
 
 	if (!ringSysNodeList.empty()) 
 		bfsNodeList.push_back(*std::max_element(ringSysNodeList.begin(), ringSysNodeList.end(), 
-												boost::bind(std::less<double>(), 
-															boost::bind(&LGNode::getPriority, _1), 
-															boost::bind(&LGNode::getPriority, _2))));
+												std::bind(std::less<double>(), 
+														  std::bind(&LGNode::getPriority, _1), 
+														  std::bind(&LGNode::getPriority, _2))));
 	else if (!atomNodeList.empty())  
 		bfsNodeList.push_back(*std::max_element(atomNodeList.begin(), atomNodeList.end(), 
-												boost::bind(std::less<double>(), 
-															boost::bind(&LGNode::getPriority, _1), 
-															boost::bind(&LGNode::getPriority, _2))));
+												std::bind(std::less<double>(), 
+														  std::bind(&LGNode::getPriority, _1), 
+														  std::bind(&LGNode::getPriority, _2))));
 	else 
 		return;
 
@@ -767,8 +775,12 @@ void Chem::Atom2DCoordinatesCalculator::createBFSNodeList()
 
 void Chem::Atom2DCoordinatesCalculator::initNodes() const
 {
-	std::for_each(atomNodeList.begin(), atomNodeList.end(), boost::bind(&LGNode::init, _1));
-	std::for_each(ringSysNodeList.begin(), ringSysNodeList.end(), boost::bind(&LGNode::init, _1));
+	using namespace std::placeholders;
+	
+	std::for_each(atomNodeList.begin(), atomNodeList.end(),
+				  std::bind(static_cast<void (LGNode::*)()>(&LGNode::init), _1));
+	std::for_each(ringSysNodeList.begin(), ringSysNodeList.end(),
+				  std::bind(static_cast<void (LGNode::*)()>(&LGNode::init), _1));
 }
 
 void Chem::Atom2DCoordinatesCalculator::layoutNodes()
@@ -910,6 +922,8 @@ void Chem::Atom2DCoordinatesCalculator::freeAllocAtomNodes()
 void Chem::Atom2DCoordinatesCalculator::RingInfo::init(const MolecularGraph* molgraph, const Fragment& ring_frag, 
 													  std::size_t num_atoms, std::size_t num_bonds) 
 {
+	using namespace std::placeholders;
+	
 	fragment = &ring_frag;
 
 	atomMask.resize(num_atoms);
@@ -919,10 +933,12 @@ void Chem::Atom2DCoordinatesCalculator::RingInfo::init(const MolecularGraph* mol
 	bondMask.reset();
 	
 	std::for_each(ring_frag.getAtomsBegin(), ring_frag.getAtomsEnd(), 
-				  boost::bind(&Util::BitSet::set, &atomMask, boost::bind(&MolecularGraph::getAtomIndex, molgraph, _1), true));
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), &atomMask,
+							std::bind(&MolecularGraph::getAtomIndex, molgraph, _1), true));
 
 	std::for_each(ring_frag.getBondsBegin(), ring_frag.getBondsEnd(), 
-				  boost::bind(&Util::BitSet::set, &bondMask, boost::bind(&MolecularGraph::getBondIndex, molgraph, _1), true));
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), &bondMask,
+							std::bind(&MolecularGraph::getBondIndex, molgraph, _1), true));
 }
 
 const Chem::Fragment& Chem::Atom2DCoordinatesCalculator::RingInfo::getFragment() const
@@ -1062,10 +1078,12 @@ double Chem::Atom2DCoordinatesCalculator::LGNode::getAngularDemand(const Atom*) 
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisions(const AtomIndexList& atoms, const AtomIndexList& proc_atoms, 
 																		  const Math::Vector2DArray& coords)
 {
+	using namespace std::placeholders;
+	
 	return std::accumulate(atoms.begin(), atoms.end(), std::size_t(0),
-						   boost::bind(std::plus<std::size_t>(), _1, 
-									   boost::bind(&LGNode::countAtomCollisionsForAtom, this, _2, 
-												   boost::ref(proc_atoms), boost::ref(coords))));
+						   std::bind(std::plus<std::size_t>(), _1, 
+									 std::bind(&LGNode::countAtomCollisionsForAtom, this, _2, 
+											   std::ref(proc_atoms), std::ref(coords))));
 }
 
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisionsForAtom(std::size_t atom_idx, 
@@ -1099,10 +1117,12 @@ std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisionsForAto
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countBondCollisions(const BondList& bonds, const BondList& proc_bonds, 
 																		  const Math::Vector2DArray& coords)
 {
+	using namespace std::placeholders;
+	
 	return std::accumulate(bonds.begin(), bonds.end(), std::size_t(0),
-						   boost::bind(std::plus<std::size_t>(), _1, 
-									   boost::bind(&LGNode::countBondCollisionsForBond, this, _2, 
-												   boost::ref(proc_bonds), boost::ref(coords))));
+						   std::bind(std::plus<std::size_t>(), _1, 
+									 std::bind(&LGNode::countBondCollisionsForBond, this, _2, 
+											   std::ref(proc_bonds), std::ref(coords))));
 }
 
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countBondCollisionsForBond(const Bond* bond, const BondList& proc_bonds, 
@@ -1148,33 +1168,39 @@ std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countBondCollisionsForBon
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomBondCollisions(const AtomIndexList& atoms, const BondList& proc_bonds, 
 																			  const Math::Vector2DArray& coords)
 {
+	using namespace std::placeholders;
+
 	return std::accumulate(atoms.begin(), atoms.end(), std::size_t(0),
-						   boost::bind(std::plus<std::size_t>(), _1, 
-									   boost::bind(&LGNode::countBondCollisionsForAtom, this, _2, 
-												   boost::ref(proc_bonds), boost::ref(coords))));
+						   std::bind(std::plus<std::size_t>(), _1, 
+									   std::bind(&LGNode::countBondCollisionsForAtom, this, _2, 
+												   std::ref(proc_bonds), std::ref(coords))));
 }
 
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countBondCollisionsForAtom(std::size_t atom_idx, const BondList& proc_bonds, 
 																				 const Math::Vector2DArray& coords)
 {
 	return std::count_if(proc_bonds.begin(), proc_bonds.end(), 
-						 boost::bind(&LGNode::testAtomBondCollision, this, atom_idx, _1, boost::ref(coords)));
+						 std::bind(&LGNode::testAtomBondCollision, this, atom_idx,
+								   std::placeholders::_1, std::ref(coords)));
 }
 
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countBondAtomCollisions(const BondList& bonds, const AtomIndexList& proc_atoms, 
-																			  const Math::Vector2DArray& coords)
+																			   const Math::Vector2DArray& coords)
 {
+	using namespace std::placeholders;
+	
 	return std::accumulate(bonds.begin(), bonds.end(), std::size_t(0),
-						   boost::bind(std::plus<std::size_t>(), _1, 
-									   boost::bind(&LGNode::countAtomCollisionsForBond, this, _2, 
-												   boost::ref(proc_atoms), boost::ref(coords))));
+						   std::bind(std::plus<std::size_t>(), _1, 
+									   std::bind(&LGNode::countAtomCollisionsForBond, this, _2, 
+												   std::ref(proc_atoms), std::ref(coords))));
 }
 
 std::size_t Chem::Atom2DCoordinatesCalculator::LGNode::countAtomCollisionsForBond(const Bond* bond, const AtomIndexList& proc_atoms, 
 																				 const Math::Vector2DArray& coords)
 {
 	return std::count_if(proc_atoms.begin(), proc_atoms.end(), 
-						 boost::bind(&LGNode::testAtomBondCollision, this, _1, bond, boost::ref(coords)));
+						 std::bind(&LGNode::testAtomBondCollision, this, std::placeholders::_1,
+								   bond, std::ref(coords)));
 }
 
 bool Chem::Atom2DCoordinatesCalculator::LGNode::testAtomBondCollision(std::size_t atom_idx, const Bond* bond, 
@@ -1214,9 +1240,9 @@ bool Chem::Atom2DCoordinatesCalculator::LGNode::testAtomBondCollision(std::size_
 // - RingSysNode -
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::init(const MolecularGraph* molgraph, 
-														 const RingInfo* ring_info, 
-														 Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms, 
-														 BondList& proc_bonds)
+														  const RingInfo* ring_info, 
+														  Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms, 
+														  BondList& proc_bonds)
 {
 	LGNode::init(molgraph);
 
@@ -1622,10 +1648,10 @@ bool Chem::Atom2DCoordinatesCalculator::RingSysNode::layoutChildNodes(double par
 			NodeLayoutInfoList::const_iterator layout_infos_end = childLayouts[0][layout_idx].end();
 
 			NodeLayoutInfoList::const_iterator it = std::find_if(layout_infos_beg, layout_infos_end,
-																 boost::bind(std::equal_to<const Bond*>(), 
-																			 boost::bind(&LGEdge::getBond, 
-																						 boost::bind(&NodeLayoutInfo::edge, _1)), 
-																			 parent_edge_bond));
+																 std::bind(std::equal_to<const Bond*>(), 
+																		   std::bind(&LGEdge::getBond, 
+																					 std::bind(&NodeLayoutInfo::edge, std::placeholders::_1)), 
+																		   parent_edge_bond));
 			assert(it != layout_infos_end);
 
 			double rsys_rot_angle = parent_edge_angle - it->angle + M_PI;
@@ -1871,6 +1897,8 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::commitAtomAndBondList() con
 
 void Chem::Atom2DCoordinatesCalculator::RingSysNode::calcCoords()
 {
+	using namespace std::placeholders;
+	
 	localCoords.resize(outputCoords->getSize());
 
 	procAtomMask.resize(atomMask.size());
@@ -1880,9 +1908,9 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::calcCoords()
 		return;
 	} 
 
-	ringLayoutQueue.sort(boost::bind(std::greater<double>(), 
-									 boost::bind(&RingInfo::getPriority, _1), 
-									 boost::bind(&RingInfo::getPriority, _2)));
+	ringLayoutQueue.sort(std::bind(std::greater<double>(), 
+								   std::bind(&RingInfo::getPriority, _1), 
+								   std::bind(&RingInfo::getPriority, _2)));
 
 	typedef std::vector<const RingInfo*> RingInfoList;
 
@@ -2207,7 +2235,7 @@ void Chem::Atom2DCoordinatesCalculator::RingSysNode::initSpringLayoutParams()
 
 	if (max_factor > 1.0)
 		std::transform(layoutWeightFactors.begin(), layoutWeightFactors.end(), layoutWeightFactors.begin(),
-					   boost::bind(std::divides<double>(), _1, max_factor));
+					   std::bind(std::divides<double>(), std::placeholders::_1, max_factor));
 
 	for (AtomIndexList::const_iterator it1 = atomList.begin(); it1 != atoms_end; ) {
 		std::size_t atom1_idx = *it1;
@@ -2575,8 +2603,8 @@ double Chem::Atom2DCoordinatesCalculator::RingSysNode::calcCongestionFactor(cons
 // - AtomNode -
 
 void Chem::Atom2DCoordinatesCalculator::AtomNode::init(const MolecularGraph* molgraph, const Atom* atom, double p, 
-													  Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms,
-													  BondList& proc_bonds)
+													   Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms,
+													   BondList& proc_bonds)
 {
 	LGNode::init(molgraph);
 
@@ -3111,8 +3139,8 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::createChildLayoutsDN()
 
 	if (parentEdge) {
 		EdgeList::iterator parent_it = std::find_if(edges_beg, edges_end,
-													boost::bind(std::equal_to<const Bond*>(), parentEdge->getBond(),
-																boost::bind(&LGEdge::getBond, _1)));
+													std::bind(std::equal_to<const Bond*>(), parentEdge->getBond(),
+															  std::bind(&LGEdge::getBond, std::placeholders::_1)));
 		assert(parent_it != edges_end);
 
 		std::rotate(edges_beg, parent_it, edges_end);
@@ -3168,8 +3196,8 @@ void Chem::Atom2DCoordinatesCalculator::AtomNode::removeParentEdge()
 	assert(parentEdge);
 
 	EdgeList::iterator parent_it = std::remove_if(edges.begin(), edges.end(), 
-												  boost::bind(std::equal_to<const Bond*>(), parentEdge->getBond(),
-															  boost::bind(&LGEdge::getBond, _1)));
+												  std::bind(std::equal_to<const Bond*>(), parentEdge->getBond(),
+															std::bind(&LGEdge::getBond, std::placeholders::_1)));
 
 	assert(parent_it != edges.end());
 

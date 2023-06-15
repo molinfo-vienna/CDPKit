@@ -31,8 +31,6 @@
 #include <iterator>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
@@ -67,7 +65,7 @@ bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const C
 
 	if (vdw_factor > 0.0) 
 		std::transform(atom_cntnr.getAtomsBegin(), atom_cntnr.getAtomsEnd(), std::back_inserter(vdw_radii), 
-					   boost::bind(std::multiplies<double>(), boost::bind(&MolProp::getVdWRadius, _1), vdw_factor));
+					   std::bind(std::multiplies<double>(), std::bind(&MolProp::getVdWRadius, std::placeholders::_1), vdw_factor));
 	else
 		vdw_radii.resize(num_atoms, 0.0);
 

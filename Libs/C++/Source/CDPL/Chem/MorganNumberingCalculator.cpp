@@ -32,8 +32,6 @@
 #include <map>
 #include <cstdint>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MorganNumberingCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -112,6 +110,8 @@ void Chem::MorganNumberingCalculator::NumberingState::init(const MolecularGraph&
 
 void Chem::MorganNumberingCalculator::NumberingState::perceiveSymClasses()
 {
+	using namespace std::placeholders;
+		
 	std::size_t num_atoms = molGraph->getNumAtoms();
 
 	atomSymbols->reserve(num_atoms);
@@ -193,9 +193,9 @@ void Chem::MorganNumberingCalculator::NumberingState::perceiveSymClasses()
 		symClassIDs->push_back(STPair(sym_class_id, i));
 	}
 
-	std::sort(symClassIDs->begin(), symClassIDs->end(), boost::bind(std::greater<std::size_t>(), 
-																	boost::bind(&STPair::first, _1),
-																	boost::bind(&STPair::first, _2)));
+	std::sort(symClassIDs->begin(), symClassIDs->end(), std::bind(std::greater<std::size_t>(), 
+																  std::bind(&STPair::first, _1),
+																  std::bind(&STPair::first, _2)));
 	lastSymClass = symClassIDs->begin();
 }
 
@@ -242,13 +242,15 @@ void Chem::MorganNumberingCalculator::NumberingState::distributeNumbers(Util::ST
 	output.clear();
 	output.reserve(molGraph->getNumAtoms());
 
-	std::for_each(atomNumbering.begin(), atomNumbering.end(), boost::bind(&Util::STArray::addElement, 
-																		  boost::ref(output),
-																		  boost::bind(&STPair::second, _1)));
+	std::for_each(atomNumbering.begin(), atomNumbering.end(), std::bind(&Util::STArray::addElement, 
+																		std::ref(output),
+																		std::bind(&STPair::second, std::placeholders::_1)));
 }
 
 void Chem::MorganNumberingCalculator::NumberingState::distributeNumbers(std::size_t atom_idx)
 {
+	using namespace std::placeholders;
+
 	// Extract not numbered connected atoms and detect ring closures
 
 	const Atom& atom = molGraph->getAtom(atom_idx);
@@ -283,16 +285,16 @@ void Chem::MorganNumberingCalculator::NumberingState::distributeNumbers(std::siz
 		return;
 	}
 
-	std::sort(not_numbered_nbrs.begin(), not_numbered_nbrs.end(), boost::bind(std::greater<std::size_t>(), 
-																			  boost::bind(&STPair::first, _1),
-																			  boost::bind(&STPair::first, _2)));
+	std::sort(not_numbered_nbrs.begin(), not_numbered_nbrs.end(), std::bind(std::greater<std::size_t>(), 
+																			std::bind(&STPair::first, _1),
+																			std::bind(&STPair::first, _2)));
 	// Create all possible permutations if more than one neighbor 
 	// belongs to the same symmetry class
 
 	STArray nbr_perms;
 
 	std::transform(not_numbered_nbrs.begin(), not_numbered_nbrs.end(), std::back_inserter(nbr_perms), 
-				   boost::bind(&STPair::second, _1));
+				   std::bind(&STPair::second, _1));
 
 	std::size_t num_perms = 1;
 

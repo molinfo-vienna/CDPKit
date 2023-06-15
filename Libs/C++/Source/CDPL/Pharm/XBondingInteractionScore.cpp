@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <cmath>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/XBondingInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -57,9 +56,9 @@ constexpr double Pharm::XBondingInteractionScore::DEF_MAX_ACC_ANGLE;
 Pharm::XBondingInteractionScore::XBondingInteractionScore(bool don_acc, double min_ax_dist, double max_ax_dist,
 														  double min_axb_ang, double max_acc_ang): 
 	donAccOrder(don_acc), minAXDist(min_ax_dist), maxAXDist(max_ax_dist), minAXBAngle(min_axb_ang),
-	maxAccAngle(max_acc_ang), distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
-	accAngleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 5, 0.0)),
-	axbAngleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
+	maxAccAngle(max_acc_ang), distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)),
+	accAngleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 5, 0.0)),
+	axbAngleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::XBondingInteractionScore::getMinAXDistance() const
 {

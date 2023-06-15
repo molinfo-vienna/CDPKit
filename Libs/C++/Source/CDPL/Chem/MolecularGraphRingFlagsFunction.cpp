@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -43,12 +41,14 @@ using namespace CDPL;
 
 void Chem::setRingFlags(MolecularGraph& molgraph, bool overwrite)
 {
+	using namespace std::placeholders;
+	
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(static_cast<bool (*)(const Atom&)>(&hasRingFlag), _1))) == molgraph.getAtomsEnd() &&
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(static_cast<bool (*)(const Atom&)>(&hasRingFlag), _1))) == molgraph.getAtomsEnd() &&
 		std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-					 boost::bind(std::equal_to<bool>(), false,
-								 boost::bind(static_cast<bool (*)(const Bond&)>(&hasRingFlag), _1))) == molgraph.getBondsEnd())
+					 std::bind(std::equal_to<bool>(), false,
+							   std::bind(static_cast<bool (*)(const Bond&)>(&hasRingFlag), _1))) == molgraph.getBondsEnd())
 		return;
 
 	const Fragment::SharedPointer& cyclic_substruct = perceiveCyclicSubstructure(molgraph);
@@ -56,10 +56,10 @@ void Chem::setRingFlags(MolecularGraph& molgraph, bool overwrite)
 	setCyclicSubstructure(molgraph, cyclic_substruct);
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(static_cast<void (*)(Atom&, bool)>(&setRingFlag), _1, 
-							  boost::bind(&Fragment::containsAtom, boost::ref(*cyclic_substruct), _1)));
+				  std::bind(static_cast<void (*)(Atom&, bool)>(&setRingFlag), _1, 
+							std::bind(&Fragment::containsAtom, std::ref(*cyclic_substruct), _1)));
 
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(static_cast<void (*)(Bond&, bool)>(&setRingFlag), _1, 
-							  boost::bind(&Fragment::containsBond, boost::ref(*cyclic_substruct), _1)));
+				  std::bind(static_cast<void (*)(Bond&, bool)>(&setRingFlag), _1, 
+							std::bind(&Fragment::containsBond, std::ref(*cyclic_substruct), _1)));
 }

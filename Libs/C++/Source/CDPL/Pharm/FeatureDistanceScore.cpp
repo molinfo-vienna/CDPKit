@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -39,7 +39,8 @@ using namespace CDPL;
 
 
 Pharm::FeatureDistanceScore::FeatureDistanceScore(double min_dist, double max_dist): 
-    minDist(min_dist), maxDist(max_dist), distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
+    minDist(min_dist), maxDist(max_dist),
+	distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)) {}
 
 double Pharm::FeatureDistanceScore::getMinDistance() const
 {

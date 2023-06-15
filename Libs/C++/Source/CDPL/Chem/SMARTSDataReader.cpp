@@ -33,7 +33,6 @@
 #include <cassert>
 
 #include <boost/tokenizer.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -411,7 +410,7 @@ Chem::SMARTSDataReader::combineBondMatchConstraints(const MatchConstraintList::S
 	if (constr_list1->getType() == MatchConstraintList::AND_LIST) {
 		if (constr_list2->getType() == MatchConstraintList::AND_LIST) {
 			std::for_each(constr_list2->getElementsBegin(), constr_list2->getElementsEnd(),
-						  boost::bind(&Util::Array<MatchConstraint>::addElement, constr_list1, _1));
+						  std::bind(&Util::Array<MatchConstraint>::addElement, constr_list1, std::placeholders::_1));
 
 			return constr_list1;
 		}
@@ -1953,7 +1952,7 @@ void Chem::SMARTSDataReader::parseReactionAtomMappingID(Atom& atom)
 Chem::Molecule::SharedPointer Chem::SMARTSDataReader::parseSMARTS(const std::string& rec_smarts_str)
 {
 	if (!smartsParser) 
-		smartsParser.reset(new SMARTSDataReader(ioBase), boost::bind(&SMARTSDataReader::destroySMARTSParser, this, _1));
+		smartsParser.reset(new SMARTSDataReader(ioBase), std::bind(&SMARTSDataReader::destroySMARTSParser, this, std::placeholders::_1));
 
 	Molecule::SharedPointer mol_ptr(new BasicMolecule());
 
@@ -2160,9 +2159,9 @@ void Chem::SMARTSDataReader::setAtomStereoDescriptor(const Molecule& mol, const 
 
 	} else {
 		if (std::find_if(atom.getAtomsBegin(), atom.getAtomsEnd(), 
-						 boost::bind(std::less<std::size_t>(), 
-									 boost::bind(&Molecule::getAtomIndex, boost::ref(mol), _1),
-									 atom_idx)) != atom.getAtomsEnd()) { // the chiral atom is not the very first one
+						 std::bind(std::less<std::size_t>(), 
+								   std::bind(&Molecule::getAtomIndex, std::ref(mol), std::placeholders::_1),
+								   atom_idx)) != atom.getAtomsEnd()) { // the chiral atom is not the very first one
 
 			config = (config == AtomConfiguration::S ? config == AtomConfiguration::R : AtomConfiguration::S);
 		} 

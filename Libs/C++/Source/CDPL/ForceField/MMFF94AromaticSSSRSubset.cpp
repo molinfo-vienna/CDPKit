@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -118,6 +117,7 @@ void ForceField::MMFF94AromaticSSSRSubset::addToAromaticBondMask(const Chem::Fra
     using namespace Chem;
 
     std::for_each(ring.getBondsBegin(), ring.getBondsEnd(),
-				  boost::bind(&Util::BitSet::set, boost::ref(aromBondMask),
-							  boost::bind(&BondContainer::getBondIndex, molGraph, _1), true));
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>
+							(&Util::BitSet::set), std::ref(aromBondMask),
+							std::bind(&BondContainer::getBondIndex, molGraph, std::placeholders::_1), true));
 }

@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/FeatureSet.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -49,7 +48,7 @@ Pharm::FeatureSet::FeatureSet(const FeatureContainer& cntnr):
     FeatureContainer(cntnr)
 {
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  boost::bind(&FeatureSet::addFeature, this, _1));
+				  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
 }
 
 Pharm::FeatureSet::~FeatureSet() {} 
@@ -209,7 +208,7 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator=(const FeatureContainer& cntnr)
     featureIndices.clear();
 
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  boost::bind(&FeatureSet::addFeature, this, _1));
+				  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
 
     copyProperties(cntnr);
 
@@ -224,7 +223,7 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator+=(const FeatureContainer& cntnr)
 	features.reserve(features.size() + cntnr.getNumFeatures());
 
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  boost::bind(&FeatureSet::addFeature, this, _1));
+				  std::bind(&FeatureSet::addFeature, this, std::placeholders::_1));
 
     return *this;
 }
@@ -237,7 +236,8 @@ Pharm::FeatureSet& Pharm::FeatureSet::operator-=(const FeatureContainer& cntnr)
 	}
 	
     std::for_each(cntnr.getFeaturesBegin(), cntnr.getFeaturesEnd(), 
-				  boost::bind(static_cast<bool (FeatureSet::*)(const Feature&)>(&FeatureSet::removeFeature), this, _1));
+				  std::bind(static_cast<bool (FeatureSet::*)(const Feature&)>(&FeatureSet::removeFeature),
+							this, std::placeholders::_1));
 
     return *this;
 }

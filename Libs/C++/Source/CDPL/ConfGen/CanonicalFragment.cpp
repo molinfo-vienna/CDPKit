@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/CanonicalFragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -94,7 +93,8 @@ namespace
 
 ConfGen::CanonicalFragment::CanonicalFragment(): hashCode(0)
 {
-	canonNumCalc.setHydrogenCountFunction(boost::bind(&MolProp::getExplicitAtomCount, _1, Chem::AtomType::H, true));
+	canonNumCalc.setHydrogenCountFunction(std::bind(static_cast<std::size_t (*)(const Chem::AtomContainer&, unsigned int, bool)>(&MolProp::getExplicitAtomCount),
+													std::placeholders::_1, Chem::AtomType::H, true));
 }
 	  
 ConfGen::CanonicalFragment::CanonicalFragment(const CanonicalFragment& frag):  
@@ -103,12 +103,14 @@ ConfGen::CanonicalFragment::CanonicalFragment(const CanonicalFragment& frag):
 	for (AtomMapping::const_iterator it = frag.atomMapping.begin(), end = frag.atomMapping.end(); it != end; ++it) 
 		atomMapping.push_back(&molecule.getAtom(frag.molecule.getAtomIndex(**it)));
 
-	canonNumCalc.setHydrogenCountFunction(boost::bind(&MolProp::getExplicitAtomCount, _1, Chem::AtomType::H, true));
+	canonNumCalc.setHydrogenCountFunction(std::bind(static_cast<std::size_t (*)(const Chem::AtomContainer&, unsigned int, bool)>(&MolProp::getExplicitAtomCount),
+													std::placeholders::_1, Chem::AtomType::H, true));
 }
 
 ConfGen::CanonicalFragment::CanonicalFragment(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
 {
-	canonNumCalc.setHydrogenCountFunction(boost::bind(&MolProp::getExplicitAtomCount, _1, Chem::AtomType::H, true));
+	canonNumCalc.setHydrogenCountFunction(std::bind(static_cast<std::size_t (*)(const Chem::AtomContainer&, unsigned int, bool)>(&MolProp::getExplicitAtomCount),
+													std::placeholders::_1, Chem::AtomType::H, true));
 
     create(molgraph, parent);
 }
@@ -552,7 +554,8 @@ void ConfGen::CanonicalFragment::hydrogenize()
 void ConfGen::CanonicalFragment::canonicalize(bool stereo)
 {
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	if (stereo) {
 		canonNumCalc.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE |
 										  AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::CONFIGURATION |
@@ -567,13 +570,13 @@ void ConfGen::CanonicalFragment::canonicalize(bool stereo)
 
 	canonNumCalc.calculate(molecule, canonNumbers);
 
-	molecule.orderAtoms(boost::bind(&CanonicalFragment::compareCanonNumber, this, _1, _2));
+	molecule.orderAtoms(std::bind(&CanonicalFragment::compareCanonNumber, this, _1, _2));
 
 	std::for_each(molecule.getAtomsBegin(), molecule.getAtomsEnd(), 
-				  boost::bind(&Atom::orderAtoms, _1, &compareAtomIndex));
+				  std::bind(&Atom::orderAtoms, _1, &compareAtomIndex));
 
 	std::for_each(molecule.getBondsBegin(), molecule.getBondsEnd(), 
-				  boost::bind(&Bond::orderAtoms, _1, &compareAtomIndex));
+				  std::bind(&Bond::orderAtoms, _1, &compareAtomIndex));
 
 	molecule.orderBonds(&compareBondAtomIndices);
 }

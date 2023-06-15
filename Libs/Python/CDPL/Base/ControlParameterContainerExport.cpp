@@ -25,9 +25,9 @@
 
 
 #include <algorithm>
+#include <functional>
 
 #include <boost/python.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
@@ -63,8 +63,8 @@ namespace
 		python::list keys;
 
 		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
-					  boost::bind(&python::list::append<Base::LookupKey>, boost::ref(keys),
-								  boost::bind(&Base::ControlParameterContainer::ParameterEntry::first, _1)));
+					  std::bind(&python::list::append<Base::LookupKey>, std::ref(keys),
+								std::bind(&Base::ControlParameterContainer::ParameterEntry::first, std::placeholders::_1)));
 		return keys;
 	}
 
@@ -76,8 +76,8 @@ namespace
 		python::list values;
 
 		std::for_each(cntnr.getParametersBegin(), cntnr.getParametersEnd(),
-					  boost::bind(&python::list::append<Base::Any>, boost::ref(values),
-								  boost::bind(&Base::ControlParameterContainer::ParameterEntry::second, _1)));
+					  std::bind(&python::list::append<Base::Any>, std::ref(values),
+								std::bind(&Base::ControlParameterContainer::ParameterEntry::second, std::placeholders::_1)));
 		return values;
 	}
 

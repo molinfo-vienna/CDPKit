@@ -31,8 +31,6 @@
 #include <functional>
 #include <iterator>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -152,17 +150,19 @@ void ForceField::MMFF94AtomTyper::assignProvisionalSymbolicAtomTypes(bool strict
 void ForceField::MMFF94AtomTyper::assignAromaticAtomTypes()
 {
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	const FragmentList::BaseType::SharedPointer& arom_rings = aromRingSetFunc(*molGraph);
 
 	std::transform(arom_rings->getElementsBegin(), arom_rings->getElementsEnd(), std::back_inserter(aromRings), 
-				   boost::bind(&Fragment::SharedPointer::get, _1));
+				   std::bind(&Fragment::SharedPointer::get, _1));
  
 	std::sort(aromRings.begin(), aromRings.end(), 
-			  boost::bind(std::greater<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), boost::bind(&Fragment::getNumAtoms, _2)));
+			  std::bind(std::greater<std::size_t>(), std::bind(&Fragment::getNumAtoms, _1), std::bind(&Fragment::getNumAtoms, _2)));
 
 	std::for_each(aromRings.begin(), aromRings.end(), 
-				  boost::bind(&ForceField::MMFF94AtomTyper::assignAromaticAtomTypes, this, _1));
+				  std::bind(static_cast<void (MMFF94AtomTyper::*)(const Chem::Fragment*)>
+																  (&ForceField::MMFF94AtomTyper::assignAromaticAtomTypes), this, _1));
 }
 
 void ForceField::MMFF94AtomTyper::assignAromaticAtomTypes(const Chem::Fragment* ring)
@@ -234,7 +234,7 @@ void ForceField::MMFF94AtomTyper::assignHydrogenAtomTypes()
 void ForceField::MMFF94AtomTyper::assignNumericAtomTypes(Util::UIArray& num_types)
 {
 	std::transform(symTypes->getElementsBegin(), symTypes->getElementsEnd(), num_types.getElementsBegin(), 
-				   boost::bind(&MMFF94SymbolicToNumericAtomTypeMap::getEntry, boost::ref(numTypeMap), _1));
+				   std::bind(&MMFF94SymbolicToNumericAtomTypeMap::getEntry, std::ref(numTypeMap), std::placeholders::_1));
 }
 
 std::size_t ForceField::MMFF94AtomTyper::getUniqueHeteroAtomIndex(const Chem::Fragment& ring) const

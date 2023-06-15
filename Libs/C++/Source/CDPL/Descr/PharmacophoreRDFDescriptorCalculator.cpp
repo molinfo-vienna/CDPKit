@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Descr/PharmacophoreRDFDescriptorCalculator.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -153,6 +153,8 @@ bool CDPL::Descr::PharmacophoreRDFDescriptorCalculator::distanceToIntervalsCente
 
 void CDPL::Descr::PharmacophoreRDFDescriptorCalculator::calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr)
 {
+	using namespace std::placeholders;
+	
 	std::size_t sub_descr_size = rdfCalculator.getNumSteps() + 1;
 	std::size_t num_ftr_types = sizeof(FEATURE_TYPES) / sizeof(unsigned int);
 
@@ -160,9 +162,9 @@ void CDPL::Descr::PharmacophoreRDFDescriptorCalculator::calculate(const Pharm::F
 
 	for (std::size_t i = 0; i < num_ftr_types; i++) {
 		if (weightFunc)
-			rdfCalculator.setEntityPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
+			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
 		else
-			rdfCalculator.setEntityPairWeightFunction(boost::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
+			rdfCalculator.setEntityPairWeightFunction(std::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

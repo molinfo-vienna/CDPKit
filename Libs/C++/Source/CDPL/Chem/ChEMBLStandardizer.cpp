@@ -32,7 +32,6 @@
 #include <cmath>
 #include <mutex>
 
-#include <boost/bind.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 

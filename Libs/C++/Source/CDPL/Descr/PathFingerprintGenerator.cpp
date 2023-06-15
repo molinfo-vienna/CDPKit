@@ -29,8 +29,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iterator>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Descr/PathFingerprintGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -220,7 +219,8 @@ void Descr::PathFingerprintGenerator::calcFingerprint(const Chem::MolecularGraph
 	visBondMask.reset();
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&PathFingerprintGenerator::growPath, this, _1, boost::ref(fp)));
+				  std::bind(&PathFingerprintGenerator::growPath, this,
+							std::placeholders::_1, std::ref(fp)));
 }
 
 void Descr::PathFingerprintGenerator::growPath(const Chem::Atom& atom, Util::BitSet& fp)

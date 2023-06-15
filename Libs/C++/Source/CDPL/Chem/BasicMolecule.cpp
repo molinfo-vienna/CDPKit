@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
@@ -48,8 +47,8 @@ using namespace CDPL;
 
 
 Chem::BasicMolecule::BasicMolecule():
-	atomCache(boost::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
-	bondCache(boost::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
+	atomCache(std::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
+	bondCache(std::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
 {
 	atomCache.setCleanupFunction(&BasicMolecule::clearAtom);
 	bondCache.setCleanupFunction(&BasicMolecule::clearBond);
@@ -57,8 +56,8 @@ Chem::BasicMolecule::BasicMolecule():
 
 Chem::BasicMolecule::BasicMolecule(const BasicMolecule& mol): 
 	Molecule(mol), 
-	atomCache(boost::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
-	bondCache(boost::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
+	atomCache(std::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
+	bondCache(std::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
 {
 	atomCache.setCleanupFunction(&BasicMolecule::clearAtom);
 	bondCache.setCleanupFunction(&BasicMolecule::clearBond);
@@ -68,8 +67,8 @@ Chem::BasicMolecule::BasicMolecule(const BasicMolecule& mol):
 
 Chem::BasicMolecule::BasicMolecule(const Molecule& mol): 
 	Molecule(mol), 
-	atomCache(boost::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
-	bondCache(boost::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
+	atomCache(std::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
+	bondCache(std::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
 {
 	atomCache.setCleanupFunction(&BasicMolecule::clearAtom);
 	bondCache.setCleanupFunction(&BasicMolecule::clearBond);
@@ -78,8 +77,8 @@ Chem::BasicMolecule::BasicMolecule(const Molecule& mol):
 }
 
 Chem::BasicMolecule::BasicMolecule(const MolecularGraph& molgraph):
-	atomCache(boost::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
-	bondCache(boost::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
+	atomCache(std::bind(&BasicMolecule::createAtom, this), &BasicMolecule::destroyAtom, MAX_ATOM_CACHE_SIZE),
+	bondCache(std::bind(&BasicMolecule::createBond, this), &BasicMolecule::destroyBond, MAX_BOND_CACHE_SIZE)
 {
 	atomCache.setCleanupFunction(&BasicMolecule::clearAtom);
 	bondCache.setCleanupFunction(&BasicMolecule::clearBond);
@@ -312,18 +311,22 @@ std::size_t Chem::BasicMolecule::getBondIndex(const Bond& bond) const
 
 void Chem::BasicMolecule::orderAtoms(const AtomCompareFunction& func)
 {
+	using namespace std::placeholders;
+	
 	std::sort(atoms.begin(), atoms.end(), 
-			  boost::bind(func, boost::bind(Util::Dereferencer<const AtomPtr, const Atom&>(), _1), 
-						  boost::bind(Util::Dereferencer<const AtomPtr, const Atom&>(), _2)));
+			  std::bind(func, std::bind(Util::Dereferencer<const AtomPtr, const Atom&>(), _1), 
+						std::bind(Util::Dereferencer<const AtomPtr, const Atom&>(), _2)));
 
 	renumberAtoms(0);
 }
 
 void Chem::BasicMolecule::orderBonds(const BondCompareFunction& func)
 {
+	using namespace std::placeholders;
+	
 	std::sort(bonds.begin(), bonds.end(), 
-			  boost::bind(func, boost::bind(Util::Dereferencer<const BondPtr, const Bond&>(), _1), 
-						  boost::bind(Util::Dereferencer<const BondPtr, const Bond&>(), _2)));
+			  std::bind(func, std::bind(Util::Dereferencer<const BondPtr, const Bond&>(), _1), 
+						std::bind(Util::Dereferencer<const BondPtr, const Bond&>(), _2)));
 
 	renumberBonds(0);
 }

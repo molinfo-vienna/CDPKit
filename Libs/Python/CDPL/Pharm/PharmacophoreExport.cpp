@@ -130,4 +130,5 @@ void CDPLPythonPharm::exportPharmacophore()
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true));
 
 	python::register_ptr_to_python<Pharm::Pharmacophore::SharedPointer>();
+	python::implicitly_convertible<Pharm::Pharmacophore::SharedPointer, Pharm::FeatureContainer::SharedPointer>();
 }

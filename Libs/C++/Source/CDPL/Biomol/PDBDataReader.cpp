@@ -31,8 +31,7 @@
 #include <algorithm>
 #include <cmath>
 #include <set>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -1242,7 +1241,7 @@ void Biomol::PDBDataReader::perceiveBondOrders(Chem::Molecule& mol)
 	readMolGraph.clear();
 
 	std::for_each(mol.getBondsBegin() + startBondCount, mol.getBondsEnd(), 
-				  boost::bind(&Chem::Fragment::addBond, readMolGraph, _1));
+				  std::bind(&Chem::Fragment::addBond, readMolGraph, std::placeholders::_1));
 
 	setRingFlags(readMolGraph, true);
 	

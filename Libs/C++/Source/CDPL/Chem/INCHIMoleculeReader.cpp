@@ -30,8 +30,6 @@
 #include <locale>
 #include <cassert>
 
-#include <boost/bind.hpp>
-
 #include "LibInChI/inchi_api.h"
 
 #include "CDPL/Chem/INCHIMoleculeReader.hpp"

@@ -30,8 +30,6 @@
 #include <functional>
 #include <locale>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -150,6 +148,8 @@ void Base::DataFormat::setMultiRecordFormat(bool multi)
 
 bool Base::DataFormat::matchesName(const std::string& query_name) const
 {
+	using namespace std::placeholders;
+	
 	if (name.length() != query_name.length())
 		return false;
 
@@ -157,13 +157,15 @@ bool Base::DataFormat::matchesName(const std::string& query_name) const
 	char (*tolower)(char, const std::locale&) = &std::tolower;
 
 	return std::equal(name.begin(), name.end(), query_name.begin(),
-					  boost::bind(std::equal_to<char>(), 
-								  boost::bind(tolower, _1, boost::ref(locale)),
-								  boost::bind(tolower, _2, boost::ref(locale))));
+					  std::bind(std::equal_to<char>(), 
+								std::bind(tolower, _1, std::ref(locale)),
+								std::bind(tolower, _2, std::ref(locale))));
 }
 
 bool Base::DataFormat::matchesMimeType(const std::string& query_type) const
 {
+	using namespace std::placeholders;
+	
 	if (mimeType.length() != query_type.length())
 		return false;
 
@@ -171,13 +173,15 @@ bool Base::DataFormat::matchesMimeType(const std::string& query_type) const
 	char (*tolower)(char, const std::locale&) = &std::tolower;
 
 	return std::equal(mimeType.begin(), mimeType.end(), query_type.begin(),
-					  boost::bind(std::equal_to<char>(), 
-								  boost::bind(tolower, _1, boost::ref(locale)),
-								  boost::bind(tolower, _2, boost::ref(locale))));
+					  std::bind(std::equal_to<char>(), 
+								std::bind(tolower, _1, std::ref(locale)),
+								std::bind(tolower, _2, std::ref(locale))));
 }
 
 bool Base::DataFormat::matchesFileExtension(const std::string& query_ext) const
 {
+	using namespace std::placeholders;
+	
 	ConstFileExtensionIterator ext_list_end = fileExtensions.end();
 
 	const std::locale& locale = std::locale::classic();
@@ -190,7 +194,7 @@ bool Base::DataFormat::matchesFileExtension(const std::string& query_ext) const
 			continue;
 
 		if (std::equal(file_ext.begin(), file_ext.end(), query_ext.begin(),
-					   boost::bind(std::equal_to<char>(), boost::bind(tolower, _1, boost::ref(locale)), boost::bind(tolower, _2, boost::ref(locale)))))
+					   std::bind(std::equal_to<char>(), std::bind(tolower, _1, std::ref(locale)), std::bind(tolower, _2, std::ref(locale)))))
 			return true;
 	}
 

@@ -32,8 +32,7 @@
 #include <string>
 #include <algorithm>
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -194,13 +193,15 @@ void Chem::JMEDataWriter::init(std::ostream& os)
 
 bool Chem::JMEDataWriter::writeComponent(std::ostream& os, const MolecularGraph& molgraph)
 {
+	using namespace std::placeholders;
+	
 	os << molgraph.getNumAtoms() << ' ' << getCompleteBondCount(molgraph);  
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&JMEDataWriter::writeAtom, this, boost::ref(os), boost::ref(molgraph), _1));
+				  std::bind(&JMEDataWriter::writeAtom, this, std::ref(os), std::ref(molgraph), _1));
 	
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(&JMEDataWriter::writeBond, this, boost::ref(os), boost::ref(molgraph), _1));
+				  std::bind(&JMEDataWriter::writeBond, this, std::ref(os), std::ref(molgraph), _1));
 
 	return os.good();
 }

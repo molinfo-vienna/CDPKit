@@ -25,8 +25,7 @@
 
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -59,7 +58,7 @@ SettingsEditDialog::SettingsEditDialog(QWidget* parent, Settings& settings, Qt::
 int SettingsEditDialog::exec()
 {
 	std::for_each(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
-				  boost::bind(&SettingsEditWidget::reset, _1));
+				  std::bind(&SettingsEditWidget::reset, std::placeholders::_1));
 
 	applyChangesButton->setEnabled(false);
 
@@ -69,7 +68,7 @@ int SettingsEditDialog::exec()
 void SettingsEditDialog::acceptChanges()
 {
 	std::for_each(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
-				  boost::bind(&SettingsEditWidget::apply, _1));
+				  std::bind(&SettingsEditWidget::apply, std::placeholders::_1));
 	accept();
 }
 
@@ -78,7 +77,7 @@ void SettingsEditDialog::resetChanges()
 	categoryEditWidgetList.at(categoryEditWidgetStack->currentIndex())->reset();	
 
 	applyChangesButton->setEnabled(std::find_if(categoryEditWidgetList.begin(), categoryEditWidgetList.end(),
-												boost::bind(&SettingsEditWidget::haveChangedSettings, _1)) != 
+												std::bind(&SettingsEditWidget::haveChangedSettings, std::placeholders::_1)) != 
 								   categoryEditWidgetList.end());
 }
 

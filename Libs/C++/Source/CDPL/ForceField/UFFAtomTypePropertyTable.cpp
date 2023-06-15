@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <mutex>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
 
@@ -284,31 +283,31 @@ bool ForceField::UFFAtomTypePropertyTable::removeEntry(unsigned int atom_type)
 ForceField::UFFAtomTypePropertyTable::EntryIterator 
 ForceField::UFFAtomTypePropertyTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 ForceField::UFFAtomTypePropertyTable::ConstEntryIterator 
 ForceField::UFFAtomTypePropertyTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), boost::bind(&DataStorage::value_type::second, _1));
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 ForceField::UFFAtomTypePropertyTable::ConstEntryIterator 
 ForceField::UFFAtomTypePropertyTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), boost::bind(&DataStorage::value_type::second, _1));
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 	
 ForceField::UFFAtomTypePropertyTable::EntryIterator 
 ForceField::UFFAtomTypePropertyTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 ForceField::UFFAtomTypePropertyTable::EntryIterator 
 ForceField::UFFAtomTypePropertyTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 void ForceField::UFFAtomTypePropertyTable::loadDefaults()

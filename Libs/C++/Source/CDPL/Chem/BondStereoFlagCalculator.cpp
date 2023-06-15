@@ -31,8 +31,6 @@
 #include <algorithm>
 #include <utility>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/BondStereoFlagCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -75,6 +73,8 @@ void Chem::BondStereoFlagCalculator::calculate(const MolecularGraph& molgraph, U
 
 void Chem::BondStereoFlagCalculator::init(const MolecularGraph& molgraph, Util::UIArray& flags)
 {
+	using namespace std::placeholders;
+	
 	molGraph = &molgraph;
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
@@ -186,25 +186,27 @@ void Chem::BondStereoFlagCalculator::init(const MolecularGraph& molgraph, Util::
 	}
 
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(&Util::BitSet::set, 
-							  boost::ref(ringBondMask), 
-							  boost::bind(&MolecularGraph::getBondIndex, molGraph, _1),
-							  boost::bind(static_cast<bool (*)(const Bond&)>(&getRingFlag), _1)));
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), 
+							std::ref(ringBondMask), 
+							std::bind(&MolecularGraph::getBondIndex, molGraph, _1),
+							std::bind(static_cast<bool (*)(const Bond&)>(&getRingFlag), _1)));
 
 	std::for_each(stereoAtomList.begin(), stereoAtomList.end(), 
-				  boost::bind(&StereoAtomInfo::findBestBondOrder, _1, boost::ref(stereoAtomMask),
-							  boost::ref(ringBondMask)));
+				  std::bind(&StereoAtomInfo::findBestBondOrder, _1, std::ref(stereoAtomMask),
+							std::ref(ringBondMask)));
 }
 
 void Chem::BondStereoFlagCalculator::assignStereoFlags(Util::UIArray& flags)
 {
+	using namespace std::placeholders;
+		
 	assignFlagsForEitherDoubleBonds(flags);
 
 	StereoAtomInfoList::iterator isolated_ctrs_beg = std::partition(stereoAtomList.begin(), 
 																	stereoAtomList.end(),
-																	boost::bind(&StereoAtomInfo::hasStereoAtomNbrs, _1));
+																	std::bind(&StereoAtomInfo::hasStereoAtomNbrs, _1));
 	std::for_each(isolated_ctrs_beg, stereoAtomList.end(),
-				  boost::bind(&BondStereoFlagCalculator::assignFlagsForIsolatedCenter, this, _1, boost::ref(flags)));
+				  std::bind(&BondStereoFlagCalculator::assignFlagsForIsolatedCenter, this, _1, std::ref(flags)));
 
 	if (isolated_ctrs_beg != stereoAtomList.begin()) {
 		currentStereoFlags = flags;
@@ -545,6 +547,8 @@ unsigned int Chem::BondStereoFlagCalculator::StereoAtomInfo::getConfiguration() 
 void Chem::BondStereoFlagCalculator::StereoAtomInfo::findBestBondOrder(const Util::BitSet& stereo_ctr_mask, 
 																	  const Util::BitSet& ring_bnd_mask)
 {
+	using namespace std::placeholders;
+
 	hasStereoNbrs = false;
 
 	typedef std::pair<std::size_t, unsigned int> LigandTypeDescr;
@@ -574,7 +578,7 @@ void Chem::BondStereoFlagCalculator::StereoAtomInfo::findBestBondOrder(const Uti
 	}
 
 	std::sort(ordered_ligs, ordered_ligs + numBonds, 
-			  boost::bind(std::less<unsigned int>(), boost::bind(&LigandTypeDescr::second, _1), boost::bind(&LigandTypeDescr::second, _2)));
+			  std::bind(std::less<unsigned int>(), std::bind(&LigandTypeDescr::second, _1), std::bind(&LigandTypeDescr::second, _2)));
 
 	for (std::size_t i = 0; i < numBonds; i++)
 		orderedLigands[i] = ligands[ordered_ligs[i].first];

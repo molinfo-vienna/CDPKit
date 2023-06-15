@@ -38,8 +38,6 @@
 #include <memory>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Util/Dereferencer.hpp"
 
 
@@ -131,7 +129,8 @@ namespace CDPL
 			void putAll() {
 				if (cleanFunc)
 					std::for_each(allocObjects.begin(), allocObjects.begin() + freeIndex, 
-								  boost::bind(cleanFunc, boost::bind(Util::Dereferencer<SharedObjectPointer, ObjectType&>(), _1)));
+								  std::bind(cleanFunc, std::bind(Util::Dereferencer<SharedObjectPointer, ObjectType&>(),
+																 std::placeholders::_1)));
 				freeIndex = 0;
 
 				if (maxSize > 0 && allocObjects.size() > maxSize)

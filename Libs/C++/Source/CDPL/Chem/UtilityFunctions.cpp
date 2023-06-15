@@ -31,8 +31,6 @@
 #include <functional>
 #include <unordered_map>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -476,7 +474,8 @@ bool Chem::containsFragmentWithBond(const FragmentList& frag_list, const Bond& b
 {
 	FragmentList::ConstElementIterator end = frag_list.getElementsEnd();
 
-	return (std::find_if(frag_list.getElementsBegin(), end, boost::bind(&Fragment::containsBond, _1, boost::ref(bond))) != end);
+	return (std::find_if(frag_list.getElementsBegin(), end,
+						 std::bind(&Fragment::containsBond, std::placeholders::_1, std::ref(bond))) != end);
 }
 		
 bool Chem::containsFragmentWithMinSize(const FragmentList& frag_list, std::size_t min_size)
@@ -484,7 +483,8 @@ bool Chem::containsFragmentWithMinSize(const FragmentList& frag_list, std::size_
 	FragmentList::ConstElementIterator end = frag_list.getElementsEnd();
 
 	return (std::find_if(frag_list.getElementsBegin(), end, 
-						 boost::bind(std::greater_equal<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), min_size)) != end);
+						 std::bind(std::greater_equal<std::size_t>(),
+								   std::bind(&Fragment::getNumAtoms, std::placeholders::_1), min_size)) != end);
 }
 
 unsigned int Chem::sybylToAtomType(unsigned int sybyl_type)

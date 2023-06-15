@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
@@ -42,17 +40,19 @@ using namespace CDPL;
 
 void ForceField::assignMMFF94AtomTypes(Chem::MolecularGraph& molgraph, bool strict, bool overwrite)
 {
-     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasMMFF94SymbolicType, _1))) == molgraph.getAtomsEnd() &&
-		 std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-					  boost::bind(std::equal_to<bool>(), false,
-								  boost::bind(&hasMMFF94NumericType, _1))) == molgraph.getAtomsEnd())
+	using namespace std::placeholders;
+	
+	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&hasMMFF94SymbolicType, _1))) == molgraph.getAtomsEnd() &&
+		std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+					 std::bind(std::equal_to<bool>(), false,
+							   std::bind(&hasMMFF94NumericType, _1))) == molgraph.getAtomsEnd())
 		return;
 
 	 Util::UIArray num_types;
 	 Util::SArray sym_types;
-
+	 
 	 MMFF94AtomTyper typer(molgraph, sym_types, num_types, strict);
 
 	 for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {

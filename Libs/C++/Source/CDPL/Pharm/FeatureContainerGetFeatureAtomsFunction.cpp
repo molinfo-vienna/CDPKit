@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -55,6 +54,6 @@ void Pharm::getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms
 		const Chem::Fragment::SharedPointer substruct = getSubstructure(ftr);
 
 		std::for_each(substruct->getAtomsBegin(), substruct->getAtomsEnd(), 
-					  boost::bind(&Chem::Fragment::addAtom, boost::ref(atoms), _1));
+					  std::bind(&Chem::Fragment::addAtom, std::ref(atoms), std::placeholders::_1));
 	}
 }

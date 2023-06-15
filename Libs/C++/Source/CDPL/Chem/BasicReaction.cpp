@@ -31,8 +31,6 @@
 #include <functional>
 #include <string>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/BasicReaction.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -75,7 +73,8 @@ Chem::BasicReaction::~BasicReaction() {}
 unsigned int Chem::BasicReaction::getComponentRole(const Molecule& mol) const
 {
 	ComponentList::const_iterator it = std::find_if(components.begin(), components.end(), 
-													boost::bind(std::equal_to<const Molecule*>(), boost::bind(&ComponentPtr::get, _1), &mol));
+													std::bind(std::equal_to<const Molecule*>(),
+															  std::bind(&ComponentPtr::get, std::placeholders::_1), &mol));
 
 	if (it == components.end())
 		return ReactionRole::NONE;
@@ -94,7 +93,8 @@ unsigned int Chem::BasicReaction::getComponentRole(const Molecule& mol) const
 std::size_t Chem::BasicReaction::getComponentIndex(const Molecule& mol) const
 {
 	ComponentList::const_iterator it = std::find_if(components.begin(), components.end(), 
-													boost::bind(std::equal_to<const Molecule*>(), boost::bind(&ComponentPtr::get, _1), &mol));
+													std::bind(std::equal_to<const Molecule*>(),
+															  std::bind(&ComponentPtr::get, std::placeholders::_1), &mol));
 
 	if (it == components.end())
 		throw Base::ItemNotFound("BasicReaction: molecule is not a component of this reaction");
@@ -105,7 +105,8 @@ std::size_t Chem::BasicReaction::getComponentIndex(const Molecule& mol) const
 bool Chem::BasicReaction::containsComponent(const Molecule& mol) const
 {
 	return (std::find_if(components.begin(), components.end(), 
-						 boost::bind(std::equal_to<const Molecule*>(), boost::bind(&ComponentPtr::get, _1), &mol)) != components.end());
+						 std::bind(std::equal_to<const Molecule*>(),
+								   std::bind(&ComponentPtr::get, std::placeholders::_1), &mol)) != components.end());
 }
 
 void Chem::BasicReaction::clear()

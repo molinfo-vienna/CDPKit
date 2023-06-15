@@ -432,11 +432,11 @@ BOOST_AUTO_TEST_CASE(HashCodeCalculatorTest)
 				frag.clear();
 
 				std::for_each(atoms.begin(), atoms.end(), 
-							  boost::bind(&Fragment::addAtom, boost::ref(frag),
+							  std::bind(&Fragment::addAtom, std::ref(frag),
 										  [](const Atom* atom) { return *atom; }));
 				
 				std::for_each(bonds.begin(), bonds.end(), 
-							  boost::bind(&Fragment::addBond, boost::ref(frag),
+							  std::bind(&Fragment::addBond, std::ref(frag),
 										  [](const Bond* bond) { return *bond; }));
 
 				BOOST_CHECK(frag.getNumAtoms() == mol.getNumAtoms());

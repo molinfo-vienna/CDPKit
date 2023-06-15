@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/MaxCommonBondSubstructureSearch.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -838,8 +837,8 @@ bool Chem::MaxCommonBondSubstructureSearch::AGNode::isConnected(const AGNode* no
 const Chem::MaxCommonBondSubstructureSearch::AGEdge* Chem::MaxCommonBondSubstructureSearch::AGNode::findEdge(const AGNode* node) const
 {
 	AGraphEdgeList::const_iterator it = std::find_if(atomEdges.begin(), atomEdges.end(),
-													 boost::bind(std::equal_to<const AGNode*>(), 
-																 node, boost::bind(&AGEdge::getOther, _1, this)));  
+													 std::bind(std::equal_to<const AGNode*>(), 
+															   node, std::bind(&AGEdge::getOther, std::placeholders::_1, this)));  
 
 	return (it == atomEdges.end() ? 0 : *it);
 }

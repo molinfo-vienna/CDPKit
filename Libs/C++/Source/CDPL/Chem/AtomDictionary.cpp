@@ -26,7 +26,8 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
+
 #include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/AtomDictionary.hpp"
@@ -745,12 +746,12 @@ std::size_t Chem::AtomDictionary::getNumEntries() const
 			
 Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), boost::bind(&EntryLookupTable::value_type::second, _1));
+	return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), boost::bind(&EntryLookupTable::value_type::second, _1));
+	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 void Chem::AtomDictionary::loadDefaults()

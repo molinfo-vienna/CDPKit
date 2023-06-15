@@ -33,8 +33,6 @@
 #include <functional>
 #include <cassert>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -135,8 +133,10 @@ namespace
 
 
 Chem::SMARTSDataWriter::SMARTSDataWriter(const Base::DataIOBase& io_base): 
-	ioBase(io_base), nodeCache(boost::bind(&SMARTSDataWriter::createNode, this), NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
-	edgeCache(boost::bind(&SMARTSDataWriter::createEdge, this), EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
+	ioBase(io_base), nodeCache(std::bind(&SMARTSDataWriter::createNode, this),
+							   NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
+	edgeCache(std::bind(&SMARTSDataWriter::createEdge, this),
+			  EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
 {}
 
 bool Chem::SMARTSDataWriter::writeReaction(std::ostream& os, const Reaction& rxn)
@@ -266,8 +266,8 @@ bool Chem::SMARTSDataWriter::writeMolGraph(std::ostream& os, const MolecularGrap
 				continue;
 			
 			if (std::find_if(comp.getAtomsBegin(), comp.getAtomsEnd(),
-							 boost::bind(std::not_equal_to<std::size_t>(), 0, 
-										 boost::bind(&getComponentGroupID, _1))) != comp.getAtomsEnd())
+							 std::bind(std::not_equal_to<std::size_t>(), 0, 
+									   std::bind(&getComponentGroupID, std::placeholders::_1))) != comp.getAtomsEnd())
 				continue;
 
 			if (!first_comp)
@@ -393,18 +393,20 @@ Chem::SMARTSDataWriter::DFSTreeNode* Chem::SMARTSDataWriter::createRootNode(cons
 
 void Chem::SMARTSDataWriter::distRingClosureNumbers()
 {
+	using namespace std::placeholders;
+	
 	NodeList::iterator nodes_end = componentNodes.end();
 
 	for (NodeList::iterator it = componentNodes.begin(); it != nodes_end; ++it) {
 		DFSTreeNode* node = *it;
 
 		std::for_each(node->getRingClosureInEdgesBegin(), node->getRingClosureInEdgesEnd(),
-					  boost::bind(&DFSTreeEdge::setRingClosureNumber, _1,
-								  boost::bind(&SMARTSDataWriter::getRingClosureNumber, this)));
+					  std::bind(&DFSTreeEdge::setRingClosureNumber, _1,
+								std::bind(&SMARTSDataWriter::getRingClosureNumber, this)));
 
 		std::for_each(node->getRingClosureOutEdgesBegin(), node->getRingClosureOutEdgesEnd(),
-					  boost::bind(&SMARTSDataWriter::putRingClosureNumber, this,
-								  boost::bind(&DFSTreeEdge::getRingClosureNumber, _1)));
+					  std::bind(&SMARTSDataWriter::putRingClosureNumber, this,
+								std::bind(&DFSTreeEdge::getRingClosureNumber, _1)));
 	}
 }
 
@@ -462,7 +464,7 @@ Chem::SMARTSDataWriter::DFSTreeEdge* Chem::SMARTSDataWriter::allocEdge()
 void Chem::SMARTSDataWriter::writeSMARTS(std::ostream& os, const MolecularGraph& molgraph)
 {
 	if (!smartsWriter) 
-		smartsWriter.reset(new SMARTSDataWriter(ioBase), boost::bind(&SMARTSDataWriter::destroySMARTSWriter, this, _1));
+		smartsWriter.reset(new SMARTSDataWriter(ioBase), std::bind(&SMARTSDataWriter::destroySMARTSWriter, this, std::placeholders::_1));
 
 	smartsWriter->writeMolGraph(os, molgraph);
 }
@@ -1637,7 +1639,8 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeReactionAtomMappingID(std::ostrea
 void Chem::SMARTSDataWriter::DFSTreeNode::writeRingClosures(std::ostream& os) const
 {
 	std::for_each(ringClosureInEdges.begin(), ringClosureInEdges.end(),
-				  boost::bind(&DFSTreeNode::writeRingClosureNumber, this, boost::ref(os), _1));
+				  std::bind(&DFSTreeNode::writeRingClosureNumber, this,
+							std::ref(os), std::placeholders::_1));
 
 	EdgeList::const_iterator edges_end = ringClosureOutEdges.end();
 

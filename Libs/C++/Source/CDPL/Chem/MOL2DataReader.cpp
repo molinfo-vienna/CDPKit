@@ -28,9 +28,9 @@
 
 #include <istream>
 #include <locale>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
@@ -111,6 +111,8 @@ namespace
 
 bool Chem::MOL2DataReader::readMolecule(std::istream& is, Molecule& mol)
 {
+	using namespace std::placeholders;
+	
 	if (!skipInputToRTI(is, MOL2::MOLECULE_RTI, true))
 		return false;
 
@@ -135,8 +137,8 @@ bool Chem::MOL2DataReader::readMolecule(std::istream& is, Molecule& mol)
 
 			tgt_molgraph = confTargetFragment.get();
 
-			std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), boost::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
-			std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), boost::bind(&Fragment::addBond, confTargetFragment.get(), _1));
+			std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), std::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
+			std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), std::bind(&Fragment::addBond, confTargetFragment.get(), _1));
 			
 			confTargetFragment->copyProperties(mol);
 		}

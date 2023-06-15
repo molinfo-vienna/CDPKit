@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Vis/View2D.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
@@ -87,9 +87,11 @@ Vis::StructureView2DParameters::StructureView2DParameters(View2D& view):
 	alignmentChangedFlag(true),
 	sizeAdjustmentChangedFlag(true) 
 {
-	view.registerParameterRemovedCallback(boost::bind(&StructureView2DParameters::parameterRemoved, this, _1));
-	view.registerParameterChangedCallback(boost::bind(&StructureView2DParameters::parameterChanged, this, _1, _2));
-	view.registerParentChangedCallback(boost::bind(&StructureView2DParameters::parentChanged, this));
+	using namespace std::placeholders;
+	
+	view.registerParameterRemovedCallback(std::bind(&StructureView2DParameters::parameterRemoved, this, _1));
+	view.registerParameterChangedCallback(std::bind(&StructureView2DParameters::parameterChanged, this, _1, _2));
+	view.registerParentChangedCallback(std::bind(&StructureView2DParameters::parentChanged, this));
 }
 
 Vis::StructureView2DParameters::~StructureView2DParameters() {}

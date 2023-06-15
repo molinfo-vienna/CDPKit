@@ -33,8 +33,7 @@
 
 #include <vector>
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Base/DataReader.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -123,7 +122,7 @@ template <typename DataType>
 void CDPL::Util::CompoundDataReader<DataType>::clear()
 {
 	std::for_each(readers.begin(), readers.end(),
-				  boost::bind(&ReaderType::setParent, _1, static_cast<CompoundDataReader*>(0)));
+				  std::bind(&ReaderType::setParent, std::placeholders::_1, static_cast<CompoundDataReader*>(0)));
 
 	readers.clear();
 	recordIdxBounds.clear();

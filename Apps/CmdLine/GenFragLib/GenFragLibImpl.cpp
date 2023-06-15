@@ -33,7 +33,6 @@
 #include <chrono>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -89,11 +88,12 @@ public:
 		parent(parent), fragLibGen(parent->fragmentLibPtr), verbLevel(parent->getVerbosityLevel()),
 		numProcMols(0), numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
-		fragLibGen.setAbortCallback(boost::bind(&FragLibGenerationWorker::abort, this));
+		fragLibGen.setAbortCallback(std::bind(&FragLibGenerationWorker::abort, this));
 		fragLibGen.getSettings() = parent->settings;
 
 		if (parent->getVerbosityLevel() >= DEBUG)  
-			fragLibGen.setLogMessageCallback(boost::bind(&FragLibGenerationWorker::appendToLogRecord, this, _1));
+			fragLibGen.setLogMessageCallback(std::bind(&FragLibGenerationWorker::appendToLogRecord, this,
+													   std::placeholders::_1));
 	}
 
 	void operator()() {
@@ -301,47 +301,49 @@ GenFragLibImpl::GenFragLibImpl():
 	numThreads(0), mode(CREATE), settings(ConformerGeneratorSettings::THOROUGH), preset("THOROUGH"),
 	maxLibSize(0), inputHandler(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
+	using namespace std::placeholders;
+	
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Output fragment library file.", 
 			  value<std::string>(&outputFile)->required());
 	addOption("mode,m", "Processing mode (CREATE, UPDATE, MERGE default: CREATE).", 
-			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&GenFragLibImpl::setMode, this, _1)));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
 			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setInputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&GenFragLibImpl::setInputFormat, this, _1)));
 	addOption("preset,F", "Fragment conformer generation preset to use (FAST, THROUGH, default: THOROUGH).", 
-			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::applyPreset, this, _1)));
+			  value<std::string>()->notifier(std::bind(&GenFragLibImpl::applyPreset, this, _1)));
 	addOption("rmsd,r", "Minimum RMSD of two small ring system conformations to be considered dissimilar (default: " + 
 			  (boost::format("%.4f") % settings.getSmallRingSystemSettings().getMinRMSD()).str() + ", must be >= 0).",
-			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setRMSD, this, _1)));
+			  value<double>()->notifier(std::bind(&GenFragLibImpl::setRMSD, this, _1)));
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
 			  std::to_string(settings.getMacrocycleSettings().getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
-			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setTimeout, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&GenFragLibImpl::setTimeout, this, _1)));
 	addOption("max-lib-size,n", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
 			  value<std::size_t>(&maxLibSize));
 	addOption("e-window,e", "Output energy window for small ring system conformers (default: " + 
 			  std::to_string(settings.getSmallRingSystemSettings().getEnergyWindow()) + ", must be >= 0).",
-			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setEnergyWindow, this, _1)));
+			  value<double>()->notifier(std::bind(&GenFragLibImpl::setEnergyWindow, this, _1)));
 	addOption("small-rsys-sampling-factor,g", "Small ring system conformer sampling factor (default: " + 
 			  std::to_string(settings.getSmallRingSystemSamplingFactor()) + ", must be > 1).",
-			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
 	addOption("force-field,f", "Build force field (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, "
 			  "MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " + ConfGen::getForceFieldTypeString(settings.getForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setStrictParameterization, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&GenFragLibImpl::setStrictParameterization, this, _1)));
 	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setDielectricConst, this, _1)));
+			  value<double>()->notifier(std::bind(&GenFragLibImpl::setDielectricConst, this, _1)));
 	addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setDistExponent, this, _1)));
+			  value<double>()->notifier(std::bind(&GenFragLibImpl::setDistExponent, this, _1)));
 	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setPreserveBondingGeometry, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&GenFragLibImpl::setPreserveBondingGeometry, this, _1)));
 
 	addOptionLongDescriptions();
 }
@@ -595,7 +597,7 @@ void GenFragLibImpl::processMultiThreaded()
 
 			FragLibGenerationWorkerPtr worker_ptr(new FragLibGenerationWorker(this));
 
-			thread_grp.emplace_back(boost::bind(&FragLibGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(std::bind(&FragLibGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -687,7 +689,8 @@ void GenFragLibImpl::updateOccurrenceCount(std::uint64_t hash_code)
 int GenFragLibImpl::saveFragmentLibrary()
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	std::ofstream os(outputFile, std::ios_base::out | std::ios_base::trunc);
 
 	if (!os)
@@ -702,9 +705,9 @@ int GenFragLibImpl::saveFragmentLibrary()
 		HashCodeOccCountPairArray occ_sorted_frags(fragmentOccCounts.begin(), fragmentOccCounts.end());
 
 		std::sort(occ_sorted_frags.begin(), occ_sorted_frags.end(), 
-				  boost::bind(std::less<std::size_t>(),
-							  boost::bind(&HashCodeOccCountPair::second, _1),
-							  boost::bind(&HashCodeOccCountPair::second, _2)));
+				  std::bind(std::less<std::size_t>(),
+							  std::bind(&HashCodeOccCountPair::second, _1),
+							  std::bind(&HashCodeOccCountPair::second, _2)));
 																				
 		for (HashCodeOccCountPairArray::const_iterator it = occ_sorted_frags.begin(), end = occ_sorted_frags.end(); 
 			 it != end && fragmentLibPtr->getNumEntries() > maxLibSize; ++it)
@@ -813,8 +816,9 @@ void GenFragLibImpl::checkInputFiles() const
 	using namespace CDPL;
 
 	StringList::const_iterator it = std::find_if(inputFiles.begin(), inputFiles.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists,
+																	 std::placeholders::_1)));
 	if (it != inputFiles.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 

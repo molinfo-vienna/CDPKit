@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -45,14 +44,14 @@ using namespace CDPL;
 
 
 Pharm::BasicPharmacophore::BasicPharmacophore(): 
-	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
 	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 }
 
 Pharm::BasicPharmacophore::BasicPharmacophore(const BasicPharmacophore& pharm): 
 	Pharmacophore(pharm), 
-	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
 	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 
@@ -61,7 +60,7 @@ Pharm::BasicPharmacophore::BasicPharmacophore(const BasicPharmacophore& pharm):
 
 Pharm::BasicPharmacophore::BasicPharmacophore(const Pharmacophore& pharm): 
 	Pharmacophore(pharm),
-	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
 	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 
@@ -69,7 +68,7 @@ Pharm::BasicPharmacophore::BasicPharmacophore(const Pharmacophore& pharm):
 }
 
 Pharm::BasicPharmacophore::BasicPharmacophore(const FeatureContainer& cntnr):
-	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+	featureCache(std::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
 	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
 

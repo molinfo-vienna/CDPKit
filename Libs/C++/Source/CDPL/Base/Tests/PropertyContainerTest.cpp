@@ -29,7 +29,6 @@
 #include <functional>
 #include <memory>
 
-#include <boost/bind.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Base/PropertyContainer.hpp"
@@ -61,6 +60,7 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 {
 	using namespace CDPL;
 	using namespace Base;
+	using namespace std::placeholders;
 
 	TestPropertyContainer prop_cntnr1;
 
@@ -164,16 +164,16 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr1.getPropertiesBegin() != prop_cntnr1.getPropertiesEnd());
 
 	PropertyContainer::ConstPropertyIterator it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-															   boost::bind(std::equal_to<LookupKey>(), 
-																		   boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-																		   key1));
+															   std::bind(std::equal_to<LookupKey>(), 
+																		 std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+																		 key1));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && !it->second.isEmpty());
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key2));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key2));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && !it->second.isEmpty());
 
@@ -206,23 +206,23 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr1.getPropertiesBegin() != prop_cntnr1.getPropertiesEnd());
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key1));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key1));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && !it->second.isEmpty());
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key2));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key2));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && !it->second.isEmpty());
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key3));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key3));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && !it->second.isEmpty());
 
@@ -262,9 +262,9 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr1.getPropertiesBegin() != prop_cntnr1.getPropertiesEnd());
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key4));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key4));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.getData<std::string>() == "value4");
 
@@ -320,16 +320,16 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr1.getPropertiesBegin() != prop_cntnr1.getPropertiesEnd());
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key7));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key7));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr1.getPropertiesBegin(), prop_cntnr1.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key1));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key1));
 
 	BOOST_CHECK(it != prop_cntnr1.getPropertiesEnd() && it->second.getData<std::string>() == "value1");
 
@@ -410,16 +410,16 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr2.getPropertiesBegin() != prop_cntnr2.getPropertiesEnd());
 
 	it = std::find_if(prop_cntnr2.getPropertiesBegin(), prop_cntnr2.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key7));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key7));
 
 	BOOST_CHECK(it != prop_cntnr2.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr2.getPropertiesBegin(), prop_cntnr2.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key1));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key1));
 
 	BOOST_CHECK(it != prop_cntnr2.getPropertiesEnd() && it->second.getData<std::string>() == "value1");
 
@@ -518,16 +518,16 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr3.getPropertiesBegin() != prop_cntnr3.getPropertiesEnd());
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key7));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key7));
 
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key1));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key1));
 
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<std::string>() == "value1");
 
@@ -658,16 +658,16 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 	BOOST_CHECK(prop_cntnr3.getPropertiesBegin() != prop_cntnr3.getPropertiesEnd());
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key7));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key7));
 
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<char>() == '7');
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-							   key1));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key1));
 	
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<std::string>() == "value1");
 
@@ -753,23 +753,23 @@ BOOST_AUTO_TEST_CASE(PropertyContainerTest)
 
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key1));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key1));
 
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<std::string>() == "key1_prop_val");
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key2));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key2));
 
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<std::string>() == "key2_prop_val");
 
 	it = std::find_if(prop_cntnr3.getPropertiesBegin(), prop_cntnr3.getPropertiesEnd(),
-					  boost::bind(std::equal_to<LookupKey>(), 
-								  boost::bind(&PropertyContainer::PropertyEntry::first, _1), 
-								  key3));
+					  std::bind(std::equal_to<LookupKey>(), 
+								std::bind(&PropertyContainer::PropertyEntry::first, _1), 
+								key3));
 
 	BOOST_CHECK(it != prop_cntnr3.getPropertiesEnd() && it->second.getData<std::string>() == "key3_prop_val");
 		

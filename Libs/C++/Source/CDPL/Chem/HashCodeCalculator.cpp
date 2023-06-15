@@ -27,8 +27,8 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/math/special_functions/prime.hpp>
 
 #include "CDPL/Chem/HashCodeCalculator.hpp"
@@ -483,7 +483,7 @@ void Chem::HashCodeCalculator::perceiveGlobalStereoFeatures()
 void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceAtoms()
 {
 	std::for_each(molGraph->getAtomsBegin(), molGraph->getAtomsEnd(),
-				  boost::bind(&HashCodeCalculator::perceiveGlobalStereoReferenceAtom, this, _1));
+				  std::bind(&HashCodeCalculator::perceiveGlobalStereoReferenceAtom, this, std::placeholders::_1));
 }
 
 void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceAtom(const Atom& atom)

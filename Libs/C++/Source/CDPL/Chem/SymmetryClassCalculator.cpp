@@ -28,8 +28,8 @@
 
 #include <algorithm>
 #include <numeric>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/math/special_functions/prime.hpp>
 
 #include "CDPL/Chem/SymmetryClassCalculator.hpp"
@@ -252,6 +252,8 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 
 void Chem::SymmetryClassCalculator::calcSVMNumbers()
 {
+	using namespace std::placeholders;
+
 	AtomNode::SVMNumberCmpFunc cmp_func;
 
 	NodeList::iterator sorted_nodes_begin = sortedAtomNodes.begin();
@@ -262,8 +264,8 @@ void Chem::SymmetryClassCalculator::calcSVMNumbers()
 	for (NodeList::iterator it = nodes_begin; it != nodes_end; ) {
 		AtomNode* node = *it;
 
-		std::for_each(nodes_begin, it, boost::bind(&AtomNode::setSVMNumber, _1, 0)); 
-		std::for_each(++it, nodes_end, boost::bind(&AtomNode::setSVMNumber, _1, 0)); 
+		std::for_each(nodes_begin, it, std::bind(&AtomNode::setSVMNumber, _1, 0)); 
+		std::for_each(++it, nodes_end, std::bind(&AtomNode::setSVMNumber, _1, 0)); 
 
 		node->setSVMNumber(1);
 
@@ -321,7 +323,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
 	}
 
 	std::for_each(atomNodes.begin(), atomNodes.begin() + molgraph.getNumAtoms(), 
-				  boost::bind(&Util::STArray::addElement, boost::ref(class_ids), boost::bind(&AtomNode::getSymClassID, _1)));
+				  std::bind(&Util::STArray::addElement, std::ref(class_ids), std::bind(&AtomNode::getSymClassID, std::placeholders::_1)));
 }
 
 Chem::SymmetryClassCalculator::AtomNode* Chem::SymmetryClassCalculator::allocNode(std::uint64_t class_id)
@@ -352,9 +354,11 @@ void Chem::SymmetryClassCalculator::AtomNode::setSVMNumber(std::uint64_t no)
 
 void Chem::SymmetryClassCalculator::AtomNode::calcNextSVMNumber()
 {
+	using namespace std::placeholders;
+	
 	nextSVMNumber = std::accumulate(nbrNodes.begin(), nbrNodes.end(), svmNumber,
-									boost::bind(std::plus<std::uint64_t>(), _1, 
-												boost::bind(&AtomNode::svmNumber, _2)));
+									std::bind(std::plus<std::uint64_t>(), _1, 
+											  std::bind(&AtomNode::svmNumber, _2)));
 }
 
 void Chem::SymmetryClassCalculator::AtomNode::updateSVMNumber()
@@ -374,9 +378,11 @@ void Chem::SymmetryClassCalculator::AtomNode::setNextSymClassID(std::uint64_t cl
 
 void Chem::SymmetryClassCalculator::AtomNode::update()
 {
+	using namespace std::placeholders;
+		
 	nbrSymClassIDProd = std::accumulate(nbrNodes.begin(), nbrNodes.end(), 1,
-										boost::bind(std::multiplies<std::uint64_t>(), _1, 
-													boost::bind(&AtomNode::nextSymClassID, _2)));
+										std::bind(std::multiplies<std::uint64_t>(), _1, 
+												  std::bind(&AtomNode::nextSymClassID, _2)));
 	symClassID = nextSymClassID;
 }
 

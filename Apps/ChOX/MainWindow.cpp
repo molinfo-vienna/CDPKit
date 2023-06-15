@@ -26,8 +26,7 @@
 
 #include <algorithm>
 #include <cmath>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include <QFileDialog>
 #include <QStatusBar>
@@ -590,7 +589,7 @@ void ChOX::MainWindow::recentFileSelected(QAction* action)
 void ChOX::MainWindow::setupRecentFilesMenu()
 {
 	std::for_each(recentFilesMenuActions.begin(), recentFilesMenuActions.end(), 
-				  boost::bind(&QWidget::removeAction, uiMainWindow.recentFilesMenu, _1));
+				  std::bind(&QWidget::removeAction, uiMainWindow.recentFilesMenu, std::placeholders::_1));
 
 	recentFilesMenuActions.clear();
 
@@ -641,7 +640,7 @@ void ChOX::MainWindow::setupWindowMenu()
 		QList<QAction*> actions = windowListGroup->actions();
 
 		std::for_each(actions.begin(), actions.end(), 
-					  boost::bind(&QWidget::removeAction, uiMainWindow.windowMenu, _1));
+					  std::bind(&QWidget::removeAction, uiMainWindow.windowMenu, std::placeholders::_1));
 
 		windowListGroup->deleteLater();
 	}

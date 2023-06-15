@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/CIPPriorityCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -166,9 +165,9 @@ void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
 		max_priority = priority;
 	}
 
-	std::for_each(expAtomNodes.begin(), expAtomNodes.end(), boost::bind(&Util::STArray::addElement, 
-																		boost::ref(priorities),
-																		boost::bind(&AtomNode::getPriority, _1)));
+	std::for_each(expAtomNodes.begin(), expAtomNodes.end(), std::bind(&Util::STArray::addElement, 
+																	  std::ref(priorities),
+																	  std::bind(&AtomNode::getPriority, std::placeholders::_1)));
 }
 
 Chem::CIPPriorityCalculator::AtomNode* Chem::CIPPriorityCalculator::allocNode(std::size_t p)

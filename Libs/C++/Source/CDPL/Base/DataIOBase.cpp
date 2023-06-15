@@ -29,8 +29,6 @@
 #include <functional>
 #include <algorithm>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Base/DataIOBase.hpp"
 
 
@@ -43,9 +41,9 @@ std::size_t Base::DataIOBase::registerIOCallback(const IOCallbackFunction& cb)
 	std::size_t num_callbacks = callbacks.size();
 
 	for ( ; id < num_callbacks && std::find_if(callbacks.begin(), callbacks.end(),
-											   boost::bind(std::equal_to<std::size_t>(),
-														   boost::bind(&CallbackListEntry::first, _1),
-														   id)) != callbacks.end(); id++);
+											   std::bind(std::equal_to<std::size_t>(),
+														 std::bind(&CallbackListEntry::first, std::placeholders::_1),
+														 id)) != callbacks.end(); id++);
 	callbacks.push_back(CallbackListEntry(id, cb));
 
 	return id;
@@ -53,9 +51,9 @@ std::size_t Base::DataIOBase::registerIOCallback(const IOCallbackFunction& cb)
 
 void Base::DataIOBase::unregisterIOCallback(std::size_t id)
 {
-	callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(), boost::bind(std::equal_to<std::size_t>(),
-																				   boost::bind(&CallbackListEntry::first, _1),
-																				   id)),
+	callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(), std::bind(std::equal_to<std::size_t>(),
+																				 std::bind(&CallbackListEntry::first, std::placeholders::_1),
+																				 id)),
 					callbacks.end());
 }
 
@@ -66,9 +64,9 @@ void Base::DataIOBase::clearIOCallbacks()
 
 void Base::DataIOBase::invokeIOCallbacks(double progress) const
 {
-	std::for_each(callbacks.begin(), callbacks.end(), boost::bind(&IOCallbackFunction::operator(),
-																  boost::bind(&CallbackListEntry::second, _1), 
-																  boost::ref(*this), progress));
+	std::for_each(callbacks.begin(), callbacks.end(), std::bind(&IOCallbackFunction::operator(),
+																std::bind(&CallbackListEntry::second, std::placeholders::_1), 
+																std::ref(*this), progress));
 }
 
 Base::DataIOBase& Base::DataIOBase::operator=(const DataIOBase& io_base)

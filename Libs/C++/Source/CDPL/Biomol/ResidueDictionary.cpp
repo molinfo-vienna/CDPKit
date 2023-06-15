@@ -28,8 +28,8 @@
 
 #include <unordered_set>
 #include <mutex>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -258,12 +258,12 @@ std::size_t Biomol::ResidueDictionary::getNumEntries() const
 			
 Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), boost::bind(&EntryLookupTable::value_type::second, _1));
+	return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), boost::bind(&EntryLookupTable::value_type::second, _1));
+	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
 void Biomol::ResidueDictionary::loadDefaults()

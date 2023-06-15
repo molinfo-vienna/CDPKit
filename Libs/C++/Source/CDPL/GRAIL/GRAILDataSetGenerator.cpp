@@ -30,8 +30,6 @@
 #include <functional>
 #include <cmath>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
 #include "CDPL/Pharm/FeatureInteractionScoreCombiner.hpp"  
@@ -258,6 +256,8 @@ GRAIL::GRAILDataSetGenerator::getPharmacophoreProcessingFunction() const
 void GRAIL::GRAILDataSetGenerator::calcInteractionGrids(const Chem::MolecularGraph& tgt_env, const Chem::Atom3DCoordinatesFunction& coords_func,
 														Grid::DRegularGridSet& grid_set, bool append)
 {
+	using namespace std::placeholders;
+
 	if (!append)
 		grid_set.clear();
 	
@@ -295,7 +295,7 @@ void GRAIL::GRAILDataSetGenerator::calcInteractionGrids(const Chem::MolecularGra
 			setName(*grid_ptr, grid_name);
 		
 		ftrInteractionGridCalc.setScoringFunction(it->second);
-		ftrInteractionGridCalc.setFeatureSelectionPredicate(boost::bind(std::equal_to<unsigned int>(), boost::bind(&Pharm::getType, _1), tgt_ftr_type));
+		ftrInteractionGridCalc.setFeatureSelectionPredicate(std::bind(std::equal_to<unsigned int>(), std::bind(&Pharm::getType, _1), tgt_ftr_type));
 		ftrInteractionGridCalc.calculate(pharmacophore, *grid_ptr);
 
 		for (std::size_t i = 0; i < num_grid_pts; i++)

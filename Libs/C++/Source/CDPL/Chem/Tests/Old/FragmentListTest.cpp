@@ -24,9 +24,6 @@
  */
 
 
-#include <functional>
-
-#include <boost/bind.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Chem/FragmentList.hpp"

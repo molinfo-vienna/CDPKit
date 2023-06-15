@@ -26,7 +26,7 @@
  
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 
@@ -38,14 +38,16 @@ using namespace CDPL;
 
 ConfGen::MMFF94BondLengthTable::MMFF94BondLengthTable()
 {
-    atomTyper.setAromaticRingSetFunction(boost::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
+	using namespace std::placeholders;
+	
+    atomTyper.setAromaticRingSetFunction(std::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
 
-    bondTyper.setAtomTypeFunction(boost::bind(&MMFF94BondLengthTable::getNumericAtomType, this, _1));
-    bondTyper.setAromaticRingSetFunction(boost::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
+    bondTyper.setAtomTypeFunction(std::bind(&MMFF94BondLengthTable::getNumericAtomType, this, _1));
+    bondTyper.setAromaticRingSetFunction(std::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
 
-    bondStretchingParameterizer.setAtomTypeFunction(boost::bind(&MMFF94BondLengthTable::getNumericAtomType, this, _1));
-    bondStretchingParameterizer.setBondTypeIndexFunction(boost::bind(&MMFF94BondLengthTable::getBondTypeIndex, this, _1));
-    bondStretchingParameterizer.setAromaticRingSetFunction(boost::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
+    bondStretchingParameterizer.setAtomTypeFunction(std::bind(&MMFF94BondLengthTable::getNumericAtomType, this, _1));
+    bondStretchingParameterizer.setBondTypeIndexFunction(std::bind(&MMFF94BondLengthTable::getBondTypeIndex, this, _1));
+    bondStretchingParameterizer.setAromaticRingSetFunction(std::bind(&MMFF94BondLengthTable::getAromaticRings, this, _1));
 }
 
 void ConfGen::MMFF94BondLengthTable::setup(const Chem::MolecularGraph& molgraph, bool strict_param)

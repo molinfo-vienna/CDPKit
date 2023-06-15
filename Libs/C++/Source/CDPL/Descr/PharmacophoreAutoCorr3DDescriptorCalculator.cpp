@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Descr/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
@@ -123,6 +123,8 @@ void CDPL::Descr::PharmacophoreAutoCorr3DDescriptorCalculator::setFeaturePairWei
 
 void CDPL::Descr::PharmacophoreAutoCorr3DDescriptorCalculator::calculate(const Pharm::FeatureContainer& cntnr, Math::DVector& descr)
 {
+	using namespace std::placeholders;
+	
 	std::size_t sub_descr_size = autoCorrCalculator.getNumSteps() + 1;
 	std::size_t num_ftr_types = sizeof(FEATURE_TYPES) / sizeof(unsigned int);
 
@@ -130,9 +132,9 @@ void CDPL::Descr::PharmacophoreAutoCorr3DDescriptorCalculator::calculate(const P
 
 	for (std::size_t i = 0; i < num_ftr_types; i++) {
 		if (weightFunc)
-			autoCorrCalculator.setEntityPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
+			autoCorrCalculator.setEntityPairWeightFunction(std::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
 		else
-			autoCorrCalculator.setEntityPairWeightFunction(boost::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
+			autoCorrCalculator.setEntityPairWeightFunction(std::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

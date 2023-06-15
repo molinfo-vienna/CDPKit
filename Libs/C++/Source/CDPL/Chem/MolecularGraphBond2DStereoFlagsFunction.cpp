@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -44,8 +42,8 @@ using namespace CDPL;
 void Chem::calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&has2DStereoFlag, _1))) == molgraph.getBondsEnd())
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&has2DStereoFlag, std::placeholders::_1))) == molgraph.getBondsEnd())
 		return;
 
 	Util::UIArray flags;

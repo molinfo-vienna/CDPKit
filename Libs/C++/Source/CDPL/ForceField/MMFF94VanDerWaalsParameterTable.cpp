@@ -29,8 +29,8 @@
 #include <cstring>
 #include <sstream>
 #include <mutex>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
 
@@ -149,31 +149,31 @@ bool ForceField::MMFF94VanDerWaalsParameterTable::removeEntry(unsigned int atom_
 ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
 ForceField::MMFF94VanDerWaalsParameterTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), boost::bind(&DataStorage::value_type::second, _1));
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), boost::bind(&DataStorage::value_type::second, _1));
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 	
 ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::setExponent(double value)

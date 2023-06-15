@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/Reaction.hpp"
@@ -44,8 +43,8 @@ void Chem::initSubstructureSearchQuery(Reaction& rxn, bool overwrite)
 	perceiveAtomMapping(rxn, overwrite);
 
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchQuery),
-							  _1, overwrite));
+				  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchQuery),
+							std::placeholders::_1, overwrite));
 
 	buildMatchExpressions(rxn ,overwrite);
 }
@@ -53,6 +52,6 @@ void Chem::initSubstructureSearchQuery(Reaction& rxn, bool overwrite)
 void Chem::initSubstructureSearchTarget(Reaction& rxn, bool overwrite)
 {
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchTarget),
-							  _1, overwrite));
+				  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&initSubstructureSearchTarget),
+							std::placeholders::_1, overwrite));
 }

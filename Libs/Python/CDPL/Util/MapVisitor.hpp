@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <type_traits>
 
-#include <boost/bind.hpp>
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
 

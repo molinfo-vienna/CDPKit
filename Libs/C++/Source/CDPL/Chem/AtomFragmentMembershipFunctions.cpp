@@ -26,10 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/AtomFunctions.hpp"
 
 
@@ -85,7 +81,8 @@ std::size_t Chem::getSizeOfLargestContainingFragment(const Atom& atom, const Fra
 std::size_t Chem::getNumContainingFragments(const Atom& atom, const FragmentList& frag_list)
 {
     std::size_t count = std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
-									  boost::bind(&Fragment::containsAtom, _1, boost::ref(atom)));
+									  std::bind(&Fragment::containsAtom, std::placeholders::_1,
+												std::ref(atom)));
 
     return count;
 }

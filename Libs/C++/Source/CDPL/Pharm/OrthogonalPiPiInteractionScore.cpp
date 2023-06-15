@@ -28,8 +28,7 @@
 
 #include <cmath>
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -53,8 +52,8 @@ constexpr double Pharm::OrthogonalPiPiInteractionScore::DEF_MAX_ANGLE;
 Pharm::OrthogonalPiPiInteractionScore::OrthogonalPiPiInteractionScore(double min_h_dist, double max_h_dist,
 																	  double max_v_dist, double max_ang):
 	minHDist(min_h_dist), maxHDist(max_h_dist),  maxVDist(max_v_dist), maxAngle(max_ang),
-	distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
-	angleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
+	distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)),
+	angleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::OrthogonalPiPiInteractionScore::getMinHDistance() const
 {

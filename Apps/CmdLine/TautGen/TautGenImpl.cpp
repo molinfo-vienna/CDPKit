@@ -29,9 +29,9 @@
 #include <thread>
 #include <cstdint>
 #include <chrono>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -144,7 +144,8 @@ private:
 	void init() {
 		using namespace CDPL;
 		using namespace Chem;
-
+		using namespace std::placeholders;
+		
 		switch (parent->mode) {
 
 			case GEOMETRICALLY_UNIQUE:
@@ -159,10 +160,10 @@ private:
 				tautGen.setMode(TautomerGenerator::TOPOLOGICALLY_UNIQUE);
 		}
 
-		tautGen.setCallbackFunction(boost::bind(&TautGenerationWorker::tautomerGenerated, this, _1));
+		tautGen.setCallbackFunction(std::bind(&TautGenerationWorker::tautomerGenerated, this, _1));
 		tautGen.regardIsotopes(parent->regardIsotopes);
 		tautGen.regardStereochemistry(parent->regardStereo);
-		tautGen.setCustomSetupFunction(boost::bind(&setRingFlags, _1, false));
+		tautGen.setCustomSetupFunction(std::bind(&setRingFlags, _1, false));
 
 		PatternBasedTautomerizationRule::SharedPointer h13_shift(new GenericHydrogen13ShiftTautomerization());
 		PatternBasedTautomerizationRule::SharedPointer h15_shift(new GenericHydrogen15ShiftTautomerization());
@@ -365,20 +366,22 @@ TautGenImpl::TautGenImpl():
 	numThreads(0), maxNumTautomers(0), mode(Mode::TOPOLOGICALLY_UNIQUE), 
 	inputHandler(), outputHandler(), outputWriter(), numOutTautomers(0)
 {
+	using namespace std::placeholders;
+	
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Tautomers output file.", 
 			  value<std::string>(&outputFile)->required());
 	addOption("mode,m", "Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: TOP_UNIQUE).", 
-			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&TautGenImpl::setMode, this, _1)));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
 			  std::to_string(std::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setInputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&TautGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&TautGenImpl::setOutputFormat, this, _1)));
 	addOption("regard-stereo,s", "Consider stereochemistry in topological duplicate detection (default: true).", 
 			  value<bool>(&regardStereo)->implicit_value(true));
 	addOption("regard-iso,d", "Whether or not isotope information matters in topological duplicate detection (default: true).", 
@@ -593,7 +596,7 @@ void TautGenImpl::processMultiThreaded()
 
 			TautGenerationWorkerPtr worker_ptr(new TautGenerationWorker(this));
 
-			thread_grp.emplace_back(boost::bind(&TautGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(std::bind(&TautGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -742,16 +745,17 @@ void TautGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol)
 void TautGenImpl::checkInputFiles() const
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	StringList::const_iterator it = std::find_if(inputFiles.begin(), inputFiles.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists, _1)));
 	if (it != inputFiles.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 
 	if (std::find_if(inputFiles.begin(), inputFiles.end(),
-					 boost::bind(Util::checkIfSameFile, boost::ref(outputFile),
-								 _1)) != inputFiles.end())
+					 std::bind(Util::checkIfSameFile, boost::ref(outputFile),
+							   _1)) != inputFiles.end())
 		throw Base::ValueError("output file must not occur in list of input files");
 }
 

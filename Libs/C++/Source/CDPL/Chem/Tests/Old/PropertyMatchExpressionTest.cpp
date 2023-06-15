@@ -28,7 +28,6 @@
 #include <functional>
 
 #include <boost/test/auto_unit_test.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/PropertyMatchExpression.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -43,7 +42,8 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 	using namespace CDPL;
 	using namespace Chem;
 	using namespace Base;
-
+	using namespace std::placeholders;
+	
 	PropertyKey key1 = PropertyManager::allocPropertyKey("key1");
 
 	Molecule mol1, mol2;
@@ -101,8 +101,8 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 //-----
 
 	expr1 =	PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>("test", 
-																							 boost::bind(boost::bind(&MolecularGraph::getProperty<std::string>, 
-																													 _1, boost::ref(key1), true), _1, _2));
+																							 std::bind(std::bind(&MolecularGraph::getProperty<std::string>, 
+																												 _1, std::ref(key1), true), _1, _2));
 	mol1.removeProperty(key1);
 	mol2.removeProperty(key1);
 
@@ -128,8 +128,8 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-	expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>(boost::bind(boost::bind(&MolecularGraph::getProperty<std::string>, 
-																													_1, boost::ref(key1), true), _1, _2));
+	expr1 = PropertyMatchExpression<std::string, std::equal_to<std::string>, Molecule, int>(std::bind(std::bind(&MolecularGraph::getProperty<std::string>, 
+																												_1, std::ref(key1), true), _1, _2));
 
 	mol2.setProperty(key1, std::string("testx"));
 	mol1.removeProperty(key1);
@@ -178,8 +178,8 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-	expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(5, boost::bind(boost::bind(&MolecularGraph::getProperty<std::size_t>, 
-																											  _1, boost::ref(key1), true), _1));
+	expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(5, std::bind(std::bind(&MolecularGraph::getProperty<std::size_t>, 
+																										  _1, std::ref(key1), true), _1));
 
 	mol1.removeProperty(key1);
 	mol2.removeProperty(key1);
@@ -234,8 +234,8 @@ BOOST_AUTO_TEST_CASE(PropertyMatchExpressionTest)
 
 //-----
 
-	expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(boost::bind(boost::bind(&MolecularGraph::getProperty<std::size_t>, 
-																										   _1, boost::ref(key1), true), _1));
+	expr2 = PropertyMatchExpression<std::size_t, std::less<std::size_t>, Molecule>(std::bind(std::bind(&MolecularGraph::getProperty<std::size_t>, 
+																									   _1, std::ref(key1), true), _1));
 
 	mol1.removeProperty(key1);
 	mol2.setProperty(key1, std::size_t(6));

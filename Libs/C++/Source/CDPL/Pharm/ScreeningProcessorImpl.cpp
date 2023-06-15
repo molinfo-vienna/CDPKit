@@ -31,8 +31,7 @@
 #include <cmath>
 #include <iterator>
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -75,12 +74,13 @@ Pharm::ScreeningProcessorImpl::ScreeningProcessorImpl(ScreeningProcessor& parent
 	checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
 	scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(), pharmAlignment(true)
 {
-
+	using namespace std::placeholders;
+	
 	pharmAlignment.setTopAlignmentConstraintFunction(
-		boost::bind(&ScreeningProcessorImpl::checkTopologicalMapping, this, _1));
+		std::bind(&ScreeningProcessorImpl::checkTopologicalMapping, this, _1));
 
 	pharmAlignment.setEntity3DCoordinatesFunction(
-		boost::bind(&ScreeningProcessorImpl::getFeatureCoordinates, this, _1));
+		std::bind(&ScreeningProcessorImpl::getFeatureCoordinates, this, _1));
 }
 
 void Pharm::ScreeningProcessorImpl::setDBAccessor(ScreeningDBAccessor& db_acc)

@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/AromaticRingSet.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -92,8 +91,9 @@ void Chem::AromaticRingSet::findAromaticRings()
 	BaseType::ElementIterator arom_rings_end = getBase().getElementsBegin();
 
 	while (true) {
-		BaseType::ElementIterator next_arom_rings_end = std::partition(arom_rings_end, rings_end, 
-																	   boost::bind(&AromaticRingSet::isAromatic, this, _1));
+		BaseType::ElementIterator next_arom_rings_end =
+			std::partition(arom_rings_end, rings_end, 
+						   std::bind(&AromaticRingSet::isAromatic, this, std::placeholders::_1));
 
 		if (next_arom_rings_end == arom_rings_end)
 			break;
@@ -111,9 +111,9 @@ bool Chem::AromaticRingSet::isAromatic(const Fragment::SharedPointer& ring_ptr)
 	if (!Chem::isAromatic(ring, *molGraph, aromBondMask))
 		return false;
 
-	std::for_each(ring.getBondsBegin(), ring.getBondsEnd(),
-				  boost::bind(&Util::BitSet::set, boost::ref(aromBondMask), 
-							  boost::bind(&BondContainer::getBondIndex, molGraph, _1), true));
+	std::for_each(ring.getBondsBegin(), ring.getBondsEnd(), 
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), std::ref(aromBondMask), 
+							std::bind(&BondContainer::getBondIndex, molGraph, std::placeholders::_1), true));
 
 	return true;
 }

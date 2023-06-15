@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/MMFF94ChargeCalculator.hpp"
@@ -46,8 +44,8 @@ using namespace CDPL;
 void ForceField::calcMMFF94AtomCharges(Chem::MolecularGraph& molgraph, bool strict, bool overwrite)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasMMFF94Charge, _1))) == molgraph.getAtomsEnd())
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&hasMMFF94Charge, std::placeholders::_1))) == molgraph.getAtomsEnd())
 		return;
 
     Util::DArray charges;

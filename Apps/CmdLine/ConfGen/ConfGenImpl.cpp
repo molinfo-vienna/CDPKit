@@ -31,9 +31,9 @@
 #include <thread>
 #include <chrono>
 #include <ratio>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -90,12 +90,13 @@ public:
 	ConformerGenerationWorker(ConfGenImpl* parent):
 		parent(parent), verbLevel(parent->getVerbosityLevel()), numProcMols(0),
 		numFailedMols(0), numGenConfs(0) {
-
-		confGen.setAbortCallback(boost::bind(&ConformerGenerationWorker::abort, this));
+		using namespace std::placeholders;
+		
+		confGen.setAbortCallback(std::bind(&ConformerGenerationWorker::abort, this));
 		confGen.getSettings() = parent->settings;
 
 		if (parent->getVerbosityLevel() >= DEBUG)  
-			confGen.setLogMessageCallback(boost::bind(&ConformerGenerationWorker::appendToLogRecord, this, _1));
+			confGen.setLogMessageCallback(std::bind(&ConformerGenerationWorker::appendToLogRecord, this, _1));
 
 		if (parent->torsionLib) {
 			if (parent->replaceBuiltinTorLib)
@@ -335,6 +336,8 @@ ConfGenImpl::ConfGenImpl():
 	energyComment(false), confIndexSuffix(false), maxNumRotorBonds(-1), torsionLib(), fragmentLib(),
 	inputHandler(), outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
 {
+	using namespace std::placeholders;
+	
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Output file.", 
@@ -347,88 +350,88 @@ ConfGenImpl::ConfGenImpl():
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("conf-gen-preset,C", "Conformer generation preset to use (SMALL_SET_DIVERSE, MEDIUM_SET_DIVERSE, " 
 			  "LARGE_SET_DIVERSE, SMALL_SET_DENSE, MEDIUM_SET_DENSE, LARGE_SET_DENSE, default: MEDIUM_SET_DIVERSE).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyConfGenPreset, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::applyConfGenPreset, this, _1)));
 	addOption("mode,m", "Conformer sampling mode (AUTO, STOCHASTIC, SYSTEMATIC, default: " + getSamplingModeString() + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSamplingMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setSamplingMode, this, _1)));
 	addOption("e-window,e", "Output energy window for generated conformers (default: " + 
 			  std::to_string(settings.getEnergyWindow()) + ", must be >= 0).",
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
+			  value<double>()->notifier(std::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
 	addOption("rmsd,r", "Minimum RMSD for output conformer selection (default: " + 
 			  (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0, 0 disables RMSD checking).",
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRMSD, this, _1)));
+			  value<double>()->notifier(std::bind(&ConfGenImpl::setRMSD, this, _1)));
 	addOption("max-num-out-confs,n", "Maximum number of output conformers per molecule (default: " + 
 			  std::to_string(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
 	addOption("nitrogen-enum-mode,N", "Invertible nitrogen enumeration mode (NONE, ALL, UNSPECIFIED, default: " + 
-			  getNitrogenEnumModeString() + ").", value<std::string>()->notifier(boost::bind(&ConfGenImpl::setNitrogenEnumMode, this, _1)));
+			  getNitrogenEnumModeString() + ").", value<std::string>()->notifier(std::bind(&ConfGenImpl::setNitrogenEnumMode, this, _1)));
 	addOption("enum-rings,R", "Enumerate ring conformers (only effective in systematic sampling mode, default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setEnumRings, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setEnumRings, this, _1)));
 	addOption("sample-het-hydrogens,H", "Perform torsion sampling for hydrogens on hetero atoms (default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleHetAtomHydrogens, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setSampleHetAtomHydrogens, this, _1)));
 	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
 			  "torsion angle tolerance range (only effective in systematic sampling mode, default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleAngleTolRanges, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setSampleAngleTolRanges, this, _1)));
 	addOption("include-input,u", "Add input 3D-structure to output conformer ensemble (default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setIncludeInput, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setIncludeInput, this, _1)));
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate conformers from scratch (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setGenerateFromScratch, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setGenerateFromScratch, this, _1)));
 	addOption("systematic-search-force-field,d", "Search force field used in systematic sampling (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getForceFieldTypeSystematic()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSystematicSearchForceFieldType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setSystematicSearchForceFieldType, this, _1)));
 	addOption("stochastic-search-force-field,q", "Search force field used in stochastic smapling (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getForceFieldTypeStochastic()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setStochasticSearchForceFieldType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setStochasticSearchForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setStrictParameterization, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&ConfGenImpl::setStrictParameterization, this, _1)));
 	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setDielectricConst, this, _1)));
+			  value<double>()->notifier(std::bind(&ConfGenImpl::setDielectricConst, this, _1)));
 	addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setDistExponent, this, _1)));
+			  value<double>()->notifier(std::bind(&ConfGenImpl::setDistExponent, this, _1)));
 	addOption("timeout,T", "Time in seconds after which molecule conformer generation will be stopped (default: " + 
 			  std::to_string(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setTimeout, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setTimeout, this, _1)));
 	addOption("max-num-rot-bonds,X", "Maximum number of allowed rotatable bonds, exceeding this limit causes molecule conf. generation to fail (default: " +
 			  std::to_string(maxNumRotorBonds) + ", negative values disable limit).", 
 			  value<long>(&maxNumRotorBonds));
 	addOption("max-pool-size,L", "Puts an upper limit on the number of generated output conformer candidates (only effective in systematic sampling mode, default: " +
 			  std::to_string(settings.getMaxPoolSize()) + ", must be >= 0, 0 disables limit).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxPoolSize, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMaxPoolSize, this, _1)));
 	addOption("max-num-sampled-confs,x", "Maximum number of sampled conformers (only effective in stochastic sampling mode, default: " +
 			  std::to_string(settings.getMaxNumSampledConformers()) + ", must be >= 0, 0 disables limit).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumSampledConfs, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMaxNumSampledConfs, this, _1)));
 	addOption("conv-check-cycle-size,y", "Minimum number of duplicate conformers that have to be generated in succession to "
 			  " consider convergence to be reached (only effective in stochastic sampling mode, default: " +
 			  std::to_string(settings.getConvergenceCheckCycleSize()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setConvergenceCheckCycleSize, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setConvergenceCheckCycleSize, this, _1)));
 	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which stochastic sampling will be performed"
 			  "(only effective in sampling mode AUTO, default: " +
 			  std::to_string(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in stochastic sampling mode, default: " +
 			  (boost::format("%.4f") % settings.getRefinementTolerance()).str() + ", must be >= 0, 0 results in refinement until convergence).", 
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRefTolerance, this, _1)));
+			  value<double>()->notifier(std::bind(&ConfGenImpl::setRefTolerance, this, _1)));
 	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in stochastic sampling mode, default: " +
 			  std::to_string(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumRefIterations, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&ConfGenImpl::setMaxNumRefIterations, this, _1)));
 	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in systematic sampling mode).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addTorsionLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::addTorsionLib, this, _1)));
 	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective in systematic sampling mode).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setTorsionLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setTorsionLib, this, _1)));
 	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in systematic sampling mode, default: FAST).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyFragBuildPreset, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::applyFragBuildPreset, this, _1)));
 	addOption("build-force-field,b", "Fragment build force field (MMFF94, MMFF94_NO_ESTAT, MMFF94S, "
 			  "MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, "
 			  "MMFF94S_RTOR_XOOP_NO_ESTAT, only effective in systematic sampling mode, default: " +
 			  getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setBuildForceFieldType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setBuildForceFieldType, this, _1)));
 	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in systematic sampling mode).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addFragmentLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::addFragmentLib, this, _1)));
 	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective in systematic sampling mode).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setFragmentLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setFragmentLib, this, _1)));
 	addOption("canonicalize,z", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));
 	addOption("energy-sd-entry,Y", "Output conformer energy in the structure data section of SD-files (default: false).", 
@@ -438,11 +441,11 @@ ConfGenImpl::ConfGenImpl():
 	addOption("conf-idx-suffix,W", "Append conformer index to the title of multiconf. output molecules (default: false).", 
 			  value<bool>(&confIndexSuffix)->implicit_value(true));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setInputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setOutputFormat, this, _1)));
 	addOption("failed-format,F", "Failed molecule output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setFailedOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&ConfGenImpl::setFailedOutputFormat, this, _1)));
 
 	addOptionLongDescriptions();
 }
@@ -870,7 +873,7 @@ void ConfGenImpl::processMultiThreaded()
 
 			ConformerGenerationWorkerPtr worker_ptr(new ConformerGenerationWorker(this));
 
-			thread_grp.emplace_back(boost::bind(&ConformerGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(std::bind(&ConformerGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -1038,21 +1041,22 @@ void ConfGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool fa
 void ConfGenImpl::checkInputFiles() const
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	StringList::const_iterator it = std::find_if(inputFiles.begin(), inputFiles.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists, _1)));
 	if (it != inputFiles.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 
 	if (std::find_if(inputFiles.begin(), inputFiles.end(),
-					 boost::bind(Util::checkIfSameFile, boost::ref(outputFile),
-								 _1)) != inputFiles.end())
+					 std::bind(Util::checkIfSameFile, boost::ref(outputFile),
+							   _1)) != inputFiles.end())
 		throw Base::ValueError("output file must not occur in list of input files");
 
 	if (!failedFile.empty() && std::find_if(inputFiles.begin(), inputFiles.end(),
-											boost::bind(Util::checkIfSameFile, boost::ref(failedFile),
-														_1)) != inputFiles.end())
+											std::bind(Util::checkIfSameFile, boost::ref(failedFile),
+													  _1)) != inputFiles.end())
 		throw Base::ValueError("failed output file must not occur in list of input files");
 
 	if (!torsionLibName.empty() && !Util::fileExists(torsionLibName))

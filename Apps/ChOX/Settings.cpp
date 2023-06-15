@@ -25,9 +25,9 @@
 
 
 #include <cstddef>
+#include <functional>
 
 #include <boost/lexical_cast.hpp>
-#include <boost/bind.hpp>
 
 #include <QSettings>
 #include <QStringList>
@@ -62,8 +62,9 @@ using namespace ChOX;
 Settings::Settings(QObject* parent): QObject(parent) 
 {
 	using namespace CDPL;
-
-	registerParameterChangedCallback(boost::bind(&Settings::parameterChanged, this, _1, _2));
+	using namespace std::placeholders;
+	
+	registerParameterChangedCallback(std::bind(&Settings::parameterChanged, this, _1, _2));
 
 	readerControlParams[Chem::DataFormat::CDF_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::CDF.getName()]);
 	readerControlParams[Chem::DataFormat::CDF_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::CDF.getName()]);

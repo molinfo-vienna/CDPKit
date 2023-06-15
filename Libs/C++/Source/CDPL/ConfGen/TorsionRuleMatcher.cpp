@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -187,7 +186,8 @@ bool ConfGen::TorsionRuleMatcher::getRuleMatches(const TorsionRule& rule, const 
 	std::size_t old_num_matches = matches.size();
 
 	std::for_each(subSearch.getMappingsBegin(), subSearch.getMappingsEnd(), 
-				  boost::bind(&TorsionRuleMatcher::outputMatch, this, _1, boost::ref(bond), boost::ref(rule))); 
+				  std::bind(&TorsionRuleMatcher::outputMatch, this, std::placeholders::_1,
+							std::ref(bond), std::ref(rule))); 
 
 	return (matches.size() > old_num_matches);
 }

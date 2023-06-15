@@ -29,9 +29,9 @@
 #include <ostream>
 #include <cassert>
 #include <algorithm>
+#include <functional>
 
 #include <boost/numeric/conversion/cast.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -353,22 +353,22 @@ void Chem::CDFDataWriter::outputExternalProperties(const H& handler, const T& ob
 void Chem::CDFDataWriter::outputExternalProperties(const Atom& atom, Internal::ByteBuffer& bbuf) 
 {
 	std::for_each(extAtomPropertyHandlers.begin(), extAtomPropertyHandlers.end(),
-				  boost::bind(&CDFDataWriter::outputExternalProperties<AtomPropertyHandler, Atom>, 
-							  this, _1, boost::ref(atom), boost::ref(bbuf)));
+				  std::bind(&CDFDataWriter::outputExternalProperties<AtomPropertyHandler, Atom>, 
+							this, std::placeholders::_1, std::ref(atom), std::ref(bbuf)));
 }
 
 void Chem::CDFDataWriter::outputExternalProperties(const Bond& bond, Internal::ByteBuffer& bbuf) 
 {
 	std::for_each(extBondPropertyHandlers.begin(), extBondPropertyHandlers.end(),
-				  boost::bind(&CDFDataWriter::outputExternalProperties<BondPropertyHandler, Bond>, 
-							  this, _1, boost::ref(bond), boost::ref(bbuf)));
+				  std::bind(&CDFDataWriter::outputExternalProperties<BondPropertyHandler, Bond>, 
+							this, std::placeholders::_1, std::ref(bond), std::ref(bbuf)));
 }
 
 void Chem::CDFDataWriter::outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) 
 {
 	std::for_each(extMolGraphPropertyHandlers.begin(), extMolGraphPropertyHandlers.end(),
-				  boost::bind(&CDFDataWriter::outputExternalProperties<MolGraphPropertyHandler, MolecularGraph>, 
-							  this, _1, boost::ref(molgraph), boost::ref(bbuf)));
+				  std::bind(&CDFDataWriter::outputExternalProperties<MolGraphPropertyHandler, MolecularGraph>, 
+							this, std::placeholders::_1, std::ref(molgraph), std::ref(bbuf)));
 }
 
 void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, unsigned int prop_id, 

@@ -29,9 +29,9 @@
 #include <iterator>
 #include <thread>
 #include <chrono>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -158,12 +158,14 @@ PSDCreateImpl::PSDCreateImpl():
 	dropDuplicates(false), numThreads(0), creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), 
 	inputHandler(), addSourceFileProp(false)
 {
+	using namespace std::placeholders;
+
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Output database file.", 
 			  value<std::string>(&outputDatabase)->required());
 	addOption("mode,m", "Database creation mode (CREATE, APPEND, UPDATE, default: CREATE).", 
-			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setCreationMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDCreateImpl::setCreationMode, this, _1)));
 	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
 			  value<bool>(&dropDuplicates)->implicit_value(true));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
@@ -171,9 +173,9 @@ PSDCreateImpl::PSDCreateImpl():
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setInputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDCreateImpl::setInputFormat, this, _1)));
 	addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().string() + "')", 
-			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setTmpFileDirectory, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDCreateImpl::setTmpFileDirectory, this, _1)));
 	addOption("add-src-file-prop,s", "Add a source-file property to output molecules (default: false).", 
 			  value<bool>(&addSourceFileProp)->implicit_value(true));
 
@@ -525,17 +527,18 @@ std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 void PSDCreateImpl::checkInputFiles() const
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	StringList::const_iterator it = std::find_if(inputFiles.begin(), inputFiles.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists, _1)));
 	if (it != inputFiles.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 			
 														 
 	if (std::find_if(inputFiles.begin(), inputFiles.end(),
-					 boost::bind(Util::checkIfSameFile, boost::ref(outputDatabase),
-								 _1)) != inputFiles.end())
+					 std::bind(Util::checkIfSameFile, boost::ref(outputDatabase),
+							   _1)) != inputFiles.end())
 		throw Base::ValueError("output file must not occur in list of input files");
 }
 

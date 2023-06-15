@@ -38,9 +38,7 @@
 #include <ctime>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
-#include <boost/function.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -533,13 +531,15 @@ void Chem::MDLDataWriter::writeCTabV2000(std::ostream& os, const MolecularGraph&
 void Chem::MDLDataWriter::writeCTabV2000AtomBlock(std::ostream& os, const MolecularGraph& molgraph) const
 {
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&MDLDataWriter::writeCTabV2000Atom, this, boost::ref(os), boost::ref(molgraph), _1));
+				  std::bind(&MDLDataWriter::writeCTabV2000Atom, this, std::ref(os),
+							std::ref(molgraph), std::placeholders::_1));
 }
 
 void Chem::MDLDataWriter::writeCTabV2000BondBlock(std::ostream& os, const MolecularGraph& molgraph) const
 {
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(&MDLDataWriter::writeCTabV2000Bond, this, boost::ref(os), boost::ref(molgraph), _1));
+				  std::bind(&MDLDataWriter::writeCTabV2000Bond, this, std::ref(os),
+							std::ref(molgraph), std::placeholders::_1));
 }
 
 void Chem::MDLDataWriter::writeCTabV2000PropertyBlock(std::ostream& os, const MolecularGraph& molgraph) const
@@ -1796,10 +1796,12 @@ void Chem::MDLDataWriter::writeRXNV2000Reaction(std::ostream& os, const Reaction
 	writeRXNV2000CountsLine(os, rxn);
 
 	std::for_each(rxn.getComponentsBegin(ReactionRole::REACTANT), rxn.getComponentsEnd(ReactionRole::REACTANT), 
-				  boost::bind(&MDLDataWriter::writeRXNV2000ReactionComponent, this, boost::ref(os), _1));
+				  std::bind(&MDLDataWriter::writeRXNV2000ReactionComponent, this,
+							std::ref(os), std::placeholders::_1));
 
 	std::for_each(rxn.getComponentsBegin(ReactionRole::PRODUCT), rxn.getComponentsEnd(ReactionRole::PRODUCT), 
-				  boost::bind(&MDLDataWriter::writeRXNV2000ReactionComponent, this, boost::ref(os), _1));
+				  std::bind(&MDLDataWriter::writeRXNV2000ReactionComponent, this,
+							std::ref(os), std::placeholders::_1));
 }
 
 void Chem::MDLDataWriter::writeRXNV2000CountsLine(std::ostream& os, const Reaction& rxn) const
@@ -2063,7 +2065,8 @@ void Chem::MDLDataWriter::writeCTabV3000AtomBlock(std::ostream& os, const Molecu
 	writeV3000BlockBegin(os, AtomBlock::BLOCK_TYPE_KEY);
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&MDLDataWriter::writeCTabV3000Atom, this, boost::ref(os), boost::ref(molgraph), _1));
+				  std::bind(&MDLDataWriter::writeCTabV3000Atom, this,
+							std::ref(os), std::ref(molgraph), std::placeholders::_1));
 
 	writeV3000BlockEnd(os, AtomBlock::BLOCK_TYPE_KEY);
 }
@@ -2078,7 +2081,8 @@ void Chem::MDLDataWriter::writeCTabV3000BondBlock(std::ostream& os, const Molecu
 	writeV3000BlockBegin(os, BondBlock::BLOCK_TYPE_KEY);
 
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(&MDLDataWriter::writeCTabV3000Bond, this, boost::ref(os), boost::ref(molgraph), _1));
+				  std::bind(&MDLDataWriter::writeCTabV3000Bond, this,
+							std::ref(os), std::ref(molgraph), std::placeholders::_1));
 
 	writeV3000BlockEnd(os, BondBlock::BLOCK_TYPE_KEY);
 }
@@ -2833,7 +2837,8 @@ void Chem::MDLDataWriter::writeCTabV3000PropertyStringValue(std::ostream& os, co
 	if (!str.empty() 
 		&& str[0] != V3000::VALUE_LIST_START_DELIM 
 		&& str[0] != V3000::STRING_QUOTE_CHAR 
-		&& std::find_if(str_beg, str_end, boost::bind(Internal::IsWhitespace(), _1)) == str_end) {
+		&& std::find_if(str_beg, str_end, std::bind(Internal::IsWhitespace(),
+													std::placeholders::_1)) == str_end) {
 		
 		os << str;
 		return;
@@ -2856,20 +2861,21 @@ void Chem::MDLDataWriter::writeCTabV3000PropertyStringValue(std::ostream& os, co
 void Chem::MDLDataWriter::writeRXNV3000Reaction(std::ostream& os, const Reaction& rxn)
 {
 	using namespace MDL::RXNFile;
-
+	using namespace std::placeholders;
+	
 	writeRXNV3000CountsLine(os, rxn);
 
 	writeV3000BlockBegin(os, V3000::REACTANT_BLOCK_KEY);
 
 	std::for_each(rxn.getComponentsBegin(ReactionRole::REACTANT), rxn.getComponentsEnd(ReactionRole::REACTANT), 
-				  boost::bind(&MDLDataWriter::writeRXNV3000ReactionComponent, this, boost::ref(os), _1));
+				  std::bind(&MDLDataWriter::writeRXNV3000ReactionComponent, this, std::ref(os), _1));
 
 	writeV3000BlockEnd(os, V3000::REACTANT_BLOCK_KEY);
 
 	writeV3000BlockBegin(os, V3000::PRODUCT_BLOCK_KEY);
 
 	std::for_each(rxn.getComponentsBegin(ReactionRole::PRODUCT), rxn.getComponentsEnd(ReactionRole::PRODUCT), 
-				  boost::bind(&MDLDataWriter::writeRXNV3000ReactionComponent, this, boost::ref(os), _1));
+				  std::bind(&MDLDataWriter::writeRXNV3000ReactionComponent, this, std::ref(os), _1));
 
 	writeV3000BlockEnd(os, V3000::PRODUCT_BLOCK_KEY);
 

@@ -25,9 +25,9 @@
 
 
 #include <algorithm>
+#include <functional>
 
 #include <boost/python.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Base/PropertyContainer.hpp"
 
@@ -59,8 +59,8 @@ namespace
 		python::list keys;
 
 		std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
-					  boost::bind(&python::list::append<Base::LookupKey>, boost::ref(keys),
-								  boost::bind(&Base::PropertyContainer::PropertyEntry::first, _1)));
+					  std::bind(&python::list::append<Base::LookupKey>, std::ref(keys),
+								std::bind(&Base::PropertyContainer::PropertyEntry::first, std::placeholders::_1)));
 
 		return keys;
 	}
@@ -73,8 +73,8 @@ namespace
 		python::list values;
 
 		std::for_each(cntnr.getPropertiesBegin(), cntnr.getPropertiesEnd(),
-					  boost::bind(&python::list::append<Base::Any>, boost::ref(values),
-								  boost::bind(&Base::PropertyContainer::PropertyEntry::second, _1)));
+					  std::bind(&python::list::append<Base::Any>, std::ref(values),
+								std::bind(&Base::PropertyContainer::PropertyEntry::second, std::placeholders::_1)));
 
 		return values;
 	}

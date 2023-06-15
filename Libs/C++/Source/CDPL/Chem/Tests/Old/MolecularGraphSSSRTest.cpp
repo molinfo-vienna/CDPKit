@@ -31,7 +31,6 @@
 #include <functional>
 
 #include <boost/test/auto_unit_test.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -49,7 +48,8 @@ BOOST_AUTO_TEST_CASE(MolecularGraphSSSRTest)
 {
 	using namespace CDPL;
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	Molecule mol;
 
 //-----
@@ -75,9 +75,9 @@ BOOST_AUTO_TEST_CASE(MolecularGraphSSSRTest)
 	BOOST_CHECK(sssr.getSize() == 31);
 
 	BOOST_CHECK(std::count_if(sssr.getElementsBegin(), sssr.getElementsEnd(), 
-							  boost::bind(std::equal_to<std::size_t>(), 5, boost::bind(&Fragment::getNumBonds, _1))) == 12);
+							  std::bind(std::equal_to<std::size_t>(), 5, std::bind(&Fragment::getNumBonds, _1))) == 12);
 	BOOST_CHECK(std::count_if(sssr.getElementsBegin(), sssr.getElementsEnd(), 
-							  boost::bind(std::equal_to<std::size_t>(), 6, boost::bind(&Fragment::getNumBonds, _1))) == 19);
+							  std::bind(std::equal_to<std::size_t>(), 6, std::bind(&Fragment::getNumBonds, _1))) == 19);
 
 	BOOST_CHECK(!mol.getProperty(MolecularGraphProperty::SSSR, false, false).isEmpty());
 

@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Vis/View2D.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
@@ -74,9 +74,11 @@ Vis::ReactionView2DParameters::ReactionView2DParameters(View2D& view):
 	arrowAttributeChangedFlag(true),
 	componentVisibilityChangedFlag(true) 
 {
-	view.registerParameterRemovedCallback(boost::bind(&ReactionView2DParameters::parameterRemoved, this, _1));
-	view.registerParameterChangedCallback(boost::bind(&ReactionView2DParameters::parameterChanged, this, _1, _2));
-	view.registerParentChangedCallback(boost::bind(&ReactionView2DParameters::parentChanged, this));
+	using namespace std::placeholders;
+		
+	view.registerParameterRemovedCallback(std::bind(&ReactionView2DParameters::parameterRemoved, this, _1));
+	view.registerParameterChangedCallback(std::bind(&ReactionView2DParameters::parameterChanged, this, _1, _2));
+	view.registerParentChangedCallback(std::bind(&ReactionView2DParameters::parentChanged, this));
 }
 
 Vis::ReactionView2DParameters::~ReactionView2DParameters() {}

@@ -30,8 +30,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/RMSDConformerSelector.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -67,14 +66,15 @@ ConfGen::RMSDConformerSelector::RMSDConformerSelector():
 	molGraph(0), minRMSD(0.0), maxNumSymMappings(DEF_MAX_NUM_SYMMETRY_MAPPINGS)
 {
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	symMappingSearch.includeIdentityMapping(true);
 	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY |
 										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
 	symMappingSearch.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
 										  BondPropertyFlag::AROMATICITY);
 	symMappingSearch.setFoundMappingCallback(
-		boost::bind(&ConfGen::RMSDConformerSelector::processSymMapping, this, _1, _2));
+		std::bind(&ConfGen::RMSDConformerSelector::processSymMapping, this, _1, _2));
 }
 
 void ConfGen::RMSDConformerSelector::setMinRMSD(double min_rmsd)

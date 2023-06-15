@@ -29,8 +29,7 @@
 #include <algorithm>
 #include <cmath>
 #include <mutex>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -1051,7 +1050,8 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* node) 
 {
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	if (!node->hasChildren())
 		return;
 
@@ -1068,7 +1068,7 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 
 	if (match && match->getRule().getNumAngles() > 0) {
 		TorsionRule::ConstAngleEntryIterator it = std::max_element(match->getRule().getAnglesBegin(), match->getRule().getAnglesEnd(),
-																   boost::bind(&compTorsionAngleEntryScore, _1, _2));
+																   std::bind(&compTorsionAngleEntryScore, _1, _2));
 		node->addTorsionAngle(it->getAngle());
 
 		const Atom* const* match_atoms = match->getAtoms();

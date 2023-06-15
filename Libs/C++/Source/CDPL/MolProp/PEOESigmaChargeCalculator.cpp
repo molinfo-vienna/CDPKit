@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -155,6 +154,8 @@ void MolProp::PEOESigmaChargeCalculator::init(const Chem::MolecularGraph& molgra
 
 void MolProp::PEOESigmaChargeCalculator::calcCharges()
 {
+	using namespace std::placeholders;
+	
 	AtomStateList::iterator atom_states_beg = atomStates.begin();
 	AtomStateList::iterator atom_states_end = atomStates.end();
 
@@ -167,14 +168,14 @@ void MolProp::PEOESigmaChargeCalculator::calcCharges()
 		attenuation_fact *= dampingFactor;
 
 		std::for_each(atom_states_beg, atom_states_end,
-					  boost::bind(&AtomState::shiftCharges, _1, attenuation_fact));
+					  std::bind(&AtomState::shiftCharges, _1, attenuation_fact));
 		std::for_each(impl_h_states_beg, impl_h_states_end,
-					  boost::bind(&AtomState::shiftCharges, _1, attenuation_fact));
+					  std::bind(&AtomState::shiftCharges, _1, attenuation_fact));
 
 		std::for_each(atom_states_beg, atom_states_end,
-					  boost::bind(&AtomState::updateElectronegativity, _1));
+					  std::bind(&AtomState::updateElectronegativity, _1));
 		std::for_each(impl_h_states_beg, impl_h_states_end,
-					  boost::bind(&AtomState::updateElectronegativity, _1));
+					  std::bind(&AtomState::updateElectronegativity, _1));
 	}
 }
 

@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/ControlParameterFunctions.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
@@ -60,6 +59,7 @@ bool ConfGen::CFLDataReader::hasMoreData(std::istream& is)
 bool ConfGen::CFLDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 {
 	using namespace Chem;
+	using namespace std::placeholders;
 	
 	bool strict_error = ConfGen::getStrictErrorCheckingParameter(ctrlParams);
 
@@ -93,9 +93,9 @@ bool ConfGen::CFLDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 		tmpFragment.clear();
 
 		std::for_each(mol.getAtomsBegin() + prev_num_atoms, mol.getAtomsEnd(),
-					  boost::bind(&Fragment::addAtom, &tmpFragment, _1));
+					  std::bind(&Fragment::addAtom, &tmpFragment, _1));
 		std::for_each(mol.getBondsBegin() + prev_num_bonds, mol.getBondsEnd(),
-					  boost::bind(&Fragment::addBond, &tmpFragment, _1));
+					  std::bind(&Fragment::addBond, &tmpFragment, _1));
 		
 		molgraph = &tmpFragment;
 	}
@@ -110,7 +110,7 @@ bool ConfGen::CFLDataReader::readMolecule(std::istream& is, Chem::Molecule& mol)
 	}
 	
 	std::for_each(molgraph->getAtomsBegin(), molgraph->getAtomsEnd(),
-				  boost::bind(&setImplicitHydrogenCount, _1, 0));
+				  std::bind(&setImplicitHydrogenCount, _1, 0));
 
 	setRingFlags(*molgraph, true);
 	perceiveSSSR(*molgraph, true);

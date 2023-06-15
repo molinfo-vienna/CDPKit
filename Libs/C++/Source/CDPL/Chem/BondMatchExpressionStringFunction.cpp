@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -362,7 +362,8 @@ namespace
 								const Chem::MatchConstraintList& constr_list, std::string& expr_list_str, bool root)
 	{
 		using namespace Chem;
-
+		using namespace std::placeholders;
+		
 		std::size_t list_size = 0;
 		std::string expr_str;
 
@@ -386,12 +387,12 @@ namespace
 
 				case BondMatchConstraint::AROMATICITY:
 					createBooleanPropertyExpressionString(bond, constraint, expr_str, AROMATIC_BOND_SYMBOL, 
-														  boost::bind(&getAromaticityFlag, _1));
+														  std::bind(&getAromaticityFlag, _1));
 					break;		
 
 				case BondMatchConstraint::RING_TOPOLOGY:
 					createBooleanPropertyExpressionString(bond, constraint, expr_str, RING_BOND_SYMBOL, 
-														  boost::bind(&getRingFlag, _1));
+														  std::bind(&getRingFlag, _1));
 					break;		
 
 				case BondMatchConstraint::CONFIGURATION:

@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -43,14 +41,16 @@ using namespace CDPL;
 
 bool Chem::hasCoordinates(const AtomContainer& cntnr, std::size_t dim)
 {
+	using namespace std::placeholders;
+	
 	if (dim == 3)
 		return (std::find_if(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(),
-							 boost::bind(std::equal_to<bool>(), false,
-										 boost::bind(&has3DCoordinates, _1))) == cntnr.getAtomsEnd());
+							 std::bind(std::equal_to<bool>(), false,
+									   std::bind(&has3DCoordinates, _1))) == cntnr.getAtomsEnd());
 
 	return (std::find_if(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(),
-						 boost::bind(std::equal_to<bool>(), false,
-									 boost::bind(&has2DCoordinates, _1))) == cntnr.getAtomsEnd());
+						 std::bind(std::equal_to<bool>(), false,
+								   std::bind(&has2DCoordinates, _1))) == cntnr.getAtomsEnd());
 }
 
 void Chem::get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append)

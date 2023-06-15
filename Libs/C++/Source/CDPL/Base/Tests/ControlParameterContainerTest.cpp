@@ -26,9 +26,9 @@
 
 #include <string>
 #include <memory>
+#include <functional>
 
 #include <boost/test/auto_unit_test.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 #include "CDPL/Base/LookupKey.hpp"
@@ -55,9 +55,9 @@ namespace
 
 BOOST_AUTO_TEST_CASE(ControlParameterContainerTest)
 {
-
 	using namespace Base;
-
+	using namespace std::placeholders;
+	
 	TestControlParameterContainer cntnr1;
 	
 	TestControlParameterContainer::SharedPointer cntnr2_ptr(new TestControlParameterContainer());
@@ -69,19 +69,19 @@ BOOST_AUTO_TEST_CASE(ControlParameterContainerTest)
 	TestChangeListener cl1;
 	TestChangeListener cl2;
 
-	std::size_t param_changed_cl1_id = cntnr1.registerParameterChangedCallback(boost::bind(&TestChangeListener::parameterChanged, 
-																						 boost::ref(cl1), _1, _2));
-	std::size_t param_removed_cl1_id = cntnr1.registerParameterRemovedCallback(boost::bind(&TestChangeListener::parameterRemoved, 
-																						 boost::ref(cl1), _1));
-	std::size_t parent_changed_cl1_id = cntnr1.registerParentChangedCallback(boost::bind(&TestChangeListener::parentChanged, 
-																					   boost::ref(cl1)));
+	std::size_t param_changed_cl1_id = cntnr1.registerParameterChangedCallback(std::bind(&TestChangeListener::parameterChanged, 
+																						 std::ref(cl1), _1, _2));
+	std::size_t param_removed_cl1_id = cntnr1.registerParameterRemovedCallback(std::bind(&TestChangeListener::parameterRemoved, 
+																						 std::ref(cl1), _1));
+	std::size_t parent_changed_cl1_id = cntnr1.registerParentChangedCallback(std::bind(&TestChangeListener::parentChanged, 
+																					   std::ref(cl1)));
 
-	cntnr2_ptr->registerParameterChangedCallback(boost::bind(&TestChangeListener::parameterChanged, 
-														   boost::ref(cl2), _1, _2));
-	cntnr2_ptr->registerParameterRemovedCallback(boost::bind(&TestChangeListener::parameterRemoved, 
-														   boost::ref(cl2), _1));
-	cntnr2_ptr->registerParentChangedCallback(boost::bind(&TestChangeListener::parentChanged, 
-														boost::ref(cl2)));
+	cntnr2_ptr->registerParameterChangedCallback(std::bind(&TestChangeListener::parameterChanged, 
+														   std::ref(cl2), _1, _2));
+	cntnr2_ptr->registerParameterRemovedCallback(std::bind(&TestChangeListener::parameterRemoved, 
+														   std::ref(cl2), _1));
+	cntnr2_ptr->registerParentChangedCallback(std::bind(&TestChangeListener::parentChanged, 
+														std::ref(cl2)));
 
 	BOOST_CHECK(cl1.numParamChangedCalls == 0);
 	BOOST_CHECK(cl1.numParamRemovedCalls == 0);

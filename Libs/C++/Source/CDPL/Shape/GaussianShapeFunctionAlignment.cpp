@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <cmath>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
@@ -54,20 +53,20 @@ namespace
 
 constexpr double      Shape::GaussianShapeFunctionAlignment::DEF_OPTIMIZATION_STOP_GRADIENT;
 constexpr std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
-
+				
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF), perfAlignment(true),
 	calcColOverlaps(true), optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
-	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(std::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, std::placeholders::_1),
+			  std::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, std::placeholders::_1, std::placeholders::_2))
 {}
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class):
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen), perfAlignment(true), calcColOverlaps(true),
 	optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
-	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(std::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, std::placeholders::_1),
+			  std::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, std::placeholders::_1, std::placeholders::_2))
 {
    setReference(ref_func,  sym_class);
 }

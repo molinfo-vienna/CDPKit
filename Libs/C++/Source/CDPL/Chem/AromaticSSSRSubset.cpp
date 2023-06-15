@@ -26,10 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"

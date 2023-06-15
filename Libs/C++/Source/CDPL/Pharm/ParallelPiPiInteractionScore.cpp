@@ -28,8 +28,7 @@
 
 #include <cmath>
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -53,8 +52,8 @@ constexpr double Pharm::ParallelPiPiInteractionScore::DEF_MAX_ANGLE;
 Pharm::ParallelPiPiInteractionScore::ParallelPiPiInteractionScore(double min_v_dist, double max_v_dist,
 																  double max_h_dist, double max_ang):
 	minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), maxAngle(max_ang), 
-	distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
-	angleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0)) {}
+	distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)),
+	angleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 2.5, 0.0)) {}
 
 double Pharm::ParallelPiPiInteractionScore::getMinVDistance() const
 {

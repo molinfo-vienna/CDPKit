@@ -26,9 +26,7 @@
  
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
-#include <boost/bind.hpp>
+#include <string>
 
 #include "CDPL/ForceField/MMFF94ChargeCalculator.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"

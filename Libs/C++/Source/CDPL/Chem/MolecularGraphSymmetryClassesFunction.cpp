@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -45,8 +43,8 @@ void Chem::perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
 								   unsigned int atom_flags, unsigned int bond_flags, bool inc_impl_h)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasSymmetryClass, _1))) == molgraph.getAtomsEnd())
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&hasSymmetryClass, std::placeholders::_1))) == molgraph.getAtomsEnd())
 		return;
 
 	Util::STArray sym_classes;

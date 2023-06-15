@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -181,6 +180,6 @@ void Chem::buildMatchExpressions(Reaction& rxn, bool overwrite)
 	buildMatchExpression(rxn, overwrite);
 
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(MolecularGraph&, bool)>(&buildMatchExpressions),
-							  _1, overwrite));
+				  std::bind(static_cast<void (*)(MolecularGraph&, bool)>(&buildMatchExpressions),
+							std::placeholders::_1, overwrite));
 }

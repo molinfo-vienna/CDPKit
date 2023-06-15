@@ -25,8 +25,7 @@
 
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include <QPointF>
 #include <QString>
@@ -99,7 +98,7 @@ void ChOX::initData(CDPL::Chem::Reaction& rxn)
 	using namespace Chem;
 
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(Molecule&)>(&initData), _1));
+				  std::bind(static_cast<void (*)(Molecule&)>(&initData), std::placeholders::_1));
 
 	perceiveComponentGroups(rxn, false);
 }
@@ -172,7 +171,7 @@ void ChOX::prepareOutputData(CDPL::Chem::Reaction& rxn, const CDPL::Base::DataFo
 	using namespace Chem;
 
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(Molecule&, const Base::DataFormat&,
-												   const Base::ControlParameterContainer&)>
-							  (&prepareOutputData), _1, boost::ref(opt_fmt), boost::ref(params)));
+				  std::bind(static_cast<void (*)(Molecule&, const Base::DataFormat&,
+												 const Base::ControlParameterContainer&)>
+							(&prepareOutputData), std::placeholders::_1, std::ref(opt_fmt), std::ref(params)));
 }

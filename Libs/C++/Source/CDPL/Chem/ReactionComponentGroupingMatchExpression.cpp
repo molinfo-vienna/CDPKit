@@ -28,8 +28,7 @@
 
 #include <iterator>
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/ReactionComponentGroupingMatchExpression.hpp"
 #include "CDPL/Chem/Reaction.hpp"
@@ -86,7 +85,8 @@ bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&,
 		}
 
 		ComponentList::iterator target_comp_it = std::find_if(compList.begin(), compList.end(),
-															  boost::bind(&Fragment::containsAtom, _1, boost::ref(*first_mpd_atom)));
+															  std::bind(&Fragment::containsAtom,
+																		std::placeholders::_1, std::ref(*first_mpd_atom)));
 
 		if (target_comp_it == compList.end())
 			return false;

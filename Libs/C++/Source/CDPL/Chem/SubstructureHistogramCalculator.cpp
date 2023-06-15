@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/SubstructureHistogramCalculator.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -110,8 +108,9 @@ void Chem::SubstructureHistogramCalculator::removePattern(std::size_t idx)
 
     patterns.erase(patterns.begin() + idx);
 
-    if (std::find_if(patterns.begin(), patterns.end(), boost::bind(std::equal_to<std::size_t>(), priority,
-																   boost::bind(&Pattern::getPriority, _1))) == patterns.end())
+    if (std::find_if(patterns.begin(), patterns.end(),
+					 std::bind(std::equal_to<std::size_t>(), priority,
+							   std::bind(&Pattern::getPriority, std::placeholders::_1))) == patterns.end())
 		matchedSubstructMasks.erase(priority);
 }
 
@@ -137,8 +136,9 @@ void Chem::SubstructureHistogramCalculator::removePattern(const PatternIterator&
 
     patterns.erase(ptn_it);
 
-    if (std::find_if(patterns.begin(), patterns.end(), boost::bind(std::equal_to<std::size_t>(), priority,
-																   boost::bind(&Pattern::getPriority, _1))) == patterns.end())
+    if (std::find_if(patterns.begin(), patterns.end(),
+					 std::bind(std::equal_to<std::size_t>(), priority,
+							   std::bind(&Pattern::getPriority, std::placeholders::_1))) == patterns.end())
 		matchedSubstructMasks.erase(priority);
 }
 

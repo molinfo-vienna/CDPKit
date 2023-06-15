@@ -33,8 +33,8 @@
 #include <ctime>
 #include <limits>
 #include <istream>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
@@ -151,6 +151,8 @@ namespace
 
 bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool read_data)
 {
+	using namespace std::placeholders;
+	
 	if (!hasMoreData(is))
 		return false;
 
@@ -181,8 +183,8 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 
 			tgt_molgraph = confTargetFragment.get();
 
-			std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), boost::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
-			std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), boost::bind(&Fragment::addBond, confTargetFragment.get(), _1));
+			std::for_each(mol.getAtomsBegin() + atom_idx_offs, mol.getAtomsEnd(), std::bind(&Fragment::addAtom, confTargetFragment.get(), _1));
+			std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), std::bind(&Fragment::addBond, confTargetFragment.get(), _1));
 			
 			confTargetFragment->copyProperties(mol);
 		}
@@ -2903,12 +2905,13 @@ void Chem::MDLDataReader::readCTabV3000AtomIndex(std::istream& is, const Molecul
 void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, MatchConstraintList& constr_list)
 {
 	using namespace MDL::MOLFile::CTab::V3000;
-
+	using namespace std::placeholders;
+	
 	readCTabV3000PropertyStringValue(is, tmpString);
 
 	std::string::const_iterator type_str_beg = tmpString.begin();
 	std::string::const_iterator type_str_end = tmpString.end();
-	std::string::const_iterator first_non_ws_pos = std::find_if(type_str_beg, type_str_end, boost::bind(Internal::IsNonWhitespace(), _1));
+	std::string::const_iterator first_non_ws_pos = std::find_if(type_str_beg, type_str_end, std::bind(Internal::IsNonWhitespace(), _1));
 
 	if (first_non_ws_pos == type_str_end) {
 		setCTabV3000AtomSymbol(tmpString, atom, constr_list);
@@ -2921,7 +2924,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 		== std::string::size_type(first_non_ws_pos - type_str_beg)) {
 
 		first_non_ws_pos = std::find_if(first_non_ws_pos + AtomBlock::NOT_ATOM_LIST_TAG.length(), type_str_end, 
-										boost::bind(Internal::IsNonWhitespace(), _1));
+										std::bind(Internal::IsNonWhitespace(), _1));
 
 		if (first_non_ws_pos == type_str_end) {
 			setCTabV3000AtomSymbol(tmpString, atom, constr_list);
@@ -2937,7 +2940,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 	}
 
 	std::string::const_iterator last_non_ws_pos = --std::find_if(tmpString.rbegin(), tmpString.rend(), 
-																 boost::bind(Internal::IsNonWhitespace(), _1)).base();
+																 std::bind(Internal::IsNonWhitespace(), _1)).base();
 
 	if (*last_non_ws_pos != AtomBlock::ATOM_LIST_END_DELIMITER) {
 		setCTabV3000AtomSymbol(tmpString, atom, constr_list);

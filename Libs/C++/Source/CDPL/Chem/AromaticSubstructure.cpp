@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/AromaticSubstructure.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -169,8 +168,8 @@ bool Chem::AromaticSubstructure::findAromaticRings(RingDescriptorListTable::valu
 
 	while (true) {
 		RingDescriptorList::iterator next_arom_rings_end = std::partition(arom_rings_end, rings_end, 
-																		  boost::bind(&AromaticSubstructure::isAromatic, 
-																					  this, _1));
+																		  std::bind(&AromaticSubstructure::isAromatic, 
+																					this, std::placeholders::_1));
 		if (aromBondMask == ringBondMask) {
 			finished = true; // ok, all ring bonds are aromatic -> nothing left to do
 			return true;
@@ -305,8 +304,9 @@ Chem::AromaticSubstructure::RingDescriptor::RingDescriptor(const Fragment::Share
 	ringPtr(ring_ptr), subRing1(0), subRing2(0), bondMask(molgraph.getNumBonds())
 {
 	std::for_each(ringPtr->getBondsBegin(), ringPtr->getBondsEnd(),
-				  boost::bind(&Util::BitSet::set, boost::ref(bondMask),
-							  boost::bind(&BondContainer::getBondIndex, boost::ref(molgraph), _1), true));
+				  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>(&Util::BitSet::set), std::ref(bondMask),
+							std::bind(&BondContainer::getBondIndex, std::ref(molgraph),
+									  std::placeholders::_1), true));
 }
 
 Chem::AromaticSubstructure::RingDescriptor::RingDescriptor(const Fragment::SharedPointer& ring_ptr, Util::BitSet& bond_mask,

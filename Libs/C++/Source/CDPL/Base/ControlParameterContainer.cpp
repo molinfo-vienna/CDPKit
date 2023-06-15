@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Base/ControlParameterContainer.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -47,7 +45,8 @@ Base::ControlParameterContainer::~ControlParameterContainer()
 	tmp_children.swap(children);
 
 	std::for_each(tmp_children.begin(), tmp_children.end(),
-				  boost::bind(&ControlParameterContainer::setParent, _1, static_cast<ControlParameterContainer*>(0)));
+				  std::bind(&ControlParameterContainer::setParent, std::placeholders::_1,
+							static_cast<ControlParameterContainer*>(0)));
 }
 
 std::size_t Base::ControlParameterContainer::getNumParameters() const
@@ -183,9 +182,9 @@ std::size_t Base::ControlParameterContainer::registerParameterChangedCallback(co
 	std::size_t num_callbacks = paramChangedCallbacks.size();
 
 	for ( ; id < num_callbacks && std::find_if(paramChangedCallbacks.begin(), paramChangedCallbacks.end(),
-											   boost::bind(std::equal_to<std::size_t>(),
-														   boost::bind(&ParamChangedCallbackContainerEntry::first, _1),
-														   id)) != paramChangedCallbacks.end(); id++);
+											   std::bind(std::equal_to<std::size_t>(),
+														 std::bind(&ParamChangedCallbackContainerEntry::first, std::placeholders::_1),
+														 id)) != paramChangedCallbacks.end(); id++);
 
 	paramChangedCallbacks.push_back(ParamChangedCallbackContainerEntry(id, cb));
 
@@ -195,9 +194,9 @@ std::size_t Base::ControlParameterContainer::registerParameterChangedCallback(co
 void Base::ControlParameterContainer::unregisterParameterChangedCallback(std::size_t id)
 {
 	paramChangedCallbacks.erase(std::remove_if(paramChangedCallbacks.begin(), paramChangedCallbacks.end(), 
-											   boost::bind(std::equal_to<std::size_t>(),
-														   boost::bind(&ParamChangedCallbackContainerEntry::first, _1),
-														   id)),
+											   std::bind(std::equal_to<std::size_t>(),
+														 std::bind(&ParamChangedCallbackContainerEntry::first, std::placeholders::_1),
+														 id)),
 								paramChangedCallbacks.end());
 }
 
@@ -207,9 +206,9 @@ std::size_t Base::ControlParameterContainer::registerParameterRemovedCallback(co
 	std::size_t num_callbacks = paramRemovedCallbacks.size();
 
 	for ( ; id < num_callbacks && std::find_if(paramRemovedCallbacks.begin(), paramRemovedCallbacks.end(),
-											   boost::bind(std::equal_to<std::size_t>(),
-														   boost::bind(&ParamRemovedCallbackContainerEntry::first, _1),
-														   id)) != paramRemovedCallbacks.end(); id++);
+											   std::bind(std::equal_to<std::size_t>(),
+														 std::bind(&ParamRemovedCallbackContainerEntry::first, std::placeholders::_1),
+														 id)) != paramRemovedCallbacks.end(); id++);
 
 	paramRemovedCallbacks.push_back(ParamRemovedCallbackContainerEntry(id, cb));
 
@@ -219,9 +218,9 @@ std::size_t Base::ControlParameterContainer::registerParameterRemovedCallback(co
 void Base::ControlParameterContainer::unregisterParameterRemovedCallback(std::size_t id)
 {
 	paramRemovedCallbacks.erase(std::remove_if(paramRemovedCallbacks.begin(), paramRemovedCallbacks.end(), 
-											   boost::bind(std::equal_to<std::size_t>(),
-														   boost::bind(&ParamRemovedCallbackContainerEntry::first, _1),
-														   id)),
+											   std::bind(std::equal_to<std::size_t>(),
+														 std::bind(&ParamRemovedCallbackContainerEntry::first, std::placeholders::_1),
+														 id)),
 								paramRemovedCallbacks.end());
 }
 
@@ -231,9 +230,9 @@ std::size_t Base::ControlParameterContainer::registerParentChangedCallback(const
 	std::size_t num_callbacks = parentChangedCallbacks.size();
 
 	for ( ; id < num_callbacks && std::find_if(parentChangedCallbacks.begin(), parentChangedCallbacks.end(),
-											   boost::bind(std::equal_to<std::size_t>(),
-														   boost::bind(&ParentChangedCallbackContainerEntry::first, _1),
-														   id)) != parentChangedCallbacks.end(); id++);
+											   std::bind(std::equal_to<std::size_t>(),
+														 std::bind(&ParentChangedCallbackContainerEntry::first, std::placeholders::_1),
+														 id)) != parentChangedCallbacks.end(); id++);
 
 	parentChangedCallbacks.push_back(ParentChangedCallbackContainerEntry(id, cb));
 
@@ -243,9 +242,9 @@ std::size_t Base::ControlParameterContainer::registerParentChangedCallback(const
 void Base::ControlParameterContainer::unregisterParentChangedCallback(std::size_t id)
 {
 	parentChangedCallbacks.erase(std::remove_if(parentChangedCallbacks.begin(), parentChangedCallbacks.end(), 
-												boost::bind(std::equal_to<std::size_t>(),
-															boost::bind(&ParentChangedCallbackContainerEntry::first, _1),
-															id)),
+												std::bind(std::equal_to<std::size_t>(),
+														  std::bind(&ParentChangedCallbackContainerEntry::first, std::placeholders::_1),
+														  id)),
 								 parentChangedCallbacks.end());
 }
 
@@ -261,24 +260,28 @@ Base::ControlParameterContainer& Base::ControlParameterContainer::operator=(cons
 
 void Base::ControlParameterContainer::parameterRemoved(const LookupKey& key) const
 {
+	using namespace std::placeholders;
+	
 	std::for_each(paramRemovedCallbacks.begin(), paramRemovedCallbacks.end(), 
-				  boost::bind(&ParameterRemovedCallbackFunction::operator(),
-							  boost::bind(&ParamRemovedCallbackContainerEntry::second, _1),
-							  boost::ref(key))); 
+				  std::bind(&ParameterRemovedCallbackFunction::operator(),
+							std::bind(&ParamRemovedCallbackContainerEntry::second, _1),
+							std::ref(key))); 
 
 	std::for_each(children.begin(), children.end(),
-				  boost::bind(&ControlParameterContainer::parentParameterRemoved, _1, boost::ref(key)));
+				  std::bind(&ControlParameterContainer::parentParameterRemoved, _1, std::ref(key)));
 }
 
 void Base::ControlParameterContainer::parameterChanged(const LookupKey& key, const Any& val) const
 {
+	using namespace std::placeholders;
+		
 	std::for_each(paramChangedCallbacks.begin(), paramChangedCallbacks.end(), 
-				  boost::bind(&ParameterChangedCallbackFunction::operator(),
-							  boost::bind(&ParamChangedCallbackContainerEntry::second, _1),
-							  boost::ref(key), boost::ref(val))); 
+				  std::bind(&ParameterChangedCallbackFunction::operator(),
+							std::bind(&ParamChangedCallbackContainerEntry::second, _1),
+							std::ref(key), std::ref(val))); 
 
 	std::for_each(children.begin(), children.end(),
-				  boost::bind(&ControlParameterContainer::parentParameterChanged, _1, boost::ref(key), boost::ref(val)));
+				  std::bind(&ControlParameterContainer::parentParameterChanged, _1, std::ref(key), std::ref(val)));
 }
 
 void Base::ControlParameterContainer::parentParameterRemoved(const LookupKey& key) const
@@ -303,10 +306,12 @@ void Base::ControlParameterContainer::parentParameterChanged(const LookupKey& ke
 
 void Base::ControlParameterContainer::parentChanged() const
 {
+	using namespace std::placeholders;
+	
 	std::for_each(parentChangedCallbacks.begin(), parentChangedCallbacks.end(), 
-				  boost::bind(&ParentChangedCallbackFunction::operator(),
-							  boost::bind(&ParentChangedCallbackContainerEntry::second, _1))); 
+				  std::bind(&ParentChangedCallbackFunction::operator(),
+							std::bind(&ParentChangedCallbackContainerEntry::second, _1))); 
 
 	std::for_each(children.begin(), children.end(),
-				  boost::bind(&ControlParameterContainer::parentChanged, _1));
+				  std::bind(&ControlParameterContainer::parentChanged, _1));
 }

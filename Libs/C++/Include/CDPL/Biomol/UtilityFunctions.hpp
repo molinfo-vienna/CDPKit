@@ -32,8 +32,7 @@
 #define CDPL_BIOMOL_UTILITYFUNCTIONS_HPP
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
@@ -52,7 +51,10 @@ namespace CDPL
 		Iter findResidueAtom(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
 							 char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO)
 		{
-			return std::find_if(it, end, boost::bind(&matchesResidueInfo, _1, res_code, chain_id, res_seq_no, ins_code, model_no, atom_name, serial_no));
+			return std::find_if(it, end,
+								std::bind(static_cast<bool (*)(const Chem::Atom&, const char*, const char*, long , char, std::size_t, const char*, long)>
+										  (&matchesResidueInfo), std::placeholders::_1, res_code, chain_id, res_seq_no,
+										  ins_code, model_no, atom_name, serial_no));
 		}
 
 	    template <typename Iter>
@@ -69,7 +71,9 @@ namespace CDPL
 					return it;
 
 				if (std::find_if(res.getAtomsBegin(), res.getAtomsEnd(), 
-								 boost::bind(&matchesResidueInfo, _1, res_code, chain_id, res_seq_no, ins_code, model_no, atom_name, serial_no)) != res.getAtomsEnd())
+								 std::bind(static_cast<bool (*)(const Chem::Atom&, const char*, const char*, long , char, std::size_t, const char*, long)>
+										   (&matchesResidueInfo), std::placeholders::_1, res_code, chain_id, res_seq_no,
+										   ins_code, model_no, atom_name, serial_no)) != res.getAtomsEnd())
 					return it;
 			}
 

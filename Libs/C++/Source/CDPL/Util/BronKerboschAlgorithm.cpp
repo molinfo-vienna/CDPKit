@@ -26,8 +26,7 @@
 
 #include <algorithm>
 #include <iterator>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
 
@@ -71,12 +70,14 @@ Util::BronKerboschAlgorithm& Util::BronKerboschAlgorithm::operator=(const BronKe
 
 void Util::BronKerboschAlgorithm::init(const BitSetArray& adj_mtx)
 {
+	using namespace std::placeholders;
+
 	adjMatrix = &adj_mtx;
 
 	nodeDegrees.clear();
 
 	std::transform(adj_mtx.getElementsBegin(), adj_mtx.getElementsEnd(), 
-				   std::back_inserter(nodeDegrees), boost::bind(&BitSet::count, _1));
+				   std::back_inserter(nodeDegrees), std::bind(&BitSet::count, _1));
 	
 	states.clear();
 	stateCache.putAll();

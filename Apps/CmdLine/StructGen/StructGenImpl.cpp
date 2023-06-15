@@ -31,9 +31,9 @@
 #include <thread>
 #include <chrono>
 #include <ratio>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -90,11 +90,12 @@ public:
 	StructureGenerationWorker(StructGenImpl* parent):
 		parent(parent), verbLevel(parent->getVerbosityLevel()), numProcMols(0), numFailedMols(0) {
 
-		structGen.setAbortCallback(boost::bind(&StructureGenerationWorker::abort, this));
+		structGen.setAbortCallback(std::bind(&StructureGenerationWorker::abort, this));
 		structGen.getSettings() = parent->settings;
 
 		if (parent->getVerbosityLevel() >= DEBUG)  
-			structGen.setLogMessageCallback(boost::bind(&StructureGenerationWorker::appendToLogRecord, this, _1));
+			structGen.setLogMessageCallback(std::bind(&StructureGenerationWorker::appendToLogRecord, this,
+													  std::placeholders::_1));
 
 		if (parent->torsionLib) {
 			if (parent->replaceBuiltinTorLib)
@@ -306,6 +307,8 @@ StructGenImpl::StructGenImpl():
 	hardTimeout(false), torsionLib(), fragmentLib(), inputHandler(), 
 	outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
 {
+	using namespace std::placeholders;
+	
 	settings.getFragmentBuildSettings() =  CDPL::ConfGen::FragmentConformerGeneratorSettings::FAST;
 
 	addOption("input,i", "Input file(s).", 
@@ -319,62 +322,62 @@ StructGenImpl::StructGenImpl():
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("mode,m", "Structure generation method to use (AUTO, DG, FRAGMENT, default: " + getGenerationModeString() + ").", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setGenerationMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setGenerationMode, this, _1)));
 	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
 			  "torsion angle tolerance range (only effective for fragment-based structure generation, default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setSampleAngleTolRanges, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&StructGenImpl::setSampleAngleTolRanges, this, _1)));
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setGenerateFromScratch, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&StructGenImpl::setGenerateFromScratch, this, _1)));
 	addOption("frag-force-field,d", "Force field used for fragment-based structure generation (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  ConfGen::getForceFieldTypeString(settings.getFragmentModeForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragBasedForceFieldType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setFragBasedForceFieldType, this, _1)));
 	addOption("dg-force-field,q", "Force field used for DG-based structure generation (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  ConfGen::getForceFieldTypeString(settings.getDGModeForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setDGBasedForceFieldType, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setDGBasedForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setStrictParameterization, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(std::bind(&StructGenImpl::setStrictParameterization, this, _1)));
 	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&StructGenImpl::setDielectricConst, this, _1)));
+			  value<double>()->notifier(std::bind(&StructGenImpl::setDielectricConst, this, _1)));
 	addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&StructGenImpl::setDistExponent, this, _1)));
+			  value<double>()->notifier(std::bind(&StructGenImpl::setDistExponent, this, _1)));
 	addOption("timeout,T", "Time in seconds after which structure generation will be stopped (default: " + 
 			  std::to_string(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
-			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setTimeout, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&StructGenImpl::setTimeout, this, _1)));
 	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which DG-based structure generation will be performed"
 			  "(only effective in generation mode AUTO, default: " +
 			  std::to_string(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&StructGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in DG-based structure generation, default: " +
 			  (boost::format("%.4f") % settings.getRefinementTolerance()).str() + ", must be >= 0, 0 results in refinement until convergence).",
-			  value<double>()->notifier(boost::bind(&StructGenImpl::setRefTolerance, this, _1)));
+			  value<double>()->notifier(std::bind(&StructGenImpl::setRefTolerance, this, _1)));
 	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in DG-based structure generation, default: " +
 			  std::to_string(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
-			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMaxNumRefIterations, this, _1)));
+			  value<std::size_t>()->notifier(std::bind(&StructGenImpl::setMaxNumRefIterations, this, _1)));
 	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective for fragment-based structure generation).",
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addTorsionLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::addTorsionLib, this, _1)));
 	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective for fragment-based structure generation).",
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setTorsionLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setTorsionLib, this, _1)));
 	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective for fragment-based structure generation, default: FAST).", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::applyFragBuildPreset, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::applyFragBuildPreset, this, _1)));
 	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective for fragment-based structure generation).",
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addFragmentLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::addFragmentLib, this, _1)));
 	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective for fragment-based structure generation).",
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragmentLib, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setFragmentLib, this, _1)));
 	addOption("canonicalize,z", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));
 	addOption("hard-timeout,U", "Specifies that exceeding the time limit shall be considered as an error and cause "
 			  "structure generation to fail (default: false).", 
 			  value<bool>(&hardTimeout)->implicit_value(true));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setInputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setOutputFormat, this, _1)));
 	addOption("failed-format,F", "Failed molecule output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFailedOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&StructGenImpl::setFailedOutputFormat, this, _1)));
 
 	addOptionLongDescriptions();
 }
@@ -706,7 +709,7 @@ void StructGenImpl::processMultiThreaded()
 
 			StructureGenerationWorkerPtr worker_ptr(new StructureGenerationWorker(this));
 
-			thread_grp.emplace_back(boost::bind(&StructureGenerationWorker::operator(), worker_ptr));
+			thread_grp.emplace_back(std::bind(&StructureGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -866,21 +869,22 @@ void StructGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool 
 void StructGenImpl::checkInputFiles() const
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	StringList::const_iterator it = std::find_if(inputFiles.begin(), inputFiles.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists, _1)));
 	if (it != inputFiles.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 
 	if (std::find_if(inputFiles.begin(), inputFiles.end(),
-					 boost::bind(Util::checkIfSameFile, boost::ref(outputFile),
-								 _1)) != inputFiles.end())
+					 std::bind(Util::checkIfSameFile, boost::ref(outputFile),
+							   _1)) != inputFiles.end())
 		throw Base::ValueError("output file must not occur in list of input files");
 
 	if (!failedFile.empty() && std::find_if(inputFiles.begin(), inputFiles.end(),
-											boost::bind(Util::checkIfSameFile, boost::ref(failedFile),
-														_1)) != inputFiles.end())
+											std::bind(Util::checkIfSameFile, boost::ref(failedFile),
+													  _1)) != inputFiles.end())
 		throw Base::ValueError("failed output file must not occur in list of input files");
 
 	if (!torsionLibName.empty() && !Util::fileExists(torsionLibName))

@@ -30,8 +30,8 @@
 #include <iterator>
 #include <limits>
 #include <cstdlib>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/functional/hash.hpp>
 
 #include "CDPL/Chem/ResonanceStructureGenerator.hpp"
@@ -73,7 +73,7 @@ Chem::ResonanceStructureGenerator::ResonanceStructureGenerator(const ResonanceSt
 	maxNumGenStructs(gen.maxNumGenStructs)
 {
 	std::transform(gen.outputResStructs.begin(), gen.outputResStructs.end(), std::back_inserter(outputResStructs),
-				   boost::bind(&ResonanceStructureGenerator::copyResStructPtr, this, _1));
+				   std::bind(&ResonanceStructureGenerator::copyResStructPtr, this, std::placeholders::_1));
 }
 
 Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(const ResonanceStructureGenerator& gen) 
@@ -91,7 +91,7 @@ Chem::ResonanceStructureGenerator& Chem::ResonanceStructureGenerator::operator=(
 	outputResStructs.clear();
 	
 	std::transform(gen.outputResStructs.begin(), gen.outputResStructs.end(), std::back_inserter(outputResStructs),
-				   boost::bind(&ResonanceStructureGenerator::copyResStructPtr, this, _1));
+				   std::bind(&ResonanceStructureGenerator::copyResStructPtr, this, std::placeholders::_1));
 		
 	return *this;
 }
@@ -219,7 +219,7 @@ void Chem::ResonanceStructureGenerator::createInputResStructData()
 	inputResStruct.bondOrders.clear();
 
 	std::transform(molGraph->getBondsBegin(), molGraph->getBondsEnd(), std::back_inserter(inputResStruct.bondOrders.getData()),
-				   boost::bind(&getOrder, _1));
+				   std::bind(&getOrder, std::placeholders::_1));
 }
 
 void Chem::ResonanceStructureGenerator::extractResBonds()
@@ -370,7 +370,8 @@ void Chem::ResonanceStructureGenerator::genOutputResStructs()
 	minNumCharges = atomData.size() * 8;
 
 	std::for_each(IndirIter(startResStructs.begin()), IndirIter(startResStructs.end()),
-				  boost::bind(&ResonanceStructureGenerator::genOutputResStructs, this, _1, 0, 0, 0));
+				  std::bind(static_cast<void (ResonanceStructureGenerator::*)(StructureData&, std::size_t, std::size_t, std::size_t)>
+							(&ResonanceStructureGenerator::genOutputResStructs), this, std::placeholders::_1, 0, 0, 0));
 
 	postprocOutputResStructs();
 }

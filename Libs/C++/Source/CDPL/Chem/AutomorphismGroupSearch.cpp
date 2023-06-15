@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -54,9 +52,11 @@ Chem::AutomorphismGroupSearch::AutomorphismGroupSearch(unsigned int atom_flags, 
     molGraphMatchExpr(new MolGraphMatchExpression(this))
 
 {
-    substructSearch.setAtomMatchExpressionFunction(boost::bind(&AutomorphismGroupSearch::getAtomMatchExpression, this, _1));
-    substructSearch.setBondMatchExpressionFunction(boost::bind(&AutomorphismGroupSearch::getBondMatchExpression, this, _1));
-    substructSearch.setMolecularGraphMatchExpressionFunction(boost::bind(&AutomorphismGroupSearch::getMolGraphMatchExpression, this, _1));
+	using namespace std::placeholders;
+	
+    substructSearch.setAtomMatchExpressionFunction(std::bind(&AutomorphismGroupSearch::getAtomMatchExpression, this, _1));
+    substructSearch.setBondMatchExpressionFunction(std::bind(&AutomorphismGroupSearch::getBondMatchExpression, this, _1));
+    substructSearch.setMolecularGraphMatchExpressionFunction(std::bind(&AutomorphismGroupSearch::getMolGraphMatchExpression, this, _1));
 
     substructSearch.uniqueMappingsOnly(false);
     substructSearch.setMaxNumMappings(0);
@@ -319,12 +319,14 @@ bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const Mo
 																		const MolecularGraph& target_molgraph, 
 																		const AtomBondMapping& mapping, const Base::Any& aux_data) const
 {
+	using namespace std::placeholders;
+	
  	if (!parent->incIdentityMapping) {
 		const AtomMapping& am = mapping.getAtomMapping();
 
 		if (std::find_if(am.getEntriesBegin(), am.getEntriesEnd(), 
-						 boost::bind(std::not_equal_to<const Atom*>(), 
-									 boost::bind(&AtomMapping::Entry::first, _1), boost::bind(&AtomMapping::Entry::second, _1))) == 
+						 std::bind(std::not_equal_to<const Atom*>(), 
+								   std::bind(&AtomMapping::Entry::first, _1), std::bind(&AtomMapping::Entry::second, _1))) == 
 			am.getEntriesEnd())
 			return false;
 	}

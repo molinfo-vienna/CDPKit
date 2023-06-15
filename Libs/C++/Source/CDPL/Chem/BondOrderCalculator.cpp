@@ -33,8 +33,8 @@
 #include <cassert>
 #include <limits>
 #include <mutex>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/max_cardinality_matching.hpp>
 
@@ -241,6 +241,8 @@ void Chem::BondOrderCalculator::calculate(const MolecularGraph& molgraph, Util::
 
 void Chem::BondOrderCalculator::init(const MolecularGraph& molgraph, Util::STArray& orders)
 {
+	using namespace std::placeholders;
+	
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	molGraph = &molgraph;
@@ -302,14 +304,14 @@ void Chem::BondOrderCalculator::init(const MolecularGraph& molgraph, Util::STArr
 		MolecularGraph::SharedPointer ptn_copy = funcGroupPatternMols[i]->clone();
 
 		std::for_each(ptn_copy->getAtomsBegin(), ptn_copy->getAtomsEnd(), 
-					  boost::bind(static_cast<void (*)(Atom&, const MatchExpression<Atom,
-													   MolecularGraph>::SharedPointer&)>(&setMatchExpression), 
-								  _1, atom_expr));
+					  std::bind(static_cast<void (*)(Atom&, const MatchExpression<Atom,
+													 MolecularGraph>::SharedPointer&)>(&setMatchExpression), 
+								_1, atom_expr));
 
 		std::for_each(ptn_copy->getBondsBegin(), ptn_copy->getBondsEnd(), 
-					  boost::bind(static_cast<void (*)(Bond&, const MatchExpression<Bond,
-													   MolecularGraph>::SharedPointer&)>(&setMatchExpression), 
-								  _1, bond_expr));
+					  std::bind(static_cast<void (*)(Bond&, const MatchExpression<Bond,
+													 MolecularGraph>::SharedPointer&)>(&setMatchExpression), 
+								_1, bond_expr));
 
 		buildMatchExpressions(*ptn_copy, false);
 
@@ -392,17 +394,19 @@ void Chem::BondOrderCalculator::calcFreeAtomValences(Util::STArray& orders)
 
 void Chem::BondOrderCalculator::perceiveAtomGeometries(Util::STArray& orders)
 {
+	using namespace std::placeholders;
+	
 	std::transform(molGraph->getAtomsBegin(), molGraph->getAtomsEnd(), 
 				   std::back_inserter(atomGeometries),
-				   boost::bind(&BondOrderCalculator::perceiveInitialGeometry, this, _1));
+				   std::bind(&BondOrderCalculator::perceiveInitialGeometry, this, _1));
 
 	FragmentList::SharedPointer sssr = getSSSR(*molGraph);
 
 	std::for_each(sssr->getElementsBegin(), sssr->getElementsEnd(), 
-				  boost::bind(&BondOrderCalculator::fixRingAtomGeometries, this, _1));
+				  std::bind(&BondOrderCalculator::fixRingAtomGeometries, this, _1));
 
 	std::for_each(molGraph->getAtomsBegin(), molGraph->getAtomsEnd(), 
-				  boost::bind(&BondOrderCalculator::postprocessGeometry, this, _1, boost::ref(orders)));
+				  std::bind(&BondOrderCalculator::postprocessGeometry, this, _1, std::ref(orders)));
 }
 
 void Chem::BondOrderCalculator::assignBondOrders(Util::STArray& orders)
@@ -446,6 +450,8 @@ void Chem::BondOrderCalculator::assignTetrahedralAtomBondOrders(Util::STArray& o
 
 void Chem::BondOrderCalculator::assignFunctionalGroupBondOrders(Util::STArray& orders)
 {
+	using namespace std::placeholders;
+	
 	for (MolecularGraphPtrList::const_iterator ptn_it = funcGroupPatterns.begin(), ptn_end = funcGroupPatterns.end(); 
 		 ptn_it != ptn_end; ++ptn_it) {
 
@@ -509,9 +515,9 @@ void Chem::BondOrderCalculator::assignFunctionalGroupBondOrders(Util::STArray& o
 				}
 
 				std::sort(funcGroupMappings.begin(), funcGroupMappings.end(), 
-						  boost::bind(std::greater<double>(), 
-									  boost::bind(&ABMappingList::value_type::first, _1), 
-									  boost::bind(&ABMappingList::value_type::first, _2)));
+						  std::bind(std::greater<double>(), 
+									std::bind(&ABMappingList::value_type::first, _1), 
+									std::bind(&ABMappingList::value_type::first, _2)));
 			}
 
 			for (ABMappingList::const_iterator m_it = funcGroupMappings.begin(), m_end = funcGroupMappings.end(); m_it != m_end; ++m_it) {
@@ -632,7 +638,7 @@ void Chem::BondOrderCalculator::assignConjPiSystemBondOrders(Util::STArray& orde
 		fragBondList.clear();
 
 		getUndefBondFragment(bond->getBegin(), false, 
-							 boost::bind(&BondOrderCalculator::isPlanarPiBond, this, _1));
+							 std::bind(&BondOrderCalculator::isPlanarPiBond, this, std::placeholders::_1));
 
 		if (fragBondList.size() < 3)
 			continue;

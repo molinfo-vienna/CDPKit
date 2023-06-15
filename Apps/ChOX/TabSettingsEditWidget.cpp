@@ -25,8 +25,7 @@
 
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include <QTabWidget>
 #include <QVBoxLayout>
@@ -46,7 +45,7 @@ TabSettingsEditWidget::TabSettingsEditWidget(QWidget* parent):
 bool TabSettingsEditWidget::haveChangedSettings() const
 {
 	return (std::find_if(editWidgetList.begin(), editWidgetList.end(), 
-						 boost::bind(&SettingsEditWidget::haveChangedSettings, _1)) != editWidgetList.end());
+						 std::bind(&SettingsEditWidget::haveChangedSettings, std::placeholders::_1)) != editWidgetList.end());
 }
 
 void TabSettingsEditWidget::addEditWidget(SettingsEditWidget* widget, const QString& label)
@@ -61,7 +60,7 @@ void TabSettingsEditWidget::addEditWidget(SettingsEditWidget* widget, const QStr
 void TabSettingsEditWidget::apply()
 {
 	std::for_each(editWidgetList.begin(), editWidgetList.end(), 
-				  boost::bind(&SettingsEditWidget::apply, _1));
+				  std::bind(&SettingsEditWidget::apply, std::placeholders::_1));
 }
 
 void TabSettingsEditWidget::reset()

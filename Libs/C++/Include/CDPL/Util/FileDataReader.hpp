@@ -33,8 +33,7 @@
 
 #include <fstream>
 #include <string>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Base/DataReader.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -90,7 +89,7 @@ CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::stri
     stream(file_name.c_str(), mode), fileName(file_name), reader(stream) 
 {
     reader.setParent(this);
-	reader.registerIOCallback(boost::bind(&Base::DataIOBase::invokeIOCallbacks, this, _2));
+	reader.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }
 
 template <typename ReaderImpl, typename DataType>

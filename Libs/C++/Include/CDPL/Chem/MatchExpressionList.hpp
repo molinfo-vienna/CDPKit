@@ -33,8 +33,7 @@
 
 #include <algorithm>
 #include <memory>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Util/IndirectArray.hpp"
@@ -92,7 +91,8 @@ template <typename ObjType1, typename ObjType2>
 bool CDPL::Chem::MatchExpressionList<ObjType1, ObjType2>::requiresAtomBondMapping() const
 {
 	return (std::find_if(this->getElementsBegin(), this->getElementsEnd(),
-						 boost::bind(&MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping, _1)) != this->getElementsEnd());
+						 std::bind(&MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping, std::placeholders::_1)) !=
+			this->getElementsEnd());
 }
 
 #endif // CDPL_CHEM_MATCHEXPRESSIONLIST_HPP

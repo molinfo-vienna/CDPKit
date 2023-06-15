@@ -29,9 +29,7 @@
 #include <cmath>
 #include <algorithm>
 #include <numeric>
-
-#include <boost/tuple/tuple_comparison.hpp>
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -292,13 +290,14 @@ void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinat
 void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	if (!molGraph)
 		return;
 
 	double bond_length_sum = std::accumulate(bondLengthTable.begin(), bondLengthTable.end(), double(),
-											 boost::bind(std::plus<double>(), _1,
-														 boost::bind(&BondLengthTable::value_type::second, _2)));
+											 std::bind(std::plus<double>(), _1,
+													   std::bind(&BondLengthTable::value_type::second, _2)));
 	bool excl_hs = settings.excludeHydrogens();
 
 	for (std::size_t i = 0; i < numAtoms; i++) {

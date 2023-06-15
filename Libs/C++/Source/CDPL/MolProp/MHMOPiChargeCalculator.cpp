@@ -30,8 +30,6 @@ h * along with this library; see the file COPYING. If not, write to
 #include <functional>
 #include <unordered_map>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/MolProp/MHMOPiChargeCalculator.hpp"
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/PEOESigmaChargeCalculator.hpp"
@@ -187,7 +185,7 @@ void MolProp::MHMOPiChargeCalculator::calculate(const Chem::ElectronSystemList& 
 	initAtomFreeElecCounts(pi_sys_list, molgraph);
 	
 	std::for_each(pi_sys_list.getElementsBegin(), pi_sys_list.getElementsEnd(),
-				  boost::bind(&MHMOPiChargeCalculator::calcForPiSys, this, _1, boost::ref(molgraph)));
+				  std::bind(&MHMOPiChargeCalculator::calcForPiSys, this, std::placeholders::_1, std::ref(molgraph)));
 }
 
 double MolProp::MHMOPiChargeCalculator::getElectronDensity(std::size_t atom_idx) const
@@ -531,6 +529,8 @@ bool MolProp::MHMOPiChargeCalculator::diagHueckelMatrix()
 
 void MolProp::MHMOPiChargeCalculator::distElectrons(const Chem::ElectronSystem& pi_sys)
 {
+	using namespace std::placeholders;
+	
 	std::size_t num_mos = hmEigenValues.getSize();
 	
 	moDescriptors.resize(num_mos);
@@ -545,7 +545,7 @@ void MolProp::MHMOPiChargeCalculator::distElectrons(const Chem::ElectronSystem& 
 	}
 
 	std::sort(moDescriptorPtrs.begin(), moDescriptorPtrs.end(),
-			  boost::bind(std::less<double>(), boost::bind(&MODescr::energy, _1),  boost::bind(&MODescr::energy, _2)));
+			  std::bind(std::less<double>(), std::bind(&MODescr::energy, _1),  std::bind(&MODescr::energy, _2)));
 
 	for (std::size_t i = 0, num_pi_elec = pi_sys.getNumElectrons(); i < num_mos; ) {
 		double energy = moDescriptorPtrs[i]->energy;

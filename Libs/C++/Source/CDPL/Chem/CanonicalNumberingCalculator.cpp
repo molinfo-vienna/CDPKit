@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -61,13 +60,15 @@ constexpr unsigned int Chem::CanonicalNumberingCalculator::DEF_BOND_PROPERTY_FLA
 Chem::CanonicalNumberingCalculator::CanonicalNumberingCalculator():
 	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
-	hCountFunc(boost::bind(&Internal::getBondCount, _1, _2, 1, AtomType::H, true)) 
+	hCountFunc(std::bind(static_cast<std::size_t (*)(const Atom&, const MolecularGraph&, std::size_t, unsigned int, bool)>(&Internal::getBondCount),
+						 std::placeholders::_1, std::placeholders::_2, 1, AtomType::H, true)) 
 {}
 
 Chem::CanonicalNumberingCalculator::CanonicalNumberingCalculator(const MolecularGraph& molgraph, Util::STArray& numbering):
 	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
-	hCountFunc(boost::bind(&Internal::getBondCount, _1, _2, 1, AtomType::H, true))
+	hCountFunc(std::bind(static_cast<std::size_t (*)(const Atom&, const MolecularGraph&, std::size_t, unsigned int, bool)>(&Internal::getBondCount),
+						 std::placeholders::_1, std::placeholders::_2, 1, AtomType::H, true))
 {
 	calculate(molgraph, numbering);
 }
@@ -544,7 +545,7 @@ void Chem::CanonicalNumberingCalculator::buildConnectionTable(ConnectionTable& c
 	ctab.clear();
 
 	std::for_each(nodeList.begin(), nodeList.end(), 
-				  boost::bind(&AtomNode::appendConnectivityData, _1, boost::ref(ctab)));
+				  std::bind(&AtomNode::appendConnectivityData, std::placeholders::_1, std::ref(ctab)));
 }
 
 void Chem::CanonicalNumberingCalculator::appendAtomConfigs(ConnectionTable& ctab)
@@ -552,7 +553,7 @@ void Chem::CanonicalNumberingCalculator::appendAtomConfigs(ConnectionTable& ctab
 	std::size_t old_ctab_size = ctab.size();
 
 	std::for_each(nodeList.begin(), nodeList.end(), 
-				  boost::bind(&AtomNode::appendAtomConfigData, _1, boost::ref(ctab)));
+				  std::bind(&AtomNode::appendAtomConfigData, std::placeholders::_1, std::ref(ctab)));
 
 	foundStereogenicAtoms = (old_ctab_size != ctab.size());
 }
@@ -562,7 +563,7 @@ void Chem::CanonicalNumberingCalculator::appendBondConfigs(ConnectionTable& ctab
 	std::size_t old_ctab_size = ctab.size();
 
 	std::for_each(nodeList.begin(), nodeList.end(), 
-				  boost::bind(&AtomNode::appendBondConfigData, _1, boost::ref(ctab)));
+				  std::bind(&AtomNode::appendBondConfigData, std::placeholders::_1, std::ref(ctab)));
 
 	foundStereogenicBonds = (old_ctab_size != ctab.size());
 }
@@ -589,6 +590,8 @@ void Chem::CanonicalNumberingCalculator::saveState()
 
 void Chem::CanonicalNumberingCalculator::restoreState()
 {
+	using namespace std::placeholders;
+	
 	assert(!nodeLabelingStack.empty());
 
 	std::size_t num_nodes = nodeList.size();
@@ -598,9 +601,9 @@ void Chem::CanonicalNumberingCalculator::restoreState()
 	NodeLabelingStack::iterator node_label_stack_end = nodeLabelingStack.end();
 
 	std::for_each(node_label_stack_end - num_nodes, node_label_stack_end,
-				  boost::bind(&AtomNode::setLabel, 
-							  boost::bind(&NodeLabelingState::first, _1),
-							  boost::bind(&NodeLabelingState::second, _1)));
+				  std::bind(&AtomNode::setLabel, 
+							std::bind(&NodeLabelingState::first, _1),
+							std::bind(&NodeLabelingState::second, _1)));
 
 	nodeLabelingStack.erase(node_label_stack_end - num_nodes, node_label_stack_end);
 }

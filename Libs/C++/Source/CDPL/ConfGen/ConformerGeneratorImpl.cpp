@@ -29,8 +29,8 @@
 #include <cmath>
 #include <algorithm>
 #include <iterator>
+#include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
@@ -102,12 +102,14 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE), settings(ConformerGeneratorSettings::DEFAULT),
 	energyMinimizer(std::ref(mmff94GradientCalc), std::ref(mmff94GradientCalc))
 {
-	fragAssembler.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
-	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
+	using namespace std::placeholders;
+	
+	fragAssembler.setTimeoutCallback(std::bind(&ConformerGeneratorImpl::timedout, this));
+	fragAssembler.setBondLengthFunction(std::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
 
-	torDriver.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
+	torDriver.setTimeoutCallback(std::bind(&ConformerGeneratorImpl::timedout, this));
 
-	confSelector.setAbortCallback(boost::bind(&ConformerGeneratorImpl::rmsdConfSelectorAbortCallback, this));
+	confSelector.setAbortCallback(std::bind(&ConformerGeneratorImpl::rmsdConfSelectorAbortCallback, this));
 	confSelector.setMaxNumSymmetryMappings(MAX_NUM_SYMMETRY_MAPPINGS + 1);
 	
 	TorsionDriverSettings& td_settings = torDriver.getSettings();
@@ -115,10 +117,10 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	td_settings.sampleHeteroAtomHydrogens(false);
 	td_settings.orderByEnergy(false);
 
-	fragConfDataCache.setCleanupFunction(boost::bind(&FragmentConfData::clear, _1));
+	fragConfDataCache.setCleanupFunction(std::bind(&FragmentConfData::clear, _1));
 
 	hCoordsCalc.undefinedOnly(true);
-	hCoordsCalc.setAtom3DCoordinatesCheckFunction(boost::bind(&ConformerGeneratorImpl::has3DCoordinates, this, _1));
+	hCoordsCalc.setAtom3DCoordinatesCheckFunction(std::bind(&ConformerGeneratorImpl::has3DCoordinates, this, _1));
 
 	DGStructureGeneratorSettings& dg_settings = dgStructureGen.getSettings();
 
@@ -334,7 +336,7 @@ void ConfGen::ConformerGeneratorImpl::combineComponentConformers(const Chem::Mol
 		const Fragment& comp = *comp_conf_data.fragment;
 
 		std::transform(comp.getAtomsBegin(), comp.getAtomsEnd(), std::back_inserter(parentAtomInds),
-					   boost::bind(&MolecularGraph::getAtomIndex, &molgraph, _1));
+					   std::bind(&MolecularGraph::getAtomIndex, &molgraph, std::placeholders::_1));
 
 		if (!have_full_ipt_coords && comp_conf_data.haveInputCoords)
 			orderConformersByEnergy(comp_conf_data.conformers);

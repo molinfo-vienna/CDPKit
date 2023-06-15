@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <iterator>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/TautomerGenerator.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -71,7 +70,7 @@ Chem::TautomerGenerator::TautomerGenerator(const TautomerGenerator& gen):
 {
 	molCache.setCleanupFunction(&BasicMolecule::clear);
 
-	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), boost::bind(&TautomerizationRule::clone, _1));
+	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), std::bind(&TautomerizationRule::clone, std::placeholders::_1));
 }
 
 Chem::TautomerGenerator& Chem::TautomerGenerator::operator=(const TautomerGenerator& gen) 
@@ -87,7 +86,7 @@ Chem::TautomerGenerator& Chem::TautomerGenerator::operator=(const TautomerGenera
 	tautRules.clear();
 
 	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), 
-				   boost::bind(&TautomerizationRule::clone, _1));
+				   std::bind(&TautomerizationRule::clone, std::placeholders::_1));
 
 	return *this;
 }
@@ -272,7 +271,7 @@ Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(
     calcImplicitHydrogenCounts(*mol_copy, true);
 	makeHydrogenComplete(*mol_copy);
 
-	std::for_each(mol_copy->getAtomsBegin(), mol_copy->getAtomsEnd(), boost::bind(&setImplicitHydrogenCount, _1, 0));
+	std::for_each(mol_copy->getAtomsBegin(), mol_copy->getAtomsEnd(), std::bind(&setImplicitHydrogenCount, std::placeholders::_1, 0));
 
 	return mol_copy;
 }

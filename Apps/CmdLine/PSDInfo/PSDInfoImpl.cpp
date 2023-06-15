@@ -31,8 +31,6 @@
 #include <sstream>
 #include <iomanip>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
@@ -141,6 +139,8 @@ void PSDInfoImpl::printStatistics(const std::string& db_name)
 		}
 
 		if (printPharmStats) {
+			using namespace std::placeholders;
+			
 			std::size_t min_cnt = 0;
 			std::size_t max_cnt = 0;
 			std::size_t tot_num_ftrs = 0;
@@ -148,8 +148,8 @@ void PSDInfoImpl::printStatistics(const std::string& db_name)
 			for (std::size_t i = 0; i < num_pharms; i++) {
 				const Pharm::FeatureTypeHistogram& ftr_counts = db_acc.getFeatureCounts(i);
 				std::size_t num_ftrs = std::accumulate(ftr_counts.getEntriesBegin(), ftr_counts.getEntriesEnd(), std::size_t(0),
-													   boost::bind(std::plus<std::size_t>(), _1, 
-																   boost::bind(&Pharm::FeatureTypeHistogram::Entry::second, _2)));
+													   std::bind(std::plus<std::size_t>(), _1, 
+																 std::bind(&Pharm::FeatureTypeHistogram::Entry::second, _2)));
 				tot_num_ftrs += num_ftrs;
 
 				if (i == 0) {
@@ -230,10 +230,11 @@ void PSDInfoImpl::printTableRow(std::ostream& os, const std::string& stat_type, 
 void PSDInfoImpl::checkInputFiles() const
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	StringList::const_iterator it = std::find_if(inputDatabases.begin(), inputDatabases.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists, _1)));
 	if (it != inputDatabases.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 }

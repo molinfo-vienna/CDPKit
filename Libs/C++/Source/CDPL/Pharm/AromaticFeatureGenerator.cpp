@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <iterator>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/AromaticFeatureGenerator.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
@@ -129,8 +128,9 @@ void Pharm::AromaticFeatureGenerator::addNonPatternFeatures(const Chem::Molecula
 		ringAtomMask.reset();
 
 		std::for_each(ring.getAtomsBegin(), ring.getAtomsEnd(),
-					  boost::bind(&Util::BitSet::set, boost::ref(ringAtomMask), 
-								  boost::bind(&AtomContainer::getAtomIndex, &molgraph, _1), true));
+					  std::bind(static_cast<Util::BitSet& (Util::BitSet::*)(Util::BitSet::size_type, bool)>
+								(&Util::BitSet::set), std::ref(ringAtomMask), 
+								std::bind(&AtomContainer::getAtomIndex, &molgraph, std::placeholders::_1), true));
 
 		if (isContainedInExMatchList(ringAtomMask) || isContainedInIncMatchList(ringAtomMask))
 			continue;

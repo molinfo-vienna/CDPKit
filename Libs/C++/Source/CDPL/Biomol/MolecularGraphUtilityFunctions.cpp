@@ -28,8 +28,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
@@ -54,7 +53,7 @@ void Biomol::extractResidueSubstructures(const Chem::MolecularGraph& molgraph, c
 	res_substructs.clear();
 
     std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
-		  boost::bind(&extractResidueSubstructure, _1, boost::ref(parent_molgraph), boost::ref(res_substructs),
+		  std::bind(&extractResidueSubstructure, std::placeholders::_1, std::ref(parent_molgraph), std::ref(res_substructs),
 			      cnctd_only, flags, true));
 }
 

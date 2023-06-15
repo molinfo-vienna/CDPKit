@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/BasicAtom.hpp"
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -88,8 +86,8 @@ Chem::Bond& Chem::BasicAtom::getBond(std::size_t idx)
 const Chem::Bond& Chem::BasicAtom::getBondToAtom(const Atom& atom) const
 {
 	NeighborList::const_iterator it = std::find_if(neighbors.begin(), neighbors.end(),
-												   boost::bind(std::equal_to<const Atom*>(), 
-															   &atom, boost::bind(&AtomBondPair::first, _1)));
+												   std::bind(std::equal_to<const Atom*>(), 
+															 &atom, std::bind(&AtomBondPair::first, std::placeholders::_1)));
 	if (it == neighbors.end())
 		throw Base::ItemNotFound("BasicAtom: argument atom is not a bonded neighbor");
 
@@ -99,8 +97,8 @@ const Chem::Bond& Chem::BasicAtom::getBondToAtom(const Atom& atom) const
 Chem::Bond& Chem::BasicAtom::getBondToAtom(const Atom& atom)
 {
 	NeighborList::const_iterator it = std::find_if(neighbors.begin(), neighbors.end(),
-												   boost::bind(std::equal_to<const Atom*>(), 
-															   &atom, boost::bind(&AtomBondPair::first, _1)));
+												   std::bind(std::equal_to<const Atom*>(), 
+															 &atom, std::bind(&AtomBondPair::first, std::placeholders::_1)));
 	if (it == neighbors.end())
 		throw Base::ItemNotFound("BasicAtom: argument atom is not a bonded neighbor");
 
@@ -110,16 +108,16 @@ Chem::Bond& Chem::BasicAtom::getBondToAtom(const Atom& atom)
 const Chem::Bond* Chem::BasicAtom::findBondToAtom(const Atom& atom) const
 {
 	NeighborList::const_iterator it = std::find_if(neighbors.begin(), neighbors.end(),
-												   boost::bind(std::equal_to<const Atom*>(), 
-															   &atom, boost::bind(&AtomBondPair::first, _1)));
+												   std::bind(std::equal_to<const Atom*>(), 
+															 &atom, std::bind(&AtomBondPair::first, std::placeholders::_1)));
 	return (it == neighbors.end() ? 0 : it->second);
 }
 
 Chem::Bond* Chem::BasicAtom::findBondToAtom(const Atom& atom)
 {
 	NeighborList::const_iterator it = std::find_if(neighbors.begin(), neighbors.end(),
-												   boost::bind(std::equal_to<const Atom*>(), 
-															   &atom, boost::bind(&AtomBondPair::first, _1)));
+												   std::bind(std::equal_to<const Atom*>(), 
+															 &atom, std::bind(&AtomBondPair::first, std::placeholders::_1)));
 	return (it == neighbors.end() ? 0 : it->second);
 }
 
@@ -141,16 +139,20 @@ Chem::Atom& Chem::BasicAtom::getAtom(std::size_t idx)
 
 void Chem::BasicAtom::orderAtoms(const AtomCompareFunction& func)
 {
+	using namespace std::placeholders;
+	
 	std::sort(neighbors.begin(), neighbors.end(), 
-			  boost::bind(func, boost::bind(AtomAccessor<const BasicAtom>(), _1), 
-						  boost::bind(AtomAccessor<const BasicAtom>(), _2)));
+			  std::bind(func, std::bind(AtomAccessor<const BasicAtom>(), _1), 
+						std::bind(AtomAccessor<const BasicAtom>(), _2)));
 }
 
 void Chem::BasicAtom::orderBonds(const BondCompareFunction& func)
 {
+	using namespace std::placeholders;
+	
 	std::sort(neighbors.begin(), neighbors.end(), 
-			  boost::bind(func, boost::bind(BondAccessor<const BasicBond>(), _1), 
-						  boost::bind(BondAccessor<const BasicBond>(), _2)));
+			  std::bind(func, std::bind(BondAccessor<const BasicBond>(), _1), 
+						std::bind(BondAccessor<const BasicBond>(), _2)));
 }
 
 Chem::BasicAtom::ConstAtomIterator Chem::BasicAtom::getAtomsBegin() const
@@ -196,22 +198,22 @@ Chem::BasicAtom::BondIterator Chem::BasicAtom::getBondsEnd()
 bool Chem::BasicAtom::containsAtom(const Atom& atom) const
 {
 	return (std::find_if(neighbors.begin(), neighbors.end(), 
-						 boost::bind(std::equal_to<const Atom*>(), 
-									 &atom, boost::bind(&AtomBondPair::first, _1))) != neighbors.end());
+						 std::bind(std::equal_to<const Atom*>(), 
+								   &atom, std::bind(&AtomBondPair::first, std::placeholders::_1))) != neighbors.end());
 }
 
 bool Chem::BasicAtom::containsBond(const Bond& bond) const
 {
 	return (std::find_if(neighbors.begin(), neighbors.end(), 
-						 boost::bind(std::equal_to<const Bond*>(), 
-									 &bond, boost::bind(&AtomBondPair::second, _1))) != neighbors.end());
+						 std::bind(std::equal_to<const Bond*>(), 
+								   &bond, std::bind(&AtomBondPair::second, std::placeholders::_1))) != neighbors.end());
 }
 
 std::size_t Chem::BasicAtom::getAtomIndex(const Atom& atom) const
 {
 	NeighborList::const_iterator it = std::find_if(neighbors.begin(), neighbors.end(), 
-												   boost::bind(std::equal_to<const Atom*>(), 
-															   &atom, boost::bind(&AtomBondPair::first, _1)));
+												   std::bind(std::equal_to<const Atom*>(), 
+															 &atom, std::bind(&AtomBondPair::first, std::placeholders::_1)));
 	if (it != neighbors.end())
 		return (it - neighbors.begin());
 
@@ -221,8 +223,8 @@ std::size_t Chem::BasicAtom::getAtomIndex(const Atom& atom) const
 std::size_t Chem::BasicAtom::getBondIndex(const Bond& bond) const
 {
 	NeighborList::const_iterator it = std::find_if(neighbors.begin(), neighbors.end(), 
-												   boost::bind(std::equal_to<const Bond*>(), 
-															   &bond, boost::bind(&AtomBondPair::second, _1)));
+												   std::bind(std::equal_to<const Bond*>(), 
+															 &bond, std::bind(&AtomBondPair::second, std::placeholders::_1)));
 	if (it != neighbors.end())
 		return (it - neighbors.begin());
 

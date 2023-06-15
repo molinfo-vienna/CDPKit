@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/ElectronSystem.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -210,9 +209,11 @@ bool Chem::ElectronSystem::removeAtom(const Atom& atom)
 
 void Chem::ElectronSystem::orderAtoms(const AtomCompareFunction& func)
 {
+	using namespace std::placeholders;
+	
     std::sort(atoms.begin(), atoms.end(), 
-			  boost::bind(func, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1), 
-						  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2)));
+			  std::bind(func, std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1), 
+						std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2)));
 
     for (std::size_t i = 0, num_atoms = atoms.size(); i < num_atoms; i++)
 		atomIndsAndElecContribs[atoms[i]].first = i;

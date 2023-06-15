@@ -28,8 +28,6 @@
 
 #include <algorithm>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"

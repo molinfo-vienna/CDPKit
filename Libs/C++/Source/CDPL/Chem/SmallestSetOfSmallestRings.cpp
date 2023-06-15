@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -127,9 +125,12 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 		}
 	}
 
+	using namespace std::placeholders;
+	
 	if (comp_count > 1)
 		std::sort(this->BaseType::getElementsBegin(), this->BaseType::getElementsEnd(), 
-				  boost::bind(std::less<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), boost::bind(&Fragment::getNumAtoms, _2)));
+				  std::bind(std::less<std::size_t>(), std::bind(&Fragment::getNumAtoms, _1),
+							std::bind(&Fragment::getNumAtoms, _2)));
 }
 
 void Chem::SmallestSetOfSmallestRings::visitComponentAtom(const Atom& atom)
@@ -370,7 +371,7 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* ctrl)
 	MessageList::iterator rcv_buf_beg = receiveBuffer.begin();
 	MessageList::iterator rcv_buf_end = receiveBuffer.end();
 
-	std::for_each(rcv_buf_beg, rcv_buf_end, boost::bind(&PathMessage::clearFlags, _1));
+	std::for_each(rcv_buf_beg, rcv_buf_end, std::bind(&PathMessage::clearFlags, std::placeholders::_1));
 
 	for (MessageList::iterator it = rcv_buf_beg; it != rcv_buf_end; ) {
 		MessagePtr& msg1 = *it;

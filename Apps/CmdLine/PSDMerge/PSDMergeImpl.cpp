@@ -27,9 +27,9 @@
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
@@ -67,12 +67,14 @@ struct PSDMergeImpl::MergeDBsProgressCallback
 PSDMergeImpl::PSDMergeImpl(): 
 	dropDuplicates(false), creationMode(CDPL::Pharm::ScreeningDBCreator::APPEND)
 {
+	using namespace std::placeholders;
+	
 	addOption("input,i", "Input database file(s).", 
 			  value<StringList>(&inputDatabases)->multitoken()->required());
 	addOption("output,o", "Output database file.", 
 			  value<std::string>(&outputDatabase)->required());
 	addOption("mode,m", "Database merge mode (CREATE, APPEND, UPDATE, default: APPEND).", 
-			  value<std::string>()->notifier(boost::bind(&PSDMergeImpl::setCreationMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDMergeImpl::setCreationMode, this, _1)));
 	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
 			  value<bool>(&dropDuplicates)->implicit_value(true));
 }
@@ -197,17 +199,18 @@ void PSDMergeImpl::printStatistics(std::size_t num_proc, std::size_t num_rej,
 void PSDMergeImpl::checkInputFiles() const
 {
 	using namespace CDPL;
-
+	using namespace std::placeholders;
+	
 	StringList::const_iterator it = std::find_if(inputDatabases.begin(), inputDatabases.end(),
-												 boost::bind(std::logical_not<bool>(), 
-															 boost::bind(Util::fileExists, _1)));
+												 std::bind(std::logical_not<bool>(), 
+														   std::bind(Util::fileExists, _1)));
 	if (it != inputDatabases.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
 			
 														 
 	if (std::find_if(inputDatabases.begin(), inputDatabases.end(),
-					 boost::bind(Util::checkIfSameFile, boost::ref(outputDatabase),
-								 _1)) != inputDatabases.end())
+					 std::bind(Util::checkIfSameFile, boost::ref(outputDatabase),
+							   _1)) != inputDatabases.end())
 		throw Base::ValueError("output file must not occur in list of input files");
 }
 

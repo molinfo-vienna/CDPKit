@@ -31,7 +31,6 @@
 #include <limits>
 #include <functional>
 
-#include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -88,7 +87,7 @@ ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl():
 	dg_settings.enablePlanarityConstraints(true);
 
 	hCoordsCalc.undefinedOnly(true);
-	hCoordsCalc.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGeneratorImpl::has3DCoordinates, this, _1));
+	hCoordsCalc.setAtom3DCoordinatesCheckFunction(std::bind(&FragmentConformerGeneratorImpl::has3DCoordinates, this, std::placeholders::_1));
 
 	symMappingSearch.includeIdentityMapping(false);
 	symMappingSearch.setMaxNumMappings(MAX_NUM_SYM_MAPPINGS);

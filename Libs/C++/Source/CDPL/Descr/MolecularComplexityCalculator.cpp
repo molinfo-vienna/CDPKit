@@ -31,8 +31,6 @@
 #include <numeric>
 #include <cmath>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Descr/MolecularComplexityCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -52,6 +50,8 @@ Descr::MolecularComplexityCalculator::MolecularComplexityCalculator(const Chem::
 
 double Descr::MolecularComplexityCalculator::calculate(const Chem::MolecularGraph& molgraph)
 {
+	using namespace std::placeholders;
+	
 	molGraph = &molgraph;
 
 	numHeavyAtoms = 0;
@@ -64,10 +64,10 @@ double Descr::MolecularComplexityCalculator::calculate(const Chem::MolecularGrap
 	piBondTerms.clear();
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&MolecularComplexityCalculator::processAtom, this, _1));
+				  std::bind(&MolecularComplexityCalculator::processAtom, this, _1));
 
 	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(&MolecularComplexityCalculator::processBond, this, _1));
+				  std::bind(&MolecularComplexityCalculator::processBond, this, _1));
 
 	calcAtomTypeComplexity();
 	calcStructuralComplexity();
@@ -147,18 +147,20 @@ void Descr::MolecularComplexityCalculator::calcAtomTypeComplexity()
 
 void Descr::MolecularComplexityCalculator::calcStructuralComplexity()
 {
+	using namespace std::placeholders;
+	
 	etaTotal -= numDoubleBonds + 3 * numTripleBonds;
 
 	structComplexity = 2.0 * etaTotal * std::log(etaTotal) * M_LOG2E;
 
 	structComplexity = std::accumulate(symmetryTerms.begin(), symmetryTerms.end(), structComplexity, 
-									   boost::bind(std::minus<double>(), _1,
-												   boost::bind(&SymmetryTerm::getValue,
-															   boost::bind(&SymmetryTermMap::value_type::second, _2))));
+									   std::bind(std::minus<double>(), _1,
+												 std::bind(&SymmetryTerm::getValue,
+														   std::bind(&SymmetryTermMap::value_type::second, _2))));
 
 	structComplexity = std::accumulate(piBondTerms.begin(), piBondTerms.end(), structComplexity, 
-									   boost::bind(std::plus<double>(), _1,
-												   boost::bind(&PiBondTerm::getCorrection, _2, boost::ref(symmetryTerms))));
+									   std::bind(std::plus<double>(), _1,
+												 std::bind(&PiBondTerm::getCorrection, _2, std::ref(symmetryTerms))));
 }
 
 

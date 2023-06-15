@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
@@ -44,8 +42,8 @@ using namespace CDPL;
 void ForceField::assignMMFF94BondTypeIndices(Chem::MolecularGraph& molgraph, bool strict, bool overwrite)
 {
      if (!overwrite && std::find_if(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-									boost::bind(std::equal_to<bool>(), false,
-												boost::bind(&hasMMFF94TypeIndex, _1))) == molgraph.getBondsEnd())
+									std::bind(std::equal_to<bool>(), false,
+											  std::bind(&hasMMFF94TypeIndex, std::placeholders::_1))) == molgraph.getBondsEnd())
 		return;
 
 	 Util::UIArray types;

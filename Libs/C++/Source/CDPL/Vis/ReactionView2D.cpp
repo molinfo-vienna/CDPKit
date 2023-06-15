@@ -30,8 +30,7 @@
 #include <utility>
 #include <cmath>
 #include <cassert>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Vis/ReactionView2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
@@ -68,8 +67,8 @@ Vis::ReactionView2D::ReactionView2D(const Chem::Reaction* rxn):
 	compViewCache(MAX_COMP_VIEW_CACHE_SIZE), polygonCache(MAX_POLYGON_CACHE_SIZE), 
 	lineSegListCache(MAX_LINE_SEG_LIST_CACHE_SIZE)
 {
-	compViewCache.setCleanupFunction(boost::bind(&StructureView2D::setParent, _1, 
-												 static_cast<const CDPL::Base::ControlParameterContainer*>(0)));
+	compViewCache.setCleanupFunction(std::bind(&StructureView2D::setParent, std::placeholders::_1, 
+											   static_cast<const CDPL::Base::ControlParameterContainer*>(0)));
 	setReaction(rxn);
 }
 
@@ -227,13 +226,13 @@ void Vis::ReactionView2D::paintBackground(Renderer2D& renderer) const
 void Vis::ReactionView2D::renderComponents(Renderer2D& renderer) const
 {
 	std::for_each(componentViews.begin(), componentViews.end(),
-				  boost::bind(&StructureView2D::render, _1, boost::ref(renderer)));
+				  std::bind(&StructureView2D::render, std::placeholders::_1, std::ref(renderer)));
 }
 
 void Vis::ReactionView2D::renderGraphicsPrimitives(Renderer2D& renderer) const
 {
 	std::for_each(drawList.begin(), drawList.end(),
-				  boost::bind(&GraphicsPrimitive2D::render, _1, boost::ref(renderer)));
+				  std::bind(&GraphicsPrimitive2D::render, std::placeholders::_1, std::ref(renderer)));
 }
 
 void Vis::ReactionView2D::initComponentViews()

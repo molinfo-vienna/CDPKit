@@ -32,9 +32,9 @@
 #include <iomanip>
 #include <thread>
 #include <chrono>
+#include <functional>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
@@ -75,7 +75,8 @@ struct PSDScreenImpl::ScreeningWorker
 	void operator()() {
 		using namespace CDPL;
 		using namespace Pharm;
-
+		using namespace std::placeholders;
+		
 		try {
 			PSDScreeningDBAccessor db_acc(parent->screeningDB);
 			ScreeningProcessor scr_proc(db_acc);
@@ -85,8 +86,8 @@ struct PSDScreenImpl::ScreeningWorker
 			scr_proc.setMaxNumOmittedFeatures(parent->maxOmittedFtrs);
 			scr_proc.checkXVolumeClashes(parent->checkXVols);
 			scr_proc.seekBestAlignments(parent->bestAlignments);
-			scr_proc.setHitCallback(boost::bind(&ScreeningWorker::reportHit, this, _1, _2));
-			scr_proc.setProgressCallback(boost::bind(&ScreeningWorker::reportProgress, this, _1, _2));
+			scr_proc.setHitCallback(std::bind(&ScreeningWorker::reportHit, this, _1, _2));
+			scr_proc.setProgressCallback(std::bind(&ScreeningWorker::reportProgress, this, _1, _2));
 
 			for (queryIndex = 0; queryIndex < parent->numQueryPharms; queryIndex++) {
 				if (PSDScreenImpl::termSignalCaught() || parent->haveErrorMessage())
@@ -164,6 +165,8 @@ PSDScreenImpl::PSDScreenImpl():
 	queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0),
 	lastProgValue(-1)
 {
+	using namespace std::placeholders;
+	
 	addOption("database,d", "Screening database file.", 
 			  value<std::string>(&screeningDB)->required());
 	addOption("query,q", "Query pharmacophore file(s).", 
@@ -171,7 +174,7 @@ PSDScreenImpl::PSDScreenImpl():
 	addOption("output,o", "Hit output file.", 
 			  value<std::string>(&hitOutputFile)->required());
 	addOption("mode,m", "Molecule conformation matching mode (FIRST-MATCH, BEST-MATCH, ALL-MATCHES, default: FIRST-MATCH).", 
-			  value<std::string>()->notifier(boost::bind(&PSDScreenImpl::setMatchingMode, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDScreenImpl::setMatchingMode, this, _1)));
 	addOption("start-index,s", "Screening range start molecule index (zero-based!, default: 0).", 
 			  value<std::size_t>(&startMolIndex)->default_value(0));
 	addOption("end-index,e", "Screening range end molecule index (zero-based and not included"
@@ -204,9 +207,9 @@ PSDScreenImpl::PSDScreenImpl():
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(std::thread::hardware_concurrency()));
 	addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&PSDScreenImpl::setHitOutputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDScreenImpl::setHitOutputFormat, this, _1)));
 	addOption("query-format,Q", "Query pharmacophore input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&PSDScreenImpl::setQueryInputFormat, this, _1)));
+			  value<std::string>()->notifier(std::bind(&PSDScreenImpl::setQueryInputFormat, this, _1)));
 
 	addOptionLongDescriptions();
 }

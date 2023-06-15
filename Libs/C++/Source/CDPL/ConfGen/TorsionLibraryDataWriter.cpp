@@ -29,8 +29,7 @@
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/Chem/SMARTSMolecularGraphWriter.hpp"
@@ -62,7 +61,8 @@ bool ConfGen::TorsionLibraryDataWriter::write(std::ostream& os, const TorsionLib
 void ConfGen::TorsionLibraryDataWriter::writeCategory(std::ostream& os, std::size_t ident, const TorsionCategory& cat, bool contents_only) const
 {
   	using namespace TorsionLibraryFormatData;
-
+	using namespace std::placeholders;
+	
 	if (!contents_only) {
 		writeStartTag(os, ident, CATEGORY_TAG, false);
 		writeAttribute(os, CATEGORY_NAME_ATTR, cat.getName(), false, false);
@@ -82,9 +82,9 @@ void ConfGen::TorsionLibraryDataWriter::writeCategory(std::ostream& os, std::siz
 	}
 
 	std::for_each(cat.getCategoriesBegin(), cat.getCategoriesEnd(),
-				  boost::bind(&TorsionLibraryDataWriter::writeCategory, this, boost::ref(os), ident + 1, _1, false));
+				  std::bind(&TorsionLibraryDataWriter::writeCategory, this, std::ref(os), ident + 1, _1, false));
 	std::for_each(cat.getRulesBegin(), cat.getRulesEnd(),
-				  boost::bind(&TorsionLibraryDataWriter::writeRule, this, boost::ref(os), ident + 1, _1));
+				  std::bind(&TorsionLibraryDataWriter::writeRule, this, std::ref(os), ident + 1, _1));
 
 	if (!contents_only)
 		writeEndTag(os, ident, CATEGORY_TAG);
@@ -116,7 +116,8 @@ void ConfGen::TorsionLibraryDataWriter::writeAngleList(std::ostream& os, std::si
 	writeStartTag(os, ident, ANGLE_LIST_TAG, true);
 	
 	std::for_each(rule.getAnglesBegin(), rule.getAnglesEnd(),
-				  boost::bind(&TorsionLibraryDataWriter::writeAngleEntry, this, boost::ref(os), ident + 1, _1));
+				  std::bind(&TorsionLibraryDataWriter::writeAngleEntry, this,
+							std::ref(os), ident + 1, std::placeholders::_1));
 
 	writeEndTag(os, ident, ANGLE_LIST_TAG);
 }

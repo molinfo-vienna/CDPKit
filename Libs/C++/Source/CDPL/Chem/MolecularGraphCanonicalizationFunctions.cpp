@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -74,6 +72,8 @@ namespace
 void Chem::canonicalize(MolecularGraph& molgraph, const AtomCompareFunction& func, bool atoms, bool atom_nbrs, 
 						bool bonds, bool bond_atoms)
 {
+	using namespace std::placeholders;
+
 	if (atoms)
 		molgraph.orderAtoms(func);
 
@@ -81,14 +81,16 @@ void Chem::canonicalize(MolecularGraph& molgraph, const AtomCompareFunction& fun
 		molgraph.orderBonds(BondCompareFunc(func));
 
 	if (atom_nbrs)
-		std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), boost::bind(&Atom::orderAtoms, _1, boost::ref(func)));
+		std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), std::bind(&Atom::orderAtoms, _1, std::ref(func)));
 
 	if (bond_atoms)
-		std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(), boost::bind(&Bond::orderAtoms, _1, boost::ref(func)));
+		std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(), std::bind(&Bond::orderAtoms, _1, std::ref(func)));
 }
 
 void Chem::canonicalize(MolecularGraph& molgraph, bool atoms, bool atom_nbrs, bool bonds, bool bond_atoms)
 {
-	canonicalize(molgraph, boost::bind(std::less<std::size_t>(), boost::bind(&getCanonicalNumber, _1), boost::bind(&getCanonicalNumber, _2)),
+	using namespace std::placeholders;
+	
+	canonicalize(molgraph, std::bind(std::less<std::size_t>(), std::bind(&getCanonicalNumber, _1), std::bind(&getCanonicalNumber, _2)),
 				 atoms, atom_nbrs, bonds, bond_atoms);
 }

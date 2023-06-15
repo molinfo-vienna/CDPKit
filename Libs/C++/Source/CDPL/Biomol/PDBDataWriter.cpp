@@ -29,10 +29,10 @@
 #include <algorithm>
 #include <cmath>
 #include <set>
+#include <functional>
 
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
@@ -146,7 +146,8 @@ void Biomol::PDBDataWriter::init(std::ostream& os)
 void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
-
+	using namespace std::placeholders;
+	
 	std::set<std::size_t> model_ids;
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
@@ -162,7 +163,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 
 	numModels = model_ids.size();
 
-	std::sort(atomSequence.begin(), atomSequence.end(), boost::bind(&PDBDataWriter::atomOrderingFunc, this, _1, _2));
+	std::sort(atomSequence.begin(), atomSequence.end(), std::bind(&PDBDataWriter::atomOrderingFunc, this, _1, _2));
 	long res_serial = 1;
 
 	for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; res_serial++) {

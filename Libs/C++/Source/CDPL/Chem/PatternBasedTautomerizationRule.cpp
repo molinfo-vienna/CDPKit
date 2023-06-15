@@ -28,8 +28,6 @@
 
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -118,13 +116,15 @@ Chem::TautomerizationRule::SharedPointer Chem::PatternBasedTautomerizationRule::
 
 bool Chem::PatternBasedTautomerizationRule::setup(MolecularGraph& parent_molgraph)
 {
-    std::for_each(patternSubSearchList.begin(), patternSubSearchList.end(), boost::bind(&SubstructureSearch::findMappings, _1, boost::ref(parent_molgraph)));
+	using namespace std::placeholders;
+		
+    std::for_each(patternSubSearchList.begin(), patternSubSearchList.end(), std::bind(&SubstructureSearch::findMappings, _1, std::ref(parent_molgraph)));
 
 	parentMolGraph = &parent_molgraph;
 	currPatternIdx = 0;
 	currMappingIdx = 0;
 
-    if (std::find_if(patternSubSearchList.begin(), patternSubSearchList.end(), boost::bind(&SubstructureSearch::getNumMappings, _1)) == patternSubSearchList.end())
+    if (std::find_if(patternSubSearchList.begin(), patternSubSearchList.end(), std::bind(&SubstructureSearch::getNumMappings, _1)) == patternSubSearchList.end())
 		return false;
 
 	if (excludePatterns.empty()) 

@@ -33,8 +33,7 @@
 
 #include <fstream>
 #include <string>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -81,7 +80,7 @@ CDPL::Util::FileDataWriter<WriterImpl, DataType>::FileDataWriter(const std::stri
     stream(file_name.c_str(), mode), fileName(file_name), writer(stream) 
 {
     writer.setParent(this);
-	writer.registerIOCallback(boost::bind(&Base::DataIOBase::invokeIOCallbacks, this, _2));
+	writer.registerIOCallback(std::bind(&Base::DataIOBase::invokeIOCallbacks, this, std::placeholders::_2));
 }
 
 template <typename WriterImpl, typename DataType>

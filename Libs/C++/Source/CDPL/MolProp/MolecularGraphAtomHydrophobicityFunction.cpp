@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
 
 #include "CDPL/MolProp/AtomFunctions.hpp"
@@ -46,8 +44,8 @@ using namespace CDPL;
 void MolProp::calcAtomHydrophobicities(Chem::MolecularGraph& molgraph, bool overwrite, bool from_logp)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasHydrophobicity, _1))) == molgraph.getAtomsEnd())
+								   std::bind(std::equal_to<bool>(), false,
+											 std::bind(&hasHydrophobicity, std::placeholders::_1))) == molgraph.getAtomsEnd())
 		return;
 
 	if (from_logp) {

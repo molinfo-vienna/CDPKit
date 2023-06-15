@@ -30,8 +30,7 @@
 #include <limits>
 #include <cmath>
 #include <iterator>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
@@ -257,18 +256,20 @@ void Vis::StructureView2D::renderGraphicsPrimitives(Renderer2D& renderer) const
 	renderer.transform(xform);
 
 	std::for_each(drawList.rbegin(), drawList.rend(), 
-				  boost::bind(&GraphicsPrimitive2D::render, _1, boost::ref(renderer)));
+				  std::bind(&GraphicsPrimitive2D::render, std::placeholders::_1, std::ref(renderer)));
 }
 
 void Vis::StructureView2D::initTextLabelBounds()
 {
+	using namespace std::placeholders;
+	
 	std::size_t num_atoms = structure->getNumAtoms();
 		
 	if (num_atoms > atomLabelBounds.size())
 		atomLabelBounds.resize(num_atoms);
 
 	std::for_each(atomLabelBounds.begin(), atomLabelBounds.begin() + num_atoms,
-				  boost::bind(&RectangleList::clear, _1));
+				  std::bind(&RectangleList::clear, _1));
 
 	std::size_t num_bonds = structure->getNumBonds();
 
@@ -276,7 +277,7 @@ void Vis::StructureView2D::initTextLabelBounds()
 		bondLabelBounds.resize(num_bonds);
 
 	std::for_each(bondLabelBounds.begin(), bondLabelBounds.begin() + num_bonds,
-				  boost::bind(&Rectangle2D::reset, _1));
+				  std::bind(&Rectangle2D::reset, _1));
 }
 
 void Vis::StructureView2D::createAtomPrimitives()
@@ -287,7 +288,8 @@ void Vis::StructureView2D::createAtomPrimitives()
 		return;
 
 	std::for_each(structure->getAtomsBegin(), structure->getAtomsEnd(),
-				  boost::bind(&StructureView2D::createAtomPrimitives, this, _1));
+				  std::bind(static_cast<void (StructureView2D::*)(const Chem::Atom&)>
+							(&StructureView2D::createAtomPrimitives), this, std::placeholders::_1));
 }
 
 #define CREATE_ATOM_LABEL(font, text, pos, label_brect)          \
@@ -2429,8 +2431,8 @@ void Vis::StructureView2D::initInputAtomPosTable()
 
 			Chem::BondStereoFlagCalculator sto_flag_calc;
 
-			sto_flag_calc.setAtom2DCoordinatesFunction(boost::bind(static_cast<const Math::Vector2D& (Math::Vector2DArray::*)(std::size_t) const>(&Math::Vector2DArray::getElement), 
-																  boost::ref(calcInputAtomCoords), boost::bind(&Chem::MolecularGraph::getAtomIndex, structure, _1)));
+			sto_flag_calc.setAtom2DCoordinatesFunction(std::bind(static_cast<const Math::Vector2D& (Math::Vector2DArray::*)(std::size_t) const>(&Math::Vector2DArray::getElement), 
+																 std::ref(calcInputAtomCoords), std::bind(&Chem::MolecularGraph::getAtomIndex, structure, std::placeholders::_1)));
 			sto_flag_calc.calculate(*structure, calcBondStereoFlags);
 		}
 
@@ -2655,7 +2657,7 @@ void Vis::StructureView2D::calcOutputStructureBounds()
 
 	for (std::size_t i = 0; i < num_atoms; i++)
 		std::for_each(atomLabelBounds[i].begin(), atomLabelBounds[i].end(),
-					  boost::bind(&Rectangle2D::addRectangle, boost::ref(outputStructureBounds), _1));
+					  std::bind(&Rectangle2D::addRectangle, std::ref(outputStructureBounds), std::placeholders::_1));
 
 	std::size_t num_bonds = structure->getNumBonds();
 

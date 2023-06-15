@@ -44,4 +44,6 @@ void CDPLPythonChem::exportDefaultMultiConfMoleculeInputProcessor()
 				  python::arg("bond_flags") = Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS)))
 		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::DefaultMultiConfMoleculeInputProcessor::DEF_ATOM_PROPERTY_FLAGS)
 		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::DefaultMultiConfMoleculeInputProcessor::DEF_BOND_PROPERTY_FLAGS);
+
+	python::implicitly_convertible<Chem::DefaultMultiConfMoleculeInputProcessor::SharedPointer, Chem::MultiConfMoleculeInputProcessor::SharedPointer>();
 }

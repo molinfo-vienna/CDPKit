@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -41,15 +40,15 @@ using namespace CDPL;
 void Chem::setAtomMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite) 
 {
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
-												   bool)>(&setAtomMatchConstraints), _1, boost::ref(constr), overwrite));
+				  std::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
+												 bool)>(&setAtomMatchConstraints), std::placeholders::_1, std::ref(constr), overwrite));
 }
 
 void Chem::setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite)
 {
 	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
-												   bool)>(&setAtomMatchConstraints), _1, boost::ref(constr), overwrite));
+				  std::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
+												 bool)>(&setAtomMatchConstraints), std::placeholders::_1, std::ref(constr), overwrite));
 }
 
 void Chem::setComponentMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite)

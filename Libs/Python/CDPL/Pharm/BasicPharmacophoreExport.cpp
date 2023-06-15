@@ -70,4 +70,6 @@ void CDPLPythonPharm::exportBasicPharmacophore()
 	.def("__iadd__", addBasicPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
 	.def("__iadd__", addPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
 	.def("__iadd__", addFtrContainerFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>());
+
+	python::implicitly_convertible<Pharm::BasicPharmacophore::SharedPointer, Pharm::Pharmacophore::SharedPointer>();
 }

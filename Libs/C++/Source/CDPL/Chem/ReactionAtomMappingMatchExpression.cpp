@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/ReactionAtomMappingMatchExpression.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
@@ -82,8 +80,8 @@ bool Chem::ReactionAtomMappingMatchExpression::operator()(const Reaction&, const
 			const Atom* target_prod_atom = atom_mapping[query_prod_atom];
 	
 			if (std::find_if(target_atom_pair_range.first, target_atom_pair_range.second,
-							 boost::bind(std::equal_to<const Atom*>(), target_prod_atom, 
-										 boost::bind(&AtomMapping::Entry::second, _1))) != target_atom_pair_range.second) {
+							 std::bind(std::equal_to<const Atom*>(), target_prod_atom, 
+									   std::bind(&AtomMapping::Entry::second, std::placeholders::_1))) != target_atom_pair_range.second) {
 				
 				found_mapping = true;
 				break;

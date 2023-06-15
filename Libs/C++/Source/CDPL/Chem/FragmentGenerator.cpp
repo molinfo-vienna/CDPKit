@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/FragmentGenerator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -321,12 +320,14 @@ void Chem::FragmentGenerator::setFragmentFilterFunction(const FragmentFilterFunc
 
 void Chem::FragmentGenerator::generate(const MolecularGraph& molgraph, FragmentList& frag_list, bool append)
 {
+	using namespace std::placeholders;
+	
 	init(molgraph);
 
 	std::for_each(fragRules.begin(), fragRules.end(),
-				  boost::bind(&Chem::FragmentGenerator::processFragRuleMatches, this, boost::ref(molgraph), _1));
+				  std::bind(&Chem::FragmentGenerator::processFragRuleMatches, this, std::ref(molgraph), _1));
 	std::for_each(exclPatterns.begin(), exclPatterns.end(),
-				  boost::bind(&Chem::FragmentGenerator::processExcludePatternMatches, this, boost::ref(molgraph), _1));
+				  std::bind(&Chem::FragmentGenerator::processExcludePatternMatches, this, std::ref(molgraph), _1));
 
 	splitIntoFragments(molgraph, frag_list, append);
 }

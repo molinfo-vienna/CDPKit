@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -49,10 +48,10 @@ using namespace CDPL;
 
 ConfGen::FragmentTree::FragmentTree(std::size_t max_conf_data_cache_size):
 	confDataCache(max_conf_data_cache_size),
-	nodeCache(boost::bind(&FragmentTree::createTreeNode, this), TreeNodeCache::DefaultDestructor(), MAX_TREE_NODE_CACHE_SIZE), 
+	nodeCache(std::bind(&FragmentTree::createTreeNode, this), TreeNodeCache::DefaultDestructor(), MAX_TREE_NODE_CACHE_SIZE), 
 	molGraph(0)
 {
-	nodeCache.setCleanupFunction(boost::bind(&FragmentTreeNode::clearConformers, _1));
+	nodeCache.setCleanupFunction(std::bind(&FragmentTreeNode::clearConformers, std::placeholders::_1));
 
 	rootNode = nodeCache.getRaw();
 }

@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -276,37 +276,39 @@ ForceField::MMFF94InteractionParameterizer& ForceField::MMFF94InteractionParamet
 
 void ForceField::MMFF94InteractionParameterizer::setPropertyFunctions()
 {
-	bondStretchingParameterizer.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
-	bondStretchingParameterizer.setBondTypeIndexFunction(boost::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
-	bondStretchingParameterizer.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
+	using namespace std::placeholders;
+	
+	bondStretchingParameterizer.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	bondStretchingParameterizer.setBondTypeIndexFunction(std::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
+	bondStretchingParameterizer.setAromaticRingSetFunction(std::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 
-	angleBendingParameterizer.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
-	angleBendingParameterizer.setBondTypeIndexFunction(boost::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
-	angleBendingParameterizer.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
+	angleBendingParameterizer.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	angleBendingParameterizer.setBondTypeIndexFunction(std::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
+	angleBendingParameterizer.setAromaticRingSetFunction(std::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 
-	stretchBendParameterizer.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	stretchBendParameterizer.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
 
-	outOfPlaneParameterizer.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	outOfPlaneParameterizer.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
 
-	torsionParameterizer.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
-	torsionParameterizer.setBondTypeIndexFunction(boost::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
-	torsionParameterizer.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
+	torsionParameterizer.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	torsionParameterizer.setBondTypeIndexFunction(std::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
+	torsionParameterizer.setAromaticRingSetFunction(std::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 
-	vanDerWaalsParameterizer.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
-	vanDerWaalsParameterizer.setTopologicalDistanceFunction(boost::bind(&MMFF94InteractionParameterizer::getTopologicalDistance, this, _1, _2, _3));
+	vanDerWaalsParameterizer.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	vanDerWaalsParameterizer.setTopologicalDistanceFunction(std::bind(&MMFF94InteractionParameterizer::getTopologicalDistance, this, _1, _2, _3));
 
-	electrostaticParameterizer.setAtomChargeFunction(boost::bind(&MMFF94InteractionParameterizer::getAtomCharge, this, _1));
-	electrostaticParameterizer.setTopologicalDistanceFunction(boost::bind(&MMFF94InteractionParameterizer::getTopologicalDistance, this, _1, _2, _3));
+	electrostaticParameterizer.setAtomChargeFunction(std::bind(&MMFF94InteractionParameterizer::getAtomCharge, this, _1));
+	electrostaticParameterizer.setTopologicalDistanceFunction(std::bind(&MMFF94InteractionParameterizer::getTopologicalDistance, this, _1, _2, _3));
 
-	atomTyper.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
+	atomTyper.setAromaticRingSetFunction(std::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 
-	bondTyper.setAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
-	bondTyper.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
+	bondTyper.setAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	bondTyper.setAromaticRingSetFunction(std::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 
-	chargeCalculator.setNumericAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
-	chargeCalculator.setSymbolicAtomTypeFunction(boost::bind(&MMFF94InteractionParameterizer::getSymbolicAtomType, this, _1));
-	chargeCalculator.setBondTypeIndexFunction(boost::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
-	chargeCalculator.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
+	chargeCalculator.setNumericAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getNumericAtomType, this, _1));
+	chargeCalculator.setSymbolicAtomTypeFunction(std::bind(&MMFF94InteractionParameterizer::getSymbolicAtomType, this, _1));
+	chargeCalculator.setBondTypeIndexFunction(std::bind(&MMFF94InteractionParameterizer::getBondTypeIndex, this, _1));
+	chargeCalculator.setAromaticRingSetFunction(std::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 }
 
 unsigned int ForceField::MMFF94InteractionParameterizer::getBondTypeIndex(const Chem::Bond& bond) const

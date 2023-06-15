@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/TautomerScore.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -71,8 +69,8 @@ double Chem::TautomerScore::operator()(const MolecularGraph& molgraph)
 		const Fragment& ring = *it;
 
 		if (std::find_if(ring.getBondsBegin(), ring.getBondsEnd(), 
-						 boost::bind(std::equal_to<bool>(), false,
-									 boost::bind(static_cast<bool (*)(const Bond&)>(&getAromaticityFlag), _1))) != ring.getBondsEnd())
+						 std::bind(std::equal_to<bool>(), false,
+								   std::bind(static_cast<bool (*)(const Bond&)>(&getAromaticityFlag), std::placeholders::_1))) != ring.getBondsEnd())
 			continue;
 	
 		if (isLactim(ring, molgraph))

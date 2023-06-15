@@ -31,9 +31,9 @@
 
 #include <cmath>
 #include <algorithm>
+#include <functional>
 
 #include <boost/random/uniform_real.hpp>
-#include <boost/bind.hpp>
 
 #include "FastExp/fastexp.h"
 
@@ -127,8 +127,8 @@ Shape::FastGaussianShapeAlignment::FastGaussianShapeAlignment():
 	genForAlgdShape(false), genForRefShape(true), genForLargerShape(true),
 	symThreshold(DEF_SYMMETRY_THRESHOLD), maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION),
 	numRandomStarts(DEF_NUM_RANDOM_STARTS), numSubTransforms(0),
-	minimizer(boost::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(std::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionValue, this, std::placeholders::_1),
+			  std::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionGradient, this, std::placeholders::_1, std::placeholders::_2))
 {}
 
 Shape::FastGaussianShapeAlignment::FastGaussianShapeAlignment(const GaussianShape& ref_shape):
@@ -139,8 +139,8 @@ Shape::FastGaussianShapeAlignment::FastGaussianShapeAlignment(const GaussianShap
 	genForAlgdShape(false), genForRefShape(true), genForLargerShape(true),
 	symThreshold(DEF_SYMMETRY_THRESHOLD), maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION),
 	numRandomStarts(DEF_NUM_RANDOM_STARTS), numSubTransforms(0),
-	minimizer(boost::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(std::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionValue, this, std::placeholders::_1),
+			  std::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionGradient, this, std::placeholders::_1, std::placeholders::_2))
 {
 	addReferenceShape(ref_shape);
 }
@@ -153,8 +153,8 @@ Shape::FastGaussianShapeAlignment::FastGaussianShapeAlignment(const GaussianShap
 	genForAlgdShape(false), genForRefShape(true), genForLargerShape(true),
 	symThreshold(DEF_SYMMETRY_THRESHOLD), maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION),
 	numRandomStarts(DEF_NUM_RANDOM_STARTS), numSubTransforms(0),
-	minimizer(boost::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(std::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionValue, this, std::placeholders::_1),
+			  std::bind(&FastGaussianShapeAlignment::calcAlignmentFunctionGradient, this, std::placeholders::_1, std::placeholders::_2))
 {
 	addReferenceShapes(ref_shapes);
 }

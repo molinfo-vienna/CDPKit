@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -323,7 +323,8 @@ namespace
 						  const Chem::MatchConstraintList& constr_list)
 	{
 		using namespace Chem;
-
+		using namespace std::placeholders;
+	
 		MatchExpressionList<Atom, MolecularGraph>::SharedPointer expr_list_ptr;
 
 		if (constr_list.getType() == MatchConstraintList::AND_LIST || 
@@ -366,7 +367,7 @@ namespace
 					break;
 
 				case AtomMatchConstraint::H_COUNT:
-					expr_ptr = createIntegralPropertyMatchExpression<std::size_t>(atom, molgraph, constraint, boost::bind(&Internal::getAtomCount, _1, _2, AtomType::H, true));
+					expr_ptr = createIntegralPropertyMatchExpression<std::size_t>(atom, molgraph, constraint, std::bind(&Internal::getAtomCount, _1, _2, AtomType::H, true));
 					break;
 
 				case AtomMatchConstraint::IMPLICIT_H_COUNT:
@@ -374,7 +375,7 @@ namespace
 					break;
 
 				case AtomMatchConstraint::EXPLICIT_H_COUNT:
-					expr_ptr = createIntegralPropertyMatchExpression<std::size_t>(atom, molgraph, constraint, boost::bind(&Internal::getExplicitAtomCount, _1, _2, AtomType::H, true));
+					expr_ptr = createIntegralPropertyMatchExpression<std::size_t>(atom, molgraph, constraint, std::bind(&Internal::getExplicitAtomCount, _1, _2, AtomType::H, true));
 					break;
 
 				case AtomMatchConstraint::BOND_COUNT:

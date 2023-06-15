@@ -443,6 +443,8 @@ bool Chem::ProtonationStateStandardizer::protForPhysCond(Molecule& mol)
 // Port of RDKit's Uncharger:uncharge() method
 bool Chem::ProtonationStateStandardizer::maxChargeComp(Molecule& mol)
 {
+	using namespace std::placeholders;
+	
 	std::call_once(initChargedAtomPatternsFlag, &initChargedAtomPatterns);
 
 	calcImplicitHydrogenCounts(mol, false);
@@ -486,9 +488,9 @@ bool Chem::ProtonationStateStandardizer::maxChargeComp(Molecule& mol)
 		have_canon_num = true;
 		
 		std::sort(negChargedAtoms.begin(), negChargedAtoms.end(),
-				  boost::bind(&ProtonationStateStandardizer::cmpCanonicalNumber, this, _1, _2));
+				  std::bind(&ProtonationStateStandardizer::cmpCanonicalNumber, this, _1, _2));
 		std::sort(negChargedAcidAtoms.begin(), negChargedAcidAtoms.end(),
-				  boost::bind(&ProtonationStateStandardizer::cmpCanonicalNumber, this, _1, _2));
+				  std::bind(&ProtonationStateStandardizer::cmpCanonicalNumber, this, _1, _2));
 
 		long neg_surplus = num_neg_atoms - q_matched;
 
@@ -582,7 +584,7 @@ bool Chem::ProtonationStateStandardizer::maxChargeComp(Molecule& mol)
 			canonNumberingCalc.calculate(mol, canonAtomNumbering);
 
 		std::sort(posChargedAtoms.begin(), posChargedAtoms.end(),
-				  boost::bind(&ProtonationStateStandardizer::cmpCanonicalNumber, this, _1, _2));
+				  std::bind(&ProtonationStateStandardizer::cmpCanonicalNumber, this, _1, _2));
 		
 		for (AtomList::const_iterator it = posChargedAtoms.begin(), end = posChargedAtoms.end(); it != end; ++it) {
 			Atom* atom = *it;

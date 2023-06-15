@@ -28,8 +28,7 @@
 
 #include <algorithm>
 #include <cmath>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -314,7 +313,7 @@ void Shape::GaussianShapeFunction::calcCentroid(Math::Vector3D& ctr) const
 	ctr.clear();
 
 	std::for_each(prodList->getProductsBegin(), prodList->getProductsEnd(),
-				  boost::bind(&addCentroidContrib, _1, ctr.getData()));
+				  std::bind(&addCentroidContrib, std::placeholders::_1, ctr.getData()));
 
 	ctr /= prodList->getVolume();
 }
@@ -326,7 +325,7 @@ void Shape::GaussianShapeFunction::calcQuadrupoleTensor(const Math::Vector3D& ct
 	quad_tensor.clear();
 
 	std::for_each(prodList->getProductsBegin(), prodList->getProductsEnd(),
-				  boost::bind(&addQuadTensorContrib, _1, ctr.getData(), tensor_data));
+				  std::bind(&addQuadTensorContrib, std::placeholders::_1, ctr.getData(), tensor_data));
 
 	copyUpperToLower(tensor_data);
 	

@@ -27,8 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <cmath>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include "CDPL/Pharm/CationPiInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -49,8 +48,8 @@ constexpr double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE;
 Pharm::CationPiInteractionScore::CationPiInteractionScore(bool aro_cat, double min_dist, double max_dist,
 														  double max_ang):
 	aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang), 
-	distScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)),
-	angleScoringFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 2.5, 0.0))
+	distScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 10, 0.0)),
+	angleScoringFunc(std::bind(&Math::generalizedBell<double>, std::placeholders::_1, 0.5, 2.5, 0.0))
 {}
 
 double Pharm::CationPiInteractionScore::getMinDistance() const

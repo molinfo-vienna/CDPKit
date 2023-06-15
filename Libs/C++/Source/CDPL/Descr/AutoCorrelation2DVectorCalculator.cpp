@@ -28,8 +28,6 @@
 
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -40,12 +38,14 @@
 using namespace CDPL;
 
 Descr::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator():
-	weightFunc(boost::bind(std::multiplies<unsigned int>(),
-						   boost::bind(&Chem::getType, _1), boost::bind(&Chem::getType, _1))) {}
+	weightFunc(std::bind(std::multiplies<unsigned int>(),
+						 std::bind(&Chem::getType, std::placeholders::_1),
+						 std::bind(&Chem::getType, std::placeholders::_1))) {}
 
 Descr::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator(const Chem::MolecularGraph& molgraph, Math::DVector& corr_vec):
-	weightFunc(boost::bind(std::multiplies<unsigned int>(),
-						   boost::bind(&Chem::getType, _1), boost::bind(&Chem::getType, _1)))
+	weightFunc(std::bind(std::multiplies<unsigned int>(),
+						 std::bind(&Chem::getType, std::placeholders::_1),
+						 std::bind(&Chem::getType, std::placeholders::_1)))
 {
 	calculate(molgraph, corr_vec);
 }

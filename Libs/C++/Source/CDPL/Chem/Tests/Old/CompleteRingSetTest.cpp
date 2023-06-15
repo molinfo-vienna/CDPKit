@@ -30,7 +30,6 @@
 #include <set>
 
 #include <boost/test/auto_unit_test.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/CompleteRingSet.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -84,8 +83,8 @@ namespace
 		using namespace Chem;
 
 		BOOST_CHECK(std::size_t(std::count_if(frag_list.getElementsBegin(), frag_list.getElementsEnd(), 
-											  boost::bind(std::equal_to<std::size_t>(), size, 
-														  boost::bind(&Fragment::getNumBonds, _1)))) == count);
+											  std::bind(std::equal_to<std::size_t>(), size, 
+														std::bind(&Fragment::getNumBonds, std::placeholders::_1)))) == count);
 	}
 }
 

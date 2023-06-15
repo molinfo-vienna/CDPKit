@@ -27,9 +27,9 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <functional>
 
 #include <boost/numeric/conversion/cast.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Grid/AttributedGridFunctions.hpp"
 
@@ -61,8 +61,9 @@ void Grid::CDFDataWriter::outputProperties(const AttributedGrid& grid, Internal:
 void Grid::CDFDataWriter::outputExternalProperties(const AttributedGrid& grid, Internal::ByteBuffer& bbuf)
 {
 	std::for_each(extPropertyHandlers.begin(), extPropertyHandlers.end(),
-				  boost::bind(&CDFDataWriter::outputExternalProperties, 
-							  this, _1, boost::ref(grid), boost::ref(bbuf)));
+				  std::bind(static_cast<void (CDFDataWriter::*)(const PropertyHandler&, const AttributedGrid&, Internal::ByteBuffer&)>
+							(&CDFDataWriter::outputExternalProperties), 
+							this, std::placeholders::_1, std::ref(grid), std::ref(bbuf)));
 }
 
 void Grid::CDFDataWriter::outputExternalProperties(const PropertyHandler& handler, const AttributedGrid& grid, Internal::ByteBuffer& bbuf)

@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <functional>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -289,6 +287,8 @@ unsigned int Chem::calcAtomConfiguration(const Atom& atom, const MolecularGraph&
 
 Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph)
 {
+	using namespace std::placeholders;
+	
 	std::size_t num_bonds = Internal::getExplicitBondCount(atom, molgraph);
 
 	if (num_bonds < 3 || num_bonds > 4)
@@ -333,11 +333,11 @@ Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom,
 	}
 
 	std::sort(ordered_nbrs, ordered_nbrs + i,
-			  boost::bind(std::less<std::size_t>(),
-						  boost::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-									  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
-						  boost::bind(&MolecularGraph::getAtomIndex, &molgraph, 
-									  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
+			  std::bind(std::less<std::size_t>(),
+						std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
+								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
+						std::bind(&MolecularGraph::getAtomIndex, &molgraph, 
+								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
 
 	unsigned int parity = getMDLParity(atom);
 

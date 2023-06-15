@@ -34,7 +34,6 @@
 #include <cassert>
 
 #include <boost/tokenizer.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -1012,9 +1011,9 @@ void Chem::SMILESDataReader::setAtomStereoDescriptors(const Molecule& mol) const
 
 		} else {
 			if (std::find_if(atom->getAtomsBegin(), atom->getAtomsEnd(), 
-							 boost::bind(std::less<std::size_t>(), 
-										 boost::bind(&Molecule::getAtomIndex, boost::ref(mol), _1),
-										 atom_idx)) != atom->getAtomsEnd()) { // the chiral atom is not the very first one
+							 std::bind(std::less<std::size_t>(), 
+									   std::bind(&Molecule::getAtomIndex, std::ref(mol), std::placeholders::_1),
+									   atom_idx)) != atom->getAtomsEnd()) { // the chiral atom is not the very first one
 
 				perm_desig = (perm_desig == 1 ? 2 : 1);
 			} 
@@ -1047,7 +1046,7 @@ void Chem::SMILESDataReader::kekulizeBonds(Molecule& mol)
 	readMolGraph.clear();
 
 	std::for_each(mol.getBondsBegin() + startBondIndex, mol.getBondsEnd(), 
-				  boost::bind(&Fragment::addBond, readMolGraph, _1));
+				  std::bind(&Fragment::addBond, readMolGraph, std::placeholders::_1));
 
 	Chem::kekulizeBonds(readMolGraph);
 }

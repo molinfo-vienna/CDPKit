@@ -28,8 +28,6 @@
 
 #include <algorithm>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Pharm/MoleculeFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"

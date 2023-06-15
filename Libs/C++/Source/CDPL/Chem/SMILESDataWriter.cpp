@@ -35,8 +35,6 @@
 #include <iterator>
 #include <cassert>
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -88,8 +86,10 @@ using namespace CDPL;
 
 
 Chem::SMILESDataWriter::SMILESDataWriter(const Base::DataIOBase& io_base): 
-	ioBase(io_base), nodeCache(boost::bind(&SMILESDataWriter::createNode, this), NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
-	edgeCache(boost::bind(&SMILESDataWriter::createEdge, this), EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
+	ioBase(io_base), nodeCache(std::bind(&SMILESDataWriter::createNode, this),
+							   NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
+	edgeCache(std::bind(&SMILESDataWriter::createEdge, this),
+			  EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
 {}
 
 Chem::SMILESDataWriter::~SMILESDataWriter() {}
@@ -552,8 +552,8 @@ void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)
 	std::sort(canonAtomList.begin(), canonAtomList.end(), CanonAtomCmpFunc(*this, molgraph));
 
 	std::for_each(canonAtomList.begin(), canonAtomList.end(),
-				  boost::bind(&Fragment::addAtom, canonMolGraph.get(),
-							  boost::bind<const Atom&>([](const Atom* atom) -> const Atom& { return *atom; }, _1)));
+				  std::bind(&Fragment::addAtom, canonMolGraph.get(),
+							std::bind<const Atom&>([](const Atom* atom) -> const Atom& { return *atom; }, std::placeholders::_1)));
 
 	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
  
@@ -630,6 +630,8 @@ void Chem::SMILESDataWriter::buildNonCanonDFSTree(const MolecularGraph& molgraph
 
 void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, DFSTreeNode* node)
 {
+	using namespace std::placeholders;
+	
 	if (!node) {
 		node = createRootNode(molgraph);
 
@@ -667,13 +669,13 @@ void Chem::SMILESDataWriter::buildCanonDFSTree(const MolecularGraph& molgraph, D
 	NeighborList::iterator nbrs_end = neighbors.end();
 
 	std::sort(nbrs_beg, nbrs_end, 
-			  boost::bind(std::less<std::size_t>(),
-						  boost::bind(&MolecularGraph::getAtomIndex, boost::ref(molgraph), 
-									  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), 
-												  boost::bind(&NeighborList::value_type::first, _1))),
-						  boost::bind(&MolecularGraph::getAtomIndex, boost::ref(molgraph), 
-									  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), 
-												  boost::bind(&NeighborList::value_type::first, _2)))));
+			  std::bind(std::less<std::size_t>(),
+						std::bind(&MolecularGraph::getAtomIndex, std::ref(molgraph), 
+								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), 
+											std::bind(&NeighborList::value_type::first, _1))),
+						std::bind(&MolecularGraph::getAtomIndex, std::ref(molgraph), 
+								  std::bind(Util::Dereferencer<const Atom*, const Atom&>(), 
+											std::bind(&NeighborList::value_type::first, _2)))));
 
 	for (NeighborList::iterator it = nbrs_beg; it != nbrs_end; ++it) {
 		const Atom* nbr_atom = it->first;
@@ -753,18 +755,20 @@ Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createRootNode(cons
  
 void Chem::SMILESDataWriter::distRingClosureNumbers()
 {
+	using namespace std::placeholders;
+	
 	NodeList::iterator nodes_end = componentNodes.end();
 
 	for (NodeList::iterator it = componentNodes.begin(); it != nodes_end; ++it) {
 		DFSTreeNode* node = *it;
 
 		std::for_each(node->getRingClosureInEdgesBegin(), node->getRingClosureInEdgesEnd(),
-					  boost::bind(&DFSTreeEdge::setRingClosureNumber, _1,
-								  boost::bind(&SMILESDataWriter::getRingClosureNumber, this)));
+					  std::bind(&DFSTreeEdge::setRingClosureNumber, _1,
+								std::bind(&SMILESDataWriter::getRingClosureNumber, this)));
 
 		std::for_each(node->getRingClosureOutEdgesBegin(), node->getRingClosureOutEdgesEnd(),
-					  boost::bind(&SMILESDataWriter::putRingClosureNumber, this,
-								  boost::bind(&DFSTreeEdge::getRingClosureNumber, _1)));
+					  std::bind(&SMILESDataWriter::putRingClosureNumber, this,
+								std::bind(&DFSTreeEdge::getRingClosureNumber, _1)));
 	}
 }
 
@@ -1004,7 +1008,8 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
 void Chem::SMILESDataWriter::DFSTreeNode::writeRingClosures(std::ostream& os) const
 {
 	std::for_each(ringClosureInEdges.begin(), ringClosureInEdges.end(),
-				  boost::bind(&DFSTreeNode::writeRingClosureNumber, this, boost::ref(os), _1));
+				  std::bind(&DFSTreeNode::writeRingClosureNumber, this,
+							std::ref(os), std::placeholders::_1));
 
 	EdgeList::const_iterator edges_end = ringClosureOutEdges.end();
 
