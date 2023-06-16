@@ -53,6 +53,7 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     "libX"
     "libelf"
     "libpython"
+    "libpthread"
     "system32"
     "ms-win-core"
     "Qt"
