@@ -266,9 +266,7 @@ namespace CDPL
 			typedef SelfType MatrixTemporaryType;
 			typedef Vector<T, A> VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
-			template <typename T1>
-			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
+			typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 			
 			Matrix(): size1(0), size2(0), data() {}
 
@@ -284,8 +282,7 @@ namespace CDPL
 				swap(m);
 			}
 
-			template <typename T1>
-			Matrix(InitializerListType<T1> l): size1(0), size2(0), data() {
+			Matrix(InitializerListType l): size1(0), size2(0), data() {
 				assign(l);
 			}
 			
@@ -346,8 +343,7 @@ namespace CDPL
 				return assign(c);
 			}
 
-			template <typename T1>
-			Matrix& operator=(InitializerListType<T1> l) {
+			Matrix& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -363,8 +359,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 
-			template <typename T1>
-			Matrix& operator+=(InitializerListType<T1> l) {
+			Matrix& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 			
@@ -380,8 +375,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			Matrix& operator-=(InitializerListType<T1> l) {
+			Matrix& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -411,9 +405,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Matrix& assign(InitializerListType<T1> l) {
-				InitListMatrix<T1> ilm(l);
+			Matrix& assign(InitializerListType l) {
+				InitListMatrix<ValueType> ilm(l);
 				resize(ilm.getSize1(), ilm.getSize2(), false);
 				matrixAssignMatrix<ScalarAssignment>(*this, ilm);
 				return *this;
@@ -425,9 +418,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Matrix& plusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<T1>(l));
+			Matrix& plusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 
@@ -437,9 +429,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Matrix& minusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<T1>(l));
+			Matrix& minusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 
@@ -511,9 +502,7 @@ namespace CDPL
 			typedef SelfType MatrixTemporaryType;
 			typedef Vector<T, std::vector<T> > VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-		
-			template <typename T1>
-			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
+			typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 			
 			SparseMatrix(): size1(0), size2(0), data() {}
 
@@ -528,8 +517,7 @@ namespace CDPL
 				swap(m);
 			}
 
-			template <typename T1>
-			SparseMatrix(InitializerListType<T1> l): size1(0), size2(0), data() {
+			SparseMatrix(InitializerListType l): size1(0), size2(0), data() {
 				assign(l);
 			}
 			
@@ -602,8 +590,7 @@ namespace CDPL
 				return assign(c);
 			}
 
-			template <typename T1>
-			SparseMatrix& operator=(InitializerListType<T1> l) {
+			SparseMatrix& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -619,8 +606,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 
-			template <typename T1>
-			SparseMatrix& operator+=(InitializerListType<T1> l) {
+			SparseMatrix& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 			
@@ -636,8 +622,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			SparseMatrix& operator-=(InitializerListType<T1> l) {
+			SparseMatrix& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -667,9 +652,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseMatrix& assign(InitializerListType<T1> l) {
-				InitListMatrix<T1> ilm(l);
+			SparseMatrix& assign(InitializerListType l) {
+				InitListMatrix<ValueType> ilm(l);
 				resize(ilm.getSize1(), ilm.getSize2());
 				matrixAssignMatrix<ScalarAssignment>(*this, ilm);
 				return *this;
@@ -681,9 +665,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseMatrix& plusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<T1>(l));
+			SparseMatrix& plusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 
@@ -693,9 +676,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseMatrix& minusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<T1>(l));
+			SparseMatrix& minusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 
@@ -776,9 +758,7 @@ namespace CDPL
 			typedef SelfType MatrixTemporaryType;
 			typedef BoundedVector<T, M * N> VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
-			template <typename T1>
-			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
+			typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 			
 			static const SizeType MaxSize1 = M;
 			static const SizeType MaxSize2 = N;
@@ -798,8 +778,7 @@ namespace CDPL
 					std::copy(m.data[i], m.data[i] + size2, data[i]);
 			}
 
-			template <typename T1>
-			BoundedMatrix(InitializerListType<T1> l): size1(0), size2(0) {
+			BoundedMatrix(InitializerListType l): size1(0), size2(0) {
 				assign(l);
 			}
 			
@@ -864,8 +843,7 @@ namespace CDPL
 				return assign(c);
 			}
 
-			template <typename T1>
-			BoundedMatrix& operator=(InitializerListType<T1> l) {
+			BoundedMatrix& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -880,8 +858,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 
-			template <typename T1>
-			BoundedMatrix& operator+=(InitializerListType<T1> l) {
+			BoundedMatrix& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 			
@@ -896,8 +873,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			BoundedMatrix& operator-=(InitializerListType<T1> l) {
+			BoundedMatrix& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -926,9 +902,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedMatrix& assign(InitializerListType<T1> l) {
-				InitListMatrix<T1> ilm(l);
+			BoundedMatrix& assign(InitializerListType l) {
+				InitListMatrix<ValueType> ilm(l);
 				resize(ilm.getSize1(), ilm.getSize2());
 				matrixAssignMatrix<ScalarAssignment>(*this, ilm);
 				return *this;
@@ -940,9 +915,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedMatrix& plusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<T1>(l));
+			BoundedMatrix& plusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 
@@ -952,9 +926,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedMatrix& minusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<T1>(l));
+			BoundedMatrix& minusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 
@@ -1038,9 +1011,7 @@ namespace CDPL
 			typedef BoundedMatrix<T, M, N> MatrixTemporaryType;
 			typedef BoundedVector<T, M * N> VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
-			template <typename T1>
-			using InitializerListType = std::initializer_list<std::initializer_list<T1> >;
+			typedef std::initializer_list<std::initializer_list<T> > InitializerListType;
 			
 			static const SizeType Size1 = M;
 			static const SizeType Size2 = N;
@@ -1060,8 +1031,7 @@ namespace CDPL
 					std::copy(m.data[i], m.data[i] + N, data[i]);
 			}
 
-			template <typename T1>
-			CMatrix(InitializerListType<T1> l) {
+			CMatrix(InitializerListType l) {
 				assign(l);
 			}
 			
@@ -1123,7 +1093,7 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CMatrix& operator=(InitializerListType<T1> l) {
+			CMatrix& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -1138,8 +1108,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 
-			template <typename T1>
-			CMatrix& operator+=(InitializerListType<T1> l) {
+			CMatrix& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 			
@@ -1154,8 +1123,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			CMatrix& operator-=(InitializerListType<T1> l) {
+			CMatrix& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -1183,8 +1151,7 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			CMatrix& assign(InitializerListType<T1> l) {
+			CMatrix& assign(InitializerListType l) {
 				SizeType n_rows = CDPL_MATH_CHECK_MAX_SIZE(SizeType(l.size()), M, Base::SizeError);
 				
 				for (SizeType i = 0; i < n_rows; i++) {
@@ -1212,9 +1179,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			CMatrix& plusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<T1>(l));
+			CMatrix& plusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarAdditionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 			
@@ -1224,9 +1190,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			CMatrix& minusAssign(InitializerListType<T1> l) {
-				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<T1>(l));
+			CMatrix& minusAssign(InitializerListType l) {
+				matrixAssignMatrix<ScalarSubtractionAssignment>(*this, InitListMatrix<ValueType>(l));
 				return *this;
 			}
 

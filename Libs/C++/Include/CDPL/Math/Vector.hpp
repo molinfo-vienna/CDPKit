@@ -245,7 +245,8 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef SelfType VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
+			typedef std::initializer_list<T> InitializerListType;
+			
 			Vector(): data() {}
 
 			explicit Vector(SizeType n): data(storageSize(n)) {}
@@ -258,8 +259,7 @@ namespace CDPL
 
 			Vector(Vector&& v): data(std::move(v.data)) {}
 
-			template <typename T1>
-			Vector(std::initializer_list<T1> l): data(l.begin(), l.end()) {}
+			Vector(InitializerListType l): data(l) {}
 			
 			template <typename E>
 			Vector(const VectorExpression<E>& e): data(storageSize(e().getSize())) {
@@ -314,8 +314,7 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Vector& operator=(std::initializer_list<T1> l) {
+			Vector& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -336,8 +335,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 
-			template <typename T1>
-			Vector& operator+=(std::initializer_list<T1> l) {
+			Vector& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 
@@ -353,8 +351,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			Vector& operator-=(std::initializer_list<T1> l) {
+			Vector& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -384,10 +381,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Vector& assign(std::initializer_list<T1> l) {
-				data.clear();
-				data.insert(data.end(), l.begin(), l.end());
+			Vector& assign(InitializerListType l) {
+				data = l;
 				return *this;
 			}
 
@@ -397,9 +392,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Vector& plusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<T1>(l));
+			Vector& plusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 			
@@ -409,9 +403,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			Vector& minusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<T1>(l));
+			Vector& minusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 
@@ -460,7 +453,8 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef SelfType VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
+			typedef std::initializer_list<T> InitializerListType;
+			
 			SparseVector(): data(), size(0) {}
 
 			explicit SparseVector(SizeType n): data(), size(storageSize(n)) {}
@@ -471,8 +465,7 @@ namespace CDPL
 				swap(v);
 			}
 
-			template <typename T1>
-			SparseVector(std::initializer_list<T1> l) {
+			SparseVector(InitializerListType l) {
 				assign(l);
 			}
 
@@ -540,8 +533,7 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseVector& operator=(std::initializer_list<T1> l) {
+			SparseVector& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -562,8 +554,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 
-			template <typename T1>
-			SparseVector& operator+=(std::initializer_list<T1> l) {
+			SparseVector& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 			
@@ -579,8 +570,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			SparseVector& operator-=(std::initializer_list<T1> l) {
+			SparseVector& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 			
@@ -610,10 +600,9 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseVector& assign(std::initializer_list<T1> l) {
+			SparseVector& assign(InitializerListType l) {
 				resize(l.size());
-				vectorAssignVector<ScalarAssignment>(*this, InitListVector<T1>(l));
+				vectorAssignVector<ScalarAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 
@@ -623,9 +612,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseVector& plusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<T1>(l));
+			SparseVector& plusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 			
@@ -635,9 +623,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			SparseVector& minusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<T1>(l));
+			SparseVector& minusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 
@@ -700,7 +687,8 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef BoundedVector<T, N + 1> VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
+			typedef std::initializer_list<T> InitializerListType;
+			
 			static const SizeType MaxSize = N;
 
 			BoundedVector(): size(0) {}
@@ -717,8 +705,7 @@ namespace CDPL
 				std::copy(v.data, v.data + v.size, data);
 			}
 
-			template <typename T1>
-			BoundedVector(std::initializer_list<T1> l) {
+			BoundedVector(InitializerListType l) {
 				assign(l);
 			}
 
@@ -774,8 +761,7 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedVector& operator=(std::initializer_list<T1> l) {
+			BoundedVector& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -795,8 +781,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 			
-			template <typename T1>
-			BoundedVector& operator+=(std::initializer_list<T1> l) {
+			BoundedVector& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 			
@@ -811,8 +796,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			BoundedVector& operator-=(std::initializer_list<T1> l) {
+			BoundedVector& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -841,8 +825,7 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedVector& assign(std::initializer_list<T1> l) {
+			BoundedVector& assign(InitializerListType l) {
 				resize(l.size());
 				std::copy(l.begin(), l.begin() + size, data);
 				return *this;
@@ -854,9 +837,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedVector& plusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<T1>(l));
+			BoundedVector& plusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 			
@@ -866,9 +848,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			BoundedVector& minusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<T1>(l));
+			BoundedVector& minusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 
@@ -930,7 +911,8 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef BoundedVector<T, N + 1> VectorTemporaryType;
 			typedef std::shared_ptr<SelfType> SharedPointer;
-
+			typedef std::initializer_list<T> InitializerListType;
+			
 			static const SizeType Size = N;
 
 			CVector() {
@@ -945,8 +927,7 @@ namespace CDPL
 				std::copy(v.data, v.data + N, data);
 			}
 
-			template <typename T1>
-			CVector(std::initializer_list<T1> l) {
+			CVector(InitializerListType l) {
 				assign(l);
 			}
 
@@ -1000,8 +981,7 @@ namespace CDPL
 				return *this;
 			}
 			
-			template <typename T1>
-			CVector& operator=(std::initializer_list<T1> l) {
+			CVector& operator=(InitializerListType l) {
 				return assign(l);
 			}
 
@@ -1021,8 +1001,7 @@ namespace CDPL
 				return plusAssign(c);
 			}
 			
-			template <typename T1>
-			CVector& operator+=(std::initializer_list<T1> l) {
+			CVector& operator+=(InitializerListType l) {
 				return plusAssign(l);
 			}
 	
@@ -1037,8 +1016,7 @@ namespace CDPL
 				return minusAssign(c);
 			}
 
-			template <typename T1>
-			CVector& operator-=(std::initializer_list<T1> l) {
+			CVector& operator-=(InitializerListType l) {
 				return minusAssign(l);
 			}
 
@@ -1066,8 +1044,7 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			CVector& assign(std::initializer_list<T1> l) {
+			CVector& assign(InitializerListType l) {
 				SizeType n = CDPL_MATH_CHECK_MAX_SIZE(l.size(), N, Base::SizeError);
 				std::copy(l.begin(), l.begin() + n, data);
 
@@ -1083,9 +1060,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			CVector& plusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<T1>(l));
+			CVector& plusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarAdditionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 			
@@ -1095,9 +1071,8 @@ namespace CDPL
 				return *this;
 			}
 
-			template <typename T1>
-			CVector& minusAssign(std::initializer_list<T1> l) {
-				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<T1>(l));
+			CVector& minusAssign(InitializerListType l) {
+				vectorAssignVector<ScalarSubtractionAssignment>(*this, InitListVector<ValueType>(l));
 				return *this;
 			}
 
