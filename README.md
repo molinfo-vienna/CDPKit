@@ -85,8 +85,8 @@ There, under the `CDPL Python-API` you can see the overview of the currently imp
 You can also access the `CDPL Python Cookbook` there, which is a collection of stand alone scripts of common use cases, including
 
 - Processing of Chemical Data
-⋅⋅* Input and Output
-⋅⋅* Fragmentation and Extraction of Substructures
+-- Input and Output
+-- Fragmentation and Extraction of Substructures
 ⋅⋅* Standardization and Curation
 
 - Pharmacophore Generation and Processing
