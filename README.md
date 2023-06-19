@@ -95,27 +95,22 @@ Once CDPKit is installed, you can start using it in your Python code. Here's an 
 ```python
 # Import the necessary CDPKit modules
 from CDPKit import Chem
+from CDPKit import Pharm
 
-# if the input molecules are expected to be in a specific format, a reader for this format could be created directly, e.g.
-# reader = Chem.FileSDFMoleculeReader(molecule.sdf)
-# here we provide the reader with a string (path) to the molecule.sdf 
-reader = getReaderByFileExt(molecule.sdf) 
-
-# create an instance of the default implementation of the Chem.Molecule interface
-mol = Chem.BasicMolecule()
-
-# reads the molecule
-reader.read(mol)
+# read molecule in SMILES-format
+mol = Chem.parseSMILES(smiles)
 
 # print the number of atoms and bonds for the molecule
 print('Processing molecule with {!s} atoms and {!s} bonds'.format(mol.numAtoms, mol.numBonds))
 
-# generate the ligand based pharmacophore model for it
-ph4 = genPharmacophore(mol) # generate pharmacophore
+# generate the empty pharmacophore model
+ph4 = Pharm.BasicPharmacophore()
+
+# generate the ligand based pharmacophore model for the molecule
+Pharm.DefaultPharmacophoreGenerator(mol,ph4)
 
 # print the number of features and feature composition
 print(' -> Generated %s features: %s' % (str(ph4.numFeatures), createFeatureCompositionStr(ph4)))
-
 ```
 
 In the above code, we import the required CDPKit modules, create a molecule from an SDF file, compute the ligand based pharmacophore model using CDPKit's built-in functions and print some of its molecular and pharmacophoric features.
