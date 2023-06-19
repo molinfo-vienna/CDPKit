@@ -90,24 +90,24 @@ You can also access the `CDPL Python Cookbook` there, which is a collection of s
     - Standardization and Curation
 
 - Pharmacophore Generation and Processing
-⋅⋅* Plain Molecule Pharmacophores
-⋅⋅* Ligand-Receptor Interaction Pharmacophores
-⋅⋅* Retrieving Feature Properties
-⋅⋅* Molecule to Reference Pharmacophore Alignment
+    - Plain Molecule Pharmacophores
+    - Ligand-Receptor Interaction Pharmacophores
+    - Retrieving Feature Properties
+    - Molecule to Reference Pharmacophore Alignment
 
 - Calculation of Atom and Bond Properties
-⋅⋅* Connectivity Properties
-⋅⋅* Chemical Element Properties
-⋅⋅* Classification Properties
-⋅⋅* Partial Charges and other Electronic Properties
-⋅⋅* Physicochemical Properties
+    - Connectivity Properties
+    - Chemical Element Properties
+    - Classification Properties
+    - Partial Charges and other Electronic Properties
+    - Physicochemical Properties
 
 - Calculation of Molecule and Pharmacophore Descriptors
-⋅⋅* Extended Connectivity Fingerprints (ECFPs)
-⋅⋅* FAME Atom Environment Fingerprints
+    - Extended Connectivity Fingerprints (ECFPs)
+    - FAME Atom Environment Fingerprints
 
 - Force Field Calculations
-⋅⋅* MMFF94 Atom Charges
+    - MMFF94 Atom Charges
 
 ### Basic Usage
 
