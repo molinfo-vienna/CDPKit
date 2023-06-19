@@ -1,4 +1,4 @@
-# Introduction
+# About
 
 The CDPkit is an open-source software toolkit for cheminformatics and is written in C++. It also provides an additional Python-interfacing layer.
 CDPKit features a high-quality and well-tested modular implementation of basic functionality typically required by any higher-level software application in the field of cheminformatics. 
@@ -6,19 +6,9 @@ It provides a wide range of functionality for handling and analyzing chemical st
 
 At its core, it provides a set of programming tools and libraries that enable researchers to work with molecular data in a systematic and efficient manner, allowing seamless integration with other software and databases.
 
-One of the key strengths of CDPkit are pharmacophore modelling, conformation generation, and its ability to perform substructure searching. Given a query molecule or a substructure pattern, CDPkit can efficiently search large chemical databases to find molecules that contain the specified substructure. 
-This capability is particularly useful in drug discovery, where scientists often need to find compounds that interact with specific target proteins or enzymes.
-
-CDPkit also supports the visualization of molecular structures and properties. It provides methods for generating 2D and 3D molecular depictions, 
-allowing scientists to visualize and explore the spatial arrangement of atoms and bonds within a molecule. This visualization capability aids in 
-understanding the structure-activity relationships and rationalizing the behavior of chemical compounds.
-
 Furthermore, CDPkit integrates with various machine learning and data mining libraries, enabling scientists to build predictive models for molecular 
 properties. This makes it a valuable tool in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
 and other properties of potential drug candidates. An example of the integration can be found in the source code of this [publication](https://www.mdpi.com/1420-3049/26/20/6185).
-
-In summary, CDPkit is a powerful and versatile toolkit for cheminformatics, offering a comprehensive set of tools and libraries for molecular manipulation, analysis, 
-and property prediction. Its wide range of functionality makes it an indispensable resource for scientists working in the field of computational chemistry and drug discovery.
 
 ## Getting Started with CDPKit
 
@@ -86,11 +76,42 @@ If all prerequisites are fulfilled
 > make doc
 ```
 
-should lead to a successful build of the CDPKit documentation which can then be found in <BUILD-DIR>/Doc/html.
+should lead to a successful build of the CDPKit documentation which can then be found in `<BUILD-DIR>/Doc/html`.
+
+### Documentation page
+The main page of the documantion will be available online soon.
+In the meantime you can access it via `<BUILD-DIR>/Doc/html`.
+There, under the `CDPL Python-API` you can see the overview of the currently implemented classes and functions.
+You can also access the `CDPL Python Cookbook` there, which is a collection of stand alone scripts of common use cases, including
+
+- Processing of Chemical Data
+⋅⋅* Input and Output
+⋅⋅* Fragmentation and Extraction of Substructures
+⋅⋅* Standardization and Curation
+
+- Pharmacophore Generation and Processing
+⋅⋅* Plain Molecule Pharmacophores
+⋅⋅* Ligand-Receptor Interaction Pharmacophores
+⋅⋅* Retrieving Feature Properties
+⋅⋅* Molecule to Reference Pharmacophore Alignment
+
+- Calculation of Atom and Bond Properties
+⋅⋅* Connectivity Properties
+⋅⋅* Chemical Element Properties
+⋅⋅* Classification Properties
+⋅⋅* Partial Charges and other Electronic Properties
+⋅⋅* Physicochemical Properties
+
+- Calculation of Molecule and Pharmacophore Descriptors
+⋅⋅* Extended Connectivity Fingerprints (ECFPs)
+⋅⋅* FAME Atom Environment Fingerprints
+
+- Force Field Calculations
+⋅⋅* MMFF94 Atom Charges
 
 ### Basic Usage
 
-Once CDPKit is installed, you can start using it in your Python code. Here's an example to get you started:
+Once CDPKit is installed, you can start using it in your Python code. Here's an example to get you started with basic ligand-based pharmacophore generation using SMILES:
 
 ```python
 # Import the necessary CDPKit modules
@@ -98,7 +119,7 @@ from CDPKit import Chem
 from CDPKit import Pharm
 
 # read molecule in SMILES-format
-mol = Chem.parseSMILES(smiles)
+mol = Chem.parseSMILES('Cc1ccccc1')
 
 # print the number of atoms and bonds for the molecule
 print('Processing molecule with {!s} atoms and {!s} bonds'.format(mol.numAtoms, mol.numBonds))
@@ -112,8 +133,6 @@ Pharm.DefaultPharmacophoreGenerator(mol,ph4)
 # print the number of features and feature composition
 print(' -> Generated %s features: %s' % (str(ph4.numFeatures), createFeatureCompositionStr(ph4)))
 ```
-
-In the above code, we import the required CDPKit modules, create a molecule from an SDF file, compute the ligand based pharmacophore model using CDPKit's built-in functions and print some of its molecular and pharmacophoric features.
 
 ### Further Exploration
 
