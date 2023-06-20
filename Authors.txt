@@ -1,3 +1,7 @@
 Thomas Seidel 
 Main Developer 
 thomas.seidel@univie.ac.at
+
+Oliver Wieder
+Documentation
+oliver.wieder@univie.ac.at
