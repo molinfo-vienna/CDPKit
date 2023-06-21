@@ -48,6 +48,13 @@ def setName(cntnr: FeatureContainer, name: str) -> None: pass
 
 ##
 # \brief 
+# \param cntnr 
+# \return 
+#
+def buildFeatureTypeHistogramString(cntnr: FeatureContainer) -> str: pass
+
+##
+# \brief 
 # \param ftr_cntnr 
 # \param atom_cntnr 
 # \param coords_func 
