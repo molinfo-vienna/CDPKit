@@ -177,34 +177,6 @@ def getPharmWriterByFileExt(filename: str) -> Pharm.FeatureContainerWriter:
 
     return opt_handler.createWriter(filename)    # create and return file writer instance
 
-# generates a simple description of the feature composition of a pharmacophore
-def createFeatureCompositionStr(ph4: Pharm.FeatureContainer) -> str:
-    ftr_type_str = { Pharm.FeatureType.UNKNOWN               : 'UNK',
-                     Pharm.FeatureType.HYDROPHOBIC           : 'H',
-                     Pharm.FeatureType.AROMATIC              : 'AR',
-                     Pharm.FeatureType.NEGATIVE_IONIZABLE    : 'NI',
-                     Pharm.FeatureType.POSITIVE_IONIZABLE    : 'PI',
-                     Pharm.FeatureType.H_BOND_DONOR          : 'HBD',
-                     Pharm.FeatureType.H_BOND_ACCEPTOR       : 'HBA',
-                     Pharm.FeatureType.HALOGEN_BOND_DONOR    : 'XBD',
-                     Pharm.FeatureType.HALOGEN_BOND_ACCEPTOR : 'XBA',
-                     Pharm.FeatureType.EXCLUSION_VOLUME      : 'XV' }
-
-    histo = Pharm.FeatureTypeHistogram()        # data structure for storing feature type counts
-    
-    Pharm.buildFeatureTypeHistogram(ph4, histo) # generate feature type histogram
-
-    # compose a string specifying feature types and counts
-    comp_str = ''
-    
-    for entry in histo.getEntries():
-        if comp_str:
-            comp_str += ', '
-
-        comp_str += '%s(%s)' % (ftr_type_str[entry[0]], str(entry[1]))
-
-    return comp_str
-        
 def main() -> None:
     args = parseArgs()
 
@@ -243,7 +215,7 @@ def main() -> None:
                 ph4_gen.generate(lig_mol, rec_mol, ia_ph4, True) # generate the pharmacophore (True = extract ligand environment residues on-the-fly)
 
                 if not args.quiet:
-                     print(' -> Generated %s features: %s' % (str(ia_ph4.numFeatures), createFeatureCompositionStr(ia_ph4)))
+                     print(' -> Generated %s features: %s' % (str(ia_ph4.numFeatures), Pharm.buildFeatureTypeHistogramString(ia_ph4)))
                 
                 try:
                     if not ph4_writer.write(ia_ph4): # output pharmacophore
