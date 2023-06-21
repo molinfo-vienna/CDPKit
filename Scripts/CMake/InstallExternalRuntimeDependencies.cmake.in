@@ -56,7 +56,6 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     "libpthread"
     "system32"
     "ms-win-core"
-    "Qt"
     "libstdc\\+\\+"
     "libgcc"
     "libm\\.so"
@@ -67,7 +66,11 @@ FUNCTION(INSTALL_DEPENDENCIES BINARY_INPUT_FILE LEVEL)
     "libdl"
     "${CMAKE_INSTALL_PREFIX_X_PTN}"
     )
- 
+
+  IF(APPLE)
+    LIST(APPEND EXCLUDE_PATTERNS "Qt")
+  ENDIF()
+  
   GET_FILENAME_COMPONENT(FILE_SUFFIX "${BINARY_INPUT_FILE}" LAST_EXT)
 
   IF("${FILE_SUFFIX}" STREQUAL "" OR "${FILE_SUFFIX}" STREQUAL ".exe")
