@@ -39,6 +39,7 @@ SET(test-suite_SRCS
     PropertyValueProductTest.cpp
     BronKerboschAlgorithmTest.cpp
     DGCoordinatesGeneratorTest.cpp
+    FoldBitSetFunctionTest.cpp
    )
 
 SET(CMAKE_BUILD_TYPE "Debug")

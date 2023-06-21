@@ -29,6 +29,8 @@ SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     TPSACalculatorTest.cpp
+
+    AtomIsOrdinaryHydrogenTest.cpp
    )
 
 SET(CMAKE_BUILD_TYPE "Debug")
