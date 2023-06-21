@@ -40,13 +40,13 @@ namespace CDPL
     namespace Chem
     {
 
-	class Molecule;
+		class Molecule;
     }
 
     namespace GRAIL 
     {
 	
-	CDPL_GRAIL_API void prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_prot_state = false);
+		CDPL_GRAIL_API void prepareForGRAILDescriptorCalculation(Chem::Molecule& mol, bool std_prot_state = false);
     }
 }
 
