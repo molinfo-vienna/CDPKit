@@ -157,6 +157,6 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit Cookbook**: Explore the [CDPKit Cookbook](http://a7srv2.pch.univie.ac.at/cdpkit/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
-- **CDPKit Conformer Generator**: Visit the [CONFORT](https://www.researchsquare.com/article/rs-1597257/v1) paper pr-eprint which described the integrated high-quality conformer generator.
+- **CDPKit Conformer Generator**: Visit the [CONFORT](https://www.researchsquare.com/article/rs-1597257/v1) paper preprint for information about the integrated high-quality conformer generator.
 
 - **CDPKit ML integration example**: Check out the [github](https://github.com/spudlig/graph_networks) page of the "Improved Lipophilicity and Aqueous Solubility Prediction with Composite Graph Neural Networks" publication for exploring the ML integration possibilities of CDPKit.
