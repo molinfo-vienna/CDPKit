@@ -44,9 +44,6 @@ SET(test-suite_SRCS
     StringDataBlockTest.cpp
     AtomDictionaryTest.cpp
 
-    #IsHydrogenTest.cpp
-    #IsOrdinaryHydrogenTest.cpp
-
     #JMEMolecularGraphOutputHandlerTest.cpp
     #MOLMolecularGraphOutputHandlerTest.cpp
     #SDFMolecularGraphOutputHandlerTest.cpp
