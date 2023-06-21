@@ -48,6 +48,14 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER5(bool, checkExclusionVolumeClash, const CDPL::Pharm::FeatureContainer&, CDPL::Chem::AtomContainer&,
 						   const CDPL::Chem::Atom3DCoordinatesFunction&, const CDPL::Math::Matrix4D&, double);
+
+	std::string buildFeatureTypeHistogramStringWrapper(CDPL::Pharm::FeatureContainer& cntnr)
+	{
+		std::string str;
+
+		CDPL::Pharm::buildFeatureTypeHistogramString(cntnr, str);
+		return str;
+	}
 }
 
 
@@ -62,6 +70,7 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
 				(python::arg("cntnr"), python::arg("type")));
 	python::def("buildFeatureTypeHistogram", &Pharm::buildFeatureTypeHistogram, 
 				(python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
+	python::def("buildFeatureTypeHistogramString", &buildFeatureTypeHistogramStringWrapper, python::arg("cntnr"));
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
 				(python::arg("ftr_cntnr"), python::arg("atom_cntnr"), python::arg("coords_func"), 
 				 python::arg("xform"), python::arg("vdw_factor") = 1.0));

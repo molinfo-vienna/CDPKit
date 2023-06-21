@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * UtilityFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,20 +24,18 @@
  */
 
 
-#ifndef CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Pharm/UtilityFunctions.hpp"
+
+#include "FunctionExports.hpp"
 
 
-namespace CDPLPythonPharm
+void CDPLPythonPharm::exportUtilityFunctions()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportPharmacophoreFunctions();
-	void exportFeatureFunctions();
-	void exportFeatureContainerFunctions();
-	void exportFeatureSetFunctions();
-	void exportControlParameterFunctions();
-	void exportMoleculeFunctions();
-	void exportUtilityFunctions();
+    python::def("getFeatureTypeString", &Pharm::getFeatureTypeString,  python::arg("ftr_type"),
+		python::return_value_policy<python::copy_const_reference>());
 }
-
-#endif // CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP

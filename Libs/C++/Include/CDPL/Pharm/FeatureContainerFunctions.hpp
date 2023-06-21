@@ -70,6 +70,9 @@ namespace CDPL
 
 		CDPL_PHARM_API void buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append = false);
 
+		CDPL_PHARM_API void buildFeatureTypeHistogramString(const FeatureContainer& cntnr, std::string& histo_str);
+
+
 		CDPL_PHARM_API void transform3DCoordinates(FeatureContainer& cntnr, const Math::Matrix4D& mtx);
 
 		CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 

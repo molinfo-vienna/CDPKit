@@ -130,7 +130,8 @@ SET(pharm_MOD_SRCS
     FeatureContainerFunctionExport.cpp 
     FeatureSetFunctionExport.cpp 
     ControlParameterFunctionExport.cpp 
-    MoleculeFunctionExport.cpp 
+    MoleculeFunctionExport.cpp
+    UtilityFunctionExport.cpp 
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

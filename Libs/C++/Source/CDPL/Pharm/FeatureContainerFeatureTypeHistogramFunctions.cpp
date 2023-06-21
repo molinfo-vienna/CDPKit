@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FeatureContainerFeatureTypeHistogramFunction.cpp 
+ * FeatureContainerFeatureTypeHistogramFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,11 +26,14 @@
 
 #include "StaticInit.hpp"
 
+#include <boost/range/iterator_range.hpp>
+
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Pharm/UtilityFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -48,5 +51,23 @@ void Pharm::buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureType
 		unsigned int feature_type = getType(ftr);
 
 		hist[feature_type]++;
+	}
+}
+
+void Pharm::buildFeatureTypeHistogramString(const FeatureContainer& cntnr, std::string& histo_str)
+{
+	FeatureTypeHistogram histo;
+    
+    buildFeatureTypeHistogram(cntnr, histo);
+	histo_str.clear();
+	
+    for (const auto& entry : boost::make_iterator_range(histo.getEntriesBegin(), histo.getEntriesEnd())) {
+        if (!histo_str.empty())
+            histo_str += ", ";
+	
+        histo_str += getFeatureTypeString(entry.first);
+		histo_str += '(';
+        histo_str += std::to_string(entry.second);
+		histo_str += ')';
 	}
 }

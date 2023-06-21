@@ -105,7 +105,7 @@ SET(cdpl-pharm_LIB_SRCS
 
     FeatureContainerPropertyFunctions.cpp
     FeatureContainerFeatureCountFunctions.cpp
-    FeatureContainerFeatureTypeHistogramFunction.cpp
+    FeatureContainerFeatureTypeHistogramFunctions.cpp
     FeatureContainerXVolumeClashTestFunction.cpp
     FeatureContainerGetFeatureAtomsFunction.cpp
     FeatureContainerTransform3DCoordinatesFunction.cpp
@@ -118,6 +118,7 @@ SET(cdpl-pharm_LIB_SRCS
 
     ControlParameterFunctions.cpp
     MoleculeFunctions.cpp
+    UtilityFunctions.cpp
 
     PiPiInteractionUtilities.cpp
     TwoPointPharmacophore.cpp

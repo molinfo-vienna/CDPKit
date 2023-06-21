@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * UtilityFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,21 +23,28 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of miscellaneous utility functions.
+ */
 
-#ifndef CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
+
+#include <string>
+
+#include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPLPythonPharm
+namespace CDPL 
 {
 
-	void exportPharmacophoreFunctions();
-	void exportFeatureFunctions();
-	void exportFeatureContainerFunctions();
-	void exportFeatureSetFunctions();
-	void exportControlParameterFunctions();
-	void exportMoleculeFunctions();
-	void exportUtilityFunctions();
+    namespace Pharm 
+    {
+
+	CDPL_PHARM_API const std::string& getFeatureTypeString(unsigned int ftr_type);
+    }
 }
 
-#endif // CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP
+#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP
+ 

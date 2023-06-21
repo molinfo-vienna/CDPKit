@@ -121,6 +121,7 @@
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureSetFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
+#include "CDPL/Pharm/UtilityFunctions.hpp"
 
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 
