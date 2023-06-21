@@ -1,12 +1,12 @@
 # About
 
-CDPKit is an open-source cheminformatics software toolkit written in C++. In addition to the C++ API CDPKit provides a Python-interfacing layer that allows to use all of CDPKit's functionality
+CDPKit is an open-source cheminformatics software toolkit implemented in C++. In addition to the C++ API a Python-interfacing layer is provided that allows to use all of CDPKit's functionality
 from Python scripts. CDPKit features a high-quality and well-tested modular implementation of basic functionality typically required by any higher-level software application in the field of cheminformatics. 
 This includes data structures for the representation and analysis of chemical structures, routines for the I/O of small molecule and macromolecular data in different file formats (MDL Mol and SDF, Mol2, PDB, MMTF, SMILES, etc.), ring and aromaticity perception, pharmacophore generation, substructure searching, molecular fingerprinting, molecule fragment generation (RECAP, BRICS), 2D structure layout and visualization, 3D structure and conformer generation ([CONFORT](https://www.researchsquare.com/article/rs-1597257/v1)), physicochemical property prediction, and so on.
 
 At its core, CDPKit delivers a set of command line tools and software libraries (CDPL) that enable researchers to work with molecular data in a systematic and efficient manner, allowing seamless integration with other software and databases.
 
-Furthermore, CDPkit integrates with various machine learning and data mining libraries, enabling scientists to build predictive models for molecular 
+Furthermore, CDPKit integrates with various machine learning and data mining libraries, enabling scientists to build predictive models for molecular 
 properties. This makes it a valuable tool in the field of computational drug discovery, where machine learning is employed to predict the biological activity, toxicity, 
 and other properties of potential drug candidates. An example of the integration can be found in the source code of this [publication](https://www.mdpi.com/1420-3049/26/20/6185).
 
@@ -16,7 +16,7 @@ This short guide will help you get started with CDPKit and introduce you to some
 
 ### Installation
 
-To install CDPKit from source, please follow the steps below:
+For an installation of CDPKit from source please follow the steps below:
 
 1. **Build Requirements and Dependencies**
 - mandatory c++11 compliant compiler
@@ -35,8 +35,7 @@ To install CDPKit from source, please follow the steps below:
 
 2. **Build and Install CDPKit**
 
-The makefiles are generated using cmake as follows
-(assuming a build on a Linux host):
+The makefiles are generated using cmake as follows (assuming a build on a Linux host):
 
 ```
 > mkdir <BUILD-DIR>
@@ -45,7 +44,7 @@ The makefiles are generated using cmake as follows
 ```
 
 If the makefiles have been generated without errors, invoking
-'make' from within <BUILD-DIR> starts the actual build process: 
+'make' from within `<BUILD-DIR>` starts the actual build process: 
 
 ```
 > make
@@ -58,14 +57,14 @@ If the build finished without errors
 > make install
 ```
 
-will install CDPKit in the /opt directory of your system (a different install
-location can be specified by -DCMAKE_INSTALL_PREFIX=<INSTALL-DIR> on the cmake command line).
+will install CDPKit in the `/opt` directory of your system (a different install
+location can be specified by a `-DCMAKE_INSTALL_PREFIX=<INSTALL-DIR>` argument on the `cmake` command line).
 
 
 ### Generating CDPKit Documentation:
 
 For a successful build of the CDPKit documentation pages, sphinx, the sphinx-rtd-theme and sphinxcontrib-bibtex
-need to be available on the build host. Furthermore, for the generation of the CDPL C++ and Python API-documentation
+need to be available on the build host. Furthermore, for the generation of the CDPL C++ and Python API-documentation,
 doxygen has to be installed.
 
 If all prerequisites are fulfilled
@@ -93,7 +92,7 @@ You can also access the `CDPL Python Cookbook` there, which is a collection of s
     - Retrieving Feature Properties
     - Molecule to Reference Pharmacophore Alignment
 
-- Calculation of Atom and Bond Properties
+- Calculation of Atom and Bond Properties
     - Connectivity Properties
     - Chemical Element Properties
     - Classification Properties
@@ -109,7 +108,7 @@ You can also access the `CDPL Python Cookbook` there, which is a collection of s
 
 ### Basic Usage
 
-Once CDPKit is installed, you can start using it in your Python code (note: PYTHONPATH has to include the <INSTALL-DIR>/Python directory).
+Once CDPKit is installed, you can start using it in your Python code (note: `PYTHONPATH` has to include the `<INSTALL-DIR>/Python` directory).
 Here's an example to get you started with basic ligand-based pharmacophore generation starting from a SMILES string:
 
 ```python
@@ -138,7 +137,7 @@ print(' -> Generated %s features: %s' % (str(ph4.numFeatures), Pharm.buildFeatur
 
 ### Further Exploration
 
-CDPKit offers a vast range of functionality beyond the basic usage shown above. Some areas to explore include:
+CDPKit offers a vast range of functionality beyond the basic usage example shown above. Some areas to explore include:
 
 - **Substructure Searching**: CDPKit provides powerful methods to search for substructures within molecules.
 
@@ -158,6 +157,6 @@ To learn more about CDPKit and explore its features in detail, refer to the offi
 
 - **CDPKit Cookbook**: Explore the [CDPKit Cookbook](http://a7srv2.pch.univie.ac.at/cdpkit/cdpl_python_cookbook/index.html) for a collection of code snippets and examples showcasing various CDPKit functionalities. The documentation page will be available for external usage soon.
 
-- **CDPKit Conformer Generator**: Visit [CONFORT](https://www.researchsquare.com/article/rs-1597257/v1) which described the integrated high-quality conformer generator.
+- **CDPKit Conformer Generator**: Visit the [CONFORT](https://www.researchsquare.com/article/rs-1597257/v1) paper pr-eprint which described the integrated high-quality conformer generator.
 
 - **CDPKit ML integration example**: Check out the [github](https://github.com/spudlig/graph_networks) page of the "Improved Lipophilicity and Aqueous Solubility Prediction with Composite Graph Neural Networks" publication for exploring the ML integration possibilities of CDPKit.
