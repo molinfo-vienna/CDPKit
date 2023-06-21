@@ -64,6 +64,9 @@ bool CDPL::Internal::isOrdinaryHydrogen(const Chem::Atom& atom, const Chem::Mole
 
     if ((flags & AtomPropertyFlag::H_COUNT) && getImplicitHydrogenCount(atom) != 0)
 		return false;
+
+	if ((flags & AtomPropertyFlag::ATOM_MAPPING_ID) && getAtomMappingID(atom) != 0)
+		return false;
 	
 	bool first_bond = true;
 
