@@ -103,7 +103,7 @@ You can also access the `CDPL Python Cookbook` there, which is a collection of s
     - Extended Connectivity Fingerprints (ECFPs)
     - FAME Atom Environment Fingerprints
 
-- Force Field Calculations
+- Force Field Calculations
     - MMFF94 Atom Charges
 
 ### Basic Usage
