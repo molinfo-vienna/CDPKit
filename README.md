@@ -19,10 +19,10 @@ This short guide will help you get started with CDPKit and introduce you to some
 For an installation of CDPKit from source please follow the steps below:
 
 1. **Build Requirements and Dependencies**
-- mandatory c++11 compliant compiler
-- mandatory cmake (V >= 3.17)
-- mandatory boost-devel C++ libraries (V >= 1.63)
-- mandatory python-devel 3.x (optional) and Python-interpreter
+- C++11 compliant compiler (mandatory)
+- cmake (V >= 3.17, mandatory)
+- boost-devel C++ libraries (V >= 1.63, mandatory)
+- python-devel 3.x (optional) and Python interpreter (mandatory)
 - Qt5-devel (optional)
 - cairo-devel (V >= 1.14, optional)
 - sqlite-devel V3 (optional)
