@@ -386,7 +386,7 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 
 		ligFtrAtoms[i].clear();
 
-		for (const auto& atom : (const AtomContainer&)(ftr_substruct))
+		for (const auto& atom : static_cast<const AtomContainer&>(*ftr_substruct))
 			if (getType(atom) != AtomType::H)
 				ligFtrAtoms[i].push_back(ligand.getAtomIndex(atom));
 		
@@ -421,7 +421,7 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 			const Feature& ftr = ligPharmacophore.getFeature(ftr_idx);
 			const Fragment::SharedPointer& ftr_substruct = getSubstructure(ftr);
 
-			for (const auto& atom : (const AtomContainer&)(ftr_substruct)) {
+			for (const auto& atom : static_cast<const AtomContainer&>(*ftr_substruct)) {
 				if (getType(atom) == AtomType::H)
 					continue;
 
