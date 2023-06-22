@@ -46,6 +46,6 @@
 \brief Contains classes and functions related to the generation and processing of pharmacophore and molecule descriptors.
 
 \namespace boost
-\brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).
+\brief The namespace of the Boost C++ Libraries.
 
 */
