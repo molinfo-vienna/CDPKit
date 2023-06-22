@@ -50,18 +50,6 @@ class BindingAffinityCalculator(Boost.Python.instance):
     def __init__() -> None: pass
 
     ##
-    # \brief Initializes the \e %BindingAffinityCalculator instance.
-    # \param measure 
-    #
-    def __init__(measure: AffinityMeasure) -> None: pass
-
-    ##
-    # \brief Initializes the \e %BindingAffinityCalculator instance.
-    # \param calc 
-    #
-    def __init__(calc: BindingAffinityCalculator) -> None: pass
-
-    ##
     # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
     #
     # Different Python \e %BindingAffinityCalculator instances may reference the same underlying C++ class instance. The commonly used Python expression
@@ -74,37 +62,14 @@ class BindingAffinityCalculator(Boost.Python.instance):
     def getObjectID() -> int: pass
 
     ##
-    # \brief Replaces the current state of \a self with a copy of the state of the \e %BindingAffinityCalculator instance \a calc.
-    # \param calc The \e %BindingAffinityCalculator instance to copy.
-    # \return \a self
-    #
-    def assign(calc: BindingAffinityCalculator) -> BindingAffinityCalculator: pass
-
-    ##
-    # \brief 
-    # \param measure 
-    #
-    def setAffinityMeasure(measure: AffinityMeasure) -> None: pass
-
-    ##
-    # \brief 
-    # \return 
-    #
-    def getAffinityMeasure() -> AffinityMeasure: pass
-
-    ##
     # \brief 
     # \param grail_descr 
+    # \param measure 
     # \return 
     #
-    def __call__(grail_descr: CDPL.Math.DVector) -> float: pass
+    def __call__(grail_descr: CDPL.Math.DVector, measure: AffinityMeasure) -> float: pass
 
     ##
     # \brief 
     #
     objectID = property(getObjectID)
-
-    ##
-    # \brief 
-    #
-    affinityMeasure = property(getAffinityMeasure, setAffinityMeasure)
