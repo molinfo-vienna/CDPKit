@@ -39,8 +39,7 @@ void CDPLPythonGRAIL::exportBindingAffinityCalculator()
     using namespace boost;
     using namespace CDPL;
   
-    python::class_<GRAIL::BindingAffinityCalculator, GRAIL::BindingAffinityCalculator::SharedPointer,
-			   boost::noncopyable> cls("BindingAffinityCalculator", python::no_init);
+    python::class_<GRAIL::BindingAffinityCalculator, boost::noncopyable> cls("BindingAffinityCalculator", python::no_init);
 
 	python::scope scope = cls;
 
@@ -52,17 +51,7 @@ void CDPLPythonGRAIL::exportBindingAffinityCalculator()
 
 	cls
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<GRAIL::BindingAffinityCalculator::AffinityMeasure>((python::arg("self"), python::arg("measure"))))
-		.def(python::init<const GRAIL::BindingAffinityCalculator&>((python::arg("self"), python::arg("calc"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GRAIL::BindingAffinityCalculator>())
-		.def("assign", CDPLPythonBase::copyAssOp(&GRAIL::BindingAffinityCalculator::operator=), 
-			 (python::arg("self"), python::arg("calc")), python::return_self<>())
-		.def("setAffinityMeasure", &GRAIL::BindingAffinityCalculator::setAffinityMeasure,
-			 (python::arg("self"), python::arg("measure")))
-		.def("getAffinityMeasure", &GRAIL::BindingAffinityCalculator::getAffinityMeasure,
-			 python::arg("self"))
 		.def("__call__", &GRAIL::BindingAffinityCalculator::operator(),
-			 (python::arg("self"), python::arg("grail_descr")))
-		.add_property("affinityMeasure", &GRAIL::BindingAffinityCalculator::getAffinityMeasure,
-					  &GRAIL::BindingAffinityCalculator::setAffinityMeasure);
+			 (python::arg("self"), python::arg("grail_descr"), python::arg("measure")));
 }

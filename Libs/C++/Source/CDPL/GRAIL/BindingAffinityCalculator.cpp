@@ -256,29 +256,12 @@ namespace
 	};
 }
 
-GRAIL::BindingAffinityCalculator::BindingAffinityCalculator():
-    affMeasure(PKD)
-{}
 
-GRAIL::BindingAffinityCalculator::BindingAffinityCalculator(AffinityMeasure measure):
-    affMeasure(measure)
-{}
-
-void GRAIL::BindingAffinityCalculator::setAffinityMeasure(AffinityMeasure measure)
-{
-    affMeasure = measure;
-}
-
-GRAIL::BindingAffinityCalculator::AffinityMeasure GRAIL::BindingAffinityCalculator::getAffinityMeasure() const
-{
-    return affMeasure;
-}
-
-double GRAIL::BindingAffinityCalculator::operator()(const Math::DVector& grail_descr) const
+double GRAIL::BindingAffinityCalculator::operator()(const Math::DVector& grail_descr, AffinityMeasure measure) const
 {
 	const double* coeffs;
 	
-	switch (affMeasure) {
+	switch (measure) {
 
 		case PKD:
 			coeffs = PKD_COEFFS;

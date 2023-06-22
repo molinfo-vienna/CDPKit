@@ -31,8 +31,6 @@
 #ifndef CDPL_GRAIL_BINDINGAFFINITYCALCULATOR_HPP
 #define CDPL_GRAIL_BINDINGAFFINITYCALCULATOR_HPP
 
-#include <memory>
-
 #include "CDPL/GRAIL/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -50,8 +48,6 @@ namespace CDPL
 		{
 
 		  public:
-			typedef std::shared_ptr<BindingAffinityCalculator> SharedPointer;
-
 			enum AffinityMeasure
 		    {
 
@@ -60,18 +56,9 @@ namespace CDPL
 			  PKD_PKI
 			};
 	    
-			BindingAffinityCalculator();
+			BindingAffinityCalculator() {}
 
-			BindingAffinityCalculator(AffinityMeasure measure);
-
-			void setAffinityMeasure(AffinityMeasure measure);
-
-			AffinityMeasure getAffinityMeasure() const;
-	    
-			double operator()(const Math::DVector& grail_descr) const;
-
-		  private:
-			AffinityMeasure affMeasure;
+			double operator()(const Math::DVector& grail_descr, AffinityMeasure measure) const;
 		};
     }
 }
