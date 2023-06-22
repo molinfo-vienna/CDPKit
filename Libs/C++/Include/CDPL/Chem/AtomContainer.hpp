@@ -117,6 +117,30 @@ namespace CDPL
 			AtomIterator getAtomsEnd();
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+			 */
+			ConstAtomIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Atom objects.
+			 * \return A constant iterator pointing to the end of the stored \c const Chem::Atom objects.
+			 */
+			ConstAtomIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::Atom objects.
+			 */
+			AtomIterator begin();
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::Atom objects.
+			 */
+			AtomIterator end();
+
+			/**
 			 * \brief Tells whether the specified Chem::Atom instance is stored in this container.
 			 * \param atom The Chem::Atom instance to look for.
 			 * \return \c true if \a atom is stored in the container, and \c false otherwise.

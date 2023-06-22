@@ -266,6 +266,16 @@ Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntr
 	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
+Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+}
+
+Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+}
+
 void Biomol::ResidueDictionary::loadDefaults()
 {
 	using namespace ResidueDictionaryData;

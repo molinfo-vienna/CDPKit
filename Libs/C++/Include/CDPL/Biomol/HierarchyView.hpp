@@ -92,6 +92,10 @@ namespace CDPL
 
 			ConstModelIterator getModelsEnd() const;
 
+			ConstModelIterator begin() const;
+
+			ConstModelIterator end() const;
+
 			/**
 			 * \brief Build the hierarchy view for the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to build the hierarchy view.

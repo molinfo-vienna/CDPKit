@@ -266,6 +266,34 @@ namespace CDPL
 
 			/**
 			 * \brief Returns a constant iterator over the pointed-to objects that points to
+			 *        the beginning of the array.
+			 * \return A constant iterator over the pointed-to objects.
+			 */
+			ConstElementIterator begin() const;
+
+			/**
+			 * \brief Returns a mutable iterator over the pointed-to objects that points to
+			 *        the beginning of the array.
+			 * \return A mutable iterator over the pointed-to objects.
+			 */
+			ElementIterator begin();
+
+			/**
+			 * \brief Returns a constant iterator over the pointed-to objects that points to
+			 *        the end of the array.
+			 * \return A constant iterator over the pointed-to objects.
+			 */
+			ConstElementIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator over the pointed-to objects that points to
+			 *        the end of the array.
+			 * \return A mutable iterator over the pointed-to objects.
+			 */
+			ElementIterator end();
+
+			/**
+			 * \brief Returns a constant iterator over the pointed-to objects that points to
 			 *        the beginning of the reversed array.
 			 * \return A constant iterator over the pointed-to objects.
 			 */
@@ -435,6 +463,34 @@ typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::El
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsEnd()  
 {
 	return ElementIterator(Array<PointerType>::getElementsEnd());
+}
+
+template <typename ValueType, typename PointerType, bool NullPointerCheck>
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstElementIterator 
+CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::begin() const  
+{
+	return ConstElementIterator(Array<PointerType>::begin());
+}
+
+template <typename ValueType, typename PointerType, bool NullPointerCheck>
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::begin()  
+{
+	return ElementIterator(Array<PointerType>::begin());
+}
+
+template <typename ValueType, typename PointerType, bool NullPointerCheck>		
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstElementIterator 
+CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::end() const  
+{
+	return ConstElementIterator(Array<PointerType>::end());
+}
+
+template <typename ValueType, typename PointerType, bool NullPointerCheck>
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::end()  
+{
+	return ElementIterator(Array<PointerType>::end());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>

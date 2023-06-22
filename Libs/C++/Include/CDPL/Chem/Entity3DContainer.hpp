@@ -113,6 +113,30 @@ namespace CDPL
 			 * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
 			 */
 			EntityIterator getEntitiesEnd();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+			 */
+			ConstEntityIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+			 * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+			 */
+			ConstEntityIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+			 */
+			EntityIterator begin();
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+			 */
+			EntityIterator end();
 	
 		protected:
 			/**

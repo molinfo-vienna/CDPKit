@@ -142,6 +142,26 @@ Chem::AutomorphismGroupSearch::ConstMappingIterator Chem::AutomorphismGroupSearc
     return substructSearch.getMappingsEnd();
 }
 
+Chem::AutomorphismGroupSearch::MappingIterator Chem::AutomorphismGroupSearch::begin()
+{
+    return substructSearch.begin();
+}
+
+Chem::AutomorphismGroupSearch::ConstMappingIterator Chem::AutomorphismGroupSearch::begin() const
+{
+    return substructSearch.begin();
+}
+
+Chem::AutomorphismGroupSearch::MappingIterator Chem::AutomorphismGroupSearch::end()
+{
+    return substructSearch.end();
+}
+
+Chem::AutomorphismGroupSearch::ConstMappingIterator Chem::AutomorphismGroupSearch::end() const
+{
+    return substructSearch.end();
+}
+
 void Chem::AutomorphismGroupSearch::setMaxNumMappings(std::size_t max_num_mappings)
 {
     substructSearch.setMaxNumMappings(max_num_mappings);

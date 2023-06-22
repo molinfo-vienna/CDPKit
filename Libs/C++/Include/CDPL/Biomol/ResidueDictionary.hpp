@@ -115,6 +115,10 @@ namespace CDPL
 			ConstEntryIterator getEntriesBegin() const;
 
 			ConstEntryIterator getEntriesEnd() const;
+
+			ConstEntryIterator begin() const;
+
+			ConstEntryIterator end() const;
 			
 			void loadDefaults();
 

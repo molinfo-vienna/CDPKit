@@ -146,6 +146,30 @@ namespace CDPL
 			ComponentIterator getComponentsEnd();
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the reaction components.
+			 * \return A constant iterator pointing to the beginning of the reaction components.
+			 */
+			ConstComponentIterator begin() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the reaction components.
+			 * \return A mutable iterator pointing to the beginning of the reaction components.
+			 */
+			ComponentIterator begin();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the reaction components.
+			 * \return A constant iterator pointing to the end of the reaction components.
+			 */
+			ConstComponentIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the reaction components.
+			 * \return A mutable iterator pointing to the end of the reaction components.
+			 */
+			ComponentIterator end();
+
+			/**
 			 * \brief Returns a constant iterator pointing to the beginning of the reaction components
 			 *        with the specified role.
 			 * \param role A flag that specifies the reaction role (see namespace Chem::ReactionRole).

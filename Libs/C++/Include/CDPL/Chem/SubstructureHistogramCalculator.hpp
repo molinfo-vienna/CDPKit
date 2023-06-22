@@ -119,6 +119,12 @@ namespace CDPL
 			PatternIterator getPatternsBegin();
 			PatternIterator getPatternsEnd();
 
+			ConstPatternIterator begin() const;
+			ConstPatternIterator end() const;
+
+			PatternIterator begin();
+			PatternIterator end();
+
 			template <typename T>
 			void calculate(const MolecularGraph& molgraph, T& histo);
 

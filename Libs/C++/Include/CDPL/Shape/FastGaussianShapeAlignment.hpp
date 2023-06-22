@@ -186,6 +186,14 @@ namespace CDPL
 			ResultIterator getResultsBegin();
 
 			ResultIterator getResultsEnd();
+
+			ConstResultIterator begin() const;
+
+			ConstResultIterator end() const;
+
+			ResultIterator begin();
+
+			ResultIterator end();
 						
 		  private:
 			struct ShapeData

@@ -162,6 +162,26 @@ Chem::SubstructureHistogramCalculator::PatternIterator Chem::SubstructureHistogr
     return patterns.end();
 }
 
+Chem::SubstructureHistogramCalculator::ConstPatternIterator Chem::SubstructureHistogramCalculator::begin() const
+{
+    return patterns.begin();
+}
+
+Chem::SubstructureHistogramCalculator::ConstPatternIterator Chem::SubstructureHistogramCalculator::end() const
+{
+    return patterns.end();
+}
+
+Chem::SubstructureHistogramCalculator::PatternIterator Chem::SubstructureHistogramCalculator::begin()
+{
+    return patterns.begin();
+}
+
+Chem::SubstructureHistogramCalculator::PatternIterator Chem::SubstructureHistogramCalculator::end()
+{
+    return patterns.end();
+}
+
 Chem::SubstructureHistogramCalculator& Chem::SubstructureHistogramCalculator::operator=(const SubstructureHistogramCalculator& calculator)
 {
     if (this == &calculator)

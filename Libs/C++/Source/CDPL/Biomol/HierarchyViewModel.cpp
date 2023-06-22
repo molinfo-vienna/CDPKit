@@ -87,6 +87,20 @@ Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::getCh
 	return ConstChainIterator(chains.end());
 }
 
+Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::begin() const
+{
+	initChainList();
+
+	return ConstChainIterator(chains.begin());
+}
+
+Biomol::HierarchyViewModel::ConstChainIterator Biomol::HierarchyViewModel::end() const
+{
+	initChainList();
+
+	return ConstChainIterator(chains.end());
+}
+
 void Biomol::HierarchyViewModel::initChainList() const
 {
     std::lock_guard<std::mutex> lock(getMutex());

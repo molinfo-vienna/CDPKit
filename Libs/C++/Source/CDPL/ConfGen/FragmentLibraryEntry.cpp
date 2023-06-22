@@ -115,6 +115,26 @@ ConfGen::FragmentLibraryEntry::ConformerIterator ConfGen::FragmentLibraryEntry::
     return conformers.end();
 }
 
+ConfGen::FragmentLibraryEntry::ConstConformerIterator ConfGen::FragmentLibraryEntry::begin() const
+{
+    return conformers.begin();
+}
+
+ConfGen::FragmentLibraryEntry::ConstConformerIterator ConfGen::FragmentLibraryEntry::end() const
+{
+    return conformers.end();
+}
+
+ConfGen::FragmentLibraryEntry::ConformerIterator ConfGen::FragmentLibraryEntry::begin()
+{
+    return conformers.begin();
+}
+
+ConfGen::FragmentLibraryEntry::ConformerIterator ConfGen::FragmentLibraryEntry::end()
+{
+    return conformers.end();
+}
+
 const ConfGen::ConformerDataArray& ConfGen::FragmentLibraryEntry:: getData() const
 {
 	return conformers;

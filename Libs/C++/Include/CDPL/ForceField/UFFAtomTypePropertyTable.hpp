@@ -131,6 +131,14 @@ namespace CDPL
 
 			EntryIterator getEntriesEnd();
 
+			ConstEntryIterator begin() const;
+
+			ConstEntryIterator end() const;
+	
+			EntryIterator begin();
+
+			EntryIterator end();
+
 			void loadDefaults();
 
 			static void set(const SharedPointer& table);

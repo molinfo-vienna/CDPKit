@@ -31,8 +31,6 @@
 #include <cmath>
 #include <mutex>
 
-#include <boost/range/iterator_range.hpp>
-
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
 #include "CDPL/GRAIL/FeatureType.hpp"
@@ -309,7 +307,7 @@ void GRAIL::GRAILDescriptorCalculator::initTargetData(const Chem::MolecularGraph
 	for (auto& ftr_ss : tgtFtrSubsets)
 		ftr_ss.features.clear();
 
-	for (auto& ftr : boost::make_iterator_range(tgtPharmacophore.getFeaturesBegin(), tgtPharmacophore.getFeaturesEnd())) {
+	for (auto& ftr : tgtPharmacophore) {
 		unsigned int ext_type = perceiveExtendedType(ftr, false);
 		
 		if (ext_type > FeatureType::MAX_EXT_TYPE) // sanity check
@@ -388,7 +386,7 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 
 		ligFtrAtoms[i].clear();
 
-		for (const auto& atom : boost::make_iterator_range(ftr_substruct->getAtomsBegin(),ftr_substruct->getAtomsEnd()))
+		for (const auto& atom : (const AtomContainer&)(ftr_substruct))
 			if (getType(atom) != AtomType::H)
 				ligFtrAtoms[i].push_back(ligand.getAtomIndex(atom));
 		
@@ -423,7 +421,7 @@ void GRAIL::GRAILDescriptorCalculator::initLigandData(const Chem::MolecularGraph
 			const Feature& ftr = ligPharmacophore.getFeature(ftr_idx);
 			const Fragment::SharedPointer& ftr_substruct = getSubstructure(ftr);
 
-			for (const auto& atom : boost::make_iterator_range(ftr_substruct->getAtomsBegin(), ftr_substruct->getAtomsEnd())) {
+			for (const auto& atom : (const AtomContainer&)(ftr_substruct)) {
 				if (getType(atom) == AtomType::H)
 					continue;
 

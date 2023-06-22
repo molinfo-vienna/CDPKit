@@ -191,6 +191,30 @@ ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94OutOfPlaneBendingParameterTable::load(std::istream& is)
 {
     std::string line;

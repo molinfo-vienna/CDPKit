@@ -754,6 +754,16 @@ Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::getEntriesEnd() c
 	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
 }
 
+Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+}
+
+Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+}
+
 void Chem::AtomDictionary::loadDefaults()
 {
 	Util::STArray val_states;

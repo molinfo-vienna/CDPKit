@@ -148,6 +148,30 @@ ForceField::MMFF94AromaticAtomTypeDefinitionTable::getEntriesEnd()
 	return entries.end();
 }
 
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator 
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::begin() const
+{
+    return entries.begin();
+}
+
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator 
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::end() const
+{
+    return entries.end();
+}
+
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::EntryIterator 
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::begin()
+{
+	return entries.begin();
+}
+
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::EntryIterator 
+ForceField::MMFF94AromaticAtomTypeDefinitionTable::end()
+{
+	return entries.end();
+}
+
 void ForceField::MMFF94AromaticAtomTypeDefinitionTable::clear()
 {
     entries.clear();

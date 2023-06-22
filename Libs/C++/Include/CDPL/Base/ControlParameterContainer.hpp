@@ -292,6 +292,18 @@ namespace CDPL
 			ConstParameterIterator getParametersEnd() const;
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the entries.
+			 * \return A constant iterator pointing to the beginning of the entries.
+			 */
+			ConstParameterIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the entries.
+			 * \return A constant iterator pointing to the end of the entries.
+			 */
+			ConstParameterIterator end() const;
+
+			/**
 			 * \brief Sets or removes the parent control-parameter container used to resolve requests for missing entries.
 			 *
 			 * A control-parameter container that has been set as a parent gets used whenever a request for a control-parameter

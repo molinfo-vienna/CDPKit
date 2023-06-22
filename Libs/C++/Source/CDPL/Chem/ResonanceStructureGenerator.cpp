@@ -187,6 +187,16 @@ Chem::ResonanceStructureGenerator::ConstStructureDataIterator Chem::ResonanceStr
 	return outputResStructs.end();
 }
 
+Chem::ResonanceStructureGenerator::ConstStructureDataIterator Chem::ResonanceStructureGenerator::begin() const
+{
+	return outputResStructs.begin();
+}
+
+Chem::ResonanceStructureGenerator::ConstStructureDataIterator Chem::ResonanceStructureGenerator::end() const
+{
+	return outputResStructs.end();
+}
+
 void Chem::ResonanceStructureGenerator::init(const MolecularGraph& molgraph)
 {
 	molGraph = &molgraph;

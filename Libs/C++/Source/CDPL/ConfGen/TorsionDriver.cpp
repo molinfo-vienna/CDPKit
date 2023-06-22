@@ -213,3 +213,23 @@ ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::getConformersE
 {
 	return impl->getConformersEnd();
 }
+
+ConfGen::TorsionDriver::ConstConformerIterator ConfGen::TorsionDriver::begin() const
+{
+	return impl->getConformersBegin();
+}
+
+ConfGen::TorsionDriver::ConstConformerIterator ConfGen::TorsionDriver::end() const
+{
+	return impl->getConformersEnd();
+}
+
+ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::begin()
+{
+	return impl->getConformersBegin();
+}
+
+ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::end()
+{
+	return impl->getConformersEnd();
+}

@@ -373,6 +373,16 @@ Shape::GaussianShapeFunctionAlignment::ConstResultIterator Shape::GaussianShapeF
 	return results.end();
 }
 
+Shape::GaussianShapeFunctionAlignment::ConstResultIterator Shape::GaussianShapeFunctionAlignment::begin() const
+{
+	return results.begin();
+}
+
+Shape::GaussianShapeFunctionAlignment::ConstResultIterator Shape::GaussianShapeFunctionAlignment::end() const
+{
+	return results.end();
+}
+
 bool Shape::GaussianShapeFunctionAlignment::checkValidity(const GaussianShapeFunction& func) const
 {
 	return (func.getShape() && func.getShape()->getNumElements() > 0);

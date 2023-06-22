@@ -136,6 +136,10 @@ namespace CDPL
 
 			ConstStructureDataIterator getStructureDataEnd() const;
 
+			ConstStructureDataIterator begin() const;
+
+			ConstStructureDataIterator end() const;
+
 		  private:			
 			struct BondData
 		    {

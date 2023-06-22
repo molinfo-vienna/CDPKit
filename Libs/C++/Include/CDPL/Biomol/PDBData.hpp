@@ -149,6 +149,14 @@ namespace CDPL
 
 			RecordIterator getRecordsEnd();
 
+		    ConstRecordIterator begin() const;
+
+			RecordIterator begin();
+
+			ConstRecordIterator end() const;
+
+			RecordIterator end();
+
 		private:
 			TypeToDataMap data;
 	    };

@@ -186,6 +186,30 @@ ForceField::MMFF94StretchBendParameterTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator 
+ForceField::MMFF94StretchBendParameterTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator 
+ForceField::MMFF94StretchBendParameterTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94StretchBendParameterTable::EntryIterator 
+ForceField::MMFF94StretchBendParameterTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94StretchBendParameterTable::EntryIterator 
+ForceField::MMFF94StretchBendParameterTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94StretchBendParameterTable::load(std::istream& is)
 {
     std::string line;

@@ -153,3 +153,23 @@ ConfGen::ConformerGenerator::ConformerIterator ConfGen::ConformerGenerator::getC
 {
     return impl->getConformersEnd();
 }
+
+ConfGen::ConformerGenerator::ConstConformerIterator ConfGen::ConformerGenerator::begin() const
+{
+    return impl->getConformersBegin();
+}
+
+ConfGen::ConformerGenerator::ConstConformerIterator ConfGen::ConformerGenerator::end() const
+{
+    return impl->getConformersEnd();
+}
+
+ConfGen::ConformerGenerator::ConformerIterator ConfGen::ConformerGenerator::begin()
+{
+    return impl->getConformersBegin();
+}
+
+ConfGen::ConformerGenerator::ConformerIterator ConfGen::ConformerGenerator::end()
+{
+    return impl->getConformersEnd();
+}

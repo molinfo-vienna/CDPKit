@@ -95,6 +95,14 @@ namespace CDPL
 			ConformerIterator getConformersBegin();
 
 			ConformerIterator getConformersEnd();
+
+			ConstConformerIterator begin() const;
+
+			ConstConformerIterator end() const;
+
+			ConformerIterator begin();
+
+			ConformerIterator end();
 	
 			const ConformerDataArray& getData() const;
 

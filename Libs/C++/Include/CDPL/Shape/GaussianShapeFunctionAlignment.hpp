@@ -174,6 +174,10 @@ namespace CDPL
 			ConstResultIterator getResultsBegin() const;
 
 			ConstResultIterator getResultsEnd() const;	
+
+			ConstResultIterator begin() const;
+
+			ConstResultIterator end() const;	
 		
 		  private:
 			GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);

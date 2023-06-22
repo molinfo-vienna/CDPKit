@@ -192,6 +192,26 @@ Chem::Reactor::ConstReactionSiteIterator Chem::Reactor::getReactionSitesEnd() co
 	return rxnSiteSearch.getMappingsEnd();
 }
 
+Chem::Reactor::ReactionSiteIterator Chem::Reactor::begin()
+{
+	return rxnSiteSearch.getMappingsBegin();
+}
+
+Chem::Reactor::ConstReactionSiteIterator Chem::Reactor::begin() const
+{
+	return rxnSiteSearch.getMappingsBegin();
+}
+
+Chem::Reactor::ReactionSiteIterator Chem::Reactor::end()
+{
+	return rxnSiteSearch.getMappingsEnd();
+}
+
+Chem::Reactor::ConstReactionSiteIterator Chem::Reactor::end() const
+{
+	return rxnSiteSearch.getMappingsEnd();
+}
+
 void Chem::Reactor::init()
 {
 	std::call_once(initPropertyConstraintIDMapFlag, &initPropertyConstraintIDMap);

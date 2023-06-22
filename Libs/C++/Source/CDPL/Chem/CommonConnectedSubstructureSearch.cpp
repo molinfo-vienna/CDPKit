@@ -149,6 +149,26 @@ Chem::CommonConnectedSubstructureSearch::ConstMappingIterator Chem::CommonConnec
 	return foundMappings.end();
 }
 
+Chem::CommonConnectedSubstructureSearch::MappingIterator Chem::CommonConnectedSubstructureSearch::begin()
+{
+	return foundMappings.begin();
+}
+
+Chem::CommonConnectedSubstructureSearch::ConstMappingIterator Chem::CommonConnectedSubstructureSearch::begin() const
+{
+	return foundMappings.begin();
+}
+
+Chem::CommonConnectedSubstructureSearch::MappingIterator Chem::CommonConnectedSubstructureSearch::end()
+{
+	return foundMappings.end();
+}
+
+Chem::CommonConnectedSubstructureSearch::ConstMappingIterator Chem::CommonConnectedSubstructureSearch::end() const
+{
+	return foundMappings.end();
+}
+
 void Chem::CommonConnectedSubstructureSearch::uniqueMappingsOnly(bool unique)
 {
 	uniqueMatches = unique;

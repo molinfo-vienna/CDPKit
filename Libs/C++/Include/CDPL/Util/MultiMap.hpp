@@ -530,6 +530,30 @@ namespace CDPL
 			EntryIterator getEntriesEnd();
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the map.
+			 * \return A constant iterator pointing to the beginning of the map.
+			 */
+			ConstEntryIterator begin() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the map.
+			 * \return A mutable iterator pointing to the beginning of the map.
+			 */
+			EntryIterator begin();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the map.
+			 * \return A constant iterator pointing to the end of the map.
+			 */
+			ConstEntryIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the map.
+			 * \return A mutable iterator pointing to the end of the map.
+			 */
+			EntryIterator end();
+			
+			/**
 			 * \brief Returns a constant iterator pointing to the beginning of the reversed map.
 			 * \return A constant iterator pointing to the beginning of the reversed map.
 			 */
@@ -954,6 +978,34 @@ CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesEnd() c
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
 CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getEntriesEnd()
+{
+	return data.end();
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::begin() const
+{
+	return data.begin();
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::begin()
+{
+	return data.begin();
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>		
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::ConstEntryIterator 
+CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::end() const
+{
+	return data.end();
+}
+
+template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
+typename CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::EntryIterator 
+CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::end()
 {
 	return data.end();
 }

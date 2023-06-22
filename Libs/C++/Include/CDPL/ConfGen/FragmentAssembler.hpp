@@ -103,6 +103,14 @@ namespace CDPL
 
 			ConformerIterator getConformersEnd();
 
+			ConstConformerIterator begin() const;
+
+			ConstConformerIterator end() const;
+
+			ConformerIterator begin();
+
+			ConformerIterator end();
+
 		  private:
 			FragmentAssembler(const FragmentAssembler&);
 

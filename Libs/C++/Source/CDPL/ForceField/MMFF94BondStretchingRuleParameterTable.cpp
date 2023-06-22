@@ -172,6 +172,30 @@ ForceField::MMFF94BondStretchingRuleParameterTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94BondStretchingRuleParameterTable::ConstEntryIterator 
+ForceField::MMFF94BondStretchingRuleParameterTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94BondStretchingRuleParameterTable::ConstEntryIterator 
+ForceField::MMFF94BondStretchingRuleParameterTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94BondStretchingRuleParameterTable::EntryIterator 
+ForceField::MMFF94BondStretchingRuleParameterTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94BondStretchingRuleParameterTable::EntryIterator 
+ForceField::MMFF94BondStretchingRuleParameterTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94BondStretchingRuleParameterTable::load(std::istream& is)
 {
     std::string line;

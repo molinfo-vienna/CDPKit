@@ -53,6 +53,26 @@ Pharm::FeatureContainer::FeatureIterator Pharm::FeatureContainer::getFeaturesEnd
     return FeatureIterator(this, getNumFeatures());
 }
 
+Pharm::FeatureContainer::ConstFeatureIterator Pharm::FeatureContainer::begin() const
+{
+    return ConstFeatureIterator(this, 0);
+}
+
+Pharm::FeatureContainer::ConstFeatureIterator Pharm::FeatureContainer::end() const
+{
+    return ConstFeatureIterator(this, getNumFeatures());
+}
+
+Pharm::FeatureContainer::FeatureIterator Pharm::FeatureContainer::begin()
+{
+    return FeatureIterator(this, 0);
+}
+
+Pharm::FeatureContainer::FeatureIterator Pharm::FeatureContainer::end()
+{
+    return FeatureIterator(this, getNumFeatures());
+}
+
 Pharm::FeatureContainer& Pharm::FeatureContainer::operator=(const FeatureContainer& cntnr) 
 {
     if (this == &cntnr)

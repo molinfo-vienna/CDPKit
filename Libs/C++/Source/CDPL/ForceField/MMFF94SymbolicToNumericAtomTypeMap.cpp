@@ -113,6 +113,30 @@ ForceField::MMFF94SymbolicToNumericAtomTypeMap::getEntriesEnd()
 	return entries.end();
 }
 
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::begin() const
+{
+    return entries.begin();
+}
+
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::end() const
+{
+    return entries.end();
+}
+
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::EntryIterator 
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::begin()
+{
+	return entries.begin();
+}
+
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::EntryIterator 
+ForceField::MMFF94SymbolicToNumericAtomTypeMap::end()
+{
+	return entries.end();
+}
+
 bool ForceField::MMFF94SymbolicToNumericAtomTypeMap::removeEntry(const std::string& sym_type)
 {
 	return entries.erase(sym_type);

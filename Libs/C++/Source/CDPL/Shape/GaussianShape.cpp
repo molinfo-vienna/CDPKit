@@ -96,3 +96,23 @@ Shape::GaussianShape::ElementIterator Shape::GaussianShape::getElementsEnd()
 {
     return elements.end();
 }
+
+Shape::GaussianShape::ConstElementIterator Shape::GaussianShape::begin() const
+{
+    return elements.begin();
+}
+
+Shape::GaussianShape::ConstElementIterator Shape::GaussianShape::end() const
+{
+    return elements.end();
+}
+
+Shape::GaussianShape::ElementIterator Shape::GaussianShape::begin()
+{
+    return elements.begin();
+}
+
+Shape::GaussianShape::ElementIterator Shape::GaussianShape::end()
+{
+    return elements.end();
+}

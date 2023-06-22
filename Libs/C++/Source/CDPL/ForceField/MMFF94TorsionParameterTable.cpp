@@ -205,6 +205,30 @@ ForceField::MMFF94TorsionParameterTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94TorsionParameterTable::ConstEntryIterator 
+ForceField::MMFF94TorsionParameterTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94TorsionParameterTable::ConstEntryIterator 
+ForceField::MMFF94TorsionParameterTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94TorsionParameterTable::EntryIterator 
+ForceField::MMFF94TorsionParameterTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94TorsionParameterTable::EntryIterator 
+ForceField::MMFF94TorsionParameterTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94TorsionParameterTable::load(std::istream& is)
 {
     std::string line;

@@ -79,6 +79,14 @@ namespace CDPL
 		EntryIterator getEntriesBegin();
 
 		EntryIterator getEntriesEnd();
+
+	    ConstEntryIterator begin() const;
+
+	    ConstEntryIterator end() const;
+
+		EntryIterator begin();
+
+		EntryIterator end();
 			
 	    void load(std::istream& is);
 

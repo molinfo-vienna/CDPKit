@@ -132,6 +132,30 @@ ForceField::MMFF94SymbolicAtomTypePatternTable::getEntriesEnd()
 	return entries.end();
 }
 
+ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::begin() const
+{
+    return entries.begin();
+}
+
+ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::end() const
+{
+    return entries.end();
+}
+
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::begin()
+{
+	return entries.begin();
+}
+
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::end()
+{
+	return entries.end();
+}
+
 void ForceField::MMFF94SymbolicAtomTypePatternTable::removeEntry(std::size_t idx)
 {
 	if (idx >= entries.size())

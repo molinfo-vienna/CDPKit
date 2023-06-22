@@ -129,3 +129,23 @@ Biomol::PDBData::RecordIterator Biomol::PDBData::getRecordsEnd()
 {
 	return data.end();
 }
+
+Biomol::PDBData::ConstRecordIterator Biomol::PDBData::begin() const
+{
+	return data.begin();
+}
+
+Biomol::PDBData::RecordIterator Biomol::PDBData::begin()
+{
+	return data.begin();
+}
+
+Biomol::PDBData::ConstRecordIterator Biomol::PDBData::end() const
+{
+	return data.end();
+}
+
+Biomol::PDBData::RecordIterator Biomol::PDBData::end()
+{
+	return data.end();
+}

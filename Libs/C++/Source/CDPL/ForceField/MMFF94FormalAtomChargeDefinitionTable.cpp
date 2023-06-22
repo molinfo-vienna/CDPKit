@@ -163,6 +163,30 @@ ForceField::MMFF94FormalAtomChargeDefinitionTable::getEntriesEnd()
     return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94FormalAtomChargeDefinitionTable::ConstEntryIterator 
+ForceField::MMFF94FormalAtomChargeDefinitionTable::begin() const
+{
+    return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94FormalAtomChargeDefinitionTable::ConstEntryIterator 
+ForceField::MMFF94FormalAtomChargeDefinitionTable::end() const
+{
+    return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94FormalAtomChargeDefinitionTable::EntryIterator 
+ForceField::MMFF94FormalAtomChargeDefinitionTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94FormalAtomChargeDefinitionTable::EntryIterator 
+ForceField::MMFF94FormalAtomChargeDefinitionTable::end()
+{
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94FormalAtomChargeDefinitionTable::load(std::istream& is)
 {
     std::string line;

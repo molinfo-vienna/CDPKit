@@ -176,6 +176,30 @@ ForceField::MMFF94VanDerWaalsParameterTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94VanDerWaalsParameterTable::setExponent(double value)
 {
 	exponent = value;

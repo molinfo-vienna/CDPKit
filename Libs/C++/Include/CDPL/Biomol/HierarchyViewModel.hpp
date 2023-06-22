@@ -77,6 +77,10 @@ namespace CDPL
 
 			ConstChainIterator getChainsEnd() const;
 
+			ConstChainIterator begin() const;
+
+			ConstChainIterator end() const;
+
 		  private:
 			HierarchyViewModel(): initChains(true) {}
 

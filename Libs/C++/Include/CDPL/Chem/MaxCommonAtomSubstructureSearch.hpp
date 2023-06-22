@@ -193,6 +193,30 @@ namespace CDPL
 			 * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
 			 */
 			ConstMappingIterator getMappingsEnd() const;
+			  
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+			 * \return A mutable iterator pointing to the beginning of the stored atom/bond mapping objects.
+			 */
+			MappingIterator begin();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+			 * \return A constant iterator pointing to the beginning of the stored atom/bond mapping objects.
+			 */
+			ConstMappingIterator begin() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored atom/bond mapping objects.
+			 * \return A mutable iterator pointing to the end of the stored atom/bond mapping objects.
+			 */
+			MappingIterator end();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored atom/bond mapping objects.
+			 * \return A constant iterator pointing to the end of the stored atom/bond mapping objects.
+			 */
+			ConstMappingIterator end() const;
 
 			/**
 			 * \brief Allows to specify whether or not to store only unique atom/bond mappings.

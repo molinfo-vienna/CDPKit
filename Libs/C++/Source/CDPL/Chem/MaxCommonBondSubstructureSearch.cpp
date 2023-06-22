@@ -138,6 +138,26 @@ Chem::MaxCommonBondSubstructureSearch::ConstMappingIterator Chem::MaxCommonBondS
 	return foundMappings.end();
 }
 
+Chem::MaxCommonBondSubstructureSearch::MappingIterator Chem::MaxCommonBondSubstructureSearch::begin()
+{
+	return foundMappings.begin();
+}
+
+Chem::MaxCommonBondSubstructureSearch::ConstMappingIterator Chem::MaxCommonBondSubstructureSearch::begin() const
+{
+	return foundMappings.begin();
+}
+
+Chem::MaxCommonBondSubstructureSearch::MappingIterator Chem::MaxCommonBondSubstructureSearch::end()
+{
+	return foundMappings.end();
+}
+
+Chem::MaxCommonBondSubstructureSearch::ConstMappingIterator Chem::MaxCommonBondSubstructureSearch::end() const
+{
+	return foundMappings.end();
+}
+
 void Chem::MaxCommonBondSubstructureSearch::uniqueMappingsOnly(bool unique)
 {
 	uniqueMatches = unique;

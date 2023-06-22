@@ -120,6 +120,16 @@ ConfGen::TorsionRuleMatcher::ConstMatchIterator ConfGen::TorsionRuleMatcher::get
 	return matches.end();
 }
 
+ConfGen::TorsionRuleMatcher::ConstMatchIterator ConfGen::TorsionRuleMatcher::begin() const
+{
+	return matches.begin();
+}
+
+ConfGen::TorsionRuleMatcher::ConstMatchIterator ConfGen::TorsionRuleMatcher::end() const
+{
+	return matches.end();
+}
+
 bool ConfGen::TorsionRuleMatcher::findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, 
 											  bool append)
 {

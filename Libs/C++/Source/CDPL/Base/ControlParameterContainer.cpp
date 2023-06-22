@@ -152,6 +152,16 @@ Base::ControlParameterContainer::ConstParameterIterator Base::ControlParameterCo
 	return parameters.end();
 }
 
+Base::ControlParameterContainer::ConstParameterIterator Base::ControlParameterContainer::begin() const
+{
+	return parameters.begin();
+}
+
+Base::ControlParameterContainer::ConstParameterIterator Base::ControlParameterContainer::end() const
+{
+	return parameters.end();
+}
+
 void Base::ControlParameterContainer::setParent(const ControlParameterContainer* new_parent)
 {
 	if (new_parent == this)

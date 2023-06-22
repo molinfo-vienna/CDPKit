@@ -150,6 +150,26 @@ ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::getEntriesEnd(
     return hashToEntryMap.end();
 }
 
+ConfGen::FragmentLibrary::ConstEntryIterator ConfGen::FragmentLibrary::begin() const
+{
+    return hashToEntryMap.begin();
+}
+
+ConfGen::FragmentLibrary::ConstEntryIterator ConfGen::FragmentLibrary::end() const
+{
+    return hashToEntryMap.end();
+}
+	
+ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::begin()
+{
+    return hashToEntryMap.begin();
+}
+
+ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::end()
+{
+    return hashToEntryMap.end();
+}
+
 std::mutex& ConfGen::FragmentLibrary::getMutex()
 {
 	return mutex;

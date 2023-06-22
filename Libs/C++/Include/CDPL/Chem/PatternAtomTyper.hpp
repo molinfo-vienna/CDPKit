@@ -124,6 +124,12 @@ namespace CDPL
 			PatternIterator getPatternsBegin();
 			PatternIterator getPatternsEnd();
 
+			ConstPatternIterator begin() const;
+			ConstPatternIterator end() const;
+
+			PatternIterator begin();
+			PatternIterator end();
+
 			bool hasAtomLabel(std::size_t idx) const;
 
 			std::size_t getAtomLabel(std::size_t idx) const;

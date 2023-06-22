@@ -155,6 +155,30 @@ namespace CDPL
 			FileExtensionIterator getFileExtensionsEnd();
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the file extension list.
+			 * \return A constant iterator pointing to the beginning of the file extension list.
+			 */
+			ConstFileExtensionIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the file extension list.
+			 * \return A constant iterator pointing to the end of the file extension list.
+			 */
+			ConstFileExtensionIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the file extension list.
+			 * \return A mutable iterator pointing to the beginning of the file extension list.
+			 */
+			FileExtensionIterator begin();
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the file extension list.
+			 * \return A mutable iterator pointing to the end of the file extension list.
+			 */
+			FileExtensionIterator end();
+
+			/**
 			 * \brief Adds \a file_ext to the current list of file extensions.
 			 * \param file_ext The file extension to add.
 			 */

@@ -138,6 +138,26 @@ Chem::ReactionSubstructureSearch::ConstMappingIterator Chem::ReactionSubstructur
 	return foundMappings.end();
 }
 
+Chem::ReactionSubstructureSearch::MappingIterator Chem::ReactionSubstructureSearch::begin()
+{
+	return foundMappings.begin();
+}
+
+Chem::ReactionSubstructureSearch::ConstMappingIterator Chem::ReactionSubstructureSearch::begin() const
+{
+	return foundMappings.begin();
+}
+
+Chem::ReactionSubstructureSearch::MappingIterator Chem::ReactionSubstructureSearch::end()
+{
+	return foundMappings.end();
+}
+
+Chem::ReactionSubstructureSearch::ConstMappingIterator Chem::ReactionSubstructureSearch::end() const
+{
+	return foundMappings.end();
+}
+
 void Chem::ReactionSubstructureSearch::uniqueMappingsOnly(bool unique)
 {
 	uniqueMatches = unique;

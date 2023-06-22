@@ -92,6 +92,26 @@ Base::DataFormat::FileExtensionIterator Base::DataFormat::getFileExtensionsEnd()
 	return fileExtensions.end();
 }
 
+Base::DataFormat::ConstFileExtensionIterator Base::DataFormat::begin() const
+{
+	return fileExtensions.begin();
+}
+
+Base::DataFormat::ConstFileExtensionIterator Base::DataFormat::end() const
+{
+	return fileExtensions.end();
+}
+
+Base::DataFormat::FileExtensionIterator Base::DataFormat::begin() 
+{
+	return fileExtensions.begin();
+}
+
+Base::DataFormat::FileExtensionIterator Base::DataFormat::end() 
+{
+	return fileExtensions.end();
+}
+
 Base::DataFormat& Base::DataFormat::addFileExtension(const std::string& file_ext)
 {
 	fileExtensions.push_back(file_ext);

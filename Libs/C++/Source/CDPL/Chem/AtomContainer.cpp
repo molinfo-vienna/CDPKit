@@ -53,6 +53,26 @@ Chem::AtomContainer::AtomIterator Chem::AtomContainer::getAtomsEnd()
 	return AtomIterator(this, getNumAtoms());
 }
 
+Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::begin() const
+{
+	return ConstAtomIterator(this, 0);
+}
+
+Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::end() const
+{
+	return ConstAtomIterator(this, getNumAtoms());
+}
+
+Chem::AtomContainer::AtomIterator Chem::AtomContainer::begin()
+{
+	return AtomIterator(this, 0);
+}
+
+Chem::AtomContainer::AtomIterator Chem::AtomContainer::end()
+{
+	return AtomIterator(this, getNumAtoms());
+}
+
 Chem::AtomContainer& Chem::AtomContainer::operator=(const AtomContainer& cntnr) 
 {
 	Entity3DContainer::operator=(cntnr);

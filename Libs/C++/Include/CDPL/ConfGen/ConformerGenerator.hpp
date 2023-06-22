@@ -111,6 +111,14 @@ namespace CDPL
 
 			ConformerIterator getConformersEnd();
 
+		    ConstConformerIterator begin() const;
+
+			ConstConformerIterator end() const;
+
+			ConformerIterator begin();
+
+			ConformerIterator end();
+
 		private:
 			ConformerGenerator(const ConformerGenerator&);
 

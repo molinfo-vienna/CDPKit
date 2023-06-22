@@ -99,6 +99,18 @@ namespace CDPL
 			 */
 			ConstMatchIterator getMatchesEnd() const;
 
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored torsion rule matches.
+			 * \return A constant iterator pointing to the beginning of the stored torsion rule matches.
+			 */
+			ConstMatchIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored torsion rule matches.
+			 * \return A constant iterator pointing to the end of the stored torsion rule matches.
+			 */
+			ConstMatchIterator end() const;
+
 			bool findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool append = false);
 
 		  private:

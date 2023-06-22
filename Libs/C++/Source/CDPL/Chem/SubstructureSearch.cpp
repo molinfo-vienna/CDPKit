@@ -157,6 +157,26 @@ Chem::SubstructureSearch::ConstMappingIterator Chem::SubstructureSearch::getMapp
 	return foundMappings.end();
 }
 
+Chem::SubstructureSearch::MappingIterator Chem::SubstructureSearch::begin()
+{
+	return foundMappings.begin();
+}
+
+Chem::SubstructureSearch::ConstMappingIterator Chem::SubstructureSearch::begin() const
+{
+	return foundMappings.begin();
+}
+
+Chem::SubstructureSearch::MappingIterator Chem::SubstructureSearch::end()
+{
+	return foundMappings.end();
+}
+
+Chem::SubstructureSearch::ConstMappingIterator Chem::SubstructureSearch::end() const
+{
+	return foundMappings.end();
+}
+
 void Chem::SubstructureSearch::uniqueMappingsOnly(bool unique)
 {
 	uniqueMatches = unique;

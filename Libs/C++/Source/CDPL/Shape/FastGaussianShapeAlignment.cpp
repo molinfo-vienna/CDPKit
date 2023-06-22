@@ -477,6 +477,26 @@ Shape::FastGaussianShapeAlignment::ResultIterator Shape::FastGaussianShapeAlignm
 	return results.end();
 }
 
+Shape::FastGaussianShapeAlignment::ConstResultIterator Shape::FastGaussianShapeAlignment::begin() const
+{
+	return results.begin();
+}
+
+Shape::FastGaussianShapeAlignment::ConstResultIterator Shape::FastGaussianShapeAlignment::end() const
+{
+	return results.end();
+}
+
+Shape::FastGaussianShapeAlignment::ResultIterator Shape::FastGaussianShapeAlignment::begin()
+{
+	return results.begin();
+}
+
+Shape::FastGaussianShapeAlignment::ResultIterator Shape::FastGaussianShapeAlignment::end()
+{
+	return results.end();
+}
+
 void Shape::FastGaussianShapeAlignment::alignAndProcessResults(std::size_t ref_idx, std::size_t al_idx)
 {
 	const ShapeData& ref_data = refShapeData[ref_idx];

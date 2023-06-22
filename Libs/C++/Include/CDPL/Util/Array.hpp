@@ -417,6 +417,30 @@ namespace CDPL
 			ElementIterator getElementsEnd();
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the array.
+			 * \return A constant iterator pointing to the beginning of the array.
+			 */
+			ConstElementIterator begin() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the array.
+			 * \return A mutable iterator pointing to the beginning of the array.
+			 */
+			ElementIterator begin();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the array.
+			 * \return A constant iterator pointing to the end of the array.
+			 */
+			ConstElementIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the array.
+			 * \return A mutable iterator pointing to the end of the array.
+			 */
+			ElementIterator end();
+
+			/**
 			 * \brief Returns a constant iterator pointing to the beginning of the reversed array.
 			 * \return A constant iterator pointing to the beginning of the reversed array.
 			 */
@@ -882,6 +906,30 @@ typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<Va
 
 template <typename ValueType>
 typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::getElementsEnd()  
+{
+	return data.end();
+}
+
+template <typename ValueType>
+typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<ValueType>::begin() const  
+{
+	return data.begin();
+}
+
+template <typename ValueType>
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::begin()  
+{
+	return data.begin();
+}
+
+template <typename ValueType>		
+typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<ValueType>::end() const  
+{
+	return data.end();
+}
+
+template <typename ValueType>
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::end()  
 {
 	return data.end();
 }

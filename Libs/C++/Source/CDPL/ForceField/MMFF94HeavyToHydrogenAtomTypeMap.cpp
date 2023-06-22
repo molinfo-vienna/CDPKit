@@ -114,6 +114,30 @@ ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesEnd()
 	return entries.end();
 }
 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::begin() const
+{
+    return entries.begin();
+}
+
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::end() const
+{
+    return entries.end();
+}
+
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::begin()
+{
+	return entries.begin();
+}
+
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::end()
+{
+	return entries.end();
+}
+
 bool ForceField::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry(const std::string& parent_type)
 {
 	return entries.erase(parent_type);

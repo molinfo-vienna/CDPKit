@@ -76,6 +76,26 @@ Chem::Reaction::ComponentIterator Chem::Reaction::getComponentsEnd()
 	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), getNumComponents());
 }
 
+Chem::Reaction::ConstComponentIterator Chem::Reaction::begin() const
+{
+	return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), 0);
+}
+
+Chem::Reaction::ComponentIterator Chem::Reaction::begin()
+{
+	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), 0);
+}
+
+Chem::Reaction::ConstComponentIterator Chem::Reaction::end() const
+{
+	return ConstComponentIterator(ConstComponentAccessor(this, ReactionRole::NONE), getNumComponents());
+}
+
+Chem::Reaction::ComponentIterator Chem::Reaction::end()
+{
+	return ComponentIterator(ComponentAccessor(this, ReactionRole::NONE), getNumComponents());
+}
+
 Chem::Reaction::ConstComponentIterator Chem::Reaction::getComponentsBegin(unsigned int role) const
 {
 	checkRole(role);

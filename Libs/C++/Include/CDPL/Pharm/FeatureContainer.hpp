@@ -138,6 +138,30 @@ namespace CDPL
 			 */
 			FeatureIterator getFeaturesEnd();
 
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
+			 * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
+			 */
+			ConstFeatureIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
+			 * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
+			 */
+			ConstFeatureIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
+			 */
+			FeatureIterator begin();
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored Pharm::Feature objects.
+			 * \return A mutable iterator pointing to the end of the stored Pharm::Feature objects.
+			 */
+			FeatureIterator end();
+
 			virtual std::size_t getNumEntities() const;
 
 			virtual const Chem::Entity3D& getEntity(std::size_t idx) const;

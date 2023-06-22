@@ -159,6 +159,30 @@ namespace CDPL
 			ConstReactionSiteIterator getReactionSitesEnd() const;
 
 			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored reaction-site data objects.
+			 * \return A mutable iterator pointing to the beginning of the stored reaction-site data objects.
+			 */
+			ReactionSiteIterator begin();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored reaction-site data objects.
+			 * \return A constant iterator pointing to the beginning of the stored reaction-site data objects.
+			 */
+			ConstReactionSiteIterator begin() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored reaction-site data objects.
+			 * \return A mutable iterator pointing to the end of the stored reaction-site data objects.
+			 */
+			ReactionSiteIterator end();
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored reaction-site data objects.
+			 * \return A constant iterator pointing to the end of the stored reaction-site data objects.
+			 */
+			ConstReactionSiteIterator end() const;
+
+			/**
 			 * \brief Performs a transformation of the target reactants to corresponding products at the specified 
 			 *        reaction-site.
 			 *

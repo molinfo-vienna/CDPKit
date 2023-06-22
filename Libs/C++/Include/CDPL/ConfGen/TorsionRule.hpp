@@ -116,6 +116,14 @@ namespace CDPL
 
 			ConstAngleEntryIterator getAnglesEnd() const;
 
+			AngleEntryIterator begin();
+
+			AngleEntryIterator end();
+
+			ConstAngleEntryIterator begin() const;
+
+			ConstAngleEntryIterator end() const;
+
 			void swap(TorsionRule& rule);
 
 			void clear();

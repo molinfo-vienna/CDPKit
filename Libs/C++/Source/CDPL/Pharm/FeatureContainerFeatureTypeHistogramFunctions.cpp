@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/range/iterator_range.hpp>
-
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
@@ -61,7 +59,7 @@ void Pharm::buildFeatureTypeHistogramString(const FeatureContainer& cntnr, std::
     buildFeatureTypeHistogram(cntnr, histo);
 	histo_str.clear();
 	
-    for (const auto& entry : boost::make_iterator_range(histo.getEntriesBegin(), histo.getEntriesEnd())) {
+    for (const auto& entry : histo) {
         if (!histo_str.empty())
             histo_str += ", ";
 	

@@ -136,3 +136,23 @@ ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getCon
 {
 	return impl->getConformersEnd();
 }
+
+ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::begin() const
+{
+	return impl->getConformersBegin();
+}
+
+ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::end() const
+{
+	return impl->getConformersEnd();
+}
+
+ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::begin()
+{
+	return impl->getConformersBegin();
+}
+
+ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::end()
+{
+	return impl->getConformersEnd();
+}

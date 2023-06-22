@@ -116,6 +116,20 @@ Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::getModelsEnd() 
 	return ConstModelIterator(models.end());
 }
 
+Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::begin() const
+{
+	initModelList();
+
+	return ConstModelIterator(models.begin());
+}
+
+Biomol::HierarchyView::ConstModelIterator Biomol::HierarchyView::end() const
+{
+	initModelList();
+
+	return ConstModelIterator(models.end());
+}
+
 void Biomol::HierarchyView::initModelList() const
 {
     std::lock_guard<std::mutex> lock(initMutex);

@@ -109,6 +109,26 @@ ConfGen::TorsionRule::ConstAngleEntryIterator ConfGen::TorsionRule::getAnglesEnd
 	return angles.end();
 }
 
+ConfGen::TorsionRule::AngleEntryIterator ConfGen::TorsionRule::begin()
+{
+	return angles.begin();
+}
+
+ConfGen::TorsionRule::AngleEntryIterator ConfGen::TorsionRule::end()
+{
+	return angles.end();
+}
+
+ConfGen::TorsionRule::ConstAngleEntryIterator ConfGen::TorsionRule::begin() const
+{
+	return angles.begin();
+}
+
+ConfGen::TorsionRule::ConstAngleEntryIterator ConfGen::TorsionRule::end() const
+{
+	return angles.end();
+}
+
 void ConfGen::TorsionRule::swap(TorsionRule& cat)
 {
 	matchPattern.swap(cat.matchPattern);

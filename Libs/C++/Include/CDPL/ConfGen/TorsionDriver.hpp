@@ -122,6 +122,14 @@ namespace CDPL
 
 			ConformerIterator getConformersEnd();
 
+			ConstConformerIterator begin() const;
+
+			ConstConformerIterator end() const;
+
+			ConformerIterator begin();
+
+			ConformerIterator end();
+
 		  private:
 			TorsionDriver(const TorsionDriver&);
 

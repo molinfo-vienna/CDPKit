@@ -153,6 +153,26 @@ Chem::MaxCommonAtomSubstructureSearch::ConstMappingIterator Chem::MaxCommonAtomS
 	return foundMappings.end();
 }
 
+Chem::MaxCommonAtomSubstructureSearch::MappingIterator Chem::MaxCommonAtomSubstructureSearch::begin()
+{
+	return foundMappings.begin();
+}
+
+Chem::MaxCommonAtomSubstructureSearch::ConstMappingIterator Chem::MaxCommonAtomSubstructureSearch::begin() const
+{
+	return foundMappings.begin();
+}
+
+Chem::MaxCommonAtomSubstructureSearch::MappingIterator Chem::MaxCommonAtomSubstructureSearch::end()
+{
+	return foundMappings.end();
+}
+
+Chem::MaxCommonAtomSubstructureSearch::ConstMappingIterator Chem::MaxCommonAtomSubstructureSearch::end() const
+{
+	return foundMappings.end();
+}
+
 void Chem::MaxCommonAtomSubstructureSearch::uniqueMappingsOnly(bool unique)
 {
 	uniqueMatches = unique;

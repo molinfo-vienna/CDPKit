@@ -171,6 +171,18 @@ namespace CDPL
 			ConstPropertyIterator getPropertiesEnd() const;
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the property entries.
+			 * \return A constant iterator pointing to the beginning of the property entries.
+			 */
+			ConstPropertyIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the property entries.
+			 * \return A constant iterator pointing to the end of the property entries.
+			 */
+			ConstPropertyIterator end() const;
+
+			/**
 			 * \brief Clears the value of the property specified by \a key.
 			 * \param key The key of the property value to erase.
 			 * \return \c true if an entry for \a key could be found and was erased, and \c false otherwise.

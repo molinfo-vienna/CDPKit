@@ -157,6 +157,26 @@ Chem::PatternAtomTyper::PatternIterator Chem::PatternAtomTyper::getPatternsEnd()
 	return patterns.end();
 }
 
+Chem::PatternAtomTyper::ConstPatternIterator Chem::PatternAtomTyper::begin() const
+{
+	return patterns.begin();
+}
+
+Chem::PatternAtomTyper::ConstPatternIterator Chem::PatternAtomTyper::end() const
+{
+	return patterns.end();
+}
+
+Chem::PatternAtomTyper::PatternIterator Chem::PatternAtomTyper::begin()
+{
+	return patterns.begin();
+}
+
+Chem::PatternAtomTyper::PatternIterator Chem::PatternAtomTyper::end()
+{
+	return patterns.end();
+}
+
 std::size_t Chem::PatternAtomTyper::getAtomLabel(std::size_t idx) const
 {
 	if (idx >= atomLabeling.size())

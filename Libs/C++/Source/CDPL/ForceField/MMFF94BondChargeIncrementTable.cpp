@@ -174,6 +174,30 @@ ForceField::MMFF94BondChargeIncrementTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94BondChargeIncrementTable::load(std::istream& is)
 {
     std::string line;

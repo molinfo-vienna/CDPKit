@@ -129,6 +129,14 @@ namespace CDPL
 			ElementIterator getElementsBegin();
 
 			ElementIterator getElementsEnd();
+
+			ConstElementIterator begin() const;
+
+			ConstElementIterator end() const;
+
+			ElementIterator begin();
+
+			ElementIterator end();
 	    
 		  private:
 			ElementList elements;

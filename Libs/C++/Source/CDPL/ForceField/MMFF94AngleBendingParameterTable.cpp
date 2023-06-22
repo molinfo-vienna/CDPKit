@@ -186,6 +186,30 @@ ForceField::MMFF94AngleBendingParameterTable::getEntriesEnd()
 	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
+ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::begin() const
+{
+	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::end() const
+{
+	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+}
+	
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::begin()
+{
+	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::end()
+{
+	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+}
+
 void ForceField::MMFF94AngleBendingParameterTable::load(std::istream& is)
 {
     std::string line;

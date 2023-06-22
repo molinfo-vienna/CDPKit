@@ -67,6 +67,20 @@ Biomol::HierarchyViewChain::ConstFragmentIterator Biomol::HierarchyViewChain::ge
     return ConstFragmentIterator(fragments.end());
 }
 
+Biomol::HierarchyViewChain::ConstFragmentIterator Biomol::HierarchyViewChain::begin() const
+{
+    initFragmentList();
+
+    return ConstFragmentIterator(fragments.begin());
+}
+
+Biomol::HierarchyViewChain::ConstFragmentIterator Biomol::HierarchyViewChain::end() const
+{
+    initFragmentList();
+
+    return ConstFragmentIterator(fragments.end());
+}
+
 void Biomol::HierarchyViewChain::initFragmentList() const
 {
     std::lock_guard<std::mutex> lock(getMutex());

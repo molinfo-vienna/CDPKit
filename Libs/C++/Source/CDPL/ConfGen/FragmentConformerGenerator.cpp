@@ -138,3 +138,23 @@ ConfGen::FragmentConformerGenerator::ConformerIterator ConfGen::FragmentConforme
 {
     return impl->getConformersEnd();
 }
+
+ConfGen::FragmentConformerGenerator::ConstConformerIterator ConfGen::FragmentConformerGenerator::begin() const
+{
+    return impl->getConformersBegin();
+}
+
+ConfGen::FragmentConformerGenerator::ConstConformerIterator ConfGen::FragmentConformerGenerator::end() const
+{
+    return impl->getConformersEnd();
+}
+
+ConfGen::FragmentConformerGenerator::ConformerIterator ConfGen::FragmentConformerGenerator::begin()
+{
+    return impl->getConformersBegin();
+}
+
+ConfGen::FragmentConformerGenerator::ConformerIterator ConfGen::FragmentConformerGenerator::end()
+{
+    return impl->getConformersEnd();
+}

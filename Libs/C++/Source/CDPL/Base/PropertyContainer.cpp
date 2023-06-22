@@ -51,6 +51,16 @@ Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::getPrope
 	return properties.end();
 }
 
+Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::begin() const
+{
+	return properties.begin();
+}
+
+Base::PropertyContainer::ConstPropertyIterator Base::PropertyContainer::end() const
+{
+	return properties.end();
+}
+
 bool Base::PropertyContainer::removeProperty(const LookupKey& key)
 {
 	return (properties.erase(key) > 0);

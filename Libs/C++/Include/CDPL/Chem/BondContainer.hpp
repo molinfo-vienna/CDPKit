@@ -116,6 +116,30 @@ namespace CDPL
 			BondIterator getBondsEnd();
 
 			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
+			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::Bond objects.
+			 */
+			ConstBondIterator begin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Bond objects.
+			 * \return A constant iterator pointing to the end of the stored \c const Chem::Bond objects.
+			 */
+			ConstBondIterator end() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::Bond objects.
+			 */
+			BondIterator begin();
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::Bond objects.
+			 */
+			BondIterator end();
+
+			/**
 			 * \brief Tells whether the specified Chem::Bond instance is stored in this container.
 			 * \param bond The Chem::Bond instance to look for.
 			 * \return \c true if \a bond is stored in the container, and \c false otherwise.

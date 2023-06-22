@@ -53,6 +53,26 @@ Chem::BondContainer::BondIterator Chem::BondContainer::getBondsEnd()
 	return BondIterator(this, getNumBonds());
 }
 
+Chem::BondContainer::ConstBondIterator Chem::BondContainer::begin() const
+{
+	return ConstBondIterator(this, 0);
+}
+
+Chem::BondContainer::ConstBondIterator Chem::BondContainer::end() const
+{
+	return ConstBondIterator(this, getNumBonds());
+}
+
+Chem::BondContainer::BondIterator Chem::BondContainer::begin()
+{
+	return BondIterator(this, 0);
+}
+
+Chem::BondContainer::BondIterator Chem::BondContainer::end()
+{
+	return BondIterator(this, getNumBonds());
+}
+
 Chem::BondContainer& Chem::BondContainer::operator=(const BondContainer& cntnr) 
 {
 	return *this;

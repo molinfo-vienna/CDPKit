@@ -72,6 +72,10 @@ namespace CDPL
 
 			ConstFragmentIterator getFragmentsEnd() const;
 
+			ConstFragmentIterator begin() const;
+
+			ConstFragmentIterator end() const;
+
 		  private:
 			HierarchyViewChain(): initFragments(true) {}
 
