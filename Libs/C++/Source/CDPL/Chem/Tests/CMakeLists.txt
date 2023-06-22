@@ -86,6 +86,9 @@ SET(test-suite_SRCS
     FragmentHydrogenManipulationFunctionsTest.cpp
     #ReactionFunctionsTest.cpp
 
+    #AtomSymbolTest.cpp
+    #AtomTypeTest.cpp
+
     #AtomContainerAtomCountTest.cpp
     #AtomContainerMassTest.cpp
     #AtomContainerHCountTest.cpp
@@ -128,19 +131,6 @@ SET(test-suite_SRCS
     #MolecularGraphSSSRTest.cpp
     #MolecularGraphRingsTest.cpp
     #MolecularGraphHashCodeTest.cpp
-
-    #AtomIsChemElementTest.cpp
-    #AtomIsMainGroupElementTest.cpp
-    #AtomIsTransitionMetalTest.cpp
-    #AtomIsMetalTest.cpp
-    #AtomIsNonMetalTest.cpp
-    #AtomIsSemiMetalTest.cpp
-    #AtomIsHalogenTest.cpp
-    #AtomIsNobleGasTest.cpp
-    #AtomVdWRadiusTest.cpp
-    #AtomIUPACGroupTest.cpp
-    #AtomSymbolTest.cpp
-    #AtomTypeTest.cpp
 
     #MoleculeReactionRoleTest.cpp
 

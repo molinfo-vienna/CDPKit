@@ -30,6 +30,7 @@ import sys
 
 test_suite = unittest.TestSuite()
 
+test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("ImportTest"))
 test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("LookupKeyTest"))
 test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName("DataFormatTest"))
 

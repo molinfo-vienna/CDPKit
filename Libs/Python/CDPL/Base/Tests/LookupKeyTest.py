@@ -153,4 +153,3 @@ class TestCase(unittest.TestCase):
         self.assert_(not (key1 == key5))
         self.assert_(key1 != key5)
         self.assert_(key1.getID() != key5.getID())
-

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomIsMetalTest.cpp 
+ * AtomIsChemElementTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,37 +26,25 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomProperties.hpp"
-#include "CDPL/Chem/AtomTypeDB.hpp"
-#include "CDPL/Chem/AtomTypes.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
-BOOST_AUTO_TEST_CASE(AtomIsMetalTest)
+BOOST_AUTO_TEST_CASE(AtomIsChemElementFunctionTest)
 {
 	using namespace CDPL;
+	using namespace MolProp;
 	using namespace Chem;
    
-	Molecule mol;
+	BasicMolecule mol;
 	Atom& atom = mol.addAtom();
 
-	BOOST_CHECK(atom.getProperty(AtomProperty::IS_METAL, false, false).isEmpty());
-
-	BOOST_CHECK(atom.getProperty<bool>(AtomProperty::IS_METAL) == false);
-
-	BOOST_CHECK(!atom.getProperty(AtomProperty::IS_METAL, false, false).isEmpty());
-
-//-----
-
 	for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
-		atom.setProperty(AtomProperty::TYPE, atom_type);
+		setType(atom, atom_type);
 
-		BOOST_CHECK(atom.getProperty(AtomProperty::IS_METAL, false, false).isEmpty());
-
-		BOOST_CHECK(atom.getProperty<bool>(AtomProperty::IS_METAL) == AtomTypeDB::isMetal(atom_type));
-
-		BOOST_CHECK(!atom.getProperty(AtomProperty::IS_METAL, false, false).isEmpty());
+		BOOST_CHECK(isChemicalElement(atom) == AtomDictionary::isChemicalElement(atom_type));
 	}
 }
-

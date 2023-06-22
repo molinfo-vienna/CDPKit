@@ -23,32 +23,4 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
-
-SET(test-suite_SRCS
-    Main.cpp
-    ConvenienceHeaderTest.cpp
-    TPSACalculatorTest.cpp
-
-    AtomIsChemElementTest.cpp
-    AtomIsMainGroupElementTest.cpp
-    AtomIsTransitionMetalTest.cpp
-    AtomIsMetalTest.cpp
-    AtomIsNonMetalTest.cpp
-    AtomIsSemiMetalTest.cpp
-    AtomIsHalogenTest.cpp
-    AtomIsNobleGasTest.cpp
-    AtomVdWRadiusTest.cpp
-    AtomIUPACGroupTest.cpp
-    AtomIsOrdinaryHydrogenTest.cpp
-   )
-
-SET(CMAKE_BUILD_TYPE "Debug")
-
-ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
-
-ADD_EXECUTABLE(molprop-test-suite ${test-suite_SRCS})
-
-TARGET_LINK_LIBRARIES(molprop-test-suite cdpl-molprop-shared ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
-
-ADD_TEST("CDPL::MolProp" "${RUN_CXX_TESTS}" "${CMAKE_CURRENT_BINARY_DIR}/molprop-test-suite")
+ADD_TEST("CDPL" "${RUN_PYTHON_TESTS}" "${CMAKE_CURRENT_SOURCE_DIR}/TestSuite.py")

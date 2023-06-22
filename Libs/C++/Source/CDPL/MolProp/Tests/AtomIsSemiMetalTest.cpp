@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomVdwRadiusTest.cpp 
+ * AtomIsSemiMetalTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,39 +25,26 @@
 
 
 #include <boost/test/auto_unit_test.hpp>
-#include <boost/test/floating_point_comparison.hpp>
 
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomProperties.hpp"
-#include "CDPL/Chem/AtomTypeDB.hpp"
-#include "CDPL/Chem/AtomTypes.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/MolProp/AtomFunctions.hpp"
 
 
-BOOST_AUTO_TEST_CASE(AtomVdwRadiusTest)
+BOOST_AUTO_TEST_CASE(AtomIsSemiMetalFunctionTest)
 {
 	using namespace CDPL;
+	using namespace MolProp;
 	using namespace Chem;
    
-	Molecule mol;
+	BasicMolecule mol;
 	Atom& atom = mol.addAtom();
 
-	BOOST_CHECK(atom.getProperty(AtomProperty::VDW_RADIUS, false, false).isEmpty());
-
-	BOOST_CHECK_SMALL(atom.getProperty<double>(AtomProperty::VDW_RADIUS), 0.0000001);
-
-	BOOST_CHECK(!atom.getProperty(AtomProperty::VDW_RADIUS, false, false).isEmpty());
-
-//-----
-
 	for (unsigned int atom_type = 0; atom_type < AtomType::MAX_TYPE + 10; atom_type++) {
-		atom.setProperty(AtomProperty::TYPE, atom_type);
+		setType(atom, atom_type);
 
-		BOOST_CHECK(atom.getProperty(AtomProperty::VDW_RADIUS, false, false).isEmpty());
-
-		BOOST_CHECK_CLOSE(atom.getProperty<double>(AtomProperty::VDW_RADIUS), AtomTypeDB::getVdWRadius(atom_type), 0.0001);
-
-		BOOST_CHECK(!atom.getProperty(AtomProperty::VDW_RADIUS, false, false).isEmpty());
+		BOOST_CHECK(isSemiMetal(atom) == AtomDictionary::isSemiMetal(atom_type));
 	}
 }
-

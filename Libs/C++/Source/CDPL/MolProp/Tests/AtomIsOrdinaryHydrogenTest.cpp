@@ -39,7 +39,7 @@
 #include "CDPL/MolProp/AtomFunctions.hpp"
 
 
-BOOST_AUTO_TEST_CASE(IsOrdinaryHydrogenFunctionTest)
+BOOST_AUTO_TEST_CASE(AtomIsOrdinaryHydrogenFunctionTest)
 {
 	using namespace CDPL;
 	using namespace Chem;
@@ -142,4 +142,3 @@ BOOST_AUTO_TEST_CASE(IsOrdinaryHydrogenFunctionTest)
 
 	BOOST_CHECK(!isOrdinaryHydrogen(atom2, mol, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::H_COUNT | AtomPropertyFlag::ATOM_MAPPING_ID));
 }
-
