@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 #include <functional>
@@ -39,94 +38,103 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer builtinTable(new ForceField::MMFF94VanDerWaalsParameterTable());
 
- 	std::once_flag initBuiltinTableFlag;
+    ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer
+        builtinTable(new ForceField::MMFF94VanDerWaalsParameterTable());
 
-	void initBuiltinTable() 
-	{
-		builtinTable->loadDefaults();
-	}
+    std::once_flag initBuiltinTableFlag;
 
-	const ForceField::MMFF94VanDerWaalsParameterTable::Entry NOT_FOUND;
-}
+    void initBuiltinTable()
+    {
+        builtinTable->loadDefaults();
+    }
+
+    const ForceField::MMFF94VanDerWaalsParameterTable::Entry NOT_FOUND;
+} // namespace
 
 
-ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer ForceField::MMFF94VanDerWaalsParameterTable::defaultTable = builtinTable;
+ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer
+    ForceField::MMFF94VanDerWaalsParameterTable::defaultTable = builtinTable;
 
 
 ForceField::MMFF94VanDerWaalsParameterTable::Entry::Entry():
-	atomType(0), polarizability(0), effElNumber(0), factA(0), factG(0), 
-	donAccType(MMFF94VanDerWaalsInteraction::NONE), initialized(false)
+    atomType(0), polarizability(0), effElNumber(0), factA(0), factG(0),
+    donAccType(MMFF94VanDerWaalsInteraction::NONE), initialized(false)
 {}
 
-ForceField::MMFF94VanDerWaalsParameterTable::Entry::Entry(unsigned int atom_type, double atom_pol, double eff_el_num, 
-														  double fact_a, double fact_g, HDonorAcceptorType don_acc_type):
-	atomType(atom_type), polarizability(atom_pol), effElNumber(eff_el_num), factA(fact_a), 
-	factG(fact_g), donAccType(don_acc_type), initialized(true)
+ForceField::MMFF94VanDerWaalsParameterTable::Entry::Entry(unsigned int atom_type, double atom_pol,
+                                                          double eff_el_num, double fact_a,
+                                                          double             fact_g,
+                                                          HDonorAcceptorType don_acc_type):
+    atomType(atom_type),
+    polarizability(atom_pol), effElNumber(eff_el_num), factA(fact_a), factG(fact_g),
+    donAccType(don_acc_type), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94VanDerWaalsParameterTable::Entry::getAtomType() const
 {
-	return atomType;
+    return atomType;
 }
 
 double ForceField::MMFF94VanDerWaalsParameterTable::Entry::getAtomicPolarizability() const
 {
-	return polarizability;
+    return polarizability;
 }
-			
+
 double ForceField::MMFF94VanDerWaalsParameterTable::Entry::getEffectiveElectronNumber() const
 {
-	return effElNumber;
+    return effElNumber;
 }
-			
+
 double ForceField::MMFF94VanDerWaalsParameterTable::Entry::getFactorA() const
 {
-	return factA;
+    return factA;
 }
-  		
+
 double ForceField::MMFF94VanDerWaalsParameterTable::Entry::getFactorG() const
 {
-	return factG;
+    return factG;
 }
-  
+
 ForceField::MMFF94VanDerWaalsParameterTable::HDonorAcceptorType
 ForceField::MMFF94VanDerWaalsParameterTable::Entry::getHDonorAcceptorType() const
 {
-	return donAccType;
+    return donAccType;
 }
 
 ForceField::MMFF94VanDerWaalsParameterTable::Entry::operator bool() const
 {
-	return initialized;
+    return initialized;
 }
 
 
 ForceField::MMFF94VanDerWaalsParameterTable::MMFF94VanDerWaalsParameterTable():
-	exponent(0.25), factB(0.2), beta(12.0), factDARAD(0.8), factDAEPS(0.5)
+    exponent(0.25), factB(0.2), beta(12.0), factDARAD(0.8), factDAEPS(0.5)
 {}
 
-void ForceField::MMFF94VanDerWaalsParameterTable::addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, 
-														   double fact_a, double fact_g, HDonorAcceptorType don_acc_type)
+void ForceField::MMFF94VanDerWaalsParameterTable::addEntry(unsigned int atom_type, double atom_pol,
+                                                           double eff_el_num, double fact_a,
+                                                           double             fact_g,
+                                                           HDonorAcceptorType don_acc_type)
 {
-    entries.insert(DataStorage::value_type(atom_type, Entry(atom_type, atom_pol, eff_el_num, fact_a, fact_g, don_acc_type)));
+    entries.insert(DataStorage::value_type(atom_type, Entry(atom_type, atom_pol, eff_el_num, fact_a,
+                                                            fact_g, don_acc_type)));
 }
 
-const ForceField::MMFF94VanDerWaalsParameterTable::Entry& ForceField::MMFF94VanDerWaalsParameterTable::getEntry(unsigned int atom_type) const
+const ForceField::MMFF94VanDerWaalsParameterTable::Entry&
+ForceField::MMFF94VanDerWaalsParameterTable::getEntry(unsigned int atom_type) const
 {
-	DataStorage::const_iterator it = entries.find(atom_type);
+    DataStorage::const_iterator it = entries.find(atom_type);
 
-	if (it == entries.end())
-		return NOT_FOUND;
+    if (it == entries.end())
+        return NOT_FOUND;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t ForceField::MMFF94VanDerWaalsParameterTable::getNumEntries() const
@@ -141,202 +149,226 @@ void ForceField::MMFF94VanDerWaalsParameterTable::clear()
 
 bool ForceField::MMFF94VanDerWaalsParameterTable::removeEntry(unsigned int atom_type)
 {
-	return entries.erase(atom_type);
+    return entries.erase(atom_type);
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.erase(it.base()),
+                         std::bind<Entry&>(&DataStorage::value_type::second,
+                                           std::placeholders::_1));
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
-	
-ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
+
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::ConstEntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
-}
-	
-ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
-ForceField::MMFF94VanDerWaalsParameterTable::begin()
-{
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator 
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator
+ForceField::MMFF94VanDerWaalsParameterTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
+}
+
+ForceField::MMFF94VanDerWaalsParameterTable::EntryIterator
 ForceField::MMFF94VanDerWaalsParameterTable::end()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::setExponent(double value)
 {
-	exponent = value;
+    exponent = value;
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::setBeta(double value)
 {
-	beta = value;
+    beta = value;
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::setFactorB(double value)
 {
-	factB = value;
+    factB = value;
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::setFactorDARAD(double value)
 {
-	factDARAD = value;
+    factDARAD = value;
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::setFactorDAEPS(double value)
 {
-	factDAEPS = value;
+    factDAEPS = value;
 }
 
 double ForceField::MMFF94VanDerWaalsParameterTable::getExponent() const
 {
-	return exponent;
+    return exponent;
 }
-		
+
 double ForceField::MMFF94VanDerWaalsParameterTable::getFactorB() const
 {
-	return factB;
+    return factB;
 }
-		
+
 double ForceField::MMFF94VanDerWaalsParameterTable::getBeta() const
 {
-	return beta;
+    return beta;
 }
-		
+
 double ForceField::MMFF94VanDerWaalsParameterTable::getFactorDARAD() const
 {
-	return factDARAD;
+    return factDARAD;
 }
 
 double ForceField::MMFF94VanDerWaalsParameterTable::getFactorDAEPS() const
 {
-	return factDAEPS;
+    return factDAEPS;
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::load(std::istream& is)
 {
-    std::string line;
+    std::string  line;
     unsigned int atom_type;
-	double atom_pol;
-	double eff_el_num;
-	double fact_a;
-	double fact_g;
-	char don_acc_type_ch;
+    double       atom_pol;
+    double       eff_el_num;
+    double       fact_a;
+    double       fact_g;
+    char         don_acc_type_ch;
 
-	if (!readMMFF94DataLine(is, line, "MMFF94VanDerWaalsParameterTable: error while reading van der Waals parameter entry"))
-		return;
+    if (!readMMFF94DataLine(is, line,
+                            "MMFF94VanDerWaalsParameterTable: error while reading van der Waals "
+                            "parameter entry"))
+        return;
 
-	std::istringstream line_iss(line);
+    std::istringstream line_iss(line);
 
-	if (!(line_iss >> exponent))
-		throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading exponent parameter");
-	
-	if (!(line_iss >> factB))
-		throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading B factor parameter");
-	
-	if (!(line_iss >> beta))
-		throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading beta parameter");
+    if (!(line_iss >> exponent))
+        throw Base::IOError(
+            "MMFF94VanDerWaalsParameterTable: error while reading exponent parameter");
 
-	if (!(line_iss >> factDARAD))
-		throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading DARAD parameter");	
+    if (!(line_iss >> factB))
+        throw Base::IOError(
+            "MMFF94VanDerWaalsParameterTable: error while reading B factor parameter");
 
-	if (!(line_iss >> factDAEPS))
-		throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading DEPS parameter");	
+    if (!(line_iss >> beta))
+        throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading beta parameter");
 
-    while (readMMFF94DataLine(is, line, "MMFF94VanDerWaalsParameterTable: error while reading van der Waals parameter entry")) {
-		std::istringstream line_iss(line);
+    if (!(line_iss >> factDARAD))
+        throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading DARAD parameter");
 
-		if (!(line_iss >> atom_type))
-			throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading atom type");
-	
-		if (!(line_iss >> atom_pol))
-			throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading atomic polarizability alpha");
+    if (!(line_iss >> factDAEPS))
+        throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading DEPS parameter");
 
-		if (!(line_iss >> eff_el_num))
-			throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading effective electron number N");
-	
-		if (!(line_iss >> fact_a))
-			throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading scaling factor A");
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94VanDerWaalsParameterTable: error while reading van der Waals "
+                              "parameter entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> fact_g))
-			throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading scaling factor G");
+        if (!(line_iss >> atom_type))
+            throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading atom type");
 
-		if (!(line_iss >> don_acc_type_ch))
-			throw Base::IOError("MMFF94VanDerWaalsParameterTable: error while reading donor/acceptor type");
+        if (!(line_iss >> atom_pol))
+            throw Base::IOError(
+                "MMFF94VanDerWaalsParameterTable: error while reading atomic polarizability alpha");
 
-		HDonorAcceptorType don_acc_type = MMFF94VanDerWaalsInteraction::NONE;
+        if (!(line_iss >> eff_el_num))
+            throw Base::IOError(
+                "MMFF94VanDerWaalsParameterTable: error while reading effective electron number N");
 
-		switch (don_acc_type_ch) {
+        if (!(line_iss >> fact_a))
+            throw Base::IOError(
+                "MMFF94VanDerWaalsParameterTable: error while reading scaling factor A");
 
-			case 'A':
-				don_acc_type = MMFF94VanDerWaalsInteraction::ACCEPTOR;
-				break;
-				
-			case 'D':
-				don_acc_type = MMFF94VanDerWaalsInteraction::DONOR;
-				break;
-			
-			case '-':
-				break;
+        if (!(line_iss >> fact_g))
+            throw Base::IOError(
+                "MMFF94VanDerWaalsParameterTable: error while reading scaling factor G");
 
-			default:
-				throw Base::IOError("MMFF94VanDerWaalsParameterTable: invalid donor/acceptor type specification");
-		}
+        if (!(line_iss >> don_acc_type_ch))
+            throw Base::IOError(
+                "MMFF94VanDerWaalsParameterTable: error while reading donor/acceptor type");
 
-		addEntry(atom_type, atom_pol, eff_el_num, fact_a, fact_g, don_acc_type);
+        HDonorAcceptorType don_acc_type = MMFF94VanDerWaalsInteraction::NONE;
+
+        switch (don_acc_type_ch) {
+
+            case 'A':
+                don_acc_type = MMFF94VanDerWaalsInteraction::ACCEPTOR;
+                break;
+
+            case 'D':
+                don_acc_type = MMFF94VanDerWaalsInteraction::DONOR;
+                break;
+
+            case '-':
+                break;
+
+            default:
+                throw Base::IOError(
+                    "MMFF94VanDerWaalsParameterTable: invalid donor/acceptor type specification");
+        }
+
+        addEntry(atom_type, atom_pol, eff_el_num, fact_a, fact_g, don_acc_type);
     }
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS, 
-																std::strlen(MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS,
+           MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS_LEN);
     load(is);
 }
 
 void ForceField::MMFF94VanDerWaalsParameterTable::set(const SharedPointer& table)
-{	
+{
     defaultTable = (!table ? builtinTable : table);
 }
 
-const ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer& ForceField::MMFF94VanDerWaalsParameterTable::get()
+const ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer&
+ForceField::MMFF94VanDerWaalsParameterTable::get()
 {
-	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
+    std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }

@@ -25,42 +25,82 @@
 #ifndef CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP
 #define CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP
 
+#include <cstddef>
 
-namespace CDPL 
+
+namespace CDPL
 {
 
-    namespace ForceField 
+    namespace ForceField
     {
 
-		namespace MMFF94ParameterData
-		{
+        namespace MMFF94ParameterData
+        {
 
-			extern const char* ANGLE_BENDING_PARAMETERS;
-			extern const char* BOND_STRETCHING_PARAMETERS;
-			extern const char* BOND_STRETCHING_RULE_PARAMETERS;
-			extern const char* STRETCH_BEND_PARAMETERS;
-			extern const char* DEFAULT_STRETCH_BEND_PARAMETERS;
-			extern const char* OUT_OF_PLANE_BENDING_PARAMETERS;
-			extern const char* STATIC_OUT_OF_PLANE_BENDING_PARAMETERS;
-			extern const char* STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS;
-			extern const char* TORSION_PARAMETERS;
-			extern const char* STATIC_TORSION_PARAMETERS;
-			extern const char* STATIC_REF_TORSION_PARAMETERS; 
-			extern const char* VAN_DER_WAALS_PARAMETERS;
+            extern const char        ANGLE_BENDING_PARAMETERS[];
+            extern const std::size_t ANGLE_BENDING_PARAMETERS_LEN;
 
-			extern const char* SYMBOLIC_ATOM_TYPE_PATTERNS;
-			extern const char* AROMATIC_ATOM_TYPE_DEFINITIONS;
-			extern const char* HYDROGEN_ATOM_TYPE_DEFINITIONS;
-			extern const char* SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING;
+            extern const char        BOND_STRETCHING_PARAMETERS[];
+            extern const std::size_t BOND_STRETCHING_PARAMETERS_LEN;
 
-			extern const char* NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING;
-			extern const char* ATOM_TYPE_PROPERTIES;
+            extern const char        BOND_STRETCHING_RULE_PARAMETERS[];
+            extern const std::size_t BOND_STRETCHING_RULE_PARAMETERS_LEN;
 
-			extern const char* BOND_CHARGE_INCREMENT_PARAMETERS;
-			extern const char* PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS;
-			extern const char* FORMAL_ATOM_CHARGE_DEFINITIONS;
-		}
-    }
-}
+            extern const char        STRETCH_BEND_PARAMETERS[];
+            extern const std::size_t STRETCH_BEND_PARAMETERS_LEN;
+
+            extern const char        DEFAULT_STRETCH_BEND_PARAMETERS[];
+            extern const std::size_t DEFAULT_STRETCH_BEND_PARAMETERS_LEN;
+
+            extern const char        OUT_OF_PLANE_BENDING_PARAMETERS[];
+            extern const std::size_t OUT_OF_PLANE_BENDING_PARAMETERS_LEN;
+
+            extern const char        STATIC_OUT_OF_PLANE_BENDING_PARAMETERS[];
+            extern const std::size_t STATIC_OUT_OF_PLANE_BENDING_PARAMETERS_LEN;
+
+            extern const char        STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS[];
+            extern const std::size_t STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS_LEN;
+
+            extern const char        TORSION_PARAMETERS[];
+            extern const std::size_t TORSION_PARAMETERS_LEN;
+
+            extern const char        STATIC_TORSION_PARAMETERS[];
+            extern const std::size_t STATIC_TORSION_PARAMETERS_LEN;
+
+            extern const char        STATIC_REF_TORSION_PARAMETERS[];
+            extern const std::size_t STATIC_REF_TORSION_PARAMETERS_LEN;
+
+            extern const char        VAN_DER_WAALS_PARAMETERS[];
+            extern const std::size_t VAN_DER_WAALS_PARAMETERS_LEN;
+
+            extern const char        SYMBOLIC_ATOM_TYPE_PATTERNS[];
+            extern const std::size_t SYMBOLIC_ATOM_TYPE_PATTERNS_LEN;
+
+            extern const char        AROMATIC_ATOM_TYPE_DEFINITIONS[];
+            extern const std::size_t AROMATIC_ATOM_TYPE_DEFINITIONS_LEN;
+
+            extern const char        HYDROGEN_ATOM_TYPE_DEFINITIONS[];
+            extern const std::size_t HYDROGEN_ATOM_TYPE_DEFINITIONS_LEN;
+
+            extern const char        SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING[];
+            extern const std::size_t SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING_LEN;
+
+            extern const char        NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING[];
+            extern const std::size_t NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING_LEN;
+
+            extern const char        ATOM_TYPE_PROPERTIES[];
+            extern const std::size_t ATOM_TYPE_PROPERTIES_LEN;
+
+            extern const char        BOND_CHARGE_INCREMENT_PARAMETERS[];
+            extern const std::size_t BOND_CHARGE_INCREMENT_PARAMETERS_LEN;
+
+            extern const char        PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS[];
+            extern const std::size_t PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS_LEN;
+
+            extern const char        FORMAL_ATOM_CHARGE_DEFINITIONS[];
+            extern const std::size_t FORMAL_ATOM_CHARGE_DEFINITIONS_LEN;
+        } // namespace MMFF94ParameterData
+    }     // namespace ForceField
+} // namespace CDPL
 
 #endif // CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP

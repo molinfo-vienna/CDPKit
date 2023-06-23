@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 #include <functional>
@@ -39,91 +38,100 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94BondChargeIncrementTable::SharedPointer builtinTable(new ForceField::MMFF94BondChargeIncrementTable());
 
-	std::once_flag initBuiltinTableFlag;
+    ForceField::MMFF94BondChargeIncrementTable::SharedPointer
+        builtinTable(new ForceField::MMFF94BondChargeIncrementTable());
 
-	void initBuiltinTable() 
-	{
-		builtinTable->loadDefaults();
-	}
+    std::once_flag initBuiltinTableFlag;
 
-	std::uint32_t lookupKey(std::uint32_t bond_type_idx, std::uint32_t atom1_type, std::uint32_t atom2_type)
-	{
-		if (atom1_type < atom2_type)
-			return ((atom1_type << 16) + (atom2_type << 8) + bond_type_idx);
+    void initBuiltinTable()
+    {
+        builtinTable->loadDefaults();
+    }
 
-		return ((atom2_type << 16) + (atom1_type << 8) + bond_type_idx);
-	}
+    std::uint32_t
+    lookupKey(std::uint32_t bond_type_idx, std::uint32_t atom1_type, std::uint32_t atom2_type)
+    {
+        if (atom1_type < atom2_type)
+            return ((atom1_type << 16) + (atom2_type << 8) + bond_type_idx);
 
-	const ForceField::MMFF94BondChargeIncrementTable::Entry NOT_FOUND;
-}
+        return ((atom2_type << 16) + (atom1_type << 8) + bond_type_idx);
+    }
+
+    const ForceField::MMFF94BondChargeIncrementTable::Entry NOT_FOUND;
+} // namespace
 
 
-ForceField::MMFF94BondChargeIncrementTable::SharedPointer ForceField::MMFF94BondChargeIncrementTable::defaultTable = builtinTable;
+ForceField::MMFF94BondChargeIncrementTable::SharedPointer
+    ForceField::MMFF94BondChargeIncrementTable::defaultTable = builtinTable;
 
 
 ForceField::MMFF94BondChargeIncrementTable::Entry::Entry():
-  	bondTypeIdx(0), atom1Type(0), atom2Type(0), chargeIncr(0), initialized(false)
+    bondTypeIdx(0), atom1Type(0), atom2Type(0), chargeIncr(0), initialized(false)
 {}
 
-ForceField::MMFF94BondChargeIncrementTable::Entry::Entry(unsigned int bond_type_idx, unsigned int atom1_type, 
-														 unsigned int atom2_type, double bond_chg_inc):
-	bondTypeIdx(bond_type_idx), atom1Type(atom1_type), atom2Type(atom2_type), chargeIncr(bond_chg_inc), initialized(true)
+ForceField::MMFF94BondChargeIncrementTable::Entry::Entry(unsigned int bond_type_idx,
+                                                         unsigned int atom1_type,
+                                                         unsigned int atom2_type,
+                                                         double       bond_chg_inc):
+    bondTypeIdx(bond_type_idx),
+    atom1Type(atom1_type), atom2Type(atom2_type), chargeIncr(bond_chg_inc), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94BondChargeIncrementTable::Entry::getBondTypeIndex() const
 {
-	return bondTypeIdx;
+    return bondTypeIdx;
 }
 
 unsigned int ForceField::MMFF94BondChargeIncrementTable::Entry::getAtom1Type() const
 {
-	return atom1Type;
+    return atom1Type;
 }
 
 unsigned int ForceField::MMFF94BondChargeIncrementTable::Entry::getAtom2Type() const
 {
-	return atom2Type;
+    return atom2Type;
 }
 
 double ForceField::MMFF94BondChargeIncrementTable::Entry::getChargeIncrement() const
 {
-	return chargeIncr;
+    return chargeIncr;
 }
 
 ForceField::MMFF94BondChargeIncrementTable::Entry::operator bool() const
 {
-	return initialized;
+    return initialized;
 }
 
 
-ForceField::MMFF94BondChargeIncrementTable::MMFF94BondChargeIncrementTable()
-{}
+ForceField::MMFF94BondChargeIncrementTable::MMFF94BondChargeIncrementTable() {}
 
-void ForceField::MMFF94BondChargeIncrementTable::addEntry(unsigned int bond_type_idx, unsigned int atom1_type, 
-														  unsigned int atom2_type, double bond_chg_inc)
+void ForceField::MMFF94BondChargeIncrementTable::addEntry(unsigned int bond_type_idx,
+                                                          unsigned int atom1_type,
+                                                          unsigned int atom2_type,
+                                                          double       bond_chg_inc)
 {
-    entries.insert(DataStorage::value_type(lookupKey(bond_type_idx, atom1_type, atom2_type), 
-										   Entry(bond_type_idx, atom1_type, atom2_type, bond_chg_inc)));
+    entries.insert(
+        DataStorage::value_type(lookupKey(bond_type_idx, atom1_type, atom2_type),
+                                Entry(bond_type_idx, atom1_type, atom2_type, bond_chg_inc)));
 }
 
-const ForceField::MMFF94BondChargeIncrementTable::Entry& 
-ForceField::MMFF94BondChargeIncrementTable::getEntry(unsigned int bond_type_idx, unsigned int atom1_type, 
-													 unsigned int atom2_type) const
+const ForceField::MMFF94BondChargeIncrementTable::Entry&
+ForceField::MMFF94BondChargeIncrementTable::getEntry(unsigned int bond_type_idx,
+                                                     unsigned int atom1_type,
+                                                     unsigned int atom2_type) const
 {
-	DataStorage::const_iterator it = entries.find(lookupKey(bond_type_idx, atom1_type, atom2_type));
+    DataStorage::const_iterator it = entries.find(lookupKey(bond_type_idx, atom1_type, atom2_type));
 
-	if (it == entries.end())
-		return NOT_FOUND;
+    if (it == entries.end())
+        return NOT_FOUND;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t ForceField::MMFF94BondChargeIncrementTable::getNumEntries() const
@@ -136,108 +144,127 @@ void ForceField::MMFF94BondChargeIncrementTable::clear()
     entries.clear();
 }
 
-bool ForceField::MMFF94BondChargeIncrementTable::removeEntry(unsigned int bond_type_idx, unsigned int atom1_type, 
-															 unsigned int atom2_type)
+bool ForceField::MMFF94BondChargeIncrementTable::removeEntry(unsigned int bond_type_idx,
+                                                             unsigned int atom1_type,
+                                                             unsigned int atom2_type)
 {
-	return entries.erase(lookupKey(bond_type_idx, atom1_type, atom2_type));
+    return entries.erase(lookupKey(bond_type_idx, atom1_type, atom2_type));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator
 ForceField::MMFF94BondChargeIncrementTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.erase(it.base()),
+                         std::bind<Entry&>(&DataStorage::value_type::second,
+                                           std::placeholders::_1));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator
 ForceField::MMFF94BondChargeIncrementTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator
 ForceField::MMFF94BondChargeIncrementTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
-	
-ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
+
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator
 ForceField::MMFF94BondChargeIncrementTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator
 ForceField::MMFF94BondChargeIncrementTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator
 ForceField::MMFF94BondChargeIncrementTable::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::ConstEntryIterator
 ForceField::MMFF94BondChargeIncrementTable::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
-}
-	
-ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
-ForceField::MMFF94BondChargeIncrementTable::begin()
-{
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94BondChargeIncrementTable::EntryIterator 
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator
+ForceField::MMFF94BondChargeIncrementTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
+}
+
+ForceField::MMFF94BondChargeIncrementTable::EntryIterator
 ForceField::MMFF94BondChargeIncrementTable::end()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
 void ForceField::MMFF94BondChargeIncrementTable::load(std::istream& is)
 {
-    std::string line;
-	unsigned int bond_type_idx;
-	unsigned int atom1_type;
-	unsigned int atom2_type;
-	double bond_chg_inc;
+    std::string  line;
+    unsigned int bond_type_idx;
+    unsigned int atom1_type;
+    unsigned int atom2_type;
+    double       bond_chg_inc;
 
-    while (readMMFF94DataLine(is, line, "MMFF94BondChargeIncrementTable: error while reading bond charge increment parameter entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94BondChargeIncrementTable: error while reading bond charge "
+                              "increment parameter entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> bond_type_idx))
-			throw Base::IOError("MMFF94BondChargeIncrementTable: error while reading bond type index");
-	
-		if (!(line_iss >> atom1_type))
-			throw Base::IOError("MMFF94BondChargeIncrementTable: error while reading type of first atom");
+        if (!(line_iss >> bond_type_idx))
+            throw Base::IOError(
+                "MMFF94BondChargeIncrementTable: error while reading bond type index");
 
-		if (!(line_iss >> atom2_type))
-			throw Base::IOError("MMFF94BondChargeIncrementTable: error while reading type of second atom");
+        if (!(line_iss >> atom1_type))
+            throw Base::IOError(
+                "MMFF94BondChargeIncrementTable: error while reading type of first atom");
 
-		if (!(line_iss >> bond_chg_inc))
-			throw Base::IOError("MMFF94BondChargeIncrementTable: error while reading bond charge increment");
-		
-		addEntry(bond_type_idx, atom1_type, atom2_type, bond_chg_inc);
+        if (!(line_iss >> atom2_type))
+            throw Base::IOError(
+                "MMFF94BondChargeIncrementTable: error while reading type of second atom");
+
+        if (!(line_iss >> bond_chg_inc))
+            throw Base::IOError(
+                "MMFF94BondChargeIncrementTable: error while reading bond charge increment");
+
+        addEntry(bond_type_idx, atom1_type, atom2_type, bond_chg_inc);
     }
 }
 
 void ForceField::MMFF94BondChargeIncrementTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS, 
-																std::strlen(MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS,
+           MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS_LEN);
     load(is);
 }
 
 void ForceField::MMFF94BondChargeIncrementTable::set(const SharedPointer& table)
-{	
+{
     defaultTable = (!table ? builtinTable : table);
 }
 
-const ForceField::MMFF94BondChargeIncrementTable::SharedPointer& ForceField::MMFF94BondChargeIncrementTable::get()
+const ForceField::MMFF94BondChargeIncrementTable::SharedPointer&
+ForceField::MMFF94BondChargeIncrementTable::get()
 {
- 	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
+    std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
-	return defaultTable;
+    return defaultTable;
 }

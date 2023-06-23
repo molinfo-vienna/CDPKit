@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <algorithm>
 #include <mutex>
@@ -41,106 +40,125 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinDynTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
-    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
-    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatExtTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
 
- 	std::once_flag initBuiltinTablesFlag;
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer
+        builtinDynTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer
+        builtinStatTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer
+        builtinStatExtTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
 
-	void initBuiltinTables() 
-	{ 
-		using namespace ForceField;
+    std::once_flag initBuiltinTablesFlag;
 
-		builtinDynTable->loadDefaults(MMFF94ParameterSet::DYNAMIC);
-		builtinStatTable->loadDefaults(MMFF94ParameterSet::STATIC);
-		builtinStatExtTable->loadDefaults(MMFF94ParameterSet::STATIC_XOOP);
-	}
+    void initBuiltinTables()
+    {
+        using namespace ForceField;
 
-	std::uint32_t lookupKey(std::uint32_t term_atom1_type, std::uint32_t ctr_atom_type, std::uint32_t term_atom2_type, std::uint32_t oop_atom_type)
-	{
-		unsigned int nbr_types[] = { term_atom1_type, term_atom2_type, oop_atom_type };
+        builtinDynTable->loadDefaults(MMFF94ParameterSet::DYNAMIC);
+        builtinStatTable->loadDefaults(MMFF94ParameterSet::STATIC);
+        builtinStatExtTable->loadDefaults(MMFF94ParameterSet::STATIC_XOOP);
+    }
 
-		std::sort(nbr_types, nbr_types + 3); 
+    std::uint32_t lookupKey(std::uint32_t term_atom1_type, std::uint32_t ctr_atom_type,
+                            std::uint32_t term_atom2_type, std::uint32_t oop_atom_type)
+    {
+        unsigned int nbr_types[] = { term_atom1_type, term_atom2_type, oop_atom_type };
 
-		return ((nbr_types[0] << 24) + (nbr_types[1] << 16) + (nbr_types[2] << 8) + ctr_atom_type);
-	}
+        std::sort(nbr_types, nbr_types + 3);
 
-	const ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry NOT_FOUND;
-}
+        return ((nbr_types[0] << 24) + (nbr_types[1] << 16) + (nbr_types[2] << 8) + ctr_atom_type);
+    }
+
+    const ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry NOT_FOUND;
+} // namespace
 
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultDynTable     = builtinDynTable;
-ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatTable    = builtinStatTable;
-ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatExtTable = builtinStatExtTable;
+ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultDynTable = builtinDynTable;
+ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatTable = builtinStatTable;
+ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatExtTable = builtinStatExtTable;
 
 
 ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::Entry():
-	termAtom1Type(0), ctrAtomType(0), termAtom2Type(0), oopAtomType(0), forceConst(0), initialized(false)
+    termAtom1Type(0), ctrAtomType(0), termAtom2Type(0), oopAtomType(0), forceConst(0),
+    initialized(false)
 {}
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::Entry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
-																unsigned int oop_atom_type, double force_const):
-	termAtom1Type(term_atom1_type), ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type), oopAtomType(term_atom2_type),
-	forceConst(force_const), initialized(true)
+ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::Entry(unsigned int term_atom1_type,
+                                                                unsigned int ctr_atom_type,
+                                                                unsigned int term_atom2_type,
+                                                                unsigned int oop_atom_type,
+                                                                double       force_const):
+    termAtom1Type(term_atom1_type),
+    ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type), oopAtomType(term_atom2_type),
+    forceConst(force_const), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getTerminalAtom1Type() const
 {
-	return termAtom1Type;
+    return termAtom1Type;
 }
 
 unsigned int ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getCenterAtomType() const
 {
-	return ctrAtomType;
+    return ctrAtomType;
 }
 
 unsigned int ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getTerminalAtom2Type() const
 {
-	return termAtom2Type;
+    return termAtom2Type;
 }
 
 unsigned int ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getOutOfPlaneAtomType() const
 {
-	return oopAtomType;
+    return oopAtomType;
 }
 
 double ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::getForceConstant() const
 {
-	return forceConst;
+    return forceConst;
 }
 
 ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::operator bool() const
 {
-	return initialized;
+    return initialized;
 }
 
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::MMFF94OutOfPlaneBendingParameterTable()
-{}
+ForceField::MMFF94OutOfPlaneBendingParameterTable::MMFF94OutOfPlaneBendingParameterTable() {}
 
-void ForceField::MMFF94OutOfPlaneBendingParameterTable::addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-																 unsigned int term_atom2_type, unsigned int oop_atom_type, double force_const)
+void ForceField::MMFF94OutOfPlaneBendingParameterTable::addEntry(unsigned int term_atom1_type,
+                                                                 unsigned int ctr_atom_type,
+                                                                 unsigned int term_atom2_type,
+                                                                 unsigned int oop_atom_type,
+                                                                 double       force_const)
 {
-    entries.insert(DataStorage::value_type(lookupKey(term_atom1_type,  ctr_atom_type, term_atom2_type, oop_atom_type), 
-										   Entry(term_atom1_type, ctr_atom_type, term_atom2_type, oop_atom_type, force_const)));
+    entries.insert(DataStorage::value_type(lookupKey(term_atom1_type, ctr_atom_type,
+                                                     term_atom2_type, oop_atom_type),
+                                           Entry(term_atom1_type, ctr_atom_type, term_atom2_type,
+                                                 oop_atom_type, force_const)));
 }
 
-const ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry& 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-															unsigned int term_atom2_type, unsigned int oop_atom_type) const
+const ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry&
+ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntry(unsigned int term_atom1_type,
+                                                            unsigned int ctr_atom_type,
+                                                            unsigned int term_atom2_type,
+                                                            unsigned int oop_atom_type) const
 {
-	DataStorage::const_iterator it = entries.find(lookupKey(term_atom1_type,  ctr_atom_type, term_atom2_type, oop_atom_type));
+    DataStorage::const_iterator it =
+        entries.find(lookupKey(term_atom1_type, ctr_atom_type, term_atom2_type, oop_atom_type));
 
-	if (it == entries.end())
-		return NOT_FOUND;
+    if (it == entries.end())
+        return NOT_FOUND;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t ForceField::MMFF94OutOfPlaneBendingParameterTable::getNumEntries() const
@@ -153,150 +171,175 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::clear()
     entries.clear();
 }
 
-bool ForceField::MMFF94OutOfPlaneBendingParameterTable::removeEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-																	unsigned int term_atom2_type, unsigned int oop_atom_type)
+bool ForceField::MMFF94OutOfPlaneBendingParameterTable::removeEntry(unsigned int term_atom1_type,
+                                                                    unsigned int ctr_atom_type,
+                                                                    unsigned int term_atom2_type,
+                                                                    unsigned int oop_atom_type)
 {
-	return entries.erase(lookupKey(term_atom1_type,  ctr_atom_type, term_atom2_type, oop_atom_type));
+    return entries.erase(lookupKey(term_atom1_type, ctr_atom_type, term_atom2_type, oop_atom_type));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.erase(it.base()),
+                         std::bind<Entry&>(&DataStorage::value_type::second,
+                                           std::placeholders::_1));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
-	
-ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
+
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
-}
-	
-ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::begin()
-{
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator 
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator
+ForceField::MMFF94OutOfPlaneBendingParameterTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
+}
+
+ForceField::MMFF94OutOfPlaneBendingParameterTable::EntryIterator
 ForceField::MMFF94OutOfPlaneBendingParameterTable::end()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
 void ForceField::MMFF94OutOfPlaneBendingParameterTable::load(std::istream& is)
 {
-    std::string line;
-	unsigned int term_atom1_type;
-	unsigned int ctr_atom_type;
-	unsigned int term_atom2_type;
-	unsigned int oop_atom_type;
-	double force_const;
+    std::string  line;
+    unsigned int term_atom1_type;
+    unsigned int ctr_atom_type;
+    unsigned int term_atom2_type;
+    unsigned int oop_atom_type;
+    double       force_const;
 
-    while (readMMFF94DataLine(is, line, "MMFF94OutOfPlaneBendingParameterTable: error while reading out-of-plane bending parameter entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94OutOfPlaneBendingParameterTable: error while reading "
+                              "out-of-plane bending parameter entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> term_atom1_type))
-			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading terminal atom 1 type");
+        if (!(line_iss >> term_atom1_type))
+            throw Base::IOError(
+                "MMFF94OutOfPlaneBendingParameterTable: error while reading terminal atom 1 type");
 
-		if (!(line_iss >> ctr_atom_type))
-			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading center atom type");
+        if (!(line_iss >> ctr_atom_type))
+            throw Base::IOError(
+                "MMFF94OutOfPlaneBendingParameterTable: error while reading center atom type");
 
-		if (!(line_iss >> term_atom2_type))
-			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading terminal atom 2 type");
-	
-		if (!(line_iss >> oop_atom_type))
-			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading out-of-plane atom type");
+        if (!(line_iss >> term_atom2_type))
+            throw Base::IOError(
+                "MMFF94OutOfPlaneBendingParameterTable: error while reading terminal atom 2 type");
 
-		if (!(line_iss >> force_const))
-			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading force constant");
+        if (!(line_iss >> oop_atom_type))
+            throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading "
+                                "out-of-plane atom type");
 
-		addEntry(term_atom1_type, ctr_atom_type, term_atom2_type, oop_atom_type, force_const);
+        if (!(line_iss >> force_const))
+            throw Base::IOError(
+                "MMFF94OutOfPlaneBendingParameterTable: error while reading force constant");
+
+        addEntry(term_atom1_type, ctr_atom_type, term_atom2_type, oop_atom_type, force_const);
     }
 }
 
 void ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults(unsigned int param_set)
 {
-	if (param_set == MMFF94ParameterSet::DYNAMIC) {
-		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::OUT_OF_PLANE_BENDING_PARAMETERS, 
-																	std::strlen(MMFF94ParameterData::OUT_OF_PLANE_BENDING_PARAMETERS));
-		load(is);
+    if (param_set == MMFF94ParameterSet::DYNAMIC) {
+        boost::iostreams::stream<boost::iostreams::array_source>
+            is(MMFF94ParameterData::OUT_OF_PLANE_BENDING_PARAMETERS,
+               MMFF94ParameterData::OUT_OF_PLANE_BENDING_PARAMETERS_LEN);
+        load(is);
 
-	} else	if (param_set == MMFF94ParameterSet::STATIC_XOOP || param_set == MMFF94ParameterSet::STATIC_RTOR_XOOP) {
-		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS, 
-																	std::strlen(MMFF94ParameterData::STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS));
-		load(is);
+    } else if (param_set == MMFF94ParameterSet::STATIC_XOOP ||
+               param_set == MMFF94ParameterSet::STATIC_RTOR_XOOP) {
+        boost::iostreams::stream<boost::iostreams::array_source>
+            is(MMFF94ParameterData::STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS,
+               MMFF94ParameterData::STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS_LEN);
+        load(is);
 
-	} else {
-		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS, 
-																	std::strlen(MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS));
-		load(is);
-	}
+    } else {
+        boost::iostreams::stream<boost::iostreams::array_source>
+            is(MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS,
+               MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS_LEN);
+        load(is);
+    }
 }
 
-void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer& table, unsigned int param_set)
-{	
-	switch (param_set) {
-		
-		case MMFF94ParameterSet::DYNAMIC:
-			defaultDynTable = (!table ? builtinDynTable : table);
-			return;
-
-		case MMFF94ParameterSet::STATIC_XOOP:
-		case MMFF94ParameterSet::STATIC_RTOR_XOOP:
-			defaultStatExtTable = (!table ? builtinStatExtTable : table);
-			return;
-
-		default:
-			defaultStatTable = (!table ? builtinStatTable : table);
-	}
-}
-
-const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer& ForceField::MMFF94OutOfPlaneBendingParameterTable::get(unsigned int param_set)
+void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer& table,
+                                                            unsigned int         param_set)
 {
- 	std::call_once(initBuiltinTablesFlag, &initBuiltinTables);
+    switch (param_set) {
 
-	switch (param_set) {
-		
-		case MMFF94ParameterSet::DYNAMIC:
-			return defaultDynTable;
+        case MMFF94ParameterSet::DYNAMIC:
+            defaultDynTable = (!table ? builtinDynTable : table);
+            return;
 
-		case MMFF94ParameterSet::STATIC_XOOP:
-		case MMFF94ParameterSet::STATIC_RTOR_XOOP:
-			return defaultStatExtTable;
+        case MMFF94ParameterSet::STATIC_XOOP:
+        case MMFF94ParameterSet::STATIC_RTOR_XOOP:
+            defaultStatExtTable = (!table ? builtinStatExtTable : table);
+            return;
 
-		default:
-			break;
-	}
+        default:
+            defaultStatTable = (!table ? builtinStatTable : table);
+    }
+}
 
-	return defaultStatTable;
+const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer&
+ForceField::MMFF94OutOfPlaneBendingParameterTable::get(unsigned int param_set)
+{
+    std::call_once(initBuiltinTablesFlag, &initBuiltinTables);
+
+    switch (param_set) {
+
+        case MMFF94ParameterSet::DYNAMIC:
+            return defaultDynTable;
+
+        case MMFF94ParameterSet::STATIC_XOOP:
+        case MMFF94ParameterSet::STATIC_RTOR_XOOP:
+            return defaultStatExtTable;
+
+        default:
+            break;
+    }
+
+    return defaultStatTable;
 }

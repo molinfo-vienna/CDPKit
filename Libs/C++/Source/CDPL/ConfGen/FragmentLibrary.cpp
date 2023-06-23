@@ -34,6 +34,7 @@
 
 #include "CFLFragmentLibraryEntryReader.hpp"
 #include "CFLFragmentLibraryEntryWriter.hpp"
+#include "FragmentLibraryData.hpp"
 
 
 using namespace CDPL;
@@ -42,21 +43,17 @@ using namespace CDPL;
 namespace
 {
 
-	const char BUILTIN_FRAG_LIB_DATA[] =
-	 	#include "FragmentLibrary.cfl.str" 
-		;
+    const ConfGen::FragmentLibraryEntry::SharedPointer NO_ENTRY;
 
-	const ConfGen::FragmentLibraryEntry::SharedPointer NO_ENTRY;
+    ConfGen::FragmentLibrary::SharedPointer builtinFragLib(new ConfGen::FragmentLibrary());
 
-	ConfGen::FragmentLibrary::SharedPointer builtinFragLib(new ConfGen::FragmentLibrary());
+    std::once_flag initBuiltinFragLibFlag;
 
-	std::once_flag initBuiltinFragLibFlag;
-	
-	void initBuiltinFragLib()
-	{
-		builtinFragLib->loadDefaults();
-	}
-}
+    void initBuiltinFragLib()
+    {
+        builtinFragLib->loadDefaults();
+    }
+} // namespace
 
 
 ConfGen::FragmentLibrary::SharedPointer ConfGen::FragmentLibrary::defaultLib = builtinFragLib;
@@ -64,41 +61,44 @@ ConfGen::FragmentLibrary::SharedPointer ConfGen::FragmentLibrary::defaultLib = b
 
 ConfGen::FragmentLibrary::FragmentLibrary() {}
 
-ConfGen::FragmentLibrary::FragmentLibrary(const FragmentLibrary& lib): hashToEntryMap(lib.hashToEntryMap)
+ConfGen::FragmentLibrary::FragmentLibrary(const FragmentLibrary& lib):
+    hashToEntryMap(lib.hashToEntryMap)
 {}
 
 ConfGen::FragmentLibrary::~FragmentLibrary() {}
 
 ConfGen::FragmentLibrary& ConfGen::FragmentLibrary::operator=(const FragmentLibrary& lib)
 {
-	if (this == &lib)
-		return *this;
+    if (this == &lib)
+        return *this;
 
-	hashToEntryMap = lib.hashToEntryMap;
+    hashToEntryMap = lib.hashToEntryMap;
 
-	return *this;
+    return *this;
 }
 
 void ConfGen::FragmentLibrary::addEntries(const FragmentLibrary& lib)
 {
-	for (HashToEntryMap::iterator it = lib.hashToEntryMap.begin(), end = lib.hashToEntryMap.end(); it != end; ++it)
-		hashToEntryMap.insert(*it);
+    for (HashToEntryMap::iterator it = lib.hashToEntryMap.begin(), end = lib.hashToEntryMap.end();
+         it != end; ++it)
+        hashToEntryMap.insert(*it);
 }
 
 bool ConfGen::FragmentLibrary::addEntry(const FragmentLibraryEntry::SharedPointer& entry)
 {
-	if (!entry)
-		return false;
+    if (!entry)
+        return false;
 
     return hashToEntryMap.insert(Entry(entry->getHashCode(), entry)).second;
 }
 
-const ConfGen::FragmentLibraryEntry::SharedPointer& ConfGen::FragmentLibrary::getEntry(std::uint64_t hash_code) const
+const ConfGen::FragmentLibraryEntry::SharedPointer&
+ConfGen::FragmentLibrary::getEntry(std::uint64_t hash_code) const
 {
     HashToEntryMap::iterator it = hashToEntryMap.find(hash_code);
 
     if (it == hashToEntryMap.end())
-		return NO_ENTRY;
+        return NO_ENTRY;
 
     return it->second;
 }
@@ -120,10 +120,11 @@ void ConfGen::FragmentLibrary::clear()
 
 bool ConfGen::FragmentLibrary::removeEntry(std::uint64_t hash_code)
 {
-   return (hashToEntryMap.erase(hash_code) > 0);
+    return (hashToEntryMap.erase(hash_code) > 0);
 }
 
-ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::removeEntry(const EntryIterator& it)
+ConfGen::FragmentLibrary::EntryIterator
+ConfGen::FragmentLibrary::removeEntry(const EntryIterator& it)
 {
     return hashToEntryMap.erase(it);
 }
@@ -137,7 +138,7 @@ ConfGen::FragmentLibrary::ConstEntryIterator ConfGen::FragmentLibrary::getEntrie
 {
     return hashToEntryMap.end();
 }
-	
+
 ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::getEntriesBegin()
 {
     return hashToEntryMap.begin();
@@ -157,7 +158,7 @@ ConfGen::FragmentLibrary::ConstEntryIterator ConfGen::FragmentLibrary::end() con
 {
     return hashToEntryMap.end();
 }
-	
+
 ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::begin()
 {
     return hashToEntryMap.begin();
@@ -170,48 +171,53 @@ ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::end()
 
 std::mutex& ConfGen::FragmentLibrary::getMutex()
 {
-	return mutex;
+    return mutex;
 }
 
 void ConfGen::FragmentLibrary::load(std::istream& is)
 {
-	CFLFragmentLibraryEntryReader reader;
+    CFLFragmentLibraryEntryReader reader;
 
-	while (true) {
-		try {
-			FragmentLibraryEntry::SharedPointer entry(new FragmentLibraryEntry());
+    while (true) {
+        try {
+            FragmentLibraryEntry::SharedPointer entry(new FragmentLibraryEntry());
 
-			if (!reader.read(is, *entry))
-				break;
+            if (!reader.read(is, *entry))
+                break;
 
-			hashToEntryMap.insert(Entry(entry->getHashCode(), entry));
+            hashToEntryMap.insert(Entry(entry->getHashCode(), entry));
 
-		} catch (const std::exception& e) {
-			throw Base::IOError("FragmentLibrary: error while loading fragment library: " + std::string(e.what()));
-		}
-	}
+        } catch (const std::exception& e) {
+            throw Base::IOError("FragmentLibrary: error while loading fragment library: " +
+                                std::string(e.what()));
+        }
+    }
 }
 
 void ConfGen::FragmentLibrary::save(std::ostream& os) const
 {
-	CFLFragmentLibraryEntryWriter writer;
+    CFLFragmentLibraryEntryWriter writer;
 
-	for (HashToEntryMap::const_iterator it = hashToEntryMap.begin(), end = hashToEntryMap.end(); it != end; ++it) {
-		try {
-			if (!writer.write(os, *it->second))
-				throw Base::IOError("FragmentLibrary: unspecified error while saving fragment library");
+    for (HashToEntryMap::const_iterator it = hashToEntryMap.begin(), end = hashToEntryMap.end();
+         it != end; ++it) {
+        try {
+            if (!writer.write(os, *it->second))
+                throw Base::IOError(
+                    "FragmentLibrary: unspecified error while saving fragment library");
 
-		} catch (const std::exception& e) {
-			throw Base::IOError("FragmentLibrary: error while saving fragment library: " + std::string(e.what()));
-		}
-	}
+        } catch (const std::exception& e) {
+            throw Base::IOError("FragmentLibrary: error while saving fragment library: " +
+                                std::string(e.what()));
+        }
+    }
 }
 
 void ConfGen::FragmentLibrary::loadDefaults()
 {
-	boost::iostreams::stream<boost::iostreams::array_source> is(BUILTIN_FRAG_LIB_DATA, sizeof(BUILTIN_FRAG_LIB_DATA) - 1);
+    boost::iostreams::stream<boost::iostreams::array_source> is(FragmentLibraryData::BUILTIN_FRAG_LIB_DATA,
+                                                                FragmentLibraryData::BUILTIN_FRAG_LIB_DATA_LEN);
 
-	load(is);
+    load(is);
 }
 
 void ConfGen::FragmentLibrary::set(const SharedPointer& lib)
@@ -221,7 +227,7 @@ void ConfGen::FragmentLibrary::set(const SharedPointer& lib)
 
 const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibrary::get()
 {
-	std::call_once(initBuiltinFragLibFlag, &initBuiltinFragLib);
+    std::call_once(initBuiltinFragLibFlag, &initBuiltinFragLib);
 
     return defaultLib;
 }

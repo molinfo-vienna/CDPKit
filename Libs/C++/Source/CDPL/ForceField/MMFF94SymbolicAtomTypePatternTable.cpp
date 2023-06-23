@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 
@@ -41,30 +40,32 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer builtinTable(new ForceField::MMFF94SymbolicAtomTypePatternTable());
 
-	std::once_flag initBuiltinTableFlag;
+    ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer
+        builtinTable(new ForceField::MMFF94SymbolicAtomTypePatternTable());
 
-	void initBuiltinTable() 
-	{
-		builtinTable->loadDefaults();
-	}
-}
+    std::once_flag initBuiltinTableFlag;
 
-
-ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer 
-ForceField::MMFF94SymbolicAtomTypePatternTable::defaultTable  = builtinTable;
+    void initBuiltinTable()
+    {
+        builtinTable->loadDefaults();
+    }
+} // namespace
 
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(const Chem::MolecularGraph::SharedPointer& ptn, 
-															 const std::string& sym_type, bool fallback):
-	pattern(ptn), symType(sym_type), fallback(fallback)
+ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer
+    ForceField::MMFF94SymbolicAtomTypePatternTable::defaultTable = builtinTable;
+
+
+ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(
+    const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback):
+    pattern(ptn),
+    symType(sym_type), fallback(fallback)
 {}
 
 bool ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::isFallbackType() const
@@ -72,7 +73,8 @@ bool ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::isFallbackType() con
     return fallback;
 }
 
-const Chem::MolecularGraph::SharedPointer& ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::getPattern() const
+const Chem::MolecularGraph::SharedPointer&
+ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::getPattern() const
 {
     return pattern;
 }
@@ -83,92 +85,91 @@ const std::string& ForceField::MMFF94SymbolicAtomTypePatternTable::Entry::getSym
 }
 
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::MMFF94SymbolicAtomTypePatternTable()
-{}
+ForceField::MMFF94SymbolicAtomTypePatternTable::MMFF94SymbolicAtomTypePatternTable() {}
 
 std::size_t ForceField::MMFF94SymbolicAtomTypePatternTable::getNumEntries() const
 {
     return entries.size();
 }
 
-void ForceField::MMFF94SymbolicAtomTypePatternTable::addEntry(const Chem::MolecularGraph::SharedPointer& ptn, 
-															  const std::string& sym_type, bool fallback)
+void ForceField::MMFF94SymbolicAtomTypePatternTable::addEntry(
+    const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback)
 {
     entries.push_back(Entry(ptn, sym_type, fallback));
 }
 
-const ForceField::MMFF94SymbolicAtomTypePatternTable::Entry& 
+const ForceField::MMFF94SymbolicAtomTypePatternTable::Entry&
 ForceField::MMFF94SymbolicAtomTypePatternTable::getEntry(std::size_t idx) const
 {
-	if (idx >= entries.size())
-		throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: entry index out of bounds");
+    if (idx >= entries.size())
+        throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: entry index out of bounds");
 
-	return entries[idx];
+    return entries[idx];
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::getEntriesBegin() const
 {
     return entries.begin();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::getEntriesEnd() const
 {
     return entries.end();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::getEntriesBegin()
 {
-	return entries.begin();
+    return entries.begin();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::getEntriesEnd()
 {
-	return entries.end();
+    return entries.end();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::begin() const
 {
     return entries.begin();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::end() const
 {
     return entries.end();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::begin()
 {
-	return entries.begin();
+    return entries.begin();
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::end()
 {
-	return entries.end();
+    return entries.end();
 }
 
 void ForceField::MMFF94SymbolicAtomTypePatternTable::removeEntry(std::size_t idx)
 {
-	if (idx >= entries.size())
-		throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: entry index out of bounds");
+    if (idx >= entries.size())
+        throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: entry index out of bounds");
 
-	entries.erase(entries.begin() + idx);
+    entries.erase(entries.begin() + idx);
 }
 
-ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+ForceField::MMFF94SymbolicAtomTypePatternTable::EntryIterator
 ForceField::MMFF94SymbolicAtomTypePatternTable::removeEntry(const EntryIterator& it)
 {
-	if (it >= entries.end())
-		throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: iterator out of bounds");
+    if (it >= entries.end())
+        throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: iterator out of bounds");
 
-	return entries.erase(it);
+    return entries.erase(it);
 }
 
 void ForceField::MMFF94SymbolicAtomTypePatternTable::clear()
@@ -178,56 +179,65 @@ void ForceField::MMFF94SymbolicAtomTypePatternTable::clear()
 
 void ForceField::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 {
-	using namespace Chem;
+    using namespace Chem;
 
-	std::string line;
-	std::string pattern;
-	std::string sym_type;
+    std::string line;
+    std::string pattern;
+    std::string sym_type;
 
-	while (readMMFF94DataLine(is, line, "MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type pattern entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94SymbolicAtomTypePatternTable: error while reading symbolic "
+                              "atom type pattern entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> pattern))
-			throw Base::IOError("MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type pattern");
-		
-		if (!(line_iss >> sym_type))
-			throw Base::IOError("MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type");
-	
-		BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
+        if (!(line_iss >> pattern))
+            throw Base::IOError("MMFF94SymbolicAtomTypePatternTable: error while reading symbolic "
+                                "atom type pattern");
 
-		if (!parseSMARTS(pattern, *mol_ptr, true))
-			throw Base::IOError("MMFF94SymbolicAtomTypePatternTable: error while parsing symbolic atom type SMARTS pattern");
-	
-		bool fb = false;
+        if (!(line_iss >> sym_type))
+            throw Base::IOError(
+                "MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type");
 
-		for (BasicMolecule::AtomIterator it = mol_ptr->getAtomsBegin(), end = mol_ptr->getAtomsEnd(); it != end; ++it) {
-			Atom& atom = *it;
+        BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
 
-			if (hasAtomMappingID(atom)) {
-				if (getAtomMappingID(atom) == 2)
-					fb = true;
-			}
-		}
+        if (!parseSMARTS(pattern, *mol_ptr, true))
+            throw Base::IOError("MMFF94SymbolicAtomTypePatternTable: error while parsing symbolic "
+                                "atom type SMARTS pattern");
 
-		addEntry(mol_ptr, sym_type, fb);
-	}
+        bool fb = false;
+
+        for (BasicMolecule::AtomIterator it  = mol_ptr->getAtomsBegin(),
+                                         end = mol_ptr->getAtomsEnd();
+             it != end; ++it) {
+            Atom& atom = *it;
+
+            if (hasAtomMappingID(atom)) {
+                if (getAtomMappingID(atom) == 2)
+                    fb = true;
+            }
+        }
+
+        addEntry(mol_ptr, sym_type, fb);
+    }
 }
 
 void ForceField::MMFF94SymbolicAtomTypePatternTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS, 
-																std::strlen(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS,
+           MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS_LEN);
     load(is);
 }
 
 void ForceField::MMFF94SymbolicAtomTypePatternTable::set(const SharedPointer& table)
-{	
+{
     defaultTable = (!table ? builtinTable : table);
 }
 
-const ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer& ForceField::MMFF94SymbolicAtomTypePatternTable::get()
+const ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer&
+ForceField::MMFF94SymbolicAtomTypePatternTable::get()
 {
-	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
+    std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }

@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 #include <functional>
@@ -39,107 +38,119 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94AtomTypePropertyTable::SharedPointer builtinTable(new ForceField::MMFF94AtomTypePropertyTable());
 
-	std::once_flag initBuiltinTableFlag;
+    ForceField::MMFF94AtomTypePropertyTable::SharedPointer
+        builtinTable(new ForceField::MMFF94AtomTypePropertyTable());
 
-	void initBuiltinTable() 
-	{
-		builtinTable->loadDefaults();
-	}
+    std::once_flag initBuiltinTableFlag;
 
-	const ForceField::MMFF94AtomTypePropertyTable::Entry NOT_FOUND;
-}
+    void initBuiltinTable()
+    {
+        builtinTable->loadDefaults();
+    }
+
+    const ForceField::MMFF94AtomTypePropertyTable::Entry NOT_FOUND;
+} // namespace
 
 
-ForceField::MMFF94AtomTypePropertyTable::SharedPointer ForceField::MMFF94AtomTypePropertyTable::defaultTable = builtinTable;
+ForceField::MMFF94AtomTypePropertyTable::SharedPointer
+    ForceField::MMFF94AtomTypePropertyTable::defaultTable = builtinTable;
 
 
 ForceField::MMFF94AtomTypePropertyTable::Entry::Entry():
-    atomType(0), atomicNo(0), numNeighbors(0), valence(0), hasPiLonePr(false),
-    mltbDesig(0), isAroType(false), hasLinBondAng(false), hasMultiOrSingleBonds(false), initialized(false)
+    atomType(0), atomicNo(0), numNeighbors(0), valence(0), hasPiLonePr(false), mltbDesig(0),
+    isAroType(false), hasLinBondAng(false), hasMultiOrSingleBonds(false), initialized(false)
 {}
 
-ForceField::MMFF94AtomTypePropertyTable::Entry::Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
-													  bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb):
-    atomType(atom_type), atomicNo(atomic_no), numNeighbors(num_nbrs), valence(valence), hasPiLonePr(has_pi_lp),
-    mltbDesig(mltb_desig), isAroType(is_arom), hasLinBondAng(lin_bnd_ang), hasMultiOrSingleBonds(has_mb_or_sb), initialized(true)
+ForceField::MMFF94AtomTypePropertyTable::Entry::Entry(unsigned int atom_type,
+                                                      unsigned int atomic_no, std::size_t num_nbrs,
+                                                      std::size_t valence, bool has_pi_lp,
+                                                      unsigned int mltb_desig, bool is_arom,
+                                                      bool lin_bnd_ang, bool has_mb_or_sb):
+    atomType(atom_type),
+    atomicNo(atomic_no), numNeighbors(num_nbrs), valence(valence), hasPiLonePr(has_pi_lp),
+    mltbDesig(mltb_desig), isAroType(is_arom), hasLinBondAng(lin_bnd_ang),
+    hasMultiOrSingleBonds(has_mb_or_sb), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94AtomTypePropertyTable::Entry::getAtomType() const
 {
-	return atomType;
+    return atomType;
 }
 
 unsigned int ForceField::MMFF94AtomTypePropertyTable::Entry::getAtomicNumber() const
 {
-	return atomicNo;
+    return atomicNo;
 }
 
 std::size_t ForceField::MMFF94AtomTypePropertyTable::Entry::getNumNeighbors() const
 {
-	return numNeighbors;
+    return numNeighbors;
 }
 
 std::size_t ForceField::MMFF94AtomTypePropertyTable::Entry::getValence() const
 {
-	return valence;
+    return valence;
 }
 
 bool ForceField::MMFF94AtomTypePropertyTable::Entry::hasPiLonePair() const
 {
-	return hasPiLonePr;
+    return hasPiLonePr;
 }
 
 unsigned int ForceField::MMFF94AtomTypePropertyTable::Entry::getMultiBondDesignator() const
 {
-	return mltbDesig;
+    return mltbDesig;
 }
 
 bool ForceField::MMFF94AtomTypePropertyTable::Entry::isAromaticAtomType() const
 {
-	return isAroType;
+    return isAroType;
 }
 
 bool ForceField::MMFF94AtomTypePropertyTable::Entry::formsLinearBondAngle() const
 {
-	return hasLinBondAng;
+    return hasLinBondAng;
 }
 
 bool ForceField::MMFF94AtomTypePropertyTable::Entry::formsMultiOrSingleBonds() const
 {
-	return hasMultiOrSingleBonds;
+    return hasMultiOrSingleBonds;
 }
 
 ForceField::MMFF94AtomTypePropertyTable::Entry::operator bool() const
 {
-	return initialized;
+    return initialized;
 }
 
 
-ForceField::MMFF94AtomTypePropertyTable::MMFF94AtomTypePropertyTable()
-{}
+ForceField::MMFF94AtomTypePropertyTable::MMFF94AtomTypePropertyTable() {}
 
-void ForceField::MMFF94AtomTypePropertyTable::addEntry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
-													   bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb)
+void ForceField::MMFF94AtomTypePropertyTable::addEntry(unsigned int atom_type,
+                                                       unsigned int atomic_no, std::size_t num_nbrs,
+                                                       std::size_t valence, bool has_pi_lp,
+                                                       unsigned int mltb_desig, bool is_arom,
+                                                       bool lin_bnd_ang, bool has_mb_or_sb)
 {
-    entries.insert(DataStorage::value_type(atom_type, Entry(atom_type, atomic_no, num_nbrs, valence, has_pi_lp, mltb_desig, is_arom, lin_bnd_ang, has_mb_or_sb)));
+    entries.insert(
+        DataStorage::value_type(atom_type, Entry(atom_type, atomic_no, num_nbrs, valence, has_pi_lp,
+                                                 mltb_desig, is_arom, lin_bnd_ang, has_mb_or_sb)));
 }
 
-const ForceField::MMFF94AtomTypePropertyTable::Entry& ForceField::MMFF94AtomTypePropertyTable::getEntry(unsigned int atom_type) const
+const ForceField::MMFF94AtomTypePropertyTable::Entry&
+ForceField::MMFF94AtomTypePropertyTable::getEntry(unsigned int atom_type) const
 {
-	DataStorage::const_iterator it = entries.find(atom_type);
+    DataStorage::const_iterator it = entries.find(atom_type);
 
-	if (it == entries.end())
-		return NOT_FOUND;
+    if (it == entries.end())
+        return NOT_FOUND;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t ForceField::MMFF94AtomTypePropertyTable::getNumEntries() const
@@ -154,125 +165,146 @@ void ForceField::MMFF94AtomTypePropertyTable::clear()
 
 bool ForceField::MMFF94AtomTypePropertyTable::removeEntry(unsigned int atom_type)
 {
-	return entries.erase(atom_type);
+    return entries.erase(atom_type);
 }
 
-ForceField::MMFF94AtomTypePropertyTable::EntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::EntryIterator
 ForceField::MMFF94AtomTypePropertyTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.erase(it.base()),
+                         std::bind<Entry&>(&DataStorage::value_type::second,
+                                           std::placeholders::_1));
 }
 
-ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator
 ForceField::MMFF94AtomTypePropertyTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator
 ForceField::MMFF94AtomTypePropertyTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
-	
-ForceField::MMFF94AtomTypePropertyTable::EntryIterator 
+
+ForceField::MMFF94AtomTypePropertyTable::EntryIterator
 ForceField::MMFF94AtomTypePropertyTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
 }
 
-ForceField::MMFF94AtomTypePropertyTable::EntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::EntryIterator
 ForceField::MMFF94AtomTypePropertyTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
-ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator
 ForceField::MMFF94AtomTypePropertyTable::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::ConstEntryIterator
 ForceField::MMFF94AtomTypePropertyTable::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
-}
-	
-ForceField::MMFF94AtomTypePropertyTable::EntryIterator 
-ForceField::MMFF94AtomTypePropertyTable::begin()
-{
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94AtomTypePropertyTable::EntryIterator 
+ForceField::MMFF94AtomTypePropertyTable::EntryIterator
+ForceField::MMFF94AtomTypePropertyTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
+}
+
+ForceField::MMFF94AtomTypePropertyTable::EntryIterator
 ForceField::MMFF94AtomTypePropertyTable::end()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
 void ForceField::MMFF94AtomTypePropertyTable::load(std::istream& is)
 {
-    std::string line;
+    std::string  line;
     unsigned int atom_type;
-	unsigned int atomic_no;
-	std::size_t num_nbrs;
-	std::size_t valence;
-	unsigned int has_pi_lp;
-	unsigned int mltb_desig;
-	unsigned int is_arom;
-	unsigned int lin_bnd_ang;
-	unsigned int has_mb_or_sb;
+    unsigned int atomic_no;
+    std::size_t  num_nbrs;
+    std::size_t  valence;
+    unsigned int has_pi_lp;
+    unsigned int mltb_desig;
+    unsigned int is_arom;
+    unsigned int lin_bnd_ang;
+    unsigned int has_mb_or_sb;
 
-    while (readMMFF94DataLine(is, line, "MMFF94AtomTypePropertyTable: error while reading atom type properties entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94AtomTypePropertyTable: error while reading atom type "
+                              "properties entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> atom_type))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading atom type");
-	
-		if (!(line_iss >> atomic_no))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading atomic number");
+        if (!(line_iss >> atom_type))
+            throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading atom type");
 
-		if (!(line_iss >> num_nbrs))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading number of bonded neighbors");
-	
-		if (!(line_iss >> valence))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading valence");
-	
-		if (!(line_iss >> has_pi_lp))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading pi lone-pair flag");
-	
-		if (!(line_iss >> mltb_desig))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading multiple-bond designator");
-		
-		if (!(line_iss >> is_arom))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading aromatic atom type flag");
-	
-		if (!(line_iss >> lin_bnd_ang))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading linear bond angle flag");
-	
-		if (!(line_iss >> has_mb_or_sb))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading single-bond/multiple-bond designator");
-	
-		addEntry(atom_type, atomic_no, num_nbrs, valence, has_pi_lp, mltb_desig, is_arom, lin_bnd_ang, has_mb_or_sb);
+        if (!(line_iss >> atomic_no))
+            throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading atomic number");
+
+        if (!(line_iss >> num_nbrs))
+            throw Base::IOError(
+                "MMFF94AtomTypePropertyTable: error while reading number of bonded neighbors");
+
+        if (!(line_iss >> valence))
+            throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading valence");
+
+        if (!(line_iss >> has_pi_lp))
+            throw Base::IOError(
+                "MMFF94AtomTypePropertyTable: error while reading pi lone-pair flag");
+
+        if (!(line_iss >> mltb_desig))
+            throw Base::IOError(
+                "MMFF94AtomTypePropertyTable: error while reading multiple-bond designator");
+
+        if (!(line_iss >> is_arom))
+            throw Base::IOError(
+                "MMFF94AtomTypePropertyTable: error while reading aromatic atom type flag");
+
+        if (!(line_iss >> lin_bnd_ang))
+            throw Base::IOError(
+                "MMFF94AtomTypePropertyTable: error while reading linear bond angle flag");
+
+        if (!(line_iss >> has_mb_or_sb))
+            throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading "
+                                "single-bond/multiple-bond designator");
+
+        addEntry(atom_type, atomic_no, num_nbrs, valence, has_pi_lp, mltb_desig, is_arom,
+                 lin_bnd_ang, has_mb_or_sb);
     }
 }
 
 void ForceField::MMFF94AtomTypePropertyTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::ATOM_TYPE_PROPERTIES, 
-																std::strlen(MMFF94ParameterData::ATOM_TYPE_PROPERTIES));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::ATOM_TYPE_PROPERTIES,
+           MMFF94ParameterData::ATOM_TYPE_PROPERTIES_LEN);
     load(is);
 }
 
 void ForceField::MMFF94AtomTypePropertyTable::set(const SharedPointer& table)
-{	
+{
     defaultTable = (!table ? builtinTable : table);
 }
 
-const ForceField::MMFF94AtomTypePropertyTable::SharedPointer& ForceField::MMFF94AtomTypePropertyTable::get()
+const ForceField::MMFF94AtomTypePropertyTable::SharedPointer&
+ForceField::MMFF94AtomTypePropertyTable::get()
 {
-	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
+    std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }

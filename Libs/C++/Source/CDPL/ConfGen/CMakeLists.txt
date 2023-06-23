@@ -51,6 +51,7 @@ SET(cdpl-confgen_LIB_SRCS
     CanonicalFragment.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
+    FragmentLibraryData.cpp
     TorsionLibrary.cpp
     TorsionRule.cpp
     TorsionCategory.cpp

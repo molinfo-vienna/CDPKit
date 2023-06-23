@@ -1,5 +1,5 @@
 /* 
- * TorsionDriverImpl.cpp 
+ * FragmentLibraryData.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,42 +24,19 @@
 
 #include "StaticInit.hpp"
 
-#include <mutex>
-
-#include "FallbackTorsionLibrary.hpp"
-#include "TorsionLibraryDataReader.hpp"
+#include "FragmentLibraryData.hpp"
 
 
 using namespace CDPL;
+using namespace ConfGen;
 
+// clang-format off
 
-namespace
-{
+const char FragmentLibraryData::BUILTIN_FRAG_LIB_DATA[] =
+    #include "FragmentLibrary.cfl.str"
+    ;
 
-    // clang-format off
-    
-    const char* FALLBACK_TOR_LIB_DATA =
-        #include "FallbackTorsionLibrary.xml.str"
-        ;
+const std::size_t FragmentLibraryData::BUILTIN_FRAG_LIB_DATA_LEN =
+    sizeof(FragmentLibraryData::BUILTIN_FRAG_LIB_DATA) - 1;
 
-    // clang-format on
-    
-    std::once_flag initFallbackTorLibFlag;
-
-    ConfGen::TorsionLibrary::SharedPointer fallbackTorLib;
-
-    void initFallbackTorLib()
-    {
-        fallbackTorLib.reset(new ConfGen::TorsionLibrary());
-
-        ConfGen::TorsionLibraryDataReader().read(FALLBACK_TOR_LIB_DATA, *fallbackTorLib);
-    }
-} // namespace
-
-
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::getFallbackTorsionLibrary()
-{
-    std::call_once(initFallbackTorLibFlag, &initFallbackTorLib);
-
-    return fallbackTorLib;
-}
+// clang-format on

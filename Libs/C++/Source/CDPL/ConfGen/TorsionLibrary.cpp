@@ -38,20 +38,23 @@ using namespace CDPL;
 
 namespace
 {
+    // clang-format off
 
-	const char* BUILTIN_TOR_LIB_DATA =                 
-        #include "TorsionLibrary.xml.str" 
-		;
+    const char* BUILTIN_TOR_LIB_DATA =
+        #include "TorsionLibrary.xml.str"
+        ;
 
+    // clang-format on
+    
     ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
 
-	std::once_flag initBuiltinTorLibFlag;
+    std::once_flag initBuiltinTorLibFlag;
 
-	void initBuiltinTorLib()
-	{
-		builtinTorLib->loadDefaults();
-	}
-}
+    void initBuiltinTorLib()
+    {
+        builtinTorLib->loadDefaults();
+    }
+} // namespace
 
 
 ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = builtinTorLib;
@@ -59,23 +62,23 @@ ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = bui
 
 void ConfGen::TorsionLibrary::load(std::istream& is)
 {
-	TorsionLibraryDataReader().read(is, *this);
+    TorsionLibraryDataReader().read(is, *this);
 }
 
 void ConfGen::TorsionLibrary::save(std::ostream& os) const
 {
-	if (!TorsionLibraryDataWriter().write(os, *this))
-		throw Base::IOError("TorsionLibrary: unspecified error while saving torsion library");
+    if (!TorsionLibraryDataWriter().write(os, *this))
+        throw Base::IOError("TorsionLibrary: unspecified error while saving torsion library");
 }
 
 void ConfGen::TorsionLibrary::loadDefaults()
 {
-	TorsionLibraryDataReader().read(BUILTIN_TOR_LIB_DATA, *this);
+    TorsionLibraryDataReader().read(BUILTIN_TOR_LIB_DATA, *this);
 }
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)
 {
- 	defaultLib = (!lib ? builtinTorLib : lib);
+    defaultLib = (!lib ? builtinTorLib : lib);
 }
 
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
@@ -84,4 +87,3 @@ const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
 
     return defaultLib;
 }
-

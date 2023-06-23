@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 
@@ -38,42 +37,45 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer builtinMap(new ForceField::MMFF94HeavyToHydrogenAtomTypeMap());
 
- 	std::once_flag initBuiltinMapFlag;
+    ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer
+        builtinMap(new ForceField::MMFF94HeavyToHydrogenAtomTypeMap());
 
-	void initBuiltinMap() 
-	{
-		builtinMap->loadDefaults();
-	}
+    std::once_flag initBuiltinMapFlag;
+
+    void initBuiltinMap()
+    {
+        builtinMap->loadDefaults();
+    }
 
     const std::string NOT_FOUND;
-}
+} // namespace
 
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer ForceField::MMFF94HeavyToHydrogenAtomTypeMap::defaultMap = builtinMap;
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer
+    ForceField::MMFF94HeavyToHydrogenAtomTypeMap::defaultMap = builtinMap;
 
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::MMFF94HeavyToHydrogenAtomTypeMap()
-{}
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::MMFF94HeavyToHydrogenAtomTypeMap() {}
 
-void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::addEntry(const std::string& parent_type, const std::string& hyd_type)
+void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::addEntry(const std::string& parent_type,
+                                                            const std::string& hyd_type)
 {
     entries.insert(DataStorage::value_type(parent_type, hyd_type));
 }
 
-const std::string& ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntry(const std::string& parent_type) const
+const std::string&
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntry(const std::string& parent_type) const
 {
     DataStorage::const_iterator it = entries.find(parent_type);
 
     if (it == entries.end())
-		return NOT_FOUND;
+        return NOT_FOUND;
 
     return it->second;
 }
@@ -88,63 +90,63 @@ void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::clear()
     entries.clear();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesBegin() const
 {
     return entries.begin();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesEnd() const
 {
     return entries.end();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesBegin()
 {
-	return entries.begin();
+    return entries.begin();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesEnd()
 {
-	return entries.end();
+    return entries.end();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::begin() const
 {
     return entries.begin();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::end() const
 {
     return entries.end();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::begin()
 {
-	return entries.begin();
+    return entries.begin();
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::end()
 {
-	return entries.end();
+    return entries.end();
 }
 
 bool ForceField::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry(const std::string& parent_type)
 {
-	return entries.erase(parent_type);
+    return entries.erase(parent_type);
 }
 
-ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator
 ForceField::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry(const EntryIterator& it)
 {
-	return entries.erase(it);
+    return entries.erase(it);
 }
 
 void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::load(std::istream& is)
@@ -153,34 +155,40 @@ void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::load(std::istream& is)
     std::string parent_type;
     std::string hyd_type;
 
-    while (readMMFF94DataLine(is, line, "MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type definition entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom "
+                              "type definition entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> parent_type))
-			throw Base::IOError("MMFF94HeavyToHydrogenAtomTypeMap: error while reading parent atom type");
-		
-		if (!(line_iss >> hyd_type))
-			throw Base::IOError("MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type");
-	
-		addEntry(parent_type, hyd_type);
+        if (!(line_iss >> parent_type))
+            throw Base::IOError(
+                "MMFF94HeavyToHydrogenAtomTypeMap: error while reading parent atom type");
+
+        if (!(line_iss >> hyd_type))
+            throw Base::IOError(
+                "MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type");
+
+        addEntry(parent_type, hyd_type);
     }
 }
 
 void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS, 
-																std::strlen(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS,
+           MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS_LEN);
     load(is);
 }
 
 void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::set(const SharedPointer& map)
-{	
+{
     defaultMap = (!map ? builtinMap : map);
 }
 
-const ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& ForceField::MMFF94HeavyToHydrogenAtomTypeMap::get()
+const ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer&
+ForceField::MMFF94HeavyToHydrogenAtomTypeMap::get()
 {
- 	std::call_once(initBuiltinMapFlag, &initBuiltinMap);
+    std::call_once(initBuiltinMapFlag, &initBuiltinMap);
 
-	return defaultMap;
+    return defaultMap;
 }

@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 #include <functional>
@@ -39,103 +38,116 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94StretchBendParameterTable::SharedPointer builtinTable(new ForceField::MMFF94StretchBendParameterTable());
 
- 	std::once_flag initBuiltinTableFlag;
+    ForceField::MMFF94StretchBendParameterTable::SharedPointer
+        builtinTable(new ForceField::MMFF94StretchBendParameterTable());
 
-	void initBuiltinTable() 
-	{
-		builtinTable->loadDefaults();
-	}
+    std::once_flag initBuiltinTableFlag;
 
-	std::uint32_t lookupKey(std::uint32_t sb_type_idx, std::uint32_t term_atom1_type, std::uint32_t ctr_atom_type, std::uint32_t term_atom2_type)
-	{
-		if (term_atom1_type < term_atom2_type)
-			return ((term_atom1_type << 24) + (ctr_atom_type << 16) + (term_atom2_type << 8) + sb_type_idx);
-		
-		return ((term_atom2_type << 24) + (ctr_atom_type << 16) + (term_atom1_type << 8) + sb_type_idx);
-	}
+    void initBuiltinTable()
+    {
+        builtinTable->loadDefaults();
+    }
 
-	const ForceField::MMFF94StretchBendParameterTable::Entry NOT_FOUND;
-}
+    std::uint32_t lookupKey(std::uint32_t sb_type_idx, std::uint32_t term_atom1_type,
+                            std::uint32_t ctr_atom_type, std::uint32_t term_atom2_type)
+    {
+        if (term_atom1_type < term_atom2_type)
+            return ((term_atom1_type << 24) + (ctr_atom_type << 16) + (term_atom2_type << 8) +
+                    sb_type_idx);
+
+        return ((term_atom2_type << 24) + (ctr_atom_type << 16) + (term_atom1_type << 8) +
+                sb_type_idx);
+    }
+
+    const ForceField::MMFF94StretchBendParameterTable::Entry NOT_FOUND;
+} // namespace
 
 
-ForceField::MMFF94StretchBendParameterTable::SharedPointer ForceField::MMFF94StretchBendParameterTable::defaultTable = builtinTable;
+ForceField::MMFF94StretchBendParameterTable::SharedPointer
+    ForceField::MMFF94StretchBendParameterTable::defaultTable = builtinTable;
 
 
 ForceField::MMFF94StretchBendParameterTable::Entry::Entry():
-	sbTypeIdx(0), termAtom1Type(0), ctrAtomType(0), termAtom2Type(0),
-	ijkForceConst(0), kjiForceConst(0), initialized(false)
+    sbTypeIdx(0), termAtom1Type(0), ctrAtomType(0), termAtom2Type(0), ijkForceConst(0),
+    kjiForceConst(0), initialized(false)
 {}
 
-ForceField::MMFF94StretchBendParameterTable::Entry::Entry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-														  unsigned int term_atom2_type, double ijk_force_const, double kji_force_const):
-	sbTypeIdx(sb_type_idx), termAtom1Type(term_atom1_type), ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type),
-	ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const), initialized(true)
+ForceField::MMFF94StretchBendParameterTable::Entry::Entry(
+    unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type,
+    unsigned int term_atom2_type, double ijk_force_const, double kji_force_const):
+    sbTypeIdx(sb_type_idx),
+    termAtom1Type(term_atom1_type), ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type),
+    ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94StretchBendParameterTable::Entry::getStretchBendTypeIndex() const
 {
-	return sbTypeIdx;
+    return sbTypeIdx;
 }
 
 unsigned int ForceField::MMFF94StretchBendParameterTable::Entry::getTerminalAtom1Type() const
 {
-	return termAtom1Type;
+    return termAtom1Type;
 }
 
 unsigned int ForceField::MMFF94StretchBendParameterTable::Entry::getCenterAtomType() const
 {
-	return ctrAtomType;
+    return ctrAtomType;
 }
 
 unsigned int ForceField::MMFF94StretchBendParameterTable::Entry::getTerminalAtom2Type() const
 {
-	return termAtom2Type;
+    return termAtom2Type;
 }
 
 double ForceField::MMFF94StretchBendParameterTable::Entry::getIJKForceConstant() const
 {
-	return ijkForceConst;
+    return ijkForceConst;
 }
 
 double ForceField::MMFF94StretchBendParameterTable::Entry::getKJIForceConstant() const
 {
-	return kjiForceConst;
+    return kjiForceConst;
 }
 
 ForceField::MMFF94StretchBendParameterTable::Entry::operator bool() const
 {
-	return initialized;
+    return initialized;
 }
 
 
-ForceField::MMFF94StretchBendParameterTable::MMFF94StretchBendParameterTable()
-{}
+ForceField::MMFF94StretchBendParameterTable::MMFF94StretchBendParameterTable() {}
 
-void ForceField::MMFF94StretchBendParameterTable::addEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-														   unsigned int term_atom2_type, double ijk_force_const, double kji_force_const)
+void ForceField::MMFF94StretchBendParameterTable::addEntry(
+    unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type,
+    unsigned int term_atom2_type, double ijk_force_const, double kji_force_const)
 {
-    entries.insert(DataStorage::value_type(lookupKey(sb_type_idx, term_atom1_type,  ctr_atom_type, term_atom2_type), 
-										   Entry(sb_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type, ijk_force_const, kji_force_const)));
+    entries.insert(
+        DataStorage::value_type(lookupKey(sb_type_idx, term_atom1_type, ctr_atom_type,
+                                          term_atom2_type),
+                                Entry(sb_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type,
+                                      ijk_force_const, kji_force_const)));
 }
 
-const ForceField::MMFF94StretchBendParameterTable::Entry& 
-ForceField::MMFF94StretchBendParameterTable::getEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-													  unsigned int term_atom2_type) const
+const ForceField::MMFF94StretchBendParameterTable::Entry&
+ForceField::MMFF94StretchBendParameterTable::getEntry(unsigned int sb_type_idx,
+                                                      unsigned int term_atom1_type,
+                                                      unsigned int ctr_atom_type,
+                                                      unsigned int term_atom2_type) const
 {
-	DataStorage::const_iterator it = entries.find(lookupKey(sb_type_idx, term_atom1_type,  ctr_atom_type, term_atom2_type));
+    DataStorage::const_iterator it =
+        entries.find(lookupKey(sb_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type));
 
-	if (it == entries.end())
-		return NOT_FOUND;
+    if (it == entries.end())
+        return NOT_FOUND;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t ForceField::MMFF94StretchBendParameterTable::getNumEntries() const
@@ -148,116 +160,139 @@ void ForceField::MMFF94StretchBendParameterTable::clear()
     entries.clear();
 }
 
-bool ForceField::MMFF94StretchBendParameterTable::removeEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-															  unsigned int term_atom2_type)
+bool ForceField::MMFF94StretchBendParameterTable::removeEntry(unsigned int sb_type_idx,
+                                                              unsigned int term_atom1_type,
+                                                              unsigned int ctr_atom_type,
+                                                              unsigned int term_atom2_type)
 {
-	return entries.erase(lookupKey(sb_type_idx, term_atom1_type,  ctr_atom_type, term_atom2_type));
+    return entries.erase(lookupKey(sb_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type));
 }
 
-ForceField::MMFF94StretchBendParameterTable::EntryIterator 
+ForceField::MMFF94StretchBendParameterTable::EntryIterator
 ForceField::MMFF94StretchBendParameterTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.erase(it.base()),
+                         std::bind<Entry&>(&DataStorage::value_type::second,
+                                           std::placeholders::_1));
 }
 
-ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator 
+ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator
 ForceField::MMFF94StretchBendParameterTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator 
+ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator
 ForceField::MMFF94StretchBendParameterTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
-	
-ForceField::MMFF94StretchBendParameterTable::EntryIterator 
+
+ForceField::MMFF94StretchBendParameterTable::EntryIterator
 ForceField::MMFF94StretchBendParameterTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
 }
 
-ForceField::MMFF94StretchBendParameterTable::EntryIterator 
+ForceField::MMFF94StretchBendParameterTable::EntryIterator
 ForceField::MMFF94StretchBendParameterTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
-ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator 
+ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator
 ForceField::MMFF94StretchBendParameterTable::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator 
+ForceField::MMFF94StretchBendParameterTable::ConstEntryIterator
 ForceField::MMFF94StretchBendParameterTable::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
-}
-	
-ForceField::MMFF94StretchBendParameterTable::EntryIterator 
-ForceField::MMFF94StretchBendParameterTable::begin()
-{
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94StretchBendParameterTable::EntryIterator 
+ForceField::MMFF94StretchBendParameterTable::EntryIterator
+ForceField::MMFF94StretchBendParameterTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
+}
+
+ForceField::MMFF94StretchBendParameterTable::EntryIterator
 ForceField::MMFF94StretchBendParameterTable::end()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
 void ForceField::MMFF94StretchBendParameterTable::load(std::istream& is)
 {
-    std::string line;
-	unsigned int sb_type_idx;
-	unsigned int term_atom1_type;
-	unsigned int ctr_atom_type;
-	unsigned int term_atom2_type;
-	double ijk_force_const;
-	double kji_force_const;
+    std::string  line;
+    unsigned int sb_type_idx;
+    unsigned int term_atom1_type;
+    unsigned int ctr_atom_type;
+    unsigned int term_atom2_type;
+    double       ijk_force_const;
+    double       kji_force_const;
 
-    while (readMMFF94DataLine(is, line, "MMFF94StretchBendParameterTable: error while reading stretch-bend parameter entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94StretchBendParameterTable: error while reading stretch-bend "
+                              "parameter entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> sb_type_idx))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading stretch-bend type index");
+        if (!(line_iss >> sb_type_idx))
+            throw Base::IOError(
+                "MMFF94StretchBendParameterTable: error while reading stretch-bend type index");
 
-		if (!(line_iss >> term_atom1_type))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading terminal atom 1 type");
+        if (!(line_iss >> term_atom1_type))
+            throw Base::IOError(
+                "MMFF94StretchBendParameterTable: error while reading terminal atom 1 type");
 
-		if (!(line_iss >> ctr_atom_type))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading center atom type");
+        if (!(line_iss >> ctr_atom_type))
+            throw Base::IOError(
+                "MMFF94StretchBendParameterTable: error while reading center atom type");
 
-		if (!(line_iss >> term_atom2_type))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading terminal atom 2 type");
-	
-		if (!(line_iss >> ijk_force_const))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading IJK force constant");
+        if (!(line_iss >> term_atom2_type))
+            throw Base::IOError(
+                "MMFF94StretchBendParameterTable: error while reading terminal atom 2 type");
 
-		if (!(line_iss >> kji_force_const))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading KJI force constant");
+        if (!(line_iss >> ijk_force_const))
+            throw Base::IOError(
+                "MMFF94StretchBendParameterTable: error while reading IJK force constant");
 
-		addEntry(sb_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type, ijk_force_const, kji_force_const);
+        if (!(line_iss >> kji_force_const))
+            throw Base::IOError(
+                "MMFF94StretchBendParameterTable: error while reading KJI force constant");
+
+        addEntry(sb_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type, ijk_force_const,
+                 kji_force_const);
     }
 }
 
 void ForceField::MMFF94StretchBendParameterTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STRETCH_BEND_PARAMETERS, 
-																std::strlen(MMFF94ParameterData::STRETCH_BEND_PARAMETERS));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::STRETCH_BEND_PARAMETERS,
+           MMFF94ParameterData::STRETCH_BEND_PARAMETERS_LEN);
     load(is);
 }
 
 void ForceField::MMFF94StretchBendParameterTable::set(const SharedPointer& table)
-{	
+{
     defaultTable = (!table ? builtinTable : table);
 }
 
-const ForceField::MMFF94StretchBendParameterTable::SharedPointer& ForceField::MMFF94StretchBendParameterTable::get()
+const ForceField::MMFF94StretchBendParameterTable::SharedPointer&
+ForceField::MMFF94StretchBendParameterTable::get()
 {
-	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
+    std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }

@@ -21,10 +21,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <sstream>
 #include <mutex>
 #include <functional>
@@ -39,103 +38,119 @@
 #include "DataIOUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
 namespace
 {
- 
-    ForceField::MMFF94AngleBendingParameterTable::SharedPointer builtinTable(new ForceField::MMFF94AngleBendingParameterTable());
 
-	std::once_flag initBuiltinTableFlag;
+    ForceField::MMFF94AngleBendingParameterTable::SharedPointer
+        builtinTable(new ForceField::MMFF94AngleBendingParameterTable());
 
-	void initBuiltinTable() 
-	{
-		builtinTable->loadDefaults();
-	}
+    std::once_flag initBuiltinTableFlag;
 
-	std::uint32_t lookupKey(std::uint32_t angle_type_idx, std::uint32_t term_atom1_type, std::uint32_t ctr_atom_type, std::uint32_t term_atom2_type)
-	{
-		if (term_atom1_type < term_atom2_type)
-			return ((term_atom1_type << 24) + (ctr_atom_type << 16) + (term_atom2_type << 8) + angle_type_idx);
+    void initBuiltinTable()
+    {
+        builtinTable->loadDefaults();
+    }
 
-		return ((term_atom2_type << 24) + (ctr_atom_type << 16) + (term_atom1_type << 8) + angle_type_idx);
-	}
+    std::uint32_t lookupKey(std::uint32_t angle_type_idx, std::uint32_t term_atom1_type,
+                            std::uint32_t ctr_atom_type, std::uint32_t term_atom2_type)
+    {
+        if (term_atom1_type < term_atom2_type)
+            return ((term_atom1_type << 24) + (ctr_atom_type << 16) + (term_atom2_type << 8) +
+                    angle_type_idx);
 
-	const ForceField::MMFF94AngleBendingParameterTable::Entry NOT_FOUND;
-}
+        return ((term_atom2_type << 24) + (ctr_atom_type << 16) + (term_atom1_type << 8) +
+                angle_type_idx);
+    }
+
+    const ForceField::MMFF94AngleBendingParameterTable::Entry NOT_FOUND;
+} // namespace
 
 
-ForceField::MMFF94AngleBendingParameterTable::SharedPointer ForceField::MMFF94AngleBendingParameterTable::defaultTable = builtinTable;
+ForceField::MMFF94AngleBendingParameterTable::SharedPointer
+    ForceField::MMFF94AngleBendingParameterTable::defaultTable = builtinTable;
 
 
 ForceField::MMFF94AngleBendingParameterTable::Entry::Entry():
-	angleTypeIdx(0), termAtom1Type(0), ctrAtomType(0), termAtom2Type(0),
-	forceConst(0), refAngle(0), initialized(false)
+    angleTypeIdx(0), termAtom1Type(0), ctrAtomType(0), termAtom2Type(0), forceConst(0), refAngle(0),
+    initialized(false)
 {}
 
-ForceField::MMFF94AngleBendingParameterTable::Entry::Entry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-														   unsigned int term_atom2_type, double force_const, double ref_angle):
-	angleTypeIdx(angle_type_idx), termAtom1Type(term_atom1_type), ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type),
-	forceConst(force_const), refAngle(ref_angle), initialized(true)
+ForceField::MMFF94AngleBendingParameterTable::Entry::Entry(unsigned int angle_type_idx,
+                                                           unsigned int term_atom1_type,
+                                                           unsigned int ctr_atom_type,
+                                                           unsigned int term_atom2_type,
+                                                           double force_const, double ref_angle):
+    angleTypeIdx(angle_type_idx),
+    termAtom1Type(term_atom1_type), ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type),
+    forceConst(force_const), refAngle(ref_angle), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94AngleBendingParameterTable::Entry::getAngleTypeIndex() const
 {
-	return angleTypeIdx;
+    return angleTypeIdx;
 }
 
 unsigned int ForceField::MMFF94AngleBendingParameterTable::Entry::getTerminalAtom1Type() const
 {
-	return termAtom1Type;
+    return termAtom1Type;
 }
 
 unsigned int ForceField::MMFF94AngleBendingParameterTable::Entry::getCenterAtomType() const
 {
-	return ctrAtomType;
+    return ctrAtomType;
 }
 
 unsigned int ForceField::MMFF94AngleBendingParameterTable::Entry::getTerminalAtom2Type() const
 {
-	return termAtom2Type;
+    return termAtom2Type;
 }
 
 double ForceField::MMFF94AngleBendingParameterTable::Entry::getForceConstant() const
 {
-	return forceConst;
+    return forceConst;
 }
 
 double ForceField::MMFF94AngleBendingParameterTable::Entry::getReferenceAngle() const
 {
-	return refAngle;
+    return refAngle;
 }
 
 ForceField::MMFF94AngleBendingParameterTable::Entry::operator bool() const
 {
-	return initialized;
+    return initialized;
 }
 
 
-ForceField::MMFF94AngleBendingParameterTable::MMFF94AngleBendingParameterTable()
-{}
+ForceField::MMFF94AngleBendingParameterTable::MMFF94AngleBendingParameterTable() {}
 
-void ForceField::MMFF94AngleBendingParameterTable::addEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-															unsigned int term_atom2_type, double force_const, double ref_angle)
+void ForceField::MMFF94AngleBendingParameterTable::addEntry(unsigned int angle_type_idx,
+                                                            unsigned int term_atom1_type,
+                                                            unsigned int ctr_atom_type,
+                                                            unsigned int term_atom2_type,
+                                                            double force_const, double ref_angle)
 {
-    entries.insert(DataStorage::value_type(lookupKey(angle_type_idx, term_atom1_type,  ctr_atom_type, term_atom2_type), 
-										   Entry(angle_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type, force_const, ref_angle)));
+    entries.insert(DataStorage::value_type(lookupKey(angle_type_idx, term_atom1_type, ctr_atom_type,
+                                                     term_atom2_type),
+                                           Entry(angle_type_idx, term_atom1_type, ctr_atom_type,
+                                                 term_atom2_type, force_const, ref_angle)));
 }
 
-const ForceField::MMFF94AngleBendingParameterTable::Entry& 
-ForceField::MMFF94AngleBendingParameterTable::getEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-													   unsigned int term_atom2_type) const
+const ForceField::MMFF94AngleBendingParameterTable::Entry&
+ForceField::MMFF94AngleBendingParameterTable::getEntry(unsigned int angle_type_idx,
+                                                       unsigned int term_atom1_type,
+                                                       unsigned int ctr_atom_type,
+                                                       unsigned int term_atom2_type) const
 {
-	DataStorage::const_iterator it = entries.find(lookupKey(angle_type_idx, term_atom1_type,  ctr_atom_type, term_atom2_type));
+    DataStorage::const_iterator it =
+        entries.find(lookupKey(angle_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type));
 
-	if (it == entries.end())
-		return NOT_FOUND;
+    if (it == entries.end())
+        return NOT_FOUND;
 
-	return it->second;
+    return it->second;
 }
 
 std::size_t ForceField::MMFF94AngleBendingParameterTable::getNumEntries() const
@@ -148,116 +163,140 @@ void ForceField::MMFF94AngleBendingParameterTable::clear()
     entries.clear();
 }
 
-bool ForceField::MMFF94AngleBendingParameterTable::removeEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-															   unsigned int term_atom2_type)
+bool ForceField::MMFF94AngleBendingParameterTable::removeEntry(unsigned int angle_type_idx,
+                                                               unsigned int term_atom1_type,
+                                                               unsigned int ctr_atom_type,
+                                                               unsigned int term_atom2_type)
 {
-	return entries.erase(lookupKey(angle_type_idx, term_atom1_type,  ctr_atom_type, term_atom2_type));
+    return entries.erase(
+        lookupKey(angle_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator
 ForceField::MMFF94AngleBendingParameterTable::removeEntry(const EntryIterator& it)
 {
-	return EntryIterator(entries.erase(it.base()), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.erase(it.base()),
+                         std::bind<Entry&>(&DataStorage::value_type::second,
+                                           std::placeholders::_1));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94AngleBendingParameterTable::getEntriesBegin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94AngleBendingParameterTable::getEntriesEnd() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
-	
-ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
+
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator
 ForceField::MMFF94AngleBendingParameterTable::getEntriesBegin()
 {
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator
 ForceField::MMFF94AngleBendingParameterTable::getEntriesEnd()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94AngleBendingParameterTable::begin() const
 {
-	return ConstEntryIterator(entries.begin(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::ConstEntryIterator
 ForceField::MMFF94AngleBendingParameterTable::end() const
 {
-	return ConstEntryIterator(entries.end(), std::bind(&DataStorage::value_type::second, std::placeholders::_1));
-}
-	
-ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
-ForceField::MMFF94AngleBendingParameterTable::begin()
-{
-	return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(),
+                              std::bind(&DataStorage::value_type::second, std::placeholders::_1));
 }
 
-ForceField::MMFF94AngleBendingParameterTable::EntryIterator 
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator
+ForceField::MMFF94AngleBendingParameterTable::begin()
+{
+    return EntryIterator(entries.begin(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                            std::placeholders::_1));
+}
+
+ForceField::MMFF94AngleBendingParameterTable::EntryIterator
 ForceField::MMFF94AngleBendingParameterTable::end()
 {
-	return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second, std::placeholders::_1));
+    return EntryIterator(entries.end(), std::bind<Entry&>(&DataStorage::value_type::second,
+                                                          std::placeholders::_1));
 }
 
 void ForceField::MMFF94AngleBendingParameterTable::load(std::istream& is)
 {
-    std::string line;
-	unsigned int angle_type_idx;
-	unsigned int term_atom1_type;
-	unsigned int ctr_atom_type;
-	unsigned int term_atom2_type;
-	double force_const;
-	double ref_angle;
+    std::string  line;
+    unsigned int angle_type_idx;
+    unsigned int term_atom1_type;
+    unsigned int ctr_atom_type;
+    unsigned int term_atom2_type;
+    double       force_const;
+    double       ref_angle;
 
-    while (readMMFF94DataLine(is, line, "MMFF94AngleBendingParameterTable: error while reading angle bending parameter entry")) {
-		std::istringstream line_iss(line);
+    while (readMMFF94DataLine(is, line,
+                              "MMFF94AngleBendingParameterTable: error while reading angle bending "
+                              "parameter entry")) {
+        std::istringstream line_iss(line);
 
-		if (!(line_iss >> angle_type_idx))
-			throw Base::IOError("MMFF94AngleBendingParameterTable: error while reading angle type index");
+        if (!(line_iss >> angle_type_idx))
+            throw Base::IOError(
+                "MMFF94AngleBendingParameterTable: error while reading angle type index");
 
-		if (!(line_iss >> term_atom1_type))
-			throw Base::IOError("MMFF94AngleBendingParameterTable: error while reading terminal atom 1 type");
+        if (!(line_iss >> term_atom1_type))
+            throw Base::IOError(
+                "MMFF94AngleBendingParameterTable: error while reading terminal atom 1 type");
 
-		if (!(line_iss >> ctr_atom_type))
-			throw Base::IOError("MMFF94AngleBendingParameterTable: error while reading center atom type");
+        if (!(line_iss >> ctr_atom_type))
+            throw Base::IOError(
+                "MMFF94AngleBendingParameterTable: error while reading center atom type");
 
-		if (!(line_iss >> term_atom2_type))
-			throw Base::IOError("MMFF94AngleBendingParameterTable: error while reading terminal atom 2 type");
-	
-		if (!(line_iss >> force_const))
-			throw Base::IOError("MMFF94AngleBendingParameterTable: error while reading force constant");
+        if (!(line_iss >> term_atom2_type))
+            throw Base::IOError(
+                "MMFF94AngleBendingParameterTable: error while reading terminal atom 2 type");
 
-		if (!(line_iss >> ref_angle))
-			throw Base::IOError("MMFF94AngleBendingParameterTable: error while reading reference angle");
+        if (!(line_iss >> force_const))
+            throw Base::IOError(
+                "MMFF94AngleBendingParameterTable: error while reading force constant");
 
-		addEntry(angle_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type, force_const, ref_angle);
+        if (!(line_iss >> ref_angle))
+            throw Base::IOError(
+                "MMFF94AngleBendingParameterTable: error while reading reference angle");
+
+        addEntry(angle_type_idx, term_atom1_type, ctr_atom_type, term_atom2_type, force_const,
+                 ref_angle);
     }
 }
 
 void ForceField::MMFF94AngleBendingParameterTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::ANGLE_BENDING_PARAMETERS, 
-																std::strlen(MMFF94ParameterData::ANGLE_BENDING_PARAMETERS));
+    boost::iostreams::stream<boost::iostreams::array_source>
+        is(MMFF94ParameterData::ANGLE_BENDING_PARAMETERS,
+           MMFF94ParameterData::ANGLE_BENDING_PARAMETERS_LEN);
     load(is);
 }
 
 void ForceField::MMFF94AngleBendingParameterTable::set(const SharedPointer& table)
-{	
+{
     defaultTable = (!table ? builtinTable : table);
 }
 
-const ForceField::MMFF94AngleBendingParameterTable::SharedPointer& ForceField::MMFF94AngleBendingParameterTable::get()
+const ForceField::MMFF94AngleBendingParameterTable::SharedPointer&
+ForceField::MMFF94AngleBendingParameterTable::get()
 {
-	std::call_once(initBuiltinTableFlag, &initBuiltinTable);
+    std::call_once(initBuiltinTableFlag, &initBuiltinTable);
 
     return defaultTable;
 }
