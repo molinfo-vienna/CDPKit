@@ -5,7 +5,7 @@ AccessModifierOffset: -2
 AlignAfterOpenBracket: Align
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments:
-  Enabled:         false
+  Enabled:         true
   AcrossEmptyLines: false
   AcrossComments:  false
   AlignCompound:   false
@@ -15,35 +15,35 @@ AlignConsecutiveBitFields:
   AcrossEmptyLines: false
   AcrossComments:  false
   AlignCompound:   false
-  PadOperators:    false
+  PadOperators:    true
 AlignConsecutiveDeclarations:
-  Enabled:         false
+  Enabled:         true
   AcrossEmptyLines: false
   AcrossComments:  false
   AlignCompound:   false
-  PadOperators:    false
+  PadOperators:    true
 AlignConsecutiveMacros:
   Enabled:         true
   AcrossEmptyLines: false
   AcrossComments:  false
   AlignCompound:   false
-  PadOperators:    false
+  PadOperators:    true
 AlignEscapedNewlines: Right
 AlignOperands:   Align
 AlignTrailingComments: true
-AllowAllArgumentsOnNextLine: true
-AllowAllParametersOfDeclarationOnNextLine: true
-AllowShortEnumsOnASingleLine: true
-AllowShortBlocksOnASingleLine: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: All
+AllowShortFunctionsOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
-AlwaysBreakTemplateDeclarations: MultiLine
+AlwaysBreakTemplateDeclarations: Yes
 AttributeMacros:
   - __capability
 BinPackArguments: true
@@ -69,7 +69,7 @@ BraceWrapping:
   SplitEmptyNamespace: false
 BreakBeforeBinaryOperators: None
 BreakBeforeConceptDeclarations: Always
-BreakBeforeBraces: Linux
+BreakBeforeBraces: Custom
 BreakBeforeInheritanceComma: false
 BreakInheritanceList: AfterComma
 BreakBeforeTernaryOperators: false
@@ -77,7 +77,7 @@ BreakConstructorInitializersBeforeComma: false
 BreakConstructorInitializers: AfterColon
 BreakAfterJavaFieldAnnotations: false
 BreakStringLiterals: true
-ColumnLimit:     120
+ColumnLimit:     100
 CommentPragmas:  '^ IWYU pragma:'
 QualifierAlignment: Leave
 CompactNamespaces: false
@@ -119,9 +119,9 @@ IncludeIsMainRegex: '(Test)?$'
 IncludeIsMainSourceRegex: ''
 IndentAccessModifiers: false
 IndentCaseLabels: true
-IndentCaseBlocks: true
+IndentCaseBlocks: false
 IndentGotoLabels: true
-IndentPPDirectives: None
+IndentPPDirectives: AfterHash
 IndentExternBlock: AfterExternBlock
 IndentRequiresClause: true
 IndentWidth:     4
@@ -134,7 +134,7 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 LambdaBodyIndentation: Signature
 MacroBlockBegin: ''
 MacroBlockEnd:   ''
-MaxEmptyLinesToKeep: 1
+MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
 ObjCBinPackProtocolList: Auto
 ObjCBlockIndentWidth: 2
@@ -142,33 +142,33 @@ ObjCBreakBeforeNestedBlockParam: true
 ObjCSpaceAfterProperty: false
 ObjCSpaceBeforeProtocolList: true
 PenaltyBreakAssignment: 2
-PenaltyBreakBeforeFirstCallParameter: 19
-PenaltyBreakComment: 300
+PenaltyBreakBeforeFirstCallParameter: 10000
+PenaltyBreakComment: 300000
 PenaltyBreakFirstLessLess: 120
 PenaltyBreakOpenParenthesis: 0
 PenaltyBreakString: 1000
 PenaltyBreakTemplateDeclaration: 10
 PenaltyExcessCharacter: 1000000
-PenaltyReturnTypeOnItsOwnLine: 60
+PenaltyReturnTypeOnItsOwnLine: 10
 PenaltyIndentedWhitespace: 0
 PointerAlignment: Left
-PPIndentWidth:   -1
+PPIndentWidth:   1
 ReferenceAlignment: Pointer
-ReflowComments:  true
+ReflowComments: false
 RemoveBracesLLVM: false
 RequiresClausePosition: OwnLine
 SeparateDefinitionBlocks: Leave
 ShortNamespaceLines: 1
-SortIncludes:    CaseSensitive
+SortIncludes:    Never
 SortJavaStaticImport: Before
-SortUsingDeclarations: true
+SortUsingDeclarations: false
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: true
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCaseColon: false
 SpaceBeforeCpp11BracedList: false
-SpaceBeforeCtorInitializerColon: true
+SpaceBeforeCtorInitializerColon: false
 SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: ControlStatements
 SpaceBeforeParensOptions:
@@ -197,13 +197,13 @@ SpacesInParentheses: false
 SpacesInSquareBrackets: false
 SpaceBeforeSquareBrackets: false
 BitFieldColonSpacing: Both
-Standard:        Latest
+Standard:        Cpp03
 StatementAttributeLikeMacros:
   - Q_EMIT
 StatementMacros:
   - Q_UNUSED
   - QT_REQUIRE_VERSION
-TabWidth:        8
+TabWidth:        4
 UseCRLF:         false
 UseTab:          Never
 WhitespaceSensitiveMacros:
