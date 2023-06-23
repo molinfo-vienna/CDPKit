@@ -46,9 +46,9 @@
 using namespace CDPL;
 
 
-namespace 
+namespace
 {
-  
+
     typedef std::unordered_set<std::string> StdResidueSet;
     typedef std::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
     typedef std::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
@@ -58,28 +58,30 @@ namespace
     StructureCache                           resStructureCache;
     Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
 
-    std::mutex                               loadStructureMutex;
-    std::once_flag                           initBuiltinDictionaryFlag;
-    std::once_flag                           initResCodeToDataEntryMapFlag;
+    std::mutex     loadStructureMutex;
+    std::once_flag initBuiltinDictionaryFlag;
+    std::once_flag initResCodeToDataEntryMapFlag;
 
-    const Biomol::ResidueDictionary::Entry   DEF_ENTRY;
+    const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
-    boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(Biomol::ResidueDictionaryData::residueStructureData, 
-                                                                                 Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
+    boost::iostreams::stream<boost::iostreams::array_source>
+        resStructureIStream(Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA,
+                            Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
 
     Chem::CDFMoleculeReader resStructureReader(resStructureIStream);
 
-    const char* stdResidueList[] = {
-        "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET",
-        "PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL", "ASX", "GLX",
-        "N", "DA", "DC", "DG", "DI", "DU", "DT", "A", "C", "G", "I", "U"
-    };
-
-    struct Init 
+    const char* stdResidueList[] = { "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU",
+                                     "GLY", "HIS", "ILE", "LEU", "LYS", "MET", "PHE", "PRO",
+                                     "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL",
+                                     "ASX", "GLX", "N",   "DA",  "DC",  "DG",  "DI",  "DU",
+                                     "DT",  "A",   "C",   "G",   "I",   "U" };
+    struct Init
     {
 
-        Init() {
-            stdResidueSet.insert(&stdResidueList[0], &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
+        Init()
+        {
+            stdResidueSet.insert(&stdResidueList[0],
+                                 &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
         }
 
     } init;
@@ -94,7 +96,7 @@ namespace
         using namespace Biomol::ResidueDictionaryData;
 
         for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
-            const ResidueDataEntry& entry = residueData[i];
+            const ResidueDataEntry& entry = RESIDUE_DATA[i];
 
             resCodeToDataEntryMap.insert(ResCodeToDataEntryMap::value_type(entry.code, &entry));
         }
@@ -104,10 +106,9 @@ namespace
     {
         using namespace Chem;
         using namespace Biomol;
-        using namespace ResidueDictionaryData;
+        using namespace ResidueDictionaryData; 
 
         std::lock_guard<std::mutex> lock(loadStructureMutex);
-
         StructureCache::const_iterator rsc_it = resStructureCache.find(code);
 
         if (rsc_it != resStructureCache.end())
@@ -125,18 +126,21 @@ namespace
             resStructureReader.read(data_entry.molIndex, *mol_ptr);
 
         } catch (std::exception& e) {
-            throw Base::IOError(std::string("ResidueDictionary: loading residue structure failed: ") + e.what());
+            throw Base::IOError(
+                std::string("ResidueDictionary: loading residue structure failed: ") + e.what());
         }
 
-        for (Molecule::AtomIterator it = mol_ptr->getAtomsBegin(), end = mol_ptr->getAtomsEnd(); it != end; ++it) {
+        for (Molecule::AtomIterator it = mol_ptr->getAtomsBegin(), end = mol_ptr->getAtomsEnd();
+             it != end; ++it) {
             Atom& atom = *it;
 
             setResidueCode(atom, code);
-    
+
             if (!getResidueLeavingAtomFlag(atom))
                 continue;
 
-            for (Atom::AtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it) {
+            for (Atom::AtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd();
+                 a_it != a_end; ++a_it) {
                 Atom& nbr_atom = *a_it;
 
                 setResidueLinkingAtomFlag(nbr_atom, !getResidueLeavingAtomFlag(nbr_atom));
@@ -162,20 +166,24 @@ namespace
 
         return mol_ptr;
     }
-}
+} // namespace
 
 
 Biomol::ResidueDictionary::SharedPointer Biomol::ResidueDictionary::defaultDict = builtinDictionary;
 
 
-Biomol::ResidueDictionary::Entry::Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
-                                        const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func):
-    code(code), replacesCode(rep_code), replacedByCode(rep_by_code), obsolete(obsolete), 
-    name(name), type(type), structRetrievalFunc(struc_ret_func)
+Biomol::ResidueDictionary::Entry::Entry(const std::string& code, const std::string& rep_code,
+                                        const std::string& rep_by_code, bool obsolete,
+                                        const std::string& name, unsigned int type,
+                                        const StructureRetrievalFunction& struc_ret_func):
+    code(code),
+    replacesCode(rep_code), replacedByCode(rep_by_code), obsolete(obsolete), name(name), type(type),
+    structRetrievalFunc(struc_ret_func)
 {}
 
 Biomol::ResidueDictionary::Entry::Entry():
-    code(), replacesCode(), replacedByCode(), obsolete(false), name(), type(ResidueType::UNKNOWN), structRetrievalFunc()
+    code(), replacesCode(), replacedByCode(), obsolete(false), name(), type(ResidueType::UNKNOWN),
+    structRetrievalFunc()
 {}
 
 const std::string& Biomol::ResidueDictionary::Entry::getCode() const
@@ -215,7 +223,7 @@ Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::Entry::getStructu
 
     return structRetrievalFunc(code);
 }
-                
+
 
 void Biomol::ResidueDictionary::addEntry(const Entry& entry)
 {
@@ -233,8 +241,9 @@ void Biomol::ResidueDictionary::removeEntry(const std::string& code)
 {
     entries.erase(code);
 }
-            
-const Biomol::ResidueDictionary::Entry& Biomol::ResidueDictionary::getEntry(const std::string& code) const
+
+const Biomol::ResidueDictionary::Entry&
+Biomol::ResidueDictionary::getEntry(const std::string& code) const
 {
     EntryLookupTable::const_iterator it = entries.find(code);
 
@@ -253,25 +262,29 @@ std::size_t Biomol::ResidueDictionary::getNumEntries() const
 {
     return entries.size();
 }
-            
+
 Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntriesBegin() const
 {
-    return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second,
+                                                         std::placeholders::_1));
 }
 
 Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntriesEnd() const
 {
-    return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second,
+                                                       std::placeholders::_1));
 }
 
 Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::begin() const
 {
-    return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.begin(), std::bind(&EntryLookupTable::value_type::second,
+                                                         std::placeholders::_1));
 }
 
 Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::end() const
 {
-    return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second, std::placeholders::_1));
+    return ConstEntryIterator(entries.end(), std::bind(&EntryLookupTable::value_type::second,
+                                                       std::placeholders::_1));
 }
 
 void Biomol::ResidueDictionary::loadDefaults()
@@ -283,10 +296,10 @@ void Biomol::ResidueDictionary::loadDefaults()
     Entry::StructureRetrievalFunction struc_ret_func(&loadResidueStructure);
 
     for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
-        const ResidueDataEntry& res_data = residueData[i];
+        const ResidueDataEntry& res_data = RESIDUE_DATA[i];
 
-        Entry entry(res_data.code, res_data.replacesCode, res_data.replacedByCode, res_data.obsolete,
-                    res_data.name, res_data.type, struc_ret_func);
+        Entry entry(res_data.code, res_data.replacesCode, res_data.replacedByCode,
+                    res_data.obsolete, res_data.name, res_data.type, struc_ret_func);
 
         addEntry(entry);
     }
@@ -310,7 +323,7 @@ bool Biomol::ResidueDictionary::isStdResidue(const std::string& code)
 }
 
 unsigned int Biomol::ResidueDictionary::getType(const std::string& code)
-{    
+{
     const Entry& entry = get()->getEntry(code);
 
     return entry.getType();

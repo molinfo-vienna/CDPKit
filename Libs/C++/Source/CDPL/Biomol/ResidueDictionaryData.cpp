@@ -24,24 +24,33 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Biomol/ResidueDictionaryData.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
+
+#include "ResidueDictionaryData.hpp"
 
 
 namespace CDPL
 {
-        
-    namespace Biomol    
+
+    namespace Biomol
     {
 
-        namespace ResidueDictionaryData 
+        namespace ResidueDictionaryData
         {
+            // clang-format off
+            
+            const char RESIDUE_STRUCTURE_DATA[] =
+                #include "ResidueDictionaryStructureData.cdf.str"
+                ;
 
-            const char* residueStructureData = 
-            #include "ResidueDictionaryStructureData.cdf.str"
-            ;
-
+            const std::size_t RESIDUE_STRUCTURE_DATA_LEN = sizeof(RESIDUE_STRUCTURE_DATA) - 1;
+            
             #include "ResidueDictionaryEntries.hpp"
-        }
-    }
-}
+
+            const std::size_t NUM_RESIDUE_ENTRIES = sizeof(RESIDUE_DATA) / sizeof(ResidueDataEntry);
+
+            // clang-format on
+            
+        } // namespace ResidueDictionaryData
+    }     // namespace Biomol
+} // namespace CDPL

@@ -24,7 +24,6 @@
  
 #include "StaticInit.hpp"
 
-#include <cstring>
 #include <algorithm>
 #include <utility>
 #include <cmath>
@@ -57,14 +56,18 @@ using namespace CDPL;
 namespace
 {
 
-    const char* CHEMBL_SALT_STRUCTURE_LIBRARY =                 
-    #include "ChEMBL-Salts.smi.str" 
-    ;
+    // clang-format off
+    
+    const char CHEMBL_SALT_STRUCTURE_LIBRARY[] =                 
+        #include "ChEMBL-Salts.smi.str" 
+        ;
 
-    const char* CHEMBL_SOLVENT_STRUCTURE_LIBRARY =                 
-    #include "ChEMBL-Solvents.smi.str" 
-    ;
+    const char CHEMBL_SOLVENT_STRUCTURE_LIBRARY[] =                 
+        #include "ChEMBL-Solvents.smi.str" 
+        ;
 
+    // clang-format on
+    
     std::once_flag initSaltAndSolventDataFlag;
     
     typedef std::pair<std::uint64_t, std::uint64_t> StructureID;
@@ -83,8 +86,8 @@ namespace
     {
         using namespace Chem;
 
-        boost::iostreams::stream<boost::iostreams::array_source> salts_is(CHEMBL_SALT_STRUCTURE_LIBRARY, std::strlen(CHEMBL_SALT_STRUCTURE_LIBRARY));
-        boost::iostreams::stream<boost::iostreams::array_source> solvents_is(CHEMBL_SOLVENT_STRUCTURE_LIBRARY, std::strlen(CHEMBL_SOLVENT_STRUCTURE_LIBRARY));
+        boost::iostreams::stream<boost::iostreams::array_source> salts_is(CHEMBL_SALT_STRUCTURE_LIBRARY, sizeof(CHEMBL_SALT_STRUCTURE_LIBRARY) - 1);
+        boost::iostreams::stream<boost::iostreams::array_source> solvents_is(CHEMBL_SOLVENT_STRUCTURE_LIBRARY, sizeof(CHEMBL_SOLVENT_STRUCTURE_LIBRARY) - 1);
 
         HashCodeCalculator hash_calc;
 

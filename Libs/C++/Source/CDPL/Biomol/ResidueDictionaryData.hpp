@@ -49,13 +49,13 @@ namespace CDPL
                 std::size_t  molIndex;
             };
 
-            extern const ResidueDataEntry residueData[];
-            extern const std::size_t NUM_RESIDUE_ENTRIES;
+            extern const ResidueDataEntry RESIDUE_DATA[];
+            extern const std::size_t      NUM_RESIDUE_ENTRIES;
 
-            extern const char* residueStructureData;
+            extern const char        RESIDUE_STRUCTURE_DATA[];
             extern const std::size_t RESIDUE_STRUCTURE_DATA_LEN;
-        }
-    }
-}
+        } // namespace ResidueDictionaryData
+    }     // namespace Biomol
+} // namespace CDPL
 
 #endif // CDPL_BIOMOL_RESIDUEDICTIONARYDATA_HPP
