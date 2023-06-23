@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * ConfGen.hpp 
  *
@@ -72,7 +70,6 @@
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/FragmentAssembler.hpp"
-
 #include "CDPL/ConfGen/CFLMoleculeInputHandler.hpp"
 #include "CDPL/ConfGen/CFLMoleculeReader.hpp"
 

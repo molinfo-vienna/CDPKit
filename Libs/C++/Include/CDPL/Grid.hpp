@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * Grid.hpp 
  *
@@ -35,13 +33,11 @@
 #include "CDPL/Grid/SpatialGrid.hpp"
 #include "CDPL/Grid/RegularGrid.hpp"
 #include "CDPL/Grid/RegularGridSet.hpp"
-
 #include "CDPL/Grid/AttributedGridProperty.hpp"
 #include "CDPL/Grid/AttributedGridPropertyDefault.hpp"
 #include "CDPL/Grid/ControlParameter.hpp"  
 #include "CDPL/Grid/ControlParameterDefault.hpp"  
 #include "CDPL/Grid/DataFormat.hpp"
-
 #include "CDPL/Grid/CDFGZDRegularGridWriter.hpp"
 #include "CDPL/Grid/CDFDRegularGridOutputHandler.hpp"
 #include "CDPL/Grid/CDFBZ2DRegularGridWriter.hpp"
@@ -66,7 +62,6 @@
 #include "CDPL/Grid/CDFBZ2DRegularGridReader.hpp"
 #include "CDPL/Grid/CDFDRegularGridReader.hpp"
 #include "CDPL/Grid/CDFGZDRegularGridInputHandler.hpp"
-
 #include "CDPL/Grid/AttributedGridFunctions.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
 

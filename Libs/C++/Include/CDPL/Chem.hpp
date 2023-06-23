@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * Chem.hpp 
  *
@@ -46,7 +44,6 @@
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/ElectronSystem.hpp"
-
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/ElectronSystemList.hpp"
@@ -65,7 +62,6 @@
 #include "CDPL/Chem/BondPredicate.hpp"
 #include "CDPL/Chem/AtomCompareFunction.hpp"
 #include "CDPL/Chem/BondCompareFunction.hpp"
-
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchExpressionList.hpp"
 #include "CDPL/Chem/ANDMatchExpressionList.hpp"
@@ -83,7 +79,6 @@
 #include "CDPL/Chem/MolecularGraphComponentGroupingMatchExpression.hpp"
 #include "CDPL/Chem/ReactionAtomMappingMatchExpression.hpp"
 #include "CDPL/Chem/ReactionComponentGroupingMatchExpression.hpp"
-
 #include "CDPL/Chem/Entity3DProperty.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/BondProperty.hpp"
@@ -98,7 +93,6 @@
 #include "CDPL/Chem/ControlParameter.hpp"
 #include "CDPL/Chem/ControlParameterDefault.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
-
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/MDLParity.hpp"
@@ -116,12 +110,10 @@
 #include "CDPL/Chem/MDLDataFormatVersion.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Chem/TautomerizationType.hpp"
-
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
 #include "CDPL/Chem/BondMatchConstraint.hpp"
 #include "CDPL/Chem/MolecularGraphMatchConstraint.hpp"
 #include "CDPL/Chem/ReactionMatchConstraint.hpp"
-
 #include "CDPL/Chem/INCHIMoleculeInputHandler.hpp"
 #include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/JMEMoleculeInputHandler.hpp"
@@ -150,7 +142,6 @@
 #include "CDPL/Chem/CDFReactionOutputHandler.hpp"
 #include "CDPL/Chem/MOL2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
-
 #include "CDPL/Chem/SDFGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SDFBZ2MoleculeInputHandler.hpp"
@@ -179,7 +170,6 @@
 #include "CDPL/Chem/MOL2GZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/MOL2BZ2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2BZ2MolecularGraphOutputHandler.hpp"
-
 #include "CDPL/Chem/SDFGZMoleculeReader.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphWriter.hpp"
 #include "CDPL/Chem/SDFBZ2MoleculeReader.hpp"
@@ -208,7 +198,6 @@
 #include "CDPL/Chem/MOL2GZMolecularGraphWriter.hpp"
 #include "CDPL/Chem/MOL2BZ2MoleculeReader.hpp"
 #include "CDPL/Chem/MOL2BZ2MolecularGraphWriter.hpp"
-
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"
 #include "CDPL/Chem/JMEMolecularGraphWriter.hpp"
@@ -237,7 +226,6 @@
 #include "CDPL/Chem/CDFReactionWriter.hpp"
 #include "CDPL/Chem/MOL2MoleculeReader.hpp"
 #include "CDPL/Chem/MOL2MolecularGraphWriter.hpp"
-
 #include "CDPL/Chem/CompleteRingSet.hpp"
 #include "CDPL/Chem/AromaticRingSet.hpp"
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
@@ -247,7 +235,6 @@
 #include "CDPL/Chem/ConnectedSubstructureSet.hpp"
 #include "CDPL/Chem/ComponentSet.hpp"
 #include "CDPL/Chem/PiElectronSystemList.hpp"
-
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/ReactionSubstructureSearch.hpp"
 #include "CDPL/Chem/CommonConnectedSubstructureSearch.hpp"
@@ -255,7 +242,6 @@
 #include "CDPL/Chem/MaxCommonBondSubstructureSearch.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Chem/Reactor.hpp"
-
 #include "CDPL/Chem/MorganNumberingCalculator.hpp"
 #include "CDPL/Chem/CIPPriorityCalculator.hpp"
 #include "CDPL/Chem/CanonicalNumberingCalculator.hpp"
@@ -270,7 +256,6 @@
 #include "CDPL/Chem/SurfaceAtomExtractor.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
 #include "CDPL/Chem/SubstructureHistogramCalculator.hpp"
-
 #include "CDPL/Chem/TautomerScore.hpp"  
 #include "CDPL/Chem/TautomerGenerator.hpp"  
 #include "CDPL/Chem/DefaultTautomerGenerator.hpp"  
@@ -290,7 +275,6 @@
 #include "CDPL/Chem/ResonanceStructureGenerator.hpp"  
 #include "CDPL/Chem/ChEMBLStandardizer.hpp"
 #include "CDPL/Chem/ProtonationStateStandardizer.hpp"  
-
 #include "CDPL/Chem/FragmentGenerator.hpp"  
 #include "CDPL/Chem/RECAPRuleID.hpp"  
 #include "CDPL/Chem/RECAPAtomLabel.hpp"  
@@ -298,14 +282,11 @@
 #include "CDPL/Chem/BRICSRuleID.hpp"  
 #include "CDPL/Chem/BRICSAtomLabel.hpp"  
 #include "CDPL/Chem/BRICSFragmentGenerator.hpp"  
-
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/SpatialEntityAlignment.hpp"
-
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
-
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"

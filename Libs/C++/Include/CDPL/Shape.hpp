@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * Shape.hpp 
  *
@@ -34,30 +32,23 @@
 #include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
 #include "CDPL/Shape/QuaternionTransformation.hpp"
-
 #include "CDPL/Shape/GaussianShapeGenerator.hpp"
-
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
-
 #include "CDPL/Shape/AlignmentResult.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
 #include "CDPL/Shape/ScoringFunctors.hpp"
-
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
 #include "CDPL/Shape/FastGaussianShapeAlignment.hpp"
-
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/ScreeningProcessor.hpp"
-
 #include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Shape/AlignmentResultSelectionMode.hpp"
-
 #include "CDPL/Shape/GaussianShapeFunctions.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
 

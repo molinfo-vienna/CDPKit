@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offcalculator: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * BindingAffinityCalculator.cpp 
  *

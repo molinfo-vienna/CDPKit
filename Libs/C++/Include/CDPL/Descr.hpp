@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * Descr.hpp 
  *
@@ -35,23 +33,18 @@
 #include "CDPL/Descr/AtomContainerFunctions.hpp"
 #include "CDPL/Descr/MolecularGraphFunctions.hpp"
 #include "CDPL/Descr/SimilarityFunctions.hpp"
-
 #include "CDPL/Descr/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Descr/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Descr/AtomAutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Descr/FeatureAutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Descr/MoleculeAutoCorr2DDescriptorCalculator.hpp"
 #include "CDPL/Descr/MoleculeAutoCorr3DDescriptorCalculator.hpp"
-
 #include "CDPL/Descr/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
-
 #include "CDPL/Descr/CircularFingerprintGenerator.hpp"
 #include "CDPL/Descr/PathFingerprintGenerator.hpp"
-
 #include "CDPL/Descr/BurdenMatrixGenerator.hpp"
 #include "CDPL/Descr/BCUTDescriptorCalculator.hpp"
 #include "CDPL/Descr/MolecularComplexityCalculator.hpp"
-
 #include "CDPL/Descr/RDFCodeCalculator.hpp"
 #include "CDPL/Descr/AtomRDFCodeCalculator.hpp"
 #include "CDPL/Descr/FeatureRDFCodeCalculator.hpp"

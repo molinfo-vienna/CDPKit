@@ -1,5 +1,3 @@
-# -*- mode: python; tab-width: 4 -*-
-
 ## 
 # CairoBackend.py 
 #

@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * Util.hpp 
  *
@@ -50,7 +48,6 @@
 #include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/SequenceFunctions.hpp"
-
 #include "CDPL/Util/FileRemover.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Util/CompressionStreams.hpp"

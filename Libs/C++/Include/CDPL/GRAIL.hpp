@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * GRAIL.hpp 
  *
@@ -34,7 +32,6 @@
 #include "CDPL/GRAIL/AttributedGridProperty.hpp"
 #include "CDPL/GRAIL/AttributedGridPropertyDefault.hpp"
 #include "CDPL/GRAIL/FeatureType.hpp"
-
 #include "CDPL/GRAIL/GeneralizedBellAtomDensity.hpp"  
 #include "CDPL/GRAIL/AtomDensityGridCalculator.hpp"  
 #include "CDPL/GRAIL/BuriednessScore.hpp"  
@@ -43,7 +40,6 @@
 #include "CDPL/GRAIL/GRAILDataSetGenerator.hpp"
 #include "CDPL/GRAIL/GRAILDescriptorCalculator.hpp"  
 #include "CDPL/GRAIL/BindingAffinityCalculator.hpp"
-
 #include "CDPL/GRAIL/AttributedGridFunctions.hpp"
 #include "CDPL/GRAIL/FeatureFunctions.hpp"
 #include "CDPL/GRAIL/MoleculeFunctions.hpp"

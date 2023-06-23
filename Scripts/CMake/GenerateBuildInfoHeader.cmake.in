@@ -1,5 +1,3 @@
-# -*- mode: CMake -*-
-
 ##
 # GenerateBuildInfoHeader.cmake
 #

@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * ForceField.hpp 
  *
@@ -43,23 +41,18 @@
 #include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/GradientVectorTraits.hpp"
-
 #include "CDPL/ForceField/UFFAtomType.hpp"
 #include "CDPL/ForceField/UFFAtomTypePropertyTable.hpp"
-
 #include "CDPL/ForceField/MMFF94ParameterSet.hpp"
-
 #include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
 #include "CDPL/ForceField/MMFF94ChargeCalculator.hpp"
-
 #include "CDPL/ForceField/MMFF94EnergyFunctions.hpp"
 #include "CDPL/ForceField/MMFF94GradientFunctions.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
-
 #include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteraction.hpp"
@@ -67,7 +60,6 @@
 #include "CDPL/ForceField/MMFF94TorsionInteraction.hpp"
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteraction.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteraction.hpp"
-
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
@@ -76,7 +68,6 @@
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
-
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionParameterizer.hpp"
@@ -85,7 +76,6 @@
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
-
 #include "CDPL/ForceField/MMFF94SymbolicAtomTypePatternTable.hpp"
 #include "CDPL/ForceField/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/ForceField/MMFF94SymbolicToNumericAtomTypeMap.hpp"

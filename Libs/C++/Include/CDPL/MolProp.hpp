@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * MolProp.hpp 
  *
@@ -34,20 +32,16 @@
 #include "CDPL/MolProp/AtomProperty.hpp"
 #include "CDPL/MolProp/BondProperty.hpp"
 #include "CDPL/MolProp/AtomPropertyDefault.hpp"
-
 #include "CDPL/MolProp/MassComposition.hpp"
 #include "CDPL/MolProp/ElementHistogram.hpp"
-
 #include "CDPL/MolProp/CoordinationGeometry.hpp"
 #include "CDPL/MolProp/HBondDonorAtomType.hpp"
 #include "CDPL/MolProp/HBondAcceptorAtomType.hpp"
-
 #include "CDPL/MolProp/AtomFunctions.hpp"
 #include "CDPL/MolProp/BondFunctions.hpp"
 #include "CDPL/MolProp/AtomContainerFunctions.hpp"
 #include "CDPL/MolProp/BondContainerFunctions.hpp"
 #include "CDPL/MolProp/MolecularGraphFunctions.hpp"
-
 #include "CDPL/MolProp/TPSACalculator.hpp"
 #include "CDPL/MolProp/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/MolProp/LogSCalculator.hpp"

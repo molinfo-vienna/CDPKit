@@ -1,5 +1,3 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
  * Vis.hpp 
  *
@@ -32,7 +30,6 @@
 #define CDPL_VIS_HPP
 
 #include "CDPL/Config.hpp"
-
 #include "CDPL/Vis/ControlParameter.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
 #include "CDPL/Vis/AtomProperty.hpp"
@@ -44,26 +41,22 @@
 #include "CDPL/Vis/MolecularGraphPropertyDefault.hpp"
 #include "CDPL/Vis/ReactionPropertyDefault.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
-
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/AtomFunctions.hpp"
 #include "CDPL/Vis/BondFunctions.hpp"
 #include "CDPL/Vis/MolecularGraphFunctions.hpp"
 #include "CDPL/Vis/ReactionFunctions.hpp"
-
 #include "CDPL/Vis/SizeAdjustment.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 #include "CDPL/Vis/LayoutStyle.hpp"
 #include "CDPL/Vis/LayoutDirection.hpp"
 #include "CDPL/Vis/ArrowStyle.hpp"
-
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
 #include "CDPL/Vis/View2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/ReactionView2D.hpp"
-
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Brush.hpp"
@@ -73,7 +66,6 @@
 #include "CDPL/Vis/PointArray2D.hpp"
 #include "CDPL/Vis/ColorTable.hpp"
 #include "CDPL/Vis/AtomColorTable.hpp"
-
 #include "CDPL/Vis/GraphicsPrimitive2D.hpp"
 #include "CDPL/Vis/LinePrimitive2D.hpp"
 #include "CDPL/Vis/PolygonPrimitive2D.hpp"
@@ -133,7 +125,5 @@
 #include "CDPL/Vis/SVGReactionOutputHandler.hpp"
 
 #endif // HAVE_CAIRO_SVG_SUPPORT
-
 #endif // HAVE_CAIRO
-
 #endif // CDPL_VIS_HPP

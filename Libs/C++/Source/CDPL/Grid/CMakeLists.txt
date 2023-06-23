@@ -1,5 +1,3 @@
-# -*- mode: CMake -*-
-
 ##
 # CMakeLists.txt  
 #
