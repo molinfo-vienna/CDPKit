@@ -76,8 +76,8 @@ def cxxToPythonCode():
         if match:
             output.append('class TestCase(unittest.TestCase):\n')
             output.append('\n')
-            output.append('\tdef runTest(self):\n')
-            output.append('\t\t"""Testing ' + match.group(1) + '"""\n')
+            output.append('    def runTest(self):\n')
+            output.append('        """Testing ' + match.group(1) + '"""\n')
             continue
         
 
@@ -87,7 +87,7 @@ def cxxToPythonCode():
         line = re.sub('Test\.cpp', 'Test.py', line)
         line = re.sub(';', '', line)
         line = re.sub('BOOST_CHECK\(', 'self.assert_(', line)
-        line = re.sub('^//', '\t#', line)
+        line = re.sub('^//', '    #', line)
         line = re.sub('::', '.', line)
         line = re.sub('&&', 'and', line)
         line = re.sub('\|\|', 'or', line)
@@ -118,7 +118,7 @@ def cxxToPythonCode():
         match = re.search('BOOST_CHECK_THROW\((.+),\s+(.+)\)\s*$', line)
 
         if match:
-            line = '\t' + 'self.assertRaises(' + match.group(2) + ', ' + match.group(1) + ')\n'
+            line = '    ' + 'self.assertRaises(' + match.group(2) + ', ' + match.group(1) + ')\n'
 
 
         abs_to_places = { '0.00000001' : '7', '0.0000001' : '6', '0.000001' : '5', 
@@ -127,42 +127,42 @@ def cxxToPythonCode():
         match = re.search('BOOST_CHECK_SMALL\((.+),\s+([0-9\.]+)\)\s*$', line)
 
         if match:
-            line = '\t' + 'self.assertAlmostEqual(' + match.group(1) + ', 0.0, ' + 
+            line = '    ' + 'self.assertAlmostEqual(' + match.group(1) + ', 0.0, ' + 
             abs_to_places[match.group(2)] + ')\n'
 
         match = re.search('BOOST_CHECK_CLOSE\((.+),\s+(.+),\s+([0-9\.]+)\)\s*$', line)
 
         if match:
-            line = '\t' + 'self.assertAlmostEqual(' + match.group(1) + ', ' + match.group(2) +
+            line = '    ' + 'self.assertAlmostEqual(' + match.group(1) + ', ' + match.group(2) +
             ', ' + abs_to_places[match.group(3)] + ')\n'
 
         
         match = re.search('^\s+(\w+)\s+=\s+(.+)\s*$', line)
 
         if match:
-            line = '\t' + match.group(1) + '.copy(' + match.group(2) + ')\n'
+            line = '    ' + match.group(1) + '.copy(' + match.group(2) + ')\n'
 
         match = re.search('^\s+([\w\.<>]+)\s+(\w+)\((.*)\)\s*$', line)
 
         if match:
-            line = '\t' + match.group(2) + ' = ' + match.group(1) + '(' + match.group(3) + ')\n'
+            line = '    ' + match.group(2) + ' = ' + match.group(1) + '(' + match.group(3) + ')\n'
 
         match = re.search('^\s+([\w\.<>]+)\s+(\w+)\s*$', line)
 
         if match:
-            line = '\t' + match.group(2) + ' = ' + match.group(1) + '()\n'
+            line = '    ' + match.group(2) + ' = ' + match.group(1) + '()\n'
 
         match = re.search('^\s+([\w\.<>]+)\s+(\w+)\s+=\s+(.+)\s*$', line)
 
         if match:
-            line = '\t' + match.group(2) + ' = ' + match.group(3) + '\n'
+            line = '    ' + match.group(2) + ' = ' + match.group(3) + '\n'
 
         line = re.sub('BOOST_CHECK_SMALL\(', 'self.assertAlmostEqual(', line)
         line = re.sub('BOOST_CHECK_CLOSE\(', 'self.assertAlmostEqual(', line)
         line = re.sub('BOOST_CHECK_THROW\(', 'self.assertRaises(', line)
 
         if line[0] != '#':
-            line = '\t' + line
+            line = '    ' + line
 
         output.append(line)
 

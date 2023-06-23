@@ -444,7 +444,7 @@ def genResidueDictionaryData():
 
         struct_wtr.write(struct)
 
-        output.append('\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(struct_idx) + ' },\n')
+        output.append('    { "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(struct_idx) + ' },\n')
 
         struct_idx += 1
 
