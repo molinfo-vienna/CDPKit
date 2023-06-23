@@ -66,7 +66,7 @@ def genResidueDictionaryData():
 
     output = list()
 
-    output.append('const ResidueDataEntry residueData[] = {\n')
+    output.append('// clang-format off\nconst ResidueDataEntry RESIDUE_DATA[] = {\n')
   
     cif_file = file(sys.argv[1], 'r')
 
@@ -450,9 +450,7 @@ def genResidueDictionaryData():
 
         #break ###### 
 
-    output.append('};\n')
-    output.append('\nconst std::size_t NUM_RESIDUE_ENTRIES = ' + str(struct_idx) + ';\n')
-    output.append('\nconst std::size_t RESIDUE_STRUCTURE_DATA_LEN = ' + str(struct_os.tell()) + ';\n')
+    output.append('};\n// clang-format on\n')
 
     open(sys.argv[2], 'w').writelines(output);
   
